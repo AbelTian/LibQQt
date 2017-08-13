@@ -20,7 +20,9 @@ QQTLineEditWithSearch::QQTLineEditWithSearch(QWidget *parent) :
     hLayout->addWidget(m_btnBrower);
     setLayout(hLayout);
 
-    // 设置输入框中文件输入区，不让输入的文字在被隐藏在按钮下
+    /*
+     * 设置输入框中文件输入区，不让输入的文字在被隐藏在按钮下
+     */
     setTextMargins(0, 1, size.width(), 1);
 
     connect(m_btnBrower, SIGNAL(clicked()), this, SIGNAL(btnClicked()));

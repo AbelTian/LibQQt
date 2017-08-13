@@ -1,7 +1,10 @@
 
 #include "qqtpluginwatcher.h"
+
+#ifdef __QT4__
 #include <QWSServer>
 #include <QMouseDriverFactory>
+#endif
 
 QQTPluginWatcher* QQTPluginWatcher::_instance = NULL;
 QQTPluginWatcher::QQTPluginWatcher(QObject *parent) :

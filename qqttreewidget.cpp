@@ -69,7 +69,9 @@ void QQTTreeWidget::clicked(QModelIndex)
     if(!curIndex.isValid())
         return;
 
-    //根据是否文件夹进行判断
+    /*
+     * 根据是否文件夹进行判断
+     */
     if(parIndex.isValid())
         return;
 

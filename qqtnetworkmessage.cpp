@@ -43,9 +43,11 @@ void QQTNetworkMessage::translate()
     QByteArray qbaVerify;
     qbaVerify << m_Size << m_Cmd << m_Uid << m_Data;
     m_Sum = 0;
-    // 校验码等错误 会导致服务器不回复消息
-    // 如果不添加quint8 0x0112+0x0088=0x009a 单字节到二字节进位的位置看不懂
-    // 带进位的8位偶校验。
+    /*
+     * 校验码等错误 会导致服务器不回复消息
+     * 如果不添加quint8 0x0112+0x0088=0x009a 单字节到二字节进位的位置看不懂
+     * 带进位的8位偶校验。
+     */
     for(int i = 0; i < qbaVerify.length(); i++)
         m_Sum += quint8(qbaVerify.at(i));
     //real verify

@@ -1,8 +1,16 @@
 #ifndef QQTGUIQT_H
 #define QQTGUIQT_H
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #include <QtCore>
 #include <QtGui>
+#include <QWSInputMethod>
+#else
+#include <QtCore>
+#include <QtGui>
+#include <QtWidgets>
+#include <QtGlobal>
+#endif
 
 #include <QApplication>
 #include <QTranslator>
@@ -15,14 +23,12 @@
 #include <QThread>
 #include <QTimer>
 #include <QSettings>
-#include <QWSServer>
 #include <QQueue>
 #include <QMutex>
 #include <QList>
 #include <QSemaphore>
 #include <QStylePainter>
 #include <QMouseEvent>
-#include <QWSInputMethod>
 #include <QUuid>
 
 #include <QPrinter>
@@ -35,7 +41,6 @@
 #include <QTextBrowser>
 #include <QTextCodec>
 #include <QFont>
-
 
 #include <QFileInfo>
 #include <QFile>

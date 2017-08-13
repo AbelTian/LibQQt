@@ -29,9 +29,13 @@ public:
     inline QQTFileSystem* fileSystem()
     { return m_fs; }
 
-    //从查询结果中过滤出rootpath里面的内容进行保存；
+    /*
+     * 从查询结果中过滤出rootpath里面的内容进行保存；
+     */
     void setRootPath();
-    //过滤，排序
+    /*
+     * 过滤，排序
+     */
     inline void setNameFilter(QString filter)
     { m_model->setNameFilter(filter); }
     inline void setFilter(QDir::Filters filter = QDir::Dirs | QDir::Files | QDir::NoSymLinks | QDir::NoDotAndDotDot)

@@ -7,20 +7,21 @@
 QQTFileSystem::QQTFileSystem(QObject *parent) :
     QObject(parent)
 {
-    //如果用QQTClientInstance会调用两次connected，来历不明
-    //如果把代码移到Open中激发一次connect
-    //如果改成new QQTClient，没有问题；
-    //疑似：connect函数连接几次调用几次。下面这段打印来自于连接了一次
-    //../k1160pro/QQTWidgets/QQTfilesystem.cpp 207 testOpenSucc QQTFileSystem(0x2d262c0)
-    //../k1160pro/QQTWidgets/QQTfilesystem.cpp 207 testOpenSucc QQTFileSystem(0x2d262c0)
-    //../k1160pro/QQTWidgets/QQTfilesystem.cpp 207 testOpenSucc QQTFileSystem(0x2d2e4c0)
-    //../k1160pro/QQTWidgets/QQTfilesystem.cpp 207 testOpenSucc QQTFileSystem(0x2d2e4c0)
-    //证明：connect连接几次调用几次，上述情况属于moc偶现bug，多次增量编译容易出现。
-    //添加if判断，证明connect，连接几次调用几次,而且内部判断信号和槽的连接，仅仅根据sender和信号的名字来，
-    //不论receiver的地址和槽名字，全都发到一次地址的槽里。
-    //我猜测，第一次连接上的是不能用的，因为他会接收无数的槽调用；通过尝试，改回来，bug消失。
-    //和槽是否存在无关。
-    //为了避免再次出现，此处使用new，可是我到处都在用，从widget导出。
+    /*
+     * 如果用QQTClientInstance会调用两次connected，来历不明
+     * 如果把代码移到Open中激发一次connect
+     * 如果改成new QQTClient，没有问题；
+     * 疑似：connect函数连接几次调用几次。下面这段打印来自于连接了一次
+     * ../k1160pro/QQTWidgets/QQTfilesystem.cpp 207 testOpenSucc QQTFileSystem(0x2d262c0)
+     * ../k1160pro/QQTWidgets/QQTfilesystem.cpp 207 testOpenSucc QQTFileSystem(0x2d262c0)
+     * ../k1160pro/QQTWidgets/QQTfilesystem.cpp 207 testOpenSucc QQTFileSystem(0x2d2e4c0)
+     * ../k1160pro/QQTWidgets/QQTfilesystem.cpp 207 testOpenSucc QQTFileSystem(0x2d2e4c0)证明：connect连接几次调用几次，上述情况属于moc偶现bug，多次增量编译容易出现。
+     * 添加if判断，证明connect，连接几次调用几次,而且内部判断信号和槽的连接，仅仅根据sender和信号的名字来，
+     * 不论receiver的地址和槽名字，全都发到一次地址的槽里。
+     * 我猜测，第一次连接上的是不能用的，因为他会接收无数的槽调用；通过尝试，改回来，bug消失。
+     * 和槽是否存在无关。
+     * 为了避免再次出现，此处使用new，可是我到处都在用，从widget导出。
+     */
     //m_client = new QQTClient(parent);
     m_client = QQTCloudClientInstance(this);
     m_protocol = new QQTCloudProtocol(this);
@@ -33,10 +34,14 @@ QQTFileSystem::QQTFileSystem(QObject *parent) :
     connect(m_protocol, SIGNAL(signalConnectFail()), this, SLOT(openLock()));
 
     connect(m_protocol, SIGNAL(signalListFileOK()), this, SLOT(queryFilesResult()));
-    //下载
+    /*
+     * 下载
+     */
     connect(m_protocol, SIGNAL(signalDownSucc()), this, SLOT(slotDownSuccess()));
     connect(m_protocol, SIGNAL(signalCancelDown()), this, SLOT(slotCancelDown()));
-    //上传
+    /*
+     * 上传
+     */
     connect(m_protocol, SIGNAL(signalUploadSucc()), this, SLOT(slotUploadSuccess()));
     //connect(m_client, SIGNAL(signalCancelUpload()), this, SLOT(slotUploadSuccess()));
 
@@ -263,7 +268,7 @@ void QQTFileSystem::del(QString filePath)
 
     if(prot.contains("local"))
     {
-        system(QString("rm -f %1").arg(files).toAscii().constData());
+        system(QString("rm -f %1").arg(files).toLatin1().constData());
         return;
     }
 
@@ -304,7 +309,7 @@ void QQTFileSystem::copy(QString src, QString dst)
         system(QString("cp -fr %1 %2 ")
                .arg(srcFile)
                .arg(dstFile)
-               .toAscii().constData());
+               .toLatin1().constData());
         ;
     }
     else if(srcProt.contains("htp") && dstProt.contains("htp"))

@@ -153,10 +153,14 @@ void QQTInput::InitForm()
         connect(b, SIGNAL(clicked()), this, SLOT(btn_clicked()));
     }
 
-    //绑定全局改变焦点信号槽
+    /*
+     * 绑定全局改变焦点信号槽
+     */
     connect(qApp, SIGNAL(focusChanged(QWidget *, QWidget *)),
             this, SLOT(focusChanged(QWidget *, QWidget *)));
-    //绑定按键事件过滤器
+    /*
+     * 绑定按键事件过滤器
+     */
     qApp->installEventFilter(this);
 }
 
@@ -256,7 +260,9 @@ void QQTInput::ShowPanel()
 
 bool QQTInput::checkPress()
 {
-    //只有属于输入法键盘的合法按钮才继续处理
+    /*
+     * 只有属于输入法键盘的合法按钮才继续处理
+     */
     bool num_ok = btnPress->property("btnNum").toBool();
     bool other_ok = btnPress->property("btnOther").toBool();
     bool letter_ok = btnPress->property("btnLetter").toBool();
@@ -276,7 +282,9 @@ void QQTInput::reClicked()
 
 void QQTInput::btn_clicked()
 {
-    //如果当前焦点控件类型为空,则返回不需要继续处理
+    /*
+     * 如果当前焦点控件类型为空,则返回不需要继续处理
+     */
     if (currentEditType == "") {
         return;
     }
@@ -284,7 +292,9 @@ void QQTInput::btn_clicked()
     QPushButton *btn = (QPushButton *)sender();
     QString objectName = btn->objectName();
     //pline() << objectName;
-    //大小写
+    /*
+     * 大小写
+     */
     if (objectName == "checkShift") {
         if (currentType == "min") {
             currentType = "max";
@@ -333,7 +343,9 @@ void QQTInput::btn_clicked()
         if(1 == ui->stackedWidget->currentIndex())
             ui->stackedWidget->setCurrentIndex(0);
     } else if (objectName == "btnDelete" || objectName == "btnDel") {
-        //如果当前是中文模式,则删除对应拼音,删除完拼音之后再删除对应文本输入框的内容
+        /*
+         * 如果当前是中文模式,则删除对应拼音,删除完拼音之后再删除对应文本输入框的内容
+         */
         if (currentType == "chinese") {
             QString txt = ui->labPY->text();
             int len = txt.length();
@@ -348,7 +360,9 @@ void QQTInput::btn_clicked()
         }
     } else if (objectName == "btnPre") {
         if (currentPY_index >= 20) {
-            //每次最多显示10个汉字,所以每次向前的时候索引要减20
+            /*
+             * 每次最多显示10个汉字,所以每次向前的时候索引要减20
+             */
             if (currentPY_index % 10 == 0) {
                 currentPY_index -= 20;
             } else {
@@ -370,15 +384,21 @@ void QQTInput::btn_clicked()
         insertValue("\n");
     }else {
         QString value = btn->text();
-        //如果是&按钮，因为对应&被过滤,所以真实的text为去除前面一个&字符
+        /*
+         * 如果是&按钮，因为对应&被过滤,所以真实的text为去除前面一个&字符
+         */
         if (objectName == "btnOther7") {
             value = value.right(1);
         }
-        //当前不是中文模式,则单击按钮对应text为传递参数
+        /*
+         * 当前不是中文模式,则单击按钮对应text为传递参数
+         */
         if (currentType != "chinese") {
             insertValue(value);
         } else {
-            //中文模式下,不允许输入特殊字符,单击对应数字按键取得当前索引的汉字
+            /*
+             * 中文模式下,不允许输入特殊字符,单击对应数字按键取得当前索引的汉字
+             */
             if (btn->property("btnOther").toBool()) {
                 if (ui->labPY->text().length() == 0) {
                     insertValue(value);
@@ -415,7 +435,9 @@ void QQTInput::btn_clicked()
     }
 }
 
-//事件过滤器,用于识别鼠标单击汉字标签处获取对应汉字
+/*
+ * 事件过滤器,用于识别鼠标单击汉字标签处获取对应汉字
+ */
 bool QQTInput::eventFilter(QObject *obj, QEvent *event)
 {
     //pline() << obj->objectName() << currentEditType << event->type();
@@ -462,14 +484,18 @@ bool QQTInput::eventFilter(QObject *obj, QEvent *event)
         }
         return false;
     } else if (event->type() == QEvent::KeyPress) {
-        //如果输入法窗体不可见,则不需要处理
+        /*
+         * 如果输入法窗体不可见,则不需要处理
+         */
         if (!isVisible()) {
             return QWidget::eventFilter(obj, event);
         }
 
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-        //Shift切换输入法模式,esc键关闭输入法面板,空格取第一个汉字,退格键删除
-        //中文模式下回车键取拼音,中文模式下当没有拼音时可以输入空格
+        /*
+         * Shift切换输入法模式,esc键关闭输入法面板,空格取第一个汉字,退格键删除
+         * 中文模式下回车键取拼音,中文模式下当没有拼音时可以输入空格
+         */
         if (keyEvent->key() == Qt::Key_Space) {
             if (ui->labPY->text() != "") {
                 setChinese(0);
@@ -544,10 +570,12 @@ void QQTInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
     currentFocusWidget = nowWidget;
     //pline() << currentEditType << "oldWidget:" << oldWidget << " nowWidget:" << nowWidget;
     if (nowWidget != 0 && !this->isAncestorOf(nowWidget)) {
-        //在Qt5和linux系统中(嵌入式linux除外),当输入法面板关闭时,焦点会变成无,然后焦点会再次移到焦点控件处
-        //这样导致输入法面板的关闭按钮不起作用,关闭后马上有控件获取焦点又显示.
-        //为此,增加判断,当焦点是从有对象转为无对象再转为有对象时不要显示.
-        //这里又要多一个判断,万一首个窗体的第一个焦点就是落在可输入的对象中,则要过滤掉
+        /*
+         * 在Qt5和linux系统中(嵌入式linux除外),当输入法面板关闭时,焦点会变成无,然后焦点会再次移到焦点控件处
+         * 这样导致输入法面板的关闭按钮不起作用,关闭后马上有控件获取焦点又显示.
+         * 为此,增加判断,当焦点是从有对象转为无对象再转为有对象时不要显示.
+         * 这里又要多一个判断,万一首个窗体的第一个焦点就是落在可输入的对象中,则要过滤掉
+         */
 
 #ifndef __MIPS_LINUX__
         if (oldWidget == 0x0 && !isFirst) {
@@ -575,7 +603,9 @@ void QQTInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
 #if 0
         } else if (nowWidget->inherits("QComboBox")) {
             QComboBox *cbox = (QComboBox *)nowWidget;
-            //只有当下拉选择框处于编辑模式才可以输入
+            /*
+             * 只有当下拉选择框处于编辑模式才可以输入
+             */
             if (cbox->isEditable()) {
                 currentLineEdit = cbox->lineEdit() ;
                 currentEditType = "QLineEdit";
@@ -591,7 +621,9 @@ void QQTInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
             ShowPanel();
 #endif
         } else {
-            //需要将输入法切换到最初的原始状态--小写,同时将之前的对象指针置为零
+            /*
+             * 需要将输入法切换到最初的原始状态--小写,同时将之前的对象指针置为零
+             */
             currentWidget = 0;
             currentLineEdit = 0;
             currentTextEdit = 0;
@@ -605,17 +637,23 @@ void QQTInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
             return;
         }
         //pline() << currentEditType;
-        //如果要实现android键盘的效果，再考虑此处，否则不考虑
+        /*
+         * 如果要实现android键盘的效果，再考虑此处，否则不考虑
+         */
         changePosition();
     }
-    //这部分代码不可更改 除非添加控件
+    /*
+     * 这部分代码不可更改 除非添加控件
+     */
     //pline() << currentEditType;
 }
 
 void QQTInput::changeType()
 {
-    //如果需要更改输入法初始模式,改变currentType这个变量即可
-    //min--小写模式  max--大写模式  chinese--中文模式
+    /*
+     * 如果需要更改输入法初始模式,改变currentType这个变量即可
+     * min--小写模式  max--大写模式  chinese--中文模式
+     */
     //currentType = "min";
     if (currentType == "max") {
         changeLetter(true);
@@ -639,7 +677,9 @@ void QQTInput::changeType()
         ui->btnOther18->setText("；");
         ui->btnOther21->setText("“");
     }
-    //每次切换到模式,都要执行清空之前中文模式下的信息
+    /*
+     * 每次切换到模式,都要执行清空之前中文模式下的信息
+     */
     clearChinese();
     ui->labPY->setText("");
 }
@@ -665,7 +705,9 @@ void QQTInput::selectChinese()
     QString currentPY = ui->labPY->text();
     QString sql = "select [word] from [pinyin] where [pinyin]='" + currentPY + "';";
     query.exec(sql);
-    //逐个将查询到的字词加入汉字队列
+    /*
+     * 逐个将查询到的字词加入汉字队列
+     */
     while(query.next()) {
         QString result = query.value(0).toString();
         QStringList text = result.split(" ");
@@ -681,7 +723,9 @@ void QQTInput::selectChinese()
 
 void QQTInput::showChinese()
 {
-    //每个版面最多显示10个汉字
+    /*
+     * 每个版面最多显示10个汉字
+     */
     int count = 0;
     currentPY.clear();
     for (int i = 0; i < 10; i++) {
@@ -722,7 +766,9 @@ void QQTInput::deleteValue()
     if (currentEditType == "QLineEdit") {
         currentLineEdit->backspace();
     } else if (currentEditType == "QTextEdit") {
-        //获取当前QTextEdit光标,如果光标有选中,则移除选中字符,否则删除光标前一个字符
+        /*
+         * 获取当前QTextEdit光标,如果光标有选中,则移除选中字符,否则删除光标前一个字符
+         */
         QTextCursor cursor = currentTextEdit->textCursor();
         if(cursor.hasSelection()) {
             cursor.removeSelectedText();
@@ -730,7 +776,9 @@ void QQTInput::deleteValue()
             cursor.deletePreviousChar();
         }
     } else if (currentEditType == "QPlainTextEdit") {
-        //获取当前QTextEdit光标,如果光标有选中,则移除选中字符,否则删除光标前一个字符
+        /*
+         * 获取当前QTextEdit光标,如果光标有选中,则移除选中字符,否则删除光标前一个字符
+         */
         QTextCursor cursor = currentPlain->textCursor();
         if(cursor.hasSelection()) {
             cursor.removeSelectedText();
@@ -738,7 +786,9 @@ void QQTInput::deleteValue()
             cursor.deletePreviousChar();
         }
     } else if (currentEditType == "QTextBrowser") {
-        //获取当前QTextEdit光标,如果光标有选中,则移除选中字符,否则删除光标前一个字符
+        /*
+         * 获取当前QTextEdit光标,如果光标有选中,则移除选中字符,否则删除光标前一个字符
+         */
         QTextCursor cursor = currentBrowser->textCursor();
         if(cursor.hasSelection()) {
             cursor.removeSelectedText();
@@ -756,7 +806,9 @@ void QQTInput::setChinese(int index)
     int count = currentPY.count();
     if (count > index) {
         insertValue(currentPY[index]);
-        //添加完一个汉字后,清空当前汉字信息,等待重新输入
+        /*
+         * 添加完一个汉字后,清空当前汉字信息,等待重新输入
+         */
         clearChinese();
         ui->labPY->setText("");
     }
@@ -764,7 +816,9 @@ void QQTInput::setChinese(int index)
 
 void QQTInput::clearChinese()
 {
-    //清空汉字,重置索引
+    /*
+     * 清空汉字,重置索引
+     */
     for (int i = 0; i < 10; i++) {
         labCh[i]->setText("");
     }
@@ -788,11 +842,15 @@ void QQTInput::changeRect()
 
 void QQTInput::changePosition()
 {
-    //如果需要更改输入法面板的显示位置,改变currentPosition这个变量即可
-    //control--显示在对应输入框的正下方 bottom--填充显示在底部  center--窗体居中显示
+    /*
+     * 如果需要更改输入法面板的显示位置,改变currentPosition这个变量即可
+     * control--显示在对应输入框的正下方 bottom--填充显示在底部  center--窗体居中显示
+     */
     //currentPosition = "";
 
-    //根据用户选择的输入法位置设置-居中显示-底部填充-显示在输入框正下方
+    /*
+     * 根据用户选择的输入法位置设置-居中显示-底部填充-显示在输入框正下方
+     */
 
     int frmRealHeight = frmHeight;
     //if(currentType != "chinese")
@@ -849,8 +907,10 @@ void QQTInput::changePosition()
 
 void QQTInput::ChangeStyle()
 {
-    //如果需要更改输入法面板的样式,改变currentStyle这个变量即可
-    //blue--淡蓝色  dev--dev风格  black--黑色  brown--灰黑色  lightgray--浅灰色  darkgray--深灰色  gray--灰色  silvery--银色
+    /*
+     * 如果需要更改输入法面板的样式,改变currentStyle这个变量即可
+     * blue--淡蓝色  dev--dev风格  black--黑色  brown--灰黑色  lightgray--浅灰色  darkgray--深灰色  gray--灰色  silvery--银色
+     */
     //currentStyle = "";
 
     if (currentStyle == "blue") {
@@ -876,7 +936,9 @@ void QQTInput::ChangeStyle()
 
 void QQTInput::ChangeFont()
 {
-    //输入法面板字体大小,如果需要更改面板字体大小,该这里即可
+    /*
+     * 输入法面板字体大小,如果需要更改面板字体大小,该这里即可
+     */
     //btnFontSize = 10;
     //labFontSize = 10;
 

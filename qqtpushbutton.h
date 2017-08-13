@@ -16,7 +16,9 @@ public:
     explicit QQTPushButton(QWidget *parent = 0);
     ~QQTPushButton();
 
-    //QQTPushButton [] = 不能正常运算 所以采用这种形式。
+    /*
+     * QQTPushButton [] = 不能正常运算 所以采用这种形式。
+     */
     TBtnIconTable& iconTable() { return m_pixmap; }
 
 private:

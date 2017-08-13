@@ -53,7 +53,7 @@ double QQTPlayer::timeLength()
     char buf[256]= {0};
     sprintf(buf, "get_time_length\n");
     app->write(buf);
-    bzero(buf, 256);
+    memset(buf, 0, 256);
     app->read(buf, 256);
     double length = 0;
     sscanf(buf, "ANS_LENGTH=%lf", &length);
@@ -65,7 +65,7 @@ double QQTPlayer::timePos()
     char buf[256]= {0};
     sprintf(buf, "get_time_pos\n");
     app->write(buf);
-    bzero(buf, 256);
+    memset(buf, 0, 256);
     app->read(buf, 256);
     double pos = 0;
     sscanf(buf, "ANS_TIME_POSITION=%lf", &pos);
@@ -77,7 +77,7 @@ int QQTPlayer::percent()
     char buf[256]= {0};
     sprintf(buf, "get_percent\n");
     app->write(buf);
-    bzero(buf, 256);
+    memset(buf, 0, 256);
     app->read(buf, 256);
     int pos = 0;
     sscanf(buf, "ANS_PERCENT_POSITION=%d", &pos);

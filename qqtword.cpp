@@ -1,5 +1,9 @@
-#include "qqtword.h"
+#include "qqtgui-qt.h"
 #include "qqtdefine.h"
+#include "qqtprinter.h"
+#include "qqtgraphicsscene.h"
+#include "qqtgraphicsitem.h"
+#include "qqtword.h"
 
 QQTWord::QQTWord(QObject *parent) :
     QObject(parent),
@@ -13,18 +17,24 @@ QQTWord::QQTWord(QObject *parent) :
     pr->setOrientation(QPrinter::Portrait);
     pr->setOutputFormat(QPrinter::PdfFormat);
 
-    //Font目标是打印纸上，所见即所得。
-    //Pos目标不是纸上的，是屏幕上的，所以更换屏幕，必须更换DPI；
-    //这个数值是迪文屏上的标准分辨率，打印机使用会失真；
-    //迪文View 142,138 //PCView 96 //打印机View 1200
-    //打印机分辨率1200不会失真，绘图必须进行坐标变换。
-    //数值增大，DrawText可用空间减小甚至切掉一部分
+    /*
+     * Font目标是打印纸上，所见即所得。
+     * Pos目标不是纸上的，是屏幕上的，所以更换屏幕，必须更换DPI；
+     * 这个数值是迪文屏上的标准分辨率，打印机使用会失真；
+     * 迪文View 142,138 //PCView 96 //打印机View 1200
+     * 打印机分辨率1200不会失真，绘图必须进行坐标变换。
+     * 数值增大，DrawText可用空间减小甚至切掉一部分
+     */
 #ifdef __MIPS_LINUX__
-    //这是实验结果，和理论结果不符合。
+    /*
+     * 这是实验结果，和理论结果不符合。
+     */
     logicalDpiX = 136;
     logicalDpiY = 156;
 #else
-    //这个值是理论值，绘图格子比较大
+    /*
+     * 这个值是理论值，绘图格子比较大
+     */
     logicalDpiX = 96;
     logicalDpiY = 96;
 #endif
@@ -109,7 +119,9 @@ void QQTWord::setFont(QFont font)
 
 void QQTWord::setLineSpacing(qreal spacing)
 {
-    //单倍行距
+    /*
+     * 单倍行距
+     */
     mainHeight = mainFmt->height();
     titleHeight = titleFmt->height();
     title2Height = title2Fmt->height();
@@ -278,6 +290,8 @@ void QQTWord::addTable(const QTableView *table, QPointF pos)
     }
 }
 
+int QQTWord::pageNum() { return pageSceneVector.size(); }
+
 void QQTWord::exportPdf(const QString &pdf)
 {
     // setup printer
@@ -339,6 +353,8 @@ void QQTWord::setFooterSize(qreal size)
     footerSize=70;
 }
 
+QFont QQTWord::font() { return m_font; }
+
 void QQTWord::setFooterLine(bool show)
 {
 
@@ -395,7 +411,9 @@ void QQTWord::paintPageHeader()
 
     int sx = xpos;
     int sy = ypos-headerSize;
-    //页眉
+    /*
+     * 页眉
+     */
     QQTGraphicsTextItem *headerItem = pageScene->addText(headerText, m_headerFont);
     headerItem->moveBy(sx, sy);
 
@@ -418,10 +436,12 @@ void QQTWord::paintPageFooter()
     if (footerText.isEmpty())
         return;
 
-    // footer
+    /*
+     * footer
+     */
     int sx = xpos;
 
-    QString footerStdText = tr("第 ") + QString::number(pageSceneVector.size()) + tr(" 页");
+    QString footerStdText = tr("Page") + QString::number(pageSceneVector.size()) + tr(" ");
     QQTGraphicsTextItem *item=pageScene->addText(footerStdText, m_headerFont);
     int height = item->boundingRect().height();
     int sy = ypos2 + footerSize - height;
@@ -454,7 +474,9 @@ QHash<int, ESpanFlags> QQTWord::tableSpans(const QTableView *table)
             int point = ( row ) * colCount + ( col );
             ESpanFlags flags = ESpanNone;
 
-            //没有合并
+            /*
+             * 没有合并
+             */
             if(rowSpan == 1 && colSpan == 1)
             {
                 spans.insert(point, flags);
@@ -465,14 +487,18 @@ QHash<int, ESpanFlags> QQTWord::tableSpans(const QTableView *table)
             {
 
                 point = ( row + i ) * colCount + col + 0;
-                //如果此处有Span，但是Spans已经赋值，那么break
+                /*
+                 * 如果此处有Span，但是Spans已经赋值，那么break
+                 */
                 if(ESpanNone != spans.value(point, ESpanNone))
                     break;
 
                 for(int j = 0; j < colSpan; j++)
                 {
                     point = ( row + i ) * colCount + col + j;
-                    //如果此处有Span，但是Spans已经赋值，那么break
+                    /*
+                     * 如果此处有Span，但是Spans已经赋值，那么break
+                     */
                     if(ESpanNone != spans.value(point, ESpanNone))
                         break;
 

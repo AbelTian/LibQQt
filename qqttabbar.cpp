@@ -52,7 +52,9 @@ void QQTTabBar::paintEvent(QPaintEvent * e)
         {
             int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
             p.drawItemPixmap(tabRectValue, Qt::AlignCenter, QIcon(iconList[index][sel]).pixmap(rect().size(), QIcon::Normal, QIcon::On));
-            //失真不明显，使用以下方法
+            /*
+             * 失真不明显，使用以下方法
+             */
             //QImage image(iconList[index][sel]);
             //p.drawItemPixmap(tabRectValue, Qt::AlignLeft |Qt::AlignTop, QPixmap::fromImage(image.scaled(tabRectValue.size(), Qt::KeepAspectRatio)));
         }

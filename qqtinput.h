@@ -27,7 +27,9 @@ class QQTInput : public QWidget
     ~QQTInput();
 
 public:
-    //单例模式,保证一个程序只存在一个输入法实例对象
+    /*
+     * 单例模式,保证一个程序只存在一个输入法实例对象
+     */
     static QQTInput *Instance() {
         if (!_instance) {
             _instance = new QQTInput;
@@ -35,28 +37,46 @@ public:
         return _instance;
     }
 
-    //初始化面板状态,包括字体大小
+    /*
+     * 初始化面板状态,包括字体大小
+     */
     void Init(QString type, QString position, QString style, int btnFontSize, int labFontSize);
 
 protected:
-    //事件过滤器,处理鼠标在汉字标签处单击操作
+    /*
+     * 事件过滤器,处理鼠标在汉字标签处单击操作
+     */
     bool eventFilter(QObject *obj, QEvent *event);
-    //鼠标拖动事件
+    /*
+     * 鼠标拖动事件
+     */
     void mouseMoveEvent(QMouseEvent *e);
-    //鼠标按下事件
+    /*
+     * 鼠标按下事件
+     */
     void mousePressEvent(QMouseEvent *e);
-    //鼠标松开事件
+    /*
+     * 鼠标松开事件
+     */
     void mouseReleaseEvent(QMouseEvent *);
 
 private slots:
-    //焦点改变事件槽函数处理
+    /*
+     * 焦点改变事件槽函数处理
+     */
     void focusChanged(QWidget *oldWidget, QWidget *nowWidget);
-    //输入法面板按键处理
+    /*
+     * 输入法面板按键处理
+     */
     void btn_clicked();
-    //改变输入法面板样式
+    /*
+     * 改变输入法面板样式
+     */
     void changeStyle(QString topColor, QString bottomColor,
                      QString borderColor, QString textColor);
-    //定时器处理退格键
+    /*
+     * 定时器处理退格键
+     */
     void reClicked();
 
 private:

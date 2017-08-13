@@ -63,25 +63,45 @@ public:
     QTimer* workTimer() { return m_workTimer; }
 
 signals:
-    //没有配置就会发送这个信号
+    /*
+     * 没有配置就会发送这个信号
+     */
     void sigScanning();
-    //断开连接的状态
+    /*
+     * 断开连接的状态
+     */
     void sigDisConnected();
-    //正在连接的状态
+    /*
+     * 正在连接的状态
+     */
     void sigConnecting();
-    //连接成功的状态
+    /*
+     * 连接成功的状态
+     */
     void sigConnected();
-    //Wifi列表更新 之上状态改变会影响list中wifi的标志位。
+    /*
+     * Wifi列表更新 之上状态改变会影响list中wifi的标志位。
+     */
     void sigRefreshed();
-    //Wifi状态改变
+    /*
+     * Wifi状态改变
+     */
     void sigStatusChanged(QString status);
-    //有线连接上
+    /*
+     * 有线连接上
+     */
     void sigLanConnected();
-    //有线断开
+    /*
+     * 有线断开
+     */
     void sigLanDisConnected();
-    //网络线路连接上
+    /*
+     * 网络线路连接上
+     */
     void sigNetworkClear();
-    //网络线路断开
+    /*
+     * 网络线路断开
+     */
     void sigNetworkNotClear();
 
 private slots:

@@ -40,7 +40,9 @@ void QQTDialog::paintEvent(QPaintEvent *e)
     QPainter p(this);
     QPalette plt = palette();
 
-    //半透明背景
+    /*
+     * 半透明背景
+     */
     QPen pen;
     int border = 2;
     int radius = 4;

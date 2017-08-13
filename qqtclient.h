@@ -58,9 +58,11 @@ protected slots:
 private:
     void connectToSingelHost();
 
-    //TODO:如果文件传输影响到了UI线程，那么需要将QTcpSocket局部变量化
-    //阻塞UI不必考虑此处
-    //非阻塞UI，UI却工作很慢，考虑此处。
+    /*
+     * TODO:如果文件传输影响到了UI线程，那么需要将QTcpSocket局部变量化
+     * 阻塞UI不必考虑此处
+     * 非阻塞UI，UI却工作很慢，考虑此处。
+     */
     //QTcpSocket* m_sock;
 
     QQTProtocol* m_protocol;

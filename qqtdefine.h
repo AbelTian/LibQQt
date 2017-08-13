@@ -1,7 +1,6 @@
 #ifndef QQTDEFINE_H
 #define QQTDEFINE_H
 
-#include <QSqlDatabase>
 #include <QWidget>
 #include <QUuid>
 #include <QApplication>
@@ -11,15 +10,23 @@
 #include <QDateTime>
 #include <QTextStream>
 #include <QElapsedTimer>
-#include <QSqlError>
 #include <QDesktopWidget>
 #include <QDebug>
+#include <QSqlDatabase>
+#include <QSqlError>
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
+#if defined (__WIN__) || defined (__WIN64__)
+#define SHUT_RD 0
+#define SHUT_WR 1
+#define SHUT_RDWR 2
+#else
 typedef bool BOOL;
+#endif
+
 typedef int		s32;
 typedef unsigned int   u32;
 typedef unsigned char	u8;
@@ -196,7 +203,9 @@ extern QString gUserName;
 extern QString gPassword;
 
 
-//自定义组件的公共部分
+/*
+ * 自定义组件的公共部分
+ */
 enum
 {
     BTN_NORMAL = 0,

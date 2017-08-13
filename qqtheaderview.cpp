@@ -20,7 +20,9 @@ void QQTHeaderView::paintSection(QPainter *painter, const QRect &rect, int logic
 
 QSize QQTHeaderView::sectionSizeFromContents(int logicalIndex) const
 {
-    // 文字宽度 不是section宽度
+    /*
+     * 文字宽度 不是section宽度
+     */
     return QHeaderView::sectionSizeFromContents(logicalIndex);
 }
 

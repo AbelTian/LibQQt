@@ -26,7 +26,9 @@ void QQTPushButton::paintEvent(QPaintEvent *e)
     //pline() << this->objectName() << e->type() << state << m_pixmap[state];
 
 #if 0
-    //不会报告ｌｉｂｐｎｇｗａｒｎｉｎｇ
+    /*
+     * 不会报告ｌｉｂｐｎｇｗａｒｎｉｎｇ
+     */
     QIcon::Mode iconFlag = QIcon::Normal;
     if(BTN_PRESS == state)
         iconFlag = QIcon::Selected;
@@ -34,7 +36,9 @@ void QQTPushButton::paintEvent(QPaintEvent *e)
         iconFlag = QIcon::Disabled;
     p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(m_pixmap[state]).pixmap(rect().size(), iconFlag, QIcon::On));
 #else
-    //以下方法会导致图片失真 可以控制大小 可以控制图片状态 ｓｃａｌｅｄ函数打印ｌｉｂｐｎｇｗａｒｎｉｎｇ
+    /*
+     * 以下方法会导致图片失真 可以控制大小 可以控制图片状态 ｓｃａｌｅｄ函数打印ｌｉｂｐｎｇｗａｒｎｉｎｇ
+     */
     QImage image(m_pixmap[state]);
     p.drawItemPixmap(rect(), Qt::AlignCenter, QPixmap::fromImage(image.scaled(rect().size(), Qt::IgnoreAspectRatio)));
 #endif

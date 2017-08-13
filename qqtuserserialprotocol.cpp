@@ -184,7 +184,9 @@ void QQTUserSerialProtocol::sendReadPasswordAck()
 
 void QQTUserSerialProtocol::sendExceptionAck()
 {
-    //机器运行出现异常自动通过这个串口上报
+    /*
+     * 机器运行出现异常自动通过这个串口上报
+     */
     QByteArray l;
     QQTExceptionAck ack;
     //ack.setData("");
