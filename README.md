@@ -1,5 +1,6 @@
 #QQtFoundation
 
+=============================
 1. 支持绘制图表
 2. 支持检测USB设备热插拔
 3. 自定义了一部分特殊需要的控件，比如仅仅使用图片的checkbox
@@ -10,9 +11,9 @@
 8. Qt对象工厂，允许注册和查找和删除所有来自QObject的类。
 9. 视频播放器，模拟端口实时预览器
 10. QQt打印机，支持导出pdf
-11. QQt进度条，解决Qt进度条在Diallog中导致系统死机的问题。
-12. QQtGuWord，支持文档编写，输出pdf格式。
+11. QQt进度条，解决Qt进度条在Dialog中导致系统死机的问题。
+12. QQtWord，支持文档编写，输出pdf格式。
 13. QQtTabWidget，解决QtTab不能竖排的问题
 14. QQt TreeView，添加Qt内部没有TreeView
 15. 支持工程的版本变更
-16. QQt通讯套件。serialport/tcpclient/tcpserver通讯口类和QQTProtocolmZQQTMessage报文基类。
+16. QQt通讯套件。serialport/tcpclient/tcpserver通讯口类和QQTProtocol协议基类和QQTMessage报文基类。
