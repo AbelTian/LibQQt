@@ -11,7 +11,11 @@ QQTTreeView::QQTTreeView(QWidget *parent) :
     setSelectionMode(QAbstractItemView::SingleSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setEditTriggers(QAbstractItemView::NoEditTriggers);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     header()->setResizeMode(QHeaderView::ResizeToContents);
+#else
+    header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#endif
 
 #ifdef __MIPS_LINUX__
     setFocusPolicy(Qt::NoFocus);

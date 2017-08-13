@@ -83,11 +83,15 @@ void QQTMPTableWidget::query(QString filter)
     int pix = 0;
 
 #if 0
-    //首次做检查，每隔10张*14条
+    /*
+     * 首次做检查，每隔10张*14条
+     */
     if(m_pageNum > ui->stWidgetPage->count())
         pix = m_pageNum - ui->stWidgetPage->count() + 10；
 #else
-    //每次做检查，每次的延迟比较均匀 每隔1张*14条
+    /*
+     * 每次做检查，每次的延迟比较均匀 每隔1张*14条
+     */
     pix = m_pageNum - ui->stWidgetPage->count();
 #endif
 

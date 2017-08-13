@@ -54,7 +54,9 @@ QString QQTEthenetManager::currentNetName()
 
 void QQTEthenetManager::readStatus()
 {
-    //从 status 中读取
+    /*
+     * 从 status 中读取
+     */
     char result[MAX_LEN];
     char key[MAX_LEN]; //设置一个合适的长度，以存储每一行输出
     char value[MAX_LEN]; //设置一个合适的长度，以存储每一行输出
@@ -68,7 +70,9 @@ void QQTEthenetManager::readStatus()
     while( fgets(result, sizeof(result), pp) != NULL)
     {
         sscanf(result, "%[^=]=%s", key, value);
-        //如果这里不用QString包含，会对比地址
+        /*
+         * 如果这里不用QString包含，会对比地址
+         */
         if(QString("wpa_state") == QString(key)) {
             m_curWifi[ESSID_STATUS] = value;
         } else if(QString("bssid") == QString(key)) {
@@ -205,7 +209,7 @@ void QQTEthenetManager::DhcpPassed(QString netname)
         perror("socket");
         return;
     }
-    strncpy(ifr.ifr_name, netname.toAscii().data(), IFNAMSIZ);
+    strncpy(ifr.ifr_name, netname.toLatin1().data(), IFNAMSIZ);
     ifr.ifr_name[IFNAMSIZ - 1] = 0;
     //ip
     if(ioctl(sockfd, SIOCGIFADDR, &ifr) <0)
@@ -271,9 +275,11 @@ QQTEthenetManager::QQTEthenetManager(QObject *parent) :
     connect(m_clearThread, SIGNAL(notcleared()), this, SIGNAL(sigNetworkNotClear()));
     m_thread = new QQTDhcpThread(this);
     connect(m_thread, SIGNAL(passed(QString)), this, SLOT(DhcpPassed(QString)));
-    //检查网线
-    //搜索热点
-    //刷新连接状态
+    /*
+     * 检查网线
+     * 搜索热点
+     * 刷新连接状态
+     */
     m_workTimer = new QTimer(this);
     m_workTimer->setSingleShot(false);
     connect(m_workTimer, SIGNAL(timeout()), this, SLOT(refreshWifiList()));
@@ -282,7 +288,9 @@ QQTEthenetManager::QQTEthenetManager(QObject *parent) :
     connect(m_workTimer, SIGNAL(timeout()), this, SLOT(checkNetworkClear()));
 #ifdef __MIPS_LINUX__
     m_workTimer->start(5000);
-    //更新一次，以后一直调用scan_r 5-6s
+    /*
+     * 更新一次，以后一直调用scan_r 5-6s
+     */
     system("wpa_cli -iwlan0 scan");
 #endif
 }
@@ -302,13 +310,13 @@ void QQTEthenetManager::restoreWifi()
     if("NO" == encryt)
     {
         pline() << "None Encryption";
-        fprintf(fp, "network={\n\tssid=%s\n\tkey_mgmt=NONE\n\tpriority=5\n}\n", name.toAscii().data());
+        fprintf(fp, "network={\n\tssid=%s\n\tkey_mgmt=NONE\n\tpriority=5\n}\n", name.toLatin1().data());
     }
     else if("WEP" == type)
     {
         pline() << "WEP Encryption";
         fprintf(fp, "network={\n\tssid=\"%s\"\n\tkey_mgmt=NONE\n\twep_key0=%s\n\twep_tx_keyidx=0\n\tpriority=5\n\tauth_alg=SHARED\n}\n",
-                name.toAscii().data(), password.toAscii().data());
+                name.toLatin1().data(), password.toLatin1().data());
     }
     else if("WPA" == type)
     {
@@ -316,14 +324,14 @@ void QQTEthenetManager::restoreWifi()
         bzero(cmdbuf, MAX_PATH);
         bzero(cmdresult, MAX_PATH);
 #if 0
-        sprintf(cmdbuf, "wpa_passphrase %s %s | awk 'NR==4{print $1}'", name.toAscii().data(), wifiPassword.toAscii().data());
+        sprintf(cmdbuf, "wpa_passphrase %s %s | awk 'NR==4{print $1}'", name.toLatin1().data(), wifiPassword.toLatin1().data());
         FILE *pp = popen(cmdbuf, "r"); //建立管道
         fgets(cmdresult, sizeof(cmdresult), pp) ; //""
         pclose(pp);
         fprintf(fp, "network={\n\tssid=\"%s\"\n\tkey_mgmt=WPA-PSK\n\tgroup=TKIP\n\tpairwise=CCMP\n\tproto=WPA\n\t#psk=\"%s\"\n\t%s\tpriority=5\n}\n",
                 name, wifiPassword, cmdresult);
 #else
-        sprintf(cmdbuf, "wpa_passphrase %s %s", name.toAscii().data(), password.toAscii().data());
+        sprintf(cmdbuf, "wpa_passphrase %s %s", name.toLatin1().data(), password.toLatin1().data());
         FILE *pp = popen(cmdbuf, "r"); //建立管道
         while(fgets(cmdresult, sizeof(cmdresult), pp))  //""
         {
@@ -365,28 +373,28 @@ void QQTEthenetManager::saveScript()
 
     bzero(cmdbuf, MAX_PATH);
     sprintf(cmdbuf, "ifconfig eth0 %s netmask %s up\n",
-            ip.toAscii().data(),
-            mask.toAscii().data());
+            ip.toLatin1().data(),
+            mask.toLatin1().data());
     script.write(cmdbuf);
 
     bzero(cmdbuf, MAX_PATH);
     sprintf(cmdbuf, "ifconfig wlan0 %s netmask %s up\n",
-            ip.toAscii().data(),
-            mask.toAscii().data());
+            ip.toLatin1().data(),
+            mask.toLatin1().data());
     script.write(cmdbuf);
 
     bzero(cmdbuf, MAX_PATH);
     sprintf(cmdbuf, "route add default gw %s netmask 0.0.0.0 dev eth0\n",
-            gw.toAscii().data());
+            gw.toLatin1().data());
     script.write(cmdbuf);
 
     bzero(cmdbuf, MAX_PATH);
     sprintf(cmdbuf, "route add default gw %s netmask 0.0.0.0 dev wlan0\n",
-            gw.toAscii().data());
+            gw.toLatin1().data());
     script.write(cmdbuf);
 
     bzero(cmdbuf, MAX_PATH);
-    sprintf(cmdbuf, "echo nameserver %s > /etc/resolv.conf\n", dns.toAscii().data());
+    sprintf(cmdbuf, "echo nameserver %s > /etc/resolv.conf\n", dns.toLatin1().data());
     script.write(cmdbuf);
 
     bzero(cmdbuf, MAX_PATH);
@@ -421,35 +429,37 @@ void QQTEthenetManager::config()
 
     // add .0 route
     bzero(cmdbuf, MAX_PATH);
-    sprintf(cmdbuf, "ifconfig %s 0.0.0.0 up", m_netName.toAscii().data());
+    sprintf(cmdbuf, "ifconfig %s 0.0.0.0 up", m_netName.toLatin1().data());
     system(cmdbuf);
     bzero(cmdbuf, MAX_PATH);
     sprintf(cmdbuf, "ifconfig %s %s netmask %s",
-            m_netName.toAscii().data(),
-            ip.toAscii().data(),
-            mask.toAscii().data());
+            m_netName.toLatin1().data(),
+            ip.toLatin1().data(),
+            mask.toLatin1().data());
     system(cmdbuf);
     QStringList sl = gw.split(".");
     if(sl.size() < 3) { sl.clear(); sl << "0" << "0" << "0" << "0";}
     QString net = QString("%1.%2.%3.0").arg(sl[0]).arg(sl[1]).arg(sl[2]);
 #if 0
-    //dhcp后 ifconfig up 引发了添加这条route
-    //ifconfig 0.0.0.0 也能引发添加这条route
+    /*
+     * dhcp后 ifconfig up 引发了添加这条route
+     * ifconfig 0.0.0.0 也能引发添加这条route
+     */
     bzero(cmdbuf, MAX_PATH);
     sprintf(cmdbuf, "route add -net %s netmask %s dev %s",
-            net.toAscii().data(),
-            mask.toAscii().data(),
-            m_netName.toAscii().data());
+            net.toLatin1().data(),
+            mask.toLatin1().data(),
+            m_netName.toLatin1().data());
     system(cmdbuf);
 #endif
     bzero(cmdbuf, MAX_PATH);
     sprintf(cmdbuf, "route add default gw %s netmask 0.0.0.0 dev %s",
-            gw.toAscii().data(),
-            m_netName.toAscii().data());
+            gw.toLatin1().data(),
+            m_netName.toLatin1().data());
     system(cmdbuf);
     //system("route");
     bzero(cmdbuf, MAX_PATH);
-    sprintf(cmdbuf, "echo nameserver %s > /etc/resolv.conf", dns.toAscii().data());
+    sprintf(cmdbuf, "echo nameserver %s > /etc/resolv.conf", dns.toLatin1().data());
     system(cmdbuf);
 }
 
@@ -476,7 +486,7 @@ void QQTDhcpThread::run()
 {
     char cmdbuf[MAX_PATH];
     bzero(cmdbuf, MAX_PATH);
-    sprintf(cmdbuf, "udhcpc -i %s", net.toAscii().data());
+    sprintf(cmdbuf, "udhcpc -i %s", net.toLatin1().data());
     system(cmdbuf);
     emit passed(net);
 }

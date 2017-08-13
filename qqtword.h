@@ -29,7 +29,7 @@ public:
     void addSignoffText(const QString& text, QFont m_font = QFont());
     void addTable(const QTableView* table, QPointF pos = QPointF(0, 0));
 
-    int pageNum() { return pageSceneVector.size(); }
+    int pageNum();
     QQTGraphicsScene* getPage(int num);
     void exportPdf(const QString &pdf);
     void print();
@@ -42,7 +42,7 @@ public:
     void setHeaderSize(qreal size = 0);
     void setFooterSize(qreal size = 0);
 
-    QFont font() { return m_font; }
+    QFont font();
     void setFont(QFont m_font = QFont());
     void setHeaderFont(QFont m_font = QFont());
     QFont mainFont() { return m_mainFont; }
@@ -71,13 +71,20 @@ signals:
 public slots:
 
 private:
-    //输出
+    /*
+     * 输出
+     */
     QQTPrinter* pr;
-    //对页面元素高度不能迅速统计的场景
+
+    /*
+     * 对页面元素高度不能迅速统计的场景
+     */
     QVector<QQTGraphicsScene*> pageSceneVector;
     QQTGraphicsScene* pageScene;
 
-    //页面元素
+    /*
+     * 页面元素
+     */
     int logicalDpiX;
     int logicalDpiY;
     QRectF sceneRect;
@@ -99,25 +106,42 @@ private:
     qreal title2Spacing;
     qreal headerSpacing;
 
-    //页眉
+    /*
+     * 页眉
+     */
     qreal headerSize;
     QFont m_headerFont;
     QFontMetrics *headerFmt;
     QString headerText;
-    //页脚
+
+    /*
+     * 页脚
+     */
     qreal footerSize;
     QString footerStdText;
     QString footerText;
-    //标题
+
+    /*
+     * 标题
+     */
     QFont m_titleFont;
     QFontMetrics *titleFmt;
-    //二号标题
+
+    /*
+     * 二号标题
+     */
     QFont m_title2Font;
     QFontMetrics *title2Fmt;
-    //正文
+
+    /*
+     * 正文
+     */
     QFont m_mainFont;
     QFontMetrics *mainFmt;
-    //使用中
+
+    /*
+     * 使用中
+     */
     QFont m_font;
     QFontMetrics *fmt;
 

@@ -286,12 +286,14 @@ void msgHandler(QtMsgType type, const char * msg)
     QString message = QString("%1 %2 %3").arg(current_date_time).arg(text).arg(msg);
     QString current_date = QDateTime::currentDateTime().toString("yyyy-MM-dd");
 
-    //检查文件数量 启动时检查 保留30天
-    //检查文件大小，超过最大值输出到最新的文件，一天一个文件
+    //check file num when start stay 30 days
+    //check file size, overtop max size out to new, one day one file
     QString filename = QString("./log/log-%1.txt").arg(current_date);
+
 #ifdef __MIPS_LINUX__
-    system(QString("touch %1").arg(filename).toAscii().data());
+    system(QString("touch %1").arg(filename).toLatin1().data());
 #endif
+
     QFile file(filename);
     file.open(QIODevice::WriteOnly | QIODevice::Append);
     QTextStream text_stream(&file);

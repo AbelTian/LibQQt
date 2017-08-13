@@ -33,7 +33,9 @@ void QQTWidget::paintEvent(QPaintEvent *)
         p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(m_pic).pixmap(rect().size(), QIcon::Normal, QIcon::On));
         break;
     case QQTTILEDWIDTH:
-        //会产生label的效果，左右按照rect长，但是不缩放形状
+        /*
+         * 会产生label的效果，左右按照rect长，但是不缩放形状
+         **/
         p.drawItemPixmap(rect(), Qt::AlignLeft | Qt::AlignTop,
                          QPixmap::fromImage(image.copy(rect())
                                             .scaledToWidth(rect().width())

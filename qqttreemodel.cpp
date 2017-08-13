@@ -102,7 +102,7 @@ void QQTTreeModel::result()
         return;        
 
     QList<QStandardItem*> itemList = findItems(files.m_path, Qt::MatchExactly, FILE_FILEPATH);
-    pline() << "找到文件夹数目" << itemList.size() << prot << file;
+    pline() << "find directory num" << itemList.size() << prot << file;
 
     pline() << itemFromIndex(QModelIndex());
 

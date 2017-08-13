@@ -35,7 +35,9 @@ void QQTRadioButton::paintEvent(QPaintEvent *)
         return;
 
     p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(icon).pixmap(rect().size(), QIcon::Normal, QIcon::On));
-    //以下方法会导致图片失真
+    /*
+     * 以下方法会导致图片失真
+     */
     //QImage image(icon);
     //p.drawItemPixmap(rect(), Qt::AlignCenter, QPixmap::fromImage(image.scaled(rect().size(), Qt::IgnoreAspectRatio)));
 

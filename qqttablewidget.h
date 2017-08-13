@@ -19,7 +19,9 @@ public:
     void setDB(QString db = "");
     void setTable(QString table);
     void query(QString excp = "");
-    //在TableWidget中，删除的行肯定是选中的行，设定
+    /*
+     * 在TableWidget中，删除的行肯定是选中的行，设定
+     */
     void removeRow(int row);
     void removeRows(int column, QList<QStringList> ids);
 

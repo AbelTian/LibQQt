@@ -1,6 +1,7 @@
 #ifndef QQTOBJECTFACTORY_H
 #define QQTOBJECTFACTORY_H
 
+#include <QObject>
 #include <QByteArray>
 #include <QMetaObject>
 #include <QHash>
@@ -17,17 +18,23 @@ public:
     template<typename T>
     static void registerClass()
     {
-        //将生成此类对象的具体（非模板）函数注册进Hash
+        /*
+         * 将生成此类对象的具体（非模板）函数注册进Hash
+         */
         constructors().insert( T::staticMetaObject.className(), &constructorHelper<T> );
     }
 
     static QObject* createObject( const QByteArray& className, QObject* parent = NULL )
     {
-        //搜索生成此类对象的函数
+        /*
+         * 搜索生成此类对象的函数
+         */
         Constructor constructor = constructors().value( className );
         if ( constructor == NULL )
             return NULL;
-        //生成对象,调用constructorHelper<className>(parent)
+        /*
+         * 生成对象,调用constructorHelper<className>(parent)
+         */
         return (*constructor)( parent );
     }
 
@@ -74,7 +81,9 @@ private:
 
     static QHash<QByteArray, Constructor>& constructors()
     {
-        //保存生成类对象的具体（非模板）函数
+        /*
+         * 保存生成类对象的具体（非模板）函数
+         */
         static QHash<QByteArray, Constructor> instance;
         return instance;
     }

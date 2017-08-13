@@ -1,6 +1,10 @@
 #include "qqtclient.h"
 #include "qqtdefine.h"
+#if defined(__WIN__) || defined(__WIN64__)
+#include "qqtwin.h"
+#else
 #include "qqtlinux.h"
+#endif
 #include <QTcpSocket>
 #include <QHostInfo>
 
@@ -139,7 +143,9 @@ void QQTClient::socketStateChanged(QAbstractSocket::SocketState eSocketState)
  */
 void QQTClient::socketErrorOccured(QAbstractSocket::SocketError e)
 {
-    //在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
+    /*
+     * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
+     */
     pline() << e;
     switch(e)
     {
@@ -159,7 +165,9 @@ void QQTClient::socketErrorOccured(QAbstractSocket::SocketError e)
 void QQTClient::socketConnected()
 {
     pline() << peerName() << peerAddress().toString() << peerPort();
-    //这个步骤，socket重建，资源重新开始
+    /*
+     * 这个步骤，socket重建，资源重新开始
+     */
     emit signalConnectSucc();
 }
 
@@ -202,16 +210,20 @@ void QQTClient::readyReadData()
 
         pline() << m_blockOnNet.size() << "..." << nBlockLen;
 
-        //收到数据不足或者解析包长小于最小包长
         if(m_blockOnNet.length() < nBlockLen)
         {
+            /*
+             * 收到数据不足或者解析包长小于最小包长
+             */
             return;
         }
-        //粘包
         else if(m_blockOnNet.length() > nBlockLen)
         {
-            //还没有处理完毕，数据已经接收到，异步信号处理出现这种异常
-            //疑问:如果异步调用这个函数绘出现什么问题？正常情况，同步获取数据，异步处理；检测异步获取并且处理会有什么状况
+            /*
+             * stick package
+             * 还没有处理完毕，数据已经接收到，异步信号处理出现这种异常
+             * 疑问:如果异步调用这个函数绘出现什么问题？正常情况，同步获取数据，异步处理；检测异步获取并且处理会有什么状况
+             */
             pline() << "stick package" << m_blockOnNet.length() << nBlockLen;
             QByteArray netData;
             netData.resize(nBlockLen);
@@ -219,7 +231,9 @@ void QQTClient::readyReadData()
             m_protocol->dispatcher(netData);
             continue;
         }
-        //正常分发
+        /*
+         * 正常分发
+         */
         m_protocol->dispatcher(m_blockOnNet);
         break;
     }while(1);

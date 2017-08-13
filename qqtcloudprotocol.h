@@ -315,11 +315,15 @@ signals:
 
 
 public slots:
-    //服务器需要解析收到的命令，而此处不需要，所以客户端和服务器代码分开编写。
+    /*
+     * 服务器需要解析收到的命令，而此处不需要，所以客户端和服务器代码分开编写。
+     */
     void sendHeatBeatMessage();
     void recvHeatBeatResultMessage(QQTNetworkMessage&);
 
-    //和PC的协议中，不登陆不能进行任何操作，所以此处登陆；
+    /*
+     * 和PC的协议中，不登陆不能进行任何操作，所以此处登陆；
+     */
     void sendLoginMessage();
     void recvLoginResultMessage(QQTNetworkMessage&);
 

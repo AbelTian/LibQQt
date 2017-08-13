@@ -12,7 +12,9 @@ QQTTableWidget::QQTTableWidget(QWidget *parent) :
     m_db = newDatabaseConn();
     m_model = new QQTTableModel(this, m_db);
     setModel(m_model);
-    //如果没有这个函数，程序存在启动崩溃的情况。
+    /*
+     * 如果没有这个函数，程序存在启动崩溃的情况。
+     */
     setItemDelegate(new QSqlRelationalDelegate(this));
 }
 
@@ -56,13 +58,17 @@ void QQTTableWidget::removeRows(int column, QList<QStringList> ids)
     {
         QModelIndex idx = m_model->index(i, column);
 
-        //经过删除，真实的rowCount后的index无效
+        /*
+         * 经过删除，真实的rowCount后的index无效
+         */
         if(!idx.isValid())
             break;
 
         QString modelColValue = m_model->data(idx).toString();
 
-        //在ids中找到列值相等的，针对row进行删除，i不变；
+        /*
+         * 在ids中找到列值相等的，针对row进行删除，i不变；
+         */
         QListIterator<QStringList> itor(ids);
         while(itor.hasNext())
         {

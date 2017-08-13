@@ -40,7 +40,9 @@ QQTPreviewWidget::~QQTPreviewWidget()
 
 int QQTPreviewWidget::play()
 {
-    //这块代码放在哪里
+    /*
+     * 这块代码放在哪里
+     */
     dmmu_init();
     dmmu_get_page_table_base_phys(&tlb_base_phys);
 
@@ -235,23 +237,35 @@ void QQTPreviewWidget::paintEvent(QPaintEvent *)
 
     QStylePainter painter(this);
 
-    //此处采集视频为多线程采集 上边的log证明 数据已经被修改
+    /*
+     * 此处采集视频为多线程采集 上边的log证明 数据已经被修改
+     */
     addr = ioctl(fd, CIMIO_GET_FRAME);
     p = (uchar*)addr;
 
-    //不具备优化能力，yuv缺少alpha。
+    /*
+     * 不具备优化能力，yuv缺少alpha。
+     */
     convert_yuv_to_rgb_buffer(p, pp, pre_size.w, pre_size.h);
     //frame->loadFromData((uchar *)pp, w * h * 3 * sizeof(char));
-    //采集的图像左边上边有黑边 更换摄像头或许回有所改善 待调试
+    /*
+     * 采集的图像左边上边有黑边 更换摄像头或许回有所改善 待调试
+     */
     QRect srcRect(2, 6, pre_size.w, pre_size.h);
     QRect dstRect = rect();
     painter.scale(1.01, 1.02);
-    //缩放OK
+    /*
+     * 缩放OK
+     */
     painter.drawImage(dstRect, *frame, srcRect );
     //painter.drawPixmap(dstRect,QPixmap::fromImage(*frame,Qt::AutoColor),srcRect);;
-    //裁切OK
+    /*
+     * 裁切OK
+     */
     //painter.drawItemPixmap(srcRect, Qt::AlignCenter, QPixmap::fromImage(*frame,Qt::AutoColor));
-    //30ms 屏幕有闪烁
+    /*
+     * 30ms 屏幕有闪烁
+     */
     //update();
 }
 

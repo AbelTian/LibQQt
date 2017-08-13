@@ -40,6 +40,7 @@ public:
         m_fileName = fileinfo.m_fileName;
         m_size = fileinfo.m_size;
         m_date = fileinfo.m_date;
+        return *this;
     }
 
     QString m_fileType;
@@ -163,21 +164,28 @@ public:
     QQTFileSystem(QObject* parent = 0);
     ~QQTFileSystem();
 
-    //如果需要使用htp协议，就可以使用
+    /*
+     * 如果需要使用htp协议，就可以使用
+     */
     bool open();
     bool close();
     bool isOpen();
     bool isQueryed();
 
     //QQTfs -> path
-    //假设已经将QQT网络硬盘映射到htp:/
-    //本地硬盘已经映射到local:/
+    /*
+     * 假设已经将QQT网络硬盘映射到htp:/
+     * 本地硬盘已经映射到local:/
+     */
     void addwangluocipanYingshe();
-    //所有的操作都不会逃出当前路径，默认当前路径
+    /*
+     * 所有的操作都不会逃出当前路径，默认当前路径
+     */
     void setRootPath();
-    //如果是映射中的路径，自动按照协议进行查询
-    //如果是其他路径，那么按照本地协议进行查询
-    //那么按照协议格式来作为输入参数很合理
+    /*
+     * 如果是映射中的路径，自动按照协议进行查询
+     * 如果是其他路径，那么按照本地协议进行查询那么按照协议格式来作为输入参数很合理
+     */
     bool query(QString path = "local:///");
     QQTFilesInfo& record();
 
