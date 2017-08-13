@@ -40,8 +40,8 @@ signals:
     void signalConnectSucc();
     void signalConnectFail();//
     void signalDisConnectSucc();//maybe
-    void signalDisConnectFail();//？
-    void signalUpdateProgress(int value);
+    void signalDisConnectFail();//
+    void signalUpdateProgress(qint64 value);
 
 
 private slots:

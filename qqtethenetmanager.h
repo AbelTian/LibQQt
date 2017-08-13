@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QTimer>
 #include <QList>
-#include "qqtdefine.h"
 #include <qthread.h>
+#include "qqtdefine.h"
 
 class QQTNetworkClearThread : public QThread
 {

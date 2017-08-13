@@ -215,6 +215,8 @@ quint16 QQTUserSerialProtocol::splitter(const QByteArray &s)
 
 bool QQTUserSerialProtocol::dispatcher(const QByteArray &m)
 {
+    bool ret = true;
+
     QQTSerialMessage qMsg;
     qMsg.parser(m);
     pline() << qMsg;
@@ -240,9 +242,11 @@ bool QQTUserSerialProtocol::dispatcher(const QByteArray &m)
         recvReadPassword(qMsg.data());
         break;
     default:
+        ret = false;
         pline() << "receive unknown command:" << hex << qMsg.cmd();
         break;
     }
+    return ret;
 }
 
 QQTSerialPort *QQTUserSerialPortInstance(QObject *parent, QString name, QSerialPort::BaudRate)

@@ -17,7 +17,7 @@ extern "C" {
 #include <time.h>
 #include <errno.h>
 #include <sys/types.h>
-#include <WinSock2.h>
+//#include <WinSock2.h>
 
 #ifdef __cplusplus
 }

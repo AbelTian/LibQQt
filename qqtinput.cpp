@@ -671,11 +671,11 @@ void QQTInput::changeType()
         ui->btnOther21->setText("\"");
     } else {
         changeLetter(false);
-        ui->btnOther12->setText("。");
-        ui->btnOther14->setText("：");
-        ui->btnOther17->setText("，");
-        ui->btnOther18->setText("；");
-        ui->btnOther21->setText("“");
+        ui->btnOther12->setText(tr("."));
+        ui->btnOther14->setText(tr(":"));
+        ui->btnOther17->setText(tr(","));
+        ui->btnOther18->setText(tr(";"));
+        ui->btnOther21->setText(tr("\""));
     }
     /*
      * 每次切换到模式,都要执行清空之前中文模式下的信息

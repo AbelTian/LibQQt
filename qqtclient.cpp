@@ -1,12 +1,14 @@
-#include "qqtclient.h"
 #include "qqtdefine.h"
+
 #if defined(__WIN__) || defined(__WIN64__)
 #include "qqtwin.h"
 #else
 #include "qqtlinux.h"
 #endif
+
 #include <QTcpSocket>
 #include <QHostInfo>
+#include "qqtclient.h"
 
 QQTClient::QQTClient(QObject *parent) :
     QTcpSocket(parent)
@@ -25,16 +27,20 @@ QQTClient::QQTClient(QObject *parent) :
 
     connect(this, SIGNAL(bytesWritten(qint64)), this, SLOT(updateProgress(qint64)));
 
-    //心情很好，但是给自己带来麻烦顾虑，也不能给系统节约多少什么资源。
-    //, Qt::QueuedConnection);
+    connect(this, SIGNAL(bytesWritten(qint64)), this, SIGNAL(signalUpdateProgress(qint64)));
 
+    /*
+     * 心情很好，但是给自己带来麻烦顾虑，也不能给系统节约多少什么资源, Qt::QueuedConnection);
+     */
 
     setSocketOption(QAbstractSocket::LowDelayOption, 0);
     setSocketOption(QAbstractSocket::KeepAliveOption, 0);
     setReadBufferSize(_TCP_RECVBUFF_SIZE);
 
     m_PORT = 0;
-    //启动连接
+    /*
+     * 启动连接
+     */
     eConType = 0;
     m_protocol = NULL;
 }
@@ -49,7 +55,8 @@ void QQTClient::installProtocol(QQTProtocol *stack)
         return;
 
     m_protocol = stack;
-    connect(m_protocol, SIGNAL(write(const QByteArray&)), this, SLOT(write(const QByteArray&)));
+    connect(m_protocol, SIGNAL(write(const QByteArray&)),
+            this, SLOT(write(const QByteArray&)));
 }
 
 void QQTClient::uninstallProtocol(QQTProtocol *stack)
@@ -57,7 +64,8 @@ void QQTClient::uninstallProtocol(QQTProtocol *stack)
     if(!m_protocol)
         return;
 
-    disconnect(m_protocol, SIGNAL(write(const QByteArray&)), this, SLOT(write(const QByteArray&)));
+    disconnect(m_protocol, SIGNAL(write(const QByteArray&)),
+               this, SLOT(write(const QByteArray&)));
     m_protocol = NULL;
 }
 
@@ -96,7 +104,11 @@ int QQTClient::SendDisConnectFromHost()
 
     if(isValid() || isOpen() )
     {
+#if defined(__WIN__) || defined (__WIN64__)
+        ;
+#else
         shutdown(this->socketDescriptor(), SHUT_RDWR);
+#endif
         disconnectFromHost();
         waitForDisconnected();
         close();

@@ -6,9 +6,6 @@ extern "C" {
 #endif /* __cplusplus */
 
 
-#include <sys/ioctl.h>
-#include <sys/soundcard.h>
-#include <unistd.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
@@ -21,6 +18,9 @@ extern "C" {
 #include <time.h>
 #include <errno.h>
 #include <sys/types.h>
+#include <sys/ioctl.h>
+#include <sys/soundcard.h>
+#include <unistd.h>
 #include <sys/mman.h>
 #include <linux/fb.h>
 #include <getopt.h>
