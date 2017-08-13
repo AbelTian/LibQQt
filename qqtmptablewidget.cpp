@@ -115,10 +115,18 @@ void QQTMPTableWidget::query(QString filter)
         //ptime();//1ms
         page->setSelectionMode(selectionMode);
         page->setAlternatingRowColors(altColor);
+#ifdef __QT5__
+        page->horizontalHeader()->setSectionResizeMode(resizeMode);
+#else
         page->horizontalHeader()->setResizeMode(resizeMode);
+#endif
         //ptime();//0ms
         for(int i = 0; i < m_model->columnCount(); i++)
+#ifdef __QT5__
+            page->horizontalHeader()->setSectionResizeMode(i, m_resizeMode.value(i, resizeMode));
+#else
             page->horizontalHeader()->setResizeMode(i, m_resizeMode.value(i, resizeMode));
+#endif
         //ptime();//QHash(338ms) QMap(372ms) 400ms(QHash等几乎不耗时)
         for(int i = 0; i < m_model->columnCount(); i++)
             page->setColumnWidth(i, m_columnWidth.value(i));
@@ -284,11 +292,19 @@ QQTTableWidget* QQTMPTableWidget::selectedRows(int column)
                     m_headerData.value(i, m_model->headerData(i, Qt::Horizontal).toString()));
     page->setSelectionMode(selectionMode);
     page->setAlternatingRowColors(altColor);
+#ifdef __QT5__
+    page->horizontalHeader()->setSectionResizeMode(resizeMode);
+#else
     page->horizontalHeader()->setResizeMode(resizeMode);
+#endif
     for(int i = 0; i < m_model->columnCount(); i++)
     {
         page->setColumnHidden(i, m_columnHidden.value(i));
+#ifdef __QT5__
+        page->horizontalHeader()->setSectionResizeMode(i, m_resizeMode.value(i, resizeMode));
+#else
         page->horizontalHeader()->setResizeMode(i, m_resizeMode.value(i, resizeMode));
+#endif
         page->setColumnWidth(i, m_columnWidth.value(i));
     }
 

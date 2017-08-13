@@ -36,6 +36,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *);
     void enterEvent(QEvent *);
     void leaveEvent(QEvent *);
+    void changeEvent(QEvent *e);
 
     // QWidget interface
 protected:

@@ -5,9 +5,9 @@
 #-------------------------------------------------
 
 lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
-lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QT4__
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport multimedia
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
+greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 QT += core gui network sql
 
@@ -25,6 +25,7 @@ message($${QT_KIT} Defined in qqtfoundation)
 #WIN64 __WIN64__
 #处理文件内平台小差异
 equals(QT_KIT, MIPS32) {
+    QT += multimedia
     DEFINES += __MIPS_LINUX__
 } else:equals(QT_KIT, LINUX) {
     DEFINES += __LINUX__

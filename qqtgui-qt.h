@@ -1,7 +1,7 @@
 #ifndef QQTGUIQT_H
 #define QQTGUIQT_H
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+#ifndef __QT5__
 #include <QtCore>
 #include <QtGui>
 #include <QWSInputMethod>
