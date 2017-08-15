@@ -58,13 +58,27 @@
 #include <QLayout>
 
 #include <QTableView>
+#include <QItemSelectionModel>
+#include <QItemDelegate>
 #include <QSqlRelationalDelegate>
 #include <QSqlTableModel>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlError>
-#include <QItemSelectionModel>
-#include <QItemDelegate>
+
+#include <QAnimationGroup>
+#include <QPauseAnimation>
+#include <QVariantAnimation>
+#include <QParallelAnimationGroup>
+#include <QSequentialAnimationGroup>
+#include <QSequentialIterable>
+#include <QPropertyAnimation>
+
+#include <QState>
+#include <QStateMachine>
+#include <QSignalTransition>
+#include <QEventTransition>
+#include <QTimeLine>
 
 #endif // QQTGUIQT_H

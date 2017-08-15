@@ -15,15 +15,12 @@
 class QQTObjectFactory
 {
 public:
-    template<typename T>
-    static void registerClass()
-    {
-        /*
-         * 将生成此类对象的具体（非模板）函数注册进Hash
-         */
-        constructors().insert( T::staticMetaObject.className(), &constructorHelper<T> );
-    }
-
+    /**
+     * @brief createObject 根据对象类型（类名）生成类对象实例
+     * @param className
+     * @param parent
+     * @return
+     */
     static QObject* createObject( const QByteArray& className, QObject* parent = NULL )
     {
         /*
@@ -37,12 +34,18 @@ public:
          */
         return (*constructor)( parent );
     }
-
+    /**
+     * @brief registerObject 将对象注册进工厂
+     * @param w
+     */
     static void registerObject(const QObject * const& w)
     {
         containers().push_back(w);
     }
-
+    /**
+     * @brief unregisterObject 取消对象在工厂中注册
+     * @param w
+     */
     static void unregisterObject(const QObject*& w)
     {
         QListIterator<const QObject*> itor(containers());
@@ -56,7 +59,11 @@ public:
             }
         }
     }
-
+    /**
+     * @brief registedObject 根据对象名（ObjectName）查找注册的对象。
+     * @param objName
+     * @return
+     */
     static const QObject* registedObject(const QString objName)
     {
         QListIterator<const QObject*> itor(containers());
@@ -86,6 +93,15 @@ private:
          */
         static QHash<QByteArray, Constructor> instance;
         return instance;
+    }
+
+    template<typename T>
+    static void registerClass()
+    {
+        /*
+         * 将生成此类对象的具体（非模板）函数注册进Hash
+         */
+        constructors().insert( T::staticMetaObject.className(), &constructorHelper<T> );
     }
 
 private:

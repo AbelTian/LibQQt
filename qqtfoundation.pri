@@ -133,7 +133,9 @@ SOURCES += $$PWD/qqtcheckbox.cpp \
     $$PWD/qqtserialmessage.cpp \
     $$PWD/qqtnetworkmessage.cpp \
     $$PWD/qqtuserserialprotocol.cpp \
-    $$PWD/qqtlanprotocol.cpp
+    $$PWD/qqtlanprotocol.cpp \
+    $$PWD/qqtanimation.cpp \
+    $$PWD/qqtanimationmanager.cpp
 
 HEADERS  += $$PWD/qqtcheckbox.h \
         $$PWD/qqtdefine.h \
@@ -187,7 +189,9 @@ HEADERS  += $$PWD/qqtcheckbox.h \
     $$PWD/qqtserialmessage.h \
     $$PWD/qqtnetworkmessage.h \
     $$PWD/qqtuserserialprotocol.h \
-    $$PWD/qqtlanprotocol.h
+    $$PWD/qqtlanprotocol.h \
+    $$PWD/qqtanimation.h \
+    $$PWD/qqtanimationmanager.h
 
 
 FORMS    += $$PWD/qqtcheckbox.ui \
