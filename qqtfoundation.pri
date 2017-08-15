@@ -13,7 +13,10 @@ QT += core gui network sql
 
 DEFINES += _TTY_POSIX_
 
-INCLUDEPATH += $$PWD
+INCLUDEPATH += $$PWD \
+                $$PWD/customplot \
+                $$PWD/pluginwatcher \
+                $$PWD/dmmu
 
 QT_KIT = $$(QKIT)
 
@@ -55,35 +58,28 @@ win32 {
     #win32 base type
     HEADERS += $$PWD/qqtwin.h
 
-    wince*: SOURCES += $$PWD/qdevicewatcher_wince.cpp
-    else:  SOURCES += $$PWD/qdevicewatcher_win32.cpp
+    wince*: SOURCES += $$PWD/pluginwatcher/qdevicewatcher_wince.cpp
+    else:  SOURCES += $$PWD/pluginwatcher/qdevicewatcher_win32.cpp
 }
 
 unix {
     macx {
-        SOURCES += $$PWD/qdevicewatcher_mac.cpp
+        SOURCES += $$PWD/pluginwatcher/qdevicewatcher_mac.cpp
         LIBS += -framework DiskArbitration -framework Foundation
     } else {
-        SOURCES += $$PWD/qdevicewatcher_linux.cpp
+        SOURCES += $$PWD/pluginwatcher/qdevicewatcher_linux.cpp
     }
 
-    HEADERS += $$PWD/qqtpreviewwidget.h \
-                $$PWD/dmmu.h \
-                $$PWD/jz_cim.h \
-                $$PWD/graphics.h \
-                $$PWD/hal.h \
+    HEADERS += $$PWD/dmmu/dmmu.h \
+                $$PWD/dmmu/jz_cim.h \
+                $$PWD/dmmu/graphics.h \
+                $$PWD/dmmu/hal.h \
                 $$PWD/qqtethenetmanager.h \
-                $$PWD/qqtwifiwidget.h \
                 #linux base type
                 $$PWD/qqtlinux.h
 
-    SOURCES += $$PWD/qqtpreviewwidget.cpp \
-                $$PWD/dmmu.c \
-                $$PWD/qqtethenetmanager.cpp \
-                $$PWD/qqtwifiwidget.cpp
-
-    FORMS   += $$PWD/qqtpreviewwidget.ui \
-                $$PWD/qqtwifiwidget.ui
+    SOURCES += $$PWD/dmmu/dmmu.c \
+                $$PWD/qqtethenetmanager.cpp
 }
 
 SOURCES += $$PWD/qqtcheckbox.cpp \
@@ -101,17 +97,13 @@ SOURCES += $$PWD/qqtcheckbox.cpp \
     $$PWD/qqttabwidgetb.cpp \
     $$PWD/qqttreeview.cpp \
     $$PWD/qqtwidget.cpp \
-    $$PWD/qcpdocumentobject.cpp \
-    $$PWD/qcustomplot.cpp \
     $$PWD/qqtclient.cpp \
     $$PWD/qqtlineeditwithsearch.cpp \
     $$PWD/qqtplayer.cpp \
-    $$PWD/qqtpluginwatcher.cpp \
     $$PWD/qqtserialport.cpp \
     $$PWD/qqtserver.cpp \
     $$PWD/qqttablemodel.cpp \
     $$PWD/qqtstandarditemmodel.cpp \
-    $$PWD/qdevicewatcher.cpp \
     $$PWD/qqtmptablewidget.cpp \
     $$PWD/qqttablewidget.cpp \
     $$PWD/qqtgraphicsscene.cpp \
@@ -125,8 +117,6 @@ SOURCES += $$PWD/qqtcheckbox.cpp \
     $$PWD/qqttreewidget.cpp \
     $$PWD/qqtinput.cpp \
     $$PWD/qqtmsgbox.cpp \
-    $$PWD/qqtpassworddialog.cpp \
-    $$PWD/qqtprogressdialog.cpp \
     $$PWD/qqtcloudprotocol.cpp \
     $$PWD/qqtmessage.cpp \
     $$PWD/qqtprotocol.cpp \
@@ -135,7 +125,10 @@ SOURCES += $$PWD/qqtcheckbox.cpp \
     $$PWD/qqtuserserialprotocol.cpp \
     $$PWD/qqtlanprotocol.cpp \
     $$PWD/qqtanimation.cpp \
-    $$PWD/qqtanimationmanager.cpp
+    $$PWD/customplot/qcpdocumentobject.cpp \
+    $$PWD/customplot/qcustomplot.cpp \
+    $$PWD/pluginwatcher/qdevicewatcher.cpp \
+    $$PWD/pluginwatcher/qqtpluginwatcher.cpp
 
 HEADERS  += $$PWD/qqtcheckbox.h \
         $$PWD/qqtdefine.h \
@@ -155,18 +148,13 @@ HEADERS  += $$PWD/qqtcheckbox.h \
     $$PWD/qqttabwidgetb.h \
     $$PWD/qqttreeview.h \
     $$PWD/qqtwidget.h \
-    $$PWD/qcpdocumentobject.h \
-    $$PWD/qcustomplot.h \
     $$PWD/qqtclient.h \
     $$PWD/qqtlineeditwithsearch.h \
     $$PWD/qqtplayer.h \
-    $$PWD/qqtpluginwatcher.h \
     $$PWD/qqtserialport.h \
     $$PWD/qqtserver.h \
     $$PWD/qqttablemodel.h \
     $$PWD/qqtstandarditemmodel.h \
-    $$PWD/qdevicewatcher.h \
-    $$PWD/qdevicewatcher_p.h \
     $$PWD/qqtmptablewidget.h \
     $$PWD/qqttablewidget.h \
     $$PWD/qqtgraphicsscene.h \
@@ -181,8 +169,6 @@ HEADERS  += $$PWD/qqtcheckbox.h \
     $$PWD/qqttreewidget.h \
     $$PWD/qqtinput.h \
     $$PWD/qqtmsgbox.h \
-    $$PWD/qqtpassworddialog.h \
-    $$PWD/qqtprogressdialog.h \
     $$PWD/qqtcloudprotocol.h \
     $$PWD/qqtprotocol.h \
     $$PWD/qqtmessage.h \
@@ -191,7 +177,11 @@ HEADERS  += $$PWD/qqtcheckbox.h \
     $$PWD/qqtuserserialprotocol.h \
     $$PWD/qqtlanprotocol.h \
     $$PWD/qqtanimation.h \
-    $$PWD/qqtanimationmanager.h
+    $$PWD/customplot/qcpdocumentobject.h \
+    $$PWD/customplot/qcustomplot.h \
+    $$PWD/pluginwatcher/qqtpluginwatcher.h \
+    $$PWD/pluginwatcher/qdevicewatcher.h \
+    $$PWD/pluginwatcher/qdevicewatcher_p.h
 
 
 FORMS    += $$PWD/qqtcheckbox.ui \
@@ -205,10 +195,8 @@ FORMS    += $$PWD/qqtcheckbox.ui \
     $$PWD/qqttabwidgetb.ui \
     $$PWD/qqttreeview.ui \
     $$PWD/qqtwidget.ui \
-    $$PWD/qqtmptablewidget.ui \
     $$PWD/qqttablewidget.ui \
+    $$PWD/qqtmptablewidget.ui \
     $$PWD/qqttreewidget.ui \
     $$PWD/qqtinput.ui \
-    $$PWD/qqtmsgbox.ui \
-    $$PWD/qqtpassworddialog.ui \
-    $$PWD/qqtprogressdialog.ui
+    $$PWD/qqtmsgbox.ui

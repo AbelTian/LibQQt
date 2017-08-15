@@ -72,7 +72,6 @@
 #include <QVariantAnimation>
 #include <QParallelAnimationGroup>
 #include <QSequentialAnimationGroup>
-#include <QSequentialIterable>
 #include <QPropertyAnimation>
 
 #include <QState>

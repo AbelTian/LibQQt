@@ -5,8 +5,8 @@
 #include <QPauseAnimation>
 #include <QParallelAnimationGroup>
 #include <QSequentialAnimationGroup>
-#include <QSequentialIterable>
 #include <QPropertyAnimation>
+#include "qqtdefine.h"
 
 class QQTAnimation : public QParallelAnimationGroup
 {

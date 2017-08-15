@@ -61,6 +61,10 @@ typedef unsigned char uint8_t;
 #define NULL   0
 #endif
 
+#ifndef nullptr
+#define nullptr 0
+#endif
+
 enum {
     Auth_Id = 0,
     Auth_Name,

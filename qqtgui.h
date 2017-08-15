@@ -35,4 +35,6 @@
 
 #include "qqtfilesystem.h"
 
+#include "qqtanimation.h"
+
 #endif // QQTGUI_H
