@@ -213,8 +213,17 @@ QSqlDatabase newDatabaseConn()
 
 void moveCenter(QWidget *w)
 {
-    w->move(( QApplication::desktop()->availableGeometry().width() - w->width()) / 2,
-           ( QApplication::desktop()->availableGeometry().height() - w->height()) / 2);
+    int x1 = 0, y1 = 0;
+
+    x1 = ( QApplication::desktop()->availableGeometry().width()
+           - w->width() ) / 2;
+    y1 = ( QApplication::desktop()->availableGeometry().height()
+           - w->height() ) / 2;
+
+
+    w->move(x1, y1);
+
+    return;
 }
 
 //opened
