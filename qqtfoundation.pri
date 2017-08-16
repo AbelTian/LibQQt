@@ -17,7 +17,10 @@ INCLUDEPATH += $$PWD \
                 $$PWD/customplot \
                 $$PWD/pluginwatcher \
                 $$PWD/dmmu \
-                $$PWD/frame
+                $$PWD/frame \
+                $$PWD/vlc/include/VLCQtCore \
+                $$PWD/vlc/include/VLCQtQml \
+                $$PWD/vlc/include/VLCQtWidgets
 
 QT_KIT = $$(QKIT)
 
@@ -94,7 +97,6 @@ unix {
     HEADERS += $$PWD/qqtethenetmanager.h \
                 $$PWD/qqtlinux.h
 }
-
 #customplot
 SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
             $$PWD/customplot/qcustomplot.cpp
@@ -106,7 +108,7 @@ SOURCES += $$PWD/pluginwatcher/qdevicewatcher.cpp \
 HEADERS += $$PWD/pluginwatcher/qqtpluginwatcher.h \
             $$PWD/pluginwatcher/qdevicewatcher.h \
             $$PWD/pluginwatcher/qdevicewatcher_p.h
-
+#com
 SOURCES += $$PWD/qqtcheckbox.cpp \
         $$PWD/qqtdefine.cpp \
     $$PWD/qqtdialog.cpp \
