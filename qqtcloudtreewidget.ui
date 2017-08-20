@@ -2,8 +2,8 @@
  <author/>
  <comment/>
  <exportmacro/>
- <class>QQTTreeWidget</class>
- <widget name="QQTTreeWidget" class="QQTTreeView">
+ <class>QQTCloudTreeWidget</class>
+ <widget class="QQTTreeView" name="QQTCloudTreeWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

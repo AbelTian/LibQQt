@@ -1,7 +1,7 @@
 #ifndef QQTWIFIWIDGET_H
 #define QQTWIFIWIDGET_H
 
-#include "qqtstandarditemmodel.h"
+#include "qstandarditemmodel.h"
 #include "qqtgui-qt.h"
 #include "qqtgui.h"
 #include "qqtpassworddialog.h"
@@ -51,7 +51,7 @@ private:
 
 private:
     Ui::QQTWIFIWidget *ui;
-    QQTStandardItemModel* m_model;
+    QStandardItemModel* m_model;
     QQTPasswordDialog* m_pass;
 };
 

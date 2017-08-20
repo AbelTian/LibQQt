@@ -99,54 +99,6 @@ public:
     QList<QQTFileInfo> m_filelist;
 };
 
-/**
- * @brief The QQTBlock class
- * QMutex，QSemphore，QCondation在gui线程会锁定gui，而我希望在gui线程中堵塞但是不要锁定gui
- * 这个block应用场合为gui线程内部，不适用线程之间
- * 仅仅锁定一次和解锁一次，多次锁定和解锁无用途。
- */
-class QQTBlock : public QObject
-{
-public:
-    explicit QQTBlock(QObject* parent = 0): QObject(parent), m_lock(0) {}
-
-    //0x7FFFFFFF
-    bool lock(int millsecond = 0x7FFFFFFF)
-    {
-        //m_lock++;
-        m_lock=1;
-
-        timer.restart();
-        while(timer.elapsed() < millsecond)
-        {
-            if(m_lock <= 0)
-                break;
-            QApplication::processEvents();
-        }
-
-        if(timer.elapsed() >= millsecond)
-            return false;
-        return true;
-    }
-
-    void unlock()
-    {
-        //m_lock--;
-        m_lock = 0;
-    }
-
-    bool isLocked()
-    {
-        if(m_lock <= 0)
-            return false;
-
-        return true;
-    }
-
-private:
-    int m_lock;
-    QElapsedTimer timer;
-};
 
 /**
  * @brief The QQTFileSystem class

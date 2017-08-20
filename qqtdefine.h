@@ -182,14 +182,14 @@ typedef enum tagSampleEnum{
 #define DB_DATA_PATH "Data/"
 #define AV_PATH "./res"
 #define DB_TYPE "QSQLITE"
-#define DB_PINYIN "PinYin"
-#define DB_MANAGER "Manager"
-#define DB_QQT "System"
-#define DB_USER "User"
-#define DB_EXTRACT "Extract"
+#define DB_PINYIN "PinYin.db"
+#define DB_MANAGER "Manager.db"
+#define DB_QQT "System.db"
+#define DB_USER "User.db"
+#define DB_EXTRACT "Extract.db"
 #define DB_REPORT_P "Data/Method_Time.db"
-#define DB_EVENT "SysEvent"
-#define DB_DATA "SampleResult"
+#define DB_EVENT "SysEvent.db"
+#define DB_DATA "SampleResult.db"
 #define TABLE_USERINFO "User"
 #define TABLE_AUTHORITY "Authority"
 #define TABLE_LIBRARY "Library"
@@ -318,5 +318,54 @@ void moveRight(QWidget* w);
 void msgHandler(QtMsgType, const char *);
 
 void QQTSleep(int millsecond);
+
+/**
+ * @brief The QQTBlock class
+ * QMutex，QSemphore，QCondation在gui线程会锁定gui，而我希望在gui线程中堵塞但是不要锁定gui
+ * 这个block应用场合为gui线程内部，不适用线程之间
+ * 仅仅锁定一次和解锁一次，多次锁定和解锁无用途。
+ */
+class QQTBlock : public QObject
+{
+public:
+    explicit QQTBlock(QObject* parent = 0): QObject(parent), m_lock(0) {}
+
+    //0x7FFFFFFF
+    bool lock(int millsecond = 0x7FFFFFFF)
+    {
+        //m_lock++;
+        m_lock=1;
+
+        timer.restart();
+        while(timer.elapsed() < millsecond)
+        {
+            if(m_lock <= 0)
+                break;
+            QApplication::processEvents();
+        }
+
+        if(timer.elapsed() >= millsecond)
+            return false;
+        return true;
+    }
+
+    void unlock()
+    {
+        //m_lock--;
+        m_lock = 0;
+    }
+
+    bool isLocked()
+    {
+        if(m_lock <= 0)
+            return false;
+
+        return true;
+    }
+
+private:
+    int m_lock;
+    QElapsedTimer timer;
+};
 
 #endif // QQTDEFINE_H

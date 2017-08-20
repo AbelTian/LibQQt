@@ -232,7 +232,7 @@ void setDatabaseName(QSqlDatabase &db, QString dbName)
     if(db.isOpen())
         db.close();
 
-    db.setDatabaseName(QString("%1/%2.db").arg(DB_PATH).arg(dbName));
+    db.setDatabaseName(QString("%1/%2").arg(DB_PATH).arg(dbName));
 
     if (!db.open()) {
         QMessageBox::warning(0, QObject::tr("QSQLITE %1 Error").arg(db.databaseName()),

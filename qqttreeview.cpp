@@ -19,11 +19,10 @@ QQTTreeView::QQTTreeView(QWidget *parent) :
 
 #ifdef __MIPS_LINUX__
     setFocusPolicy(Qt::NoFocus);
-#endif
-
     QFont fnt(font());
     fnt.setPointSize(16);
     setFont(fnt);
+#endif
 }
 
 QQTTreeView::~QQTTreeView()

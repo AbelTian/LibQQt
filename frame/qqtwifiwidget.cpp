@@ -50,7 +50,7 @@ QQTWIFIWidget::QQTWIFIWidget(QWidget *parent) :
     m_pManager = QQTEthenetManager::Instance(this);
     connect(m_pManager, SIGNAL(sigRefreshed()), this, SLOT(wifiRefreshed()));
 
-    m_model = new QQTStandardItemModel(this);
+    m_model = new QStandardItemModel(this);
     m_model->setColumnCount(ESSID_MAX);
     setModel(m_model);
 

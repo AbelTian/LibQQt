@@ -1,4 +1,4 @@
-#include "qqttreemodel.h"
+#include "qqttreedriver.h"
 
 QQTTreeModel::QQTTreeModel(QObject *parent) : QStandardItemModel(parent)
 {

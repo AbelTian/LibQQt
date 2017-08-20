@@ -27,7 +27,7 @@
 
 #include "qqttablewidget.h"
 #include "qqtmptablewidget.h"
-#include "qqttreewidget.h"
+#include "qqtcloudtreewidget.h"
 
 #include "qqtgraphicsitem.h"
 #include "qqtgraphicsscene.h"

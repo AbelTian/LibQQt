@@ -11,7 +11,7 @@ class QQTMessage : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQTMessage(QObject *parent = 0);
+    explicit QQTMessage(QObject *parent = 0) : QObject(parent) {}
 
 public:
     /**

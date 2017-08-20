@@ -27,6 +27,7 @@ void QQTTableWidget::setDB(QString db)
 {
     if(db.isEmpty())
     {
+        //TODO:
         closeDatabase(m_db);
         return;
     }

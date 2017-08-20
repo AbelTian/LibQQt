@@ -9,7 +9,7 @@ lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
-QT += core gui network sql
+QT += core gui network sql xml
 
 DEFINES += _TTY_POSIX_
 
@@ -17,10 +17,7 @@ INCLUDEPATH += $$PWD \
                 $$PWD/customplot \
                 $$PWD/pluginwatcher \
                 $$PWD/dmmu \
-                $$PWD/frame \
-                $$PWD/vlc/include/VLCQtCore \
-                $$PWD/vlc/include/VLCQtQml \
-                $$PWD/vlc/include/VLCQtWidgets
+                $$PWD/frame
 
 QT_KIT = $$(QKIT)
 
@@ -51,12 +48,9 @@ CONFIG(debug, debug|release) {
 
 win32 {
     win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
-
     QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
-
     LIBS += -luser32
 }
-
 
 win32 {
     #win32 base type
@@ -130,7 +124,6 @@ SOURCES += $$PWD/qqtcheckbox.cpp \
     $$PWD/qqtserialport.cpp \
     $$PWD/qqtserver.cpp \
     $$PWD/qqttablemodel.cpp \
-    $$PWD/qqtstandarditemmodel.cpp \
     $$PWD/qqtmptablewidget.cpp \
     $$PWD/qqttablewidget.cpp \
     $$PWD/qqtgraphicsscene.cpp \
@@ -139,9 +132,7 @@ SOURCES += $$PWD/qqtcheckbox.cpp \
     $$PWD/qqtword.cpp \
     $$PWD/qqtreport.cpp \
     $$PWD/qqtobjectfactory.cpp \
-    $$PWD/qqttreemodel.cpp \
     $$PWD/qqtfilesystem.cpp \
-    $$PWD/qqttreewidget.cpp \
     $$PWD/qqtinput.cpp \
     $$PWD/qqtmsgbox.cpp \
     $$PWD/qqtcloudprotocol.cpp \
@@ -151,7 +142,14 @@ SOURCES += $$PWD/qqtcheckbox.cpp \
     $$PWD/qqtnetworkmessage.cpp \
     $$PWD/qqtuserserialprotocol.cpp \
     $$PWD/qqtlanprotocol.cpp \
-    $$PWD/qqtanimation.cpp
+    $$PWD/qqtanimation.cpp \
+    $$PWD/qqtcloudtreemodel.cpp \
+    $$PWD/qqtcloudtreewidget.cpp \
+    $$PWD/qqttreewidget.cpp \
+    $$PWD/qqttreemodel.cpp \
+    $$PWD/qqtfilesystemtreemodel.cpp \
+    $$PWD/qqtsqltreemodel.cpp \
+    $$PWD/qqtxmltreemodel.cpp
 
 HEADERS  += $$PWD/qqtcheckbox.h \
         $$PWD/qqtdefine.h \
@@ -177,7 +175,6 @@ HEADERS  += $$PWD/qqtcheckbox.h \
     $$PWD/qqtserialport.h \
     $$PWD/qqtserver.h \
     $$PWD/qqttablemodel.h \
-    $$PWD/qqtstandarditemmodel.h \
     $$PWD/qqtmptablewidget.h \
     $$PWD/qqttablewidget.h \
     $$PWD/qqtgraphicsscene.h \
@@ -187,9 +184,7 @@ HEADERS  += $$PWD/qqtcheckbox.h \
     $$PWD/qqtreport.h \
     $$PWD/version.h \
     $$PWD/qqtobjectfactory.h \
-    $$PWD/qqttreemodel.h \
     $$PWD/qqtfilesystem.h \
-    $$PWD/qqttreewidget.h \
     $$PWD/qqtinput.h \
     $$PWD/qqtmsgbox.h \
     $$PWD/qqtcloudprotocol.h \
@@ -200,7 +195,13 @@ HEADERS  += $$PWD/qqtcheckbox.h \
     $$PWD/qqtuserserialprotocol.h \
     $$PWD/qqtlanprotocol.h \
     $$PWD/qqtanimation.h \
-
+    $$PWD/qqtcloudtreemodel.h \
+    $$PWD/qqtcloudtreewidget.h \
+    $$PWD/qqttreewidget.h \
+    $$PWD/qqttreemodel.h \
+    $$PWD/qqtfilesystemtreemodel.h \
+    $$PWD/qqtsqltreemodel.h \
+    $$PWD/qqtxmltreemodel.h
 
 FORMS    += $$PWD/qqtcheckbox.ui \
     $$PWD/qqtdialog.ui \
@@ -215,6 +216,7 @@ FORMS    += $$PWD/qqtcheckbox.ui \
     $$PWD/qqtwidget.ui \
     $$PWD/qqttablewidget.ui \
     $$PWD/qqtmptablewidget.ui \
-    $$PWD/qqttreewidget.ui \
     $$PWD/qqtinput.ui \
-    $$PWD/qqtmsgbox.ui
+    $$PWD/qqtmsgbox.ui \
+    $$PWD/qqtcloudtreewidget.ui \
+    $$PWD/qqttreewidget.ui
