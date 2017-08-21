@@ -42,6 +42,7 @@ void QQTXmlTreeModel::setFilePath(QString fileName)
 
 bool QQTXmlTreeModel::query(QString condition)
 {
+    return true;
 }
 
 /**

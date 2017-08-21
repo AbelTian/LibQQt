@@ -9,6 +9,7 @@ QQTFileSystemTreeModel::QQTFileSystemTreeModel(QObject *parent) : QQTTreeModel(p
 
 bool QQTFileSystemTreeModel::query(QString condition)
 {
+    return true;
 }
 
 void QQTFileSystemTreeModel::setFilePath(QString path)

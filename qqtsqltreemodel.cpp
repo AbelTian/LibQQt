@@ -19,7 +19,7 @@ void QQTSqlTreeModel::setFilePath(QString dbname)
 
 bool QQTSqlTreeModel::query(QString condition)
 {
-    parseDatabase();
+    return parseDatabase();
 }
 
 bool QQTSqlTreeModel::parseDatabase()
@@ -31,6 +31,7 @@ bool QQTSqlTreeModel::parseDatabase()
         QString table = itor.next();
         parseTable(table);
     }
+    return true;
 }
 
 bool QQTSqlTreeModel::parseTable(QString tableName)
