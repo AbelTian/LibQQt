@@ -2,6 +2,21 @@ include (${CMAKE_SOURCE_DIR}/cmake/function.cmake)
 
 set ( SUBLIBRARY_NAME QQt)
 
+set( VER_FILEVERSION             0,1,0,0   )//文件版本
+set( VER_FILEVERSION_STR         "0.1.0.0" )
+set( VER_PRODUCTVERSION          0,1,0,0 )
+set( VER_PRODUCTVERSION_STR      "0.1"   )//产品版本
+set( VER_COMPANYNAME_STR         "QQT"   )
+set( VER_FILEDESCRIPTION_STR     "QQT"   )//文件说明
+set( VER_INTERNALNAME_STR        "QQT"   )
+set( VER_LEGALCOPYRIGHT_STR      "Copyright 2007-2017 QQT Co., Ltd."  ) //版权
+set( VER_LEGALTRADEMARKS1_STR    "All rights reserved" )
+set( VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR )
+set( VER_ORIGINALFILENAME_STR    "QQT"  )//原始文件名
+set( VER_PRODUCTNAME_STR         "QQT"  )//产品名称
+set( VER_COMPANYDOMAIN_STR       "www.qqt.com" )
+configure_file(qqtversion.h.in core/qqtversion.h)
+
 ##SOURCES
 file(GLOB_RECURSE SOURCES "*.cpp")
 msglist("${SOURCES}")
