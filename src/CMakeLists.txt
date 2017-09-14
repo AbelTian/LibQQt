@@ -2,20 +2,29 @@ include (${CMAKE_SOURCE_DIR}/cmake/function.cmake)
 
 set ( SUBLIBRARY_NAME QQt)
 
-set( VER_FILEVERSION             0,1,0,0   )//文件版本
-set( VER_FILEVERSION_STR         "0.1.0.0" )
-set( VER_PRODUCTVERSION          0,1,0,0 )
-set( VER_PRODUCTVERSION_STR      "0.1"   )//产品版本
-set( VER_COMPANYNAME_STR         "QQT"   )
-set( VER_FILEDESCRIPTION_STR     "QQT"   )//文件说明
+#文件版本
+set( VER_FILEVERSION             1,0,0,0   )
+set( VER_FILEVERSION_STR         "1.0.0.0" )
+
+#产品版本
+set( VER_PRODUCTVERSION          1.0 )
+set( VER_PRODUCTVERSION_MAJOR          1 )
+set( VER_PRODUCTVERSION_STR      "1.0"   )
+set( VER_PRODUCTVERSION_MAJOR_STR      "1"   )
+
+#产品名称
+set( VER_PRODUCTNAME_STR         "QQT"  )
+set( VER_ORIGINALFILENAME_STR    "QQT"  )
 set( VER_INTERNALNAME_STR        "QQT"   )
-set( VER_LEGALCOPYRIGHT_STR      "Copyright 2007-2017 QQT Co., Ltd."  ) //版权
-set( VER_LEGALTRADEMARKS1_STR    "All rights reserved" )
-set( VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR )
-set( VER_ORIGINALFILENAME_STR    "QQT"  )//原始文件名
-set( VER_PRODUCTNAME_STR         "QQT"  )//产品名称
+set( VER_COMPANYNAME_STR         "QQT"   )
 set( VER_COMPANYDOMAIN_STR       "www.qqt.com" )
-configure_file(qqtversion.h.in core/qqtversion.h)
+#文件说明
+set( VER_FILEDESCRIPTION_STR     "QQT"   )
+#版权
+set( VER_LEGALCOPYRIGHT_STR      "Copyright 2007-2017 QQT Co., Ltd."  )
+set( VER_LEGALTRADEMARKS1_STR    "All rights reserved" )
+set( VER_LEGALTRADEMARKS2_STR    ${VER_LEGALTRADEMARKS1_STR} )
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/qqtversion.h.in ${CMAKE_CURRENT_SOURCE_DIR}/core/qqtversion.h)
 
 ##SOURCES
 file(GLOB_RECURSE SOURCES "*.cpp")
@@ -26,14 +35,13 @@ if(UNIX)
 	set(SOURCE ${SOURCES} ${DMMUSOURCES})
 endif(UNIX)
 
-if(NOT UNIX)
+if(APPLE OR WIN32 OR WINCE)
 	file(GLOB FILTER "network/qqtethenetmanager.cpp")
 	set(FILTERS ${FILTERS} ${FILTER})
 	file(GLOB FILTER "frame/qqtpreviewwidget.cpp")
 	set(FILTERS ${FILTERS} ${FILTER})
 	file(GLOB FILTER "frame/qqtwifiwidget.cpp")
 	set(FILTERS ${FILTERS} ${FILTER})
-
 	msglist("${FILTERS}")
 	filter_out("${FILTERS}" "${SOURCES}" SOURCES )
 endif()
@@ -52,7 +60,7 @@ elseif(UNIX)
 endif(WIN32)
 
 #内部编译 解决头文件发现不了的问题
-include_directories( core sql network 
+include_directories( core sql network
 	customplot gui widgets frame
 	pluginwatcher printsupport )
 
@@ -61,21 +69,25 @@ SET_TARGET_PROPERTIES(${SUBLIBRARY_NAME} PROPERTIES OUTPUT_NAME ${SUBLIBRARY_NAM
 GET_TARGET_PROPERTY(OUTPUT_VALUE ${SUBLIBRARY_NAME} OUTPUT_NAME)
 MESSAGE(STATUS "${OUTPUT_VALUE} ${CMAKE_SHARED_LIBS}")
 
-SET_TARGET_PROPERTIES(${SUBLIBRARY_NAME} PROPERTIES VERSION 1.2 SOVERSION 1)
+SET_TARGET_PROPERTIES(${SUBLIBRARY_NAME} PROPERTIES VERSION ${VER_PRODUCTVERSION} SOVERSION ${VER_PRODUCTVERSION_MAJOR})
 
-set(Qt5Libs Core Widgets Gui Xml Sql Network PrintSupport SerialPort)
-foreach(loop_var ${Qt5Libs})
-    #message(Qt5${loop_var})
-    find_package(Qt5${loop_var})
-    target_link_libraries(${SUBLIBRARY_NAME} Qt5::${loop_var})
-endforeach(loop_var)
+link_qt_libraries(${SUBLIBRARY_NAME})
 
-install(TARGETS ${SUBLIBRARY_NAME} 
+if(APPLE)
+    link_framework(${SUBLIBRARY_NAME})
+    set_target_properties(${SUBLIBRARY_NAME} PROPERTIES AUTOMOC_MOC_OPTIONS "-DQ_OS_MAC")
+    # qmake will do this automatically
+    set_target_properties(${SUBLIBRARY_NAME} PROPERTIES COMPILE_FLAGS "-mmacosx-version-min=10.10")
+endif()
+
+
+
+install(TARGETS ${SUBLIBRARY_NAME}
     RUNTIME DESTINATION bin
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
 )
 
 install ( FILES ${MOC_HEADERS}
-	DESTINATION include
+    DESTINATION include
 )

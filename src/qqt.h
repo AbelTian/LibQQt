@@ -5,8 +5,10 @@
 #include "qqtgui-qt.h"
 #if defined(__WIN__) || defined(__WIN64__)
 #include "qqtwin.h"
-#else
+#elif defined(__LINUX__) || defined(__LINUX64__)
 #include "qqtlinux.h"
+#else
+#include "qqtdarwin.h"
 #endif
 #include "qqtcore.h"
 #include "qqtsql.h"
