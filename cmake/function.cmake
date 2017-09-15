@@ -76,3 +76,10 @@ macro (link_qt_libraries projectname)
     endif()
 endmacro(link_qt_libraries)
 
+macro (install_mac_framework projectname)
+    install( TARGETS ${projectname}
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+    )
+endmacro(install_mac_framework)
