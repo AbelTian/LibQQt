@@ -3,12 +3,13 @@
 
 #include "qqttreeview.h"
 #include "qqttreemodel.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTTreeWidget;
 }
 
-class QQTTreeWidget : public QQTTreeView
+class QQTSHARED_EXPORT QQTTreeWidget : public QQTTreeView
 {
     Q_OBJECT
 

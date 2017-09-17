@@ -7,6 +7,7 @@
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 TARGET = qqtframe
 TEMPLATE = app
@@ -16,12 +17,12 @@ MOC_DIR = obj/moc.cpp
 UI_DIR = obj/ui.h
 RCC_DIR = qrc
 #user directory
-#DESTDIR = bin
-DESTDIR = ../../../Product/install/Application
+DESTDIR = bin
+#DESTDIR = ../../../Product/install/Application
 
-INCLUDEPATH += ../qqtfoundation
+INCLUDEPATH += ../../src
 
-include(../qqtfoundation/qqtfoundation.pri)
+include(../../src/qqt.pri)
 
 QT_KIT = $$(QKIT)
 
@@ -30,22 +31,33 @@ message($${QT_KIT} Defined in qqtframe)
 DEFINES += _TTY_POSIX_
 
 equals(QT_KIT, MIPS32) {
-	QT += multimedia
-	DEFINES += __MIPS_LINUX__
-} else {
-	DEFINES += __LINUX64__
+    QT += multimedia
+    DEFINES += __MIPS_LINUX__
+} else:equals(QT_KIT, LINUX) {
+    DEFINES += __LINUX__
+} else:equals(QT_KIT, LINUX64) {
+    DEFINES += __LINUX64__
+} else:equals(QT_KIT, WIN) {
+    DEFINES += __WIN__
+} else:equals(QT_KIT, WIN64) {
+    DEFINES += __WIN64__
+} else:equals(QT_KIT, macOS) {
+    DEFINES += __DARWIN__
 }
 
 CONFIG(debug, debug|release) {
 } else {
-	DEFINES -= QT_NO_DEBUG_OUTPUT
+    DEFINES -= QT_NO_DEBUG_OUTPUT
+}
+
+
+equals(QT_KIT, MIPS32) {
+	mips32.path = /Application
+	INSTALLS += mips32
+} else {
 }
 
 INCLUDEPATH +=  .
-
-target.path += /application
-
-INSTALLS += target
 
 SOURCES += $$PWD/main.cpp $$PWD/qqtapp.cpp $$PWD/qqtwindow.cpp
 

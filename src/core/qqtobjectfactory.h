@@ -7,12 +7,13 @@
 #include <QHash>
 #include <QList>
 #include <QListIterator>
+#include <qqt.h>
 
 /**
  * @brief The QQTObjectFactory class
  * QQT 对象管理器 工厂模式
  */
-class QQTObjectFactory
+class QQTSHARED_EXPORT QQTObjectFactory
 {
 public:
     /**

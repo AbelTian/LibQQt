@@ -4,8 +4,9 @@
 #include <QTcpServer>
 #include "qqtprotocol.h"
 #include "qqtclient.h"
+#include "qqt.h"
 
-class QQTServer : public QTcpServer
+class QQTSHARED_EXPORT QQTServer : public QTcpServer
 {
     Q_OBJECT
 public:

@@ -3,12 +3,13 @@
 
 #include <QPushButton>
 #include "qqtwidgets.h"
+#include <qqt.h>
 
 namespace Ui {
 class QQTPushButton;
 }
 
-class QQTPushButton : public QPushButton
+class QQTSHARED_EXPORT QQTPushButton : public QPushButton
 {
     Q_OBJECT
 

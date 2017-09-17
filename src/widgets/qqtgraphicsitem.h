@@ -3,15 +3,16 @@
 
 #include <QGraphicsItem>
 #include <QGraphicsProxyWidget>
+#include <qqt.h>
 
-class QQTGraphicsItem : public QGraphicsItem
+class QQTSHARED_EXPORT QQTGraphicsItem : public QGraphicsItem
 {
 public:
     explicit QQTGraphicsItem(QQTGraphicsItem *parent = 0);
 
 };
 
-class QQTGraphicsTextItem : public QGraphicsTextItem
+class QQTSHARED_EXPORT QQTGraphicsTextItem : public QGraphicsTextItem
 {
 public:
     explicit QQTGraphicsTextItem(QQTGraphicsItem *parent = 0);
@@ -23,7 +24,7 @@ public:
 };
 
 
-class QQTGraphicsSimpleTextItem : public QGraphicsSimpleTextItem
+class QQTSHARED_EXPORT QQTGraphicsSimpleTextItem : public QGraphicsSimpleTextItem
 {
 public:
     explicit QQTGraphicsSimpleTextItem(QQTGraphicsItem *parent = 0);
@@ -31,14 +32,14 @@ public:
 };
 
 
-class QQTGraphicsPixmapItem : public QGraphicsPixmapItem
+class QQTSHARED_EXPORT QQTGraphicsPixmapItem : public QGraphicsPixmapItem
 {
 public:
     explicit QQTGraphicsPixmapItem(QQTGraphicsItem *parent = 0);
 
 };
 
-class QQTGraphicsRectItem : public QGraphicsRectItem
+class QQTSHARED_EXPORT QQTGraphicsRectItem : public QGraphicsRectItem
 {
 public:
     explicit QQTGraphicsRectItem(QQTGraphicsItem *parent = 0);
@@ -50,7 +51,7 @@ public:
 };
 
 
-class QQTGraphicsLineItem : public QGraphicsLineItem
+class QQTSHARED_EXPORT QQTGraphicsLineItem : public QGraphicsLineItem
 {
 public:
     explicit QQTGraphicsLineItem(QQTGraphicsItem *parent = 0);
@@ -64,7 +65,7 @@ public:
 
 
 
-class QQTGraphicsPathItem : public QGraphicsPathItem
+class QQTSHARED_EXPORT QQTGraphicsPathItem : public QGraphicsPathItem
 {
 public:
     explicit QQTGraphicsPathItem(QQTGraphicsItem *parent = 0);
@@ -72,7 +73,7 @@ public:
 };
 
 
-class QQTGraphicsEllipseItem : public QGraphicsEllipseItem
+class QQTSHARED_EXPORT QQTGraphicsEllipseItem : public QGraphicsEllipseItem
 {
 public:
     explicit QQTGraphicsEllipseItem(QQTGraphicsItem *parent = 0);
@@ -80,21 +81,21 @@ public:
 };
 
 
-class QQTGraphicsPolygonItem : public QGraphicsPolygonItem
+class QQTSHARED_EXPORT QQTGraphicsPolygonItem : public QGraphicsPolygonItem
 {
 public:
     explicit QQTGraphicsPolygonItem(QQTGraphicsItem *parent = 0);
 
 };
 
-class QQTGraphicsItemGroup : public QGraphicsItemGroup
+class QQTSHARED_EXPORT QQTGraphicsItemGroup : public QGraphicsItemGroup
 {
 public:
     explicit QQTGraphicsItemGroup(QQTGraphicsItem *parent = 0);
 
 };
 
-class QQTGraphicsProxyWidget : public QGraphicsProxyWidget
+class QQTSHARED_EXPORT QQTGraphicsProxyWidget : public QGraphicsProxyWidget
 {
 public:
     explicit QQTGraphicsProxyWidget(QQTGraphicsItem *parent = 0);

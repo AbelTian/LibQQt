@@ -2,6 +2,7 @@
 #define QQTMSGBOX_H
 
 #include "qqtdialog.h"
+#include <qqt.h>
 
 namespace Ui {
 class QQTMsgBox;
@@ -11,7 +12,7 @@ class QQTMsgBox;
  * @brief The QQTMsgBox class
  *
  */
-class QQTMsgBox : public QQTDialog
+class QQTSHARED_EXPORT QQTMsgBox : public QQTDialog
 {
     Q_OBJECT
 

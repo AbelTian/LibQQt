@@ -2,12 +2,13 @@
 #define QQTTABLEMODEL_H
 
 #include <QSqlRelationalTableModel>
+#include <qqt.h>
 
 /**
  * @brief The QQTTableModel class
  * QQTSqlRelationalTableModel 方便起见，仅仅使用这个model
  */
-class QQTTableModel :  public QSqlRelationalTableModel
+class QQTSHARED_EXPORT QQTTableModel :  public QSqlRelationalTableModel
 {
     Q_OBJECT
 public:

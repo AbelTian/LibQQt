@@ -2,8 +2,9 @@
 #define QQTHTTPPROTOCOL_H
 
 #include <QObject>
+#include <qqt.h>
 
-class QQtHttpProtocol : public QObject
+class QQTSHARED_EXPORT QQtHttpProtocol : public QObject
 {
     Q_OBJECT
 public:

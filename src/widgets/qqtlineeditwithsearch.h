@@ -3,8 +3,9 @@
 
 #include <QLineEdit>
 #include <QPushButton>
+#include <qqt.h>
 
-class QQTLineEditWithSearch : public QLineEdit
+class QQTSHARED_EXPORT QQTLineEditWithSearch : public QLineEdit
 {
     Q_OBJECT
 public:

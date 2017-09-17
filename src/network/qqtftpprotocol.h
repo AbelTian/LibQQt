@@ -2,8 +2,9 @@
 #define QQTFTPPROTOCOL_H
 
 #include <QObject>
+#include <qqt.h>
 
-class QQtFtpProtocol : public QObject
+class QQTSHARED_EXPORT QQtFtpProtocol : public QObject
 {
     Q_OBJECT
 public:

@@ -6,8 +6,9 @@
 #define QQT_CLIENT_H
 
 #include <QTcpSocket>
-#include "qqtprotocol.h"
 #include "QStringList"
+#include "qqtprotocol.h"
+#include "qqt.h"
 
 #define TANK_Q_TCP_SOCKET 0
 #define TANK_Q_SOCKET 1
@@ -18,7 +19,7 @@
 /**
  * @brief 客户端决定和协议的交互关系;只跟协议打交道；
  */
-class QQTClient : public QTcpSocket
+class QQTSHARED_EXPORT QQTClient : public QTcpSocket
 {
     Q_OBJECT
 public:

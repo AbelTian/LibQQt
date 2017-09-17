@@ -3,6 +3,10 @@
 # Project created by QtCreator 2016-03-24T14:08:11
 #
 #-------------------------------------------------
+TARGET = qqt
+TEMPLATE = lib
+
+DEFINES += QQT_LIBRARY QCUSTOMPLOT_COMPILE_LIBRARY BUILD_QDEVICEWATCHER_LIB
 
 lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
 

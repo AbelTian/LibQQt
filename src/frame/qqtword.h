@@ -2,9 +2,10 @@
 #define QQTWORD_H
 
 #include <QObject>
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtprinter.h"
 #include "qqtgraphicsscene.h"
+#include "qqt.h"
 
 enum ESpanFlag
 {
@@ -18,7 +19,7 @@ enum ESpanFlag
 
 Q_DECLARE_FLAGS(ESpanFlags, ESpanFlag)
 
-class QQTWord : public QObject
+class QQTSHARED_EXPORT QQTWord : public QObject
 {
     Q_OBJECT
 public:

@@ -2,12 +2,12 @@
 #define QQTMESSAGE_H
 
 #include <QObject>
-
+#include <qqt.h>
 
 /**
  * @brief 语法类 定义报文格式
  */
-class QQTMessage : public QObject
+class QQTSHARED_EXPORT QQTMessage : public QObject
 {
     Q_OBJECT
 public:

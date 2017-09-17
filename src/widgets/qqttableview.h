@@ -3,12 +3,13 @@
 
 #include <QTableView>
 #include "qqtheaderview.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTTableView;
 }
 
-class QQTTableView : public QTableView
+class QQTSHARED_EXPORT QQTTableView : public QTableView
 {
     Q_OBJECT
 

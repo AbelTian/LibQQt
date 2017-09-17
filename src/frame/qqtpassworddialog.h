@@ -2,12 +2,13 @@
 #define QQTPASSWORDDIALOG_H
 
 #include "qqtdialog.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTPasswordDialog;
 }
 
-class QQTPasswordDialog : public QQTDialog
+class QQTSHARED_EXPORT QQTPasswordDialog : public QQTDialog
 {
     Q_OBJECT
 

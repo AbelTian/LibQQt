@@ -2,6 +2,7 @@
 #define QQTDIALOG_H
 
 #include <QDialog>
+#include <qqt.h>
 
 namespace Ui {
 class QQTDialog;
@@ -10,7 +11,7 @@ class QQTDialog;
 /**
  * @brief QSS
  */
-class QQTDialog : public QDialog
+class QQTSHARED_EXPORT QQTDialog : public QDialog
 {
     Q_OBJECT
 

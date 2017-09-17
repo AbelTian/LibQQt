@@ -12,6 +12,7 @@
 #include <QElapsedTimer>
 #include <QDesktopWidget>
 #include <QDebug>
+#include "qqt.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,7 +35,7 @@ enum
 }
 #endif  /* __cplusplus */
 
-typedef struct tagBtnIconTable
+typedef struct QQTSHARED_EXPORT tagBtnIconTable
 {
     QString pixmap[BTN_MAX];
 
@@ -49,9 +50,9 @@ typedef struct tagBtnIconTable
 }TBtnIconTable;
 
 
-void moveCenter(QWidget* w);
+QQTSHARED_EXPORT void moveCenter(QWidget* w);
 
-void moveRight(QWidget* w);
+QQTSHARED_EXPORT void moveRight(QWidget* w);
 
 
 

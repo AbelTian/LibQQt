@@ -1,7 +1,7 @@
 #include "qqttablewidget.h"
 #include "ui_qqttablewidget.h"
 
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtcore.h"
 #include "qqtsql.h"
 

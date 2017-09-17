@@ -3,8 +3,9 @@
 
 #include <QGraphicsScene>
 #include "qqtgraphicsitem.h"
+#include <qqt.h>
 
-class QQTGraphicsScene : public QGraphicsScene
+class QQTSHARED_EXPORT QQTGraphicsScene : public QGraphicsScene
 {
     Q_OBJECT
 public:

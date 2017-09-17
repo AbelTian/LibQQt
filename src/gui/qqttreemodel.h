@@ -2,12 +2,14 @@
 #define QQTTREEMODEL_H
 
 #include <QStandardItemModel>
+#include <qqt.h>
+
 /**
  * this is a interface class
  * define the tree model's functions name.
  */
 
-class QQTTreeModel : public QStandardItemModel
+class QQTSHARED_EXPORT QQTTreeModel : public QStandardItemModel
 {
     Q_OBJECT
 public:

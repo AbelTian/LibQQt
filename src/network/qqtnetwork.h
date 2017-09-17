@@ -12,6 +12,7 @@
 #include <QElapsedTimer>
 #include <QDesktopWidget>
 #include <QDebug>
+#include <qqt.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,7 +37,7 @@ enum {
 #endif  /* __cplusplus */
 
 
-typedef struct tagWifi
+typedef struct QQTSHARED_EXPORT tagWifi
 {
     QString wifi[ESSID_MAX];
 

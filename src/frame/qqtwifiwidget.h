@@ -2,14 +2,15 @@
 #define QQTWIFIWIDGET_H
 
 #include "qstandarditemmodel.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtgui.h"
 #include "qqtpassworddialog.h"
 #include <QItemDelegate>
 #include <QStylePainter>
 #include "qqtcore.h"
+#include "qqt.h"
 
-class QQTWIFIIDTextDelegate : public QItemDelegate
+class QQTSHARED_EXPORT QQTWIFIIDTextDelegate : public QItemDelegate
 {
     Q_OBJECT
 public:

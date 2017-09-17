@@ -14,6 +14,7 @@
 #include <QDebug>
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <qqt.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -76,6 +77,9 @@ typedef unsigned char uint8_t;
 #define WARNING "Warning"
 #define NOTICE "Notice"
 
+
+QQTSHARED_EXPORT void QQTSleep(int millsecond);
+
 #ifdef __cplusplus
 }
 #endif  /* __cplusplus */
@@ -86,37 +90,34 @@ typedef unsigned char uint8_t;
 #define ptime() pline() << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss zzz")
 
 
+QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const quint8 r);
 
-QByteArray &operator<<(QByteArray &l, const quint8 r);
+QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const quint16 r);
 
-QByteArray &operator<<(QByteArray &l, const quint16 r);
+QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const quint32 r);
 
-QByteArray &operator<<(QByteArray &l, const quint32 r);
+QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const QByteArray &r);
 
-QByteArray &operator<<(QByteArray &l, const QByteArray &r);
+QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, quint8& r);
 
-QByteArray &operator>>(QByteArray &l, quint8& r);
+QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, quint16& r);
 
-QByteArray &operator>>(QByteArray &l, quint16& r);
+QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, quint32& r);
 
-QByteArray &operator>>(QByteArray &l, quint32& r);
+QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, QByteArray& r);
 
-QByteArray &operator>>(QByteArray &l, QByteArray& r);
+QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const qint16 r);
 
-QByteArray &operator<<(QByteArray &l, const qint16 r);
+QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const qint32 r);
 
-QByteArray &operator<<(QByteArray &l, const qint32 r);
+QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, qint8& r);
 
-QByteArray &operator>>(QByteArray &l, qint8& r);
+QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, qint16& r);
 
-QByteArray &operator>>(QByteArray &l, qint16& r);
+QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, qint32& r);
 
-QByteArray &operator>>(QByteArray &l, qint32& r);
+QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, QByteArray& r);
 
-QByteArray &operator>>(QByteArray &l, QByteArray& r);
-
-
-void QQTSleep(int millsecond);
 
 /**
  * @brief The QQTBlock class
@@ -124,7 +125,7 @@ void QQTSleep(int millsecond);
  * 这个block应用场合为gui线程内部，不适用线程之间
  * 仅仅锁定一次和解锁一次，多次锁定和解锁无用途。
  */
-class QQTBlock : public QObject
+class QQTSHARED_EXPORT QQTBlock : public QObject
 {
 public:
     explicit QQTBlock(QObject* parent = 0): QObject(parent), m_lock(0) {}

@@ -1,5 +1,5 @@
 /******************************************************************************
-	Name: description
+    Name: description
     Copyright (C) 2011-2015 Wang Bin <wbsecg1@gmail.com>
 
     This library is free software; you can redistribute it and/or
@@ -24,14 +24,15 @@
 #include <QtCore/QThread>
 #include "qdevicewatcher.h"
 #include <QTimer>
+#include <qqt.h>
 
 #ifndef __GNUC__
 #define __PRETTY_FUNCTION__  __FUNCTION__
 #endif
 
-class QQTPluginWatcher : public QThread
+class QQTSHARED_EXPORT QQTPluginWatcher : public QThread
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
     static QQTPluginWatcher *Instance();
 

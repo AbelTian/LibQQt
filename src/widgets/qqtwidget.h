@@ -2,12 +2,13 @@
 #define QPICWIDGET_H
 
 #include <QWidget>
+#include <qqt.h>
 
 namespace Ui {
 class QQTWidget;
 }
 
-class QQTWidget : public QWidget
+class QQTSHARED_EXPORT QQTWidget : public QWidget
 {
     Q_OBJECT
 

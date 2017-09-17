@@ -2,7 +2,7 @@
 #include "ui_qqtmptablewidget.h"
 #include "qqtcore.h"
 #include "qqtsql.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 
 QQTMPTableWidget::QQTMPTableWidget(QWidget *parent) :
     QWidget(parent),

@@ -3,12 +3,13 @@
 
 #include "qqtdialog.h"
 #include "qqtprogressbar.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTProgressDialog;
 }
 
-class QQTProgressDialog : public QQTDialog
+class QQTSHARED_EXPORT QQTProgressDialog : public QQTDialog
 {
     Q_OBJECT
 

@@ -27,7 +27,8 @@ set(CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE ON)
 set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
 set(BUILD_SHARED_LIBS ON)
 set(CMAKE_VERBOSE_MAKEFILE OFF )
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 #set ( CMAKE_TOOLCHAIN_FILE  ${CMAKE_SOURCE_DIR}/cmake/build.cmake )
 
 project(App0OnQQt)
@@ -56,3 +57,12 @@ add_subdirectory( examples/qqtframe )
 #add_subdirectory( examples/webkit )
 
 #set ( CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/../../b1-Product/a0-qqtbased/Application)
+
+if(APPLE)
+    set (CPACK_GENERATOR Bundle)
+    set (CPACK_BUNDLE_NAME "QQtFrame")
+    set (CPACK_BUNDLE_PLIST "info.plist")
+    set (CPACK_BUNDLE_ICON "app.ico")
+    INCLUDE (CPack)
+endif(APPLE)
+

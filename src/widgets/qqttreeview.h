@@ -2,12 +2,13 @@
 #define QQTTREEVIEW_H
 
 #include <QTreeView>
+#include <qqt.h>
 
 namespace Ui {
 class QQTTreeView;
 }
 
-class QQTTreeView : public QTreeView
+class QQTSHARED_EXPORT QQTTreeView : public QTreeView
 {
     Q_OBJECT
 

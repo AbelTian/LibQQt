@@ -3,12 +3,13 @@
 
 #include "qqttableview.h"
 #include "qqttablemodel.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTTableWidget;
 }
 
-class QQTTableWidget : public QQTTableView
+class QQTSHARED_EXPORT QQTTableWidget : public QQTTableView
 {
     Q_OBJECT
 

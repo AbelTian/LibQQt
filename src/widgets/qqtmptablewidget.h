@@ -6,6 +6,7 @@
 #include <QHeaderView>
 #include <QTableView>
 #include "qqttablewidget.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTMPTableWidget;
@@ -17,7 +18,7 @@ class QQTMPTableWidget;
  * 这里的控件使用默认视图
  * 这里的控件只是Table-DB关系，没有Tree/List模型
  */
-class QQTMPTableWidget : public QWidget
+class QQTSHARED_EXPORT QQTMPTableWidget : public QWidget
 {
     Q_OBJECT
 

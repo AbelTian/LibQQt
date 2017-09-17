@@ -2,12 +2,13 @@
 #define QQTTABWIDGETB_H
 
 #include <QTabWidget>
+#include <qqt.h>
 
 namespace Ui {
 class QQTTabWidgetB;
 }
 
-class QQTTabWidgetB : public QTabWidget
+class QQTSHARED_EXPORT QQTTabWidgetB : public QTabWidget
 {
     Q_OBJECT
 

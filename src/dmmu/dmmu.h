@@ -1,6 +1,8 @@
 #ifndef _JZ_DMMU_H_
 #define _JZ_DMMU_H_
 
+#include <qqt.h>
+
 __BEGIN_DECLS
 
 #define DMMU_DEV_NAME "/dev/dmmu"
@@ -18,21 +20,21 @@ __BEGIN_DECLS
 #define VIDEO_TABLE_FLAGE 1
 
 struct dmmu_mem_info {
-	int size;
-	int page_count;
+    int size;
+    int page_count;
 
-	unsigned int paddr;
+    unsigned int paddr;
 
-	void *vaddr;
-	void *pages_phys_addr_table;
+    void *vaddr;
+    void *pages_phys_addr_table;
 
-	unsigned int start_offset;
-	unsigned int end_offset;
+    unsigned int start_offset;
+    unsigned int end_offset;
 };
 
 static inline void init_page_count(struct dmmu_mem_info *info)
 {
-	int page_count;
+    int page_count;
 #ifdef __MIPS_LINUX__
     unsigned int start;			/* page start */
     unsigned int end;			/* page end */
@@ -59,48 +61,48 @@ static inline void init_page_count(struct dmmu_mem_info *info)
 //  printf("<----start_offset: %x, end_offset: %x, page_count: %d\n", info->start_offset, info->end_offset, page_count);
 #endif
 
-	return;
+    return;
 }
 
 static inline int dump_mem_info(struct dmmu_mem_info *mem, char * description)
 {
-	if (mem == NULL) {
-		printf("mem is NULL!\n");
-		return -1;
-	}
-	printf("mem: %p, \t%s\n", mem, description?description:"");
-	printf("\tvaddr= %p\n", mem->vaddr);
-	printf("\tsize= %d (0x%x)\n", mem->size, mem->size);
-	printf("\tpaddr= 0x%08x\n", mem->paddr);
-	printf("\tpage_count= %d\n", mem->page_count);
-	printf("\tpages_phys_addr_table=%p\n", mem->pages_phys_addr_table);
-	printf("\tstart_offset= %d\n", mem->start_offset);
-	printf("\tend_offset= %d\n", mem->end_offset);
+    if (mem == NULL) {
+        printf("mem is NULL!\n");
+        return -1;
+    }
+    printf("mem: %p, \t%s\n", mem, description?description:"");
+    printf("\tvaddr= %p\n", mem->vaddr);
+    printf("\tsize= %d (0x%x)\n", mem->size, mem->size);
+    printf("\tpaddr= 0x%08x\n", mem->paddr);
+    printf("\tpage_count= %d\n", mem->page_count);
+    printf("\tpages_phys_addr_table=%p\n", mem->pages_phys_addr_table);
+    printf("\tstart_offset= %d\n", mem->start_offset);
+    printf("\tend_offset= %d\n", mem->end_offset);
 
-	return 0;
+    return 0;
 }
 
 enum REQUIRE_ALLOC_PAGE_TABLE {
-	NO_REQUIRED = 0,
-	REQUIRED = 1,
+    NO_REQUIRED = 0,
+    REQUIRED = 1,
 };
 
-extern int dmmu_init();
-extern int dmmu_set_table_flag(void);
-extern int dmmu_init_with_set_page_table(unsigned int * phys_addr, int size);
-extern int dmmu_deinit();
-extern int dmmu_get_page_table_base_phys(unsigned int * phys_addr);
-extern int dmmu_set_page_table(unsigned int * phys_addr, int size);
-extern int dmmu_map_user_memory(struct dmmu_mem_info* mem);
-extern int dmmu_unmap_user_memory(struct dmmu_mem_info* mem);
+QQTSHARED_EXPORT extern int dmmu_init();
+QQTSHARED_EXPORT extern int dmmu_set_table_flag(void);
+QQTSHARED_EXPORT extern int dmmu_init_with_set_page_table(unsigned int * phys_addr, int size);
+QQTSHARED_EXPORT extern int dmmu_deinit();
+QQTSHARED_EXPORT extern int dmmu_get_page_table_base_phys(unsigned int * phys_addr);
+QQTSHARED_EXPORT extern int dmmu_set_page_table(unsigned int * phys_addr, int size);
+QQTSHARED_EXPORT extern int dmmu_map_user_memory(struct dmmu_mem_info* mem);
+QQTSHARED_EXPORT extern int dmmu_unmap_user_memory(struct dmmu_mem_info* mem);
 
-extern int dmmu_map_user_mem(void * vaddr, int size);
-extern int dmmu_unmap_user_mem(void * vaddr, int size);
+QQTSHARED_EXPORT extern int dmmu_map_user_mem(void * vaddr, int size);
+QQTSHARED_EXPORT extern int dmmu_unmap_user_mem(void * vaddr, int size);
 
-extern int dmmu_match_user_mem_tlb(void * vaddr, int size);
+QQTSHARED_EXPORT extern int dmmu_match_user_mem_tlb(void * vaddr, int size);
 
-extern int dmmu_get_memory_physical_address(struct dmmu_mem_info* mem);
-extern int dmmu_release_memory_physical_address(struct dmmu_mem_info* mem);
+QQTSHARED_EXPORT extern int dmmu_get_memory_physical_address(struct dmmu_mem_info* mem);
+QQTSHARED_EXPORT extern int dmmu_release_memory_physical_address(struct dmmu_mem_info* mem);
 
 __END_DECLS
 

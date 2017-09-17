@@ -2,9 +2,9 @@
 #define QQTGRAPHICSVIEW_H
 
 #include <QGraphicsView>
+#include <qqt.h>
 
-
-class QQTGraphicsView : public QGraphicsView
+class QQTSHARED_EXPORT QQTGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:

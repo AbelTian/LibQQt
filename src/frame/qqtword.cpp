@@ -1,4 +1,4 @@
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtcore.h"
 #include "qqtprinter.h"
 #include "qqtgraphicsscene.h"

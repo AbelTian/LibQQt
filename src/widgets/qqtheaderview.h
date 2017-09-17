@@ -2,8 +2,9 @@
 #define QQTHEADERVIEW_H
 
 #include <QHeaderView>
+#include <qqt.h>
 
-class QQTHeaderView : public QHeaderView
+class QQTSHARED_EXPORT QQTHeaderView : public QHeaderView
 {
     Q_OBJECT
 public:

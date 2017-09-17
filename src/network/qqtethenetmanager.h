@@ -6,8 +6,9 @@
 #include <QList>
 #include <qthread.h>
 #include "qqtcore.h"
+#include "qqt.h"
 
-class QQTNetworkClearThread : public QThread
+class QQTSHARED_EXPORT QQTNetworkClearThread : public QThread
 {
     Q_OBJECT
 public:
@@ -22,7 +23,7 @@ protected:
     void run();
 };
 
-class QQTDhcpThread : public QThread
+class QQTSHARED_EXPORT QQTDhcpThread : public QThread
 {
     Q_OBJECT
 public:
@@ -39,7 +40,7 @@ private:
 };
 
 // thread unsafe
-class QQTEthenetManager : public QObject
+class QQTSHARED_EXPORT QQTEthenetManager : public QObject
 {
     Q_OBJECT
 public:

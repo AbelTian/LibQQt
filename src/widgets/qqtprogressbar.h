@@ -7,12 +7,13 @@
 
 #include <QWidget>
 #include "qqtwidgets.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTProgressBar;
 }
 
-class QQTProgressBar : public QWidget
+class QQTSHARED_EXPORT QQTProgressBar : public QWidget
 {
     Q_OBJECT
 

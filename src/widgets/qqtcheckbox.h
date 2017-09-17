@@ -4,6 +4,7 @@
 #include <QCheckBox>
 #include "qqtcore.h"
 #include "qqtwidgets.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTCheckBox;
@@ -12,7 +13,7 @@ class QQTCheckBox;
  * @brief The QQTCheckBox class
  * 为了图片占据全部全部控件而编写。
  */
-class QQTCheckBox : public QCheckBox
+class QQTSHARED_EXPORT QQTCheckBox : public QCheckBox
 {
     Q_OBJECT
 

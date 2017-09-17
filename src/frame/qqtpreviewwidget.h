@@ -2,9 +2,10 @@
 #ifndef QPREVIEWUI_H
 #define QPREVIEWUI_H
 
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtlinux.h"
 #include "qqtcore.h"
+#include "qqt.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,7 +24,7 @@ namespace Ui {
 class QQTPreviewWidget;
 }
 
-class QQTPreviewWidget : public QWidget
+class QQTSHARED_EXPORT QQTPreviewWidget : public QWidget
 {
     Q_OBJECT
 

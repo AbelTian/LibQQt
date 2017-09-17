@@ -3,11 +3,13 @@
 
 #include <QObject>
 #include "qqtmessage.h"
+#include <qqt.h>
+
 /**
  * @brief The QQTProtocol class
  * very good ideology and impliment
  */
-class QQTProtocol : public QObject
+class QQTSHARED_EXPORT QQTProtocol : public QObject
 {
     Q_OBJECT
 public:

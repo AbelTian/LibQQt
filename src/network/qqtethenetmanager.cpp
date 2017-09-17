@@ -1,7 +1,7 @@
 #include "qqtethenetmanager.h"
 #include "qqtlinux.h"
 #include "qqtcore.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 
 QQTEthenetManager* QQTEthenetManager::_instance = NULL;
 

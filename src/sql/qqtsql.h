@@ -14,6 +14,7 @@
 #include <QDebug>
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <qqt.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,12 +27,12 @@ extern "C" {
 }
 #endif  /* __cplusplus */
 
-QSqlDatabase newDatabaseConn();
+QQTSHARED_EXPORT QSqlDatabase newDatabaseConn();
 
-void setDatabaseName(QSqlDatabase &db, QString dbName);
+QQTSHARED_EXPORT void setDatabaseName(QSqlDatabase &db, QString dbName);
 
-void openDatabase(QSqlDatabase &db);
+QQTSHARED_EXPORT void openDatabase(QSqlDatabase &db);
 
-void closeDatabase(QSqlDatabase &db);
+QQTSHARED_EXPORT void closeDatabase(QSqlDatabase &db);
 
 #endif // QQTSQLDEFINE_H

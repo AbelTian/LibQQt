@@ -13,13 +13,14 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QTextCodec>
+#include <qqt.h>
 
 namespace Ui
 {
     class frmInput;
 }
 
-class QQTInput : public QWidget
+class QQTSHARED_EXPORT QQTInput : public QWidget
 {
     Q_OBJECT
 

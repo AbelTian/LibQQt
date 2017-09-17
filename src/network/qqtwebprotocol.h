@@ -4,8 +4,9 @@
 #include <QObject>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <qqt.h>
 
-class QQtWebProtocol : public QObject
+class QQTSHARED_EXPORT QQtWebProtocol : public QObject
 {
     Q_OBJECT
 public:

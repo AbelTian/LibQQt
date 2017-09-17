@@ -3,12 +3,13 @@
 
 #include <QTabWidget>
 #include "qqttabbar.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTTabWidget;
 }
 
-class QQTTabWidget : public QTabWidget
+class QQTSHARED_EXPORT QQTTabWidget : public QTabWidget
 {
     Q_OBJECT
 

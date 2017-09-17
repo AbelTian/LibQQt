@@ -2,12 +2,13 @@
 #define QQTLISTVIEW_H
 
 #include <QListView>
+#include <qqt.h>
 
 namespace Ui {
 class QQTListView;
 }
 
-class QQTListView : public QListView
+class QQTSHARED_EXPORT QQTListView : public QListView
 {
     Q_OBJECT
 

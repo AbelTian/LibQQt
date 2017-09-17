@@ -3,8 +3,9 @@
 
 #include <qqttreemodel.h>
 #include <QDomDocument>
+#include <qqt.h>
 
-class QQTXmlTreeModel : public QQTTreeModel
+class QQTSHARED_EXPORT QQTXmlTreeModel : public QQTTreeModel
 {
     Q_OBJECT
 public:

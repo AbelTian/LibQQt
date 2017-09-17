@@ -2,7 +2,7 @@
 #include <QGraphicsItem>
 #include <QPainter>
 #include "qqtcore.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 QQTGraphicsScene::QQTGraphicsScene(QObject *parent) :
     QGraphicsScene(parent)
 {

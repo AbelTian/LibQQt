@@ -4,9 +4,9 @@
 #include <QSerialPort>
 #include "qqtcore.h"
 #include "qqtprotocol.h"
-#include "qqtserialmessage.h"
+#include <qqt.h>
 
-class QQTSerialPort : public QSerialPort
+class QQTSHARED_EXPORT QQTSerialPort : public QSerialPort
 {
     Q_OBJECT
 public:

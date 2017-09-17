@@ -2,8 +2,9 @@
 #define _QQTPRINTER_H
 
 #include <QPrinter>
+#include <qqt.h>
 
-class QQTPrinter : public QPrinter
+class QQTSHARED_EXPORT QQTPrinter : public QPrinter
 {
 public:
     QQTPrinter(PrinterMode mode = HighResolution);

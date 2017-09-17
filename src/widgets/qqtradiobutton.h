@@ -4,12 +4,13 @@
 #include <QRadioButton>
 #include "qqtcore.h"
 #include "qqtwidgets.h"
+#include "qqt.h"
 
 namespace Ui {
 class QQTRadioButton;
 }
 
-class QQTRadioButton : public QRadioButton
+class QQTSHARED_EXPORT QQTRadioButton : public QRadioButton
 {
     Q_OBJECT
 

@@ -3,7 +3,7 @@
 #include <QStyleOptionGraphicsItem>
 #include "qqtcore.h"
 #include "qqtgraphicsscene.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 
 QQTGraphicsView::QQTGraphicsView(QWidget *parent) :
     QGraphicsView(parent)

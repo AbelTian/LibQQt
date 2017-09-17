@@ -2,8 +2,9 @@
 #define QQTFTPTREEMODEL_H
 
 #include <QObject>
+#include "qqt.h"
 
-class QQtFTPTreeModel : public QObject
+class QQTSHARED_EXPORT QQtFTPTreeModel : public QObject
 {
     Q_OBJECT
 public:
