@@ -5,7 +5,7 @@
 #include "qqt-qt.h"
 #include "qqtprinter.h"
 #include "qqtgraphicsscene.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 enum ESpanFlag
 {

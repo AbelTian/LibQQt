@@ -2,7 +2,7 @@
 #define QQTTABLEMODEL_H
 
 #include <QSqlRelationalTableModel>
-#include <qqt.h>
+#include <qqt-local.h>
 
 /**
  * @brief The QQTTableModel class

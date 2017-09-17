@@ -3,7 +3,7 @@
 
 #include <QLineEdit>
 #include <QPushButton>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTLineEditWithSearch : public QLineEdit
 {

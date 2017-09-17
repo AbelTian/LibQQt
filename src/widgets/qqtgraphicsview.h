@@ -2,7 +2,7 @@
 #define QQTGRAPHICSVIEW_H
 
 #include <QGraphicsView>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTGraphicsView : public QGraphicsView
 {

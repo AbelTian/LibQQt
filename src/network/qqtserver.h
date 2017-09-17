@@ -4,7 +4,7 @@
 #include <QTcpServer>
 #include "qqtprotocol.h"
 #include "qqtclient.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 class QQTSHARED_EXPORT QQTServer : public QTcpServer
 {

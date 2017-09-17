@@ -12,7 +12,7 @@
 #include <QElapsedTimer>
 #include <QDesktopWidget>
 #include <QDebug>
-#include <qqt.h>
+#include <qqt-local.h>
 
 #ifdef __cplusplus
 extern "C" {

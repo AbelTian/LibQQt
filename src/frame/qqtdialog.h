@@ -2,7 +2,7 @@
 #define QQTDIALOG_H
 
 #include <QDialog>
-#include <qqt.h>
+#include <qqt-local.h>
 
 namespace Ui {
 class QQTDialog;

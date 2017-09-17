@@ -6,7 +6,7 @@
 #include <QList>
 #include <qthread.h>
 #include "qqtcore.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 class QQTSHARED_EXPORT QQTNetworkClearThread : public QThread
 {

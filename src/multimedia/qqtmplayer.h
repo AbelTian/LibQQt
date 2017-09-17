@@ -2,7 +2,7 @@
 #define QQTMPLAYER_H
 
 #include <QProcess>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTPlayer : public QObject
 {

@@ -2,7 +2,7 @@
 #define QQTMSGBOX_H
 
 #include "qqtdialog.h"
-#include <qqt.h>
+#include <qqt-local.h>
 
 namespace Ui {
 class QQTMsgBox;

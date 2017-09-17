@@ -4,7 +4,7 @@
 #include <qqttreemodel.h>
 #include <qqttablemodel.h>
 #include <QList>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTSqlTreeModel : public QQTTreeModel
 {

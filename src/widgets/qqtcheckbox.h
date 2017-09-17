@@ -4,7 +4,7 @@
 #include <QCheckBox>
 #include "qqtcore.h"
 #include "qqtwidgets.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 namespace Ui {
 class QQTCheckBox;

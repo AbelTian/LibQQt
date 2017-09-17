@@ -2,7 +2,7 @@
 #define QQTMESSAGE_H
 
 #include <QObject>
-#include <qqt.h>
+#include <qqt-local.h>
 
 /**
  * @brief 语法类 定义报文格式

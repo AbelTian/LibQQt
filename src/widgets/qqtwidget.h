@@ -2,7 +2,7 @@
 #define QPICWIDGET_H
 
 #include <QWidget>
-#include <qqt.h>
+#include <qqt-local.h>
 
 namespace Ui {
 class QQTWidget;

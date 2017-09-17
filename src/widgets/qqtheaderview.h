@@ -2,7 +2,7 @@
 #define QQTHEADERVIEW_H
 
 #include <QHeaderView>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTHeaderView : public QHeaderView
 {

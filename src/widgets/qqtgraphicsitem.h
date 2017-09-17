@@ -3,7 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QGraphicsProxyWidget>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTGraphicsItem : public QGraphicsItem
 {

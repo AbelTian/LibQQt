@@ -3,7 +3,7 @@
 
 #include <QGraphicsScene>
 #include "qqtgraphicsitem.h"
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTGraphicsScene : public QGraphicsScene
 {

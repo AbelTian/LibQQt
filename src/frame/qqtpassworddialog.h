@@ -2,7 +2,7 @@
 #define QQTPASSWORDDIALOG_H
 
 #include "qqtdialog.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 namespace Ui {
 class QQTPasswordDialog;

@@ -21,7 +21,6 @@ DESTDIR = bin
 #DESTDIR = ../../../Product/install/Application
 
 INCLUDEPATH += ../../src
-
 include(../../src/qqt.pri)
 
 QT_KIT = $$(QKIT)
@@ -57,7 +56,7 @@ equals(QT_KIT, MIPS32) {
 } else {
 }
 
-INCLUDEPATH +=  .
+INCLUDEPATH +=  $$PWD
 
 SOURCES += $$PWD/main.cpp $$PWD/qqtapp.cpp $$PWD/qqtwindow.cpp
 

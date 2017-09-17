@@ -3,7 +3,7 @@
 
 #include <QPushButton>
 #include "qqtwidgets.h"
-#include <qqt.h>
+#include <qqt-local.h>
 
 namespace Ui {
 class QQTPushButton;

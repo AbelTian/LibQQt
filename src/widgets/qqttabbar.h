@@ -5,7 +5,7 @@
 #include <QList>
 #include "qqtcore.h"
 #include "qqtwidgets.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 class QQTSHARED_EXPORT QQTTabBar : public QTabBar
 {

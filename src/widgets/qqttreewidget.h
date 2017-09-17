@@ -3,7 +3,7 @@
 
 #include "qqttreeview.h"
 #include "qqttreemodel.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 namespace Ui {
 class QQTTreeWidget;

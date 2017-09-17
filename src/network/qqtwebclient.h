@@ -4,7 +4,7 @@
 #include <QNetworkAccessManager>
 //import this struct will not build fail
 #include <QNetworkProxy>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQtWebClient : public QNetworkAccessManager
 {

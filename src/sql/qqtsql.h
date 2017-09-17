@@ -14,7 +14,7 @@
 #include <QDebug>
 #include <QSqlDatabase>
 #include <QSqlError>
-#include <qqt.h>
+#include <qqt-local.h>
 
 #ifdef __cplusplus
 extern "C" {

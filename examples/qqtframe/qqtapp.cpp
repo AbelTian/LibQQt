@@ -9,8 +9,6 @@
 #include "qqtclient.h"
 #include "qqtserver.h"
 #include "qqtserialport.h"
-#include "qqtcloudprotocol.h"
-#include "qqtuserserialprotocol.h"
 #include "qqtpluginwatcher.h"
 
 /*

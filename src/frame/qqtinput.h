@@ -13,7 +13,7 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QTextCodec>
-#include <qqt.h>
+#include <qqt-local.h>
 
 namespace Ui
 {

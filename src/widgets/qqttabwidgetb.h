@@ -2,7 +2,7 @@
 #define QQTTABWIDGETB_H
 
 #include <QTabWidget>
-#include <qqt.h>
+#include <qqt-local.h>
 
 namespace Ui {
 class QQTTabWidgetB;

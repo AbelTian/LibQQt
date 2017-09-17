@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "qqtmessage.h"
-#include <qqt.h>
+#include <qqt-local.h>
 
 /**
  * @brief The QQTProtocol class

@@ -5,7 +5,7 @@
 #include "qqt-qt.h"
 #include "qqtlinux.h"
 #include "qqtcore.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 #ifdef __cplusplus
 extern "C" {

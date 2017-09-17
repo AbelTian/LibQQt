@@ -1,7 +1,7 @@
 #include "qqtserialport.h"
+#include "qqtcore.h"
 
-QQTSerialPort::QQTSerialPort(QObject *parent) :
-    QSerialPort(parent)
+QQTSerialPort::QQTSerialPort(QObject *parent)
 {
     //connect(this, SIGNAL(bytesWritten(qint64)), this, SLOT(updateProgress(qint64)) );
     connect(this, SIGNAL(readyRead()), this, SLOT(readyReadData()) );

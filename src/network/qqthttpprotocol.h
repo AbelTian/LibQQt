@@ -2,7 +2,7 @@
 #define QQTHTTPPROTOCOL_H
 
 #include <QObject>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQtHttpProtocol : public QObject
 {

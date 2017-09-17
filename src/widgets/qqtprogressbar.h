@@ -6,8 +6,9 @@
 #define QQTPROGRESSBAR_H
 
 #include <QWidget>
+#include "qqt-local.h"
 #include "qqtwidgets.h"
-#include "qqt.h"
+#include "qqtframe.h"
 
 namespace Ui {
 class QQTProgressBar;

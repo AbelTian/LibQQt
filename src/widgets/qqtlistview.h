@@ -2,7 +2,7 @@
 #define QQTLISTVIEW_H
 
 #include <QListView>
-#include <qqt.h>
+#include <qqt-local.h>
 
 namespace Ui {
 class QQTListView;

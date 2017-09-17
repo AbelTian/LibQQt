@@ -3,7 +3,7 @@
 
 #include <QTabWidget>
 #include "qqttabbar.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 namespace Ui {
 class QQTTabWidget;

@@ -2,7 +2,7 @@
 #define QQTTREEMODEL_H
 
 #include <QStandardItemModel>
-#include <qqt.h>
+#include <qqt-local.h>
 
 /**
  * this is a interface class

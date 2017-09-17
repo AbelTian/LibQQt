@@ -8,7 +8,7 @@
 #include <QTcpSocket>
 #include "QStringList"
 #include "qqtprotocol.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 #define TANK_Q_TCP_SOCKET 0
 #define TANK_Q_SOCKET 1

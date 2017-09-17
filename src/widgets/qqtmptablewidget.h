@@ -6,7 +6,7 @@
 #include <QHeaderView>
 #include <QTableView>
 #include "qqttablewidget.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 namespace Ui {
 class QQTMPTableWidget;

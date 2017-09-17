@@ -1,9 +1,9 @@
 #ifndef QPROGRESSWINDOW_H
 #define QPROGRESSWINDOW_H
 
+#include "qqt-local.h"
 #include "qqtdialog.h"
 #include "qqtprogressbar.h"
-#include "qqt.h"
 
 namespace Ui {
 class QQTProgressDialog;

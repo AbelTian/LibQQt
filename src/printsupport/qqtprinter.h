@@ -2,7 +2,7 @@
 #define _QQTPRINTER_H
 
 #include <QPrinter>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTPrinter : public QPrinter
 {

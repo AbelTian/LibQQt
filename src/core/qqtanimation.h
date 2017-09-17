@@ -7,7 +7,7 @@
 #include <QSequentialAnimationGroup>
 #include <QPropertyAnimation>
 #include "qqtcore.h"
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTAnimation : public QParallelAnimationGroup
 {

@@ -3,7 +3,7 @@
 
 #include <qqttreemodel.h>
 #include <QDomDocument>
-#include <qqt.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQTXmlTreeModel : public QQTTreeModel
 {

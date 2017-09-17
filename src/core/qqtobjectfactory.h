@@ -7,7 +7,7 @@
 #include <QHash>
 #include <QList>
 #include <QListIterator>
-#include <qqt.h>
+#include <qqt-local.h>
 
 /**
  * @brief The QQTObjectFactory class

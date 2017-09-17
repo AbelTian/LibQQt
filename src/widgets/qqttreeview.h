@@ -2,7 +2,7 @@
 #define QQTTREEVIEW_H
 
 #include <QTreeView>
-#include <qqt.h>
+#include <qqt-local.h>
 
 namespace Ui {
 class QQTTreeView;

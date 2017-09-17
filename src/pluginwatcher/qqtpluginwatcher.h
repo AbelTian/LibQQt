@@ -24,7 +24,7 @@
 #include <QtCore/QThread>
 #include "qdevicewatcher.h"
 #include <QTimer>
-#include <qqt.h>
+#include <qqt-local.h>
 
 #ifndef __GNUC__
 #define __PRETTY_FUNCTION__  __FUNCTION__

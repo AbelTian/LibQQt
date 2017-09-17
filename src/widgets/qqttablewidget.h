@@ -3,7 +3,7 @@
 
 #include "qqttableview.h"
 #include "qqttablemodel.h"
-#include "qqt.h"
+#include "qqt-local.h"
 
 namespace Ui {
 class QQTTableWidget;
