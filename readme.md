@@ -11,7 +11,7 @@
 7. QQt输入法
 8. Qt对象工厂，允许注册和查找和删除所有来自QObject的类。
 9. 视频播放器，模拟端口实时预览器
-10. QQt打印机，支持导出pdf[^1]
+10. QQt打印机，支持导出pdf
 11. QQt进度条，解决Qt进度条在Dialog中导致系统死机的问题。
 12. QQtWord，支持文档编写，输出pdf格式。
 13. QQtTabWidget，解决QtTab不能竖排的问题
