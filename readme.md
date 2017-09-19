@@ -21,4 +21,5 @@
     1. serialport and tcpclient and tcpserver通讯口类
     2. QQTProtocol协议基类
     3. QQTMessage报文基类
+17. 使用PyMake和PyCmd支援qmake和cmake的编译工作
 
