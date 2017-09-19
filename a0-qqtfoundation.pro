@@ -1,6 +1,7 @@
 TEMPLATE = subdirs
 SUBDIRS +=  \
-  examples/qqtframe \
+ src/qqt.pro \
+# examples/qqtframe \
 # examples/animationframe \
 # examples/cmdwidget \
 # examples/qqtliveplayer \

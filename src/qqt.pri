@@ -81,7 +81,8 @@ INCLUDEPATH += $$PWD
 HEADERS += $$PWD/qqt.h \
     $$PWD/qqtversion.h \
     $$PWD/qqt-local.h \
-    $$PWD/qqt-qt.h
+    $$PWD/qqt-qt.h \
+    $$PWD/widgets/qqtapplication.h
 
 
 #serialport
@@ -107,7 +108,8 @@ INCLUDEPATH += $$PWD/core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
     $$PWD/core/qqtanimation.cpp \
-    $$PWD/core/qqtobjectfactory.cpp
+    $$PWD/core/qqtobjectfactory.cpp \
+    $$PWD/widgets/qqtapplication.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
     $$PWD/core/qqtanimation.h \
