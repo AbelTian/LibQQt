@@ -4,13 +4,15 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += core gui network sql xml
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 TARGET = qqtframe
 TEMPLATE = app
+macx {
+    CONFIG += app_bundle
+}
 
 OBJECTS_DIR = obj
 MOC_DIR = obj/moc.cpp
@@ -20,8 +22,25 @@ RCC_DIR = qrc
 DESTDIR = bin
 #DESTDIR = ../../../Product/install/Application
 
-INCLUDEPATH += ../../src
-include(../../src/qqt.pri)
+INCLUDEPATH += $$PWD \
+    $$PWD/../../src \
+    $$PWD/../../src/core \
+    $$PWD/../../src/gui \
+    $$PWD/../../src/multimedia \
+    $$PWD/../../src/network \
+    $$PWD/../../src/printsupport \
+    $$PWD/../../src/sql \
+    $$PWD/../../src/widgets \
+    $$PWD/../../src/customplot \
+    $$PWD/../../src/pluginwatcher \
+    $$PWD/../../src/dmmu \
+    $$PWD/../../src/frame
+
+#include(../../src/qqt.pri)
+macx {
+    LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/Release/src/bin
+    LIBS += -framework QQt
+}
 
 QT_KIT = $$(QKIT)
 
@@ -51,9 +70,13 @@ CONFIG(debug, debug|release) {
 
 
 equals(QT_KIT, MIPS32) {
-	mips32.path = /Application
-	INSTALLS += mips32
-} else {
+	target.path = /Application
+	INSTALLS += target
+} else: unix {
+	macx{
+		target.path = /Users/abel/Develop/b1-Product/a0-qqtbased/Application
+		INSTALLS += target
+	}
 }
 
 INCLUDEPATH +=  $$PWD

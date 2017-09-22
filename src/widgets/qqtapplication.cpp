@@ -22,7 +22,7 @@ QQtApplication::QQtApplication(int &argc, char **argv
                       #endif
                       )
 {
-#ifndef __QT5__
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif

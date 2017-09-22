@@ -70,7 +70,7 @@ QQTWIFIWidget::QQTWIFIWidget(QWidget *parent) :
     setItemDelegateForColumn(ESSID_STATUS, dg);
     for(int i = ESSID_TYPE; i < ESSID_MAX; i++)
         setColumnHidden(i, true);
-#ifdef __QT5__
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
 #else
     horizontalHeader()->setResizeMode(0, QHeaderView::Fixed);

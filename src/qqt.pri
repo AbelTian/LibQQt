@@ -4,14 +4,33 @@
 #
 #-------------------------------------------------
 
-##Project version
+############
+##install and build
+############
+OBJECTS_DIR = obj
+MOC_DIR = obj/moc.cpp
+UI_DIR = obj/ui.h
+RCC_DIR = qrc
+#user directory
+DESTDIR = bin
+macx {
+    ###if install product to same path,use this.
+    target.path = /Users/abel/Develop/b1-Product/a0-qqtbased/Application
+    INSTALLS += target
+}
+
+#############
+##project version
+#############
 unix:VERSION            = 1.0.0
 
 ##Qt version
 QT += core gui network sql xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
-greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
+#############
+##definition
+#############
 ##Arch type
 QT_KIT = $$(QKIT)
 message($${QT_KIT} Defined in qqtfoundation)
@@ -36,33 +55,52 @@ equals(QT_KIT, MIPS32) {
 } else:equals(QT_KIT, macOS) {
     DEFINES += __DARWIN__
 }
-win32 {
-    win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
-    QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
-    LIBS += -luser32
-}
-
-
-
-############
-##install and build
-############
-macx {
-    target.path = /Users/abel/Develop/b1-Product/a0-qqtbased/Application
-    INSTALLS += target
-}
-OBJECTS_DIR = obj
-MOC_DIR = obj/moc.cpp
-UI_DIR = obj/ui.h
-RCC_DIR = qrc
-#user directory
-DESTDIR = bin
 CONFIG(debug, debug|release) {
 } else {
     DEFINES -= QT_NO_DEBUG_OUTPUT
 }
+win32 {
+    win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
+    QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
+}
 
 
+#############
+##libraries
+#############
+win32 {
+    LIBS += -luser32
+}else: unix {
+    macx {
+        #min macosx target
+        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+        #deperated
+        #QMAKE_MAC_SDK=macosx10.12
+        #MACOSXSDK = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$${QMAKE_MACOSX_DEPLOYMENT_TARGET}.sdk
+        #QMAKE_LIBDIR = $${MACOSXSDK}
+        #LIBS += -F$${MACOSXSDK}/System/Library/Frameworks
+        #LIBS += -L$${MACOSXSDK}/usr/lib
+        LIBS += -framework DiskArbitration -framework Cocoa -framework IOKit
+    } else {
+    }
+}
+
+###########################
+##include directories
+###########################
+INCLUDEPATH += $$PWD
+INCLUDEPATH += $$PWD/serialport
+INCLUDEPATH += $$PWD/core
+INCLUDEPATH += $$PWD/customplot
+INCLUDEPATH += $$PWD/dmmu
+INCLUDEPATH += $$PWD/frame
+INCLUDEPATH += $$PWD/gui
+INCLUDEPATH += $$PWD/multimedia
+INCLUDEPATH += $$PWD/network
+INCLUDEPATH += $$PWD/pluginwatcher
+INCLUDEPATH += $$PWD/printsupport
+INCLUDEPATH += $$PWD/sql
+INCLUDEPATH += $$PWD/widgets
 
 #root dir
 win32 {
@@ -72,17 +110,14 @@ win32 {
 unix {
     macx {
         HEADERS += $$PWD/qqtdarwin.h
-        LIBS += -framework DiskArbitration -framework Cocoa -framework IOKit
     } else {
         HEADERS += $$PWD/qqtlinux.h
     }
 }
-INCLUDEPATH += $$PWD
 HEADERS += $$PWD/qqt.h \
     $$PWD/qqtversion.h \
     $$PWD/qqt-local.h \
-    $$PWD/qqt-qt.h \
-    $$PWD/widgets/qqtapplication.h
+    $$PWD/qqt-qt.h
 
 
 #serialport
@@ -90,7 +125,6 @@ HEADERS += $$PWD/qqt.h \
 #DEFINES += __QTEXTSERIALPORT__
 contains (DEFINES, __QTEXTSERIALPORT__) {
     message ( __QTEXTSERIALPORT__ defined in qqtfoundation)
-    INCLUDEPATH += $$PWD/serialport
     include ( $$PWD/serialport/qextserialport.pri )
 } else {
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
@@ -104,7 +138,6 @@ contains (DEFINES, __QTEXTSERIALPORT__) {
 
 
 #core
-INCLUDEPATH += $$PWD/core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
     $$PWD/core/qqtanimation.cpp \
@@ -117,7 +150,6 @@ HEADERS += \
 
 
 #customplot
-INCLUDEPATH += $$PWD/customplot
 contains (DEFINES, QQT_LIBRARY) {
 	DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
 }
@@ -130,7 +162,6 @@ HEADERS += $$PWD/customplot/qcpdocumentobject.h \
 
 
 #dmmu
-INCLUDEPATH += $$PWD/dmmu
 equals(QT_KIT, MIPS32) {
     SOURCES += $$PWD/dmmu/dmmu.c
     HEADERS += $$PWD/dmmu/dmmu.h \
@@ -141,7 +172,6 @@ equals(QT_KIT, MIPS32) {
 
 
 #frame
-INCLUDEPATH += $$PWD/frame
 equals(QT_KIT, MIPS32) {
     SOURCES += $$PWD/frame/qqtpreviewwidget.cpp \
                 $$PWD/frame/qqtwifiwidget.cpp
@@ -175,7 +205,6 @@ FORMS += \
 
 
 #gui
-INCLUDEPATH += $$PWD/gui
 SOURCES += \
     $$PWD/gui/qqtftptreemodel.cpp \
     $$PWD/gui/qqtsqltreemodel.cpp \
@@ -193,13 +222,11 @@ HEADERS += \
 
 
 #multimedia
-INCLUDEPATH += $$PWD/multimedia
 SOURCES += $$PWD/multimedia/qqtmplayer.cpp
 HEADERS += $$PWD/multimedia/qqtmplayer.h
 
 
 #network
-INCLUDEPATH += $$PWD/network
 equals(QT_KIT, MIPS32) {
     SOURCES += $$PWD/network/qqtethenetmanager.cpp
     HEADERS += $$PWD/network/qqtethenetmanager.h
@@ -230,7 +257,6 @@ HEADERS += \
     $$PWD/network/qqtnetwork.h
 
 #pluginwatcher
-INCLUDEPATH += $$PWD/pluginwatcher
 contains (DEFINES, QQT_LIBRARY) {
     DEFINES += BUILD_QDEVICEWATCHER_LIB
 }
@@ -252,19 +278,16 @@ HEADERS += $$PWD/pluginwatcher/qqtpluginwatcher.h \
             $$PWD/pluginwatcher/qdevicewatcher_p.h
 
 #printsupport
-INCLUDEPATH += $$PWD/printsupport
 SOURCES += $$PWD/printsupport/qqtprinter.cpp
 HEADERS += $$PWD/printsupport/qqtprinter.h
 
 
 #sql
-INCLUDEPATH += $$PWD/sql
 SOURCES += $$PWD/sql/qqtsql.cpp
 HEADERS += $$PWD/sql/qqtsql.h
 
 
 #widgets
-INCLUDEPATH += $$PWD/widgets
 SOURCES += \
     $$PWD/widgets/qqtcheckbox.cpp \
     $$PWD/widgets/qqtheaderview.cpp \
@@ -306,7 +329,8 @@ HEADERS += \
     $$PWD/widgets/qqtgraphicsview.h \
     $$PWD/widgets/qqttreewidget.h \
     $$PWD/widgets/qqtwidget.h \
-    $$PWD/widgets/qqtwidgets.h
+    $$PWD/widgets/qqtwidgets.h \
+    $$PWD/widgets/qqtapplication.h
 FORMS += \
     $$PWD/widgets/qqtcheckbox.ui \
     $$PWD/widgets/qqtlistview.ui \

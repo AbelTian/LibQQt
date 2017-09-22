@@ -6,9 +6,14 @@
 TARGET = QQt
 TEMPLATE = lib
 
+macx {
+    CONFIG += lib_bundle
+}
+
 #QQT LIBRARY (DLL)
 #DEFINES += QQT_LIBRARY
 
 DEFINES += QQT_LIBRARY
+
 
 include ($$PWD/qqt.pri)
