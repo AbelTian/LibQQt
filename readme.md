@@ -1,7 +1,6 @@
 #QQt Foundation Class
 
 =============================
-
 1. 支持绘制图表
 2. 支持检测USB设备热插拔
 3. 自定义了一部分特殊需要的控件，比如仅仅使用图片的checkbox
@@ -17,9 +16,4 @@
 13. QQtTabWidget，解决QtTab不能竖排的问题
 14. QQt TreeView，添加Qt内部没有TreeView
 15. 支持工程的版本变更
-16. QQt通讯套件。
-    1. serialport and tcpclient and tcpserver通讯口类
-    2. QQTProtocol协议基类
-    3. QQTMessage报文基类
-17. 使用PyMake和PyCmd支援qmake和cmake的编译工作
-
+16. QQt通讯套件。serialport/tcpclient/tcpserver通讯口类和QQTProtocol协议基类和QQTMessage报文基类。
