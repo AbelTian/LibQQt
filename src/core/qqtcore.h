@@ -14,6 +14,7 @@
 #include <QDebug>
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <QSslError>
 #include <qqt-local.h>
 
 #ifdef __cplusplus

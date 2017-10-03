@@ -4,21 +4,6 @@
 #
 #-------------------------------------------------
 
-############
-##install and build
-############
-OBJECTS_DIR = obj
-MOC_DIR = obj/moc.cpp
-UI_DIR = obj/ui.h
-RCC_DIR = qrc
-#user directory
-DESTDIR = bin
-macx {
-    ###if install product to same path,use this.
-    target.path = /Users/abel/Develop/b1-Product/a0-qqtbased/Application
-    INSTALLS += target
-}
-
 #############
 ##project version
 #############
@@ -35,11 +20,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
 QT_KIT = $$(QKIT)
 message($${QT_KIT} Defined in qqtfoundation)
 #MIPS __MIPS_LINUX__
+#ARM __ARM_LINUX__
 #LINUX __LINUX__
 #LINUX64 __LINUX64__
 #WIN __WIN__
 #WIN64 __WIN64__
 #macOS __DARWIN__
+#Android __ANDROID__
 #处理文件内平台小差异
 equals(QT_KIT, MIPS32) {
     QT += multimedia
@@ -54,6 +41,9 @@ equals(QT_KIT, MIPS32) {
     DEFINES += __WIN64__
 } else:equals(QT_KIT, macOS) {
     DEFINES += __DARWIN__
+} else:equals(QT_KIT, Android) {
+    DEFINES += __ANDROID__
+    #TODO:no customplot word printer
 }
 CONFIG(debug, debug|release) {
 } else {
@@ -63,7 +53,6 @@ win32 {
     win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
     QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
 }
-
 
 #############
 ##libraries
@@ -83,6 +72,21 @@ win32 {
         LIBS += -framework DiskArbitration -framework Cocoa -framework IOKit
     } else {
     }
+}
+
+############
+##install and build
+############
+OBJECTS_DIR = obj
+MOC_DIR = obj/moc.cpp
+UI_DIR = obj/ui.h
+RCC_DIR = qrc
+#user directory
+DESTDIR = bin
+macx {
+    ###if install product to same path,use this.
+    target.path = /Users/abel/Develop/b1-Product
+    INSTALLS += target
 }
 
 ###########################
@@ -157,7 +161,12 @@ SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
 			$$PWD/customplot/qcustomplot.cpp
 HEADERS += $$PWD/customplot/qcpdocumentobject.h \
 			$$PWD/customplot/qcustomplot.h
-
+equals(QT_KIT, Android) {
+    SOURCES -= $$PWD/customplot/qcpdocumentobject.cpp \
+                            $$PWD/customplot/qcustomplot.cpp
+    HEADERS -= $$PWD/customplot/qcpdocumentobject.h \
+                            $$PWD/customplot/qcustomplot.h
+}
 
 
 
@@ -202,6 +211,10 @@ FORMS += \
     $$PWD/frame/qqtdialog.ui \
     $$PWD/frame/qqtinput.ui \
     $$PWD/frame/qqtmsgbox.ui
+equals(QT_KIT, Android) {
+    SOURCES -= $$PWD/frame/qqtword.cpp
+    HEADERS -= $$PWD/frame/qqtword.h
+}
 
 
 #gui
@@ -280,7 +293,10 @@ HEADERS += $$PWD/pluginwatcher/qqtpluginwatcher.h \
 #printsupport
 SOURCES += $$PWD/printsupport/qqtprinter.cpp
 HEADERS += $$PWD/printsupport/qqtprinter.h
-
+equals(QT_KIT, Android) {
+    SOURCES -= $$PWD/printsupport/qqtprinter.cpp
+    HEADERS -= $$PWD/printsupport/qqtprinter.h
+}
 
 #sql
 SOURCES += $$PWD/sql/qqtsql.cpp

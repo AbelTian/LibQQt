@@ -82,4 +82,8 @@
 #include <QEventTransition>
 #include <QTimeLine>
 
+#include <QSslError>
+#include <QSslKey>
+#include <QSslSocket>
+
 #endif // QQTGUIQT_H

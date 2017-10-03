@@ -5,14 +5,13 @@
 #-------------------------------------------------
 TARGET = QQt
 TEMPLATE = lib
-
+CONFIG += dll
 macx {
     CONFIG += lib_bundle
 }
 
 #QQT LIBRARY (DLL)
 #DEFINES += QQT_LIBRARY
-
 DEFINES += QQT_LIBRARY
 
 

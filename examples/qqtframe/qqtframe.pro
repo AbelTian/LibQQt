@@ -14,13 +14,38 @@ macx {
     CONFIG += app_bundle
 }
 
-OBJECTS_DIR = obj
-MOC_DIR = obj/moc.cpp
-UI_DIR = obj/ui.h
-RCC_DIR = qrc
-#user directory
-DESTDIR = bin
-#DESTDIR = ../../../Product/install/Application
+QT_KIT = $$(QKIT)
+message($${QT_KIT} Defined in qqtframe)
+equals(QT_KIT, MIPS32) {
+    QT += multimedia
+    DEFINES += __MIPS_LINUX__
+} else:equals(QT_KIT, LINUX) {
+    DEFINES += __LINUX__
+} else:equals(QT_KIT, LINUX64) {
+    DEFINES += __LINUX64__
+} else:equals(QT_KIT, WIN) {
+    DEFINES += __WIN__
+} else:equals(QT_KIT, WIN64) {
+    DEFINES += __WIN64__
+} else:equals(QT_KIT, macOS) {
+    DEFINES += __DARWIN__
+} else:equals(QT_KIT, Android) {
+    DEFINES += __ANDROID__
+}
+
+CONFIG(debug, debug|release) {
+} else {
+    DEFINES -= QT_NO_DEBUG_OUTPUT
+}
+
+equals(QT_KIT, Android) {
+    CONFIG += mobility
+    MOBILITY =
+    #DISTFILES += \
+    #    android/AndroidManifest.xml
+
+    #ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+}
 
 INCLUDEPATH += $$PWD \
     $$PWD/../../src \
@@ -41,42 +66,25 @@ macx {
     LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/Release/src/bin
     LIBS += -framework QQt
 }
-
-QT_KIT = $$(QKIT)
-
-message($${QT_KIT} Defined in qqtframe)
-
-DEFINES += _TTY_POSIX_
-
-equals(QT_KIT, MIPS32) {
-    QT += multimedia
-    DEFINES += __MIPS_LINUX__
-} else:equals(QT_KIT, LINUX) {
-    DEFINES += __LINUX__
-} else:equals(QT_KIT, LINUX64) {
-    DEFINES += __LINUX64__
-} else:equals(QT_KIT, WIN) {
-    DEFINES += __WIN__
-} else:equals(QT_KIT, WIN64) {
-    DEFINES += __WIN64__
-} else:equals(QT_KIT, macOS) {
-    DEFINES += __DARWIN__
+equals(QT_KIT, Android) {
+    LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android-arm/Release/src/bin
+    LIBS += -lQQt
 }
 
-CONFIG(debug, debug|release) {
-} else {
-    DEFINES -= QT_NO_DEBUG_OUTPUT
-}
-
-
+OBJECTS_DIR = obj
+MOC_DIR = obj/moc.cpp
+UI_DIR = obj/ui.h
+RCC_DIR = qrc
+#user directory
+DESTDIR = bin
 equals(QT_KIT, MIPS32) {
-	target.path = /Application
-	INSTALLS += target
+    target.path = /Application
+    INSTALLS += target
 } else: unix {
-	macx{
-		target.path = /Users/abel/Develop/b1-Product/a0-qqtbased/Application
-		INSTALLS += target
-	}
+    macx{
+        target.path = /Users/abel/Develop/b1-Product
+        INSTALLS += target
+    }
 }
 
 INCLUDEPATH +=  $$PWD

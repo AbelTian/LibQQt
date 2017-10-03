@@ -10,6 +10,10 @@ QQTWord::QQTWord(QObject *parent) :
     fmt(0), mainFmt(0),headerFmt(0),titleFmt(0), title2Fmt(0)
 {
     //setup printer
+    /**
+      MIPS bug: you must use QQTPrinter(QPrinter::HighResolution)
+      Other constructer won't work well
+      */
     pr= new QQTPrinter(QPrinter::HighResolution);
     pr->setFullPage(true);
     pr->setColorMode(QPrinter::Color);
@@ -298,7 +302,7 @@ void QQTWord::exportPdf(const QString &pdf)
     pr->setOutputFileName(pdf);
 
     // print pdf
-    QPainter p(pr);
+    QPainter p(pr);        
 
     QQTGraphicsScene* pageScene = 0;
     foreach (pageScene, pageSceneVector) {
