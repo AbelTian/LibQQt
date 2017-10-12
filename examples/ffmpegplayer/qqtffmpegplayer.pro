@@ -15,14 +15,9 @@ OBJECTS_DIR = obj
 MOC_DIR = obj/moc.cpp
 UI_DIR = obj/ui.h
 RCC_DIR = qrc
+DESTDIR = bin
 
-#user directory
-#DESTDIR = bin
-DESTDIR = ../../../Product/install/Application
-
-INCLUDEPATH += ../qqtfoundation \
-	/usr/include/x86_64-linux-gnu
-
+INCLUDEPATH += ../qqtfoundation
 include(../qqtfoundation/qqtfoundation.pri)
 
 QT_KIT = $$(QKIT)
@@ -43,10 +38,6 @@ CONFIG(debug, debug|release) {
 	DEFINES -= QT_NO_DEBUG_OUTPUT
 }
 
-target.path += /application
-
-INSTALLS += target
-
 INCLUDEPATH +=  .
 
 SOURCES += $$PWD/main.cpp $$PWD/qqtapp.cpp $$PWD/qqtwindow.cpp \
@@ -57,6 +48,12 @@ HEADERS  += $$PWD/qqtapp.h $$PWD/qqtwindow.h \
 
 FORMS    += $$PWD/qqtwindow.ui
 
-
-LIBS += -L/usr/lib/x86_64-linux-gnu -lavutil -lavcodec -lswscale -lswresample -lavformat -lSDL2
+unix {
+    macx{
+    }
+    else{
+        INCLUDEPATH += /usr/include/x86_64-linux-gnu
+        LIBS += -L/usr/lib/x86_64-linux-gnu -lavutil -lavcodec -lswscale -lswresample -lavformat -lSDL2
+    }
+}
 

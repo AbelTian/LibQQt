@@ -20,7 +20,8 @@ QQtApplication::QQtApplication(int &argc, char **argv
                       #ifndef Q_QDOC
                          , flags
                       #endif
-                      )
+                      ),
+    bUPanAutoRun(false)
 {
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));

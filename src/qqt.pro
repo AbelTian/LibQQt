@@ -16,3 +16,14 @@ DEFINES += QQT_LIBRARY
 
 
 include ($$PWD/qqt.pri)
+
+############
+##install
+############
+#CONFIG += can_install
+
+can_install:macx {
+    ###if install product to same path,use this.
+    target.path = /System/Library/Frameworks
+    INSTALLS += target
+}

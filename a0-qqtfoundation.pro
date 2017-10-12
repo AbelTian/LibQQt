@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
+CONFIG += ordered
 SUBDIRS +=  \
  src/qqt.pro \
  examples/qqtframe \
@@ -9,5 +10,6 @@ SUBDIRS +=  \
 # examples/qqtftpclient \
 # examples/qqthttpclient \
 # examples/qqtwebkit
+    examples/qqtframe2
 
 #include(src/qqt.pri)

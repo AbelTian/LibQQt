@@ -75,19 +75,13 @@ win32 {
 }
 
 ############
-##install and build
+##build cache
 ############
 OBJECTS_DIR = obj
 MOC_DIR = obj/moc.cpp
 UI_DIR = obj/ui.h
 RCC_DIR = qrc
-#user directory
 DESTDIR = bin
-macx {
-    ###if install product to same path,use this.
-    target.path = /Users/abel/Develop/b1-Product
-    INSTALLS += target
-}
 
 ###########################
 ##include directories
