@@ -49,7 +49,7 @@ HEADERS  += $$PWD/qqtapp.h $$PWD/qqtwindow.h \
 FORMS    += $$PWD/qqtwindow.ui
 
 unix {
-    macx{
+    equals(QT_KIT, macOS){
     }
     else{
         INCLUDEPATH += /usr/include/x86_64-linux-gnu

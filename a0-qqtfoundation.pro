@@ -3,6 +3,7 @@ CONFIG += ordered
 SUBDIRS +=  \
  src/qqt.pro \
  examples/qqtframe \
+ examples/qqtframe2 \
 # examples/animationframe \
 # examples/cmdwidget \
 # examples/qqtliveplayer \
@@ -10,6 +11,6 @@ SUBDIRS +=  \
 # examples/qqtftpclient \
 # examples/qqthttpclient \
 # examples/qqtwebkit
-    examples/qqtframe2
+
 
 #include(src/qqt.pri)

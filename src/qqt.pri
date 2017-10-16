@@ -11,7 +11,7 @@ unix:VERSION            = 1.0.0
 
 ##Qt version
 QT += core gui network sql xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 #############
 ##definition
@@ -34,17 +34,23 @@ equals(QT_KIT, MIPS32) {
 } else:equals(QT_KIT, LINUX) {
     DEFINES += __LINUX__
 } else:equals(QT_KIT, LINUX64) {
+    DEFINES += __LINUX__
     DEFINES += __LINUX64__
 } else:equals(QT_KIT, WIN) {
     DEFINES += __WIN__
 } else:equals(QT_KIT, WIN64) {
+    DEFINES += __WIN__
     DEFINES += __WIN64__
 } else:equals(QT_KIT, macOS) {
     DEFINES += __DARWIN__
 } else:equals(QT_KIT, Android) {
     DEFINES += __ANDROID__
-    #TODO:no customplot word printer
+} else:equals(QT_KIT, ANDROIDX86) {
+    DEFINES += __ANDROID__
+    DEFINES += __ANDROIDX86__
+    #todo:no customplot word printer
 }
+
 CONFIG(debug, debug|release) {
 } else {
     DEFINES -= QT_NO_DEBUG_OUTPUT
@@ -60,7 +66,7 @@ win32 {
 win32 {
     LIBS += -luser32
 }else: unix {
-    macx {
+    equals(QT_KIT, macOS) {
         #min macosx target
         QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
         #deperated
@@ -87,7 +93,6 @@ DESTDIR = bin
 ##include directories
 ###########################
 INCLUDEPATH += $$PWD
-INCLUDEPATH += $$PWD/serialport
 INCLUDEPATH += $$PWD/core
 INCLUDEPATH += $$PWD/customplot
 INCLUDEPATH += $$PWD/dmmu
@@ -95,6 +100,7 @@ INCLUDEPATH += $$PWD/frame
 INCLUDEPATH += $$PWD/gui
 INCLUDEPATH += $$PWD/multimedia
 INCLUDEPATH += $$PWD/network
+INCLUDEPATH += $$PWD/network/qextserialport
 INCLUDEPATH += $$PWD/pluginwatcher
 INCLUDEPATH += $$PWD/printsupport
 INCLUDEPATH += $$PWD/sql
@@ -106,7 +112,7 @@ win32 {
     HEADERS += $$PWD/qqtwin.h
 }
 unix {
-    macx {
+    equals(QT_KIT, macOS) {
         HEADERS += $$PWD/qqtdarwin.h
     } else {
         HEADERS += $$PWD/qqtlinux.h
@@ -118,13 +124,48 @@ HEADERS += $$PWD/qqt.h \
     $$PWD/qqt-qt.h
 
 
-#serialport
+#network
+equals(QT_KIT, MIPS32) {
+    SOURCES += $$PWD/network/qqtethenetmanager.cpp
+    HEADERS += $$PWD/network/qqtethenetmanager.h
+}
+##websocket
+SOURCES += $$PWD/network/qqtwebclient.cpp \
+    $$PWD/network/qqtftpprotocol.cpp \
+    $$PWD/network/qqthttpprotocol.cpp \
+    $$PWD/network/qqtwebprotocol.cpp
+HEADERS += $$PWD/network/qqtwebclient.h \
+    $$PWD/network/qqtftpprotocol.h \
+    $$PWD/network/qqthttpprotocol.h \
+    $$PWD/network/qqtwebprotocol.h
+#tcpsocket
+SOURCES += \
+    $$PWD/network/qqtclient.cpp \
+    $$PWD/network/qqtserialport.cpp \
+    $$PWD/network/qqtserver.cpp \
+    $$PWD/network/qqtmessage.cpp \
+    $$PWD/network/qqtprotocol.cpp \
+    $$PWD/network/qqtnetwork.cpp
+HEADERS += \
+    $$PWD/network/qqtclient.h \
+    $$PWD/network/qqtserialport.h \
+    $$PWD/network/qqtserver.h \
+    $$PWD/network/qqtmessage.h \
+    $$PWD/network/qqtprotocol.h \
+    $$PWD/network/qqtnetwork.h
+#bluetooth
+SOURCES += \
+    $$PWD/network/qqtbluetoothmanager.cpp
+HEADERS += \
+    $$PWD/network/qqtbluetoothmanager.h
+#qserialport
 #USE QEXTSERIALPORT
 #DEFINES += __QTEXTSERIALPORT__
 contains (DEFINES, __QTEXTSERIALPORT__) {
-    message ( __QTEXTSERIALPORT__ defined in qqtfoundation)
-    include ( $$PWD/serialport/qextserialport.pri )
+    message ( __QTEXTSERIALPORT__ Defined in qqtfoundation)
+    include ( $$PWD/network/qextserialport/qextserialport.pri )
 } else {
+    greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
     unix {
         DEFINES += _TTY_POSIX_
@@ -232,37 +273,6 @@ HEADERS += \
 SOURCES += $$PWD/multimedia/qqtmplayer.cpp
 HEADERS += $$PWD/multimedia/qqtmplayer.h
 
-
-#network
-equals(QT_KIT, MIPS32) {
-    SOURCES += $$PWD/network/qqtethenetmanager.cpp
-    HEADERS += $$PWD/network/qqtethenetmanager.h
-}
-##websocket
-SOURCES += $$PWD/network/qqtwebclient.cpp \
-	$$PWD/network/qqtftpprotocol.cpp \
-	$$PWD/network/qqthttpprotocol.cpp \
-	$$PWD/network/qqtwebprotocol.cpp
-HEADERS += $$PWD/network/qqtwebclient.h \
-	$$PWD/network/qqtftpprotocol.h \
-	$$PWD/network/qqthttpprotocol.h \
-	$$PWD/network/qqtwebprotocol.h
-#tcpsocket
-SOURCES += \
-    $$PWD/network/qqtclient.cpp \
-    $$PWD/network/qqtserialport.cpp \
-    $$PWD/network/qqtserver.cpp \
-    $$PWD/network/qqtmessage.cpp \
-    $$PWD/network/qqtprotocol.cpp \
-    $$PWD/network/qqtnetwork.cpp
-HEADERS += \
-    $$PWD/network/qqtclient.h \
-    $$PWD/network/qqtserialport.h \
-    $$PWD/network/qqtserver.h \
-    $$PWD/network/qqtmessage.h \
-    $$PWD/network/qqtprotocol.h \
-    $$PWD/network/qqtnetwork.h
-
 #pluginwatcher
 contains (DEFINES, QQT_LIBRARY) {
     DEFINES += BUILD_QDEVICEWATCHER_LIB
@@ -272,7 +282,7 @@ win32 {
     else:  SOURCES += $$PWD/pluginwatcher/qdevicewatcher_win32.cpp
 }
 unix {
-    macx {
+    equals(QT_KIT, macOS) {
         SOURCES += $$PWD/pluginwatcher/qdevicewatcher_mac.cpp
     } else {
         SOURCES += $$PWD/pluginwatcher/qdevicewatcher_linux.cpp

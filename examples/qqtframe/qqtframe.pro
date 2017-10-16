@@ -10,9 +10,6 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 TARGET = qqtframe
 TEMPLATE = app
-macx {
-    CONFIG += app_bundle
-}
 
 QT_KIT = $$(QKIT)
 message($${QT_KIT} Defined in qqtframe)
@@ -22,15 +19,23 @@ equals(QT_KIT, MIPS32) {
 } else:equals(QT_KIT, LINUX) {
     DEFINES += __LINUX__
 } else:equals(QT_KIT, LINUX64) {
+    DEFINES += __LINUX__
     DEFINES += __LINUX64__
 } else:equals(QT_KIT, WIN) {
     DEFINES += __WIN__
 } else:equals(QT_KIT, WIN64) {
+    DEFINES += __WIN__
     DEFINES += __WIN64__
 } else:equals(QT_KIT, macOS) {
     DEFINES += __DARWIN__
 } else:equals(QT_KIT, Android) {
     DEFINES += __ANDROID__
+} else:equals(QT_KIT, ANDROIDX86) {
+    DEFINES += __ANDROID__
+    DEFINES += __ANDROIDX86__
+}
+equals(QT_KIT, macOS) {
+    CONFIG += app_bundle
 }
 
 CONFIG(debug, debug|release) {
@@ -62,12 +67,20 @@ INCLUDEPATH += $$PWD \
     $$PWD/../../src/frame
 
 #include(../../src/qqt.pri)
-macx {
-    LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/Release/src/bin
-    LIBS += -framework QQt
-}
-equals(QT_KIT, Android) {
-    LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android-arm/Release/src/bin
+message(Link QQt to $${TARGET} $${QT_KIT} on $${QMAKE_HOST.os})
+equals(QMAKE_HOST.os, Darwin) {
+    equals(QT_KIT, macOS) {
+        LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/Release/src/bin
+        LIBS += -framework QQt
+    } else: equals(QT_KIT, Android) {
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android/Release/src/bin
+        LIBS += -lQQt
+    } else: equals(QT_KIT, ANDROIDX86) {
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android_x86/Release/src/bin
+        LIBS += -lQQt
+    }
+} else: equals(QMAKE_HOST.os, Linux) {
+    LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/Linux/Release/src/bin
     LIBS += -lQQt
 }
 
@@ -87,7 +100,7 @@ can_install:equals(QT_KIT, MIPS32) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
-    macx{
+    equals(QT_KIT, macOS){
         target.path = /Applications
         INSTALLS += target
     }

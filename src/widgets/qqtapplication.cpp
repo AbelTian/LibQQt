@@ -11,16 +11,8 @@
 #include <QTranslator>
 #include <QFontDatabase>
 
-QQtApplication::QQtApplication(int &argc, char **argv
-                                #ifndef Q_QDOC
-                                   , int flags
-                                #endif
-                                ) :
-    QApplication(argc, argv
-                      #ifndef Q_QDOC
-                         , flags
-                      #endif
-                      ),
+QQtApplication::QQtApplication(int &argc, char **argv) :
+    QApplication(argc, argv),
     bUPanAutoRun(false)
 {
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)

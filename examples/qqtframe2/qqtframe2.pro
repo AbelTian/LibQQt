@@ -18,12 +18,6 @@ QT += core gui network sql xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
-TARGET = qqtframe2
-TEMPLATE = app
-macx {
-    CONFIG += app_bundle
-}
-
 QT_KIT = $$(QKIT)
 message($${QT_KIT} Defined in $${TARGET})
 equals(QT_KIT, MIPS32) {
@@ -41,6 +35,13 @@ equals(QT_KIT, MIPS32) {
     DEFINES += __DARWIN__
 } else:equals(QT_KIT, Android) {
     DEFINES += __ANDROID__
+}
+
+TARGET = qqtframe2
+TEMPLATE = app
+
+equals(QT_KIT, macOS) {
+    CONFIG += app_bundle
 }
 
 CONFIG(debug, debug|release) {
@@ -72,12 +73,20 @@ INCLUDEPATH += $$PWD \
     $$PWD/../../src/frame
 
 #include(../../src/qqt.pri)
-macx {
-    LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/Release/src/bin
-    LIBS += -framework QQt
-}
-equals(QT_KIT, Android) {
-    LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android-arm/Release/src/bin
+message(Link QQt to $${TARGET} $${QT_KIT} on $${QMAKE_HOST.os})
+equals(QMAKE_HOST.os, Darwin) {
+    equals(QT_KIT, macOS) {
+        LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/Release/src/bin
+        LIBS += -framework QQt
+    } else: equals(QT_KIT, Android) {
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android/Release/src/bin
+        LIBS += -lQQt
+    } else: equals(QT_KIT, ANDROIDX86) {
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android_x86/Release/src/bin
+        LIBS += -lQQt
+    }
+} else: equals(QMAKE_HOST.os, Linux) {
+    LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/Linux/Release/src/bin
     LIBS += -lQQt
 }
 
@@ -97,7 +106,7 @@ can_install:equals(QT_KIT, MIPS32) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
-    macx{
+    equals(QT_KIT, macOS) {
         target.path = /Applications
         INSTALLS += target
     }

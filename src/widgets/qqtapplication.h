@@ -9,11 +9,7 @@ class QQTSHARED_EXPORT QQtApplication : public QApplication
     Q_OBJECT
 public:
 public:
-    explicit QQtApplication(int &argc, char **argv
-#ifndef Q_QDOC
-    , int = ApplicationFlags
-#endif
-        );
+    explicit QQtApplication(int &argc, char **argv);
 
     void setLanguage(QString qmfile = "./lang/zh_CN.qm");
     //palette
