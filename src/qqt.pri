@@ -106,6 +106,9 @@ INCLUDEPATH += $$PWD/printsupport
 INCLUDEPATH += $$PWD/sql
 INCLUDEPATH += $$PWD/widgets
 
+SOURCES += \
+HEADERS += \
+
 #root dir
 win32 {
     #win32 base type
@@ -125,10 +128,6 @@ HEADERS += $$PWD/qqt.h \
 
 
 #network
-equals(QT_KIT, MIPS32) {
-    SOURCES += $$PWD/network/qqtethenetmanager.cpp
-    HEADERS += $$PWD/network/qqtethenetmanager.h
-}
 ##websocket
 SOURCES += $$PWD/network/qqtwebclient.cpp \
     $$PWD/network/qqtftpprotocol.cpp \
@@ -141,24 +140,37 @@ HEADERS += $$PWD/network/qqtwebclient.h \
 #tcpsocket
 SOURCES += \
     $$PWD/network/qqtclient.cpp \
-    $$PWD/network/qqtserialport.cpp \
     $$PWD/network/qqtserver.cpp \
     $$PWD/network/qqtmessage.cpp \
     $$PWD/network/qqtprotocol.cpp \
     $$PWD/network/qqtnetwork.cpp
 HEADERS += \
     $$PWD/network/qqtclient.h \
-    $$PWD/network/qqtserialport.h \
     $$PWD/network/qqtserver.h \
     $$PWD/network/qqtmessage.h \
     $$PWD/network/qqtprotocol.h \
     $$PWD/network/qqtnetwork.h
+#serialport
+SOURCES += \
+    $$PWD/network/qqtserialport.cpp
+HEADERS += \
+    $$PWD/network/qqtserialport.h
 #bluetooth
+SOURCES += \
+    $$PWD/network/qqtbluetooth.cpp
+HEADERS += \
+    $$PWD/network/qqtbluetooth.h
+#ethnet manager
+equals(QT_KIT, MIPS32) {
+    SOURCES += $$PWD/network/qqtethenetmanager.cpp
+    HEADERS += $$PWD/network/qqtethenetmanager.h
+}
+#bluetooth manager
 SOURCES += \
     $$PWD/network/qqtbluetoothmanager.cpp
 HEADERS += \
     $$PWD/network/qqtbluetoothmanager.h
-#qserialport
+#qextserialport support
 #USE QEXTSERIALPORT
 #DEFINES += __QTEXTSERIALPORT__
 contains (DEFINES, __QTEXTSERIALPORT__) {
