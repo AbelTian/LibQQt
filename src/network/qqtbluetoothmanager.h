@@ -12,7 +12,9 @@
 #include <qbluetoothdevicediscoveryagent.h>
 #include <qbluetoothservicediscoveryagent.h>
 
-class QQtBluetoothManager : public QBluetoothLocalDevice
+#include "qqt-local.h"
+
+class QQTSHARED_EXPORT QQtBluetoothManager : public QBluetoothLocalDevice
 {
     Q_OBJECT
 public:

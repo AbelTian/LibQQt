@@ -26,7 +26,6 @@ void QQTServer::installProtocol(QQTProtocol *stack)
         return;
 
     m_protocol = stack;
-    connect(m_protocol, SIGNAL(write(const QByteArray&)), this, SLOT(write(const QByteArray&)));
 }
 
 void QQTServer::uninstallProtocol(QQTProtocol *stack)
@@ -34,7 +33,6 @@ void QQTServer::uninstallProtocol(QQTProtocol *stack)
     if(!m_protocol)
         return;
 
-    disconnect(m_protocol, SIGNAL(write(const QByteArray&)), this, SLOT(write(const QByteArray&)));
     m_protocol = NULL;
 }
 

@@ -10,9 +10,9 @@
 #include "qqtprotocol.h"
 #include "qqt-local.h"
 
-#define TANK_Q_TCP_SOCKET 0
-#define TANK_Q_SOCKET 1
-#define TANK_Q_THREAD 0
+#define QQT_TCP_SOCKET 0
+#define QQT_SOCKET 1
+#define QQT_THREAD 0
 #define _TCP_BLOCKDATA_SIZE                    0x400
 #define _TCP_RECVBUFF_SIZE                      0x800
 

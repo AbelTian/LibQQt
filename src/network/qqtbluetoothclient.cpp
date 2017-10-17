@@ -1,5 +1,4 @@
-#include "qqtnetwork.h"
-#include "qqtcore.h"
+#include "qqtbluetoothclient.h"
 
 #if defined(__WIN__) || defined(__WIN64__)
 #include "qqtwin.h"
@@ -8,51 +7,37 @@
 #elif defined (__DARWIN__)
 #include "qqtdarwin.h"
 #endif
+#include "qqtcore.h"
 
-#include <QTcpSocket>
-#include <QHostInfo>
-#include "qqtclient.h"
-
-QQTClient::QQTClient(QObject *parent) :
-    QTcpSocket(parent)
+QQtBluetoothClient::QQtBluetoothClient(QObject *parent) :
+    QBluetoothSocket(parent),
+    m_PORT(0),
+    m_protocol(nullptr)
 {
-    connect(this, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(socketStateChanged(QAbstractSocket::SocketState)) );
+    connect(this, SIGNAL(stateChanged(QBluetoothSocket::SocketState)),
+            this, SLOT(socketStateChanged(QBluetoothSocket::SocketState)) );
     // connected
-    connect(this, SIGNAL(connected()), this, SLOT(socketConnected()) );
+    connect(this, SIGNAL(connected()),
+            this, SLOT(socketConnected()) );
     // disconnected
-    connect(this, SIGNAL(disconnected()), this, SLOT(socketDisconnect()) );
-    // domain
-    connect(this, SIGNAL(hostFound()), this, SLOT(domainHostFound()));
+    connect(this, SIGNAL(disconnected()),
+            this, SLOT(socketDisconnect()) );
     // error
-    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketErrorOccured(QAbstractSocket::SocketError)) );
+    connect(this, SIGNAL(error(QBluetoothSocket::SocketError)),
+            this, SLOT(socketErrorOccured(QBluetoothSocket::SocketError)) );
 
-    connect(this, SIGNAL(readyRead()), this, SLOT(readyReadData()));
+    connect(this, SIGNAL(readyRead()),
+            this, SLOT(readyReadData()));
 
-    connect(this, SIGNAL(bytesWritten(qint64)), this, SLOT(updateProgress(qint64)));
+    connect(this, SIGNAL(bytesWritten(qint64)),
+            this, SLOT(updateProgress(qint64)));
 
-    connect(this, SIGNAL(bytesWritten(qint64)), this, SIGNAL(signalUpdateProgress(qint64)));
-
-    /*
-     * 心情很好，但是给自己带来麻烦顾虑，也不能给系统节约多少什么资源, Qt::QueuedConnection);
-     */
-
-    setSocketOption(QAbstractSocket::LowDelayOption, 0);
-    setSocketOption(QAbstractSocket::KeepAliveOption, 0);
-    setReadBufferSize(_TCP_RECVBUFF_SIZE);
-
-    m_PORT = 0;
-    /*
-     * 启动连接
-     */
-    eConType = 0;
-    m_protocol = NULL;
+    connect(this, SIGNAL(bytesWritten(qint64)),
+            this, SIGNAL(signalUpdateProgress(qint64)));
 }
 
-QQTClient::~QQTClient()
-{
-}
 
-void QQTClient::installProtocol(QQTProtocol *stack)
+void QQtBluetoothClient::installProtocol(QQTProtocol *stack)
 {
     if(m_protocol)
         return;
@@ -62,7 +47,7 @@ void QQTClient::installProtocol(QQTProtocol *stack)
             this, SLOT(write(const QByteArray&)));
 }
 
-void QQTClient::uninstallProtocol(QQTProtocol *stack)
+void QQtBluetoothClient::uninstallProtocol(QQTProtocol *stack)
 {
     if(!m_protocol)
         return;
@@ -72,22 +57,22 @@ void QQTClient::uninstallProtocol(QQTProtocol *stack)
     m_protocol = NULL;
 }
 
-QQTProtocol *QQTClient::installedProtocol()
+QQTProtocol *QQtBluetoothClient::installedProtocol()
 {
     return m_protocol;
 }
 
-void QQTClient::SendConnectMessage()
+void QQtBluetoothClient::sendConnectMessage()
 {
-    pline() << isValid() << isOpen() << state();
+    pline() << isOpen() << state();
 
-    if(!isValid() && !isOpen())
+    if(!isOpen())
     {
         connectToSingelHost();
         return;
     }
 
-    if(state() == HostLookupState ||
+    if(state() == ServiceLookupState ||
             state() == ConnectingState)
     {
         emit signalConnecting();
@@ -101,19 +86,18 @@ void QQTClient::SendConnectMessage()
 }
 
 
-int QQTClient::SendDisConnectFromHost()
+int QQtBluetoothClient::sendDisConnectFromHost()
 {
-    pline() << isValid() << isOpen() << state();
+    pline() << isOpen() << state();
 
-    if(isValid() || isOpen() )
+    if(isOpen() )
     {
 #if defined(__WIN__) || defined (__WIN64__)
         ;
 #else
         shutdown(this->socketDescriptor(), SHUT_RDWR);
 #endif
-        disconnectFromHost();
-        waitForDisconnected();
+        disconnectFromService();
         close();
         emit signalDisConnectSucc();
     }
@@ -121,30 +105,24 @@ int QQTClient::SendDisConnectFromHost()
     return true;
 }
 
-void QQTClient::domainHostFound()
-{
-    pline();
-}
-
 /**
- * @brief QQTClient::socketStateChanged
+ * @brief QQtBluetoothClient::socketStateChanged
  * @param eSocketState
  * 状态函数
  */
-void QQTClient::socketStateChanged(QAbstractSocket::SocketState eSocketState)
+void QQtBluetoothClient::socketStateChanged(QBluetoothSocket::SocketState eSocketState)
 {
     pline() << eSocketState;
     switch(eSocketState)
     {
-    case QAbstractSocket::HostLookupState:
-    case QAbstractSocket::ConnectingState:
+    case ServiceLookupState:
+    case ConnectingState:
         break;
-    case QAbstractSocket::ConnectedState:
+    case ConnectedState:
         break;
-    case QAbstractSocket::ClosingState:
+    case ClosingState:
         break;
-    case QAbstractSocket::UnconnectedState:
-        eConType++;
+    case UnconnectedState:
         break;
     default:
         break;
@@ -152,21 +130,19 @@ void QQTClient::socketStateChanged(QAbstractSocket::SocketState eSocketState)
 }
 
 /**
- * @brief QQTClient::socketErrorOccured
+ * @brief QQtBluetoothClient::socketErrorOccured
  * @param e
  * 状态函数
  */
-void QQTClient::socketErrorOccured(QAbstractSocket::SocketError e)
+void QQtBluetoothClient::socketErrorOccured(QBluetoothSocket::SocketError e)
 {
     /*
      * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
      */
-    pline() << e;
+    pline() << e << errorString();
     switch(e)
     {
-    case QAbstractSocket::RemoteHostClosedError:
-        break;
-    case QAbstractSocket::HostNotFoundError:
+    case HostNotFoundError:
     default:
         emit signalConnectFail();
         break;
@@ -174,10 +150,10 @@ void QQTClient::socketErrorOccured(QAbstractSocket::SocketError e)
 }
 
 /**
- * @brief QQTClient::socketConnected
+ * @brief QQtBluetoothClient::socketConnected
  * 功能接口
  */
-void QQTClient::socketConnected()
+void QQtBluetoothClient::socketConnected()
 {
     pline() << peerName() << peerAddress().toString() << peerPort();
     /*
@@ -187,30 +163,40 @@ void QQTClient::socketConnected()
 }
 
 /**
- * @brief QQTClient::socketDisconnect
+ * @brief QQtBluetoothClient::socketDisconnect
  * 功能接口
  */
-void QQTClient::socketDisconnect()
+void QQtBluetoothClient::socketDisconnect()
 {
     pline();
 }
 
-void QQTClient::updateProgress(qint64 bytes)
+void QQtBluetoothClient::updateProgress(qint64 bytes)
 {
     //pline() << bytes;
 }
 
-void QQTClient::connectToSingelHost()
+void QQtBluetoothClient::connectToSingelHost()
 {
-    int contype = eConType % m_serverIP.size();
-    QString ip = m_serverIP.at(contype);
-    connectToHost(QHostAddress(ip), m_PORT);
-
-    pline() << peerName() << m_PORT;
+    if (!m_uuid.isNull())
+    {
+        connectToService(m_serverIP, m_uuid);
+        pline() << peerName() << m_uuid;
+    }
+    else if(m_serviceInfo.isValid())
+    {
+        connectToService(m_serviceInfo);
+        pline() << m_serviceInfo;
+    }
+    else if (m_PORT!= 0)
+    {
+        connectToService(m_serverIP, m_PORT);
+        pline() << peerName() << m_PORT;
+    }
 }
 
 
-void QQTClient::readyReadData()
+void QQtBluetoothClient::readyReadData()
 {
     // queued conn and queued package;
     // direct conn and direct package;

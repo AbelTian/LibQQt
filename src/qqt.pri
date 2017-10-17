@@ -161,9 +161,11 @@ contains (DEFINES, __BLUETOOTH__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
     #bluetooth socket
     SOURCES += \
-        $$PWD/network/qqtbluetooth.cpp
+        $$PWD/network/qqtbluetoothclient.cpp \
+        $$PWD/network/qqtbluetoothserver.cpp
     HEADERS += \
-        $$PWD/network/qqtbluetooth.h
+        $$PWD/network/qqtbluetoothclient.h \
+        $$PWD/network/qqtbluetoothserver.h
     #bluetooth manager
     SOURCES += \
         $$PWD/network/qqtbluetoothmanager.cpp
