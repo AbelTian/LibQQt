@@ -131,10 +131,12 @@ INCLUDEPATH +=  $$PWD
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    filetransferprotocol.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    filetransferprotocol.h
 
 FORMS += \
         mainwindow.ui

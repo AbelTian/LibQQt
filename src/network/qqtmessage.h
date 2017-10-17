@@ -36,6 +36,10 @@ signals:
 public slots:
 
 private:
+    //example
+    //quint32 a;
+    //QByteArray b;
+    //quint8 c;
 };
 
 

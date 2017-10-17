@@ -11,7 +11,8 @@ SUBDIRS +=  \
 #    examples/qqtftpclient \
 #    examples/qqthttpclient \
 #    examples/qqtwebkit \
-    examples/qqtbluetoothfiletransferserver
+    examples/qqtbluetoothfiletransferserver \
+    examples/qqtnetworkexample
 
 
 #include(src/qqt.pri)
