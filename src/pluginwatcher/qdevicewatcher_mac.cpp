@@ -85,6 +85,7 @@ void QDeviceWatcherPrivate::run()
 {
     mStop = false;
 
+
     DASessionScheduleWithRunLoop(mSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     SInt32 result;
     do {

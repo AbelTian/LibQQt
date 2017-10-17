@@ -18,7 +18,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 #############
 ##Arch type
 QT_KIT = $$(QKIT)
-message($${QT_KIT} Defined in qqtfoundation)
+message($${QT_KIT} Defined in $${TARGET})
 #MIPS __MIPS_LINUX__
 #ARM __ARM_LINUX__
 #LINUX __LINUX__

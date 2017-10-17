@@ -55,8 +55,10 @@ QQtApplication::QQtApplication(int &argc, char **argv) :
     QQTInput::Instance()->Init("min", "control", "QQT", 14, 14);
 #endif
 
+#ifndef __DARWIN__
     QObject::connect(QQTPluginWatcher::Instance(), SIGNAL(storageChanged(int)),
                      this, SLOT(slotUPanAutoRun(int)));
+#endif
 }
 
 
@@ -101,6 +103,9 @@ void QQtApplication::slotUPanAutoRun(int status)
             {
                 return;
             }
+        }
+        else {
+            return;
         }
         QProcess* p = new QProcess(this);
         p->setWorkingDirectory(mP);

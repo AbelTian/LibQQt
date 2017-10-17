@@ -9,10 +9,18 @@
 #endif
 #include "qqtcore.h"
 
-QQtBluetoothClient::QQtBluetoothClient(QObject *parent) :
-    QBluetoothSocket(parent),
-    m_PORT(0),
-    m_protocol(nullptr)
+QQtBluetoothClient::QQtBluetoothClient(QBluetoothServiceInfo::Protocol socketType, QObject *parent) :
+    QBluetoothSocket(socketType, parent)
+{
+    initSocket();
+}
+
+QQtBluetoothClient::QQtBluetoothClient(QObject *parent) : QBluetoothSocket(parent)
+{
+    initSocket();
+}
+
+void QQtBluetoothClient::initSocket()
 {
     connect(this, SIGNAL(stateChanged(QBluetoothSocket::SocketState)),
             this, SLOT(socketStateChanged(QBluetoothSocket::SocketState)) );
@@ -34,8 +42,10 @@ QQtBluetoothClient::QQtBluetoothClient(QObject *parent) :
 
     connect(this, SIGNAL(bytesWritten(qint64)),
             this, SIGNAL(signalUpdateProgress(qint64)));
-}
 
+    m_PORT = 0;
+    m_protocol = nullptr;
+}
 
 void QQtBluetoothClient::installProtocol(QQTProtocol *stack)
 {
@@ -194,6 +204,7 @@ void QQtBluetoothClient::connectToSingelHost()
         pline() << peerName() << m_PORT;
     }
 }
+
 
 
 void QQtBluetoothClient::readyReadData()
