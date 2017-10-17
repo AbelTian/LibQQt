@@ -106,8 +106,8 @@ INCLUDEPATH += $$PWD/printsupport
 INCLUDEPATH += $$PWD/sql
 INCLUDEPATH += $$PWD/widgets
 
-SOURCES += \
-HEADERS += \
+SOURCES =
+HEADERS =
 
 #root dir
 win32 {
@@ -156,20 +156,25 @@ SOURCES += \
 HEADERS += \
     $$PWD/network/qqtserialport.h
 #bluetooth
-SOURCES += \
-    $$PWD/network/qqtbluetooth.cpp
-HEADERS += \
-    $$PWD/network/qqtbluetooth.h
+DEFINES += __BLUETOOTH__
+contains (DEFINES, __BLUETOOTH__) {
+    greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
+    #bluetooth socket
+    SOURCES += \
+        $$PWD/network/qqtbluetooth.cpp
+    HEADERS += \
+        $$PWD/network/qqtbluetooth.h
+    #bluetooth manager
+    SOURCES += \
+        $$PWD/network/qqtbluetoothmanager.cpp
+    HEADERS += \
+        $$PWD/network/qqtbluetoothmanager.h
+}
 #ethnet manager
 equals(QT_KIT, MIPS32) {
     SOURCES += $$PWD/network/qqtethenetmanager.cpp
     HEADERS += $$PWD/network/qqtethenetmanager.h
 }
-#bluetooth manager
-SOURCES += \
-    $$PWD/network/qqtbluetoothmanager.cpp
-HEADERS += \
-    $$PWD/network/qqtbluetoothmanager.h
 #qextserialport support
 #USE QEXTSERIALPORT
 #DEFINES += __QTEXTSERIALPORT__
