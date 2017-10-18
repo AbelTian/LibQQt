@@ -55,19 +55,18 @@ equals(QT_KIT, MIPS32) {
     DEFINES += __ANDROIDX86__
     #todo:no customplot word printer
 }
-
-TARGET = qqtframe2
-TEMPLATE = app
-
+CONFIG(debug, debug|release) {
+    BUILD=Debug
+} else {
+    BUILD=Release
+}
 equals(QT_KIT, macOS) {
     CONFIG += app_bundle
 }
-
 CONFIG(debug, debug|release) {
 } else {
     DEFINES -= QT_NO_DEBUG_OUTPUT
 }
-
 equals(QT_KIT, Android) {
     CONFIG += mobility
     MOBILITY =
@@ -83,6 +82,7 @@ INCLUDEPATH += $$PWD \
     $$PWD/../../src/gui \
     $$PWD/../../src/multimedia \
     $$PWD/../../src/network \
+    $$PWD/../../src/network/qextserialport \
     $$PWD/../../src/printsupport \
     $$PWD/../../src/sql \
     $$PWD/../../src/widgets \
@@ -92,28 +92,40 @@ INCLUDEPATH += $$PWD \
     $$PWD/../../src/frame
 
 #include(../../src/qqt.pri)
-CONFIG(debug, debug|release) {
-    BUILD=Debug
-} else {
-    BUILD=Release
+equals(QT_KIT, MIPS32) {
+    SYSNAME = Mips32
+} else:equals(QT_KIT, LINUX) {
+    SYSNAME = Linux
+} else:equals(QT_KIT, LINUX64) {
+    SYSNAME = Linux64
+} else:equals(QT_KIT, WIN) {
+    SYSNAME = Windows
+} else:equals(QT_KIT, WIN64) {
+    SYSNAME = Win64
+} else:equals(QT_KIT, macOS) {
+    SYSNAME = MacOS
+} else:equals(QT_KIT, Android) {
+    SYSNAME = Android
+} else:equals(QT_KIT, ANDROIDX86) {
+    SYSNAME = Android_x86
 }
-message(Link QQt to $${TARGET} $${QT_KIT} $${BUILD} on $${QMAKE_HOST.os})
+message(Link QQt to $${TARGET} $${QT_KIT} from $${SYSNAME} $${BUILD} on $${QMAKE_HOST.os})
 equals(QMAKE_HOST.os, Darwin) {
     equals(QT_KIT, macOS) {
-        LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/$${BUILD}/src/bin
+        LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
         LIBS += -framework QQt
     } else: equals(QT_KIT, Android) {
-        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android/$${BUILD}/src/bin
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
         LIBS += -lQQt
     } else: equals(QT_KIT, ANDROIDX86) {
-        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android_x86/$${BUILD}/src/bin
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
         LIBS += -lQQt
     }
 } else: equals(QMAKE_HOST.os, Linux) {
-    LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/Linux/$${BUILD}/src/bin
+    LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
     LIBS += -lQQt
 } else: equals(QMAKE_HOST.os, Windows) {
-    LIBS += -LC:/Users/Administrator/Develop/c0-build/a0-qqtfoundation/Mingw32/$${BUILD}/src/bin
+    LIBS += -LC:/Users/Administrator/Develop/c0-build/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
     LIBS += -lQQt
 }
 
@@ -140,7 +152,8 @@ can_install:equals(QT_KIT, MIPS32) {
     }
 }
 
-INCLUDEPATH +=  $$PWD
+TARGET = qqtframe2
+TEMPLATE = app
 
 SOURCES += \
         main.cpp \
