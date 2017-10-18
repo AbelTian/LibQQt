@@ -112,7 +112,11 @@ equals(QMAKE_HOST.os, Darwin) {
 } else: equals(QMAKE_HOST.os, Linux) {
     LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/Linux/$${BUILD}/src/bin
     LIBS += -lQQt
+} else: equals(QMAKE_HOST.os, Windows) {
+    LIBS += -LC:/Users/Administrator/Develop/c0-build/a0-qqtfoundation/Mingw32/$${BUILD}/src/bin
+    LIBS += -lQQt
 }
+
 
 ############
 ##build cache

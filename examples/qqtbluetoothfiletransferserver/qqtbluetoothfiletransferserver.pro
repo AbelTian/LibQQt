@@ -87,22 +87,31 @@ INCLUDEPATH += $$PWD \
     $$PWD/../../src/frame
 
 #include(../../src/qqt.pri)
-message(Link QQt to $${TARGET} $${QT_KIT} on $${QMAKE_HOST.os})
+CONFIG(debug, debug|release) {
+    BUILD=Debug
+} else {
+    BUILD=Release
+}
+message(Link QQt to $${TARGET} $${QT_KIT} $${BUILD} on $${QMAKE_HOST.os})
 equals(QMAKE_HOST.os, Darwin) {
     equals(QT_KIT, macOS) {
-        LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/Release/src/bin
+        LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/$${BUILD}/src/bin
         LIBS += -framework QQt
     } else: equals(QT_KIT, Android) {
-        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android/Release/src/bin
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android/$${BUILD}/src/bin
         LIBS += -lQQt
     } else: equals(QT_KIT, ANDROIDX86) {
-        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android_x86/Release/src/bin
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android_x86/$${BUILD}/src/bin
         LIBS += -lQQt
     }
 } else: equals(QMAKE_HOST.os, Linux) {
-    LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/Linux/Release/src/bin
+    LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/Linux/$${BUILD}/src/bin
+    LIBS += -lQQt
+} else: equals(QMAKE_HOST.os, Windows) {
+    LIBS += -LC:/Users/Administrator/Develop/c0-build/a0-qqtfoundation/Mingw32/$${BUILD}/src/bin
     LIBS += -lQQt
 }
+
 
 ############
 ##build cache
