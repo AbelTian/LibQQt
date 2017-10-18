@@ -57,7 +57,7 @@ CONFIG(debug, debug|release) {
 }
 win32 {
     win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
-    QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
+    #QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
 }
 
 #############
