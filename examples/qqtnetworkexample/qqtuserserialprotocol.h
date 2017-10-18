@@ -4,6 +4,7 @@
 #include "qqtserialmessage.h"
 #include "qqtprotocol.h"
 #include "qqtserialport.h"
+#include "qqtbluetoothclient.h"
 
 #define _SERIAL_HAND            0x0001
 #define _SERIAL_HANDACK         0x8001
@@ -127,4 +128,5 @@ private:
 };
 
 QQTSerialPort* QQTUserSerialPortInstance(QObject* parent = 0, QString name = "/dev/tty0", QSerialPort::BaudRate = QSerialPort::Baud57600);
+QQtBluetoothClient* QQtUserBluetoothClientInstance(QObject* parent = 0);
 #endif // QQTUSERSERIALPROTOCOL_H

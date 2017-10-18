@@ -6,6 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // bluetooth example
+    // serialport example
+    // tcpsocket example
+    // websocket?
+    //
 }
 
 MainWindow::~MainWindow()

@@ -18,23 +18,42 @@ QT += core gui network sql xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
+#############
+##definition
+#############
+##Arch type
 QT_KIT = $$(QKIT)
 message($${QT_KIT} Defined in $${TARGET})
+#MIPS __MIPS_LINUX__
+#ARM __ARM_LINUX__
+#LINUX __LINUX__
+#LINUX64 __LINUX64__
+#WIN __WIN__
+#WIN64 __WIN64__
+#macOS __DARWIN__
+#Android __ANDROID__
+#处理文件内平台小差异
 equals(QT_KIT, MIPS32) {
     QT += multimedia
     DEFINES += __MIPS_LINUX__
 } else:equals(QT_KIT, LINUX) {
     DEFINES += __LINUX__
 } else:equals(QT_KIT, LINUX64) {
+    DEFINES += __LINUX__
     DEFINES += __LINUX64__
 } else:equals(QT_KIT, WIN) {
     DEFINES += __WIN__
 } else:equals(QT_KIT, WIN64) {
+    DEFINES += __WIN__
     DEFINES += __WIN64__
 } else:equals(QT_KIT, macOS) {
     DEFINES += __DARWIN__
 } else:equals(QT_KIT, Android) {
     DEFINES += __ANDROID__
+} else:equals(QT_KIT, ANDROIDX86) {
+    DEFINES += __ANDROID__
+    DEFINES += __ANDROIDX86__
+    #todo:no customplot word printer
 }
 
 TARGET = qqtframe2
@@ -73,20 +92,25 @@ INCLUDEPATH += $$PWD \
     $$PWD/../../src/frame
 
 #include(../../src/qqt.pri)
-message(Link QQt to $${TARGET} $${QT_KIT} on $${QMAKE_HOST.os})
+CONFIG(debug, debug|release) {
+    BUILD=Debug
+} else {
+    BUILD=Release
+}
+message(Link QQt to $${TARGET} $${QT_KIT} $${BUILD} on $${QMAKE_HOST.os})
 equals(QMAKE_HOST.os, Darwin) {
     equals(QT_KIT, macOS) {
-        LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/Release/src/bin
+        LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/$${BUILD}/src/bin
         LIBS += -framework QQt
     } else: equals(QT_KIT, Android) {
-        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android/Release/src/bin
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android/$${BUILD}/src/bin
         LIBS += -lQQt
     } else: equals(QT_KIT, ANDROIDX86) {
-        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android_x86/Release/src/bin
+        LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android_x86/$${BUILD}/src/bin
         LIBS += -lQQt
     }
 } else: equals(QMAKE_HOST.os, Linux) {
-    LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/Linux/Release/src/bin
+    LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/Linux/$${BUILD}/src/bin
     LIBS += -lQQt
 }
 

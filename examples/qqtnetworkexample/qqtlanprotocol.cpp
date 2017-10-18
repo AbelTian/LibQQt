@@ -26,3 +26,11 @@ bool QQTLanProtocol::dispatcher(const QByteArray &m)
 {
     return 0;
 }
+
+
+QQTServer *QQTSingleServer(QObject *parent)
+{
+    static QQTServer* s = new QQTServer(parent);
+    s->listen(QHostAddress::Any, 8000);
+    return s;
+}

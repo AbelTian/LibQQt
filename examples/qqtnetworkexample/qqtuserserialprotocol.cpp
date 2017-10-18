@@ -1,6 +1,7 @@
 #include "qqtuserserialprotocol.h"
 #include "qqtcore.h"
 #include "qqt-qt.h"
+#include "qqtbluetoothmanager.h"
 
 void QQTWritePassAck::pack(QByteArray &l)
 {
@@ -263,4 +264,17 @@ QQTSerialPort *QQTUserSerialPortInstance(QObject *parent, QString name, QSerialP
         s0->setFlowControl(QSerialPort::NoFlowControl);
     }
     return s0;
+}
+
+QQtBluetoothClient *QQtUserBluetoothClientInstance(QObject *parent)
+{
+    static QQtBluetoothClient* cli = nullptr;
+    if (!cli) {
+        QQtBluetoothManager* inst = QQtBluetoothManager::Instance(parent);
+        inst->getDeviceList().first().address();
+        cli = new QQtBluetoothClient(QBluetoothServiceInfo::RfcommProtocol, parent);
+        cli->setServiceAddress(inst->getDeviceList().first().address());
+
+    }
+    return cli;
 }

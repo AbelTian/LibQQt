@@ -25,6 +25,5 @@ private:
     QQTProtocol* m_protocol;
 };
 
-QQTServer *QQTSingleServer(QObject* parent);
 
 #endif // QQTSERVER_H
