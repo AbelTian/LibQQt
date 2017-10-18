@@ -39,19 +39,16 @@ equals(QT_KIT, MIPS32) {
 } else:equals(QT_KIT, LINUX) {
     DEFINES += __LINUX__
 } else:equals(QT_KIT, LINUX64) {
-    DEFINES += __LINUX__
     DEFINES += __LINUX64__
 } else:equals(QT_KIT, WIN) {
     DEFINES += __WIN__
 } else:equals(QT_KIT, WIN64) {
-    DEFINES += __WIN__
     DEFINES += __WIN64__
 } else:equals(QT_KIT, macOS) {
     DEFINES += __DARWIN__
 } else:equals(QT_KIT, Android) {
     DEFINES += __ANDROID__
 } else:equals(QT_KIT, ANDROIDX86) {
-    DEFINES += __ANDROID__
     DEFINES += __ANDROIDX86__
     #todo:no customplot word printer
 }
@@ -122,7 +119,7 @@ equals(QMAKE_HOST.os, Darwin) {
         LIBS += -lQQt
     }
 } else: equals(QMAKE_HOST.os, Linux) {
-    LIBS += -L/mnt/hgfs/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
+    LIBS += -L/home/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
     LIBS += -lQQt
 } else: equals(QMAKE_HOST.os, Windows) {
     LIBS += -LC:/Users/Administrator/Develop/c0-build/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
