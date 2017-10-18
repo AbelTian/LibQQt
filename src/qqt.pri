@@ -178,11 +178,11 @@ equals(QT_KIT, MIPS32) {
     HEADERS += $$PWD/network/qqtethenetmanager.h
 }
 #qextserialport support
-#USE QEXTSERIALPORT
+#if you use qextserialport, open the two annotation
 #DEFINES += __QTEXTSERIALPORT__
 contains (DEFINES, __QTEXTSERIALPORT__) {
-    message ( __QTEXTSERIALPORT__ Defined in qqtfoundation)
-    include ( $$PWD/network/qextserialport/qextserialport.pri )
+    #include ( $$PWD/network/qextserialport/qextserialport.pri )
+    #message ( __QTEXTSERIALPORT__ Defined in $${TARGET})
 } else {
     greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
