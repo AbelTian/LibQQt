@@ -159,6 +159,7 @@ HEADERS += \
 DEFINES += __BLUETOOTH__
 contains (DEFINES, __BLUETOOTH__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
+    lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
     #bluetooth socket
     SOURCES += \
         $$PWD/network/qqtbluetoothclient.cpp \
