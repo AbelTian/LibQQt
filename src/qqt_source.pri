@@ -5,62 +5,6 @@
 #-------------------------------------------------
 
 #############
-##project version
-#############
-unix:VERSION            = 1.0.0
-
-##Qt version
-QT += core gui network sql xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
-
-#############
-##definition
-#############
-##Arch type
-QT_KIT = $$(QKIT)
-message($${QT_KIT} Defined in $${TARGET})
-#MIPS __MIPS_LINUX__
-#ARM __ARM_LINUX__
-#LINUX __LINUX__
-#LINUX64 __LINUX64__
-#WIN __WIN__
-#WIN64 __WIN64__
-#macOS __DARWIN__
-#Android __ANDROID__
-#处理文件内平台小差异
-equals(QT_KIT, MIPS32) {
-    QT += multimedia
-    DEFINES += __MIPS_LINUX__
-} else:equals(QT_KIT, LINUX) {
-    DEFINES += __LINUX__
-} else:equals(QT_KIT, LINUX64) {
-    DEFINES += __LINUX__
-    DEFINES += __LINUX64__
-} else:equals(QT_KIT, WIN) {
-    DEFINES += __WIN__
-} else:equals(QT_KIT, WIN64) {
-    DEFINES += __WIN__
-    DEFINES += __WIN64__
-} else:equals(QT_KIT, macOS) {
-    DEFINES += __DARWIN__
-} else:equals(QT_KIT, Android) {
-    DEFINES += __ANDROID__
-} else:equals(QT_KIT, ANDROIDX86) {
-    DEFINES += __ANDROID__
-    DEFINES += __ANDROIDX86__
-    #todo:no customplot word printer
-}
-
-CONFIG(debug, debug|release) {
-} else {
-    DEFINES -= QT_NO_DEBUG_OUTPUT
-}
-win32 {
-    win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
-    #QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
-}
-
-#############
 ##libraries
 #############
 win32 {
@@ -79,32 +23,6 @@ win32 {
     } else {
     }
 }
-
-############
-##build cache
-############
-OBJECTS_DIR = obj
-MOC_DIR = obj/moc.cpp
-UI_DIR = obj/ui.h
-RCC_DIR = qrc
-DESTDIR = bin
-
-###########################
-##include directories
-###########################
-INCLUDEPATH += $$PWD
-INCLUDEPATH += $$PWD/core
-INCLUDEPATH += $$PWD/customplot
-INCLUDEPATH += $$PWD/dmmu
-INCLUDEPATH += $$PWD/frame
-INCLUDEPATH += $$PWD/gui
-INCLUDEPATH += $$PWD/multimedia
-INCLUDEPATH += $$PWD/network
-INCLUDEPATH += $$PWD/network/qextserialport
-INCLUDEPATH += $$PWD/pluginwatcher
-INCLUDEPATH += $$PWD/printsupport
-INCLUDEPATH += $$PWD/sql
-INCLUDEPATH += $$PWD/widgets
 
 SOURCES =
 HEADERS =

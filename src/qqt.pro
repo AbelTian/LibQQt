@@ -11,10 +11,12 @@ TEMPLATE = lib
 DEFINES += QQT_LIBRARY
 
 
-include ($$PWD/qqt.pri)
+include ($$PWD/qqt_header.pri)
+include ($$PWD/qqt_source.pri)
+
+message (build $${TARGET} $${QT_KIT} library)
 
 equals(QT_KIT, macOS) {
-    message (build $${TARGET} $${QT_KIT} bundle)
     CONFIG += dll
     CONFIG += lib_bundle
 }
