@@ -57,6 +57,11 @@ class QQTSHARED_EXPORT QQtCustomProgressBar : public QWidget
     Q_PROPERTY(QColor textColor READ getTextColor WRITE setTextColor)
 
 public:
+    enum CircleType {
+        CircleType_Color = 0,           /*使用颜色*/
+        CircleType_Image = 1,           /*使用图片*/
+    };
+
     enum PercentStyle {
         PercentStyle_Arc = 0,           /*圆弧风格*/
         PercentStyle_Polo = 1,          /*水池风格*/
@@ -91,12 +96,15 @@ private:
     QColor usedColor;               /*已使用百分比颜色*/
     QColor freeColor;               /*未使用百分比颜色*/
     QColor circleColor;             /*圆颜色*/
+    QString circleImage;            /*圆图片*/
     QColor textColor;               /*文字颜色*/
     QFont  textFont;                /*文字字体*/
 
     PercentStyle percentStyle;      /*进度样式风格*/
+    CircleType   circleType;        /*圆的样式类型*/
 
-    int waterDensity,waterHeight;
+    int waterDensity;
+    int waterHeight;
 
 public:
     int getMinValue()               const;
@@ -117,6 +125,7 @@ public:
     QColor getTextColor()           const;
 
     PercentStyle getPercentStyle()  const;
+    CircleType   getCircleType()    const;
 
     virtual QSize sizeHint()        const;
     virtual QSize minimumSizeHint() const;
@@ -152,6 +161,8 @@ public Q_SLOTS:
     void setFreeColor(const QColor &freeColor);
     /*设置圆颜色*/
     void setCircleColor(const QColor &circleColor);
+    /*设置圆背景图*/
+    void setCircleImage(const QString &circleImage);
     /*设置文本颜色*/
     void setTextColor(const QColor &textColor);
     /*设置字体*/
@@ -159,6 +170,7 @@ public Q_SLOTS:
 
     /*设置进度样式风格*/
     void setPercentStyle(PercentStyle percentStyle);
+    void setCircleType(CircleType circleType);
 
     /*设置水波密度 0-10*/
     void setWaterDensity(int value);

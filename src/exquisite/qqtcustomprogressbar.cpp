@@ -25,13 +25,13 @@ QQtCustomProgressBar::QQtCustomProgressBar(QWidget *parent) : QWidget(parent)
     freeColor = QColor(100, 100, 100);
     circleColor = QColor(70, 70, 70);
     textColor = QColor(250, 250, 250);
+    textFont = font();
 
     percentStyle = PercentStyle_Arc;
+    circleType = CircleType_Color;
 
     waterDensity = 1;
     waterHeight = 1;
-
-    setFont(QFont("Arial", 7));
 }
 
 QQtCustomProgressBar::~QQtCustomProgressBar()
@@ -42,15 +42,25 @@ void QQtCustomProgressBar::paintEvent(QPaintEvent *)
 {
     int width = this->width();
     int height = this->height();
+    /*显示实长*/
     int side = qMin(width, height);
 
     /*绘制准备工作,启用反锯齿,平移坐标轴中心,等比例缩放*/
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+    /*平移坐标系*/
     painter.translate(width / 2, height / 2);
+    /*更改刻度 设置的是放大的倍数 */
+    /*有利于在绘制的时候，统一绘制数据*/
+    /*矢量放大，不失真*/
     painter.scale(side / 200.0, side / 200.0);
 
     /*绘制中心圆*/
+    /*
+     * 实际显示到屏幕的大小（显示实长）为
+     * QPainter绘制区域大小（绘制用数据） * 倍率
+     * 200 * ( side / 200.0 )
+     */
     drawCircle(&painter, 99);
 
     /*根据样式绘制进度*/
@@ -80,7 +90,21 @@ void QQtCustomProgressBar::drawCircle(QPainter *painter, int radius)
     painter->save();
     painter->setPen(Qt::NoPen);
     painter->setBrush(circleColor);
-    painter->drawEllipse(-radius, -radius, radius * 2, radius * 2);
+
+    if(circleType == CircleType_Color) {
+        painter->drawEllipse(-radius, -radius, radius * 2, radius * 2);
+    } else {
+        QPixmap pix;
+        pix = QPixmap(circleImage);
+
+        /*自动等比例平滑缩放居中显示*/
+        int targetWidth = pix.width();
+        int targetHeight = pix.height();
+        pix = pix.scaled(targetWidth, targetHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        painter->drawPixmap(-radius, -radius, radius * 2, radius * 2, pix);
+    }
+
     painter->restore();
 }
 
@@ -230,17 +254,22 @@ void QQtCustomProgressBar::drawWave(QPainter *painter, int radius)
 
 void QQtCustomProgressBar::drawText(QPainter *painter, int radius)
 {    
-    painter->save();
-    painter->setPen(textColor);
-    painter->setFont(QFont("Arial", 50));
-
-    QRectF textRect(-radius, -radius, radius * 2, radius * 2);
     QString strValue = QString("%1").arg(value);
 
     if (showPercent) {
         strValue = QString("%1%").arg((double)value / (maxValue - minValue) * 100);
     }
 
+    painter->save();
+
+    painter->setPen(textColor);
+    painter->setFont(textFont);
+
+    QFontMetricsF fm(textFont);
+    QSizeF textSize = fm.size(Qt::TextSingleLine, strValue);
+    //QRectF textRect(-radius, -radius, radius * 2, radius * 2);
+    QRectF textRect(-textSize.width()/2, 40, textSize.width(), textSize.height());
+    //painter->drawText(-w / 2, 42, strValue);
     painter->drawText(textRect, Qt::AlignCenter, strValue);
 
     painter->restore();
@@ -314,6 +343,11 @@ QColor QQtCustomProgressBar::getTextColor() const
 QQtCustomProgressBar::PercentStyle QQtCustomProgressBar::getPercentStyle() const
 {
     return this->percentStyle;
+}
+
+QQtCustomProgressBar::CircleType QQtCustomProgressBar::getCircleType() const
+{
+    return this->circleType;
 }
 
 QSize QQtCustomProgressBar::sizeHint() const
@@ -438,6 +472,14 @@ void QQtCustomProgressBar::setCircleColor(const QColor &circleColor)
     }
 }
 
+void QQtCustomProgressBar::setCircleImage(const QString &circleImage)
+{
+    if (this->circleImage != circleImage) {
+        this->circleImage = circleImage;
+        update();
+    }
+}
+
 void QQtCustomProgressBar::setTextColor(const QColor &textColor)
 {
     if (this->textColor != textColor) {
@@ -458,6 +500,14 @@ void QQtCustomProgressBar::setPercentStyle(QQtCustomProgressBar::PercentStyle pe
 {
     if (this->percentStyle != percentStyle) {
         this->percentStyle = percentStyle;
+        update();
+    }
+}
+
+void QQtCustomProgressBar::setCircleType(QQtCustomProgressBar::CircleType circleType)
+{
+    if (this->circleType != circleType) {
+        this->circleType = circleType;
         update();
     }
 }

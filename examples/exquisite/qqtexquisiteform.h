@@ -17,19 +17,23 @@ public:
     ~QQtExquisiteForm();
 
 private slots:
-    void setValue(int);
     void setValue();
     void setValueDown();
 private:
     Ui::QQtExquisiteForm *ui;
     QTimer* m_timer ;
-    QTimer* m_t1 ;
+    QTimer* m_timer_down ;
     int value;
+    int curmaxValue;
 
     // QWidget interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
     virtual void keyReleaseEvent(QKeyEvent *event) override;
+
+    // QObject interface
+public:
+    virtual bool eventFilter(QObject *watched, QEvent *event) override;
 };
 
 #endif // QQTEXQUISITEFORM_H
