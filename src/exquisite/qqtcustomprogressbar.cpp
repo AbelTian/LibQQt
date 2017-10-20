@@ -44,16 +44,16 @@ void QQtCustomProgressBar::paintEvent(QPaintEvent *)
     int height = this->height();
     int side = qMin(width, height);
 
-    //绘制准备工作,启用反锯齿,平移坐标轴中心,等比例缩放
+    /*绘制准备工作,启用反锯齿,平移坐标轴中心,等比例缩放*/
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
     painter.translate(width / 2, height / 2);
     painter.scale(side / 200.0, side / 200.0);
 
-    //绘制中心圆
+    /*绘制中心圆*/
     drawCircle(&painter, 99);
 
-    //根据样式绘制进度
+    /*根据样式绘制进度*/
     if (percentStyle == PercentStyle_Arc) {
         drawArc(&painter, 99 - lineWidth / 2);
     } else if (percentStyle == PercentStyle_Polo) {
@@ -65,7 +65,7 @@ void QQtCustomProgressBar::paintEvent(QPaintEvent *)
         drawWave(&painter, 100);
     }
 
-    //绘制当前值
+    /*绘制当前值*/
     drawText(&painter, 100);
 }
 
@@ -92,30 +92,30 @@ void QQtCustomProgressBar::drawArc(QPainter *painter, int radius)
     QPen pen = painter->pen();
     pen.setWidthF(lineWidth);
 
-    //这里可以更改画笔样式更换线条风格
+    /*这里可以更改画笔样式更换线条风格*/
     pen.setCapStyle(Qt::RoundCap);
 
     double arcLength = 360.0 / (maxValue - minValue) * value;
     QRect rect(-radius, -radius, radius * 2, radius * 2);
 
-    //逆时针为顺时针分负数
+    /*逆时针为顺时针分负数*/
     if (!clockWise) {
         arcLength = -arcLength;
     }
 
-    //绘制剩余进度圆弧
+    /*绘制剩余进度圆弧*/
     if (showFree) {
         pen.setColor(freeColor);
         painter->setPen(pen);
         painter->drawArc(rect, (nullPosition - arcLength) * 16, -(360 - arcLength) * 16);
     }
 
-    //绘制当前进度圆弧
+    /*绘制当前进度圆弧*/
     pen.setColor(usedColor);
     painter->setPen(pen);
     painter->drawArc(rect, nullPosition * 16, -arcLength * 16);
 
-    //绘制进度圆弧前面的小圆
+    /*绘制进度圆弧前面的小圆*/
     if (showSmallCircle) {
         int offset = radius - lineWidth + 1;
         radius = lineWidth / 2 - 1;
@@ -133,18 +133,18 @@ void QQtCustomProgressBar::drawPolo(QPainter *painter, int radius)
 {    
     painter->save();
 
-    //计算当前值所占百分比对应高度
+    /*计算当前值所占百分比对应高度*/
     double poloHeight = (double)radius / (maxValue - minValue) * value;
 
-    //大圆路径
+    /*大圆路径*/
     QPainterPath bigPath;
     bigPath.addEllipse(-radius, -radius, radius * 2, radius * 2);
 
-    //底部水池灌水所占的矩形区域路径
+    /*底部水池灌水所占的矩形区域路径*/
     QPainterPath smallPath;
     smallPath.addRect(-radius, radius - poloHeight * 2, radius * 2, poloHeight * 2);
 
-    //将两个路径重合相交部分提取,就是水池注水所占面积
+    /*将两个路径重合相交部分提取,就是水池注水所占面积*/
     QPainterPath path;
     path = bigPath.intersected(smallPath);
 
@@ -158,20 +158,20 @@ void QQtCustomProgressBar::drawPolo(QPainter *painter, int radius)
 void QQtCustomProgressBar::drawWave(QPainter *painter, int radius)
 {
     static int offset = 0.1;
-    //计算当前值所占百分比
+    /*计算当前值所占百分比*/
     double percent = 1 - (double)(value - minValue) / (maxValue - minValue);
-    //正弦曲线公式 y = A * sin(ωx + φ) + k
-    //w表示周期,可以理解为水波的密度,值越大密度越大(浪越密集 ^_^),取值 密度*M_PI/宽度
+    /*正弦曲线公式 y = A * sin(ωx + φ) + k*/
+    /*w表示周期,可以理解为水波的密度,值越大密度越大(浪越密集 ^_^),取值 密度*M_PI/宽度*/
     double w = waterDensity * M_PI / radius;
-    //A表示振幅,可以理解为水波的高度,值越大高度越高(越浪 ^_^),取值高度的百分比
+    /*A表示振幅,可以理解为水波的高度,值越大高度越高(越浪 ^_^),取值高度的百分比*/
     double A = radius * waterHeight;
-    //k表示y轴偏移,可以理解为进度,取值高度的进度百分比
+    /*k表示y轴偏移,可以理解为进度,取值高度的进度百分比*/
     double k = radius * percent;
-    //第一条波浪路径集合
+    /*第一条波浪路径集合*/
     QPainterPath waterPath1;
-    //第二条波浪路径集合
+    /*第二条波浪路径集合*/
     QPainterPath waterPath2;
-    //移动到左上角起始点
+    /*移动到左上角起始点*/
     waterPath1.moveTo(0, radius);
     waterPath2.moveTo(0, radius);
     offset += 0.6;
@@ -179,16 +179,16 @@ void QQtCustomProgressBar::drawWave(QPainter *painter, int radius)
         offset = 0;
     }
     for(int x = 0; x <= radius; x++) {
-        //第一条波浪Y轴
+        /*第一条波浪Y轴*/
         double waterY1 = (double)(A * sin(w * x + offset)) + k;
-        //第二条波浪Y轴
+        /*第二条波浪Y轴*/
         double waterY2 = (double)(A * sin(w * x + offset + (radius / 2 * w))) + k;
-        //如果当前值为最小值则Y轴为高度
+        /*如果当前值为最小值则Y轴为高度*/
         if (this->value == minValue) {
             waterY1 = radius;
             waterY2 = radius;
         }
-        //如果当前值为最大值则Y轴为0
+        /*如果当前值为最大值则Y轴为0*/
         if (this->value == maxValue) {
             waterY1 = 0;
             waterY2 = 0;
@@ -196,20 +196,20 @@ void QQtCustomProgressBar::drawWave(QPainter *painter, int radius)
         waterPath1.lineTo(x, waterY1);
         waterPath2.lineTo(x, waterY2);
     }
-    //移动到右下角结束点,整体形成一个闭合路径
+    /*移动到右下角结束点,整体形成一个闭合路径*/
     waterPath1.lineTo(radius, radius);
     waterPath2.lineTo(radius, radius);
 
-    //大路径
+    /*大路径*/
     QPainterPath bigPath;
     bigPath.addEllipse(-radius, -radius, radius * 2, radius * 2);
 
     painter->save();
 
-    //新路径,用大路径减去波浪区域的路径,形成遮罩效果
+    /*新路径,用大路径减去波浪区域的路径,形成遮罩效果*/
     QPainterPath path;
 
-    //第一条波浪挖去后的路径
+    /*第一条波浪挖去后的路径*/
     path = bigPath.intersected(waterPath1);
     QColor waterColor1 = usedColor;
     waterColor1.setAlpha(100);
@@ -217,7 +217,7 @@ void QQtCustomProgressBar::drawWave(QPainter *painter, int radius)
     painter->setBrush(waterColor1);
     painter->drawPath(path);
 
-    //第二条波浪挖去后的路径
+    /*第二条波浪挖去后的路径*/
     path = bigPath.intersected(waterPath2);
     QColor waterColor2 = usedColor;
     waterColor2.setAlpha(180);
@@ -328,7 +328,7 @@ QSize QQtCustomProgressBar::minimumSizeHint() const
 
 void QQtCustomProgressBar::setRange(int minValue, int maxValue)
 {
-    //如果最小值大于或者等于最大值则不设置
+    /*如果最小值大于或者等于最大值则不设置*/
     if (minValue >= maxValue) {
         return;
     }
@@ -336,7 +336,7 @@ void QQtCustomProgressBar::setRange(int minValue, int maxValue)
     this->minValue = minValue;
     this->maxValue = maxValue;
 
-    //如果目标值不在范围值内,则重新设置目标值
+    /*如果目标值不在范围值内,则重新设置目标值*/
     if (value < minValue || value > maxValue) {
         setValue(value);
     }
@@ -356,7 +356,7 @@ void QQtCustomProgressBar::setMaxValue(int maxValue)
 
 void QQtCustomProgressBar::setValue(int value)
 {
-    //值小于最小值或者值大于最大值或者值和当前值一致则无需处理
+    /*值小于最小值或者值大于最大值或者值和当前值一致则无需处理*/
     if (value < minValue || value > maxValue || value == this->value) {
         return;
     }
@@ -448,8 +448,8 @@ void QQtCustomProgressBar::setTextColor(const QColor &textColor)
 
 void QQtCustomProgressBar::setTextFont(QFont font)
 {
-    if (this->textFont != textColor) {
-        this->textFont = textColor;
+    if (this->textFont != font) {
+        this->textFont = font;
         update();
     }
 }
@@ -476,4 +476,14 @@ void QQtCustomProgressBar::setWaterHeight(int value)
         waterHeight = 0;
     else
         waterHeight = value;
+}
+
+void QQtCustomProgressBar::setWaterDirection(bool direction)
+{
+
+}
+
+void QQtCustomProgressBar::setWaterSpeed(int speed)
+{
+
 }

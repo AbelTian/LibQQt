@@ -25,9 +25,11 @@ win32 {
 }
 
 SOURCES = \
-    $$PWD/exquisite/qqtcustomprogressbar.cpp
+    $$PWD/exquisite/qqtcustomprogressbar.cpp \
+    $$PWD/exquisite/qqtcustomspeedmeter.cpp
 HEADERS = \
-    $$PWD/exquisite/qqtcustomprogressbar.h
+    $$PWD/exquisite/qqtcustomprogressbar.h \
+    $$PWD/exquisite/qqtcustomspeedmeter.h
 
 #root dir
 win32 {

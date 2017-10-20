@@ -1,6 +1,10 @@
 #ifndef FRMINPUT_H
 #define FRMINPUT_H
 
+/**
+ * T.D.R (QQ:2657635903) mod 2015年12月20日19:44:04
+**/
+
 #include <QWidget>
 #include <QMouseEvent>
 #include <QLabel>

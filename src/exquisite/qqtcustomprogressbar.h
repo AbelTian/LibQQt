@@ -21,6 +21,7 @@
  */
 
 #include <QWidget>
+#include <qqt-local.h>
 
 #ifdef quc
 #if (QT_VERSION < QT_VERSION_CHECK(5,7,0))
@@ -31,7 +32,7 @@
 
 class QDESIGNER_WIDGET_EXPORT QQtCustomProgressBar : public QWidget
 #else
-class QQtCustomProgressBar : public QWidget
+class QQTSHARED_EXPORT QQtCustomProgressBar : public QWidget
 #endif
 
 {
@@ -57,10 +58,10 @@ class QQtCustomProgressBar : public QWidget
 
 public:
     enum PercentStyle {
-        PercentStyle_Arc = 0,           //圆弧风格
-        PercentStyle_Polo = 1,          //水池风格
-        PercentStyle_Arc_Polo = 2,      //圆弧水池风格
-        PercentStyle_Wave = 3,          //水波纹风格
+        PercentStyle_Arc = 0,           /*圆弧风格*/
+        PercentStyle_Polo = 1,          /*水池风格*/
+        PercentStyle_Arc_Polo = 2,      /*圆弧水池风格*/
+        PercentStyle_Wave = 3,          /*水波纹风格*/
     };
 
     explicit QQtCustomProgressBar(QWidget *parent = 0);
@@ -75,25 +76,25 @@ protected:
     void drawText(QPainter *painter, int radius);
 
 private:
-    int maxValue;                   //最小值
-    int minValue;                   //最大值
-    int value;                      //目标值
+    int maxValue;                   /*最小值*/
+    int minValue;                   /*最大值*/
+    int value;                      /*目标值*/
 
-    int nullPosition;               //起始角度
-    int lineWidth;                  //线条宽度
+    int nullPosition;               /*起始角度*/
+    int lineWidth;                  /*线条宽度*/
 
-    bool showPercent;               //是否显示百分比
-    bool showFree;                  //是否显示未使用进度
-    bool showSmallCircle;           //是否显示小圆
-    bool clockWise;                 //顺时针
+    bool showPercent;               /*是否显示百分比*/
+    bool showFree;                  /*是否显示未使用进度*/
+    bool showSmallCircle;           /*是否显示小圆*/
+    bool clockWise;                 /*顺时针*/
 
-    QColor usedColor;               //已使用百分比颜色
-    QColor freeColor;               //未使用百分比颜色
-    QColor circleColor;             //圆颜色
-    QColor textColor;               //文字颜色
-    QFont  textFont;                //文字字体
+    QColor usedColor;               /*已使用百分比颜色*/
+    QColor freeColor;               /*未使用百分比颜色*/
+    QColor circleColor;             /*圆颜色*/
+    QColor textColor;               /*文字颜色*/
+    QFont  textFont;                /*文字字体*/
 
-    PercentStyle percentStyle;      //进度样式风格
+    PercentStyle percentStyle;      /*进度样式风格*/
 
     int waterDensity,waterHeight;
 
@@ -121,51 +122,51 @@ public:
     virtual QSize minimumSizeHint() const;
 
 public Q_SLOTS:
-    //设置范围值
+    /*设置范围值*/
     void setRange(int minValue, int maxValue);
 
-    //设置最大最小值
+    /*设置最大最小值*/
     void setMinValue(int minValue);
     void setMaxValue(int maxValue);
 
-    //设置目标值
+    /*设置目标值*/
     void setValue(int value);
 
-    //设置最小值位置
+    /*设置最小值位置*/
     void setNullPosition(int nullPosition);
-    //设置线条宽度
+    /*设置线条宽度*/
     void setLineWidth(int lineWidth);
 
-    //设置是否显示百分比
+    /*设置是否显示百分比*/
     void setShowPercent(bool showPercent);
-    //设置是否显示剩余进度
+    /*设置是否显示剩余进度*/
     void setShowFree(bool showFree);
-    //设置是否显示小圆
+    /*设置是否显示小圆*/
     void setShowSmallCircle(bool showSmallCircle);
-    //设置进度旋转方向
+    /*设置进度旋转方向*/
     void setClockWise(bool clockWise);
 
-    //设置已使用百分比颜色
+    /*设置已使用百分比颜色*/
     void setUsedColor(const QColor &usedColor);
-    //设置未使用百分比颜色
+    /*设置未使用百分比颜色*/
     void setFreeColor(const QColor &freeColor);
-    //设置圆颜色
+    /*设置圆颜色*/
     void setCircleColor(const QColor &circleColor);
-    //设置文本颜色
+    /*设置文本颜色*/
     void setTextColor(const QColor &textColor);
-    //设置字体
+    /*设置字体*/
     void setTextFont(QFont font);
 
-    //设置进度样式风格
+    /*设置进度样式风格*/
     void setPercentStyle(PercentStyle percentStyle);
 
-    //设置水波密度 0-10
+    /*设置水波密度 0-10*/
     void setWaterDensity(int value);
-    //设置浪高 0-10
+    /*设置浪高 0-10*/
     void setWaterHeight(int value);
-    //设置运动方向 true left false right
+    /*设置运动方向 true left false right*/
     void setWaterDirection(bool direction);
-    //设置运动速度 0-10
+    /*设置运动速度 0-10*/
     void setWaterSpeed(int speed);
 
 Q_SIGNALS:

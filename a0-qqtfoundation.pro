@@ -1,18 +1,19 @@
 TEMPLATE = subdirs
 CONFIG += ordered
-SUBDIRS +=  \
-    src/qqt.pro \
-#    examples/qqtframe \
-    examples/qqtframe2 \
-#    examples/animationframe \
-#    examples/cmdwidget \
-#    examples/qqtliveplayer \
-#    examples/qqtffmpegplayer \
-#    examples/qqtftpclient \
-#    examples/qqthttpclient \
-#    examples/qqtwebkit \
-#    examples/qqtbluetoothfiletransferserver \
-#    examples/qqtnetworkexample
+
+SUBDIRS += src/qqt.pro
+#SUBDIRS += examples/qqtframe
+SUBDIRS += examples/qqtframe2
+#SUBDIRS += examples/animationframe
+#SUBDIRS += examples/cmdwidget
+#SUBDIRS += examples/qqtliveplayer
+#SUBDIRS += examples/qqtffmpegplayer
+#SUBDIRS += examples/qqtftpclient
+#SUBDIRS += examples/qqthttpclient
+#SUBDIRS += examples/qqtwebkit
+#SUBDIRS += examples/qqtbluetoothfiletransferserver
+#SUBDIRS += examples/qqtnetworkexample
+SUBDIRS += examples/exquisite
 
 
 #include(src/qqt.pri)

@@ -21,10 +21,6 @@ equals(QKIT_, macOS) {
 }
 CONFIG += debug_and_release
 CONFIG += build_all
-TT=$${CONFIG}
-join(TT)
-message(d)
-message ($${TT})
 for (cc, CONFIG) {
     message($${TARGET} configed $${cc})
 }
