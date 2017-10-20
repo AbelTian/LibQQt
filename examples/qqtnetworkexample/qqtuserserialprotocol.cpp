@@ -61,7 +61,7 @@ void QQTExceptionAck::pack(QByteArray &l)
 QQTUserSerialProtocol::QQTUserSerialProtocol(QObject *parent) :
     QQTProtocol(parent)
 {
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     QString portName("/dev/ttyS2");
 #else
     QString portName("/dev/ttyS2");

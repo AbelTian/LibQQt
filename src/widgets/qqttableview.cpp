@@ -21,7 +21,7 @@ QQTTableView::QQTTableView(QWidget *parent) :
      * 如果没有这个中介，release版本无故会崩溃。
      */
     setItemDelegate(new QSqlRelationalDelegate(this));
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     setFocusPolicy(Qt::NoFocus);
 #endif
 

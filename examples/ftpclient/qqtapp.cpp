@@ -46,12 +46,12 @@ QQTApp::QQTApp(int &argc, char **argv) : QApplication(argc, argv)
     QApplication::setGraphicsSystem("raster");
 #endif
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     //QApplication::setOverrideCursor(Qt::ArrowCursor);
     QWSServer::setCursorVisible(false);
 #endif
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     QFontDatabase db;
 
 #if 0
@@ -99,7 +99,7 @@ QQTApp::QQTApp(int &argc, char **argv) : QApplication(argc, argv)
     //setPalette(QPalette(QColor("#F0F0F0")));
 #endif
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     QQTInput::Instance()->Init("min", "control", "QQT", 14, 14);
 #endif
 
@@ -109,7 +109,7 @@ QQTApp::QQTApp(int &argc, char **argv) : QApplication(argc, argv)
                      this, SLOT(slotUPanAutoRun(int)));
     //QQTClient
     //QQTCloudClientInstance(this);
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     //QQTEthManager
     QQTEthenetManager::Instance(this);
 #endif

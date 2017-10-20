@@ -35,7 +35,7 @@ struct dmmu_mem_info {
 static inline void init_page_count(struct dmmu_mem_info *info)
 {
     int page_count;
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     unsigned int start;			/* page start */
     unsigned int end;			/* page end */
 

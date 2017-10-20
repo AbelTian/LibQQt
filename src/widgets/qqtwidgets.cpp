@@ -5,7 +5,7 @@ tagBtnIconTable::tagBtnIconTable()
 {
     pixmap[BTN_NORMAL] = "./skin/default/bt_bt_normal.png";
     pixmap[BTN_UNCHECK] = "./skin/default/bt_bt_normal.png";
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     pixmap[BTN_HOVER] = "./skin/default/bt_bt_hover.png";
     pixmap[BTN_CHECK] = "./skin/default/bt_bt_hover.png";
     pixmap[BTN_PRESS] = "./skin/default/bt_bt_hover.png";

@@ -36,7 +36,7 @@ void qqtFrameMsgHandler(QtMsgType type, const char * msg)
     //check file size, overtop max size out to new, one day one file
     QString filename = QString("./log/log-%1.txt").arg(current_date);
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     system(QString("touch %1").arg(filename).toLatin1().data());
 #endif
 

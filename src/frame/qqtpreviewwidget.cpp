@@ -281,7 +281,7 @@ void QQTPreviewWidget::mousePressEvent(QMouseEvent *e)
         bGInit = true;
     }
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     //pline() << e->pos() << e->globalPos();
     if(e->pos().x() < 0 || e->pos().y() < 0 ||
             e->pos().x() > geome.width() || e->pos().y() > geome.height())

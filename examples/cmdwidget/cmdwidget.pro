@@ -17,20 +17,20 @@ RCC_DIR = qrc
 UI_DIR = ui_h
 DESTDIR = bin
 
-QT_KIT = $$(QKIT)
+QKIT_ = $$(QKIT)
 
-message($${QT_KIT} Defined in cmdwidget)
+message($${QKIT_} Defined in cmdwidget)
 
-#MIPS __MIPS_LINUX__
+#MIPS __EMBEDDED_LINUX__
 #LINUX64 __LINUX64__
 #WIN64 __WIN64__
 
-equals(QT_KIT, MIPS32) {
+equals(QKIT_, MIPS32) {
     QT += multimedia
-    DEFINES += __MIPS_LINUX__
-} else:equals(QT_KIT, LINUX64){
+    DEFINES += __EMBEDDED_LINUX__
+} else:equals(QKIT_, LINUX64){
     DEFINES += __LINUX64__
-} else:equals(QT_KIT, WIN64){
+} else:equals(QKIT_, WIN64){
     DEFINES += __WIN64__
 }
 

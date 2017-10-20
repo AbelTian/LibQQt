@@ -23,15 +23,15 @@ INCLUDEPATH += ../qqtfoundation
 
 include(../qqtfoundation/qqtfoundation.pri)
 
-QT_KIT = $$(QKIT)
+QKIT_ = $$(QKIT)
 
-message($${QT_KIT} Defined in qqtframe)
+message($${QKIT_} Defined in qqtframe)
 
 DEFINES += _TTY_POSIX_
 
-equals(QT_KIT, MIPS32) {
+equals(QKIT_, MIPS32) {
 	QT += multimedia
-	DEFINES += __MIPS_LINUX__
+	DEFINES += __EMBEDDED_LINUX__
 } else {
 	DEFINES += __LINUX64__
 }

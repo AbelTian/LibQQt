@@ -4,7 +4,7 @@
 #include "qqtprotocol.h"
 #include <qqt-local.h>
 
-#if defined (__QTEXTSERIALPORT__ )
+#if defined (__QEXTSERIALPORT__ )
 #include <qextserialport.h>
 typedef QextSerialPort QSerialPort;
 #else

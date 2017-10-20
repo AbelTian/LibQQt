@@ -21,25 +21,25 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 TARGET = qqtframe2
 TEMPLATE = app
 
-QT_KIT = $$(QKIT)
-message($${QT_KIT} Defined in $${TARGET})
-equals(QT_KIT, MIPS32) {
+QKIT_ = $$(QKIT)
+message($${QKIT_} Defined in $${TARGET})
+equals(QKIT_, MIPS32) {
     QT += multimedia
-    DEFINES += __MIPS_LINUX__
-} else:equals(QT_KIT, LINUX) {
+    DEFINES += __EMBEDDED_LINUX__
+} else:equals(QKIT_, LINUX) {
     DEFINES += __LINUX__
-} else:equals(QT_KIT, LINUX64) {
+} else:equals(QKIT_, LINUX64) {
     DEFINES += __LINUX64__
-} else:equals(QT_KIT, WIN) {
+} else:equals(QKIT_, WIN) {
     DEFINES += __WIN__
-} else:equals(QT_KIT, WIN64) {
+} else:equals(QKIT_, WIN64) {
     DEFINES += __WIN64__
-} else:equals(QT_KIT, macOS) {
+} else:equals(QKIT_, macOS) {
     DEFINES += __DARWIN__
-} else:equals(QT_KIT, Android) {
+} else:equals(QKIT_, Android) {
     DEFINES += __ANDROID__
 }
-equals(QT_KIT, macOS) {
+equals(QKIT_, macOS) {
     CONFIG += app_bundle
 }
 
@@ -48,7 +48,7 @@ CONFIG(debug, debug|release) {
     DEFINES -= QT_NO_DEBUG_OUTPUT
 }
 
-equals(QT_KIT, Android) {
+equals(QKIT_, Android) {
     CONFIG += mobility
     MOBILITY =
     #DISTFILES += \
@@ -72,11 +72,11 @@ INCLUDEPATH += $$PWD \
     $$PWD/../../src/frame
 
 #include(../../src/qqt.pri)
-equals(QT_KIT, macOS) {
+equals(QKIT_, macOS) {
     LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/Release/src/bin
     LIBS += -framework QQt
 }
-equals(QT_KIT, Android) {
+equals(QKIT_, Android) {
     LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android-arm/Release/src/bin
     LIBS += -lQQt
 }
@@ -93,11 +93,11 @@ DESTDIR = bin
 ##install
 ############
 #CONFIG += can_install
-can_install:equals(QT_KIT, MIPS32) {
+can_install:equals(QKIT_, MIPS32) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
-    equals(QT_KIT, macOS){
+    equals(QKIT_, macOS){
         target.path = /Applications
         INSTALLS += target
     }

@@ -63,7 +63,7 @@ QQTWIFIWidget::QQTWIFIWidget(QWidget *parent) :
     horizontalHeader()->setStretchLastSection(true);
     setShowGrid(true);
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     setFocusPolicy(Qt::NoFocus);
 #endif
     dg = new QQTWIFIIDTextDelegate(this);

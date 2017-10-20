@@ -23,15 +23,15 @@ contains (CONFIG, BUILD_SRC) {
     #include(../../src/qqt.pri)
 } else {
     #if you want to link QQt library
-    message(Link QQt to $${TARGET} $${QT_KIT} from $${SYSNAME} $${BUILD} on $${QMAKE_HOST.os})
+    message(Link QQt to $${TARGET} $${QKIT_} from $${SYSNAME} $${BUILD} on $${QMAKE_HOST.os})
     equals(QMAKE_HOST.os, Darwin) {
-        equals(QT_KIT, macOS) {
+        equals(QKIT_, macOS) {
             LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
             LIBS += -framework QQt
-        } else: equals(QT_KIT, Android) {
+        } else: equals(QKIT_, Android) {
             LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
             LIBS += -lQQt
-        } else: equals(QT_KIT, ANDROIDX86) {
+        } else: equals(QKIT_, ANDROIDX86) {
             LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
             LIBS += -lQQt
         }
@@ -47,20 +47,20 @@ contains (CONFIG, BUILD_SRC) {
 ##install
 ############
 #CONFIG += can_install
-can_install:equals(QT_KIT, MIPS32) {
+can_install:equals(QKIT_, MIPS32) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
-    equals(QT_KIT, macOS) {
+    equals(QKIT_, macOS) {
         target.path = /Applications
         INSTALLS += target
     }
 }
 
-equals(QT_KIT, macOS) {
+equals(QKIT_, macOS) {
     CONFIG += app_bundle
 }
-equals(QT_KIT, Android) {
+equals(QKIT_, Android) {
     CONFIG += mobility
     MOBILITY =
     #DISTFILES += \

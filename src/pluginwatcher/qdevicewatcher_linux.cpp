@@ -234,7 +234,7 @@ void QDeviceWatcherPrivate::parseLine(const QByteArray &line)
     QString action_str;
     QString dev;
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     if (line.contains("/event")) //event
     {
         action_str = line.left(line.indexOf('@')).toLower();
@@ -259,7 +259,7 @@ void QDeviceWatcherPrivate::parseLine(const QByteArray &line)
     dev = "/dev/" + line.right(line.length() - line.lastIndexOf('/') - 1);
 #endif //USE_REGEXP
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     }
 #endif
 

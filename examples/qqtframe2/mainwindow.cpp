@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     /*
      * 这里只要frameless足够
      */

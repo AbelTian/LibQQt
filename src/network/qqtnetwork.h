@@ -43,7 +43,7 @@ typedef struct QQTSHARED_EXPORT tagWifi
 
     bool isValid();
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     tagWifi& operator= (tagWifi& w);
 #else
     tagWifi &operator=(const tagWifi &w);

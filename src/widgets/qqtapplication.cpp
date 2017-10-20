@@ -27,7 +27,7 @@ QQtApplication::QQtApplication(int &argc, char **argv) :
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH);
     QSettings::setPath(QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH);
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     system("rm -f /tmp/LCK..ttyS*");
 #endif
 
@@ -45,13 +45,13 @@ QQtApplication::QQtApplication(int &argc, char **argv) :
     QApplication::setGraphicsSystem("raster");
 #endif
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     //QApplication::setOverrideCursor(Qt::ArrowCursor);
     QWSServer::setCursorVisible(false);
 #endif
 
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     QQTInput::Instance()->Init("min", "control", "QQT", 14, 14);
 #endif
 

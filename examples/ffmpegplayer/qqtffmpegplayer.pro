@@ -20,15 +20,15 @@ DESTDIR = bin
 INCLUDEPATH += ../qqtfoundation
 include(../qqtfoundation/qqtfoundation.pri)
 
-QT_KIT = $$(QKIT)
+QKIT_ = $$(QKIT)
 
-message($${QT_KIT} Defined in qqtffmpegplayer)
+message($${QKIT_} Defined in qqtffmpegplayer)
 
 DEFINES += _TTY_POSIX_
 
-equals(QT_KIT, MIPS32) {
+equals(QKIT_, MIPS32) {
 	QT += multimedia
-	DEFINES += __MIPS_LINUX__
+	DEFINES += __EMBEDDED_LINUX__
 } else {
 	DEFINES += __LINUX64__
 }
@@ -49,7 +49,7 @@ HEADERS  += $$PWD/qqtapp.h $$PWD/qqtwindow.h \
 FORMS    += $$PWD/qqtwindow.ui
 
 unix {
-    equals(QT_KIT, macOS){
+    equals(QKIT_, macOS){
     }
     else{
         INCLUDEPATH += /usr/include/x86_64-linux-gnu

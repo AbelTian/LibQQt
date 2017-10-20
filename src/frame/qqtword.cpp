@@ -29,7 +29,7 @@ QQTWord::QQTWord(QObject *parent) :
      * 打印机分辨率1200不会失真，绘图必须进行坐标变换。
      * 数值增大，DrawText可用空间减小甚至切掉一部分
      */
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     /*
      * 这是实验结果，和理论结果不符合。
      */

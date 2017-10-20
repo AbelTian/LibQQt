@@ -67,7 +67,7 @@ void QQTPluginWatcher::slotDeviceChanged(const QString &dev)
 
 void QQTPluginWatcher::slotDeviceDriver()
 {
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     if(E_MOUSE == m_devType)
     {
         if(E_ADD == m_devStat)

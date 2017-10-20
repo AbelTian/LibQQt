@@ -17,7 +17,7 @@ QQTTreeView::QQTTreeView(QWidget *parent) :
     header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 #endif
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     setFocusPolicy(Qt::NoFocus);
     QFont fnt(font());
     fnt.setPointSize(16);

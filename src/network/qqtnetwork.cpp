@@ -6,7 +6,7 @@ bool tagWifi::isValid()
     return wifi[ESSID_BSSID].isEmpty() ? false : true;
 }
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
 tagWifi& tagWifi::operator= (tagWifi& w)
 #else
 tagWifi &tagWifi::operator=(const tagWifi &w)

@@ -64,7 +64,7 @@ void QQTPushButton::mouseReleaseEvent(QMouseEvent *e)
 {
     if(e->button() == Qt::LeftButton)
     {
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
         state = BTN_NORMAL;
         //pline() << state;
         update();

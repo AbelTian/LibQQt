@@ -19,7 +19,7 @@ QQTWindow::QQTWindow(QWidget *parent) :
 
     QQTObjectFactory::registerObject(this);
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     /*
      * 这里只要frameless足够
      */

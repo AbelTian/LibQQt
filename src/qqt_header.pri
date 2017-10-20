@@ -26,9 +26,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 #############
 ##definition
 #############
-##Arch type
-QT_KIT = $$(QKIT)
-message($${QT_KIT} Defined to $${TARGET})
+##target arch type
+QKIT_ = $$(QKIT)
+message($${QKIT_} Defined to $${TARGET})
+#EMBEDDED __EMBEDDED_LINUX__
 #MIPS __MIPS_LINUX__
 #ARM __ARM_LINUX__
 #LINUX __LINUX__
@@ -37,23 +38,28 @@ message($${QT_KIT} Defined to $${TARGET})
 #WIN64 __WIN64__
 #macOS __DARWIN__
 #Android __ANDROID__
+#ANDROIDX86 __ANDROIDX86__
 #处理文件内平台小差异
-equals(QT_KIT, MIPS32) {
+equals(QKIT_, EMBEDDED) {
+    DEFINES += __EMBEDDED_LINUX__
+} else:equals(QKIT_, ARM32) {
+    DEFINES += __ARM_LINUX__
+} else:equals(QKIT_, MIPS32) {
     QT += multimedia
     DEFINES += __MIPS_LINUX__
-} else:equals(QT_KIT, LINUX) {
+} else:equals(QKIT_, LINUX) {
     DEFINES += __LINUX__
-} else:equals(QT_KIT, LINUX64) {
+} else:equals(QKIT_, LINUX64) {
     DEFINES += __LINUX64__
-} else:equals(QT_KIT, WIN) {
+} else:equals(QKIT_, WIN) {
     DEFINES += __WIN__
-} else:equals(QT_KIT, WIN64) {
+} else:equals(QKIT_, WIN64) {
     DEFINES += __WIN64__
-} else:equals(QT_KIT, macOS) {
+} else:equals(QKIT_, macOS) {
     DEFINES += __DARWIN__
-} else:equals(QT_KIT, Android) {
+} else:equals(QKIT_, Android) {
     DEFINES += __ANDROID__
-} else:equals(QT_KIT, ANDROIDX86) {
+} else:equals(QKIT_, ANDROIDX86) {
     DEFINES += __ANDROIDX86__
     #todo:no customplot word printer
 }
@@ -62,11 +68,18 @@ CONFIG(debug, debug|release) {
 } else {
     DEFINES -= QT_NO_DEBUG_OUTPUT
 }
+
 win32 {
     win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
     #QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
 }
 
+#if you use qextserialport, open the annotation
+#DEFINES += __QEXTSERIALPORT__
+#if you use qcustomplot, open this annotation
+DEFINES += __CUSTOMPLOT__
+#if you use qtbluetooth, open this annotation
+DEFINES += __BLUETOOTH__
 
 #############
 ##variables
@@ -76,21 +89,21 @@ CONFIG(debug, debug|release) {
 } else {
     BUILD=Release
 }
-equals(QT_KIT, MIPS32) {
+equals(QKIT_, MIPS32) {
     SYSNAME = Mips32
-} else:equals(QT_KIT, LINUX) {
+} else:equals(QKIT_, LINUX) {
     SYSNAME = Linux
-} else:equals(QT_KIT, LINUX64) {
+} else:equals(QKIT_, LINUX64) {
     SYSNAME = Linux64
-} else:equals(QT_KIT, WIN) {
+} else:equals(QKIT_, WIN) {
     SYSNAME = Windows
-} else:equals(QT_KIT, WIN64) {
+} else:equals(QKIT_, WIN64) {
     SYSNAME = Win64
-} else:equals(QT_KIT, macOS) {
+} else:equals(QKIT_, macOS) {
     SYSNAME = MacOS
-} else:equals(QT_KIT, Android) {
+} else:equals(QKIT_, Android) {
     SYSNAME = Android
-} else:equals(QT_KIT, ANDROIDX86) {
+} else:equals(QKIT_, ANDROIDX86) {
     SYSNAME = Android_x86
 }
 
@@ -120,4 +133,5 @@ INCLUDEPATH += $$PWD/pluginwatcher
 INCLUDEPATH += $$PWD/printsupport
 INCLUDEPATH += $$PWD/sql
 INCLUDEPATH += $$PWD/widgets
+INCLUDEPATH += $$PWD/exquisite
 

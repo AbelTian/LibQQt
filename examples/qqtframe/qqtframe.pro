@@ -11,30 +11,30 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 TARGET = qqtframe
 TEMPLATE = app
 
-QT_KIT = $$(QKIT)
-message($${QT_KIT} Defined in qqtframe)
-equals(QT_KIT, MIPS32) {
+QKIT_ = $$(QKIT)
+message($${QKIT_} Defined in qqtframe)
+equals(QKIT_, MIPS32) {
     QT += multimedia
-    DEFINES += __MIPS_LINUX__
-} else:equals(QT_KIT, LINUX) {
+    DEFINES += __EMBEDDED_LINUX__
+} else:equals(QKIT_, LINUX) {
     DEFINES += __LINUX__
-} else:equals(QT_KIT, LINUX64) {
+} else:equals(QKIT_, LINUX64) {
     DEFINES += __LINUX__
     DEFINES += __LINUX64__
-} else:equals(QT_KIT, WIN) {
+} else:equals(QKIT_, WIN) {
     DEFINES += __WIN__
-} else:equals(QT_KIT, WIN64) {
+} else:equals(QKIT_, WIN64) {
     DEFINES += __WIN__
     DEFINES += __WIN64__
-} else:equals(QT_KIT, macOS) {
+} else:equals(QKIT_, macOS) {
     DEFINES += __DARWIN__
-} else:equals(QT_KIT, Android) {
+} else:equals(QKIT_, Android) {
     DEFINES += __ANDROID__
-} else:equals(QT_KIT, ANDROIDX86) {
+} else:equals(QKIT_, ANDROIDX86) {
     DEFINES += __ANDROID__
     DEFINES += __ANDROIDX86__
 }
-equals(QT_KIT, macOS) {
+equals(QKIT_, macOS) {
     CONFIG += app_bundle
 }
 
@@ -43,7 +43,7 @@ CONFIG(debug, debug|release) {
     DEFINES -= QT_NO_DEBUG_OUTPUT
 }
 
-equals(QT_KIT, Android) {
+equals(QKIT_, Android) {
     CONFIG += mobility
     MOBILITY =
     #DISTFILES += \
@@ -72,15 +72,15 @@ CONFIG(debug, debug|release) {
 } else {
     BUILD=Release
 }
-message(Link QQt to $${TARGET} $${QT_KIT} $${BUILD} on $${QMAKE_HOST.os})
+message(Link QQt to $${TARGET} $${QKIT_} $${BUILD} on $${QMAKE_HOST.os})
 equals(QMAKE_HOST.os, Darwin) {
-    equals(QT_KIT, macOS) {
+    equals(QKIT_, macOS) {
         LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/MacOS/$${BUILD}/src/bin
         LIBS += -framework QQt
-    } else: equals(QT_KIT, Android) {
+    } else: equals(QKIT_, Android) {
         LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android/$${BUILD}/src/bin
         LIBS += -lQQt
-    } else: equals(QT_KIT, ANDROIDX86) {
+    } else: equals(QKIT_, ANDROIDX86) {
         LIBS += -L/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/Android_x86/$${BUILD}/src/bin
         LIBS += -lQQt
     }
@@ -104,11 +104,11 @@ DESTDIR = bin
 ##install
 ############
 #CONFIG += can_install
-can_install:equals(QT_KIT, MIPS32) {
+can_install:equals(QKIT_, MIPS32) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
-    equals(QT_KIT, macOS){
+    equals(QKIT_, macOS){
         target.path = /Applications
         INSTALLS += target
     }

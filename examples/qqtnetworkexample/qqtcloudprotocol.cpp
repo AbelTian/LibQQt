@@ -817,7 +817,7 @@ void QQTCloudProtocol::recvDownFileResultMessage(QQTNetworkMessage &qMsg)
 
     QString tmpFile = m_downfileresult.m_localfile;
 
-#ifdef __MIPS_LINUX__
+#ifdef __EMBEDDED_LINUX__
     system(QString("touch %1").arg(tmpFile).toLatin1().data());
 #endif
 

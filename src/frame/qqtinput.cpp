@@ -579,7 +579,7 @@ void QQTInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
          * 这里又要多一个判断,万一首个窗体的第一个焦点就是落在可输入的对象中,则要过滤掉
          */
 
-#ifndef __MIPS_LINUX__
+#ifndef __EMBEDDED_LINUX__
         if (oldWidget == 0x0 && !isFirst) {
             return;
         }

@@ -10,7 +10,7 @@
 win32 {
     LIBS += -luser32
 }else: unix {
-    equals(QT_KIT, macOS) {
+    equals(QKIT_, macOS) {
         #min macosx target
         QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
         #deperated
@@ -24,8 +24,10 @@ win32 {
     }
 }
 
-SOURCES =
-HEADERS =
+SOURCES = \
+    $$PWD/exquisite/qqtcustomprogressbar.cpp
+HEADERS = \
+    $$PWD/exquisite/qqtcustomprogressbar.h
 
 #root dir
 win32 {
@@ -33,7 +35,7 @@ win32 {
     HEADERS += $$PWD/qqtwin.h
 }
 unix {
-    equals(QT_KIT, macOS) {
+    equals(QKIT_, macOS) {
         HEADERS += $$PWD/qqtdarwin.h
     } else {
         HEADERS += $$PWD/qqtlinux.h
@@ -74,7 +76,7 @@ SOURCES += \
 HEADERS += \
     $$PWD/network/qqtserialport.h
 #bluetooth
-DEFINES += __BLUETOOTH__
+#DEFINES += __BLUETOOTH__
 contains (DEFINES, __BLUETOOTH__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
@@ -92,16 +94,29 @@ contains (DEFINES, __BLUETOOTH__) {
         $$PWD/network/qqtbluetoothmanager.h
 }
 #ethnet manager
-equals(QT_KIT, MIPS32) {
+equals(QKIT_, MIPS32) {
     SOURCES += $$PWD/network/qqtethenetmanager.cpp
     HEADERS += $$PWD/network/qqtethenetmanager.h
 }
 #qextserialport support
 #if you use qextserialport, open the two annotation
-#DEFINES += __QTEXTSERIALPORT__
-contains (DEFINES, __QTEXTSERIALPORT__) {
+#DEFINES += __QEXTSERIALPORT__
+contains (DEFINES, __QEXTSERIALPORT__) {
     #include ( $$PWD/network/qextserialport/qextserialport.pri )
-    #message ( __QTEXTSERIALPORT__ Defined in $${TARGET})
+    CONFIG += thread
+    HEADERS += $$PWD/network/qextserialport/qextserialbase.h \
+              $$PWD/network/qextserialport/qextserialport.h \
+              $$PWD/network/qextserialport/qextserialenumerator.h
+    SOURCES += $$PWD/network/qextserialport/qextserialbase.cpp \
+              $$PWD/network/qextserialport/qextserialport.cpp \
+              $$PWD/network/qextserialport/qextserialenumerator.cpp
+    unix:HEADERS += $$PWD/network/qextserialport/posix_qextserialport.h
+    unix:SOURCES += $$PWD/network/qextserialport/posix_qextserialport.cpp
+    unix:DEFINES += _TTY_POSIX_
+    win32:HEADERS += $$PWD/network/qextserialport/win_qextserialport.h
+    win32:SOURCES += $$PWD/network/qextserialport/win_qextserialport.cpp
+    win32:DEFINES += _TTY_WIN_
+    message ( __QEXTSERIALPORT__ Defined in $${TARGET})
 } else {
     greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
@@ -127,24 +142,28 @@ HEADERS += \
 
 
 #customplot
-contains (DEFINES, QQT_LIBRARY) {
-	DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
-}
-SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
-			$$PWD/customplot/qcustomplot.cpp
-HEADERS += $$PWD/customplot/qcpdocumentobject.h \
-			$$PWD/customplot/qcustomplot.h
-equals(QT_KIT, Android) {
-    SOURCES -= $$PWD/customplot/qcpdocumentobject.cpp \
-                            $$PWD/customplot/qcustomplot.cpp
-    HEADERS -= $$PWD/customplot/qcpdocumentobject.h \
-                            $$PWD/customplot/qcustomplot.h
+#DEFINES += __CUSTOMPLOT__
+contains (DEFINES, __CUSTOMPLOT__) {
+    message (qcustomplot is used in $${TARGET})
+    contains (DEFINES, QQT_LIBRARY) {
+        DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
+    }
+    SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
+                $$PWD/customplot/qcustomplot.cpp
+    HEADERS += $$PWD/customplot/qcpdocumentobject.h \
+                $$PWD/customplot/qcustomplot.h
+    equals(QKIT_, Android) {
+        SOURCES -= $$PWD/customplot/qcpdocumentobject.cpp \
+                                $$PWD/customplot/qcustomplot.cpp
+        HEADERS -= $$PWD/customplot/qcpdocumentobject.h \
+                                $$PWD/customplot/qcustomplot.h
+    }
 }
 
 
 
 #dmmu
-equals(QT_KIT, MIPS32) {
+equals(QKIT_, MIPS32) {
     SOURCES += $$PWD/dmmu/dmmu.c
     HEADERS += $$PWD/dmmu/dmmu.h \
                 $$PWD/dmmu/jz_cim.h \
@@ -154,7 +173,7 @@ equals(QT_KIT, MIPS32) {
 
 
 #frame
-equals(QT_KIT, MIPS32) {
+equals(QKIT_, MIPS32) {
     SOURCES += $$PWD/frame/qqtpreviewwidget.cpp \
                 $$PWD/frame/qqtwifiwidget.cpp
     HEADERS += $$PWD/frame/qqtpreviewwidget.h \
@@ -184,7 +203,7 @@ FORMS += \
     $$PWD/frame/qqtdialog.ui \
     $$PWD/frame/qqtinput.ui \
     $$PWD/frame/qqtmsgbox.ui
-equals(QT_KIT, Android) {
+equals(QKIT_, Android) {
     SOURCES -= $$PWD/frame/qqtword.cpp
     HEADERS -= $$PWD/frame/qqtword.h
 }
@@ -220,7 +239,7 @@ win32 {
     else:  SOURCES += $$PWD/pluginwatcher/qdevicewatcher_win32.cpp
 }
 unix {
-    equals(QT_KIT, macOS) {
+    mac* {
         SOURCES += $$PWD/pluginwatcher/qdevicewatcher_mac.cpp
     } else {
         SOURCES += $$PWD/pluginwatcher/qdevicewatcher_linux.cpp
@@ -235,7 +254,7 @@ HEADERS += $$PWD/pluginwatcher/qqtpluginwatcher.h \
 #printsupport
 SOURCES += $$PWD/printsupport/qqtprinter.cpp
 HEADERS += $$PWD/printsupport/qqtprinter.h
-equals(QT_KIT, Android) {
+equals(QKIT_, Android) {
     SOURCES -= $$PWD/printsupport/qqtprinter.cpp
     HEADERS -= $$PWD/printsupport/qqtprinter.h
 }
