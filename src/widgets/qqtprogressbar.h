@@ -10,7 +10,8 @@
 #include "qqtwidgets.h"
 #include "qqtframe.h"
 
-namespace Ui {
+namespace Ui
+{
 class QQTProgressBar;
 }
 
@@ -19,7 +20,7 @@ class QQTSHARED_EXPORT QQTProgressBar : public QWidget
     Q_OBJECT
 
 public:
-    explicit QQTProgressBar(QWidget *parent = 0);
+    explicit QQTProgressBar(QWidget* parent = 0);
     ~QQTProgressBar();
 
     void setPixMap(QString back, QString trunk);
@@ -28,7 +29,7 @@ public slots:
     void setRange(int min, int max);
 
 private:
-    Ui::QQTProgressBar *ui;
+    Ui::QQTProgressBar* ui;
 
 private:
     QString m_back, m_trunk;

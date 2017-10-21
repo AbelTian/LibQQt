@@ -26,6 +26,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 #############
 ##definition
 #############
+#You need define a env variable QKIT=XX
 ##target arch type
 QKIT_ = $$(QKIT)
 message($${QKIT_} Defined to $${TARGET})
@@ -74,7 +75,9 @@ win32 {
     #QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
 }
 
+#You need switch these more macro according to your needs.
 #if you use qextserialport, open the annotation
+#suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
 #DEFINES += __QEXTSERIALPORT__
 #if you use qcustomplot, open this annotation
 DEFINES += __CUSTOMPLOT__
