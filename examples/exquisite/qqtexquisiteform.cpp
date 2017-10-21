@@ -68,7 +68,7 @@ void QQtExquisiteForm::setValueDown()
 
 void QQtExquisiteForm::keyPressEvent(QKeyEvent *event)
 {
-    //pline() << hex << event->key();
+    pline() << hex << event->key();
     if(event->key() == Qt::Key_Up) {
         m_timer_down->stop();
         m_timer->start(10);
@@ -91,6 +91,8 @@ void QQtExquisiteForm::keyReleaseEvent(QKeyEvent *event)
 
 bool QQtExquisiteForm::eventFilter(QObject *watched, QEvent *event)
 {
+    if(event->type() != QEvent::Paint)
+        ;//pline() << watched << hex << event->type();
     if(watched == ui->hs0){
         if(event->type() == QEvent::MouseButtonPress) {
             QMouseEvent* e = (QMouseEvent*)event;
@@ -115,6 +117,13 @@ bool QQtExquisiteForm::eventFilter(QObject *watched, QEvent *event)
                 m_timer->stop();
                 m_timer_down->start(10);
                 event->accept();
+                /*!
+                 * linux
+                 * after click slider, all key event come here....
+                 * because, focus hasn't coming back,
+                 * but on mac, focus has coming back.
+                !*/
+                ui->w0->setFocus();
                 return true;
             }
         }
