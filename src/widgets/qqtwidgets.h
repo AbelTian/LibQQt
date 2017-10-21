@@ -45,9 +45,9 @@ typedef struct QQTSHARED_EXPORT tagBtnIconTable
     void initNormal(QString normal, QString press);
     void initCheck(QString uncheck, QString check);
     void initOther(QString hover, QString disable);
-    const QString& operator[] (int index) const;
-    QString &operator [](int index);
-}TBtnIconTable;
+    const QString& operator[](int index) const;
+    QString& operator [](int index);
+} TBtnIconTable;
 
 
 QQTSHARED_EXPORT void moveCenter(QWidget* w);

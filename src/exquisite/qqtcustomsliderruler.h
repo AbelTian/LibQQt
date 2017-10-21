@@ -167,4 +167,4 @@ signals:
     void valueChanged(double value);
 };
 
-#endif /* __QQTCUSTOMSLIDERRULER_H__
+#endif // __QQTCUSTOMSLIDERRULER_H__
