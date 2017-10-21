@@ -13,39 +13,37 @@
   <property name="windowTitle">
    <string>QQtExquisiteForm</string>
   </property>
-  <widget class="QQtCustomSpeedMeter" name="w0" native="true">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>30</y>
-     <width>241</width>
-     <height>251</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QQtCustomProgressBar" name="w2" native="true">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>30</y>
-     <width>251</width>
-     <height>251</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QSlider" name="hs0">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>380</y>
-     <width>501</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Tab 1</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QQtCustomSpeedMeter" name="w0" native="true"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QQtCustomProgressBar" name="w2" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Tab 2</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSlider" name="hs0">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

@@ -28,12 +28,16 @@ SOURCES = \
     $$PWD/exquisite/qqtcustomprogressbar.cpp \
     $$PWD/exquisite/qqtcustomspeedmeter.cpp \
     $$PWD/exquisite/qqtcustomsliderruler.cpp \
-    $$PWD/exquisite/qqtcustompiano.cpp
+    $$PWD/exquisite/qqtcustompiano.cpp \
+    $$PWD/exquisite/qqtframelesshelper.cpp \
+    $$PWD/exquisite/qqtframelesshelperprivate.cpp
 HEADERS = \
     $$PWD/exquisite/qqtcustomprogressbar.h \
     $$PWD/exquisite/qqtcustomspeedmeter.h \
     $$PWD/exquisite/qqtcustomsliderruler.h \
-    $$PWD/exquisite/qqtcustompiano.h
+    $$PWD/exquisite/qqtcustompiano.h \
+    $$PWD/exquisite/qqtframelesshelper.h \
+    $$PWD/exquisite/qqtframelesshelperprivate.h
 
 #root dir
 win32 {
