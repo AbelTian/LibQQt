@@ -10,19 +10,26 @@ QQtExquisiteForm::QQtExquisiteForm(QWidget *parent) :
     ui(new Ui::QQtExquisiteForm)
 {
     ui->setupUi(this);
+
+    value = 0;
+    curmaxValue = 80;
+
     ui->hs0->setRange(0, 100);
 
     ui->w0->setMinValue(0);
     ui->w0->setMaxValue(80);
 
 
+    ui->w2->setCircleColor(QColor(20, 40, 100));
     ui->w2->setRange(0, 80);
     //ui->w2->setCircleType(QQtCustomProgressBar::CircleType_Image);
     //ui->w2->setCircleImage("./xxtest.png");
-    ui->w2->setCircleColor(QColor(20, 40, 100));
 
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w0, SLOT(setValue(int)));
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w2, SLOT(setValue(int)));
+
+    ui->hs0->installEventFilter(this);
+
     m_timer = new QTimer(this);
     m_timer->setSingleShot(false);
 
@@ -32,11 +39,7 @@ QQtExquisiteForm::QQtExquisiteForm(QWidget *parent) :
     connect(m_timer_down, SIGNAL(timeout()), this, SLOT(setValueDown()));
     connect(m_timer, SIGNAL(timeout()), this, SLOT(setValue()));
 
-    value = 0;
-    curmaxValue = 80;
     m_timer_down->start(10);
-
-    ui->hs0->installEventFilter(this);
 }
 
 QQtExquisiteForm::~QQtExquisiteForm()
@@ -112,8 +115,15 @@ bool QQtExquisiteForm::eventFilter(QObject *watched, QEvent *event)
                 m_timer->stop();
                 m_timer_down->start(10);
                 event->accept();
+                return true;
             }
         }
+        /*fix the parent handled bug terminally*/
+        if(event->type() == QEvent::Paint) {
+            return QDialog::eventFilter(watched, event);
+        }
+        //+ fix bug
+        return true;
     }
     return QDialog::eventFilter(watched, event);
 }

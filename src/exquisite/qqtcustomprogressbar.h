@@ -55,6 +55,7 @@ class QQTSHARED_EXPORT QQtCustomProgressBar : public QWidget
     Q_PROPERTY(QColor freeColor READ getFreeColor WRITE setFreeColor)
     Q_PROPERTY(QColor circleColor READ getCircleColor WRITE setCircleColor)
     Q_PROPERTY(QColor textColor READ getTextColor WRITE setTextColor)
+    Q_PROPERTY(QString percentSuffix READ getPercentSuffix WRITE setPercentSuffix)
 
 public:
     enum CircleType {
@@ -89,6 +90,7 @@ private:
     int lineWidth;                  /*线条宽度*/
 
     bool showPercent;               /*是否显示百分比*/
+    QString percentSuffix; /*百分比后缀*/
     bool showFree;                  /*是否显示未使用进度*/
     bool showSmallCircle;           /*是否显示小圆*/
     bool clockWise;                 /*顺时针*/
@@ -123,6 +125,7 @@ public:
     QColor getFreeColor()           const;
     QColor getCircleColor()         const;
     QColor getTextColor()           const;
+    QString getPercentSuffix()           const;
 
     PercentStyle getPercentStyle()  const;
     CircleType   getCircleType()    const;
@@ -148,6 +151,9 @@ public Q_SLOTS:
 
     /*设置是否显示百分比*/
     void setShowPercent(bool showPercent);
+    /*设置百分比后缀*/
+    /*can't use default parameter*/
+    void setPercentSuffix(QString suffix);
     /*设置是否显示剩余进度*/
     void setShowFree(bool showFree);
     /*设置是否显示小圆*/

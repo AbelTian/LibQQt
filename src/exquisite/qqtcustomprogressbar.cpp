@@ -30,6 +30,8 @@ QQtCustomProgressBar::QQtCustomProgressBar(QWidget *parent) : QWidget(parent)
     percentStyle = PercentStyle_Arc;
     circleType = CircleType_Color;
 
+    percentSuffix = "%";
+
     waterDensity = 1;
     waterHeight = 1;
 }
@@ -257,7 +259,8 @@ void QQtCustomProgressBar::drawText(QPainter *painter, int radius)
     QString strValue = QString("%1").arg(value);
 
     if (showPercent) {
-        strValue = QString("%1%").arg((double)value / (maxValue - minValue) * 100);
+        strValue = QString("%1%2").arg((double)value / (maxValue - minValue) * 100)
+                .arg(percentSuffix);
     }
 
     painter->save();
@@ -340,6 +343,11 @@ QColor QQtCustomProgressBar::getTextColor() const
     return this->textColor;
 }
 
+QString QQtCustomProgressBar::getPercentSuffix() const
+{
+    return this->percentSuffix;
+}
+
 QQtCustomProgressBar::PercentStyle QQtCustomProgressBar::getPercentStyle() const
 {
     return this->percentStyle;
@@ -420,6 +428,14 @@ void QQtCustomProgressBar::setShowPercent(bool showPercent)
 {
     if (this->showPercent != showPercent) {
         this->showPercent = showPercent;
+        update();
+    }
+}
+
+void QQtCustomProgressBar::setPercentSuffix(QString percentSuffix)
+{
+    if (this->percentSuffix != percentSuffix) {
+        this->percentSuffix = percentSuffix;
         update();
     }
 }

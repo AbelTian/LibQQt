@@ -18,18 +18,18 @@
     <rect>
      <x>40</x>
      <y>30</y>
-     <width>171</width>
-     <height>121</height>
+     <width>241</width>
+     <height>251</height>
     </rect>
    </property>
   </widget>
   <widget class="QQtCustomProgressBar" name="w2" native="true">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>300</x>
      <y>30</y>
-     <width>201</width>
-     <height>121</height>
+     <width>251</width>
+     <height>251</height>
     </rect>
    </property>
   </widget>
