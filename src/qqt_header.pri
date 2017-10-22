@@ -14,18 +14,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-#############
+#################################################################
 ##project version
-#############
+#################################################################
 unix:VERSION            = 1.0.0
 
+#################################################################
+##definition and configration
+#################################################################
 ##Qt version
 QT += core gui network sql xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
-#############
-##definition
-#############
 #You need define a env variable QKIT=XX
 ##target arch type
 QKIT_ = $$(QKIT)
@@ -64,29 +64,48 @@ equals(QKIT_, EMBEDDED) {
     DEFINES += __ANDROIDX86__
     #todo:no customplot word printer
 }
-
 CONFIG(debug, debug|release) {
 } else {
     DEFINES -= QT_NO_DEBUG_OUTPUT
 }
-
 win32 {
     win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
     #QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
 }
-
+#compatible old version QQt (deperated)
+greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 #You need switch these more macro according to your needs.
 #if you use qextserialport, open the annotation
 #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
 #DEFINES += __QEXTSERIALPORT__
+contains (DEFINES, __QEXTSERIALPORT__) {
+    #include ( $$PWD/network/qextserialport/qextserialport.pri )
+    CONFIG += thread
+    unix:DEFINES += _TTY_POSIX_
+    win32:DEFINES += _TTY_WIN_
+    message ( __QEXTSERIALPORT__ Defined in $${TARGET})
+} else {
+    greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
+    lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
+    unix {
+        DEFINES += _TTY_POSIX_
+    } else {
+        DEFINES += _TTY_WIN_
+    }
+}
 #if you use qcustomplot, open this annotation
 DEFINES += __CUSTOMPLOT__
 #if you use qtbluetooth, open this annotation
 DEFINES += __BLUETOOTH__
+contains (DEFINES, __BLUETOOTH__) {
+    greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
+    lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
+}
 
-#############
+
+#################################################################
 ##variables
-#############
+#################################################################
 CONFIG(debug, debug|release) {
     BUILD=Debug
 } else {
@@ -111,18 +130,18 @@ equals(QKIT_, MIPS32) {
 }
 
 
-############
+################################################################
 ##build cache
-############
+################################################################
 OBJECTS_DIR = obj
 MOC_DIR = obj/moc.cpp
 UI_DIR = obj/ui.h
 RCC_DIR = qrc
 DESTDIR = bin
 
-###########################
+##################################################################
 ##include directories
-###########################
+##################################################################
 INCLUDEPATH += $$PWD
 INCLUDEPATH += $$PWD/core
 INCLUDEPATH += $$PWD/customplot

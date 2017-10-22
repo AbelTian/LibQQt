@@ -1,14 +1,14 @@
 #include "qqtwindow.h"
 #include "ui_qqtwindow.h"
 #include "qqtobjectfactory.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtcore.h"
 #include "qqtwidgets.h"
 #include "qqtanimation.h"
 #include "qqtobjectfactory.h"
 #include "animationmanager.h"
 
-QQTWindow::QQTWindow(QWidget *parent) :
+QQTWindow::QQTWindow(QWidget* parent) :
     QStackedWidget(parent),
     ui(new Ui::QQTWindow)
 {

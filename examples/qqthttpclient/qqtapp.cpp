@@ -1,5 +1,5 @@
 #include "qqtapp.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtgui.h"
 #include "qqtcore.h"
 #include "qqtinput.h"

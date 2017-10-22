@@ -15,20 +15,18 @@ contains (CONFIG, BUILD_SRC) {
     include(../qqt_library.pri)
 }
 
-
-QT       += core gui
+QT       += core gui webkitwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = animationframe
+TARGET = qqthttpclient
 TEMPLATE = app
 
-INCLUDEPATH +=  $$PWD
 
-SOURCES += $$PWD/main.cpp $$PWD/qqtapp.cpp $$PWD/qqtwindow.cpp \
-    animationmanager.cpp
+INCLUDEPATH +=  .
 
-HEADERS  += $$PWD/qqtapp.h $$PWD/qqtwindow.h \
-    animationmanager.h
+SOURCES += $$PWD/main.cpp $$PWD/qqtapp.cpp $$PWD/qqtwindow.cpp
+
+HEADERS  += $$PWD/qqtapp.h $$PWD/qqtwindow.h
 
 FORMS    += $$PWD/qqtwindow.ui

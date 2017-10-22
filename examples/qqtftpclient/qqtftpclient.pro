@@ -15,20 +15,17 @@ contains (CONFIG, BUILD_SRC) {
     include(../qqt_library.pri)
 }
 
-
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = animationframe
+TARGET = qqtftpclient
 TEMPLATE = app
 
-INCLUDEPATH +=  $$PWD
+INCLUDEPATH +=  .
 
-SOURCES += $$PWD/main.cpp $$PWD/qqtapp.cpp $$PWD/qqtwindow.cpp \
-    animationmanager.cpp
+SOURCES += $$PWD/main.cpp $$PWD/qqtapp.cpp $$PWD/qqtwindow.cpp
 
-HEADERS  += $$PWD/qqtapp.h $$PWD/qqtwindow.h \
-    animationmanager.h
+HEADERS  += $$PWD/qqtapp.h $$PWD/qqtwindow.h
 
 FORMS    += $$PWD/qqtwindow.ui

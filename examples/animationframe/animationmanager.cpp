@@ -1,19 +1,19 @@
 #include "animationmanager.h"
 #include "qqtobjectfactory.h"
 #include "qqtanimation.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 
 AnimationManager* AnimationManager::_instance = NULL;
 
-AnimationManager *AnimationManager::Instance(QObject *parent)
+AnimationManager* AnimationManager::Instance(QObject* parent)
 {
-    if(_instance)
+    if (_instance)
         return _instance;
     _instance = new AnimationManager(parent);
     return _instance;
 }
 
-AnimationManager::AnimationManager(QObject *parent) : QObject(parent)
+AnimationManager::AnimationManager(QObject* parent) : QObject(parent)
 {
     //init app's all animation
     QPushButton* pushButton = (QPushButton*)QQTObjectFactory::registedObject("pushButton");

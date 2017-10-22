@@ -1,7 +1,7 @@
 #include "qqtwindow.h"
 #include "ui_qqtwindow.h"
 #include "qqtobjectfactory.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtcore.h"
 #include "qqtgui.h"
 #include "animationmanager.h"

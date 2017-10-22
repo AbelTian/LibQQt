@@ -1,11 +1,11 @@
 #include "qqtapp.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtversion.h"
 #include "qqtcore.h"
 #include "qqtgui.h"
 #include "qqtwindow.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QQTApp a(argc, argv);
 

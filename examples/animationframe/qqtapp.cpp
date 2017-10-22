@@ -1,5 +1,5 @@
 #include "qqtapp.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtgui.h"
 #include "qqtcore.h"
 #include "qqtinput.h"
@@ -8,9 +8,8 @@
 #include "qqtclient.h"
 #include "qqtserver.h"
 #include "qqtserialport.h"
-#include "qqtcloudprotocol.h"
-#include "qqtuserserialprotocol.h"
 #include "qqtpluginwatcher.h"
+#include "qqtversion.h"
 
 /*
  * 转移到Lan协议当中去。
@@ -23,7 +22,7 @@ void QQTLanServer(QObject* parent = 0)
     s->installedProtocol();
 }
 
-QQTApp::QQTApp(int &argc, char **argv) : QApplication(argc, argv)
+QQTApp::QQTApp(int& argc, char** argv) : QApplication(argc, argv)
 {
 #ifndef __QT5__
     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
@@ -56,11 +55,11 @@ QQTApp::QQTApp(int &argc, char **argv) : QApplication(argc, argv)
 
 #if 0
     int heitiFontID = db.addApplicationFont("/usr/lib/fonts/heiti.ttf");
-    QString heiti = db.applicationFontFamilies ( heitiFontID ).at(0);
+    QString heiti = db.applicationFontFamilies(heitiFontID).at(0);
     pline() << heiti;
 #else
     int wenquanyiFontID = db.addApplicationFont("/usr/lib/fonts/wenquanyi.ttf");
-    QString wenquanyi = db.applicationFontFamilies ( wenquanyiFontID ).at(0);
+    QString wenquanyi = db.applicationFontFamilies(wenquanyiFontID).at(0);
     pline() << wenquanyi;
 #endif
 
@@ -140,13 +139,13 @@ void QQTApp::setLanguage()
 
 void QQTApp::slotUPanAutoRun(int status)
 {
-    if(QQTPluginWatcher::E_ADD == status)
+    if (QQTPluginWatcher::E_ADD == status)
     {
         QString mP = QQTPluginWatcher::Instance()->upanMountPath();
         QString app = QString("%1/autorun.sh").arg(mP);
         QFile file(app);
-        if(file.exists())
-            if(QDialog::Rejected == QQTMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
+        if (file.exists())
+            if (QDialog::Rejected == QQTMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
                 return;
         QProcess* p = new QProcess(this);
         p->setWorkingDirectory(mP);

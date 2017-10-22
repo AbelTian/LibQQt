@@ -3,6 +3,18 @@
 # Project created by QtCreator 2016-06-17T10:03:52
 #
 #-------------------------------------------------
+#include QQt's header (add QQt header to includepath)
+include(../../src/qqt_header.pri)
+
+#CONFIG += BUILD_SRC
+contains (CONFIG, BUILD_SRC) {
+    #if you want to build src but not link QQt in this project
+    #include(../../src/qqt.pri)
+} else {
+    #if you want to link QQt library
+    include(qqt_library.pri)
+}
+
 
 QT       += core gui
 
@@ -11,42 +23,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = qqtliveplayer
 TEMPLATE = app
 
-OBJECTS_DIR = obj
-MOC_DIR = obj/moc.cpp
-UI_DIR = obj/ui.h
-RCC_DIR = qrc
-
-#user directory
-#DESTDIR = bin
-DESTDIR = ../../../Product/install/Application
-
-INCLUDEPATH += ../qqtfoundation
-
-include(../qqtfoundation/qqtfoundation.pri)
-
-QKIT_ = $$(QKIT)
-
-message($${QKIT_} Defined in qqtframe)
-
-DEFINES += _TTY_POSIX_
-
-equals(QKIT_, MIPS32) {
-	QT += multimedia
-	DEFINES += __EMBEDDED_LINUX__
-} else {
-	DEFINES += __LINUX64__
-}
-
-CONFIG(debug, debug|release) {
-} else {
-	DEFINES -= QT_NO_DEBUG_OUTPUT
-}
-
 INCLUDEPATH +=  .
 
-target.path += /application
-
-INSTALLS += target
 
 CONFIG += c++11
 

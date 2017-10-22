@@ -88,8 +88,6 @@ HEADERS += \
 #bluetooth
 #DEFINES += __BLUETOOTH__
 contains (DEFINES, __BLUETOOTH__) {
-    greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
-    lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
     #bluetooth socket
     SOURCES += \
         $$PWD/network/qqtbluetoothclient.cpp \
@@ -113,7 +111,6 @@ equals(QKIT_, MIPS32) {
 #DEFINES += __QEXTSERIALPORT__
 contains (DEFINES, __QEXTSERIALPORT__) {
     #include ( $$PWD/network/qextserialport/qextserialport.pri )
-    CONFIG += thread
     HEADERS += $$PWD/network/qextserialport/qextserialbase.h \
               $$PWD/network/qextserialport/qextserialport.h \
               $$PWD/network/qextserialport/qextserialenumerator.h
@@ -122,21 +119,9 @@ contains (DEFINES, __QEXTSERIALPORT__) {
               $$PWD/network/qextserialport/qextserialenumerator.cpp
     unix:HEADERS += $$PWD/network/qextserialport/posix_qextserialport.h
     unix:SOURCES += $$PWD/network/qextserialport/posix_qextserialport.cpp
-    unix:DEFINES += _TTY_POSIX_
     win32:HEADERS += $$PWD/network/qextserialport/win_qextserialport.h
     win32:SOURCES += $$PWD/network/qextserialport/win_qextserialport.cpp
-    win32:DEFINES += _TTY_WIN_
-    message ( __QEXTSERIALPORT__ Defined in $${TARGET})
-} else {
-    greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
-    lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
-    unix {
-        DEFINES += _TTY_POSIX_
-    } else {
-        DEFINES += _TTY_WIN_
-    }
 }
-
 
 
 #core

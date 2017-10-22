@@ -1,7 +1,7 @@
 #include "animationmanager.h"
 #include "qqtobjectfactory.h"
 #include "qqtanimation.h"
-#include "qqtgui-qt.h"
+#include "qqt-qt.h"
 #include "qqtwindow.h"
 
 AnimationManager* AnimationManager::_instance = NULL;
