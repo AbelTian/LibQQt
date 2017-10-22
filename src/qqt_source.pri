@@ -24,6 +24,7 @@ win32 {
     }
 }
 
+#exquisite
 SOURCES = \
     $$PWD/exquisite/qqtcustomspeedmeter.cpp \
     $$PWD/exquisite/qqtframelesshelper.cpp \
@@ -92,8 +93,6 @@ win32 {
 }
 unix {
     equals(QKIT_, macOS) {
-        HEADERS += $$PWD/qqtdarwin.h
-    } else:equals(QKIT_, iOS) {
         HEADERS += $$PWD/qqtdarwin.h
     } else {
         HEADERS += $$PWD/qqtlinux.h

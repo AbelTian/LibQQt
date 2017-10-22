@@ -17,6 +17,7 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QDebug>
+#include <QProcess>
 
 #include <QPixmap>
 #include <QImage>

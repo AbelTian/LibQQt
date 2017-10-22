@@ -10,6 +10,7 @@
 #include <qqtcore.h>
 #include <QTranslator>
 #include <QFontDatabase>
+#include <QProcess>
 
 QQtApplication::QQtApplication(int& argc, char** argv) :
     QApplication(argc, argv),
