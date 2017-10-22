@@ -58,6 +58,8 @@ equals(QKIT_, EMBEDDED) {
     DEFINES += __WIN64__
 } else:equals(QKIT_, macOS) {
     DEFINES += __DARWIN__
+} else:equals(QKIT_, iOS) {
+    DEFINES += __IOS__
 } else:equals(QKIT_, Android) {
     DEFINES += __ANDROID__
 } else:equals(QKIT_, ANDROIDX86) {
@@ -78,6 +80,9 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 #if you use qextserialport, open the annotation
 #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
 #DEFINES += __QEXTSERIALPORT__
+equals(QKIT_, iOS) {
+    DEFINES += __QEXTSERIALPORT__
+}
 contains (DEFINES, __QEXTSERIALPORT__) {
     #include ( $$PWD/network/qextserialport/qextserialport.pri )
     CONFIG += thread
@@ -101,6 +106,8 @@ contains (DEFINES, __BLUETOOTH__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
 }
+#if you use QR encode, open this annotation
+DEFINES += __QRENCODE__
 
 
 #################################################################
@@ -145,6 +152,7 @@ DESTDIR = bin
 INCLUDEPATH += $$PWD
 INCLUDEPATH += $$PWD/core
 INCLUDEPATH += $$PWD/customplot
+# c support
 INCLUDEPATH += $$PWD/dmmu
 INCLUDEPATH += $$PWD/frame
 INCLUDEPATH += $$PWD/gui
@@ -156,4 +164,5 @@ INCLUDEPATH += $$PWD/printsupport
 INCLUDEPATH += $$PWD/sql
 INCLUDEPATH += $$PWD/widgets
 INCLUDEPATH += $$PWD/exquisite
-
+# c support
+INCLUDEPATH += $$PWD/qrencode

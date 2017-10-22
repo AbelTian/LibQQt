@@ -1,5 +1,5 @@
-﻿#ifndef __QQTCUSTOMSLIDERRULER_H__
-#define __QQTCUSTOMSLIDERRULER_H__
+﻿#ifndef QQTRULEREFFECTSLIDER_H
+#define QQTRULEREFFECTSLIDER_H
 
 /**
  * T.D.R (QQ:2657635903) MOD 2017年10月21日13:24:03
@@ -17,13 +17,12 @@
  * 7:暂不支持负数刻度值
  */
 
-#include <QWidget>
-
-class QQtCustomSliderRuler : public QWidget
+#include <QSlider>
+class QQtRulerEffectSlider : public QSlider
 {
     Q_OBJECT
 public:
-    explicit QQtCustomSliderRuler(QWidget* parent = 0);
+    explicit QQtRulerEffectSlider(QWidget* parent = 0);
 
 protected:
     void resizeEvent(QResizeEvent*);
@@ -167,4 +166,4 @@ signals:
     void valueChanged(double value);
 };
 
-#endif // __QQTCUSTOMSLIDERRULER_H__
+#endif // QQTRULEREFFECTSLIDER_H

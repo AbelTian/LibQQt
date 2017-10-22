@@ -4,18 +4,18 @@
 #include "qqtwin.h"
 #elif defined(__LINUX__) || defined(__LINUX64__)
 #include "qqtlinux.h"
-#elif defined (__DARWIN__)
+#elif defined (__DARWIN__)  || defined(__IOS__)
 #include "qqtdarwin.h"
 #endif
 #include "qqtcore.h"
 
-QQtBluetoothClient::QQtBluetoothClient(QBluetoothServiceInfo::Protocol socketType, QObject *parent) :
+QQtBluetoothClient::QQtBluetoothClient(QBluetoothServiceInfo::Protocol socketType, QObject* parent) :
     QBluetoothSocket(socketType, parent)
 {
     initSocket();
 }
 
-QQtBluetoothClient::QQtBluetoothClient(QObject *parent) : QBluetoothSocket(parent)
+QQtBluetoothClient::QQtBluetoothClient(QObject* parent) : QBluetoothSocket(parent)
 {
     initSocket();
 }
@@ -23,16 +23,16 @@ QQtBluetoothClient::QQtBluetoothClient(QObject *parent) : QBluetoothSocket(paren
 void QQtBluetoothClient::initSocket()
 {
     connect(this, SIGNAL(stateChanged(QBluetoothSocket::SocketState)),
-            this, SLOT(socketStateChanged(QBluetoothSocket::SocketState)) );
+            this, SLOT(socketStateChanged(QBluetoothSocket::SocketState)));
     // connected
     connect(this, SIGNAL(connected()),
-            this, SLOT(socketConnected()) );
+            this, SLOT(socketConnected()));
     // disconnected
     connect(this, SIGNAL(disconnected()),
-            this, SLOT(socketDisconnect()) );
+            this, SLOT(socketDisconnect()));
     // error
     connect(this, SIGNAL(error(QBluetoothSocket::SocketError)),
-            this, SLOT(socketErrorOccured(QBluetoothSocket::SocketError)) );
+            this, SLOT(socketErrorOccured(QBluetoothSocket::SocketError)));
 
     connect(this, SIGNAL(readyRead()),
             this, SLOT(readyReadData()));
@@ -47,9 +47,9 @@ void QQtBluetoothClient::initSocket()
     m_protocol = nullptr;
 }
 
-void QQtBluetoothClient::installProtocol(QQTProtocol *stack)
+void QQtBluetoothClient::installProtocol(QQTProtocol* stack)
 {
-    if(m_protocol)
+    if (m_protocol)
         return;
 
     m_protocol = stack;
@@ -57,9 +57,9 @@ void QQtBluetoothClient::installProtocol(QQTProtocol *stack)
             this, SLOT(write(const QByteArray&)));
 }
 
-void QQtBluetoothClient::uninstallProtocol(QQTProtocol *stack)
+void QQtBluetoothClient::uninstallProtocol(QQTProtocol* stack)
 {
-    if(!m_protocol)
+    if (!m_protocol)
         return;
 
     disconnect(m_protocol, SIGNAL(write(const QByteArray&)),
@@ -67,7 +67,7 @@ void QQtBluetoothClient::uninstallProtocol(QQTProtocol *stack)
     m_protocol = NULL;
 }
 
-QQTProtocol *QQtBluetoothClient::installedProtocol()
+QQTProtocol* QQtBluetoothClient::installedProtocol()
 {
     return m_protocol;
 }
@@ -76,20 +76,20 @@ void QQtBluetoothClient::sendConnectMessage()
 {
     pline() << isOpen() << state();
 
-    if(!isOpen())
+    if (!isOpen())
     {
         connectToSingelHost();
         return;
     }
 
-    if(state() == ServiceLookupState ||
-            state() == ConnectingState)
+    if (state() == ServiceLookupState ||
+        state() == ConnectingState)
     {
         emit signalConnecting();
         return;
     }
 
-    if(state() == ConnectedState)
+    if (state() == ConnectedState)
         emit signalConnectSucc();
 
     return;
@@ -100,7 +100,7 @@ int QQtBluetoothClient::sendDisConnectFromHost()
 {
     pline() << isOpen() << state();
 
-    if(isOpen() )
+    if (isOpen())
     {
 #if defined(__WIN__) || defined (__WIN64__)
         ;
@@ -123,7 +123,7 @@ int QQtBluetoothClient::sendDisConnectFromHost()
 void QQtBluetoothClient::socketStateChanged(QBluetoothSocket::SocketState eSocketState)
 {
     pline() << eSocketState;
-    switch(eSocketState)
+    switch (eSocketState)
     {
     case ServiceLookupState:
     case ConnectingState:
@@ -150,7 +150,7 @@ void QQtBluetoothClient::socketErrorOccured(QBluetoothSocket::SocketError e)
      * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
      */
     pline() << e << errorString();
-    switch(e)
+    switch (e)
     {
     case HostNotFoundError:
     default:
@@ -193,12 +193,12 @@ void QQtBluetoothClient::connectToSingelHost()
         connectToService(m_serverIP, m_uuid);
         pline() << peerName() << m_uuid;
     }
-    else if(m_serviceInfo.isValid())
+    else if (m_serviceInfo.isValid())
     {
         connectToService(m_serviceInfo);
         pline() << m_serviceInfo;
     }
-    else if (m_PORT!= 0)
+    else if (m_PORT != 0)
     {
         connectToService(m_serverIP, m_PORT);
         pline() << peerName() << m_PORT;
@@ -217,19 +217,20 @@ void QQtBluetoothClient::readyReadData()
     //qint64 aaa = bytesAvailable();
     //pline() << aaa;
 
-    do{
+    do
+    {
         quint16 nBlockLen = m_protocol->splitter(m_blockOnNet);
 
         pline() << m_blockOnNet.size() << "..." << nBlockLen;
 
-        if(m_blockOnNet.length() < nBlockLen)
+        if (m_blockOnNet.length() < nBlockLen)
         {
             /*
              * 收到数据不足或者解析包长小于最小包长
              */
             return;
         }
-        else if(m_blockOnNet.length() > nBlockLen)
+        else if (m_blockOnNet.length() > nBlockLen)
         {
             /*
              * stick package
@@ -248,7 +249,8 @@ void QQtBluetoothClient::readyReadData()
          */
         m_protocol->dispatcher(m_blockOnNet);
         break;
-    }while(1);
+    }
+    while (1);
 
     m_blockOnNet.clear();
 }

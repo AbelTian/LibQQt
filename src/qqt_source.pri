@@ -25,19 +25,65 @@ win32 {
 }
 
 SOURCES = \
-    $$PWD/exquisite/qqtcustomprogressbar.cpp \
     $$PWD/exquisite/qqtcustomspeedmeter.cpp \
-    $$PWD/exquisite/qqtcustomsliderruler.cpp \
-    $$PWD/exquisite/qqtcustompiano.cpp \
     $$PWD/exquisite/qqtframelesshelper.cpp \
-    $$PWD/exquisite/qqtframelesshelperprivate.cpp
+    $$PWD/exquisite/qqtframelesshelperprivate.cpp \
+    $$PWD/exquisite/qqtcustompianokeyboard.cpp \
+    $$PWD/exquisite/qqtrippleeffectpushbutton.cpp \
+    $$PWD/exquisite/qqtcomplexprogressbar.cpp \
+    $$PWD/exquisite/qqtrulereffectslider.cpp \
+    $$PWD/exquisite/qqtflipeffectstackedwidget.cpp \
+    $$PWD/exquisite/qqtledbannereffectlabel.cpp \
+    $$PWD/exquisite/qqtmarqueeeffectlabel.cpp \
+    $$PWD/exquisite/qqtcustomverificationcode.cpp \
+    $$PWD/exquisite/qqtfadeeffectwidget.cpp \
+    $$PWD/exquisite/qqtshadoweffectwidget.cpp \
+    $$PWD/exquisite/qqtpopeffectdialog.cpp \
+    $$PWD/exquisite/qqtcustomqrencodewidget.cpp
 HEADERS = \
-    $$PWD/exquisite/qqtcustomprogressbar.h \
     $$PWD/exquisite/qqtcustomspeedmeter.h \
-    $$PWD/exquisite/qqtcustomsliderruler.h \
-    $$PWD/exquisite/qqtcustompiano.h \
     $$PWD/exquisite/qqtframelesshelper.h \
-    $$PWD/exquisite/qqtframelesshelperprivate.h
+    $$PWD/exquisite/qqtframelesshelperprivate.h \
+    $$PWD/exquisite/qqtcustompianokeyboard.h \
+    $$PWD/exquisite/qqtrippleeffectpushbutton.h \
+    $$PWD/exquisite/qqtcomplexprogressbar.h \
+    $$PWD/exquisite/qqtrulereffectslider.h \
+    $$PWD/exquisite/qqtflipeffectstackedwidget.h \
+    $$PWD/exquisite/qqtmarqueeeffectlabel.h \
+    $$PWD/exquisite/qqtledbannereffectlabel.h \
+    $$PWD/exquisite/qqtcustomverificationcode.h \
+    $$PWD/exquisite/qqtfadeeffectwidget.h \
+    $$PWD/exquisite/qqtshadoweffectwidget.h \
+    $$PWD/exquisite/qqtcustomqrencodewidget.h \
+    $$PWD/exquisite/qqtpopeffectdialog.h
+
+#qrcode
+#DEFINES += __QRENCODE__
+contains (DEFINES, __QRENCODE__) {
+    HEADERS += \
+        $$PWD/qrencode/bitstream.h \
+        $$PWD/qrencode/config.h \
+        $$PWD/qrencode/mask.h \
+        $$PWD/qrencode/mmask.h \
+        $$PWD/qrencode/mqrspec.h \
+        $$PWD/qrencode/qrencode.h \
+        $$PWD/qrencode/qrencode_inner.h \
+        $$PWD/qrencode/qrinput.h \
+        $$PWD/qrencode/qrspec.h \
+        $$PWD/qrencode/rscode.h \
+        $$PWD/qrencode/split.h
+
+    SOURCES += \
+        $$PWD/qrencode/bitstream.c \
+        $$PWD/qrencode/mask.c \
+        $$PWD/qrencode/mmask.c \
+        $$PWD/qrencode/mqrspec.c \
+        $$PWD/qrencode/qrencode.c \
+        $$PWD/qrencode/qrinput.c \
+        $$PWD/qrencode/qrspec.c \
+        $$PWD/qrencode/rscode.c \
+        $$PWD/qrencode/split.c
+}
 
 #root dir
 win32 {
@@ -46,6 +92,8 @@ win32 {
 }
 unix {
     equals(QKIT_, macOS) {
+        HEADERS += $$PWD/qqtdarwin.h
+    } else:equals(QKIT_, iOS) {
         HEADERS += $$PWD/qqtdarwin.h
     } else {
         HEADERS += $$PWD/qqtlinux.h

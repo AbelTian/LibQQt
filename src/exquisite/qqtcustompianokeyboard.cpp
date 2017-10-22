@@ -5,7 +5,7 @@
  * granted in any way without warranty by the original author.
  *
  */
-#include "qqtcustompiano.h"
+#include "qqtcustompianokeyboard.h"
 #include <QPainter>
 #include <QScrollBar>
 #include <QRect>
@@ -42,7 +42,7 @@ struct key
 };
 
 
-QQtCustomPiano::QQtCustomPiano(QWidget* p) : \
+QQtCustomPianoKeyBoard::QQtCustomPianoKeyBoard(QWidget* p) : \
     QWidget(p),
     octaves(10),
     octaveWidth(0),
@@ -70,11 +70,11 @@ QQtCustomPiano::QQtCustomPiano(QWidget* p) : \
     connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(sliderPos(int)));
 }
 
-QQtCustomPiano::~QQtCustomPiano()
+QQtCustomPianoKeyBoard::~QQtCustomPianoKeyBoard()
 {
 }
 
-void QQtCustomPiano::calculateSize()
+void QQtCustomPianoKeyBoard::calculateSize()
 {
     for (unsigned int i = 0; i < 12; i++)
         if (!octave[i].isBlack)
@@ -84,18 +84,18 @@ void QQtCustomPiano::calculateSize()
     size.setHeight(rangeSelectorSize + octave[0].height + scrollbar->height() + 1);
 }
 
-void QQtCustomPiano::scrollToCenter()
+void QQtCustomPianoKeyBoard::scrollToCenter()
 {
     doCenter = true;
     update();
 }
 
-void QQtCustomPiano::emitOutOfRangeNotes(bool e)
+void QQtCustomPianoKeyBoard::emitOutOfRangeNotes(bool e)
 {
     m_EmitOutOfRangeNotes = e;
 }
 
-void QQtCustomPiano::setRange(int s, int c, int e, bool beQuiet)
+void QQtCustomPianoKeyBoard::setRange(int s, int c, int e, bool beQuiet)
 {
     rangeStart = s - 1;
     rangeCenter = c;
@@ -108,12 +108,12 @@ void QQtCustomPiano::setRange(int s, int c, int e, bool beQuiet)
     update();
 }
 
-QSize QQtCustomPiano::sizeHint() const
+QSize QQtCustomPianoKeyBoard::sizeHint() const
 {
     return size;
 }
 
-inline int QQtCustomPiano::getNoteRangePosition(int note)
+inline int QQtCustomPianoKeyBoard::getNoteRangePosition(int note)
 {
     int _note = note % 12;
     int notePos = octave[_note].pos;
@@ -124,7 +124,7 @@ inline int QQtCustomPiano::getNoteRangePosition(int note)
     return notePos + (note / 12) * octaveWidth - scrollOffset;
 }
 
-inline int QQtCustomPiano::getNotePosition(int note)
+inline int QQtCustomPianoKeyBoard::getNotePosition(int note)
 {
     int _note = note % 12;
     int notePos = octave[_note].pos;
@@ -132,12 +132,12 @@ inline int QQtCustomPiano::getNotePosition(int note)
     return notePos + (note / 12) * octaveWidth - scrollOffset;
 }
 
-inline bool QQtCustomPiano::isBlack(int note)
+inline bool QQtCustomPianoKeyBoard::isBlack(int note)
 {
     return octave[note % 12].isBlack;
 }
 
-inline int QQtCustomPiano::getNoteRangeWidth(int note)
+inline int QQtCustomPianoKeyBoard::getNoteRangeWidth(int note)
 {
     int _note = note % 12;
     int width = octave[_note].width;
@@ -150,14 +150,14 @@ inline int QQtCustomPiano::getNoteRangeWidth(int note)
     return width;
 }
 
-inline void QQtCustomPiano::noteToRangeRect(int note, QRect& rect)
+inline void QQtCustomPianoKeyBoard::noteToRangeRect(int note, QRect& rect)
 {
     int noteStart = getNoteRangePosition(note);
     int noteWidth = getNoteRangeWidth(note);
     rect.setRect(noteStart, 0, noteWidth, rangeSelectorSize);
 }
 
-void QQtCustomPiano::paintEvent(QPaintEvent* /*event*/)
+void QQtCustomPianoKeyBoard::paintEvent(QPaintEvent* /*event*/)
 {
     QPainter painter(this);
     /*
@@ -261,13 +261,13 @@ void QQtCustomPiano::paintEvent(QPaintEvent* /*event*/)
     painter.fillRect(rCenter, Qt::red);
 }
 
-void QQtCustomPiano::sliderPos(int p)
+void QQtCustomPianoKeyBoard::sliderPos(int p)
 {
     scrollOffset = p;
     update();
 }
 
-int QQtCustomPiano::getNoteFromMousePos(const QPoint& p, bool ignoreY)
+int QQtCustomPianoKeyBoard::getNoteFromMousePos(const QPoint& p, bool ignoreY)
 {
     int _note = -1;
 
@@ -309,7 +309,7 @@ int QQtCustomPiano::getNoteFromMousePos(const QPoint& p, bool ignoreY)
     return _note;
 }
 
-bool QQtCustomPiano::getRangeThumbFromMousePos(const QPoint& p, int** thumb)
+bool QQtCustomPianoKeyBoard::getRangeThumbFromMousePos(const QPoint& p, int** thumb)
 {
     if (p.y() >= rangeSelectorSize)
         return false;
@@ -344,7 +344,7 @@ bool QQtCustomPiano::getRangeThumbFromMousePos(const QPoint& p, int** thumb)
     return false;
 }
 
-bool QQtCustomPiano::updateRangeThumbPosFromMousePos(const QPoint& p)
+bool QQtCustomPianoKeyBoard::updateRangeThumbPosFromMousePos(const QPoint& p)
 {
     int _note = getNoteFromMousePos(p, true);
 
@@ -369,7 +369,7 @@ bool QQtCustomPiano::updateRangeThumbPosFromMousePos(const QPoint& p)
     return true;
 }
 
-bool QQtCustomPiano::fixRangeMarkers()
+bool QQtCustomPianoKeyBoard::fixRangeMarkers()
 {
     int fixed = 0;
 
@@ -388,12 +388,12 @@ bool QQtCustomPiano::fixRangeMarkers()
     return fixed > 0 ? true : false;
 }
 
-bool QQtCustomPiano::isNoteInRange(int note)
+bool QQtCustomPianoKeyBoard::isNoteInRange(int note)
 {
     return (note > rangeStart && note < rangeEnd) ? true : false;
 }
 
-void QQtCustomPiano::mousePressEvent(QMouseEvent* event)
+void QQtCustomPianoKeyBoard::mousePressEvent(QMouseEvent* event)
 {
     currentNote = getNoteFromMousePos(event->pos());
 
@@ -420,7 +420,7 @@ void QQtCustomPiano::mousePressEvent(QMouseEvent* event)
     }
 }
 
-void QQtCustomPiano::mouseReleaseEvent(QMouseEvent* event)
+void QQtCustomPianoKeyBoard::mouseReleaseEvent(QMouseEvent* event)
 {
     if (pianoKeyDown)
     {
@@ -437,7 +437,7 @@ void QQtCustomPiano::mouseReleaseEvent(QMouseEvent* event)
     }
 }
 
-void QQtCustomPiano::mouseMoveEvent(QMouseEvent* event)
+void QQtCustomPianoKeyBoard::mouseMoveEvent(QMouseEvent* event)
 {
     if (pianoKeyDown)
     {

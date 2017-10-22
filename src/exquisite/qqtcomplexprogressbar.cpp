@@ -2,13 +2,13 @@
 #pragma execution_character_set("utf-8")
 #endif
 
-#include "qqtcustomprogressbar.h"
+#include "qqtcomplexprogressbar.h"
 #include "qpainter.h"
 #include "qdebug.h"
 #include "qmath.h"
 #include "qtimer.h"
 
-QQtCustomProgressBar::QQtCustomProgressBar(QWidget* parent) : QWidget(parent)
+QQtComplexProgressBar::QQtComplexProgressBar(QWidget* parent) : QWidget(parent)
 {
     minValue = 0;
     maxValue = 100;
@@ -43,11 +43,11 @@ QQtCustomProgressBar::QQtCustomProgressBar(QWidget* parent) : QWidget(parent)
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 }
 
-QQtCustomProgressBar::~QQtCustomProgressBar()
+QQtComplexProgressBar::~QQtComplexProgressBar()
 {
 }
 
-void QQtCustomProgressBar::paintEvent(QPaintEvent*)
+void QQtComplexProgressBar::paintEvent(QPaintEvent*)
 {
     int width = this->width();
     int height = this->height();
@@ -95,7 +95,7 @@ void QQtCustomProgressBar::paintEvent(QPaintEvent*)
     drawText(&painter, 100);
 }
 
-void QQtCustomProgressBar::drawCircle(QPainter* painter, int radius)
+void QQtComplexProgressBar::drawCircle(QPainter* painter, int radius)
 {
     if (percentStyle == PercentStyle_Arc)
     {
@@ -130,7 +130,7 @@ void QQtCustomProgressBar::drawCircle(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtCustomProgressBar::drawArc(QPainter* painter, int radius)
+void QQtComplexProgressBar::drawArc(QPainter* painter, int radius)
 {
     painter->save();
     painter->setBrush(Qt::NoBrush);
@@ -178,7 +178,7 @@ void QQtCustomProgressBar::drawArc(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtCustomProgressBar::drawPolo(QPainter* painter, int radius)
+void QQtComplexProgressBar::drawPolo(QPainter* painter, int radius)
 {
     /*计算当前值所占百分比对应高度*/
     double poloHeight = (double)radius / (maxValue - minValue) * (value - minValue) ;
@@ -204,7 +204,7 @@ void QQtCustomProgressBar::drawPolo(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtCustomProgressBar::drawWave(QPainter* painter, int radius)
+void QQtComplexProgressBar::drawWave(QPainter* painter, int radius)
 {
     /*大路径*/
     QPainterPath bigPath;
@@ -318,7 +318,7 @@ void QQtCustomProgressBar::drawWave(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtCustomProgressBar::drawText(QPainter* painter, int radius)
+void QQtComplexProgressBar::drawText(QPainter* painter, int radius)
 {
     QString strValue = QString("%1").arg(value);
 
@@ -343,97 +343,97 @@ void QQtCustomProgressBar::drawText(QPainter* painter, int radius)
     painter->restore();
 }
 
-int QQtCustomProgressBar::getMinValue() const
+int QQtComplexProgressBar::getMinValue() const
 {
     return this->minValue;
 }
 
-int QQtCustomProgressBar::getMaxValue() const
+int QQtComplexProgressBar::getMaxValue() const
 {
     return this->maxValue;
 }
 
-int QQtCustomProgressBar::getValue() const
+int QQtComplexProgressBar::getValue() const
 {
     return this->value;
 }
 
-int QQtCustomProgressBar::getNullPosition() const
+int QQtComplexProgressBar::getNullPosition() const
 {
     return this->nullPosition;
 }
 
-int QQtCustomProgressBar::getLineWidth() const
+int QQtComplexProgressBar::getLineWidth() const
 {
     return this->lineWidth;
 }
 
-bool QQtCustomProgressBar::getShowPercent() const
+bool QQtComplexProgressBar::getShowPercent() const
 {
     return this->showPercent;
 }
 
-bool QQtCustomProgressBar::getShowFree() const
+bool QQtComplexProgressBar::getShowFree() const
 {
     return this->showFree;
 }
 
-bool QQtCustomProgressBar::getShowSmallCircle() const
+bool QQtComplexProgressBar::getShowSmallCircle() const
 {
     return this->showSmallCircle;
 }
 
-bool QQtCustomProgressBar::getClockWise() const
+bool QQtComplexProgressBar::getClockWise() const
 {
     return this->clockWise;
 }
 
-QColor QQtCustomProgressBar::getUsedColor() const
+QColor QQtComplexProgressBar::getUsedColor() const
 {
     return this->usedColor;
 }
 
-QColor QQtCustomProgressBar::getFreeColor() const
+QColor QQtComplexProgressBar::getFreeColor() const
 {
     return this->freeColor;
 }
 
-QColor QQtCustomProgressBar::getCircleColor() const
+QColor QQtComplexProgressBar::getCircleColor() const
 {
     return this->circleColor;
 }
 
-QColor QQtCustomProgressBar::getTextColor() const
+QColor QQtComplexProgressBar::getTextColor() const
 {
     return this->textColor;
 }
 
-QString QQtCustomProgressBar::getPercentSuffix() const
+QString QQtComplexProgressBar::getPercentSuffix() const
 {
     return this->percentSuffix;
 }
 
-QQtCustomProgressBar::PercentStyle QQtCustomProgressBar::getPercentStyle() const
+QQtComplexProgressBar::PercentStyle QQtComplexProgressBar::getPercentStyle() const
 {
     return this->percentStyle;
 }
 
-QQtCustomProgressBar::CircleType QQtCustomProgressBar::getCircleType() const
+QQtComplexProgressBar::CircleType QQtComplexProgressBar::getCircleType() const
 {
     return this->circleType;
 }
 
-QSize QQtCustomProgressBar::sizeHint() const
+QSize QQtComplexProgressBar::sizeHint() const
 {
     return QSize(200, 200);
 }
 
-QSize QQtCustomProgressBar::minimumSizeHint() const
+QSize QQtComplexProgressBar::minimumSizeHint() const
 {
     return QSize(10, 10);
 }
 
-void QQtCustomProgressBar::setRange(int minValue, int maxValue)
+void QQtComplexProgressBar::setRange(int minValue, int maxValue)
 {
     /*如果最小值大于或者等于最大值则不设置*/
     if (minValue >= maxValue)
@@ -453,17 +453,17 @@ void QQtCustomProgressBar::setRange(int minValue, int maxValue)
     update();
 }
 
-void QQtCustomProgressBar::setMinValue(int minValue)
+void QQtComplexProgressBar::setMinValue(int minValue)
 {
     setRange(minValue, maxValue);
 }
 
-void QQtCustomProgressBar::setMaxValue(int maxValue)
+void QQtComplexProgressBar::setMaxValue(int maxValue)
 {
     setRange(minValue, maxValue);
 }
 
-void QQtCustomProgressBar::setValue(int value)
+void QQtComplexProgressBar::setValue(int value)
 {
     /*值小于最小值或者值大于最大值或者值和当前值一致则无需处理*/
     if (value < minValue || value > maxValue || value == this->value)
@@ -476,7 +476,7 @@ void QQtCustomProgressBar::setValue(int value)
     emit valueChanged(value);
 }
 
-void QQtCustomProgressBar::setNullPosition(int nullPosition)
+void QQtComplexProgressBar::setNullPosition(int nullPosition)
 {
     if (this->nullPosition != nullPosition)
     {
@@ -485,7 +485,7 @@ void QQtCustomProgressBar::setNullPosition(int nullPosition)
     }
 }
 
-void QQtCustomProgressBar::setLineWidth(int lineWidth)
+void QQtComplexProgressBar::setLineWidth(int lineWidth)
 {
     if (this->lineWidth != lineWidth)
     {
@@ -494,7 +494,7 @@ void QQtCustomProgressBar::setLineWidth(int lineWidth)
     }
 }
 
-void QQtCustomProgressBar::setShowPercent(bool showPercent)
+void QQtComplexProgressBar::setShowPercent(bool showPercent)
 {
     if (this->showPercent != showPercent)
     {
@@ -503,7 +503,7 @@ void QQtCustomProgressBar::setShowPercent(bool showPercent)
     }
 }
 
-void QQtCustomProgressBar::setPercentSuffix(QString percentSuffix)
+void QQtComplexProgressBar::setPercentSuffix(QString percentSuffix)
 {
     if (this->percentSuffix != percentSuffix)
     {
@@ -512,7 +512,7 @@ void QQtCustomProgressBar::setPercentSuffix(QString percentSuffix)
     }
 }
 
-void QQtCustomProgressBar::setShowFree(bool showFree)
+void QQtComplexProgressBar::setShowFree(bool showFree)
 {
     if (this->showFree != showFree)
     {
@@ -521,7 +521,7 @@ void QQtCustomProgressBar::setShowFree(bool showFree)
     }
 }
 
-void QQtCustomProgressBar::setShowSmallCircle(bool showSmallCircle)
+void QQtComplexProgressBar::setShowSmallCircle(bool showSmallCircle)
 {
     if (this->showSmallCircle != showSmallCircle)
     {
@@ -530,7 +530,7 @@ void QQtCustomProgressBar::setShowSmallCircle(bool showSmallCircle)
     }
 }
 
-void QQtCustomProgressBar::setClockWise(bool clockWise)
+void QQtComplexProgressBar::setClockWise(bool clockWise)
 {
     if (this->clockWise != clockWise)
     {
@@ -539,7 +539,7 @@ void QQtCustomProgressBar::setClockWise(bool clockWise)
     }
 }
 
-void QQtCustomProgressBar::setUsedColor(const QColor& usedColor)
+void QQtComplexProgressBar::setUsedColor(const QColor& usedColor)
 {
     if (this->usedColor != usedColor)
     {
@@ -548,7 +548,7 @@ void QQtCustomProgressBar::setUsedColor(const QColor& usedColor)
     }
 }
 
-void QQtCustomProgressBar::setFreeColor(const QColor& freeColor)
+void QQtComplexProgressBar::setFreeColor(const QColor& freeColor)
 {
     if (this->freeColor != freeColor)
     {
@@ -557,7 +557,7 @@ void QQtCustomProgressBar::setFreeColor(const QColor& freeColor)
     }
 }
 
-void QQtCustomProgressBar::setCircleColor(const QColor& circleColor)
+void QQtComplexProgressBar::setCircleColor(const QColor& circleColor)
 {
     if (this->circleColor != circleColor)
     {
@@ -566,7 +566,7 @@ void QQtCustomProgressBar::setCircleColor(const QColor& circleColor)
     }
 }
 
-void QQtCustomProgressBar::setCircleImage(const QString& circleImage)
+void QQtComplexProgressBar::setCircleImage(const QString& circleImage)
 {
     if (this->circleImage != circleImage)
     {
@@ -575,7 +575,7 @@ void QQtCustomProgressBar::setCircleImage(const QString& circleImage)
     }
 }
 
-void QQtCustomProgressBar::setTextColor(const QColor& textColor)
+void QQtComplexProgressBar::setTextColor(const QColor& textColor)
 {
     if (this->textColor != textColor)
     {
@@ -584,7 +584,7 @@ void QQtCustomProgressBar::setTextColor(const QColor& textColor)
     }
 }
 
-void QQtCustomProgressBar::setTextFont(QFont font)
+void QQtComplexProgressBar::setTextFont(QFont font)
 {
     if (this->textFont != font)
     {
@@ -595,7 +595,7 @@ void QQtCustomProgressBar::setTextFont(QFont font)
 
 #define TIMER_FIELD 600
 
-void QQtCustomProgressBar::setPercentStyle(QQtCustomProgressBar::PercentStyle percentStyle)
+void QQtComplexProgressBar::setPercentStyle(QQtComplexProgressBar::PercentStyle percentStyle)
 {
     if (this->percentStyle != percentStyle)
     {
@@ -608,7 +608,7 @@ void QQtCustomProgressBar::setPercentStyle(QQtCustomProgressBar::PercentStyle pe
     }
 }
 
-void QQtCustomProgressBar::setCircleType(QQtCustomProgressBar::CircleType circleType)
+void QQtComplexProgressBar::setCircleType(QQtComplexProgressBar::CircleType circleType)
 {
     if (this->circleType != circleType)
     {
@@ -617,7 +617,7 @@ void QQtCustomProgressBar::setCircleType(QQtCustomProgressBar::CircleType circle
     }
 }
 
-void QQtCustomProgressBar::setWaveDensity(int value)
+void QQtComplexProgressBar::setWaveDensity(int value)
 {
     if (value < 1)
         value = 1;
@@ -628,7 +628,7 @@ void QQtCustomProgressBar::setWaveDensity(int value)
     }
 }
 
-void QQtCustomProgressBar::setWaveHeight(int value)
+void QQtComplexProgressBar::setWaveHeight(int value)
 {
     if (value < 1)
         value = 1;
@@ -639,7 +639,7 @@ void QQtCustomProgressBar::setWaveHeight(int value)
     }
 }
 
-void QQtCustomProgressBar::setWaveDirection(WaveDirection direction)
+void QQtComplexProgressBar::setWaveDirection(WaveDirection direction)
 {
     if (this->waveDirection != direction)
     {
@@ -648,7 +648,7 @@ void QQtCustomProgressBar::setWaveDirection(WaveDirection direction)
     }
 }
 
-void QQtCustomProgressBar::setWaveSpeed(int speed)
+void QQtComplexProgressBar::setWaveSpeed(int speed)
 {
     if (speed < 1)
         speed = 1;

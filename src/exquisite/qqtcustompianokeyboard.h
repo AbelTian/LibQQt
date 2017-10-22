@@ -1,26 +1,27 @@
 /*
+ * T.D.R (QQ:2657635903) mod 2017年10月21日20:48:43
+ */
+
+/*
  * Copyright 2010 - Andre Maaßdorf
  *
  * Use, change and distribution of the code below is hereby
  * granted in any way without warranty by the original author.
  *
  */
-/**
- * T.D.R (QQ:2657635903) mod 2017年10月21日20:48:43
-**/
-#ifndef __QQTCUSTOMPIANO_H__
-#define __QQTCUSTOMPIANO_H__
+#ifndef __QQTCUSTOMPIANOKEYBOARD_H__
+#define __QQTCUSTOMPIANOKEYBOARD_H__
 
 #include <QWidget>
 
 class QScrollBar;
 
-class QQtCustomPiano : public QWidget
+class QQtCustomPianoKeyBoard : public QWidget
 {
     Q_OBJECT
 public:
-    QQtCustomPiano(QWidget*);
-    ~QQtCustomPiano();
+    QQtCustomPianoKeyBoard(QWidget*);
+    ~QQtCustomPianoKeyBoard();
 
     void scrollToCenter();
     void emitOutOfRangeNotes(bool);
@@ -77,4 +78,4 @@ private:
     QWidget*      parent;
 };
 
-#endif // __QQTCUSTOMPIANO_H__
+#endif // __QQTCUSTOMPIANOKEYBOARD_H__

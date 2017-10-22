@@ -35,7 +35,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 QT += core gui network sql xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport bluetooth
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 INCLUDEPATH +=  $$PWD

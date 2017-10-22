@@ -1,11 +1,11 @@
-﻿#include "qqtcustomsliderruler.h"
+﻿#include "qqtrulereffectslider.h"
 #include "qpainter.h"
 #include "qevent.h"
 #include "qtimer.h"
 #include "qdebug.h"
 
-QQtCustomSliderRuler::QQtCustomSliderRuler(QWidget* parent) :
-    QWidget(parent)
+QQtRulerEffectSlider::QQtRulerEffectSlider(QWidget* parent) :
+    QSlider(parent)
 {
     value = 0.0;
     minValue = 0.0;
@@ -31,13 +31,13 @@ QQtCustomSliderRuler::QQtCustomSliderRuler(QWidget* parent) :
     sliderLastPot = QPointF(space, longLineHeight / 2);
 }
 
-void QQtCustomSliderRuler::resizeEvent(QResizeEvent*)
+void QQtRulerEffectSlider::resizeEvent(QResizeEvent*)
 {
     resetVariables();
     setValue(currentValue);
 }
 
-void QQtCustomSliderRuler::wheelEvent(QWheelEvent* e)
+void QQtRulerEffectSlider::wheelEvent(QWheelEvent* e)
 {
     /*滚动的角度,*8就是鼠标滚动的距离*/
     int degrees = e->delta() / 8;
@@ -75,7 +75,7 @@ void QQtCustomSliderRuler::wheelEvent(QWheelEvent* e)
     }
 }
 
-void QQtCustomSliderRuler::mousePressEvent(QMouseEvent* e)
+void QQtRulerEffectSlider::mousePressEvent(QMouseEvent* e)
 {
     if (e->button() & Qt::LeftButton)
     {
@@ -87,13 +87,13 @@ void QQtCustomSliderRuler::mousePressEvent(QMouseEvent* e)
     }
 }
 
-void QQtCustomSliderRuler::mouseReleaseEvent(QMouseEvent* e)
+void QQtRulerEffectSlider::mouseReleaseEvent(QMouseEvent* e)
 {
     pressed = false;
     update();
 }
 
-void QQtCustomSliderRuler::mouseMoveEvent(QMouseEvent* e)
+void QQtRulerEffectSlider::mouseMoveEvent(QMouseEvent* e)
 {
     if (pressed)
     {
@@ -112,7 +112,7 @@ void QQtCustomSliderRuler::mouseMoveEvent(QMouseEvent* e)
     }
 }
 
-void QQtCustomSliderRuler::paintEvent(QPaintEvent*)
+void QQtRulerEffectSlider::paintEvent(QPaintEvent*)
 {
     /*绘制准备工作,启用反锯齿*/
     QPainter painter(this);
@@ -128,7 +128,7 @@ void QQtCustomSliderRuler::paintEvent(QPaintEvent*)
     drawTip(&painter);
 }
 
-void QQtCustomSliderRuler::drawBg(QPainter* painter)
+void QQtRulerEffectSlider::drawBg(QPainter* painter)
 {
     painter->save();
     painter->setPen(Qt::NoPen);
@@ -140,7 +140,7 @@ void QQtCustomSliderRuler::drawBg(QPainter* painter)
     painter->restore();
 }
 
-void QQtCustomSliderRuler::drawRule(QPainter* painter)
+void QQtRulerEffectSlider::drawRule(QPainter* painter)
 {
     painter->save();
     painter->setPen(lineColor);
@@ -185,7 +185,7 @@ void QQtCustomSliderRuler::drawRule(QPainter* painter)
     painter->restore();
 }
 
-void QQtCustomSliderRuler::drawSlider(QPainter* painter)
+void QQtRulerEffectSlider::drawSlider(QPainter* painter)
 {
     painter->save();
 
@@ -223,7 +223,7 @@ void QQtCustomSliderRuler::drawSlider(QPainter* painter)
     painter->restore();
 }
 
-void QQtCustomSliderRuler::drawTip(QPainter* painter)
+void QQtRulerEffectSlider::drawTip(QPainter* painter)
 {
     if (!pressed)
     {
@@ -239,7 +239,7 @@ void QQtCustomSliderRuler::drawTip(QPainter* painter)
     painter->restore();
 }
 
-void QQtCustomSliderRuler::resetVariables()
+void QQtRulerEffectSlider::resetVariables()
 {
     longLineHeight = height() / 5;
     shortLineHeight = height() / 7;
@@ -247,7 +247,7 @@ void QQtCustomSliderRuler::resetVariables()
     sliderBottomHeight = height() / 6;
 }
 
-void QQtCustomSliderRuler::setRange(double minValue, double maxValue)
+void QQtRulerEffectSlider::setRange(double minValue, double maxValue)
 {
     /*如果最小值大于或者等于最大值以及最小值小于0则不设置*/
     if (minValue >= maxValue || minValue < 0)
@@ -260,12 +260,12 @@ void QQtCustomSliderRuler::setRange(double minValue, double maxValue)
     setValue(minValue);
 }
 
-void QQtCustomSliderRuler::setRange(int minValue, int maxValue)
+void QQtRulerEffectSlider::setRange(int minValue, int maxValue)
 {
     setRange((double)minValue, (double)maxValue);
 }
 
-void QQtCustomSliderRuler::setValue(double value)
+void QQtRulerEffectSlider::setValue(double value)
 {
     /*值小于最小值或者值大于最大值则无需处理*/
     if (value < minValue || value > maxValue)
@@ -286,18 +286,18 @@ void QQtCustomSliderRuler::setValue(double value)
     update();
 }
 
-void QQtCustomSliderRuler::setValue(int value)
+void QQtRulerEffectSlider::setValue(int value)
 {
     setValue((double)value);
 }
 
-void QQtCustomSliderRuler::setPrecision(int precision)
+void QQtRulerEffectSlider::setPrecision(int precision)
 {
     this->precision = precision;
     update();
 }
 
-void QQtCustomSliderRuler::setStep(int longStep, int shortStep)
+void QQtRulerEffectSlider::setStep(int longStep, int shortStep)
 {
     /*短步长不能超过长步长*/
     if (longStep < shortStep)
@@ -310,33 +310,33 @@ void QQtCustomSliderRuler::setStep(int longStep, int shortStep)
     update();
 }
 
-void QQtCustomSliderRuler::setSpace(int space)
+void QQtRulerEffectSlider::setSpace(int space)
 {
     this->space = space;
     update();
 }
 
-void QQtCustomSliderRuler::setBgColor(QColor bgColorStart, QColor bgColorEnd)
+void QQtRulerEffectSlider::setBgColor(QColor bgColorStart, QColor bgColorEnd)
 {
     this->bgColorStart = bgColorStart;
     this->bgColorEnd = bgColorEnd;
     update();
 }
 
-void QQtCustomSliderRuler::setLineColor(QColor lineColor)
+void QQtRulerEffectSlider::setLineColor(QColor lineColor)
 {
     this->lineColor = lineColor;
     update();
 }
 
-void QQtCustomSliderRuler::setSliderColor(QColor sliderColorTop, QColor sliderColorBottom)
+void QQtRulerEffectSlider::setSliderColor(QColor sliderColorTop, QColor sliderColorBottom)
 {
     this->sliderColorTop = sliderColorTop;
     this->sliderColorBottom = sliderColorBottom;
     update();
 }
 
-void QQtCustomSliderRuler::setTipBgColor(QColor tipBgColor, QColor tipTextColor)
+void QQtRulerEffectSlider::setTipBgColor(QColor tipBgColor, QColor tipTextColor)
 {
     this->tipBgColor = tipBgColor;
     this->tipTextColor = tipTextColor;

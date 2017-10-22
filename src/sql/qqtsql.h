@@ -29,10 +29,12 @@ extern "C" {
 
 QQTSHARED_EXPORT QSqlDatabase newDatabaseConn();
 
-QQTSHARED_EXPORT void setDatabaseName(QSqlDatabase &db, QString dbName);
+QQTSHARED_EXPORT void setDatabaseName(QSqlDatabase& db, QString dbName);
+QQTSHARED_EXPORT void useDatabase(QSqlDatabase& db, QString dbName);
 
-QQTSHARED_EXPORT void openDatabase(QSqlDatabase &db);
+QQTSHARED_EXPORT void openDatabase(QSqlDatabase& db);
+QQTSHARED_EXPORT void closeDatabase(QSqlDatabase& db);
 
-QQTSHARED_EXPORT void closeDatabase(QSqlDatabase &db);
+QQTSHARED_EXPORT void deleteDatabaseConn(QString connectionName);
 
 #endif // QQTSQLDEFINE_H

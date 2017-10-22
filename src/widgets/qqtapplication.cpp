@@ -11,7 +11,7 @@
 #include <QTranslator>
 #include <QFontDatabase>
 
-QQtApplication::QQtApplication(int &argc, char **argv) :
+QQtApplication::QQtApplication(int& argc, char** argv) :
     QApplication(argc, argv),
     bUPanAutoRun(false)
 {
@@ -55,7 +55,7 @@ QQtApplication::QQtApplication(int &argc, char **argv) :
     QQTInput::Instance()->Init("min", "control", "QQT", 14, 14);
 #endif
 
-#ifndef __DARWIN__
+#if ( !defined (__DARWIN__)  && !defined(__IOS__) )
     QObject::connect(QQTPluginWatcher::Instance(), SIGNAL(storageChanged(int)),
                      this, SLOT(slotUPanAutoRun(int)));
 #endif
@@ -89,22 +89,23 @@ void QQtApplication::setUPanAutorun(bool run)
 
 void QQtApplication::slotUPanAutoRun(int status)
 {
-    if(!bUPanAutoRun)
+    if (!bUPanAutoRun)
         return;
 
-    if(QQTPluginWatcher::E_ADD == status)
+    if (QQTPluginWatcher::E_ADD == status)
     {
         QString mP = QQTPluginWatcher::Instance()->upanMountPath();
         QString app = QString("%1/autorun.sh").arg(mP);
         QFile file(app);
-        if(file.exists())
+        if (file.exists())
         {
-            if(QDialog::Rejected == QQTMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
+            if (QDialog::Rejected == QQTMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
             {
                 return;
             }
         }
-        else {
+        else
+        {
             return;
         }
         QProcess* p = new QProcess(this);
@@ -119,7 +120,7 @@ void QQtApplication::setTextFont(QString fontfile, int fontsize)
     QFontDatabase db;
 
     int fontID = db.addApplicationFont(fontfile);
-    QString ziti = db.applicationFontFamilies ( fontID ).at(0);
+    QString ziti = db.applicationFontFamilies(fontID).at(0);
     pline() << ziti;
 
     QFont font(ziti, fontsize);

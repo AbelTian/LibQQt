@@ -1,5 +1,5 @@
-﻿#ifndef __QQTCUSTOMPROGRESSBAR_H__
-#define __QQTCUSTOMPROGRESSBAR_H__
+﻿#ifndef QQTCOMPLEXPROGRESSBAR_H
+#define QQTCOMPLEXPROGRESSBAR_H
 
 /**
  * T.D.R (QQ:2657635903) mod 2017年10月20日19:10:53
@@ -32,7 +32,7 @@
 
 class QDESIGNER_WIDGET_EXPORT QQtCustomProgressBar : public QWidget
 #else
-class QQTSHARED_EXPORT QQtCustomProgressBar : public QWidget
+class QQTSHARED_EXPORT QQtComplexProgressBar : public QWidget
 #endif
 
 {
@@ -86,8 +86,8 @@ public:
         PercentStyle_Wave = 3,          /*水波纹风格*/
     };
 
-    explicit QQtCustomProgressBar(QWidget* parent = 0);
-    ~QQtCustomProgressBar();
+    explicit QQtComplexProgressBar(QWidget* parent = 0);
+    ~QQtComplexProgressBar();
 
 protected:
     void paintEvent(QPaintEvent*);
@@ -215,4 +215,4 @@ Q_SIGNALS:
     void valueChanged(int value);
 };
 
-#endif //__QQTCUSTOMPROGRESSBAR_H__
+#endif //QQTCOMPLEXPROGRESSBAR_H

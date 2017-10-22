@@ -5,7 +5,7 @@
 #include "qqtwin.h"
 #elif defined(__LINUX__) || defined(__LINUX64__)
 #include "qqtlinux.h"
-#elif defined (__DARWIN__)
+#elif defined (__DARWIN__)  || defined(__IOS__)
 #include "qqtdarwin.h"
 #endif
 
@@ -13,18 +13,18 @@
 #include <QHostInfo>
 #include "qqtclient.h"
 
-QQTClient::QQTClient(QObject *parent) :
+QQTClient::QQTClient(QObject* parent) :
     QTcpSocket(parent)
 {
-    connect(this, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(socketStateChanged(QAbstractSocket::SocketState)) );
+    connect(this, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(socketStateChanged(QAbstractSocket::SocketState)));
     // connected
-    connect(this, SIGNAL(connected()), this, SLOT(socketConnected()) );
+    connect(this, SIGNAL(connected()), this, SLOT(socketConnected()));
     // disconnected
-    connect(this, SIGNAL(disconnected()), this, SLOT(socketDisconnect()) );
+    connect(this, SIGNAL(disconnected()), this, SLOT(socketDisconnect()));
     // domain
     connect(this, SIGNAL(hostFound()), this, SLOT(domainHostFound()));
     // error
-    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketErrorOccured(QAbstractSocket::SocketError)) );
+    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketErrorOccured(QAbstractSocket::SocketError)));
 
     connect(this, SIGNAL(readyRead()), this, SLOT(readyReadData()));
 
@@ -52,9 +52,9 @@ QQTClient::~QQTClient()
 {
 }
 
-void QQTClient::installProtocol(QQTProtocol *stack)
+void QQTClient::installProtocol(QQTProtocol* stack)
 {
-    if(m_protocol)
+    if (m_protocol)
         return;
 
     m_protocol = stack;
@@ -62,9 +62,9 @@ void QQTClient::installProtocol(QQTProtocol *stack)
             this, SLOT(write(const QByteArray&)));
 }
 
-void QQTClient::uninstallProtocol(QQTProtocol *stack)
+void QQTClient::uninstallProtocol(QQTProtocol* stack)
 {
-    if(!m_protocol)
+    if (!m_protocol)
         return;
 
     disconnect(m_protocol, SIGNAL(write(const QByteArray&)),
@@ -72,7 +72,7 @@ void QQTClient::uninstallProtocol(QQTProtocol *stack)
     m_protocol = NULL;
 }
 
-QQTProtocol *QQTClient::installedProtocol()
+QQTProtocol* QQTClient::installedProtocol()
 {
     return m_protocol;
 }
@@ -81,20 +81,20 @@ void QQTClient::SendConnectMessage()
 {
     pline() << isValid() << isOpen() << state();
 
-    if(!isValid() && !isOpen())
+    if (!isValid() && !isOpen())
     {
         connectToSingelHost();
         return;
     }
 
-    if(state() == HostLookupState ||
-            state() == ConnectingState)
+    if (state() == HostLookupState ||
+        state() == ConnectingState)
     {
         emit signalConnecting();
         return;
     }
 
-    if(state() == ConnectedState)
+    if (state() == ConnectedState)
         emit signalConnectSucc();
 
     return;
@@ -105,7 +105,7 @@ int QQTClient::SendDisConnectFromHost()
 {
     pline() << isValid() << isOpen() << state();
 
-    if(isValid() || isOpen() )
+    if (isValid() || isOpen())
     {
 #if defined(__WIN__) || defined (__WIN64__)
         ;
@@ -134,7 +134,7 @@ void QQTClient::domainHostFound()
 void QQTClient::socketStateChanged(QAbstractSocket::SocketState eSocketState)
 {
     pline() << eSocketState;
-    switch(eSocketState)
+    switch (eSocketState)
     {
     case QAbstractSocket::HostLookupState:
     case QAbstractSocket::ConnectingState:
@@ -162,7 +162,7 @@ void QQTClient::socketErrorOccured(QAbstractSocket::SocketError e)
      * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
      */
     pline() << e;
-    switch(e)
+    switch (e)
     {
     case QAbstractSocket::RemoteHostClosedError:
         break;
@@ -220,19 +220,20 @@ void QQTClient::readyReadData()
     //qint64 aaa = bytesAvailable();
     //pline() << aaa;
 
-    do{
+    do
+    {
         quint16 nBlockLen = m_protocol->splitter(m_blockOnNet);
 
         pline() << m_blockOnNet.size() << "..." << nBlockLen;
 
-        if(m_blockOnNet.length() < nBlockLen)
+        if (m_blockOnNet.length() < nBlockLen)
         {
             /*
              * 收到数据不足或者解析包长小于最小包长
              */
             return;
         }
-        else if(m_blockOnNet.length() > nBlockLen)
+        else if (m_blockOnNet.length() > nBlockLen)
         {
             /*
              * stick package
@@ -251,7 +252,8 @@ void QQTClient::readyReadData()
          */
         m_protocol->dispatcher(m_blockOnNet);
         break;
-    }while(1);
+    }
+    while (1);
 
     m_blockOnNet.clear();
 }
