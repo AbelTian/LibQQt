@@ -17,7 +17,6 @@
 #include <QLabel>
 #include <QUrl>
 #include <QResizeEvent>
-#include <QtConcurrent/QtConcurrentRun>
 #include <QDesktopServices>
 #include "qqt-local.h"
 

@@ -21,11 +21,16 @@ equals(QKIT_, macOS) {
 }
 CONFIG += debug_and_release
 CONFIG += build_all
-for (cc, CONFIG) {
-    message($${TARGET} configed $${cc})
-}
-for (cc, DEFINES) {
-    message($${TARGET} defined $${cc})
+greaterThan(QT_MAJOR_VERSION, 4): {
+    for (cc, CONFIG) {
+        message($${TARGET} configed $${cc})
+    }
+    for (cc, DEFINES) {
+        message($${TARGET} defined $${cc})
+    }
+} else {
+    message ($${TARGET} configed $${CONFIG})
+    message ($${TARGET} defined $${DEFINES})
 }
 ############
 ##install

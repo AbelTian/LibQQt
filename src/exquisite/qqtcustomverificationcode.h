@@ -25,7 +25,7 @@ class QQTSHARED_EXPORT QQtCustomVerificationCode : public QWidget
 {
     Q_OBJECT
 public:
-    explicit QQtCustomVerificationCode(QWidget* parent = nullptr, quint16 width = 180, quint16 height = 50, quint8 count = 6);
+    explicit QQtCustomVerificationCode(QWidget* parent = 0, quint16 width = 180, quint16 height = 50, quint8 count = 6);
 
     /**
      * @brief generateOneCaptcha 生成一个验证码

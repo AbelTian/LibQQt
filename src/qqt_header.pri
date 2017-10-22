@@ -78,6 +78,8 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 #if you use qextserialport, open the annotation
 #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
 #DEFINES += __QEXTSERIALPORT__
+#if compiler QtSerialPort module manual, note this line is a good idea.
+lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
 contains (DEFINES, __QEXTSERIALPORT__) {
     #include ( $$PWD/network/qextserialport/qextserialport.pri )
     CONFIG += thread
@@ -97,6 +99,8 @@ contains (DEFINES, __QEXTSERIALPORT__) {
 DEFINES += __CUSTOMPLOT__
 #if you use qtbluetooth, open this annotation
 DEFINES += __BLUETOOTH__
+#if compiler QtBluetooth module manual, note this line is a good idea.
+lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __BLUETOOTH__
 contains (DEFINES, __BLUETOOTH__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth

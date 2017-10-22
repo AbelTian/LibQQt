@@ -58,8 +58,11 @@ void QQtFramelessHelperPrivate::addDragWidget(QWidget* widget)
 void QQtFramelessHelperPrivate::checkPos()
 {
     QRect rectMustIn = parent->frameGeometry();
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
     QRect rectMustNotIn = rectMustIn.marginsRemoved(margins);
-
+#else
+    QRect rectMustNotIn = rectMustIn.adjusted(margins.left(), margins.top(), margins.right(), margins.bottom());
+#endif
     QPoint cursorPos = QCursor::pos();
 
     if (isMaximized ||
