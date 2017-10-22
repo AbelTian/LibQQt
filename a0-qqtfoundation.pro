@@ -3,7 +3,7 @@ CONFIG += ordered
 
 SUBDIRS =
 SUBDIRS += src/qqt.pro
-#SUBDIRS += examples/framelesshelperwidget
+SUBDIRS += examples/framelesshelperwidget
 #SUBDIRS += examples/qqtframe
 #SUBDIRS += examples/qqtframe2
 #SUBDIRS += examples/animationframe

@@ -37,6 +37,8 @@ class QQTSHARED_EXPORT QQtCustomProgressBar : public QWidget
 
 {
     Q_OBJECT
+    Q_ENUMS(WaveDirection)
+    Q_ENUMS(CircleType)
     Q_ENUMS(PercentStyle)
 
     Q_PROPERTY(int minValue READ getMinValue WRITE setMinValue)
@@ -57,29 +59,43 @@ class QQTSHARED_EXPORT QQtCustomProgressBar : public QWidget
     Q_PROPERTY(QColor textColor READ getTextColor WRITE setTextColor)
     Q_PROPERTY(QString percentSuffix READ getPercentSuffix WRITE setPercentSuffix)
 
+    Q_PROPERTY(int waveDensity READ getWaveDensity WRITE setWaveDensity)
+    Q_PROPERTY(int waveHeight READ getWaveHeight WRITE setWaveHeight)
+    Q_PROPERTY(int waveSpeed READ getWaveSpeed WRITE setWaveSpeed)
+
 public:
-    enum CircleType {
+    enum WaveDirection
+    {
+        WaveDirection_Left = 0,           /**/
+        WaveDirection_Right = 1,           /**/
+        WaveDirection_Left_Right = 2,           /**/
+        WaveDirection_Right_Left = 3,           /**/
+    };
+
+    enum CircleType
+    {
         CircleType_Color = 0,           /*使用颜色*/
         CircleType_Image = 1,           /*使用图片*/
     };
 
-    enum PercentStyle {
+    enum PercentStyle
+    {
         PercentStyle_Arc = 0,           /*圆弧风格*/
         PercentStyle_Polo = 1,          /*水池风格*/
         PercentStyle_Arc_Polo = 2,      /*圆弧水池风格*/
         PercentStyle_Wave = 3,          /*水波纹风格*/
     };
 
-    explicit QQtCustomProgressBar(QWidget *parent = 0);
+    explicit QQtCustomProgressBar(QWidget* parent = 0);
     ~QQtCustomProgressBar();
 
 protected:
-    void paintEvent(QPaintEvent *);
-    void drawCircle(QPainter *painter, int radius);
-    void drawArc(QPainter *painter, int radius);
-    void drawPolo(QPainter *painter, int radius);
-    void drawWave(QPainter *painter, int radius);
-    void drawText(QPainter *painter, int radius);
+    void paintEvent(QPaintEvent*);
+    void drawCircle(QPainter* painter, int radius);
+    void drawArc(QPainter* painter, int radius);
+    void drawPolo(QPainter* painter, int radius);
+    void drawWave(QPainter* painter, int radius);
+    void drawText(QPainter* painter, int radius);
 
 private:
     int maxValue;                   /*最小值*/
@@ -104,10 +120,13 @@ private:
 
     PercentStyle percentStyle;      /*进度样式风格*/
     CircleType   circleType;        /*圆的样式类型*/
+    WaveDirection waveDirection;
 
-    int waterDensity;
-    int waterHeight;
+    int waveDensity;
+    int waveHeight;
+    int waveSpeed;
 
+    QTimer* timer;
 public:
     int getMinValue()               const;
     int getMaxValue()               const;
@@ -129,6 +148,11 @@ public:
 
     PercentStyle getPercentStyle()  const;
     CircleType   getCircleType()    const;
+    WaveDirection getWaveDirection()const { return waveDirection; }
+
+    int getWaveDensity()const { return waveDensity; }
+    int getWaveHeight()const { return waveHeight; }
+    int getWaveSpeed()const { return waveSpeed; }
 
     virtual QSize sizeHint()        const;
     virtual QSize minimumSizeHint() const;
@@ -162,30 +186,30 @@ public Q_SLOTS:
     void setClockWise(bool clockWise);
 
     /*设置已使用百分比颜色*/
-    void setUsedColor(const QColor &usedColor);
+    void setUsedColor(const QColor& usedColor);
     /*设置未使用百分比颜色*/
-    void setFreeColor(const QColor &freeColor);
+    void setFreeColor(const QColor& freeColor);
     /*设置圆颜色*/
-    void setCircleColor(const QColor &circleColor);
+    void setCircleColor(const QColor& circleColor);
     /*设置圆背景图*/
-    void setCircleImage(const QString &circleImage);
+    void setCircleImage(const QString& circleImage);
     /*设置文本颜色*/
-    void setTextColor(const QColor &textColor);
+    void setTextColor(const QColor& textColor);
     /*设置字体*/
     void setTextFont(QFont font);
 
     /*设置进度样式风格*/
     void setPercentStyle(PercentStyle percentStyle);
     void setCircleType(CircleType circleType);
+    /*设置运动方向*/
+    void setWaveDirection(WaveDirection direction);
 
-    /*设置水波密度 0-10*/
-    void setWaterDensity(int value);
-    /*设置浪高 0-10*/
-    void setWaterHeight(int value);
-    /*设置运动方向 true left false right*/
-    void setWaterDirection(bool direction);
-    /*设置运动速度 0-10*/
-    void setWaterSpeed(int speed);
+    /*设置水波密度 1-10*/
+    void setWaveDensity(int value);
+    /*设置浪高 1-10*/
+    void setWaveHeight(int value);
+    /*设置运动速度 1-10*/
+    void setWaveSpeed(int speed);
 
 Q_SIGNALS:
     void valueChanged(int value);

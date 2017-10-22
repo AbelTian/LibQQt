@@ -4,7 +4,8 @@
 #include <QDialog>
 #include <QTimer>
 
-namespace Ui {
+namespace Ui
+{
 class QQtExquisiteForm;
 }
 
@@ -13,14 +14,15 @@ class QQtExquisiteForm : public QDialog
     Q_OBJECT
 
 public:
-    explicit QQtExquisiteForm(QWidget *parent = 0);
+    explicit QQtExquisiteForm(QWidget* parent = 0);
     ~QQtExquisiteForm();
 
 private slots:
+    void setValue(int);
     void setValue();
     void setValueDown();
 private:
-    Ui::QQtExquisiteForm *ui;
+    Ui::QQtExquisiteForm* ui;
     QTimer* m_timer ;
     QTimer* m_timer_down ;
     int value;
@@ -28,12 +30,12 @@ private:
 
     // QWidget interface
 protected:
-    virtual void keyPressEvent(QKeyEvent *event) override;
-    virtual void keyReleaseEvent(QKeyEvent *event) override;
+    virtual void keyPressEvent(QKeyEvent* event) override;
+    virtual void keyReleaseEvent(QKeyEvent* event) override;
 
     // QObject interface
 public:
-    virtual bool eventFilter(QObject *watched, QEvent *event) override;
+    virtual bool eventFilter(QObject* watched, QEvent* event) override;
 };
 
 #endif // QQTEXQUISITEFORM_H
