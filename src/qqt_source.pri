@@ -106,6 +106,17 @@ HEADERS += $$PWD/qqt.h \
     $$PWD/qqt-local.h \
     $$PWD/qqt-qt.h
 
+#core
+SOURCES += \
+    $$PWD/core/qqtcore.cpp \
+    $$PWD/core/qqtanimation.cpp \
+    $$PWD/core/qqtobjectfactory.cpp \
+    $$PWD/widgets/qqtapplication.cpp
+HEADERS += \
+    $$PWD/core/qqtcore.h \
+    $$PWD/core/qqtanimation.h \
+    $$PWD/core/qqtobjectfactory.h
+
 
 #network
 ##websocket
@@ -130,11 +141,6 @@ HEADERS += \
     $$PWD/network/qqtmessage.h \
     $$PWD/network/qqtprotocol.h \
     $$PWD/network/qqtnetwork.h
-#serialport
-SOURCES += \
-    $$PWD/network/qqtserialport.cpp
-HEADERS += \
-    $$PWD/network/qqtserialport.h
 #bluetooth
 #DEFINES += __BLUETOOTH__
 contains (DEFINES, __BLUETOOTH__) {
@@ -151,11 +157,11 @@ contains (DEFINES, __BLUETOOTH__) {
     HEADERS += \
         $$PWD/network/qqtbluetoothmanager.h
 }
-#ethnet manager
-equals(QKIT_, MIPS32) {
-    SOURCES += $$PWD/network/qqtethenetmanager.cpp
-    HEADERS += $$PWD/network/qqtethenetmanager.h
-}
+#serialport
+SOURCES += \
+    $$PWD/network/qqtserialport.cpp
+HEADERS += \
+    $$PWD/network/qqtserialport.h
 #qextserialport support
 #if you use qextserialport, open the two annotation
 #DEFINES += __QEXTSERIALPORT__
@@ -173,20 +179,33 @@ contains (DEFINES, __QEXTSERIALPORT__) {
     win32:SOURCES += $$PWD/network/qextserialport/win_qextserialport.cpp
 }
 
+#ethnet(+wifi) manager
+#arm mips
+#TODO: +wince +android +ios +macOS? +win? +linux?
+equals(QKIT_, EMBEDDED) {
+    SOURCES += $$PWD/network/qqtethenetmanager.cpp
+    HEADERS += $$PWD/network/qqtethenetmanager.h
+    SOURCES += $$PWD/frame/qqtwifiwidget.cpp
+    HEADERS += $$PWD/frame/qqtwifiwidget.h
+    FORMS += $$PWD/frame/qqtwifiwidget.ui
+}
 
-#core
-SOURCES += \
-    $$PWD/core/qqtcore.cpp \
-    $$PWD/core/qqtanimation.cpp \
-    $$PWD/core/qqtobjectfactory.cpp \
-    $$PWD/widgets/qqtapplication.cpp
-HEADERS += \
-    $$PWD/core/qqtcore.h \
-    $$PWD/core/qqtanimation.h \
-    $$PWD/core/qqtobjectfactory.h
-
+#dmmu preview
+#arm mips
+#TODO: +wince +android +ios +macOS +win +linux
+equals(QKIT_, EMBEDDED) {
+    SOURCES += $$PWD/dmmu/dmmu.c
+    HEADERS += $$PWD/dmmu/dmmu.h \
+                $$PWD/dmmu/jz_cim.h \
+                $$PWD/dmmu/graphics.h \
+                $$PWD/dmmu/hal.h
+    SOURCES += $$PWD/frame/qqtpreviewwidget.cpp
+    HEADERS += $$PWD/frame/qqtpreviewwidget.h
+    FORMS += $$PWD/frame/qqtpreviewwidget.ui
+}
 
 #customplot
+#need print support
 #DEFINES += __CUSTOMPLOT__
 contains (DEFINES, __CUSTOMPLOT__) {
     message (qcustomplot is used in $${TARGET})
@@ -197,60 +216,38 @@ contains (DEFINES, __CUSTOMPLOT__) {
                 $$PWD/customplot/qcustomplot.cpp
     HEADERS += $$PWD/customplot/qcpdocumentobject.h \
                 $$PWD/customplot/qcustomplot.h
-    equals(QKIT_, Android) {
-        SOURCES -= $$PWD/customplot/qcpdocumentobject.cpp \
-                                $$PWD/customplot/qcustomplot.cpp
-        HEADERS -= $$PWD/customplot/qcpdocumentobject.h \
-                                $$PWD/customplot/qcustomplot.h
-    }
 }
-
-
-
-#dmmu
-equals(QKIT_, MIPS32) {
-    SOURCES += $$PWD/dmmu/dmmu.c
-    HEADERS += $$PWD/dmmu/dmmu.h \
-                $$PWD/dmmu/jz_cim.h \
-                $$PWD/dmmu/graphics.h \
-                $$PWD/dmmu/hal.h
+#printsupport
+#DEFINES += __PRINTSUPPORT__
+contains (DEFINES, __PRINTSUPPORT__) {
+    SOURCES += $$PWD/printsupport/qqtprinter.cpp
+    HEADERS += $$PWD/printsupport/qqtprinter.h
+    SOURCES += \
+        $$PWD/frame/qqtword.cpp
+    HEADERS += \
+        $$PWD/frame/qqtword.h
 }
-
 #frame
-equals(QKIT_, MIPS32) {
-    SOURCES += $$PWD/frame/qqtpreviewwidget.cpp \
-                $$PWD/frame/qqtwifiwidget.cpp
-    HEADERS += $$PWD/frame/qqtpreviewwidget.h \
-                $$PWD/frame/qqtwifiwidget.h
-    FORMS += $$PWD/frame/qqtpreviewwidget.ui \
-                $$PWD/frame/qqtwifiwidget.ui
-}
 SOURCES += \
     $$PWD/frame/qqtprogressdialog.cpp \
     $$PWD/frame/qqtpassworddialog.cpp \
     $$PWD/frame/qqtframe.cpp \
     $$PWD/frame/qqtdialog.cpp \
     $$PWD/frame/qqtmsgbox.cpp \
-    $$PWD/frame/qqtinput.cpp \
-    $$PWD/frame/qqtword.cpp
+    $$PWD/frame/qqtinput.cpp
 HEADERS += \
     $$PWD/frame/qqtprogressdialog.h \
     $$PWD/frame/qqtpassworddialog.h \
     $$PWD/frame/qqtframe.h \
     $$PWD/frame/qqtdialog.h \
     $$PWD/frame/qqtmsgbox.h \
-    $$PWD/frame/qqtinput.h \
-    $$PWD/frame/qqtword.h
+    $$PWD/frame/qqtinput.h
 FORMS += \
     $$PWD/frame/qqtprogressdialog.ui \
     $$PWD/frame/qqtpassworddialog.ui \
     $$PWD/frame/qqtdialog.ui \
     $$PWD/frame/qqtinput.ui \
     $$PWD/frame/qqtmsgbox.ui
-equals(QKIT_, Android) {
-    SOURCES -= $$PWD/frame/qqtword.cpp
-    HEADERS -= $$PWD/frame/qqtword.h
-}
 
 
 #gui
@@ -271,6 +268,8 @@ HEADERS += \
 
 
 #multimedia
+#arm mips
+#TODO: +wince +android +ios +macOS +win +linux
 SOURCES += $$PWD/multimedia/qqtmplayer.cpp
 HEADERS += $$PWD/multimedia/qqtmplayer.h
 
@@ -295,16 +294,6 @@ HEADERS += $$PWD/pluginwatcher/qqtpluginwatcher.h \
             $$PWD/pluginwatcher/qdevicewatcher.h \
             $$PWD/pluginwatcher/qdevicewatcher_p.h
 
-#printsupport
-SOURCES += $$PWD/printsupport/qqtprinter.cpp
-HEADERS += $$PWD/printsupport/qqtprinter.h
-equals(QKIT_, Android) {
-    SOURCES -= $$PWD/printsupport/qqtprinter.cpp
-    HEADERS -= $$PWD/printsupport/qqtprinter.h
-} else:equals(QKIT_, iOS) {
-    SOURCES -= $$PWD/printsupport/qqtprinter.cpp
-    HEADERS -= $$PWD/printsupport/qqtprinter.h
-}
 
 #sql
 SOURCES += $$PWD/sql/qqtsql.cpp

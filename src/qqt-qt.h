@@ -34,9 +34,11 @@
 #include <QMouseEvent>
 #include <QUuid>
 
+#ifdef __PRINTSUPPORT__
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
+#endif
 
 #include <QTextFormat>
 #include <QTextTable>

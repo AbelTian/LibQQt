@@ -24,12 +24,10 @@ unix:VERSION            = 1.1.0
 #################################################################
 ##Qt version
 QT += core gui network sql xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 #You need define a env variable QKIT=XX
-##target arch type
-QKIT_ = $$(QKIT)
-message($${QKIT_} Defined to $${TARGET})
+#处理文件内平台小差异
 #EMBEDDED __EMBEDDED_LINUX__
 #MIPS __MIPS_LINUX__
 #ARM __ARM_LINUX__
@@ -40,7 +38,9 @@ message($${QKIT_} Defined to $${TARGET})
 #macOS __DARWIN__
 #Android __ANDROID__
 #ANDROIDX86 __ANDROIDX86__
-#处理文件内平台小差异
+##target arch type
+QKIT_ = $$(QKIT)
+message($${QKIT_} Defined to $${TARGET})
 equals(QKIT_, EMBEDDED) {
     #embedded common macro
     DEFINES += __EMBEDDED_LINUX__
@@ -65,31 +65,37 @@ equals(QKIT_, EMBEDDED) {
     DEFINES += __DARWIN__
 } else:equals(QKIT_, iOS) {
     DEFINES += __IOS__
+} else:equals(QKIT_, iOSSimulator) {
+    DEFINES += __IOS__
 } else:equals(QKIT_, Android) {
     DEFINES += __ANDROID__
 } else:equals(QKIT_, ANDROIDX86) {
-    DEFINES += __ANDROIDX86__
+    DEFINES += __ANDROID__
     #todo:no customplot word printer
 }
+# release open debug output
 CONFIG(debug, debug|release) {
 } else {
     DEFINES -= QT_NO_DEBUG_OUTPUT
 }
+#close win32 no using fopen_s warning
 win32 {
     win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
+    #this three pragma cause errors
     #QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
 }
 #compatible old version QQt (deperated)
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
+
 #You need switch these more macro according to your needs.
 #if you use qextserialport, open the annotation
 #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
 #DEFINES += __QEXTSERIALPORT__
-#if compiler QtSerialPort module manual, note this line is a good idea.
+#if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
 lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
+#to ios, use qextserialport
 contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
 contains (DEFINES, __QEXTSERIALPORT__) {
-    #include ( $$PWD/network/qextserialport/qextserialport.pri )
     CONFIG += thread
     unix:DEFINES += _TTY_POSIX_
     win32:DEFINES += _TTY_WIN_
@@ -103,11 +109,9 @@ contains (DEFINES, __QEXTSERIALPORT__) {
         DEFINES += _TTY_WIN_
     }
 }
-#if you use qcustomplot, open this annotation
-DEFINES += __CUSTOMPLOT__
 #if you use qtbluetooth, open this annotation
 DEFINES += __BLUETOOTH__
-#if compiler QtBluetooth module manual, note this line is a good idea.
+#if you compiler QtBluetooth module manual, note this line is a good idea. default qt4 don't use bluetooth
 lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __BLUETOOTH__
 contains (DEFINES, __BLUETOOTH__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
@@ -115,8 +119,8 @@ contains (DEFINES, __BLUETOOTH__) {
 }
 #if you use QR encode, open this annotation
 DEFINES += __QRENCODE__
-#if you use C++11, open this annotation
-DEFINES += __CPP11__
+#if you use C++11, open this annotation. suggest: ignore
+#DEFINES += __CPP11__
 contains (DEFINES, __CPP11__) {
     #macOS gcc Qt4.8.7
     #qobject.h fatal error: 'initializer_list' file not found,
@@ -130,11 +134,24 @@ contains (DEFINES, __CPP11__) {
     #on windows mingw32? need test
     #CONFIG += c++11
 
-    #LibQQt need c++11 support. Please insure your compiler version.
+    #compile period
+    #LibQQt need c++11 support. Please ensure your compiler version.
     #LibQQt used override identifier
+    #lambda also need c++11
 }
-
-
+#if you use qcustomplot, open this annotation
+#need print support
+DEFINES += __CUSTOMPLOT__
+#if you use printsupport , open this annotation
+DEFINES += __PRINTSUPPORT__
+#ios android can't support this function now
+equals(QKIT_, iOS):DEFINES -= __CUSTOMPLOT__
+equals(QKIT_, iOS):DEFINES -= __PRINTSUPPORT__
+equals(QKIT_, Android):DEFINES -= __CUSTOMPLOT__
+equals(QKIT_, Android):DEFINES -= __PRINTSUPPORT__
+contains (DEFINES, __PRINTSUPPORT__) {
+    greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
+}
 #################################################################
 ##variables
 #################################################################
@@ -155,6 +172,10 @@ equals(QKIT_, MIPS32) {
     SYSNAME = Win64
 } else:equals(QKIT_, macOS) {
     SYSNAME = MacOS
+} else:equals(QKIT_, iOS) {
+    SYSNAME = iOS
+} else:equals(QKIT_, iOSSimulator) {
+    SYSNAME = iOS-simulator
 } else:equals(QKIT_, Android) {
     SYSNAME = Android
 } else:equals(QKIT_, ANDROIDX86) {
