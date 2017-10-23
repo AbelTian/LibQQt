@@ -119,15 +119,6 @@ HEADERS += \
 
 
 #network
-##websocket
-SOURCES += $$PWD/network/qqtwebclient.cpp \
-    $$PWD/network/qqtftpprotocol.cpp \
-    $$PWD/network/qqthttpprotocol.cpp \
-    $$PWD/network/qqtwebprotocol.cpp
-HEADERS += $$PWD/network/qqtwebclient.h \
-    $$PWD/network/qqtftpprotocol.h \
-    $$PWD/network/qqthttpprotocol.h \
-    $$PWD/network/qqtwebprotocol.h
 #tcpsocket
 SOURCES += \
     $$PWD/network/qqtclient.cpp \
@@ -141,6 +132,17 @@ HEADERS += \
     $$PWD/network/qqtmessage.h \
     $$PWD/network/qqtprotocol.h \
     $$PWD/network/qqtnetwork.h
+##websocket
+contains (DEFINES, __WEBSOCKETSUPPORT__) {
+    SOURCES += $$PWD/network/qqtwebclient.cpp \
+        $$PWD/network/qqtftpprotocol.cpp \
+        $$PWD/network/qqthttpprotocol.cpp \
+        $$PWD/network/qqtwebprotocol.cpp
+    HEADERS += $$PWD/network/qqtwebclient.h \
+        $$PWD/network/qqtftpprotocol.h \
+        $$PWD/network/qqthttpprotocol.h \
+        $$PWD/network/qqtwebprotocol.h
+}
 #bluetooth
 #DEFINES += __BLUETOOTH__
 contains (DEFINES, __BLUETOOTH__) {

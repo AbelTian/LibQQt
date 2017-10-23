@@ -17,7 +17,10 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QDebug>
-#include <QProcess>
+
+#include <QSslError>
+#include <QSslKey>
+#include <QSslSocket>
 
 #include <QPixmap>
 #include <QImage>
@@ -85,8 +88,6 @@
 #include <QEventTransition>
 #include <QTimeLine>
 
-#include <QSslError>
-#include <QSslKey>
-#include <QSslSocket>
+#include <QProcess>
 
 #endif // QQTGUIQT_H

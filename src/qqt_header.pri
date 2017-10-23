@@ -95,6 +95,7 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
 #to ios, use qextserialport
 contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
+#android qt5 support serialport default?
 contains (DEFINES, __QEXTSERIALPORT__) {
     CONFIG += thread
     unix:DEFINES += _TTY_POSIX_
@@ -152,6 +153,15 @@ equals(QKIT_, Android):DEFINES -= __PRINTSUPPORT__
 contains (DEFINES, __PRINTSUPPORT__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 }
+
+#if you use QWebSocketSupport , open this annotation
+#DEFINES += __WEBSOCKETSUPPORT__
+equals(QKIT_, macOS):DEFINES += __WEBSOCKETSUPPORT__
+contains (DEFINES, __WEBSOCKETSUPPORT__) {
+    #QSslError not found, you need recompiler Qt4
+    #TODO: QT += webkit
+}
+
 #################################################################
 ##variables
 #################################################################

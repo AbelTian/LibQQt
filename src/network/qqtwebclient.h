@@ -4,6 +4,7 @@
 #include <QNetworkAccessManager>
 //import this struct will not build fail
 #include <QNetworkProxy>
+#include <QSslError>
 #include <qqt-qt.h>
 #include <qqt-local.h>
 
