@@ -18,6 +18,11 @@ message (build $${TARGET} $${QKIT_} library)
 equals(QKIT_, macOS) {
     CONFIG += dll
     CONFIG += lib_bundle
+} else:equals(QKIT_, iOS) {
+    #DEFINES -= QQT_LIBRARY
+    CONFIG -= dll
+    CONFIG -= lib_bundle
+    CONFIG += staticlib
 }
 CONFIG += debug_and_release
 CONFIG += build_all

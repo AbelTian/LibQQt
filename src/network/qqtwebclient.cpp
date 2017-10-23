@@ -39,7 +39,7 @@ void QQtWebClient::proxyAuthenticationRequired(QNetworkProxy p, QAuthenticator* 
 
 void QQtWebClient::sslErrors(QNetworkReply* r, QList<QSslError> e)
 {
-    pline() << r << e;
+    pline() << r << e.size();
 }
 
 void QQtWebClient::networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility a)
