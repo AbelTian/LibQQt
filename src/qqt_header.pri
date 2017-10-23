@@ -58,6 +58,8 @@ equals(QKIT_, EMBEDDED) {
     DEFINES += __WIN64__
 } else:equals(QKIT_, macOS) {
     DEFINES += __DARWIN__
+} else:equals(QKIT_, iOS) {
+    DEFINES += __IOS__
 } else:equals(QKIT_, Android) {
     DEFINES += __ANDROID__
 } else:equals(QKIT_, ANDROIDX86) {
@@ -80,6 +82,7 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 #DEFINES += __QEXTSERIALPORT__
 #if compiler QtSerialPort module manual, note this line is a good idea.
 lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
+contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
 contains (DEFINES, __QEXTSERIALPORT__) {
     #include ( $$PWD/network/qextserialport/qextserialport.pri )
     CONFIG += thread

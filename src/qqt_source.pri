@@ -39,8 +39,7 @@ SOURCES = \
     $$PWD/exquisite/qqtcustomverificationcode.cpp \
     $$PWD/exquisite/qqtfadeeffectwidget.cpp \
     $$PWD/exquisite/qqtshadoweffectwidget.cpp \
-    $$PWD/exquisite/qqtpopeffectdialog.cpp \
-    $$PWD/exquisite/qqtcustomqrencodewidget.cpp
+    $$PWD/exquisite/qqtpopeffectdialog.cpp
 HEADERS = \
     $$PWD/exquisite/qqtcustomspeedmeter.h \
     $$PWD/exquisite/qqtframelesshelper.h \
@@ -55,7 +54,6 @@ HEADERS = \
     $$PWD/exquisite/qqtcustomverificationcode.h \
     $$PWD/exquisite/qqtfadeeffectwidget.h \
     $$PWD/exquisite/qqtshadoweffectwidget.h \
-    $$PWD/exquisite/qqtcustomqrencodewidget.h \
     $$PWD/exquisite/qqtpopeffectdialog.h
 
 #qrcode
@@ -84,6 +82,11 @@ contains (DEFINES, __QRENCODE__) {
         $$PWD/qrencode/qrspec.c \
         $$PWD/qrencode/rscode.c \
         $$PWD/qrencode/split.c
+
+    HEADERS += \
+        $$PWD/exquisite/qqtcustomqrencodewidget.h
+    SOURCES += \
+        $$PWD/exquisite/qqtcustomqrencodewidget.cpp
 }
 
 #root dir
@@ -212,7 +215,6 @@ equals(QKIT_, MIPS32) {
                 $$PWD/dmmu/graphics.h \
                 $$PWD/dmmu/hal.h
 }
-
 
 #frame
 equals(QKIT_, MIPS32) {
