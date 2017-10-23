@@ -116,10 +116,19 @@ contains (DEFINES, __BLUETOOTH__) {
 #if you use QR encode, open this annotation
 DEFINES += __QRENCODE__
 #if you use C++11, open this annotation
-DEFINES += __CPP11__
+#DEFINES += __CPP11__
 contains (DEFINES, __CPP11__) {
-    greaterThan(QT_MAJOR_VERSION, 4): CONFIG += c++11
-    lessThan(QT_MAJOR_VERSION, 5): gcc:QMAKE_CXXFLAGS += "-std=c++0x"
+    #macOS gcc Qt4.8.7
+    #qobject.h fatal error: 'initializer_list' file not found,
+    #Qt4.8.7 can't support c++11 features
+    #QMAKE_CXXFLAGS += "-std=c++11"
+    #QMAKE_CXXFLAGS += "-std=c++0x"
+
+    #below: gcc version > 4.6.3
+    #Open this Config, Why in Qt4 works? see qmake config auto ignored this feature.
+    #In Qt5? don't need open this config, qmake auto add c++11 support on linux plat.
+    #on windows mingw32? need test
+    #CONFIG += c++11
 }
 
 
