@@ -116,7 +116,7 @@ contains (DEFINES, __BLUETOOTH__) {
 #if you use QR encode, open this annotation
 DEFINES += __QRENCODE__
 #if you use C++11, open this annotation
-#DEFINES += __CPP11__
+DEFINES += __CPP11__
 contains (DEFINES, __CPP11__) {
     #macOS gcc Qt4.8.7
     #qobject.h fatal error: 'initializer_list' file not found,
@@ -129,6 +129,9 @@ contains (DEFINES, __CPP11__) {
     #In Qt5? don't need open this config, qmake auto add c++11 support on linux plat.
     #on windows mingw32? need test
     #CONFIG += c++11
+
+    #LibQQt need c++11 support. Please insure your compiler version.
+    #LibQQt used override identifier
 }
 
 
