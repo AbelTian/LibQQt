@@ -301,7 +301,7 @@ HEADERS += $$PWD/printsupport/qqtprinter.h
 equals(QKIT_, Android) {
     SOURCES -= $$PWD/printsupport/qqtprinter.cpp
     HEADERS -= $$PWD/printsupport/qqtprinter.h
-} else equals(QKIT_, iOS) {
+} else:equals(QKIT_, iOS) {
     SOURCES -= $$PWD/printsupport/qqtprinter.cpp
     HEADERS -= $$PWD/printsupport/qqtprinter.h
 }

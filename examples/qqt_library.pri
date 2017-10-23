@@ -22,7 +22,7 @@ equals(QMAKE_HOST.os, Darwin) {
 ##install
 ############
 #CONFIG += can_install
-can_install:equals(QKIT_, MIPS32) {
+can_install:equals(QKIT_, EMBEDDED) {
     target.path = /Application
     INSTALLS += target
 } else: unix {

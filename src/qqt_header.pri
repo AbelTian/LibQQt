@@ -42,11 +42,16 @@ message($${QKIT_} Defined to $${TARGET})
 #ANDROIDX86 __ANDROIDX86__
 #处理文件内平台小差异
 equals(QKIT_, EMBEDDED) {
+    #embedded common macro
     DEFINES += __EMBEDDED_LINUX__
 } else:equals(QKIT_, ARM32) {
+    DEFINES += __EMBEDDED_LINUX__
+    #arm32 private
     DEFINES += __ARM_LINUX__
 } else:equals(QKIT_, MIPS32) {
     QT += multimedia
+    DEFINES += __EMBEDDED_LINUX__
+    #mips32 private
     DEFINES += __MIPS_LINUX__
 } else:equals(QKIT_, LINUX) {
     DEFINES += __LINUX__
@@ -110,6 +115,12 @@ contains (DEFINES, __BLUETOOTH__) {
 }
 #if you use QR encode, open this annotation
 DEFINES += __QRENCODE__
+#if you use C++11, open this annotation
+DEFINES += __CPP11__
+contains (DEFINES, __CPP11__) {
+    greaterThan(QT_MAJOR_VERSION, 4): CONFIG += c++11
+    lessThan(QT_MAJOR_VERSION, 5): gcc:QMAKE_CXXFLAGS += "-std=c++0x"
+}
 
 
 #################################################################
