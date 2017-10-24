@@ -5,7 +5,7 @@
  * T.D.R (QQ:2657635903) 2017年10月24日20:22:23
 **/
 
-#include <QObject>
+#include <QWidget>
 #include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQtRectEffectProgressBar : public QWidget
@@ -29,7 +29,7 @@ class QQTSHARED_EXPORT QQtRectEffectProgressBar : public QWidget
 
     Q_PROPERTY(QColor usedColor READ getUsedColor WRITE setUsedColor)
     Q_PROPERTY(QColor freeColor READ getFreeColor WRITE setFreeColor)
-    Q_PROPERTY(QColor circleColor READ getBackgroundColor WRITE setBackgroundColor)
+    Q_PROPERTY(QColor backgroundColor READ getBackgroundColor WRITE setBackgroundColor)
     Q_PROPERTY(QColor textColor READ getTextColor WRITE setTextColor)
     Q_PROPERTY(QString percentSuffix READ getPercentSuffix WRITE setPercentSuffix)
 
@@ -58,7 +58,7 @@ public:
         PercentStyle_Wave = 3,          /*水波纹风格*/
     };
 
-    explicit QQtRectEffectProgressBar(QObject* parent = nullptr);
+    explicit QQtRectEffectProgressBar(QWidget* parent = nullptr);
     virtual ~QQtRectEffectProgressBar();
 
 public:
@@ -174,8 +174,8 @@ private:
 
     QColor usedColor;               /*已使用百分比颜色*/
     QColor freeColor;               /*未使用百分比颜色*/
-    QColor circleColor;             /*圆颜色*/
-    QString circleImage;            /*圆图片*/
+    QColor backgroundColor;             /*圆颜色*/
+    QString backgroundImage;            /*圆图片*/
     QColor textColor;               /*文字颜色*/
     QFont  textFont;                /*文字字体*/
 
