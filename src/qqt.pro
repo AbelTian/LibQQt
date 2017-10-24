@@ -5,14 +5,10 @@
 #-------------------------------------------------
 
 #################################################################
-##project
+##project name
 #################################################################
 TARGET = QQt
 TEMPLATE = lib
-#QQT LIBRARY (DLL)
-#DEFINES += QQT_LIBRARY
-CONFIG += dll
-DEFINES += QQT_LIBRARY
 
 #################################################################
 ##project version
@@ -60,6 +56,10 @@ greaterThan(QT_MAJOR_VERSION, 4): {
 #################################################################
 ##project source
 #################################################################
+#QQT LIBRARY (DLL)
+#DEFINES += QQT_LIBRARY
+CONFIG += dll
+DEFINES += QQT_LIBRARY
 equals(QKIT_, macOS) {
     CONFIG += lib_bundle
 } else:equals(QKIT_, iOS) {
@@ -77,9 +77,9 @@ include ($$PWD/qqt_header.pri)
 include ($$PWD/qqt_source.pri)
 
 
-############
+################################################
 ##install
-############
+################################################
 #CONFIG += can_install
 can_install:equals(QKIT_, macOS) {
     ###if install product to same path,use this.
@@ -87,5 +87,8 @@ can_install:equals(QKIT_, macOS) {
     INSTALLS += target
 }
 
+################################################
+##project resource
+################################################
 RESOURCES += \
     qqt.qrc
