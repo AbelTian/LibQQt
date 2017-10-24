@@ -22,6 +22,7 @@ unix:VERSION            = 1.2.0
 #################################################################
 ##definition and configration
 #################################################################
+
 ##Qt version
 QT += core gui network sql xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -40,7 +41,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #ANDROIDX86 __ANDROIDX86__
 ##target arch type
 QKIT_ = $$(QKIT)
-message($${QKIT_} Defined to $${TARGET})
+message(Build $${TARGET} to $${QKIT_})
 equals(QKIT_, EMBEDDED) {
     #embedded common macro
     DEFINES += __EMBEDDED_LINUX__
@@ -73,6 +74,44 @@ equals(QKIT_, EMBEDDED) {
     DEFINES += __ANDROID__
     #todo:no customplot word printer
 }
+
+QMAKESPEC_NAME = $${QMAKESPEC}
+QMAKESPEC_NAME ~=s@^/.*/([^/]+)/?@\1@g
+#QMAKESPECS = $${QMAKESPEC}
+#QMAKESPECS ~= s:/[^/]*$::p
+#message ($$QMAKESPEC_NAME $$QMAKESPECS)
+#equals(QMAKESPEC_NAME, EMBEDDED) {
+#    #embedded common macro
+#    DEFINES += __EMBEDDED_LINUX__
+#} else:equals(QMAKESPEC_NAME, *arm*) {
+#    DEFINES += __EMBEDDED_LINUX__
+#    #arm32 private
+#    DEFINES += __ARM_LINUX__
+#} else:equals(QMAKESPEC_NAME, *mips*) {
+#    QT += multimedia
+#    DEFINES += __EMBEDDED_LINUX__
+#    #mips32 private
+#    DEFINES += __MIPS_LINUX__
+#} else:equals(QMAKESPEC_NAME, linux-g++-32) {
+#    DEFINES += __LINUX__
+#} else:equals(QMAKESPEC_NAME, linux-g++) {
+#    DEFINES += __LINUX64__
+#} else:equals(QMAKESPEC_NAME, win32-*) {
+#    DEFINES += __WIN__
+#} else:equals(QMAKESPEC_NAME, win64-*) {
+#    DEFINES += __WIN64__
+#} else:equals(QMAKESPEC_NAME, macx-ios-*) {
+#    DEFINES += __IOS__
+#} else:equals(QMAKESPEC_NAME, iOSSimulator) {
+#    DEFINES += __IOS__
+#} else:equals(QMAKESPEC_NAME, macx-*) {
+#    DEFINES += __DARWIN__
+#} else:equals(QMAKESPEC_NAME, android-*) {
+#    DEFINES += __ANDROID__
+#} else:equals(QMAKESPEC_NAME, ANDROIDX86) {
+#    DEFINES += __ANDROID__
+#    #todo:no customplot word printer
+#}
 # release open debug output
 CONFIG(debug, debug|release) {
 } else {
@@ -87,6 +126,50 @@ win32 {
 #compatible old version QQt (deperated)
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
+#################################################################
+##variables
+#################################################################
+CONFIG(debug, debug|release) {
+    BUILD=Debug
+} else {
+    BUILD=Release
+}
+equals(QKIT_, MIPS32) {
+    SYSNAME = Mips32
+} else:equals(QKIT_, LINUX) {
+    SYSNAME = Linux
+} else:equals(QKIT_, LINUX64) {
+    SYSNAME = Linux64
+} else:equals(QKIT_, WIN) {
+    SYSNAME = Windows
+} else:equals(QKIT_, WIN64) {
+    SYSNAME = Win64
+} else:equals(QKIT_, macOS) {
+    SYSNAME = MacOS
+} else:equals(QKIT_, iOS) {
+    SYSNAME = iOS
+} else:equals(QKIT_, iOSSimulator) {
+    SYSNAME = iOS-simulator
+} else:equals(QKIT_, Android) {
+    SYSNAME = Android
+} else:equals(QKIT_, ANDROIDX86) {
+    SYSNAME = Android_x86
+}
+message(Build $${TARGET} at $${QT_VERSION} $${SYSNAME} $${BUILD})
+message(Build $${TARGET} on $${QMAKE_HOST.os})
+
+################################################################
+##build cache
+################################################################
+OBJECTS_DIR = obj
+MOC_DIR = obj/moc.cpp
+UI_DIR = obj/ui.h
+RCC_DIR = qrc
+DESTDIR = bin
+
+################################################################
+##QQt Functions Macro
+################################################################
 #You need switch these more macro according to your needs.
 #if you use qextserialport, open the annotation
 #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
@@ -162,45 +245,6 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
     #TODO: QT += webkit
 }
 
-#################################################################
-##variables
-#################################################################
-CONFIG(debug, debug|release) {
-    BUILD=Debug
-} else {
-    BUILD=Release
-}
-equals(QKIT_, MIPS32) {
-    SYSNAME = Mips32
-} else:equals(QKIT_, LINUX) {
-    SYSNAME = Linux
-} else:equals(QKIT_, LINUX64) {
-    SYSNAME = Linux64
-} else:equals(QKIT_, WIN) {
-    SYSNAME = Windows
-} else:equals(QKIT_, WIN64) {
-    SYSNAME = Win64
-} else:equals(QKIT_, macOS) {
-    SYSNAME = MacOS
-} else:equals(QKIT_, iOS) {
-    SYSNAME = iOS
-} else:equals(QKIT_, iOSSimulator) {
-    SYSNAME = iOS-simulator
-} else:equals(QKIT_, Android) {
-    SYSNAME = Android
-} else:equals(QKIT_, ANDROIDX86) {
-    SYSNAME = Android_x86
-}
-
-
-################################################################
-##build cache
-################################################################
-OBJECTS_DIR = obj
-MOC_DIR = obj/moc.cpp
-UI_DIR = obj/ui.h
-RCC_DIR = qrc
-DESTDIR = bin
 
 ##################################################################
 ##include directories

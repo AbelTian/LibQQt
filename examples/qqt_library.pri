@@ -1,8 +1,8 @@
 #here is all your app common defination and configration
 #change these path on your computer
-message(Link QQt to $${TARGET} $${QKIT_} from $${SYSNAME} $${BUILD} on $${QMAKE_HOST.os})
+message(Link QQt to $${TARGET} $${QKIT_} at $${QT_VERSION} $${SYSNAME} $${BUILD} on $${QMAKE_HOST.os})
 equals(QMAKE_HOST.os, Darwin) {
-    LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
+    LIBS += -F/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src/bin
     contains(DEFINES, __DARWIN__) {
         LIBS += -framework QQt
     } else: contains(DEFINES, __IOS__) {
@@ -11,10 +11,10 @@ equals(QMAKE_HOST.os, Darwin) {
         LIBS += -lQQt
     }
 } else: equals(QMAKE_HOST.os, Linux) {
-    LIBS += -L/home/abel/Develop/c0-buildstation/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
+    LIBS += -L/home/abel/Develop/c0-buildstation/a0-qqtfoundation/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src/bin
     LIBS += -lQQt
 } else: equals(QMAKE_HOST.os, Windows) {
-    LIBS += -LC:/Users/Administrator/Develop/c0-build/a0-qqtfoundation/$${SYSNAME}/$${BUILD}/src/bin
+    LIBS += -LC:/Users/Administrator/Develop/c0-build/a0-qqtfoundation/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src/bin
     LIBS += -lQQt
 }
 

@@ -30,7 +30,7 @@
 #include <QtUiPlugin/QDesignerExportWidget>
 #endif
 
-class QDESIGNER_WIDGET_EXPORT QQtCustomProgressBar : public QWidget
+class QDESIGNER_WIDGET_EXPORT QQtComplexProgressBar : public QWidget
 #else
 class QQTSHARED_EXPORT QQtComplexProgressBar : public QWidget
 #endif

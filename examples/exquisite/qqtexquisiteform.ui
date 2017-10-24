@@ -25,7 +25,7 @@
         <widget class="QQtCustomSpeedMeter" name="w0" native="true"/>
        </item>
        <item row="0" column="1">
-        <widget class="QQtCustomProgressBar" name="w2" native="true"/>
+        <widget class="QQtComplexProgressBar" name="w2" native="true"/>
        </item>
       </layout>
      </widget>
@@ -54,9 +54,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQtCustomProgressBar</class>
+   <class>QQtComplexProgressBar</class>
    <extends>QWidget</extends>
-   <header location="global">qqtcustomprogressbar.h</header>
+   <header location="global">qqtcomplexprogressbar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
