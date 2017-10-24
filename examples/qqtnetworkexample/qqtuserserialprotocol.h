@@ -4,7 +4,6 @@
 #include "qqtserialmessage.h"
 #include "qqtprotocol.h"
 #include "qqtserialport.h"
-#include "qqtbluetoothclient.h"
 
 #define _SERIAL_HAND            0x0001
 #define _SERIAL_HANDACK         0x8001
@@ -25,7 +24,7 @@ class QQTHandupAck : public QQTSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QQTHandupAck(QObject *parent = 0) : QQTSerialMessage(parent){}
+    explicit QQTHandupAck(QObject* parent = 0) : QQTSerialMessage(parent) {}
 
     void pack(QByteArray& l);
 };
@@ -34,16 +33,16 @@ class QQTCloseAck : public QQTSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QQTCloseAck(QObject *parent = 0) : QQTSerialMessage(parent){}
+    explicit QQTCloseAck(QObject* parent = 0) : QQTSerialMessage(parent) {}
 
-    void pack(QByteArray &l);
+    void pack(QByteArray& l);
 };
 
 class QQTWriteSerialNoAck : public QQTSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QQTWriteSerialNoAck(QObject *parent = 0) : QQTSerialMessage(parent){}
+    explicit QQTWriteSerialNoAck(QObject* parent = 0) : QQTSerialMessage(parent) {}
 
     void pack(QByteArray& l);
 };
@@ -52,7 +51,7 @@ class QQTReadSerialNoAck : public QQTSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QQTReadSerialNoAck(QObject *parent = 0) : QQTSerialMessage(parent){}
+    explicit QQTReadSerialNoAck(QObject* parent = 0) : QQTSerialMessage(parent) {}
 
     void pack(QByteArray& l);
 };
@@ -61,9 +60,9 @@ class QQTWritePassAck : public QQTSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QQTWritePassAck(QObject *parent = 0) : QQTSerialMessage(parent){}
+    explicit QQTWritePassAck(QObject* parent = 0) : QQTSerialMessage(parent) {}
 
-    void pack(QByteArray &l);
+    void pack(QByteArray& l);
 };
 
 
@@ -71,9 +70,9 @@ class QQTReadPassAck : public QQTSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QQTReadPassAck(QObject *parent = 0) : QQTSerialMessage(parent){}
+    explicit QQTReadPassAck(QObject* parent = 0) : QQTSerialMessage(parent) {}
 
-    void pack(QByteArray &l);
+    void pack(QByteArray& l);
 };
 
 
@@ -81,9 +80,9 @@ class QQTExceptionAck : public QQTSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QQTExceptionAck(QObject *parent = 0) : QQTSerialMessage(parent){}
+    explicit QQTExceptionAck(QObject* parent = 0) : QQTSerialMessage(parent) {}
 
-    void pack(QByteArray &l);
+    void pack(QByteArray& l);
 };
 
 /**
@@ -94,7 +93,7 @@ class QQTUserSerialProtocol : public QQTProtocol
 {
     Q_OBJECT
 public:
-    explicit QQTUserSerialProtocol(QObject *parent = 0);
+    explicit QQTUserSerialProtocol(QObject* parent = 0);
     ~QQTUserSerialProtocol();
 
 signals:
@@ -120,13 +119,12 @@ public slots:
 public:
     quint16 minlength() override;
     quint16 maxlength() override;
-    quint16 splitter(const QByteArray &s) override;
-    bool dispatcher(const QByteArray &m) override;
+    quint16 splitter(const QByteArray& s) override;
+    bool dispatcher(const QByteArray& m) override;
 
 private:
     QQTSerialPort* s0;
 };
 
-QQTSerialPort* QQTUserSerialPortInstance(QObject* parent = 0, QString name = "/dev/tty0", QSerialPort::BaudRate = QSerialPort::Baud57600);
-QQtBluetoothClient* QQtUserBluetoothClientInstance(QObject* parent = 0);
+QQTSerialPort* QQTUserSerialPortInstance(QObject* parent = 0, QString name = "/dev/tty0", QQTSerialPort::BaudRate = QQTSerialPort::Baud57600);
 #endif // QQTUSERSERIALPROTOCOL_H

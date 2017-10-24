@@ -1,38 +1,39 @@
 #include "qqtserialport.h"
 #include "qqtcore.h"
 
-QQTSerialPort::QQTSerialPort(QObject *parent)
+QQTSerialPort::QQTSerialPort(QObject* parent) : QSerialPort(parent)
 {
     //connect(this, SIGNAL(bytesWritten(qint64)), this, SLOT(updateProgress(qint64)) );
-    connect(this, SIGNAL(readyRead()), this, SLOT(readyReadData()) );
+    connect(this, SIGNAL(readyRead()), this, SLOT(readyReadData()));
     //connect(this, SIGNAL(aboutToClose()), this, SLOT(aboutToClose()));
     //connect(this, SIGNAL(readChannelFinished()), this, SLOT(readChannelFinished()));
 }
 
 QQTSerialPort::~QQTSerialPort()
 {
-    close();
+    if (isOpen())
+        close();
 }
 
-void QQTSerialPort::installProtocol(QQTProtocol *stack)
+void QQTSerialPort::installProtocol(QQTProtocol* stack)
 {
-    if(m_protocol)
+    if (m_protocol)
         return;
 
     m_protocol = stack;
     connect(m_protocol, SIGNAL(write(const QByteArray&)), this, SLOT(write(const QByteArray&)));
 }
 
-void QQTSerialPort::uninstallProtocol(QQTProtocol *stack)
+void QQTSerialPort::uninstallProtocol(QQTProtocol* stack)
 {
-    if(!m_protocol)
+    if (!m_protocol)
         return;
 
     disconnect(m_protocol, SIGNAL(write(const QByteArray&)), this, SLOT(write(const QByteArray&)));
     m_protocol = NULL;
 }
 
-QQTProtocol *QQTSerialPort::installedProtocol()
+QQTProtocol* QQTSerialPort::installedProtocol()
 {
     return m_protocol;
 }
@@ -47,19 +48,20 @@ void QQTSerialPort::readyReadData()
     //qint64 aaa = bytesAvailable();
     //pline() << aaa;
 
-    do{
+    do
+    {
         quint16 nBlockLen = m_protocol->splitter(m_blockOnNet);
 
         pline() << m_blockOnNet.size() << "..." << nBlockLen;
 
-        if(m_blockOnNet.length() < nBlockLen || nBlockLen < m_protocol->minlength())
+        if (m_blockOnNet.length() < nBlockLen || nBlockLen < m_protocol->minlength())
         {
             /*
              * 收到数据不足或者解析包长小于最小包长
              */
             return;
         }
-        else if(nBlockLen > m_protocol->maxlength())
+        else if (nBlockLen > m_protocol->maxlength())
         {
             /*
              * 数据包长超过了最大长度
@@ -68,7 +70,7 @@ void QQTSerialPort::readyReadData()
             pline() << "forbidden package" << m_blockOnNet.length() << nBlockLen;
             return;
         }
-        else if(m_blockOnNet.length() > nBlockLen)
+        else if (m_blockOnNet.length() > nBlockLen)
         {
             /*
              * 粘包
@@ -87,7 +89,8 @@ void QQTSerialPort::readyReadData()
          */
         m_protocol->dispatcher(m_blockOnNet);
         break;
-    }while(1);
+    }
+    while (1);
 
     m_blockOnNet.clear();
 }

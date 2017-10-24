@@ -75,8 +75,8 @@ equals(QKIT_, EMBEDDED) {
     #todo:no customplot word printer
 }
 
-QMAKESPEC_NAME = $${QMAKESPEC}
-QMAKESPEC_NAME ~=s@^/.*/([^/]+)/?@\1@g
+#QMAKESPEC_NAME = $${QMAKESPEC}
+#QMAKESPEC_NAME ~= s@^/.*/([^/]+)/?@\1@g
 #QMAKESPECS = $${QMAKESPEC}
 #QMAKESPECS ~= s:/[^/]*$::p
 #message ($$QMAKESPEC_NAME $$QMAKESPECS)

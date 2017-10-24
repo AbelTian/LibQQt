@@ -1,9 +1,8 @@
 #include "qqtuserserialprotocol.h"
 #include "qqtcore.h"
 #include "qqt-qt.h"
-#include "qqtbluetoothmanager.h"
 
-void QQTWritePassAck::pack(QByteArray &l)
+void QQTWritePassAck::pack(QByteArray& l)
 {
     setCmd(_SERIAL_WRITEPASSACK);
     translate();
@@ -11,7 +10,7 @@ void QQTWritePassAck::pack(QByteArray &l)
 }
 
 
-void QQTWriteSerialNoAck::pack(QByteArray &l)
+void QQTWriteSerialNoAck::pack(QByteArray& l)
 {
     setCmd(_SERIAL_WRITEDEVNOACK);
     translate();
@@ -19,7 +18,7 @@ void QQTWriteSerialNoAck::pack(QByteArray &l)
 }
 
 
-void QQTHandupAck::pack(QByteArray &l)
+void QQTHandupAck::pack(QByteArray& l)
 {
     setCmd(_SERIAL_HANDACK);
     translate();
@@ -27,7 +26,7 @@ void QQTHandupAck::pack(QByteArray &l)
 }
 
 
-void QQTCloseAck::pack(QByteArray &l)
+void QQTCloseAck::pack(QByteArray& l)
 {
     setCmd(_SERIAL_CLOSEACK);
     translate();
@@ -35,7 +34,7 @@ void QQTCloseAck::pack(QByteArray &l)
 }
 
 
-void QQTReadSerialNoAck::pack(QByteArray &l)
+void QQTReadSerialNoAck::pack(QByteArray& l)
 {
     setCmd(_SERIAL_READDEVNOACK);
     translate();
@@ -43,7 +42,7 @@ void QQTReadSerialNoAck::pack(QByteArray &l)
 }
 
 
-void QQTReadPassAck::pack(QByteArray &l)
+void QQTReadPassAck::pack(QByteArray& l)
 {
     setCmd(_SERIAL_READPASSACK);
     translate();
@@ -51,14 +50,14 @@ void QQTReadPassAck::pack(QByteArray &l)
 }
 
 
-void QQTExceptionAck::pack(QByteArray &l)
+void QQTExceptionAck::pack(QByteArray& l)
 {
     setCmd(_SERIAL_EXCEPTIONACK);
     translate();
     QQTSerialMessage::packer(l);
 }
 
-QQTUserSerialProtocol::QQTUserSerialProtocol(QObject *parent) :
+QQTUserSerialProtocol::QQTUserSerialProtocol(QObject* parent) :
     QQTProtocol(parent)
 {
 #ifdef __EMBEDDED_LINUX__
@@ -66,9 +65,9 @@ QQTUserSerialProtocol::QQTUserSerialProtocol(QObject *parent) :
 #else
     QString portName("/dev/ttyS2");
 #endif
-    s0 = QQTUserSerialPortInstance(this, portName, QSerialPort::Baud57600);
+    s0 = QQTUserSerialPortInstance(this, portName, QQTSerialPort::Baud57600);
 
-    if(s0->open(QIODevice::ReadWrite)) //Open Port dev.
+    if (s0->open(QIODevice::ReadWrite)) //Open Port dev.
         pline() << QString("serial port %1 open success!").arg(portName);
     else
         pline() << QString("serial port %1 open failed! errcode =").arg(portName) << s0->errorString();
@@ -79,7 +78,7 @@ QQTUserSerialProtocol::~QQTUserSerialProtocol()
     s0->close();
 }
 
-void QQTUserSerialProtocol::recvHandup(const QByteArray &l)
+void QQTUserSerialProtocol::recvHandup(const QByteArray& l)
 {
     sendHandupAck();
 }
@@ -96,7 +95,7 @@ void QQTUserSerialProtocol::sendHandupAck()
     write(l);
 }
 
-void QQTUserSerialProtocol::recvClose(const QByteArray &l)
+void QQTUserSerialProtocol::recvClose(const QByteArray& l)
 {
     sendCloseAck();
 }
@@ -112,7 +111,7 @@ void QQTUserSerialProtocol::sendCloseAck()
     write(l);
 }
 
-void QQTUserSerialProtocol::recvWriteSerialNumber(const QByteArray &l)
+void QQTUserSerialProtocol::recvWriteSerialNumber(const QByteArray& l)
 {
     QSettings set;
     set.setValue("Device/DeviceNo", l);
@@ -132,7 +131,7 @@ void QQTUserSerialProtocol::sendWriteSerialNumberAck()
     write(l);
 }
 
-void QQTUserSerialProtocol::recvReadSerial(const QByteArray &l)
+void QQTUserSerialProtocol::recvReadSerial(const QByteArray& l)
 {
     sendReadSerialAck();
 }
@@ -148,7 +147,7 @@ void QQTUserSerialProtocol::sendReadSerialAck()
     write(l);
 }
 
-void QQTUserSerialProtocol::recvWritePassword(const QByteArray &l)
+void QQTUserSerialProtocol::recvWritePassword(const QByteArray& l)
 {
     QSettings set;
     set.setValue("Device/Password", l);
@@ -167,7 +166,7 @@ void QQTUserSerialProtocol::sendWritePasswordAck()
     write(l);
 }
 
-void QQTUserSerialProtocol::  recvReadPassword(const QByteArray &l)
+void QQTUserSerialProtocol::  recvReadPassword(const QByteArray& l)
 {
     sendReadPasswordAck();
 }
@@ -205,7 +204,7 @@ quint16 QQTUserSerialProtocol::maxlength()
     return 128;
 }
 
-quint16 QQTUserSerialProtocol::splitter(const QByteArray &s)
+quint16 QQTUserSerialProtocol::splitter(const QByteArray& s)
 {
     QByteArray l = s.left(4);
     quint16 b0 = 0, b1 = 0;
@@ -214,7 +213,7 @@ quint16 QQTUserSerialProtocol::splitter(const QByteArray &s)
 }
 
 
-bool QQTUserSerialProtocol::dispatcher(const QByteArray &m)
+bool QQTUserSerialProtocol::dispatcher(const QByteArray& m)
 {
     bool ret = true;
 
@@ -222,7 +221,7 @@ bool QQTUserSerialProtocol::dispatcher(const QByteArray &m)
     qMsg.parser(m);
     pline() << qMsg;
 
-    switch(qMsg.cmd())
+    switch (qMsg.cmd())
     {
     case _SERIAL_HAND:
         recvHandup(qMsg.data());
@@ -250,31 +249,19 @@ bool QQTUserSerialProtocol::dispatcher(const QByteArray &m)
     return ret;
 }
 
-QQTSerialPort *QQTUserSerialPortInstance(QObject *parent, QString name, QSerialPort::BaudRate)
+QQTSerialPort* QQTUserSerialPortInstance(QObject* parent, QString name, QQTSerialPort::BaudRate)
 {
     static QQTSerialPort* s0 = NULL;
-    if(s0 == 0)
+    if (s0 == 0)
     {
         s0 = new QQTSerialPort(parent);
         s0->setPortName(name);
-        s0->setBaudRate(QSerialPort::Baud57600);
-        s0->setDataBits(QSerialPort::Data8);
-        s0->setParity(QSerialPort::NoParity);
-        s0->setStopBits(QSerialPort::OneStop);
-        s0->setFlowControl(QSerialPort::NoFlowControl);
+        s0->setBaudRate(QQTSerialPort::Baud57600);
+        s0->setDataBits(QQTSerialPort::Data8);
+        s0->setParity(QQTSerialPort::NoParity);
+        s0->setStopBits(QQTSerialPort::OneStop);
+        s0->setFlowControl(QQTSerialPort::NoFlowControl);
     }
     return s0;
 }
 
-QQtBluetoothClient *QQtUserBluetoothClientInstance(QObject *parent)
-{
-    static QQtBluetoothClient* cli = nullptr;
-    if (!cli) {
-        QQtBluetoothManager* inst = QQtBluetoothManager::Instance(parent);
-        inst->getDeviceList().first().address();
-        cli = new QQtBluetoothClient(QBluetoothServiceInfo::RfcommProtocol, parent);
-        cli->setServiceAddress(inst->getDeviceList().first().address());
-
-    }
-    return cli;
-}

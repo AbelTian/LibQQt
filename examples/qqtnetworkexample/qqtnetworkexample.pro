@@ -57,6 +57,13 @@ HEADERS += \
     qqtserialmessage.h \
     qqtuserserialprotocol.h
 
+contains (DEFINES, __BLUETOOTH__){
+    SOURCES += \
+        quserbluetoothprotocol.cpp
+    HEADERS += \
+        quserbluetoothprotocol.h
+}
+
 FORMS += \
         mainwindow.ui
 
