@@ -23,11 +23,11 @@ QQtExquisiteForm::QQtExquisiteForm(QWidget* parent) :
     ui->w2->setCircleColor(QColor(20, 40, 100));
     ui->w2->setRange(0, 80);
     ui->w2->setWaveDensity(2);
-    ui->w2->setWaveDirection(QQtComplexProgressBar::WaveDirection_Left_Right);
+    ui->w2->setWaveDirection(QQtCircleEffectProgressBar::WaveDirection_Left_Right);
     ui->w2->setWaveHeight(2);
     ui->w2->setWaveSpeed(6);
-    ui->w2->setPercentStyle(QQtComplexProgressBar::PercentStyle_Wave);
-    //ui->w2->setCircleType(QQtComplexProgressBar::CircleType_Image);
+    ui->w2->setPercentStyle(QQtCircleEffectProgressBar::PercentStyle_Wave);
+    //ui->w2->setCircleType(QQtCircleEffectProgressBar::CircleType_Image);
     //ui->w2->setCircleImage("./xxtest.png");
 
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w0, SLOT(setValue(int)));

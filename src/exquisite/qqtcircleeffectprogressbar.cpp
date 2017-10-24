@@ -2,13 +2,13 @@
 #pragma execution_character_set("utf-8")
 #endif
 
-#include "qqtcomplexprogressbar.h"
+#include "qqtcircleeffectprogressbar.h"
 #include "qpainter.h"
 #include "qdebug.h"
 #include "qmath.h"
 #include "qtimer.h"
 
-QQtComplexProgressBar::QQtComplexProgressBar(QWidget* parent) : QWidget(parent)
+QQtCircleEffectProgressBar::QQtCircleEffectProgressBar(QWidget* parent) : QWidget(parent)
 {
     minValue = 0;
     maxValue = 100;
@@ -43,11 +43,11 @@ QQtComplexProgressBar::QQtComplexProgressBar(QWidget* parent) : QWidget(parent)
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 }
 
-QQtComplexProgressBar::~QQtComplexProgressBar()
+QQtCircleEffectProgressBar::~QQtCircleEffectProgressBar()
 {
 }
 
-void QQtComplexProgressBar::paintEvent(QPaintEvent*)
+void QQtCircleEffectProgressBar::paintEvent(QPaintEvent*)
 {
     int width = this->width();
     int height = this->height();
@@ -95,7 +95,7 @@ void QQtComplexProgressBar::paintEvent(QPaintEvent*)
     drawText(&painter, 100);
 }
 
-void QQtComplexProgressBar::drawCircle(QPainter* painter, int radius)
+void QQtCircleEffectProgressBar::drawCircle(QPainter* painter, int radius)
 {
     if (percentStyle == PercentStyle_Arc)
     {
@@ -130,7 +130,7 @@ void QQtComplexProgressBar::drawCircle(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtComplexProgressBar::drawArc(QPainter* painter, int radius)
+void QQtCircleEffectProgressBar::drawArc(QPainter* painter, int radius)
 {
     painter->save();
     painter->setBrush(Qt::NoBrush);
@@ -178,7 +178,7 @@ void QQtComplexProgressBar::drawArc(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtComplexProgressBar::drawPolo(QPainter* painter, int radius)
+void QQtCircleEffectProgressBar::drawPolo(QPainter* painter, int radius)
 {
     /*计算当前值所占百分比对应高度*/
     double poloHeight = (double)radius / (maxValue - minValue) * (value - minValue) ;
@@ -204,7 +204,7 @@ void QQtComplexProgressBar::drawPolo(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtComplexProgressBar::drawWave(QPainter* painter, int radius)
+void QQtCircleEffectProgressBar::drawWave(QPainter* painter, int radius)
 {
     /*大路径*/
     QPainterPath bigPath;
@@ -318,7 +318,7 @@ void QQtComplexProgressBar::drawWave(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtComplexProgressBar::drawText(QPainter* painter, int radius)
+void QQtCircleEffectProgressBar::drawText(QPainter* painter, int radius)
 {
     QString strValue = QString("%1").arg(value);
 
@@ -343,97 +343,97 @@ void QQtComplexProgressBar::drawText(QPainter* painter, int radius)
     painter->restore();
 }
 
-int QQtComplexProgressBar::getMinValue() const
+int QQtCircleEffectProgressBar::getMinValue() const
 {
     return this->minValue;
 }
 
-int QQtComplexProgressBar::getMaxValue() const
+int QQtCircleEffectProgressBar::getMaxValue() const
 {
     return this->maxValue;
 }
 
-int QQtComplexProgressBar::getValue() const
+int QQtCircleEffectProgressBar::getValue() const
 {
     return this->value;
 }
 
-int QQtComplexProgressBar::getNullPosition() const
+int QQtCircleEffectProgressBar::getNullPosition() const
 {
     return this->nullPosition;
 }
 
-int QQtComplexProgressBar::getLineWidth() const
+int QQtCircleEffectProgressBar::getLineWidth() const
 {
     return this->lineWidth;
 }
 
-bool QQtComplexProgressBar::getShowPercent() const
+bool QQtCircleEffectProgressBar::getShowPercent() const
 {
     return this->showPercent;
 }
 
-bool QQtComplexProgressBar::getShowFree() const
+bool QQtCircleEffectProgressBar::getShowFree() const
 {
     return this->showFree;
 }
 
-bool QQtComplexProgressBar::getShowSmallCircle() const
+bool QQtCircleEffectProgressBar::getShowSmallCircle() const
 {
     return this->showSmallCircle;
 }
 
-bool QQtComplexProgressBar::getClockWise() const
+bool QQtCircleEffectProgressBar::getClockWise() const
 {
     return this->clockWise;
 }
 
-QColor QQtComplexProgressBar::getUsedColor() const
+QColor QQtCircleEffectProgressBar::getUsedColor() const
 {
     return this->usedColor;
 }
 
-QColor QQtComplexProgressBar::getFreeColor() const
+QColor QQtCircleEffectProgressBar::getFreeColor() const
 {
     return this->freeColor;
 }
 
-QColor QQtComplexProgressBar::getCircleColor() const
+QColor QQtCircleEffectProgressBar::getCircleColor() const
 {
     return this->circleColor;
 }
 
-QColor QQtComplexProgressBar::getTextColor() const
+QColor QQtCircleEffectProgressBar::getTextColor() const
 {
     return this->textColor;
 }
 
-QString QQtComplexProgressBar::getPercentSuffix() const
+QString QQtCircleEffectProgressBar::getPercentSuffix() const
 {
     return this->percentSuffix;
 }
 
-QQtComplexProgressBar::PercentStyle QQtComplexProgressBar::getPercentStyle() const
+QQtCircleEffectProgressBar::PercentStyle QQtCircleEffectProgressBar::getPercentStyle() const
 {
     return this->percentStyle;
 }
 
-QQtComplexProgressBar::CircleType QQtComplexProgressBar::getCircleType() const
+QQtCircleEffectProgressBar::CircleType QQtCircleEffectProgressBar::getCircleType() const
 {
     return this->circleType;
 }
 
-QSize QQtComplexProgressBar::sizeHint() const
+QSize QQtCircleEffectProgressBar::sizeHint() const
 {
     return QSize(200, 200);
 }
 
-QSize QQtComplexProgressBar::minimumSizeHint() const
+QSize QQtCircleEffectProgressBar::minimumSizeHint() const
 {
     return QSize(10, 10);
 }
 
-void QQtComplexProgressBar::setRange(int minValue, int maxValue)
+void QQtCircleEffectProgressBar::setRange(int minValue, int maxValue)
 {
     /*如果最小值大于或者等于最大值则不设置*/
     if (minValue >= maxValue)
@@ -453,17 +453,17 @@ void QQtComplexProgressBar::setRange(int minValue, int maxValue)
     update();
 }
 
-void QQtComplexProgressBar::setMinValue(int minValue)
+void QQtCircleEffectProgressBar::setMinValue(int minValue)
 {
     setRange(minValue, maxValue);
 }
 
-void QQtComplexProgressBar::setMaxValue(int maxValue)
+void QQtCircleEffectProgressBar::setMaxValue(int maxValue)
 {
     setRange(minValue, maxValue);
 }
 
-void QQtComplexProgressBar::setValue(int value)
+void QQtCircleEffectProgressBar::setValue(int value)
 {
     /*值小于最小值或者值大于最大值或者值和当前值一致则无需处理*/
     if (value < minValue || value > maxValue || value == this->value)
@@ -476,7 +476,7 @@ void QQtComplexProgressBar::setValue(int value)
     emit valueChanged(value);
 }
 
-void QQtComplexProgressBar::setNullPosition(int nullPosition)
+void QQtCircleEffectProgressBar::setNullPosition(int nullPosition)
 {
     if (this->nullPosition != nullPosition)
     {
@@ -485,7 +485,7 @@ void QQtComplexProgressBar::setNullPosition(int nullPosition)
     }
 }
 
-void QQtComplexProgressBar::setLineWidth(int lineWidth)
+void QQtCircleEffectProgressBar::setLineWidth(int lineWidth)
 {
     if (this->lineWidth != lineWidth)
     {
@@ -494,7 +494,7 @@ void QQtComplexProgressBar::setLineWidth(int lineWidth)
     }
 }
 
-void QQtComplexProgressBar::setShowPercent(bool showPercent)
+void QQtCircleEffectProgressBar::setShowPercent(bool showPercent)
 {
     if (this->showPercent != showPercent)
     {
@@ -503,7 +503,7 @@ void QQtComplexProgressBar::setShowPercent(bool showPercent)
     }
 }
 
-void QQtComplexProgressBar::setPercentSuffix(QString percentSuffix)
+void QQtCircleEffectProgressBar::setPercentSuffix(QString percentSuffix)
 {
     if (this->percentSuffix != percentSuffix)
     {
@@ -512,7 +512,7 @@ void QQtComplexProgressBar::setPercentSuffix(QString percentSuffix)
     }
 }
 
-void QQtComplexProgressBar::setShowFree(bool showFree)
+void QQtCircleEffectProgressBar::setShowFree(bool showFree)
 {
     if (this->showFree != showFree)
     {
@@ -521,7 +521,7 @@ void QQtComplexProgressBar::setShowFree(bool showFree)
     }
 }
 
-void QQtComplexProgressBar::setShowSmallCircle(bool showSmallCircle)
+void QQtCircleEffectProgressBar::setShowSmallCircle(bool showSmallCircle)
 {
     if (this->showSmallCircle != showSmallCircle)
     {
@@ -530,7 +530,7 @@ void QQtComplexProgressBar::setShowSmallCircle(bool showSmallCircle)
     }
 }
 
-void QQtComplexProgressBar::setClockWise(bool clockWise)
+void QQtCircleEffectProgressBar::setClockWise(bool clockWise)
 {
     if (this->clockWise != clockWise)
     {
@@ -539,7 +539,7 @@ void QQtComplexProgressBar::setClockWise(bool clockWise)
     }
 }
 
-void QQtComplexProgressBar::setUsedColor(const QColor& usedColor)
+void QQtCircleEffectProgressBar::setUsedColor(const QColor& usedColor)
 {
     if (this->usedColor != usedColor)
     {
@@ -548,7 +548,7 @@ void QQtComplexProgressBar::setUsedColor(const QColor& usedColor)
     }
 }
 
-void QQtComplexProgressBar::setFreeColor(const QColor& freeColor)
+void QQtCircleEffectProgressBar::setFreeColor(const QColor& freeColor)
 {
     if (this->freeColor != freeColor)
     {
@@ -557,7 +557,7 @@ void QQtComplexProgressBar::setFreeColor(const QColor& freeColor)
     }
 }
 
-void QQtComplexProgressBar::setCircleColor(const QColor& circleColor)
+void QQtCircleEffectProgressBar::setCircleColor(const QColor& circleColor)
 {
     if (this->circleColor != circleColor)
     {
@@ -566,7 +566,7 @@ void QQtComplexProgressBar::setCircleColor(const QColor& circleColor)
     }
 }
 
-void QQtComplexProgressBar::setCircleImage(const QString& circleImage)
+void QQtCircleEffectProgressBar::setCircleImage(const QString& circleImage)
 {
     if (this->circleImage != circleImage)
     {
@@ -575,7 +575,7 @@ void QQtComplexProgressBar::setCircleImage(const QString& circleImage)
     }
 }
 
-void QQtComplexProgressBar::setTextColor(const QColor& textColor)
+void QQtCircleEffectProgressBar::setTextColor(const QColor& textColor)
 {
     if (this->textColor != textColor)
     {
@@ -584,7 +584,7 @@ void QQtComplexProgressBar::setTextColor(const QColor& textColor)
     }
 }
 
-void QQtComplexProgressBar::setTextFont(QFont font)
+void QQtCircleEffectProgressBar::setTextFont(QFont font)
 {
     if (this->textFont != font)
     {
@@ -595,7 +595,7 @@ void QQtComplexProgressBar::setTextFont(QFont font)
 
 #define TIMER_FIELD 600
 
-void QQtComplexProgressBar::setPercentStyle(QQtComplexProgressBar::PercentStyle percentStyle)
+void QQtCircleEffectProgressBar::setPercentStyle(QQtCircleEffectProgressBar::PercentStyle percentStyle)
 {
     if (this->percentStyle != percentStyle)
     {
@@ -608,7 +608,7 @@ void QQtComplexProgressBar::setPercentStyle(QQtComplexProgressBar::PercentStyle 
     }
 }
 
-void QQtComplexProgressBar::setCircleType(QQtComplexProgressBar::CircleType circleType)
+void QQtCircleEffectProgressBar::setCircleType(QQtCircleEffectProgressBar::CircleType circleType)
 {
     if (this->circleType != circleType)
     {
@@ -617,7 +617,7 @@ void QQtComplexProgressBar::setCircleType(QQtComplexProgressBar::CircleType circ
     }
 }
 
-void QQtComplexProgressBar::setWaveDensity(int value)
+void QQtCircleEffectProgressBar::setWaveDensity(int value)
 {
     if (value < 1)
         value = 1;
@@ -628,7 +628,7 @@ void QQtComplexProgressBar::setWaveDensity(int value)
     }
 }
 
-void QQtComplexProgressBar::setWaveHeight(int value)
+void QQtCircleEffectProgressBar::setWaveHeight(int value)
 {
     if (value < 1)
         value = 1;
@@ -639,7 +639,7 @@ void QQtComplexProgressBar::setWaveHeight(int value)
     }
 }
 
-void QQtComplexProgressBar::setWaveDirection(WaveDirection direction)
+void QQtCircleEffectProgressBar::setWaveDirection(WaveDirection direction)
 {
     if (this->waveDirection != direction)
     {
@@ -648,7 +648,7 @@ void QQtComplexProgressBar::setWaveDirection(WaveDirection direction)
     }
 }
 
-void QQtComplexProgressBar::setWaveSpeed(int speed)
+void QQtCircleEffectProgressBar::setWaveSpeed(int speed)
 {
     if (speed < 1)
         speed = 1;
