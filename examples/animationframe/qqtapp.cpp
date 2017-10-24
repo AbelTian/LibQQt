@@ -30,9 +30,9 @@ QQTApp::QQTApp(int& argc, char** argv) : QApplication(argc, argv)
 #endif
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
-    QApplication::setOrganizationName(VER_COMPANYNAME_STR);
-    QApplication::setOrganizationDomain(VER_COMPANYDOMAIN_STR);  // 专为Mac OS X 准备的
-    QApplication::setApplicationName(VER_PRODUCTNAME_STR);
+    QApplication::setOrganizationName("animationframe");
+    QApplication::setOrganizationDomain("www.animationframe.com");  // 专为Mac OS X 准备的
+    QApplication::setApplicationName("AnimationFrame");
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH);
     QSettings::setPath(QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH);
 

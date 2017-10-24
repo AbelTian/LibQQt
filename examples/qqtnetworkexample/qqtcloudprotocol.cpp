@@ -3,10 +3,10 @@
 #include "qqtcore.h"
 #include "qqt-qt.h"
 
-QQTClient *QQTUpgradeClientInstance(QObject *parent)
+QQTClient* QQTUpgradeClientInstance(QObject* parent)
 {
     static QQTClient* cli = NULL;
-    if(!cli)
+    if (!cli)
     {
         QStringList ip;
         ip << "222.175.114.244" << "124.133.1.54";
@@ -18,10 +18,10 @@ QQTClient *QQTUpgradeClientInstance(QObject *parent)
     return cli;
 }
 
-QQTClient *QQTCloudClientInstance(QObject *parent)
+QQTClient* QQTCloudClientInstance(QObject* parent)
 {
     static QQTClient* cli = NULL;
-    if(!cli)
+    if (!cli)
     {
         QStringList ip;
         ip << "222.175.114.244" << "124.133.1.54";
@@ -33,7 +33,7 @@ QQTClient *QQTCloudClientInstance(QObject *parent)
 }
 
 
-QQTCloudProtocol::QQTCloudProtocol(QObject *parent) : QQTProtocol(parent)
+QQTCloudProtocol::QQTCloudProtocol(QObject* parent) : QQTProtocol(parent)
 {
     m_isLogined = false;
     m_heartCount = 0;
@@ -44,16 +44,16 @@ QQTCloudProtocol::QQTCloudProtocol(QObject *parent) : QQTProtocol(parent)
 
     connect(this, SIGNAL(signalSendData()), this, SLOT(sendUploadFileData()), Qt::QueuedConnection);
     connect(this, SIGNAL(signalDownData()), this, SLOT(sendDownFileData()), Qt::QueuedConnection);
-    connect(this, SIGNAL(signalDownSucc()), this, SLOT(sendDownFileSuccess()), Qt::QueuedConnection );
+    connect(this, SIGNAL(signalDownSucc()), this, SLOT(sendDownFileSuccess()), Qt::QueuedConnection);
 
 
 }
 
-QTCheckVersionResult &QQTCloudProtocol::GetVersionResult() { return m_versionresult; }
+QTCheckVersionResult& QQTCloudProtocol::GetVersionResult() { return m_versionresult; }
 
-QTCloudListDirResult &QQTCloudProtocol::GetDirList() { return m_dirs; }
+QTCloudListDirResult& QQTCloudProtocol::GetDirList() { return m_dirs; }
 
-QTCloudListFileResult &QQTCloudProtocol::GetListedFiles() { return m_files; }
+QTCloudListFileResult& QQTCloudProtocol::GetListedFiles() { return m_files; }
 
 bool QQTCloudProtocol::isLogined() { return m_isLogined; }
 
@@ -74,7 +74,7 @@ void QQTCloudProtocol::stopHeartBeat()
     timer->stop();
 }
 
-void QQTCloudProtocol::sendMessage(quint16 cmd, QByteArray &data)
+void QQTCloudProtocol::sendMessage(quint16 cmd, QByteArray& data)
 {
     QQTNetworkMessage qMsg;
     qMsg.setUid(m_UID);
@@ -87,7 +87,7 @@ void QQTCloudProtocol::sendMessage(quint16 cmd, QByteArray &data)
     write(b);
 }
 
-bool QQTCloudProtocol::dispatcher(const QByteArray &m)
+bool QQTCloudProtocol::dispatcher(const QByteArray& m)
 {
     bool ret = true;
 
@@ -95,7 +95,7 @@ bool QQTCloudProtocol::dispatcher(const QByteArray &m)
     qMsg.parser(m);
     //pline() << qMsg;
 
-    switch(qMsg.cmd())
+    switch (qMsg.cmd())
     {
     case _TCPCMD_LOGINRESUALT:
         recvLoginResultMessage(qMsg);
@@ -157,14 +157,14 @@ void QQTCloudProtocol::sendHeatBeatMessage()
     /*
      * 断链判断 如果断链 TODO:
      */
-    if(m_heartCount > MAX_HEARDBEAT)
+    if (m_heartCount > MAX_HEARDBEAT)
     {
 #if 1
         /*
          * 重连策略 30 * 2 s
          */
         static int curp = 0;
-        if(curp >= 2)
+        if (curp >= 2)
         {
             curp = 0;
             emit signalReconnectQequest();
@@ -178,7 +178,7 @@ void QQTCloudProtocol::sendHeatBeatMessage()
         static int p[4] = {1, 5, 10, 20};
         static int curp = 0;
         static int curpos = 0;
-        if(curp >= p[curpos])
+        if (curp >= p[curpos])
         {
             curp = 0;
             curpos = (curpos + 1) % 4;
@@ -212,9 +212,9 @@ void QQTCloudProtocol::sendLoginMessage()
     QByteArray _pwd = set.value("Device/Password").toByteArray();
 
     QString name, pwd;
-    for(int i = 0; i < _name.size(); i++)
+    for (int i = 0; i < _name.size(); i++)
         name += QString::number((quint8)_name[i], 16);
-    for(int i = 0; i < _pwd.size(); i++)
+    for (int i = 0; i < _pwd.size(); i++)
         pwd += QString::number((quint8)_pwd[i], 16);
     name = name.toUpper();
     pwd = pwd.toUpper();
@@ -249,7 +249,7 @@ void QQTCloudProtocol::sendLogoutMessage()
     write(b);
 }
 
-void QQTCloudProtocol::recvConnPoolFullMessage(QQTNetworkMessage &){}
+void QQTCloudProtocol::recvConnPoolFullMessage(QQTNetworkMessage&) {}
 
 
 void QQTCloudProtocol::recvLoginResultMessage(QQTNetworkMessage& qMsg)
@@ -257,7 +257,7 @@ void QQTCloudProtocol::recvLoginResultMessage(QQTNetworkMessage& qMsg)
     m_UID = qMsg.uid();
     QTCloudLoginResult qtLoginResult;
     parseLoginResultData(qtLoginResult, qMsg.data());
-    switch(qtLoginResult.m_result)
+    switch (qtLoginResult.m_result)
     {
     case 0x00:
     {
@@ -265,7 +265,7 @@ void QQTCloudProtocol::recvLoginResultMessage(QQTNetworkMessage& qMsg)
         m_isLogined = true;
         emit signalLoginSucc();
     }
-        break;
+    break;
     case 0x10:
         pline() << "Other user logined";
         break;
@@ -286,18 +286,18 @@ void QQTCloudProtocol::recvLoginResultMessage(QQTNetworkMessage& qMsg)
         break;
     }
 
-    if(0x00 != qtLoginResult.m_result)
+    if (0x00 != qtLoginResult.m_result)
         emit signalLoginFail();
 }
 
-void QQTCloudProtocol::recvHeatBeatResultMessage(QQTNetworkMessage &)
+void QQTCloudProtocol::recvHeatBeatResultMessage(QQTNetworkMessage&)
 {
     m_heartCount = 0;
     pline() << "HeartBeat Callback";
 }
 
 
-void QQTCloudProtocol::packCheckVersionData(QByteArray &l, const QTCheckVersion &t)
+void QQTCloudProtocol::packCheckVersionData(QByteArray& l, const QTCheckVersion& t)
 {
     packKeyWordToByteArray(l, _TCP_SECTION_SOFTWAREID, t.m_softwareid);
     packKeyWordToByteArray(l, _TCP_SECTION_DEVICECODE, t.m_devicecode);
@@ -305,7 +305,7 @@ void QQTCloudProtocol::packCheckVersionData(QByteArray &l, const QTCheckVersion 
     packKeyWordToByteArray(l, _TCP_SECTION_VERSION, t.m_version);
 }
 
-void QQTCloudProtocol::parseCheckVersionResultData(QTCheckVersionResult &t, const QByteArray &l)
+void QQTCloudProtocol::parseCheckVersionResultData(QTCheckVersionResult& t, const QByteArray& l)
 {
     quint32 pos = 0;
     QByteArray b = l;
@@ -319,7 +319,7 @@ void QQTCloudProtocol::parseCheckVersionResultData(QTCheckVersionResult &t, cons
      * 和公共文件区域的一样，郑工服务器端按照
      */
     QByteArray m_Explain = parseKeyWordInByteArray(b, _TCP_SECTION_EXPLAIN, pos);
-    QTextCodec *Codec = QTextCodec::codecForName("gbk");
+    QTextCodec* Codec = QTextCodec::codecForName("gbk");
     t.m_Explain = Codec->toUnicode(m_Explain);
 
     t.m_ReleaseStatus = parseKeyWordInByteArray(b, _TCP_SECTION_RELEASESTAT, pos);
@@ -336,7 +336,7 @@ void QQTCloudProtocol::sendCheckVersion()
     t.m_softwareid = "0";
     t.m_devicecode = "0601";
     t.m_softwarecode = "211100";
-    t.m_version = VER_FILEVERSION_STR;
+    t.m_version = FILE_VERSION;
     quint16 _tcpcmd = _TCPCMD_CHECKVERSION;
 
     QQTNetworkMessage qMsg;
@@ -358,7 +358,7 @@ void QQTCloudProtocol::sendCheckNewVersion()
     t.m_softwareid = m_versionresult.m_NewSoftwareID;
     t.m_devicecode = "";
     t.m_softwarecode = "";
-    t.m_version = VER_FILEVERSION_STR;
+    t.m_version = FILE_VERSION;
     quint16 _tcpcmd = _TCPCMD_CHECKVERSION;
 
     QQTNetworkMessage qMsg;
@@ -374,26 +374,26 @@ void QQTCloudProtocol::sendCheckNewVersion()
     write(b);
 }
 
-void QQTCloudProtocol::recvCheckVersionResult(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvCheckVersionResult(QQTNetworkMessage& qMsg)
 {
     parseCheckVersionResultData(m_versionresult, qMsg.data());
     emit signalCheckVersionResult();
 }
 
 
-void QQTCloudProtocol::packListDirData(QByteArray &l, const QTCloudListDir &t)
+void QQTCloudProtocol::packListDirData(QByteArray& l, const QTCloudListDir& t)
 {
     l = t.m_code.toLatin1();
 }
 
-void QQTCloudProtocol::parseListDirResultData(QTCloudListDirResult &r, const QByteArray &l)
+void QQTCloudProtocol::parseListDirResultData(QTCloudListDirResult& r, const QByteArray& l)
 {
     quint32 pos = 0;
     QByteArray b = l;
     QByteArray h;
     h = parseKeyWordInByteArray(b, _TCP_SECTION_UPCODE, pos);
     r.m_upcode = h;
-    while(pos < b.length())
+    while (pos < b.length())
     {
         _QTCloudListDirResult _r;
         QByteArray __r;
@@ -407,14 +407,14 @@ void QQTCloudProtocol::parseListDirResultData(QTCloudListDirResult &r, const QBy
     }
 }
 
-void QQTCloudProtocol::packAddDirData(QByteArray &l, const QTCloudAddDir &t)
+void QQTCloudProtocol::packAddDirData(QByteArray& l, const QTCloudAddDir& t)
 {
     packKeyWordToByteArray(l, _TCP_SECTION_UPCODE, t.m_upcode);
     packKeyWordToByteArray(l, _TCP_SECTION_CODE, t.m_code);
     packKeyWordToByteArray(l, _TCP_SECTION_NAME, t.m_name);
 }
 
-void QQTCloudProtocol::parseAddDirResultData(QTCloudAddDirResult &t, const QByteArray &l)
+void QQTCloudProtocol::parseAddDirResultData(QTCloudAddDirResult& t, const QByteArray& l)
 {
     quint32 pos = 0;
     QByteArray b = l;
@@ -422,20 +422,20 @@ void QQTCloudProtocol::parseAddDirResultData(QTCloudAddDirResult &t, const QByte
     t.m_result = parseKeyWordInByteArray(b, _TCP_SECTION_RESULE, pos);
 }
 
-void QQTCloudProtocol::packDelFileData(QByteArray &l, const QTCloudDelFile &t)
+void QQTCloudProtocol::packDelFileData(QByteArray& l, const QTCloudDelFile& t)
 {
     packKeyWordToByteArray(l, _TCP_SECTION_CODE, t.m_code);
     packKeyWordToByteArray(l, _TCP_SECTION_ID, t.m_id);
 }
 
-void QQTCloudProtocol::parseListFileResultData(QTCloudListFileResult &r, const QByteArray &l)
+void QQTCloudProtocol::parseListFileResultData(QTCloudListFileResult& r, const QByteArray& l)
 {
     quint32 pos = 0;
     QByteArray b = l;
     QByteArray h;
     h = parseKeyWordInByteArray(b, _TCP_SECTION_CODE, pos);
     r.m_code = h;
-    while(pos < b.length())
+    while (pos < b.length())
     {
         _QTCloudListFileResult _r;
         QByteArray __r;
@@ -451,12 +451,12 @@ void QQTCloudProtocol::parseListFileResultData(QTCloudListFileResult &r, const Q
     }
 }
 
-void QQTCloudProtocol::packDownDevFileData(QByteArray &l, const QTCloudDownDevFile &t)
+void QQTCloudProtocol::packDownDevFileData(QByteArray& l, const QTCloudDownDevFile& t)
 {
     l = t.m_id.toLatin1();
 }
 
-void QQTCloudProtocol::parseDownDevFileResultData(QTCloudDownDevFileResult &t, const QByteArray &l)
+void QQTCloudProtocol::parseDownDevFileResultData(QTCloudDownDevFileResult& t, const QByteArray& l)
 {
     quint32 pos = 0;
     QByteArray b = l;
@@ -465,17 +465,17 @@ void QQTCloudProtocol::parseDownDevFileResultData(QTCloudDownDevFileResult &t, c
     t.m_length = parseKeyWordInByteArray(b, _TCP_SECTION_LENGTH, pos);
 }
 
-void QQTCloudProtocol::packDownDevFileSuccessData(QByteArray &l, const QTCloudDownFileSuccess &t)
+void QQTCloudProtocol::packDownDevFileSuccessData(QByteArray& l, const QTCloudDownFileSuccess& t)
 {
     l << t.m_fileno;
 }
 
-void QQTCloudProtocol::packDownDevFileDataData(QByteArray &l, const QTCloudDownFileData &t)
+void QQTCloudProtocol::packDownDevFileDataData(QByteArray& l, const QTCloudDownFileData& t)
 {
     l << t.m_fileno << t.m_dno;
 }
 
-void QQTCloudProtocol::parseDownDevFileDataResultData(QTCloudDownFileDataResult &t, const QByteArray &l)
+void QQTCloudProtocol::parseDownDevFileDataResultData(QTCloudDownFileDataResult& t, const QByteArray& l)
 {
     quint32 pos = 0;
     QByteArray b = l;
@@ -484,29 +484,29 @@ void QQTCloudProtocol::parseDownDevFileDataResultData(QTCloudDownFileDataResult 
     b >> t.m_data;
 }
 
-void QQTCloudProtocol::packUploadFileData(QByteArray &l, const QTCloudUploadFile &t)
+void QQTCloudProtocol::packUploadFileData(QByteArray& l, const QTCloudUploadFile& t)
 {
     l = QString(_TCPCMD_DATASENDFILEINFO).arg(t.m_code).arg(t.m_name).arg(t.m_overwrite).arg(t.m_length).toLatin1();
 }
 
-void QQTCloudProtocol::parseUploadFileResultData(QTCloudUploadFileResult &t, const QByteArray &l)
+void QQTCloudProtocol::parseUploadFileResultData(QTCloudUploadFileResult& t, const QByteArray& l)
 {
     QByteArray b = l;
     b >> t.m_fileno >> t.m_state;
 }
 
-void QQTCloudProtocol::packUploadFileDataData(QByteArray &l, const QTCloudUploadFileData &t)
+void QQTCloudProtocol::packUploadFileDataData(QByteArray& l, const QTCloudUploadFileData& t)
 {
     l << t.m_fileno << t.m_dno << t.m_addr << t.m_dlen << t.m_data;
 }
 
-void QQTCloudProtocol::parseUploadFileDataResultData(QTCloudUploadFileDataResult &t, const QByteArray &l)
+void QQTCloudProtocol::parseUploadFileDataResultData(QTCloudUploadFileDataResult& t, const QByteArray& l)
 {
     QByteArray b = l;
     b >> t.m_fileno >> t.m_dno;
 }
 
-void QQTCloudProtocol::parseUploadFileSuccessData(QTCloudUploadFileSuccess &t, const QByteArray &l)
+void QQTCloudProtocol::parseUploadFileSuccessData(QTCloudUploadFileSuccess& t, const QByteArray& l)
 {
     QByteArray b = l;
     b >> t.m_fileno;
@@ -568,11 +568,11 @@ void QQTCloudProtocol::sendDelDirectory()
     sendMessage(_tcpcmd, d);
 }
 
-void QQTCloudProtocol::recvAddDirResultMessage(QQTNetworkMessage &){}
+void QQTCloudProtocol::recvAddDirResultMessage(QQTNetworkMessage&) {}
 
-void QQTCloudProtocol::recvDelDirResultMessage(QQTNetworkMessage &){}
+void QQTCloudProtocol::recvDelDirResultMessage(QQTNetworkMessage&) {}
 
-void QQTCloudProtocol::recvModDirResultMessage(QQTNetworkMessage &){}
+void QQTCloudProtocol::recvModDirResultMessage(QQTNetworkMessage&) {}
 
 void QQTCloudProtocol::sendListFiles(QString code)
 {
@@ -632,7 +632,8 @@ void QQTCloudProtocol::sendDownPubFiles()
 {
     QTCloudDownPubFile t;
     _QTCloudListFileResult _result;
-    foreach (_result, m_pubfiles.m_file) {
+    foreach (_result, m_pubfiles.m_file)
+    {
         break;
     }
     t.m_id = _result.m_id;
@@ -700,8 +701,8 @@ void QQTCloudProtocol::sendUploadFileData()
 {
     m_uploadfiledata.m_addr = m_uploadfiledata.m_dno * _TCP_BLOCKDATA_SIZE;
     QFile f(m_uploadfile.m_localfile);
-    f.open( QIODevice::ReadOnly );
-    if(f.isOpen())
+    f.open(QIODevice::ReadOnly);
+    if (f.isOpen())
     {
         f.seek(m_uploadfiledata.m_addr);
         m_uploadfiledata.m_data = f.read(_TCP_BLOCKDATA_SIZE);
@@ -735,7 +736,7 @@ void QQTCloudProtocol::sendCancelUpload()
     emit signalCancelUpload();
 }
 
-void QQTCloudProtocol::sendDownUpgradeFile(const QString &id, const QString &localfile)
+void QQTCloudProtocol::sendDownUpgradeFile(const QString& id, const QString& localfile)
 {
     m_downfileresult.m_localfile = localfile;
     m_work = 1;
@@ -747,14 +748,15 @@ void QQTCloudProtocol::sendDownUpgradeFile(const QString &id, const QString &loc
     sendMessage(_tcpcmd, d);
 }
 
-void QQTCloudProtocol::recvListDirResultMessage(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvListDirResultMessage(QQTNetworkMessage& qMsg)
 {
     m_dirs.m_upcode = "";
     m_dirs.m_dir.clear();
     parseListDirResultData(m_dirs, qMsg.data());
     pline() << m_dirs.m_upcode;
     _QTCloudListDirResult _result;
-    foreach (_result, m_dirs.m_dir) {
+    foreach (_result, m_dirs.m_dir)
+    {
         /*
          * 这里保存到model中
          */
@@ -763,14 +765,15 @@ void QQTCloudProtocol::recvListDirResultMessage(QQTNetworkMessage &qMsg)
     emit signalListDirOK();
 }
 
-void QQTCloudProtocol::recvListFilesResultMessage(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvListFilesResultMessage(QQTNetworkMessage& qMsg)
 {
     m_files.m_code = "";
     m_files.m_file.clear();
     parseListFileResultData(m_files, qMsg.data());
     pline() << m_files.m_code;
     _QTCloudListFileResult _result;
-    foreach (_result, m_files.m_file) {
+    foreach (_result, m_files.m_file)
+    {
         /*
          * 这里保存到model中
          */
@@ -779,14 +782,15 @@ void QQTCloudProtocol::recvListFilesResultMessage(QQTNetworkMessage &qMsg)
     emit signalListFileOK();
 }
 
-void QQTCloudProtocol::recvListPubDirResultMessage(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvListPubDirResultMessage(QQTNetworkMessage& qMsg)
 {
     m_pubdirs.m_upcode = "";
     m_pubdirs.m_dir.clear();
     parseListDirResultData(m_pubdirs, qMsg.data());
     pline() << m_pubdirs.m_upcode;
     _QTCloudListDirResult _result;
-    foreach (_result, m_pubdirs.m_dir) {
+    foreach (_result, m_pubdirs.m_dir)
+    {
         /*
          * 这里保存到model中
          */
@@ -794,14 +798,15 @@ void QQTCloudProtocol::recvListPubDirResultMessage(QQTNetworkMessage &qMsg)
     }
 }
 
-void QQTCloudProtocol::recvListPubFilesResultMessage(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvListPubFilesResultMessage(QQTNetworkMessage& qMsg)
 {
     m_pubfiles.m_code = "";
     m_pubfiles.m_file.clear();
     parseListFileResultData(m_pubfiles, qMsg.data());
     pline() << m_pubfiles.m_code;
     _QTCloudListFileResult _result;
-    foreach (_result, m_pubfiles.m_file) {
+    foreach (_result, m_pubfiles.m_file)
+    {
         /*
          * 这里保存到model中
          */
@@ -809,7 +814,7 @@ void QQTCloudProtocol::recvListPubFilesResultMessage(QQTNetworkMessage &qMsg)
     }
 }
 
-void QQTCloudProtocol::recvDownFileResultMessage(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvDownFileResultMessage(QQTNetworkMessage& qMsg)
 {
     parseDownDevFileResultData(m_downfileresult, qMsg.data());
     pline() << m_downfileresult.m_fileno << m_downfileresult.m_name << m_downfileresult.m_length;
@@ -822,35 +827,35 @@ void QQTCloudProtocol::recvDownFileResultMessage(QQTNetworkMessage &qMsg)
 #endif
 
     QFile f(tmpFile);
-    f.open( QIODevice::WriteOnly | QIODevice::Truncate );
+    f.open(QIODevice::WriteOnly | QIODevice::Truncate);
     pline() << tmpFile << f.size();
     f.close();
     emit signalUpdateProgress(0);
     emit signalDownData();
 }
 
-void QQTCloudProtocol::recvDownFileDataResultMessage(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvDownFileDataResultMessage(QQTNetworkMessage& qMsg)
 {
-    if(0 == m_work)
+    if (0 == m_work)
         return;
     QTCloudDownFileDataResult result;
     parseDownDevFileDataResultData(result, qMsg.data());
     pline() << result.m_fileno << result.m_dno << result.m_addr <<
-               result.m_dlen;// << m_downfiledata.m_data;
+            result.m_dlen;// << m_downfiledata.m_data;
     int nFileSize = 0;
     QString tmpFile = m_downfileresult.m_localfile;
     QFile f(tmpFile);
-    f.open( QIODevice::WriteOnly | QIODevice::Append );
+    f.open(QIODevice::WriteOnly | QIODevice::Append);
     f.write(result.m_data);
     nFileSize = f.size();
     f.close();
     pline() << nFileSize << m_downfileresult.m_length;
     int percent = 0;
-    if(nFileSize > 0)
+    if (nFileSize > 0)
         percent = 100 * nFileSize / m_downfileresult.m_length.toInt();
     emit signalUpdateProgress(percent);
     pline() << percent;
-    if(nFileSize < m_downfileresult.m_length.toInt())
+    if (nFileSize < m_downfileresult.m_length.toInt())
     {
         m_downfiledata.m_dno++;
         emit signalDownData();
@@ -862,7 +867,7 @@ void QQTCloudProtocol::recvDownFileDataResultMessage(QQTNetworkMessage &qMsg)
     }
 }
 
-void QQTCloudProtocol::recvUploadFileResult(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvUploadFileResult(QQTNetworkMessage& qMsg)
 {
     QTCloudUploadFileResult result;
     parseUploadFileResultData(result, qMsg.data());
@@ -874,7 +879,7 @@ void QQTCloudProtocol::recvUploadFileResult(QQTNetworkMessage &qMsg)
     perr(result.m_state, 0x04) << "files too long";
     perr(result.m_state, 0x14) << "no much storage";
 
-    if(result.m_state == 0x00)
+    if (result.m_state == 0x00)
     {
         m_uploadfiledata.m_fileno = result.m_fileno;
         m_uploadfiledata.m_dno = 0;
@@ -886,67 +891,67 @@ void QQTCloudProtocol::recvUploadFileResult(QQTNetworkMessage &qMsg)
     }
 }
 
-void QQTCloudProtocol::recvUploadFileDataResult(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvUploadFileDataResult(QQTNetworkMessage& qMsg)
 {
     QTCloudUploadFileDataResult result;
 
     parseUploadFileDataResultData(result, qMsg.data());
-    pline() << result.m_fileno << result.m_dno << result.m_dno * _TCP_BLOCKDATA_SIZE << m_uploadfile.m_length.toInt();
+    pline() << result.m_fileno << result.m_dno << result.m_dno* _TCP_BLOCKDATA_SIZE << m_uploadfile.m_length.toInt();
 
     /*
      * 不需要发空串
      */
     m_uploadfiledata.m_dno = result.m_dno + 1;
     int percent = 0;
-    if(m_uploadfile.m_length.toInt() > 0)
+    if (m_uploadfile.m_length.toInt() > 0)
         percent = 100 * m_uploadfiledata.m_dno * _TCP_BLOCKDATA_SIZE /
-                m_uploadfile.m_length.toInt();
+                  m_uploadfile.m_length.toInt();
 
-    if(m_uploadfiledata.m_dno * _TCP_BLOCKDATA_SIZE < m_uploadfile.m_length.toInt())
+    if (m_uploadfiledata.m_dno * _TCP_BLOCKDATA_SIZE < m_uploadfile.m_length.toInt())
     {
         emit signalSendData();
         emit signalUpdateProgress(percent);
     }
 }
 
-void QQTCloudProtocol::recvUploadFileSuccess(QQTNetworkMessage &qMsg)
+void QQTCloudProtocol::recvUploadFileSuccess(QQTNetworkMessage& qMsg)
 {
     QTCloudUploadFileSuccess result;
     parseUploadFileSuccessData(result, qMsg.data());
-    pline() << result.m_fileno << m_uploadfiledata.m_dno << m_uploadfiledata.m_dno * _TCP_BLOCKDATA_SIZE << m_uploadfile.m_length.toInt() << "upload success";
+    pline() << result.m_fileno << m_uploadfiledata.m_dno << m_uploadfiledata.m_dno* _TCP_BLOCKDATA_SIZE << m_uploadfile.m_length.toInt() << "upload success";
     emit signalUpdateProgress(100);
     emit signalUploadSucc();
 }
 
-void QQTCloudProtocol::packLoginData(QByteArray &l, const QTCloudLogin &t)
+void QQTCloudProtocol::packLoginData(QByteArray& l, const QTCloudLogin& t)
 {
     l = QString(_TCPCMD_DATALOGIN).arg(t.m_name).arg(t.m_password).toLatin1();
 }
 
-void QQTCloudProtocol::parseLoginResultData(QTCloudLoginResult &t, const QByteArray &l)
+void QQTCloudProtocol::parseLoginResultData(QTCloudLoginResult& t, const QByteArray& l)
 {
     QByteArray _l = l;
     _l >> t.m_result;
 }
 
 
-QByteArray& QQTCloudProtocol::packKeyWordToByteArray(QByteArray &array, const QString& key, const QString &value)
+QByteArray& QQTCloudProtocol::packKeyWordToByteArray(QByteArray& array, const QString& key, const QString& value)
 {
     return array << key.toLatin1() << "=\"" << value.toLatin1() << "\"";
 }
 
-QByteArray QQTCloudProtocol::parseKeyWordInByteArray(const QByteArray &array, const QByteArray &section, quint32& pos)
+QByteArray QQTCloudProtocol::parseKeyWordInByteArray(const QByteArray& array, const QByteArray& section, quint32& pos)
 {
     int index = pos, indexTemp = 0;
 
     index = array.indexOf(section, index);
     index = array.indexOf('\"', index);
-    indexTemp = array.indexOf('\"', index+1);
+    indexTemp = array.indexOf('\"', index + 1);
     pos = indexTemp + 1;
-    return array.mid(index + 1, (indexTemp - index-1));
+    return array.mid(index + 1, (indexTemp - index - 1));
 }
 
-quint16 QQTCloudProtocol::splitter(const QByteArray &s)
+quint16 QQTCloudProtocol::splitter(const QByteArray& s)
 {
     QByteArray l = s.left(4);
     quint16 b0 = 0, b1 = 0;

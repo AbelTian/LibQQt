@@ -22,9 +22,9 @@ QQtApplication::QQtApplication(int& argc, char** argv) :
 #endif
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
-    QCoreApplication::setOrganizationName(VER_COMPANYNAME_STR);
-    QCoreApplication::setOrganizationDomain(VER_COMPANYDOMAIN_STR);  // 专为Mac OS X 准备的
-    QCoreApplication::setApplicationName(VER_PRODUCTNAME_STR);
+    QCoreApplication::setOrganizationName(COMPANY_NAME);
+    QCoreApplication::setOrganizationDomain(COMPANY_DOMAIN);  // 专为Mac OS X 准备的
+    QCoreApplication::setApplicationName(PRODUCT_NAME);
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH);
     QSettings::setPath(QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH);
 

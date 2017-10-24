@@ -1,23 +1,25 @@
 #ifndef QQTVERSION_H
 #define QQTVERSION_H
 
-#define VER_FILEVERSION             1,2,0,0
-#define VER_FILEVERSION_STR         "1.2.0.0"
+#define PRODUCT_ICON            "qqt.ico"
 
-#define VER_PRODUCTVERSION          1.2
-#define VER_PRODUCTVERSION_MAJOR    1
-#define VER_PRODUCTVERSION_STR      "1.2"
-#define VER_PRODUCTVERSION_MAJOR_STR "1"
+#define FILE_VERSION              1,3,0,0
+#define FILE_VERSION_STR          "1.3.0.0"
+#define FILE_DESCRIPTION          "QQT"
 
-#define VER_COMPANYNAME_STR         "QQT"
-#define VER_FILEDESCRIPTION_STR     "QQT"
-#define VER_INTERNALNAME_STR        "QQT"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright 2007-2017 QQT Co., Ltd."
-#define VER_LEGALTRADEMARKS1_STR    "All rights reserved"
-#define VER_LEGALTRADEMARKS2_STR    "All rights reserved"
-#define VER_ORIGINALFILENAME_STR    "QQT"
-#define VER_PRODUCTNAME_STR         "QQT"
+#define PRODUCT_VERSION           1.3
+#define PRODUCT_VERSION_MAJOR     1
+#define PRODUCT_VERSION_STR       "1.3"
+#define PRODUCT_VERSION_MAJOR_STR "1"
+#define PRODUCT_NAME              "QQT"
 
-#define VER_COMPANYDOMAIN_STR       "www.qqt.com"
+#define COMPANY_NAME              "QQT"
+#define INTERNAL_NAME             "QQT"
+#define ORIGINAL_FILE_NAME        "QQT"
+#define LEGAL_COPYRIGHT           "Copyright 2007-2017 QQT Co., Ltd."
+#define LEGAL_TRADE_MARKS1        "All rights reserved"
+#define LEGALTRADEMARKS2          "All rights reserved"
+
+#define COMPANY_DOMAIN            "www.qqt.com"
 
 #endif // QQTVERSION_H

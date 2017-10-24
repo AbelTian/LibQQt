@@ -22,7 +22,7 @@ void QQTLanServer(QObject* parent = 0)
     s->installedProtocol();
 }
 
-QQTApp::QQTApp(int &argc, char **argv) : QApplication(argc, argv)
+QQTApp::QQTApp(int& argc, char** argv) : QApplication(argc, argv)
 {
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
@@ -30,9 +30,9 @@ QQTApp::QQTApp(int &argc, char **argv) : QApplication(argc, argv)
 #endif
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
-    QApplication::setOrganizationName(VER_COMPANYNAME_STR);
-    QApplication::setOrganizationDomain(VER_COMPANYDOMAIN_STR);  // 专为Mac OS X 准备的
-    QApplication::setApplicationName(VER_PRODUCTNAME_STR);
+    QApplication::setOrganizationName("qqtframe");
+    QApplication::setOrganizationDomain("www.qqtframe.com");  // 专为Mac OS X 准备的
+    QApplication::setApplicationName("QQtFrame");
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH);
     QSettings::setPath(QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH);
 
@@ -55,11 +55,11 @@ QQTApp::QQTApp(int &argc, char **argv) : QApplication(argc, argv)
 
 #if 0
     int heitiFontID = db.addApplicationFont("/usr/lib/fonts/heiti.ttf");
-    QString heiti = db.applicationFontFamilies ( heitiFontID ).at(0);
+    QString heiti = db.applicationFontFamilies(heitiFontID).at(0);
     pline() << heiti;
 #else
     int wenquanyiFontID = db.addApplicationFont("/usr/lib/fonts/wenquanyi.ttf");
-    QString wenquanyi = db.applicationFontFamilies ( wenquanyiFontID ).at(0);
+    QString wenquanyi = db.applicationFontFamilies(wenquanyiFontID).at(0);
     pline() << wenquanyi;
 #endif
 
@@ -139,13 +139,13 @@ void QQTApp::setLanguage()
 
 void QQTApp::slotUPanAutoRun(int status)
 {
-    if(QQTPluginWatcher::E_ADD == status)
+    if (QQTPluginWatcher::E_ADD == status)
     {
         QString mP = QQTPluginWatcher::Instance()->upanMountPath();
         QString app = QString("%1/autorun.sh").arg(mP);
         QFile file(app);
-        if(file.exists())
-            if(QDialog::Rejected == QQTMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
+        if (file.exists())
+            if (QDialog::Rejected == QQTMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
                 return;
         QProcess* p = new QProcess(this);
         p->setWorkingDirectory(mP);

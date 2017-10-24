@@ -102,8 +102,8 @@ unix {
     }
 }
 HEADERS += $$PWD/qqt.h \
-    $$PWD/qqtversion.h \
     $$PWD/qqt-local.h \
+    $$PWD/qqtversion.h \
     $$PWD/qqt-qt.h
 
 #core
