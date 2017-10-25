@@ -32,7 +32,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #WIN __WIN__
 #WIN64 __WIN64__
 #macOS __DARWIN__
-#Android __ANDROID__
+#ANDROID __ANDROID__
 #ANDROIDX86 __ANDROIDX86__
 ##target arch type
 QKIT_ = $$(QKIT)
@@ -63,7 +63,7 @@ equals(QKIT_, EMBEDDED) {
     DEFINES += __IOS__
 } else:equals(QKIT_, iOSSimulator) {
     DEFINES += __IOS__
-} else:equals(QKIT_, Android) {
+} else:equals(QKIT_, ANDROID) {
     DEFINES += __ANDROID__
 } else:equals(QKIT_, ANDROIDX86) {
     DEFINES += __ANDROID__

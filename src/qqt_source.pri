@@ -39,8 +39,7 @@ SOURCES = \
     $$PWD/exquisite/qqtfadeeffectwidget.cpp \
     $$PWD/exquisite/qqtshadoweffectwidget.cpp \
     $$PWD/exquisite/qqtpopeffectdialog.cpp \
-    $$PWD/exquisite/qqtcircleeffectprogressbar.cpp \
-    $$PWD/exquisite/qqtrecteffectprogressbar.cpp
+    $$PWD/exquisite/qqtcustomeffectprogressbar.cpp
 HEADERS = \
     $$PWD/exquisite/qqtcustomspeedmeter.h \
     $$PWD/exquisite/qqtframelesshelper.h \
@@ -55,8 +54,7 @@ HEADERS = \
     $$PWD/exquisite/qqtfadeeffectwidget.h \
     $$PWD/exquisite/qqtshadoweffectwidget.h \
     $$PWD/exquisite/qqtpopeffectdialog.h \
-    $$PWD/exquisite/qqtcircleeffectprogressbar.h \
-    $$PWD/exquisite/qqtrecteffectprogressbar.h
+    $$PWD/exquisite/qqtcustomeffectprogressbar.h
 
 #qrcode
 #DEFINES += __QRENCODE__

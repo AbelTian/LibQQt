@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>618</width>
-    <height>436</height>
+    <width>739</width>
+    <height>515</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,16 +16,25 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>4</number>
+     </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>Tab 1</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QQtCustomSpeedMeter" name="w0" native="true"/>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w01" native="true"/>
        </item>
-       <item row="0" column="1">
-        <widget class="QQtCircleEffectProgressBar" name="w2" native="true"/>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w0" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w1" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w2" native="true"/>
        </item>
       </layout>
      </widget>
@@ -33,6 +42,71 @@
       <attribute name="title">
        <string>Tab 2</string>
       </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w5" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w6" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w3" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w4" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>页</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w50" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w51" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w52" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w53" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>页</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w40" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w41" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w42" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomEffectProgressBar" name="w43" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>页</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QQtCustomSpeedMeter" name="w7" native="true"/>
+       </item>
+       <item>
+        <widget class="QQtCustomSpeedMeter" name="w8" native="true"/>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
@@ -54,9 +128,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQtCircleEffectProgressBar</class>
+   <class>QQtCustomEffectProgressBar</class>
    <extends>QWidget</extends>
-   <header location="global">qqtcircleeffectprogressbar.h</header>
+   <header location="global">qqtcustomeffectprogressbar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -1,14 +1,14 @@
-#if _MSC_VER >= 1600
+﻿#if _MSC_VER >= 1600
 #pragma execution_character_set("utf-8")
 #endif
 
-#include "qqtrecteffectprogressbar.h"
+#include "qqtcustomeffectprogressbar.h"
 #include "qpainter.h"
 #include "qdebug.h"
 #include "qmath.h"
 #include "qtimer.h"
 
-QQtRectEffectProgressBar::QQtRectEffectProgressBar(QWidget* parent) : QWidget(parent)
+QQtCustomEffectProgressBar::QQtCustomEffectProgressBar(QWidget* parent) : QWidget(parent)
 {
     minValue = 0;
     maxValue = 100;
@@ -16,6 +16,7 @@ QQtRectEffectProgressBar::QQtRectEffectProgressBar(QWidget* parent) : QWidget(pa
 
     nullPosition = 0;
     lineWidth = 10;
+    cornerRadius = 10;
 
     showPercent = true;
     showFree = false;
@@ -28,7 +29,8 @@ QQtRectEffectProgressBar::QQtRectEffectProgressBar(QWidget* parent) : QWidget(pa
     textColor = QColor(250, 250, 250);
     textFont = font();
 
-    percentStyle = PercentStyle_Polo;
+    designStyle = DesignStyle_Circle;
+    percentStyle = PercentStyle_Arc;
     backgroundType = BackgroundType_Color;
 
     percentSuffix = "%";
@@ -43,11 +45,11 @@ QQtRectEffectProgressBar::QQtRectEffectProgressBar(QWidget* parent) : QWidget(pa
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 }
 
-QQtRectEffectProgressBar::~QQtRectEffectProgressBar()
+QQtCustomEffectProgressBar::~QQtCustomEffectProgressBar()
 {
 }
 
-void QQtRectEffectProgressBar::paintEvent(QPaintEvent*)
+void QQtCustomEffectProgressBar::paintEvent(QPaintEvent*)
 {
     int width = this->width();
     int height = this->height();
@@ -62,7 +64,12 @@ void QQtRectEffectProgressBar::paintEvent(QPaintEvent*)
     /*更改刻度 设置的是放大的倍数 */
     /*有利于在绘制的时候，统一绘制数据*/
     /*矢量放大，不失真*/
-    painter.scale(side / 200.0, side / 200.0);
+    if (designStyle == DesignStyle_Circle
+        || designStyle == DesignStyle_Square)
+        painter.scale(side / 200.0, side / 200.0);
+    else if (designStyle == DesignStyle_Ellipse
+             || designStyle == DesignStyle_Rectangle)
+        painter.scale(width / 200.0, height / 200.0);
 
     /*绘制中心圆*/
     /*
@@ -73,9 +80,18 @@ void QQtRectEffectProgressBar::paintEvent(QPaintEvent*)
     drawBackground(&painter, 99);
 
     /*根据样式绘制进度*/
-    if (percentStyle == PercentStyle_Polo)
+    if (percentStyle == PercentStyle_Arc)
     {
-        drawPolo(&painter, 99 - lineWidth);
+        drawArc(&painter, 99 - lineWidth / 2);
+    }
+    else if (percentStyle == PercentStyle_Polo)
+    {
+        drawPolo(&painter, 99);
+    }
+    else if (percentStyle == PercentStyle_Arc_Polo)
+    {
+        drawArc(&painter, 99 - lineWidth / 2);
+        drawPolo(&painter, 99 - lineWidth * 2);
     }
     else if (percentStyle == PercentStyle_Wave)
     {
@@ -86,15 +102,30 @@ void QQtRectEffectProgressBar::paintEvent(QPaintEvent*)
     drawText(&painter, 100);
 }
 
-void QQtRectEffectProgressBar::drawBackground(QPainter* painter, int radius)
+void QQtCustomEffectProgressBar::drawBackground(QPainter* painter, int radius)
 {
+    if (percentStyle == PercentStyle_Arc)
+    {
+        radius = radius - lineWidth;
+    }
+    else if (percentStyle == PercentStyle_Arc_Polo)
+    {
+        radius = radius - lineWidth * 2;
+    }
+
     painter->save();
     painter->setPen(Qt::NoPen);
     painter->setBrush(backgroundColor);
 
     if (backgroundType == BackgroundType_Color)
     {
-        painter->drawEllipse(-radius, -radius, radius * 2, radius * 2);
+        if (designStyle == DesignStyle_Circle
+            || designStyle == DesignStyle_Ellipse)
+            painter->drawEllipse(-radius, -radius, radius * 2, radius * 2);
+        else if (designStyle == DesignStyle_Rectangle
+                 || designStyle == DesignStyle_Square)
+            painter->drawRoundRect(-radius, -radius, radius * 2, radius * 2,
+                                   cornerRadius, cornerRadius);
     }
     else
     {
@@ -112,14 +143,68 @@ void QQtRectEffectProgressBar::drawBackground(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtRectEffectProgressBar::drawPolo(QPainter* painter, int radius)
+void QQtCustomEffectProgressBar::drawArc(QPainter* painter, int radius)
+{
+    painter->save();
+    painter->setBrush(Qt::NoBrush);
+
+    QPen pen = painter->pen();
+    pen.setWidthF(lineWidth);
+
+    /*这里可以更改画笔样式更换线条风格*/
+    pen.setCapStyle(Qt::RoundCap);
+
+    double arcLength = 360.0 / (maxValue - minValue) * value;
+    QRect rect(-radius, -radius, radius * 2, radius * 2);
+
+    /*逆时针为顺时针分负数*/
+    if (!clockWise)
+    {
+        arcLength = -arcLength;
+    }
+
+    /*绘制剩余进度圆弧*/
+    if (showFree)
+    {
+        pen.setColor(freeColor);
+        painter->setPen(pen);
+        painter->drawArc(rect, (nullPosition - arcLength) * 16, -(360 - arcLength) * 16);
+    }
+
+    /*绘制当前进度圆弧*/
+    pen.setColor(usedColor);
+    painter->setPen(pen);
+    painter->drawArc(rect, nullPosition * 16, -arcLength * 16);
+
+    /*绘制进度圆弧前面的小圆*/
+    if (showSmallCircle)
+    {
+        int offset = radius - lineWidth + 1;
+        radius = lineWidth / 2 - 1;
+        painter->rotate(-nullPosition - 90);
+
+        QRect circleRect(-radius, radius + offset, radius * 2, radius * 2);
+        painter->rotate(arcLength);
+        painter->drawEllipse(circleRect);
+    }
+
+    painter->restore();
+}
+
+void QQtCustomEffectProgressBar::drawPolo(QPainter* painter, int radius)
 {
     /*计算当前值所占百分比对应高度*/
     double poloHeight = (double)radius / (maxValue - minValue) * (value - minValue) ;
 
     /*大圆路径*/
     QPainterPath bigPath;
-    bigPath.addEllipse(-radius, -radius, radius * 2, radius * 2);
+    if (designStyle == DesignStyle_Circle
+        || designStyle == DesignStyle_Ellipse)
+        bigPath.addEllipse(-radius, -radius, radius * 2, radius * 2);
+    else if (designStyle == DesignStyle_Rectangle
+             || designStyle == DesignStyle_Square)
+        bigPath.addRoundedRect(-radius, -radius, radius * 2, radius * 2,
+                               cornerRadius, cornerRadius);
 
     /*底部水池灌水所占的矩形区域路径*/
     QPainterPath smallPath;
@@ -138,11 +223,21 @@ void QQtRectEffectProgressBar::drawPolo(QPainter* painter, int radius)
     painter->restore();
 }
 
-void QQtRectEffectProgressBar::drawWave(QPainter* painter, int radius)
+void QQtCustomEffectProgressBar::drawWave(QPainter* painter, int radius)
 {
     /*大路径*/
     QPainterPath bigPath;
-    bigPath.addEllipse(-radius, -radius, radius * 2, radius * 2);
+    if (designStyle == DesignStyle_Circle
+        || designStyle == DesignStyle_Ellipse)
+        bigPath.addEllipse(-radius, -radius, radius * 2, radius * 2);
+    else if (designStyle == DesignStyle_Rectangle
+             || designStyle == DesignStyle_Square)
+        /*
+         * addRoundRect bug:
+         * 30% 左右 图形闪烁 经过分析为QPainterPath计算公共区域时在圆角上出了错误。
+        */
+        bigPath.addRoundedRect(-radius, -radius, radius * 2, radius * 2,
+                               cornerRadius, cornerRadius);
 
     /*正弦曲线公式 y = A * sin(ωx + φ) + k*/
     /*A表示振幅,可以理解为水波的高度,值越大高度越高(越浪 ^_^),取值高度的百分比*/
@@ -228,31 +323,32 @@ void QQtRectEffectProgressBar::drawWave(QPainter* painter, int radius)
     waterPath2.lineTo(-radius, radius);
     waterPath2.lineTo(-radius, k);
 
-    painter->save();
 
+
+    painter->save();
     /*新路径,用大路径减去波浪区域的路径,形成遮罩效果*/
     /*第一条波浪挖去后的路径*/
     QPainterPath path1;
     path1 = bigPath.intersected(waterPath1);
-    QColor waterColor1 = usedColor;
-    waterColor1.setAlpha(100);
-    painter->setPen(waterColor1);
-    painter->setBrush(waterColor1);
+    QColor path1Color = usedColor;
+    path1Color.setAlpha(100);
+    painter->setPen(path1Color);
+    painter->setBrush(path1Color);
     painter->drawPath(path1);
 
     /*第二条波浪挖去后的路径*/
     QPainterPath path2;
     path2 = bigPath.intersected(waterPath2);
-    QColor waterColor2 = usedColor;
-    waterColor2.setAlpha(180);
-    painter->setPen(waterColor2);
-    painter->setBrush(waterColor2);
+    QColor path2Color = usedColor;
+    path2Color.setAlpha(180);
+    painter->setPen(path2Color);
+    painter->setBrush(path2Color);
     painter->drawPath(path2);
 
     painter->restore();
 }
 
-void QQtRectEffectProgressBar::drawText(QPainter* painter, int radius)
+void QQtCustomEffectProgressBar::drawText(QPainter* painter, int radius)
 {
     QString strValue = QString("%1").arg(value);
 
@@ -269,105 +365,103 @@ void QQtRectEffectProgressBar::drawText(QPainter* painter, int radius)
 
     QFontMetricsF fm(textFont);
     QSizeF textSize = fm.size(Qt::TextSingleLine, strValue);
-    //QRectF textRect(-radius, -radius, radius * 2, radius * 2);
     QRectF textRect(-textSize.width() / 2, 40, textSize.width(), textSize.height());
-    //painter->drawText(-w / 2, 42, strValue);
     painter->drawText(textRect, Qt::AlignCenter, strValue);
 
     painter->restore();
 }
 
-int QQtRectEffectProgressBar::getMinValue() const
+int QQtCustomEffectProgressBar::getMinValue() const
 {
     return this->minValue;
 }
 
-int QQtRectEffectProgressBar::getMaxValue() const
+int QQtCustomEffectProgressBar::getMaxValue() const
 {
     return this->maxValue;
 }
 
-int QQtRectEffectProgressBar::getValue() const
+int QQtCustomEffectProgressBar::getValue() const
 {
     return this->value;
 }
 
-int QQtRectEffectProgressBar::getNullPosition() const
+int QQtCustomEffectProgressBar::getNullPosition() const
 {
     return this->nullPosition;
 }
 
-int QQtRectEffectProgressBar::getLineWidth() const
+int QQtCustomEffectProgressBar::getLineWidth() const
 {
     return this->lineWidth;
 }
 
-bool QQtRectEffectProgressBar::getShowPercent() const
+bool QQtCustomEffectProgressBar::getShowPercent() const
 {
     return this->showPercent;
 }
 
-bool QQtRectEffectProgressBar::getShowFree() const
+bool QQtCustomEffectProgressBar::getShowFree() const
 {
     return this->showFree;
 }
 
-bool QQtRectEffectProgressBar::getShowSmallCircle() const
+bool QQtCustomEffectProgressBar::getShowSmallCircle() const
 {
     return this->showSmallCircle;
 }
 
-bool QQtRectEffectProgressBar::getClockWise() const
+bool QQtCustomEffectProgressBar::getClockWise() const
 {
     return this->clockWise;
 }
 
-QColor QQtRectEffectProgressBar::getUsedColor() const
+QColor QQtCustomEffectProgressBar::getUsedColor() const
 {
     return this->usedColor;
 }
 
-QColor QQtRectEffectProgressBar::getFreeColor() const
+QColor QQtCustomEffectProgressBar::getFreeColor() const
 {
     return this->freeColor;
 }
 
-QColor QQtRectEffectProgressBar::getBackgroundColor() const
+QColor QQtCustomEffectProgressBar::getBackgroundColor() const
 {
     return this->backgroundColor;
 }
 
-QColor QQtRectEffectProgressBar::getTextColor() const
+QColor QQtCustomEffectProgressBar::getTextColor() const
 {
     return this->textColor;
 }
 
-QString QQtRectEffectProgressBar::getPercentSuffix() const
+QString QQtCustomEffectProgressBar::getPercentSuffix() const
 {
     return this->percentSuffix;
 }
 
-QQtRectEffectProgressBar::PercentStyle QQtRectEffectProgressBar::getPercentStyle() const
+QQtCustomEffectProgressBar::PercentStyle QQtCustomEffectProgressBar::getPercentStyle() const
 {
     return this->percentStyle;
 }
 
-QQtRectEffectProgressBar::BackgroundType QQtRectEffectProgressBar::getBackgroundType() const
+QQtCustomEffectProgressBar::BackgroundType QQtCustomEffectProgressBar::getBackgroundType() const
 {
     return this->backgroundType;
 }
 
-QSize QQtRectEffectProgressBar::sizeHint() const
+QSize QQtCustomEffectProgressBar::sizeHint() const
 {
     return QSize(200, 200);
 }
 
-QSize QQtRectEffectProgressBar::minimumSizeHint() const
+QSize QQtCustomEffectProgressBar::minimumSizeHint() const
 {
     return QSize(10, 10);
 }
 
-void QQtRectEffectProgressBar::setRange(int minValue, int maxValue)
+void QQtCustomEffectProgressBar::setRange(int minValue, int maxValue)
 {
     /*如果最小值大于或者等于最大值则不设置*/
     if (minValue >= maxValue)
@@ -387,17 +481,17 @@ void QQtRectEffectProgressBar::setRange(int minValue, int maxValue)
     update();
 }
 
-void QQtRectEffectProgressBar::setMinValue(int minValue)
+void QQtCustomEffectProgressBar::setMinValue(int minValue)
 {
     setRange(minValue, maxValue);
 }
 
-void QQtRectEffectProgressBar::setMaxValue(int maxValue)
+void QQtCustomEffectProgressBar::setMaxValue(int maxValue)
 {
     setRange(minValue, maxValue);
 }
 
-void QQtRectEffectProgressBar::setValue(int value)
+void QQtCustomEffectProgressBar::setValue(int value)
 {
     /*值小于最小值或者值大于最大值或者值和当前值一致则无需处理*/
     if (value < minValue || value > maxValue || value == this->value)
@@ -410,7 +504,7 @@ void QQtRectEffectProgressBar::setValue(int value)
     emit valueChanged(value);
 }
 
-void QQtRectEffectProgressBar::setNullPosition(int nullPosition)
+void QQtCustomEffectProgressBar::setNullPosition(int nullPosition)
 {
     if (this->nullPosition != nullPosition)
     {
@@ -419,7 +513,7 @@ void QQtRectEffectProgressBar::setNullPosition(int nullPosition)
     }
 }
 
-void QQtRectEffectProgressBar::setLineWidth(int lineWidth)
+void QQtCustomEffectProgressBar::setLineWidth(int lineWidth)
 {
     if (this->lineWidth != lineWidth)
     {
@@ -428,7 +522,7 @@ void QQtRectEffectProgressBar::setLineWidth(int lineWidth)
     }
 }
 
-void QQtRectEffectProgressBar::setShowPercent(bool showPercent)
+void QQtCustomEffectProgressBar::setShowPercent(bool showPercent)
 {
     if (this->showPercent != showPercent)
     {
@@ -437,7 +531,7 @@ void QQtRectEffectProgressBar::setShowPercent(bool showPercent)
     }
 }
 
-void QQtRectEffectProgressBar::setPercentSuffix(QString percentSuffix)
+void QQtCustomEffectProgressBar::setPercentSuffix(QString percentSuffix)
 {
     if (this->percentSuffix != percentSuffix)
     {
@@ -446,7 +540,7 @@ void QQtRectEffectProgressBar::setPercentSuffix(QString percentSuffix)
     }
 }
 
-void QQtRectEffectProgressBar::setShowFree(bool showFree)
+void QQtCustomEffectProgressBar::setShowFree(bool showFree)
 {
     if (this->showFree != showFree)
     {
@@ -455,7 +549,7 @@ void QQtRectEffectProgressBar::setShowFree(bool showFree)
     }
 }
 
-void QQtRectEffectProgressBar::setShowSmallCircle(bool showSmallCircle)
+void QQtCustomEffectProgressBar::setShowSmallCircle(bool showSmallCircle)
 {
     if (this->showSmallCircle != showSmallCircle)
     {
@@ -464,7 +558,7 @@ void QQtRectEffectProgressBar::setShowSmallCircle(bool showSmallCircle)
     }
 }
 
-void QQtRectEffectProgressBar::setClockWise(bool clockWise)
+void QQtCustomEffectProgressBar::setClockWise(bool clockWise)
 {
     if (this->clockWise != clockWise)
     {
@@ -473,7 +567,7 @@ void QQtRectEffectProgressBar::setClockWise(bool clockWise)
     }
 }
 
-void QQtRectEffectProgressBar::setUsedColor(const QColor& usedColor)
+void QQtCustomEffectProgressBar::setUsedColor(const QColor& usedColor)
 {
     if (this->usedColor != usedColor)
     {
@@ -482,7 +576,7 @@ void QQtRectEffectProgressBar::setUsedColor(const QColor& usedColor)
     }
 }
 
-void QQtRectEffectProgressBar::setFreeColor(const QColor& freeColor)
+void QQtCustomEffectProgressBar::setFreeColor(const QColor& freeColor)
 {
     if (this->freeColor != freeColor)
     {
@@ -491,7 +585,7 @@ void QQtRectEffectProgressBar::setFreeColor(const QColor& freeColor)
     }
 }
 
-void QQtRectEffectProgressBar::setBackgroundColor(const QColor& backgroundColor)
+void QQtCustomEffectProgressBar::setBackgroundColor(const QColor& backgroundColor)
 {
     if (this->backgroundColor != backgroundColor)
     {
@@ -500,7 +594,7 @@ void QQtRectEffectProgressBar::setBackgroundColor(const QColor& backgroundColor)
     }
 }
 
-void QQtRectEffectProgressBar::setBackgroundImage(const QString& backgroundImage)
+void QQtCustomEffectProgressBar::setBackgroundImage(const QString& backgroundImage)
 {
     if (this->backgroundImage != backgroundImage)
     {
@@ -509,7 +603,7 @@ void QQtRectEffectProgressBar::setBackgroundImage(const QString& backgroundImage
     }
 }
 
-void QQtRectEffectProgressBar::setTextColor(const QColor& textColor)
+void QQtCustomEffectProgressBar::setTextColor(const QColor& textColor)
 {
     if (this->textColor != textColor)
     {
@@ -518,7 +612,7 @@ void QQtRectEffectProgressBar::setTextColor(const QColor& textColor)
     }
 }
 
-void QQtRectEffectProgressBar::setTextFont(QFont font)
+void QQtCustomEffectProgressBar::setTextFont(QFont font)
 {
     if (this->textFont != font)
     {
@@ -527,9 +621,27 @@ void QQtRectEffectProgressBar::setTextFont(QFont font)
     }
 }
 
+void QQtCustomEffectProgressBar::setCornerRadius(int cornerRadius)
+{
+    if (this->cornerRadius != cornerRadius)
+    {
+        this->cornerRadius = cornerRadius;
+        update();
+    }
+}
+
+void QQtCustomEffectProgressBar::setDesignStyle(QQtCustomEffectProgressBar::DesignStyle designStyle)
+{
+    if (this->designStyle != designStyle)
+    {
+        this->designStyle = designStyle;
+        update();
+    }
+}
+
 #define TIMER_FIELD 600
 
-void QQtRectEffectProgressBar::setPercentStyle(QQtRectEffectProgressBar::PercentStyle percentStyle)
+void QQtCustomEffectProgressBar::setPercentStyle(QQtCustomEffectProgressBar::PercentStyle percentStyle)
 {
     if (this->percentStyle != percentStyle)
     {
@@ -542,7 +654,7 @@ void QQtRectEffectProgressBar::setPercentStyle(QQtRectEffectProgressBar::Percent
     }
 }
 
-void QQtRectEffectProgressBar::setBackgroundType(QQtRectEffectProgressBar::BackgroundType backgroundType)
+void QQtCustomEffectProgressBar::setBackgroundType(QQtCustomEffectProgressBar::BackgroundType backgroundType)
 {
     if (this->backgroundType != backgroundType)
     {
@@ -551,7 +663,7 @@ void QQtRectEffectProgressBar::setBackgroundType(QQtRectEffectProgressBar::Backg
     }
 }
 
-void QQtRectEffectProgressBar::setWaveDensity(int value)
+void QQtCustomEffectProgressBar::setWaveDensity(int value)
 {
     if (value < 1)
         value = 1;
@@ -562,7 +674,7 @@ void QQtRectEffectProgressBar::setWaveDensity(int value)
     }
 }
 
-void QQtRectEffectProgressBar::setWaveHeight(int value)
+void QQtCustomEffectProgressBar::setWaveHeight(int value)
 {
     if (value < 1)
         value = 1;
@@ -573,7 +685,7 @@ void QQtRectEffectProgressBar::setWaveHeight(int value)
     }
 }
 
-void QQtRectEffectProgressBar::setWaveDirection(WaveDirection direction)
+void QQtCustomEffectProgressBar::setWaveDirection(WaveDirection direction)
 {
     if (this->waveDirection != direction)
     {
@@ -582,7 +694,7 @@ void QQtRectEffectProgressBar::setWaveDirection(WaveDirection direction)
     }
 }
 
-void QQtRectEffectProgressBar::setWaveSpeed(int speed)
+void QQtCustomEffectProgressBar::setWaveSpeed(int speed)
 {
     if (speed < 1)
         speed = 1;
