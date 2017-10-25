@@ -1,18 +1,28 @@
 #here is all your app common defination and configration
 #change these path on your computer
-QQT_OUT_PWD=$${OUT_PWD}/../../src/bin
-message (QQt is building here : $${QQT_OUT_PWD})
-message(Link QQt to $${TARGET} $${QKIT_} at $${QT_VERSION} $${SYSNAME} $${BUILD} on $${QMAKE_HOST.os})
-LIBS += -L$${QQT_OUT_PWD}
+message(Link QQt to $${TARGET} $${QKIT_} \
+    at $${QT_VERSION} $${SYSNAME} $${BUILD} \
+    on $${QMAKE_HOST.os})
+
 equals(QMAKE_HOST.os, Darwin) {
-    contains(DEFINES, __DARWIN__|__IOS__) {
-        LIBS += -F$${QQT_OUT_PWD}
-        LIBS += -framework QQt
-    } else{
-        LIBS += -lQQt
-    }
-} else: contains(QMAKE_HOST.os, Linux|Windows) {
-    LIBS += -lQQt
+    BUILDROOT = /Users/abel/Develop/c0-buildstation
+} else: equals(QMAKE_HOST.os, Linux) {
+    BUILDROOT = /home/abel/Develop/c0-buildstation
+} else: equals(QMAKE_HOST.os, Windows) {
+    BUILDROOT = C:/Users/Administrator/Develop/c0-build
+}
+
+QQT_OUT_PWD = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src
+QQT_OUT_BIN = $${QQT_OUT_PWD}/$${DESTDIR}
+QQT_LIB_PWD = $$BUILDROOT/$$QQT_OUT_BIN
+message (QQt Build: $$QQT_LIB_PWD)
+
+contains(DEFINES, __DARWIN__) {
+    LIBS += -F$${QQT_LIB_PWD}
+    LIBS += -framework QQt
+} else {
+    LIBS += -L$${QQT_LIB_PWD}
+    LIBS += -l QQt
 }
 
 ############

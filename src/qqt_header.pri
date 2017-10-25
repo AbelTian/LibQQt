@@ -150,7 +150,7 @@ equals(QKIT_, MIPS32) {
 }
 message(Build $${TARGET} at $${QT_VERSION} $${SYSNAME} $${BUILD})
 message(Build $${TARGET} on $${QMAKE_HOST.os})
-
+lessThan(QT_MAJOR_VERSION, 5):DEFINES += nullptr=0
 ################################################################
 ##build cache
 ################################################################
@@ -219,13 +219,13 @@ contains (DEFINES, __CPP11__) {
 #if you use qcustomplot, open this annotation
 #need print support
 DEFINES += __CUSTOMPLOT__
-contains(QKIT_, iOS|iOSSimulator|ANDROID|ANDROIDX86) {
+contains(QKIT_, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
     DEFINES -= __CUSTOMPLOT__
 }
 #if you use printsupport , open this annotation
 DEFINES += __PRINTSUPPORT__
 #ios android can't support this function now
-contains(QKIT_, iOS|iOSSimulator|ANDROID|ANDROIDX86) {
+contains(QKIT_, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
     DEFINES -= __PRINTSUPPORT__
 }
 contains (DEFINES, __PRINTSUPPORT__) {
@@ -246,9 +246,6 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
 equals (QKIT_, iOSSimulator):{
     QMAKE_CXXFLAGS +=-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
 }
-#############
-##libraries
-#############
 win32 {
     LIBS += -luser32
 }else: unix {

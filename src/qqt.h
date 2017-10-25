@@ -3,15 +3,11 @@
 
 
 #include <QtCore/qglobal.h>
+#include "qqt-local.h"
 
-#if defined(QQT_LIBRARY)
-#  define QQTSHARED_EXPORT Q_DECL_EXPORT
-#else
-#  define QQTSHARED_EXPORT Q_DECL_IMPORT
-#endif
 
-#include "qqtgui.h"
 #include "qqt-qt.h"
+#include "qqtgui.h"
 #if defined(__WIN__) || defined(__WIN64__)
 #include "qqtwin.h"
 #elif defined(__LINUX__) || defined(__LINUX64__)

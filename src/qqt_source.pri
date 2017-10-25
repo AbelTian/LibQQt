@@ -282,7 +282,7 @@ FORMS += \
     $$PWD/widgets/qqttreewidget.ui
 
 #exquisite
-SOURCES = \
+SOURCES += \
     $$PWD/exquisite/qqtcustomspeedmeter.cpp \
     $$PWD/exquisite/qqtframelesshelper.cpp \
     $$PWD/exquisite/qqtframelesshelperprivate.cpp \
@@ -297,7 +297,7 @@ SOURCES = \
     $$PWD/exquisite/qqtshadoweffectwidget.cpp \
     $$PWD/exquisite/qqtpopeffectdialog.cpp \
     $$PWD/exquisite/qqtcustomeffectprogressbar.cpp
-HEADERS = \
+HEADERS += \
     $$PWD/exquisite/qqtcustomspeedmeter.h \
     $$PWD/exquisite/qqtframelesshelper.h \
     $$PWD/exquisite/qqtframelesshelperprivate.h \

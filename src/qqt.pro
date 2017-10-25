@@ -10,6 +10,28 @@
 TARGET = QQt
 TEMPLATE = lib
 
+##default build dll but some occasion
+CONFIG += dll
+#QQt library export (DLL) static lib is not needed
+DEFINES += QQT_LIBRARY
+##special lib lib_bundle/staticlib
+equals(QKIT_, macOS) {
+    CONFIG += lib_bundle
+} else:equals(QKIT_, iOS) {
+    DEFINES -= QQT_LIBRARY
+    CONFIG -= dll
+    CONFIG += staticlib
+} else:equals(QKIT_, WIN) {
+    #when Qt is static by mingw32 building 5.9.1
+    equals(QT_VERSION, 5.9.1){
+        DEFINES -= QQT_LIBRARY
+        CONFIG -= dll
+        CONFIG += staticlib
+    }
+}
+#CONFIG += debug_and_release
+#CONFIG += build_all
+
 #################################################################
 ##project version
 #################################################################
@@ -56,24 +78,7 @@ greaterThan(QT_MAJOR_VERSION, 4): {
 #################################################################
 ##project source
 #################################################################
-#QQT LIBRARY (DLL)
-DEFINES += QQT_LIBRARY
-CONFIG += dll
 include ($$PWD/qqt_header.pri)
-equals(QKIT_, macOS) {
-    CONFIG += dll
-    CONFIG += lib_bundle
-} else:equals(QKIT_, iOS) {
-    DEFINES -= QQT_LIBRARY
-    CONFIG -= dll
-    CONFIG += staticlib
-} else:equals(QKIT_, WIN) {
-    DEFINES -= QQT_LIBRARY
-    CONFIG -= dll
-    CONFIG += staticlib
-}
-#CONFIG += debug_and_release
-#CONFIG += build_all
 include ($$PWD/qqt_source.pri)
 
 
