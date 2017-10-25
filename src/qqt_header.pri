@@ -143,7 +143,7 @@ equals(QKIT_, MIPS32) {
     SYSNAME = iOS
 } else:equals(QKIT_, iOSSimulator) {
     SYSNAME = iOS-simulator
-} else:equals(QKIT_, Android) {
+} else:equals(QKIT_, ANDROID) {
     SYSNAME = Android
 } else:equals(QKIT_, ANDROIDX86) {
     SYSNAME = Android_x86
@@ -219,13 +219,15 @@ contains (DEFINES, __CPP11__) {
 #if you use qcustomplot, open this annotation
 #need print support
 DEFINES += __CUSTOMPLOT__
+contains(QKIT_, iOS|iOSSimulator|ANDROID|ANDROIDX86) {
+    DEFINES -= __CUSTOMPLOT__
+}
 #if you use printsupport , open this annotation
 DEFINES += __PRINTSUPPORT__
 #ios android can't support this function now
-equals(QKIT_, iOS):DEFINES -= __CUSTOMPLOT__
-equals(QKIT_, iOS):DEFINES -= __PRINTSUPPORT__
-equals(QKIT_, Android):DEFINES -= __CUSTOMPLOT__
-equals(QKIT_, Android):DEFINES -= __PRINTSUPPORT__
+contains(QKIT_, iOS|iOSSimulator|ANDROID|ANDROIDX86) {
+    DEFINES -= __PRINTSUPPORT__
+}
 contains (DEFINES, __PRINTSUPPORT__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 }
@@ -238,7 +240,32 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
     #TODO: QT += webkit
 }
 
-
+##################################################################
+##library
+##################################################################
+equals (QKIT_, iOSSimulator):{
+    QMAKE_CXXFLAGS +=-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
+}
+#############
+##libraries
+#############
+win32 {
+    LIBS += -luser32
+}else: unix {
+    equals(QKIT_, macOS) {
+        #min macosx target
+        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+        #deperated
+        #QMAKE_MAC_SDK=macosx10.12
+        #MACOSXSDK = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$${QMAKE_MACOSX_DEPLOYMENT_TARGET}.sdk
+        #QMAKE_LIBDIR = $${MACOSXSDK}
+        #LIBS += -F$${MACOSXSDK}/System/Library/Frameworks
+        #LIBS += -L$${MACOSXSDK}/usr/lib
+        LIBS += -framework DiskArbitration -framework Cocoa -framework IOKit
+    } else:contains(QKIT_, iOS|iOSSimulator) {
+        LIBS += -l DiskArbitration -l Cocoa -l IOKit
+    }
+}
 ##################################################################
 ##include directories
 ##################################################################

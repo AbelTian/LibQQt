@@ -3,27 +3,6 @@
 # Project created by QtCreator 2016-03-24T14:08:11
 #
 #-------------------------------------------------
-
-#############
-##libraries
-#############
-win32 {
-    LIBS += -luser32
-}else: unix {
-    equals(QKIT_, macOS) {
-        #min macosx target
-        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
-        #deperated
-        #QMAKE_MAC_SDK=macosx10.12
-        #MACOSXSDK = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$${QMAKE_MACOSX_DEPLOYMENT_TARGET}.sdk
-        #QMAKE_LIBDIR = $${MACOSXSDK}
-        #LIBS += -F$${MACOSXSDK}/System/Library/Frameworks
-        #LIBS += -L$${MACOSXSDK}/usr/lib
-        LIBS += -framework DiskArbitration -framework Cocoa -framework IOKit
-    } else {
-    }
-}
-
 SOURCES=
 HEADERS=
 

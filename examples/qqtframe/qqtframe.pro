@@ -16,8 +16,7 @@ contains (CONFIG, BUILD_SRC) {
 }
 
 QT += core gui network sql xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
-greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = qqtframe
 TEMPLATE = app

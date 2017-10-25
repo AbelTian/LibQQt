@@ -1,17 +1,17 @@
 #here is all your app common defination and configration
 #change these path on your computer
+QQT_OUT_PWD=$${OUT_PWD}/../../src/bin
+message (QQt is building here : $${QQT_OUT_PWD})
 message(Link QQt to $${TARGET} $${QKIT_} at $${QT_VERSION} $${SYSNAME} $${BUILD} on $${QMAKE_HOST.os})
-QQT_OUT_PWD=$$OUT_PWD/../../src/bin
-message (QQt is build here: $$QQT_OUT_PWD)
-LIBS += -L$$QQT_OUT_PWD
+LIBS += -L$${QQT_OUT_PWD}
 equals(QMAKE_HOST.os, Darwin) {
     contains(DEFINES, __DARWIN__|__IOS__) {
-        LIBS += -F$$QQT_OUT_PWD
+        LIBS += -F$${QQT_OUT_PWD}
         LIBS += -framework QQt
     } else{
         LIBS += -lQQt
     }
-} else: equals(QMAKE_HOST.os, Linux|Windows) {
+} else: contains(QMAKE_HOST.os, Linux|Windows) {
     LIBS += -lQQt
 }
 
