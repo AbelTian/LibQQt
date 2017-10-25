@@ -15,9 +15,12 @@ win32 {
 unix {
     equals(QKIT_, macOS) {
         HEADERS += $$PWD/qqtdarwin.h
-    } else {
+    } else: contains(QKIT_, LINUX|LINUX64) {
         HEADERS += $$PWD/qqtlinux.h
     }
+}
+contains (QKIT_, ANDROID||ANDROIDX86) {
+    HEADERS += $$PWD/qqtandroid.h
 }
 HEADERS += $$PWD/qqt.h \
     $$PWD/qqt-local.h \

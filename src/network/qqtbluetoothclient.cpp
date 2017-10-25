@@ -1,13 +1,6 @@
 #include "qqtbluetoothclient.h"
 
-#if defined(__WIN__) || defined(__WIN64__)
-#include "qqtwin.h"
-#elif defined(__LINUX__) || defined(__LINUX64__)
-#include "qqtlinux.h"
-#elif defined (__DARWIN__)  || defined(__IOS__)
-#include "qqtdarwin.h"
-#endif
-#include "qqtcore.h"
+#include <qqt.h>
 
 QQtBluetoothClient::QQtBluetoothClient(QBluetoothServiceInfo::Protocol socketType, QObject* parent) :
     QBluetoothSocket(socketType, parent)

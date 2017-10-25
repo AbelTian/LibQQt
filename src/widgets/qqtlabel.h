@@ -2,6 +2,7 @@
 #define QQTLABEL_H
 
 #include <QLabel>
+#include <qqtcore.h>
 
 class QQtLabel : public QLabel
 {

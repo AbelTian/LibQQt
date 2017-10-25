@@ -1,13 +1,6 @@
 #include "qqtnetwork.h"
 #include "qqtcore.h"
-
-#if defined(__WIN__) || defined(__WIN64__)
-#include "qqtwin.h"
-#elif defined(__LINUX__) || defined(__LINUX64__)
-#include "qqtlinux.h"
-#elif defined (__DARWIN__)  || defined(__IOS__)
-#include "qqtdarwin.h"
-#endif
+#include "qqt.h"
 
 #include <QTcpSocket>
 #include <QHostInfo>

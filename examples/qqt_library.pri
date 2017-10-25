@@ -18,8 +18,13 @@ QQT_LIB_PWD = $$BUILDROOT/$$QQT_OUT_BIN
 message (QQt Build: $$QQT_LIB_PWD)
 
 contains(DEFINES, __DARWIN__) {
-    LIBS += -F$${QQT_LIB_PWD}
-    LIBS += -framework QQt
+    lessThan(QT_MAJOR_VERSION, 5):{
+        LIBS += -L$${QQT_LIB_PWD}
+        LIBS += -l QQt
+    } else {
+        LIBS += -F$${QQT_LIB_PWD}
+        LIBS += -framework QQt
+    }
 } else {
     LIBS += -L$${QQT_LIB_PWD}
     LIBS += -l QQt

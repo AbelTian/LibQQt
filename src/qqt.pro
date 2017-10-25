@@ -59,6 +59,13 @@ win32 {
     RC_CODEPAGE=
 }
 
+
+#################################################################
+##project source
+#################################################################
+include ($$PWD/qqt_header.pri)
+include ($$PWD/qqt_source.pri)
+
 #################################################################
 ##project environ
 #################################################################
@@ -71,16 +78,9 @@ greaterThan(QT_MAJOR_VERSION, 4): {
         message($${TARGET} defined $${cc})
     }
 } else {
-    message ($${TARGET} configed $${CONFIG})
+    message ($${TARGET} config  $${CONFIG})
     message ($${TARGET} defined $${DEFINES})
 }
-
-#################################################################
-##project source
-#################################################################
-include ($$PWD/qqt_header.pri)
-include ($$PWD/qqt_source.pri)
-
 
 ################################################
 ##install

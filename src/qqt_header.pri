@@ -150,7 +150,8 @@ equals(QKIT_, MIPS32) {
 }
 message(Build $${TARGET} at $${QT_VERSION} $${SYSNAME} $${BUILD})
 message(Build $${TARGET} on $${QMAKE_HOST.os})
-lessThan(QT_MAJOR_VERSION, 5):DEFINES += nullptr=0
+#defined in qqtcore.h
+#lessThan(QT_MAJOR_VERSION, 5):DEFINES += nullptr=0
 ################################################################
 ##build cache
 ################################################################
@@ -244,7 +245,8 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
 ##library
 ##################################################################
 equals (QKIT_, iOSSimulator):{
-    QMAKE_CXXFLAGS +=-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
+    #error need
+    #QMAKE_CXXFLAGS +=-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
 }
 win32 {
     LIBS += -luser32

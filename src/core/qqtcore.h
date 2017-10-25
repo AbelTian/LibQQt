@@ -21,7 +21,8 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#if defined (__WIN__) || defined (__WIN64__)
+#if defined (__WIN__) \
+    || defined (__WIN64__)
 #define SHUT_RD 0
 #define SHUT_WR 1
 #define SHUT_RDWR 2
@@ -29,13 +30,13 @@ extern "C" {
 typedef bool BOOL;
 #endif
 
-typedef int		s32;
+typedef int     s32;
 typedef unsigned int   u32;
-typedef unsigned char	u8;
+typedef unsigned char   u8;
 typedef unsigned short  u16;
 typedef short           s16;
 typedef char            s8;
-typedef long int		s64;
+typedef long int        s64;
 typedef unsigned long int u64;
 typedef unsigned char uint8_t;
 
@@ -91,33 +92,33 @@ QQTSHARED_EXPORT void QQTSleep(int millsecond);
 #define ptime() pline() << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss zzz")
 
 
-QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const quint8 r);
+QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const quint8 r);
 
-QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const quint16 r);
+QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const quint16 r);
 
-QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const quint32 r);
+QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const quint32 r);
 
-QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const QByteArray &r);
+QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const QByteArray& r);
 
-QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, quint8& r);
+QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, quint8& r);
 
-QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, quint16& r);
+QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, quint16& r);
 
-QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, quint32& r);
+QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, quint32& r);
 
-QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, QByteArray& r);
+QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, QByteArray& r);
 
-QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const qint16 r);
+QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const qint16 r);
 
-QQTSHARED_EXPORT QByteArray &operator<<(QByteArray &l, const qint32 r);
+QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const qint32 r);
 
-QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, qint8& r);
+QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, qint8& r);
 
-QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, qint16& r);
+QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, qint16& r);
 
-QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, qint32& r);
+QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, qint32& r);
 
-QQTSHARED_EXPORT QByteArray &operator>>(QByteArray &l, QByteArray& r);
+QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, QByteArray& r);
 
 
 /**
@@ -135,17 +136,17 @@ public:
     bool lock(int millsecond = 0x7FFFFFFF)
     {
         //m_lock++;
-        m_lock=1;
+        m_lock = 1;
 
         timer.restart();
-        while(timer.elapsed() < millsecond)
+        while (timer.elapsed() < millsecond)
         {
-            if(m_lock <= 0)
+            if (m_lock <= 0)
                 break;
             QApplication::processEvents();
         }
 
-        if(timer.elapsed() >= millsecond)
+        if (timer.elapsed() >= millsecond)
             return false;
         return true;
     }
@@ -158,7 +159,7 @@ public:
 
     bool isLocked()
     {
-        if(m_lock <= 0)
+        if (m_lock <= 0)
             return false;
 
         return true;
