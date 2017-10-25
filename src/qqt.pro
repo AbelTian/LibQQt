@@ -58,15 +58,18 @@ greaterThan(QT_MAJOR_VERSION, 4): {
 #################################################################
 #QQT LIBRARY (DLL)
 DEFINES += QQT_LIBRARY
+CONFIG += dll
 include ($$PWD/qqt_header.pri)
 equals(QKIT_, macOS) {
     CONFIG += dll
     CONFIG += lib_bundle
 } else:equals(QKIT_, iOS) {
     DEFINES -= QQT_LIBRARY
+    CONFIG -= dll
     CONFIG += staticlib
 } else:equals(QKIT_, WIN) {
     DEFINES -= QQT_LIBRARY
+    CONFIG -= dll
     CONFIG += staticlib
 }
 #CONFIG += debug_and_release

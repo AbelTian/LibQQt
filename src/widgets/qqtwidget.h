@@ -40,7 +40,7 @@ private:
     quint32 m_style;
     // QWidget interface
 protected:
-    void paintEvent(QPaintEvent*);
+    void paintEvent(QPaintEvent*) override;
 
     // QWidget interface
 protected:

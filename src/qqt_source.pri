@@ -24,72 +24,9 @@ win32 {
     }
 }
 
-#exquisite
-SOURCES = \
-    $$PWD/exquisite/qqtcustomspeedmeter.cpp \
-    $$PWD/exquisite/qqtframelesshelper.cpp \
-    $$PWD/exquisite/qqtframelesshelperprivate.cpp \
-    $$PWD/exquisite/qqtcustompianokeyboard.cpp \
-    $$PWD/exquisite/qqtrippleeffectpushbutton.cpp \
-    $$PWD/exquisite/qqtrulereffectslider.cpp \
-    $$PWD/exquisite/qqtflipeffectstackedwidget.cpp \
-    $$PWD/exquisite/qqtledbannereffectlabel.cpp \
-    $$PWD/exquisite/qqtmarqueeeffectlabel.cpp \
-    $$PWD/exquisite/qqtcustomverificationcode.cpp \
-    $$PWD/exquisite/qqtfadeeffectwidget.cpp \
-    $$PWD/exquisite/qqtshadoweffectwidget.cpp \
-    $$PWD/exquisite/qqtpopeffectdialog.cpp \
-    $$PWD/exquisite/qqtcustomeffectprogressbar.cpp \
-    $$PWD/widgets/qqtlabel.cpp
-HEADERS = \
-    $$PWD/exquisite/qqtcustomspeedmeter.h \
-    $$PWD/exquisite/qqtframelesshelper.h \
-    $$PWD/exquisite/qqtframelesshelperprivate.h \
-    $$PWD/exquisite/qqtcustompianokeyboard.h \
-    $$PWD/exquisite/qqtrippleeffectpushbutton.h \
-    $$PWD/exquisite/qqtrulereffectslider.h \
-    $$PWD/exquisite/qqtflipeffectstackedwidget.h \
-    $$PWD/exquisite/qqtmarqueeeffectlabel.h \
-    $$PWD/exquisite/qqtledbannereffectlabel.h \
-    $$PWD/exquisite/qqtcustomverificationcode.h \
-    $$PWD/exquisite/qqtfadeeffectwidget.h \
-    $$PWD/exquisite/qqtshadoweffectwidget.h \
-    $$PWD/exquisite/qqtpopeffectdialog.h \
-    $$PWD/exquisite/qqtcustomeffectprogressbar.h \
-    $$PWD/widgets/qqtlabel.h
+SOURCES=
+HEADERS=
 
-#qrcode
-#DEFINES += __QRENCODE__
-contains (DEFINES, __QRENCODE__) {
-    HEADERS += \
-        $$PWD/qrencode/bitstream.h \
-        $$PWD/qrencode/config.h \
-        $$PWD/qrencode/mask.h \
-        $$PWD/qrencode/mmask.h \
-        $$PWD/qrencode/mqrspec.h \
-        $$PWD/qrencode/qrencode.h \
-        $$PWD/qrencode/qrencode_inner.h \
-        $$PWD/qrencode/qrinput.h \
-        $$PWD/qrencode/qrspec.h \
-        $$PWD/qrencode/rscode.h \
-        $$PWD/qrencode/split.h
-
-    SOURCES += \
-        $$PWD/qrencode/bitstream.c \
-        $$PWD/qrencode/mask.c \
-        $$PWD/qrencode/mmask.c \
-        $$PWD/qrencode/mqrspec.c \
-        $$PWD/qrencode/qrencode.c \
-        $$PWD/qrencode/qrinput.c \
-        $$PWD/qrencode/qrspec.c \
-        $$PWD/qrencode/rscode.c \
-        $$PWD/qrencode/split.c
-
-    HEADERS += \
-        $$PWD/exquisite/qqtcustomqrencodewidget.h
-    SOURCES += \
-        $$PWD/exquisite/qqtcustomqrencodewidget.cpp
-}
 
 #root dir
 win32 {
@@ -325,7 +262,8 @@ SOURCES += \
     $$PWD/widgets/qqtgraphicsview.cpp \
     $$PWD/widgets/qqttreewidget.cpp \
     $$PWD/widgets/qqtwidget.cpp \
-    $$PWD/widgets/qqtwidgets.cpp
+    $$PWD/widgets/qqtwidgets.cpp \
+    $$PWD/widgets/qqtlabel.cpp
 HEADERS += \
     $$PWD/widgets/qqtcheckbox.h \
     $$PWD/widgets/qqtheaderview.h \
@@ -347,7 +285,8 @@ HEADERS += \
     $$PWD/widgets/qqttreewidget.h \
     $$PWD/widgets/qqtwidget.h \
     $$PWD/widgets/qqtwidgets.h \
-    $$PWD/widgets/qqtapplication.h
+    $$PWD/widgets/qqtapplication.h \
+    $$PWD/widgets/qqtlabel.h
 FORMS += \
     $$PWD/widgets/qqtcheckbox.ui \
     $$PWD/widgets/qqtlistview.ui \
@@ -362,3 +301,68 @@ FORMS += \
     $$PWD/widgets/qqttablewidget.ui \
     $$PWD/widgets/qqtmptablewidget.ui \
     $$PWD/widgets/qqttreewidget.ui
+
+#exquisite
+SOURCES = \
+    $$PWD/exquisite/qqtcustomspeedmeter.cpp \
+    $$PWD/exquisite/qqtframelesshelper.cpp \
+    $$PWD/exquisite/qqtframelesshelperprivate.cpp \
+    $$PWD/exquisite/qqtcustompianokeyboard.cpp \
+    $$PWD/exquisite/qqtrippleeffectpushbutton.cpp \
+    $$PWD/exquisite/qqtrulereffectslider.cpp \
+    $$PWD/exquisite/qqtflipeffectstackedwidget.cpp \
+    $$PWD/exquisite/qqtledbannereffectlabel.cpp \
+    $$PWD/exquisite/qqtmarqueeeffectlabel.cpp \
+    $$PWD/exquisite/qqtcustomverificationcode.cpp \
+    $$PWD/exquisite/qqtfadeeffectwidget.cpp \
+    $$PWD/exquisite/qqtshadoweffectwidget.cpp \
+    $$PWD/exquisite/qqtpopeffectdialog.cpp \
+    $$PWD/exquisite/qqtcustomeffectprogressbar.cpp
+HEADERS = \
+    $$PWD/exquisite/qqtcustomspeedmeter.h \
+    $$PWD/exquisite/qqtframelesshelper.h \
+    $$PWD/exquisite/qqtframelesshelperprivate.h \
+    $$PWD/exquisite/qqtcustompianokeyboard.h \
+    $$PWD/exquisite/qqtrippleeffectpushbutton.h \
+    $$PWD/exquisite/qqtrulereffectslider.h \
+    $$PWD/exquisite/qqtflipeffectstackedwidget.h \
+    $$PWD/exquisite/qqtmarqueeeffectlabel.h \
+    $$PWD/exquisite/qqtledbannereffectlabel.h \
+    $$PWD/exquisite/qqtcustomverificationcode.h \
+    $$PWD/exquisite/qqtfadeeffectwidget.h \
+    $$PWD/exquisite/qqtshadoweffectwidget.h \
+    $$PWD/exquisite/qqtpopeffectdialog.h \
+    $$PWD/exquisite/qqtcustomeffectprogressbar.h
+
+#qrcode
+#DEFINES += __QRENCODE__
+contains (DEFINES, __QRENCODE__) {
+    HEADERS += \
+        $$PWD/qrencode/bitstream.h \
+        $$PWD/qrencode/config.h \
+        $$PWD/qrencode/mask.h \
+        $$PWD/qrencode/mmask.h \
+        $$PWD/qrencode/mqrspec.h \
+        $$PWD/qrencode/qrencode.h \
+        $$PWD/qrencode/qrencode_inner.h \
+        $$PWD/qrencode/qrinput.h \
+        $$PWD/qrencode/qrspec.h \
+        $$PWD/qrencode/rscode.h \
+        $$PWD/qrencode/split.h
+
+    SOURCES += \
+        $$PWD/qrencode/bitstream.c \
+        $$PWD/qrencode/mask.c \
+        $$PWD/qrencode/mmask.c \
+        $$PWD/qrencode/mqrspec.c \
+        $$PWD/qrencode/qrencode.c \
+        $$PWD/qrencode/qrinput.c \
+        $$PWD/qrencode/qrspec.c \
+        $$PWD/qrencode/rscode.c \
+        $$PWD/qrencode/split.c
+
+    HEADERS += \
+        $$PWD/exquisite/qqtcustomqrencodewidget.h
+    SOURCES += \
+        $$PWD/exquisite/qqtcustomqrencodewidget.cpp
+}

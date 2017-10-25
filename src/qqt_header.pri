@@ -127,7 +127,6 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 CONFIG(debug, debug|profile|release):BUILD=Debug
 CONFIG(profile, debug|profile|release):BUILD=Profile
 CONFIG(release, debug|profile|release):BUILD=Release
-
 equals(QKIT_, MIPS32) {
     SYSNAME = Mips32
 } else:equals(QKIT_, LINUX) {
