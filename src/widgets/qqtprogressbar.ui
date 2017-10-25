@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QQTWidget" name="widgetBack" native="true">
+    <widget class="QQtWidget" name="widgetBack" native="true">
      <layout class="QGridLayout" name="gridLayout">
       <property name="leftMargin">
        <number>0</number>
@@ -45,7 +45,7 @@
        <number>0</number>
       </property>
       <item row="0" column="0">
-       <widget class="QQTWidget" name="widthTrunk" native="true"/>
+       <widget class="QQtWidget" name="widthTrunk" native="true"/>
       </item>
       <item row="0" column="1">
        <spacer name="horizontalSpacer">
@@ -80,7 +80,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QQTWidget</class>
+   <class>QQtWidget</class>
    <extends>QWidget</extends>
    <header>qqtwidget.h</header>
    <container>1</container>

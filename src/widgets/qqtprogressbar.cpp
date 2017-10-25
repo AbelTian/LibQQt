@@ -16,8 +16,8 @@ QQTProgressBar::QQTProgressBar(QWidget *parent) :
     m_trunk = "./skin/default/bk_progress_chunk.png";
     ui->widthTrunk->setPixmap(m_trunk);
     ui->widgetBack->setPixmap(m_back);
-    ui->widthTrunk->setType(QQTWidget::QQTTILEDWIDTH);
-    ui->widgetBack->setType(QQTWidget::QQTZOOMWIDTH);
+    ui->widthTrunk->setType(QQtWidget::QQTTILEDWIDTH);
+    ui->widgetBack->setType(QQtWidget::QQTZOOMWIDTH);
 }
 
 QQTProgressBar::~QQTProgressBar()

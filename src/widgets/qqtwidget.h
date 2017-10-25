@@ -4,34 +4,48 @@
 #include <QWidget>
 #include <qqt-local.h>
 
-namespace Ui {
-class QQTWidget;
+namespace Ui
+{
+class QQtWidget;
 }
 
-class QQTSHARED_EXPORT QQTWidget : public QWidget
+class QQTSHARED_EXPORT QQtWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit QQTWidget(QWidget *parent = 0);
-    ~QQTWidget();
+    explicit QQtWidget(QWidget* parent = 0);
+    ~QQtWidget();
 
-    enum {
+    enum ImageStyle
+    {
         QQTCENTER,
+        /*
+         * 会产生label的效果，左右按照rect长，但是不缩放形状
+         **/
         QQTTILEDWIDTH,
         QQTTILEDHEIGHT,
         QQTZOOMWIDTH,
         QQTZOOMHEIGHT,
     };
     void setPixmap(QString pic = QString());
-    void setType(quint32 type = 0) { m_type = type; }
+    void setType(ImageStyle style = QQTCENTER) { m_style = style; }
+signals:
+    void clicked();
+    void doubleClicked();
+
 private:
-    Ui::QQTWidget *ui;
+    Ui::QQtWidget* ui;
     QString m_pic;
-    quint32 m_type;
+    quint32 m_style;
     // QWidget interface
 protected:
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent*);
+
+    // QWidget interface
+protected:
+    virtual void mouseReleaseEvent(QMouseEvent* event) override;
+    virtual void mouseDoubleClickEvent(QMouseEvent* event) override;
 };
 
 #endif // QPICWIDGET_H
