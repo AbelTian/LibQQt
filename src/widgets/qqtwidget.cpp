@@ -53,12 +53,12 @@ void QQtWidget::paintEvent(QPaintEvent*)
 
 void QQtWidget::mouseReleaseEvent(QMouseEvent* event)
 {
-    emit clicked();
+    emit click();
     return QWidget::mouseReleaseEvent(event);
 }
 
 void QQtWidget::mouseDoubleClickEvent(QMouseEvent* event)
 {
-    emit doubleClicked();
+    emit doubleClick();
     return QWidget::mouseDoubleClickEvent(event);
 }

@@ -31,8 +31,8 @@ public:
     void setPixmap(QString pic = QString());
     void setType(ImageStyle style = QQTCENTER) { m_style = style; }
 signals:
-    void clicked();
-    void doubleClicked();
+    void click();
+    void doubleClick();
 
 private:
     Ui::QQtWidget* ui;
