@@ -36,7 +36,7 @@ equals(QKIT_, macOS) {
 ##project version
 #################################################################
 TARGET_MAJOR_VERSION = 1
-TARGET_MINOR_VERSION = 3
+TARGET_MINOR_VERSION = 4
 TARGET_PATCH_VERSION = 0
 TARGET_BUILD_VERSION = 0
 TARGET_VERSION = $${TARGET_MAJOR_VERSION}.$${TARGET_MINOR_VERSION}.$${TARGET_PATCH_VERSION}
