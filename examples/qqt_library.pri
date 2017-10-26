@@ -59,18 +59,19 @@ equals(QKIT_, Android) {
     #ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 }
 
-#equals(QKIT_, macOS) {
-#    QMAKE_CFLAGS_X86_64 += -mmacosx-version-min=10.7
-#    QMAKE_CXXFLAGS_X86_64 = $$QMAKE_CFLAGS_X86_64
-#    msgpacklib.path = Contents/Frameworks
-#    msgpacklib.files = ../myapp/3rd/msgpack-0.5.4/src/.libs/libmsgpack.3.dylib
-#    evlib.path = Contents/Frameworks
-#    evlib.files = ../myapp/3rd/libev-4.11/.libs/libev.4.dylib
-#    QMAKE_BUNDLE_DATA += msgpacklib evlib
-#    QMAKE_POST_LINK = install_name_tool -change /usr/local/lib/libmsgpack.3.dylib \
-#         @executable_path/../Frameworks/libmsgpack.3.dylib \
-#         myapp.app/Contents/MacOs/myapp & \
-#         install_name_tool -change /usr/local/lib/libev.4.dylib \
-#         @executable_path/../Frameworks/libev.4.dylib \
-#         myapp.app/Contents/MacOs/myapp
-#}
+equals(QKIT_, macOS) {
+    QMAKE_POST_LINK = install_name_tool -change QQt.framework/Versions/1/QQt \
+         @rpath/QQt.framework/Versions/1/QQt \
+         bin/$$TARGET.app/Contents/MacOS/$$TARGET
+}
+
+################################################
+##install QQt sdk
+##library file is here
+################################################
+#CONFIG += can_install_sdk
+can_install_sdk:equals(QKIT_, macOS) {
+    ###if install product to same path,use this.
+    target.path = /System/Library/Frameworks
+    INSTALLS += target
+}

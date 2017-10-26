@@ -19,7 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #################################################################
 
 ##Qt version
-QT += core gui network sql xml
+QT += core sql network gui xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 #You need define a env variable QKIT=XX

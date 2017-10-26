@@ -21,7 +21,7 @@ void QQtWidget::setPixmap(QString pic)
     m_pic = pic;
 }
 
-void QQtWidget::paintEvent(QPaintEvent*)
+void QQtWidget::paintEvent(QPaintEvent* event)
 {
     QStylePainter p(this);
     if (m_pic.isEmpty())
@@ -48,6 +48,8 @@ void QQtWidget::paintEvent(QPaintEvent*)
     default:
         break;
     }
+
+    return QWidget::paintEvent(event);
 }
 
 

@@ -3,6 +3,12 @@
 # Project created by QtCreator 2016-03-24T14:08:11
 #
 #-------------------------------------------------
+#################################################################
+##project environ
+#################################################################
+#default
+message ($${TARGET} config $${CONFIG})
+message ($${TARGET} define $${DEFINES})
 
 #################################################################
 ##project name
@@ -28,6 +34,13 @@ equals(QKIT_, macOS) {
         CONFIG -= dll
         CONFIG += staticlib
     }
+}
+#create prl
+CONFIG += create_prl
+CONFIG += build_pass
+build_pass:CONFIG(debug, debug|release) {
+    #troublesome
+    #win32: TARGET = $$join(TARGET,,,d)
 }
 #CONFIG += debug_and_release
 #CONFIG += build_all
@@ -69,31 +82,11 @@ win32 {
 include ($$PWD/qqt_header.pri)
 include ($$PWD/qqt_source.pri)
 
-#################################################################
-##project environ
-#################################################################
-#default
-greaterThan(QT_MAJOR_VERSION, 4): {
-    for (cc, CONFIG) {
-        message($${TARGET} configed $${cc})
-    }
-    for (cc, DEFINES) {
-        message($${TARGET} defined $${cc})
-    }
-} else {
-    message ($${TARGET} config  $${CONFIG})
-    message ($${TARGET} defined $${DEFINES})
-}
-
 ################################################
-##install
+##install to Qt library
 ################################################
-#CONFIG += can_install
-can_install:equals(QKIT_, macOS) {
-    ###if install product to same path,use this.
-    target.path = /System/Library/Frameworks
-    INSTALLS += target
-}
+#if you want to use QQt with QT += QQtCore please open this feature
+include($$PWD/qqt_install.pri)
 
 ################################################
 ##project resource
