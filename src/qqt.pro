@@ -53,6 +53,9 @@ QMAKE_TARGET_COPYRIGHT = "Copyright 2015-2020 QQT Co., Ltd. All rights reserved"
 
 win32 {
     #common to use upload, this can be ignored.
+    #open this can support cmake config.h.in
+    #configure_file(qqtversion.h.in, qqtversion.h) control version via cmake.
+    #qmake version config and cmake version config is conflicted
     #RC_FILE += qqt.rc
     #RC_ICONS=
     RC_LANG=0x0004
