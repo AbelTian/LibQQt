@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -108,6 +108,21 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_6">
+      <attribute name="title">
+       <string>页</string>
+      </attribute>
+      <widget class="QQTProgressBar" name="w60" native="true">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>491</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </item>
    <item>
@@ -131,6 +146,12 @@
    <class>QQtCustomEffectProgressBar</class>
    <extends>QWidget</extends>
    <header location="global">qqtcustomeffectprogressbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QQTProgressBar</class>
+   <extends>QWidget</extends>
+   <header location="global">qqtprogressbar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

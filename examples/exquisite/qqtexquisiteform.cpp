@@ -121,6 +121,9 @@ QQtExquisiteForm::QQtExquisiteForm(QWidget* parent) :
     ui->w53->setWaveSpeed(6);
     ui->w53->setPercentStyle(QQtCustomEffectProgressBar::PercentStyle_Wave);
 
+    //ui->w60->setRange(0, 100);
+    //ui->w60->setValue(100);
+
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w01, SLOT(setValue(int)));
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w0, SLOT(setValue(int)));
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w1, SLOT(setValue(int)));
@@ -137,6 +140,7 @@ QQtExquisiteForm::QQtExquisiteForm(QWidget* parent) :
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w51, SLOT(setValue(int)));
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w52, SLOT(setValue(int)));
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w53, SLOT(setValue(int)));
+    connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w60, SLOT(setValue(int)));
 
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w7, SLOT(setValue(int)));
     connect(ui->hs0, SIGNAL(valueChanged(int)), ui->w8, SLOT(setValue(int)));
