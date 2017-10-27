@@ -1,5 +1,5 @@
 
-#QQt Foundation Class  
+# QQt Foundation Class  
 
 ==============================================  
 1. 支持绘制图表  
