@@ -18,7 +18,7 @@
 extern "C" {
 #endif /* __cplusplus */
 /*
- * 自定义组件的公共部分
+ * 鑷畾涔夌粍浠剁殑鍏叡閮ㄥ垎
  */
 enum
 {

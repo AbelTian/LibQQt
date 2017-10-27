@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 - Andre Maaßdorf
+ * Copyright 2010 - Andre Maa脽dorf
  *
  * Use, change and distribution of the code below is hereby
  * granted in any way without warranty by the original author.

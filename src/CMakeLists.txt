@@ -2,25 +2,25 @@ include (${CMAKE_SOURCE_DIR}/cmake/function.cmake)
 
 set ( SUBLIBRARY_NAME QQt)
 
-#文件版本
+#鏂囦欢鐗堟湰
 set( VER_FILEVERSION             1,0,0,0   )
 set( VER_FILEVERSION_STR         "1.0.0.0" )
 
-#产品版本
+#浜у搧鐗堟湰
 set( VER_PRODUCTVERSION          1.0 )
 set( VER_PRODUCTVERSION_MAJOR          1 )
 set( VER_PRODUCTVERSION_STR      "1.0"   )
 set( VER_PRODUCTVERSION_MAJOR_STR      "1"   )
 
-#产品名称
+#浜у搧鍚嶇О
 set( VER_PRODUCTNAME_STR         "QQT"  )
 set( VER_ORIGINALFILENAME_STR    "QQT"  )
 set( VER_INTERNALNAME_STR        "QQT"   )
 set( VER_COMPANYNAME_STR         "QQT"   )
 set( VER_COMPANYDOMAIN_STR       "www.qqt.com" )
-#文件说明
+#鏂囦欢璇存槑
 set( VER_FILEDESCRIPTION_STR     "QQT"   )
-#版权
+#鐗堟潈
 set( VER_LEGALCOPYRIGHT_STR      "Copyright 2007-2017 QQT Co., Ltd."  )
 set( VER_LEGALTRADEMARKS1_STR    "All rights reserved" )
 set( VER_LEGALTRADEMARKS2_STR    ${VER_LEGALTRADEMARKS1_STR} )
@@ -59,7 +59,7 @@ elseif(UNIX)
 	set(SOURCES ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/pluginwatcher/qdevicewatcher_linux.cpp)
 endif(WIN32)
 
-#内部编译 解决头文件发现不了的问题
+#鍐呴儴缂栬瘧 瑙ｅ喅澶存枃浠跺彂鐜颁笉浜嗙殑闂
 include_directories( core sql network
 	customplot gui widgets frame
 	pluginwatcher printsupport )

@@ -1,6 +1,6 @@
 /**
  * @file qextserialenumerator.cpp
- * @author Michał Policht
+ * @author Micha艂 Policht
  * @see QextSerialEnumerator
  */
 
