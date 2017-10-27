@@ -52,7 +52,7 @@ MODULE_CNAME=QQtCore
 QQT_BUILD_DIR=$$OUT_PWD/bin
 QQT_TEMP_DIR=$$PWD/../install
 #QQT_BASE_DIR=$$[QT_INSTALL_DATA]
-QQT_BASE_DIR=$$absolute_path($$QQT_TEMP_DIR)
+QQT_BASE_DIR=$$QQT_TEMP_DIR
 
 #framework only
 contains(QKIT_, macOS) {
