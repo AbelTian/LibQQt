@@ -249,6 +249,8 @@ equals(QKIT_, macOS):DEFINES += __WEBSOCKETSUPPORT__
 contains (DEFINES, __WEBSOCKETSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
     #TODO: QT += webkit
+    #if you use QtSoap, open this annotation
+    DEFINES += __QTSOAP__
 }
 
 ##################################################################
@@ -295,3 +297,4 @@ INCLUDEPATH += $$PWD/widgets
 INCLUDEPATH += $$PWD/exquisite
 # c support
 INCLUDEPATH += $$PWD/qrencode
+INCLUDEPATH += $$PWD/soap

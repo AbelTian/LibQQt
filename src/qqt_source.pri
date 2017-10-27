@@ -348,4 +348,13 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
         $$PWD/network/qqtftpprotocol.h \
         $$PWD/network/qqthttpprotocol.h \
         $$PWD/network/qqtwebprotocol.h
+    contains(DEFINES, __QTSOAP__) {
+        contains (DEFINES, QQT_LIBRARY) {
+            DEFINES += QT_QTSOAP_LIBRARY
+        }
+        SOURCES += \
+            $$PWD/soap/qtsoap.cpp
+        HEADERS += \
+            $$PWD/soap/qtsoap.h
+    }
 }
