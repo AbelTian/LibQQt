@@ -33,3 +33,18 @@
 19. 添加QQtApplication，支持一般嵌入式App所必须的初始化内容
 20. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM。
 
+# Usage
+
+==============================================
+include (qqt_header.pri)
+include (qqt_library.pri) or include (qqt_source.pri)
+
+# Contact Me
+
+==============================================
+Mail me: tianduanrui@163.com
+My qq: 2657635903
+Make issure: https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0
+
+
+
