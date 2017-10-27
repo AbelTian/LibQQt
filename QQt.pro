@@ -1,7 +1,8 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = src/qqt.pro
+SUBDIRS = src/qqt.pro \
+    examples/qqtframe3
 SUBDIRS += examples/framelesshelperwidget
 SUBDIRS += examples/qqtframe
 SUBDIRS += examples/qqtframe2

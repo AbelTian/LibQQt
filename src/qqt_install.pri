@@ -34,8 +34,7 @@ defineReplace(write_file) {
         $$empty_file($$filename)
     }
     for(value, variable): {
-        sde = "echo $$value >> $$filename"
-        $$system($$sde)||return(false)
+        $$system("echo $$value >> $$filename")||return(false)
     }
 }
 
@@ -50,68 +49,89 @@ defineReplace(mkdir) {
 MODULE_NAME=qqtcore
 MODULE_CNAME=QQtCore
 
+QQT_BUILD_DIR=$$OUT_PWD/bin
 QQT_TEMP_DIR=$$PWD/../install
 #QQT_BASE_DIR=$$[QT_INSTALL_DATA]
 QQT_BASE_DIR=$$absolute_path($$QQT_TEMP_DIR)
 
-QQT_INC_DIR=$${QQT_BASE_DIR}/include/QQtCore
-QQT_LIB_DIR=$${QQT_BASE_DIR}/lib
-QQT_PRI_PATH=$${QQT_BASE_DIR}/mkspecs/modules
-QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${MODULE_NAME}.pri
-QQT_CMAKE_DIR=$${QQT_BASE_DIR}/lib/cmake/QQtCore
+#framework only
+contains(QKIT_, macOS) {
+    message (laile?)
+    ###if install product to same path,use this.
+    QQT_BUNDLE_DIR=$${QQT_BASE_DIR}/lib/$${MODULE_CNAME}.framework
 
-message($$QQT_BASE_DIR)
-message($$QQT_INC_DIR)
-message($$QQT_LIB_DIR)
-message($$QQT_PRI_PATH)
-message($$QQT_CMAKE_DIR)
+    QQT_RES_DIR=$${QQT_BUNDLE_DIR}/Versions/$${TARGET_MAJOR_VERSION}/Resources
+    QQT_RES_LINK=$${QQT_BUNDLE_DIR}/Resources
+
+    QQT_INC_DIR=$${QQT_BUNDLE_DIR}/Versions/$${TARGET_MAJOR_VERSION}/Headers
+    QQT_INC_DIR=$${QQT_BUNDLE_DIR}/Headers
+
+    QQT_LIB_DIR=$${QQT_BUNDLE_DIR}/Versions/$${TARGET_MAJOR_VERSION}
+    QQT_LIB_FILEPATH=$${QQT_LIB_DIR}/$${MODULE_CNAME}
+    QQT_LIB_FILEPATH_LINK=$${QQT_BUNDLE_DIR}/$${MODULE_CNAME}
+
+    QQT_CURRENT_LINK=$${QQT_BUNDLE_DIR}/Versions/Current
+
+    QMAKE_INFO_PLIST = $$QQT_RES_DIR/Info.plist
+    ##how to set names
+
+    QQT_PRI_PATH=$${QQT_BASE_DIR}/mkspecs/modules
+    QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${MODULE_NAME}.pri
+    QQT_CMAKE_DIR=$${QQT_BASE_DIR}/lib/cmake/$${MODULE_CNAME}
+} else {
+    QQT_INC_DIR=$${QQT_BASE_DIR}/include/$${MODULE_CNAME}
+    QQT_LIB_DIR=$${QQT_BASE_DIR}/lib
+    QQT_PRI_PATH=$${QQT_BASE_DIR}/mkspecs/modules
+    QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${MODULE_NAME}.pri
+    QQT_CMAKE_DIR=$${QQT_BASE_DIR}/lib/cmake/$${MODULE_CNAME}
+    QQT_RES_DIR=
+}
+
+#QQT_BASE_DIR=$$[QT_INSTALL_DATA]
 
 ##create dest dirs
-$$mkdir($$QQT_BASE_DIR)
-$$mkdir($$QQT_INC_DIR)
-$$mkdir($$QQT_PRI_PATH)
-$$mkdir($$QQT_CMAKE_DIR)
+!equals(QQT_BASE_DIR , $$[QT_INSTALL_DATA]){
+    message($$QQT_BASE_DIR)
+    message($$QQT_INC_DIR)
+    message($$QQT_LIB_DIR)
+    message($$QQT_PRI_PATH)
+    message($$QQT_CMAKE_DIR)
+    QMAKE_POST_LINK += $$system($$RM_DIR $$QQT_BASE_DIR)
+    QMAKE_POST_LINK += $$mkdir($$QQT_BASE_DIR)
+    QMAKE_POST_LINK += $$mkdir($$QQT_INC_DIR)
+    QMAKE_POST_LINK += $$mkdir($$QQT_PRI_PATH)
+    QMAKE_POST_LINK += $$mkdir($$QQT_CMAKE_DIR)
+}
 
 ##write qt_lib_qqtcore.pri
-message (dddddd $$absolute_path($$QQT_BASE_DIR))
-$$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.VERSION = $${TARGET_VERSION}")
-$$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.name = $${MODULE_CNAME}", append)
-$$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.module = $${MODULE_CNAME}", append)
-$$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.libs = '\$$QT_MODULE_LIB_BASE'", append)
-$$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.bins = $$system_quote(\$$QT_MODULE_BIN_BASE)", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.VERSION = $${TARGET_VERSION}")
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.name = $${MODULE_CNAME}", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.module = $${MODULE_CNAME}", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.libs = '\$$QT_MODULE_LIB_BASE'", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.bins = $$system_quote(\$$QT_MODULE_BIN_BASE)", append)
 equals(QKIT_, macOS) {
-    $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.includes = '\$$QT_MODULE_LIB_BASE/$${MODULE_CNAME}.framework/Headers'", append)
-    $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.frameworks = '\$$QT_MODULE_LIB_BASE'", append)
-    $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.module_config = v2 lib_bundle", append)
+    QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.includes = '\$$QT_MODULE_LIB_BASE/$${MODULE_CNAME}.framework/Headers'", append)
+    QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.frameworks = '\$$QT_MODULE_LIB_BASE'", append)
+    QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.module_config = v2 lib_bundle", append)
 } else {
-    $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.includes = '\$$QT_MODULE_INCLUDE_BASE \$$QT_MODULE_INCLUDE_BASE/$${MODULE_CNAME}'", append)
-    $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.frameworks = ", append)
-    $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.module_config = v2 ", append)
+    QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.includes = '\$$QT_MODULE_INCLUDE_BASE \$$QT_MODULE_INCLUDE_BASE/$${MODULE_CNAME}'", append)
+    QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.frameworks = ", append)
+    QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.module_config = v2 ", append)
 }
 greaterThan(QT_MAJOR_VERSION, 4):{
-    $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.depends = core sql network gui xml widgets", append)
+    QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.depends = core sql network gui xml widgets", append)
 } else {
-    $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.depends = core sql network gui xml", append)
+    QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.depends = core sql network gui xml", append)
 }
-$$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.uses =", append)
-$$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.DEFINES = QQT_LIBRARY", append)
-$$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.enabled_features =", append)
-$$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.disabled_features =", append)
-$$write_file($${QQT_PRI_FILEPATH}, "QT_CONFIG +=", append)
-$$write_file($${QQT_PRI_FILEPATH}, "QT_MODULES += $${MODULE_NAME}", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.uses =", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.DEFINES = QQT_LIBRARY", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.enabled_features =", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT.$${MODULE_NAME}.disabled_features =", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT_CONFIG +=", append)
+QMAKE_POST_LINK += $$write_file($${QQT_PRI_FILEPATH}, "QT_MODULES += $${MODULE_NAME}", append)
 
-$$system("$$COPY $$HEADERS $$QQT_INC_DIR")
+#write haeders and library
+QMAKE_POST_LINK += $$system($$COPY $$HEADERS $$QQT_INC_DIR)
+QMAKE_POST_LINK += $$system($$COPY $$QQT_BUILD_DIR/* $$QQT_LIB_DIR)
 
-QMAKE_POST_LINK += message(eeeeee)
-    #$$system($$COPY )
-
-
-#framework only
-equals(QKIT_, macOS) {
-    ###if install product to same path,use this.
-    target.path = /System/Library/Frameworks
-    INSTALLS += target
-} else {
-    qqt.files = j
-}
 
