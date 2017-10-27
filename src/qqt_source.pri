@@ -199,7 +199,7 @@ contains (DEFINES, __PRINTSUPPORT__) {
     #need print support
     #DEFINES += __CUSTOMPLOT__
     contains (DEFINES, __CUSTOMPLOT__) {
-        message (qcustomplot is used in $${TARGET})
+        #message (qcustomplot is used in $${TARGET})
         contains (DEFINES, QQT_LIBRARY) {
             DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
         }
@@ -272,18 +272,6 @@ equals(QKIT_, EMBEDDED) {
     FORMS += $$PWD/frame/qqtwifiwidget.ui
 }
 
-##websocket
-contains (DEFINES, __WEBSOCKETSUPPORT__) {
-    SOURCES += $$PWD/network/qqtwebclient.cpp \
-        $$PWD/network/qqtftpprotocol.cpp \
-        $$PWD/network/qqthttpprotocol.cpp \
-        $$PWD/network/qqtwebprotocol.cpp
-    HEADERS += $$PWD/network/qqtwebclient.h \
-        $$PWD/network/qqtftpprotocol.h \
-        $$PWD/network/qqthttpprotocol.h \
-        $$PWD/network/qqtwebprotocol.h
-}
-
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
     SOURCES += \
@@ -348,4 +336,16 @@ contains (DEFINES, __EXQUISITE__) {
         SOURCES += \
             $$PWD/exquisite/qqtcustomqrencodewidget.cpp
     }
+}
+
+##websocket
+contains (DEFINES, __WEBSOCKETSUPPORT__) {
+    SOURCES += $$PWD/network/qqtwebclient.cpp \
+        $$PWD/network/qqtftpprotocol.cpp \
+        $$PWD/network/qqthttpprotocol.cpp \
+        $$PWD/network/qqtwebprotocol.cpp
+    HEADERS += $$PWD/network/qqtwebclient.h \
+        $$PWD/network/qqtftpprotocol.h \
+        $$PWD/network/qqthttpprotocol.h \
+        $$PWD/network/qqtwebprotocol.h
 }

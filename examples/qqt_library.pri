@@ -15,7 +15,7 @@ equals(QMAKE_HOST.os, Darwin) {
 QQT_OUT_PWD = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src
 QQT_OUT_BIN = $${QQT_OUT_PWD}/$${DESTDIR}
 QQT_LIB_PWD = $$BUILDROOT/$$QQT_OUT_BIN
-message (QQt Build: $$QQT_LIB_PWD)
+#message (QQt Build: $$QQT_LIB_PWD)
 
 contains(DEFINES, __DARWIN__) {
     lessThan(QT_MAJOR_VERSION, 5):{
@@ -44,6 +44,18 @@ can_install:equals(QKIT_, EMBEDDED) {
     }
 }
 
+#not good to use, some function error
+#CONFIG += qmake_deploy
+qmake_deploy:equals(QKIT_, macOS) {
+    QQT_MAJOR_VERSION = 1
+    QMAKE_POST_LINK += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
+         @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
+         bin/$${TARGET}.app/Contents/MacOS/$$TARGET &
+    QMAKE_POST_LINK += cp -fr ../../src/bin/QQt.framework \
+            bin/$${TARGET}.app/Contents/Frameworks &
+    QMAKE_POST_LINK += macdeployqt bin/$${TARGET}.app -qmldir=$$PWD -verbose=1
+}
+
 ############
 ##config defination
 ############
@@ -59,19 +71,3 @@ equals(QKIT_, Android) {
     #ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 }
 
-equals(QKIT_, macOS) {
-    QMAKE_POST_LINK = install_name_tool -change QQt.framework/Versions/1/QQt \
-         @rpath/QQt.framework/Versions/1/QQt \
-         bin/$$TARGET.app/Contents/MacOS/$$TARGET
-}
-
-################################################
-##install QQt sdk
-##library file is here
-################################################
-#CONFIG += can_install_sdk
-can_install_sdk:equals(QKIT_, macOS) {
-    ###if install product to same path,use this.
-    target.path = /System/Library/Frameworks
-    INSTALLS += target
-}
