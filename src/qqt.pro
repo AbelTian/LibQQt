@@ -42,7 +42,7 @@ build_pass:CONFIG(debug, debug|release) {
 ##project version
 #################################################################
 TARGET_MAJOR_VERSION = 1
-TARGET_MINOR_VERSION = 4
+TARGET_MINOR_VERSION = 5
 TARGET_PATCH_VERSION = 0
 TARGET_BUILD_VERSION = 0
 TARGET_VERSION = $${TARGET_MAJOR_VERSION}.$${TARGET_MINOR_VERSION}.$${TARGET_PATCH_VERSION}
@@ -50,7 +50,7 @@ TARGET_VERSION4 = $${TARGET_MAJOR_VERSION}.$${TARGET_MINOR_VERSION}.$${TARGET_PA
 unix:VERSION = $${TARGET_VERSION}
 #bug?:open this macro, TARGET will suffixed with major version.
 #win32:VERSION = $${TARGET_VERSION4}
-
+message (QQt version: $$VERSION)
 QMAKE_TARGET_FILE = "$${TARGET}"
 QMAKE_TARGET_PRODUCT = "$${TARGET}"
 QMAKE_TARGET_COMPANY = "www.qqt.com"
