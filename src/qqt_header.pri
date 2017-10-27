@@ -164,15 +164,16 @@ DESTDIR = bin
 ################################################################
 ##QQt Functions Macro
 ################################################################
-#You need switch these more macro according to your needs.
+##################Basic Module##################################
+#You need switch these more macro according to your needs when you build this library
+
 #if you use qextserialport, open the annotation
 #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
 #DEFINES += __QEXTSERIALPORT__
 #if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
 lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
-#to ios, use qextserialport
+#to ios, use qextserialport #android qt5 support serialport default?
 contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
-#android qt5 support serialport default?
 contains (DEFINES, __QEXTSERIALPORT__) {
     CONFIG += thread
     unix:DEFINES += _TTY_POSIX_
@@ -187,16 +188,17 @@ contains (DEFINES, __QEXTSERIALPORT__) {
         DEFINES += _TTY_WIN_
     }
 }
+
 #if you use qtbluetooth, open this annotation
 DEFINES += __BLUETOOTH__
 #if you compiler QtBluetooth module manual, note this line is a good idea. default qt4 don't use bluetooth
 lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __BLUETOOTH__
+#condation
 contains (DEFINES, __BLUETOOTH__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
 }
-#if you use QR encode, open this annotation
-DEFINES += __QRENCODE__
+
 #if you use C++11, open this annotation. suggest: ignore
 #DEFINES += __CPP11__
 contains (DEFINES, __CPP11__) {
@@ -217,12 +219,7 @@ contains (DEFINES, __CPP11__) {
     #LibQQt used override identifier
     #lambda also need c++11
 }
-#if you use qcustomplot, open this annotation
-#need print support
-DEFINES += __CUSTOMPLOT__
-contains(QKIT_, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
-    DEFINES -= __CUSTOMPLOT__
-}
+
 #if you use printsupport , open this annotation
 DEFINES += __PRINTSUPPORT__
 #ios android can't support this function now
@@ -231,6 +228,19 @@ contains(QKIT_, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
 }
 contains (DEFINES, __PRINTSUPPORT__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
+    #if you use qcustomplot, open this annotation
+    DEFINES += __CUSTOMPLOT__
+    contains(QKIT_, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
+        DEFINES -= __CUSTOMPLOT__
+    }
+}
+
+##################Exquisite Module###############################
+#if you use Exquisite widgets, open this annotation
+DEFINES += __EXQUISITE__
+contains (DEFINES, __EXQUISITE__) {
+    #if you use QR encode, open this annotation
+    DEFINES += __QRENCODE__
 }
 
 #if you use QWebSocketSupport , open this annotation
