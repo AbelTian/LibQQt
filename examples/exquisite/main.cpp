@@ -1,7 +1,7 @@
 #include "qqtexquisiteform.h"
 #include <QApplication>
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
     QQtExquisiteForm w;
@@ -9,3 +9,4 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+

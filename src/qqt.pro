@@ -41,16 +41,11 @@ build_pass:CONFIG(debug, debug|release) {
 #################################################################
 ##project version
 #################################################################
-TARGET_MAJOR_VERSION = 1
-TARGET_MINOR_VERSION = 5
-TARGET_PATCH_VERSION = 0
-TARGET_BUILD_VERSION = 0
-TARGET_VERSION = $${TARGET_MAJOR_VERSION}.$${TARGET_MINOR_VERSION}.$${TARGET_PATCH_VERSION}
-TARGET_VERSION4 = $${TARGET_MAJOR_VERSION}.$${TARGET_MINOR_VERSION}.$${TARGET_PATCH_VERSION}.$${TARGET_BUILD_VERSION}
-unix:VERSION = $${TARGET_VERSION}
+include ($$PWD/qqt_version.pri)
+unix:VERSION = $${QQT_VERSION}
 #bug?:open this macro, TARGET will suffixed with major version.
-#win32:VERSION = $${TARGET_VERSION4}
-message (QQt version: $$VERSION)
+#win32:VERSION = $${QQT_VERSION4}
+
 QMAKE_TARGET_FILE = "$${TARGET}"
 QMAKE_TARGET_PRODUCT = "$${TARGET}"
 QMAKE_TARGET_COMPANY = "www.qqt.com"
@@ -74,14 +69,9 @@ win32 {
 #################################################################
 include ($$PWD/qqt_header.pri)
 include ($$PWD/qqt_source.pri)
-
 ################################################
 ##install to Qt library
 ################################################
-#if you want to use QQt with QT += QQt please open this feature
-#unimplete: CONFIG += install_to_qt_library
-#use to output sdk
-CONFIG += create_sdk
 include ($$PWD/qqt_install.pri)
 
 ################################################

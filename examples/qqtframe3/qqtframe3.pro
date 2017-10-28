@@ -14,6 +14,7 @@ equals(QMAKE_HOST.os, Darwin) {
     QQT_SOURCE_ROOT = C:/Users/Administrator/Develop/a0-develop/a0-qqtfoundation
 }
 
+include($${QQT_SOURCE_ROOT}/src/qqt_version.pri)
 include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
 #CONFIG += BUILD_SRC
 contains (CONFIG, BUILD_SRC) {

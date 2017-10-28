@@ -5,7 +5,7 @@
 #include "QHBoxLayout"
 #include "QSpacerItem"
 
-QQTProgressBar::QQTProgressBar(QWidget *parent) :
+QQTProgressBar::QQTProgressBar(QWidget* parent) :
     QWidget(parent),
     ui(new Ui::QQTProgressBar)
 {
@@ -36,10 +36,10 @@ void QQTProgressBar::setPixMap(QString back, QString trunk)
 void QQTProgressBar::setValue(int value)
 {
     m_value = value;
-    int w = ui->widgetBack->width() * (m_value-m_min) / (m_max-m_min);
+    int w = ui->widgetBack->width() * (m_value - m_min) / (m_max - m_min);
     int h = ui->widgetBack->height();
     ui->widthTrunk->setFixedSize(w, h);
-    pline() << width() << ui->widgetBack->width() << w << h;
+    //pline() << width() << ui->widgetBack->width() << w << h;
 }
 
 void QQTProgressBar::setRange(int min, int max)
