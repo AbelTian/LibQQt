@@ -1,21 +1,26 @@
 #here is all your app common defination and configration
-#change these path on your computer
+
+#equals(QMAKE_HOST.os, Darwin) {
+#    BUILDROOT = /Users/abel/Develop/c0-buildstation
+#} else: equals(QMAKE_HOST.os, Linux) {
+#    BUILDROOT = /home/abel/Develop/c0-buildstation
+#} else: equals(QMAKE_HOST.os, Windows) {
+#    BUILDROOT = C:/Users/Administrator/Develop/c0-build
+#}
+
+#QQT_OUT_PWD = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src
+#QQT_OUT_BIN = $${QQT_OUT_PWD}/$${DESTDIR}
+#QQT_LIB_PWD = $$BUILDROOT/$$QQT_OUT_BIN
+
 message(Link QQt to $${TARGET} $${QKIT_} \
     at $${QT_VERSION} $${SYSNAME} $${BUILD} \
     on $${QMAKE_HOST.os})
 
-equals(QMAKE_HOST.os, Darwin) {
-    BUILDROOT = /Users/abel/Develop/c0-buildstation
-} else: equals(QMAKE_HOST.os, Linux) {
-    BUILDROOT = /home/abel/Develop/c0-buildstation
-} else: equals(QMAKE_HOST.os, Windows) {
-    BUILDROOT = C:/Users/Administrator/Develop/c0-build
-}
-
-QQT_OUT_PWD = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src
-QQT_OUT_BIN = $${QQT_OUT_PWD}/$${DESTDIR}
-QQT_LIB_PWD = $$BUILDROOT/$$QQT_OUT_BIN
-#message (QQt Build: $$QQT_LIB_PWD)
+#change this path on your computer
+#copy this pri to QQt based user app project public position
+#set user relative path to QQt builder bin (only this need to be set by user)
+QQT_LIB_PWD = $$OUT_PWD/../../src/bin
+message (QQt Build: $$QQT_LIB_PWD)
 
 contains(DEFINES, __DARWIN__) {
     lessThan(QT_MAJOR_VERSION, 5):{
@@ -70,4 +75,3 @@ equals(QKIT_, Android) {
 
     #ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 }
-

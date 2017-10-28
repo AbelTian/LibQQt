@@ -79,7 +79,7 @@ include ($$PWD/qqt_source.pri)
 ##install to Qt library
 ################################################
 #if you want to use QQt with QT += QQtCore please open this feature
-#buged: include ($$PWD/qqt_install.pri)
+include ($$PWD/qqt_install.pri)
 
 ################################################
 ##project resource

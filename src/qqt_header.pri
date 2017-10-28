@@ -166,6 +166,8 @@ DESTDIR = bin
 ################################################################
 ##################Basic Module##################################
 #You need switch these more macro according to your needs when you build this library
+#You can tailor QQt  with these macro.
+#Default: macroes is configed, some open, some close, compatibled to special accotation.
 
 #if you use qextserialport, open the annotation
 #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
@@ -178,7 +180,7 @@ contains (DEFINES, __QEXTSERIALPORT__) {
     CONFIG += thread
     unix:DEFINES += _TTY_POSIX_
     win32:DEFINES += _TTY_WIN_
-    message ( __QEXTSERIALPORT__ Defined in $${TARGET})
+    #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
 } else {
     greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
@@ -243,6 +245,7 @@ contains (DEFINES, __EXQUISITE__) {
     DEFINES += __QRENCODE__
 }
 
+##################WebSocket Module###############################
 #if you use QWebSocketSupport , open this annotation
 #DEFINES += __WEBSOCKETSUPPORT__
 equals(QKIT_, macOS):DEFINES += __WEBSOCKETSUPPORT__
