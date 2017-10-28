@@ -78,7 +78,10 @@ include ($$PWD/qqt_source.pri)
 ################################################
 ##install to Qt library
 ################################################
-#if you want to use QQt with QT += QQtCore please open this feature
+#if you want to use QQt with QT += QQt please open this feature
+#unimplete: CONFIG += install_to_qt_library
+#use to output sdk
+CONFIG += create_sdk
 include ($$PWD/qqt_install.pri)
 
 ################################################

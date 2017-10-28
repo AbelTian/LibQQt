@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QQtCustomSpeedMeter" name="widget" native="true">
+   <widget class="QQtCustomSpeedMeter" name="w0" native="true">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -31,7 +31,7 @@
      <x>0</x>
      <y>0</y>
      <width>661</width>
-     <height>22</height>
+     <height>28</height>
     </rect>
    </property>
   </widget>

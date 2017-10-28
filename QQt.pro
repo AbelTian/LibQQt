@@ -14,7 +14,7 @@ SUBDIRS += examples/QtSdkManager
 SUBDIRS += examples/QQtInstaller
 
 #need QQt installed to Qt library
-#SUBDIRS += examples/qqtframe3
+SUBDIRS += examples/qqtframe3
 
 #need bluetooth library
 #SUBDIRS += examples/qqtbluetoothfiletransferserver
