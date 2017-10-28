@@ -2,7 +2,6 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS = src/qqt.pro
-SUBDIRS += examples/qqtframe3
 SUBDIRS += examples/framelesshelperwidget
 SUBDIRS += examples/qqtframe
 SUBDIRS += examples/qqtframe2
@@ -13,6 +12,9 @@ SUBDIRS += examples/exquisite
 SUBDIRS += examples/QtBuildTool
 SUBDIRS += examples/QtSdkManager
 SUBDIRS += examples/QQtInstaller
+
+#need QQt installed to Qt library
+#SUBDIRS += examples/qqtframe3
 
 #need bluetooth library
 #SUBDIRS += examples/qqtbluetoothfiletransferserver

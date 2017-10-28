@@ -15,7 +15,7 @@ contains(QMAKE_HOST.os,Windows) {
     CMD_SEP = &&
     MOVE = mv
     COPY = cp -f
-    COPY_DIR = $$COPY -R
+    COPY_DIR = cp -rf
     MK_DIR = mkdir -p
     RM = rm -f
     LN = ln -s
@@ -123,19 +123,15 @@ defineTest(write_file) {
 system("touch $${PWD}/exquisite/qqtcustomeffectprogressbar.cpp")
 
 
-MODULE_NAME=qqtcore
-MODULE_CNAME=QQtCore
+MODULE_NAME=qqt
+MODULE_CNAME=QQt
 
 QQT_BUILD_DIR=$$OUT_PWD/bin
 QQT_TEMP_DIR=$$PWD/../install
-#QQT_BASE_DIR=$$[QT_INSTALL_DATA]
 QQT_BASE_DIR=$$QQT_TEMP_DIR
 #QQT_BASE_DIR=$$[QT_INSTALL_DATA]
 message(QQt sdk install here:$${QQT_BASE_DIR})
 
-defineReplace(create_sdk_dirs) {
-    return (cccccc)
-}
 #can be used in condition or values
 #must $$ !
 #return values. true is 'true', false is 'false', xx0, xx1 is list
@@ -143,17 +139,25 @@ defineReplace(create_sdk) {
     return (cccccc)
 }
 
-!equals(QQT_BASE_DIR , $$[QT_INSTALL_DATA]){
-    QQT_INC_DIR=$${QQT_BASE_DIR}/include/$${MODULE_CNAME}
-    QQT_LIB_DIR=$${QQT_BASE_DIR}/lib
-    QQT_PRI_PATH=$${QQT_BASE_DIR}/mkspecs/modules
-    QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${MODULE_NAME}.pri
-    QQT_CMAKE_DIR=$${QQT_BASE_DIR}/lib/cmake/$${MODULE_CNAME}
-    #mac only
-    contains(QKIT_, macOS) {
-        QQT_INC_DIR=$${QQT_BASE_DIR}/lib/QQt.framework/Versions/$${TARGET_MAJOR_VERSION}/Headers
-    }
+QQT_INC_DIR=$${QQT_BASE_DIR}/include/$${MODULE_CNAME}
+QQT_LIB_DIR=$${QQT_BASE_DIR}/lib
+QQT_PRI_PATH=$${QQT_BASE_DIR}/mkspecs/modules
+QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${MODULE_NAME}.pri
+QQT_CMAKE_DIR=$${QQT_BASE_DIR}/lib/cmake/$${MODULE_CNAME}
+contains(QKIT_, macOS) {
+    QQT_BUNDLE_DIR=$${QQT_BASE_DIR}/lib/$${MODULE_CNAME}.framework
+    QQT_BUNDLE_CUR_DIR  =$${QQT_BUNDLE_DIR}/Versions/$${TARGET_MAJOR_VERSION}
+    QQT_BUNDLE_INC_DIR  =$${QQT_BUNDLE_CUR_DIR}/Headers
+    QQT_BUNDLE_RES_DIR  =$${QQT_BUNDLE_CUR_DIR}/Resources
+    QQT_BUNDLE_EXE_FILE =$${QQT_BUNDLE_CUR_DIR}/$${MODULE_CNAME}
 }
+contains(QKIT_, macOS) {
+    QQT_BUNDLE_CUR_LINK  =$${QQT_BUNDLE_DIR}/Versions/Current
+    QQT_BUNDLE_INC_LINK  =$${QQT_BUNDLE_DIR}/Headers
+    QQT_BUNDLE_RES_LINK  =$${QQT_BUNDLE_DIR}/Resources
+    QQT_BUNDLE_EXE_LINK  =$${QQT_BUNDLE_DIR}/$${MODULE_CNAME}
+}
+
 
 #create base dir excide header
 !equals(QQT_BASE_DIR , $$[QT_INSTALL_DATA]){
@@ -164,22 +168,43 @@ defineReplace(create_sdk) {
     QMAKE_POST_LINK += $$MK_DIR $$QQT_CMAKE_DIR $$CMD_SEP
 }
 
+#create bundle dir
+contains(QKIT_, macOS) {
+    QMAKE_POST_LINK += $$RM_DIR $$QQT_BUNDLE_DIR $$CMD_SEP
+    QMAKE_POST_LINK += $$MK_DIR $$QQT_BUNDLE_CUR_DIR $$CMD_SEP
+}
+
 #copy lib
 contains(QKIT_, macOS) {
-    QMAKE_POST_LINK += "$$COPY_DIR $$QQT_BUILD_DIR/QQt.framework $$QQT_LIB_DIR" $$CMD_SEP
+    QMAKE_POST_LINK += "$$COPY_DIR $$QQT_BUILD_DIR/$${MODULE_CNAME}.framework/Versions/$${TARGET_MAJOR_VERSION}/* $$QQT_BUNDLE_CUR_DIR" $$CMD_SEP
 } else {
     QMAKE_POST_LINK += "$$COPY_DIR $$QQT_BUILD_DIR/* $$QQT_LIB_DIR" $$CMD_SEP
 }
 
-#create header dir
-!equals(QQT_BASE_DIR , $$[QT_INSTALL_DATA]){
-    QMAKE_POST_LINK += $$MK_DIR $$QQT_INC_DIR $$CMD_SEP
-}
-QMAKE_POST_LINK += $$COPY $$HEADERS $$QQT_INC_DIR $$CMD_SEP
-
-#link header
+#copy header
 contains(QKIT_, macOS) {
-    QMAKE_POST_LINK += "$$LN $$QQT_INC_DIR $$QQT_LIB_DIR/QQt.framework/Headers" $$CMD_SEP
+    QMAKE_POST_LINK += $$MK_DIR $$QQT_BUNDLE_INC_DIR $$CMD_SEP
+    QMAKE_POST_LINK += $$COPY $$HEADERS $$QQT_BUNDLE_INC_DIR $$CMD_SEP
+}else{
+    !equals(QQT_BASE_DIR , $$[QT_INSTALL_DATA]){
+        QMAKE_POST_LINK += $$MK_DIR $$QQT_INC_DIR $$CMD_SEP
+    }
+    QMAKE_POST_LINK += $$COPY $$HEADERS $$QQT_INC_DIR $$CMD_SEP
+}
+
+#link header current resources
+contains(QKIT_, macOS) {
+    QMAKE_POST_LINK += $$LN $$QQT_BUNDLE_CUR_DIR  $${QQT_BUNDLE_CUR_LINK} $$CMD_SEP
+    QMAKE_POST_LINK += $$LN $$QQT_BUNDLE_INC_DIR  $${QQT_BUNDLE_INC_LINK} $$CMD_SEP
+    QMAKE_POST_LINK += $$LN $$QQT_BUNDLE_RES_DIR  $${QQT_BUNDLE_RES_LINK} $$CMD_SEP
+    QMAKE_POST_LINK += $$LN $$QQT_BUNDLE_EXE_FILE $${QQT_BUNDLE_EXE_LINK} $$CMD_SEP
+}
+
+#copy prl
+contains(QKIT_, macOS) {
+    QMAKE_POST_LINK += $$COPY $$QQT_BUILD_DIR/lib$${MODULE_CNAME}.prl $$QQT_BUNDLE_DIR/$${MODULE_CNAME}.prl $$CMD_SEP
+} else {
+    QMAKE_POST_LINK += $$COPY $$QQT_BUILD_DIR/*.prl $$QQT_LIB_DIR $$CMD_SEP
 }
 
 ##write qt_lib_qqtcore.pri
