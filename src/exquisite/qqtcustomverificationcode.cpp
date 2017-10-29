@@ -185,20 +185,16 @@ QQtCustomVerificationCodePrivate::QQtCustomVerificationCodePrivate(QObject* pare
 
 QString QQtCustomVerificationCodePrivate::generateLetter(quint16 paramCount)
 {
-    QString randKey;
-    std::string allowedChars = "abcdfhikmnstuvwxyzABCDEFGHJKLMNPRSTUVWXYZ01245689";
+    QByteArray allowedChars = "abcdfhikmnstuvwxyzABCDEFGHJKLMNPRSTUVWXYZ01245689";
     int randomIndex;
-    std::string outputString = "";
+    QByteArray outputString = "";
     for (uint i = 0; i < paramCount; ++i)
     {
         randomIndex = rand() % allowedChars.length();
         outputString += allowedChars[randomIndex];
     }
-    std::string ss11 = outputString;
-    char* ss = new char[ss11.length() + 1];
-    strcpy(ss, ss11.c_str());
-    randKey = ss;
-    return randKey;
+
+    return QString(outputString);
 }
 
 qint16 QQtCustomVerificationCodePrivate::generateRandom(qint16 paramLow, qint16 paramHigh)
