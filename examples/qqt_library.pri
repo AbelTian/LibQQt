@@ -12,7 +12,7 @@
 #QQT_OUT_BIN = $${QQT_OUT_PWD}/$${DESTDIR}
 #QQT_LIB_PWD = $$BUILDROOT/$$QQT_OUT_BIN
 
-message(Link QQt to $${TARGET} $${QKIT_} \
+message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
     at $${QT_VERSION} $${SYSNAME} $${BUILD} \
     on $${QMAKE_HOST.os})
 
@@ -39,11 +39,11 @@ contains(DEFINES, __DARWIN__) {
 ##install
 ############
 #CONFIG += can_install
-can_install:equals(QKIT_, EMBEDDED) {
+can_install:equals(QKIT_PRIVATE, EMBEDDED) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
-    equals(QKIT_, macOS) {
+    equals(QKIT_PRIVATE, macOS) {
         target.path = /Applications
         INSTALLS += target
     }
@@ -51,7 +51,7 @@ can_install:equals(QKIT_, EMBEDDED) {
 
 #not good to use, some function error
 #CONFIG += qmake_deploy
-qmake_deploy:equals(QKIT_, macOS) {
+qmake_deploy:equals(QKIT_PRIVATE, macOS) {
     QQT_MAJOR_VERSION = 1
     QMAKE_POST_LINK += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
          @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
@@ -64,10 +64,10 @@ qmake_deploy:equals(QKIT_, macOS) {
 ############
 ##config defination
 ############
-equals(QKIT_, macOS) {
+equals(QKIT_PRIVATE, macOS) {
     CONFIG += app_bundle
 }
-equals(QKIT_, Android) {
+equals(QKIT_PRIVATE, Android) {
     CONFIG += mobility
     MOBILITY =
     #DISTFILES += \

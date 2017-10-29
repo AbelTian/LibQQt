@@ -1,5 +1,7 @@
 ################################################
+##qqt_install.pri
 ##install to Qt library
+##need qqt_version.pri
 ################################################
 contains(QMAKE_HOST.os,Windows) {
     SCRIPT_SUFFIX=bat
@@ -20,7 +22,7 @@ contains(QMAKE_HOST.os,Windows) {
     MK_DIR = mkdir -p
     RM = rm -f
     CD = cd
-    LN = ln -s
+    LN = ln -sf
     RM_DIR = rm -rf
 }
 ################################################
@@ -137,7 +139,7 @@ defineReplace(create_dir_struct) {
     #if it's qt library, don't create
     command =
     !equals(QQT_SDK_DIR , $$[QT_INSTALL_DATA]){
-        !contains(QKIT_, macOS) {
+        !contains(QKIT_PRIVATE, macOS) {
             command += $$MK_DIR $$QQT_INC_DIR $$CMD_SEP
         }
         command += $$MK_DIR $$QQT_LIB_DIR $$CMD_SEP
@@ -163,30 +165,35 @@ defineReplace(create_mac_sdk){
     #need cd framework root
     #QQT_BUILD_DIR MODULE_NAME QQT_MAJOR_VERSION
     module_name = $$lower($$MODULE_NAME)
-    QQT_BUNDLE_CUR_DIR   = Versions/$${QQT_MAJOR_VERSION}
-    QQT_BUNDLE_INC_DIR   = $${QQT_BUNDLE_CUR_DIR}/Headers
-    QQT_BUNDLE_RES_DIR   = $${QQT_BUNDLE_CUR_DIR}/Resources
-    QQT_BUNDLE_EXE_FILE  = $${QQT_BUNDLE_CUR_DIR}/$${MODULE_NAME}
+    QQT_BUNDLE_VER_DIR   = Versions/$${QQT_MAJOR_VERSION}
+    QQT_BUNDLE_CUR_DIR   = Versions/Current
+    QQT_BUNDLE_INC_DIR   = $${QQT_BUNDLE_VER_DIR}/Headers
+    QQT_BUNDLE_RES_DIR   = $${QQT_BUNDLE_VER_DIR}/Resources
+    QQT_BUNDLE_EXE_FILE  = $${QQT_BUNDLE_VER_DIR}/$${MODULE_NAME}
 
-    QQT_BUNDLE_CUR_LINK  = Versions/Current
+    QQT_BUNDLE_CUR_INC_DIR   = $${QQT_BUNDLE_CUR_DIR}/Headers
+    QQT_BUNDLE_CUR_RES_DIR   = $${QQT_BUNDLE_CUR_DIR}/Resources
+    QQT_BUNDLE_CUR_EXE_FILE  = $${QQT_BUNDLE_CUR_DIR}/$${MODULE_NAME}
+
+    QQT_BUNDLE_CUR_LINK  = Current
     QQT_BUNDLE_INC_LINK  = Headers
     QQT_BUNDLE_RES_LINK  = Resources
     QQT_BUNDLE_EXE_LINK  = $${MODULE_NAME}
 
     command =
-    command += $$MK_DIR $$QQT_BUNDLE_CUR_DIR $$CMD_SEP
+    command += $$MK_DIR $$QQT_BUNDLE_VER_DIR $$CMD_SEP
     command += $$MK_DIR $$QQT_BUNDLE_INC_DIR $$CMD_SEP
     #copy lib
-    command += $$COPY_DIR $$QQT_BUILD_DIR/$${MODULE_NAME}.framework/$${QQT_BUNDLE_CUR_DIR}/* $$QQT_BUNDLE_CUR_DIR $$CMD_SEP
+    command += $$COPY_DIR $$QQT_BUILD_DIR/$${MODULE_NAME}.framework/$${QQT_BUNDLE_VER_DIR}/* $$QQT_BUNDLE_VER_DIR $$CMD_SEP
     #copy header
     command += $$COPY $$HEADERS $$QQT_BUNDLE_INC_DIR $$CMD_SEP
     #link header current resources
-    command += $$CD Versions  $$CMD_SEP
-    command += $$LN $${QQT_MAJOR_VERSION} Current  $$CMD_SEP
-    command += $$CD ..  $$CMD_SEP
-    command += $$LN $$QQT_BUNDLE_INC_DIR  $${QQT_BUNDLE_INC_LINK} $$CMD_SEP
-    command += $$LN $$QQT_BUNDLE_RES_DIR  $${QQT_BUNDLE_RES_LINK} $$CMD_SEP
-    command += $$LN $$QQT_BUNDLE_EXE_FILE $${QQT_BUNDLE_EXE_LINK}
+    command += $$CD Versions $$CMD_SEP
+    command += $$LN $${QQT_MAJOR_VERSION} $${QQT_BUNDLE_CUR_LINK} $$CMD_SEP
+    command += $$CD .. $$CMD_SEP
+    command += $$LN $$QQT_BUNDLE_CUR_INC_DIR  $${QQT_BUNDLE_INC_LINK} $$CMD_SEP
+    command += $$LN $$QQT_BUNDLE_CUR_RES_DIR  $${QQT_BUNDLE_RES_LINK} $$CMD_SEP
+    command += $$LN $$QQT_BUNDLE_CUR_EXE_FILE $${QQT_BUNDLE_EXE_LINK}
 
     return ($$command)
 }
@@ -206,7 +213,7 @@ defineReplace(create_qt_lib_pri){
     command += echo "QT.$${module_name}.module = $${MODULE_NAME}"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${module_name}.libs = '\$$QT_MODULE_LIB_BASE'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${module_name}.bins = '\$$QT_MODULE_BIN_BASE'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
-    equals(QKIT_, macOS) {
+    equals(QKIT_PRIVATE, macOS) {
         command += echo "QT.$${module_name}.includes = '\$$QT_MODULE_LIB_BASE/$${MODULE_NAME}.framework/Headers'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.frameworks = '\$$QT_MODULE_LIB_BASE'" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.module_config = v2 lib_bundle" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
@@ -235,8 +242,8 @@ defineReplace(create_qt_lib_pri){
 #use to output sdk
 CONFIG += create_sdk
 contains(CONFIG, create_sdk){
-    #test case
-    #system("touch $${PWD}/exquisite/qqtcustomeffectprogressbar.cpp")
+    #debug
+    #system("touch $${PWD}/widgets/qqtapplication.cpp")
     MODULE_NAME=QQt
     QQT_BUILD_DIR=$$OUT_PWD/bin
     #sdk path
@@ -249,13 +256,13 @@ contains(CONFIG, create_sdk){
     post_link += $$CD $$QQT_SDK_DIR $$CMD_SEP
     post_link += $$create_dir_struct()
 
-    contains(QKIT_, macOS) {
+    contains(QKIT_PRIVATE, macOS) {
         post_link += $$MK_DIR lib/$${MODULE_NAME}.framework $$CMD_SEP
         post_link += $$CD lib/$${MODULE_NAME}.framework $$CMD_SEP
         post_link += $$create_mac_sdk() $$CMD_SEP
         post_link += $$CD ../../ $$CMD_SEP
         #create prl
-        post_link += $$COPY $$QQT_BUILD_DIR/lib$${MODULE_NAME}.prl lib/$${MODULE_NAME}.prl $$CMD_SEP
+        post_link += $$COPY $$QQT_BUILD_DIR/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl lib/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl $$CMD_SEP
     } else {
         post_link += $$create_linux_sdk() $$CMD_SEP
         post_link += $$COPY $$QQT_BUILD_DIR/*.prl lib $$CMD_SEP

@@ -13,13 +13,13 @@ win32 {
     HEADERS += $$PWD/qqtwin.h
 }
 unix {
-    equals(QKIT_, macOS) {
+    equals(QKIT_PRIVATE, macOS) {
         HEADERS += $$PWD/qqtdarwin.h
-    } else: contains(QKIT_, LINUX|LINUX64) {
+    } else: contains(QKIT_PRIVATE, LINUX|LINUX64) {
         HEADERS += $$PWD/qqtlinux.h
     }
 }
-contains (QKIT_, ANDROID||ANDROIDX86) {
+contains (QKIT_PRIVATE, ANDROID||ANDROIDX86) {
     HEADERS += $$PWD/qqtandroid.h
 }
 HEADERS += $$PWD/qqt.h \
@@ -146,7 +146,7 @@ FORMS += \
 #dmmu preview
 #arm mips
 #TODO: +wince +android +ios +macOS +win +linux
-equals(QKIT_, EMBEDDED) {
+equals(QKIT_PRIVATE, EMBEDDED) {
     SOURCES += $$PWD/dmmu/dmmu.c
     HEADERS += $$PWD/dmmu/dmmu.h \
                 $$PWD/dmmu/jz_cim.h \
@@ -264,7 +264,7 @@ contains (DEFINES, __BLUETOOTH__) {
 #ethnet(+wifi) manager
 #arm mips
 #TODO: +wince +android +ios +macOS? +win? +linux?
-equals(QKIT_, EMBEDDED) {
+equals(QKIT_PRIVATE, EMBEDDED) {
     SOURCES += $$PWD/network/qqtethenetmanager.cpp
     HEADERS += $$PWD/network/qqtethenetmanager.h
     SOURCES += $$PWD/frame/qqtwifiwidget.cpp

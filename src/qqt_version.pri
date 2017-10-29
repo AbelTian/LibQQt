@@ -1,3 +1,8 @@
+#################################################################
+##project QQt version pri
+#################################################################
+##qqt_library qqt_install all need this pri
+
 QQT_MAJOR_VERSION = 1
 QQT_MINOR_VERSION = 6
 QQT_PATCH_VERSION = 0

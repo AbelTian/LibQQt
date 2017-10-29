@@ -9,18 +9,23 @@
 TARGET = QQt
 TEMPLATE = lib
 
+################################################
+##project config definition
+##need QKIT to compitible with some occasion
+################################################
 ##default build dll but some occasion
 CONFIG += dll
 #QQt library export (DLL) static lib is not needed
 DEFINES += QQT_LIBRARY
 ##special lib lib_bundle/staticlib
-equals(QKIT_, macOS) {
+QKIT_PRIVATE = $$(QKIT)
+equals(QKIT_PRIVATE, macOS) {
     CONFIG += lib_bundle
-} else:equals(QKIT_, iOS) {
+} else:equals(QKIT_PRIVATE, iOS) {
     DEFINES -= QQT_LIBRARY
     CONFIG -= dll
     CONFIG += staticlib
-} else:equals(QKIT_, WIN) {
+} else:equals(QKIT_PRIVATE, WIN) {
     #when Qt is static by mingw32 building 5.9.1
     equals(QT_VERSION, 5.9.1){
         DEFINES -= QQT_LIBRARY
@@ -30,13 +35,23 @@ equals(QKIT_, macOS) {
 }
 #create prl
 CONFIG += create_prl
-CONFIG += build_pass
+#CONFIG += build_pass
 build_pass:CONFIG(debug, debug|release) {
     #troublesome
     #win32: TARGET = $$join(TARGET,,,d)
 }
 #CONFIG += debug_and_release
 #CONFIG += build_all
+
+#################################################################
+##project Headers
+#################################################################
+include ($$PWD/qqt_header.pri)
+
+#################################################################
+##project source
+#################################################################
+include ($$PWD/qqt_source.pri)
 
 #################################################################
 ##project version
@@ -64,21 +79,20 @@ win32 {
 }
 
 
-#################################################################
-##project source
-#################################################################
-include ($$PWD/qqt_header.pri)
-include ($$PWD/qqt_source.pri)
-################################################
-##install to Qt library
-################################################
-include ($$PWD/qqt_install.pri)
+
 
 ################################################
 ##project resource
 ################################################
 RESOURCES += \
     qqt.qrc
+
+
+################################################
+##install to Qt library
+################################################
+include ($$PWD/qqt_install.pri)
+
 
 #################################################################
 ##project environ

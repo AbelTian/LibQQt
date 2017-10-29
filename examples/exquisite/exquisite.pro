@@ -27,11 +27,11 @@ contains (CONFIG, BUILD_SRC) {
 ##install
 ############
 #CONFIG += can_install
-can_install:equals(QKIT_, EMBEDDED) {
+can_install:equals(QKIT_PRIVATE, EMBEDDED) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
-    equals(QKIT_, macOS) {
+    equals(QKIT_PRIVATE, macOS) {
         target.path = /Applications
         INSTALLS += target
     }

@@ -19,13 +19,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 #################################################################
 ##definition and configration
+##need QKIT
 #################################################################
 
 ##Qt version
 QT += core sql network gui xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+##target arch type
 #You need define a env variable QKIT=XX
+QKIT_PRIVATE = $$(QKIT)
 #处理文件内平台小差异
 #EMBEDDED __EMBEDDED_LINUX__
 #MIPS __MIPS_LINUX__
@@ -37,38 +40,36 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #macOS __DARWIN__
 #ANDROID __ANDROID__
 #ANDROIDX86 __ANDROIDX86__
-##target arch type
-QKIT_ = $$(QKIT)
-message(Build $${TARGET} to $${QKIT_})
-equals(QKIT_, EMBEDDED) {
+message(Build $${TARGET} to $${QKIT_PRIVATE})
+equals(QKIT_PRIVATE, EMBEDDED) {
     #embedded common macro
     DEFINES += __EMBEDDED_LINUX__
-} else:equals(QKIT_, ARM32) {
+} else:equals(QKIT_PRIVATE, ARM32) {
     DEFINES += __EMBEDDED_LINUX__
     #arm32 private
     DEFINES += __ARM_LINUX__
-} else:equals(QKIT_, MIPS32) {
+} else:equals(QKIT_PRIVATE, MIPS32) {
     QT += multimedia
     DEFINES += __EMBEDDED_LINUX__
     #mips32 private
     DEFINES += __MIPS_LINUX__
-} else:equals(QKIT_, LINUX) {
+} else:equals(QKIT_PRIVATE, LINUX) {
     DEFINES += __LINUX__
-} else:equals(QKIT_, LINUX64) {
+} else:equals(QKIT_PRIVATE, LINUX64) {
     DEFINES += __LINUX64__
-} else:equals(QKIT_, WIN) {
+} else:equals(QKIT_PRIVATE, WIN) {
     DEFINES += __WIN__
-} else:equals(QKIT_, WIN64) {
+} else:equals(QKIT_PRIVATE, WIN64) {
     DEFINES += __WIN64__
-} else:equals(QKIT_, macOS) {
+} else:equals(QKIT_PRIVATE, macOS) {
     DEFINES += __DARWIN__
-} else:equals(QKIT_, iOS) {
+} else:equals(QKIT_PRIVATE, iOS) {
     DEFINES += __IOS__
-} else:equals(QKIT_, iOSSimulator) {
+} else:equals(QKIT_PRIVATE, iOSSimulator) {
     DEFINES += __IOS__
-} else:equals(QKIT_, ANDROID) {
+} else:equals(QKIT_PRIVATE, ANDROID) {
     DEFINES += __ANDROID__
-} else:equals(QKIT_, ANDROIDX86) {
+} else:equals(QKIT_PRIVATE, ANDROIDX86) {
     DEFINES += __ANDROID__
     #todo:no customplot word printer
 }
@@ -130,25 +131,25 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 CONFIG(debug, debug|profile|release):BUILD=Debug
 CONFIG(profile, debug|profile|release):BUILD=Profile
 CONFIG(release, debug|profile|release):BUILD=Release
-equals(QKIT_, MIPS32) {
+equals(QKIT_PRIVATE, MIPS32) {
     SYSNAME = Mips32
-} else:equals(QKIT_, LINUX) {
+} else:equals(QKIT_PRIVATE, LINUX) {
     SYSNAME = Linux
-} else:equals(QKIT_, LINUX64) {
+} else:equals(QKIT_PRIVATE, LINUX64) {
     SYSNAME = Linux64
-} else:equals(QKIT_, WIN) {
+} else:equals(QKIT_PRIVATE, WIN) {
     SYSNAME = Windows
-} else:equals(QKIT_, WIN64) {
+} else:equals(QKIT_PRIVATE, WIN64) {
     SYSNAME = Win64
-} else:equals(QKIT_, macOS) {
+} else:equals(QKIT_PRIVATE, macOS) {
     SYSNAME = MacOS
-} else:equals(QKIT_, iOS) {
+} else:equals(QKIT_PRIVATE, iOS) {
     SYSNAME = iOS
-} else:equals(QKIT_, iOSSimulator) {
+} else:equals(QKIT_PRIVATE, iOSSimulator) {
     SYSNAME = iOS-simulator
-} else:equals(QKIT_, ANDROID) {
+} else:equals(QKIT_PRIVATE, ANDROID) {
     SYSNAME = Android
-} else:equals(QKIT_, ANDROIDX86) {
+} else:equals(QKIT_PRIVATE, ANDROIDX86) {
     SYSNAME = Android_x86
 }
 message(Build $${TARGET} at $${QT_VERSION} $${SYSNAME} $${BUILD})
@@ -228,14 +229,14 @@ contains (DEFINES, __CPP11__) {
 #if you use printsupport , open this annotation
 DEFINES += __PRINTSUPPORT__
 #ios android can't support this function now
-contains(QKIT_, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
+contains(QKIT_PRIVATE, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
     DEFINES -= __PRINTSUPPORT__
 }
 contains (DEFINES, __PRINTSUPPORT__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
     #if you use qcustomplot, open this annotation
     DEFINES += __CUSTOMPLOT__
-    contains(QKIT_, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
+    contains(QKIT_PRIVATE, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
         DEFINES -= __CUSTOMPLOT__
     }
 }
@@ -251,7 +252,7 @@ contains (DEFINES, __EXQUISITE__) {
 ##################WebSocket Module###############################
 #if you use QWebSocketSupport , open this annotation
 #DEFINES += __WEBSOCKETSUPPORT__
-equals(QKIT_, macOS):DEFINES += __WEBSOCKETSUPPORT__
+equals(QKIT_PRIVATE, macOS):DEFINES += __WEBSOCKETSUPPORT__
 contains (DEFINES, __WEBSOCKETSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
     #TODO: QT += webkit
@@ -262,14 +263,14 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
 ##################################################################
 ##library
 ##################################################################
-equals (QKIT_, iOSSimulator):{
+equals (QKIT_PRIVATE, iOSSimulator):{
     #error need
     #QMAKE_CXXFLAGS +=-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
 }
 win32 {
     LIBS += -luser32
 }else: unix {
-    equals(QKIT_, macOS) {
+    equals(QKIT_PRIVATE, macOS) {
         #min macosx target
         QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
         #deperated
@@ -279,7 +280,7 @@ win32 {
         #LIBS += -F$${MACOSXSDK}/System/Library/Frameworks
         #LIBS += -L$${MACOSXSDK}/usr/lib
         LIBS += -framework DiskArbitration -framework Cocoa -framework IOKit
-    } else:contains(QKIT_, iOS|iOSSimulator) {
+    } else:contains(QKIT_PRIVATE, iOS|iOSSimulator) {
         LIBS += -l DiskArbitration -l Cocoa -l IOKit
     }
 }

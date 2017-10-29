@@ -39,6 +39,7 @@ void QQTProgressBar::setValue(int value)
     int w = ui->widgetBack->width() * (m_value - m_min) / (m_max - m_min);
     int h = ui->widgetBack->height();
     ui->widthTrunk->setFixedSize(w, h);
+
     //pline() << width() << ui->widgetBack->width() << w << h;
 }
 
