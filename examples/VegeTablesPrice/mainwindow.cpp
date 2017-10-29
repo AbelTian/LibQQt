@@ -1,16 +1,13 @@
-#include "dialog.h"
-#include "ui_dialog.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
-#include "QtWebView"
 #include "QDebug"
 
-Dialog::Dialog(QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::Dialog)
+MainWindow::MainWindow(QWidget* parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    QtWebView::initialize();
 
     QStringList vl;
     vl << "西葫芦";
@@ -47,15 +44,17 @@ Dialog::Dialog(QWidget* parent) :
     ui->lw->setCurrentRow(0);
 }
 
-Dialog::~Dialog()
+MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-void Dialog::currentItemChanged(QListWidgetItem* cur, QListWidgetItem* prev)
+void MainWindow::currentItemChanged(QListWidgetItem* cur, QListWidgetItem* prev)
 {
     qDebug() << cur << prev;
+    if (!cur)
+        return;
+
     QString url = QString("http://www.baidu.com/s?wd=%1%2").arg(cur->text()).arg("价格");
-    //ui->web->load(QUrl(url));
 
 }
