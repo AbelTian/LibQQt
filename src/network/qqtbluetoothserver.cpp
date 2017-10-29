@@ -2,7 +2,7 @@
 #include "qqtnetwork.h"
 #include "qqtbluetoothclient.h"
 
-QQtBluetoothServer::QQtBluetoothServer(QBluetoothServiceInfo::Protocol serverType, QObject *parent) : QBluetoothServer(serverType, parent)
+QQtBluetoothServer::QQtBluetoothServer(QBluetoothServiceInfo::Protocol serverType, QObject* parent) : QBluetoothServer(serverType, parent)
 {
     connect(this, SIGNAL(newConnection()),
             this, SLOT(comingNewConnection()));
@@ -16,7 +16,7 @@ QQtBluetoothServer::~QQtBluetoothServer()
 
 void QQtBluetoothServer::comingNewConnection()
 {
-    if(!hasPendingConnections())
+    if (!hasPendingConnections())
         return;
 
     QBluetoothSocket* comingSocket = nextPendingConnection();
@@ -26,23 +26,24 @@ void QQtBluetoothServer::comingNewConnection()
     clientSocket->setSocketDescriptor(comingSocket->socketDescriptor(), QBluetoothServiceInfo::RfcommProtocol);
 }
 
-void QQtBluetoothServer::installProtocol(QQTProtocol *stack)
+void QQtBluetoothServer::installProtocol(QQTProtocol* stack)
 {
-    if(m_protocol)
+    if (m_protocol)
         return;
 
     m_protocol = stack;
 }
 
-void QQtBluetoothServer::uninstallProtocol(QQTProtocol *stack)
+void QQtBluetoothServer::uninstallProtocol(QQTProtocol* stack)
 {
-    if(!m_protocol)
+    Q_UNUSED(stack)
+    if (!m_protocol)
         return;
 
     m_protocol = NULL;
 }
 
-QQTProtocol *QQtBluetoothServer::installedProtocol()
+QQTProtocol* QQtBluetoothServer::installedProtocol()
 {
     return m_protocol;
 }

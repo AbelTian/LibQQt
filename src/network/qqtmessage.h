@@ -7,11 +7,11 @@
 /**
  * @brief 语法类 定义报文格式
  */
-class QQTSHARED_EXPORT QQTMessage : public QObject
+class QQTSHARED_EXPORT QQtMessage : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQTMessage(QObject *parent = 0) : QObject(parent) {}
+    explicit QQtMessage(QObject* parent = 0) : QObject(parent) {}
 
 public:
     /**
@@ -19,7 +19,7 @@ public:
      * @param m
      * @param l
      */
-    virtual void parser(const QByteArray &l) = 0;
+    virtual void parser(const QByteArray& l) = 0;
     /**
      * @brief 将报文组装为流
      * @param l

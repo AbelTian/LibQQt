@@ -10,7 +10,7 @@ class QQTSHARED_EXPORT QQTServer : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit QQTServer(QObject *parent = 0);
+    explicit QQTServer(QObject* parent = 0);
     ~QQTServer();
 
     void installProtocol(QQTProtocol* stack);
@@ -20,7 +20,7 @@ public:
 signals:
     // QTcpServer interface
 protected:
-    void incomingConnection(int handle);
+    virtual void incomingConnection(qintptr handle) override;
 private:
     QQTProtocol* m_protocol;
 };

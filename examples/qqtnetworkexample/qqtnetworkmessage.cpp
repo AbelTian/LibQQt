@@ -2,7 +2,7 @@
 #include "qqtcore.h"
 #include "qqtnetwork.h"
 
-QQTNetworkMessage::QQTNetworkMessage(QObject *parent) : QQTMessage(parent)
+QQTNetworkMessage::QQTNetworkMessage(QObject *parent) : QQtMessage(parent)
 {
     m_Head = _TCPCMD_TAGHEAD;
     m_Size = m_Cmd = m_Uid = m_Sum = 0;

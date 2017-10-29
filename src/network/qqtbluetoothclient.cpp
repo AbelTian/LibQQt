@@ -52,6 +52,7 @@ void QQtBluetoothClient::installProtocol(QQTProtocol* stack)
 
 void QQtBluetoothClient::uninstallProtocol(QQTProtocol* stack)
 {
+    Q_UNUSED(stack)
     if (!m_protocol)
         return;
 
@@ -176,6 +177,7 @@ void QQtBluetoothClient::socketDisconnect()
 
 void QQtBluetoothClient::updateProgress(qint64 bytes)
 {
+    Q_UNUSED(bytes)
     //pline() << bytes;
 }
 

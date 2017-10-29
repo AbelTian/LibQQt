@@ -2,7 +2,7 @@
 #include "qqtcore.h"
 
 QQTSerialMessage::QQTSerialMessage(QObject *parent) :
-    QQTMessage(parent)
+    QQtMessage(parent)
 {
     m_Head = _SERIAL_HEAD;
     m_Size = m_Cmd = m_Sum = 0;

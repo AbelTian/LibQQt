@@ -13,7 +13,7 @@ class QQTSHARED_EXPORT QQTProtocol : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQTProtocol(QObject *parent = 0);
+    explicit QQTProtocol(QObject* parent = 0);
 
 signals:
     qint64 write(const QByteArray& l);
@@ -30,13 +30,13 @@ public:
      * @param 接收到的数据段
      * @return 按照协议解析到的数据长度 可用，继续接收，丢弃，粘包。
      */
-    virtual quint16 splitter(const QByteArray &s) { return 0; }
+    virtual quint16 splitter(const QByteArray&) { return 0; }
     /**
      * @brief 语义解析器
      * @param 数据包
      * @return 0 no dispatched(others) 1 dispatched(own)
      */
-    virtual bool dispatcher(const QByteArray &m) { return 0; }
+    virtual bool dispatcher(const QByteArray&) { return 0; }
 };
 
 #endif // QQTPROTOCOL_H

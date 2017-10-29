@@ -6,7 +6,7 @@
 #define _TCPCMD_TAGHEAD                   0xAA55
 #define _TCPCMD_TAGTAIL                   0xCC33C33C
 
-class QQTNetworkMessage : public QQTMessage
+class QQTNetworkMessage : public QQtMessage
 {
     Q_OBJECT
 public:
@@ -32,7 +32,7 @@ signals:
 
 public slots:
 
-    // QQTMessage interface
+    // QQtMessage interface
 public:
 
     void parser(const QByteArray &l) override;

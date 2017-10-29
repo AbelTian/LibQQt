@@ -57,6 +57,8 @@ void QQTClient::installProtocol(QQTProtocol* stack)
 
 void QQTClient::uninstallProtocol(QQTProtocol* stack)
 {
+    Q_UNUSED(stack)
+
     if (!m_protocol)
         return;
 
@@ -190,6 +192,7 @@ void QQTClient::socketDisconnect()
 
 void QQTClient::updateProgress(qint64 bytes)
 {
+    Q_UNUSED(bytes)
     //pline() << bytes;
 }
 

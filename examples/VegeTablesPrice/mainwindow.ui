@@ -32,7 +32,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QTableWidget" name="tableWidget"/>
+     <widget class="QTableWidget" name="tb"/>
     </item>
    </layout>
   </widget>

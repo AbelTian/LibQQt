@@ -9,12 +9,8 @@
 #FDL1.3 GPLv3 LGPLv2.1 PreviewCommercial
 #2017年10月29日09:16:41
 #-------------------------------------------------
-SOURCES= \
-    $$PWD/network/qqtnetworkclient.cpp \
-    $$PWD/network/qqtwebclient.cpp
-HEADERS= \
-    $$PWD/network/qqtnetworkclient.h \
-    $$PWD/network/qqtwebclient.h
+SOURCES +=
+HEADERS +=
 
 
 #root dir
@@ -185,6 +181,13 @@ contains (DEFINES, __PRINTSUPPORT__) {
 }
 
 #network
+#udpsocket
+SOURCES += \
+    $$PWD/network/qqtudpclient.cpp \
+    $$PWD/network/qqtudpserver.cpp
+HEADERS += \
+    $$PWD/network/qqtudpclient.h \
+    $$PWD/network/qqtudpserver.h
 #tcpsocket
 SOURCES += \
     $$PWD/network/qqtclient.cpp \
@@ -362,13 +365,26 @@ contains(DEFINES, __QTSOAP__) {
 }
 
 
-contains (DEFINES, __WEBSOCKETSUPPORT__) {
+contains (DEFINES, __NETWORKSUPPORT__) {
     SOURCES += \
+        $$PWD/network/qqtnetworkclient.cpp \
+        $$PWD/network/qqtnetworkserver.cpp \
         $$PWD/network/qqtftpprotocol.cpp \
         $$PWD/network/qqthttpprotocol.cpp \
         $$PWD/network/qqtwebprotocol.cpp
     HEADERS += \
+        $$PWD/network/qqtnetworkclient.h \
+        $$PWD/network/qqtnetworkserver.h \
         $$PWD/network/qqtftpprotocol.h \
         $$PWD/network/qqthttpprotocol.h \
         $$PWD/network/qqtwebprotocol.h
+}
+
+contains (DEFINES, __WEBSOCKETSUPPORT__) {
+    SOURCES += \
+        $$PWD/network/qqtwebclient.cpp \
+        $$PWD/network/qqtwebserver.cpp
+    HEADERS += \
+        $$PWD/network/qqtwebclient.h \
+        $$PWD/network/qqtwebserver.h
 }

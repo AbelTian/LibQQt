@@ -26,6 +26,7 @@ void QQTSerialPort::installProtocol(QQTProtocol* stack)
 
 void QQTSerialPort::uninstallProtocol(QQTProtocol* stack)
 {
+    Q_UNUSED(stack)
     if (!m_protocol)
         return;
 

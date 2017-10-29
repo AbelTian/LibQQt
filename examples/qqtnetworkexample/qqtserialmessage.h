@@ -7,7 +7,7 @@
 #define _SERIAL_HEAD            0xAA55
 #define _SERIAL_TAIL            0xCC33
 
-class QQTSerialMessage : public QQTMessage
+class QQTSerialMessage : public QQtMessage
 {
 public:
     explicit QQTSerialMessage(QObject* parent = 0);
