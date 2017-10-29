@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 #include QQt's header (add QQt header to includepath)
 include(../../src/qqt_header.pri)
+include(../../src/qqt_version.pri)
 
 #CONFIG += BUILD_SRC
 contains (CONFIG, BUILD_SRC) {
@@ -23,7 +24,7 @@ contains (CONFIG, BUILD_SRC) {
     #include(../../src/qqt.pri)
 } else {
     #if you want to link QQt library
-    include(../qqt_library.pri)
+    include(../qqtframe2/qqt_library.pri)
 }
 
 

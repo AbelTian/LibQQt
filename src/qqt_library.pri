@@ -1,8 +1,8 @@
 ################################################
 ##qqt_library.pri
-##QQt based app contains qqt library
-##need qqt_version.pri
-##don't modify this pri file, if you cache any issure, please make issure
+##QQt based app please include this pri to link qqt library
+##dependence qqt_version.pri qqt_header.pri
+##don't modify this pri file, if you catch any issure, please make issure
 ##https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0
 ##2017年10月29日08:54:28
 ################################################
@@ -12,7 +12,7 @@ message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
     on $${QMAKE_HOST.os})
 
 QQT_LIB_PWD = $$PWD/../sdk/lib
-message (Linke QQt from: $$QQT_LIB_PWD)
+message (Link QQt from: $$QQT_LIB_PWD)
 
 contains(DEFINES, __DARWIN__) {
     lessThan(QT_MAJOR_VERSION, 5):{

@@ -35,3 +35,4 @@ SUBDIRS += examples/qqtframe3
 #need QtSoap - WebSupport
 #SUBDIRS += examples/easter
 #SUBDIRS += examples/soapQQtOnline
+#SUBDIRS += examples/VegeTablesPrice

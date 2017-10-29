@@ -90,6 +90,7 @@ RESOURCES += \
 
 ################################################
 ##install to Qt library
+##in this section, I use QMAKE_POST_LINK, it won't work until project source changed
 ################################################
 include ($$PWD/qqt_install.pri)
 

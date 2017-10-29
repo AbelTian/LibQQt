@@ -2,7 +2,7 @@
 ##qqt_install.pri
 ##install to Qt library
 ##please don't modify this pri
-##need qqt_version.pri
+##need qqt_version.pri qqt_header.pri qqt_source.pri
 ################################################
 contains(QMAKE_HOST.os,Windows) {
     SCRIPT_SUFFIX=bat
@@ -129,14 +129,9 @@ defineTest(write_file) {
 
 ################################################
 ##QQt install functions
+##variable can be private and default inherit
 ################################################
 defineReplace(create_dir_struct) {
-    QQT_INC_DIR=include/$${MODULE_NAME}
-    QQT_LIB_DIR=lib
-    QQT_CMAKE_DIR=lib/cmake/$${MODULE_NAME}
-    QQT_PRI_PATH=mkspecs/modules
-    QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${module_name}.pri
-
     #if it's qt library, don't create
     command =
     !equals(QQT_SDK_DIR , $$[QT_INSTALL_DATA]){
@@ -152,12 +147,10 @@ defineReplace(create_dir_struct) {
 
 defineReplace(create_linux_sdk) {
     #need cd sdk root
-    #need MODULE_NAME
-    module_name = $$lower($$MODULE_NAME)
 
     command =
-    command += $$COPY $$HEADERS $$QQT_INC_DIR $$CMD_SEP
-    command += $$COPY_DIR $$QQT_BUILD_DIR/* $$QQT_LIB_DIR
+    command += $$COPY $$HEADERS $${QQT_INC_DIR} $$CMD_SEP
+    command += $$COPY_DIR $${QQT_BUILD_DIR}/* $${QQT_LIB_DIR}
 
     return ($$command)
 }
@@ -240,16 +233,24 @@ defineReplace(create_qt_lib_pri){
 ################################################
 ##QQt install workflow
 ################################################
+#debug
+system("touch $${PWD}/widgets/qqtapplication.cpp")
 #use to output sdk
 CONFIG += create_sdk
 contains(CONFIG, create_sdk){
-    #debug
-    #system("touch $${PWD}/widgets/qqtapplication.cpp")
     MODULE_NAME=QQt
+    module_name = $$lower($${MODULE_NAME})
+
     QQT_BUILD_DIR=$$OUT_PWD/bin
     #sdk path
     QQT_SDK_DIR = $$PWD/../sdk
     message(QQt sdk install here:$${QQT_SDK_DIR})
+
+    QQT_INC_DIR = include/$${MODULE_NAME}
+    QQT_LIB_DIR = lib
+    QQT_CMAKE_DIR=lib/cmake/$${MODULE_NAME}
+    QQT_PRI_PATH=mkspecs/modules
+    QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${module_name}.pri
 
     post_link =
     post_link += $$RM_DIR $$QQT_SDK_DIR $$CMD_SEP
@@ -258,6 +259,7 @@ contains(CONFIG, create_sdk){
     post_link += $$create_dir_struct()
 
     contains(QKIT_PRIVATE, macOS) {
+        message(create QQt mac bundle framework)
         post_link += $$MK_DIR lib/$${MODULE_NAME}.framework $$CMD_SEP
         post_link += $$CD lib/$${MODULE_NAME}.framework $$CMD_SEP
         post_link += $$create_mac_sdk() $$CMD_SEP
@@ -265,6 +267,7 @@ contains(CONFIG, create_sdk){
         #create prl
         post_link += $$COPY $$QQT_BUILD_DIR/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl lib/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl $$CMD_SEP
     } else {
+        message(create QQt linux struct library)
         post_link += $$create_linux_sdk() $$CMD_SEP
         post_link += $$COPY $$QQT_BUILD_DIR/*.prl lib $$CMD_SEP
     }
