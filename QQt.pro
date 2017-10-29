@@ -13,11 +13,9 @@ SUBDIRS += examples/QtBuildTool
 SUBDIRS += examples/QtSdkManager
 SUBDIRS += examples/QQtInstaller
 
-#need QQt installed to Qt library
+#need QQt installed to Qt library or
+#need QQt installed to sdk
 SUBDIRS += examples/qqtframe3
-
-#need bluetooth library
-#SUBDIRS += examples/qqtbluetoothfiletransferserver
 
 #need vlcQt libvlc library
 #SUBDIRS += examples/qqtliveplayer
@@ -25,10 +23,15 @@ SUBDIRS += examples/qqtframe3
 #need ffmpeg library
 #SUBDIRS += examples/qqtffmpegplayer
 
+#need bluetooth library
+#SUBDIRS += examples/qqtbluetoothfiletransferserver
+
 #need webkitwidgets - WebSupport
 #SUBDIRS += examples/qqtftpclient
 #SUBDIRS += examples/qqthttpclient
 #SUBDIRS += examples/qqtwebkit
+
+
 #need QtSoap - WebSupport
 #SUBDIRS += examples/easter
 #SUBDIRS += examples/soapQQtOnline

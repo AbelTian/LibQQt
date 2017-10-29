@@ -1,6 +1,7 @@
 ################################################
 ##qqt_install.pri
 ##install to Qt library
+##please don't modify this pri
 ##need qqt_version.pri
 ################################################
 contains(QMAKE_HOST.os,Windows) {

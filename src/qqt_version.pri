@@ -1,5 +1,6 @@
 #################################################################
 ##project QQt version pri
+##please don't modify this pri
 #################################################################
 ##qqt_library qqt_install all need this pri
 

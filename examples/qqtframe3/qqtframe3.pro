@@ -3,8 +3,6 @@
 # Project created by QtCreator 2017-10-27T12:29:41
 #
 #-------------------------------------------------
-#need QQt.pro CONFIG+=create_sdk support
-
 #QQt source root on your computer
 equals(QMAKE_HOST.os, Darwin) {
     QQT_SOURCE_ROOT = /Users/abel/Develop/a0-develop/a0-qqtfoundation
