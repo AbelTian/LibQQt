@@ -233,7 +233,10 @@ defineReplace(create_qt_lib_pri){
 ################################################
 ##QQt install workflow
 ################################################
-#debug
+#debug.
+#QMAKE_POST_LINK won't work until source changed
+#qmake pro pri prf change won't effect to QMAKE_POST_LINK
+#but I need it before I complete this pri.
 system("touch $${PWD}/widgets/qqtapplication.cpp")
 #use to output sdk
 CONFIG += create_sdk

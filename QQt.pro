@@ -27,12 +27,12 @@ SUBDIRS += examples/VegeTablesPrice
 #need bluetooth library
 #SUBDIRS += examples/qqtbluetoothfiletransferserver
 
+#need QtSoap - WebSupport
+SUBDIRS += examples/easter
+SUBDIRS += examples/soapQQtOnline
+
 #need webkitwidgets - WebSupport
+#webkit webengine
 #SUBDIRS += examples/qqtftpclient
 #SUBDIRS += examples/qqthttpclient
 #SUBDIRS += examples/qqtwebkit
-
-
-#need QtSoap - WebSupport
-#SUBDIRS += examples/easter
-#SUBDIRS += examples/soapQQtOnline

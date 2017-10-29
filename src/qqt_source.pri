@@ -9,8 +9,12 @@
 #FDL1.3 GPLv3 LGPLv2.1 PreviewCommercial
 #2017年10月29日09:16:41
 #-------------------------------------------------
-SOURCES=
-HEADERS=
+SOURCES= \
+    $$PWD/network/qqtnetworkclient.cpp \
+    $$PWD/network/qqtwebclient.cpp
+HEADERS= \
+    $$PWD/network/qqtnetworkclient.h \
+    $$PWD/network/qqtwebclient.h
 
 
 #root dir
@@ -127,43 +131,6 @@ FORMS += \
 
 
 
-#frame
-SOURCES += \
-    $$PWD/frame/qqtprogressdialog.cpp \
-    $$PWD/frame/qqtpassworddialog.cpp \
-    $$PWD/frame/qqtframe.cpp \
-    $$PWD/frame/qqtdialog.cpp \
-    $$PWD/frame/qqtmsgbox.cpp \
-    $$PWD/frame/qqtinput.cpp
-HEADERS += \
-    $$PWD/frame/qqtprogressdialog.h \
-    $$PWD/frame/qqtpassworddialog.h \
-    $$PWD/frame/qqtframe.h \
-    $$PWD/frame/qqtdialog.h \
-    $$PWD/frame/qqtmsgbox.h \
-    $$PWD/frame/qqtinput.h
-FORMS += \
-    $$PWD/frame/qqtprogressdialog.ui \
-    $$PWD/frame/qqtpassworddialog.ui \
-    $$PWD/frame/qqtdialog.ui \
-    $$PWD/frame/qqtinput.ui \
-    $$PWD/frame/qqtmsgbox.ui
-
-#dmmu preview
-#arm mips
-#TODO: +wince +android +ios +macOS +win +linux
-equals(QKIT_PRIVATE, EMBEDDED) {
-    SOURCES += $$PWD/dmmu/dmmu.c
-    HEADERS += $$PWD/dmmu/dmmu.h \
-                $$PWD/dmmu/jz_cim.h \
-                $$PWD/dmmu/graphics.h \
-                $$PWD/dmmu/hal.h
-    SOURCES += $$PWD/frame/qqtpreviewwidget.cpp
-    HEADERS += $$PWD/frame/qqtpreviewwidget.h
-    FORMS += $$PWD/frame/qqtpreviewwidget.ui
-}
-
-
 #multimedia
 #arm mips
 #TODO: +wince +android +ios +macOS +win +linux
@@ -171,6 +138,7 @@ SOURCES += $$PWD/multimedia/qqtmplayer.cpp
 HEADERS += $$PWD/multimedia/qqtmplayer.h
 
 #pluginwatcher
+#TODO: macOS dump
 contains (DEFINES, QQT_LIBRARY) {
     DEFINES += BUILD_QDEVICEWATCHER_LIB
 }
@@ -278,6 +246,43 @@ equals(QKIT_PRIVATE, EMBEDDED) {
     FORMS += $$PWD/frame/qqtwifiwidget.ui
 }
 
+#dmmu preview
+#arm mips
+#TODO: +wince +android +ios +macOS +win +linux
+equals(QKIT_PRIVATE, EMBEDDED) {
+    SOURCES += $$PWD/dmmu/dmmu.c
+    HEADERS += $$PWD/dmmu/dmmu.h \
+                $$PWD/dmmu/jz_cim.h \
+                $$PWD/dmmu/graphics.h \
+                $$PWD/dmmu/hal.h
+    SOURCES += $$PWD/frame/qqtpreviewwidget.cpp
+    HEADERS += $$PWD/frame/qqtpreviewwidget.h
+    FORMS += $$PWD/frame/qqtpreviewwidget.ui
+}
+
+#frame
+SOURCES += \
+    $$PWD/frame/qqtprogressdialog.cpp \
+    $$PWD/frame/qqtpassworddialog.cpp \
+    $$PWD/frame/qqtframe.cpp \
+    $$PWD/frame/qqtdialog.cpp \
+    $$PWD/frame/qqtmsgbox.cpp \
+    $$PWD/frame/qqtinput.cpp
+HEADERS += \
+    $$PWD/frame/qqtprogressdialog.h \
+    $$PWD/frame/qqtpassworddialog.h \
+    $$PWD/frame/qqtframe.h \
+    $$PWD/frame/qqtdialog.h \
+    $$PWD/frame/qqtmsgbox.h \
+    $$PWD/frame/qqtinput.h
+FORMS += \
+    $$PWD/frame/qqtprogressdialog.ui \
+    $$PWD/frame/qqtpassworddialog.ui \
+    $$PWD/frame/qqtdialog.ui \
+    $$PWD/frame/qqtinput.ui \
+    $$PWD/frame/qqtmsgbox.ui
+
+
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
     SOURCES += \
@@ -310,57 +315,60 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtshadoweffectwidget.h \
         $$PWD/exquisite/qqtpopeffectdialog.h \
         $$PWD/exquisite/qqtcustomeffectprogressbar.h
-    #qrcode
-    #DEFINES += __QRENCODE__
-    contains (DEFINES, __QRENCODE__) {
-        HEADERS += \
-            $$PWD/qrencode/bitstream.h \
-            $$PWD/qrencode/config.h \
-            $$PWD/qrencode/mask.h \
-            $$PWD/qrencode/mmask.h \
-            $$PWD/qrencode/mqrspec.h \
-            $$PWD/qrencode/qrencode.h \
-            $$PWD/qrencode/qrencode_inner.h \
-            $$PWD/qrencode/qrinput.h \
-            $$PWD/qrencode/qrspec.h \
-            $$PWD/qrencode/rscode.h \
-            $$PWD/qrencode/split.h
+}
 
-        SOURCES += \
-            $$PWD/qrencode/bitstream.c \
-            $$PWD/qrencode/mask.c \
-            $$PWD/qrencode/mmask.c \
-            $$PWD/qrencode/mqrspec.c \
-            $$PWD/qrencode/qrencode.c \
-            $$PWD/qrencode/qrinput.c \
-            $$PWD/qrencode/qrspec.c \
-            $$PWD/qrencode/rscode.c \
-            $$PWD/qrencode/split.c
+#qrcode
+#DEFINES += __QRENCODE__
+contains (DEFINES, __QRENCODE__) {
+    HEADERS += \
+        $$PWD/qrencode/bitstream.h \
+        $$PWD/qrencode/config.h \
+        $$PWD/qrencode/mask.h \
+        $$PWD/qrencode/mmask.h \
+        $$PWD/qrencode/mqrspec.h \
+        $$PWD/qrencode/qrencode.h \
+        $$PWD/qrencode/qrencode_inner.h \
+        $$PWD/qrencode/qrinput.h \
+        $$PWD/qrencode/qrspec.h \
+        $$PWD/qrencode/rscode.h \
+        $$PWD/qrencode/split.h
 
-        HEADERS += \
-            $$PWD/exquisite/qqtcustomqrencodewidget.h
-        SOURCES += \
-            $$PWD/exquisite/qqtcustomqrencodewidget.cpp
-    }
+    SOURCES += \
+        $$PWD/qrencode/bitstream.c \
+        $$PWD/qrencode/mask.c \
+        $$PWD/qrencode/mmask.c \
+        $$PWD/qrencode/mqrspec.c \
+        $$PWD/qrencode/qrencode.c \
+        $$PWD/qrencode/qrinput.c \
+        $$PWD/qrencode/qrspec.c \
+        $$PWD/qrencode/rscode.c \
+        $$PWD/qrencode/split.c
+
+    HEADERS += \
+        $$PWD/exquisite/qqtcustomqrencodewidget.h
+    SOURCES += \
+        $$PWD/exquisite/qqtcustomqrencodewidget.cpp
 }
 
 ##websocket
+contains(DEFINES, __QTSOAP__) {
+    contains (DEFINES, QQT_LIBRARY) {
+        DEFINES += QT_QTSOAP_LIBRARY
+    }
+    SOURCES += \
+        $$PWD/soap/qtsoap.cpp
+    HEADERS += \
+        $$PWD/soap/qtsoap.h
+}
+
+
 contains (DEFINES, __WEBSOCKETSUPPORT__) {
-    SOURCES += $$PWD/network/qqtwebclient.cpp \
+    SOURCES += \
         $$PWD/network/qqtftpprotocol.cpp \
         $$PWD/network/qqthttpprotocol.cpp \
         $$PWD/network/qqtwebprotocol.cpp
-    HEADERS += $$PWD/network/qqtwebclient.h \
+    HEADERS += \
         $$PWD/network/qqtftpprotocol.h \
         $$PWD/network/qqthttpprotocol.h \
         $$PWD/network/qqtwebprotocol.h
-    contains(DEFINES, __QTSOAP__) {
-        contains (DEFINES, QQT_LIBRARY) {
-            DEFINES += QT_QTSOAP_LIBRARY
-        }
-        SOURCES += \
-            $$PWD/soap/qtsoap.cpp
-        HEADERS += \
-            $$PWD/soap/qtsoap.h
-    }
 }

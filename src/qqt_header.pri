@@ -168,11 +168,11 @@ DESTDIR = bin
 ################################################################
 ##QQt Functions Macro
 ################################################################
-##################Basic Module##################################
 #You need switch these more macro according to your needs when you build this library
 #You can tailor QQt  with these macro.
 #Default: macroes is configed, some open, some close, compatibled to special accotation.
 
+##################SerialPort Module##################################
 #if you use qextserialport, open the annotation
 #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
 #DEFINES += __QEXTSERIALPORT__
@@ -195,6 +195,7 @@ contains (DEFINES, __QEXTSERIALPORT__) {
     }
 }
 
+##################Bluetooth Module###############################
 #if you use qtbluetooth, open this annotation
 DEFINES += __BLUETOOTH__
 #if you compiler QtBluetooth module manual, note this line is a good idea. default qt4 don't use bluetooth
@@ -205,6 +206,7 @@ contains (DEFINES, __BLUETOOTH__) {
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
 }
 
+##################C++11 Module###############################
 #if you use C++11, open this annotation. suggest: ignore
 #DEFINES += __CPP11__
 contains (DEFINES, __CPP11__) {
@@ -226,6 +228,7 @@ contains (DEFINES, __CPP11__) {
     #lambda also need c++11
 }
 
+##################PrintSupport Module###############################
 #if you use printsupport , open this annotation
 DEFINES += __PRINTSUPPORT__
 #ios android can't support this function now
@@ -244,20 +247,18 @@ contains (DEFINES, __PRINTSUPPORT__) {
 ##################Exquisite Module###############################
 #if you use Exquisite widgets, open this annotation
 DEFINES += __EXQUISITE__
-contains (DEFINES, __EXQUISITE__) {
-    #if you use QR encode, open this annotation
-    DEFINES += __QRENCODE__
-}
+#if you use QR encode, open this annotation
+DEFINES += __QRENCODE__
 
 ##################WebSocket Module###############################
+#if you use QtSoap, open this annotation
+DEFINES += __QTSOAP__
 #if you use QWebSocketSupport , open this annotation
 #DEFINES += __WEBSOCKETSUPPORT__
 equals(QKIT_PRIVATE, macOS):DEFINES += __WEBSOCKETSUPPORT__
 contains (DEFINES, __WEBSOCKETSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
     #TODO: QT += webkit
-    #if you use QtSoap, open this annotation
-    DEFINES += __QTSOAP__
 }
 
 ##################################################################
