@@ -59,10 +59,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        qqtexquisiteform.cpp
+    mainwindow.cpp
 
 HEADERS += \
-        qqtexquisiteform.h
+    mainwindow.h
 
 FORMS += \
-        qqtexquisiteform.ui
+    mainwindow.ui

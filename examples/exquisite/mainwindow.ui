@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1002</width>
+    <height>629</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w01" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w0" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w1" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w2" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w5" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w6" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w3" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w4" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>页</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w50" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w51" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w52" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w53" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>页</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w40" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w41" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w42" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomEffectProgressBar" name="w43" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>页</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QQtCustomSpeedMeter" name="w7" native="true"/>
+        </item>
+        <item>
+         <widget class="QQtCustomSpeedMeter" name="w8" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_6">
+       <attribute name="title">
+        <string>页</string>
+       </attribute>
+       <widget class="QQTProgressBar" name="w60" native="true">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>491</width>
+          <height>41</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSlider" name="hs0">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1002</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QQtCustomSpeedMeter</class>
+   <extends>QWidget</extends>
+   <header location="global">qqtcustomspeedmeter.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QQtCustomEffectProgressBar</class>
+   <extends>QWidget</extends>
+   <header location="global">qqtcustomeffectprogressbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QQTProgressBar</class>
+   <extends>QWidget</extends>
+   <header location="global">qqtprogressbar.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

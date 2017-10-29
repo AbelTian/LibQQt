@@ -1,13 +1,12 @@
-#include "qqtexquisiteform.h"
-#include "ui_qqtexquisiteform.h"
-
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <qqtcore.h>
 
-QQtExquisiteForm::QQtExquisiteForm(QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::QQtExquisiteForm)
+MainWindow::MainWindow(QWidget* parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -161,17 +160,17 @@ QQtExquisiteForm::QQtExquisiteForm(QWidget* parent) :
     m_timer_down->start(10);
 }
 
-QQtExquisiteForm::~QQtExquisiteForm()
+MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-void QQtExquisiteForm::setValue(int value)
+void MainWindow::setValue(int value)
 {
     this->value = value;
 }
 
-void QQtExquisiteForm::setValue()
+void MainWindow::setValue()
 {
     //pline() << value;
     if (value > curmaxValue)
@@ -183,7 +182,7 @@ void QQtExquisiteForm::setValue()
     ui->hs0->setValue(value);
 }
 
-void QQtExquisiteForm::setValueDown()
+void MainWindow::setValueDown()
 {
     if (value > 0)
         value--;
@@ -191,7 +190,7 @@ void QQtExquisiteForm::setValueDown()
 }
 
 
-void QQtExquisiteForm::keyPressEvent(QKeyEvent* event)
+void MainWindow::keyPressEvent(QKeyEvent* event)
 {
     //pline() << hex << event->key();
     if (event->key() == Qt::Key_Up)
@@ -201,11 +200,11 @@ void QQtExquisiteForm::keyPressEvent(QKeyEvent* event)
         event->accept();
     }
 
-    QDialog::keyPressEvent(event);
+    QMainWindow::keyPressEvent(event);
 
 }
 
-void QQtExquisiteForm::keyReleaseEvent(QKeyEvent* event)
+void MainWindow::keyReleaseEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Up)
     {
@@ -213,10 +212,10 @@ void QQtExquisiteForm::keyReleaseEvent(QKeyEvent* event)
         m_timer->stop();
         event->accept();
     }
-    QDialog::keyReleaseEvent(event);
+    QMainWindow::keyReleaseEvent(event);
 }
 
-bool QQtExquisiteForm::eventFilter(QObject* watched, QEvent* event)
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
     if (event->type() != QEvent::Paint)
         ;//pline() << watched << hex << event->type();
@@ -275,10 +274,10 @@ bool QQtExquisiteForm::eventFilter(QObject* watched, QEvent* event)
         /*fix the parent handled bug terminally*/
         if (event->type() == QEvent::Paint)
         {
-            return QDialog::eventFilter(watched, event);
+            return QMainWindow::eventFilter(watched, event);
         }
         //+ fix bug
         return true;
     }
-    return QDialog::eventFilter(watched, event);
+    return QMainWindow::eventFilter(watched, event);
 }

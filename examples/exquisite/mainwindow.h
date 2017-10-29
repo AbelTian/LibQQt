@@ -1,28 +1,27 @@
-#ifndef QQTEXQUISITEFORM_H
-#define QQTEXQUISITEFORM_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include <QDialog>
+#include <QMainWindow>
 #include <QTimer>
 
 namespace Ui
 {
-class QQtExquisiteForm;
+class MainWindow;
 }
 
-class QQtExquisiteForm : public QDialog
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit QQtExquisiteForm(QWidget* parent = 0);
-    ~QQtExquisiteForm();
+    explicit MainWindow(QWidget* parent = 0);
+    ~MainWindow();
 
 private slots:
     void setValue(int);
     void setValue();
     void setValueDown();
 private:
-    Ui::QQtExquisiteForm* ui;
     QTimer* m_timer ;
     QTimer* m_timer_down ;
     int value;
@@ -36,6 +35,9 @@ protected:
     // QObject interface
 public:
     virtual bool eventFilter(QObject* watched, QEvent* event) override;
+
+private:
+    Ui::MainWindow* ui;
 };
 
-#endif // QQTEXQUISITEFORM_H
+#endif // MAINWINDOW_H
