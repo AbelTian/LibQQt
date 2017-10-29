@@ -8,6 +8,7 @@
 #include <QList>
 #include <QListIterator>
 #include <qqt-local.h>
+#include "qqtcore.h"
 
 /**
  * @brief The QQTObjectFactory class

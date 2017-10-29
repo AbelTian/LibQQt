@@ -2,6 +2,7 @@
 #define QQTUDPCLIENT_H
 
 #include <QUdpSocket>
+#include <qqtcore.h>
 
 class QQtUdpClient : public QUdpSocket
 {

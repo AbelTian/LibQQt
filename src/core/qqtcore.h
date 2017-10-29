@@ -68,6 +68,9 @@ typedef unsigned char uint8_t;
 #define nullptr 0
 #endif
 
+#ifndef qintptr
+#define qintptr int
+#endif
 
 
 #ifndef MAX_PATH

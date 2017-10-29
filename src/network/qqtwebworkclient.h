@@ -1,5 +1,5 @@
-#ifndef QQTNETWORKCLIENT_H
-#define QQTNETWORKCLIENT_H
+#ifndef QQTWEBWORKCLIENT_H
+#define QQTWEBWORKCLIENT_H
 
 #include <QNetworkAccessManager>
 //import this struct will not build fail
@@ -8,16 +8,16 @@
 #include <qqt-qt.h>
 #include <qqt-local.h>
 /**
- * @brief The QQtNetworkClient class
+ * @brief The QQtWebworkClient class
  * One Ftp Http 单工...
  * Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
  * Multi New Protocol 全双工 QWebSocket
  */
-class QQTSHARED_EXPORT QQtNetworkClient : public QNetworkAccessManager
+class QQTSHARED_EXPORT QQtWebworkClient : public QNetworkAccessManager
 {
     Q_OBJECT
 public:
-    explicit QQtNetworkClient(QObject* parent = 0);
+    explicit QQtWebworkClient(QObject* parent = 0);
 
     //void installProtocol();
     //void uninstallProtocol();
@@ -35,4 +35,4 @@ private slots:
     void networkSessionConnected();
 };
 
-#endif // QQTNETWORKCLIENT_H
+#endif // QQTWEBWORKCLIENT_H

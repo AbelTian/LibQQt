@@ -1,7 +1,7 @@
-#include "qqtnetworkclient.h"
+#include "qqtwebworkclient.h"
 #include "qqtcore.h"
 
-QQtNetworkClient::QQtNetworkClient(QObject* parent) : QNetworkAccessManager(parent)
+QQtWebworkClient::QQtWebworkClient(QObject* parent) : QNetworkAccessManager(parent)
 {
     connect(this, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(finished(QNetworkReply*)));
@@ -22,32 +22,32 @@ QQtNetworkClient::QQtNetworkClient(QObject* parent) : QNetworkAccessManager(pare
             this, SLOT(networkSessionConnected()));
 }
 
-void QQtNetworkClient::finished(QNetworkReply* reply)
+void QQtWebworkClient::finished(QNetworkReply* reply)
 {
     pline() << reply;
 }
 
-void QQtNetworkClient::authenticationRequired(QNetworkReply* r, QAuthenticator* a)
+void QQtWebworkClient::authenticationRequired(QNetworkReply* r, QAuthenticator* a)
 {
     pline() << r << a;
 }
 
-void QQtNetworkClient::proxyAuthenticationRequired(QNetworkProxy p, QAuthenticator* a)
+void QQtWebworkClient::proxyAuthenticationRequired(QNetworkProxy p, QAuthenticator* a)
 {
     pline() << p.hostName() << a;
 }
 
-void QQtNetworkClient::sslErrors(QNetworkReply* r, QList<QSslError> e)
+void QQtWebworkClient::sslErrors(QNetworkReply* r, QList<QSslError> e)
 {
     pline() << r << e.size();
 }
 
-void QQtNetworkClient::networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility a)
+void QQtWebworkClient::networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility a)
 {
     pline() << a;
 }
 
-void QQtNetworkClient::networkSessionConnected()
+void QQtWebworkClient::networkSessionConnected()
 {
     pline();
 }

@@ -365,19 +365,21 @@ contains(DEFINES, __QTSOAP__) {
 }
 
 
-contains (DEFINES, __NETWORKSUPPORT__) {
+contains (DEFINES, __WEBWORKSUPPORT__) {
     SOURCES += \
-        $$PWD/network/qqtnetworkclient.cpp \
-        $$PWD/network/qqtnetworkserver.cpp \
         $$PWD/network/qqtftpprotocol.cpp \
         $$PWD/network/qqthttpprotocol.cpp \
         $$PWD/network/qqtwebprotocol.cpp
     HEADERS += \
-        $$PWD/network/qqtnetworkclient.h \
-        $$PWD/network/qqtnetworkserver.h \
         $$PWD/network/qqtftpprotocol.h \
         $$PWD/network/qqthttpprotocol.h \
         $$PWD/network/qqtwebprotocol.h
+    SOURCES += \
+        $$PWD/network/qqtwebworkclient.cpp \
+        $$PWD/network/qqtwebworkserver.cpp
+    HEADERS += \
+        $$PWD/network/qqtwebworkclient.h \
+        $$PWD/network/qqtwebworkserver.h
 }
 
 contains (DEFINES, __WEBSOCKETSUPPORT__) {
