@@ -46,6 +46,11 @@ build_pass:CONFIG(debug, debug|release) {
 CLFLAGS = -Wno-unused-parameter -Wno-reorder
 QMAKE_CFLAGS +=  $${CLFLAGS}
 QMAKE_CXXFLAGS +=  $${CLFLAGS}
+#debug.
+#QMAKE_POST_LINK won't work until source changed
+#qmake pro pri prf change won't effect to QMAKE_POST_LINK
+#but I need it before I complete this pri.
+system("touch $${PWD}/widgets/qqtapplication.cpp")
 #################################################################
 ##project Headers
 #################################################################
@@ -104,3 +109,4 @@ include ($$PWD/qqt_install.pri)
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
+

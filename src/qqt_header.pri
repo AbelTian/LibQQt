@@ -256,14 +256,14 @@ DEFINES += __QTSOAP__
 #One Ftp Http 单工...
 #Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
 #if you use QNetworkAccessManagerSupport , open this annotation
-#DEFINES += __NETWORKSUPPORT__
+DEFINES += __NETWORKSUPPORT__
 contains (DEFINES, __NETWORKSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
     #TODO: QT += webkit
 }
 #Multi New Protocol 全双工 QWebSocket
 #if you use QWebSocketSupport , open this annotation
-#DEFINES += __WEBSOCKETSUPPORT__
+DEFINES += __WEBSOCKETSUPPORT__
 equals(QKIT_PRIVATE, macOS):DEFINES += __WEBSOCKETSUPPORT__
 contains (DEFINES, __WEBSOCKETSUPPORT__) {
     QT += websockets

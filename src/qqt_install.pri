@@ -233,11 +233,6 @@ defineReplace(create_qt_lib_pri){
 ################################################
 ##QQt install workflow
 ################################################
-#debug.
-#QMAKE_POST_LINK won't work until source changed
-#qmake pro pri prf change won't effect to QMAKE_POST_LINK
-#but I need it before I complete this pri.
-system("touch $${PWD}/widgets/qqtapplication.cpp")
 #use to output sdk
 CONFIG += create_sdk
 contains(CONFIG, create_sdk){
@@ -282,8 +277,6 @@ contains(CONFIG, create_sdk){
 #if you want to use QQt with QT += QQt please open this feature
 #unimplete: CONFIG += install_to_qt_library
 contains(CONFIG, install_to_qt_library){
-    #test case
-    #system("touch $${PWD}/exquisite/qqtcustomeffectprogressbar.cpp")
     MODULE_NAME=QQt
     QQT_BUILD_DIR=$$OUT_PWD/bin
     #sdk path
