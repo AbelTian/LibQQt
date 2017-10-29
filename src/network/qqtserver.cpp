@@ -20,7 +20,7 @@ void QQTServer::incomingConnection(qintptr handle)
     clientSocket->installProtocol(m_protocol);
 }
 
-void QQTServer::installProtocol(QQTProtocol* stack)
+void QQTServer::installProtocol(QQtProtocol* stack)
 {
     if (m_protocol)
         return;
@@ -28,7 +28,7 @@ void QQTServer::installProtocol(QQTProtocol* stack)
     m_protocol = stack;
 }
 
-void QQTServer::uninstallProtocol(QQTProtocol* stack)
+void QQTServer::uninstallProtocol(QQtProtocol* stack)
 {
     Q_UNUSED(stack)
 
@@ -38,7 +38,7 @@ void QQTServer::uninstallProtocol(QQTProtocol* stack)
     m_protocol = NULL;
 }
 
-QQTProtocol* QQTServer::installedProtocol()
+QQtProtocol* QQTServer::installedProtocol()
 {
     return m_protocol;
 }

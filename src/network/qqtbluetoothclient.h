@@ -30,9 +30,9 @@ public:
     void setServiceUUid(const QBluetoothUuid &uuid)
     { m_uuid = uuid; }
 
-    void installProtocol(QQTProtocol* stack);
-    void uninstallProtocol(QQTProtocol* stack);
-    QQTProtocol* installedProtocol();
+    void installProtocol(QQtProtocol* stack);
+    void uninstallProtocol(QQtProtocol* stack);
+    QQtProtocol* installedProtocol();
 
     void sendConnectMessage();
     int sendDisConnectFromHost();
@@ -64,7 +64,7 @@ private:
     void connectToSingelHost();
     void initSocket();
 
-    QQTProtocol* m_protocol;
+    QQtProtocol* m_protocol;
 
     QBluetoothServiceInfo m_serviceInfo;
     QBluetoothAddress m_serverIP;

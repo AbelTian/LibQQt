@@ -261,7 +261,7 @@ typedef struct tagQTCheckVersionResult
 #define _TCPCMD_DATASENDFILEINFO         "CODE=\"%1\"NAME=\"%2\"OVERWRITE=\"%3\"LENGTH=\"%4\""
 #define MAX_HEARDBEAT 10
 
-class QQTCloudProtocol : public QQTProtocol
+class QQTCloudProtocol : public QQtProtocol
 {
     Q_OBJECT
 public:
@@ -414,7 +414,7 @@ protected:
 
     QByteArray  parseKeyWordInByteArray(const QByteArray& array, const QByteArray &section, quint32 &pos);
 
-    // QQTProtocol interface
+    // QQtProtocol interface
 public:
     quint16 minlength() override;
     quint16 maxlength() override;

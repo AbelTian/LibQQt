@@ -79,15 +79,15 @@ public:
     explicit QQTSerialPort(QObject* parent = 0);
     ~QQTSerialPort();
 
-    void installProtocol(QQTProtocol* stack);
-    void uninstallProtocol(QQTProtocol* stack);
-    QQTProtocol* installedProtocol();
+    void installProtocol(QQtProtocol* stack);
+    void uninstallProtocol(QQtProtocol* stack);
+    QQtProtocol* installedProtocol();
 
 private slots:
     void readyReadData();
 
 private:
-    QQTProtocol* m_protocol;
+    QQtProtocol* m_protocol;
 };
 
 #endif // QQTSERIALPORT_H

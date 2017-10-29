@@ -15,7 +15,7 @@ QQTSerialPort::~QQTSerialPort()
         close();
 }
 
-void QQTSerialPort::installProtocol(QQTProtocol* stack)
+void QQTSerialPort::installProtocol(QQtProtocol* stack)
 {
     if (m_protocol)
         return;
@@ -24,7 +24,7 @@ void QQTSerialPort::installProtocol(QQTProtocol* stack)
     connect(m_protocol, SIGNAL(write(const QByteArray&)), this, SLOT(write(const QByteArray&)));
 }
 
-void QQTSerialPort::uninstallProtocol(QQTProtocol* stack)
+void QQTSerialPort::uninstallProtocol(QQtProtocol* stack)
 {
     Q_UNUSED(stack)
     if (!m_protocol)
@@ -34,7 +34,7 @@ void QQTSerialPort::uninstallProtocol(QQTProtocol* stack)
     m_protocol = NULL;
 }
 
-QQTProtocol* QQTSerialPort::installedProtocol()
+QQtProtocol* QQTSerialPort::installedProtocol()
 {
     return m_protocol;
 }

@@ -58,7 +58,7 @@ void QQTExceptionAck::pack(QByteArray& l)
 }
 
 QQTUserSerialProtocol::QQTUserSerialProtocol(QObject* parent) :
-    QQTProtocol(parent)
+    QQtProtocol(parent)
 {
 #ifdef __EMBEDDED_LINUX__
     QString portName("/dev/ttyS2");

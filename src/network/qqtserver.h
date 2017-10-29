@@ -14,16 +14,16 @@ public:
     explicit QQTServer(QObject* parent = 0);
     ~QQTServer();
 
-    void installProtocol(QQTProtocol* stack);
-    void uninstallProtocol(QQTProtocol* stack);
-    QQTProtocol* installedProtocol();
+    void installProtocol(QQtProtocol* stack);
+    void uninstallProtocol(QQtProtocol* stack);
+    QQtProtocol* installedProtocol();
 
 signals:
     // QTcpServer interface
 protected:
     virtual void incomingConnection(qintptr handle) override;
 private:
-    QQTProtocol* m_protocol;
+    QQtProtocol* m_protocol;
 };
 
 

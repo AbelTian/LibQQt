@@ -1,7 +1,7 @@
 #include "qqtlanprotocol.h"
 
 QQTLanProtocol::QQTLanProtocol(QObject *parent) :
-    QQTProtocol(parent)
+    QQtProtocol(parent)
 {
 
 }

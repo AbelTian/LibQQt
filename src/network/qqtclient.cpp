@@ -45,7 +45,7 @@ QQTClient::~QQTClient()
 {
 }
 
-void QQTClient::installProtocol(QQTProtocol* stack)
+void QQTClient::installProtocol(QQtProtocol* stack)
 {
     if (m_protocol)
         return;
@@ -55,7 +55,7 @@ void QQTClient::installProtocol(QQTProtocol* stack)
             this, SLOT(write(const QByteArray&)));
 }
 
-void QQTClient::uninstallProtocol(QQTProtocol* stack)
+void QQTClient::uninstallProtocol(QQtProtocol* stack)
 {
     Q_UNUSED(stack)
 
@@ -67,7 +67,7 @@ void QQTClient::uninstallProtocol(QQTProtocol* stack)
     m_protocol = NULL;
 }
 
-QQTProtocol* QQTClient::installedProtocol()
+QQtProtocol* QQTClient::installedProtocol()
 {
     return m_protocol;
 }

@@ -89,7 +89,7 @@ public:
  * @brief The QQTUserSerialProtocol class
  * 用户使用这个串口操作机器
  */
-class QQTUserSerialProtocol : public QQTProtocol
+class QQTUserSerialProtocol : public QQtProtocol
 {
     Q_OBJECT
 public:
@@ -115,7 +115,7 @@ public slots:
     void sendExceptionAck();
 
 
-    // QQTProtocol interface
+    // QQtProtocol interface
 public:
     quint16 minlength() override;
     quint16 maxlength() override;

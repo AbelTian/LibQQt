@@ -12,20 +12,20 @@ class QQTSHARED_EXPORT QQtMessage : public QObject
     Q_OBJECT
 public:
     explicit QQtMessage(QObject* parent = 0) : QObject(parent) {}
-
+    virtual ~QQtMessage() {}
 public:
     /**
      * @brief 从流中解析报文
      * @param m
      * @param l
      */
-    virtual void parser(const QByteArray& l) = 0;
+    virtual void parser(const QByteArray&) {}
     /**
      * @brief 将报文组装为流
      * @param l
      * @param m
      */
-    virtual void packer(QByteArray& l) = 0;
+    virtual void packer(QByteArray&) {}
     /**
      * @brief 最小包长
      * @return

@@ -16,6 +16,7 @@
 #include <QSqlError>
 #include <QSslError>
 #include <qqt-local.h>
+#include "qglobal.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -68,10 +69,12 @@ typedef unsigned char uint8_t;
 #define nullptr 0
 #endif
 
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #ifndef qintptr
 #define qintptr int
 #endif
-
+#endif
 
 #ifndef MAX_PATH
 #define MAX_PATH 256

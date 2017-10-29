@@ -192,8 +192,6 @@ HEADERS += \
 SOURCES += \
     $$PWD/network/qqtclient.cpp \
     $$PWD/network/qqtserver.cpp \
-    $$PWD/network/qqtmessage.cpp \
-    $$PWD/network/qqtprotocol.cpp \
     $$PWD/network/qqtnetwork.cpp
 HEADERS += \
     $$PWD/network/qqtclient.h \

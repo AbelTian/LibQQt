@@ -29,9 +29,9 @@ public:
     void SetServerIPAddress(QStringList ip) { m_serverIP = ip; }
     void SetServerPort(quint32 p = 7079) { m_PORT = p; }
 
-    void installProtocol(QQTProtocol* stack);
-    void uninstallProtocol(QQTProtocol* stack);
-    QQTProtocol* installedProtocol();
+    void installProtocol(QQtProtocol* stack);
+    void uninstallProtocol(QQtProtocol* stack);
+    QQtProtocol* installedProtocol();
 
     void SendConnectMessage();
     int SendDisConnectFromHost();
@@ -66,7 +66,7 @@ private:
      */
     //QTcpSocket* m_sock;
 
-    QQTProtocol* m_protocol;
+    QQtProtocol* m_protocol;
     quint32 eConType;
     QStringList m_serverIP;
     quint32 m_PORT;

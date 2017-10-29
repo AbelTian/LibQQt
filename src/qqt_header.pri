@@ -267,8 +267,8 @@ contains (DEFINES, __WEBWORKSUPPORT__) {
 #Multi New Protocol 全双工 QWebSocket
 #if you use QWebSocketSupport , open this annotation
 DEFINES += __WEBSOCKETSUPPORT__
-lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBSOCKETSUPPORT__
 equals(QKIT_PRIVATE, macOS):DEFINES += __WEBSOCKETSUPPORT__
+lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBSOCKETSUPPORT__
 contains (DEFINES, __WEBSOCKETSUPPORT__) {
     QT += websockets
     #QSslError not found, you need recompiler Qt4

@@ -33,7 +33,7 @@ QQTClient* QQTCloudClientInstance(QObject* parent)
 }
 
 
-QQTCloudProtocol::QQTCloudProtocol(QObject* parent) : QQTProtocol(parent)
+QQTCloudProtocol::QQTCloudProtocol(QObject* parent) : QQtProtocol(parent)
 {
     m_isLogined = false;
     m_heartCount = 0;

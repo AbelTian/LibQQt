@@ -4,12 +4,12 @@
 #include "qqtprotocol.h"
 #include "qqtserver.h"
 
-class QQTLanProtocol : public QQTProtocol
+class QQTLanProtocol : public QQtProtocol
 {
 public:
     explicit QQTLanProtocol(QObject *parent = 0);
 
-    // QQTProtocol interface
+    // QQtProtocol interface
 public:
     quint16 minlength() override;
     quint16 maxlength() override;

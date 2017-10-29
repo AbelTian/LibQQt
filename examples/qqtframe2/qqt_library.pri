@@ -54,10 +54,10 @@ can_install:equals(QKIT_PRIVATE, EMBEDDED) {
 equals(QKIT_PRIVATE, macOS) {
     QMAKE_POST_LINK += rm -rf bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
     QMAKE_POST_LINK += cp -af ../../src/bin/QQt.framework \
-            bin/$${TARGET}.app/Contents/Frameworks &
+            bin/$${TARGET}.app/Contents/Frameworks &&
     QMAKE_POST_LINK += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
          @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
-         bin/$${TARGET}.app/Contents/MacOS/$$TARGET &
+         bin/$${TARGET}.app/Contents/MacOS/$$TARGET &&
     QMAKE_POST_LINK += macdeployqt bin/$${TARGET}.app -verbose=1
 }
 

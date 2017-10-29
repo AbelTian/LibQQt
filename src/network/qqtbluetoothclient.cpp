@@ -40,7 +40,7 @@ void QQtBluetoothClient::initSocket()
     m_protocol = nullptr;
 }
 
-void QQtBluetoothClient::installProtocol(QQTProtocol* stack)
+void QQtBluetoothClient::installProtocol(QQtProtocol* stack)
 {
     if (m_protocol)
         return;
@@ -50,7 +50,7 @@ void QQtBluetoothClient::installProtocol(QQTProtocol* stack)
             this, SLOT(write(const QByteArray&)));
 }
 
-void QQtBluetoothClient::uninstallProtocol(QQTProtocol* stack)
+void QQtBluetoothClient::uninstallProtocol(QQtProtocol* stack)
 {
     Q_UNUSED(stack)
     if (!m_protocol)
@@ -61,7 +61,7 @@ void QQtBluetoothClient::uninstallProtocol(QQTProtocol* stack)
     m_protocol = NULL;
 }
 
-QQTProtocol* QQtBluetoothClient::installedProtocol()
+QQtProtocol* QQtBluetoothClient::installedProtocol()
 {
     return m_protocol;
 }

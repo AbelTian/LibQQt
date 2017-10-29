@@ -12,9 +12,9 @@ public:
     explicit QQtBluetoothServer(QBluetoothServiceInfo::Protocol serverType, QObject *parent = nullptr);
     ~QQtBluetoothServer();
 
-    void installProtocol(QQTProtocol* stack);
-    void uninstallProtocol(QQTProtocol* stack);
-    QQTProtocol* installedProtocol();
+    void installProtocol(QQtProtocol* stack);
+    void uninstallProtocol(QQtProtocol* stack);
+    QQtProtocol* installedProtocol();
 
 signals:
 
@@ -26,7 +26,7 @@ private slots:
     void comingNewConnection();
 
 private:
-    QQTProtocol* m_protocol;
+    QQtProtocol* m_protocol;
 };
 
 #endif // QQTBLUETOOTHSERVER_H

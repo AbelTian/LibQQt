@@ -26,7 +26,7 @@ void QQtBluetoothServer::comingNewConnection()
     clientSocket->setSocketDescriptor(comingSocket->socketDescriptor(), QBluetoothServiceInfo::RfcommProtocol);
 }
 
-void QQtBluetoothServer::installProtocol(QQTProtocol* stack)
+void QQtBluetoothServer::installProtocol(QQtProtocol* stack)
 {
     if (m_protocol)
         return;
@@ -34,7 +34,7 @@ void QQtBluetoothServer::installProtocol(QQTProtocol* stack)
     m_protocol = stack;
 }
 
-void QQtBluetoothServer::uninstallProtocol(QQTProtocol* stack)
+void QQtBluetoothServer::uninstallProtocol(QQtProtocol* stack)
 {
     Q_UNUSED(stack)
     if (!m_protocol)
@@ -43,7 +43,7 @@ void QQtBluetoothServer::uninstallProtocol(QQTProtocol* stack)
     m_protocol = NULL;
 }
 
-QQTProtocol* QQtBluetoothServer::installedProtocol()
+QQtProtocol* QQtBluetoothServer::installedProtocol()
 {
     return m_protocol;
 }
