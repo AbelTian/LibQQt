@@ -54,7 +54,8 @@ message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
 
 QT       += core gui
-QT += webchannel webview
+greaterThan(QT_MAJOR_VERSION, 4): QT += webchannel webview
+lessThan(QT_MAJOR_VERSION, 5): QT += webkit
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = VegeTablesPrice
