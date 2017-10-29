@@ -26,21 +26,21 @@
 
 static QStringList sDevices; //disk list, or mount point list?
 
-static void onDiskAppear(DADiskRef disk, void *context)
+static void onDiskAppear(DADiskRef disk, void* context)
 {
     QString disk_name = DADiskGetBSDName(disk);
     if (sDevices.contains(disk_name))
         return;
     sDevices.append(disk_name);
-    QDeviceWatcherPrivate *p = static_cast<QDeviceWatcherPrivate*>(context);
+    QDeviceWatcherPrivate* p = static_cast<QDeviceWatcherPrivate*>(context);
     p->emitDeviceAdded(disk_name);
 }
 
-static void onDiskDisappear(DADiskRef disk, void *context)
+static void onDiskDisappear(DADiskRef disk, void* context)
 {
     QString disk_name = DADiskGetBSDName(disk);
     sDevices.removeAll(disk_name); //erase?
-    QDeviceWatcherPrivate *p = static_cast<QDeviceWatcherPrivate*>(context);
+    QDeviceWatcherPrivate* p = static_cast<QDeviceWatcherPrivate*>(context);
     p->emitDeviceRemoved(disk_name);
 }
 
@@ -53,6 +53,7 @@ bool QDeviceWatcherPrivate::start()
 {
     init();
     QThread::start();
+    return true;
 }
 
 bool QDeviceWatcherPrivate::stop()
@@ -62,6 +63,7 @@ bool QDeviceWatcherPrivate::stop()
     //DAUnregisterApprovalCallback
     DAUnregisterCallback(mSession, (void*)onDiskAppear, this);
     DAUnregisterCallback(mSession, (void*)onDiskDisappear, this);
+    return true;
 }
 
 
@@ -78,7 +80,7 @@ bool QDeviceWatcherPrivate::init()
 
     DARegisterDiskAppearedCallback(mSession, NULL, onDiskAppear, this);
     DARegisterDiskDisappearedCallback(mSession, NULL, onDiskDisappear, this);
-
+    return true;
 }
 
 void QDeviceWatcherPrivate::run()
@@ -88,9 +90,11 @@ void QDeviceWatcherPrivate::run()
 
     DASessionScheduleWithRunLoop(mSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     SInt32 result;
-    do {
+    do
+    {
         result = CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1, true);
-    } while (!mStop && result);
+    }
+    while (!mStop && result);
 
     DASessionUnscheduleFromRunLoop(mSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 }

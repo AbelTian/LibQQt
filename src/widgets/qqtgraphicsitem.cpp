@@ -3,41 +3,42 @@
 #include <QStyleOptionGraphicsItem>
 #include "qqtcore.h"
 
-QQTGraphicsItem::QQTGraphicsItem(QQTGraphicsItem *parent) : QGraphicsItem(parent) {}
+QQTGraphicsItem::QQTGraphicsItem(QQTGraphicsItem* parent) : QGraphicsItem(parent) {}
 
 
-QQTGraphicsTextItem::QQTGraphicsTextItem(QQTGraphicsItem *parent) : QGraphicsTextItem(parent) {}
+QQTGraphicsTextItem::QQTGraphicsTextItem(QQTGraphicsItem* parent) : QGraphicsTextItem(parent) {}
 
 
-QQTGraphicsRectItem::QQTGraphicsRectItem(QQTGraphicsItem *parent) : QGraphicsRectItem(parent) {}
+QQTGraphicsRectItem::QQTGraphicsRectItem(QQTGraphicsItem* parent) : QGraphicsRectItem(parent) {}
 
 
-QQTGraphicsSimpleTextItem::QQTGraphicsSimpleTextItem(QQTGraphicsItem *parent) : QGraphicsSimpleTextItem(parent) {}
+QQTGraphicsSimpleTextItem::QQTGraphicsSimpleTextItem(QQTGraphicsItem* parent) : QGraphicsSimpleTextItem(parent) {}
 
 
-QQTGraphicsLineItem::QQTGraphicsLineItem(QQTGraphicsItem *parent) : QGraphicsLineItem(parent) {}
+QQTGraphicsLineItem::QQTGraphicsLineItem(QQTGraphicsItem* parent) : QGraphicsLineItem(parent) {}
 
 
-QQTGraphicsPixmapItem::QQTGraphicsPixmapItem(QQTGraphicsItem *parent) : QGraphicsPixmapItem(parent) {}
+QQTGraphicsPixmapItem::QQTGraphicsPixmapItem(QQTGraphicsItem* parent) : QGraphicsPixmapItem(parent) {}
 
 
-QQTGraphicsPathItem::QQTGraphicsPathItem(QQTGraphicsItem *parent) : QGraphicsPathItem(parent) {}
+QQTGraphicsPathItem::QQTGraphicsPathItem(QQTGraphicsItem* parent) : QGraphicsPathItem(parent) {}
 
 
-QQTGraphicsEllipseItem::QQTGraphicsEllipseItem(QQTGraphicsItem *parent) : QGraphicsEllipseItem(parent) {}
+QQTGraphicsEllipseItem::QQTGraphicsEllipseItem(QQTGraphicsItem* parent) : QGraphicsEllipseItem(parent) {}
 
 
-QQTGraphicsPolygonItem::QQTGraphicsPolygonItem(QQTGraphicsItem *parent) : QGraphicsPolygonItem(parent) {}
+QQTGraphicsPolygonItem::QQTGraphicsPolygonItem(QQTGraphicsItem* parent) : QGraphicsPolygonItem(parent) {}
 
 
-QQTGraphicsItemGroup::QQTGraphicsItemGroup(QQTGraphicsItem *parent) : QGraphicsItemGroup(parent) {}
+QQTGraphicsItemGroup::QQTGraphicsItemGroup(QQTGraphicsItem* parent) : QGraphicsItemGroup(parent) {}
 
 
-QQTGraphicsProxyWidget::QQTGraphicsProxyWidget(QQTGraphicsItem *parent) : QGraphicsProxyWidget(parent) {}
+QQTGraphicsProxyWidget::QQTGraphicsProxyWidget(QQTGraphicsItem* parent) : QGraphicsProxyWidget(parent) {}
 
 
-void QQTGraphicsTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void QQTGraphicsTextItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+    Q_UNUSED(widget)
     QFont oldFont(painter->font());
 
     painter->setFont(font());
@@ -47,7 +48,7 @@ void QQTGraphicsTextItem::paint(QPainter *painter, const QStyleOptionGraphicsIte
     if (option->state & (QStyle::State_Selected | QStyle::State_HasFocus))
         ;
 
-    if(0 && toPlainText().contains("K1160"))
+    if (0 && toPlainText().contains("K1160"))
     {
         pline() << font().pointSize() << font().pixelSize();
         pline() << pos() << option->rect << option->exposedRect << toPlainText();
@@ -57,23 +58,26 @@ void QQTGraphicsTextItem::paint(QPainter *painter, const QStyleOptionGraphicsIte
 }
 
 
-void QQTGraphicsLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void QQTGraphicsLineItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+    Q_UNUSED(widget)
     QPen oldPen(painter->pen());
 
     qreal xratio = option->rect.width() / option->exposedRect.width();
     qreal yratio = option->rect.height() / option->exposedRect.height();
+    Q_UNUSED(yratio)
+    //TODO:
 
     QPen pn = pen();
     pn.setWidth(pn.width()*xratio);
     painter->setPen(pn);
 
     QLineF l = QLineF(option->rect.left(), option->rect.top(),
-                          option->rect.right(), option->rect.bottom());
+                      option->rect.right(), option->rect.bottom());
 
     painter->drawLine(l);
 
-    if(0)
+    if (0)
     {
         pline() << line() << l << option->rect << option->exposedRect;
         pline() << option->matrix << option->matrix.mapRect(option->rect);
@@ -83,25 +87,28 @@ void QQTGraphicsLineItem::paint(QPainter *painter, const QStyleOptionGraphicsIte
 }
 
 
-void QQTGraphicsRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void QQTGraphicsRectItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+    Q_UNUSED(widget)
     QPen oldPen(painter->pen());
     QBrush oldBrush(painter->brush());
 
     qreal xratio = option->rect.width() / option->exposedRect.width();
     qreal yratio = option->rect.height() / option->exposedRect.height();
+    Q_UNUSED(yratio)
+    //TODO:
 
     QPen pn = pen();
     pn.setWidth(pn.width()*xratio);
     painter->setPen(pn);
 
     QRectF r = QRectF(option->rect.left(), option->rect.top(),
-                          option->rect.width(), option->rect.height());
+                      option->rect.width(), option->rect.height());
 
     painter->setBrush(brush());
     painter->drawRect(r);
 
-    if(0)
+    if (0)
     {
         pline() << option->matrix << option->matrix.mapRect(option->rect) << r;
     }

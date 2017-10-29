@@ -3,18 +3,18 @@
 #include <QPainter>
 #include "qqtcore.h"
 #include "qqt-qt.h"
-QQTGraphicsScene::QQTGraphicsScene(QObject *parent) :
+QQTGraphicsScene::QQTGraphicsScene(QObject* parent) :
     QGraphicsScene(parent)
 {
 }
 
-QQTGraphicsScene::QQTGraphicsScene(const QRectF &sceneRect, QObject *parent) :
+QQTGraphicsScene::QQTGraphicsScene(const QRectF& sceneRect, QObject* parent) :
     QGraphicsScene(sceneRect, parent)
 {
 
 }
 
-QQTGraphicsScene::QQTGraphicsScene(qreal x, qreal y, qreal width, qreal height, QObject *parent) :
+QQTGraphicsScene::QQTGraphicsScene(qreal x, qreal y, qreal width, qreal height, QObject* parent) :
     QGraphicsScene(x, y, width, height, parent)
 {
 
@@ -30,21 +30,22 @@ QQTGraphicsScene::QQTGraphicsScene(qreal x, qreal y, qreal width, qreal height, 
  * @param source
  * @param aspectRatioMode
  */
-void QQTGraphicsScene::render(QPainter *painter, const QRectF &target, const QRectF &source, Qt::AspectRatioMode aspectRatioMode)
+void QQTGraphicsScene::render(QPainter* painter, const QRectF& target, const QRectF& source, Qt::AspectRatioMode aspectRatioMode)
 {
+    Q_UNUSED(aspectRatioMode)
     // Find the ideal x / y scaling ratio to fit a source into a target.
     QRectF sourceRect = sceneRect();
     QRectF targetRect = sourceRect;
-    if(!source.isEmpty())
+    if (!source.isEmpty())
         sourceRect = source;
-    if(!target.isEmpty())
+    if (!target.isEmpty())
         targetRect = target;
 
     qreal xratio = targetRect.width() / sourceRect.width();
     qreal yratio = targetRect.height() / sourceRect.height();
 
-    QList<QGraphicsItem *> itemList = items();
-    QGraphicsItem **itemArray = new QGraphicsItem *[itemList.size()];
+    QList<QGraphicsItem*> itemList = items();
+    QGraphicsItem** itemArray = new QGraphicsItem *[itemList.size()];
     int numItems = itemList.size();
     for (int i = 0; i < numItems; ++i)
         itemArray[numItems - i - 1] = itemList.at(i);
@@ -53,9 +54,10 @@ void QQTGraphicsScene::render(QPainter *painter, const QRectF &target, const QRe
     painter->save();
 
     // Generate the style options
-    QStyleOptionGraphicsItem *styleOptionArray = new QStyleOptionGraphicsItem[numItems];
-    for (int i = 0; i < numItems; ++i) {
-        QGraphicsItem *item = itemArray[i];
+    QStyleOptionGraphicsItem* styleOptionArray = new QStyleOptionGraphicsItem[numItems];
+    for (int i = 0; i < numItems; ++i)
+    {
+        QGraphicsItem* item = itemArray[i];
         QStyleOptionGraphicsItem option;
         option.state = QStyle::State_None;
         if (item->isSelected())
@@ -88,7 +90,7 @@ void QQTGraphicsScene::render(QPainter *painter, const QRectF &target, const QRe
     painter->restore();
 }
 
-QQTGraphicsTextItem *QQTGraphicsScene::addText(const QString &text, const QFont &font)
+QQTGraphicsTextItem* QQTGraphicsScene::addText(const QString& text, const QFont& font)
 {
     QQTGraphicsTextItem* item = new QQTGraphicsTextItem;
     item->setFont(font);
@@ -97,7 +99,7 @@ QQTGraphicsTextItem *QQTGraphicsScene::addText(const QString &text, const QFont 
     return item;
 }
 
-QQTGraphicsRectItem *QQTGraphicsScene::addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
+QQTGraphicsRectItem* QQTGraphicsScene::addRect(const QRectF& rect, const QPen& pen, const QBrush& brush)
 {
     QQTGraphicsRectItem* item = new QQTGraphicsRectItem;
     item->setRect(rect);
@@ -108,7 +110,7 @@ QQTGraphicsRectItem *QQTGraphicsScene::addRect(const QRectF &rect, const QPen &p
     return item;
 }
 
-QQTGraphicsLineItem *QQTGraphicsScene::addLine(const QLineF &line, const QPen &pen)
+QQTGraphicsLineItem* QQTGraphicsScene::addLine(const QLineF& line, const QPen& pen)
 {
     QQTGraphicsLineItem* item = new QQTGraphicsLineItem;
     item->setLine(line);
@@ -120,12 +122,14 @@ QQTGraphicsLineItem *QQTGraphicsScene::addLine(const QLineF &line, const QPen &p
 }
 
 
-void QQTGraphicsScene::drawItems(QPainter *painter, int numItems, QGraphicsItem *items[], const QStyleOptionGraphicsItem options[], QWidget *widget)
+void QQTGraphicsScene::drawItems(QPainter* painter, int numItems, QGraphicsItem* items[], const QStyleOptionGraphicsItem options[], QWidget* widget)
 {
-    for (int i = 0; i < numItems; ++i) {
+    for (int i = 0; i < numItems; ++i)
+    {
 
-        QQTGraphicsItem *item = (QQTGraphicsItem*)items[i];
-        if (item->flags() & QGraphicsItem::ItemClipsToShape) {
+        QQTGraphicsItem* item = (QQTGraphicsItem*)items[i];
+        if (item->flags() & QGraphicsItem::ItemClipsToShape)
+        {
             //painter->setClipPath(item->shape(), Qt::IntersectClip);
         }
         item->paint(painter, &options[i], widget);

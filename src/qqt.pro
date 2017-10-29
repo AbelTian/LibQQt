@@ -42,7 +42,10 @@ build_pass:CONFIG(debug, debug|release) {
 }
 #CONFIG += debug_and_release
 #CONFIG += build_all
-
+#if some bug occured, maybe this help me
+CLFLAGS = -Wno-unused-parameter -Wno-reorder
+QMAKE_CFLAGS +=  $${CLFLAGS}
+QMAKE_CXXFLAGS +=  $${CLFLAGS}
 #################################################################
 ##project Headers
 #################################################################

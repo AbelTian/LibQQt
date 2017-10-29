@@ -7,7 +7,7 @@
 #endif
 
 QQTPluginWatcher* QQTPluginWatcher::_instance = NULL;
-QQTPluginWatcher::QQTPluginWatcher(QObject *parent) :
+QQTPluginWatcher::QQTPluginWatcher(QObject* parent) :
     QThread(parent)
 {
     m_devType = E_NULLDEV;
@@ -31,65 +31,68 @@ QQTPluginWatcher::QQTPluginWatcher(QObject *parent) :
     watcher->start();
 }
 
-QQTPluginWatcher *QQTPluginWatcher::Instance()
+QQTPluginWatcher* QQTPluginWatcher::Instance()
 {
-    if(_instance)
+    if (_instance)
         return _instance;
     _instance = new QQTPluginWatcher();
     return _instance;
 }
 
-void QQTPluginWatcher::slotDeviceAdded(const QString &dev)
+void QQTPluginWatcher::slotDeviceAdded(const QString& dev)
 {
-    qDebug("tid=%#x %s: add %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
+    qDebug("tid=%#llx %s: add %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
 
-    if("/dev/input/event1" == dev)
+    if ("/dev/input/event1" == dev)
         m_devType = E_MOUSE;
-    else if("/dev/input/event2" == dev)
+    else if ("/dev/input/event2" == dev)
         m_devType = E_KEYBOARD;
-    else if("/dev/sda1" == dev)
+    else if ("/dev/sda1" == dev)
         m_devType = E_STORAGE;
     m_devStat = E_ADD;
     timer->start(1000);
 }
 
-void QQTPluginWatcher::slotDeviceRemoved(const QString &dev)
+void QQTPluginWatcher::slotDeviceRemoved(const QString& dev)
 {
-    qDebug("tid=%#x %s: remove %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
+    qDebug("tid=%#llx %s: remove %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
     m_devStat = E_RM;
     timer->start(1000);
 }
 
-void QQTPluginWatcher::slotDeviceChanged(const QString &dev)
+void QQTPluginWatcher::slotDeviceChanged(const QString& dev)
 {
-    qDebug("tid=%#x %s: change %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
+    qDebug("tid=%#llx %s: change %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
 }
 
 void QQTPluginWatcher::slotDeviceDriver()
 {
 #ifdef __EMBEDDED_LINUX__
-    if(E_MOUSE == m_devType)
+    if (E_MOUSE == m_devType)
     {
-        if(E_ADD == m_devStat)
+        if (E_ADD == m_devStat)
             QWSServer::setCursorVisible(true);
-        else if(E_RM == m_devStat)
+        else if (E_RM == m_devStat)
             QWSServer::setCursorVisible(false);
     }
-    else if(E_STORAGE == m_devType)
+    else if (E_STORAGE == m_devType)
     {
-        if(E_ADD == m_devStat)
+        if (E_ADD == m_devStat)
             emit storageChanged(E_ADD);
-        else if(E_RM == m_devStat)
+        else if (E_RM == m_devStat)
             emit storageChanged(E_RM);
     }
     else
 #endif
-    if(E_KEYBOARD == m_devType);
+        if (E_KEYBOARD == m_devType)
+            return;
 }
 
-bool QQTPluginWatcher::event(QEvent *e) {
-    if (e->type() == QDeviceChangeEvent::registeredType()) {
-        QDeviceChangeEvent *event = (QDeviceChangeEvent*)e;
+bool QQTPluginWatcher::event(QEvent* e)
+{
+    if (e->type() == QDeviceChangeEvent::registeredType())
+    {
+        QDeviceChangeEvent* event = (QDeviceChangeEvent*)e;
         QString action("Change");
         if (event->action() == QDeviceChangeEvent::Add)
             action = "Add";

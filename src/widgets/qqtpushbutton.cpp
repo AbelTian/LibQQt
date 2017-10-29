@@ -5,7 +5,7 @@
 #include "qqtcore.h"
 #include "qqtwidgets.h"
 
-QQTPushButton::QQTPushButton(QWidget *parent) :
+QQTPushButton::QQTPushButton(QWidget* parent) :
     QPushButton(parent),
     ui(new Ui::QQTPushButton)
 {
@@ -18,8 +18,9 @@ QQTPushButton::~QQTPushButton()
     delete ui;
 }
 
-void QQTPushButton::paintEvent(QPaintEvent *e)
+void QQTPushButton::paintEvent(QPaintEvent* e)
 {
+    Q_UNUSED(e)
     QStylePainter p(this);
 
     bool enabled = isEnabled();
@@ -31,9 +32,9 @@ void QQTPushButton::paintEvent(QPaintEvent *e)
      * 不会报告ｌｉｂｐｎｇｗａｒｎｉｎｇ
      */
     QIcon::Mode iconFlag = QIcon::Normal;
-    if(BTN_PRESS == state)
+    if (BTN_PRESS == state)
         iconFlag = QIcon::Selected;
-    if(!enabled)
+    if (!enabled)
         iconFlag = QIcon::Disabled;
     p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(m_pixmap[state]).pixmap(rect().size(), iconFlag, QIcon::On));
 #else
@@ -49,9 +50,9 @@ void QQTPushButton::paintEvent(QPaintEvent *e)
     p.drawItemText(rect(), Qt::AlignCenter, opt.palette, enabled, text());
 }
 
-void QQTPushButton::mousePressEvent(QMouseEvent *e)
+void QQTPushButton::mousePressEvent(QMouseEvent* e)
 {
-    if(e->button() == Qt::LeftButton)
+    if (e->button() == Qt::LeftButton)
     {
         state = BTN_PRESS;
         QApplication::beep();
@@ -60,16 +61,16 @@ void QQTPushButton::mousePressEvent(QMouseEvent *e)
     QPushButton::mousePressEvent(e);
 }
 
-void QQTPushButton::mouseReleaseEvent(QMouseEvent *e)
+void QQTPushButton::mouseReleaseEvent(QMouseEvent* e)
 {
-    if(e->button() == Qt::LeftButton)
+    if (e->button() == Qt::LeftButton)
     {
 #ifdef __EMBEDDED_LINUX__
         state = BTN_NORMAL;
         //pline() << state;
         update();
 #else
-        if(rect().contains(e->pos()))
+        if (rect().contains(e->pos()))
             state = BTN_HOVER;
         else
             state = BTN_NORMAL;
@@ -78,19 +79,19 @@ void QQTPushButton::mouseReleaseEvent(QMouseEvent *e)
     QPushButton::mouseReleaseEvent(e);
 }
 
-void QQTPushButton::enterEvent(QEvent *e)
+void QQTPushButton::enterEvent(QEvent* e)
 {
     state = BTN_HOVER;
     QPushButton::enterEvent(e);
 }
 
-void QQTPushButton::leaveEvent(QEvent *e)
+void QQTPushButton::leaveEvent(QEvent* e)
 {
     state = BTN_NORMAL;
     QPushButton::leaveEvent(e);
 }
 
-void QQTPushButton::changeEvent(QEvent *e)
+void QQTPushButton::changeEvent(QEvent* e)
 {
     QPushButton::changeEvent(e);
 }
@@ -101,6 +102,8 @@ void QQTPushButton::enabledChange(bool enabled)
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QPushButton::enabledChange(enabled);
 #else
+    //TODO:
+    Q_UNUSED(enabled)
     //TODO:
 #endif
 }

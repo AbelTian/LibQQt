@@ -2,7 +2,7 @@
 #include "qqtcore.h"
 #include "qqtsql.h"
 
-QQTSqlTreeModel::QQTSqlTreeModel(QObject *parent) :
+QQTSqlTreeModel::QQTSqlTreeModel(QObject* parent) :
     QQTTreeModel(parent)
 {
     m_db = newDatabaseConn();
@@ -10,7 +10,7 @@ QQTSqlTreeModel::QQTSqlTreeModel(QObject *parent) :
 
 void QQTSqlTreeModel::setFilePath(QString dbname)
 {
-    if(dbname.isEmpty())
+    if (dbname.isEmpty())
     {
         return;
     }
@@ -20,6 +20,8 @@ void QQTSqlTreeModel::setFilePath(QString dbname)
 
 bool QQTSqlTreeModel::query(QString condition)
 {
+    Q_UNUSED(condition)
+    //TODO:
     return parseDatabase();
 }
 
@@ -27,7 +29,7 @@ bool QQTSqlTreeModel::parseDatabase()
 {
     QStringList tables = m_db.tables(QSql::Tables);
     QStringListIterator itor(tables);
-    while(itor.hasNext())
+    while (itor.hasNext())
     {
         QString table = itor.next();
         parseTable(table);
@@ -46,14 +48,14 @@ bool QQTSqlTreeModel::parseTable(QString tableName)
     itemParent->setData(tableName, Qt::EditRole);
     appendRow(itemParent);
 
-    if(columnCount() < mdl->columnCount())
+    if (columnCount() < mdl->columnCount())
         setColumnCount(mdl->columnCount());
-    for(int i = 0; i < mdl->rowCount(); i++)
+    for (int i = 0; i < mdl->rowCount(); i++)
     {
         QStandardItem* _item = new QStandardItem;
         _item->setData(mdl->index(i, 0).data(Qt::DisplayRole), Qt::EditRole);
         itemParent->appendRow(_item);
-        for(int j = 1; j < mdl->columnCount(); j++)
+        for (int j = 1; j < mdl->columnCount(); j++)
         {
             QStandardItem* __item = new QStandardItem;
             __item->setData(mdl->index(i, j).data(Qt::DisplayRole), Qt::EditRole);

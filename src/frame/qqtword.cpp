@@ -5,16 +5,16 @@
 #include "qqtgraphicsitem.h"
 #include "qqtword.h"
 
-QQTWord::QQTWord(QObject *parent) :
+QQTWord::QQTWord(QObject* parent) :
     QObject(parent),
-    fmt(0), mainFmt(0),headerFmt(0),titleFmt(0), title2Fmt(0)
+    fmt(0), headerFmt(0), titleFmt(0), title2Fmt(0), mainFmt(0)
 {
     //setup printer
     /**
       MIPS bug: you must use QQTPrinter(QPrinter::HighResolution)
       Other constructer won't work well
       */
-    pr= new QQTPrinter(QPrinter::HighResolution);
+    pr = new QQTPrinter(QPrinter::HighResolution);
     pr->setFullPage(true);
     pr->setColorMode(QPrinter::Color);
     pr->setPaperSize(QPrinter::A4);
@@ -44,7 +44,7 @@ QQTWord::QQTWord(QObject *parent) :
 #endif
 
     QRect rect = pr->paperRect();
-    sceneRect = QRectF(0.0, 0.0, logicalDpiX *rect.width()/pr->logicalDpiX(), logicalDpiY*rect.height()/pr->logicalDpiY());
+    sceneRect = QRectF(0.0, 0.0, logicalDpiX * rect.width() / pr->logicalDpiX(), logicalDpiY * rect.height() / pr->logicalDpiY());
 
 #if 0
     //1200 9917,14033 printerRect 固定
@@ -62,19 +62,19 @@ QQTWord::QQTWord(QObject *parent) :
 #endif
 
     m_mainFont = QApplication::font();
-    if(mainFmt)
+    if (mainFmt)
         delete mainFmt;
     mainFmt = new QFontMetrics(m_mainFont);
-    m_titleFont= QApplication::font();
+    m_titleFont = QApplication::font();
     m_titleFont.setPointSize(22);
-    if(titleFmt)
+    if (titleFmt)
         delete titleFmt;
     titleFmt = new QFontMetrics(m_titleFont);
     m_title2Font = QApplication::font();;
     m_title2Font.setPointSize(16);
-    if(title2Fmt)
+    if (title2Fmt)
         delete title2Fmt;
-    title2Fmt =new QFontMetrics(m_title2Font);
+    title2Fmt = new QFontMetrics(m_title2Font);
 
     setMargin();
     setHeaderSize();
@@ -92,17 +92,17 @@ QQTWord::QQTWord(QObject *parent) :
 
 void QQTWord::setMargin(qreal left, qreal right, qreal top, qreal botoom)
 {
-    leftMargin=134.6;
-    rightMargin=134.6;
-    topMargin=177.7;
-    bottomMargin=177.7;
+    leftMargin = 134.6;
+    rightMargin = 134.6;
+    topMargin = 177.7;
+    bottomMargin = 177.7;
 }
 
 QRectF QQTWord::clientRectF()
 {
     return QRectF(leftMargin, topMargin,
-                  sceneRect.width()-leftMargin-rightMargin,
-                  sceneRect.height()-topMargin-bottomMargin);
+                  sceneRect.width() - leftMargin - rightMargin,
+                  sceneRect.height() - topMargin - bottomMargin);
 }
 
 QRectF QQTWord::paperRect()
@@ -116,7 +116,7 @@ void QQTWord::setFont(QFont font)
 {
     //normal font 11
     m_font = QApplication::font();
-    if(fmt)
+    if (fmt)
         delete fmt;
     fmt = new QFontMetrics(m_font);
 }
@@ -137,12 +137,12 @@ void QQTWord::setLineSpacing(qreal spacing)
     headerSpacing = headerFmt->height() * 1;
 }
 
-void QQTWord::addText(const QString &text, QFont font, Qt::Alignment align, QPointF point)
+void QQTWord::addText(const QString& text, QFont font, Qt::Alignment align, QPointF point)
 {
     QFontMetrics fmt = QFontMetrics(font);
     int spacing = fmt.height() * 2;
     int height = fmt.height();
-    int width=fmt.width(text);
+    int width = fmt.width(text);
 
     //pline() << font.pointSize() << fmt.height();
 
@@ -150,29 +150,29 @@ void QQTWord::addText(const QString &text, QFont font, Qt::Alignment align, QPoi
 
     QQTGraphicsTextItem* item = pageScene->addText(text, font);
 
-    if(align & Qt::AlignLeft)
-        item->moveBy(dx, dy+height);
-    else if(align & Qt::AlignRight)
-        item->moveBy(xpos2 - width, dy+height);
-    else if(align & Qt::AlignHCenter)
-        item->moveBy((pageScene->width()/2)-(width/2), dy+height);
+    if (align & Qt::AlignLeft)
+        item->moveBy(dx, dy + height);
+    else if (align & Qt::AlignRight)
+        item->moveBy(xpos2 - width, dy + height);
+    else if (align & Qt::AlignHCenter)
+        item->moveBy((pageScene->width() / 2) - (width / 2), dy + height);
     dy += height + spacing;
 }
 
-void QQTWord::addSignoffText(const QString &text, QFont font)
+void QQTWord::addSignoffText(const QString& text, QFont font)
 {
     adjustdy(mainHeight + mainSpacing);
 
     int ddy = dy;
 
-    dy = ypos2 - ( (mainHeight + mainSpacing) * 2 );
+    dy = ypos2 - ((mainHeight + mainSpacing) * 2);
 
     addText(text, m_mainFont, Qt::AlignRight);
 
     dy = ddy;
 }
 
-void QQTWord::addTable(const QTableView *table, QPointF pos)
+void QQTWord::addTable(const QTableView* table, QPointF pos)
 {
     Q_ASSERT(table);
 
@@ -182,25 +182,26 @@ void QQTWord::addTable(const QTableView *table, QPointF pos)
 
     int tableRowHeight = 0;
 
-    if(!table->horizontalHeader()->isHidden())
+    if (!table->horizontalHeader()->isHidden())
     {
         tableRowHeight = table->horizontalHeader()->height();
         adjustdy(tableRowHeight);
-        for (int col=0; col<model->columnCount(); col++) {
-            int logicalIndex=table->horizontalHeader()->logicalIndex(col);
-            int actColSize= table->columnWidth(logicalIndex);
+        for (int col = 0; col < model->columnCount(); col++)
+        {
+            int logicalIndex = table->horizontalHeader()->logicalIndex(col);
+            int actColSize = table->columnWidth(logicalIndex);
 
-            if(table->horizontalHeader()->isSectionHidden(col))
+            if (table->horizontalHeader()->isSectionHidden(col))
                 continue;
 
             QPen pen(Qt::gray, 0.1);
             QBrush brush(QColor(255, 250, 250));
             //QBrush brush(tableView->horizontalHeader()->palette().background());
-            pageScene->addRect(dx,dy, actColSize,tableRowHeight, pen, brush);
+            pageScene->addRect(dx, dy, actColSize, tableRowHeight, pen, brush);
 
-            QString txt = model->headerData(logicalIndex,Qt::Horizontal,Qt::DisplayRole).toString();
-            txt = tableFmt.elidedText(txt, Qt::ElideRight, actColSize-2);
-            QQTGraphicsTextItem *item = pageScene->addText(txt, tableFont);
+            QString txt = model->headerData(logicalIndex, Qt::Horizontal, Qt::DisplayRole).toString();
+            txt = tableFmt.elidedText(txt, Qt::ElideRight, actColSize - 2);
+            QQTGraphicsTextItem* item = pageScene->addText(txt, tableFont);
             item->moveBy(dx, dy);
             dx += actColSize;
         }
@@ -209,36 +210,39 @@ void QQTWord::addTable(const QTableView *table, QPointF pos)
 
     QHash<int, ESpanFlags> spans = tableSpans(table);
     QHashIterator<int, ESpanFlags> it(spans);
-    while(0 && it.hasNext())
+    while (0 && it.hasNext())
     {
         it.next();
         pline() << it.key() << it.value();
         pline() << it.value().testFlag(ESpanLeft) <<
-                   it.value().testFlag(ESpanTop)  <<
-                   it.value().testFlag(ESpanRight) <<
-                   it.value().testFlag(ESpanBottom) <<
-                   it.value().testFlag(ESpanMiddle) ;
+                it.value().testFlag(ESpanTop)  <<
+                it.value().testFlag(ESpanRight) <<
+                it.value().testFlag(ESpanBottom) <<
+                it.value().testFlag(ESpanMiddle) ;
     }
 
     //Table rows
     QPen pen(Qt::gray, 0.1);
     QBrush brush(Qt::gray, Qt::SolidPattern);
     int row = 0;
-    for (;;) {
-        if (row >= model->rowCount()) {
+    for (;;)
+    {
+        if (row >= model->rowCount())
+        {
             break;
         }
 
-        if(table->isRowHidden(row))
+        if (table->isRowHidden(row))
             continue;
 
         tableRowHeight = table->rowHeight(row);
         adjustdy(tableRowHeight);
-        for (int col=0; col<model->columnCount(); col++) {
-            int logicalIndex=table->horizontalHeader()->logicalIndex(col);
-            int actColSize=table->columnWidth(logicalIndex);
+        for (int col = 0; col < model->columnCount(); col++)
+        {
+            int logicalIndex = table->horizontalHeader()->logicalIndex(col);
+            int actColSize = table->columnWidth(logicalIndex);
 
-            if(table->isColumnHidden(col))
+            if (table->isColumnHidden(col))
                 continue;
 
             int point = row * model->columnCount() + col;
@@ -248,45 +252,46 @@ void QQTWord::addTable(const QTableView *table, QPointF pos)
             QBrush brush(table->palette().window());
             bool balt = table->alternatingRowColors();
 
-            if(ESpanNone == flags)
+            if (ESpanNone == flags)
             {
-                if(balt)
+                if (balt)
                 {
-                    int modulo= row % 2;
-                    if (modulo != 0) {
+                    int modulo = row % 2;
+                    if (modulo != 0)
+                    {
                         //rectangle grey
-                        pageScene->addRect(dx,dy,actColSize,tableRowHeight, pen, brush);
+                        pageScene->addRect(dx, dy, actColSize, tableRowHeight, pen, brush);
                     }
                     else
                     {
-                        pageScene->addRect(dx,dy,actColSize,tableRowHeight, pen);
+                        pageScene->addRect(dx, dy, actColSize, tableRowHeight, pen);
                     }
                 }
                 else
                 {
-                    pageScene->addRect(dx,dy,actColSize,tableRowHeight, pen);
+                    pageScene->addRect(dx, dy, actColSize, tableRowHeight, pen);
                 }
             }
 
-            if(flags.testFlag(ESpanLeft))
-                pageScene->addLine(dx, dy, dx, dy+tableRowHeight, pen);
-            if(flags.testFlag(ESpanTop))
-                pageScene->addLine(dx, dy, dx+actColSize, dy, pen);
-            if(flags.testFlag(ESpanRight))
-                pageScene->addLine(dx+actColSize, dy, dx+actColSize, dy+tableRowHeight, pen);
-            if(flags.testFlag(ESpanBottom))
-                pageScene->addLine(dx, dy+tableRowHeight, dx+actColSize, dy+tableRowHeight, pen);
+            if (flags.testFlag(ESpanLeft))
+                pageScene->addLine(dx, dy, dx, dy + tableRowHeight, pen);
+            if (flags.testFlag(ESpanTop))
+                pageScene->addLine(dx, dy, dx + actColSize, dy, pen);
+            if (flags.testFlag(ESpanRight))
+                pageScene->addLine(dx + actColSize, dy, dx + actColSize, dy + tableRowHeight, pen);
+            if (flags.testFlag(ESpanBottom))
+                pageScene->addLine(dx, dy + tableRowHeight, dx + actColSize, dy + tableRowHeight, pen);
 
-            if(ESpanNone == flags ||
-                    (flags.testFlag(ESpanLeft)&&flags.testFlag(ESpanTop)))
+            if (ESpanNone == flags ||
+                (flags.testFlag(ESpanLeft) && flags.testFlag(ESpanTop)))
             {
-                QString txt = model->data(model->index(row,logicalIndex)).toString();
-                txt=tableFmt.elidedText(txt,Qt::ElideRight,actColSize-2);
-                QQTGraphicsTextItem *item = pageScene->addText(txt, tableFont);
-                item->moveBy(dx,dy);
+                QString txt = model->data(model->index(row, logicalIndex)).toString();
+                txt = tableFmt.elidedText(txt, Qt::ElideRight, actColSize - 2);
+                QQTGraphicsTextItem* item = pageScene->addText(txt, tableFont);
+                item->moveBy(dx, dy);
             }
 
-            dx+=actColSize;
+            dx += actColSize;
         }
         row++;
         dy += tableRowHeight;
@@ -296,29 +301,30 @@ void QQTWord::addTable(const QTableView *table, QPointF pos)
 
 int QQTWord::pageNum() { return pageSceneVector.size(); }
 
-void QQTWord::exportPdf(const QString &pdf)
+void QQTWord::exportPdf(const QString& pdf)
 {
     // setup printer
     pr->setOutputFileName(pdf);
 
     // print pdf
-    QPainter p(pr);        
+    QPainter p(pr);
 
     QQTGraphicsScene* pageScene = 0;
-    foreach (pageScene, pageSceneVector) {
+    foreach (pageScene, pageSceneVector)
+    {
 
         pageScene->render(&p, pr->paperRect(), sceneRect);
 
-        if(pageScene != pageSceneVector.last())
+        if (pageScene != pageSceneVector.last())
             pr->newPage();
     }
 }
 
-QQTGraphicsScene *QQTWord::getPage(int num)
+QQTGraphicsScene* QQTWord::getPage(int num)
 {
-    if(num < 1 || num > pageSceneVector.size())
+    if (num < 1 || num > pageSceneVector.size())
         return NULL;
-    return pageSceneVector.at(num-1);
+    return pageSceneVector.at(num - 1);
 }
 
 void QQTWord::print()
@@ -331,14 +337,14 @@ void QQTWord::setHeaderFont(QFont font)
     //header font
     m_headerFont = QApplication::font();;
     m_headerFont.setPointSize(9);
-    if(headerFmt)
+    if (headerFmt)
         delete headerFmt;
-    headerFmt =new QFontMetrics(m_headerFont);
+    headerFmt = new QFontMetrics(m_headerFont);
 }
 
 void QQTWord::setHeaderSize(qreal size)
 {
-    headerSize=70;
+    headerSize = 70;
 }
 
 void QQTWord::setHeaderLine(bool show)
@@ -346,7 +352,7 @@ void QQTWord::setHeaderLine(bool show)
 
 }
 
-void QQTWord::setHeaderText(const QString &text, QFont font, Qt::Alignment align)
+void QQTWord::setHeaderText(const QString& text, QFont font, Qt::Alignment align)
 {
     headerText = text;
     paintPageHeader();
@@ -354,25 +360,28 @@ void QQTWord::setHeaderText(const QString &text, QFont font, Qt::Alignment align
 
 void QQTWord::setFooterSize(qreal size)
 {
-    footerSize=70;
+    footerSize = 70;
 }
 
 QFont QQTWord::font() { return m_font; }
 
 void QQTWord::setFooterLine(bool show)
 {
-
+    Q_UNUSED(show)
 }
 
-void QQTWord::setFooterText(const QString &text, QFont font, Qt::Alignment align)
+void QQTWord::setFooterText(const QString& text, QFont font, Qt::Alignment align)
 {
+    Q_UNUSED(font)
+    Q_UNUSED(align)
     footerText = text;
     paintPageFooter();
 }
 
 void QQTWord::initWord()
 {
-    while ( ! pageSceneVector.isEmpty() ) {
+    while (! pageSceneVector.isEmpty())
+    {
         QQTGraphicsScene* pageScene = pageSceneVector.first();
         pageScene->clear();
         delete pageScene;
@@ -386,7 +395,7 @@ void QQTWord::initWord()
 void QQTWord::adjustdy(qreal dy0)
 {
     dx = xpos;
-    if(dy + dy0 < ypos2)
+    if (dy + dy0 < ypos2)
         return;
     createFrame();
 }
@@ -414,19 +423,19 @@ void QQTWord::paintPageHeader()
         return;
 
     int sx = xpos;
-    int sy = ypos-headerSize;
+    int sy = ypos - headerSize;
     /*
      * 页眉
      */
-    QQTGraphicsTextItem *headerItem = pageScene->addText(headerText, m_headerFont);
+    QQTGraphicsTextItem* headerItem = pageScene->addText(headerText, m_headerFont);
     headerItem->moveBy(sx, sy);
 
     //std text
-    QString date=QDate::currentDate().toString(QLocale().dateFormat());
-    QString time=QTime::currentTime().toString(QLocale().timeFormat(QLocale::ShortFormat));
+    QString date = QDate::currentDate().toString(QLocale().dateFormat());
+    QString time = QTime::currentTime().toString(QLocale().timeFormat(QLocale::ShortFormat));
     QString headerStdText;
-    headerStdText = date+"  "+time;
-    QQTGraphicsTextItem *item = pageScene->addText(headerStdText, m_headerFont);
+    headerStdText = date + "  " + time;
+    QQTGraphicsTextItem* item = pageScene->addText(headerStdText, m_headerFont);
     item->moveBy(xpos2 - headerFmt->width(headerStdText), sy);
 
     sy += headerItem->boundingRect().height();
@@ -446,18 +455,18 @@ void QQTWord::paintPageFooter()
     int sx = xpos;
 
     QString footerStdText = tr("Page") + QString::number(pageSceneVector.size()) + tr(" ");
-    QQTGraphicsTextItem *item=pageScene->addText(footerStdText, m_headerFont);
+    QQTGraphicsTextItem* item = pageScene->addText(footerStdText, m_headerFont);
     int height = item->boundingRect().height();
     int sy = ypos2 + footerSize - height;
     item->moveBy(xpos2 - headerFmt->width(footerStdText), sy);
 
     pageScene->addLine(xpos, sy, xpos2, sy, QPen(Qt::black, 1.0));
 
-    QQTGraphicsTextItem *footerItem=pageScene->addText(footerText, m_headerFont);
+    QQTGraphicsTextItem* footerItem = pageScene->addText(footerText, m_headerFont);
     footerItem->moveBy(xpos, sy);
 }
 
-QHash<int, ESpanFlags> QQTWord::tableSpans(const QTableView *table)
+QHash<int, ESpanFlags> QQTWord::tableSpans(const QTableView* table)
 {
     Q_ASSERT(table);
 
@@ -470,57 +479,57 @@ QHash<int, ESpanFlags> QQTWord::tableSpans(const QTableView *table)
     for (int row = 0; row < rowCount; row++)
     {
 
-        for(int col = 0; col < colCount; col++)
+        for (int col = 0; col < colCount; col++)
         {
             int rowSpan = table->rowSpan(row, col);
             int colSpan = table->columnSpan(row, col);
 
-            int point = ( row ) * colCount + ( col );
+            int point = (row) * colCount + (col);
             ESpanFlags flags = ESpanNone;
 
             /*
              * 没有合并
              */
-            if(rowSpan == 1 && colSpan == 1)
+            if (rowSpan == 1 && colSpan == 1)
             {
                 spans.insert(point, flags);
                 continue;
             }
 
-            for(int i = 0; i < rowSpan; i++)
+            for (int i = 0; i < rowSpan; i++)
             {
 
-                point = ( row + i ) * colCount + col + 0;
+                point = (row + i) * colCount + col + 0;
                 /*
                  * 如果此处有Span，但是Spans已经赋值，那么break
                  */
-                if(ESpanNone != spans.value(point, ESpanNone))
+                if (ESpanNone != spans.value(point, ESpanNone))
                     break;
 
-                for(int j = 0; j < colSpan; j++)
+                for (int j = 0; j < colSpan; j++)
                 {
-                    point = ( row + i ) * colCount + col + j;
+                    point = (row + i) * colCount + col + j;
                     /*
                      * 如果此处有Span，但是Spans已经赋值，那么break
                      */
-                    if(ESpanNone != spans.value(point, ESpanNone))
+                    if (ESpanNone != spans.value(point, ESpanNone))
                         break;
 
                     ESpanFlags flags = ESpanNone;
 
-                    if(i == 0)
+                    if (i == 0)
                         flags |= ESpanFlags(ESpanTop);
 
-                    if(i == rowSpan - 1)
+                    if (i == rowSpan - 1)
                         flags |= ESpanFlags(ESpanBottom);
 
-                    if(j == 0)
+                    if (j == 0)
                         flags |= ESpanFlags(ESpanLeft);
 
-                    if(j == colSpan - 1)
+                    if (j == colSpan - 1)
                         flags |= ESpanFlags(ESpanRight);
 
-                    if(i != 0 && j != 0 && i != rowSpan-1 && j != colSpan-1)
+                    if (i != 0 && j != 0 && i != rowSpan - 1 && j != colSpan - 1)
                         flags |= ESpanMiddle;
 
                     spans.insert(point, flags);

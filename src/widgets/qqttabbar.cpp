@@ -7,7 +7,7 @@
 #include "QToolButton"
 #include "qqtcore.h"
 
-QQTTabBar::QQTTabBar(QWidget *parent) :
+QQTTabBar::QQTTabBar(QWidget* parent) :
     QTabBar(parent)
 {
     setFocusPolicy(Qt::NoFocus);
@@ -15,7 +15,7 @@ QQTTabBar::QQTTabBar(QWidget *parent) :
 
 void QQTTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
 {
-    if(index < 0 || index + 1 > count() || index + 1 > iconList.size())
+    if (index < 0 || index + 1 > count() || index + 1 > iconList.size())
         return;
 
     icon = QImage(iconList[index][BTN_NORMAL]);
@@ -24,9 +24,9 @@ void QQTTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
     return ;
 }
 
-void QQTTabBar::setTabPixmap(int index, const QString &icon, const QString& iconSel)
+void QQTTabBar::setTabPixmap(int index, const QString& icon, const QString& iconSel)
 {
-    if(index < 0 || index + 1 > count())
+    if (index < 0 || index + 1 > count())
         return;
 
     TBtnIconTable table;
@@ -36,19 +36,21 @@ void QQTTabBar::setTabPixmap(int index, const QString &icon, const QString& icon
     iconList.insert(index, table);
 }
 
-void QQTTabBar::paintEvent(QPaintEvent * e)
+void QQTTabBar::paintEvent(QPaintEvent* e)
 {
+    Q_UNUSED(e)
     QStylePainter p(this);
 
     for (int index = 0; index < count(); index++)
     {
+        //TODO:
         QStyleOptionTabV3 opt;
         initStyleOption(&opt, index);
         opt.shape = verticalTabs() ? QTabBar::RoundedWest : QTabBar::RoundedNorth;
 
         QRect tabRectValue = tabRect(index);
 
-        if( iconList.size() > index )
+        if (iconList.size() > index)
         {
             int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
             p.drawItemPixmap(tabRectValue, Qt::AlignCenter, QIcon(iconList[index][sel]).pixmap(rect().size(), QIcon::Normal, QIcon::On));
@@ -66,10 +68,10 @@ void QQTTabBar::paintEvent(QPaintEvent * e)
         //-rect.height()/20 上移
         verticalTabs() ? tabRectValue.adjust(0, 0, 0, 0) : tabRectValue.adjust(0, 0, 0, 0);
 
-        int flags = verticalTabs() ? Qt::AlignHCenter|Qt::AlignBottom : Qt::AlignCenter;
+        int flags = verticalTabs() ? Qt::AlignHCenter | Qt::AlignBottom : Qt::AlignCenter;
 
         //pline() << objectName() << rect;
-        if(index == currentIndex())
+        if (index == currentIndex())
             p.drawItemText(tabRectValue, flags, opt.palette, true, opt.text, QPalette::Text);
         else
             p.drawItemText(tabRectValue, flags, opt.palette, true, opt.text, QPalette::BrightText);
@@ -79,7 +81,7 @@ void QQTTabBar::paintEvent(QPaintEvent * e)
 bool QQTTabBar::verticalTabs()
 {
     return shape() == QTabBar::RoundedWest
-            || shape() == QTabBar::RoundedEast
-            || shape() == QTabBar::TriangularWest
-            || shape() == QTabBar::TriangularEast;
+           || shape() == QTabBar::RoundedEast
+           || shape() == QTabBar::TriangularWest
+           || shape() == QTabBar::TriangularEast;
 }
