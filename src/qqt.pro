@@ -25,10 +25,10 @@ equals(QKIT_PRIVATE, macOS) {
     DEFINES -= QQT_LIBRARY
     CONFIG -= dll
     CONFIG += staticlib
-} else:equals(QKIT_PRIVATE, WIN) {
+} else:equals(QKIT_PRIVATE, WIN32) {
     #when Qt is static by mingw32 building 5.9.1
     equals(QT_VERSION, 5.9.1){
-        DEFINES -= QQT_LIBRARY
+        #DEFINES -= QQT_LIBRARY
         CONFIG -= dll
         CONFIG += staticlib
     }

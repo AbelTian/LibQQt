@@ -16,7 +16,7 @@ SUBDIRS += examples/QQtInstaller
 #need QQt installed to Qt library or
 #need QQt installed to sdk
 SUBDIRS += examples/qqtframe3
-SUBDIRS += examples/VegeTablesPrice
+#SUBDIRS += examples/VegeTablesPrice
 
 #need vlcQt libvlc library
 #SUBDIRS += examples/qqtliveplayer

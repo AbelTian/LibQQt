@@ -96,7 +96,7 @@ int QQtBluetoothClient::sendDisConnectFromHost()
 
     if (isOpen())
     {
-#if defined(__WIN__) || defined (__WIN64__)
+#if defined(__WIN32__) || defined (__WIN64__)
         ;
 #else
         shutdown(this->socketDescriptor(), SHUT_RDWR);

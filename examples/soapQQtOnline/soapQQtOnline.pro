@@ -9,7 +9,7 @@ equals(QMAKE_HOST.os, Darwin) {
 } else: equals(QMAKE_HOST.os, Linux) {
     QQT_SOURCE_ROOT = /home/abel/Develop/a0-develop/LibQt
 } else: equals(QMAKE_HOST.os, Windows) {
-    QQT_SOURCE_ROOT = C:/Users/Administrator/Develop/a0-develop/a0-qqtfoundation
+    QQT_SOURCE_ROOT = C:/Users/Administrator/Develop/a0-develop/LibQt
 }
 
 #include QQt's version, needed by qqt_library.pri

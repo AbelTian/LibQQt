@@ -35,7 +35,7 @@ QKIT_PRIVATE = $$(QKIT)
 #ARM __ARM_LINUX__
 #LINUX __LINUX__
 #LINUX64 __LINUX64__
-#WIN __WIN__
+#WIN32 __WIN32__
 #WIN64 __WIN64__
 #macOS __DARWIN__
 #ANDROID __ANDROID__
@@ -57,8 +57,8 @@ equals(QKIT_PRIVATE, EMBEDDED) {
     DEFINES += __LINUX__
 } else:equals(QKIT_PRIVATE, LINUX64) {
     DEFINES += __LINUX64__
-} else:equals(QKIT_PRIVATE, WIN) {
-    DEFINES += __WIN__
+} else:equals(QKIT_PRIVATE, WIN32) {
+    DEFINES += __WIN32__
 } else:equals(QKIT_PRIVATE, WIN64) {
     DEFINES += __WIN64__
 } else:equals(QKIT_PRIVATE, macOS) {
@@ -96,7 +96,7 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 #} else:equals(QMAKESPEC_NAME, linux-g++) {
 #    DEFINES += __LINUX64__
 #} else:equals(QMAKESPEC_NAME, win32-*) {
-#    DEFINES += __WIN__
+#    DEFINES += __WIN32__
 #} else:equals(QMAKESPEC_NAME, win64-*) {
 #    DEFINES += __WIN64__
 #} else:equals(QMAKESPEC_NAME, macx-ios-*) {
@@ -137,7 +137,7 @@ equals(QKIT_PRIVATE, MIPS32) {
     SYSNAME = Linux
 } else:equals(QKIT_PRIVATE, LINUX64) {
     SYSNAME = Linux64
-} else:equals(QKIT_PRIVATE, WIN) {
+} else:equals(QKIT_PRIVATE, WIN32) {
     SYSNAME = Windows
 } else:equals(QKIT_PRIVATE, WIN64) {
     SYSNAME = Win64

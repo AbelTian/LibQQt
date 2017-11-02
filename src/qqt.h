@@ -7,7 +7,7 @@
 #include "qqt-local.h"
 #include "qqt-qt.h"
 
-#if defined(__WIN__) || defined(__WIN64__)
+#if defined(__WIN32__) || defined(__WIN64__)
 #include "qqtwin.h"
 #elif defined(__LINUX__) || defined(__LINUX64__)
 #include "qqtlinux.h"

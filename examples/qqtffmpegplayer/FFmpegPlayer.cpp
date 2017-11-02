@@ -2,7 +2,7 @@
 #include<QDebug>
 #include<iostream>
 #include "qqtdefine.h"
-#if defined (__WIN__) || defined (__WIN64__)
+#if defined (__WIN32__) || defined (__WIN64__)
 #include<windows.h>
 #else
 #define  nullptr NULL

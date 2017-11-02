@@ -22,7 +22,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#if defined (__WIN__) \
+#if defined (__WIN32__) \
     || defined (__WIN64__)
 #define SHUT_RD 0
 #define SHUT_WR 1
