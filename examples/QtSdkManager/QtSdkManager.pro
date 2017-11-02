@@ -13,6 +13,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+QT += core gui network sql xml
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
+
+#this name must be equals to pro name? no, this must place before qqt_library.pri
+#qmake pro pri is sequential
+TARGET = QQtSdkManager
+TEMPLATE = app
 
 #QQt source root on your computer
 equals(QMAKE_HOST.os, Darwin) {
@@ -35,13 +43,6 @@ contains (CONFIG, BUILD_SRC) {
 }
 
 
-QT += core gui network sql xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
-greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
-
-#this name must be equals to pro name
-TARGET = QtSdkManager
-TEMPLATE = app
 
 INCLUDEPATH +=  $$PWD
 

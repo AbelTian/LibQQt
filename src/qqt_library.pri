@@ -62,8 +62,9 @@ equals(QKIT_PRIVATE, macOS) {
     #        bin/$${TARGET}.app/Contents/Frameworks &&
     QMAKE_POST_LINK += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
          @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
-         bin/$${TARGET}.app/Contents/MacOS/$$TARGET &&
+         bin/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     QMAKE_POST_LINK += macdeployqt bin/$${TARGET}.app -verbose=1
+    message($$QMAKE_POST_LINK)
 }
 
 ############
