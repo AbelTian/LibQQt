@@ -82,7 +82,8 @@ SOURCES += \
     qqtlanprotocol.cpp \
     qqtnetworkmessage.cpp \
     qqtserialmessage.cpp \
-    qqtuserserialprotocol.cpp
+    qqtuserserialprotocol.cpp \
+    qqtsubprotocoltest.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -90,7 +91,8 @@ HEADERS += \
     qqtlanprotocol.h \
     qqtnetworkmessage.h \
     qqtserialmessage.h \
-    qqtuserserialprotocol.h
+    qqtuserserialprotocol.h \
+    qqtsubprotocoltest.h
 
 contains (DEFINES, __BLUETOOTH__){
     SOURCES += \

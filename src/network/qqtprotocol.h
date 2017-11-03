@@ -4,6 +4,7 @@
 #include <QObject>
 #include <qqt-local.h>
 #include "qqtmessage.h"
+#include "qqtcore.h"
 
 /**
  * @brief The QQtProtocol class
@@ -13,19 +14,27 @@ class QQTSHARED_EXPORT QQtProtocol : public QObject
 {
     Q_OBJECT
 public:
-    inline explicit QQtProtocol(QObject* parent = 0) : QObject(parent) {}
-    inline virtual ~QQtProtocol() {}
+    explicit QQtProtocol(QObject* parent = 0);
+    virtual ~QQtProtocol();
 
 Q_SIGNALS:
     qint64 write(const QByteArray&);
 
 public:
+    /**
+     * @brief 协议处理器
+     * @param Qt通讯口readAll()读到的bytes
+     * @return
+     */
+    virtual void translator(const QByteArray& bytes);
+
+protected:
     inline virtual quint16 minlength() { return 0; }
     /**
      * @brief 最大包长
      * @return
      */
-    inline virtual quint16 maxlength() { return 0; }
+    inline virtual quint16 maxlength() { return 0xFFFF; }
     /**
      * @brief 语法解析器 从流中解析报文长度
      * @param 接收到的数据段
