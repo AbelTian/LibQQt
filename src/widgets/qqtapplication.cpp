@@ -1,13 +1,13 @@
 #include "qqtapplication.h"
-#include <QFile>
 #include "qqtpluginwatcher.h"
 #include <qqtwidgets.h>
 #include <qqtmsgbox.h>
-#include <QTextCodec>
-#include <QSettings>
 #include <qqtversion.h>
 #include <qqtframe.h>
 #include <qqtcore.h>
+#include <QFile>
+#include <QTextCodec>
+#include <QSettings>
 #include <QTranslator>
 #include <QFontDatabase>
 #include <QProcess>

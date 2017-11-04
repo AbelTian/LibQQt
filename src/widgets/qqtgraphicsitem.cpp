@@ -48,7 +48,7 @@ void QQTGraphicsTextItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
     if (option->state & (QStyle::State_Selected | QStyle::State_HasFocus))
         ;
 
-    if (0 && toPlainText().contains("K1160"))
+    if (0 && toPlainText().contains("Da Zi"))
     {
         pline() << font().pointSize() << font().pixelSize();
         pline() << pos() << option->rect << option->exposedRect << toPlainText();
