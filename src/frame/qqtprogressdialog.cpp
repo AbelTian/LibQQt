@@ -3,9 +3,9 @@
 #include "qqtcore.h"
 #include "qqtobjectfactory.h"
 
-QQTProgressDialog::QQTProgressDialog(QWidget *parent) :
-    QQTDialog(parent),
-    ui(new Ui::QQTProgressDialog)
+QQtProgressDialog::QQtProgressDialog(QWidget* parent) :
+    QQtDialog(parent),
+    ui(new Ui::QQtProgressDialog)
 {
     ui->setupUi(this);
     bar = ui->widgetBar;
@@ -25,9 +25,9 @@ QQTProgressDialog::QQTProgressDialog(QWidget *parent) :
     ui->btnCancel->setText("");
     ui->btnCancel->setFixedSize(104, 40);
     ui->btnCancel->iconTable().initNormal("./skin/default/bt_back_normal.png",
-                                      "./skin/default/bt_back_press.png" );
+                                          "./skin/default/bt_back_press.png");
     ui->btnCancel->iconTable().initOther("./skin/default/bt_back_hover.png",
-                                     "./skin/default/bt_back_disable.png");
+                                         "./skin/default/bt_back_disable.png");
 
     ui->widgetBar->setPixMap("./skin/default/bk_progress_background.png",
                              "./skin/default/bk_progress_chunk.png");
@@ -37,28 +37,28 @@ QQTProgressDialog::QQTProgressDialog(QWidget *parent) :
     QQTObjectFactory::registerObject(ui->btnCancel);
 }
 
-QQTProgressDialog::~QQTProgressDialog()
+QQtProgressDialog::~QQtProgressDialog()
 {
     delete ui;
 }
 
-void QQTProgressDialog::initAll()
+void QQtProgressDialog::initAll()
 {
     bar->setRange(0, 100);
     bar->setValue(0);
 }
 
-void QQTProgressDialog::setRange(int min, int max)
+void QQtProgressDialog::setRange(int min, int max)
 {
     bar->setRange(min, max);
 }
 
-void QQTProgressDialog::setContent(QString content)
+void QQtProgressDialog::setContent(QString content)
 {
     ui->label->setText(content);
 }
 
-void QQTProgressDialog::setValue(int value)
+void QQtProgressDialog::setValue(int value)
 {
     bar->setValue(value);
 }

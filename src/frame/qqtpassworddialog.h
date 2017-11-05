@@ -8,7 +8,7 @@ namespace Ui {
 class QQTPasswordDialog;
 }
 
-class QQTSHARED_EXPORT QQTPasswordDialog : public QQTDialog
+class QQTSHARED_EXPORT QQTPasswordDialog : public QQtDialog
 {
     Q_OBJECT
 

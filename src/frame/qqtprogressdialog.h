@@ -5,17 +5,18 @@
 #include "qqtdialog.h"
 #include "qqtprogressbar.h"
 
-namespace Ui {
-class QQTProgressDialog;
+namespace Ui
+{
+class QQtProgressDialog;
 }
 
-class QQTSHARED_EXPORT QQTProgressDialog : public QQTDialog
+class QQTSHARED_EXPORT QQtProgressDialog : public QQtDialog
 {
     Q_OBJECT
 
 public:
-    explicit QQTProgressDialog(QWidget *parent = 0);
-    ~QQTProgressDialog();
+    explicit QQtProgressDialog(QWidget* parent = 0);
+    ~QQtProgressDialog();
 
     void initAll();
     void setRange(int min, int max);
@@ -25,7 +26,7 @@ public slots:
     void setValue(int value);
 
 private:
-    Ui::QQTProgressDialog *ui;
+    Ui::QQtProgressDialog* ui;
     QQTProgressBar* bar;
 };
 

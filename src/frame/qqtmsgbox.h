@@ -12,7 +12,7 @@ class QQTMsgBox;
  * @brief The QQTMsgBox class
  *
  */
-class QQTSHARED_EXPORT QQTMsgBox : public QQTDialog
+class QQTSHARED_EXPORT QQTMsgBox : public QQtDialog
 {
     Q_OBJECT
 

@@ -12,7 +12,6 @@
 SOURCES +=
 HEADERS +=
 
-
 #root dir
 win32 {
     #win32 base type
@@ -72,10 +71,8 @@ SOURCES += \
     $$PWD/widgets/qqtprogressbar.cpp \
     $$PWD/widgets/qqtpushbutton.cpp \
     $$PWD/widgets/qqtradiobutton.cpp \
-    $$PWD/widgets/qqttabbar.cpp \
     $$PWD/widgets/qqttableview.cpp \
     $$PWD/widgets/qqttabwidget.cpp \
-    $$PWD/widgets/qqttabwidgetb.cpp \
     $$PWD/widgets/qqttreeview.cpp \
     $$PWD/widgets/qqtlineeditwithsearch.cpp \
     $$PWD/widgets/qqtmptablewidget.cpp \
@@ -94,10 +91,8 @@ HEADERS += \
     $$PWD/widgets/qqtprogressbar.h \
     $$PWD/widgets/qqtpushbutton.h \
     $$PWD/widgets/qqtradiobutton.h \
-    $$PWD/widgets/qqttabbar.h \
     $$PWD/widgets/qqttableview.h \
     $$PWD/widgets/qqttabwidget.h \
-    $$PWD/widgets/qqttabwidgetb.h \
     $$PWD/widgets/qqttreeview.h \
     $$PWD/widgets/qqtlineeditwithsearch.h \
     $$PWD/widgets/qqtmptablewidget.h \
@@ -117,8 +112,6 @@ FORMS += \
     $$PWD/widgets/qqtpushbutton.ui \
     $$PWD/widgets/qqtradiobutton.ui \
     $$PWD/widgets/qqttableview.ui \
-    $$PWD/widgets/qqttabwidget.ui \
-    $$PWD/widgets/qqttabwidgetb.ui \
     $$PWD/widgets/qqttreeview.ui \
     $$PWD/widgets/qqtwidget.ui \
     $$PWD/widgets/qqttablewidget.ui \
@@ -280,43 +273,60 @@ HEADERS += \
 FORMS += \
     $$PWD/frame/qqtprogressdialog.ui \
     $$PWD/frame/qqtpassworddialog.ui \
-    $$PWD/frame/qqtdialog.ui \
     $$PWD/frame/qqtinput.ui \
     $$PWD/frame/qqtmsgbox.ui
 
 
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
+    #progressbar
     SOURCES += \
         $$PWD/exquisite/qqtcustomspeedmeter.cpp \
-        $$PWD/exquisite/qqtframelesshelper.cpp \
-        $$PWD/exquisite/qqtframelesshelperprivate.cpp \
-        $$PWD/exquisite/qqtcustompianokeyboard.cpp \
-        $$PWD/exquisite/qqtrippleeffectpushbutton.cpp \
-        $$PWD/exquisite/qqtrulereffectslider.cpp \
-        $$PWD/exquisite/qqtflipeffectstackedwidget.cpp \
-        $$PWD/exquisite/qqtledbannereffectlabel.cpp \
-        $$PWD/exquisite/qqtmarqueeeffectlabel.cpp \
-        $$PWD/exquisite/qqtcustomverificationcode.cpp \
-        $$PWD/exquisite/qqtfadeeffectwidget.cpp \
-        $$PWD/exquisite/qqtshadoweffectwidget.cpp \
-        $$PWD/exquisite/qqtpopeffectdialog.cpp \
         $$PWD/exquisite/qqtcustomeffectprogressbar.cpp
     HEADERS += \
         $$PWD/exquisite/qqtcustomspeedmeter.h \
+        $$PWD/exquisite/qqtcustomeffectprogressbar.h
+    #label
+    SOURCES += \
+        $$PWD/exquisite/qqtledbannereffectlabel.cpp \
+        $$PWD/exquisite/qqtmarqueeeffectlabel.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtmarqueeeffectlabel.h \
+        $$PWD/exquisite/qqtledbannereffectlabel.h
+
+    SOURCES += \
+        $$PWD/exquisite/qqtcustompianokeyboard.cpp \
+        $$PWD/exquisite/qqtrippleeffectpushbutton.cpp \
+        $$PWD/exquisite/qqtrulereffectslider.cpp \
+        $$PWD/exquisite/qqtcustomverificationcode.cpp \
+        $$PWD/exquisite/qqtframelesshelper.cpp \
+        $$PWD/exquisite/qqtframelesshelperprivate.cpp \
+        $$PWD/exquisite/qqtflipeffectstackedwidget.cpp \
+        $$PWD/exquisite/qqtfadeeffectwidget.cpp \
+        $$PWD/exquisite/qqtshadoweffectwidget.cpp \
+        $$PWD/exquisite/qqtpopeffectdialog.cpp
+    HEADERS += \
         $$PWD/exquisite/qqtframelesshelper.h \
         $$PWD/exquisite/qqtframelesshelperprivate.h \
         $$PWD/exquisite/qqtcustompianokeyboard.h \
         $$PWD/exquisite/qqtrippleeffectpushbutton.h \
         $$PWD/exquisite/qqtrulereffectslider.h \
         $$PWD/exquisite/qqtflipeffectstackedwidget.h \
-        $$PWD/exquisite/qqtmarqueeeffectlabel.h \
-        $$PWD/exquisite/qqtledbannereffectlabel.h \
         $$PWD/exquisite/qqtcustomverificationcode.h \
         $$PWD/exquisite/qqtfadeeffectwidget.h \
         $$PWD/exquisite/qqtshadoweffectwidget.h \
-        $$PWD/exquisite/qqtpopeffectdialog.h \
-        $$PWD/exquisite/qqtcustomeffectprogressbar.h
+        $$PWD/exquisite/qqtpopeffectdialog.h
+    #tabwidget
+    SOURCES += \
+        $$PWD/exquisite/qqtpictureeffecttabbar.cpp \
+        $$PWD/exquisite/qqtslideeffecttabbar.cpp \
+        $$PWD/exquisite/qqtpictureeffecttabwidget.cpp \
+        $$PWD/exquisite/qqtslideeffecttabwidget.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtpictureeffecttabbar.h \
+        $$PWD/exquisite/qqtslideeffecttabbar.h \
+        $$PWD/exquisite/qqtpictureeffecttabwidget.h \
+        $$PWD/exquisite/qqtslideeffecttabwidget.h
 }
 
 #qrcode

@@ -2,20 +2,20 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS = src/qqt.pro
-SUBDIRS += examples/framelesshelperwidget
-SUBDIRS += examples/qqtframe
-SUBDIRS += examples/qqtframe2
-SUBDIRS += examples/animationframe
-SUBDIRS += examples/cmdwidget
-SUBDIRS += examples/qqtnetworkexample
+#open SUBDIRS += examples/framelesshelperwidget
+#open SUBDIRS += examples/qqtframe
+#open SUBDIRS += examples/qqtframe2
+#open SUBDIRS += examples/animationframe
+#open SUBDIRS += examples/cmdwidget
+#open SUBDIRS += examples/qqtnetworkexample
 SUBDIRS += examples/exquisite
-SUBDIRS += examples/QtBuildTool
-SUBDIRS += examples/QtSdkManager
-SUBDIRS += examples/QQtInstaller
+#open SUBDIRS += examples/QtBuildTool
+#open SUBDIRS += examples/QtSdkManager
+#open SUBDIRS += examples/QQtInstaller
 
 #need QQt installed to Qt library or
 #need QQt installed to sdk
-SUBDIRS += examples/qqtframe3
+#open SUBDIRS += examples/qqtframe3
 #SUBDIRS += examples/VegeTablesPrice
 
 #need vlcQt libvlc library
@@ -28,8 +28,8 @@ SUBDIRS += examples/qqtframe3
 #SUBDIRS += examples/qqtbluetoothfiletransferserver
 
 #need QtSoap - WebSupport
-SUBDIRS += examples/easter
-SUBDIRS += examples/soapQQtOnline
+#open SUBDIRS += examples/easter
+#open SUBDIRS += examples/soapQQtOnline
 
 #need webkitwidgets - WebSupport
 #webkit webengine

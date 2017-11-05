@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>QQTMsgBox</class>
- <widget class="QQTDialog" name="QQTMsgBox">
+ <widget class="QQtDialog" name="QQTMsgBox">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -66,7 +66,7 @@
    <header>qqtpushbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>QQTDialog</class>
+   <class>QQtDialog</class>
    <extends>QWidget</extends>
    <header>qqtdialog.h</header>
    <container>1</container>

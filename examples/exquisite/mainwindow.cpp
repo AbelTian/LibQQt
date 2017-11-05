@@ -3,6 +3,7 @@
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <qqtcore.h>
+#include <qqtslideeffecttabbar.h>
 
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
@@ -158,7 +159,39 @@ MainWindow::MainWindow(QWidget* parent) :
     connect(m_timer, SIGNAL(timeout()), this, SLOT(setValue()));
 
     m_timer_down->start(10);
+
+    /*
+    ui->w60->setFixedHeight(30);
+    QQtSlideEffectTabBar* bar = new QQtSlideEffectTabBar(ui->tab_6);
+    QQtSlideEffectTabBar* bar2 = new QQtSlideEffectTabBar(ui->tab_6);
+    bar->addTab("xxx");
+    bar->addTab("ccc");
+    bar2->setShape(QQtSlideEffectTabBar::RoundedEast);
+    bar2->addTab("yyy");
+    bar2->addTab("ddd");
+
+    QSpacerItem* space = new QSpacerItem(800, 30, QSizePolicy::Maximum);
+    QGridLayout* lay = new QGridLayout(ui->tab_6);
+    lay->addWidget(ui->w60, 1, 1, 1, 2);
+    lay->addWidget(bar, 2, 1, 1, 2);
+    lay->addWidget(bar2, 3, 1, 1, 1);
+    lay->addItem(space, 3, 2, 1, 1);
+
+    ui->tab_6->setLayout(lay);
+    */
+    /*
+    QQtSlideEffectTabBar* bar2 = new QQtSlideEffectTabBar(ui->tab_6);
+    ui->tb1->setTabBar(bar2);
+    */
+    //QQtSlideEffectTabBar* bar = new QQtSlideEffectTabBar(ui->tb0);
+    //ui->tb0->setTabBar(bar);
+    //ui->tb0->setObjectName("tb0");
+
+    ui->w77->addTab("ddd");
+    ui->w77->addTab("xxxx");
+    ui->w77->setFixedHeight(28);
 }
+
 
 MainWindow::~MainWindow()
 {

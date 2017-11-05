@@ -2,7 +2,7 @@
 #include "ui_qqtpassworddialog.h"
 
 QQTPasswordDialog::QQTPasswordDialog(QWidget *parent) :
-    QQTDialog(parent),
+    QQtDialog(parent),
     ui(new Ui::QQTPasswordDialog)
 {
     ui->setupUi(this);

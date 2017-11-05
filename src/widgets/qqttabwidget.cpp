@@ -1,34 +1,21 @@
 #include "qqttabwidget.h"
-#include "ui_qqttabwidget.h"
-#include "qqttabbar.h"
-#include <QDebug>
-#include <QPainter>
-#include <QStylePainter>
-#include <QStyleOptionTabWidgetFrameV2>
 #include "qqtcore.h"
+#include <QTabBar>
 
-QQTTabWidget::QQTTabWidget(QWidget *parent) :
-    QTabWidget(parent),
-    ui(new Ui::QQTTabWidget)
+QQtTabWidget::QQtTabWidget(QWidget* parent) :
+    QTabWidget(parent)
 {
-    m_bar = new QQTTabBar(this);
-    setTabBar(m_bar);
-
-    ui->setupUi(this);
 }
 
-QQTTabWidget::~QQTTabWidget()
+QQtTabWidget::~QQtTabWidget()
 {
-    delete ui;
 }
 
-QQTTabBar *QQTTabWidget::cTabBar()
+void QQtTabWidget::setObjectName(const QString& name)
 {
-    return m_bar;
-}
-
-void QQTTabWidget::setObjectName(const QString &name)
-{
-    m_bar->setObjectName(QString("%1_bar").arg(name));
+    tabBar()->setObjectName(QString("%1_bar").arg(name));
+    /*
+     * pline() << "系统tabBar的类指针被替换掉了吗？" << tabBar();
+     */
     QTabWidget::setObjectName(name);
 }

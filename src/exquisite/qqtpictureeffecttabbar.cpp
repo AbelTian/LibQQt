@@ -1,4 +1,4 @@
-#include "qqttabbar.h"
+#include "qqtpictureeffecttabbar.h"
 #include "QStylePainter"
 #include "QStyleOptionTabV3"
 #include "QDebug"
@@ -7,13 +7,13 @@
 #include "QToolButton"
 #include "qqtcore.h"
 
-QQTTabBar::QQTTabBar(QWidget* parent) :
+QQtTabBar::QQtTabBar(QWidget* parent) :
     QTabBar(parent)
 {
     setFocusPolicy(Qt::NoFocus);
 }
 
-void QQTTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
+void QQtTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
 {
     if (index < 0 || index + 1 > count() || index + 1 > iconList.size())
         return;
@@ -24,7 +24,7 @@ void QQTTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
     return ;
 }
 
-void QQTTabBar::setTabPixmap(int index, const QString& icon, const QString& iconSel)
+void QQtTabBar::setTabPixmap(int index, const QString& icon, const QString& iconSel)
 {
     if (index < 0 || index + 1 > count())
         return;
@@ -36,7 +36,7 @@ void QQTTabBar::setTabPixmap(int index, const QString& icon, const QString& icon
     iconList.insert(index, table);
 }
 
-void QQTTabBar::paintEvent(QPaintEvent* e)
+void QQtTabBar::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
     QStylePainter p(this);
@@ -61,7 +61,8 @@ void QQTTabBar::paintEvent(QPaintEvent* e)
             //p.drawItemPixmap(tabRectValue, Qt::AlignLeft |Qt::AlignTop, QPixmap::fromImage(image.scaled(tabRectValue.size(), Qt::KeepAspectRatio)));
         }
 
-        opt.palette.setColor(QPalette::Normal, QPalette::Text, QColor(255, 132, 0));
+        //opt.palette.setColor(QPalette::Normal, QPalette::Text, QColor(255, 132, 0));
+        opt.palette.setColor(QPalette::Normal, QPalette::Text, tabTextColor(index));
         opt.palette.setCurrentColorGroup(QPalette::Active);
         opt.state |= QStyle::State_Sunken;
 
@@ -78,7 +79,7 @@ void QQTTabBar::paintEvent(QPaintEvent* e)
     }
 }
 
-bool QQTTabBar::verticalTabs()
+bool QQtTabBar::verticalTabs()
 {
     return shape() == QTabBar::RoundedWest
            || shape() == QTabBar::RoundedEast

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QQTProgressDialog</class>
- <widget class="QQTDialog" name="QQTProgressDialog">
+ <class>QQtProgressDialog</class>
+ <widget class="QQtDialog" name="QQTProgressDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -57,7 +57,7 @@
    <header>qqtpushbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>QQTDialog</class>
+   <class>QQtDialog</class>
    <extends>QWidget</extends>
    <header>qqtdialog.h</header>
    <container>1</container>

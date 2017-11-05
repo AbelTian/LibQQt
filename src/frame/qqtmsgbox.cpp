@@ -3,7 +3,7 @@
 #include "qqtcore.h"
 
 QQTMsgBox::QQTMsgBox(QWidget *parent) :
-    QQTDialog(parent),
+    QQtDialog(parent),
     ui(new Ui::QQTMsgBox)
 {
     ui->setupUi(this);
