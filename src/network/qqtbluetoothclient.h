@@ -9,26 +9,22 @@ class QQTSHARED_EXPORT QQtBluetoothClient : public QBluetoothSocket
 {
     Q_OBJECT
 public:
-    explicit QQtBluetoothClient(QBluetoothServiceInfo::Protocol socketType = QBluetoothServiceInfo::RfcommProtocol, QObject *parent = nullptr);
-    explicit QQtBluetoothClient(QObject *parent = nullptr);
+    explicit QQtBluetoothClient(QBluetoothServiceInfo::Protocol socketType = QBluetoothServiceInfo::RfcommProtocol, QObject* parent = nullptr);
+    explicit QQtBluetoothClient(QObject* parent = nullptr);
 
     /**
      * @brief setServiceInfo
      * 设置目标蓝牙地址
      */
-    void setServiceInfo(const QBluetoothServiceInfo& serviceinfo)
-    { m_serviceInfo = serviceinfo; }
-    void setServiceAddress(const QBluetoothAddress &address)
-    { m_serverIP = address; }
+    void setServiceInfo(const QBluetoothServiceInfo& serviceinfo) { m_serviceInfo = serviceinfo; }
+    void setServiceAddress(const QBluetoothAddress& address) { m_serverIP = address; }
     /**
      * @brief setServicePort
      * @param p
      * 设置目标蓝牙端口 和UUID选择一个就可以
      */
-    void setServicePort(quint16 p = 8888)
-    { m_PORT = p; }
-    void setServiceUUid(const QBluetoothUuid &uuid)
-    { m_uuid = uuid; }
+    void setServicePort(quint16 p = 8888) { m_PORT = p; }
+    void setServiceUUid(const QBluetoothUuid& uuid) { m_uuid = uuid; }
 
     void installProtocol(QQtProtocol* stack);
     void uninstallProtocol(QQtProtocol* stack);

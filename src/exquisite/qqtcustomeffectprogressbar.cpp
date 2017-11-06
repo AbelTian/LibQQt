@@ -13,6 +13,7 @@ QQtCustomEffectProgressBar::QQtCustomEffectProgressBar(QWidget* parent) : QWidge
     minValue = 0;
     maxValue = 100;
     value = 0;
+    text = "";
 
     nullPosition = 0;
     lineWidth = 10;
@@ -28,7 +29,10 @@ QQtCustomEffectProgressBar::QQtCustomEffectProgressBar(QWidget* parent) : QWidge
     backgroundColor = QColor(70, 70, 70);
     textColor = QColor(250, 250, 250);
     textFont = font();
+    percentColor = QColor(250, 250, 250);
+    percentFont = font();
 
+    textStyle = TextStyle_Percent;
     designStyle = DesignStyle_Circle;
     percentStyle = PercentStyle_Arc;
     backgroundType = BackgroundType_Color;
@@ -60,10 +64,14 @@ void QQtCustomEffectProgressBar::paintEvent(QPaintEvent*)
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
     /*平移坐标系*/
+    //-width/2 width/2
+    //-height/2 height/2
     painter.translate(width / 2, height / 2);
     /*更改刻度 设置的是放大的倍数 */
     /*有利于在绘制的时候，统一绘制数据*/
     /*矢量放大，不失真*/
+    //-100, 100
+    //-100, 100
     if (designStyle == DesignStyle_Circle
         || designStyle == DesignStyle_Square)
         painter.scale(side / 200.0, side / 200.0);
@@ -100,6 +108,7 @@ void QQtCustomEffectProgressBar::paintEvent(QPaintEvent*)
 
     /*绘制当前值*/
     drawText(&painter, 100);
+    drawPercentText(&painter, 100);
 }
 
 void QQtCustomEffectProgressBar::drawBackground(QPainter* painter, int radius)
@@ -154,7 +163,7 @@ void QQtCustomEffectProgressBar::drawArc(QPainter* painter, int radius)
     /*这里可以更改画笔样式更换线条风格*/
     pen.setCapStyle(Qt::RoundCap);
 
-    double arcLength = 360.0 / (maxValue - minValue) * value;
+    double arcLength = 360.0 / (maxValue - minValue) * (value - minValue);
     QRect rect(-radius, -radius, radius * 2, radius * 2);
 
     /*逆时针为顺时针分负数*/
@@ -350,25 +359,69 @@ void QQtCustomEffectProgressBar::drawWave(QPainter* painter, int radius)
 
 void QQtCustomEffectProgressBar::drawText(QPainter* painter, int radius)
 {
-    QString strValue = QString("%1").arg(value);
+    QString strText = QString("%1").arg(text);
 
+
+    if (textStyle == TextStyle_None)
+        return;
+
+
+    else if (textStyle == TextStyle_Text
+             || textStyle == TextStyle_Percent_Text)
+    {
+        painter->save();
+        painter->setPen(textColor);
+        painter->setFont(textFont);
+
+        QFontMetricsF fm(textFont);
+        QSizeF textSize = fm.size(Qt::TextSingleLine, strText);
+        QRectF textRect(-textSize.width() / 2, -textSize.height() / 2, textSize.width(), textSize.height());
+        painter->drawText(textRect, Qt::AlignCenter, strText);
+
+        painter->restore();
+    }
+
+}
+
+void QQtCustomEffectProgressBar::drawPercentText(QPainter* painter, int radius)
+{
+    QString strValue = QString("%1").arg(value - minValue);
     if (showPercent)
     {
-        strValue = QString("%1%2").arg((double)value / (maxValue - minValue) * 100)
+        strValue = QString("%1%2").arg((double)(value - minValue) / (maxValue - minValue) * 100)
                    .arg(percentSuffix);
     }
 
-    painter->save();
+    if (textStyle == TextStyle_None)
+        return;
 
-    painter->setPen(textColor);
-    painter->setFont(textFont);
+    else if (textStyle == TextStyle_Middle_Percent)
+    {
+        painter->save();
+        painter->setPen(percentColor);
+        painter->setFont(percentFont);
 
-    QFontMetricsF fm(textFont);
-    QSizeF textSize = fm.size(Qt::TextSingleLine, strValue);
-    QRectF textRect(-textSize.width() / 2, 40, textSize.width(), textSize.height());
-    painter->drawText(textRect, Qt::AlignCenter, strValue);
+        QFontMetricsF fm(percentFont);
+        QSizeF textSize = fm.size(Qt::TextSingleLine, strValue);
+        QRectF textRect(-textSize.width() / 2, -textSize.height() / 2, textSize.width(), textSize.height());
+        painter->drawText(textRect, Qt::AlignCenter, strValue);
 
-    painter->restore();
+        painter->restore();
+    }
+    else if (textStyle == TextStyle_Percent
+             || textStyle == TextStyle_Percent_Text)
+    {
+        painter->save();
+        painter->setPen(percentColor);
+        painter->setFont(percentFont);
+
+        QFontMetricsF fm(percentFont);
+        QSizeF textSize = fm.size(Qt::TextSingleLine, strValue);
+        QRectF textRect(-textSize.width() / 2, 40, textSize.width(), textSize.height());
+        painter->drawText(textRect, Qt::AlignCenter, strValue);
+
+        painter->restore();
+    }
 }
 
 int QQtCustomEffectProgressBar::getMinValue() const
@@ -603,6 +656,15 @@ void QQtCustomEffectProgressBar::setBackgroundImage(const QString& backgroundIma
     }
 }
 
+void QQtCustomEffectProgressBar::setText(const QString& text)
+{
+    if (this->text != text)
+    {
+        this->text = text;
+        update();
+    }
+}
+
 void QQtCustomEffectProgressBar::setTextColor(const QColor& textColor)
 {
     if (this->textColor != textColor)
@@ -621,11 +683,38 @@ void QQtCustomEffectProgressBar::setTextFont(QFont font)
     }
 }
 
+void QQtCustomEffectProgressBar::setPercentTextColor(const QColor& percentColor)
+{
+    if (this->percentColor != percentColor)
+    {
+        this->percentColor = percentColor;
+        update();
+    }
+}
+
+void QQtCustomEffectProgressBar::setPercentTextFont(QFont percentFont)
+{
+    if (this->percentFont != percentFont)
+    {
+        this->percentFont = percentFont;
+        update();
+    }
+}
+
 void QQtCustomEffectProgressBar::setCornerRadius(int cornerRadius)
 {
     if (this->cornerRadius != cornerRadius)
     {
         this->cornerRadius = cornerRadius;
+        update();
+    }
+}
+
+void QQtCustomEffectProgressBar::setTextStyle(QQtCustomEffectProgressBar::TextStyle textStyle)
+{
+    if (this->textStyle != textStyle)
+    {
+        this->textStyle = textStyle;
         update();
     }
 }
@@ -704,4 +793,17 @@ void QQtCustomEffectProgressBar::setWaveSpeed(int speed)
         timer->start(TIMER_FIELD / waveSpeed);
         update();
     }
+}
+
+
+void QQtCustomEffectProgressBar::mouseReleaseEvent(QMouseEvent* event)
+{
+    emit click();
+    return QWidget::mouseReleaseEvent(event);
+}
+
+void QQtCustomEffectProgressBar::mouseDoubleClickEvent(QMouseEvent* event)
+{
+    emit doubleClick();
+    return QWidget::mouseDoubleClickEvent(event);
 }

@@ -8,6 +8,8 @@
  * T.D.R (QQ:2657635903) mod 2017年10月24日20:22:23
  * T.D.R (QQ:2657635903) mod 2017年10月25日10:55:28
  * add design style
+ * T.D.R (QQ:2657635903) mod 2017年11月06日18:24:09
+ * add text style
 **/
 
 /**
@@ -44,6 +46,7 @@ class QQTSHARED_EXPORT QQtCustomEffectProgressBar : public QWidget
     Q_ENUMS(BackgroundType)
     Q_ENUMS(PercentStyle)
     Q_ENUMS(DesignStyle)
+    Q_ENUMS(TextStyle)
 
     Q_PROPERTY(int minValue READ getMinValue WRITE setMinValue)
     Q_PROPERTY(int maxValue READ getMaxValue WRITE setMaxValue)
@@ -63,7 +66,10 @@ class QQTSHARED_EXPORT QQtCustomEffectProgressBar : public QWidget
     Q_PROPERTY(QColor backgroundColor READ getBackgroundColor WRITE setBackgroundColor)
     Q_PROPERTY(QColor textColor READ getTextColor WRITE setTextColor)
     Q_PROPERTY(QFont textFont READ getTextFont WRITE setTextFont)
+    Q_PROPERTY(QColor percentColor READ getPercentTextColor WRITE setPercentTextColor)
+    Q_PROPERTY(QFont percentFont READ getPercentTextFont WRITE setPercentTextFont)
     Q_PROPERTY(QString percentSuffix READ getPercentSuffix WRITE setPercentSuffix)
+    Q_PROPERTY(QString text READ getText WRITE setText)
 
     Q_PROPERTY(int waveDensity READ getWaveDensity WRITE setWaveDensity)
     Q_PROPERTY(int waveHeight READ getWaveHeight WRITE setWaveHeight)
@@ -104,6 +110,15 @@ public:
         PercentStyle_Wave = 3,          /*水波纹风格*/
     };
 
+    enum TextStyle
+    {
+        TextStyle_None = 0,           /*不显示*/
+        TextStyle_Middle_Percent = 1,           /*只在中央显示百分比*/
+        TextStyle_Percent = 2,           /*只显示百分比*/
+        TextStyle_Text = 3,      /*只显示文字*/
+        TextStyle_Percent_Text = 4,          /*显示百分比和文字*/
+    };
+
     explicit QQtCustomEffectProgressBar(QWidget* parent = 0);
     virtual ~QQtCustomEffectProgressBar();
 
@@ -126,8 +141,12 @@ public:
     QColor getBackgroundColor()         const;
     QColor getTextColor()           const;
     QFont getTextFont()           const { return textFont; }
+    QColor getPercentTextColor()           const { return percentColor; }
+    QFont getPercentTextFont()           const { return percentFont; }
     QString getPercentSuffix()           const;
+    QString getText()           const { return text; }
 
+    TextStyle getTextStyle()  const { return textStyle; }
     DesignStyle getDesingStyle()  const { return designStyle; }
     PercentStyle getPercentStyle()  const;
     BackgroundType   getBackgroundType()    const;
@@ -178,13 +197,20 @@ public Q_SLOTS:
     void setBackgroundColor(const QColor& backgroundColor);
     /*设置圆背景图*/
     void setBackgroundImage(const QString& backgroundImage);
+    /*设置文本*/
+    void setText(const QString& text);
     /*设置文本颜色*/
     void setTextColor(const QColor& textColor);
     /*设置字体*/
     void setTextFont(QFont font);
+    /*设置百分比文本颜色*/
+    void setPercentTextColor(const QColor& percentColor);
+    /*设置百分比文字字体*/
+    void setPercentTextFont(QFont percentFont);
     /*设置圆角半径*/
     void setCornerRadius(int cornerRadius);
 
+    void setTextStyle(TextStyle textStyle);
     void setDesignStyle(DesignStyle designStyle);
     /*设置进度样式风格*/
     void setPercentStyle(PercentStyle percentStyle);
@@ -200,7 +226,8 @@ public Q_SLOTS:
     void setWaveSpeed(int speed);
 
 signals:
-
+    void click();
+    void doubleClick();
 public slots:
 
 protected:
@@ -210,6 +237,7 @@ protected:
     void drawPolo(QPainter* painter, int radius);
     void drawWave(QPainter* painter, int radius);
     void drawText(QPainter* painter, int radius);
+    void drawPercentText(QPainter* painter, int radius);
 
 private:
     int maxValue;                   /*最小值*/
@@ -220,6 +248,7 @@ private:
     int lineWidth;                  /*线条宽度*/
 
     bool showPercent;               /*是否显示百分比*/
+    QString text; /*文字*/
     QString percentSuffix; /*百分比后缀*/
     bool showFree;                  /*是否显示未使用进度*/
     bool showSmallCircle;           /*是否显示小圆*/
@@ -231,7 +260,10 @@ private:
     QString backgroundImage;            /*圆图片*/
     QColor textColor;               /*文字颜色*/
     QFont  textFont;                /*文字字体*/
+    QColor percentColor;               /*百分比文字颜色*/
+    QFont  percentFont;                /*百分比文字字体*/
 
+    TextStyle textStyle; /*文字风格*/
     DesignStyle designStyle;        /*面板样式风格*/
     PercentStyle percentStyle;      /*进度样式风格*/
     BackgroundType   backgroundType;        /*圆的样式类型*/
@@ -245,6 +277,11 @@ private:
     int cornerRadius;
 
     QTimer* timer;
+
+    // QWidget interface
+protected:
+    virtual void mouseReleaseEvent(QMouseEvent* event) override;
+    virtual void mouseDoubleClickEvent(QMouseEvent* event) override;
 };
 
 #endif //QQTCUSTOMEFFECTPROGRESSBAR_H

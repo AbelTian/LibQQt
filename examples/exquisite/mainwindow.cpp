@@ -21,14 +21,25 @@ MainWindow::MainWindow(QWidget* parent) :
     ui->w01->setPercentStyle(QQtCustomEffectProgressBar::PercentStyle_Arc);
     ui->w01->setShowFree(true);
     ui->w01->setShowSmallCircle(true);
+    ui->w01->setTextStyle(QQtCustomEffectProgressBar::TextStyle_Text);
+    ui->w01->setText("EE");
+    ui->w01->setTextColor(QColor(128, 128, 66));
+    ui->w01->setTextFont(QFont("Arial", 48));
 
     ui->w0->setRange(0, 100);
     ui->w0->setBackgroundColor(QColor(60, 80, 100));
     ui->w0->setPercentStyle(QQtCustomEffectProgressBar::PercentStyle_Polo);
+    ui->w0->setTextStyle(QQtCustomEffectProgressBar::TextStyle_Middle_Percent);
+    ui->w0->setPercentTextFont(QFont("Arial", 60));
 
     ui->w1->setBackgroundColor(QColor(60, 80, 100));
     ui->w1->setRange(0, 100);
     ui->w1->setPercentStyle(QQtCustomEffectProgressBar::PercentStyle_Arc_Polo);
+    ui->w1->setTextStyle(QQtCustomEffectProgressBar::TextStyle_Percent_Text);
+    ui->w1->setText("PP");
+    ui->w1->setTextColor(QColor(128, 66, 66));
+    ui->w1->setTextFont(QFont("Arial", 36));
+    ui->w1->setPercentSuffix("Day");
 
     ui->w2->setBackgroundColor(QColor(20, 40, 100));
     ui->w2->setPercentStyle(QQtCustomEffectProgressBar::PercentStyle_Wave);
