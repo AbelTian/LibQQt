@@ -23,9 +23,11 @@ public:
     /**
      * @brief setToolTipDuration
      * bug? unset cause compiler error...
+     * 5.8.5 no setToolTipDuration so cl err
+     * >5.8.5 no need this override
      * @param msec
      */
-    virtual void setToolTipDuration(int msec) /*override*/ { return QTabWidget::setToolTipDuration(msec) ; }
+    //virtual void setToolTipDuration(int msec) /*override*/ { return QTabWidget::setToolTipDuration(msec) ; }
     /**
      * @brief localTabBar
      * 在setTabBar以后，系统tabBar和这个Bar不一样。
