@@ -19,8 +19,11 @@ contains (CONFIG, BUILD_SRC) {
     #if you want to build src but not link QQt in this project
     include($${QQT_SOURCE_ROOT}/src/qqt_source.pri)
 } else {
-    #if you want to link QQt library
-    include($${QQT_SOURCE_ROOT}/src/qqt_library.pri)
+    contains(QKIT_PRIVATE, WIN32|WIN64) {
+    } else {
+        #if you want to link QQt library
+        include($${QQT_SOURCE_ROOT}/src/qqt_library.pri)
+    }
 }
 
 ############

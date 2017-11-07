@@ -4,7 +4,6 @@ CONFIG += ordered
 SUBDIRS = src/qqt.pro
 #open SUBDIRS += examples/framelesshelperwidget
 #open SUBDIRS += examples/qqtframe
-#open SUBDIRS += examples/qqtframe2
 #open SUBDIRS += examples/animationframe
 #open SUBDIRS += examples/cmdwidget
 #open SUBDIRS += examples/qqtnetworkexample
@@ -13,9 +12,11 @@ SUBDIRS += examples/exquisite
 #open SUBDIRS += examples/QtSdkManager
 #open SUBDIRS += examples/QQtInstaller
 
+#open SUBDIRS += examples/qqtframe2
+
 #need QQt installed to Qt library or
 #need QQt installed to sdk
-#open SUBDIRS += examples/qqtframe3
+#openSUBDIRS += examples/qqtframe3
 #SUBDIRS += examples/VegeTablesPrice
 
 #need vlcQt libvlc library
