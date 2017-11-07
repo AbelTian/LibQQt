@@ -6,6 +6,8 @@
 
 #if defined(QQT_LIBRARY)
 #  define QQTSHARED_EXPORT Q_DECL_EXPORT
+#elif defined(QQT_STATIC_LIBRARY)
+#  define QQTSHARED_EXPORT
 #else
 #  define QQTSHARED_EXPORT Q_DECL_IMPORT
 #endif

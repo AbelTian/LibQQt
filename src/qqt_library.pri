@@ -29,7 +29,8 @@ contains(DEFINES, __DARWIN__) {
     LIBS += -framework QQt
 } else {
     LIBS += -L$${QQT_LIB_PWD}
-    LIBS += -l QQt
+    #win can't with the blank! error: -l QQt
+    LIBS += -lQQt
 }
 
 equals(QKIT_PRIVATE, macOS) {
