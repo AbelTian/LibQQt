@@ -1,0 +1,115 @@
+#target arch type
+#You need define a env variable QKIT=XX
+QKIT_PRIVATE = $$(QKIT)
+#处理文件内平台小差异
+#EMBEDDED __EMBEDDED_LINUX__
+#MIPS __MIPS_LINUX__
+#ARM __ARM_LINUX__
+#LINUX __LINUX__
+#LINUX64 __LINUX64__
+#WIN32 __WIN32__
+#WIN64 __WIN64__
+#macOS __DARWIN__
+#ANDROID __ANDROID__
+#ANDROIDX86 __ANDROIDX86__
+message(Build $${TARGET} to $${QKIT_PRIVATE})
+equals(QKIT_PRIVATE, EMBEDDED) {
+    #embedded common macro
+    DEFINES += __EMBEDDED_LINUX__
+} else:equals(QKIT_PRIVATE, ARM32) {
+    DEFINES += __EMBEDDED_LINUX__
+    #arm32 private
+    DEFINES += __ARM_LINUX__
+} else:equals(QKIT_PRIVATE, MIPS32) {
+    QT += multimedia
+    DEFINES += __EMBEDDED_LINUX__
+    #mips32 private
+    DEFINES += __MIPS_LINUX__
+} else:equals(QKIT_PRIVATE, LINUX) {
+    DEFINES += __LINUX__
+} else:equals(QKIT_PRIVATE, LINUX64) {
+    DEFINES += __LINUX64__
+} else:equals(QKIT_PRIVATE, WIN32) {
+    DEFINES += __WIN32__
+} else:equals(QKIT_PRIVATE, WIN64) {
+    DEFINES += __WIN64__
+} else:equals(QKIT_PRIVATE, macOS) {
+    DEFINES += __DARWIN__
+} else:equals(QKIT_PRIVATE, iOS) {
+    DEFINES += __IOS__
+} else:equals(QKIT_PRIVATE, iOSSimulator) {
+    DEFINES += __IOS__
+} else:equals(QKIT_PRIVATE, ANDROID) {
+    DEFINES += __ANDROID__
+} else:equals(QKIT_PRIVATE, ANDROIDX86) {
+    DEFINES += __ANDROID__
+    #todo:no customplot word printer
+}
+
+#QMAKESPEC_NAME = $${QMAKESPEC}
+#QMAKESPEC_NAME ~= s@^/.*/([^/]+)/?@\1@g
+#QMAKESPECS = $${QMAKESPEC}
+#QMAKESPECS ~= s:/[^/]*$::p
+#message ($$QMAKESPEC_NAME $$QMAKESPECS)
+#equals(QMAKESPEC_NAME, EMBEDDED) {
+#    #embedded common macro
+#    DEFINES += __EMBEDDED_LINUX__
+#} else:equals(QMAKESPEC_NAME, *arm*) {
+#    DEFINES += __EMBEDDED_LINUX__
+#    #arm32 private
+#    DEFINES += __ARM_LINUX__
+#} else:equals(QMAKESPEC_NAME, *mips*) {
+#    QT += multimedia
+#    DEFINES += __EMBEDDED_LINUX__
+#    #mips32 private
+#    DEFINES += __MIPS_LINUX__
+#} else:equals(QMAKESPEC_NAME, linux-g++-32) {
+#    DEFINES += __LINUX__
+#} else:equals(QMAKESPEC_NAME, linux-g++) {
+#    DEFINES += __LINUX64__
+#} else:equals(QMAKESPEC_NAME, win32-*) {
+#    DEFINES += __WIN32__
+#} else:equals(QMAKESPEC_NAME, win64-*) {
+#    DEFINES += __WIN64__
+#} else:equals(QMAKESPEC_NAME, macx-ios-*) {
+#    DEFINES += __IOS__
+#} else:equals(QMAKESPEC_NAME, iOSSimulator) {
+#    DEFINES += __IOS__
+#} else:equals(QMAKESPEC_NAME, macx-*) {
+#    DEFINES += __DARWIN__
+#} else:equals(QMAKESPEC_NAME, android-*) {
+#    DEFINES += __ANDROID__
+#} else:equals(QMAKESPEC_NAME, ANDROIDX86) {
+#    DEFINES += __ANDROID__
+#    #todo:no customplot word printer
+#}
+
+#################################################################
+##variables
+#################################################################
+CONFIG(debug, debug|profile|release):BUILD=Debug
+CONFIG(profile, debug|profile|release):BUILD=Profile
+CONFIG(release, debug|profile|release):BUILD=Release
+equals(QKIT_PRIVATE, MIPS32) {
+    SYSNAME = Mips32
+} else:equals(QKIT_PRIVATE, LINUX) {
+    SYSNAME = Linux
+} else:equals(QKIT_PRIVATE, LINUX64) {
+    SYSNAME = Linux64
+} else:equals(QKIT_PRIVATE, WIN32) {
+    SYSNAME = Windows
+} else:equals(QKIT_PRIVATE, WIN64) {
+    SYSNAME = Win64
+} else:equals(QKIT_PRIVATE, macOS) {
+    SYSNAME = MacOS
+} else:equals(QKIT_PRIVATE, iOS) {
+    SYSNAME = iOS
+} else:equals(QKIT_PRIVATE, iOSSimulator) {
+    SYSNAME = iOS-simulator
+} else:equals(QKIT_PRIVATE, ANDROID) {
+    SYSNAME = Android
+} else:equals(QKIT_PRIVATE, ANDROIDX86) {
+    SYSNAME = Android_x86
+}
+message(Build $${TARGET} at $${QT_VERSION} $${SYSNAME} $${BUILD})
+message(Build $${TARGET} on $${QMAKE_HOST.os})

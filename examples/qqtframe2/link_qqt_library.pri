@@ -9,8 +9,23 @@ equals(QMAKE_HOST.os, Darwin) {
     QQT_SOURCE_ROOT = C:/Users/Administrator/Develop/a0-develop/LibQt
 }
 
+#qqt qkit
+include($${QQT_SOURCE_ROOT}/src/qqt_kit.pri)
+
 #qqt version
 include($${QQT_SOURCE_ROOT}/src/qqt_version.pri)
+
+#link QQt static library or dynamic library
+equals(QKIT_PRIVATE, iOS) {
+    CONFIG += staticlib
+    DEFINES += QQT_STATIC_LIBRARY
+} else:equals(QKIT_PRIVATE, WIN32) {
+    #when Qt is static by mingw32 building 5.9.1
+    equals(QT_VERSION, 5.9.1){
+        CONFIG += staticlib
+        DEFINES += QQT_STATIC_LIBRARY
+    }
+}
 
 #qqt header
 include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
