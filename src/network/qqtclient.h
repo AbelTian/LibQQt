@@ -9,6 +9,7 @@
 #include "QStringList"
 #include "qqtprotocol.h"
 #include "qqt-local.h"
+#include "qqtcore.h"
 
 #define QQT_TCP_SOCKET 0
 #define QQT_SOCKET 1
@@ -23,7 +24,7 @@ class QQTSHARED_EXPORT QQTClient : public QTcpSocket
 {
     Q_OBJECT
 public:
-    explicit QQTClient(QObject *parent = 0);
+    explicit QQTClient(QObject* parent = 0);
     virtual ~QQTClient();
 
     void SetServerIPAddress(QStringList ip) { m_serverIP = ip; }

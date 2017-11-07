@@ -11,7 +11,9 @@ message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
     at $${QT_VERSION} $${SYSNAME} $${BUILD} \
     on $${QMAKE_HOST.os})
 
-QQT_LIB_PWD = $$PWD/../sdk/lib
+isEmpty(QQT_LIB_PWD) {
+    QQT_LIB_PWD = $$PWD/../sdk/lib
+}
 message (Link QQt from: $$QQT_LIB_PWD)
 
 contains(DEFINES, __DARWIN__) {

@@ -9,6 +9,7 @@
 #include <QTabBar>
 #include <QPainter>
 #include <QTimer>
+#include <qqtcore.h>
 
 class QQtSlideEffectTabBar : public QTabBar
 {

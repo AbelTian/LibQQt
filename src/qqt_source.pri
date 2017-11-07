@@ -6,7 +6,7 @@
 #-------------------------------------------------
 #QQt source
 #Don't modify this pri
-#FDL1.3 GPLv3 LGPLv2.1 PreviewCommercial
+#FDLv1.3 GPLv3 LGPLv2.1 PreviewCommercial
 #2017年10月29日09:16:41
 #-------------------------------------------------
 SOURCES +=
