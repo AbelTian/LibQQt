@@ -7,6 +7,9 @@
 ##2017年10月29日08:54:28
 ################################################
 
+#TARGET must be equals to pro name ? no, TARGET must place before qqt_library.pri
+#qmake pro pri is sequential
+
 message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
     at $${QT_VERSION} $${SYSNAME} $${BUILD} \
     on $${QMAKE_HOST.os})
