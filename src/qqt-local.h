@@ -4,16 +4,18 @@
 
 #include <QtCore/qglobal.h>
 
-#if !defined(QQT_STATIC_LIBRARY)
-//dynamic
-#if  defined(QQT_LIBRARY)
-#    define QQTSHARED_EXPORT Q_DECL_EXPORT
+#if defined(Q_OS_WIN)
+//dynamic and static are different
+#if   defined(QQT_LIBRARY)
+#     define QQTSHARED_EXPORT Q_DECL_EXPORT
+#elif defined(QQT_STATIC_LIBRARY)
+#     define QQTSHARED_EXPORT
 #else
-#    define QQTSHARED_EXPORT Q_DECL_IMPORT
+#     define QQTSHARED_EXPORT Q_DECL_IMPORT
 #endif
 #else
-//static
-#    define QQTSHARED_EXPORT
+//dynamic and static are equal to each other
+#     define QQTSHARED_EXPORT
 #endif
 
 
