@@ -11,7 +11,12 @@ message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
     at $${QT_VERSION} $${SYSNAME} $${BUILD} \
     on $${QMAKE_HOST.os})
 
-isEmpty(QQT_LIB_PWD) {
+contains(CONFIG, link_from_build) {
+    #this configration need Qt Creator set default build directory
+    #%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}")}
+    QQT_BUILD_OUT_PWD = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src/$${DESTDIR}
+    QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_BUILD_OUT_PWD}
+} else {
     QQT_LIB_PWD = $$PWD/../sdk/lib
 }
 message (Link QQt from: $$QQT_LIB_PWD)

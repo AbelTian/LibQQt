@@ -19,11 +19,19 @@ contains (CONFIG, BUILD_SRC) {
     #if you want to build src but not link QQt in this project
     include($${QQT_SOURCE_ROOT}/src/qqt_source.pri)
 } else {
-    contains(QKIT_PRIVATE, WIN32|WIN64) {
-    } else {
-        #if you want to link QQt library
-        include($${QQT_SOURCE_ROOT}/src/qqt_library.pri)
+    #default CONFIG += link_from_sdk
+    CONFIG += link_from_build
+    contains(CONFIG, link_from_build) {
+        equals(QMAKE_HOST.os, Darwin) {
+            QQT_BUILD_ROOT = /Users/abel/Develop/c0-buildstation
+        } else: equals(QMAKE_HOST.os, Linux) {
+            QQT_BUILD_ROOT = /home/abel/Develop/c0-buildstation
+        } else: equals(QMAKE_HOST.os, Windows) {
+            QQT_BUILD_ROOT = C:/Users/Administrator/Develop/c0-build
+        }
     }
+    #if you want to link QQt library
+    include($${QQT_SOURCE_ROOT}/src/qqt_library.pri)
 }
 
 ############
