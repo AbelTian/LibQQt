@@ -3,33 +3,7 @@
 # Project created by QtCreator 2016-06-17T10:03:52
 #
 #-------------------------------------------------
-#this link struct can't support macOS
-#include QQt's header (add QQt header to includepath)
-#include(../../src/qqt_version.pri)
-#include(../../src/qqt_header.pri)
-#include(../qqtframe2/qqt_library.pri)
-
-#QQt source root on your computer
-equals(QMAKE_HOST.os, Darwin) {
-    QQT_SOURCE_ROOT = /Users/abel/Develop/a0-develop/a0-qqtfoundation
-} else: equals(QMAKE_HOST.os, Linux) {
-    QQT_SOURCE_ROOT = /home/abel/Develop/a0-develop/LibQt
-} else: equals(QMAKE_HOST.os, Windows) {
-    QQT_SOURCE_ROOT = C:/Users/Administrator/Develop/a0-develop/LibQt
-}
-
-#include QQt's version
-include($${QQT_SOURCE_ROOT}/src/qqt_version.pri)
-#include QQt's header (add QQt header to includepath)
-include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
-#CONFIG += BUILD_SRC
-contains (CONFIG, BUILD_SRC) {
-    #if you want to build src but not link QQt in this project
-    include($${QQT_SOURCE_ROOT}/src/qqt_source.pri)
-} else {
-    #if you want to link QQt library
-    include($${QQT_SOURCE_ROOT}/src/qqt_library.pri)
-}
+include(../qqtframe2/link_qqt_library.pri)
 
 ############
 ##install

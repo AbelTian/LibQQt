@@ -100,6 +100,9 @@ RESOURCES += \
 ##install to Qt library
 ##in this section, I use QMAKE_POST_LINK, it won't work until project source changed
 ################################################
+!contains(QKIT_PRIVATE, WIN32|WIN64) {
+    CONFIG += qqt_create_sdk
+}
 include ($$PWD/qqt_install.pri)
 
 

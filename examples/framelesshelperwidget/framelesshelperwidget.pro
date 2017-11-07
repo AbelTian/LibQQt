@@ -3,26 +3,7 @@
 # Project created by QtCreator 2017-10-21T21:26:55
 #
 #-------------------------------------------------
-#include QQt's header (add QQt header to includepath)
-#QQt source root on your computer
-equals(QMAKE_HOST.os, Darwin) {
-    QQT_SOURCE_ROOT = /Users/abel/Develop/a0-develop/a0-qqtfoundation
-} else: equals(QMAKE_HOST.os, Linux) {
-    QQT_SOURCE_ROOT = /home/abel/Develop/a0-develop/LibQt
-} else: equals(QMAKE_HOST.os, Windows) {
-    QQT_SOURCE_ROOT = C:/Users/Administrator/Develop/a0-develop/LibQt
-}
-
-include($${QQT_SOURCE_ROOT}/src/qqt_version.pri)
-include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
-#CONFIG += BUILD_SRC
-contains (CONFIG, BUILD_SRC) {
-    #if you want to build src but not link QQt in this project
-    include($${QQT_SOURCE_ROOT}/src/qqt_source.pri)
-} else {
-    #if you want to link QQt library
-    include($${QQT_SOURCE_ROOT}/src/qqt_library.pri)
-}
+include(../qqtframe2/link_qqt_library.pri)
 
 ############
 ##install

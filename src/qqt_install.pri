@@ -234,8 +234,7 @@ defineReplace(create_qt_lib_pri){
 ##QQt install workflow
 ################################################
 #use to output sdk
-CONFIG += create_sdk
-contains(CONFIG, create_sdk){
+contains(CONFIG, qqt_create_sdk){
     MODULE_NAME=QQt
     module_name = $$lower($${MODULE_NAME})
 
