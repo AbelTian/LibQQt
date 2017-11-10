@@ -14,6 +14,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+#Project link: https://gitee.com/drabel/LibQt
+#if you succeed with LibQQt, please thumb up.
+#2017年11月10日18:53:56
+
 ##Don't modify this file outside QQt project
 ##this is QQt feature pri you can modify QQt feature in QQt project at this pri
 

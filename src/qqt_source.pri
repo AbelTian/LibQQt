@@ -8,6 +8,9 @@
 #Don't modify this pri
 #FDLv1.3 GPLv3 LGPLv2.1 PreviewCommercial
 #2017年10月29日09:16:41
+#Project link: https://gitee.com/drabel/LibQt
+#if you succeed with LibQQt, please thumb up.
+#2017年11月10日18:53:56
 #-------------------------------------------------
 SOURCES +=
 HEADERS +=
