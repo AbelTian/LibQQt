@@ -3,34 +3,6 @@
 # Project created by QtCreator 2017-10-17T21:33:06
 #
 #-------------------------------------------------
-include(../qqtframe2/link_qqt_library.pri)
-
-############
-##install
-############
-#CONFIG += can_install
-can_install:equals(QKIT_PRIVATE, EMBEDDED) {
-    target.path = /Application
-    INSTALLS += target
-} else: unix {
-    equals(QKIT_PRIVATE, macOS) {
-        target.path = /Applications
-        INSTALLS += target
-    }
-}
-
-equals(QKIT_PRIVATE, ANDROID) {
-    CONFIG += mobility
-    MOBILITY =
-}
-
-#################################################################
-##project environ
-#################################################################
-#default
-message ($${TARGET} config $${CONFIG})
-message ($${TARGET} define $${DEFINES})
-
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -48,13 +20,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
-
-QT += core gui network sql xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
-greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
-
-INCLUDEPATH +=  $$PWD
 
 SOURCES += \
         main.cpp \
@@ -87,4 +52,35 @@ FORMS += \
 
 CONFIG += mobility
 MOBILITY = 
+
+#-------------------------------------------------
+#link qqt library
+#-------------------------------------------------
+include(../qqtframe2/link_qqt_library.pri)
+
+#-------------------------------------------------
+#install
+#-------------------------------------------------
+#CONFIG += can_install
+can_install:equals(QKIT_PRIVATE, EMBEDDED) {
+    target.path = /Application
+    INSTALLS += target
+} else: unix {
+    equals(QKIT_PRIVATE, macOS) {
+        target.path = /Applications
+        INSTALLS += target
+    }
+}
+
+equals(QKIT_PRIVATE, ANDROID) {
+    CONFIG += mobility
+    MOBILITY =
+}
+
+#-------------------------------------------------
+##project environ
+#-------------------------------------------------
+#default
+message ($${TARGET} config $${CONFIG})
+message ($${TARGET} define $${DEFINES})
 

@@ -1,3 +1,6 @@
+#this configration need Qt Creator set default build directory
+#%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}")}
+
 #target arch type
 #You need define a env variable QKIT=XX
 QKIT_PRIVATE = $$(QKIT)

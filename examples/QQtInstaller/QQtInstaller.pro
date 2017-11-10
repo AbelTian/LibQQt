@@ -3,34 +3,6 @@
 # Project created by QtCreator 2017-10-27T00:14:05
 #
 #-------------------------------------------------
-include(../qqtframe2/link_qqt_library.pri)
-
-############
-##install
-############
-#CONFIG += can_install
-can_install:equals(QKIT_PRIVATE, EMBEDDED) {
-    target.path = /Application
-    INSTALLS += target
-} else: unix {
-    equals(QKIT_PRIVATE, macOS) {
-        target.path = /Applications
-        INSTALLS += target
-    }
-}
-
-equals(QKIT_PRIVATE, ANDROID) {
-    CONFIG += mobility
-    MOBILITY =
-}
-
-#################################################################
-##project environ
-#################################################################
-#default
-message ($${TARGET} config $${CONFIG})
-message ($${TARGET} define $${DEFINES})
-
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -61,19 +33,33 @@ FORMS += \
         mainwindow.ui
 
 
+############################################################
+##link qqt library
+############################################################
+include(../qqtframe2/link_qqt_library.pri)
 
-#equals(QKIT_PRIVATE, macOS) {
-#    QMAKE_CFLAGS_X86_64 += -mmacosx-version-min=10.7
-#    QMAKE_CXXFLAGS_X86_64 = $$QMAKE_CFLAGS_X86_64
-#    msgpacklib.path = Contents/Frameworks
-#    msgpacklib.files = ../myapp/3rd/msgpack-0.5.4/src/.libs/libmsgpack.3.dylib
-#    evlib.path = Contents/Frameworks
-#    evlib.files = ../myapp/3rd/libev-4.11/.libs/libev.4.dylib
-#    QMAKE_BUNDLE_DATA += msgpacklib evlib
-#    QMAKE_POST_LINK = install_name_tool -change /usr/local/lib/libmsgpack.3.dylib \
-#         @executable_path/../Frameworks/libmsgpack.3.dylib \
-#         myapp.app/Contents/MacOs/myapp & \
-#         install_name_tool -change /usr/local/lib/libev.4.dylib \
-#         @executable_path/../Frameworks/libev.4.dylib \
-#         myapp.app/Contents/MacOs/myapp
-#}
+############
+##install
+############
+#CONFIG += can_install
+can_install:equals(QKIT_PRIVATE, EMBEDDED) {
+    target.path = /Application
+    INSTALLS += target
+} else: unix {
+    equals(QKIT_PRIVATE, macOS) {
+        target.path = /Applications
+        INSTALLS += target
+    }
+}
+
+equals(QKIT_PRIVATE, ANDROID) {
+    CONFIG += mobility
+    MOBILITY =
+}
+
+#################################################################
+##project environ
+#################################################################
+#default
+message ($${TARGET} config $${CONFIG})
+message ($${TARGET} define $${DEFINES})

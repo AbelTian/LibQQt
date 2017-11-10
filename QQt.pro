@@ -6,8 +6,9 @@ SUBDIRS = src/qqt.pro
 #open SUBDIRS += examples/qqtframe
 #open SUBDIRS += examples/animationframe
 #open SUBDIRS += examples/cmdwidget
-#open SUBDIRS += examples/qqtnetworkexample
-SUBDIRS += examples/exquisite
+#open
+SUBDIRS += examples/qqtnetworkexample
+#open SUBDIRS += examples/exquisite
 #open SUBDIRS += examples/QtBuildTool
 #open SUBDIRS += examples/QtSdkManager
 #open SUBDIRS += examples/QQtInstaller
@@ -16,7 +17,7 @@ SUBDIRS += examples/exquisite
 
 #need QQt installed to Qt library or
 #need QQt installed to sdk
-#openSUBDIRS += examples/qqtframe3
+#open SUBDIRS += examples/qqtframe3
 #SUBDIRS += examples/VegeTablesPrice
 
 #need vlcQt libvlc library
