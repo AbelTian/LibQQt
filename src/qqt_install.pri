@@ -256,7 +256,7 @@ contains(CONFIG, qqt_create_sdk){
     post_link += $$create_dir_struct()
 
     contains(QKIT_PRIVATE, macOS) {
-        message(create QQt mac bundle framework)
+        #message(create QQt mac bundle framework)
         post_link += $$MK_DIR lib/$${MODULE_NAME}.framework $$CMD_SEP
         post_link += $$CD lib/$${MODULE_NAME}.framework $$CMD_SEP
         post_link += $$create_mac_sdk() $$CMD_SEP
@@ -264,7 +264,7 @@ contains(CONFIG, qqt_create_sdk){
         #create prl
         post_link += $$COPY $$QQT_BUILD_DIR/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl lib/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl $$CMD_SEP
     } else {
-        message(create QQt linux struct library)
+        #message(create QQt linux struct library)
         post_link += $$create_linux_sdk() $$CMD_SEP
         post_link += $$COPY $$QQT_BUILD_DIR/*.prl lib $$CMD_SEP
     }

@@ -23,6 +23,8 @@ SUBDIRS += examples/exquisite
 #-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe3
 #SUBDIRS += examples/VegeTablesPrice
+#can't support ios
+#SUBDIRS += examples/qqtprintsupportexample
 
 #-----------------------------------------------------------------
 #need vlcQt libvlc library

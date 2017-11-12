@@ -39,8 +39,6 @@
 
 #ifdef __PRINTSUPPORT__
 #include <QPrinter>
-#include <QPrintDialog>
-#include <QPrintPreviewDialog>
 #endif
 
 #include <QTextFormat>
@@ -88,6 +86,8 @@
 #include <QEventTransition>
 #include <QTimeLine>
 
+#ifdef __PROCESSMODULE__
 #include <QProcess>
+#endif
 
 #endif // QQTGUIQT_H

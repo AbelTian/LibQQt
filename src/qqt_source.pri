@@ -126,32 +126,33 @@ FORMS += \
 #multimedia
 #arm mips
 #TODO: +wince +android +ios +macOS +win +linux
-SOURCES += $$PWD/multimedia/qqtmplayer.cpp
-HEADERS += $$PWD/multimedia/qqtmplayer.h
+contains (DEFINES, __PROCESSMODULE__) {
+    SOURCES += $$PWD/multimedia/qqtmplayer.cpp
+    HEADERS += $$PWD/multimedia/qqtmplayer.h
+}
 
 #pluginwatcher
 #TODO: macOS dump
-win32 {
-    contains (DEFINES, QQT_LIBRARY) {
-        DEFINES += BUILD_QDEVICEWATCHER_LIB
-    } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-        DEFINES += BUILD_QDEVICEWATCHER_STATIC
-    }
-    wince*: SOURCES += $$PWD/pluginwatcher/qdevicewatcher_wince.cpp
-    else:  SOURCES += $$PWD/pluginwatcher/qdevicewatcher_win32.cpp
-}
-unix {
-    mac* {
+contains(DEFINES, __PLUGINWATCHER__) {
+    contains(QKIT_PRIVATE, WIN32|WIN64) {
+        contains (DEFINES, QQT_LIBRARY) {
+            DEFINES += BUILD_QDEVICEWATCHER_LIB
+        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+            DEFINES += BUILD_QDEVICEWATCHER_STATIC
+        }
+        wince*: SOURCES += $$PWD/pluginwatcher/qdevicewatcher_wince.cpp
+        else:  SOURCES += $$PWD/pluginwatcher/qdevicewatcher_win32.cpp
+    }else:contains(QKIT_PRIVATE, macOS) {
         SOURCES += $$PWD/pluginwatcher/qdevicewatcher_mac.cpp
-    } else {
+    }else {
         SOURCES += $$PWD/pluginwatcher/qdevicewatcher_linux.cpp
     }
+    SOURCES += $$PWD/pluginwatcher/qdevicewatcher.cpp \
+                $$PWD/pluginwatcher/qqtpluginwatcher.cpp
+    HEADERS += $$PWD/pluginwatcher/qqtpluginwatcher.h \
+                $$PWD/pluginwatcher/qdevicewatcher.h \
+                $$PWD/pluginwatcher/qdevicewatcher_p.h
 }
-SOURCES += $$PWD/pluginwatcher/qdevicewatcher.cpp \
-            $$PWD/pluginwatcher/qqtpluginwatcher.cpp
-HEADERS += $$PWD/pluginwatcher/qqtpluginwatcher.h \
-            $$PWD/pluginwatcher/qdevicewatcher.h \
-            $$PWD/pluginwatcher/qdevicewatcher_p.h
 
 #printsupport
 #DEFINES += __PRINTSUPPORT__

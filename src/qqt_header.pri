@@ -76,6 +76,7 @@ contains (DEFINES, __QEXTSERIALPORT__) {
     win32:DEFINES += _TTY_WIN_
     #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
 } else {
+    #message ( __QSERIALPORT__ Defined in $${TARGET})
     greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
     lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
     unix {
@@ -118,21 +119,38 @@ contains (DEFINES, __CPP11__) {
     #lambda also need c++11
 }
 
+##################DeviceWatcher Module###############################
+#used in windows linux e-linux android, mac ios not support exactly
+#if you use DeviceWatcher , open this annotation
+DEFINES += __PLUGINWATCHER__
+contains(QKIT_PRIVATE, iOS||iOSSimulator||macOS) {
+    DEFINES -= __PLUGINWATCHER__
+}
+
+##################Process Module###############################
+#if you use qprocess , open this annotation
+DEFINES += __PROCESSMODULE__
+#ios has no backend process
+contains(QKIT_PRIVATE, iOS||iOSSimulator) {
+    DEFINES -= __PROCESSMODULE__
+}
+
 ##################PrintSupport Module###############################
 #if you use printsupport , open this annotation
 DEFINES += __PRINTSUPPORT__
-#ios can't support this feature
-contains(QKIT_PRIVATE, iOS||iOSSimulator) {
-    #DEFINES -= __PRINTSUPPORT__
-    qtHaveModule(printsupport) : message(ios have printsupport)
-}
-#Qt5.9.1, ios android can't support this feature
+#Qt5.9.1, ios android can't support this feature.
+#Qt5.9.1, broken
 equals(QT_VERSION, 5.9.1) {
-    contains(QKIT_PRIVATE, ANDROID||ANDROIDX86) {
+    contains(QKIT_PRIVATE, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
         DEFINES -= __PRINTSUPPORT__
     }
 }
+#ios can't use printsupport
+contains(QKIT_PRIVATE, iOS||iOSSimulator) {
+    DEFINES -= __PRINTSUPPORT__
+}
 contains (DEFINES, __PRINTSUPPORT__) {
+    #qtHaveModule(printsupport) : message(qqt use module printsupport)
     greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
     #if you use qcustomplot, open this annotation
     DEFINES += __CUSTOMPLOT__
@@ -189,8 +207,8 @@ win32 {
         #LIBS += -F$${MACOSXSDK}/System/Library/Frameworks
         #LIBS += -L$${MACOSXSDK}/usr/lib
         LIBS += -framework DiskArbitration -framework Cocoa -framework IOKit
-    } else:contains(QKIT_PRIVATE, iOS|iOSSimulator) {
-        LIBS += -l DiskArbitration -l Cocoa -l IOKit
+    }else:contains(QKIT_PRIVATE, iOS|iOSSimulator){
+        QMAKE_LFLAGS += -ObjC -lsqlite3 -lz -framework "AddressBook" -framework "AssetsLibrary" -framework "CoreFoundation" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreMotion" -framework "MessageUI" -framework "SystemConfiguration"
     }
 }
 ##################################################################

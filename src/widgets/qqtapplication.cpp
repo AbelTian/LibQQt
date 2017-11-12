@@ -1,5 +1,7 @@
 #include "qqtapplication.h"
+#ifdef __PLUGINWATCHER__
 #include "qqtpluginwatcher.h"
+#endif
 #include <qqtwidgets.h>
 #include <qqtmsgbox.h>
 #include <qqtversion.h>
@@ -10,7 +12,9 @@
 #include <QSettings>
 #include <QTranslator>
 #include <QFontDatabase>
+#ifdef __PROCESSMODULE__
 #include <QProcess>
+#endif
 
 QQtApplication::QQtApplication(int& argc, char** argv) :
     QApplication(argc, argv),
@@ -56,7 +60,7 @@ QQtApplication::QQtApplication(int& argc, char** argv) :
     QQTInput::Instance()->Init("min", "control", "QQT", 14, 14);
 #endif
 
-#if ( !defined (__DARWIN__)  && !defined(__IOS__) )
+#ifdef __PLUGINWATCHER__
     QObject::connect(QQTPluginWatcher::Instance(), SIGNAL(storageChanged(int)),
                      this, SLOT(slotUPanAutoRun(int)));
 #endif
@@ -93,6 +97,7 @@ void QQtApplication::slotUPanAutoRun(int status)
     if (!bUPanAutoRun)
         return;
 
+#ifdef __PLUGINWATCHER__
     if (QQTPluginWatcher::E_ADD == status)
     {
         QString mP = QQTPluginWatcher::Instance()->upanMountPath();
@@ -109,10 +114,15 @@ void QQtApplication::slotUPanAutoRun(int status)
         {
             return;
         }
+#ifdef __PROCESSMODULE__
         QProcess* p = new QProcess(this);
         p->setWorkingDirectory(mP);
         p->start(app);
+#else
+        //TODO:
+#endif
     }
+#endif
 }
 
 
