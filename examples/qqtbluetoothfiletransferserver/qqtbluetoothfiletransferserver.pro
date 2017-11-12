@@ -3,8 +3,6 @@
 # Project created by QtCreator 2017-10-17T17:48:58
 #
 #-------------------------------------------------
-include(../qqtframe2/link_qqt_library.pri)
-
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -40,4 +38,35 @@ FORMS += \
 
 CONFIG += mobility
 MOBILITY = 
+
+#-------------------------------------------------
+#link qqt library
+#-------------------------------------------------
+include(../qqtframe2/link_qqt_library.pri)
+
+#-------------------------------------------------
+#install
+#-------------------------------------------------
+#CONFIG += can_install
+can_install:equals(QKIT_PRIVATE, EMBEDDED) {
+    target.path = /Application
+    INSTALLS += target
+} else: unix {
+    equals(QKIT_PRIVATE, macOS) {
+        target.path = /Applications
+        INSTALLS += target
+    }
+}
+
+equals(QKIT_PRIVATE, ANDROID) {
+    CONFIG += mobility
+    MOBILITY =
+}
+
+#-------------------------------------------------
+##project environ
+#-------------------------------------------------
+#default
+message ($${TARGET} config $${CONFIG})
+message ($${TARGET} define $${DEFINES})
 

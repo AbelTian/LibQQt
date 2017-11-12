@@ -121,17 +121,21 @@ contains (DEFINES, __CPP11__) {
 ##################PrintSupport Module###############################
 #if you use printsupport , open this annotation
 DEFINES += __PRINTSUPPORT__
-#ios android can't support this function now
-contains(QKIT_PRIVATE, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
-    DEFINES -= __PRINTSUPPORT__
+#ios can't support this feature
+contains(QKIT_PRIVATE, iOS||iOSSimulator) {
+    #DEFINES -= __PRINTSUPPORT__
+    qtHaveModule(printsupport) : message(ios have printsupport)
+}
+#Qt5.9.1, ios android can't support this feature
+equals(QT_VERSION, 5.9.1) {
+    contains(QKIT_PRIVATE, ANDROID||ANDROIDX86) {
+        DEFINES -= __PRINTSUPPORT__
+    }
 }
 contains (DEFINES, __PRINTSUPPORT__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
     #if you use qcustomplot, open this annotation
     DEFINES += __CUSTOMPLOT__
-    contains(QKIT_PRIVATE, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
-        DEFINES -= __CUSTOMPLOT__
-    }
 }
 
 ##################Exquisite Module###############################

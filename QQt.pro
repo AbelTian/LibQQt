@@ -2,39 +2,51 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS = src/qqt.pro
-#open SUBDIRS += examples/framelesshelperwidget
-#open SUBDIRS += examples/qqtframe
-#open SUBDIRS += examples/animationframe
-#open SUBDIRS += examples/cmdwidget
-#open
-SUBDIRS += examples/qqtnetworkexample
-#open SUBDIRS += examples/exquisite
-#open SUBDIRS += examples/QtBuildTool
-#open SUBDIRS += examples/QtSdkManager
-#open SUBDIRS += examples/QQtInstaller
+#-----------------------------------------------------------------
+#basic example
+#-----------------------------------------------------------------
+#SUBDIRS += examples/framelesshelperwidget
+#SUBDIRS += examples/qqtframe
+#SUBDIRS += examples/animationframe
+#SUBDIRS += examples/cmdwidget
+#SUBDIRS += examples/qqtnetworkexample
+#
+SUBDIRS += examples/exquisite
+#SUBDIRS += examples/QtBuildTool
+#SUBDIRS += examples/QtSdkManager
+#SUBDIRS += examples/QQtInstaller
+#SUBDIRS += examples/qqtframe2
 
-#open SUBDIRS += examples/qqtframe2
-
+#-----------------------------------------------------------------
 #need QQt installed to Qt library or
 #need QQt installed to sdk
-#open SUBDIRS += examples/qqtframe3
+#-----------------------------------------------------------------
+#SUBDIRS += examples/qqtframe3
 #SUBDIRS += examples/VegeTablesPrice
 
+#-----------------------------------------------------------------
 #need vlcQt libvlc library
+#-----------------------------------------------------------------
 #SUBDIRS += examples/qqtliveplayer
 
+#-----------------------------------------------------------------
 #need ffmpeg library
+#-----------------------------------------------------------------
 #SUBDIRS += examples/qqtffmpegplayer
 
 #need bluetooth library
-#SUBDIRS += examples/qqtbluetoothfiletransferserver
+#open SUBDIRS += examples/qqtbluetoothfiletransferserver
 
+#-----------------------------------------------------------------
 #need QtSoap - WebSupport
-#open SUBDIRS += examples/easter
-#open SUBDIRS += examples/soapQQtOnline
+#-----------------------------------------------------------------
+#SUBDIRS += examples/easter
+#SUBDIRS += examples/soapQQtOnline
 
+#-----------------------------------------------------------------
 #need webkitwidgets - WebSupport
 #webkit webengine
+#-----------------------------------------------------------------
 #SUBDIRS += examples/qqtftpclient
 #SUBDIRS += examples/qqthttpclient
 #SUBDIRS += examples/qqtwebkit

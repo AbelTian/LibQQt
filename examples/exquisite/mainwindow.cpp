@@ -4,6 +4,11 @@
 #include <QKeyEvent>
 #include <qqtcore.h>
 #include <qqtslideeffecttabbar.h>
+#include <qcustomplot.h>
+#include <QTime>
+
+QCPGraph* g0 = NULL;
+QTime start;
 
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
@@ -201,6 +206,15 @@ MainWindow::MainWindow(QWidget* parent) :
     ui->w77->addTab("ddd");
     ui->w77->addTab("xxxx");
     ui->w77->setFixedHeight(28);
+
+    ui->w99->xAxis->setTickLabelType(QCPAxis::ltNumber);
+    ui->w99->xAxis->setAutoTickStep(true);
+    ui->w99->xAxis->setTickStep(5);
+    ui->w99->xAxis->setRange(0, 100);
+    ui->w99->yAxis->setRange(0, 200);
+
+    g0 = ui->w99->addGraph(ui->w99->xAxis, ui->w99->yAxis);
+    start = QTime::currentTime();
 }
 
 
@@ -212,6 +226,13 @@ MainWindow::~MainWindow()
 void MainWindow::setValue(int value)
 {
     this->value = value;
+
+    QTime ecl = QTime::currentTime();
+    int key = -ecl.msecsTo(start) / 10;
+    g0->addData(key, ui->hs0->value());
+    ui->w99->xAxis->setRange(0, key + 100, Qt::AlignLeft);
+    ui->w99->replot();
+    //pline() << key;
 }
 
 void MainWindow::setValue()

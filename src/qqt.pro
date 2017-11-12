@@ -8,6 +8,11 @@
 #2017年11月10日18:53:56
 
 #################################################################
+##Usage
+#################################################################
+#please dont use Qt 5.9.1, it is broken with android and ios.
+
+#################################################################
 ##project name
 #################################################################
 TARGET = QQt
@@ -18,13 +23,15 @@ TEMPLATE = lib
 ##need QKIT to compitible with some occasion
 ################################################
 include ($$PWD/qqt_kit.pri)
-##special lib lib_bundle/staticlib
-equals(QKIT_PRIVATE, macOS) {
-    CONFIG += dll
-    CONFIG += lib_bundle
-} else:equals(QKIT_PRIVATE, iOS) {
-    CONFIG += staticlib
-} else:equals(QKIT_PRIVATE, WIN32) {
+
+##different target:
+##win link qqt dll + ..
+##win link qqt static + QQT_STATIC_LIBRARY
+##win build qqt dll + QQT_LIBRARY
+##win build qqt lib + QQT_STATIC_LIBRARY
+##*nix build and link qqt dll or lib + ..
+##some target, special lib lib_bundle/staticlib
+equals(QKIT_PRIVATE, WIN32) {
     #when Qt is static by mingw32 building 5.9.1
     equals(QT_VERSION, 5.9.1){
         CONFIG += staticlib
@@ -33,12 +40,16 @@ equals(QKIT_PRIVATE, macOS) {
         CONFIG += dll
         DEFINES += QQT_LIBRARY
     }
-} else {
-    ##default build dll but some occasion
+} else:equals(QKIT_PRIVATE, macOS) {
     CONFIG += dll
-    #windows QQt library export (DLL) static lib is not needed
+    CONFIG += lib_bundle
+} else:equals(QKIT_PRIVATE, iOS) {
+    CONFIG += staticlib
+} else {
+    ##default build dll
+    CONFIG += dll
     #*nix no need this macro
-    DEFINES += QQT_LIBRARY
+    #DEFINES += QQT_LIBRARY
 }
 #create prl
 CONFIG += create_prl

@@ -84,7 +84,8 @@ equals(QKIT_PRIVATE, macOS) {
 equals(QKIT_PRIVATE, macOS) {
     CONFIG += app_bundle
 }
-equals(QKIT_PRIVATE, ANDROID) {
+
+equals(QKIT_PRIVATE, ANDROID||ANDROIDX86) {
     CONFIG += mobility
     MOBILITY =
 }

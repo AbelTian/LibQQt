@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -113,6 +113,16 @@
        <attribute name="title">
         <string>页</string>
        </attribute>
+       <widget class="QCustomPlot" name="w99" native="true">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>80</y>
+          <width>651</width>
+          <height>301</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
@@ -233,7 +243,13 @@
   <customwidget>
    <class>QQtSlideEffectTabWidget</class>
    <extends>QTabWidget</extends>
-   <header>qqtslideeffecttabwidget.h</header>
+   <header location="global">qqtslideeffecttabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header location="global">qcustomplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

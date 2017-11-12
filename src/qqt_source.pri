@@ -16,20 +16,20 @@ SOURCES +=
 HEADERS +=
 
 #root dir
-win32 {
+contains (QKIT_PRIVATE, WIN32||WIN64) {
     #win32 base type
     HEADERS += $$PWD/qqtwin.h
-}
-unix {
-    equals(QKIT_PRIVATE, macOS) {
-        HEADERS += $$PWD/qqtdarwin.h
-    } else: contains(QKIT_PRIVATE, LINUX|LINUX64) {
-        HEADERS += $$PWD/qqtlinux.h
-    }
-}
-contains (QKIT_PRIVATE, ANDROID||ANDROIDX86) {
+} else:contains (QKIT_PRIVATE, macOS||iOS||iOSSimulator) {
+    #mac base type
+    HEADERS += $$PWD/qqtdarwin.h
+} else:contains (QKIT_PRIVATE, ANDROID||ANDROIDX86) {
+    #android base type
     HEADERS += $$PWD/qqtandroid.h
+} else {
+    #linux base type
+    HEADERS += $$PWD/qqtlinux.h
 }
+
 HEADERS += $$PWD/qqt.h \
     $$PWD/qqt-local.h \
     $$PWD/qqtversion.h \
@@ -131,10 +131,12 @@ HEADERS += $$PWD/multimedia/qqtmplayer.h
 
 #pluginwatcher
 #TODO: macOS dump
-contains (DEFINES, QQT_LIBRARY) {
-    DEFINES += BUILD_QDEVICEWATCHER_LIB
-}
 win32 {
+    contains (DEFINES, QQT_LIBRARY) {
+        DEFINES += BUILD_QDEVICEWATCHER_LIB
+    } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+        DEFINES += BUILD_QDEVICEWATCHER_STATIC
+    }
     wince*: SOURCES += $$PWD/pluginwatcher/qdevicewatcher_wince.cpp
     else:  SOURCES += $$PWD/pluginwatcher/qdevicewatcher_win32.cpp
 }
@@ -166,8 +168,12 @@ contains (DEFINES, __PRINTSUPPORT__) {
     #DEFINES += __CUSTOMPLOT__
     contains (DEFINES, __CUSTOMPLOT__) {
         #message (qcustomplot is used in $${TARGET})
-        contains (DEFINES, QQT_LIBRARY) {
-            DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
+        win32 {
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
+            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+                DEFINES += QCUSTOMPLOT_USE_LIBRARY
+            }
         }
         SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
                     $$PWD/customplot/qcustomplot.cpp
@@ -367,8 +373,12 @@ contains (DEFINES, __QRENCODE__) {
 
 ##websocket
 contains(DEFINES, __QTSOAP__) {
-    contains (DEFINES, QQT_LIBRARY) {
-        DEFINES += QT_QTSOAP_LIBRARY
+    win32 {
+        contains (DEFINES, QQT_LIBRARY) {
+            DEFINES += QT_QTSOAP_LIBRARY
+        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+            DEFINES += QT_QTSOAP_STATIC_LIBRARY
+        }
     }
     SOURCES += \
         $$PWD/soap/qtsoap.cpp

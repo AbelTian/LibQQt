@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QEventLoop>
 #include <QTimer>
+#include <qqt.h>
 
 /**
  * @brief The QQtVerificationCode_p class 验证码操作类

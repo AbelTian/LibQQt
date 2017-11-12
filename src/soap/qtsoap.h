@@ -49,11 +49,20 @@
 #include <QLinkedList>
 #include <QPointer>
 
+#include <QtCore/qglobal.h>
 
-#if defined(QT_QTSOAP_LIBRARY)
-#  define QT_QTSOAP_EXPORT Q_DECL_EXPORT
+#if defined(Q_OS_WIN)
+//dynamic and static are different
+#if   defined(QT_QTSOAP_LIBRARY)
+#     define QT_QTSOAP_EXPORT Q_DECL_EXPORT
+#elif defined(QT_QTSOAP_STATIC_LIBRARY)
+#     define QT_QTSOAP_EXPORT
 #else
-#  define QT_QTSOAP_EXPORT Q_DECL_IMPORT
+#     define QT_QTSOAP_EXPORT Q_DECL_IMPORT
+#endif
+#else
+//dynamic and static are equal to each other
+#     define QT_QTSOAP_EXPORT
 #endif
 
 #define SOAPv11_ENVELOPE    "http://schemas.xmlsoap.org/soap/envelope/"

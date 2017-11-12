@@ -1,5 +1,5 @@
 /******************************************************************************
-	QDeviceWatcher: Device watcher class
+    QDeviceWatcher: Device watcher class
     Copyright (C) 2011-2015 Wang Bin <wbsecg1@gmail.com>
 
     This library is free software; you can redistribute it and/or
@@ -22,44 +22,47 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QEvent>
+#include <QtCore/qglobal.h>
 
-#ifdef BUILD_QDEVICEWATCHER_STATIC
-#define Q_DW_EXPORT
+#if defined(Q_OS_WIN)
+//dynamic and static are different
+#if   defined(BUILD_QDEVICEWATCHER_LIB)
+#     define Q_DW_EXPORT Q_DECL_EXPORT
+#elif defined(BUILD_QDEVICEWATCHER_STATIC)
+#     define Q_DW_EXPORT
 #else
-#if defined(BUILD_QDEVICEWATCHER_LIB)
-#  undef Q_DW_EXPORT
-#  define Q_DW_EXPORT Q_DECL_EXPORT
-#else
-#  undef Q_DW_EXPORT
-#  define Q_DW_EXPORT //Q_DECL_IMPORT //only for vc?
+#     define Q_DW_EXPORT Q_DECL_IMPORT
 #endif
-#endif //BUILD_QDEVICEWATCHER_STATIC
+#else
+//dynamic and static are equal to each other
+#     define Q_DW_EXPORT
+#endif
 
 
 class QDeviceWatcherPrivate;
 
 class Q_DW_EXPORT QDeviceWatcher : public QObject
 {
-	Q_OBJECT
-	Q_DECLARE_PRIVATE(QDeviceWatcher)
+    Q_OBJECT
+    Q_DECLARE_PRIVATE(QDeviceWatcher)
 public:
-	explicit QDeviceWatcher(QObject *parent = 0);
-	~QDeviceWatcher();
+    explicit QDeviceWatcher(QObject* parent = 0);
+    ~QDeviceWatcher();
 
-	bool start();
-	bool stop();
-	bool isRunning() const;
+    bool start();
+    bool stop();
+    bool isRunning() const;
 
-	void appendEventReceiver(QObject* receiver);
+    void appendEventReceiver(QObject* receiver);
 
 signals:
-	void deviceAdded(const QString& dev);
-	void deviceChanged(const QString& dev); //when umounting the device
-	void deviceRemoved(const QString& dev);
+    void deviceAdded(const QString& dev);
+    void deviceChanged(const QString& dev); //when umounting the device
+    void deviceRemoved(const QString& dev);
 
 protected:
-	bool running;
-	QDeviceWatcherPrivate *d_ptr;
+    bool running;
+    QDeviceWatcherPrivate* d_ptr;
 };
 
 
