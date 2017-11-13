@@ -126,9 +126,11 @@ FORMS += \
 #multimedia
 #arm mips
 #TODO: +wince +android +ios +macOS +win +linux
-contains (DEFINES, __PROCESSMODULE__) {
-    SOURCES += $$PWD/multimedia/qqtmplayer.cpp
-    HEADERS += $$PWD/multimedia/qqtmplayer.h
+contains (DEFINES, __MULTIMEDIA__) {
+    contains (DEFINES, __PROCESSMODULE__){
+        SOURCES += $$PWD/multimedia/qqtmplayer.cpp
+        HEADERS += $$PWD/multimedia/qqtmplayer.h
+    }
 }
 
 #pluginwatcher

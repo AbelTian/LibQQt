@@ -1,5 +1,5 @@
-#ifndef QQTLINUX_H
-#define QQTLINUX_H
+#ifndef QQTANDROID_H
+#define QQTANDROID_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,4 +39,4 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif  /* __cplusplus */
-#endif // QQTLINUX_H
+#endif // QQTANDROID_H

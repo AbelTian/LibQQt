@@ -119,6 +119,12 @@ contains (DEFINES, __CPP11__) {
     #lambda also need c++11
 }
 
+##################MultiMedia Module###############################
+DEFINES += __MULTIMEDIA__
+contains (DEFINES, __MULTIMEDIA__) {
+    QT += multimedia
+}
+
 ##################DeviceWatcher Module###############################
 #used in windows linux e-linux android, mac ios not support exactly
 #if you use DeviceWatcher , open this annotation

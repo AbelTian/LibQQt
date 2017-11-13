@@ -24,7 +24,6 @@ equals(QKIT_PRIVATE, EMBEDDED) {
     #arm32 private
     DEFINES += __ARM_LINUX__
 } else:equals(QKIT_PRIVATE, MIPS32) {
-    QT += multimedia
     DEFINES += __EMBEDDED_LINUX__
     #mips32 private
     DEFINES += __MIPS_LINUX__
@@ -93,7 +92,11 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 CONFIG(debug, debug|profile|release):BUILD=Debug
 CONFIG(profile, debug|profile|release):BUILD=Profile
 CONFIG(release, debug|profile|release):BUILD=Release
-equals(QKIT_PRIVATE, MIPS32) {
+equals(QKIT_PRIVATE, EMBEDDED) {
+    SYSNAME = Embedded
+} else:equals(QKIT_PRIVATE, ARM32) {
+    SYSNAME = Arm32
+} else:equals(QKIT_PRIVATE, MIPS32) {
     SYSNAME = Mips32
 } else:equals(QKIT_PRIVATE, LINUX) {
     SYSNAME = Linux
