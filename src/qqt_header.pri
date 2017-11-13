@@ -208,7 +208,8 @@ win32 {
         #LIBS += -L$${MACOSXSDK}/usr/lib
         LIBS += -framework DiskArbitration -framework Cocoa -framework IOKit
     }else:contains(QKIT_PRIVATE, iOS|iOSSimulator){
-        QMAKE_LFLAGS += -ObjC -lsqlite3 -lz -framework "AddressBook" -framework "AssetsLibrary" -framework "CoreFoundation" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreMotion" -framework "MessageUI" -framework "SystemConfiguration"
+        QMAKE_LFLAGS += -ObjC -lsqlite3 -lz
+        QMAKE_IOS_DEPLOYMENT_TARGET = 8
     }
 }
 ##################################################################

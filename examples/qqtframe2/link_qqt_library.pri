@@ -39,6 +39,9 @@ contains (CONFIG, BUILD_SRC) {
     } else {
         CONFIG += link_from_build
     }
+    contains(QKIT_PRIVATE, iOS|iOSSimulator) {
+        CONFIG += link_from_build
+    }
 
     contains(CONFIG, link_from_build) {
         equals(QMAKE_HOST.os, Darwin) {
@@ -53,4 +56,3 @@ contains (CONFIG, BUILD_SRC) {
     #if you want to link QQt library
     include($${QQT_SOURCE_ROOT}/src/qqt_library.pri)
 }
-

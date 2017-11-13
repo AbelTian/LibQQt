@@ -43,8 +43,8 @@ equals(QKIT_PRIVATE, WIN32) {
 } else:equals(QKIT_PRIVATE, macOS) {
     CONFIG += dll
     CONFIG += lib_bundle
-} else:equals(QKIT_PRIVATE, iOS) {
-    CONFIG += staticlib
+} else:contains(QKIT_PRIVATE, iOS|iOSSimulator) {
+    CONFIG += static
 } else {
     ##default build dll
     CONFIG += dll
