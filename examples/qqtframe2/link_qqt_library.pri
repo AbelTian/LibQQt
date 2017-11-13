@@ -33,14 +33,17 @@ contains (CONFIG, BUILD_SRC) {
     include($${QQT_SOURCE_ROOT}/src/qqt_source.pri)
 } else {
     #QKIT_PRIVATE from qqt_header.pri
-    !contains(QKIT_PRIVATE, WIN32|WIN64) {
+    contains(QKIT_PRIVATE, WIN32|WIN64) {
+        CONFIG += link_from_build
+    } else:contains(QKIT_PRIVATE, iOS|iOSSimulator) {
+        #mac ios .framework .a 里面的快捷方式必须使用里面的相对路径，不能使用绝对路径
+        #但是qtcreator生成framework的时候用了绝对路径，所以导致拷贝后链接失败，库不可用。
+        #qqt_install.pri 里面解决了framework的拷贝问题，但是对于ios里.a的没做，而.a被拷贝了竟然也不能用！
+        #在build的地方link就可以了
+        CONFIG += link_from_build
+    } else{
         #default
         CONFIG += link_from_sdk
-    } else {
-        CONFIG += link_from_build
-    }
-    contains(QKIT_PRIVATE, iOS|iOSSimulator) {
-        CONFIG += link_from_build
     }
 
     contains(CONFIG, link_from_build) {
