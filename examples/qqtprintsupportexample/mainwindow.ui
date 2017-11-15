@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>647</width>
-    <height>460</height>
+    <width>780</width>
+    <height>562</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,27 +18,41 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_11">
        <attribute name="title">
         <string>页</string>
        </attribute>
-       <widget class="QCustomPlot" name="w99" native="true">
-        <property name="geometry">
-         <rect>
-          <x>140</x>
-          <y>80</y>
-          <width>651</width>
-          <height>301</height>
-         </rect>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QCustomPlot" name="w99" native="true"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>页</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QQtPictureEffectTabWidget" name="tw0">
+          <property name="tabPosition">
+           <enum>QTabWidget::West</enum>
+          </property>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>Tab 1</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>Tab 2</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -56,8 +70,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>647</width>
-     <height>25</height>
+     <width>780</width>
+     <height>28</height>
     </rect>
    </property>
   </widget>
@@ -68,6 +82,12 @@
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
    <header location="global">qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QQtPictureEffectTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header location="global">qqtpictureeffecttabwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

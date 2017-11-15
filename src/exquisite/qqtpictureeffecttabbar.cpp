@@ -85,6 +85,7 @@ void QQtTabBar::paintEvent(QPaintEvent* e)
         opt.palette.setCurrentColorGroup(QPalette::Active);
         opt.state |= QStyle::State_Sunken;
 
+        tabRectValue = tabRect(index);
         //-rect.height()/20 上移
         verticalTabs() ? tabRectValue.adjust(0, 0, 0, 0) : tabRectValue.adjust(0, 0, 0, 0);
 

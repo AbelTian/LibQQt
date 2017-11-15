@@ -24,6 +24,7 @@ public:
 
     IconStyle getIconStyle() const { return iconStyle; }
     void setIconStyle(IconStyle iconStyle);
+
     void tabPixmap(int index, QImage& icon, QImage& iconSel);
     void setTabPixmap(int index, const QString& icon = QString(), const QString& iconSel = QString());
 
