@@ -17,7 +17,12 @@ public:
 
     enum IconStyle
     {
+        //picture style
+        IconStyle_Cover_And_TopText,
         IconStyle_Cover_And_BottomText,
+        IconStyle_Cover_And_LeftText,
+        IconStyle_Cover_And_RightText,
+        //color style
         IconStyle_Left_And_RightText,
         IconStyle_Max_Style
     };
@@ -37,8 +42,12 @@ public:
     void tabPixmap(int index, QImage& icon, QImage& iconSel);
     void setTabPixmap(int index, const QString& icon = QString(), const QString& iconSel = QString());
 
+    //effected by drawbase
+    QColor getBackgroundColor() const { return backgroundColor; }
+    void setBackgroundColor(QColor backgroundColor);
 protected:
     virtual void paintEvent(QPaintEvent*);
+    virtual void drawBackground(QPainter* p);
     virtual void drawPicture(QPainter* p);
     virtual void drawText(QPainter* p);
 
@@ -53,6 +62,7 @@ private:
     QFont textFont;
     QColor textColor;
     QColor selectedTextColor;
+    QColor backgroundColor;
 };
 
 #endif // QQTTABBAR_H

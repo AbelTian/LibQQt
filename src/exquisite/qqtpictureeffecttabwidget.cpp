@@ -9,7 +9,6 @@ QQtPictureEffectTabWidget::QQtPictureEffectTabWidget(QWidget* parent) : QQtTabWi
      */
 }
 
-
 void QQtPictureEffectTabWidget::setObjectName(const QString& name)
 {
     m_bar->setObjectName(QString("%1_bar").arg(name));

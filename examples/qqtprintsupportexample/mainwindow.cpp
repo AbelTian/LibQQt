@@ -46,11 +46,11 @@ MainWindow::MainWindow(QWidget* parent) :
     g0 = ui->w99->addGraph(ui->w99->xAxis, ui->w99->yAxis);
     start = QTime::currentTime();
 
+    ui->tw0->setStyleSheet("QTabWidget#tw0 QTabBar::tab { width:90px; height:30px; }");
     QQtTabBar* tab = (QQtTabBar*)ui->tw0->localTabBar();
+    tab->setIconStyle(QQtTabBar::IconStyle_Cover_And_RightText);
     tab->setTabPixmap(0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png");
     tab->setTabPixmap(1, "./skin/default/bt_user.png", "./skin/default/bt_user_press.png");
-    ui->tw0->setStyleSheet("QTabWidget#tw0 QTabBar::tab { width:90px; height:30px; }");
-    tab->setIconStyle(QQtTabBar::IconStyle_Left_And_RightText);
 }
 
 

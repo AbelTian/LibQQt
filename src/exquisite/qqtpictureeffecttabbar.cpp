@@ -11,10 +11,12 @@ QQtTabBar::QQtTabBar(QWidget* parent) :
     QTabBar(parent)
 {
     setFocusPolicy(Qt::NoFocus);
-    iconStyle = IconStyle_Cover_And_BottomText;
+    iconStyle = IconStyle_Cover_And_RightText;
     textColor = QColor(0, 0, 0);
+    backgroundColor = QColor(0, 0, 0);
     selectedTextColor = QColor(255, 255, 255);
     textFont = QApplication::font();
+    setDrawBase(false);
 }
 
 void QQtTabBar::setIconStyle(QQtTabBar::IconStyle iconStyle)
@@ -76,12 +78,38 @@ void QQtTabBar::setTabPixmap(int index, const QString& icon, const QString& icon
     iconList.insert(index, table);
 }
 
+void QQtTabBar::setBackgroundColor(QColor backgroundColor)
+{
+    if (this->backgroundColor != backgroundColor)
+    {
+        this->backgroundColor = backgroundColor;
+        update();
+    }
+}
+
 void QQtTabBar::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
     QPainter p(this);
+    drawBackground(&p);
     drawPicture(&p);
     drawText(&p);
+}
+
+void QQtTabBar::drawBackground(QPainter* p)
+{
+    bool b = drawBase();
+    if (b)
+    {
+        for (int index = 0; index < count(); index++)
+        {
+            p->save();
+
+            p->setBrush(QBrush(backgroundColor));
+            p->fillRect(tabRect(index), backgroundColor);
+            p->restore();
+        }
+    }
 }
 
 void QQtTabBar::drawPicture(QPainter* p)
@@ -89,15 +117,15 @@ void QQtTabBar::drawPicture(QPainter* p)
     for (int index = 0; index < count(); index++)
     {
         QRect iconRect = tabRect(index);
-        if (iconStyle == IconStyle_Cover_And_BottomText)
-            iconRect = tabRect(index);
-        else if (iconStyle == IconStyle_Left_And_RightText)
+        if (iconStyle == IconStyle_Left_And_RightText)
             iconRect = QRect(iconRect.left(), iconRect.top(),
                              iconRect.height(), iconRect.height());
+
         if (iconList.size() > index)
         {
             p->save();
             int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
+            //tabRect = rect()?
             p->drawPixmap(iconRect, QIcon(iconList[index][sel]).pixmap(iconRect.size(), QIcon::Normal, QIcon::On));
             /*
              * 失真不明显，使用以下方法
@@ -117,17 +145,19 @@ void QQtTabBar::drawText(QPainter* p)
         //-rect.height()/20 上移
         verticalTabs() ? tabTextRect.adjust(0, 0, 0, 0) : tabTextRect.adjust(0, 0, 0, 0);
 
-        if (iconStyle == IconStyle_Cover_And_BottomText)
-            tabTextRect = tabRect(index);
-        else if (iconStyle == IconStyle_Left_And_RightText)
+        if (iconStyle == IconStyle_Left_And_RightText)
             tabTextRect = QRect(tabTextRect.left() + tabTextRect.height(), tabTextRect.top(),
                                 tabTextRect.width() - tabTextRect.height(), tabTextRect.height());
 
         int flags = Qt::AlignCenter;
         if (iconStyle == IconStyle_Cover_And_BottomText)
-            flags = verticalTabs() ? Qt::AlignHCenter | Qt::AlignBottom : Qt::AlignCenter;
-        else if (iconStyle == IconStyle_Left_And_RightText)
-            flags =  Qt::AlignCenter;
+            flags = Qt::AlignHCenter | Qt::AlignBottom;
+        else if (iconStyle == IconStyle_Cover_And_TopText)
+            flags = Qt::AlignHCenter | Qt::AlignTop;
+        else if (iconStyle == IconStyle_Cover_And_LeftText)
+            flags = Qt::AlignVCenter | Qt::AlignLeft;
+        else if (iconStyle == IconStyle_Cover_And_RightText)
+            flags = Qt::AlignVCenter | Qt::AlignRight;
 
         //pline() << objectName() << rect;
         //if on board text is normal, this is right. otherwise the palette is right
