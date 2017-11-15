@@ -12,6 +12,9 @@ QQtTabBar::QQtTabBar(QWidget* parent) :
 {
     setFocusPolicy(Qt::NoFocus);
     iconStyle = IconStyle_Cover_And_BottomText;
+    textColor = QColor(0, 0, 0);
+    selectedTextColor = QColor(255, 255, 255);
+    textFont = QApplication::font();
 }
 
 void QQtTabBar::setIconStyle(QQtTabBar::IconStyle iconStyle)
@@ -91,12 +94,11 @@ void QQtTabBar::drawPicture(QPainter* p)
         else if (iconStyle == IconStyle_Left_And_RightText)
             iconRect = QRect(iconRect.left(), iconRect.top(),
                              iconRect.height(), iconRect.height());
-
         if (iconList.size() > index)
         {
             p->save();
             int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
-            p->drawPixmap(iconRect, QIcon(iconList[index][sel]).pixmap(rect().size(), QIcon::Normal, QIcon::On));
+            p->drawPixmap(iconRect, QIcon(iconList[index][sel]).pixmap(iconRect.size(), QIcon::Normal, QIcon::On));
             /*
              * 失真不明显，使用以下方法
              */
@@ -130,6 +132,7 @@ void QQtTabBar::drawText(QPainter* p)
         //pline() << objectName() << rect;
         //if on board text is normal, this is right. otherwise the palette is right
         p->save();
+        p->setFont(textFont);
         if (index == currentIndex())
             p->setPen(selectedTextColor);
         else
