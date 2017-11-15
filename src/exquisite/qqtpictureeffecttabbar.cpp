@@ -11,6 +11,16 @@ QQtTabBar::QQtTabBar(QWidget* parent) :
     QTabBar(parent)
 {
     setFocusPolicy(Qt::NoFocus);
+    iconStyle = IconStyle_Cover_And_BottomText;
+}
+
+void QQtTabBar::setIconStyle(QQtTabBar::IconStyle iconStyle)
+{
+    if (this->iconStyle != iconStyle)
+    {
+        this->iconStyle = iconStyle;
+        update();
+    }
 }
 
 void QQtTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
@@ -44,11 +54,20 @@ void QQtTabBar::paintEvent(QPaintEvent* e)
     for (int index = 0; index < count(); index++)
     {
         //TODO:
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         QStyleOptionTabV3 opt;
+#else
+        QStyleOptionTab opt;
+#endif
         initStyleOption(&opt, index);
         opt.shape = verticalTabs() ? QTabBar::RoundedWest : QTabBar::RoundedNorth;
 
         QRect tabRectValue = tabRect(index);
+        if (iconStyle == IconStyle_Cover_And_BottomText)
+            tabRectValue = tabRect(index);
+        else if (iconStyle == IconStyle_Left_And_RightText)
+            tabRectValue = QRect(tabRectValue.left(), tabRectValue.top(),
+                                 tabRectValue.height(), tabRectValue.height());
 
         if (iconList.size() > index)
         {
@@ -69,7 +88,17 @@ void QQtTabBar::paintEvent(QPaintEvent* e)
         //-rect.height()/20 上移
         verticalTabs() ? tabRectValue.adjust(0, 0, 0, 0) : tabRectValue.adjust(0, 0, 0, 0);
 
-        int flags = verticalTabs() ? Qt::AlignHCenter | Qt::AlignBottom : Qt::AlignCenter;
+        if (iconStyle == IconStyle_Cover_And_BottomText)
+            tabRectValue = tabRect(index);
+        else if (iconStyle == IconStyle_Left_And_RightText)
+            tabRectValue = QRect(tabRectValue.left() + tabRectValue.height(), tabRectValue.top(),
+                                 tabRectValue.width() - tabRectValue.height(), tabRectValue.height());
+
+        int flags = Qt::AlignCenter;
+        if (iconStyle == IconStyle_Cover_And_BottomText)
+            flags = verticalTabs() ? Qt::AlignHCenter | Qt::AlignBottom : Qt::AlignCenter;
+        else if (iconStyle == IconStyle_Left_And_RightText)
+            flags =  Qt::AlignCenter;
 
         //pline() << objectName() << rect;
         if (index == currentIndex())

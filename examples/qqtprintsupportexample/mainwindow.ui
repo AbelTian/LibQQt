@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1002</width>
-    <height>629</height>
+    <width>647</width>
+    <height>460</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,6 +35,11 @@
         </property>
        </widget>
       </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>页</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
     <item>
@@ -51,8 +56,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1002</width>
-     <height>22</height>
+     <width>647</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>

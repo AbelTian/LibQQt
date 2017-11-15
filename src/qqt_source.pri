@@ -16,6 +16,11 @@ SOURCES +=
 HEADERS +=
 
 #root dir
+HEADERS += $$PWD/qqt.h \
+    $$PWD/qqt-local.h \
+    $$PWD/qqtversion.h \
+    $$PWD/qqt-qt.h
+#platform header
 contains (QKIT_PRIVATE, WIN32||WIN64) {
     #win32 base type
     HEADERS += $$PWD/qqtwin.h
@@ -29,11 +34,6 @@ contains (QKIT_PRIVATE, WIN32||WIN64) {
     #linux base type
     HEADERS += $$PWD/qqtlinux.h
 }
-
-HEADERS += $$PWD/qqt.h \
-    $$PWD/qqt-local.h \
-    $$PWD/qqtversion.h \
-    $$PWD/qqt-qt.h
 
 #core
 SOURCES += \

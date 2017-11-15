@@ -2,6 +2,7 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS = src/qqt.pro
+SUBDIRS +=
 #-----------------------------------------------------------------
 #basic example
 #-----------------------------------------------------------------
@@ -10,8 +11,7 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/animationframe
 #SUBDIRS += examples/cmdwidget
 #SUBDIRS += examples/qqtnetworkexample
-#
-SUBDIRS += examples/exquisite
+#SUBDIRS += examples/exquisite
 #SUBDIRS += examples/QtBuildTool
 #SUBDIRS += examples/QtSdkManager
 #SUBDIRS += examples/QQtInstaller
@@ -24,7 +24,8 @@ SUBDIRS += examples/exquisite
 #SUBDIRS += examples/qqtframe3
 #SUBDIRS += examples/VegeTablesPrice
 #can't support ios
-#SUBDIRS += examples/qqtprintsupportexample
+#
+SUBDIRS += examples/qqtprintsupportexample
 
 #-----------------------------------------------------------------
 #need vlcQt libvlc library
@@ -37,7 +38,7 @@ SUBDIRS += examples/exquisite
 #SUBDIRS += examples/qqtffmpegplayer
 
 #need bluetooth library
-#open SUBDIRS += examples/qqtbluetoothfiletransferserver
+#SUBDIRS += examples/qqtbluetoothfiletransferserver
 
 #-----------------------------------------------------------------
 #need QtSoap - WebSupport
