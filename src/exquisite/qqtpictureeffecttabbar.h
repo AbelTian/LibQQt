@@ -25,11 +25,22 @@ public:
     IconStyle getIconStyle() const { return iconStyle; }
     void setIconStyle(IconStyle iconStyle);
 
+    QFont getTextFont() const { return textFont; }
+    void setTextFont(QFont textFont);
+
+    QColor getTextColor() const { return textColor; }
+    void setTextColor(QColor textColor);
+
+    QColor getSelectedTextColor() const { return selectedTextColor; }
+    void setSelectedTextColor(QColor selectedTextColor);
+
     void tabPixmap(int index, QImage& icon, QImage& iconSel);
     void setTabPixmap(int index, const QString& icon = QString(), const QString& iconSel = QString());
 
 protected:
-    void paintEvent(QPaintEvent*);
+    virtual void paintEvent(QPaintEvent*);
+    virtual void drawPicture(QPainter* p);
+    virtual void drawText(QPainter* p);
 
 private:
     inline bool verticalTabs();
@@ -39,6 +50,9 @@ public slots:
 private:
     QList<TBtnIconTable> iconList;
     IconStyle iconStyle;
+    QFont textFont;
+    QColor textColor;
+    QColor selectedTextColor;
 };
 
 #endif // QQTTABBAR_H

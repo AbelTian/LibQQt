@@ -51,6 +51,8 @@ MainWindow::MainWindow(QWidget* parent) :
     tab->setIconStyle(QQtTabBar::IconStyle_Left_And_RightText);
     tab->setTabPixmap(0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png");
     tab->setTabPixmap(1, "./skin/default/bt_user.png", "./skin/default/bt_user_press.png");
+    ui->tw0->localTabBar()->setTabTextColor(0, QColor(44, 55, 66));
+    ui->tw0->localTabBar()->setTabTextColor(1, QColor(44, 55, 66));
 }
 
 

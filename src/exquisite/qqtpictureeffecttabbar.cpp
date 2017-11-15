@@ -23,6 +23,33 @@ void QQtTabBar::setIconStyle(QQtTabBar::IconStyle iconStyle)
     }
 }
 
+void QQtTabBar::setTextFont(QFont textFont)
+{
+    if (this->textFont != textFont)
+    {
+        this->textFont = textFont;
+        update();
+    }
+}
+
+void QQtTabBar::setTextColor(QColor textColor)
+{
+    if (this->textColor != textColor)
+    {
+        this->textColor = textColor;
+        update();
+    }
+}
+
+void QQtTabBar::setSelectedTextColor(QColor selectedTextColor)
+{
+    if (this->selectedTextColor != selectedTextColor)
+    {
+        this->selectedTextColor = selectedTextColor;
+        update();
+    }
+}
+
 void QQtTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
 {
     if (index < 0 || index + 1 > count() || index + 1 > iconList.size())
@@ -49,51 +76,50 @@ void QQtTabBar::setTabPixmap(int index, const QString& icon, const QString& icon
 void QQtTabBar::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
-    QStylePainter p(this);
+    QPainter p(this);
+    drawPicture(&p);
+    drawText(&p);
+}
 
+void QQtTabBar::drawPicture(QPainter* p)
+{
     for (int index = 0; index < count(); index++)
     {
-        //TODO:
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-        QStyleOptionTabV3 opt;
-#else
-        QStyleOptionTab opt;
-#endif
-        initStyleOption(&opt, index);
-        opt.shape = verticalTabs() ? QTabBar::RoundedWest : QTabBar::RoundedNorth;
-
-        QRect tabRectValue = tabRect(index);
+        QRect iconRect = tabRect(index);
         if (iconStyle == IconStyle_Cover_And_BottomText)
-            tabRectValue = tabRect(index);
+            iconRect = tabRect(index);
         else if (iconStyle == IconStyle_Left_And_RightText)
-            tabRectValue = QRect(tabRectValue.left(), tabRectValue.top(),
-                                 tabRectValue.height(), tabRectValue.height());
+            iconRect = QRect(iconRect.left(), iconRect.top(),
+                             iconRect.height(), iconRect.height());
 
         if (iconList.size() > index)
         {
+            p->save();
             int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
-            p.drawItemPixmap(tabRectValue, Qt::AlignCenter, QIcon(iconList[index][sel]).pixmap(rect().size(), QIcon::Normal, QIcon::On));
+            p->drawPixmap(iconRect, QIcon(iconList[index][sel]).pixmap(rect().size(), QIcon::Normal, QIcon::On));
             /*
              * 失真不明显，使用以下方法
              */
             //QImage image(iconList[index][sel]);
             //p.drawItemPixmap(tabRectValue, Qt::AlignLeft |Qt::AlignTop, QPixmap::fromImage(image.scaled(tabRectValue.size(), Qt::KeepAspectRatio)));
+            p->restore();
         }
+    }
+}
 
-        //opt.palette.setColor(QPalette::Normal, QPalette::Text, QColor(255, 132, 0));
-        opt.palette.setColor(QPalette::Normal, QPalette::Text, tabTextColor(index));
-        opt.palette.setCurrentColorGroup(QPalette::Active);
-        opt.state |= QStyle::State_Sunken;
-
-        tabRectValue = tabRect(index);
+void QQtTabBar::drawText(QPainter* p)
+{
+    for (int index = 0; index < count(); index++)
+    {
+        QRect tabTextRect = tabRect(index);
         //-rect.height()/20 上移
-        verticalTabs() ? tabRectValue.adjust(0, 0, 0, 0) : tabRectValue.adjust(0, 0, 0, 0);
+        verticalTabs() ? tabTextRect.adjust(0, 0, 0, 0) : tabTextRect.adjust(0, 0, 0, 0);
 
         if (iconStyle == IconStyle_Cover_And_BottomText)
-            tabRectValue = tabRect(index);
+            tabTextRect = tabRect(index);
         else if (iconStyle == IconStyle_Left_And_RightText)
-            tabRectValue = QRect(tabRectValue.left() + tabRectValue.height(), tabRectValue.top(),
-                                 tabRectValue.width() - tabRectValue.height(), tabRectValue.height());
+            tabTextRect = QRect(tabTextRect.left() + tabTextRect.height(), tabTextRect.top(),
+                                tabTextRect.width() - tabTextRect.height(), tabTextRect.height());
 
         int flags = Qt::AlignCenter;
         if (iconStyle == IconStyle_Cover_And_BottomText)
@@ -102,10 +128,14 @@ void QQtTabBar::paintEvent(QPaintEvent* e)
             flags =  Qt::AlignCenter;
 
         //pline() << objectName() << rect;
+        //if on board text is normal, this is right. otherwise the palette is right
+        p->save();
         if (index == currentIndex())
-            p.drawItemText(tabRectValue, flags, opt.palette, true, opt.text, QPalette::Text);
+            p->setPen(selectedTextColor);
         else
-            p.drawItemText(tabRectValue, flags, opt.palette, true, opt.text, QPalette::BrightText);
+            p->setPen(textColor);
+        p->drawText(tabTextRect, flags, tabText(index));
+        p->restore();
     }
 }
 
