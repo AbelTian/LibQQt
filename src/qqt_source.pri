@@ -14,10 +14,12 @@
 #-------------------------------------------------
 SOURCES += \
     $$PWD/svgwidgets/qqtsvgwidget.cpp \
-    $$PWD/svgwidgets/qqtsvgpushbutton.cpp
+    $$PWD/svgwidgets/qqtsvgpushbutton.cpp \
+    $$PWD/svgwidgets/qqtsvgcheckbox.cpp
 HEADERS += \
     $$PWD/svgwidgets/qqtsvgwidget.h \
-    $$PWD/svgwidgets/qqtsvgpushbutton.h
+    $$PWD/svgwidgets/qqtsvgpushbutton.h \
+    $$PWD/svgwidgets/qqtsvgcheckbox.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \

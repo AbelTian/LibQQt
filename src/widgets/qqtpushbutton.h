@@ -12,7 +12,7 @@ class QQTSHARED_EXPORT QQtPushButton : public QPushButton
 
 public:
     explicit QQtPushButton(QWidget* parent = 0);
-    ~QQtPushButton();
+    virtual ~QQtPushButton();
 
     /*
      * QQtPushButton [] = 不能正常运算 所以采用这种形式。
@@ -27,15 +27,15 @@ private:
 
     // QWidget interface
 protected:
-    void paintEvent(QPaintEvent*);
+    virtual void paintEvent(QPaintEvent*) override;
 
     // QWidget interface
 protected:
-    void mousePressEvent(QMouseEvent*);
-    void mouseReleaseEvent(QMouseEvent*);
-    void enterEvent(QEvent*);
-    void leaveEvent(QEvent*);
-    void changeEvent(QEvent* e);
+    virtual void mousePressEvent(QMouseEvent*) override;
+    virtual void mouseReleaseEvent(QMouseEvent*) override;
+    virtual void enterEvent(QEvent*) override;
+    virtual void leaveEvent(QEvent*) override;
+    virtual void changeEvent(QEvent* e) override;
 
     // QWidget interface
 protected:

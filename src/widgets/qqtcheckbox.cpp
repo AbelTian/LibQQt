@@ -11,10 +11,16 @@ QQtCheckBox::~QQtCheckBox()
 {
 }
 
-void QQtCheckBox::pixMap(QImage& icon, QImage& iconSel)
+void QQtCheckBox::pixMap(QImage& icon, QImage& iconSel) const
 {
     icon = QImage(this->m_icon[BTN_NORMAL]);
     iconSel = QImage(this->m_icon[BTN_PRESS]);
+}
+
+void QQtCheckBox::pixMap(QString& icon, QString& iconSel) const
+{
+    icon = m_icon[BTN_NORMAL];
+    iconSel = m_icon[BTN_PRESS];
 }
 
 void QQtCheckBox::setPixmap(const QString& icon, const QString& iconSel)

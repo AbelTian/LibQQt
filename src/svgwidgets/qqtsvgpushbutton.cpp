@@ -1,5 +1,4 @@
 #include "qqtsvgpushbutton.h"
-#include <QString>
 
 QQtSvgPushButton::QQtSvgPushButton(QWidget* parent) : QQtPushButton(parent)
 {
@@ -22,7 +21,8 @@ void QQtSvgPushButton::paintEvent(QPaintEvent* event)
 
     QStylePainter p(this);
     EBtnStatus bs = btnStatus();
-    r[bs].render(&p);
+    if (r[bs].isValid())
+        r[bs].render(&p);
 
     bool enabled = isEnabled();
     QStyleOptionButton opt;
