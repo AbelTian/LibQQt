@@ -1,13 +1,8 @@
-#ifndef QPICWIDGET_H
-#define QPICWIDGET_H
+#ifndef QQTWIDGET_H
+#define QQTWIDGET_H
 
 #include <QWidget>
 #include <qqt-local.h>
-
-namespace Ui
-{
-class QQtWidget;
-}
 
 class QQTSHARED_EXPORT QQtWidget : public QWidget
 {
@@ -15,7 +10,7 @@ class QQTSHARED_EXPORT QQtWidget : public QWidget
 
 public:
     explicit QQtWidget(QWidget* parent = 0);
-    ~QQtWidget();
+    virtual ~QQtWidget();
 
     enum ImageStyle
     {
@@ -35,7 +30,6 @@ signals:
     void doubleClick();
 
 private:
-    Ui::QQtWidget* ui;
     QString m_pic;
     quint32 m_style;
     // QWidget interface

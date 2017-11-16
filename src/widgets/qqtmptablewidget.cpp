@@ -99,7 +99,7 @@ void QQTMPTableWidget::query(QString filter)
     for(int i = 0; i < pix; i++)
     {
         //ptime();//89ms
-        QQTTableWidget* page = new QQTTableWidget(this);
+        QQtTableWidget* page = new QQtTableWidget(this);
         //ptime();//2ms
         page->setDB(m_name);
         //ptime();//8ms
@@ -140,7 +140,7 @@ void QQTMPTableWidget::query(QString filter)
 
     for(int i = 0; i < m_pageNum; i++)
     {
-        QQTTableWidget* page = (QQTTableWidget*)(ui->stWidgetPage->widget(i));
+        QQtTableWidget* page = (QQtTableWidget*)(ui->stWidgetPage->widget(i));
         page->query(QString("%1 limit %2 offset %3")
                     .arg(filter)
                     .arg(m_numPerPage)
@@ -251,7 +251,7 @@ void QQTMPTableWidget::selectedRows(int column, QVector<QStringList> &strl)
 {
     for(int i = 0; i < m_pageNum; i++)
     {
-        QQTTableWidget* page = (QQTTableWidget*)ui->stWidgetPage->widget(i);
+        QQtTableWidget* page = (QQtTableWidget*)ui->stWidgetPage->widget(i);
         QMap<int, QStringList> ids;
         page->selectedRows(column, ids);
         QMapIterator<int, QStringList> itor(ids);
@@ -263,7 +263,7 @@ void QQTMPTableWidget::selectedRows(int column, QVector<QStringList> &strl)
     return;
 }
 
-QQTTableWidget* QQTMPTableWidget::selectedRows(int column)
+QQtTableWidget* QQTMPTableWidget::selectedRows(int column)
 {
     QString sectionName;
     QSqlQuery query(m_db);
@@ -275,7 +275,7 @@ QQTTableWidget* QQTMPTableWidget::selectedRows(int column)
     QVector<QStringList> lid;
     selectedRows(column, lid);
 
-    static QQTTableWidget* page = new QQTTableWidget(this);
+    static QQtTableWidget* page = new QQtTableWidget(this);
     page->setDB(m_name);
     page->setTable(m_table);
 
@@ -316,7 +316,7 @@ void QQTMPTableWidget::removeSelectedRows(int column)
 {
     for(int i = 0; i < m_pageNum; i++)
     {
-        QQTTableWidget* page = (QQTTableWidget*)ui->stWidgetPage->widget(i);
+        QQtTableWidget* page = (QQtTableWidget*)ui->stWidgetPage->widget(i);
         QMap<int, QStringList> ids;
         page->selectedRows(column, ids);
         page->removeRows(column, ids.values());

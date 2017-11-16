@@ -5,23 +5,18 @@
 #include "qqttreemodel.h"
 #include "qqt-local.h"
 
-namespace Ui {
-class QQTTreeWidget;
-}
-
-class QQTSHARED_EXPORT QQTTreeWidget : public QQTTreeView
+class QQTSHARED_EXPORT QQtTreeWidget : public QQtTreeView
 {
     Q_OBJECT
 
 public:
-    explicit QQTTreeWidget(QWidget *parent = 0);
-    ~QQTTreeWidget();
+    explicit QQtTreeWidget(QWidget* parent = 0);
+    virtual ~QQtTreeWidget();
 
 
 public slots:
 
 private:
-    Ui::QQTTreeWidget *ui;
     QQTTreeModel* mModel;
 };
 

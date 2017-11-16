@@ -4,20 +4,15 @@
 #include <QListView>
 #include <qqt-local.h>
 
-namespace Ui {
-class QQTListView;
-}
-
-class QQTSHARED_EXPORT QQTListView : public QListView
+class QQTSHARED_EXPORT QQtListView : public QListView
 {
     Q_OBJECT
 
 public:
-    explicit QQTListView(QWidget *parent = 0);
-    ~QQTListView();
+    explicit QQtListView(QWidget* parent = 0);
+    virtual ~QQtListView();
 
 private:
-    Ui::QQTListView *ui;
 };
 
 #endif // QQTLISTVIEW_H

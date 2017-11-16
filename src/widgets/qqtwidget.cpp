@@ -1,19 +1,15 @@
 #include "qqtwidget.h"
-#include "ui_qqtwidget.h"
 #include <QStylePainter>
 #include "qqtcore.h"
 
 QQtWidget::QQtWidget(QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::QQtWidget)
+    QWidget(parent)
 {
-    ui->setupUi(this);
     m_style = QQTCENTER;
 }
 
 QQtWidget::~QQtWidget()
 {
-    delete ui;
 }
 
 void QQtWidget::setPixmap(QString pic)

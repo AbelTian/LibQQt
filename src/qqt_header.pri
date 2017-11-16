@@ -167,7 +167,11 @@ contains (DEFINES, __PRINTSUPPORT__) {
 DEFINES += __EXQUISITE__
 #if you use QR encode, open this annotation
 DEFINES += __QRENCODE__
-
+#if you use Svg widgets, open this annotation
+DEFINES += __SVGWIDGETS__
+contains (DEFINES, __SVGWIDGETS__) {
+    QT += svg
+}
 ##################WebSocket Module###############################
 #if you use QtSoap, open this annotation
 DEFINES += __QTSOAP__
@@ -239,3 +243,4 @@ INCLUDEPATH += $$PWD/exquisite
 # c support
 INCLUDEPATH += $$PWD/qrencode
 INCLUDEPATH += $$PWD/soap
+INCLUDEPATH += $$PWD/svgwidgets

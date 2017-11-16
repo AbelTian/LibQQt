@@ -5,17 +5,13 @@
 #include "qqttablemodel.h"
 #include "qqt-local.h"
 
-namespace Ui {
-class QQTTableWidget;
-}
-
-class QQTSHARED_EXPORT QQTTableWidget : public QQTTableView
+class QQTSHARED_EXPORT QQtTableWidget : public QQtTableView
 {
     Q_OBJECT
 
 public:
-    explicit QQTTableWidget(QWidget *parent = 0);
-    ~QQTTableWidget();
+    explicit QQtTableWidget(QWidget* parent = 0);
+    virtual ~QQtTableWidget();
 
     void setDB(QString db = "");
     void setTable(QString table);
@@ -33,7 +29,6 @@ public:
 
     void selectedRows(int column, QMap<int, QStringList>& ids);
 private:
-    Ui::QQTTableWidget *ui;
     QQTTableModel* m_model;
     QSqlDatabase m_db;
 };

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QQTPushButton" name="btnCancel">
+  <widget class="QQtPushButton" name="btnCancel">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -52,7 +52,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QQTPushButton</class>
+   <class>QQtPushButton</class>
    <extends>QPushButton</extends>
    <header>qqtpushbutton.h</header>
   </customwidget>

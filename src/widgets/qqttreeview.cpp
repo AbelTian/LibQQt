@@ -1,13 +1,9 @@
 #include "qqttreeview.h"
-#include "ui_qqttreeview.h"
-#include <QFile>
+#include <QHeaderView>
 
-QQTTreeView::QQTTreeView(QWidget *parent) :
-    QTreeView(parent),
-    ui(new Ui::QQTTreeView)
+QQtTreeView::QQtTreeView(QWidget* parent) :
+    QTreeView(parent)
 {
-    ui->setupUi(this);
-
     setSelectionMode(QAbstractItemView::SingleSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -25,18 +21,17 @@ QQTTreeView::QQTTreeView(QWidget *parent) :
 #endif
 }
 
-QQTTreeView::~QQTTreeView()
+QQtTreeView::~QQtTreeView()
 {
-    delete ui;
 }
 
 
-void QQTTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const
+void QQtTreeView::drawRow(QPainter* painter, const QStyleOptionViewItem& options, const QModelIndex& index) const
 {
     return QTreeView::drawRow(painter, options, index);
 }
 
-void QQTTreeView::drawBranches(QPainter *painter, const QRect &rect, const QModelIndex &index) const
+void QQtTreeView::drawBranches(QPainter* painter, const QRect& rect, const QModelIndex& index) const
 {
     return QTreeView::drawBranches(painter, rect, index);
 }

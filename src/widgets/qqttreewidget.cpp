@@ -2,14 +2,11 @@
 #include "ui_qqttreewidget.h"
 #include "qqtxmltreemodel.h"
 
-QQTTreeWidget::QQTTreeWidget(QWidget *parent) :
-    QQTTreeView(parent),
-    ui(new Ui::QQTTreeWidget)
+QQtTreeWidget::QQtTreeWidget(QWidget* parent) :
+    QQtTreeView(parent)
 {
-    ui->setupUi(this);
 }
 
-QQTTreeWidget::~QQTTreeWidget()
+QQtTreeWidget::~QQtTreeWidget()
 {
-    delete ui;
 }

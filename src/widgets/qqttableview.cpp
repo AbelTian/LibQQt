@@ -1,15 +1,11 @@
 #include "qqttableview.h"
-#include "ui_qqttableview.h"
 #include <QFile>
 #include <QScrollBar>
 #include <QSqlRelationalDelegate>
 
-QQTTableView::QQTTableView(QWidget *parent) :
-    QTableView(parent),
-    ui(new Ui::QQTTableView)
+QQtTableView::QQtTableView(QWidget* parent) :
+    QTableView(parent)
 {
-    ui->setupUi(this);
-
     m_header = new QQTHeaderView(Qt::Horizontal, this);
     m_vheader = new QQTHeaderView(Qt::Vertical, this);
 
@@ -27,22 +23,21 @@ QQTTableView::QQTTableView(QWidget *parent) :
 
 }
 
-QQTTableView::~QQTTableView()
+QQtTableView::~QQtTableView()
 {
-    delete ui;
 }
 
-void QQTTableView::setQQTHeader()
+void QQtTableView::setQQTHeader()
 {
     setHorizontalHeader(m_header);
 }
 
-void QQTTableView::setQQTVHeader()
+void QQtTableView::setQQTVHeader()
 {
     setVerticalHeader(m_vheader);
 }
 
-void QQTTableView::setObjectName(const QString &name)
+void QQtTableView::setObjectName(const QString& name)
 {
     QTableView::setObjectName(name);
     horizontalHeader()->setObjectName(QString("%1_Header").arg(name));

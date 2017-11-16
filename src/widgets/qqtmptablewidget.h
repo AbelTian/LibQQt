@@ -39,7 +39,7 @@ public:
     void setColumnWidth(int column, int width);
     void query(QString filter = "1=1");
     void selectedRows(int column, QVector<QStringList> & strl);
-    QQTTableWidget* selectedRows(int column = 0);
+    QQtTableWidget* selectedRows(int column = 0);
     int pageNum();
     int currentPage();
     void setCurrentPage(int page);

@@ -472,7 +472,7 @@
               <number>2</number>
              </property>
              <item>
-              <widget class="QQTCheckBox" name="checkShift">
+              <widget class="QQtCheckBox" name="checkShift">
                <property name="text">
                 <string/>
                </property>
@@ -1033,7 +1033,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QQTPushButton" name="btnDelete">
+              <widget class="QQtPushButton" name="btnDelete">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
                  <horstretch>0</horstretch>
@@ -1265,7 +1265,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QQTPushButton" name="btnDel">
+              <widget class="QQtPushButton" name="btnDel">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
                  <horstretch>0</horstretch>
@@ -1779,28 +1779,28 @@
        <number>2</number>
       </property>
       <item>
-       <widget class="QQTRadioButton" name="radioCN">
+       <widget class="QQtRadioButton" name="radioCN">
         <property name="text">
          <string>中文</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QQTRadioButton" name="radioEN">
+       <widget class="QQtRadioButton" name="radioEN">
         <property name="text">
          <string>英文</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QQTRadioButton" name="radioNum">
+       <widget class="QQtRadioButton" name="radioNum">
         <property name="text">
          <string>123</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QQTPushButton" name="btnSpace">
+       <widget class="QQtPushButton" name="btnSpace">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
           <horstretch>0</horstretch>
@@ -1816,7 +1816,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QQTPushButton" name="btnReturn">
+       <widget class="QQtPushButton" name="btnReturn">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
           <horstretch>0</horstretch>
@@ -1832,7 +1832,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QQTPushButton" name="btnClose">
+       <widget class="QQtPushButton" name="btnClose">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
           <horstretch>0</horstretch>
@@ -1857,17 +1857,17 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QQTPushButton</class>
+   <class>QQtPushButton</class>
    <extends>QPushButton</extends>
    <header>qqtpushbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>QQTRadioButton</class>
+   <class>QQtRadioButton</class>
    <extends>QRadioButton</extends>
    <header>qqtradiobutton.h</header>
   </customwidget>
   <customwidget>
-   <class>QQTCheckBox</class>
+   <class>QQtCheckBox</class>
    <extends>QCheckBox</extends>
    <header>qqtcheckbox.h</header>
   </customwidget>

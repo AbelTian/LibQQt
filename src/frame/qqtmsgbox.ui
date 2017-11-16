@@ -29,7 +29,7 @@
    </item>
    <item row="1" column="2">
     <widget class="QWidget" name="widgetBottom" native="true">
-     <widget class="QQTPushButton" name="btnYes">
+     <widget class="QQtPushButton" name="btnYes">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -42,7 +42,7 @@
        <string>Yes</string>
       </property>
      </widget>
-     <widget class="QQTPushButton" name="btnNo">
+     <widget class="QQtPushButton" name="btnNo">
       <property name="geometry">
        <rect>
         <x>240</x>
@@ -61,7 +61,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QQTPushButton</class>
+   <class>QQtPushButton</class>
    <extends>QPushButton</extends>
    <header>qqtpushbutton.h</header>
   </customwidget>

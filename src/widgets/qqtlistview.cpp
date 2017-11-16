@@ -1,14 +1,10 @@
 #include "qqtlistview.h"
-#include "ui_qqtlistview.h"
 
-QQTListView::QQTListView(QWidget *parent) :
-    QListView(parent),
-    ui(new Ui::QQTListView)
+QQtListView::QQtListView(QWidget* parent) :
+    QListView(parent)
 {
-    ui->setupUi(this);
 }
 
-QQTListView::~QQTListView()
+QQtListView::~QQtListView()
 {
-    delete ui;
 }

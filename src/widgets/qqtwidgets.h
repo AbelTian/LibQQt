@@ -20,16 +20,16 @@ extern "C" {
 /*
  * 自定义组件的公共部分
  */
-enum
+typedef enum tagEBtnStatus
 {
     BTN_NORMAL = 0,
     BTN_UNCHECK = BTN_NORMAL,
     BTN_PRESS = 1,
     BTN_CHECK = BTN_PRESS,
-    BTN_HOVER,
-    BTN_DISABLE,
+    BTN_HOVER = 2,
+    BTN_DISABLE = 3,
     BTN_MAX,
-};
+} EBtnStatus;
 
 #ifdef __cplusplus
 }

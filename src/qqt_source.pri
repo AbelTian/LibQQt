@@ -12,8 +12,12 @@
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
 #-------------------------------------------------
-SOURCES +=
-HEADERS +=
+SOURCES += \
+    $$PWD/svgwidgets/qqtsvgwidget.cpp \
+    $$PWD/svgwidgets/qqtsvgpushbutton.cpp
+HEADERS += \
+    $$PWD/svgwidgets/qqtsvgwidget.h \
+    $$PWD/svgwidgets/qqtsvgpushbutton.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \
@@ -111,17 +115,8 @@ HEADERS += \
     $$PWD/widgets/qqtapplication.h \
     $$PWD/widgets/qqtlabel.h
 FORMS += \
-    $$PWD/widgets/qqtcheckbox.ui \
-    $$PWD/widgets/qqtlistview.ui \
     $$PWD/widgets/qqtprogressbar.ui \
-    $$PWD/widgets/qqtpushbutton.ui \
-    $$PWD/widgets/qqtradiobutton.ui \
-    $$PWD/widgets/qqttableview.ui \
-    $$PWD/widgets/qqttreeview.ui \
-    $$PWD/widgets/qqtwidget.ui \
-    $$PWD/widgets/qqttablewidget.ui \
-    $$PWD/widgets/qqtmptablewidget.ui \
-    $$PWD/widgets/qqttreewidget.ui
+    $$PWD/widgets/qqtmptablewidget.ui
 
 
 

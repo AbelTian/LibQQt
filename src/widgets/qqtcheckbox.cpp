@@ -1,34 +1,30 @@
 #include "qqtcheckbox.h"
-#include "ui_qqtcheckbox.h"
 #include <QStylePainter>
 #include "qqtwidgets.h"
 
-QQTCheckBox::QQTCheckBox(QWidget* parent) :
-    QCheckBox(parent),
-    ui(new Ui::QQTCheckBox)
+QQtCheckBox::QQtCheckBox(QWidget* parent) :
+    QCheckBox(parent)
 {
-    ui->setupUi(this);
 }
 
-QQTCheckBox::~QQTCheckBox()
+QQtCheckBox::~QQtCheckBox()
 {
-    delete ui;
 }
 
-void QQTCheckBox::pixMap(QImage& icon, QImage& iconSel)
+void QQtCheckBox::pixMap(QImage& icon, QImage& iconSel)
 {
     icon = QImage(this->m_icon[BTN_NORMAL]);
     iconSel = QImage(this->m_icon[BTN_PRESS]);
 }
 
-void QQTCheckBox::setPixmap(const QString& icon, const QString& iconSel)
+void QQtCheckBox::setPixmap(const QString& icon, const QString& iconSel)
 {
     this->m_icon[BTN_NORMAL] = icon;
     this->m_icon[BTN_PRESS] = iconSel;
 }
 
 
-void QQTCheckBox::paintEvent(QPaintEvent*)
+void QQtCheckBox::paintEvent(QPaintEvent*)
 {
     QStylePainter p(this);
 
@@ -43,7 +39,7 @@ void QQTCheckBox::paintEvent(QPaintEvent*)
     p.drawItemText(rect(), Qt::AlignCenter, opt.palette, true, text());
 }
 
-bool QQTCheckBox::hitButton(const QPoint& pos) const
+bool QQtCheckBox::hitButton(const QPoint& pos) const
 {
     Q_UNUSED(pos)
     //TODO:

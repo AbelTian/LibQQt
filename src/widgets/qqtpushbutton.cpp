@@ -1,24 +1,20 @@
 #include "qqtpushbutton.h"
-#include "ui_qqtpushbutton.h"
 #include <QStylePainter>
 #include <QMouseEvent>
 #include "qqtcore.h"
-#include "qqtwidgets.h"
 
-QQTPushButton::QQTPushButton(QWidget* parent) :
-    QPushButton(parent),
-    ui(new Ui::QQTPushButton)
+QQtPushButton::QQtPushButton(QWidget* parent) :
+    QPushButton(parent)
 {
-    ui->setupUi(this);
     state = BTN_NORMAL;
+    ring = false;
 }
 
-QQTPushButton::~QQTPushButton()
+QQtPushButton::~QQtPushButton()
 {
-    delete ui;
 }
 
-void QQTPushButton::paintEvent(QPaintEvent* e)
+void QQtPushButton::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
     QStylePainter p(this);
@@ -50,18 +46,19 @@ void QQTPushButton::paintEvent(QPaintEvent* e)
     p.drawItemText(rect(), Qt::AlignCenter, opt.palette, enabled, text());
 }
 
-void QQTPushButton::mousePressEvent(QMouseEvent* e)
+void QQtPushButton::mousePressEvent(QMouseEvent* e)
 {
     if (e->button() == Qt::LeftButton)
     {
         state = BTN_PRESS;
-        QApplication::beep();
+        if (ring)
+            QApplication::beep();
         //pline() << state;
     }
     QPushButton::mousePressEvent(e);
 }
 
-void QQTPushButton::mouseReleaseEvent(QMouseEvent* e)
+void QQtPushButton::mouseReleaseEvent(QMouseEvent* e)
 {
     if (e->button() == Qt::LeftButton)
     {
@@ -79,24 +76,24 @@ void QQTPushButton::mouseReleaseEvent(QMouseEvent* e)
     QPushButton::mouseReleaseEvent(e);
 }
 
-void QQTPushButton::enterEvent(QEvent* e)
+void QQtPushButton::enterEvent(QEvent* e)
 {
     state = BTN_HOVER;
     QPushButton::enterEvent(e);
 }
 
-void QQTPushButton::leaveEvent(QEvent* e)
+void QQtPushButton::leaveEvent(QEvent* e)
 {
     state = BTN_NORMAL;
     QPushButton::leaveEvent(e);
 }
 
-void QQTPushButton::changeEvent(QEvent* e)
+void QQtPushButton::changeEvent(QEvent* e)
 {
     QPushButton::changeEvent(e);
 }
 
-void QQTPushButton::enabledChange(bool enabled)
+void QQtPushButton::enabledChange(bool enabled)
 {
     state = isEnabled() ? BTN_NORMAL : BTN_DISABLE;
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
