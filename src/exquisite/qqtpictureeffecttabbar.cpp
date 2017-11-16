@@ -144,6 +144,16 @@ void QQtPictureEffectTabBar::drawText(QPainter* p)
         QRect tabTextRect = tabRect(index);
         //-rect.height()/20 上移
         verticalTabs() ? tabTextRect.adjust(0, 0, 0, 0) : tabTextRect.adjust(0, 0, 0, 0);
+        if (iconStyle == IconStyle_Cover_And_BottomText)
+            tabTextRect.adjust(0, 0, 0, -2);
+        else if (iconStyle == IconStyle_Cover_And_TopText)
+            tabTextRect.adjust(0, +2, 0, 0);
+        else if (iconStyle == IconStyle_Cover_And_LeftText)
+            tabTextRect.adjust(+2, 0, 0, 0);
+        else if (iconStyle == IconStyle_Cover_And_RightText)
+            tabTextRect.adjust(0, 0, -2, 0);
+        else if (iconStyle == IconStyle_Cover_And_MiddleText)
+            tabTextRect.adjust(0, 0, 0, 0);
 
         if (iconStyle == IconStyle_Left_And_RightText)
             tabTextRect = QRect(tabTextRect.left() + tabTextRect.height(), tabTextRect.top(),
@@ -158,6 +168,8 @@ void QQtPictureEffectTabBar::drawText(QPainter* p)
             flags = Qt::AlignVCenter | Qt::AlignLeft;
         else if (iconStyle == IconStyle_Cover_And_RightText)
             flags = Qt::AlignVCenter | Qt::AlignRight;
+        else if (iconStyle == IconStyle_Cover_And_MiddleText)
+            flags = Qt::AlignVCenter | Qt::AlignHCenter;
 
         //pline() << objectName() << rect;
         //if on board text is normal, this is right. otherwise the palette is right

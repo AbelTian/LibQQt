@@ -17,11 +17,11 @@ public slots:
 
     // QWidget interface
 protected:
-    virtual void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+    virtual void mouseReleaseEvent(QMouseEvent* event) override;
 
     // QWidget interface
 protected:
-    virtual void mouseDoubleClickEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+    virtual void mouseDoubleClickEvent(QMouseEvent* event) override;
 };
 
 #endif // QQTLABEL_H

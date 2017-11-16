@@ -23,6 +23,7 @@ public:
         IconStyle_Cover_And_BottomText,
         IconStyle_Cover_And_LeftText,
         IconStyle_Cover_And_RightText,
+        IconStyle_Cover_And_MiddleText,
         //color style
         IconStyle_Left_And_RightText,
         IconStyle_Max_Style

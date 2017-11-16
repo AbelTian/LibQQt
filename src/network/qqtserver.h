@@ -21,7 +21,7 @@ public:
 signals:
     // QTcpServer interface
 protected:
-    virtual void incomingConnection(qintptr handle) Q_DECL_OVERRIDE;
+    virtual void incomingConnection(qintptr handle) override;
 private:
     QQtProtocol* m_protocol;
 };

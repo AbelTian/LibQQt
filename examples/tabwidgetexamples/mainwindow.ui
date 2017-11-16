@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -141,6 +141,22 @@
            <attribute name="title">
             <string>Tab 1</string>
            </attribute>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QQtPictureEffectTabWidget" name="tw1">
+              <widget class="QWidget" name="tab_14">
+               <attribute name="title">
+                <string>Tab 1</string>
+               </attribute>
+              </widget>
+              <widget class="QWidget" name="tab_15">
+               <attribute name="title">
+                <string>Tab 2</string>
+               </attribute>
+              </widget>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tab_11">
            <attribute name="title">

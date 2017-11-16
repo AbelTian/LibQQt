@@ -45,6 +45,12 @@ MainWindow::MainWindow(QWidget* parent) :
     tab->setIconStyle(QQtPictureEffectTabBar::IconStyle_Cover_And_RightText);
     tab->setTabPixmap(0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png");
     tab->setTabPixmap(1, "./skin/default/bt_user.png", "./skin/default/bt_user_press.png");
+
+    ui->tw1->setStyleSheet("QTabWidget#tw1 QTabBar::tab { width:90px; height:30px; }");
+    QQtPictureEffectTabBar* tab1 = (QQtPictureEffectTabBar*)ui->tw1->localTabBar();
+    tab1->setIconStyle(QQtPictureEffectTabBar::IconStyle_Cover_And_RightText);
+    tab1->setTabPixmap(0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png");
+    tab1->setTabPixmap(1, "./skin/default/bt_user.png", "./skin/default/bt_user_press.png");
 }
 
 MainWindow::~MainWindow()

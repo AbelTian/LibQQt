@@ -105,20 +105,6 @@ void QQtHorizontalTextEffectTabBar::paintEvent(QPaintEvent* e)
         setShape(QTabBar::RoundedWest);
     }
 
-    // Only draw the tear indicator if necessary. Most of the time we don't need too.
-    if (0 && cutLeft >= 0)
-    {
-        cutTabLeft.rect = rect();
-        cutTabLeft.rect = style()->subElementRect(QStyle::SE_TabBarTearIndicatorLeft, &cutTabLeft, this);
-        p.drawPrimitive(QStyle::PE_IndicatorTabTearLeft, cutTabLeft);
-    }
-
-    if (0 && cutRight >= 0)
-    {
-        cutTabRight.rect = rect();
-        cutTabRight.rect = style()->subElementRect(QStyle::SE_TabBarTearIndicatorRight, &cutTabRight, this);
-        p.drawPrimitive(QStyle::PE_IndicatorTabTearRight, cutTabRight);
-    }
 }
 
 void QQtHorizontalTextEffectTabBar::drawTextLabel(QPainter* p)

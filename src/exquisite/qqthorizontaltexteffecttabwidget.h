@@ -19,8 +19,8 @@ private:
 
     // QQtTabWidget interface
 public:
-    virtual void setObjectName(const QString& name) Q_DECL_OVERRIDE;
-    virtual QQtTabBar* localTabBar() const Q_DECL_OVERRIDE { return m_bar; }
+    virtual void setObjectName(const QString& name) override;
+    virtual QQtTabBar* localTabBar() const override { return m_bar; }
 };
 
 #endif // QQTHORIZONTALTEXTEFFECTTABWIDGET_H

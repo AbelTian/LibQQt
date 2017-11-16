@@ -54,15 +54,15 @@ private:
 
     // QWidget interface
 protected:
-    virtual void paintEvent(QPaintEvent* event) Q_DECL_OVERRIDE;
+    virtual void paintEvent(QPaintEvent* event) override;
 
     // QWidget interface
 protected:
-    virtual void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QMouseEvent* event) override;
 
     // QWidget interface
 protected:
-    virtual void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+    virtual void mouseReleaseEvent(QMouseEvent* event) override;
 };
 
 #endif // QQTSLIDEEFFECTTABBAR_H

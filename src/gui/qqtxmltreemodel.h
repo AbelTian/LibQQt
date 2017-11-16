@@ -18,8 +18,8 @@ public slots:
 
     // QQTTreeModel interface
 public:
-    bool query(QString condition) Q_DECL_OVERRIDE;
-    void setFilePath(QString xmlfile) Q_DECL_OVERRIDE;
+    bool query(QString condition) override;
+    void setFilePath(QString xmlfile) override;
 
 protected:
        /**
