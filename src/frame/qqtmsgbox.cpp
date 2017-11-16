@@ -2,7 +2,7 @@
 #include "ui_qqtmsgbox.h"
 #include "qqtcore.h"
 
-QQTMsgBox::QQTMsgBox(QWidget *parent) :
+QQTMsgBox::QQTMsgBox(QWidget* parent) :
     QQtDialog(parent),
     ui(new Ui::QQTMsgBox)
 {
@@ -17,7 +17,7 @@ QQTMsgBox::QQTMsgBox(QWidget *parent) :
 
     pline() << qApp->desktop()->size();
 
-    if(qApp->desktop()->size() == QSize(1024, 768))
+    if (qApp->desktop()->size() == QSize(1024, 768))
     {
 
         widgetW = 401;
@@ -25,9 +25,9 @@ QQTMsgBox::QQTMsgBox(QWidget *parent) :
         btnW = 104;
         btnH = 40;
         botoomH = widgetH / 7 * 3;
-        xSpaceYes = (widgetW - btnW - 12)/2;
-        xSpaceYesNo = (widgetW-btnW*2-12)/3;
-        ySpace = (botoomH-btnH)/2;
+        xSpaceYes = (widgetW - btnW - 12) / 2;
+        xSpaceYesNo = (widgetW - btnW * 2 - 12) / 3;
+        ySpace = (botoomH - btnH) / 2;
 
         pline() << widgetW << widgetH;
         pline() << btnW << btnH;
@@ -39,7 +39,7 @@ QQTMsgBox::QQTMsgBox(QWidget *parent) :
         //size
         ui->btnNo->setFixedSize(btnW, btnH);
         ui->btnYes->setFixedSize(btnW, btnH);
-        ui->widgetBottom->setFixedHeight( botoomH );
+        ui->widgetBottom->setFixedHeight(botoomH);
 
         //text
         ui->btnNo->setText("");
@@ -47,26 +47,26 @@ QQTMsgBox::QQTMsgBox(QWidget *parent) :
 
         //pic
         ui->btnNo->iconTable().initNormal("./skin/default/bt_back_normal.png",
-                                          "./skin/default/bt_back_press.png" );
+                                          "./skin/default/bt_back_press.png");
         ui->btnNo->iconTable().initOther("./skin/default/bt_back_hover.png",
                                          "./skin/default/bt_back_disable.png");
 
         ui->btnYes->iconTable().initNormal("./skin/default/bt_login_normal.png",
-                                           "./skin/default/bt_login_press.png" );
+                                           "./skin/default/bt_login_press.png");
         ui->btnYes->iconTable().initOther("./skin/default/bt_login_hover.png",
                                           "./skin/default/bt_login_disable.png");
 
     }
-    else if(qApp->desktop()->size() == QSize(800, 480))
+    else if (qApp->desktop()->size() == QSize(800, 480))
     {
         widgetW = 300;
         widgetH = 160;
         btnW = 80;
         btnH = 30;
         botoomH = widgetH / 7 * 3;
-        xSpaceYes = (widgetW - btnW - 12)/2;
-        xSpaceYesNo = (widgetW-btnW*2-12)/3;
-        ySpace = (botoomH-btnH)/2;
+        xSpaceYes = (widgetW - btnW - 12) / 2;
+        xSpaceYesNo = (widgetW - btnW * 2 - 12) / 3;
+        ySpace = (botoomH - btnH) / 2;
 
         pline() << widgetW << widgetH;
         pline() << btnW << btnH;
@@ -78,7 +78,7 @@ QQTMsgBox::QQTMsgBox(QWidget *parent) :
         //size
         ui->btnNo->setFixedSize(btnW, btnH);
         ui->btnYes->setFixedSize(btnW, btnH);
-        ui->widgetBottom->setFixedHeight( botoomH );
+        ui->widgetBottom->setFixedHeight(botoomH);
     }
 
 }
@@ -90,14 +90,14 @@ QQTMsgBox::~QQTMsgBox()
 
 
 
-int QQTMsgBox::warning(QWidget *parent, QString content )
+int QQTMsgBox::warning(QWidget* parent, QString content)
 {
     QQTMsgBox* msgBox = new QQTMsgBox(parent);
 
     return msgBox->_warning(content);
 }
 
-int QQTMsgBox::question(QWidget *parent, QString content)
+int QQTMsgBox::question(QWidget* parent, QString content)
 {
     QQTMsgBox* msgBox = new QQTMsgBox(parent);
     return msgBox->_question(content);
@@ -133,7 +133,7 @@ void QQTMsgBox::showYesAndNo()
     int x0 = xSpaceYesNo;
     int y0 = ySpace;
     ui->btnYes->setGeometry(x0, y0, btnW, btnH);
-    ui->btnNo->setGeometry(x0+btnW+x0, y0, btnW, btnH);
+    ui->btnNo->setGeometry(x0 + btnW + x0, y0, btnW, btnH);
 }
 
 void QQTMsgBox::showNull()
@@ -180,14 +180,16 @@ void QQTMsgBox::information(QString content)
     QQTSleep(delayShow);
 }
 
-void QQTMsgBox::timerEvent(QTimerEvent *e)
+void QQTMsgBox::timerEvent(QTimerEvent* e)
 {
     return;
-    if(m_time > 5)
+
+    if (m_time > 5)
     {
         killTimer(e->timerId());
         reject();
         return;
     }
+
     m_time ++ ;
 }

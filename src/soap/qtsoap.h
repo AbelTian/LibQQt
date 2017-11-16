@@ -77,15 +77,13 @@ template <class T>
 class QtSmartPtr
 {
 public:
-    inline QtSmartPtr(T* data = 0)
-    {
+    inline QtSmartPtr(T* data = 0) {
         d = data;
         r = new int;
         *r = 1;
     }
 
-    inline QtSmartPtr(const QtSmartPtr& copy)
-    {
+    inline QtSmartPtr(const QtSmartPtr& copy) {
         if (*copy.r != 0)
             ++(*copy.r);
 
@@ -93,28 +91,26 @@ public:
         d = copy.d;
     }
 
-    inline ~QtSmartPtr()
-    {
+    inline ~QtSmartPtr() {
         if ((*r) == 0)
             delete r;
-        else if ((*r) != 0 && --(*r) == 0)
-        {
+        else if ((*r) != 0 && --(*r) == 0) {
             delete r;
+
             if (d)
                 delete d;
         }
     }
 
-    inline QtSmartPtr& operator =(const QtSmartPtr& copy)
-    {
+    inline QtSmartPtr& operator =(const QtSmartPtr& copy) {
         if (*copy.r != 0)
             ++(*copy.r);
 
         if ((*r) == 0)
             delete r;
-        else if ((*r) != 0 && --(*r) == 0)
-        {
+        else if ((*r) != 0 && --(*r) == 0) {
             delete r;
+
             if (d)
                 delete d;
         }
@@ -124,34 +120,28 @@ public:
         return *this;
     }
 
-    inline T& operator *() const
-    {
+    inline T& operator *() const {
         return *d;
     }
 
-    inline T* operator ->() const
-    {
+    inline T* operator ->() const {
         return d;
     }
 
-    inline T* ptr() const
-    {
+    inline T* ptr() const {
         return d;
     }
 
-    inline T& ref() const
-    {
+    inline T& ref() const {
         return *d;
     }
 
-    inline T* releasedPtr() const
-    {
+    inline T* releasedPtr() const {
         (*r) = 0;
         return d;
     }
 
-    inline bool isNull() const
-    {
+    inline bool isNull() const {
         return d == 0;
     }
 
@@ -500,12 +490,10 @@ private:
 class QT_QTSOAP_EXPORT QtSoapTypeConstructorBase
 {
 public:
-    inline QtSoapTypeConstructorBase()
-    {
+    inline QtSoapTypeConstructorBase() {
     }
 
-    virtual inline ~QtSoapTypeConstructorBase()
-    {
+    virtual inline ~QtSoapTypeConstructorBase() {
     }
 
     virtual QtSoapType* createObject(QDomNode) = 0;
@@ -517,27 +505,23 @@ template <class T>
 class QT_QTSOAP_EXPORT QtSoapTypeConstructor : public QtSoapTypeConstructorBase
 {
 public:
-    QtSoapTypeConstructor()
-    {
+    QtSoapTypeConstructor() {
     }
 
-    QtSoapType* createObject(QDomNode node)
-    {
+    QtSoapType* createObject(QDomNode node) {
         T* t = new T();
-        if (t->parse(node))
-        {
+
+        if (t->parse(node)) {
             return t;
         }
-        else
-        {
+        else {
             errorStr = t->errorString();
             delete t;
             return 0;
         }
     }
 
-    QString errorString() const
-    {
+    QString errorString() const {
         return errorStr;
     }
 

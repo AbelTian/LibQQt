@@ -10,8 +10,7 @@
 #include "qqtwidgets.h"
 #include "qqtframe.h"
 
-namespace Ui
-{
+namespace Ui {
 class QQTProgressBar;
 }
 

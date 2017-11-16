@@ -4,7 +4,7 @@
 #include "qqtsql.h"
 #include "qqt-qt.h"
 
-QQTMPTableWidget::QQTMPTableWidget(QWidget *parent) :
+QQTMPTableWidget::QQTMPTableWidget(QWidget* parent) :
     QWidget(parent),
     ui(new Ui::QQTMPTableWidget)
 {
@@ -49,7 +49,7 @@ void QQTMPTableWidget::setTable(QString table)
     m_table = table;
 }
 
-void QQTMPTableWidget::setRelation(int column, const QSqlRelation &relation)
+void QQTMPTableWidget::setRelation(int column, const QSqlRelation& relation)
 {
     m_columnRelation.insert(column, relation);
 }
@@ -65,16 +65,19 @@ void QQTMPTableWidget::query(QString filter)
     query.exec(QString("select count(*) from %1").arg(m_table));
 
     int num = 0;
-    if(query.next())
+
+    if (query.next())
     {
         num = query.value(0).toInt();
         pline() << "record num:" << num;
     }
+
     query.finish();
 
     int pageNum = 0;
-    if(num%m_numPerPage>0)
-        pageNum = num / m_numPerPage+1;
+
+    if (num % m_numPerPage > 0)
+        pageNum = num / m_numPerPage + 1;
     else
         pageNum = num / m_numPerPage;
 
@@ -83,68 +86,77 @@ void QQTMPTableWidget::query(QString filter)
     int pix = 0;
 
 #if 0
+
     /*
      * 首次做检查，每隔10张*14条
      */
-    if(m_pageNum > ui->stWidgetPage->count())
+    if (m_pageNum > ui->stWidgetPage->count())
         pix = m_pageNum - ui->stWidgetPage->count() + 10；
 #else
     /*
      * 每次做检查，每次的延迟比较均匀 每隔1张*14条
      */
     pix = m_pageNum - ui->stWidgetPage->count();
+
 #endif
 
-    // pix >= 1 start work
-    for(int i = 0; i < pix; i++)
-    {
-        //ptime();//89ms
-        QQtTableWidget* page = new QQtTableWidget(this);
-        //ptime();//2ms
-        page->setDB(m_name);
-        //ptime();//8ms
-        page->setTable(m_table);
-        //ptime();//14ms
-        //query
-        //ptime();//3ms
-        QAbstractItemModel* m_model = page->model();
-        for(int i = 0; i < m_model->columnCount(); i++)
-            m_model->setHeaderData(
-                        i, Qt::Horizontal,
-                        m_headerData.value(i, m_model->headerData(i, Qt::Horizontal).toString()));
-        //ptime();//1ms
-        page->setSelectionMode(selectionMode);
-        page->setAlternatingRowColors(altColor);
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-        page->horizontalHeader()->setResizeMode(resizeMode);
-#else
-        page->horizontalHeader()->setSectionResizeMode(resizeMode);
-#endif
-        //ptime();//0ms
-        for(int i = 0; i < m_model->columnCount(); i++)
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-            page->horizontalHeader()->setResizeMode(i, m_resizeMode.value(i, resizeMode));
-#else
-            page->horizontalHeader()->setSectionResizeMode(i, m_resizeMode.value(i, resizeMode));
-#endif
-        //ptime();//QHash(338ms) QMap(372ms) 400ms(QHash等几乎不耗时)
-        for(int i = 0; i < m_model->columnCount(); i++)
-            page->setColumnWidth(i, m_columnWidth.value(i));
-        //ptime();
-        for(int i = 0; i < m_model->columnCount(); i++)
-            page->setColumnHidden(i, m_columnHidden.value(i));
-        //ptime();//219ms
-        ui->stWidgetPage->addWidget(page);
-        //ptime();
-    }
+              // pix >= 1 start work
+              for (int i = 0; i < pix; i++)
+        {
+            //ptime();//89ms
+            QQtTableWidget* page = new QQtTableWidget(this);
+            //ptime();//2ms
+            page->setDB(m_name);
+            //ptime();//8ms
+            page->setTable(m_table);
+            //ptime();//14ms
+            //query
+            //ptime();//3ms
+            QAbstractItemModel* m_model = page->model();
 
-    for(int i = 0; i < m_pageNum; i++)
+            for (int i = 0; i < m_model->columnCount(); i++)
+                m_model->setHeaderData(
+                    i, Qt::Horizontal,
+                    m_headerData.value(i, m_model->headerData(i, Qt::Horizontal).toString()));
+
+            //ptime();//1ms
+            page->setSelectionMode(selectionMode);
+            page->setAlternatingRowColors(altColor);
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+            page->horizontalHeader()->setResizeMode(resizeMode);
+#else
+            page->horizontalHeader()->setSectionResizeMode(resizeMode);
+#endif
+
+            //ptime();//0ms
+            for (int i = 0; i < m_model->columnCount(); i++)
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+                page->horizontalHeader()->setResizeMode(i, m_resizeMode.value(i, resizeMode));
+
+#else
+                page->horizontalHeader()->setSectionResizeMode(i, m_resizeMode.value(i, resizeMode));
+#endif
+
+            //ptime();//QHash(338ms) QMap(372ms) 400ms(QHash等几乎不耗时)
+            for (int i = 0; i < m_model->columnCount(); i++)
+                page->setColumnWidth(i, m_columnWidth.value(i));
+
+            //ptime();
+            for (int i = 0; i < m_model->columnCount(); i++)
+                page->setColumnHidden(i, m_columnHidden.value(i));
+
+            //ptime();//219ms
+            ui->stWidgetPage->addWidget(page);
+            //ptime();
+        }
+
+    for (int i = 0; i < m_pageNum; i++)
     {
         QQtTableWidget* page = (QQtTableWidget*)(ui->stWidgetPage->widget(i));
         page->query(QString("%1 limit %2 offset %3")
                     .arg(filter)
                     .arg(m_numPerPage)
-                    .arg(i*m_numPerPage));
+                    .arg(i * m_numPerPage));
     }
 }
 
@@ -155,14 +167,15 @@ int QQTMPTableWidget::pageNum()
 
 int QQTMPTableWidget::currentPage()
 {
-    return ui->stWidgetPage->currentIndex()+1;
+    return ui->stWidgetPage->currentIndex() + 1;
 }
 
 void QQTMPTableWidget::setCurrentPage(int index)
 {
-    if(index < 1 || index > m_pageNum)
+    if (index < 1 || index > m_pageNum)
         return;
-    ui->stWidgetPage->setCurrentIndex(index-1);
+
+    ui->stWidgetPage->setCurrentIndex(index - 1);
     ui->lbPos->setText(QString("%1/%2").arg(index).arg(m_pageNum));
 }
 
@@ -209,27 +222,32 @@ void QQTMPTableWidget::setColumnWidth(int column, int width)
 void QQTMPTableWidget::on_btnLeft_clicked()
 {
     int index = ui->stWidgetPage->currentIndex();
-    if(index > 0)
+
+    if (index > 0)
         index--;
+
     ui->stWidgetPage->setCurrentIndex(index);
-    ui->lbPos->setText(QString("%1/%2").arg(index+1).arg(m_pageNum));
+    ui->lbPos->setText(QString("%1/%2").arg(index + 1).arg(m_pageNum));
 }
 
 void QQTMPTableWidget::on_btnRight_clicked()
 {
     int index = ui->stWidgetPage->currentIndex();
-    if(index < m_pageNum-1)
+
+    if (index < m_pageNum - 1)
         index++;
+
     ui->stWidgetPage->setCurrentIndex(index);
-    ui->lbPos->setText(QString("%1/%2").arg(index+1).arg(m_pageNum));
+    ui->lbPos->setText(QString("%1/%2").arg(index + 1).arg(m_pageNum));
 }
 
 void QQTMPTableWidget::on_btnJump_clicked()
 {
     int num = ui->leNum->text().toInt();
-    if(num <= m_pageNum && num > 0)
+
+    if (num <= m_pageNum && num > 0)
     {
-        ui->stWidgetPage->setCurrentIndex(num-1);
+        ui->stWidgetPage->setCurrentIndex(num - 1);
         ui->lbPos->setText(QString("%1/%2").arg(num).arg(m_pageNum));
     }
 }
@@ -242,24 +260,27 @@ void QQTMPTableWidget::on_btnLeftHead_clicked()
 
 void QQTMPTableWidget::on_btnRightHead_clicked()
 {
-    int index = m_pageNum-1;
+    int index = m_pageNum - 1;
     ui->stWidgetPage->setCurrentIndex(index);
-    ui->lbPos->setText(QString("%1/%2").arg(index+1).arg(m_pageNum));
+    ui->lbPos->setText(QString("%1/%2").arg(index + 1).arg(m_pageNum));
 }
 
-void QQTMPTableWidget::selectedRows(int column, QVector<QStringList> &strl)
+void QQTMPTableWidget::selectedRows(int column, QVector<QStringList>& strl)
 {
-    for(int i = 0; i < m_pageNum; i++)
+    for (int i = 0; i < m_pageNum; i++)
     {
         QQtTableWidget* page = (QQtTableWidget*)ui->stWidgetPage->widget(i);
         QMap<int, QStringList> ids;
         page->selectedRows(column, ids);
         QMapIterator<int, QStringList> itor(ids);
-        while (itor.hasNext()) {
+
+        while (itor.hasNext())
+        {
             itor.next();
             strl.append(itor.value());
         }
     }
+
     return;
 }
 
@@ -280,16 +301,20 @@ QQtTableWidget* QQTMPTableWidget::selectedRows(int column)
     page->setTable(m_table);
 
     QString excp;
-    for(int i = 0; i < lid.count() - 1; i++)
+
+    for (int i = 0; i < lid.count() - 1; i++)
         excp += QString("%1 = '%2' or ").arg(sectionName).arg(lid[i].at(column));
+
     excp += QString("%1 = '%2'").arg(sectionName).arg(lid.last().at(column));
     page->query(excp);
 
     QAbstractItemModel* m_model = page->model();
-    for(int i = 0; i < m_model->columnCount(); i++)
+
+    for (int i = 0; i < m_model->columnCount(); i++)
         m_model->setHeaderData(
-                    i, Qt::Horizontal,
-                    m_headerData.value(i, m_model->headerData(i, Qt::Horizontal).toString()));
+            i, Qt::Horizontal,
+            m_headerData.value(i, m_model->headerData(i, Qt::Horizontal).toString()));
+
     page->setSelectionMode(selectionMode);
     page->setAlternatingRowColors(altColor);
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
@@ -297,7 +322,8 @@ QQtTableWidget* QQTMPTableWidget::selectedRows(int column)
 #else
     page->horizontalHeader()->setSectionResizeMode(resizeMode);
 #endif
-    for(int i = 0; i < m_model->columnCount(); i++)
+
+    for (int i = 0; i < m_model->columnCount(); i++)
     {
         page->setColumnHidden(i, m_columnHidden.value(i));
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
@@ -314,7 +340,7 @@ QQtTableWidget* QQTMPTableWidget::selectedRows(int column)
 
 void QQTMPTableWidget::removeSelectedRows(int column)
 {
-    for(int i = 0; i < m_pageNum; i++)
+    for (int i = 0; i < m_pageNum; i++)
     {
         QQtTableWidget* page = (QQtTableWidget*)ui->stWidgetPage->widget(i);
         QMap<int, QStringList> ids;

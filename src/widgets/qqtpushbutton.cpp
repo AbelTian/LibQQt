@@ -28,10 +28,13 @@ void QQtPushButton::paintEvent(QPaintEvent* e)
      * 不会报告ｌｉｂｐｎｇｗａｒｎｉｎｇ
      */
     QIcon::Mode iconFlag = QIcon::Normal;
+
     if (BTN_PRESS == state)
         iconFlag = QIcon::Selected;
+
     if (!enabled)
         iconFlag = QIcon::Disabled;
+
     p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(m_pixmap[state]).pixmap(rect().size(), iconFlag, QIcon::On));
 #else
     /*
@@ -51,10 +54,13 @@ void QQtPushButton::mousePressEvent(QMouseEvent* e)
     if (e->button() == Qt::LeftButton)
     {
         state = BTN_PRESS;
+
         if (ring)
             QApplication::beep();
+
         //pline() << state;
     }
+
     QPushButton::mousePressEvent(e);
 }
 
@@ -67,12 +73,15 @@ void QQtPushButton::mouseReleaseEvent(QMouseEvent* e)
         //pline() << state;
         update();
 #else
+
         if (rect().contains(e->pos()))
             state = BTN_HOVER;
         else
             state = BTN_NORMAL;
+
 #endif
     }
+
     QPushButton::mouseReleaseEvent(e);
 }
 

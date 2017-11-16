@@ -8,7 +8,7 @@ class QQTSHARED_EXPORT QQTPlayer : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQTPlayer(QObject *parent = 0);
+    explicit QQTPlayer(QObject* parent = 0);
 
     void play(QString filename, int wid = 0, int width = 20, int height = 20);
     void pause();

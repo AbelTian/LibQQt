@@ -13,7 +13,7 @@ class QQTSHARED_EXPORT QQTTreeModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
-    explicit QQTTreeModel(QObject *parent = 0);
+    explicit QQTTreeModel(QObject* parent = 0);
 
     /**
      * @brief query

@@ -174,6 +174,7 @@ void QQTInput::InitForm()
     ui->radioEN->setChecked(true);
 
     QList<QPushButton*> btn = this->findChildren<QPushButton*>();
+
     foreach (QPushButton* b, btn)
     {
         connect(b, SIGNAL(clicked()), this, SLOT(btn_clicked()));
@@ -274,6 +275,7 @@ void QQTInput::InitProperty()
     labCh.append(ui->labCh7);
     labCh.append(ui->labCh8);
     labCh.append(ui->labCh9);
+
     for (int i = 0; i < 10; i++)
     {
         labCh[i]->installEventFilter(this);
@@ -293,10 +295,12 @@ bool QQTInput::checkPress()
     bool num_ok = btnPress->property("btnNum").toBool();
     bool other_ok = btnPress->property("btnOther").toBool();
     bool letter_ok = btnPress->property("btnLetter").toBool();
+
     if (num_ok || other_ok || letter_ok)
     {
         return true;
     }
+
     return false;
 }
 
@@ -321,6 +325,7 @@ void QQTInput::btn_clicked()
 
     QPushButton* btn = (QPushButton*)sender();
     QString objectName = btn->objectName();
+
     //pline() << objectName;
     /*
      * 大小写
@@ -330,15 +335,19 @@ void QQTInput::btn_clicked()
         if (currentType == "min")
         {
             currentType = "max";
+
             if (!ui->checkShift->isChecked())
                 ui->checkShift->setChecked(true);
+
             changeType();
         }
         else if (currentType == "max")
         {
             currentType = "min";
+
             if (ui->checkShift->isChecked())
                 ui->checkShift->setChecked(false);
+
             changeType();
         }
         else if (currentType == "chinese")
@@ -362,14 +371,17 @@ void QQTInput::btn_clicked()
         {
             currentType = "chinese";
             ui->checkShift->setPixmap("./skin/default/key_hidden.png", "./skin/default/key_hidden.png");
+
             if (ui->checkShift->isChecked())
                 ui->checkShift->setChecked(false);
+
             ui->checkShift->update();
             changeType();
         }
         else if (currentType == "chinese")
         {
         }
+
         //if(ui->radioNum->isChecked())
         //    ui->radioNum->setChecked(false);
         if (1 == ui->stackedWidget->currentIndex())
@@ -384,11 +396,14 @@ void QQTInput::btn_clicked()
         {
             currentType = "min";
             ui->checkShift->setPixmap("./skin/default/key_shift.png", "./skin/default/key_shift_press.png");
+
             if (ui->checkShift->isChecked())
                 ui->checkShift->setChecked(false);
+
             ui->checkShift->update();
             changeType();
         }
+
         //if(ui->radioNum->isChecked())
         //    ui->radioNum->setChecked(false);
         if (1 == ui->stackedWidget->currentIndex())
@@ -403,6 +418,7 @@ void QQTInput::btn_clicked()
         {
             QString txt = ui->labPY->text();
             int len = txt.length();
+
             if (len > 0)
             {
                 ui->labPY->setText(txt.left(len - 1));
@@ -438,6 +454,7 @@ void QQTInput::btn_clicked()
         {
             currentPY_index = 0;
         }
+
         showChinese();
     }
     else if (objectName == "btnNext")
@@ -462,6 +479,7 @@ void QQTInput::btn_clicked()
     else
     {
         QString value = btn->text();
+
         /*
          * 如果是&按钮，因为对应&被过滤,所以真实的text为去除前面一个&字符
          */
@@ -469,6 +487,7 @@ void QQTInput::btn_clicked()
         {
             value = value.right(1);
         }
+
         /*
          * 当前不是中文模式,则单击按钮对应text为传递参数
          */
@@ -596,12 +615,15 @@ bool QQTInput::eventFilter(QObject* obj, QEvent* event)
         {
             ShowPanel();
         }
+
         btnPress = (QPushButton*)obj;
+
         if (checkPress())
         {
             isPress = true;
             timerPress->start(500);
         }
+
         //pline() << currentEditType;
         return false;
     }
@@ -613,12 +635,14 @@ bool QQTInput::eventFilter(QObject* obj, QEvent* event)
     else if (event->type() == QEvent::MouseButtonRelease)
     {
         btnPress = (QPushButton*)obj;
+
         if (checkPress())
         {
             isPress = false;
             timerPress->stop();
             btnPress->update();
         }
+
         return false;
     }
     else if (event->type() == QEvent::KeyPress)
@@ -632,6 +656,7 @@ bool QQTInput::eventFilter(QObject* obj, QEvent* event)
         }
 
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+
         /*
          * Shift切换输入法模式,esc键关闭输入法面板,空格取第一个汉字,退格键删除
          * 中文模式下回车键取拼音,中文模式下当没有拼音时可以输入空格
@@ -705,6 +730,7 @@ bool QQTInput::eventFilter(QObject* obj, QEvent* event)
             {
                 currentType = "min";
             }
+
             changeType();
             return true;
         }
@@ -714,7 +740,9 @@ bool QQTInput::eventFilter(QObject* obj, QEvent* event)
             {
                 return false;
             }
+
             QString key;
+
             if (currentType == "chinese")
             {
                 key = keyEvent->text();
@@ -727,7 +755,9 @@ bool QQTInput::eventFilter(QObject* obj, QEvent* event)
             {
                 key = keyEvent->text().toUpper();
             }
+
             QList<QPushButton*> btn = this->findChildren<QPushButton*>();
+
             foreach (QPushButton* b, btn)
             {
                 if (b->text() == key)
@@ -737,14 +767,17 @@ bool QQTInput::eventFilter(QObject* obj, QEvent* event)
                 }
             }
         }
+
         return false;
     }
+
     return QWidget::eventFilter(obj, event);
 }
 
 void QQTInput::focusChanged(QWidget* oldWidget, QWidget* nowWidget)
 {
     currentFocusWidget = nowWidget;
+
     //pline() << currentEditType << "oldWidget:" << oldWidget << " nowWidget:" << nowWidget;
     if (nowWidget != 0 && !this->isAncestorOf(nowWidget))
     {
@@ -760,12 +793,15 @@ void QQTInput::focusChanged(QWidget* oldWidget, QWidget* nowWidget)
         {
             return;
         }
+
 #endif
 
         isFirst = false;
+
         if (nowWidget->inherits("QLineEdit"))
         {
             QLineEdit* lineedit = (QLineEdit*)nowWidget;
+
             if (!lineedit->isReadOnly())
             {
                 currentLineEdit = (QLineEdit*)nowWidget;
@@ -789,6 +825,7 @@ void QQTInput::focusChanged(QWidget* oldWidget, QWidget* nowWidget)
         else if (nowWidget->inherits("QComboBox"))
         {
             QComboBox* cbox = (QComboBox*)nowWidget;
+
             /*
              * 只有当下拉选择框处于编辑模式才可以输入
              */
@@ -827,12 +864,14 @@ void QQTInput::focusChanged(QWidget* oldWidget, QWidget* nowWidget)
             //pline();
             return;
         }
+
         //pline() << currentEditType;
         /*
          * 如果要实现android键盘的效果，再考虑此处，否则不考虑
          */
         changePosition();
     }
+
     /*
      * 这部分代码不可更改 除非添加控件
      */
@@ -873,6 +912,7 @@ void QQTInput::changeType()
         ui->btnOther18->setText(tr(";"));
         ui->btnOther21->setText(tr("\""));
     }
+
     /*
      * 每次切换到模式,都要执行清空之前中文模式下的信息
      */
@@ -883,6 +923,7 @@ void QQTInput::changeType()
 void QQTInput::changeLetter(bool isUpper)
 {
     QList<QPushButton*> btn = this->findChildren<QPushButton*>();
+
     foreach (QPushButton* b, btn)
     {
         if (b->property("btnLetter").toBool())
@@ -906,6 +947,7 @@ void QQTInput::selectChinese()
     QString currentPY = ui->labPY->text();
     QString sql = "select [word] from [pinyin] where [pinyin]='" + currentPY + "';";
     query.exec(sql);
+
     /*
      * 逐个将查询到的字词加入汉字队列
      */
@@ -913,6 +955,7 @@ void QQTInput::selectChinese()
     {
         QString result = query.value(0).toString();
         QStringList text = result.split(" ");
+
         foreach (QString txt, text)
         {
             if (txt.length() > 0)
@@ -922,6 +965,7 @@ void QQTInput::selectChinese()
             }
         }
     }
+
     showChinese();
 }
 
@@ -932,6 +976,7 @@ void QQTInput::showChinese()
      */
     int count = 0;
     currentPY.clear();
+
     for (int i = 0; i < 10; i++)
     {
         labCh[i]->setText("");
@@ -943,12 +988,14 @@ void QQTInput::showChinese()
         {
             break;
         }
+
         QString txt = QString("%1  ").arg(allPY[currentPY_index]);
         currentPY.append(allPY[currentPY_index]);
         labCh[count]->setText(txt);
         count++;
         currentPY_index++;
     }
+
     qDebug() << "currentPY_index:" << currentPY_index << "currentPY_count:" << currentPY_count;
 }
 
@@ -989,6 +1036,7 @@ void QQTInput::deleteValue()
          * 获取当前QTextEdit光标,如果光标有选中,则移除选中字符,否则删除光标前一个字符
          */
         QTextCursor cursor = currentTextEdit->textCursor();
+
         if (cursor.hasSelection())
         {
             cursor.removeSelectedText();
@@ -1004,6 +1052,7 @@ void QQTInput::deleteValue()
          * 获取当前QTextEdit光标,如果光标有选中,则移除选中字符,否则删除光标前一个字符
          */
         QTextCursor cursor = currentPlain->textCursor();
+
         if (cursor.hasSelection())
         {
             cursor.removeSelectedText();
@@ -1019,6 +1068,7 @@ void QQTInput::deleteValue()
          * 获取当前QTextEdit光标,如果光标有选中,则移除选中字符,否则删除光标前一个字符
          */
         QTextCursor cursor = currentBrowser->textCursor();
+
         if (cursor.hasSelection())
         {
             cursor.removeSelectedText();
@@ -1038,6 +1088,7 @@ void QQTInput::deleteValue()
 void QQTInput::setChinese(int index)
 {
     int count = currentPY.count();
+
     if (count > index)
     {
         insertValue(currentPY[index]);
@@ -1058,6 +1109,7 @@ void QQTInput::clearChinese()
     {
         labCh[i]->setText("");
     }
+
     allPY.clear();
     currentPY.clear();
     currentPY_index = 0;
@@ -1067,6 +1119,7 @@ void QQTInput::clearChinese()
 void QQTInput::changeRect()
 {
     QRect geo = geometry();
+
     if (currentType == "min" || currentType == "max")
     {
         geo.adjust(0, +frmTopHeight, 0, 0);
@@ -1075,6 +1128,7 @@ void QQTInput::changeRect()
     {
         geo.adjust(0, -frmTopHeight, 0, 0);
     }
+
     setFixedHeight(geo.height());
     setGeometry(geo);
 }
@@ -1150,6 +1204,7 @@ void QQTInput::changePosition()
     {
         if (currentFocusWidget == NULL)
             return;
+
         QRect rect = currentFocusWidget->rect();
         QPoint pos = QPoint(rect.left(), rect.top() + 27 + 2);
         QPoint pos2 = QPoint(rect.left(), rect.bottom() + 2);
@@ -1233,16 +1288,19 @@ void QQTInput::ChangeFont()
     QFont labFont(this->font().family(), labFontSize);
 
     QList<QPushButton*> btns = ui->widgetMain->findChildren<QPushButton*>();
+
     foreach (QPushButton* btn, btns)
     {
         btn->setFont(btnFont);
     }
 
     QList<QLabel*> labs = ui->widgetTop->findChildren<QLabel*>();
+
     foreach (QLabel* lab, labs)
     {
         lab->setFont(labFont);
     }
+
     ui->btnPre->setFont(labFont);
     ui->btnNext->setFont(labFont);
     ui->btnClose->setFont(labFont);
@@ -1254,31 +1312,40 @@ void QQTInput::changeStyle(QString topColor, QString bottomColor, QString border
 
     qss.append(QString("QWidget#frmInput{background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 %1,stop:1 %2);}")
                .arg(topColor).arg(bottomColor));
-    qss.append(QString("QWidget#widgetTopPinyin{background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 %1,stop:1 %2);}")
-               .arg(QString("#FFFFFF")).arg(QString("#FFFFFF")));
-    qss.append(QString("QWidget#widgetTopHanzi{background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 %1,stop:1 %2);}")
-               .arg(QString("#F4F4F4")).arg(QString("#F4F4F4")));
+    qss.append(
+        QString("QWidget#widgetTopPinyin{background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 %1,stop:1 %2);}")
+        .arg(QString("#FFFFFF")).arg(QString("#FFFFFF")));
+    qss.append(
+        QString("QWidget#widgetTopHanzi{background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 %1,stop:1 %2);}")
+        .arg(QString("#F4F4F4")).arg(QString("#F4F4F4")));
     //normal
-    qss.append(QString("QPushButton{padding:1px;color:%1;background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 %2, stop: 1 %2);border: 0px solid %3;border-radius:6px;}")
-               .arg(textColor).arg("#FFFFFF").arg(borderColor));
-    qss.append(QString("QPushButton::pressed {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 %1, stop: 0.5 %1, stop: 1.0 %1); border-color: %2; }")
-               .arg("#FF8400").arg(borderColor));
+    qss.append(
+        QString("QPushButton{padding:1px;color:%1;background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 %2, stop: 1 %2);border: 0px solid %3;border-radius:6px;}")
+        .arg(textColor).arg("#FFFFFF").arg(borderColor));
+    qss.append(
+        QString("QPushButton::pressed {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 %1, stop: 0.5 %1, stop: 1.0 %1); border-color: %2; }")
+        .arg("#FF8400").arg(borderColor));
     //return
-    qss.append(QString("QPushButton#btnReturn{padding:5px;color:%1;background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 %2, stop: 1 %2);border: 1px solid %3;border-radius:6px;}")
-               .arg("#FFFFFF").arg("#FF8400").arg(borderColor));
-    qss.append(QString("QPushButton#btnReturn::pressed {color:%1; background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 %2, stop: 0.5 %2, stop: 1.0 %2); border-color: %3; }")
-               .arg("#000000").arg("#FFFFFF").arg(borderColor));
+    qss.append(
+        QString("QPushButton#btnReturn{padding:5px;color:%1;background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 %2, stop: 1 %2);border: 1px solid %3;border-radius:6px;}")
+        .arg("#FFFFFF").arg("#FF8400").arg(borderColor));
+    qss.append(
+        QString("QPushButton#btnReturn::pressed {color:%1; background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 %2, stop: 0.5 %2, stop: 1.0 %2); border-color: %3; }")
+        .arg("#000000").arg("#FFFFFF").arg(borderColor));
 
     //pre next
-    qss.append(QString("QPushButton#btnPre,QPushButton#btnNext{padding:5px;color:%1;background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 %2, stop: 1 %2);border: 1px solid %3;border-radius:6px;}")
-               .arg("#000000").arg("#F4F4F4").arg("#F4F4F4"));
-    qss.append(QString("QPushButton#btnPre::pressed,QPushButton#btnNext::pressed {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 %1, stop: 0.5 %1, stop: 1.0 %1); border-color: %2; }")
-               .arg("#F4F4F4").arg("#F4F4F4"));
+    qss.append(
+        QString("QPushButton#btnPre,QPushButton#btnNext{padding:5px;color:%1;background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 %2, stop: 1 %2);border: 1px solid %3;border-radius:6px;}")
+        .arg("#000000").arg("#F4F4F4").arg("#F4F4F4"));
+    qss.append(
+        QString("QPushButton#btnPre::pressed,QPushButton#btnNext::pressed {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 %1, stop: 0.5 %1, stop: 1.0 %1); border-color: %2; }")
+        .arg("#F4F4F4").arg("#F4F4F4"));
 
     //qss.append(QString("QPushButton:hover{background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 %1,stop:1 %2);}")
     //           .arg(topColor).arg(bottomColor));
     qss.append(QString("QLabel{color:%1;}").arg(textColor));
-    qss.append(QString("QLineEdit{border:1px solid %1;border-radius:5px;padding:2px;background:none;selection-background-color:%2;selection-color:%3;}")
-               .arg(borderColor).arg(bottomColor).arg(topColor));
+    qss.append(
+        QString("QLineEdit{border:1px solid %1;border-radius:5px;padding:2px;background:none;selection-background-color:%2;selection-color:%3;}")
+        .arg(borderColor).arg(bottomColor).arg(topColor));
     this->setStyleSheet(qss.join(""));
 }

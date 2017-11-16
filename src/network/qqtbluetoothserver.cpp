@@ -2,7 +2,8 @@
 #include "qqtnetwork.h"
 #include "qqtbluetoothclient.h"
 
-QQtBluetoothServer::QQtBluetoothServer(QBluetoothServiceInfo::Protocol serverType, QObject* parent) : QBluetoothServer(serverType, parent)
+QQtBluetoothServer::QQtBluetoothServer(QBluetoothServiceInfo::Protocol serverType,
+                                       QObject* parent) : QBluetoothServer(serverType, parent)
 {
     connect(this, SIGNAL(newConnection()),
             this, SLOT(comingNewConnection()));
@@ -37,6 +38,7 @@ void QQtBluetoothServer::installProtocol(QQtProtocol* stack)
 void QQtBluetoothServer::uninstallProtocol(QQtProtocol* stack)
 {
     Q_UNUSED(stack)
+
     if (!m_protocol)
         return;
 

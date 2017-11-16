@@ -27,78 +27,78 @@ class QQTSHARED_EXPORT QQtCustomSpeedMeter: public QWidget
     Q_PROPERTY(QColor background READ background WRITE setBackground)
     Q_PROPERTY(bool thresholdEnabled READ isThresholdEnabled WRITE setThresholdEnabled)
     Q_PROPERTY(bool numericIndicatorEnabled READ isNumericIndicatorEnabled WRITE setNumericIndicatorEnabled)
-	
-public: 
-    enum ErrorCode {MaxValueError=1,MinValueError,ThresholdError,TargetError,PrecisionError,ColorError,UnitsEmpty,OutOfRange};
 
-    explicit QQtCustomSpeedMeter(QWidget *parent = 0);
+public:
+    enum ErrorCode {MaxValueError = 1, MinValueError, ThresholdError, TargetError, PrecisionError, ColorError, UnitsEmpty, OutOfRange};
+
+    explicit QQtCustomSpeedMeter(QWidget* parent = 0);
     double value() const {return m_value;}
     int minValue() const {return m_minValue;}
     int maxValue() const {return m_maxValue;}
     double threshold() const {return m_threshold;}
     int precision() const {return m_precision;}
-	QString units()const {return m_units;}
-	int scaleMajor() const {return m_scaleMajor;}
-	int scaleMinor() const {return m_scaleMinor;}
-	int startAngle() const {return m_startAngle;}
+    QString units()const {return m_units;}
+    int scaleMajor() const {return m_scaleMajor;}
+    int scaleMinor() const {return m_scaleMinor;}
+    int startAngle() const {return m_startAngle;}
     int endAngle() const { return m_endAngle;}
-	QColor crownColor() const {return m_crownColor;}
+    QColor crownColor() const {return m_crownColor;}
     QColor foreground() const {return m_foreground;}
     QColor background() const {return m_background;}
     bool isThresholdEnabled() const {return m_thresholdEnabled;}
-	bool isNumericIndicatorEnabled() const {return m_numericIndicatorEnabled;}
-		       	            
+    bool isNumericIndicatorEnabled() const {return m_numericIndicatorEnabled;}
+
 Q_SIGNALS:
     void errorSignal(int);
     void thresholdAlarm(bool);
 
 public Q_SLOTS:
     void setValue(int);
-	void setMinValue(int);
-	void setMaxValue(int);	
-	void setThreshold(double);
-    void setPrecision(int);	
-	void setUnits(QString);	
-	void setScaleMajor(int);
-	void setScaleMinor(int);
-	void setStartAngle(int);
-	void setEndAngle(int);
-	void setCrownColor(QColor);
-	void setForeground(QColor);
-	void setBackground(QColor);
+    void setMinValue(int);
+    void setMaxValue(int);
+    void setThreshold(double);
+    void setPrecision(int);
+    void setUnits(QString);
+    void setScaleMajor(int);
+    void setScaleMinor(int);
+    void setStartAngle(int);
+    void setEndAngle(int);
+    void setCrownColor(QColor);
+    void setForeground(QColor);
+    void setBackground(QColor);
     void setThresholdEnabled(bool);
     void setNumericIndicatorEnabled(bool);
 
 protected:
     void thresholdManager();
-    void paintEvent(QPaintEvent *);
-            
-    void drawCrown(QPainter *painter);
-    void drawBackground(QPainter *painter);
-    void drawScale(QPainter *painter);
-    void drawScaleNum(QPainter *painter);
-    void drawUnits(QPainter *painter);
-    void drawIndicator(QPainter *painter);
-    void drawThresholdLine(QPainter *painter);
-    void drawNumericValue(QPainter *painter);
-  
+    void paintEvent(QPaintEvent*);
+
+    void drawCrown(QPainter* painter);
+    void drawBackground(QPainter* painter);
+    void drawScale(QPainter* painter);
+    void drawScaleNum(QPainter* painter);
+    void drawUnits(QPainter* painter);
+    void drawIndicator(QPainter* painter);
+    void drawThresholdLine(QPainter* painter);
+    void drawNumericValue(QPainter* painter);
+
 private:
-	double m_value;
+    double m_value;
     int m_maxValue, m_minValue;
     int m_precision;
-	QString m_units;
-	int m_scaleMajor;
-	int m_scaleMinor;
-	int m_startAngle,m_endAngle;
-	double m_threshold;
-	bool m_thresholdFlag;
-	
-	QColor m_crownColor;
-	QColor m_foreground;
-	QColor m_background;
-	
-	bool m_thresholdEnabled;
-	bool m_numericIndicatorEnabled;
+    QString m_units;
+    int m_scaleMajor;
+    int m_scaleMinor;
+    int m_startAngle, m_endAngle;
+    double m_threshold;
+    bool m_thresholdFlag;
+
+    QColor m_crownColor;
+    QColor m_foreground;
+    QColor m_background;
+
+    bool m_thresholdEnabled;
+    bool m_numericIndicatorEnabled;
 };
 
 #endif

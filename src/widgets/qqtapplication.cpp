@@ -98,11 +98,13 @@ void QQtApplication::slotUPanAutoRun(int status)
         return;
 
 #ifdef __PLUGINWATCHER__
+
     if (QQTPluginWatcher::E_ADD == status)
     {
         QString mP = QQTPluginWatcher::Instance()->upanMountPath();
         QString app = QString("%1/autorun.sh").arg(mP);
         QFile file(app);
+
         if (file.exists())
         {
             if (QDialog::Rejected == QQTMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
@@ -114,6 +116,7 @@ void QQtApplication::slotUPanAutoRun(int status)
         {
             return;
         }
+
 #ifdef __PROCESSMODULE__
         QProcess* p = new QProcess(this);
         p->setWorkingDirectory(mP);
@@ -122,6 +125,7 @@ void QQtApplication::slotUPanAutoRun(int status)
         //TODO:
 #endif
     }
+
 #endif
 }
 

@@ -23,16 +23,16 @@ class QQTSHARED_EXPORT QQTWord : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQTWord(QObject *parent = 0);
+    explicit QQTWord(QObject* parent = 0);
 
     void addText(const QString& text, QFont m_font = QFont(),
-                 Qt::Alignment align = Qt::AlignHCenter, QPointF point= QPointF(0, 0));
+                 Qt::Alignment align = Qt::AlignHCenter, QPointF point = QPointF(0, 0));
     void addSignoffText(const QString& text, QFont m_font = QFont());
     void addTable(const QTableView* table, QPointF pos = QPointF(0, 0));
 
     int pageNum();
     QQTGraphicsScene* getPage(int num);
-    void exportPdf(const QString &pdf);
+    void exportPdf(const QString& pdf);
     void print();
 
     QRectF clientRectF();
@@ -52,7 +52,7 @@ public:
     QFont headerFont() { return m_headerFont; }
     void setHeaderLine(bool show = false);
     void setFooterLine(bool show = false);
-    void setHeaderText(const QString &text, QFont m_font = QFont(),
+    void setHeaderText(const QString& text, QFont m_font = QFont(),
                        Qt::Alignment align = Qt::AlignHCenter);
     void setFooterText(const QString& text, QFont m_font = QFont(),
                        Qt::Alignment align = Qt::AlignHCenter);
@@ -112,7 +112,7 @@ private:
      */
     qreal headerSize;
     QFont m_headerFont;
-    QFontMetrics *headerFmt;
+    QFontMetrics* headerFmt;
     QString headerText;
 
     /*
@@ -126,25 +126,25 @@ private:
      * 标题
      */
     QFont m_titleFont;
-    QFontMetrics *titleFmt;
+    QFontMetrics* titleFmt;
 
     /*
      * 二号标题
      */
     QFont m_title2Font;
-    QFontMetrics *title2Fmt;
+    QFontMetrics* title2Fmt;
 
     /*
      * 正文
      */
     QFont m_mainFont;
-    QFontMetrics *mainFmt;
+    QFontMetrics* mainFmt;
 
     /*
      * 使用中
      */
     QFont m_font;
-    QFontMetrics *fmt;
+    QFontMetrics* fmt;
 
 
     QHash<int, ESpanFlags> tableSpans(const QTableView* table);

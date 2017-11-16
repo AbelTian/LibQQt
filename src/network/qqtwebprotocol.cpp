@@ -1,6 +1,6 @@
 #include "qqtwebprotocol.h"
 
-QQtWebProtocol::QQtWebProtocol(QObject *parent) : QObject(parent)
+QQtWebProtocol::QQtWebProtocol(QObject* parent) : QObject(parent)
 {
 
 }

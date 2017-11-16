@@ -54,6 +54,7 @@ void QQTGraphicsTextItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
         pline() << pos() << option->rect << option->exposedRect << toPlainText();
         pline() << option->matrix << option->matrix.mapRect(option->rect);
     }
+
     painter->setFont(oldFont);
 }
 

@@ -80,9 +80,11 @@ void QQtSlideEffectTabBar::drawTabBarIcon(QPainter* painter)
 void QQtSlideEffectTabBar::drawTabBarText(QPainter* painter)
 {
     painter->save();
+
     for (int i = 0; i < count(); i++)
     {
         QPalette pale = palette();
+
         if (i == currentIndex())
             painter->setBrush(pale.buttonText());
         else
@@ -91,6 +93,7 @@ void QQtSlideEffectTabBar::drawTabBarText(QPainter* painter)
         QRect textRect = tabRect(i);
         painter->drawText(textRect, Qt::AlignCenter, tabText(i));
     }
+
     painter->restore();
 }
 
@@ -158,6 +161,7 @@ void QQtSlideEffectTabBar::updateTabBarRect()
             }
         }
     }
+
     update();
 }
 
@@ -165,6 +169,7 @@ void QQtSlideEffectTabBar::updateTabBarRect()
 void QQtSlideEffectTabBar::mousePressEvent(QMouseEvent* event)
 {
     m_barRect = tabRect(currentIndex());
+
     for (int i = 0 ; i < count(); i++)
     {
         if (tabRect(i).contains(event->pos()) && i != currentIndex())
@@ -174,6 +179,7 @@ void QQtSlideEffectTabBar::mousePressEvent(QMouseEvent* event)
             break;
         }
     }
+
     return QTabBar::mousePressEvent(event);
 }
 

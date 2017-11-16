@@ -114,11 +114,11 @@
     \endlist
 */
 
-namespace
-{
+namespace {
 QString localName(const QString& tagName)
 {
     int pos;
+
     if ((pos = tagName.indexOf(':')))
         return tagName.right(tagName.length() - pos - 1);
 
@@ -128,6 +128,7 @@ QString localName(const QString& tagName)
 QString prefix(const QString& tagName)
 {
     int pos;
+
     if ((pos = tagName.indexOf(':')))
         return tagName.left(pos);
 
@@ -546,48 +547,91 @@ QString QtSoapType::typeToName(QtSoapType::Type t)
     switch (t)
     {
     case Duration: return "duration";
+
     case DateTime: return "dateTime";
+
     case Time: return "time";
+
     case Date: return "date";
+
     case GYearMonth: return "gYearMonth";
+
     case GYear: return "gYear";
+
     case GMonthDay: return "gMonthDay";
+
     case GDay: return "gDay";
+
     case GMonth: return "gMonth";
+
     case Boolean: return "boolean";
+
     case Base64Binary: return "base64Binary";
+
     case HexBinary: return "hexBinary";
+
     case Float: return "float";
+
     case Double: return "double";
+
     case AnyURI: return "anyURI";
+
     case QName: return "QName";
+
     case NOTATION: return "NOTATION";
+
     case String: return "string";
+
     case NormalizedString: return "normalizedString";
+
     case Token: return "token";
+
     case Language: return "language";
+
     case Name: return "name";
+
     case NMTOKEN: return "NMToken";
+
     case NCName: return "NCName";
+
     case ID: return "ID";
+
     case IDREF: return "IDREF";
+
     case ENTITY: return "ENTITY";
+
     case Decimal: return "decimal";
+
     case Integer: return "integer";
+
     case NonPositiveInteger: return "nonPositiveInteger";
+
     case NegativeInteger: return "negativeInteger";
+
     case Long: return "long";
+
     case Int: return "int";
+
     case Short: return "short";
+
     case Byte: return "byte";
+
     case NonNegativeInteger: return "nonNegativeInteger";
+
     case UnsignedLong: return "unsignedLong";
+
     case PositiveInteger: return "positiveInteger";
+
     case UnsignedInt: return "unsignedInt";
+
     case UnsignedShort: return "unsignedShort";
+
     case UnsignedByte: return "unsignedByte";
+
     case Array: return "array";
+
     case Struct: return "struct";
+
     default: return "other";
     }
 }
@@ -972,6 +1016,7 @@ QtSoapArray& QtSoapArray::operator = (const QtSoapArray& copy)
 {
     if (this == &copy)
         return *this;
+
     t = copy.t;
     errorStr = copy.errorStr;
     i = copy.i;
@@ -1161,15 +1206,20 @@ void QtSoapArray::insert(int pos0, int pos1, int pos2, int pos3, int pos4,
 QString QtSoapArray::arraySizeString() const
 {
     QString arraySize = "[";
+
     if (siz0 != -1)
     {
         arraySize += QString::number(siz0);
+
         if (order > 1)
             arraySize += "," + QString::number(siz1);
+
         if (order > 2)
             arraySize += "," + QString::number(siz2);
+
         if (order > 3)
             arraySize += "," + QString::number(siz3);
+
         if (order > 4)
             arraySize += "," + QString::number(siz4);
     }
@@ -1192,6 +1242,7 @@ QString QtSoapArray::arrayTypeString() const
 
     QString atString;
     QtSoapArray* ar = const_cast<QtSoapArray*>(this);
+
     do
     {
         if (ar->count() == 0)
@@ -1200,15 +1251,16 @@ QString QtSoapArray::arrayTypeString() const
         atString += ar->arraySizeString();
 
         QtSoapArrayIterator it(*const_cast<QtSoapArray*>(this));
+
         if (it.data()->type() != Array)
             break;
 
         ar = (QtSoapArray*)it.data();
-    }
-    while (ar);
+    } while (ar);
 
 
     QtSoapArrayIterator it(*const_cast<QtSoapArray*>(this));
+
     if (ar->count() == 0)
         atString = QtSoapSimpleType::typeToName(Int) + atString;
     else
@@ -1243,14 +1295,19 @@ QDomElement QtSoapArray::toDomElement(QDomDocument doc) const
         i.pos(&pos0, &pos1, &pos2, &pos3, &pos4);
 
         QString position = "[" + QString::number(pos0);
+
         if (order > 1)
             position += "," + QString::number(pos1);
+
         if (order > 2)
             position += "," + QString::number(pos2);
+
         if (order > 3)
             position += "," + QString::number(pos3);
+
         if (order > 4)
             position += "," + QString::number(pos4);
+
         position += "]";
 
         QString envprefix = QtSoapNamespaces::instance().prefixFor(SOAPv11_ENVELOPE);
@@ -1282,6 +1339,7 @@ bool QtSoapArray::parse(QDomNode node)
 
     QDomElement e = node.toElement();
     QDomAttr typeattr = e.attributeNode("type");
+
     if (!typeattr.isNull() && (localName(typeattr.value()).toLower() != "array"))
         return false;
 
@@ -1292,11 +1350,14 @@ bool QtSoapArray::parse(QDomNode node)
     // ### array.resize(c);
 
     int pos = 0;
+
     for (int i = 0; i < c; ++i)
     {
         QDomNode n = children.item(i);
+
         if (n.isComment())
             continue;
+
         if (!n.isElement())
         {
             // ### An error in the soap document.
@@ -1306,6 +1367,7 @@ bool QtSoapArray::parse(QDomNode node)
         QDomElement elem = n.toElement();
 
         QtSmartPtr<QtSoapType> type = QtSoapTypeFactory::instance().soapType(elem);
+
         if (!type.ptr())
         {
             // ### An error in the soap document.
@@ -1314,6 +1376,7 @@ bool QtSoapArray::parse(QDomNode node)
 
         // ### Check namespace
         QDomAttr posattr = elem.attributeNode("position");
+
         if (!posattr.isNull())
             pos = posattr.value().toInt();
 
@@ -1615,29 +1678,38 @@ void QtSoapArrayIterator::pos(int* pos0, int* pos1, int* pos2,
     case 1:
         if (pos0)
             *pos0 = key;
+
         break;
+
     case 2:
     {
         const int tmp = key / arr->siz1;
+
         if (pos0)
             *pos0 = tmp;
+
         if (pos1)
             *pos1 = key - (tmp * arr->siz1);
     }
     break;
+
     case 3:
     {
         const int tmp0 = key / (arr->siz2 * arr->siz1);
         const int tmp1 = key - (tmp0 * (arr->siz2 * arr->siz1));
         const int tmp2 = tmp1 / arr->siz2;
+
         if (pos0)
             *pos0 = tmp0;
+
         if (pos1)
             *pos1 = tmp2;
+
         if (pos2)
             *pos2 = tmp1 - (tmp2 * arr->siz2);
     }
     break;
+
     case 4:
     {
         const int tmp0 = key / (arr->siz3 * arr->siz2 * arr->siz1);
@@ -1646,16 +1718,21 @@ void QtSoapArrayIterator::pos(int* pos0, int* pos1, int* pos2,
         const int tmp3 = tmp1 - (tmp2 * (arr->siz3 * arr->siz2));
         const int tmp4 = tmp3 / arr->siz3;
         const int tmp5 = tmp3 - (tmp4 * arr->siz3);
+
         if (pos0)
             *pos0 = tmp0;
+
         if (pos1)
             *pos1 = tmp2;
+
         if (pos2)
             *pos2 = tmp4;
+
         if (pos3)
             *pos3 = tmp5;
     }
     break;
+
     case 5:
     {
         const int tmp0 = key / (arr->siz4 * arr->siz3 * arr->siz2 * arr->siz1);
@@ -1666,18 +1743,24 @@ void QtSoapArrayIterator::pos(int* pos0, int* pos1, int* pos2,
         const int tmp5 = tmp3 - (tmp4 * arr->siz4 * arr->siz3);
         const int tmp6 = tmp5 / arr->siz3;
         const int tmp7 = tmp5 - (tmp6 * arr->siz3);
+
         if (pos0)
             *pos0 = tmp0;
+
         if (pos1)
             *pos1 = tmp2;
+
         if (pos2)
             *pos2 = tmp4;
+
         if (pos3)
             *pos3 = tmp6;
+
         if (pos4)
             *pos4 = tmp7;
     }
     break;
+
     default:
         break;
     }
@@ -1691,6 +1774,7 @@ QtSoapType* QtSoapArrayIterator::data()
 {
     if (it == arr->array.end())
         return 0;
+
     return it.value().ptr();
 }
 
@@ -1702,6 +1786,7 @@ const QtSoapType* QtSoapArrayIterator::current() const
 {
     if (it == arr->array.end())
         return 0;
+
     return it.value().ptr();
 }
 
@@ -1779,6 +1864,7 @@ QtSoapStruct& QtSoapStruct::operator =(const QtSoapStruct& copy)
 {
     if (this == &copy)
         return *this;
+
     t = copy.t;
     errorStr = copy.errorStr;
     i = copy.i;
@@ -1842,8 +1928,10 @@ bool QtSoapStruct::parse(QDomNode node)
     for (int i = 0; i < c; ++i)
     {
         QDomNode n = children.item(i);
+
         if (n.isComment())
             continue;
+
         if (!n.isElement())
         {
             errorStr = "In the struct element " + e.tagName();
@@ -1853,6 +1941,7 @@ bool QtSoapStruct::parse(QDomNode node)
         }
 
         QtSmartPtr<QtSoapType> type = QtSoapTypeFactory::instance().soapType(n.toElement());
+
         if (!type.ptr())
         {
             errorStr = "In the struct element " + e.tagName();
@@ -1934,6 +2023,7 @@ const QtSoapType& QtSoapStruct::operator [](const QString& key) const
 QtSoapType& QtSoapStruct::operator [](int i)
 {
     static QtSoapType NIL;
+
     if (i < 0 || i >= dict.count())
         return NIL;
 
@@ -1952,6 +2042,7 @@ QtSoapType& QtSoapStruct::operator [](int i)
 const QtSoapType& QtSoapStruct::operator [](int i) const
 {
     static QtSoapType NIL;
+
     if (i < 0 || i >= dict.count())
         return NIL;
 
@@ -1968,9 +2059,11 @@ QtSoapType& QtSoapStruct::at(const QtSoapQName& key)
     static QtSoapType NIL;
 
     QListIterator<QtSmartPtr<QtSoapType> > it(dict);
+
     while (it.hasNext())
     {
         QtSoapType* ret = it.next().ptr();
+
         if (ret->name() == key)
             return *ret;
     }
@@ -2019,6 +2112,7 @@ QtSoapQName QtSoapStructIterator::key() const
 {
     if (it == itEnd)
         return QtSoapQName();
+
     return (*it)->name();
 }
 
@@ -2029,6 +2123,7 @@ QtSoapType* QtSoapStructIterator::data()
 {
     if (it == itEnd)
         return 0;
+
     return it->ptr();
 }
 
@@ -2039,6 +2134,7 @@ const QtSoapType* QtSoapStructIterator::current() const
 {
     if (it == itEnd)
         return 0;
+
     return it->ptr();
 }
 
@@ -2049,6 +2145,7 @@ void QtSoapStructIterator::operator ++()
 {
     if (it == itEnd)
         return;
+
     ++it;
 }
 
@@ -2205,6 +2302,7 @@ bool QtSoapSimpleType::parse(QDomNode node)
     QString type = typeattr.isNull() ? QString("string") : localName(typeattr.value()).toLower();
 
     t = QtSoapType::nameToType(type);
+
     switch (t)
     {
     case Duration:
@@ -2233,12 +2331,15 @@ bool QtSoapSimpleType::parse(QDomNode node)
     case ENTITY:
         v = QVariant(e.text());
         break;
+
     case Float:
         v = QVariant(e.text().toFloat());
         break;
+
     case Double:
         v = QVariant(e.text().toDouble());
         break;
+
     case Decimal:
     case Integer:
     case NonPositiveInteger:
@@ -2262,15 +2363,18 @@ bool QtSoapSimpleType::parse(QDomNode node)
         }
 
         break;
+
     case Boolean:
     {
         QString val = e.text().trimmed().toLower();
+
         if (val == "false")
             v = QVariant(false);
         else if (val == "true")
             v = QVariant(true);
     }
     break;
+
     default:
         v = e.text();
         break;
@@ -2480,6 +2584,7 @@ bool QtSoapMessage::setContent(QDomDocument& d)
     {
         clear();
         QDomNode node = d.firstChild();
+
         if (!node.isElement())
             node = node.nextSibling();
 
@@ -2507,6 +2612,7 @@ bool QtSoapMessage::setContent(const QByteArray& buffer)
     QString errorMsg;
 
     QDomDocument doc;
+
     if (!doc.setContent(buffer, true, &errorMsg,
                         &errorLine, &errorColumn))
     {
@@ -2523,11 +2629,15 @@ bool QtSoapMessage::setContent(const QByteArray& buffer)
         return false;
 
     QDomNode node = doc.firstChild();
+
     if (!node.isElement())
         node = node.nextSibling();
+
     bool res = envelope.parse(node);
+
     if (!res)
         qDebug("QtSoapMessage::setContent(), parsing failed: %s", envelope.errorString().toLatin1().constData());
+
     return res;
 }
 
@@ -2539,6 +2649,7 @@ bool QtSoapMessage::setContent(const QByteArray& buffer)
 bool QtSoapMessage::isValidSoapMessage(const QDomDocument& candidate)
 {
     QDomNode tmp = candidate.firstChild();
+
     if (tmp.isNull())
         return false;
 
@@ -2565,6 +2676,7 @@ bool QtSoapMessage::isValidSoapMessage(const QDomDocument& candidate)
     }
 
     tmp = tmp.firstChild();
+
     if (tmp.isNull() || !tmp.isElement())
     {
         setFaultCode(VersionMismatch);
@@ -2576,6 +2688,7 @@ bool QtSoapMessage::isValidSoapMessage(const QDomDocument& candidate)
     QDomElement tmpe2 = tmp.toElement();
 
     bool foundHeader = false;
+
     if (localName(tmpe2.tagName()).toUpper() == "HEADER")
     {
         foundHeader = true;
@@ -2662,6 +2775,7 @@ void QtSoapMessage::addBodyItem(QtSoapType* item)
 void QtSoapMessage::addHeaderItem(QtSoapType* item)
 {
     QtSoapType& headerTmp = envelope[QtSoapQName("Header", SOAPv11_ENVELOPE)];
+
     if (!headerTmp.isValid())
         envelope.insert(new QtSoapStruct(QtSoapQName("Header", SOAPv11_ENVELOPE)));
 
@@ -2682,6 +2796,7 @@ const QtSoapType& QtSoapMessage::returnValue() const
         return NIL;
 
     QtSoapStruct& m = (QtSoapStruct&) meth;
+
     if (m.count() == 0)
         return NIL;
 
@@ -2720,6 +2835,7 @@ bool QtSoapMessage::isFault() const
 QtSoapMessage::FaultCode QtSoapMessage::faultCode() const
 {
     QtSoapType& code = body()[QtSoapQName("Fault")][QtSoapQName("Faultcode")];
+
     if (!code.isValid() || (code.type() != QtSoapType::String
                             && code.type() != QtSoapType::QName))
         return Other;
@@ -2729,6 +2845,7 @@ QtSoapMessage::FaultCode QtSoapMessage::faultCode() const
 
     // Only test string before first .
     int pos;
+
     if ((pos = fcodestr.indexOf('.')) != -1)
         fcodestr.truncate(pos);
 
@@ -2755,6 +2872,7 @@ QtSoapStruct& QtSoapMessage::body() const
     const QtSoapQName bodyName("Body", SOAPv11_ENVELOPE);
 
     QtSoapType& bodyTmp = envelope[bodyName];
+
     if (!bodyTmp.isValid())
         envelope.insert(new QtSoapStruct(bodyName));
 
@@ -2769,6 +2887,7 @@ QtSoapStruct& QtSoapMessage::header() const
     const QtSoapQName headerName("Header", SOAPv11_ENVELOPE);
 
     QtSoapType& headerTmp = envelope[headerName];
+
     if (!headerTmp.isValid())
         envelope.insert(new QtSoapStruct(headerName));
 
@@ -2790,20 +2909,25 @@ void QtSoapMessage::setFaultCode(FaultCode code)
         addBodyItem(new QtSoapStruct(QtSoapQName("Fault", SOAPv11_ENVELOPE)));
 
     QString codeStr;
+
     switch (code)
     {
     case VersionMismatch:
         codeStr = "SOAP-ENV:VersionMismatch";
         break;
+
     case MustUnderstand:
         codeStr = "SOAP-ENV:MustUnderstand";
         break;
+
     case Client:
         codeStr = "SOAP-ENV:Client";
         break;
+
     case Server:
         codeStr = "SOAP-ENV:Server";
         break;
+
     case Other:
         codeStr = "Other";
         break;
@@ -2850,6 +2974,7 @@ void QtSoapMessage::addFaultDetail(QtSoapType* detail)
 
     QtSoapType& node = body()[QtSoapQName("Fault", SOAPv11_ENVELOPE)];
     QtSoapStruct& fault = reinterpret_cast<QtSoapStruct&>(node);
+
     if (!fault[QtSoapQName("Faultdetail", SOAPv11_ENVELOPE)].isValid())
         fault.insert(new QtSoapStruct(QtSoapQName("Faultdetail", SOAPv11_ENVELOPE)));
 
@@ -3009,6 +3134,7 @@ QtSoapTypeFactory::QtSoapTypeFactory()
 QtSoapTypeFactory::~QtSoapTypeFactory()
 {
     QLinkedList<QtSoapTypeConstructorBase*>::ConstIterator it = deleteList.begin();
+
     while (it != deleteList.end())
     {
         delete *it;
@@ -3051,10 +3177,12 @@ QtSmartPtr<QtSoapType> QtSoapTypeFactory::soapType(QDomNode node) const
 
     QDomAttr attr = elem.attributeNode("type");
     QtSoapTypeConstructorBase* constructor = 0;
+
     if (!attr.isNull())
     {
         QHash<QString, QtSoapTypeConstructorBase*>::ConstIterator it;
         it = typeHandlers.find(localName(attr.value().toLower()));
+
         if (it != typeHandlers.end())
             constructor = *it;
     }
@@ -3062,6 +3190,7 @@ QtSmartPtr<QtSoapType> QtSoapTypeFactory::soapType(QDomNode node) const
     if (attr.isNull() || !constructor)
     {
         QHash<QString, QtSoapTypeConstructorBase*>::ConstIterator it;
+
         if (node.firstChild().isElement())
         {
             if (localName(node.nodeName().toLower()) == "array")
@@ -3073,6 +3202,7 @@ QtSmartPtr<QtSoapType> QtSoapTypeFactory::soapType(QDomNode node) const
         }
         else
             it = typeHandlers.find("string");
+
         if (it != typeHandlers.end())
             constructor = *it;
     }
@@ -3213,6 +3343,7 @@ void QtSoapHttpTransport::setHost(const QString& host, bool useSecureHTTP, int p
 {
     url.setHost(host);
     url.setScheme(useSecureHTTP ? QLatin1String("https") : QLatin1String("http"));
+
     if (port)
         url.setPort(port);
     else
@@ -3291,6 +3422,7 @@ QNetworkReply* QtSoapHttpTransport::networkReply()
 void QtSoapHttpTransport::readResponse(QNetworkReply* reply)
 {
     networkRep = reply;
+
     switch (reply->error())
     {
     case QNetworkReply::NoError:
@@ -3302,10 +3434,12 @@ void QtSoapHttpTransport::readResponse(QNetworkReply* reply)
         soapResponse.setContent(reply->readAll());
 
         int httpStatus = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
         if (httpStatus != 200 && httpStatus != 100)
         {
             if (soapResponse.faultCode() == QtSoapMessage::Other)
                 soapResponse.setFaultCode(QtSoapMessage::Client);
+
             /*
             QString httpReason = reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
             soapResponse.setFaultString(QString("HTTP status %2 (%3).\n%1").arg(soapResponse.faultString().toString()).arg(httpStatus).arg(httpReason));
@@ -3313,6 +3447,7 @@ void QtSoapHttpTransport::readResponse(QNetworkReply* reply)
         }
     }
     break;
+
     default:
     {
         soapResponse.setFaultCode(QtSoapMessage::Client);

@@ -9,9 +9,9 @@ class QQTSHARED_EXPORT QQTLineEditWithSearch : public QLineEdit
 {
     Q_OBJECT
 public:
-    explicit QQTLineEditWithSearch(QWidget *parent = 0);
+    explicit QQTLineEditWithSearch(QWidget* parent = 0);
     void setButtonText(QString text);
-    void setObjectName(const QString &name);
+    void setObjectName(const QString& name);
 
 signals:
     void btnClicked();

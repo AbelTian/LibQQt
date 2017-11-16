@@ -53,6 +53,7 @@ void QQtFlipEffectStackedWidget::rotate(int index)
 {
     if (isAnimating)
         return;
+
     nextIndex = index;
     int offsetx = frameRect().width();
     int offsety = frameRect().height();

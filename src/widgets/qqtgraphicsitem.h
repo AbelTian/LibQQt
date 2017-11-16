@@ -8,26 +8,26 @@
 class QQTSHARED_EXPORT QQTGraphicsItem : public QGraphicsItem
 {
 public:
-    explicit QQTGraphicsItem(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsItem(QQTGraphicsItem* parent = 0);
 
 };
 
 class QQTSHARED_EXPORT QQTGraphicsTextItem : public QGraphicsTextItem
 {
 public:
-    explicit QQTGraphicsTextItem(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsTextItem(QQTGraphicsItem* parent = 0);
 
 
     // QGraphicsItem interface
 public:
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 };
 
 
 class QQTSHARED_EXPORT QQTGraphicsSimpleTextItem : public QGraphicsSimpleTextItem
 {
 public:
-    explicit QQTGraphicsSimpleTextItem(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsSimpleTextItem(QQTGraphicsItem* parent = 0);
 
 };
 
@@ -35,31 +35,31 @@ public:
 class QQTSHARED_EXPORT QQTGraphicsPixmapItem : public QGraphicsPixmapItem
 {
 public:
-    explicit QQTGraphicsPixmapItem(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsPixmapItem(QQTGraphicsItem* parent = 0);
 
 };
 
 class QQTSHARED_EXPORT QQTGraphicsRectItem : public QGraphicsRectItem
 {
 public:
-    explicit QQTGraphicsRectItem(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsRectItem(QQTGraphicsItem* parent = 0);
 
 
     // QGraphicsItem interface
 public:
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 };
 
 
 class QQTSHARED_EXPORT QQTGraphicsLineItem : public QGraphicsLineItem
 {
 public:
-    explicit QQTGraphicsLineItem(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsLineItem(QQTGraphicsItem* parent = 0);
 
 
     // QGraphicsItem interface
 public:
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 };
 
 
@@ -68,7 +68,7 @@ public:
 class QQTSHARED_EXPORT QQTGraphicsPathItem : public QGraphicsPathItem
 {
 public:
-    explicit QQTGraphicsPathItem(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsPathItem(QQTGraphicsItem* parent = 0);
 
 };
 
@@ -76,7 +76,7 @@ public:
 class QQTSHARED_EXPORT QQTGraphicsEllipseItem : public QGraphicsEllipseItem
 {
 public:
-    explicit QQTGraphicsEllipseItem(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsEllipseItem(QQTGraphicsItem* parent = 0);
 
 };
 
@@ -84,21 +84,21 @@ public:
 class QQTSHARED_EXPORT QQTGraphicsPolygonItem : public QGraphicsPolygonItem
 {
 public:
-    explicit QQTGraphicsPolygonItem(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsPolygonItem(QQTGraphicsItem* parent = 0);
 
 };
 
 class QQTSHARED_EXPORT QQTGraphicsItemGroup : public QGraphicsItemGroup
 {
 public:
-    explicit QQTGraphicsItemGroup(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsItemGroup(QQTGraphicsItem* parent = 0);
 
 };
 
 class QQTSHARED_EXPORT QQTGraphicsProxyWidget : public QGraphicsProxyWidget
 {
 public:
-    explicit QQTGraphicsProxyWidget(QQTGraphicsItem *parent = 0);
+    explicit QQTGraphicsProxyWidget(QQTGraphicsItem* parent = 0);
 
 };
 

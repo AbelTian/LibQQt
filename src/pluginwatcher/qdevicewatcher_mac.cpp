@@ -29,8 +29,10 @@ static QStringList sDevices; //disk list, or mount point list?
 static void onDiskAppear(DADiskRef disk, void* context)
 {
     QString disk_name = DADiskGetBSDName(disk);
+
     if (sDevices.contains(disk_name))
         return;
+
     sDevices.append(disk_name);
     QDeviceWatcherPrivate* p = static_cast<QDeviceWatcherPrivate*>(context);
     p->emitDeviceAdded(disk_name);
@@ -90,11 +92,11 @@ void QDeviceWatcherPrivate::run()
 
     DASessionScheduleWithRunLoop(mSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     SInt32 result;
+
     do
     {
         result = CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1, true);
-    }
-    while (!mStop && result);
+    } while (!mStop && result);
 
     DASessionUnscheduleFromRunLoop(mSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 }

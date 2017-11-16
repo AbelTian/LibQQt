@@ -3,24 +3,28 @@
 
 QQtBluetoothManager* QQtBluetoothManager::_instance = NULL;
 
-QQtBluetoothManager *QQtBluetoothManager::Instance(QObject *parent)
+QQtBluetoothManager* QQtBluetoothManager::Instance(QObject* parent)
 {
-    if(_instance)
+    if (_instance)
         return _instance;
+
     _instance = new QQtBluetoothManager(parent);
     return _instance;
 }
 
-void QQtBluetoothManager::changeAdapter(QBluetoothAddress &adapterAddress)
+void QQtBluetoothManager::changeAdapter(QBluetoothAddress& adapterAddress)
 {
-    if(adapterAddress!=m_adapterAddress)
+    if (adapterAddress != m_adapterAddress)
         m_adapterAddress = adapterAddress;
 
-    if(deviceDiscoveryAgent) {
+    if (deviceDiscoveryAgent)
+    {
         deviceDiscoveryAgent->stop();
         delete deviceDiscoveryAgent;
     }
-    for(slitor = sl.begin(); slitor!= sl.end(); slitor++) {
+
+    for (slitor = sl.begin(); slitor != sl.end(); slitor++)
+    {
         QBluetoothServiceDiscoveryAgent* sa = (QBluetoothServiceDiscoveryAgent*)*slitor;
         sa->stop();
         sa->clear();
@@ -50,23 +54,28 @@ void QQtBluetoothManager::powerOff()
 bool QQtBluetoothManager::isPowerOn()
 {
     HostMode mode = hostMode();
-    if(mode == HostPoweredOff)
+
+    if (mode == HostPoweredOff)
         return false;
+
     return true;
 }
 
 bool QQtBluetoothManager::isDiscoverable()
 {
     HostMode mode = hostMode();
-    if(mode == HostDiscoverable)
+
+    if (mode == HostDiscoverable)
         return true;
+
     return false;
 }
 
 void QQtBluetoothManager::setAutoScan(bool scan)
 {
     bAutoScan = scan;
-    if(scan)
+
+    if (scan)
     {
         deviceDiscoveryAgent->start();
     }
@@ -79,7 +88,7 @@ void QQtBluetoothManager::setAutoScan(bool scan)
 
 void QQtBluetoothManager::setDiscoverable(bool able)
 {
-    if(able)
+    if (able)
         setHostMode(HostDiscoverable);
     else
         setHostMode(HostConnectable);
@@ -92,20 +101,25 @@ void QQtBluetoothManager::refresh()
 
 QList<QBluetoothDeviceInfo> QQtBluetoothManager::getDeviceList()
 {
-    if(deviceDiscoveryAgent)
+    if (deviceDiscoveryAgent)
         return deviceDiscoveryAgent->discoveredDevices();
+
     //empty
     return QList<QBluetoothDeviceInfo>();
 }
 
-QList<QBluetoothServiceInfo> QQtBluetoothManager::getServiceList(QBluetoothAddress &address)
+QList<QBluetoothServiceInfo> QQtBluetoothManager::getServiceList(QBluetoothAddress& address)
 {
-    for(slitor = sl.begin(); slitor!= sl.end(); slitor++) {
+    for (slitor = sl.begin(); slitor != sl.end(); slitor++)
+    {
         QBluetoothServiceDiscoveryAgent* sa = (QBluetoothServiceDiscoveryAgent*)*slitor;
-        if (sa->remoteAddress() == address) {
+
+        if (sa->remoteAddress() == address)
+        {
             return sa->discoveredServices();
         }
     }
+
     //empty
     return QList<QBluetoothServiceInfo>();
 }
@@ -130,7 +144,7 @@ void QQtBluetoothManager::slot_addService(QBluetoothServiceInfo info)
     pline() << info;
 }
 
-QQtBluetoothManager::QQtBluetoothManager(QObject *parent) :
+QQtBluetoothManager::QQtBluetoothManager(QObject* parent) :
     QBluetoothLocalDevice(parent),
     deviceDiscoveryAgent(nullptr),
     bAutoScan(true)

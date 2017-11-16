@@ -51,6 +51,7 @@ void QQtTableWidget::removeRows(int column, QList<QStringList> ids)
 {
     int rowCount = m_model->rowCount();
     int i = 0;
+
     while (i < rowCount)
     {
         QModelIndex idx = m_model->index(i, column);
@@ -67,6 +68,7 @@ void QQtTableWidget::removeRows(int column, QList<QStringList> ids)
          * 在ids中找到列值相等的，针对row进行删除，i不变；
          */
         QListIterator<QStringList> itor(ids);
+
         while (itor.hasNext())
         {
             QString colValue = itor.next().at(column);
@@ -77,6 +79,7 @@ void QQtTableWidget::removeRows(int column, QList<QStringList> ids)
                 break;
             }
         }
+
         i++;
     }
 }
@@ -85,11 +88,14 @@ void QQtTableWidget::selectedRows(int column, QMap<int, QStringList>& ids)
 {
     QModelIndexList l = selectionModel()->selectedRows(column);
     QModelIndex idx;
+
     foreach (idx, l)
     {
         QStringList l;
+
         for (int i = 0; i < m_model->columnCount(); i++)
             l << m_model->index(idx.row(), i).data().toString();
+
         ids.insert(idx.row(), l);
     }
 }

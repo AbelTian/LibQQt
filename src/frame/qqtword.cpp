@@ -44,7 +44,8 @@ QQTWord::QQTWord(QObject* parent) :
 #endif
 
     QRect rect = pr->paperRect();
-    sceneRect = QRectF(0.0, 0.0, logicalDpiX * rect.width() / pr->logicalDpiX(), logicalDpiY * rect.height() / pr->logicalDpiY());
+    sceneRect = QRectF(0.0, 0.0, logicalDpiX * rect.width() / pr->logicalDpiX(),
+                       logicalDpiY * rect.height() / pr->logicalDpiY());
 
 #if 0
     //1200 9917,14033 printerRect 固定
@@ -62,18 +63,24 @@ QQTWord::QQTWord(QObject* parent) :
 #endif
 
     m_mainFont = QApplication::font();
+
     if (mainFmt)
         delete mainFmt;
+
     mainFmt = new QFontMetrics(m_mainFont);
     m_titleFont = QApplication::font();
     m_titleFont.setPointSize(22);
+
     if (titleFmt)
         delete titleFmt;
+
     titleFmt = new QFontMetrics(m_titleFont);
     m_title2Font = QApplication::font();;
     m_title2Font.setPointSize(16);
+
     if (title2Fmt)
         delete title2Fmt;
+
     title2Fmt = new QFontMetrics(m_title2Font);
 
     setMargin();
@@ -116,8 +123,10 @@ void QQTWord::setFont(QFont font)
 {
     //normal font 11
     m_font = QApplication::font();
+
     if (fmt)
         delete fmt;
+
     fmt = new QFontMetrics(m_font);
 }
 
@@ -156,6 +165,7 @@ void QQTWord::addText(const QString& text, QFont font, Qt::Alignment align, QPoi
         item->moveBy(xpos2 - width, dy + height);
     else if (align & Qt::AlignHCenter)
         item->moveBy((pageScene->width() / 2) - (width / 2), dy + height);
+
     dy += height + spacing;
 }
 
@@ -186,6 +196,7 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
     {
         tableRowHeight = table->horizontalHeader()->height();
         adjustdy(tableRowHeight);
+
         for (int col = 0; col < model->columnCount(); col++)
         {
             int logicalIndex = table->horizontalHeader()->logicalIndex(col);
@@ -205,11 +216,13 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
             item->moveBy(dx, dy);
             dx += actColSize;
         }
+
         dy += tableRowHeight;
     }
 
     QHash<int, ESpanFlags> spans = tableSpans(table);
     QHashIterator<int, ESpanFlags> it(spans);
+
     while (0 && it.hasNext())
     {
         it.next();
@@ -225,6 +238,7 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
     QPen pen(Qt::gray, 0.1);
     QBrush brush(Qt::gray, Qt::SolidPattern);
     int row = 0;
+
     for (;;)
     {
         if (row >= model->rowCount())
@@ -237,6 +251,7 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
 
         tableRowHeight = table->rowHeight(row);
         adjustdy(tableRowHeight);
+
         for (int col = 0; col < model->columnCount(); col++)
         {
             int logicalIndex = table->horizontalHeader()->logicalIndex(col);
@@ -257,6 +272,7 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
                 if (balt)
                 {
                     int modulo = row % 2;
+
                     if (modulo != 0)
                     {
                         //rectangle grey
@@ -275,10 +291,13 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
 
             if (flags.testFlag(ESpanLeft))
                 pageScene->addLine(dx, dy, dx, dy + tableRowHeight, pen);
+
             if (flags.testFlag(ESpanTop))
                 pageScene->addLine(dx, dy, dx + actColSize, dy, pen);
+
             if (flags.testFlag(ESpanRight))
                 pageScene->addLine(dx + actColSize, dy, dx + actColSize, dy + tableRowHeight, pen);
+
             if (flags.testFlag(ESpanBottom))
                 pageScene->addLine(dx, dy + tableRowHeight, dx + actColSize, dy + tableRowHeight, pen);
 
@@ -293,6 +312,7 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
 
             dx += actColSize;
         }
+
         row++;
         dy += tableRowHeight;
         dx = xpos;
@@ -310,6 +330,7 @@ void QQTWord::exportPdf(const QString& pdf)
     QPainter p(pr);
 
     QQTGraphicsScene* pageScene = 0;
+
     foreach (pageScene, pageSceneVector)
     {
 
@@ -324,6 +345,7 @@ QQTGraphicsScene* QQTWord::getPage(int num)
 {
     if (num < 1 || num > pageSceneVector.size())
         return NULL;
+
     return pageSceneVector.at(num - 1);
 }
 
@@ -337,8 +359,10 @@ void QQTWord::setHeaderFont(QFont font)
     //header font
     m_headerFont = QApplication::font();;
     m_headerFont.setPointSize(9);
+
     if (headerFmt)
         delete headerFmt;
+
     headerFmt = new QFontMetrics(m_headerFont);
 }
 
@@ -387,6 +411,7 @@ void QQTWord::initWord()
         delete pageScene;
         pageSceneVector.remove(0);
     }
+
     headerText = "";
     footerText = "";
     createFrame();
@@ -395,8 +420,10 @@ void QQTWord::initWord()
 void QQTWord::adjustdy(qreal dy0)
 {
     dx = xpos;
+
     if (dy + dy0 < ypos2)
         return;
+
     createFrame();
 }
 
@@ -500,6 +527,7 @@ QHash<int, ESpanFlags> QQTWord::tableSpans(const QTableView* table)
             {
 
                 point = (row + i) * colCount + col + 0;
+
                 /*
                  * 如果此处有Span，但是Spans已经赋值，那么break
                  */
@@ -509,6 +537,7 @@ QHash<int, ESpanFlags> QQTWord::tableSpans(const QTableView* table)
                 for (int j = 0; j < colSpan; j++)
                 {
                     point = (row + i) * colCount + col + j;
+
                     /*
                      * 如果此处有Span，但是Spans已经赋值，那么break
                      */

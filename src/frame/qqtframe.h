@@ -20,7 +20,8 @@
 extern "C" {
 #endif /* __cplusplus */
 
-enum {
+enum
+{
     Auth_Id = 0,
     Auth_Name,
     Auth_Passwd,
@@ -30,7 +31,8 @@ enum {
     Auth_Comment,
 };
 
-enum {
+enum
+{
     Lib_Id = 0,
     Lib_Name,
     Lib_Creater,
@@ -38,19 +40,22 @@ enum {
     Lib_Comment,
 };
 
-enum {
+enum
+{
     Authority_Id = 0,
     Authority_Level,
 };
 
-enum {
+enum
+{
     Method_Id = 0,
     Method_Name,
     Method_Type,
     Method_Vessel,
 };
 
-enum {
+enum
+{
     Stage_Id = 0,
     Stage_Index,
     Stage_Vessel,
@@ -62,20 +67,23 @@ enum {
 };
 
 
-enum{
+enum
+{
     Type_Standard = 0,
     Type_Temprature,
     Type_Stressure,
     Type_Extract,
 };
 
-enum {
+enum
+{
     Login_Request,
     Login_Success,
 };
 
 
-enum {
+enum
+{
     Event_ID,
     Event_Name,
     Event_Time,
@@ -83,13 +91,15 @@ enum {
     Event_Content,
 };
 
-enum {
+enum
+{
     Event_TypeId,
     Event_TypeName,
 };
 
 
-typedef enum tagSampleEnum{
+typedef enum tagSampleEnum
+{
     ESampleId,
     ESampleMingcheng,
     ESampleBianhao,
@@ -99,26 +109,29 @@ typedef enum tagSampleEnum{
     ESampleJieguodanwei,
     ESampleCeshiren,
     ESampleCeshishijian,
-}ESampleColomn;
+} ESampleColomn;
 
-enum{
+enum
+{
     Language_English,
     Language_Chinese,
 };
 
-enum {
+enum
+{
     FILE_NAME,
     FILE_SIZE,
     FILE_TYPE,
     FILE_DATE,
     FILE_ID,
-    FILE_PATH ,
-    FILE_FILEPATH ,
+    FILE_PATH,
+    FILE_FILEPATH,
 
     FILE_MAX,
 };
 
-enum {
+enum
+{
     DIR_NAME,
     DIR_CODE,
     DIR_PATH,
@@ -157,7 +170,7 @@ extern QString gPassword;
 }
 #endif  /* __cplusplus */
 
-void qqtFrameMsgHandler(QtMsgType type, const char * msg);
+void qqtFrameMsgHandler(QtMsgType type, const char* msg);
 
 
 #endif // QQTFRAMEDEFINE_H

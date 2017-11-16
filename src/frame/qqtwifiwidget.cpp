@@ -6,38 +6,47 @@
 #include "qqtethenetmanager.h"
 
 
-void QQTWIFIIDTextDelegate::drawCheck(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, Qt::CheckState state) const
+void QQTWIFIIDTextDelegate::drawCheck(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect,
+                                      Qt::CheckState state) const
 {
 #if 0
+
     if (!rect.isValid())
         return;
+
     QStyleOptionViewItem opt(option);
     opt.rect = rect;
     opt.state = opt.state & ~QStyle::State_HasFocus;
-    switch (state) {
+
+    switch (state)
+    {
     case Qt::Unchecked:
         opt.state |= QStyle::State_Off;
         break;
+
     case Qt::PartiallyChecked:
         opt.state |= QStyle::State_NoChange;
         break;
+
     case Qt::Checked:
         opt.state |= QStyle::State_On;
         break;
     }
+
     QApplication::style()->drawPrimitive(QStyle::PE_IndicatorViewItemCheck, &opt, painter);
 #else
     QItemDelegate::drawCheck(painter, option, rect, state);
 #endif
 }
 
-void QQTWIFIIDTextDelegate::drawDisplay(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QString &text) const
+void QQTWIFIIDTextDelegate::drawDisplay(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect,
+                                        const QString& text) const
 {
-    if("COMPLETED" == text)
+    if ("COMPLETED" == text)
         painter->drawImage(rect, QImage("./skin/default/bk_sel.png"));
 }
 
-QQTWIFIWidget::QQTWIFIWidget(QWidget *parent) :
+QQTWIFIWidget::QQTWIFIWidget(QWidget* parent) :
     QQTTableView(parent),
     ui(new Ui::QQTWIFIWidget)
 {
@@ -68,8 +77,10 @@ QQTWIFIWidget::QQTWIFIWidget(QWidget *parent) :
 #endif
     dg = new QQTWIFIIDTextDelegate(this);
     setItemDelegateForColumn(ESSID_STATUS, dg);
-    for(int i = ESSID_TYPE; i < ESSID_MAX; i++)
+
+    for (int i = ESSID_TYPE; i < ESSID_MAX; i++)
         setColumnHidden(i, true);
+
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
 #else
@@ -102,14 +113,18 @@ void QQTWIFIWidget::wifiRefreshed()
     m_model->removeRows(row, m_model->rowCount());
     QList<TWifi>& list = m_pManager->wifiList();
     m_model->insertRows(row, list.size());
-    for(QList<TWifi>::Iterator it = list.begin();
-        it != list.end(); it++)
+
+    for (QList<TWifi>::Iterator it = list.begin();
+         it != list.end(); it++)
     {
         TWifi wifi = *(TWifi*)(&*it);
-        for(int i = ESSID_STATUS; i < ESSID_MAX; i++)
+
+        for (int i = ESSID_STATUS; i < ESSID_MAX; i++)
             m_model->setData(m_model->index(row, i), wifi[i]);
+
         row++;
     }
+
     m_model->submit();
 }
 
@@ -121,12 +136,14 @@ void QQTWIFIWidget::clickWIFI()
     QString mac = m_model->data(m_model->index(currentIndex().row(), ESSID_BSSID)).toString();
 
     QQTEthenetManager::Instance()->setRefresh(false);
+
     do
     {
-        if("YES" == encryt)
+        if ("YES" == encryt)
         {
             m_pass->setWifiName(name);
-            if(QQTPasswordDialog::Rejected == m_pass->exec())
+
+            if (QQTPasswordDialog::Rejected == m_pass->exec())
                 break;
         }
 
@@ -134,14 +151,15 @@ void QQTWIFIWidget::clickWIFI()
 
         pline() << ok;
 
-        if(!ok)
+        if (!ok)
         {
             QQTMsgBox::warning(this, tr("Password error"));
             break;
         }
 
         pline() << name << encryt << m_pass->wifiPwd();
-    }while(0);
+    } while (0);
+
     QQTEthenetManager::Instance()->setRefresh();
 }
 

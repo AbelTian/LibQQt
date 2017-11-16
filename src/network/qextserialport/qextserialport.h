@@ -13,20 +13,20 @@
 #define QextBaseType Win_QextSerialPort
 #endif
 
-class QextSerialPort: public QextBaseType 
+class QextSerialPort: public QextBaseType
 {
-	Q_OBJECT
-	
-	public:
-		typedef QextSerialBase::QueryMode QueryMode;
+    Q_OBJECT
 
-	    QextSerialPort();
-	    QextSerialPort(const QString & name, QueryMode mode = QextSerialPort::Polling);
-	    QextSerialPort(PortSettings const& s, QueryMode mode = QextSerialPort::Polling);
-	    QextSerialPort(const QString & name, PortSettings const& s, QueryMode mode = QextSerialPort::Polling);
-	    QextSerialPort(const QextSerialPort& s);
-	    QextSerialPort& operator=(const QextSerialPort&);
-	    virtual ~QextSerialPort();
+public:
+    typedef QextSerialBase::QueryMode QueryMode;
+
+    QextSerialPort();
+    QextSerialPort(const QString& name, QueryMode mode = QextSerialPort::Polling);
+    QextSerialPort(PortSettings const& s, QueryMode mode = QextSerialPort::Polling);
+    QextSerialPort(const QString& name, PortSettings const& s, QueryMode mode = QextSerialPort::Polling);
+    QextSerialPort(const QextSerialPort& s);
+    QextSerialPort& operator=(const QextSerialPort&);
+    virtual ~QextSerialPort();
 
 };
 

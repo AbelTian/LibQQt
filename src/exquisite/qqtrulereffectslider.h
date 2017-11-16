@@ -77,64 +77,50 @@ private slots:
     void resetVariables();
 
 public:
-    double getValue() const
-    {
+    double getValue() const {
         return value;
     }
-    double getMinValue() const
-    {
+    double getMinValue() const {
         return minValue;
     }
-    double getMaxValue() const
-    {
+    double getMaxValue() const {
         return maxValue;
     }
 
-    int getPrecision() const
-    {
+    int getPrecision() const {
         return precision;
     }
-    int getLongStep() const
-    {
+    int getLongStep() const {
         return longStep;
     }
-    int getShortStep() const
-    {
+    int getShortStep() const {
         return shortStep;
     }
-    int getSpace() const
-    {
+    int getSpace() const {
         return space;
     }
 
-    QColor getBgColorStart() const
-    {
+    QColor getBgColorStart() const {
         return bgColorStart;
     }
-    QColor getBgColorEnd() const
-    {
+    QColor getBgColorEnd() const {
         return bgColorEnd;
     }
-    QColor getLineColor() const
-    {
+    QColor getLineColor() const {
         return lineColor;
     }
 
-    QColor getSliderColorTop() const
-    {
+    QColor getSliderColorTop() const {
         return sliderColorTop;
     }
-    QColor getSliderColorBottom() const
-    {
+    QColor getSliderColorBottom() const {
         return sliderColorBottom;
     }
 
-    QColor getTipBgColor() const
-    {
+    QColor getTipBgColor() const {
         return tipBgColor;
     }
-    QColor getTipTextColor() const
-    {
+    QColor getTipTextColor() const {
         return tipTextColor;
     }
 public slots:

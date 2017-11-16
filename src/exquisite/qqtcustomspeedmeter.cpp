@@ -53,6 +53,7 @@ void QQtCustomSpeedMeter::setMinValue(int value)
         Q_EMIT errorSignal(MinValueError);
     else
         m_minValue = value;
+
     update();
 }
 
@@ -88,6 +89,7 @@ void QQtCustomSpeedMeter::setPrecision(int precision)
         Q_EMIT errorSignal(PrecisionError);
     else
         m_precision = precision;
+
     update();
 }
 
@@ -117,6 +119,7 @@ void QQtCustomSpeedMeter::paintEvent(QPaintEvent*)
 
     if (m_numericIndicatorEnabled)
         drawNumericValue(&painter);                 /* 画数字显示 */
+
     drawIndicator(&painter);                        /* 画指针 */
 }
 
@@ -162,6 +165,7 @@ void QQtCustomSpeedMeter::drawScaleNum(QPainter* painter)
         y = -82 * sina + h / 4;
         painter->drawText(x, y, str);
     }
+
     painter->restore();
 }
 
@@ -173,6 +177,7 @@ void QQtCustomSpeedMeter::drawScale(QPainter* painter)
     double angleStep = (360.0 - m_startAngle - m_endAngle) / steps;
     painter->setPen(m_foreground);
     QPen pen = painter->pen();
+
     for (int i = 0; i <= steps; i++)
     {
         if (i % m_scaleMinor == 0)
@@ -187,8 +192,10 @@ void QQtCustomSpeedMeter::drawScale(QPainter* painter)
             painter->setPen(pen);
             painter->drawLine(0, 67, 0, 72);
         }
+
         painter->rotate(angleStep);
     }
+
     painter->restore();
 }
 

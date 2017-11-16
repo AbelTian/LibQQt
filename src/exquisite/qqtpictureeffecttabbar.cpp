@@ -99,6 +99,7 @@ void QQtPictureEffectTabBar::paintEvent(QPaintEvent* e)
 void QQtPictureEffectTabBar::drawBackground(QPainter* p)
 {
     bool b = drawBase();
+
     if (b)
     {
         for (int index = 0; index < count(); index++)
@@ -117,6 +118,7 @@ void QQtPictureEffectTabBar::drawPicture(QPainter* p)
     for (int index = 0; index < count(); index++)
     {
         QRect iconRect = tabRect(index);
+
         if (iconStyle == IconStyle_Left_And_RightText)
             iconRect = QRect(iconRect.left(), iconRect.top(),
                              iconRect.height(), iconRect.height());
@@ -144,6 +146,7 @@ void QQtPictureEffectTabBar::drawText(QPainter* p)
         QRect tabTextRect = tabRect(index);
         //-rect.height()/20 上移
         verticalTabs() ? tabTextRect.adjust(0, 0, 0, 0) : tabTextRect.adjust(0, 0, 0, 0);
+
         if (iconStyle == IconStyle_Cover_And_BottomText)
             tabTextRect.adjust(0, 0, 0, -2);
         else if (iconStyle == IconStyle_Cover_And_TopText)
@@ -160,6 +163,7 @@ void QQtPictureEffectTabBar::drawText(QPainter* p)
                                 tabTextRect.width() - tabTextRect.height(), tabTextRect.height());
 
         int flags = Qt::AlignCenter;
+
         if (iconStyle == IconStyle_Cover_And_BottomText)
             flags = Qt::AlignHCenter | Qt::AlignBottom;
         else if (iconStyle == IconStyle_Cover_And_TopText)
@@ -175,10 +179,12 @@ void QQtPictureEffectTabBar::drawText(QPainter* p)
         //if on board text is normal, this is right. otherwise the palette is right
         p->save();
         p->setFont(textFont);
+
         if (index == currentIndex())
             p->setPen(selectedTextColor);
         else
             p->setPen(textColor);
+
         p->drawText(tabTextRect, flags, tabText(index));
         p->restore();
     }

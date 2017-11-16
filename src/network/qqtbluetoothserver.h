@@ -9,7 +9,7 @@ class QQTSHARED_EXPORT QQtBluetoothServer : public QBluetoothServer
 {
     Q_OBJECT
 public:
-    explicit QQtBluetoothServer(QBluetoothServiceInfo::Protocol serverType, QObject *parent = nullptr);
+    explicit QQtBluetoothServer(QBluetoothServiceInfo::Protocol serverType, QObject* parent = nullptr);
     ~QQtBluetoothServer();
 
     void installProtocol(QQtProtocol* stack);

@@ -13,7 +13,7 @@ class QQTSHARED_EXPORT QQTAnimation : public QParallelAnimationGroup
 {
     Q_OBJECT
 public:
-    explicit QQTAnimation(QObject *parent = nullptr);
+    explicit QQTAnimation(QObject* parent = nullptr);
 
 signals:
 

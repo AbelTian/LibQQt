@@ -62,6 +62,7 @@ void QQtLedBannerEffectLabel::paintGrid()
     {
         painter.drawLine(1 * i, 1, 1 * i, 13);
     }
+
     for (int i = 0; i <= 14; i++)
     {
         painter.drawLine(1, 1 * i, length - 1, 1 * i);
@@ -81,14 +82,17 @@ void QQtLedBannerEffectLabel::timerEvent(QTimerEvent* event)
             textMsg = rest.append(first);
             update();
         }
+
         if (typeEff == intermittent)
         {
             on = !on;
+
             if (on)
             {
                 textMsg = textOn;
                 update();
             }
+
             if (!on)
             {
                 textMsg = textOff;
@@ -96,11 +100,13 @@ void QQtLedBannerEffectLabel::timerEvent(QTimerEvent* event)
             }
         }
     }
+
     if (timerState == false)
     {
         textMsg = textOn;
         update();
     }
+
     QLabel::timerEvent(event);
 }
 
@@ -150,6 +156,7 @@ void QQtLedBannerEffectLabel::startEffect(bool start)
         idTimer = startTimer(timerVal);
         update();
     }
+
     if (timerState == false)
     {
         killTimer(idTimer);

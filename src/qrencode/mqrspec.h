@@ -1,7 +1,7 @@
 /*
  * qrencode - QR Code encoder
  *
- * Micro QR Code specification in convenient format. 
+ * Micro QR Code specification in convenient format.
  * Copyright (C) 2006-2011 Kentaro Fukuchi <kentaro@fukuchi.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -135,7 +135,7 @@ extern unsigned int MQRspec_getFormatInfo(int mask, int version, QRecLevel level
  * @param version
  * @return Array of unsigned char. You can free it by free().
  */
-extern unsigned char *MQRspec_newFrame(int version);
+extern unsigned char* MQRspec_newFrame(int version);
 
 /**
  * Clear the frame cache. Typically for debug.

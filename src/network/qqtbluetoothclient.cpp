@@ -53,6 +53,7 @@ void QQtBluetoothClient::installProtocol(QQtProtocol* stack)
 void QQtBluetoothClient::uninstallProtocol(QQtProtocol* stack)
 {
     Q_UNUSED(stack)
+
     if (!m_protocol)
         return;
 
@@ -117,17 +118,22 @@ int QQtBluetoothClient::sendDisConnectFromHost()
 void QQtBluetoothClient::socketStateChanged(QBluetoothSocket::SocketState eSocketState)
 {
     pline() << eSocketState;
+
     switch (eSocketState)
     {
     case ServiceLookupState:
     case ConnectingState:
         break;
+
     case ConnectedState:
         break;
+
     case ClosingState:
         break;
+
     case UnconnectedState:
         break;
+
     default:
         break;
     }
@@ -144,6 +150,7 @@ void QQtBluetoothClient::socketErrorOccured(QBluetoothSocket::SocketError e)
      * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
      */
     pline() << e << errorString();
+
     switch (e)
     {
     case HostNotFoundError:

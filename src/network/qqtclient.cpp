@@ -9,7 +9,8 @@
 QQTClient::QQTClient(QObject* parent) :
     QTcpSocket(parent)
 {
-    connect(this, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(socketStateChanged(QAbstractSocket::SocketState)));
+    connect(this, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this,
+            SLOT(socketStateChanged(QAbstractSocket::SocketState)));
     // connected
     connect(this, SIGNAL(connected()), this, SLOT(socketConnected()));
     // disconnected
@@ -17,7 +18,8 @@ QQTClient::QQTClient(QObject* parent) :
     // domain
     connect(this, SIGNAL(hostFound()), this, SLOT(domainHostFound()));
     // error
-    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketErrorOccured(QAbstractSocket::SocketError)));
+    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this,
+            SLOT(socketErrorOccured(QAbstractSocket::SocketError)));
 
     connect(this, SIGNAL(readyRead()), this, SLOT(readyReadData()));
 
@@ -129,18 +131,23 @@ void QQTClient::domainHostFound()
 void QQTClient::socketStateChanged(QAbstractSocket::SocketState eSocketState)
 {
     pline() << eSocketState;
+
     switch (eSocketState)
     {
     case QAbstractSocket::HostLookupState:
     case QAbstractSocket::ConnectingState:
         break;
+
     case QAbstractSocket::ConnectedState:
         break;
+
     case QAbstractSocket::ClosingState:
         break;
+
     case QAbstractSocket::UnconnectedState:
         eConType++;
         break;
+
     default:
         break;
     }
@@ -157,10 +164,12 @@ void QQTClient::socketErrorOccured(QAbstractSocket::SocketError e)
      * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
      */
     pline() << e;
+
     switch (e)
     {
     case QAbstractSocket::RemoteHostClosedError:
         break;
+
     case QAbstractSocket::HostNotFoundError:
     default:
         emit signalConnectFail();

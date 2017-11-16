@@ -19,26 +19,26 @@
 #include <QTextCodec>
 #include <qqt-local.h>
 
-namespace Ui
-{
-    class frmInput;
+namespace Ui {
+class frmInput;
 }
 
 class QQTSHARED_EXPORT QQTInput : public QWidget
 {
     Q_OBJECT
 
-    explicit QQTInput(QWidget *parent = 0);
+    explicit QQTInput(QWidget* parent = 0);
     ~QQTInput();
 
 public:
     /*
      * 单例模式,保证一个程序只存在一个输入法实例对象
      */
-    static QQTInput *Instance() {
+    static QQTInput* Instance() {
         if (!_instance) {
             _instance = new QQTInput;
         }
+
         return _instance;
     }
 
@@ -51,25 +51,25 @@ protected:
     /*
      * 事件过滤器,处理鼠标在汉字标签处单击操作
      */
-    bool eventFilter(QObject *obj, QEvent *event);
+    bool eventFilter(QObject* obj, QEvent* event);
     /*
      * 鼠标拖动事件
      */
-    void mouseMoveEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent* e);
     /*
      * 鼠标按下事件
      */
-    void mousePressEvent(QMouseEvent *e);
+    void mousePressEvent(QMouseEvent* e);
     /*
      * 鼠标松开事件
      */
-    void mouseReleaseEvent(QMouseEvent *);
+    void mouseReleaseEvent(QMouseEvent*);
 
 private slots:
     /*
      * 焦点改变事件槽函数处理
      */
-    void focusChanged(QWidget *oldWidget, QWidget *nowWidget);
+    void focusChanged(QWidget* oldWidget, QWidget* nowWidget);
     /*
      * 输入法面板按键处理
      */
@@ -85,8 +85,8 @@ private slots:
     void reClicked();
 
 private:
-    Ui::frmInput *ui;
-    static QQTInput *_instance;     //实例对象
+    Ui::frmInput* ui;
+    static QQTInput* _instance;     //实例对象
 
     int deskWidth;                  //桌面宽度
     int deskHeight;                 //桌面高度
@@ -102,8 +102,8 @@ private:
 
     QSqlDatabase m_db;              //数据库
     bool isPress;                   //是否长按退格键
-    QPushButton *btnPress;          //长按按钮
-    QTimer *timerPress;             //退格键定时器
+    QPushButton* btnPress;          //长按按钮
+    QTimer* timerPress;             //退格键定时器
     bool checkPress();              //校验当前长按的按钮
 
     bool isFirst;                   //是否首次加载
@@ -114,11 +114,11 @@ private:
     void ShowPanel();               //显示输入法面板
 
     QWidget* currentFocusWidget;
-    QWidget *currentWidget;         //当前焦点的对象
-    QLineEdit *currentLineEdit;     //当前焦点的单行文本框
-    QTextEdit *currentTextEdit;     //当前焦点的多行文本框
-    QPlainTextEdit *currentPlain;   //当前焦点的富文本框
-    QTextBrowser *currentBrowser;   //当前焦点的文本浏览框
+    QWidget* currentWidget;         //当前焦点的对象
+    QLineEdit* currentLineEdit;     //当前焦点的单行文本框
+    QTextEdit* currentTextEdit;     //当前焦点的多行文本框
+    QPlainTextEdit* currentPlain;   //当前焦点的富文本框
+    QTextBrowser* currentBrowser;   //当前焦点的文本浏览框
 
     QString currentEditType;        //当前焦点控件的类型
     QString currentPosition;        //当前输入法面板位置类型
@@ -132,7 +132,7 @@ private:
     void changeType();  //改变输入法类型
     void changeLetter(bool isUpper);//改变字母大小写
 
-    QList<QLabel *>labCh;           //汉字标签数组
+    QList<QLabel*>labCh;            //汉字标签数组
     QStringList allPY;              //所有拼音链表
     QStringList currentPY;          //当前拼音链表
     int currentPY_index;            //当前拼音索引

@@ -144,6 +144,7 @@ inline int QQtCustomPianoKeyBoard::getNoteRangeWidth(int note)
 
     if (octave[(_note + 1) % 12].isBlack)
         width -= BWIDTH / 2;
+
     if (octave[(_note + 23) % 12].isBlack)
         width -= BWIDTH / 2;
 
@@ -201,6 +202,7 @@ void QQtCustomPianoKeyBoard::paintEvent(QPaintEvent* /*event*/)
         for (unsigned int j = 0; j < 12; j++)
         {
             int pos = octaveWidth * i + octave[j].pos - scrollOffset;
+
             if ((pos >= 0 && pos <= viewportWidth) || (pos < 0 && pos + octave[i].width >= 0))
             {
                 if (octave[j].isBlack)
@@ -210,6 +212,7 @@ void QQtCustomPianoKeyBoard::paintEvent(QPaintEvent* /*event*/)
                 else
                 {
                     painter.drawRect(pos, rangeSelectorSize, octave[j].width, octave[j].height);
+
                     if (j == 0)
                         painter.drawText(pos + 8, rangeSelectorSize + octave[j].height - 5, QString("%1").arg(i));
                 }
@@ -243,7 +246,8 @@ void QQtCustomPianoKeyBoard::paintEvent(QPaintEvent* /*event*/)
     noteToRangeRect(rangeCenter, rCenter);
     noteToRangeRect(rangeEnd, rEnd);
 
-    painter.fillRect(rStart.right(), rStart.top(), rEnd.left() - rStart.right(), rEnd.bottom() - rStart.top(), Qt::lightGray);
+    painter.fillRect(rStart.right(), rStart.top(), rEnd.left() - rStart.right(), rEnd.bottom() - rStart.top(),
+                     Qt::lightGray);
 
     painter.setPen(Qt::blue);
     QPainterPath rangeStartPath(rStart.topRight());
@@ -302,7 +306,8 @@ int QQtCustomPianoKeyBoard::getNoteFromMousePos(const QPoint& p, bool ignoreY)
         }
     }
 
-    if (!isWhite && !isBlack(_note) && _pos >= octave[(_note + 1) % 12 ].pos && _pos < octave[(_note + 1) % 12 ].pos + octave[(_note + 1) % 12 ].width)
+    if (!isWhite && !isBlack(_note) && _pos >= octave[(_note + 1) % 12 ].pos
+        && _pos < octave[(_note + 1) % 12 ].pos + octave[(_note + 1) % 12 ].width)
         _note++;
 
     _note += _octave * 12;
@@ -400,14 +405,17 @@ void QQtCustomPianoKeyBoard::mousePressEvent(QMouseEvent* event)
     if (currentNote != -1)
     {
         pianoKeyDown = true;
+
         if (m_EmitOutOfRangeNotes || isNoteInRange(currentNote))
             emit noteOn(currentNote);
+
         update();
     }
     else
     {
         currentNote = -1;
         int* thumb = NULL;
+
         if (getRangeThumbFromMousePos(event->pos(), &thumb))
         {
             selectedRangeThumb = thumb;
@@ -425,8 +433,10 @@ void QQtCustomPianoKeyBoard::mouseReleaseEvent(QMouseEvent* event)
     if (pianoKeyDown)
     {
         pianoKeyDown = false;
+
         if (m_EmitOutOfRangeNotes || isNoteInRange(currentNote))
             emit noteOff(currentNote);
+
         currentNote = -1;
         update();
     }
@@ -442,6 +452,7 @@ void QQtCustomPianoKeyBoard::mouseMoveEvent(QMouseEvent* event)
     if (pianoKeyDown)
     {
         int _note = getNoteFromMousePos(event->pos());
+
         if (_note != currentNote)
         {
             if (m_EmitOutOfRangeNotes || isNoteInRange(currentNote))

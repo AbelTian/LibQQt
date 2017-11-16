@@ -39,7 +39,8 @@ extern "C" {
  * pixel format definitions
  */
 
-enum {
+enum
+{
     HAL_PIXEL_FORMAT_RGBA_8888          = 1,
     HAL_PIXEL_FORMAT_RGBX_8888          = 2,
     HAL_PIXEL_FORMAT_RGB_888            = 3,
@@ -48,8 +49,8 @@ enum {
     HAL_PIXEL_FORMAT_RGBA_5551          = 6,
     HAL_PIXEL_FORMAT_RGBA_4444          = 7,
 
-//    HAL_PIXEL_FORMAT_BGRX_8888  	= 0x8000,
-    HAL_PIXEL_FORMAT_BGRX_8888  	= 0x1ff,
+//    HAL_PIXEL_FORMAT_BGRX_8888    = 0x8000,
+    HAL_PIXEL_FORMAT_BGRX_8888      = 0x1ff,
 
     /* 0x8 - 0xFF range unavailable */
 
@@ -131,7 +132,8 @@ enum {
  *
  */
 
-enum {
+enum
+{
     /* flip source image horizontally (around the vertical axis) */
     HAL_TRANSFORM_FLIP_H    = 0x01,
     /* flip source image vertically (around the horizontal axis)*/

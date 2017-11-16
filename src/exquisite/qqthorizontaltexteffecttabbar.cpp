@@ -80,8 +80,10 @@ void QQtHorizontalTextEffectTabBar::paintEvent(QPaintEvent* e)
             continue;
 
         optTabBase.tabBarRect |= tab.rect;
+
         if (i == selected)
             continue;
+
         setShape(QTabBar::RoundedNorth);
         p.drawControl(QStyle::CE_TabBarTab, tab);
         setShape(QTabBar::RoundedWest);

@@ -29,11 +29,13 @@ bool QQTSqlTreeModel::parseDatabase()
 {
     QStringList tables = m_db.tables(QSql::Tables);
     QStringListIterator itor(tables);
+
     while (itor.hasNext())
     {
         QString table = itor.next();
         parseTable(table);
     }
+
     return true;
 }
 
@@ -50,11 +52,13 @@ bool QQTSqlTreeModel::parseTable(QString tableName)
 
     if (columnCount() < mdl->columnCount())
         setColumnCount(mdl->columnCount());
+
     for (int i = 0; i < mdl->rowCount(); i++)
     {
         QStandardItem* _item = new QStandardItem;
         _item->setData(mdl->index(i, 0).data(Qt::DisplayRole), Qt::EditRole);
         itemParent->appendRow(_item);
+
         for (int j = 1; j < mdl->columnCount(); j++)
         {
             QStandardItem* __item = new QStandardItem;

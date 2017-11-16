@@ -9,6 +9,7 @@ QQtSvgPushButton::QQtSvgPushButton(QWidget* parent) : QQtPushButton(parent)
 void QQtSvgPushButton::renderToVariable()
 {
     TBtnIconTable& pic = iconTable();
+
     for (int i = 0; i < BTN_MAX; i++)
         r[i].load(pic[i]);
 }

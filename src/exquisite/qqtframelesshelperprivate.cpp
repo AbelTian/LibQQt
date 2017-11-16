@@ -313,14 +313,17 @@ bool QQtFramelessHelperPrivate::eventFilter(QObject* obj, QEvent* event)
                 {
                     resize(e->pos());
                 }
+
                 return true;
             }
+
             break;
         }
 
         if (event->type() == QEvent::MouseButtonRelease)
         {
             QMouseEvent* e = (QMouseEvent*)event;
+
             if (e->button() == Qt::LeftButton && isMousePressed)
             {
                 isMousePressed = false;
@@ -328,11 +331,11 @@ bool QQtFramelessHelperPrivate::eventFilter(QObject* obj, QEvent* event)
                 timer->start();
                 return true;
             }
+
             break;
         }
 
-    }
-    while (false);
+    } while (false);
 
 
 

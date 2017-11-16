@@ -174,6 +174,7 @@ QString QQtCustomQrEncodeWidget::getQrFilePath() const
 void QQtCustomQrEncodeWidget::setQrFilePath(const QString& value)
 {
     qrFilePath = value;
+
     if (!qrFilePath.isEmpty())
     {
         saveCurViewToFile();
@@ -186,6 +187,7 @@ void QQtCustomQrEncodeWidget::paintEvent(QPaintEvent* e)
     QPainter painter(this);
     QRcode* qrcode = QRcode_encodeString(qrData.toUtf8(), 7, (QRecLevel)qrLevel, (QRencodeMode)qrMode, qrCasesen ? 1 : 0);
     QRect rect(0, 0, qrSize.width(), qrSize.height());
+
     if (0 != qrcode)
     {
         unsigned char* point = qrcode->data;
@@ -194,6 +196,7 @@ void QQtCustomQrEncodeWidget::paintEvent(QPaintEvent* e)
         painter.drawRect(rect);
         double scale = (rect.width() - 2.0 * qrMargin) / qrcode->width;
         painter.setBrush(this->qrForeground);
+
         for (int y = 0; y < qrcode->width; y ++)
         {
             for (int x = 0; x < qrcode->width; x ++)
@@ -203,9 +206,11 @@ void QQtCustomQrEncodeWidget::paintEvent(QPaintEvent* e)
                     QRectF r(qrMargin + x * scale, qrMargin + y * scale, scale, scale);
                     painter.drawRects(&r, 1);
                 }
+
                 point ++;
             }
         }
+
         point = NULL;
         QRcode_free(qrcode);
         painter.setBrush(QColor("#00ffffff"));
@@ -215,6 +220,7 @@ void QQtCustomQrEncodeWidget::paintEvent(QPaintEvent* e)
         double wrap_y = (rect.width() - icon_height) / 2.0;
         QRectF wrap(wrap_x - 5, wrap_y - 5, icon_width + 10, icon_height + 10);
         painter.drawRoundRect(wrap, 50, 50);
+
         if (qrLogo.isEmpty() || qrLogo == "daodaoliang.github.io")
         {
             painter.save();
@@ -231,6 +237,7 @@ void QQtCustomQrEncodeWidget::paintEvent(QPaintEvent* e)
             {
                 qrLogo = qrLogo.replace("qrc", "");
             }
+
             QPixmap image(qrLogo);
             QRectF target(wrap_x, wrap_y, icon_width, icon_height);
             QRectF source(0, 0, image.width(), image.height());
@@ -245,6 +252,7 @@ void QQtCustomQrEncodeWidget::resizeEvent(QResizeEvent* e)
     {
         int w = this->size().width();
         int h = this->size().height();
+
         if (w > h)
         {
             setQrSize(QSize(h, h));
@@ -259,16 +267,20 @@ void QQtCustomQrEncodeWidget::resizeEvent(QResizeEvent* e)
 void QQtCustomQrEncodeWidget::saveCurViewToFile()
 {
     QString str = qrFilePath;
+
     if (!str.endsWith(".png"))
     {
         str.append(".png");
     }
+
     QFile file(str);
+
     if (!file.open(QIODevice::WriteOnly))
     {
         file.close();
         return;
     }
+
     QRect rect(0, 0, qrSize.width(), qrSize.height());
     QPixmap pixmap(rect.size());
     this->render(&pixmap, QPoint(), QRegion(rect));

@@ -13,7 +13,7 @@ class QQTSHARED_EXPORT QQTPasswordDialog : public QQtDialog
     Q_OBJECT
 
 public:
-    explicit QQTPasswordDialog(QWidget *parent = 0);
+    explicit QQTPasswordDialog(QWidget* parent = 0);
     ~QQTPasswordDialog();
 
     void setWifiName(QString name);
@@ -26,7 +26,7 @@ private slots:
     void btnEnabled(QString);
 
 private:
-    Ui::QQTPasswordDialog *ui;
+    Ui::QQTPasswordDialog* ui;
 };
 
 #endif // QQTPASSWORDDIALOG_H

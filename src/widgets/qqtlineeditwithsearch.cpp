@@ -2,7 +2,7 @@
 #include <QHBoxLayout>
 #include "qqtwidgets.h"
 
-QQTLineEditWithSearch::QQTLineEditWithSearch(QWidget *parent) :
+QQTLineEditWithSearch::QQTLineEditWithSearch(QWidget* parent) :
     QLineEdit(parent)
 {
     m_btnBrower = new QPushButton(this);
@@ -14,7 +14,7 @@ QQTLineEditWithSearch::QQTLineEditWithSearch(QWidget *parent) :
     m_btnBrower->setIcon(QIcon("./skin/default/bt_brower.png"));
     m_btnBrower->setIconSize(size);
 
-    QHBoxLayout *hLayout = new QHBoxLayout(this);
+    QHBoxLayout* hLayout = new QHBoxLayout(this);
     hLayout->setContentsMargins(0, 0, 1, 0);
     hLayout->addStretch();
     hLayout->addWidget(m_btnBrower);
@@ -33,7 +33,7 @@ void QQTLineEditWithSearch::setButtonText(QString text)
     m_btnBrower->setText(text);
 }
 
-void QQTLineEditWithSearch::setObjectName(const QString &name)
+void QQTLineEditWithSearch::setObjectName(const QString& name)
 {
     QLineEdit::setObjectName(name);
     m_btnBrower->setObjectName(QString("%1_button").arg(name));

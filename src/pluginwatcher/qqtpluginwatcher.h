@@ -34,9 +34,10 @@ class QQTSHARED_EXPORT QQTPluginWatcher : public QThread
 {
     Q_OBJECT
 public:
-    static QQTPluginWatcher *Instance();
+    static QQTPluginWatcher* Instance();
 
-    enum {
+    enum
+    {
         E_NULLDEV,
         E_MOUSE,
         E_KEYBOARD,
@@ -44,7 +45,8 @@ public:
         E_MAXDEV,
     };
 
-    enum {
+    enum
+    {
         E_NULLSTAT,
         E_ADD,
         E_RM,
@@ -67,13 +69,13 @@ public slots:
     void slotDeviceDriver();
 
 protected:
-    virtual bool event(QEvent *e);
+    virtual bool event(QEvent* e);
 
 private:
 
 private:
-    QDeviceWatcher *watcher;
-    explicit QQTPluginWatcher(QObject *parent = 0);
+    QDeviceWatcher* watcher;
+    explicit QQTPluginWatcher(QObject* parent = 0);
     static QQTPluginWatcher* _instance;
     quint32 m_devType;
     quint32 m_devStat;

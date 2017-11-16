@@ -97,8 +97,7 @@ class QCPBars;
 /*!
   The QCP Namespace contains general enums and QFlags used throughout the QCustomPlot library
 */
-namespace QCP
-{
+namespace QCP {
 /*!
   Defines the sides of a rectangular entity to which margins can be applied.
 
@@ -202,10 +201,15 @@ inline void setMarginValue(QMargins& margins, QCP::MarginSide side, int value)
     switch (side)
     {
     case QCP::msLeft: margins.setLeft(value); break;
+
     case QCP::msRight: margins.setRight(value); break;
+
     case QCP::msTop: margins.setTop(value); break;
+
     case QCP::msBottom: margins.setBottom(value); break;
+
     case QCP::msAll: margins = QMargins(value, value, value, value); break;
+
     default: break;
     }
 }
@@ -222,11 +226,16 @@ inline int getMarginValue(const QMargins& margins, QCP::MarginSide side)
     switch (side)
     {
     case QCP::msLeft: return margins.left();
+
     case QCP::msRight: return margins.right();
+
     case QCP::msTop: return margins.top();
+
     case QCP::msBottom: return margins.bottom();
+
     default: break;
     }
+
     return 0;
 }
 
@@ -753,7 +762,8 @@ protected:
     void sizeConstraintsChanged() const;
     void adoptElement(QCPLayoutElement* el);
     void releaseElement(QCPLayoutElement* el);
-    QVector<int> getSectionSizes(QVector<int> maxSizes, QVector<int> minSizes, QVector<double> stretchFactors, int totalSize) const;
+    QVector<int> getSectionSizes(QVector<int> maxSizes, QVector<int> minSizes, QVector<double> stretchFactors,
+                                 int totalSize) const;
 
 private:
     Q_DISABLE_COPY(QCPLayout)
@@ -1384,7 +1394,8 @@ protected:
 
     virtual QByteArray generateLabelParameterHash() const;
 
-    virtual void placeTickLabel(QCPPainter* painter, double position, int distanceToAxis, const QString& text, QSize* tickLabelsSize);
+    virtual void placeTickLabel(QCPPainter* painter, double position, int distanceToAxis, const QString& text,
+                                QSize* tickLabelsSize);
     virtual void drawTickLabel(QCPPainter* painter, double x, double y, const TickLabelData& labelData) const;
     virtual TickLabelData getTickLabelData(const QFont& font, const QString& text) const;
     virtual QPointF getTickLabelDrawOffset(const TickLabelData& labelData) const;
@@ -1814,7 +1825,8 @@ public:
     QList<QCPLegend*> selectedLegends() const;
     Q_SLOT void deselectAll();
 
-    bool savePdf(const QString& fileName, bool noCosmeticPen = false, int width = 0, int height = 0, const QString& pdfCreator = QString(), const QString& pdfTitle = QString());
+    bool savePdf(const QString& fileName, bool noCosmeticPen = false, int width = 0, int height = 0,
+                 const QString& pdfCreator = QString(), const QString& pdfTitle = QString());
     bool savePng(const QString& fileName, int width = 0, int height = 0, double scale = 1.0, int quality = -1);
     bool saveJpg(const QString& fileName, int width = 0, int height = 0, double scale = 1.0, int quality = -1);
     bool saveBmp(const QString& fileName, int width = 0, int height = 0, double scale = 1.0);
@@ -1955,7 +1967,8 @@ public:
     void setPeriodic(bool enabled);
 
     // non-property methods:
-    void colorize(const double* data, const QCPRange& range, QRgb* scanLine, int n, int dataIndexFactor = 1, bool logarithmic = false);
+    void colorize(const double* data, const QCPRange& range, QRgb* scanLine, int n, int dataIndexFactor = 1,
+                  bool logarithmic = false);
     QRgb color(double position, const QCPRange& range, bool logarithmic = false);
     void loadPreset(GradientPreset preset);
     void clearColorStops();
@@ -2550,11 +2563,15 @@ public:
     void setData(QCPDataMap* data, bool copy = false);
     void setData(const QVector<double>& key, const QVector<double>& value);
     void setDataKeyError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& keyError);
-    void setDataKeyError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& keyErrorMinus, const QVector<double>& keyErrorPlus);
+    void setDataKeyError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& keyErrorMinus,
+                         const QVector<double>& keyErrorPlus);
     void setDataValueError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& valueError);
-    void setDataValueError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& valueErrorMinus, const QVector<double>& valueErrorPlus);
-    void setDataBothError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& keyError, const QVector<double>& valueError);
-    void setDataBothError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& keyErrorMinus, const QVector<double>& keyErrorPlus, const QVector<double>& valueErrorMinus, const QVector<double>& valueErrorPlus);
+    void setDataValueError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& valueErrorMinus,
+                           const QVector<double>& valueErrorPlus);
+    void setDataBothError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& keyError,
+                          const QVector<double>& valueError);
+    void setDataBothError(const QVector<double>& key, const QVector<double>& value, const QVector<double>& keyErrorMinus,
+                          const QVector<double>& keyErrorPlus, const QVector<double>& valueErrorMinus, const QVector<double>& valueErrorPlus);
     void setLineStyle(LineStyle ls);
     void setScatterStyle(const QCPScatterStyle& style);
     void setErrorType(ErrorType errorType);
@@ -2601,8 +2618,10 @@ protected:
     virtual void drawLegendIcon(QCPPainter* painter, const QRectF& rect) const;
     virtual QCPRange getKeyRange(bool& foundRange, SignDomain inSignDomain = sdBoth) const;
     virtual QCPRange getValueRange(bool& foundRange, SignDomain inSignDomain = sdBoth) const;
-    virtual QCPRange getKeyRange(bool& foundRange, SignDomain inSignDomain, bool includeErrors) const; // overloads base class interface
-    virtual QCPRange getValueRange(bool& foundRange, SignDomain inSignDomain, bool includeErrors) const; // overloads base class interface
+    virtual QCPRange getKeyRange(bool& foundRange, SignDomain inSignDomain,
+                                 bool includeErrors) const; // overloads base class interface
+    virtual QCPRange getValueRange(bool& foundRange, SignDomain inSignDomain,
+                                   bool includeErrors) const; // overloads base class interface
 
     // introduced virtual methods:
     virtual void drawFill(QCPPainter* painter, QVector<QPointF>* lineData) const;
@@ -2621,7 +2640,8 @@ protected:
     void getImpulsePlotData(QVector<QPointF>* linePixelData, QVector<QCPData>* scatterData) const;
     void drawError(QCPPainter* painter, double x, double y, const QCPData& data) const;
     void getVisibleDataBounds(QCPDataMap::const_iterator& lower, QCPDataMap::const_iterator& upper) const;
-    int countDataInBounds(const QCPDataMap::const_iterator& lower, const QCPDataMap::const_iterator& upper, int maxCount) const;
+    int countDataInBounds(const QCPDataMap::const_iterator& lower, const QCPDataMap::const_iterator& upper,
+                          int maxCount) const;
     void addFillBasePoints(QVector<QPointF>* lineData) const;
     void removeFillBasePoints(QVector<QPointF>* lineData) const;
     QPointF lowerFillBasePoint(double lowerKey) const;
@@ -2728,11 +2748,15 @@ protected:
     // non-virtual methods:
     void getCurveData(QVector<QPointF>* lineData) const;
     int getRegion(double x, double y, double rectLeft, double rectTop, double rectRight, double rectBottom) const;
-    QPointF getOptimizedPoint(int prevRegion, double prevKey, double prevValue, double key, double value, double rectLeft, double rectTop, double rectRight, double rectBottom) const;
-    QVector<QPointF> getOptimizedCornerPoints(int prevRegion, int currentRegion, double prevKey, double prevValue, double key, double value, double rectLeft, double rectTop, double rectRight, double rectBottom) const;
+    QPointF getOptimizedPoint(int prevRegion, double prevKey, double prevValue, double key, double value, double rectLeft,
+                              double rectTop, double rectRight, double rectBottom) const;
+    QVector<QPointF> getOptimizedCornerPoints(int prevRegion, int currentRegion, double prevKey, double prevValue,
+                                              double key, double value, double rectLeft, double rectTop, double rectRight, double rectBottom) const;
     bool mayTraverse(int prevRegion, int currentRegion) const;
-    bool getTraverse(double prevKey, double prevValue, double key, double value, double rectLeft, double rectTop, double rectRight, double rectBottom, QPointF& crossA, QPointF& crossB) const;
-    void getTraverseCornerPoints(int prevRegion, int currentRegion, double rectLeft, double rectTop, double rectRight, double rectBottom, QVector<QPointF>& beforeTraverse, QVector<QPointF>& afterTraverse) const;
+    bool getTraverse(double prevKey, double prevValue, double key, double value, double rectLeft, double rectTop,
+                     double rectRight, double rectBottom, QPointF& crossA, QPointF& crossB) const;
+    void getTraverseCornerPoints(int prevRegion, int currentRegion, double rectLeft, double rectTop, double rectRight,
+                                 double rectBottom, QVector<QPointF>& beforeTraverse, QVector<QPointF>& afterTraverse) const;
     double pointDistance(const QPointF& pixelPoint) const;
 
     friend class QCustomPlot;
@@ -3085,7 +3109,8 @@ public:
 
     // non-property methods:
     void rescaleDataRange(bool recalculateDataBounds = false);
-    Q_SLOT void updateLegendIcon(Qt::TransformationMode transformMode = Qt::SmoothTransformation, const QSize& thumbSize = QSize(32, 18));
+    Q_SLOT void updateLegendIcon(Qt::TransformationMode transformMode = Qt::SmoothTransformation,
+                                 const QSize& thumbSize = QSize(32, 18));
 
     // reimplemented virtual methods:
     virtual void clearData();
@@ -3188,7 +3213,8 @@ public:
 
     // setters:
     void setData(QCPFinancialDataMap* data, bool copy = false);
-    void setData(const QVector<double>& key, const QVector<double>& open, const QVector<double>& high, const QVector<double>& low, const QVector<double>& close);
+    void setData(const QVector<double>& key, const QVector<double>& open, const QVector<double>& high,
+                 const QVector<double>& low, const QVector<double>& close);
     void setChartStyle(ChartStyle style);
     void setWidth(double width);
     void setTwoColored(bool twoColored);
@@ -3201,7 +3227,8 @@ public:
     void addData(const QCPFinancialDataMap& dataMap);
     void addData(const QCPFinancialData& data);
     void addData(double key, double open, double high, double low, double close);
-    void addData(const QVector<double>& key, const QVector<double>& open, const QVector<double>& high, const QVector<double>& low, const QVector<double>& close);
+    void addData(const QVector<double>& key, const QVector<double>& open, const QVector<double>& high,
+                 const QVector<double>& low, const QVector<double>& close);
     void removeDataBefore(double key);
     void removeDataAfter(double key);
     void removeData(double fromKey, double toKey);
@@ -3212,7 +3239,8 @@ public:
     virtual double selectTest(const QPointF& pos, bool onlySelectable, QVariant* details = 0) const;
 
     // static methods:
-    static QCPFinancialDataMap timeSeriesToOhlc(const QVector<double>& time, const QVector<double>& value, double timeBinSize, double timeBinOffset = 0);
+    static QCPFinancialDataMap timeSeriesToOhlc(const QVector<double>& time, const QVector<double>& value,
+                                                double timeBinSize, double timeBinOffset = 0);
 
 protected:
     // property members:
@@ -3230,10 +3258,14 @@ protected:
     virtual QCPRange getValueRange(bool& foundRange, SignDomain inSignDomain = sdBoth) const;
 
     // non-virtual methods:
-    void drawOhlcPlot(QCPPainter* painter, const QCPFinancialDataMap::const_iterator& begin, const QCPFinancialDataMap::const_iterator& end);
-    void drawCandlestickPlot(QCPPainter* painter, const QCPFinancialDataMap::const_iterator& begin, const QCPFinancialDataMap::const_iterator& end);
-    double ohlcSelectTest(const QPointF& pos, const QCPFinancialDataMap::const_iterator& begin, const QCPFinancialDataMap::const_iterator& end) const;
-    double candlestickSelectTest(const QPointF& pos, const QCPFinancialDataMap::const_iterator& begin, const QCPFinancialDataMap::const_iterator& end) const;
+    void drawOhlcPlot(QCPPainter* painter, const QCPFinancialDataMap::const_iterator& begin,
+                      const QCPFinancialDataMap::const_iterator& end);
+    void drawCandlestickPlot(QCPPainter* painter, const QCPFinancialDataMap::const_iterator& begin,
+                             const QCPFinancialDataMap::const_iterator& end);
+    double ohlcSelectTest(const QPointF& pos, const QCPFinancialDataMap::const_iterator& begin,
+                          const QCPFinancialDataMap::const_iterator& end) const;
+    double candlestickSelectTest(const QPointF& pos, const QCPFinancialDataMap::const_iterator& begin,
+                                 const QCPFinancialDataMap::const_iterator& end) const;
     void getVisibleDataBounds(QCPFinancialDataMap::const_iterator& lower, QCPFinancialDataMap::const_iterator& upper) const;
 
     friend class QCustomPlot;
@@ -3599,7 +3631,8 @@ public:
 
     // setters;
     void setPixmap(const QPixmap& pixmap);
-    void setScaled(bool scaled, Qt::AspectRatioMode aspectRatioMode = Qt::KeepAspectRatio, Qt::TransformationMode transformationMode = Qt::SmoothTransformation);
+    void setScaled(bool scaled, Qt::AspectRatioMode aspectRatioMode = Qt::KeepAspectRatio,
+                   Qt::TransformationMode transformationMode = Qt::SmoothTransformation);
     void setPen(const QPen& pen);
     void setSelectedPen(const QPen& pen);
 

@@ -8,7 +8,7 @@ class QQTSHARED_EXPORT QQTHeaderView : public QHeaderView
 {
     Q_OBJECT
 public:
-    explicit QQTHeaderView(Qt::Orientation orientation = Qt::Horizontal, QWidget *parent = 0);
+    explicit QQTHeaderView(Qt::Orientation orientation = Qt::Horizontal, QWidget* parent = 0);
 
 signals:
 
@@ -17,12 +17,12 @@ public slots:
 
     // QHeaderView interface
 protected:
-    void paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const;
+    void paintSection(QPainter* painter, const QRect& rect, int logicalIndex) const;
     QSize sectionSizeFromContents(int logicalIndex) const;
 
     // QWidget interface
 protected:
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent*);
 
 private:
     Qt::Orientation ori;

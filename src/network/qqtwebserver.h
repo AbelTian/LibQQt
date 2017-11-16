@@ -7,7 +7,7 @@ class QQtWebServer : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtWebServer(QObject *parent = nullptr);
+    explicit QQtWebServer(QObject* parent = nullptr);
 
 signals:
 

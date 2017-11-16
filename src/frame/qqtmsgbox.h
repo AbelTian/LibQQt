@@ -17,7 +17,7 @@ class QQTSHARED_EXPORT QQTMsgBox : public QQtDialog
     Q_OBJECT
 
 public:
-    explicit QQTMsgBox(QWidget *parent = 0);
+    explicit QQTMsgBox(QWidget* parent = 0);
     ~QQTMsgBox();
 
     void warning(QString content);
@@ -38,7 +38,7 @@ protected:
     int _question(QString content);
 
 private:
-    Ui::QQTMsgBox *ui;
+    Ui::QQTMsgBox* ui;
     quint32 m_time;
     int delayShow;
 
@@ -58,7 +58,7 @@ private:
 
     // QObject interface
 protected:
-    void timerEvent(QTimerEvent *);
+    void timerEvent(QTimerEvent*);
 };
 
 #endif // QQTMSGBOX_H

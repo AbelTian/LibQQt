@@ -1,6 +1,6 @@
 #include "qqtwebserver.h"
 
-QQtWebServer::QQtWebServer(QObject *parent) : QObject(parent)
+QQtWebServer::QQtWebServer(QObject* parent) : QObject(parent)
 {
 
 }

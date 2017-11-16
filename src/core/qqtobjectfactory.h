@@ -23,14 +23,15 @@ public:
      * @param parent
      * @return
      */
-    static QObject* createObject(const QByteArray& className, QObject* parent = NULL)
-    {
+    static QObject* createObject(const QByteArray& className, QObject* parent = NULL) {
         /*
          * 搜索生成此类对象的函数
          */
         Constructor constructor = constructors().value(className);
+
         if (constructor == NULL)
             return NULL;
+
         /*
          * 生成对象,调用constructorHelper<className>(parent)
          */
@@ -40,22 +41,20 @@ public:
      * @brief registerObject 将对象注册进工厂
      * @param w
      */
-    static void registerObject(const QObject* const& w)
-    {
+    static void registerObject(const QObject* const& w) {
         containers().push_back(w);
     }
     /**
      * @brief unregisterObject 取消对象在工厂中注册
      * @param w
      */
-    static void unregisterObject(const QObject*& w)
-    {
+    static void unregisterObject(const QObject*& w) {
         QListIterator<const QObject*> itor(containers());
-        while (itor.hasNext())
-        {
+
+        while (itor.hasNext()) {
             const QObject* ww = itor.next();
-            if (ww == w)
-            {
+
+            if (ww == w) {
                 containers().removeOne(w);
                 break;
             }
@@ -66,17 +65,17 @@ public:
      * @param objName
      * @return
      */
-    static const QObject* registedObject(const QString objName)
-    {
+    static const QObject* registedObject(const QString objName) {
         QListIterator<const QObject*> itor(containers());
-        while (itor.hasNext())
-        {
+
+        while (itor.hasNext()) {
             const QObject* ww = itor.next();
-            if (ww->objectName() == objName)
-            {
+
+            if (ww->objectName() == objName) {
                 return ww;
             }
         }
+
         return nullptr;
     }
 
@@ -84,13 +83,11 @@ private:
     typedef QObject* (*Constructor)(QObject* parent);
 
     template<typename T>
-    static QObject* constructorHelper(QObject* parent)
-    {
+    static QObject* constructorHelper(QObject* parent) {
         return new T(parent);
     }
 
-    static QHash<QByteArray, Constructor>& constructors()
-    {
+    static QHash<QByteArray, Constructor>& constructors() {
         /*
          * 保存生成类对象的具体（非模板）函数
          */
@@ -99,8 +96,7 @@ private:
     }
 
     template<typename T>
-    static void registerClass()
-    {
+    static void registerClass() {
         /*
          * 将生成此类对象的具体（非模板）函数注册进Hash
          */
@@ -108,8 +104,7 @@ private:
     }
 
 private:
-    static QList<const QObject*>& containers()
-    {
+    static QList<const QObject*>& containers() {
         static QList<const QObject*> instance;
         return instance;
     }

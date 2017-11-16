@@ -5,8 +5,7 @@
 #include "qqtdialog.h"
 #include "qqtprogressbar.h"
 
-namespace Ui
-{
+namespace Ui {
 class QQtProgressDialog;
 }
 

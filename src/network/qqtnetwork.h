@@ -18,7 +18,8 @@
 extern "C" {
 #endif /* __cplusplus */
 
-enum {
+enum
+{
     ESSID_STATUS = 0,
     ESSID_NAME,//SSID
     ESSID_TYPE,
@@ -46,13 +47,13 @@ typedef struct QQTSHARED_EXPORT tagWifi
 #ifdef __EMBEDDED_LINUX__
     tagWifi& operator= (tagWifi& w);
 #else
-    tagWifi &operator=(const tagWifi &w);
+    tagWifi& operator=(const tagWifi& w);
 #endif
 
-    const QString &operator[] (int index) const;
+    const QString& operator[](int index) const;
 
-    QString& operator[] (int index);
-}TWifi;
+    QString& operator[](int index);
+} TWifi;
 
 
 

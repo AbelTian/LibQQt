@@ -67,6 +67,7 @@ void QQtCustomEffectProgressBar::paintEvent(QPaintEvent*)
     //-width/2 width/2
     //-height/2 height/2
     painter.translate(width / 2, height / 2);
+
     /*更改刻度 设置的是放大的倍数 */
     /*有利于在绘制的时候，统一绘制数据*/
     /*矢量放大，不失真*/
@@ -207,6 +208,7 @@ void QQtCustomEffectProgressBar::drawPolo(QPainter* painter, int radius)
 
     /*大圆路径*/
     QPainterPath bigPath;
+
     if (designStyle == DesignStyle_Circle
         || designStyle == DesignStyle_Ellipse)
         bigPath.addEllipse(-radius, -radius, radius * 2, radius * 2);
@@ -236,6 +238,7 @@ void QQtCustomEffectProgressBar::drawWave(QPainter* painter, int radius)
 {
     /*大路径*/
     QPainterPath bigPath;
+
     if (designStyle == DesignStyle_Circle
         || designStyle == DesignStyle_Ellipse)
         bigPath.addEllipse(-radius, -radius, radius * 2, radius * 2);
@@ -262,12 +265,15 @@ void QQtCustomEffectProgressBar::drawWave(QPainter* painter, int radius)
     static double offset = 0;
     /*>=1, wave will lost leisurely */
     offset += 0.6;
+
     if (offset > 180)
     {
         offset = 0;
     }
+
     int offset1 = offset;
     int offset2 = offset;
+
     if (WaveDirection_Right == waveDirection)
     {
         offset1 *= -1;
@@ -287,20 +293,24 @@ void QQtCustomEffectProgressBar::drawWave(QPainter* painter, int radius)
     QPainterPath waterPath1;
     /*移动到左上角起始点*/
     waterPath1.moveTo(-radius, k);
+
     for (int x = -radius; x <= radius; x++)
     {
         /*第一条波浪Y轴*/
         double waterY1 = (double)(A * sin(w * x + offset1)) + radius - k;
+
         /*如果当前值为最小值则Y轴为高度*/
         if (this->value == minValue)
         {
             waterY1 = radius;
         }
+
         /*如果当前值为最大值则Y轴为0*/
         if (this->value == maxValue)
         {
             waterY1 = -radius;
         }
+
         waterPath1.lineTo(x, waterY1);
     }
 
@@ -312,22 +322,27 @@ void QQtCustomEffectProgressBar::drawWave(QPainter* painter, int radius)
     /*第二条波浪路径集合*/
     QPainterPath waterPath2;
     waterPath2.moveTo(-radius, k);
+
     for (int x = -radius; x <= radius; x++)
     {
         /*第二条波浪Y轴*/
         double waterY2 = (double)(A * sin(w * x + offset2 + 180)) + radius - k;
+
         /*如果当前值为最小值则Y轴为高度*/
         if (this->value == minValue)
         {
             waterY2 = radius;
         }
+
         /*如果当前值为最大值则Y轴为0*/
         if (this->value == maxValue)
         {
             waterY2 = -radius;
         }
+
         waterPath2.lineTo(x, waterY2);
     }
+
     waterPath2.lineTo(radius, radius);
     waterPath2.lineTo(-radius, radius);
     waterPath2.lineTo(-radius, k);
@@ -386,6 +401,7 @@ void QQtCustomEffectProgressBar::drawText(QPainter* painter, int radius)
 void QQtCustomEffectProgressBar::drawPercentText(QPainter* painter, int radius)
 {
     QString strValue = QString("%1").arg(value - minValue);
+
     if (showPercent)
     {
         strValue = QString("%1%2").arg((double)(value - minValue) / (maxValue - minValue) * 100)
@@ -735,10 +751,12 @@ void QQtCustomEffectProgressBar::setPercentStyle(QQtCustomEffectProgressBar::Per
     if (this->percentStyle != percentStyle)
     {
         this->percentStyle = percentStyle;
+
         if (percentStyle == PercentStyle_Wave)
             timer->start(TIMER_FIELD / waveSpeed);
         else
             timer->stop();
+
         update();
     }
 }
@@ -756,6 +774,7 @@ void QQtCustomEffectProgressBar::setWaveDensity(int value)
 {
     if (value < 1)
         value = 1;
+
     if (this->waveDensity != value)
     {
         this->waveDensity = value;
@@ -767,6 +786,7 @@ void QQtCustomEffectProgressBar::setWaveHeight(int value)
 {
     if (value < 1)
         value = 1;
+
     if (this->waveHeight != value)
     {
         this->waveHeight = value;
@@ -787,6 +807,7 @@ void QQtCustomEffectProgressBar::setWaveSpeed(int speed)
 {
     if (speed < 1)
         speed = 1;
+
     if (this->waveSpeed != speed)
     {
         this->waveSpeed = speed;

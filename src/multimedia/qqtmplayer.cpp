@@ -1,7 +1,7 @@
 #include "qqtmplayer.h"
 #include "qqtcore.h"
 
-QQTPlayer::QQTPlayer(QObject *parent) :
+QQTPlayer::QQTPlayer(QObject* parent) :
     QObject(parent)
 {
     app = new QProcess(this);
@@ -9,7 +9,7 @@ QQTPlayer::QQTPlayer(QObject *parent) :
 
 void QQTPlayer::play(QString filename, int wid, int width, int height)
 {
-    QString mppath="mplayer";
+    QString mppath = "mplayer";
     QStringList mpargs;
     mpargs << "-slave";
     mpargs << "-quiet";
@@ -24,9 +24,9 @@ void QQTPlayer::play(QString filename, int wid, int width, int height)
     mpargs << filename;
 
     app->setProcessChannelMode(QProcess::SeparateChannels);
-    app->start(mppath, mpargs, QIODevice::Truncate|QIODevice::ReadWrite);
+    app->start(mppath, mpargs, QIODevice::Truncate | QIODevice::ReadWrite);
 
-    if(!app->waitForStarted(3000))
+    if (!app->waitForStarted(3000))
         pline() << "mpp start fail :(";
 
     pline() << "mpp start success :)";
@@ -34,14 +34,14 @@ void QQTPlayer::play(QString filename, int wid, int width, int height)
 
 void QQTPlayer::pause()
 {
-    char buf[256]= {0};
+    char buf[256] = {0};
     sprintf(buf, "pause\n");
     app->write(buf);
 }
 
 void QQTPlayer::stop()
 {
-    char buf[256]= {0};
+    char buf[256] = {0};
     sprintf(buf, "stop\n");
     app->write(buf);
     sprintf(buf, "quit\n");
@@ -50,7 +50,7 @@ void QQTPlayer::stop()
 
 double QQTPlayer::timeLength()
 {
-    char buf[256]= {0};
+    char buf[256] = {0};
     sprintf(buf, "get_time_length\n");
     app->write(buf);
     memset(buf, 0, 256);
@@ -62,7 +62,7 @@ double QQTPlayer::timeLength()
 
 double QQTPlayer::timePos()
 {
-    char buf[256]= {0};
+    char buf[256] = {0};
     sprintf(buf, "get_time_pos\n");
     app->write(buf);
     memset(buf, 0, 256);
@@ -74,7 +74,7 @@ double QQTPlayer::timePos()
 
 int QQTPlayer::percent()
 {
-    char buf[256]= {0};
+    char buf[256] = {0};
     sprintf(buf, "get_percent\n");
     app->write(buf);
     memset(buf, 0, 256);
@@ -86,21 +86,21 @@ int QQTPlayer::percent()
 
 void QQTPlayer::seekPos(double second)
 {
-    char buf[256]= {0};
+    char buf[256] = {0};
     sprintf(buf, "seek %lf\n", second);
     app->write(buf);
 }
 
 void QQTPlayer::setVolume(int v)
 {
-    char buf[256]= {0};
+    char buf[256] = {0};
     sprintf(buf, "volume %d 1\n", v);
     app->write(buf);
 }
 
 void QQTPlayer::mute(bool m)
 {
-    char buf[256]= {0};
+    char buf[256] = {0};
     sprintf(buf, "mute %d\n", m);
     app->write(buf);
 }

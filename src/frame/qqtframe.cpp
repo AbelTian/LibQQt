@@ -4,13 +4,14 @@ QSqlDatabase managerDB;
 QString gUserName;
 QString gPassword;
 
-void qqtFrameMsgHandler(QtMsgType type, const char * msg)
+void qqtFrameMsgHandler(QtMsgType type, const char* msg)
 {
     static QMutex mutex;
     mutex.lock();
 
     QString text;
-    switch(type)
+
+    switch (type)
     {
     case QtDebugMsg:
         text = QString("Debug");

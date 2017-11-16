@@ -20,7 +20,7 @@ class QQTSHARED_EXPORT QQtBluetoothManager : public QBluetoothLocalDevice
 {
     Q_OBJECT
 public:
-    static QQtBluetoothManager *Instance(QObject* parent = 0);
+    static QQtBluetoothManager* Instance(QObject* parent = 0);
     /**
      * @brief changeAdapter
      * @param adapterAddress
@@ -56,7 +56,7 @@ private slots:
     void slot_addService(QBluetoothServiceInfo);
 protected:
 private:
-    explicit QQtBluetoothManager(QObject *parent = nullptr);
+    explicit QQtBluetoothManager(QObject* parent = nullptr);
     static QQtBluetoothManager* _instance;
 
     QBluetoothDeviceDiscoveryAgent* deviceDiscoveryAgent;

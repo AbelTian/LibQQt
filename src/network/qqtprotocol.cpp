@@ -1,6 +1,6 @@
 #include "qqtprotocol.h"
 
-QQtProtocol::QQtProtocol(QObject *parent) : QObject(parent)
+QQtProtocol::QQtProtocol(QObject* parent) : QObject(parent)
 {
 
 }
@@ -12,7 +12,7 @@ QQtProtocol::~QQtProtocol()
 
 #define pline2() pline() << metaObject()->className()
 
-void QQtProtocol::translator(const QByteArray &bytes)
+void QQtProtocol::translator(const QByteArray& bytes)
 {
     // queued conn and queued package;
     // direct conn and direct package;
@@ -58,13 +58,13 @@ void QQtProtocol::translator(const QByteArray &bytes)
             dispatcher(netData);
             continue;
         }
+
         /*
          * 正常分发
          */
         dispatcher(sqbaBlockOnNet);
         break;
-    }
-    while (1);
+    } while (1);
 
     sqbaBlockOnNet.clear();
 }

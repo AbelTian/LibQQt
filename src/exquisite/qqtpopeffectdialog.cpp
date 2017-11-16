@@ -12,6 +12,7 @@ void QQtPopEffectDialog::showPopDialog(quint32 paramRemainTime)
 {
     mremainTime = paramRemainTime * 500;
     this->move((desktop.availableGeometry().width() - this->width()), desktop.availableGeometry().height());
+
     if (!this->isVisible())
     {
         show();
@@ -29,7 +30,8 @@ void QQtPopEffectDialog::pausePopDialog()
 {
     if (animation != NULL)
     {
-        this->move((desktop.availableGeometry().width() - this->width()), (desktop.availableGeometry().height() - this->height()));
+        this->move((desktop.availableGeometry().width() - this->width()),
+                   (desktop.availableGeometry().height() - this->height()));
         animation->setPaused(true);
         mIsPause = true;
     }
@@ -56,7 +58,8 @@ void QQtPopEffectDialog::closeAnimation()
         delete remainTimer;
         remainTimer = NULL;
         animation->setStartValue(QPoint(this->x(), this->y()));
-        animation->setEndValue(QPoint((desktop.availableGeometry().width() - this->width()), desktop.availableGeometry().height() + 50));
+        animation->setEndValue(QPoint((desktop.availableGeometry().width() - this->width()),
+                                      desktop.availableGeometry().height() + 50));
         animation->start();
         connect(animation, SIGNAL(finished()), this, SLOT(clearAll()));
     }
@@ -69,6 +72,7 @@ void QQtPopEffectDialog::clearAll()
         disconnect(animation, SIGNAL(finished()), this, SLOT(clearAll()));
         delete animation;
     }
+
     animation = NULL;
     hide();
 }
@@ -81,7 +85,8 @@ void QQtPopEffectDialog::showAnimation()
         animation->setDuration(mremainTime);
         animation->setEasingCurve(QEasingCurve::OutElastic);
         animation->setStartValue(QPoint(this->x(), this->y()));
-        animation->setEndValue(QPoint((desktop.availableGeometry().width() - this->width()), (desktop.availableGeometry().height() - this->height())));
+        animation->setEndValue(QPoint((desktop.availableGeometry().width() - this->width()),
+                                      (desktop.availableGeometry().height() - this->height())));
         connect(animation, SIGNAL(valueChanged(QVariant)), this, SLOT(animationValueChanged(QVariant)));
         animation->start();
         remainTimer = new QTimer();

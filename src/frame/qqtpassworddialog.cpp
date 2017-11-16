@@ -1,7 +1,7 @@
 #include "qqtpassworddialog.h"
 #include "ui_qqtpassworddialog.h"
 
-QQTPasswordDialog::QQTPasswordDialog(QWidget *parent) :
+QQTPasswordDialog::QQTPasswordDialog(QWidget* parent) :
     QQtDialog(parent),
     ui(new Ui::QQTPasswordDialog)
 {
@@ -41,6 +41,6 @@ void QQTPasswordDialog::connectClicked()
 
 void QQTPasswordDialog::btnEnabled(QString pas)
 {
-    bool enable = pas.length()<8?false:true;
+    bool enable = pas.length() < 8 ? false : true;
     ui->pushButton_ssid_connect->setEnabled(enable);
 }

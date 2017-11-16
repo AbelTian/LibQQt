@@ -8,7 +8,7 @@ class QQTSHARED_EXPORT QQtFTPTreeModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtFTPTreeModel(QObject *parent = 0);
+    explicit QQtFTPTreeModel(QObject* parent = 0);
 
 signals:
 

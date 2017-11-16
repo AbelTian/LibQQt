@@ -1,7 +1,7 @@
 #include "qqtpreviewwidget.h"
 #include "ui_qqtpreviewwidget.h"
 
-QQTPreviewWidget::QQTPreviewWidget(QWidget *parent) :
+QQTPreviewWidget::QQTPreviewWidget(QWidget* parent) :
     QWidget(parent),
     ui(new Ui::QQTPreviewWidget)
 {
@@ -9,7 +9,7 @@ QQTPreviewWidget::QQTPreviewWidget(QWidget *parent) :
 
     memset(&sinfo, 0, sizeof(struct sensor_info));
     pre_bpp = 16;
-    rate = 15;	      /* default to 15fps  */
+    rate = 15;        /* default to 15fps  */
     addr = 0;
     phys = 0;
 
@@ -18,9 +18,9 @@ QQTPreviewWidget::QQTPreviewWidget(QWidget *parent) :
 
     fd = 0;
 
-    memset( & pre_memory, 0, sizeof(struct camera_memory));
-    memset( & pre_buf, 0, sizeof(struct camera_buffer));
-    memset( & pre_size, 0, sizeof(struct frm_size));
+    memset(& pre_memory, 0, sizeof(struct camera_memory));
+    memset(& pre_buf, 0, sizeof(struct camera_buffer));
+    memset(& pre_size, 0, sizeof(struct frm_size));
 
     tlb_base_phys = 0;
     format = HAL_PIXEL_FORMAT_YCbCr_422_I;
@@ -47,9 +47,12 @@ int QQTPreviewWidget::play()
     dmmu_get_page_table_base_phys(&tlb_base_phys);
 
     fd = ::open("/dev/cim", O_RDWR); //av
-    if (fd < 0) {
+
+    if (fd < 0)
+    {
         qDebug() << "Open device fail\n";
     }
+
     ioctl(fd, CIMIO_SELECT_SENSOR, sinfo.sensor_id);
 
     ioctl(fd, CIMIO_GET_SENSORINFO, &sinfo);
@@ -58,7 +61,7 @@ int QQTPreviewWidget::play()
 
     int i = 0;
 
-    if(pre_buf.common && pre_buf.common->data)
+    if (pre_buf.common && pre_buf.common->data)
     {
         dmmu_unmap_user_memory(&(pre_buf.dmmu_info));
         free(pre_buf.common->data);
@@ -71,6 +74,7 @@ int QQTPreviewWidget::play()
     pre_buf.common->size = pre_buf.size * pre_buf.nr;
     pre_buf.common->data = memalign(4096, pre_buf.size * pre_buf.nr);
     memset(pre_buf.common->data, 0xa5, (pre_buf.size * pre_buf.nr));
+
     if (pre_buf.common->data == NULL)
     {
         printf("==<%s L%d: null pointer!\n", __func__, __LINE__);
@@ -89,7 +93,8 @@ int QQTPreviewWidget::play()
     ((uint8_t*)(pre_buf.common->data))[pre_buf.common->size - 1] = 0xff;
     dmmu_map_user_memory(&(pre_buf.dmmu_info));
 
-    for (i= 0; i < pre_buf.nr; ++i) {
+    for (i = 0; i < pre_buf.nr; ++i)
+    {
         pre_buf.yuvMeta[i].index = i;
         pre_buf.yuvMeta[i].width = pre_size.w;
         pre_buf.yuvMeta[i].height = pre_size.h;
@@ -101,23 +106,29 @@ int QQTPreviewWidget::play()
         pre_buf.yuvMeta[i].yAddr = (int32_t)pre_buf.common->data + (pre_buf.size) * i;
 #endif
         pre_buf.yuvMeta[i].yPhy = pre_buf.paddr + i * (pre_buf.size);
-        if (pre_buf.yuvMeta[i].format == HAL_PIXEL_FORMAT_YCbCr_422_I) {	//yuv422 packed
+
+        if (pre_buf.yuvMeta[i].format == HAL_PIXEL_FORMAT_YCbCr_422_I)      //yuv422 packed
+        {
             pre_buf.yuvMeta[i].uAddr = pre_buf.yuvMeta[i].yAddr;
             pre_buf.yuvMeta[i].vAddr = pre_buf.yuvMeta[i].uAddr;
             pre_buf.yuvMeta[i].uPhy = pre_buf.yuvMeta[i].yPhy;
             pre_buf.yuvMeta[i].vPhy = pre_buf.yuvMeta[i].uPhy;
-            pre_buf.yuvMeta[i].yStride = pre_buf.yuvMeta[i].width<<1;
+            pre_buf.yuvMeta[i].yStride = pre_buf.yuvMeta[i].width << 1;
             pre_buf.yuvMeta[i].uStride = pre_buf.yuvMeta[i].yStride;
             pre_buf.yuvMeta[i].vStride = pre_buf.yuvMeta[i].yStride;
-        } else if (pre_buf.yuvMeta[i].format == HAL_PIXEL_FORMAT_JZ_YUV_420_P) {	//yuv420 planar
+        }
+        else if (pre_buf.yuvMeta[i].format == HAL_PIXEL_FORMAT_JZ_YUV_420_P)        //yuv420 planar
+        {
             pre_buf.yuvMeta[i].uAddr = pre_buf.yuvMeta[i].yAddr + pre_size.w * pre_size.h;
             pre_buf.yuvMeta[i].vAddr = pre_buf.yuvMeta[i].uAddr + pre_size.w * pre_size.h / 4;
             pre_buf.yuvMeta[i].uPhy = pre_buf.yuvMeta[i].yPhy + pre_size.w * pre_size.h;
             pre_buf.yuvMeta[i].vPhy = pre_buf.yuvMeta[i].uPhy + pre_size.w * pre_size.h / 4;
-            pre_buf.yuvMeta[i].yStride = pre_buf.yuvMeta[i].width<<1;
+            pre_buf.yuvMeta[i].yStride = pre_buf.yuvMeta[i].width << 1;
             pre_buf.yuvMeta[i].uStride = pre_buf.yuvMeta[i].width / 2;
             pre_buf.yuvMeta[i].vStride = pre_buf.yuvMeta[i].width / 2;
-        } else if (pre_buf.yuvMeta[i].format == HAL_PIXEL_FORMAT_RAW_SENSOR) {	//raw bayer
+        }
+        else if (pre_buf.yuvMeta[i].format == HAL_PIXEL_FORMAT_RAW_SENSOR)      //raw bayer
+        {
             pre_buf.yuvMeta[i].uAddr = pre_buf.yuvMeta[i].yAddr + pre_size.w * pre_size.h;
             pre_buf.yuvMeta[i].vAddr = pre_buf.yuvMeta[i].uAddr;
             pre_buf.yuvMeta[i].uPhy = pre_buf.yuvMeta[i].yPhy;
@@ -135,7 +146,7 @@ int QQTPreviewWidget::play()
 
     ioctl(fd, CIMIO_START_PREVIEW);
 
-    pp = (unsigned char *)malloc(pre_size.w * pre_size.h * 3 * sizeof(char));
+    pp = (unsigned char*)malloc(pre_size.w * pre_size.h * 3 * sizeof(char));
     frame = new QImage(pp, pre_size.w, pre_size.h, QImage::Format_RGB888);
     timer->start(100);
 
@@ -146,8 +157,9 @@ int QQTPreviewWidget::close()
 {
     bool ret = false;
 
-    if(fd <= 0)
+    if (fd <= 0)
         printf("fd < 0\n");
+
     ret = ioctl(fd, CIMIO_SHUTDOWN);
 
     ::close(fd);
@@ -156,13 +168,14 @@ int QQTPreviewWidget::close()
     dmmu_unmap_user_memory(&(pre_buf.dmmu_info));
     dmmu_deinit();
 
-    memset(pre_buf.yuvMeta, 0, pre_buf.nr * sizeof (CameraYUVMeta));
+    memset(pre_buf.yuvMeta, 0, pre_buf.nr * sizeof(CameraYUVMeta));
     pre_buf.size = 0;
     pre_buf.nr = 0;
     pre_buf.paddr = 0;
     pre_buf.fd = -1;
 
-    if((pre_buf.common != NULL) && (pre_buf.common->data != NULL)) {
+    if ((pre_buf.common != NULL) && (pre_buf.common->data != NULL))
+    {
         free(pre_buf.common->data);
         pre_buf.common->data = NULL;
     }
@@ -180,33 +193,36 @@ int QQTPreviewWidget::close()
 int QQTPreviewWidget::convert_yuv_to_rgb_pixel(int y, int u, int v)
 {
     unsigned int pixel32 = 0;
-    unsigned char *pixel = (unsigned char *)&pixel32;
+    unsigned char* pixel = (unsigned char*)&pixel32;
     int r, g, b;
     b = y + ((443 * (u - 128)) >> 8);
-    b = (b < 0) ? 0 : ((b > 255 ) ? 255 : b);
+    b = (b < 0) ? 0 : ((b > 255) ? 255 : b);
     g = y - ((179 * (v - 128) + 86 * (u - 128)) >> 8);
-    g = (g < 0) ? 0 : ((g > 255 ) ? 255 : g);
+    g = (g < 0) ? 0 : ((g > 255) ? 255 : g);
     r = y + ((351 * (v - 128)) >> 8);
-    r = (r < 0) ? 0 : ((r > 255 ) ? 255 : r);
+    r = (r < 0) ? 0 : ((r > 255) ? 255 : r);
     pixel[0] = r;
     pixel[1] = g;
     pixel[2] = b;
     return pixel32;
 }
 
-int QQTPreviewWidget::convert_yuv_to_rgb_buffer(unsigned char *yuv, unsigned char *rgb, unsigned int width, unsigned int height)
+int QQTPreviewWidget::convert_yuv_to_rgb_buffer(unsigned char* yuv, unsigned char* rgb, unsigned int width,
+                                                unsigned int height)
 {
     unsigned int in, out = 0;
     unsigned int pixel_16;
     unsigned char pixel_24[3];
     unsigned int pixel32;
     int y0, u, y1, v;
-    for(in = 0; in < width * height * 2; in += 4) {
+
+    for (in = 0; in < width * height * 2; in += 4)
+    {
         pixel_16 =
-                yuv[in + 3] << 24 |
-                yuv[in + 2] << 16 |
-                yuv[in + 1] <<  8 |
-                yuv[in + 0];
+            yuv[in + 3] << 24 |
+            yuv[in + 2] << 16 |
+            yuv[in + 1] <<  8 |
+            yuv[in + 0];
         y0 = (pixel_16 & 0x000000ff);
         u  = (pixel_16 & 0x0000ff00) >>  8;
         y1 = (pixel_16 & 0x00ff0000) >> 16;
@@ -226,13 +242,14 @@ int QQTPreviewWidget::convert_yuv_to_rgb_buffer(unsigned char *yuv, unsigned cha
         rgb[out++] = pixel_24[1];
         rgb[out++] = pixel_24[2];
     }
+
     return 0;
 }
 
 
-void QQTPreviewWidget::paintEvent(QPaintEvent *)
+void QQTPreviewWidget::paintEvent(QPaintEvent*)
 {
-    if(fd <= 0)
+    if (fd <= 0)
         return;
 
     QStylePainter painter(this);
@@ -257,7 +274,7 @@ void QQTPreviewWidget::paintEvent(QPaintEvent *)
     /*
      * 缩放OK
      */
-    painter.drawImage(dstRect, *frame, srcRect );
+    painter.drawImage(dstRect, *frame, srcRect);
     //painter.drawPixmap(dstRect,QPixmap::fromImage(*frame,Qt::AutoColor),srcRect);;
     /*
      * 裁切OK
@@ -270,10 +287,11 @@ void QQTPreviewWidget::paintEvent(QPaintEvent *)
 }
 
 
-void QQTPreviewWidget::mousePressEvent(QMouseEvent *e)
+void QQTPreviewWidget::mousePressEvent(QMouseEvent* e)
 {
     static bool bGInit = false;
-    if(!bGInit && !bFullScreen)
+
+    if (!bGInit && !bFullScreen)
     {
         flags = windowFlags();
         flags |= Qt::FramelessWindowHint;
@@ -282,22 +300,24 @@ void QQTPreviewWidget::mousePressEvent(QMouseEvent *e)
     }
 
 #ifdef __EMBEDDED_LINUX__
+
     //pline() << e->pos() << e->globalPos();
-    if(e->pos().x() < 0 || e->pos().y() < 0 ||
-            e->pos().x() > geome.width() || e->pos().y() > geome.height())
+    if (e->pos().x() < 0 || e->pos().y() < 0 ||
+        e->pos().x() > geome.width() || e->pos().y() > geome.height())
     {
         //在mips板上，全屏返回的时候，点击其他位置，会多响应一次，在此处过滤。
         pline() << "warning!";
         Q_UNUSED(e);
         return;
     }
+
 #endif
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setAttribute(Qt::WA_NoMousePropagation, true);
     setAttribute(Qt::WA_OpaquePaintEvent, true);
 
-    if(bFullScreen)
+    if (bFullScreen)
     {
         flags ^= Qt::Window;
         flags |= Qt::Widget;

@@ -21,6 +21,7 @@ QString tagBtnIconTable::pixMap(int index)
 {
     if (index < 0 || index + 1 > BTN_MAX)
         return pixmap[BTN_NORMAL];
+
     return pixmap[index];
 }
 
@@ -28,6 +29,7 @@ void tagBtnIconTable::setPixMap(int index, QString pix)
 {
     if (index < 0 || index + 1 > BTN_MAX)
         return;
+
     pixmap[index] = pix;
 }
 
@@ -35,6 +37,7 @@ void tagBtnIconTable::initNormal(QString normal, QString press)
 {
     if (!normal.isEmpty())
         pixmap[BTN_NORMAL] = normal;
+
     if (!press.isEmpty())
         pixmap[BTN_PRESS] = press;
 }
@@ -43,6 +46,7 @@ void tagBtnIconTable::initCheck(QString uncheck, QString check)
 {
     if (!uncheck.isEmpty())
         pixmap[BTN_UNCHECK] = uncheck;
+
     if (!check.isEmpty())
         pixmap[BTN_CHECK] = check;
 }
@@ -51,6 +55,7 @@ void tagBtnIconTable::initOther(QString hover, QString disable)
 {
     if (!hover.isEmpty())
         pixmap[BTN_HOVER] = hover;
+
     if (!disable.isEmpty())
         pixmap[BTN_DISABLE] = disable;
 }

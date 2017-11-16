@@ -5,7 +5,10 @@
 QQtDialog::QQtDialog(QWidget* parent) :
     QDialog(parent)
 {
-    setWindowModality(Qt::WindowModal);//阻挡父亲窗口内其他控件，除非本dialog关闭 show的功能强大起来 可以使用输入法
+    /*
+     * 阻挡父亲窗口内其他控件，除非本dialog关闭 show的功能强大起来 可以使用输入法
+     */
+    setWindowModality(Qt::WindowModal);
 
 #if 0
     setWindowFlags(Qt::FramelessWindowHint | windowFlags());

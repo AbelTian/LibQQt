@@ -29,7 +29,7 @@ class QQTSHARED_EXPORT QQTDhcpThread : public QThread
 public:
     QQTDhcpThread(QObject* parent = 0) : QThread(parent) {
     }
-    void setnet(QString eth = "eth0") {net=eth;}
+    void setnet(QString eth = "eth0") {net = eth;}
 signals:
     void passed(QString);
     // QThread interface
@@ -44,10 +44,10 @@ class QQTSHARED_EXPORT QQTEthenetManager : public QObject
 {
     Q_OBJECT
 public:
-    static QQTEthenetManager *Instance(QObject* parent = 0);
+    static QQTEthenetManager* Instance(QObject* parent = 0);
 
     QList<TWifi>& wifiList() { return m_wifiList; }
-    inline TWifi currentWifi(){ return m_curWifi; }
+    inline TWifi currentWifi() { return m_curWifi; }
     bool setCurrentWifi(QString bssid_mac, QString password = "");
     void setRefresh(bool ref = true) { ref ? m_workTimer->start(5000) : m_workTimer->stop(); }
     void setDHCP(bool bUse = false) { m_bUseDHCP = bUse; }
@@ -113,7 +113,7 @@ private slots:
     void checkNetworkClear();
 
 private:
-    explicit QQTEthenetManager(QObject *parent = 0);
+    explicit QQTEthenetManager(QObject* parent = 0);
     void readStatus();
     void restoreWifi();
     bool restartWifi();

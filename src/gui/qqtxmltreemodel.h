@@ -9,7 +9,7 @@ class QQTSHARED_EXPORT QQTXmlTreeModel : public QQTTreeModel
 {
     Q_OBJECT
 public:
-    explicit QQTXmlTreeModel(QObject *parent = 0);
+    explicit QQTXmlTreeModel(QObject* parent = 0);
 
 
 signals:
@@ -22,11 +22,11 @@ public:
     void setFilePath(QString xmlfile) override;
 
 protected:
-       /**
-     * @brief parseChildElement
-     * @param element
-     */
-    void parseChildElement(const QDomElement &element, QStandardItem* itemParent = 0);
+    /**
+    * @brief parseChildElement
+    * @param element
+    */
+    void parseChildElement(const QDomElement& element, QStandardItem* itemParent = 0);
 
 private:
     QDomDocument doc;

@@ -44,6 +44,7 @@ void QQtMarqueeEffectLabel::setAlignment(Qt::Alignment align)
         QLabel::setAlignment(Qt::AlignLeft
                              | (align & Qt::AlignVertical_Mask));
         break;
+
     case BottomToTop:
     default:
         QLabel::setAlignment(Qt::AlignTop
@@ -58,12 +59,15 @@ void QQtMarqueeEffectLabel::reset()
         killTimer(timerId);
         timerId = 0;
     }
+
     bool bActiveChanged = false;
+
     if (active)
     {
         active = false;
         bActiveChanged = true;
     }
+
     marqueeMargin = 0;
     setContentsMargins(0, 0, 0, 0);
     update();
@@ -80,6 +84,7 @@ void QQtMarqueeEffectLabel::setActive(bool active)
     {
         return;
     }
+
     if (active)
     {
         start();
@@ -96,14 +101,17 @@ void QQtMarqueeEffectLabel::setInterval(int msec)
     {
         return;
     }
+
     if (mInterval != msec)
     {
         mInterval = msec;
+
         if (timerId != 0)
         {
             killTimer(timerId);
             timerId = startTimer(mInterval);
         }
+
         Q_EMIT intervalChanged(mInterval);
     }
 }
@@ -111,17 +119,20 @@ void QQtMarqueeEffectLabel::setInterval(int msec)
 void QQtMarqueeEffectLabel::start()
 {
     bool bActiveChanged = false;
+
     if (!active)
     {
         active = true;
         bActiveChanged = true;
     }
+
     if (!mouseIn)
     {
         if (timerId == 0)
         {
             timerId = startTimer(mInterval);
         }
+
         setContentsMargins(0, 0, 0, 0);
     }
 
@@ -134,11 +145,13 @@ void QQtMarqueeEffectLabel::start()
 void QQtMarqueeEffectLabel::stop()
 {
     bool bActiveChanged = false;
+
     if (active)
     {
         active = false;
         bActiveChanged = true;
     }
+
     if (!mouseIn)
     {
         if (timerId != 0)
@@ -146,11 +159,13 @@ void QQtMarqueeEffectLabel::stop()
             killTimer(timerId);
             timerId = 0;
         }
+
         switch (mDirection)
         {
         case RightToLeft:
             setContentsMargins(marqueeMargin, 0, 0, 0);
             break;
+
         case BottomToTop:
         default:
             setContentsMargins(0, marqueeMargin, 0, 0);
@@ -169,18 +184,22 @@ void QQtMarqueeEffectLabel::setDirection(QQtMarqueeEffectLabel::Direction param_
     {
         return;
     }
+
     mDirection = param_direciton;
+
     switch (mDirection)
     {
     case RightToLeft:
         setAlignment(Qt::AlignLeft
                      | (alignment() & Qt::AlignVertical_Mask));
         break;
+
     case BottomToTop:
     default:
         setAlignment(Qt::AlignTop
                      | (alignment() & Qt::AlignHorizontal_Mask));
     }
+
     marqueeMargin = 0;
     setContentsMargins(0, 0, 0, 0);
     update();
@@ -190,6 +209,7 @@ void QQtMarqueeEffectLabel::setDirection(QQtMarqueeEffectLabel::Direction param_
 void QQtMarqueeEffectLabel::enterEvent(QEvent* event)
 {
     mouseIn = true;
+
     if (active)
     {
         if (timerId != 0)
@@ -197,30 +217,36 @@ void QQtMarqueeEffectLabel::enterEvent(QEvent* event)
             killTimer(timerId);
             timerId = 0;
         }
+
         switch (mDirection)
         {
         case RightToLeft:
             setContentsMargins(marqueeMargin, 0, 0, 0);
             break;
+
         case BottomToTop:
         default:
             setContentsMargins(0, marqueeMargin, 0, 0);
         }
     }
+
     QLabel::enterEvent(event);
 }
 
 void QQtMarqueeEffectLabel::leaveEvent(QEvent* event)
 {
     mouseIn = false;
+
     if (active)
     {
         if (timerId == 0)
         {
             timerId = startTimer(mInterval);
         }
+
         setContentsMargins(0, 0, 0, 0);
     }
+
     QLabel::leaveEvent(event);
 }
 
@@ -228,15 +254,18 @@ void QQtMarqueeEffectLabel::resizeEvent(QResizeEvent* event)
 {
     QLabel::resizeEvent(event);
     int w;
+
     switch (mDirection)
     {
     case RightToLeft:
         w = event->size().width();
         break;
+
     case BottomToTop:
     default:
         w = event->size().height();
     }
+
     if (marqueeMargin > w)
     {
         marqueeMargin = w;
@@ -247,25 +276,30 @@ void QQtMarqueeEffectLabel::resizeEvent(QResizeEvent* event)
 void QQtMarqueeEffectLabel::timerEvent(QTimerEvent* event)
 {
     QLabel::timerEvent(event);
+
     if (timerId != 0 && event->timerId() == timerId)
     {
         marqueeMargin--;
         int w, w2;
+
         switch (mDirection)
         {
         case RightToLeft:
             w = sizeHint().width();
             w2 = width();
             break;
+
         case BottomToTop:
         default:
             w = sizeHint().height();
             w2 = height();
         }
+
         if (marqueeMargin < 0 && -marqueeMargin > w)
         {
             marqueeMargin = w2;
         }
+
         update();
     }
 }
@@ -277,10 +311,12 @@ void QQtMarqueeEffectLabel::paintEvent(QPaintEvent* event)
     case RightToLeft:
         setContentsMargins(marqueeMargin, 0, 0, 0);
         break;
+
     case BottomToTop:
     default:
         setContentsMargins(0, marqueeMargin, 0, 0);
     }
+
     QLabel::paintEvent(event);
 
     if (timerId != 0)

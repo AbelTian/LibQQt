@@ -89,6 +89,7 @@ QPixmap QQtCustomVerificationCode::generateOneCaptcha()
 
     // 噪音线
     QPainter painter(&image);
+
     for (int i = 0; i < 10; i++)
     {
         QPen penHText(captchaInstance->generateRandomColor(), 2);
@@ -99,6 +100,7 @@ QPixmap QQtCustomVerificationCode::generateOneCaptcha()
                          captchaInstance->generateRandom(-canvas_h, canvas_h));
         captchaInstance->sleepNow(5);
     }
+
     painter.end();
     // 验证码
     int xStart = captchaInstance->generateRandom(canvas_w / captchaCount / 3 * 2, canvas_w / captchaCount);
@@ -106,6 +108,7 @@ QPixmap QQtCustomVerificationCode::generateOneCaptcha()
     int fontSize = captchaInstance->generateRandom(canvas_h / 5 * 2, canvas_h / 5 * 3);
     int rotateVar = 0;
     QString captchaString;
+
     for (int i = 0; i < captchaCount; i++)
     {
         QPainter painter(&image);
@@ -131,6 +134,7 @@ QPixmap QQtCustomVerificationCode::generateOneCaptcha()
         painter.rotate(-rotateVar);
         painter.end();
     }
+
     // 验证码转小写
     captchaString = captchaString.toLower();
     // 保存验证码
@@ -189,6 +193,7 @@ QString QQtCustomVerificationCodePrivate::generateLetter(quint16 paramCount)
     QByteArray allowedChars = "abcdfhikmnstuvwxyzABCDEFGHJKLMNPRSTUVWXYZ01245689";
     int randomIndex;
     QByteArray outputString = "";
+
     for (uint i = 0; i < paramCount; ++i)
     {
         randomIndex = rand() % allowedChars.length();
@@ -203,6 +208,7 @@ qint16 QQtCustomVerificationCodePrivate::generateRandom(qint16 paramLow, qint16 
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
     sleepNow(2);
+
     if (paramLow > 0)
     {
         return paramLow + rand() % (paramHigh - paramLow);

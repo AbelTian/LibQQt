@@ -139,32 +139,31 @@ public:
     explicit QQTBlock(QObject* parent = 0): QObject(parent), m_lock(0) {}
 
     //0x7FFFFFFF
-    bool lock(int millsecond = 0x7FFFFFFF)
-    {
+    bool lock(int millsecond = 0x7FFFFFFF) {
         //m_lock++;
         m_lock = 1;
 
         timer.restart();
-        while (timer.elapsed() < millsecond)
-        {
+
+        while (timer.elapsed() < millsecond) {
             if (m_lock <= 0)
                 break;
+
             QApplication::processEvents();
         }
 
         if (timer.elapsed() >= millsecond)
             return false;
+
         return true;
     }
 
-    void unlock()
-    {
+    void unlock() {
         //m_lock--;
         m_lock = 0;
     }
 
-    bool isLocked()
-    {
+    bool isLocked() {
         if (m_lock <= 0)
             return false;
 

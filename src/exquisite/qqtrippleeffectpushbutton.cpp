@@ -34,6 +34,7 @@ void QQtRippleEffectPushButton::paintEvent(QPaintEvent* event)
         tempPainter.drawEllipse(rectangle);
         tempPainter.end();
     }
+
     QWidget::paintEvent(event);
 }
 

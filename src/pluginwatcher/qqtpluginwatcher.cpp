@@ -35,6 +35,7 @@ QQTPluginWatcher* QQTPluginWatcher::Instance()
 {
     if (_instance)
         return _instance;
+
     _instance = new QQTPluginWatcher();
     return _instance;
 }
@@ -49,6 +50,7 @@ void QQTPluginWatcher::slotDeviceAdded(const QString& dev)
         m_devType = E_KEYBOARD;
     else if ("/dev/sda1" == dev)
         m_devType = E_STORAGE;
+
     m_devStat = E_ADD;
     timer->start(1000);
 }
@@ -68,6 +70,7 @@ void QQTPluginWatcher::slotDeviceChanged(const QString& dev)
 void QQTPluginWatcher::slotDeviceDriver()
 {
 #ifdef __EMBEDDED_LINUX__
+
     if (E_MOUSE == m_devType)
     {
         if (E_ADD == m_devStat)
@@ -94,6 +97,7 @@ bool QQTPluginWatcher::event(QEvent* e)
     {
         QDeviceChangeEvent* event = (QDeviceChangeEvent*)e;
         QString action("Change");
+
         if (event->action() == QDeviceChangeEvent::Add)
             action = "Add";
         else if (event->action() == QDeviceChangeEvent::Remove)
@@ -103,5 +107,6 @@ bool QQTPluginWatcher::event(QEvent* e)
         event->accept();
         return true;
     }
+
     return QObject::event(e);
 }

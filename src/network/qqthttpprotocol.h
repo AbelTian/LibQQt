@@ -8,7 +8,7 @@ class QQTSHARED_EXPORT QQtHttpProtocol : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtHttpProtocol(QObject *parent = 0);
+    explicit QQtHttpProtocol(QObject* parent = 0);
 
 signals:
 

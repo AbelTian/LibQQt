@@ -5,7 +5,7 @@
 Default constructor.
 */
 QextSerialBase::QextSerialBase()
- : QIODevice()
+    : QIODevice()
 {
 
 #ifdef _TTY_WIN_
@@ -37,8 +37,8 @@ QextSerialBase::QextSerialBase()
 \fn QextSerialBase::QextSerialBase(const QString & name)
 Construct a port and assign it to the device specified by the name parameter.
 */
-QextSerialBase::QextSerialBase(const QString & name)
- : QIODevice()
+QextSerialBase::QextSerialBase(const QString& name)
+    : QIODevice()
 {
     setPortName(name);
     construct();
@@ -50,7 +50,7 @@ Standard destructor.
 */
 QextSerialBase::~QextSerialBase()
 {
-	delete mutex;
+    delete mutex;
 }
 
 /*!
@@ -60,26 +60,26 @@ Common constructor function for setting up default port settings.
 */
 void QextSerialBase::construct()
 {
-    Settings.BaudRate=BAUD115200;
-    Settings.DataBits=DATA_8;
-    Settings.Parity=PAR_NONE;
-    Settings.StopBits=STOP_1;
-    Settings.FlowControl=FLOW_HARDWARE;
-    Settings.Timeout_Millisec=500;
-	mutex = new QMutex( QMutex::Recursive );
-	setOpenMode(QIODevice::NotOpen);
+    Settings.BaudRate = BAUD115200;
+    Settings.DataBits = DATA_8;
+    Settings.Parity = PAR_NONE;
+    Settings.StopBits = STOP_1;
+    Settings.FlowControl = FLOW_HARDWARE;
+    Settings.Timeout_Millisec = 500;
+    mutex = new QMutex(QMutex::Recursive);
+    setOpenMode(QIODevice::NotOpen);
 }
 
 void QextSerialBase::setQueryMode(QueryMode mechanism)
 {
-	_queryMode = mechanism;
+    _queryMode = mechanism;
 }
 
 /*!
 \fn void QextSerialBase::setPortName(const QString & name)
 Sets the name of the device associated with the object, e.g. "COM1", or "/dev/ttyS0".
 */
-void QextSerialBase::setPortName(const QString & name)
+void QextSerialBase::setPortName(const QString& name)
 {
     port = name;
 }
@@ -146,12 +146,12 @@ FlowType QextSerialBase::flowControl() const
 /*!
 \fn bool QextSerialBase::isSequential() const
 Returns true if device is sequential, otherwise returns false. Serial port is sequential device
-so this function always returns true. Check QIODevice::isSequential() documentation for more 
+so this function always returns true. Check QIODevice::isSequential() documentation for more
 information.
 */
 bool QextSerialBase::isSequential() const
 {
-	return true;
+    return true;
 }
 
 /*!
@@ -161,9 +161,11 @@ Call QextSerialBase::lastError() for error information.
 */
 bool QextSerialBase::atEnd() const
 {
-    if (size()) {
+    if (size())
+    {
         return true;
     }
+
     return false;
 }
 
@@ -173,25 +175,29 @@ This function will read a line of buffered input from the port, stopping when ei
 have been read, the port has no more data available, or a newline is encountered.
 The value returned is the length of the string that was read.
 */
-qint64 QextSerialBase::readLine(char * data, qint64 maxSize)
+qint64 QextSerialBase::readLine(char* data, qint64 maxSize)
 {
     qint64 numBytes = bytesAvailable();
     char* pData = data;
 
-	if (maxSize < 2)	//maxSize must be larger than 1
-		return -1;
+    if (maxSize < 2)    //maxSize must be larger than 1
+        return -1;
 
     /*read a byte at a time for MIN(bytesAvail, maxSize - 1) iterations, or until a newline*/
-    while (pData<(data+numBytes) && --maxSize) {
+    while (pData < (data + numBytes) && --maxSize)
+    {
         readData(pData, 1);
-        if (*pData++ == '\n') {
+
+        if (*pData++ == '\n')
+        {
             break;
         }
     }
-    *pData='\0';
+
+    *pData = '\0';
 
     /*return size of data read*/
-    return (pData-data);
+    return (pData - data);
 }
 
 /*!

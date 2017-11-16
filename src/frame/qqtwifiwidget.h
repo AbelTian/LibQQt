@@ -14,18 +14,18 @@ class QQTSHARED_EXPORT QQTWIFIIDTextDelegate : public QItemDelegate
 {
     Q_OBJECT
 public:
-    QQTWIFIIDTextDelegate(QObject *parent = 0): QItemDelegate(parent), parent(parent) { }
+    QQTWIFIIDTextDelegate(QObject* parent = 0): QItemDelegate(parent), parent(parent) { }
 
 private:
     QObject* parent;
 
     // QItemDelegate interface
 protected:
-    void drawCheck(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, Qt::CheckState state) const;
+    void drawCheck(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect, Qt::CheckState state) const;
 
     // QItemDelegate interface
 protected:
-    void drawDisplay(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QString &text) const;
+    void drawDisplay(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect, const QString& text) const;
 };
 
 namespace Ui {
@@ -37,7 +37,7 @@ class QQTWIFIWidget : public QQTTableView
     Q_OBJECT
 
 public:
-    explicit QQTWIFIWidget(QWidget *parent = 0);
+    explicit QQTWIFIWidget(QWidget* parent = 0);
     ~QQTWIFIWidget();
 
 private slots:
@@ -51,7 +51,7 @@ private:
     QQTWIFIIDTextDelegate* dg;
 
 private:
-    Ui::QQTWIFIWidget *ui;
+    Ui::QQTWIFIWidget* ui;
     QStandardItemModel* m_model;
     QQTPasswordDialog* m_pass;
 };

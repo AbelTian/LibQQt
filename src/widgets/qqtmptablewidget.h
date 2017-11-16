@@ -23,7 +23,7 @@ class QQTSHARED_EXPORT QQTMPTableWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit QQTMPTableWidget(QWidget *parent = 0);
+    explicit QQTMPTableWidget(QWidget* parent = 0);
     ~QQTMPTableWidget();
 
     void setDB(QString db);
@@ -38,7 +38,7 @@ public:
     void setHeaderData(int i, Qt::Orientation, QString data);
     void setColumnWidth(int column, int width);
     void query(QString filter = "1=1");
-    void selectedRows(int column, QVector<QStringList> & strl);
+    void selectedRows(int column, QVector<QStringList>& strl);
     QQtTableWidget* selectedRows(int column = 0);
     int pageNum();
     int currentPage();
@@ -59,7 +59,7 @@ private slots:
     void on_btnRightHead_clicked();
 
 private:
-    Ui::QQTMPTableWidget *ui;
+    Ui::QQTMPTableWidget* ui;
     QSqlDatabase m_db;
     QString m_name;
     QString m_table;

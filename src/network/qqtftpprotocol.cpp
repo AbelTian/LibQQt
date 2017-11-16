@@ -1,6 +1,6 @@
 #include "qqtftpprotocol.h"
 
-QQtFtpProtocol::QQtFtpProtocol(QObject *parent) : QObject(parent)
+QQtFtpProtocol::QQtFtpProtocol(QObject* parent) : QObject(parent)
 {
 
 }

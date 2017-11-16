@@ -30,12 +30,14 @@ void QQTHeaderView::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
     QStylePainter p(this->viewport());
+
     if (Qt::Horizontal == ori)
     {
         for (int i = 0; i < model()->columnCount(); i++)
         {
             if (isSectionHidden(i))
                 continue;
+
             QRect rect(sectionViewportPosition(i), 0, sectionSize(i), height());
             paintSection(&p, rect, i);
         }

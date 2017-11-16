@@ -25,8 +25,7 @@ protected:
 public slots:
 
 private:
-    static void initStyleBaseOption(QStyleOptionTabBarBase* optTabBase, QTabBar* tabbar, QSize size)
-    {
+    static void initStyleBaseOption(QStyleOptionTabBarBase* optTabBase, QTabBar* tabbar, QSize size) {
 //        QStyleOptionTab tabOverlap;
 //        tabOverlap.shape = tabbar->shape();
 //        int overlap = tabbar->style()->pixelMetric(QStyle::PM_TabBarBaseOverlap, &tabOverlap, tabbar);

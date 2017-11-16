@@ -11,7 +11,7 @@ class QQTSHARED_EXPORT QQtWebProtocol : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtWebProtocol(QObject *parent = 0);
+    explicit QQtWebProtocol(QObject* parent = 0);
 
 signals:
 

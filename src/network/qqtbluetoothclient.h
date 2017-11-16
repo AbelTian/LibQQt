@@ -9,7 +9,8 @@ class QQTSHARED_EXPORT QQtBluetoothClient : public QBluetoothSocket
 {
     Q_OBJECT
 public:
-    explicit QQtBluetoothClient(QBluetoothServiceInfo::Protocol socketType = QBluetoothServiceInfo::RfcommProtocol, QObject* parent = nullptr);
+    explicit QQtBluetoothClient(QBluetoothServiceInfo::Protocol socketType = QBluetoothServiceInfo::RfcommProtocol,
+                                QObject* parent = nullptr);
     explicit QQtBluetoothClient(QObject* parent = nullptr);
 
     /**

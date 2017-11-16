@@ -1,6 +1,6 @@
 #include "qqtftptreemodel.h"
 
-QQtFTPTreeModel::QQtFTPTreeModel(QObject *parent) : QObject(parent)
+QQtFTPTreeModel::QQtFTPTreeModel(QObject* parent) : QObject(parent)
 {
 
 }

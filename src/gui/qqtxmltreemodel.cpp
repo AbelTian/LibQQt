@@ -11,6 +11,7 @@ QQTXmlTreeModel::QQTXmlTreeModel(QObject* parent) : QQTTreeModel(parent)
 void QQTXmlTreeModel::setFilePath(QString fileName)
 {
     QFile file(fileName);
+
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
         pline() << "Error: Cannot read file " << qPrintable(fileName)
@@ -24,6 +25,7 @@ void QQTXmlTreeModel::setFilePath(QString fileName)
     int errorColumn;
 
     QDomDocument doc;
+
     if (!doc.setContent(&file, false, &errorStr, &errorLine,
                         &errorColumn))
     {
@@ -64,6 +66,7 @@ void QQTXmlTreeModel::parseChildElement(const QDomElement& element, QStandardIte
 
     item->setData(element.nodeName(), Qt::EditRole);
     item->setData(element.text(), Qt::UserRole);
+
     if (element.isNull() && !element.hasChildNodes())
         item->setData(itemParent->data(Qt::UserRole), Qt::EditRole);
 
@@ -86,8 +89,10 @@ void QQTXmlTreeModel::parseChildElement(const QDomElement& element, QStandardIte
      * @brief element attibute
      */
     QDomNamedNodeMap nodeMap = element.attributes();
+
     if (nodeMap.count() > columnCount())
         setColumnCount(nodeMap.count());
+
     for (int i = 0; i < nodeMap.count(); i++)
     {
         QString attName = nodeMap.item(i).nodeName();
@@ -97,6 +102,7 @@ void QQTXmlTreeModel::parseChildElement(const QDomElement& element, QStandardIte
         _item->setData(attValue, Qt::EditRole);
 
         pline() << attName << attValue << itemParent;
+
         if (itemParent)
         {
             itemParent->setChild(item->index().row(), i + 1, _item);
@@ -115,6 +121,7 @@ void QQTXmlTreeModel::parseChildElement(const QDomElement& element, QStandardIte
      * child element
      */
     QDomNode child = element.firstChild();
+
     while (!child.isNull())
     {
         parseChildElement(child.toElement(), item);
