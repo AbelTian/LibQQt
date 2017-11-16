@@ -7,8 +7,8 @@
 #include "QToolButton"
 #include "qqtcore.h"
 
-QQtTabBar::QQtTabBar(QWidget* parent) :
-    QTabBar(parent)
+QQtPictureEffectTabBar::QQtPictureEffectTabBar(QWidget* parent) :
+    QQtTabBar(parent)
 {
     setFocusPolicy(Qt::NoFocus);
     iconStyle = IconStyle_Cover_And_RightText;
@@ -19,7 +19,7 @@ QQtTabBar::QQtTabBar(QWidget* parent) :
     setDrawBase(false);
 }
 
-void QQtTabBar::setIconStyle(QQtTabBar::IconStyle iconStyle)
+void QQtPictureEffectTabBar::setIconStyle(QQtPictureEffectTabBar::IconStyle iconStyle)
 {
     if (this->iconStyle != iconStyle)
     {
@@ -28,7 +28,7 @@ void QQtTabBar::setIconStyle(QQtTabBar::IconStyle iconStyle)
     }
 }
 
-void QQtTabBar::setTextFont(QFont textFont)
+void QQtPictureEffectTabBar::setTextFont(QFont textFont)
 {
     if (this->textFont != textFont)
     {
@@ -37,7 +37,7 @@ void QQtTabBar::setTextFont(QFont textFont)
     }
 }
 
-void QQtTabBar::setTextColor(QColor textColor)
+void QQtPictureEffectTabBar::setTextColor(QColor textColor)
 {
     if (this->textColor != textColor)
     {
@@ -46,7 +46,7 @@ void QQtTabBar::setTextColor(QColor textColor)
     }
 }
 
-void QQtTabBar::setSelectedTextColor(QColor selectedTextColor)
+void QQtPictureEffectTabBar::setSelectedTextColor(QColor selectedTextColor)
 {
     if (this->selectedTextColor != selectedTextColor)
     {
@@ -55,7 +55,7 @@ void QQtTabBar::setSelectedTextColor(QColor selectedTextColor)
     }
 }
 
-void QQtTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
+void QQtPictureEffectTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
 {
     if (index < 0 || index + 1 > count() || index + 1 > iconList.size())
         return;
@@ -66,7 +66,7 @@ void QQtTabBar::tabPixmap(int index, QImage& icon, QImage& iconSel)
     return ;
 }
 
-void QQtTabBar::setTabPixmap(int index, const QString& icon, const QString& iconSel)
+void QQtPictureEffectTabBar::setTabPixmap(int index, const QString& icon, const QString& iconSel)
 {
     if (index < 0 || index + 1 > count())
         return;
@@ -78,7 +78,7 @@ void QQtTabBar::setTabPixmap(int index, const QString& icon, const QString& icon
     iconList.insert(index, table);
 }
 
-void QQtTabBar::setBackgroundColor(QColor backgroundColor)
+void QQtPictureEffectTabBar::setBackgroundColor(QColor backgroundColor)
 {
     if (this->backgroundColor != backgroundColor)
     {
@@ -87,7 +87,7 @@ void QQtTabBar::setBackgroundColor(QColor backgroundColor)
     }
 }
 
-void QQtTabBar::paintEvent(QPaintEvent* e)
+void QQtPictureEffectTabBar::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
     QPainter p(this);
@@ -96,7 +96,7 @@ void QQtTabBar::paintEvent(QPaintEvent* e)
     drawText(&p);
 }
 
-void QQtTabBar::drawBackground(QPainter* p)
+void QQtPictureEffectTabBar::drawBackground(QPainter* p)
 {
     bool b = drawBase();
     if (b)
@@ -112,7 +112,7 @@ void QQtTabBar::drawBackground(QPainter* p)
     }
 }
 
-void QQtTabBar::drawPicture(QPainter* p)
+void QQtPictureEffectTabBar::drawPicture(QPainter* p)
 {
     for (int index = 0; index < count(); index++)
     {
@@ -137,7 +137,7 @@ void QQtTabBar::drawPicture(QPainter* p)
     }
 }
 
-void QQtTabBar::drawText(QPainter* p)
+void QQtPictureEffectTabBar::drawText(QPainter* p)
 {
     for (int index = 0; index < count(); index++)
     {
@@ -170,12 +170,4 @@ void QQtTabBar::drawText(QPainter* p)
         p->drawText(tabTextRect, flags, tabText(index));
         p->restore();
     }
-}
-
-bool QQtTabBar::verticalTabs()
-{
-    return shape() == QTabBar::RoundedWest
-           || shape() == QTabBar::RoundedEast
-           || shape() == QTabBar::TriangularWest
-           || shape() == QTabBar::TriangularEast;
 }

@@ -115,7 +115,7 @@ contains (DEFINES, __CPP11__) {
 
     #compile period
     #LibQQt need c++11 support. Please ensure your compiler version.
-    #LibQQt used override identifier
+    #LibQQt used Q_DECL_OVERRIDE identifier
     #lambda also need c++11
 }
 

@@ -4,7 +4,10 @@
 #include <QTabWidget>
 #include "qqt-local.h"
 
-
+/**
+ * @brief The QQtTabWidget class
+ * 用于解决QtTabWidget接口上的错误
+ */
 class QQTSHARED_EXPORT QQtTabWidget : public QTabWidget
 {
     Q_OBJECT
@@ -31,7 +34,7 @@ public:
     /**
      * @brief localTabBar
      * 在setTabBar以后，系统tabBar和这个Bar不一样。
-     * 返回本地设置的tabbar，给子类用的，父类返回系统tabBar，不可用！
+     * 返回本地设置的tabbar，给子类用的，QQtTabWidget返回系统tabBar，不可用！
      * 用于eventfilter
      * @return
      */
@@ -39,12 +42,14 @@ public:
     /**
      * @brief tabBar
      * 用于eventfilter
+     * Qt4.8.7 protected公开为public
      * @return
      */
     virtual QTabBar* tabBar() const /*override*/ { return QTabWidget::tabBar(); }
     /**
      * @brief setTabBar
      * 这个函数是个炸弹，必须在子类的构造函数中，带ui的在setupUI之前，调动，否则不起作用。
+     * protected公开为public
      * @param b
      */
     virtual void setTabBar(QTabBar* b) /*override*/ { return QTabWidget::setTabBar(b); }

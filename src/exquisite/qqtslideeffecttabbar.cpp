@@ -3,7 +3,7 @@
 #include <QPalette>
 #include <qqtcore.h>
 
-QQtSlideEffectTabBar::QQtSlideEffectTabBar(QWidget* parent) : QTabBar(parent)
+QQtSlideEffectTabBar::QQtSlideEffectTabBar(QWidget* parent) : QQtTabBar(parent)
 {
     slideSpeed = 10;
     cornerRadius = 6;
@@ -92,14 +92,6 @@ void QQtSlideEffectTabBar::drawTabBarText(QPainter* painter)
         painter->drawText(textRect, Qt::AlignCenter, tabText(i));
     }
     painter->restore();
-}
-
-bool QQtSlideEffectTabBar::verticalTabs()
-{
-    return shape() == QTabBar::RoundedWest
-           || shape() == QTabBar::RoundedEast
-           || shape() == QTabBar::TriangularWest
-           || shape() == QTabBar::TriangularEast;
 }
 
 void QQtSlideEffectTabBar::updateTabBarRect()

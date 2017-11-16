@@ -1,19 +1,20 @@
-#ifndef QQTTABBAR_H
-#define QQTTABBAR_H
+#ifndef QQTPICTUREEFFECTTABBAR_H
+#define QQTPICTUREEFFECTTABBAR_H
 
 #include <QTabBar>
 #include <QList>
 #include <QColor>
 #include "qqtcore.h"
 #include "qqtwidgets.h"
+#include "qqttabbar.h"
 #include "qqt-local.h"
 
-class QQTSHARED_EXPORT QQtTabBar : public QTabBar
+class QQTSHARED_EXPORT QQtPictureEffectTabBar : public QQtTabBar
 {
     Q_OBJECT
 
 public:
-    explicit QQtTabBar(QWidget* parent = 0);
+    explicit QQtPictureEffectTabBar(QWidget* parent = 0);
 
     enum IconStyle
     {
@@ -51,9 +52,6 @@ protected:
     virtual void drawPicture(QPainter* p);
     virtual void drawText(QPainter* p);
 
-private:
-    inline bool verticalTabs();
-
 public slots:
 
 private:
@@ -65,4 +63,4 @@ private:
     QColor backgroundColor;
 };
 
-#endif // QQTTABBAR_H
+#endif // QQTPICTUREEFFECTTABBAR_H

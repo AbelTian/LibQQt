@@ -40,12 +40,12 @@ private:
     quint32 m_style;
     // QWidget interface
 protected:
-    void paintEvent(QPaintEvent*) override;
+    void paintEvent(QPaintEvent*) Q_DECL_OVERRIDE;
 
     // QWidget interface
 protected:
-    virtual void mouseReleaseEvent(QMouseEvent* event) override;
-    virtual void mouseDoubleClickEvent(QMouseEvent* event) override;
+    virtual void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+    virtual void mouseDoubleClickEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
 };
 
 #endif // QPICWIDGET_H

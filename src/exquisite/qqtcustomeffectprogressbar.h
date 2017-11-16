@@ -280,8 +280,8 @@ private:
 
     // QWidget interface
 protected:
-    virtual void mouseReleaseEvent(QMouseEvent* event) override;
-    virtual void mouseDoubleClickEvent(QMouseEvent* event) override;
+    virtual void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+    virtual void mouseDoubleClickEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
 };
 
 #endif //QQTCUSTOMEFFECTPROGRESSBAR_H

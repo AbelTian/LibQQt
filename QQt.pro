@@ -2,30 +2,25 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS = src/qqt.pro
-SUBDIRS +=
 #-----------------------------------------------------------------
 #basic example
 #-----------------------------------------------------------------
 #SUBDIRS += examples/framelesshelperwidget
 #SUBDIRS += examples/qqtframe
 #SUBDIRS += examples/animationframe
-#SUBDIRS += examples/cmdwidget
 #SUBDIRS += examples/qqtnetworkexample
-#SUBDIRS += examples/exquisite
-#SUBDIRS += examples/QtBuildTool
-#SUBDIRS += examples/QtSdkManager
-#SUBDIRS += examples/QQtInstaller
 #SUBDIRS += examples/qqtframe2
 
 #-----------------------------------------------------------------
-#need QQt installed to Qt library or
-#need QQt installed to sdk
+#QQt installed to Qt library or
+#QQt installed to sdk or
+#QQt is build
 #-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe3
-#SUBDIRS += examples/VegeTablesPrice
+#SUBDIRS += examples/exquisite
 #can't support ios
-#
-SUBDIRS += examples/qqtprintsupportexample
+#SUBDIRS += examples/qqtprintsupportexample
+SUBDIRS += examples/tabwidgetexamples
 
 #-----------------------------------------------------------------
 #need vlcQt libvlc library
@@ -53,3 +48,12 @@ SUBDIRS += examples/qqtprintsupportexample
 #SUBDIRS += examples/qqtftpclient
 #SUBDIRS += examples/qqthttpclient
 #SUBDIRS += examples/qqtwebkit
+
+#-----------------------------------------------------------------
+#some example project
+#-----------------------------------------------------------------
+#SUBDIRS += examples/cmdwidget
+#SUBDIRS += examples/VegeTablesPrice
+#SUBDIRS += examples/QtBuildTool
+#SUBDIRS += examples/QtSdkManager
+#SUBDIRS += examples/QQtInstaller

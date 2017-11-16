@@ -15,12 +15,12 @@ signals:
 
 public slots:
 private:
-    QQtTabBar* m_bar;
+    QQtPictureEffectTabBar* m_bar;
 
     // QQtTabWidget interface
 public:
-    virtual void setObjectName(const QString& name) override;
-    virtual QTabBar* localTabBar() const override;
+    virtual void setObjectName(const QString& name) Q_DECL_OVERRIDE;
+    virtual QQtTabBar* localTabBar() const Q_DECL_OVERRIDE { return m_bar; }
 };
 
 #endif // QQTPICTUREEFFECTTABWIDGET_H

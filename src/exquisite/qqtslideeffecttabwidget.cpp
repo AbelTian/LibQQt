@@ -12,8 +12,3 @@ void QQtSlideEffectTabWidget::setObjectName(const QString& name)
     m_bar->setObjectName(QString("%1_bar").arg(name));
     return QQtTabWidget::setObjectName(name);
 }
-
-QTabBar* QQtSlideEffectTabWidget::localTabBar() const
-{
-    return m_bar;
-}

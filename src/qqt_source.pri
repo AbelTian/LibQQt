@@ -75,6 +75,7 @@ SOURCES += \
     $$PWD/widgets/qqtpushbutton.cpp \
     $$PWD/widgets/qqtradiobutton.cpp \
     $$PWD/widgets/qqttableview.cpp \
+    $$PWD/widgets/qqttabbar.cpp \
     $$PWD/widgets/qqttabwidget.cpp \
     $$PWD/widgets/qqttreeview.cpp \
     $$PWD/widgets/qqtlineeditwithsearch.cpp \
@@ -95,6 +96,7 @@ HEADERS += \
     $$PWD/widgets/qqtpushbutton.h \
     $$PWD/widgets/qqtradiobutton.h \
     $$PWD/widgets/qqttableview.h \
+    $$PWD/widgets/qqttabbar.h \
     $$PWD/widgets/qqttabwidget.h \
     $$PWD/widgets/qqttreeview.h \
     $$PWD/widgets/qqtlineeditwithsearch.h \
@@ -330,14 +332,18 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtpopeffectdialog.h
     #tabwidget
     SOURCES += \
+        $$PWD/exquisite/qqthorizontaltexteffecttabbar.cpp \
+        $$PWD/exquisite/qqthorizontaltexteffecttabwidget.cpp \
         $$PWD/exquisite/qqtpictureeffecttabbar.cpp \
-        $$PWD/exquisite/qqtslideeffecttabbar.cpp \
         $$PWD/exquisite/qqtpictureeffecttabwidget.cpp \
+        $$PWD/exquisite/qqtslideeffecttabbar.cpp \
         $$PWD/exquisite/qqtslideeffecttabwidget.cpp
     HEADERS += \
+        $$PWD/exquisite/qqthorizontaltexteffecttabbar.h \
+        $$PWD/exquisite/qqthorizontaltexteffecttabwidget.h \
         $$PWD/exquisite/qqtpictureeffecttabbar.h \
-        $$PWD/exquisite/qqtslideeffecttabbar.h \
         $$PWD/exquisite/qqtpictureeffecttabwidget.h \
+        $$PWD/exquisite/qqtslideeffecttabbar.h \
         $$PWD/exquisite/qqtslideeffecttabwidget.h
 }
 

@@ -16,8 +16,8 @@ public:
 
     // QQTVirtualTreeModel interface
 public:
-    bool query(QString condition) override;
-    void setFilePath(QString dbname) override;
+    bool query(QString condition) Q_DECL_OVERRIDE;
+    void setFilePath(QString dbname) Q_DECL_OVERRIDE;
 
 protected:
     bool parseDatabase();

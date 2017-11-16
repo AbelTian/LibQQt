@@ -10,8 +10,9 @@
 #include <QPainter>
 #include <QTimer>
 #include <qqtcore.h>
+#include <qqttabbar.h>
 
-class QQtSlideEffectTabBar : public QTabBar
+class QQtSlideEffectTabBar : public QQtTabBar
 {
     Q_OBJECT
 public:
@@ -41,8 +42,6 @@ protected:
     virtual void drawTabBarIcon(QPainter* painter);
     virtual void drawTabBarText(QPainter* painter);
 
-    bool verticalTabs();
-
 private slots:
     void updateTabBarRect();
 private:
@@ -55,15 +54,15 @@ private:
 
     // QWidget interface
 protected:
-    virtual void paintEvent(QPaintEvent* event) override;
+    virtual void paintEvent(QPaintEvent* event) Q_DECL_OVERRIDE;
 
     // QWidget interface
 protected:
-    virtual void mousePressEvent(QMouseEvent* event) override;
+    virtual void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
 
     // QWidget interface
 protected:
-    virtual void mouseReleaseEvent(QMouseEvent* event) override;
+    virtual void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
 };
 
 #endif // QQTSLIDEEFFECTTABBAR_H
