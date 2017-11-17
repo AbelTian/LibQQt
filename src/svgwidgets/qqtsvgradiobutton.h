@@ -4,8 +4,9 @@
 #include <qqtradiobutton.h>
 #include <QSvgRenderer>
 #include <qqtwidgets.h>
+#include <qqt-local.h>
 
-class QQtSvgRadioButton : public QQtRadioButton
+class QQTSHARED_EXPORT QQtSvgRadioButton : public QQtRadioButton
 {
     Q_OBJECT
 public:

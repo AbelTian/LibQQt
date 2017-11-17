@@ -11,24 +11,24 @@
 #include "qqtframe.h"
 
 namespace Ui {
-class QQTProgressBar;
+class QQtProgressBar;
 }
 
-class QQTSHARED_EXPORT QQTProgressBar : public QWidget
+class QQTSHARED_EXPORT QQtProgressBar : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit QQTProgressBar(QWidget* parent = 0);
-    ~QQTProgressBar();
+    explicit QQtProgressBar ( QWidget* parent = 0 );
+    ~QQtProgressBar();
 
-    void setPixMap(QString back, QString trunk);
+    void setPixMap ( QString back, QString trunk );
 public slots:
-    void setValue(int value);
-    void setRange(int min, int max);
+    void setValue ( int value );
+    void setRange ( int min, int max );
 
 private:
-    Ui::QQTProgressBar* ui;
+    Ui::QQtProgressBar* ui;
 
 private:
     QString m_back, m_trunk;

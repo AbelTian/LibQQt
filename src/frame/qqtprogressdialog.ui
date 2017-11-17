@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>QQtProgressDialog</class>
- <widget class="QQtDialog" name="QQTProgressDialog">
+ <widget class="QQtDialog" name="QQtProgressDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,7 +26,7 @@
     <string>Cancel</string>
    </property>
   </widget>
-  <widget class="QQTProgressBar" name="widgetBar" native="true">
+  <widget class="QQtProgressBar" name="widgetBar" native="true">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -63,7 +63,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQTProgressBar</class>
+   <class>QQtProgressBar</class>
    <extends>QWidget</extends>
    <header>qqtprogressbar.h</header>
    <container>1</container>

@@ -26,7 +26,7 @@ public slots:
 
 private:
     Ui::QQtProgressDialog* ui;
-    QQTProgressBar* bar;
+    QQtProgressBar* bar;
 };
 
 #endif // QPROGRESSWINDOW_H

@@ -4,8 +4,9 @@
 #include <qqtpushbutton.h>
 #include <QSvgRenderer>
 #include <qqtwidgets.h>
+#include <qqt-local.h>
 
-class QQtSvgPushButton : public QQtPushButton
+class QQTSHARED_EXPORT QQtSvgPushButton : public QQtPushButton
 {
     Q_OBJECT
 public:

@@ -2,8 +2,9 @@
 #define QQTWIFIDBWIDGET_H
 
 #include <qqtwidget.h>
+#include <qqt-local.h>
 
-class QQtWifiDBWidget : public QQtWidget
+class QQTSHARED_EXPORT QQtWifiDBWidget : public QQtWidget
 {
     Q_OBJECT
     Q_ENUMS(DB_STAT)

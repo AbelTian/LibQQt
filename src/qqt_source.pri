@@ -17,12 +17,16 @@ SOURCES += \
     $$PWD/svgwidgets/qqtsvgwidget.cpp \
     $$PWD/svgwidgets/qqtsvgpushbutton.cpp \
     $$PWD/svgwidgets/qqtsvgcheckbox.cpp \
-    $$PWD/svgwidgets/qqtsvgradiobutton.cpp
+    $$PWD/svgwidgets/qqtsvgradiobutton.cpp \
+    $$PWD/svgwidgets/qqtgraphicssvgitem.cpp \
+    $$PWD/svgwidgets/qqtsvglabel.cpp
 HEADERS += \
     $$PWD/svgwidgets/qqtsvgwidget.h \
     $$PWD/svgwidgets/qqtsvgpushbutton.h \
     $$PWD/svgwidgets/qqtsvgcheckbox.h \
-    $$PWD/svgwidgets/qqtsvgradiobutton.h
+    $$PWD/svgwidgets/qqtsvgradiobutton.h \
+    $$PWD/svgwidgets/qqtgraphicssvgitem.h \
+    $$PWD/svgwidgets/qqtsvglabel.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \

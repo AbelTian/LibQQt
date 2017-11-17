@@ -2,8 +2,9 @@
 #define QQTSVGWIDGET_H
 
 #include <QSvgWidget>
+#include <qqt-local.h>
 
-class QQtSvgWidget : public QSvgWidget
+class QQTSHARED_EXPORT QQtSvgWidget : public QSvgWidget
 {
     Q_OBJECT
 public:

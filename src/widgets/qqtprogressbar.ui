@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QQTProgressBar</class>
- <widget class="QWidget" name="QQTProgressBar">
+ <class>QQtProgressBar</class>
+ <widget class="QWidget" name="QQtProgressBar">
   <property name="geometry">
    <rect>
     <x>0</x>

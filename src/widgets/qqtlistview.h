@@ -9,8 +9,8 @@ class QQTSHARED_EXPORT QQtListView : public QListView
     Q_OBJECT
 
 public:
-    explicit QQtListView(QWidget* parent = 0);
-    virtual ~QQtListView();
+    explicit QQtListView ( QWidget* parent = 0 );
+    virtual ~QQtListView ();
 
 private:
 };

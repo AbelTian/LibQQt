@@ -4,8 +4,9 @@
 #include <qqtcheckbox.h>
 #include <QSvgRenderer>
 #include <qqtwidgets.h>
+#include <qqt-local.h>
 
-class QQtSvgCheckBox : public QQtCheckBox
+class QQTSHARED_EXPORT QQtSvgCheckBox : public QQtCheckBox
 {
     Q_OBJECT
 public:
