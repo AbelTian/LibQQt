@@ -31,7 +31,7 @@ signals:
 public slots:
 
 private:
-    QString pic[DB_STAT];
+    QString pic[Db_SMax];
 };
 
 #endif // QQTWIFIDBWIDGET_H
