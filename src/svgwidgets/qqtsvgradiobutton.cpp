@@ -1,11 +1,11 @@
-#include "qqtsvgcheckbox.h"
+#include "qqtsvgradiobutton.h"
 
-QQtSvgCheckBox::QQtSvgCheckBox(QWidget* parent) : QQtCheckBox(parent)
+QQtSvgRadioButton::QQtSvgRadioButton(QWidget* parent) : QQtRadioButton(parent)
 {
 
 }
 
-void QQtSvgCheckBox::renderToVariable()
+void QQtSvgRadioButton::renderToVariable()
 {
     TBtnIconTable& pic = iconTable();
 
@@ -13,8 +13,7 @@ void QQtSvgCheckBox::renderToVariable()
         r[i].load(pic[i]);
 }
 
-
-void QQtSvgCheckBox::paintEvent(QPaintEvent* event)
+void QQtSvgRadioButton::paintEvent(QPaintEvent* event)
 {
     Q_UNUSED(event)
 

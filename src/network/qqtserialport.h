@@ -72,12 +72,12 @@ public:
 #include <QSerialPort>
 #endif
 
-class QQTSHARED_EXPORT QQTSerialPort : public QSerialPort
+class QQTSHARED_EXPORT QQtSerialPort : public QSerialPort
 {
     Q_OBJECT
 public:
-    explicit QQTSerialPort(QObject* parent = 0);
-    ~QQTSerialPort();
+    explicit QQtSerialPort(QObject* parent = 0);
+    ~QQtSerialPort();
 
     void installProtocol(QQtProtocol* stack);
     void uninstallProtocol(QQtProtocol* stack);

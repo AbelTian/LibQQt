@@ -1,7 +1,7 @@
 #include "qqtserialport.h"
 #include "qqtcore.h"
 
-QQTSerialPort::QQTSerialPort(QObject* parent) : QSerialPort(parent)
+QQtSerialPort::QQtSerialPort(QObject* parent) : QSerialPort(parent)
 {
     //connect(this, SIGNAL(bytesWritten(qint64)), this, SLOT(updateProgress(qint64)) );
     connect(this, SIGNAL(readyRead()), this, SLOT(readyReadData()));
@@ -9,13 +9,13 @@ QQTSerialPort::QQTSerialPort(QObject* parent) : QSerialPort(parent)
     //connect(this, SIGNAL(readChannelFinished()), this, SLOT(readChannelFinished()));
 }
 
-QQTSerialPort::~QQTSerialPort()
+QQtSerialPort::~QQtSerialPort()
 {
     if (isOpen())
         close();
 }
 
-void QQTSerialPort::installProtocol(QQtProtocol* stack)
+void QQtSerialPort::installProtocol(QQtProtocol* stack)
 {
     if (m_protocol)
         return;
@@ -24,7 +24,7 @@ void QQTSerialPort::installProtocol(QQtProtocol* stack)
     connect(m_protocol, SIGNAL(write(const QByteArray&)), this, SLOT(write(const QByteArray&)));
 }
 
-void QQTSerialPort::uninstallProtocol(QQtProtocol* stack)
+void QQtSerialPort::uninstallProtocol(QQtProtocol* stack)
 {
     Q_UNUSED(stack)
 
@@ -35,12 +35,12 @@ void QQTSerialPort::uninstallProtocol(QQtProtocol* stack)
     m_protocol = NULL;
 }
 
-QQtProtocol* QQTSerialPort::installedProtocol()
+QQtProtocol* QQtSerialPort::installedProtocol()
 {
     return m_protocol;
 }
 
-void QQTSerialPort::readyReadData()
+void QQtSerialPort::readyReadData()
 {
     QByteArray bytes;
     bytes = readAll();

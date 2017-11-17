@@ -12,14 +12,17 @@
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
 #-------------------------------------------------
+
 SOURCES += \
     $$PWD/svgwidgets/qqtsvgwidget.cpp \
     $$PWD/svgwidgets/qqtsvgpushbutton.cpp \
-    $$PWD/svgwidgets/qqtsvgcheckbox.cpp
+    $$PWD/svgwidgets/qqtsvgcheckbox.cpp \
+    $$PWD/svgwidgets/qqtsvgradiobutton.cpp
 HEADERS += \
     $$PWD/svgwidgets/qqtsvgwidget.h \
     $$PWD/svgwidgets/qqtsvgpushbutton.h \
-    $$PWD/svgwidgets/qqtsvgcheckbox.h
+    $$PWD/svgwidgets/qqtsvgcheckbox.h \
+    $$PWD/svgwidgets/qqtsvgradiobutton.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \
@@ -267,6 +270,10 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 }
 
 #frame
+SOURCES += \
+    $$PWD/frame/qqtwifidbwidget.cpp
+HEADERS += \
+    $$PWD/frame/qqtwifidbwidget.h
 SOURCES += \
     $$PWD/frame/qqtprogressdialog.cpp \
     $$PWD/frame/qqtpassworddialog.cpp \

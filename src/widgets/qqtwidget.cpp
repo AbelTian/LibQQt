@@ -15,6 +15,7 @@ QQtWidget::~QQtWidget()
 void QQtWidget::setPixmap(QString pic)
 {
     m_pic = pic;
+    update();
 }
 
 void QQtWidget::paintEvent(QPaintEvent* event)

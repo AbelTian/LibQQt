@@ -18,7 +18,7 @@
     <item>
      <widget class="QToolBox" name="toolBox">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -67,21 +67,94 @@
        </layout>
       </widget>
       <widget class="QWidget" name="page_3">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>782</width>
+         <height>282</height>
+        </rect>
+       </property>
        <attribute name="label">
         <string>Page 3</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QQtSvgCheckBox" name="c0">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>CheckBox</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QQtSvgRadioButton" name="r0">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>RadioButton</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QQtSvgRadioButton" name="r1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>RadioButton</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="page_4">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>782</width>
+         <height>282</height>
+        </rect>
+       </property>
        <attribute name="label">
         <string>Page 4</string>
        </attribute>
       </widget>
       <widget class="QWidget" name="page_5">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>782</width>
+         <height>282</height>
+        </rect>
+       </property>
        <attribute name="label">
         <string>Page 5</string>
        </attribute>
       </widget>
       <widget class="QWidget" name="page_6">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>782</width>
+         <height>282</height>
+        </rect>
+       </property>
        <attribute name="label">
         <string>Page 6</string>
        </attribute>
@@ -103,6 +176,16 @@
    <class>QQtSvgPushButton</class>
    <extends>QPushButton</extends>
    <header>qqtsvgpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QQtSvgCheckBox</class>
+   <extends>QCheckBox</extends>
+   <header>qqtsvgcheckbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QQtSvgRadioButton</class>
+   <extends>QRadioButton</extends>
+   <header>qqtsvgradiobutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

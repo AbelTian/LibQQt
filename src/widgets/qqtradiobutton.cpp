@@ -16,6 +16,12 @@ void QQtRadioButton::pixMap(QImage& icon, QImage& iconSel)
     iconSel = QImage(this->m_icon[BTN_PRESS]);
 }
 
+void QQtRadioButton::pixMap(QString& icon, QString& iconSel)
+{
+    icon = m_icon[BTN_NORMAL];
+    iconSel = m_icon[BTN_PRESS];
+}
+
 void QQtRadioButton::setPixmap(const QString& icon, const QString& iconSel)
 {
     this->m_icon[BTN_NORMAL] = icon;

@@ -14,8 +14,11 @@ public:
     explicit QQtRadioButton(QWidget* parent = 0);
     virtual ~QQtRadioButton();
 
-    void pixMap(QImage& m_icon, QImage& m_iconSel);
-    void setPixmap(const QString& m_icon = QString(), const QString& m_iconSel = QString());
+    inline TBtnIconTable& iconTable() { return m_icon; }
+    void pixMap(QImage& icon, QImage& iconSel);
+    void pixMap(QString& icon, QString& iconSel);
+    void setPixmap(const QString& icon = QString(),
+                   const QString& iconSel = QString());
 private:
     TBtnIconTable m_icon;
 

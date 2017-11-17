@@ -1,16 +1,15 @@
-#ifndef QQTSVGCHECKBOX_H
-#define QQTSVGCHECKBOX_H
+#ifndef QQTSVGRADIOBUTTON_H
+#define QQTSVGRADIOBUTTON_H
 
-#include <qqtcheckbox.h>
+#include <qqtradiobutton.h>
 #include <QSvgRenderer>
 #include <qqtwidgets.h>
 
-class QQtSvgCheckBox : public QQtCheckBox
+class QQtSvgRadioButton : public QQtRadioButton
 {
     Q_OBJECT
 public:
-    explicit QQtSvgCheckBox(QWidget* parent = nullptr);
-
+    explicit QQtSvgRadioButton(QWidget* parent = nullptr);
     /**
      * @brief renderToVariable
      * call this function after iconTable() set.
@@ -27,4 +26,4 @@ private:
     QSvgRenderer r[BTN_MAX];
 };
 
-#endif // QQTSVGCHECKBOX_H
+#endif // QQTSVGRADIOBUTTON_H
