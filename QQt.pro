@@ -17,11 +17,11 @@ SUBDIRS = src/qqt.pro
 #QQt is build
 #-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe3
-#SUBDIRS += examples/exquisite
+#
+SUBDIRS += examples/exquisite
 #can't support ios
 #SUBDIRS += examples/qqtprintsupportexample
-#
-SUBDIRS += examples/tabwidgetexamples
+#SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/svgtest
 
 #-----------------------------------------------------------------
