@@ -3,13 +3,14 @@
 
 #include <QGraphicsSvgItem>
 #include <qqt-local.h>
+#include <qqtcore.h>
 
 class QQTSHARED_EXPORT QQtGraphicsSvgItem : public QGraphicsSvgItem
 {
     Q_OBJECT
 public:
-    explicit QQtGraphicsSvgItem(QQtGraphicsSvgItem* parent = nullptr);
-    explicit QQtGraphicsSvgItem(const QString& fileName, QQtGraphicsSvgItem* parentItem = nullptr);
+    explicit QQtGraphicsSvgItem ( QQtGraphicsSvgItem* parent = nullptr );
+    explicit QQtGraphicsSvgItem ( const QString& fileName, QQtGraphicsSvgItem* parentItem = nullptr );
 
 signals:
 

@@ -9,15 +9,15 @@ class QQTSHARED_EXPORT QQtTreeView : public QTreeView
     Q_OBJECT
 
 public:
-    explicit QQtTreeView(QWidget* parent = 0);
+    explicit QQtTreeView ( QWidget* parent = 0 );
     virtual ~QQtTreeView();
 
 private:
 
-    // QQTTreeView interface
+    // QQtTreeView interface
 protected:
-    void drawRow(QPainter* painter, const QStyleOptionViewItem& options, const QModelIndex& index) const;
-    void drawBranches(QPainter* painter, const QRect& rect, const QModelIndex& index) const;
+    void drawRow ( QPainter* painter, const QStyleOptionViewItem& options, const QModelIndex& index ) const;
+    void drawBranches ( QPainter* painter, const QRect& rect, const QModelIndex& index ) const;
 };
 
 #endif // QQTTREEVIEW_H

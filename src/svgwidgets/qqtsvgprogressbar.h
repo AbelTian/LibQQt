@@ -4,6 +4,7 @@
 #include <qqtsvgwidget.h>
 #include <QSvgRenderer>
 #include <qqt-local.h>
+#include <qqtcore.h>
 
 class QQTSHARED_EXPORT QQtSvgProgressBar : public QQtSvgWidget
 {

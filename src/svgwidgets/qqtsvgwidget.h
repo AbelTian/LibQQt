@@ -3,6 +3,7 @@
 
 #include <QSvgWidget>
 #include <qqt-local.h>
+#include <qqtcore.h>
 
 class QQTSHARED_EXPORT QQtSvgWidget : public QSvgWidget
 {

@@ -5,12 +5,13 @@
 #include <QSvgRenderer>
 #include <qqtwidgets.h>
 #include <qqt-local.h>
+#include <qqtcore.h>
 
 class QQTSHARED_EXPORT QQtSvgCheckBox : public QQtCheckBox
 {
     Q_OBJECT
 public:
-    explicit QQtSvgCheckBox(QWidget* parent = nullptr);
+    explicit QQtSvgCheckBox ( QWidget* parent = nullptr );
 
     /**
      * @brief renderToVariable
@@ -23,7 +24,7 @@ public slots:
 
     // QWidget interface
 protected:
-    virtual void paintEvent(QPaintEvent* event) override;
+    virtual void paintEvent ( QPaintEvent* event ) override;
 private:
     QSvgRenderer r[BTN_MAX];
 };

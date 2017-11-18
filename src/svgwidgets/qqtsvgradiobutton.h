@@ -5,12 +5,13 @@
 #include <QSvgRenderer>
 #include <qqtwidgets.h>
 #include <qqt-local.h>
+#include <qqtcore.h>
 
 class QQTSHARED_EXPORT QQtSvgRadioButton : public QQtRadioButton
 {
     Q_OBJECT
 public:
-    explicit QQtSvgRadioButton(QWidget* parent = nullptr);
+    explicit QQtSvgRadioButton ( QWidget* parent = nullptr );
     /**
      * @brief renderToVariable
      * call this function after iconTable() set.
@@ -22,7 +23,7 @@ public slots:
 
     // QWidget interface
 protected:
-    virtual void paintEvent(QPaintEvent* event) override;
+    virtual void paintEvent ( QPaintEvent* event ) override;
 private:
     QSvgRenderer r[BTN_MAX];
 };

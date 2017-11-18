@@ -36,19 +36,22 @@ MainWindow::MainWindow ( QWidget* parent ) :
                          "/Users/abel/Develop/d1-product/App/skin/default/bt_stir_press.svg" );
     ui->p0->setRange ( 0, 100 );
     ui->p0->setValue ( 60 );
+
     QTimer* timer = new QTimer ( this );
     timer->setInterval ( 100 );
     timer->setSingleShot ( false );
-    QObject::connect ( timer, &QTimer::timeout,
-                       [this]
-    {
-        static int i = 0;
-        ui->p0->setValue ( i++ % 100 );
-    } ) ;
+    QObject::connect ( timer, SIGNAL ( timeout() ),
+                       this, SLOT ( updateProgress() ) ) ;
     timer->start();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::updateProgress()
+{
+    static int i = 0;
+    ui->p0->setValue ( i++ % 100 );
 }
