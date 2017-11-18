@@ -12,8 +12,7 @@
     - 包括复杂的圆盘进度条, SpeedMeter    
     - 包括有多种效果的Widget、Dialog
     - 二维码、校验码生成器
-4. 有线和无线网络自动连接管理类
-5. 支持Qt5.9.2   
+4. 有线和无线网络自动连接管理类  
 6. 解决Qt4.8.7在嵌入式屏幕上QGraphics系统不正常绘画的问题 
 7. QQt输入法
     - 从网络资源改编而来
@@ -37,7 +36,10 @@
 17. 添加应用中常用的form
 18. 支持多页TableWidget
 19. 添加QQtApplication，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
-20. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。
+15. 支持Qt5.9.2   
+20. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
+21. 添加svg support widgets  
+     - 比如 QQtSvgProgressbar  
 
 # Usage  
 

@@ -3,11 +3,11 @@
 #include <qqtslideeffecttabbar.h>
 #include <qqtpictureeffecttabwidget.h>
 
-MainWindow::MainWindow(QWidget* parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow ( QWidget* parent ) :
+    QMainWindow ( parent ),
+    ui ( new Ui::MainWindow )
 {
-    ui->setupUi(this);
+    ui->setupUi ( this );
     /*
     ui->w60->setFixedHeight(30);
     QQtSlideEffectTabBar* bar = new QQtSlideEffectTabBar(ui->tab_6);
@@ -35,22 +35,24 @@ MainWindow::MainWindow(QWidget* parent) :
     //ui->tb0->setTabBar(bar);
     //ui->tb0->setObjectName("tb0");
 
-    ui->w77->addTab("ddd");
-    ui->w77->addTab("xxxx");
-    ui->w77->setFixedHeight(28);
+    ui->w77->addTab ( "ddd" );
+    ui->w77->addTab ( "xxxx" );
+    ui->w77->setFixedHeight ( 28 );
 
 
-    ui->tw0->setStyleSheet("QTabWidget#tw0 QTabBar::tab { width:90px; height:30px; }");
-    QQtPictureEffectTabBar* tab = (QQtPictureEffectTabBar*)ui->tw0->localTabBar();
-    tab->setIconStyle(QQtPictureEffectTabBar::IconStyle_Cover_And_RightText);
-    tab->setTabPixmap(0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png");
-    tab->setTabPixmap(1, "./skin/default/bt_user.png", "./skin/default/bt_user_press.png");
+    ui->tw0->setStyleSheet ( "QTabWidget#tw0 QTabBar::tab { width:90px; height:30px; }" );
+    QQtPictureEffectTabBar* tab = ( QQtPictureEffectTabBar* ) ui->tw0->localTabBar();
+    tab->setIconStyle ( QQtPictureEffectTabBar::IconStyle_Cover_And_RightText );
+    tab->setTabPixmap ( 0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png" );
+    tab->setTabPixmap ( 1, "./skin/default/bt_user.png", "./skin/default/bt_user_press.png" );
 
-    ui->tw1->setStyleSheet("QTabWidget#tw1 QTabBar::tab { width:90px; height:30px; }");
-    QQtPictureEffectTabBar* tab1 = (QQtPictureEffectTabBar*)ui->tw1->localTabBar();
-    tab1->setIconStyle(QQtPictureEffectTabBar::IconStyle_Cover_And_RightText);
-    tab1->setTabPixmap(0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png");
-    tab1->setTabPixmap(1, "./skin/default/bt_user.png", "./skin/default/bt_user_press.png");
+    ui->tw1->setStyleSheet ( "QTabWidget#tw1 QTabBar::tab { width:90px; height:30px; }" );
+    QQtPictureEffectTabBar* tab1 = ( QQtPictureEffectTabBar* ) ui->tw1->localTabBar();
+    tab1->setIconStyle ( QQtPictureEffectTabBar::IconStyle_Cover_And_RightText );
+    tab1->setTabPixmap ( 0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png" );
+    tab1->setTabPixmap ( 1, "./skin/default/bt_user.png", "./skin/default/bt_user_press.png" );
+
+    ui->tb0->setStyleSheet ( "QTabWidget#tb0 QTabBar::tab { width:90px; height:10px; }" );
 }
 
 MainWindow::~MainWindow()
