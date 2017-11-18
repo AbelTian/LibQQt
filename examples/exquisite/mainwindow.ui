@@ -118,7 +118,7 @@
        <attribute name="title">
         <string>页</string>
        </attribute>
-       <widget class="QQTProgressBar" name="w60" native="true">
+       <widget class="QQtProgressBar" name="w60" native="true">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -166,7 +166,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQTProgressBar</class>
+   <class>QQtProgressBar</class>
    <extends>QWidget</extends>
    <header location="global">qqtprogressbar.h</header>
    <container>1</container>
