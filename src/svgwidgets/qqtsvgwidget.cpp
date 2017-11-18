@@ -1,16 +1,26 @@
 #include "qqtsvgwidget.h"
+#include <QPainter>
+#include <QSvgRenderer>
+#include <QImage>
+#include <QIcon>
 
-QQtSvgWidget::QQtSvgWidget(QWidget* parent) : QSvgWidget(parent)
+QQtSvgWidget::QQtSvgWidget ( QWidget* parent ) : QSvgWidget ( parent )
 {
 
 }
 
-void QQtSvgWidget::setSvgFile(QString& filename)
+QQtSvgWidget::QQtSvgWidget ( const QString& file, QWidget* parent ) :
+    QSvgWidget ( file, parent )
 {
-    return load(filename);
+
 }
 
-void QQtSvgWidget::setSvgContent(QByteArray& bytes)
+void QQtSvgWidget::setSvgFile ( QString& filename )
 {
-    return load(bytes);
+    return load ( filename );
+}
+
+void QQtSvgWidget::setSvgContent ( QByteArray& bytes )
+{
+    return load ( bytes );
 }

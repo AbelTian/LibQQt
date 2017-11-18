@@ -18,7 +18,7 @@
     <item>
      <widget class="QToolBox" name="toolBox">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -132,6 +132,11 @@
        <attribute name="label">
         <string>Page 4</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QQtSvgProgressBar" name="p0" native="true"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="page_5">
        <property name="geometry">
@@ -186,6 +191,12 @@
    <class>QQtSvgRadioButton</class>
    <extends>QRadioButton</extends>
    <header>qqtsvgradiobutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QQtSvgProgressBar</class>
+   <extends>QWidget</extends>
+   <header>qqtsvgprogressbar.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
