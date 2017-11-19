@@ -119,6 +119,11 @@ FORMS += \
     $$PWD/widgets/qqtprogressbar.ui \
     $$PWD/widgets/qqtmptablewidget.ui
 
+DEFINES += __PROCESSMODULE__
+#ios has no backend process
+contains(QKIT_PRIVATE, iOS||iOSSimulator) {
+    DEFINES -= __PROCESSMODULE__
+}
 
 
 #multimedia
@@ -250,16 +255,55 @@ equals(QKIT_PRIVATE, EMBEDDED) {
     HEADERS += $$PWD/frame/qqtwifiwidget.h
     FORMS += $$PWD/frame/qqtwifiwidget.ui
 }
+##webservice
+contains(DEFINES, __WEBSERVICESUPPORT__) {
+    win32 {
+        contains (DEFINES, QQT_LIBRARY) {
+            DEFINES += QT_QTSOAP_LIBRARY
+        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+            DEFINES += QT_QTSOAP_STATIC_LIBRARY
+        }
+    }
+    SOURCES += \
+        $$PWD/network/soap/qtsoap.cpp
+    HEADERS += \
+        $$PWD/network/soap/qtsoap.h
+}
+contains (DEFINES, __WEBWORKSUPPORT__) {
+    SOURCES += \
+        $$PWD/network/qqtftpprotocol.cpp \
+        $$PWD/network/qqthttpprotocol.cpp \
+        $$PWD/network/qqtwebprotocol.cpp
+    HEADERS += \
+        $$PWD/network/qqtftpprotocol.h \
+        $$PWD/network/qqthttpprotocol.h \
+        $$PWD/network/qqtwebprotocol.h
+    SOURCES += \
+        $$PWD/network/qqtwebworkclient.cpp \
+        $$PWD/network/qqtwebworkserver.cpp
+    HEADERS += \
+        $$PWD/network/qqtwebworkclient.h \
+        $$PWD/network/qqtwebworkserver.h
+}
+contains (DEFINES, __WEBSOCKETSUPPORT__) {
+    SOURCES += \
+        $$PWD/network/qqtwebclient.cpp \
+        $$PWD/network/qqtwebserver.cpp
+    HEADERS += \
+        $$PWD/network/qqtwebclient.h \
+        $$PWD/network/qqtwebserver.h
+}
+
 
 #dmmu preview
 #arm mips
 #TODO: +wince +android +ios +macOS +win +linux
 equals(QKIT_PRIVATE, EMBEDDED) {
-    SOURCES += $$PWD/dmmu/dmmu.c
-    HEADERS += $$PWD/dmmu/dmmu.h \
-                $$PWD/dmmu/jz_cim.h \
-                $$PWD/dmmu/graphics.h \
-                $$PWD/dmmu/hal.h
+    SOURCES += $$PWD/frame/dmmu/dmmu.c
+    HEADERS += $$PWD/frame/dmmu/dmmu.h \
+                $$PWD/frame/dmmu/jz_cim.h \
+                $$PWD/frame/dmmu/graphics.h \
+                $$PWD/frame/dmmu/hal.h
     SOURCES += $$PWD/frame/qqtpreviewwidget.cpp
     HEADERS += $$PWD/frame/qqtpreviewwidget.h
     FORMS += $$PWD/frame/qqtpreviewwidget.ui
@@ -293,6 +337,31 @@ FORMS += \
 
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
+    SOURCES += \
+        $$PWD/exquisite/qqtninepatcheffectwidget.cpp \
+        $$PWD/exquisite/qqtcustompianokeyboard.cpp \
+        $$PWD/exquisite/qqtrippleeffectpushbutton.cpp \
+        $$PWD/exquisite/qqtrulereffectslider.cpp \
+        $$PWD/exquisite/qqtcustomverificationcode.cpp \
+        $$PWD/exquisite/qqtframelesshelper.cpp \
+        $$PWD/exquisite/qqtframelesshelperprivate.cpp \
+        $$PWD/exquisite/qqtflipeffectstackedwidget.cpp \
+        $$PWD/exquisite/qqtfadeeffectwidget.cpp \
+        $$PWD/exquisite/qqtshadoweffectwidget.cpp \
+        $$PWD/exquisite/qqtpopeffectdialog.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtninepatcheffectwidget.h \
+        $$PWD/exquisite/qqtframelesshelper.h \
+        $$PWD/exquisite/qqtframelesshelperprivate.h \
+        $$PWD/exquisite/qqtcustompianokeyboard.h \
+        $$PWD/exquisite/qqtrippleeffectpushbutton.h \
+        $$PWD/exquisite/qqtrulereffectslider.h \
+        $$PWD/exquisite/qqtflipeffectstackedwidget.h \
+        $$PWD/exquisite/qqtcustomverificationcode.h \
+        $$PWD/exquisite/qqtfadeeffectwidget.h \
+        $$PWD/exquisite/qqtshadoweffectwidget.h \
+        $$PWD/exquisite/qqtpopeffectdialog.h
+
     #progressbar
     SOURCES += \
         $$PWD/exquisite/qqtcustomspeedmeter.cpp \
@@ -308,28 +377,6 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtmarqueeeffectlabel.h \
         $$PWD/exquisite/qqtledbannereffectlabel.h
 
-    SOURCES += \
-        $$PWD/exquisite/qqtcustompianokeyboard.cpp \
-        $$PWD/exquisite/qqtrippleeffectpushbutton.cpp \
-        $$PWD/exquisite/qqtrulereffectslider.cpp \
-        $$PWD/exquisite/qqtcustomverificationcode.cpp \
-        $$PWD/exquisite/qqtframelesshelper.cpp \
-        $$PWD/exquisite/qqtframelesshelperprivate.cpp \
-        $$PWD/exquisite/qqtflipeffectstackedwidget.cpp \
-        $$PWD/exquisite/qqtfadeeffectwidget.cpp \
-        $$PWD/exquisite/qqtshadoweffectwidget.cpp \
-        $$PWD/exquisite/qqtpopeffectdialog.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtframelesshelper.h \
-        $$PWD/exquisite/qqtframelesshelperprivate.h \
-        $$PWD/exquisite/qqtcustompianokeyboard.h \
-        $$PWD/exquisite/qqtrippleeffectpushbutton.h \
-        $$PWD/exquisite/qqtrulereffectslider.h \
-        $$PWD/exquisite/qqtflipeffectstackedwidget.h \
-        $$PWD/exquisite/qqtcustomverificationcode.h \
-        $$PWD/exquisite/qqtfadeeffectwidget.h \
-        $$PWD/exquisite/qqtshadoweffectwidget.h \
-        $$PWD/exquisite/qqtpopeffectdialog.h
     #tabwidget
     SOURCES += \
         $$PWD/exquisite/qqthorizontaltexteffecttabbar.cpp \
@@ -345,98 +392,59 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtpictureeffecttabwidget.h \
         $$PWD/exquisite/qqtslideeffecttabbar.h \
         $$PWD/exquisite/qqtslideeffecttabwidget.h
-}
 
-#qrcode
-#DEFINES += __QRENCODE__
-contains (DEFINES, __QRENCODE__) {
-    HEADERS += \
-        $$PWD/qrencode/bitstream.h \
-        $$PWD/qrencode/config.h \
-        $$PWD/qrencode/mask.h \
-        $$PWD/qrencode/mmask.h \
-        $$PWD/qrencode/mqrspec.h \
-        $$PWD/qrencode/qrencode.h \
-        $$PWD/qrencode/qrencode_inner.h \
-        $$PWD/qrencode/qrinput.h \
-        $$PWD/qrencode/qrspec.h \
-        $$PWD/qrencode/rscode.h \
-        $$PWD/qrencode/split.h
+    #qrcode widgets
+    #DEFINES += __QRENCODE__
+    contains (DEFINES, __QRENCODE__) {
+        HEADERS += \
+            $$PWD/exquisite/qqtcustomqrencodewidget.h
+        SOURCES += \
+            $$PWD/exquisite/qqtcustomqrencodewidget.cpp
 
-    SOURCES += \
-        $$PWD/qrencode/bitstream.c \
-        $$PWD/qrencode/mask.c \
-        $$PWD/qrencode/mmask.c \
-        $$PWD/qrencode/mqrspec.c \
-        $$PWD/qrencode/qrencode.c \
-        $$PWD/qrencode/qrinput.c \
-        $$PWD/qrencode/qrspec.c \
-        $$PWD/qrencode/rscode.c \
-        $$PWD/qrencode/split.c
+        HEADERS += \
+            $$PWD/exquisite/qrencode/bitstream.h \
+            $$PWD/exquisite/qrencode/config.h \
+            $$PWD/exquisite/qrencode/mask.h \
+            $$PWD/exquisite/qrencode/mmask.h \
+            $$PWD/exquisite/qrencode/mqrspec.h \
+            $$PWD/exquisite/qrencode/qrencode.h \
+            $$PWD/exquisite/qrencode/qrencode_inner.h \
+            $$PWD/exquisite/qrencode/qrinput.h \
+            $$PWD/exquisite/qrencode/qrspec.h \
+            $$PWD/exquisite/qrencode/rscode.h \
+            $$PWD/exquisite/qrencode/split.h
 
-    HEADERS += \
-        $$PWD/exquisite/qqtcustomqrencodewidget.h
-    SOURCES += \
-        $$PWD/exquisite/qqtcustomqrencodewidget.cpp
-}
-
-##websocket
-contains(DEFINES, __QTSOAP__) {
-    win32 {
-        contains (DEFINES, QQT_LIBRARY) {
-            DEFINES += QT_QTSOAP_LIBRARY
-        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-            DEFINES += QT_QTSOAP_STATIC_LIBRARY
-        }
+        SOURCES += \
+            $$PWD/exquisite/qrencode/bitstream.c \
+            $$PWD/exquisite/qrencode/mask.c \
+            $$PWD/exquisite/qrencode/mmask.c \
+            $$PWD/exquisite/qrencode/mqrspec.c \
+            $$PWD/exquisite/qrencode/qrencode.c \
+            $$PWD/exquisite/qrencode/qrinput.c \
+            $$PWD/exquisite/qrencode/qrspec.c \
+            $$PWD/exquisite/qrencode/rscode.c \
+            $$PWD/exquisite/qrencode/split.c
     }
-    SOURCES += \
-        $$PWD/soap/qtsoap.cpp
-    HEADERS += \
-        $$PWD/soap/qtsoap.h
+
+    #svg widgets
+    contains (DEFINES, __SVGWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/svgwidgets/qqtsvgwidget.cpp \
+            $$PWD/exquisite/svgwidgets/qqtsvgpushbutton.cpp \
+            $$PWD/exquisite/svgwidgets/qqtsvgcheckbox.cpp \
+            $$PWD/exquisite/svgwidgets/qqtsvgradiobutton.cpp \
+            $$PWD/exquisite/svgwidgets/qqtgraphicssvgitem.cpp \
+            $$PWD/exquisite/svgwidgets/qqtsvglabel.cpp \
+            $$PWD/exquisite/svgwidgets/qqtsvgprogressbar.cpp
+        HEADERS += \
+            $$PWD/exquisite/svgwidgets/qqtsvgwidget.h \
+            $$PWD/exquisite/svgwidgets/qqtsvgpushbutton.h \
+            $$PWD/exquisite/svgwidgets/qqtsvgcheckbox.h \
+            $$PWD/exquisite/svgwidgets/qqtsvgradiobutton.h \
+            $$PWD/exquisite/svgwidgets/qqtgraphicssvgitem.h \
+            $$PWD/exquisite/svgwidgets/qqtsvglabel.h \
+            $$PWD/exquisite/svgwidgets/qqtsvgprogressbar.h
+    }
 }
 
 
-contains (DEFINES, __WEBWORKSUPPORT__) {
-    SOURCES += \
-        $$PWD/network/qqtftpprotocol.cpp \
-        $$PWD/network/qqthttpprotocol.cpp \
-        $$PWD/network/qqtwebprotocol.cpp
-    HEADERS += \
-        $$PWD/network/qqtftpprotocol.h \
-        $$PWD/network/qqthttpprotocol.h \
-        $$PWD/network/qqtwebprotocol.h
-    SOURCES += \
-        $$PWD/network/qqtwebworkclient.cpp \
-        $$PWD/network/qqtwebworkserver.cpp
-    HEADERS += \
-        $$PWD/network/qqtwebworkclient.h \
-        $$PWD/network/qqtwebworkserver.h
-}
-
-contains (DEFINES, __WEBSOCKETSUPPORT__) {
-    SOURCES += \
-        $$PWD/network/qqtwebclient.cpp \
-        $$PWD/network/qqtwebserver.cpp
-    HEADERS += \
-        $$PWD/network/qqtwebclient.h \
-        $$PWD/network/qqtwebserver.h
-}
-
-contains (DEFINES, __SVGWIDGETS__) {
-    SOURCES += \
-        $$PWD/svgwidgets/qqtsvgwidget.cpp \
-        $$PWD/svgwidgets/qqtsvgpushbutton.cpp \
-        $$PWD/svgwidgets/qqtsvgcheckbox.cpp \
-        $$PWD/svgwidgets/qqtsvgradiobutton.cpp \
-        $$PWD/svgwidgets/qqtgraphicssvgitem.cpp \
-        $$PWD/svgwidgets/qqtsvglabel.cpp \
-        $$PWD/svgwidgets/qqtsvgprogressbar.cpp
-    HEADERS += \
-        $$PWD/svgwidgets/qqtsvgwidget.h \
-        $$PWD/svgwidgets/qqtsvgpushbutton.h \
-        $$PWD/svgwidgets/qqtsvgcheckbox.h \
-        $$PWD/svgwidgets/qqtsvgradiobutton.h \
-        $$PWD/svgwidgets/qqtgraphicssvgitem.h \
-        $$PWD/svgwidgets/qqtsvglabel.h \
-        $$PWD/svgwidgets/qqtsvgprogressbar.h
-}

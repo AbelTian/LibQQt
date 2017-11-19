@@ -233,6 +233,7 @@ defineReplace(create_qt_lib_pri){
 ################################################
 ##QQt install workflow
 ##used to output sdk, can't support windows and ios
+##this don't need any other path set.
 ################################################
 contains(CONFIG, qqt_create_sdk){
     MODULE_NAME=QQt

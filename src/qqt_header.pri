@@ -133,14 +133,6 @@ contains(QKIT_PRIVATE, iOS||iOSSimulator||macOS) {
     DEFINES -= __PLUGINWATCHER__
 }
 
-##################Process Module###############################
-#if you use qprocess , open this annotation
-DEFINES += __PROCESSMODULE__
-#ios has no backend process
-contains(QKIT_PRIVATE, iOS||iOSSimulator) {
-    DEFINES -= __PROCESSMODULE__
-}
-
 ##################PrintSupport Module###############################
 #if you use printsupport , open this annotation
 DEFINES += __PRINTSUPPORT__
@@ -165,18 +157,20 @@ contains (DEFINES, __PRINTSUPPORT__) {
 ##################Exquisite Module###############################
 #if you use Exquisite widgets, open this annotation
 DEFINES += __EXQUISITE__
-#if you use QR encode, open this annotation
-DEFINES += __QRENCODE__
-#if you use Svg widgets, open this annotation
-DEFINES += __SVGWIDGETS__
-contains (DEFINES, __SVGWIDGETS__) {
-    QT += svg
+contains (DEFINES, __EXQUISITE__) {
+    #if you use QR encode, open this annotation
+    DEFINES += __QRENCODE__
+    #if you use Svg widgets, open this annotation
+    DEFINES += __SVGWIDGETS__
+    contains (DEFINES, __SVGWIDGETS__) {
+        QT += svg
+    }
 }
 ##################WebSocket Module###############################
-#if you use QtSoap, open this annotation
-DEFINES += __QTSOAP__
 #don't close this macro ...
 DEFINES += __TCPUDPSOCKET__
+#if you use Qt Service Spoort ( QtSoap ), open this annotation
+DEFINES += __WEBSERVICESUPPORT__
 #One Ftp Http 单工...
 #Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
 #if you use QNetworkAccessManagerSupport , open this annotation
@@ -228,19 +222,17 @@ win32 {
 INCLUDEPATH += $$PWD
 INCLUDEPATH += $$PWD/core
 INCLUDEPATH += $$PWD/customplot
-# c support
-INCLUDEPATH += $$PWD/dmmu
 INCLUDEPATH += $$PWD/frame
+INCLUDEPATH += $$PWD/frame/dmmu
 INCLUDEPATH += $$PWD/gui
 INCLUDEPATH += $$PWD/multimedia
 INCLUDEPATH += $$PWD/network
 INCLUDEPATH += $$PWD/network/qextserialport
+INCLUDEPATH += $$PWD/network/soap
 INCLUDEPATH += $$PWD/pluginwatcher
 INCLUDEPATH += $$PWD/printsupport
 INCLUDEPATH += $$PWD/sql
 INCLUDEPATH += $$PWD/widgets
 INCLUDEPATH += $$PWD/exquisite
-# c support
-INCLUDEPATH += $$PWD/qrencode
-INCLUDEPATH += $$PWD/soap
-INCLUDEPATH += $$PWD/svgwidgets
+INCLUDEPATH += $$PWD/exquisite/qrencode
+INCLUDEPATH += $$PWD/exquisite/svgwidgets
