@@ -3,11 +3,12 @@
 
 #include <qqtwidget.h>
 #include <qqt-local.h>
+#include <qqtcore.h>
 
 class QQTSHARED_EXPORT QQtWifiDBWidget : public QQtWidget
 {
     Q_OBJECT
-    Q_ENUMS(DB_STAT)
+    Q_ENUMS ( DB_STAT )
 
 public:
     enum DB_STAT
@@ -21,11 +22,11 @@ public:
         Db_SMax
     };
 
-    explicit QQtWifiDBWidget(QWidget* parent = nullptr);
+    explicit QQtWifiDBWidget ( QWidget* parent = nullptr );
     virtual ~QQtWifiDBWidget() {}
 
-    void setDB(DB_STAT s);
-    void setDbPixMap(DB_STAT s, QString pixname);
+    void setDB ( DB_STAT s );
+    void setDbPixMap ( DB_STAT s, QString pixname );
 
 signals:
 

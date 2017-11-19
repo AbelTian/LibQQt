@@ -7,7 +7,7 @@
 ##2017年10月29日08:54:28
 ################################################
 
-#TARGET must be equals to pro name ? no, TARGET must place before qqt_library.pri
+#TARGET must be equals to pro name ? no, TARGET must be placeed before qqt_library.pri
 #qmake pro pri is sequential
 
 message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
@@ -20,7 +20,7 @@ contains(CONFIG, link_from_build) {
     QQT_BUILD_OUT_PWD = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src/$${DESTDIR}
     QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_BUILD_OUT_PWD}
 } else {
-    QQT_LIB_PWD = $$PWD/../sdk/lib
+    QQT_LIB_PWD = $$absolute_path($$PWD/../sdk/lib)
 }
 message (Link QQt from: $$QQT_LIB_PWD)
 
@@ -69,6 +69,7 @@ equals(QKIT_PRIVATE, macOS) {
     QMAKE_POST_LINK += cd bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
     QMAKE_POST_LINK += $${command} &&
     QMAKE_POST_LINK += cd $${OUT_PWD} &&
+    #Qt Creator create framework but use absolute path to make link
     #QMAKE_POST_LINK += cp -rf $${QQT_LIB_PWD}/QQt.framework \
     #        bin/$${TARGET}.app/Contents/Frameworks &&
     QMAKE_POST_LINK += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \

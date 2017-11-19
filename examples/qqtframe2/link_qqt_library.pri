@@ -2,11 +2,11 @@
 #you can modify this pri to link qqt_library
 
 equals(QMAKE_HOST.os, Darwin) {
-    QQT_SOURCE_ROOT = /Users/abel/Develop/a0-develop/a0-qqtfoundation
+    QQT_SOURCE_ROOT = $$PWD/../../
 } else: equals(QMAKE_HOST.os, Linux) {
-    QQT_SOURCE_ROOT = /home/abel/Develop/a0-develop/LibQt
+    QQT_SOURCE_ROOT = $$PWD/../../
 } else: equals(QMAKE_HOST.os, Windows) {
-    QQT_SOURCE_ROOT = C:/Users/Administrator/Develop/a0-develop/LibQt
+    QQT_SOURCE_ROOT = $$PWD/../../
 }
 
 #qqt qkit
@@ -29,7 +29,7 @@ include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
 #qqt library or qqt source
 #CONFIG += BUILD_SRC
 contains (CONFIG, BUILD_SRC) {
-    #if you want to build src but not link QQt in this project
+    #if you want to build src but not link QQt in your project
     include($${QQT_SOURCE_ROOT}/src/qqt_source.pri)
 } else {
     #QKIT_PRIVATE from qqt_header.pri

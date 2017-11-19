@@ -17,15 +17,13 @@ SUBDIRS = src/qqt.pro
 #QQt is build
 #-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe3
-#
-SUBDIRS += examples/exquisite
+#SUBDIRS += examples/exquisite
 #can't support ios
 #SUBDIRS += examples/qqtprintsupportexample
 #
 SUBDIRS += examples/tabwidgetexamples
-#
-SUBDIRS += examples/svgtest
-SUBDIRS += examples/treeviewexample
+#SUBDIRS += examples/svgtest
+#SUBDIRS += examples/treeviewexample
 
 #-----------------------------------------------------------------
 #need vlcQt libvlc library
@@ -56,6 +54,7 @@ SUBDIRS += examples/treeviewexample
 
 #-----------------------------------------------------------------
 #some example project
+#maybe demo
 #-----------------------------------------------------------------
 #SUBDIRS += examples/cmdwidget
 #SUBDIRS += examples/VegeTablesPrice

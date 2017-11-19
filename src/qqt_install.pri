@@ -232,15 +232,15 @@ defineReplace(create_qt_lib_pri){
 
 ################################################
 ##QQt install workflow
+##used to output sdk, can't support windows and ios
 ################################################
-#use to output sdk
 contains(CONFIG, qqt_create_sdk){
     MODULE_NAME=QQt
     module_name = $$lower($${MODULE_NAME})
 
     QQT_BUILD_DIR=$$OUT_PWD/bin
     #sdk path
-    QQT_SDK_DIR = $$PWD/../sdk
+    QQT_SDK_DIR = $$absolute_path($$PWD/../sdk)
     message(QQt sdk install here:$${QQT_SDK_DIR})
 
     QQT_INC_DIR = include/$${MODULE_NAME}
