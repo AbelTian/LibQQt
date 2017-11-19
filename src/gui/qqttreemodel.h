@@ -9,11 +9,11 @@
  * define the tree model's functions name.
  */
 
-class QQTSHARED_EXPORT QQTTreeModel : public QStandardItemModel
+class QQTSHARED_EXPORT QQtTreeModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
-    explicit QQTTreeModel(QObject* parent = 0);
+    explicit QQtTreeModel(QObject* parent = 0);
 
     /**
      * @brief query

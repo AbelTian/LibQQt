@@ -29,7 +29,7 @@ public:
 
     void selectedRows(int column, QMap<int, QStringList>& ids);
 private:
-    QQTTableModel* m_model;
+    QQtTableModel* m_model;
     QSqlDatabase m_db;
 };
 

@@ -1,17 +1,17 @@
 #include "qqttablemodel.h"
 
-QQTTableModel::QQTTableModel(QObject* parent, QSqlDatabase db):
+QQtTableModel::QQtTableModel(QObject* parent, QSqlDatabase db):
     QSqlRelationalTableModel(parent, db)
 {
 }
 
-void QQTTableModel::query(QString filter)
+void QQtTableModel::query(QString filter)
 {
     setFilter(filter);
     select();
 }
 
-QVariant QQTTableModel::data(const QModelIndex& index, int role) const
+QVariant QQtTableModel::data(const QModelIndex& index, int role) const
 {
     switch (role)
     {
@@ -26,12 +26,12 @@ QVariant QQTTableModel::data(const QModelIndex& index, int role) const
 }
 
 
-bool QQTTableModel::setData(const QModelIndex& index, const QVariant& value, int role)
+bool QQtTableModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     return QSqlRelationalTableModel::setData(index, value, role);
 }
 
-Qt::ItemFlags QQTTableModel::flags(const QModelIndex& index) const
+Qt::ItemFlags QQtTableModel::flags(const QModelIndex& index) const
 {
     return QSqlRelationalTableModel::flags(index);
 }

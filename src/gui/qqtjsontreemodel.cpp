@@ -1,14 +1,14 @@
-#include "qqtxmltreemodel.h"
+#include "qqtjsontreemodel.h"
 #include <QFile>
 #include "qqtcore.h"
 #include <QModelIndex>
 
-QQTXmlTreeModel::QQTXmlTreeModel ( QObject* parent ) : QQtTreeModel ( parent )
+QQtJsonTreeModel::QQtJsonTreeModel ( QObject* parent ) : QQtTreeModel ( parent )
 {
 
 }
 
-void QQTXmlTreeModel::setFilePath ( QString fileName )
+void QQtJsonTreeModel::setFilePath ( QString fileName )
 {
     QFile file ( fileName );
 
@@ -44,7 +44,7 @@ void QQTXmlTreeModel::setFilePath ( QString fileName )
     return;
 }
 
-bool QQTXmlTreeModel::query ( QString condition )
+bool QQtJsonTreeModel::query ( QString condition )
 {
     Q_UNUSED ( condition )
     //TODO:
@@ -57,7 +57,7 @@ bool QQTXmlTreeModel::query ( QString condition )
  * @param parent
  * 这套递归代码，第一次和最后一次不同。
  */
-void QQTXmlTreeModel::parseChildElement ( const QDomElement& element, QStandardItem* itemParent )
+void QQtJsonTreeModel::parseChildElement ( const QDomElement& element, QStandardItem* itemParent )
 {
     /**
      * @brief element name

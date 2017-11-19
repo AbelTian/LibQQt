@@ -17,7 +17,7 @@ public:
 public slots:
 
 private:
-    QQTTreeModel* mModel;
+    QQtTreeModel* mModel;
 };
 
 #endif // QQTTREEWIDGET_H

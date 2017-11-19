@@ -1,22 +1,22 @@
-#ifndef QQTXMLTREEMODEL_H
-#define QQTXMLTREEMODEL_H
+#ifndef QQTJSONTREEMODEL_H
+#define QQTJSONTREEMODEL_H
 
 #include <qqttreemodel.h>
 #include <QDomDocument>
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT QQTXmlTreeModel : public QQtTreeModel
+class QQTSHARED_EXPORT QQtJsonTreeModel : public QQtTreeModel
 {
     Q_OBJECT
 public:
-    explicit QQTXmlTreeModel ( QObject* parent = 0 );
+    explicit QQtJsonTreeModel ( QObject* parent = 0 );
 
 
 signals:
 
 public slots:
 
-    // QQtTreeModel interface
+    // QQtJsonTreeModel interface
 public:
     bool query ( QString condition ) override;
     void setFilePath ( QString xmlfile ) override;
@@ -32,4 +32,4 @@ private:
     QDomDocument doc;
 };
 
-#endif // QQTXMLTREEMODEL_H
+#endif // QQTJSONTREEMODEL_H

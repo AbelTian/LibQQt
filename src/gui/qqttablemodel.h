@@ -5,14 +5,14 @@
 #include <qqt-local.h>
 
 /**
- * @brief The QQTTableModel class
+ * @brief The QQtTableModel class
  * QQTSqlRelationalTableModel 方便起见，仅仅使用这个model
  */
-class QQTSHARED_EXPORT QQTTableModel :  public QSqlRelationalTableModel
+class QQTSHARED_EXPORT QQtTableModel :  public QSqlRelationalTableModel
 {
     Q_OBJECT
 public:
-    explicit QQTTableModel(QObject* parent = 0, QSqlDatabase db = QSqlDatabase());
+    explicit QQtTableModel(QObject* parent = 0, QSqlDatabase db = QSqlDatabase());
 
     void query(QString filter);
 

@@ -12,23 +12,9 @@
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
 #-------------------------------------------------
+SOURCES +=
+HEADERS +=
 
-SOURCES += \
-    $$PWD/svgwidgets/qqtsvgwidget.cpp \
-    $$PWD/svgwidgets/qqtsvgpushbutton.cpp \
-    $$PWD/svgwidgets/qqtsvgcheckbox.cpp \
-    $$PWD/svgwidgets/qqtsvgradiobutton.cpp \
-    $$PWD/svgwidgets/qqtgraphicssvgitem.cpp \
-    $$PWD/svgwidgets/qqtsvglabel.cpp \
-    $$PWD/svgwidgets/qqtsvgprogressbar.cpp
-HEADERS += \
-    $$PWD/svgwidgets/qqtsvgwidget.h \
-    $$PWD/svgwidgets/qqtsvgpushbutton.h \
-    $$PWD/svgwidgets/qqtsvgcheckbox.h \
-    $$PWD/svgwidgets/qqtsvgradiobutton.h \
-    $$PWD/svgwidgets/qqtgraphicssvgitem.h \
-    $$PWD/svgwidgets/qqtsvglabel.h \
-    $$PWD/svgwidgets/qqtsvgprogressbar.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \
@@ -71,6 +57,8 @@ SOURCES += \
     $$PWD/gui/qqtsqltreemodel.cpp \
     $$PWD/gui/qqttablemodel.cpp \
     $$PWD/gui/qqttreemodel.cpp \
+    $$PWD/gui/qqtfilesystemtreemodel.cpp \
+    $$PWD/gui/qqtjsontreemodel.cpp \
     $$PWD/gui/qqtxmltreemodel.cpp
 
 HEADERS += \
@@ -78,6 +66,8 @@ HEADERS += \
     $$PWD/gui/qqtsqltreemodel.h \
     $$PWD/gui/qqttablemodel.h \
     $$PWD/gui/qqttreemodel.h \
+    $$PWD/gui/qqtfilesystemtreemodel.h \
+    $$PWD/gui/qqtjsontreemodel.h \
     $$PWD/gui/qqtxmltreemodel.h \
     $$PWD/gui/qqtgui.h
 
@@ -430,4 +420,23 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
     HEADERS += \
         $$PWD/network/qqtwebclient.h \
         $$PWD/network/qqtwebserver.h
+}
+
+contains (DEFINES, __SVGWIDGETS__) {
+    SOURCES += \
+        $$PWD/svgwidgets/qqtsvgwidget.cpp \
+        $$PWD/svgwidgets/qqtsvgpushbutton.cpp \
+        $$PWD/svgwidgets/qqtsvgcheckbox.cpp \
+        $$PWD/svgwidgets/qqtsvgradiobutton.cpp \
+        $$PWD/svgwidgets/qqtgraphicssvgitem.cpp \
+        $$PWD/svgwidgets/qqtsvglabel.cpp \
+        $$PWD/svgwidgets/qqtsvgprogressbar.cpp
+    HEADERS += \
+        $$PWD/svgwidgets/qqtsvgwidget.h \
+        $$PWD/svgwidgets/qqtsvgpushbutton.h \
+        $$PWD/svgwidgets/qqtsvgcheckbox.h \
+        $$PWD/svgwidgets/qqtsvgradiobutton.h \
+        $$PWD/svgwidgets/qqtgraphicssvgitem.h \
+        $$PWD/svgwidgets/qqtsvglabel.h \
+        $$PWD/svgwidgets/qqtsvgprogressbar.h
 }

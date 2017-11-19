@@ -7,7 +7,7 @@ QQtTableWidget::QQtTableWidget(QWidget* parent) :
     QQtTableView(parent)
 {
     m_db = newDatabaseConn();
-    m_model = new QQTTableModel(this, m_db);
+    m_model = new QQtTableModel(this, m_db);
     setModel(m_model);
     /*
      * 如果没有这个函数，程序存在启动崩溃的情况。

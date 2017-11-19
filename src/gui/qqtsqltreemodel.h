@@ -6,25 +6,30 @@
 #include <QList>
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT QQTSqlTreeModel : public QQTTreeModel
+/**
+ * @brief The QQtSqlTreeModel class
+ * 按照树的样式来显示数据库
+ */
+class QQTSHARED_EXPORT QQtSqlTreeModel : public QQtTreeModel
 {
     Q_OBJECT
 public:
-    explicit QQTSqlTreeModel(QObject* parent = 0);
+    explicit QQtSqlTreeModel ( QObject* parent = 0 );
 
     //TODO:
+    QSqlDatabase& database() { return m_db; }
+    void setAbsoluteFilePath ( QString dbname );
 
-    // QQTVirtualTreeModel interface
+    // QQtSqlTreeModel interface
 public:
-    bool query(QString condition) override;
-    void setFilePath(QString dbname) override;
-
+    virtual bool query ( QString condition = "" ) override;
+    virtual void setFilePath ( QString dbname ) override;
 protected:
-    bool parseDatabase();
-    bool parseTable(QString tableName);
+    virtual bool parseDatabase();
+    virtual bool parseTable ( QString tableName );
 private:
     QSqlDatabase m_db;
-    QList<QQTTableModel*> tableModelList;
+    QList<QQtTableModel*> tableModelList;
 };
 
 #endif // QQTSQLTREEMODEL_H
