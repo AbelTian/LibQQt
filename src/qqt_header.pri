@@ -172,6 +172,7 @@ contains (DEFINES, __EXQUISITE__) {
         QT += svg
     }
     #c++ html parser query
+    #need std support
     #if you use Gumbo parser query, open this annotation
     DEFINES += __GUMBOSUPPORT__
 }

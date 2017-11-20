@@ -1,8 +1,8 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = src/qqt.pro \
-    examples/qrcodeexample
+SUBDIRS = src/qqt.pro
+
 #-----------------------------------------------------------------
 #basic example
 #-----------------------------------------------------------------
@@ -19,11 +19,15 @@ SUBDIRS = src/qqt.pro \
 #-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe3
 #SUBDIRS += examples/exquisite
-#can't support ios
-#SUBDIRS += examples/qqtprintsupportexample
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/svgtest
 #SUBDIRS += examples/treeviewexample
+#
+SUBDIRS += examples/qrcodeexample
+#SUBDIRS += examples/gumbo_query_test
+
+#can't support ios
+#SUBDIRS += examples/qqtprintsupportexample
 
 #-----------------------------------------------------------------
 #need vlcQt libvlc library
@@ -57,7 +61,8 @@ SUBDIRS = src/qqt.pro \
 #maybe demo
 #-----------------------------------------------------------------
 #SUBDIRS += examples/cmdwidget
-#SUBDIRS += examples/VegeTablesPrice
+#
+SUBDIRS += examples/VegeTablesPrice
 #SUBDIRS += examples/QtBuildTool
 #SUBDIRS += examples/QtSdkManager
 #SUBDIRS += examples/QQtInstaller

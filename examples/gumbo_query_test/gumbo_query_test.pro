@@ -1,17 +1,13 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2017-10-29T10:04:08
-#
-#-------------------------------------------------
-QT       += core gui
+QT -= gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+CONFIG += c++11
+#CONFIG += console
+#去掉console，调试的时候没有弹出命令窗口
 
-TARGET = VegeTablesPrice
-TEMPLATE = app
+CONFIG -= app_bundle
 
 # The following define makes your compiler emit warnings if you use
-# any feature of Qt which has been marked as deprecated (the exact warnings
+# any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -21,21 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-        main.cpp \
-    mainwindow.cpp
-
-HEADERS += \
-    mainwindow.h
-
-FORMS += \
-    mainwindow.ui
+SOURCES += main.cpp
 
 #-------------------------------------------------
 #link qqt library
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
 #-------------------------------------------------
-include(../qqtframe2/link_qqt_library.pri)
+include(../../examples/qqtframe2/link_qqt_library.pri)
 
 #-------------------------------------------------
 #install
