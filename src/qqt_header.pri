@@ -160,6 +160,12 @@ DEFINES += __EXQUISITE__
 contains (DEFINES, __EXQUISITE__) {
     #if you use QR encode, open this annotation
     DEFINES += __QRENCODE__
+    #if you use QR decode, open this annotation
+    DEFINES += __QRDECODE__
+    contains(DEFINES, __QRDECODE__) {
+        #lessThan(QT_MAJOR_VERSION, 5): QT += declarative
+        greaterThan(QT_MAJOR_VERSION, 4): QT += quick
+    }
     #if you use Svg widgets, open this annotation
     DEFINES += __SVGWIDGETS__
     contains (DEFINES, __SVGWIDGETS__) {
@@ -233,6 +239,17 @@ INCLUDEPATH += $$PWD/pluginwatcher
 INCLUDEPATH += $$PWD/printsupport
 INCLUDEPATH += $$PWD/sql
 INCLUDEPATH += $$PWD/widgets
+
+#exquisite widget
 INCLUDEPATH += $$PWD/exquisite
-INCLUDEPATH += $$PWD/exquisite/qrencode
 INCLUDEPATH += $$PWD/exquisite/svgwidgets
+INCLUDEPATH += $$PWD/exquisite/qrcode/qrencode
+INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode
+INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode/zxing
+win32-g++{
+    INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode/zxing/win32/zxing
+}
+win32-msvc*{
+    INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode/zxing/win32/zxing \
+                $$PWD/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
+}

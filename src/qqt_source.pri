@@ -369,6 +369,7 @@ contains (DEFINES, __EXQUISITE__) {
     HEADERS += \
         $$PWD/exquisite/qqtcustomspeedmeter.h \
         $$PWD/exquisite/qqtcustomeffectprogressbar.h
+
     #label
     SOURCES += \
         $$PWD/exquisite/qqtledbannereffectlabel.cpp \
@@ -393,39 +394,6 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtslideeffecttabbar.h \
         $$PWD/exquisite/qqtslideeffecttabwidget.h
 
-    #qrcode widgets
-    #DEFINES += __QRENCODE__
-    contains (DEFINES, __QRENCODE__) {
-        HEADERS += \
-            $$PWD/exquisite/qqtcustomqrencodewidget.h
-        SOURCES += \
-            $$PWD/exquisite/qqtcustomqrencodewidget.cpp
-
-        HEADERS += \
-            $$PWD/exquisite/qrencode/bitstream.h \
-            $$PWD/exquisite/qrencode/config.h \
-            $$PWD/exquisite/qrencode/mask.h \
-            $$PWD/exquisite/qrencode/mmask.h \
-            $$PWD/exquisite/qrencode/mqrspec.h \
-            $$PWD/exquisite/qrencode/qrencode.h \
-            $$PWD/exquisite/qrencode/qrencode_inner.h \
-            $$PWD/exquisite/qrencode/qrinput.h \
-            $$PWD/exquisite/qrencode/qrspec.h \
-            $$PWD/exquisite/qrencode/rscode.h \
-            $$PWD/exquisite/qrencode/split.h
-
-        SOURCES += \
-            $$PWD/exquisite/qrencode/bitstream.c \
-            $$PWD/exquisite/qrencode/mask.c \
-            $$PWD/exquisite/qrencode/mmask.c \
-            $$PWD/exquisite/qrencode/mqrspec.c \
-            $$PWD/exquisite/qrencode/qrencode.c \
-            $$PWD/exquisite/qrencode/qrinput.c \
-            $$PWD/exquisite/qrencode/qrspec.c \
-            $$PWD/exquisite/qrencode/rscode.c \
-            $$PWD/exquisite/qrencode/split.c
-    }
-
     #svg widgets
     contains (DEFINES, __SVGWIDGETS__) {
         SOURCES += \
@@ -447,4 +415,4 @@ contains (DEFINES, __EXQUISITE__) {
     }
 }
 
-
+include ($$PWD/qqt_3rdparty.pri)

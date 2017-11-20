@@ -1,7 +1,8 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = src/qqt.pro
+SUBDIRS = src/qqt.pro \
+    examples/qrcodeexample
 #-----------------------------------------------------------------
 #basic example
 #-----------------------------------------------------------------
@@ -20,8 +21,7 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/exquisite
 #can't support ios
 #SUBDIRS += examples/qqtprintsupportexample
-#
-SUBDIRS += examples/tabwidgetexamples
+#SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/svgtest
 #SUBDIRS += examples/treeviewexample
 
