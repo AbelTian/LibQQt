@@ -28,7 +28,7 @@ QQtWebWorkClient::QQtWebWorkClient ( QObject* parent ) : QNetworkAccessManager (
               this, SLOT ( networkSessionConnected() ) );
 }
 
-void QQtWebWorkClient::getRequest ( QString& strUrl )
+void QQtWebWorkClient::sendGetRequest ( QString& strUrl )
 {
     QQtWebWorkSession* s0 = new QQtWebWorkSession ( this );
 
@@ -52,6 +52,7 @@ void QQtWebWorkClient::getRequest ( QString& strUrl )
     }
 
     s0->m_pNetworkReply = get ( netRequest ); //发起get请求
+    m_listWebWorkSession.push_back ( s0 );
     /*下面关联信号和槽*/
 
     /*下载完成后开始一阵一阵堆取数据*/
@@ -71,7 +72,7 @@ void QQtWebWorkClient::getRequest ( QString& strUrl )
     s0->m_pTimer->start ( );
 }
 
-void QQtWebWorkClient::postRequest ( QString& strUrl )
+void QQtWebWorkClient::sendPostRequest ( QString& strUrl )
 {
     //post
 //    QString strBody; //http body部分，可封装参数信息
@@ -101,9 +102,11 @@ void QQtWebWorkClient::finished ( QNetworkReply* reply )
     if ( !s0 )
         return;
 
+    pline() << s0->m_pNetworkReply << s0->m_pTimer;
+
+    s0->m_pTimer->stop();
     s0->m_pNetworkReply->deleteLater();
     m_listWebWorkSession.removeOne ( s0 );
-
 }
 
 void QQtWebWorkClient::authenticationRequired ( QNetworkReply* r, QAuthenticator* a )

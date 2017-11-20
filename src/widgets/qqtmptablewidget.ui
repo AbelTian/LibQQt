@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QQTMPTableWidget</class>
- <widget class="QWidget" name="QQTMPTableWidget">
+ <class>QQtMPTableWidget</class>
+ <widget class="QWidget" name="QQtMPTableWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

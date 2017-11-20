@@ -22,9 +22,9 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/svgtest
 #SUBDIRS += examples/treeviewexample
+#SUBDIRS += examples/qrcodeexample
 #
-SUBDIRS += examples/qrcodeexample
-#SUBDIRS += examples/gumbo_query_test
+SUBDIRS += examples/gumbo_query_test
 
 #can't support ios
 #SUBDIRS += examples/qqtprintsupportexample

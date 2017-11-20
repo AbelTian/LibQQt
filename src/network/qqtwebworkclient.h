@@ -17,27 +17,15 @@
  * Multi New Protocol 全双工 QWebSocket
  * need ssl
  */
-class QQtWebWorkSession : QObject
-{
-    Q_OBJECT
-public:
-    explicit QQtWebWorkSession ( QObject* parent ) :
-        QObject ( parent ) {}
-    virtual ~QQtWebWorkSession() {}
-
-    QNetworkReply* m_pNetworkReply; //封装请求返回信息
-    QTimer* m_pTimer; //请求超时计时器
-    QString m_strUrl; //记录当前请求的url
-} ;
-
+class QQtWebWorkSession;
 class QQTSHARED_EXPORT QQtWebWorkClient : public QNetworkAccessManager
 {
     Q_OBJECT
 public:
     explicit QQtWebWorkClient ( QObject* parent = 0 );
 
-    void getRequest ( QString& strUrl );
-    void postRequest ( QString& strUrl );
+    void sendGetRequest ( QString& strUrl );
+    void sendPostRequest ( QString& strUrl );
     //void installProtocol();
     //void uninstallProtocol();
 
@@ -69,5 +57,18 @@ private:
 
     QList<QQtWebWorkSession*> m_listWebWorkSession;
 };
+
+class QQtWebWorkSession : QObject
+{
+    Q_OBJECT
+public:
+    explicit QQtWebWorkSession ( QObject* parent ) :
+        QObject ( parent ) {}
+    virtual ~QQtWebWorkSession() {}
+
+    QNetworkReply* m_pNetworkReply; //封装请求返回信息
+    QTimer* m_pTimer; //请求超时计时器
+    QString m_strUrl; //记录当前请求的url
+} ;
 
 #endif // QQTWEBWORKCLIENT_H

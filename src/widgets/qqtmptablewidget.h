@@ -9,43 +9,43 @@
 #include "qqt-local.h"
 
 namespace Ui {
-class QQTMPTableWidget;
+class QQtMPTableWidget;
 }
 
 /**
- * @brief The QQTMPTableWidget class
+ * @brief The QQtMPTableWidget class
  * 关于视图规格的改变改变到上层
  * 这里的控件使用默认视图
  * 这里的控件只是Table-DB关系，没有Tree/List模型
  */
-class QQTSHARED_EXPORT QQTMPTableWidget : public QWidget
+class QQTSHARED_EXPORT QQtMPTableWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit QQTMPTableWidget(QWidget* parent = 0);
-    ~QQTMPTableWidget();
+    explicit QQtMPTableWidget ( QWidget* parent = 0 );
+    ~QQtMPTableWidget();
 
-    void setDB(QString db);
-    void setTable(QString table);
-    void setRelation(int column, const QSqlRelation& relation);
-    void setRecordNumPerPage(int num);
-    void setColumnHidden(int key, bool value = true);
-    void setSelectionMode(QAbstractItemView::SelectionMode mode = QAbstractItemView::MultiSelection);
-    void setResizeMode(QHeaderView::ResizeMode mode = QHeaderView::ResizeToContents);
-    void setResizeMode(int column, QHeaderView::ResizeMode mode = QHeaderView::ResizeToContents);
-    void setAlternatingRowColors(bool alt = true);
-    void setHeaderData(int i, Qt::Orientation, QString data);
-    void setColumnWidth(int column, int width);
-    void query(QString filter = "1=1");
-    void selectedRows(int column, QVector<QStringList>& strl);
-    QQtTableWidget* selectedRows(int column = 0);
+    void setDB ( QString db );
+    void setTable ( QString table );
+    void setRelation ( int column, const QSqlRelation& relation );
+    void setRecordNumPerPage ( int num );
+    void setColumnHidden ( int key, bool value = true );
+    void setSelectionMode ( QAbstractItemView::SelectionMode mode = QAbstractItemView::MultiSelection );
+    void setResizeMode ( QHeaderView::ResizeMode mode = QHeaderView::ResizeToContents );
+    void setResizeMode ( int column, QHeaderView::ResizeMode mode = QHeaderView::ResizeToContents );
+    void setAlternatingRowColors ( bool alt = true );
+    void setHeaderData ( int i, Qt::Orientation, QString data );
+    void setColumnWidth ( int column, int width );
+    void query ( QString filter = "1=1" );
+    void selectedRows ( int column, QVector<QStringList>& strl );
+    QQtTableWidget* selectedRows ( int column = 0 );
     int pageNum();
     int currentPage();
-    void setCurrentPage(int page);
+    void setCurrentPage ( int page );
 
 public slots:
-    void removeSelectedRows(int column = 0);
+    void removeSelectedRows ( int column = 0 );
 
 private slots:
     void on_btnLeft_clicked();
@@ -59,7 +59,7 @@ private slots:
     void on_btnRightHead_clicked();
 
 private:
-    Ui::QQTMPTableWidget* ui;
+    Ui::QQtMPTableWidget* ui;
     QSqlDatabase m_db;
     QString m_name;
     QString m_table;
