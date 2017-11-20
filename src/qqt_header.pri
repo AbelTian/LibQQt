@@ -171,6 +171,9 @@ contains (DEFINES, __EXQUISITE__) {
     contains (DEFINES, __SVGWIDGETS__) {
         QT += svg
     }
+    #c++ html parser query
+    #if you use Gumbo parser query, open this annotation
+    DEFINES += __GUMBOSUPPORT__
 }
 ##################WebSocket Module###############################
 #don't close this macro ...
@@ -243,6 +246,8 @@ INCLUDEPATH += $$PWD/widgets
 #exquisite widget
 INCLUDEPATH += $$PWD/exquisite
 INCLUDEPATH += $$PWD/exquisite/svgwidgets
+
+##qr code library
 INCLUDEPATH += $$PWD/exquisite/qrcode/qrencode
 INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode
 INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode/zxing
@@ -252,4 +257,11 @@ win32-g++{
 win32-msvc*{
     INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode/zxing/win32/zxing \
                 $$PWD/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
+}
+
+##gumbo library
+INCLUDEPATH += $$PWD/exquisite/gumbo/parser/src
+INCLUDEPATH += $$PWD/exquisite/gumbo/query/src
+win32{
+    INCLUDEPATH += $$PWD/visualc/include
 }
