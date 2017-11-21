@@ -178,7 +178,8 @@ contains (DEFINES, __PRINTSUPPORT__) {
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
             } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                DEFINES += QCUSTOMPLOT_USE_LIBRARY
+                #build static library - customplot
+                DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
             }
         }
         SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \

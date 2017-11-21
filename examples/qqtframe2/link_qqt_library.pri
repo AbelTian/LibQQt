@@ -17,10 +17,17 @@ include($${QQT_SOURCE_ROOT}/src/qqt_version.pri)
 
 #link QQt static library in some occation
 equals(QKIT_PRIVATE, WIN32) {
-    #when Qt is static by mingw32 building 5.9.1
-    equals(QT_VERSION, 5.9.1){
+    #Qt is static by mingw32 building
+    mingw{
         DEFINES += QQT_STATIC_LIBRARY
     }
+}
+
+contains(DEFINES, QQT_STATIC_LIBRARY) {
+    DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
+    DEFINES += QZXING_STATIC_LIBRARY
+    DEFINES += QT_QTSOAP_STATIC_LIBRARY
+    DEFINES += BUILD_QDEVICEWATCHER_STATIC
 }
 
 #qqt header

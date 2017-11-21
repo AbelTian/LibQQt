@@ -136,14 +136,14 @@ contains(QKIT_PRIVATE, iOS||iOSSimulator||macOS) {
 ##################PrintSupport Module###############################
 #if you use printsupport , open this annotation
 DEFINES += __PRINTSUPPORT__
-#Qt5.9.1, ios android can't support this feature.
-#Qt5.9.1, broken
+#Qt 5.9.1, ios and android can't support this feature, because Qt 5.9.1, broken
 equals(QT_VERSION, 5.9.1) {
     contains(QKIT_PRIVATE, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
         DEFINES -= __PRINTSUPPORT__
     }
 }
-#ios can't use printsupport
+#Qt 5.9.2, android support this feature
+#Qt 5.9.2, ios can't use printsupport, but Qt Charts work well, it don't use QPrinter.
 contains(QKIT_PRIVATE, iOS||iOSSimulator) {
     DEFINES -= __PRINTSUPPORT__
 }
@@ -151,6 +151,7 @@ contains (DEFINES, __PRINTSUPPORT__) {
     #qtHaveModule(printsupport) : message(qqt use module printsupport)
     greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
     #if you use qcustomplot, open this annotation
+    #qcustomplot use QPrinter to export png file.
     DEFINES += __CUSTOMPLOT__
 }
 

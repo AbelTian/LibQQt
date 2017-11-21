@@ -15,6 +15,8 @@
 #include <QWidget>
 #include <QAction>
 #include <QMenu>
+#include "qqtcore.h"
+#include "qqt-local.h"
 
 typedef enum
 {
@@ -23,12 +25,13 @@ typedef enum
     DOWN,
 } E_DIRECTION;
 
-class QQtCustomQrDecodeWidget : public QWidget
+
+class QQTSHARED_EXPORT QQtCustomQrDecodeWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    QQtCustomQrDecodeWidget ( QWidget* parent = 0 );
+    QQtCustomQrDecodeWidget(QWidget* parent = 0);
     ~QQtCustomQrDecodeWidget();
 
 protected:
@@ -40,17 +43,17 @@ protected:
     QString m_strScanResult;
 
 protected:
-    void mousePressEvent ( QMouseEvent* e );
-    void mouseMoveEvent ( QMouseEvent* e );
-    void mouseReleaseEvent ( QMouseEvent* );
+    void mousePressEvent(QMouseEvent* e);
+    void mouseMoveEvent(QMouseEvent* e);
+    void mouseReleaseEvent(QMouseEvent*);
 
-    void paintEvent ( QPaintEvent* e );
-    void timerEvent ( QTimerEvent* event );
+    void paintEvent(QPaintEvent* e);
+    void timerEvent(QTimerEvent* event);
 
 private:
     QMenu* mainMenu;
 private slots:
-    void SltActionTriggered ( QAction* action );
+    void SltActionTriggered(QAction* action);
 
 private:
     void ScanRecord();
