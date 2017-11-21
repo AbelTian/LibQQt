@@ -23,8 +23,7 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/svgtest
 #SUBDIRS += examples/treeviewexample
 #SUBDIRS += examples/qrcodeexample
-#
-SUBDIRS += examples/gumbo_query_test
+#SUBDIRS += examples/gumbo_query_test
 
 #can't support ios
 #SUBDIRS += examples/qqtprintsupportexample
@@ -61,8 +60,7 @@ SUBDIRS += examples/gumbo_query_test
 #maybe demo
 #-----------------------------------------------------------------
 #SUBDIRS += examples/cmdwidget
-#
-SUBDIRS += examples/VegeTablesPrice
+#SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS += examples/QtBuildTool
 #SUBDIRS += examples/QtSdkManager
 #SUBDIRS += examples/QQtInstaller
