@@ -13,7 +13,7 @@ QQTWindow::QQTWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QQTObjectFactory::registerObject(this);
+    QQtObjectFactory::registerObject(this);
 
 #ifdef __EMBEDDED_LINUX__
     /*

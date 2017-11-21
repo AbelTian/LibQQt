@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QQTMsgBox</class>
- <widget class="QQtDialog" name="QQTMsgBox">
+ <class>QQtMsgBox</class>
+ <widget class="QQtDialog" name="QQtMsgBox">
   <property name="geometry">
    <rect>
     <x>0</x>

@@ -21,21 +21,21 @@ extern "C" {
 #endif  /* __cplusplus */
 
 namespace Ui {
-class QQTPreviewWidget;
+class QQtPreviewWidget;
 }
 
-class QQTSHARED_EXPORT QQTPreviewWidget : public QWidget
+class QQTSHARED_EXPORT QQtPreviewWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit QQTPreviewWidget(QWidget* parent = 0);
-    ~QQTPreviewWidget();
+    explicit QQtPreviewWidget ( QWidget* parent = 0 );
+    ~QQtPreviewWidget();
     int play();
     int close();
 
 private:
-    Ui::QQTPreviewWidget* ui;
+    Ui::QQtPreviewWidget* ui;
 
     struct sensor_info sinfo;
     int pre_bpp;
@@ -61,13 +61,13 @@ private:
     QRect geome;
     Qt::WindowFlags flags;
 
-    int convert_yuv_to_rgb_pixel(int y, int u, int v);
-    int convert_yuv_to_rgb_buffer(unsigned char* yuv, unsigned char* rgb, unsigned int width, unsigned int height);
+    int convert_yuv_to_rgb_pixel ( int y, int u, int v );
+    int convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width, unsigned int height );
 
     // QWidget interface
 protected:
-    void paintEvent(QPaintEvent*);
-    void mousePressEvent(QMouseEvent* e);
+    void paintEvent ( QPaintEvent* );
+    void mousePressEvent ( QMouseEvent* e );
 };
 
 #endif // QPREVIEWUI_H

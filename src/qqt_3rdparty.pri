@@ -16,6 +16,7 @@ contains (DEFINES, __EXQUISITE__) {
     #DEFINES += __QRDECODE__
     contains (DEFINES, __QRDECODE__) {
         contains(QKIT_PRIVATE, WIN32|WIN64) {
+            #ignore: QZXing has no need to export
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QZXING_LIBRARY
             } else: contains (DEFINES, QQT_STATIC_LIBRARY) {

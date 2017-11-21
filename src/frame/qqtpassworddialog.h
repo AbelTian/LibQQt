@@ -5,28 +5,28 @@
 #include "qqt-local.h"
 
 namespace Ui {
-class QQTPasswordDialog;
+class QQtPasswordDialog;
 }
 
-class QQTSHARED_EXPORT QQTPasswordDialog : public QQtDialog
+class QQTSHARED_EXPORT QQtPasswordDialog : public QQtDialog
 {
     Q_OBJECT
 
 public:
-    explicit QQTPasswordDialog(QWidget* parent = 0);
-    ~QQTPasswordDialog();
+    explicit QQtPasswordDialog ( QWidget* parent = 0 );
+    ~QQtPasswordDialog();
 
-    void setWifiName(QString name);
+    void setWifiName ( QString name );
     QString wifiPwd();
 
 signals:
-    void connectClicked(QString password);
+    void connectClicked ( QString password );
 private slots:
     void connectClicked();
-    void btnEnabled(QString);
+    void btnEnabled ( QString );
 
 private:
-    Ui::QQTPasswordDialog* ui;
+    Ui::QQtPasswordDialog* ui;
 };
 
 #endif // QQTPASSWORDDIALOG_H

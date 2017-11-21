@@ -16,14 +16,14 @@ AnimationManager* AnimationManager::Instance(QObject* parent)
 AnimationManager::AnimationManager(QObject* parent) : QObject(parent)
 {
     //init app's all animation
-    QPushButton* pushButton = (QPushButton*)QQTObjectFactory::registedObject("pushButton");
-    QPushButton* pushButton_2 = (QPushButton*)QQTObjectFactory::registedObject("pushButton_2");
-    QPushButton* pushButton_3 = (QPushButton*)QQTObjectFactory::registedObject("pushButton_3");
-    QPushButton* pushButton_4 = (QPushButton*)QQTObjectFactory::registedObject("pushButton_4");
-    QPushButton* pushButton_5 = (QPushButton*)QQTObjectFactory::registedObject("pushButton_5");
-    QPushButton* pushButton_6 = (QPushButton*)QQTObjectFactory::registedObject("pushButton_6");
+    QPushButton* pushButton = (QPushButton*)QQtObjectFactory::registedObject("pushButton");
+    QPushButton* pushButton_2 = (QPushButton*)QQtObjectFactory::registedObject("pushButton_2");
+    QPushButton* pushButton_3 = (QPushButton*)QQtObjectFactory::registedObject("pushButton_3");
+    QPushButton* pushButton_4 = (QPushButton*)QQtObjectFactory::registedObject("pushButton_4");
+    QPushButton* pushButton_5 = (QPushButton*)QQtObjectFactory::registedObject("pushButton_5");
+    QPushButton* pushButton_6 = (QPushButton*)QQtObjectFactory::registedObject("pushButton_6");
 
-    QQTAnimation* ani = new QQTAnimation(this);
+    QQtAnimation* ani = new QQtAnimation(this);
     QSequentialAnimationGroup* sa = new QSequentialAnimationGroup(ani);
     QParallelAnimationGroup* pa = new QParallelAnimationGroup(ani);
 

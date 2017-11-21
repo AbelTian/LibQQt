@@ -17,6 +17,6 @@ public:
     bool dispatcher(const QByteArray &m) override;
 };
 
-QQTServer *QQTSingleServer(QObject* parent);
+QQtServer *QQTSingleServer(QObject* parent);
 
 #endif // QQTLANPROTOCOL_H

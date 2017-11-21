@@ -1,19 +1,19 @@
 #include "qqtprinter.h"
 #include "stdlib.h"
 
-QQTPrinter::QQTPrinter(QPrinter::PrinterMode mode) :
+QQtPrinter::QQtPrinter(QPrinter::PrinterMode mode) :
     QPrinter(mode)
 {
 
 }
 
-void QQTPrinter::setOutputFileName(const QString& name)
+void QQtPrinter::setOutputFileName(const QString& name)
 {
     m_outputname = name;
     QPrinter::setOutputFileName(m_outputname);
 }
 
-void QQTPrinter::print()
+void QQtPrinter::print()
 {
     /*
      * 此处不会影响打印质量，不必再调试

@@ -6,7 +6,7 @@
 #include "qqtethenetmanager.h"
 
 
-void QQTWIFIIDTextDelegate::drawCheck(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect,
+void QQtWiFiIdTextDelegate::drawCheck(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect,
                                       Qt::CheckState state) const
 {
 #if 0
@@ -39,24 +39,24 @@ void QQTWIFIIDTextDelegate::drawCheck(QPainter* painter, const QStyleOptionViewI
 #endif
 }
 
-void QQTWIFIIDTextDelegate::drawDisplay(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect,
+void QQtWiFiIdTextDelegate::drawDisplay(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect,
                                         const QString& text) const
 {
     if ("COMPLETED" == text)
         painter->drawImage(rect, QImage("./skin/default/bk_sel.png"));
 }
 
-QQTWIFIWidget::QQTWIFIWidget(QWidget* parent) :
+QQtWiFiWidget::QQtWiFiWidget(QWidget* parent) :
     QQTTableView(parent),
-    ui(new Ui::QQTWIFIWidget)
+    ui(new Ui::QQtWiFiWidget)
 {
     ui->setupUi(this);
 
     connect(this, SIGNAL(clicked(QModelIndex)),
             this, SLOT(clickWIFI()), Qt::QueuedConnection);
-    m_pass = new QQTPasswordDialog(this);
+    m_pass = new QQtPasswordDialog(this);
 
-    m_pManager = QQTEthenetManager::Instance(this);
+    m_pManager = QQtEthenetManager::Instance(this);
     connect(m_pManager, SIGNAL(sigRefreshed()), this, SLOT(wifiRefreshed()));
 
     m_model = new QStandardItemModel(this);
@@ -75,7 +75,7 @@ QQTWIFIWidget::QQTWIFIWidget(QWidget* parent) :
 #ifdef __EMBEDDED_LINUX__
     setFocusPolicy(Qt::NoFocus);
 #endif
-    dg = new QQTWIFIIDTextDelegate(this);
+    dg = new QQtWiFiIdTextDelegate(this);
     setItemDelegateForColumn(ESSID_STATUS, dg);
 
     for (int i = ESSID_TYPE; i < ESSID_MAX; i++)
@@ -90,24 +90,24 @@ QQTWIFIWidget::QQTWIFIWidget(QWidget* parent) :
 
 }
 
-QQTWIFIWidget::~QQTWIFIWidget()
+QQtWiFiWidget::~QQtWiFiWidget()
 {
     delete ui;
 }
 
 
-TWifi QQTWIFIWidget::currentWifi()
+TWifi QQtWiFiWidget::currentWifi()
 {
     return m_pManager->currentWifi();
 }
 
 
-bool QQTWIFIWidget::setCurrentWifi(QString bssid_mac, QString password)
+bool QQtWiFiWidget::setCurrentWifi(QString bssid_mac, QString password)
 {
     return m_pManager->setCurrentWifi(bssid_mac, password);
 }
 
-void QQTWIFIWidget::wifiRefreshed()
+void QQtWiFiWidget::wifiRefreshed()
 {
     int row = 0;
     m_model->removeRows(row, m_model->rowCount());
@@ -128,14 +128,14 @@ void QQTWIFIWidget::wifiRefreshed()
     m_model->submit();
 }
 
-void QQTWIFIWidget::clickWIFI()
+void QQtWiFiWidget::clickWIFI()
 {
     QString name = m_model->data(m_model->index(currentIndex().row(), ESSID_NAME)).toString();
     QString encryt = m_model->data(m_model->index(currentIndex().row(), ESSID_ENCRYP)).toString();
     QString type = m_model->data(m_model->index(currentIndex().row(), ESSID_TYPE)).toString();
     QString mac = m_model->data(m_model->index(currentIndex().row(), ESSID_BSSID)).toString();
 
-    QQTEthenetManager::Instance()->setRefresh(false);
+    QQtEthenetManager::Instance()->setRefresh(false);
 
     do
     {
@@ -143,7 +143,7 @@ void QQTWIFIWidget::clickWIFI()
         {
             m_pass->setWifiName(name);
 
-            if (QQTPasswordDialog::Rejected == m_pass->exec())
+            if (QQtPasswordDialog::Rejected == m_pass->exec())
                 break;
         }
 
@@ -153,13 +153,13 @@ void QQTWIFIWidget::clickWIFI()
 
         if (!ok)
         {
-            QQTMsgBox::warning(this, tr("Password error"));
+            QQtMsgBox::warning(this, tr("Password error"));
             break;
         }
 
         pline() << name << encryt << m_pass->wifiPwd();
     } while (0);
 
-    QQTEthenetManager::Instance()->setRefresh();
+    QQtEthenetManager::Instance()->setRefresh();
 }
 

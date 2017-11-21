@@ -2,8 +2,8 @@
  <author/>
  <comment/>
  <exportmacro/>
- <class>QQTWIFIWidget</class>
- <widget name="QQTWIFIWidget" class="QQTTableView">
+ <class>QQtWiFiWidget</class>
+ <widget name="QQtWiFiWidget" class="QQTTableView">
   <property name="geometry">
    <rect>
     <x>0</x>

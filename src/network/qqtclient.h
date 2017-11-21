@@ -1,6 +1,6 @@
 /**************************************************
- * QQTClient
- * 在一个工程当中仅仅存在一个实例，通过调用QQTClient实现。
+ * QQtClient
+ * 在一个工程当中仅仅存在一个实例，通过调用QQtClient实现。
  **************************************************/
 #ifndef QQT_CLIENT_H
 #define QQT_CLIENT_H
@@ -20,18 +20,18 @@
 /**
  * @brief 客户端决定和协议的交互关系;只跟协议打交道；
  */
-class QQTSHARED_EXPORT QQTClient : public QTcpSocket
+class QQTSHARED_EXPORT QQtClient : public QTcpSocket
 {
     Q_OBJECT
 public:
-    explicit QQTClient(QObject* parent = 0);
-    virtual ~QQTClient();
+    explicit QQtClient ( QObject* parent = 0 );
+    virtual ~QQtClient();
 
-    void SetServerIPAddress(QStringList ip) { m_serverIP = ip; }
-    void SetServerPort(quint32 p = 7079) { m_PORT = p; }
+    void SetServerIPAddress ( QStringList ip ) { m_serverIP = ip; }
+    void SetServerPort ( quint32 p = 7079 ) { m_PORT = p; }
 
-    void installProtocol(QQtProtocol* stack);
-    void uninstallProtocol(QQtProtocol* stack);
+    void installProtocol ( QQtProtocol* stack );
+    void uninstallProtocol ( QQtProtocol* stack );
     QQtProtocol* installedProtocol();
 
     void SendConnectMessage();
@@ -43,16 +43,16 @@ signals:
     void signalConnectFail();//
     void signalDisConnectSucc();//maybe
     void signalDisConnectFail();//
-    void signalUpdateProgress(qint64 value);
+    void signalUpdateProgress ( qint64 value );
 
 
 private slots:
     void domainHostFound();
-    void socketStateChanged(QAbstractSocket::SocketState);
-    void socketErrorOccured(QAbstractSocket::SocketError);
+    void socketStateChanged ( QAbstractSocket::SocketState );
+    void socketErrorOccured ( QAbstractSocket::SocketError );
     void socketConnected();
     void socketDisconnect();
-    void updateProgress(qint64);
+    void updateProgress ( qint64 );
 
 protected slots:
     void readyReadData();

@@ -8,11 +8,11 @@
 #include "qqtcore.h"
 #include "qqt-local.h"
 
-class QQTSHARED_EXPORT QQTNetworkClearThread : public QThread
+class QQTSHARED_EXPORT QQtNetWorkClearThread : public QThread
 {
     Q_OBJECT
 public:
-    QQTNetworkClearThread(QObject* parent = 0) : QThread(parent) {
+    QQtNetWorkClearThread ( QObject* parent = 0 ) : QThread ( parent ) {
     }
 signals:
     void cleared();
@@ -23,15 +23,15 @@ protected:
     void run();
 };
 
-class QQTSHARED_EXPORT QQTDhcpThread : public QThread
+class QQTSHARED_EXPORT QQtDHCPThread : public QThread
 {
     Q_OBJECT
 public:
-    QQTDhcpThread(QObject* parent = 0) : QThread(parent) {
+    QQtDHCPThread ( QObject* parent = 0 ) : QThread ( parent ) {
     }
-    void setnet(QString eth = "eth0") {net = eth;}
+    void setnet ( QString eth = "eth0" ) {net = eth;}
 signals:
-    void passed(QString);
+    void passed ( QString );
     // QThread interface
 protected:
     void run();
@@ -40,19 +40,19 @@ private:
 };
 
 // thread unsafe
-class QQTSHARED_EXPORT QQTEthenetManager : public QObject
+class QQTSHARED_EXPORT QQtEthenetManager : public QObject
 {
     Q_OBJECT
 public:
-    static QQTEthenetManager* Instance(QObject* parent = 0);
+    static QQtEthenetManager* Instance ( QObject* parent = 0 );
 
     QList<TWifi>& wifiList() { return m_wifiList; }
     inline TWifi currentWifi() { return m_curWifi; }
-    bool setCurrentWifi(QString bssid_mac, QString password = "");
-    void setRefresh(bool ref = true) { ref ? m_workTimer->start(5000) : m_workTimer->stop(); }
-    void setDHCP(bool bUse = false) { m_bUseDHCP = bUse; }
-    void setAddr(QString ip, QString mask, QString gw, QString dns);
-    void getAddr(QString& ip, QString& mask, QString& gw, QString& dns);
+    bool setCurrentWifi ( QString bssid_mac, QString password = "" );
+    void setRefresh ( bool ref = true ) { ref ? m_workTimer->start ( 5000 ) : m_workTimer->stop(); }
+    void setDHCP ( bool bUse = false ) { m_bUseDHCP = bUse; }
+    void setAddr ( QString ip, QString mask, QString gw, QString dns );
+    void getAddr ( QString& ip, QString& mask, QString& gw, QString& dns );
     /**
      * @brief configIPAddress
      * wpa_suplicant.conf
@@ -87,7 +87,7 @@ signals:
     /*
      * Wifi状态改变
      */
-    void sigStatusChanged(QString status);
+    void sigStatusChanged ( QString status );
     /*
      * 有线连接上
      */
@@ -109,11 +109,11 @@ private slots:
     void refreshWifiList();
     void refreshWifiStatus();
     void checkLanConnection();
-    void DhcpPassed(QString netname);
+    void DhcpPassed ( QString netname );
     void checkNetworkClear();
 
 private:
-    explicit QQTEthenetManager(QObject* parent = 0);
+    explicit QQtEthenetManager ( QObject* parent = 0 );
     void readStatus();
     void restoreWifi();
     bool restartWifi();
@@ -124,14 +124,14 @@ signals:
 
 public slots:
 private:
-    static QQTEthenetManager* _instance;
+    static QQtEthenetManager* _instance;
     QTimer* m_workTimer;
     QList<TWifi> m_wifiList;
     TWifi m_curWifi;
     bool m_bUseDHCP;
     QString m_netName;
-    QQTDhcpThread* m_thread;
-    QQTNetworkClearThread* m_clearThread;
+    QQtDHCPThread* m_thread;
+    QQtNetWorkClearThread* m_clearThread;
     QString m_status;
 };
 

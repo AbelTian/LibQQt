@@ -5,16 +5,16 @@
 #include "qqtgraphicsitem.h"
 #include "qqtword.h"
 
-QQTWord::QQTWord(QObject* parent) :
+QQtWord::QQtWord(QObject* parent) :
     QObject(parent),
     fmt(0), headerFmt(0), titleFmt(0), title2Fmt(0), mainFmt(0)
 {
     //setup printer
     /**
-      MIPS bug: you must use QQTPrinter(QPrinter::HighResolution)
+      MIPS bug: you must use QQtPrinter(QPrinter::HighResolution)
       Other constructer won't work well
       */
-    pr = new QQTPrinter(QPrinter::HighResolution);
+    pr = new QQtPrinter(QPrinter::HighResolution);
     pr->setFullPage(true);
     pr->setColorMode(QPrinter::Color);
     pr->setPaperSize(QPrinter::A4);
@@ -97,7 +97,7 @@ QQTWord::QQTWord(QObject* parent) :
     initWord();
 }
 
-void QQTWord::setMargin(qreal left, qreal right, qreal top, qreal botoom)
+void QQtWord::setMargin(qreal left, qreal right, qreal top, qreal botoom)
 {
     leftMargin = 134.6;
     rightMargin = 134.6;
@@ -105,21 +105,21 @@ void QQTWord::setMargin(qreal left, qreal right, qreal top, qreal botoom)
     bottomMargin = 177.7;
 }
 
-QRectF QQTWord::clientRectF()
+QRectF QQtWord::clientRectF()
 {
     return QRectF(leftMargin, topMargin,
                   sceneRect.width() - leftMargin - rightMargin,
                   sceneRect.height() - topMargin - bottomMargin);
 }
 
-QRectF QQTWord::paperRect()
+QRectF QQtWord::paperRect()
 {
     return QRectF(0, 0,
                   sceneRect.width(),
                   sceneRect.height());
 }
 
-void QQTWord::setFont(QFont font)
+void QQtWord::setFont(QFont font)
 {
     //normal font 11
     m_font = QApplication::font();
@@ -130,7 +130,7 @@ void QQTWord::setFont(QFont font)
     fmt = new QFontMetrics(m_font);
 }
 
-void QQTWord::setLineSpacing(qreal spacing)
+void QQtWord::setLineSpacing(qreal spacing)
 {
     /*
      * 单倍行距
@@ -146,7 +146,7 @@ void QQTWord::setLineSpacing(qreal spacing)
     headerSpacing = headerFmt->height() * 1;
 }
 
-void QQTWord::addText(const QString& text, QFont font, Qt::Alignment align, QPointF point)
+void QQtWord::addText(const QString& text, QFont font, Qt::Alignment align, QPointF point)
 {
     QFontMetrics fmt = QFontMetrics(font);
     int spacing = fmt.height() * 2;
@@ -157,7 +157,7 @@ void QQTWord::addText(const QString& text, QFont font, Qt::Alignment align, QPoi
 
     adjustdy(height + spacing);
 
-    QQTGraphicsTextItem* item = pageScene->addText(text, font);
+    QQtGraphicsTextItem* item = pageScene->addText(text, font);
 
     if (align & Qt::AlignLeft)
         item->moveBy(dx, dy + height);
@@ -169,7 +169,7 @@ void QQTWord::addText(const QString& text, QFont font, Qt::Alignment align, QPoi
     dy += height + spacing;
 }
 
-void QQTWord::addSignoffText(const QString& text, QFont font)
+void QQtWord::addSignoffText(const QString& text, QFont font)
 {
     adjustdy(mainHeight + mainSpacing);
 
@@ -182,7 +182,7 @@ void QQTWord::addSignoffText(const QString& text, QFont font)
     dy = ddy;
 }
 
-void QQTWord::addTable(const QTableView* table, QPointF pos)
+void QQtWord::addTable(const QTableView* table, QPointF pos)
 {
     Q_ASSERT(table);
 
@@ -212,7 +212,7 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
 
             QString txt = model->headerData(logicalIndex, Qt::Horizontal, Qt::DisplayRole).toString();
             txt = tableFmt.elidedText(txt, Qt::ElideRight, actColSize - 2);
-            QQTGraphicsTextItem* item = pageScene->addText(txt, tableFont);
+            QQtGraphicsTextItem* item = pageScene->addText(txt, tableFont);
             item->moveBy(dx, dy);
             dx += actColSize;
         }
@@ -306,7 +306,7 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
             {
                 QString txt = model->data(model->index(row, logicalIndex)).toString();
                 txt = tableFmt.elidedText(txt, Qt::ElideRight, actColSize - 2);
-                QQTGraphicsTextItem* item = pageScene->addText(txt, tableFont);
+                QQtGraphicsTextItem* item = pageScene->addText(txt, tableFont);
                 item->moveBy(dx, dy);
             }
 
@@ -319,9 +319,9 @@ void QQTWord::addTable(const QTableView* table, QPointF pos)
     }
 }
 
-int QQTWord::pageNum() { return pageSceneVector.size(); }
+int QQtWord::pageNum() { return pageSceneVector.size(); }
 
-void QQTWord::exportPdf(const QString& pdf)
+void QQtWord::exportPdf(const QString& pdf)
 {
     // setup printer
     pr->setOutputFileName(pdf);
@@ -329,7 +329,7 @@ void QQTWord::exportPdf(const QString& pdf)
     // print pdf
     QPainter p(pr);
 
-    QQTGraphicsScene* pageScene = 0;
+    QQtGraphicsScene* pageScene = 0;
 
     foreach (pageScene, pageSceneVector)
     {
@@ -341,7 +341,7 @@ void QQTWord::exportPdf(const QString& pdf)
     }
 }
 
-QQTGraphicsScene* QQTWord::getPage(int num)
+QQtGraphicsScene* QQtWord::getPage(int num)
 {
     if (num < 1 || num > pageSceneVector.size())
         return NULL;
@@ -349,12 +349,12 @@ QQTGraphicsScene* QQTWord::getPage(int num)
     return pageSceneVector.at(num - 1);
 }
 
-void QQTWord::print()
+void QQtWord::print()
 {
     pr->print();
 }
 
-void QQTWord::setHeaderFont(QFont font)
+void QQtWord::setHeaderFont(QFont font)
 {
     //header font
     m_headerFont = QApplication::font();;
@@ -366,35 +366,35 @@ void QQTWord::setHeaderFont(QFont font)
     headerFmt = new QFontMetrics(m_headerFont);
 }
 
-void QQTWord::setHeaderSize(qreal size)
+void QQtWord::setHeaderSize(qreal size)
 {
     headerSize = 70;
 }
 
-void QQTWord::setHeaderLine(bool show)
+void QQtWord::setHeaderLine(bool show)
 {
 
 }
 
-void QQTWord::setHeaderText(const QString& text, QFont font, Qt::Alignment align)
+void QQtWord::setHeaderText(const QString& text, QFont font, Qt::Alignment align)
 {
     headerText = text;
     paintPageHeader();
 }
 
-void QQTWord::setFooterSize(qreal size)
+void QQtWord::setFooterSize(qreal size)
 {
     footerSize = 70;
 }
 
-QFont QQTWord::font() { return m_font; }
+QFont QQtWord::font() { return m_font; }
 
-void QQTWord::setFooterLine(bool show)
+void QQtWord::setFooterLine(bool show)
 {
     Q_UNUSED(show)
 }
 
-void QQTWord::setFooterText(const QString& text, QFont font, Qt::Alignment align)
+void QQtWord::setFooterText(const QString& text, QFont font, Qt::Alignment align)
 {
     Q_UNUSED(font)
     Q_UNUSED(align)
@@ -402,11 +402,11 @@ void QQTWord::setFooterText(const QString& text, QFont font, Qt::Alignment align
     paintPageFooter();
 }
 
-void QQTWord::initWord()
+void QQtWord::initWord()
 {
     while (! pageSceneVector.isEmpty())
     {
-        QQTGraphicsScene* pageScene = pageSceneVector.first();
+        QQtGraphicsScene* pageScene = pageSceneVector.first();
         pageScene->clear();
         delete pageScene;
         pageSceneVector.remove(0);
@@ -417,7 +417,7 @@ void QQTWord::initWord()
     createFrame();
 }
 
-void QQTWord::adjustdy(qreal dy0)
+void QQtWord::adjustdy(qreal dy0)
 {
     dx = xpos;
 
@@ -428,7 +428,7 @@ void QQTWord::adjustdy(qreal dy0)
 }
 
 
-void QQTWord::createFrame()
+void QQtWord::createFrame()
 {
     xpos = leftMargin;
     xpos2 = sceneRect.width() - rightMargin;
@@ -437,13 +437,13 @@ void QQTWord::createFrame()
     dx = xpos;
     dy = ypos;
 
-    pageScene = new QQTGraphicsScene(sceneRect);
+    pageScene = new QQtGraphicsScene(sceneRect);
     pageSceneVector.append(pageScene);
     paintPageHeader();
     paintPageFooter();
 }
 
-void QQTWord::paintPageHeader()
+void QQtWord::paintPageHeader()
 {
     // Page header
     if (headerText.isEmpty())
@@ -454,7 +454,7 @@ void QQTWord::paintPageHeader()
     /*
      * 页眉
      */
-    QQTGraphicsTextItem* headerItem = pageScene->addText(headerText, m_headerFont);
+    QQtGraphicsTextItem* headerItem = pageScene->addText(headerText, m_headerFont);
     headerItem->moveBy(sx, sy);
 
     //std text
@@ -462,7 +462,7 @@ void QQTWord::paintPageHeader()
     QString time = QTime::currentTime().toString(QLocale().timeFormat(QLocale::ShortFormat));
     QString headerStdText;
     headerStdText = date + "  " + time;
-    QQTGraphicsTextItem* item = pageScene->addText(headerStdText, m_headerFont);
+    QQtGraphicsTextItem* item = pageScene->addText(headerStdText, m_headerFont);
     item->moveBy(xpos2 - headerFmt->width(headerStdText), sy);
 
     sy += headerItem->boundingRect().height();
@@ -471,7 +471,7 @@ void QQTWord::paintPageHeader()
     pageScene->addLine(xpos, sy, xpos2, sy, QPen(Qt::black, 1.0));
 }
 
-void QQTWord::paintPageFooter()
+void QQtWord::paintPageFooter()
 {
     if (footerText.isEmpty())
         return;
@@ -482,18 +482,18 @@ void QQTWord::paintPageFooter()
     int sx = xpos;
 
     QString footerStdText = tr("Page") + QString::number(pageSceneVector.size()) + tr(" ");
-    QQTGraphicsTextItem* item = pageScene->addText(footerStdText, m_headerFont);
+    QQtGraphicsTextItem* item = pageScene->addText(footerStdText, m_headerFont);
     int height = item->boundingRect().height();
     int sy = ypos2 + footerSize - height;
     item->moveBy(xpos2 - headerFmt->width(footerStdText), sy);
 
     pageScene->addLine(xpos, sy, xpos2, sy, QPen(Qt::black, 1.0));
 
-    QQTGraphicsTextItem* footerItem = pageScene->addText(footerText, m_headerFont);
+    QQtGraphicsTextItem* footerItem = pageScene->addText(footerText, m_headerFont);
     footerItem->moveBy(xpos, sy);
 }
 
-QHash<int, ESpanFlags> QQTWord::tableSpans(const QTableView* table)
+QHash<int, ESpanFlags> QQtWord::tableSpans(const QTableView* table)
 {
     Q_ASSERT(table);
 

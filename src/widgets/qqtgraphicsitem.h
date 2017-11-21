@@ -5,100 +5,100 @@
 #include <QGraphicsProxyWidget>
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT QQTGraphicsItem : public QGraphicsItem
+class QQTSHARED_EXPORT QQtGraphicsItem : public QGraphicsItem
 {
 public:
-    explicit QQTGraphicsItem(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsItem ( QQtGraphicsItem* parent = 0 );
 
 };
 
-class QQTSHARED_EXPORT QQTGraphicsTextItem : public QGraphicsTextItem
+class QQTSHARED_EXPORT QQtGraphicsTextItem : public QGraphicsTextItem
 {
 public:
-    explicit QQTGraphicsTextItem(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsTextItem ( QQtGraphicsItem* parent = 0 );
 
 
     // QGraphicsItem interface
 public:
-    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+    void paint ( QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget );
 };
 
 
-class QQTSHARED_EXPORT QQTGraphicsSimpleTextItem : public QGraphicsSimpleTextItem
+class QQTSHARED_EXPORT QQtGraphicsSimpleTextItem : public QGraphicsSimpleTextItem
 {
 public:
-    explicit QQTGraphicsSimpleTextItem(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsSimpleTextItem ( QQtGraphicsItem* parent = 0 );
 
 };
 
 
-class QQTSHARED_EXPORT QQTGraphicsPixmapItem : public QGraphicsPixmapItem
+class QQTSHARED_EXPORT QQtGraphicsPixmapItem : public QGraphicsPixmapItem
 {
 public:
-    explicit QQTGraphicsPixmapItem(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsPixmapItem ( QQtGraphicsItem* parent = 0 );
 
 };
 
-class QQTSHARED_EXPORT QQTGraphicsRectItem : public QGraphicsRectItem
+class QQTSHARED_EXPORT QQtGraphicsRectItem : public QGraphicsRectItem
 {
 public:
-    explicit QQTGraphicsRectItem(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsRectItem ( QQtGraphicsItem* parent = 0 );
 
 
     // QGraphicsItem interface
 public:
-    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+    void paint ( QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget );
 };
 
 
-class QQTSHARED_EXPORT QQTGraphicsLineItem : public QGraphicsLineItem
+class QQTSHARED_EXPORT QQtGraphicsLineItem : public QGraphicsLineItem
 {
 public:
-    explicit QQTGraphicsLineItem(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsLineItem ( QQtGraphicsItem* parent = 0 );
 
 
     // QGraphicsItem interface
 public:
-    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+    void paint ( QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget );
 };
 
 
 
 
-class QQTSHARED_EXPORT QQTGraphicsPathItem : public QGraphicsPathItem
+class QQTSHARED_EXPORT QQtGraphicsPathItem : public QGraphicsPathItem
 {
 public:
-    explicit QQTGraphicsPathItem(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsPathItem ( QQtGraphicsItem* parent = 0 );
 
 };
 
 
-class QQTSHARED_EXPORT QQTGraphicsEllipseItem : public QGraphicsEllipseItem
+class QQTSHARED_EXPORT QQtGraphicsEllipseItem : public QGraphicsEllipseItem
 {
 public:
-    explicit QQTGraphicsEllipseItem(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsEllipseItem ( QQtGraphicsItem* parent = 0 );
 
 };
 
 
-class QQTSHARED_EXPORT QQTGraphicsPolygonItem : public QGraphicsPolygonItem
+class QQTSHARED_EXPORT QQtGraphicsPolygonItem : public QGraphicsPolygonItem
 {
 public:
-    explicit QQTGraphicsPolygonItem(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsPolygonItem ( QQtGraphicsItem* parent = 0 );
 
 };
 
-class QQTSHARED_EXPORT QQTGraphicsItemGroup : public QGraphicsItemGroup
+class QQTSHARED_EXPORT QQtGraphicsItemGroup : public QGraphicsItemGroup
 {
 public:
-    explicit QQTGraphicsItemGroup(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsItemGroup ( QQtGraphicsItem* parent = 0 );
 
 };
 
-class QQTSHARED_EXPORT QQTGraphicsProxyWidget : public QGraphicsProxyWidget
+class QQTSHARED_EXPORT QQtGraphicsProxyWidget : public QGraphicsProxyWidget
 {
 public:
-    explicit QQTGraphicsProxyWidget(QQTGraphicsItem* parent = 0);
+    explicit QQtGraphicsProxyWidget ( QQtGraphicsItem* parent = 0 );
 
 };
 

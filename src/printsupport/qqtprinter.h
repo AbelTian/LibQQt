@@ -4,12 +4,12 @@
 #include <QPrinter>
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT QQTPrinter : public QPrinter
+class QQTSHARED_EXPORT QQtPrinter : public QPrinter
 {
 public:
-    QQTPrinter(PrinterMode mode = HighResolution);
+    QQtPrinter ( PrinterMode mode = HighResolution );
 
-    void setOutputFileName(const QString&);
+    void setOutputFileName ( const QString& );
     void print();
 
 private:

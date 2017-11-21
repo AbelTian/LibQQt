@@ -86,7 +86,7 @@ typedef unsigned char uint8_t;
 #define NOTICE "Notice"
 
 
-QQTSHARED_EXPORT void QQTSleep(int millsecond);
+QQTSHARED_EXPORT void QQTSleep ( int millsecond );
 
 #ifdef __cplusplus
 }
@@ -98,61 +98,61 @@ QQTSHARED_EXPORT void QQTSleep(int millsecond);
 #define ptime() pline() << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss zzz")
 
 
-QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const quint8 r);
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint8 r );
 
-QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const quint16 r);
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint16 r );
 
-QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const quint32 r);
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint32 r );
 
-QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const QByteArray& r);
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const QByteArray& r );
 
-QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, quint8& r);
+QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, quint8& r );
 
-QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, quint16& r);
+QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, quint16& r );
 
-QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, quint32& r);
+QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, quint32& r );
 
-QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, QByteArray& r);
+QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, QByteArray& r );
 
-QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const qint16 r);
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint16 r );
 
-QQTSHARED_EXPORT QByteArray& operator<<(QByteArray& l, const qint32 r);
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint32 r );
 
-QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, qint8& r);
+QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, qint8& r );
 
-QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, qint16& r);
+QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, qint16& r );
 
-QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, qint32& r);
+QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, qint32& r );
 
-QQTSHARED_EXPORT QByteArray& operator>>(QByteArray& l, QByteArray& r);
+QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, QByteArray& r );
 
 
 /**
- * @brief The QQTBlock class
+ * @brief The QQtBlock class
  * QMutex，QSemphore，QCondation在gui线程会锁定gui，而我希望在gui线程中堵塞但是不要锁定gui
  * 这个block应用场合为gui线程内部，不适用线程之间
  * 仅仅锁定一次和解锁一次，多次锁定和解锁无用途。
  */
-class QQTSHARED_EXPORT QQTBlock : public QObject
+class QQTSHARED_EXPORT QQtBlock : public QObject
 {
 public:
-    explicit QQTBlock(QObject* parent = 0): QObject(parent), m_lock(0) {}
+    explicit QQtBlock ( QObject* parent = 0 ) : QObject ( parent ), m_lock ( 0 ) {}
 
     //0x7FFFFFFF
-    bool lock(int millsecond = 0x7FFFFFFF) {
+    bool lock ( int millsecond = 0x7FFFFFFF ) {
         //m_lock++;
         m_lock = 1;
 
         timer.restart();
 
-        while (timer.elapsed() < millsecond) {
-            if (m_lock <= 0)
+        while ( timer.elapsed() < millsecond ) {
+            if ( m_lock <= 0 )
                 break;
 
             QApplication::processEvents();
         }
 
-        if (timer.elapsed() >= millsecond)
+        if ( timer.elapsed() >= millsecond )
             return false;
 
         return true;
@@ -164,7 +164,7 @@ public:
     }
 
     bool isLocked() {
-        if (m_lock <= 0)
+        if ( m_lock <= 0 )
             return false;
 
         return true;

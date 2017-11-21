@@ -2,6 +2,7 @@
 #define FRMINPUT_H
 
 /**
+ * 原作者 刘典武 mod引用 LGPLv2.1
  * T.D.R (QQ:2657635903) mod 2015年12月20日19:44:04
 **/
 
@@ -20,23 +21,23 @@
 #include <qqt-local.h>
 
 namespace Ui {
-class frmInput;
+class QQtInput;
 }
 
-class QQTSHARED_EXPORT QQTInput : public QWidget
+class QQTSHARED_EXPORT QQtInput : public QWidget
 {
     Q_OBJECT
 
-    explicit QQTInput(QWidget* parent = 0);
-    ~QQTInput();
+    explicit QQtInput ( QWidget* parent = 0 );
+    ~QQtInput();
 
 public:
     /*
      * 单例模式,保证一个程序只存在一个输入法实例对象
      */
-    static QQTInput* Instance() {
-        if (!_instance) {
-            _instance = new QQTInput;
+    static QQtInput* Instance() {
+        if ( !_instance ) {
+            _instance = new QQtInput;
         }
 
         return _instance;
@@ -45,31 +46,31 @@ public:
     /*
      * 初始化面板状态,包括字体大小
      */
-    void Init(QString type, QString position, QString style, int btnFontSize, int labFontSize);
+    void Init ( QString type, QString position, QString style, int btnFontSize, int labFontSize );
 
 protected:
     /*
      * 事件过滤器,处理鼠标在汉字标签处单击操作
      */
-    bool eventFilter(QObject* obj, QEvent* event);
+    bool eventFilter ( QObject* obj, QEvent* event );
     /*
      * 鼠标拖动事件
      */
-    void mouseMoveEvent(QMouseEvent* e);
+    void mouseMoveEvent ( QMouseEvent* e );
     /*
      * 鼠标按下事件
      */
-    void mousePressEvent(QMouseEvent* e);
+    void mousePressEvent ( QMouseEvent* e );
     /*
      * 鼠标松开事件
      */
-    void mouseReleaseEvent(QMouseEvent*);
+    void mouseReleaseEvent ( QMouseEvent* );
 
 private slots:
     /*
      * 焦点改变事件槽函数处理
      */
-    void focusChanged(QWidget* oldWidget, QWidget* nowWidget);
+    void focusChanged ( QWidget* oldWidget, QWidget* nowWidget );
     /*
      * 输入法面板按键处理
      */
@@ -77,16 +78,16 @@ private slots:
     /*
      * 改变输入法面板样式
      */
-    void changeStyle(QString topColor, QString bottomColor,
-                     QString borderColor, QString textColor);
+    void changeStyle ( QString topColor, QString bottomColor,
+                       QString borderColor, QString textColor );
     /*
      * 定时器处理退格键
      */
     void reClicked();
 
 private:
-    Ui::frmInput* ui;
-    static QQTInput* _instance;     //实例对象
+    Ui::QQtInput* ui;
+    static QQtInput* _instance;     //实例对象
 
     int deskWidth;                  //桌面宽度
     int deskHeight;                 //桌面高度
@@ -125,12 +126,12 @@ private:
     QString currentStyle;           //当前输入法面板样式
     int btnFontSize;                //当前输入法面板按钮字体大小
     int labFontSize;                //当前输入法面板标签字体大小
-    void insertValue(QString value);//插入值到当前焦点控件
+    void insertValue ( QString value ); //插入值到当前焦点控件
     void deleteValue();             //删除当前焦点控件的一个字符
 
     QString currentType;            //当前输入法类型
     void changeType();  //改变输入法类型
-    void changeLetter(bool isUpper);//改变字母大小写
+    void changeLetter ( bool isUpper ); //改变字母大小写
 
     QList<QLabel*>labCh;            //汉字标签数组
     QStringList allPY;              //所有拼音链表
@@ -139,7 +140,7 @@ private:
     int currentPY_count;            //当前拼音数量
     void selectChinese();           //查询汉字
     void showChinese();             //显示查询到的汉字
-    void setChinese(int index);     //设置当前汉字
+    void setChinese ( int index );  //设置当前汉字
     void clearChinese();            //清空当前汉字信息
     void changeRect();
     void changePosition();

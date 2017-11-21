@@ -1,9 +1,9 @@
 #include "qqtpassworddialog.h"
 #include "ui_qqtpassworddialog.h"
 
-QQTPasswordDialog::QQTPasswordDialog(QWidget* parent) :
+QQtPasswordDialog::QQtPasswordDialog(QWidget* parent) :
     QQtDialog(parent),
-    ui(new Ui::QQTPasswordDialog)
+    ui(new Ui::QQtPasswordDialog)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose, false);
@@ -18,28 +18,28 @@ QQTPasswordDialog::QQTPasswordDialog(QWidget* parent) :
     connect(ui->btnCancel, SIGNAL(clicked()), this, SLOT(reject()));
 }
 
-QQTPasswordDialog::~QQTPasswordDialog()
+QQtPasswordDialog::~QQtPasswordDialog()
 {
     delete ui;
 }
 
-void QQTPasswordDialog::setWifiName(QString name)
+void QQtPasswordDialog::setWifiName(QString name)
 {
     ui->label_ssid_name->setText(name);
 }
 
-QString QQTPasswordDialog::wifiPwd()
+QString QQtPasswordDialog::wifiPwd()
 {
     return ui->lineEdit_ssid_password->text();
 }
 
-void QQTPasswordDialog::connectClicked()
+void QQtPasswordDialog::connectClicked()
 {
     emit connectClicked(ui->lineEdit_ssid_password->text());
     accept();
 }
 
-void QQTPasswordDialog::btnEnabled(QString pas)
+void QQtPasswordDialog::btnEnabled(QString pas)
 {
     bool enable = pas.length() < 8 ? false : true;
     ui->pushButton_ssid_connect->setEnabled(enable);

@@ -6,8 +6,8 @@
 #include <QMouseDriverFactory>
 #endif
 
-QQTPluginWatcher* QQTPluginWatcher::_instance = NULL;
-QQTPluginWatcher::QQTPluginWatcher(QObject* parent) :
+QQtPluginWatcher* QQtPluginWatcher::_instance = NULL;
+QQtPluginWatcher::QQtPluginWatcher(QObject* parent) :
     QThread(parent)
 {
     m_devType = E_NULLDEV;
@@ -31,16 +31,16 @@ QQTPluginWatcher::QQTPluginWatcher(QObject* parent) :
     watcher->start();
 }
 
-QQTPluginWatcher* QQTPluginWatcher::Instance()
+QQtPluginWatcher* QQtPluginWatcher::Instance()
 {
     if (_instance)
         return _instance;
 
-    _instance = new QQTPluginWatcher();
+    _instance = new QQtPluginWatcher();
     return _instance;
 }
 
-void QQTPluginWatcher::slotDeviceAdded(const QString& dev)
+void QQtPluginWatcher::slotDeviceAdded(const QString& dev)
 {
     qDebug("tid=%#llx %s: add %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
 
@@ -55,19 +55,19 @@ void QQTPluginWatcher::slotDeviceAdded(const QString& dev)
     timer->start(1000);
 }
 
-void QQTPluginWatcher::slotDeviceRemoved(const QString& dev)
+void QQtPluginWatcher::slotDeviceRemoved(const QString& dev)
 {
     qDebug("tid=%#llx %s: remove %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
     m_devStat = E_RM;
     timer->start(1000);
 }
 
-void QQTPluginWatcher::slotDeviceChanged(const QString& dev)
+void QQtPluginWatcher::slotDeviceChanged(const QString& dev)
 {
     qDebug("tid=%#llx %s: change %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
 }
 
-void QQTPluginWatcher::slotDeviceDriver()
+void QQtPluginWatcher::slotDeviceDriver()
 {
 #ifdef __EMBEDDED_LINUX__
 
@@ -91,7 +91,7 @@ void QQTPluginWatcher::slotDeviceDriver()
             return;
 }
 
-bool QQTPluginWatcher::event(QEvent* e)
+bool QQtPluginWatcher::event(QEvent* e)
 {
     if (e->type() == QDeviceChangeEvent::registeredType())
     {

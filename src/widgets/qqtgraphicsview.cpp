@@ -5,13 +5,13 @@
 #include "qqtgraphicsscene.h"
 #include "qqt-qt.h"
 
-QQTGraphicsView::QQTGraphicsView(QWidget* parent) :
+QQtGraphicsView::QQtGraphicsView(QWidget* parent) :
     QGraphicsView(parent)
 {
 }
 
 
-void QQTGraphicsView::paintEvent(QPaintEvent* e)
+void QQtGraphicsView::paintEvent(QPaintEvent* e)
 {
 #if 1
     //已经确认，在PC和板子上，这同一套计算代码，都存在问题
@@ -30,7 +30,7 @@ void QQTGraphicsView::paintEvent(QPaintEvent* e)
         //         pline() << logicalDpiX() << logicalDpiY();
         //pc 96 0.81,0.46 743,593 778，628
         //p.scale(1.5/1, 1.5/1);
-        QQTGraphicsScene* sn = (QQTGraphicsScene*)scene();
+        QQtGraphicsScene* sn = (QQtGraphicsScene*)scene();
         sn->render(&p, rf, rt);
     }
 
@@ -251,13 +251,13 @@ void QQTGraphicsView::paintEvent(QPaintEvent* e)
 }
 
 
-void QQTGraphicsView::drawItems(QPainter* painter, int numItems, QGraphicsItem* items[],
+void QQtGraphicsView::drawItems(QPainter* painter, int numItems, QGraphicsItem* items[],
                                 const QStyleOptionGraphicsItem options[])
 {
     for (int i = 0; i < numItems; ++i)
     {
         // Save painter
-        QQTGraphicsItem* item = (QQTGraphicsItem*)items[i];
+        QQtGraphicsItem* item = (QQtGraphicsItem*)items[i];
 
         if (item->flags() & QGraphicsItem::ItemClipsToShape)
         {

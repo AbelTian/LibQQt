@@ -3,40 +3,40 @@
 #include <QStyleOptionGraphicsItem>
 #include "qqtcore.h"
 
-QQTGraphicsItem::QQTGraphicsItem(QQTGraphicsItem* parent) : QGraphicsItem(parent) {}
+QQtGraphicsItem::QQtGraphicsItem(QQtGraphicsItem* parent) : QGraphicsItem(parent) {}
 
 
-QQTGraphicsTextItem::QQTGraphicsTextItem(QQTGraphicsItem* parent) : QGraphicsTextItem(parent) {}
+QQtGraphicsTextItem::QQtGraphicsTextItem(QQtGraphicsItem* parent) : QGraphicsTextItem(parent) {}
 
 
-QQTGraphicsRectItem::QQTGraphicsRectItem(QQTGraphicsItem* parent) : QGraphicsRectItem(parent) {}
+QQtGraphicsRectItem::QQtGraphicsRectItem(QQtGraphicsItem* parent) : QGraphicsRectItem(parent) {}
 
 
-QQTGraphicsSimpleTextItem::QQTGraphicsSimpleTextItem(QQTGraphicsItem* parent) : QGraphicsSimpleTextItem(parent) {}
+QQtGraphicsSimpleTextItem::QQtGraphicsSimpleTextItem(QQtGraphicsItem* parent) : QGraphicsSimpleTextItem(parent) {}
 
 
-QQTGraphicsLineItem::QQTGraphicsLineItem(QQTGraphicsItem* parent) : QGraphicsLineItem(parent) {}
+QQtGraphicsLineItem::QQtGraphicsLineItem(QQtGraphicsItem* parent) : QGraphicsLineItem(parent) {}
 
 
-QQTGraphicsPixmapItem::QQTGraphicsPixmapItem(QQTGraphicsItem* parent) : QGraphicsPixmapItem(parent) {}
+QQtGraphicsPixmapItem::QQtGraphicsPixmapItem(QQtGraphicsItem* parent) : QGraphicsPixmapItem(parent) {}
 
 
-QQTGraphicsPathItem::QQTGraphicsPathItem(QQTGraphicsItem* parent) : QGraphicsPathItem(parent) {}
+QQtGraphicsPathItem::QQtGraphicsPathItem(QQtGraphicsItem* parent) : QGraphicsPathItem(parent) {}
 
 
-QQTGraphicsEllipseItem::QQTGraphicsEllipseItem(QQTGraphicsItem* parent) : QGraphicsEllipseItem(parent) {}
+QQtGraphicsEllipseItem::QQtGraphicsEllipseItem(QQtGraphicsItem* parent) : QGraphicsEllipseItem(parent) {}
 
 
-QQTGraphicsPolygonItem::QQTGraphicsPolygonItem(QQTGraphicsItem* parent) : QGraphicsPolygonItem(parent) {}
+QQtGraphicsPolygonItem::QQtGraphicsPolygonItem(QQtGraphicsItem* parent) : QGraphicsPolygonItem(parent) {}
 
 
-QQTGraphicsItemGroup::QQTGraphicsItemGroup(QQTGraphicsItem* parent) : QGraphicsItemGroup(parent) {}
+QQtGraphicsItemGroup::QQtGraphicsItemGroup(QQtGraphicsItem* parent) : QGraphicsItemGroup(parent) {}
 
 
-QQTGraphicsProxyWidget::QQTGraphicsProxyWidget(QQTGraphicsItem* parent) : QGraphicsProxyWidget(parent) {}
+QQtGraphicsProxyWidget::QQtGraphicsProxyWidget(QQtGraphicsItem* parent) : QGraphicsProxyWidget(parent) {}
 
 
-void QQTGraphicsTextItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void QQtGraphicsTextItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     Q_UNUSED(widget)
     QFont oldFont(painter->font());
@@ -59,7 +59,7 @@ void QQTGraphicsTextItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 }
 
 
-void QQTGraphicsLineItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void QQtGraphicsLineItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     Q_UNUSED(widget)
     QPen oldPen(painter->pen());
@@ -88,7 +88,7 @@ void QQTGraphicsLineItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 }
 
 
-void QQTGraphicsRectItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void QQtGraphicsRectItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     Q_UNUSED(widget)
     QPen oldPen(painter->pen());

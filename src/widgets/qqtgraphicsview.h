@@ -4,11 +4,11 @@
 #include <QGraphicsView>
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT QQTGraphicsView : public QGraphicsView
+class QQTSHARED_EXPORT QQtGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    explicit QQTGraphicsView(QWidget* parent = 0);
+    explicit QQtGraphicsView ( QWidget* parent = 0 );
 
 signals:
 
@@ -17,11 +17,11 @@ public slots:
 
     // QWidget interface
 protected:
-    void paintEvent(QPaintEvent*);
+    void paintEvent ( QPaintEvent* );
 
     // QGraphicsView interface
 protected:
-    void drawItems(QPainter* painter, int numItems, QGraphicsItem* items[], const QStyleOptionGraphicsItem options[]);
+    void drawItems ( QPainter* painter, int numItems, QGraphicsItem* items[], const QStyleOptionGraphicsItem options[] );
 };
 
 #endif // QQTGRAPHICSVIEW_H

@@ -3,9 +3,7 @@ QT       += core gui
 #lessThan(QT_MAJOR_VERSION, 5): QT += declarative
 greaterThan(QT_MAJOR_VERSION, 4): QT += quick
 
-DEFINES += QZXING_LIBRARY \
-        ZXING_ICONV_CONST \
-        DISABLE_LIBRARY_FEATURES
+DEFINES += ZXING_ICONV_CONST
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     HEADERS += $$PWD/imagehandler.h

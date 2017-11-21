@@ -11,10 +11,10 @@
 #include "qqtcore.h"
 
 /**
- * @brief The QQTObjectFactory class
+ * @brief The QQtObjectFactory class
  * QQT 对象管理器 工厂模式
  */
-class QQTSHARED_EXPORT QQTObjectFactory
+class QQTSHARED_EXPORT QQtObjectFactory
 {
 public:
     /**
@@ -23,39 +23,39 @@ public:
      * @param parent
      * @return
      */
-    static QObject* createObject(const QByteArray& className, QObject* parent = NULL) {
+    static QObject* createObject ( const QByteArray& className, QObject* parent = NULL ) {
         /*
          * 搜索生成此类对象的函数
          */
-        Constructor constructor = constructors().value(className);
+        Constructor constructor = constructors().value ( className );
 
-        if (constructor == NULL)
+        if ( constructor == NULL )
             return NULL;
 
         /*
          * 生成对象,调用constructorHelper<className>(parent)
          */
-        return (*constructor)(parent);
+        return ( *constructor ) ( parent );
     }
     /**
      * @brief registerObject 将对象注册进工厂
      * @param w
      */
-    static void registerObject(const QObject* const& w) {
-        containers().push_back(w);
+    static void registerObject ( const QObject* const& w ) {
+        containers().push_back ( w );
     }
     /**
      * @brief unregisterObject 取消对象在工厂中注册
      * @param w
      */
-    static void unregisterObject(const QObject*& w) {
-        QListIterator<const QObject*> itor(containers());
+    static void unregisterObject ( const QObject*& w ) {
+        QListIterator<const QObject*> itor ( containers() );
 
-        while (itor.hasNext()) {
+        while ( itor.hasNext() ) {
             const QObject* ww = itor.next();
 
-            if (ww == w) {
-                containers().removeOne(w);
+            if ( ww == w ) {
+                containers().removeOne ( w );
                 break;
             }
         }
@@ -65,13 +65,13 @@ public:
      * @param objName
      * @return
      */
-    static const QObject* registedObject(const QString objName) {
-        QListIterator<const QObject*> itor(containers());
+    static const QObject* registedObject ( const QString objName ) {
+        QListIterator<const QObject*> itor ( containers() );
 
-        while (itor.hasNext()) {
+        while ( itor.hasNext() ) {
             const QObject* ww = itor.next();
 
-            if (ww->objectName() == objName) {
+            if ( ww->objectName() == objName ) {
                 return ww;
             }
         }
@@ -80,11 +80,11 @@ public:
     }
 
 private:
-    typedef QObject* (*Constructor)(QObject* parent);
+    typedef QObject* ( *Constructor ) ( QObject* parent );
 
     template<typename T>
-    static QObject* constructorHelper(QObject* parent) {
-        return new T(parent);
+    static QObject* constructorHelper ( QObject* parent ) {
+        return new T ( parent );
     }
 
     static QHash<QByteArray, Constructor>& constructors() {
@@ -100,7 +100,7 @@ private:
         /*
          * 将生成此类对象的具体（非模板）函数注册进Hash
          */
-        constructors().insert(T::staticMetaObject.className(), &constructorHelper<T>);
+        constructors().insert ( T::staticMetaObject.className(), &constructorHelper<T> );
     }
 
 private:

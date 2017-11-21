@@ -33,8 +33,8 @@ QQtProgressDialog::QQtProgressDialog(QWidget* parent) :
                              "./skin/default/bk_progress_chunk.png");
 #endif
 
-    QQTObjectFactory::registerObject(this);
-    QQTObjectFactory::registerObject(ui->btnCancel);
+    QQtObjectFactory::registerObject(this);
+    QQtObjectFactory::registerObject(ui->btnCancel);
 }
 
 QQtProgressDialog::~QQtProgressDialog()

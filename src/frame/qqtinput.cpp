@@ -5,20 +5,20 @@
 #include "qqtsql.h"
 #include "qqtframe.h"
 
-QQTInput* QQTInput::_instance = 0;
-QQTInput::QQTInput(QWidget* parent) :
+QQtInput* QQtInput::_instance = 0;
+QQtInput::QQtInput(QWidget* parent) :
     QWidget(parent),
-    ui(new Ui::frmInput)
+    ui(new Ui::QQtInput)
 {
     ui->setupUi(this);
 }
 
-QQTInput::~QQTInput()
+QQtInput::~QQtInput()
 {
     delete ui;
 }
 
-void QQTInput::Init(QString type, QString position, QString style, int btnFontSize, int labFontSize)
+void QQtInput::Init(QString type, QString position, QString style, int btnFontSize, int labFontSize)
 {
     this->currentPosition = position;
     this->currentStyle = style;
@@ -34,7 +34,7 @@ void QQTInput::Init(QString type, QString position, QString style, int btnFontSi
     this->changePosition();
 }
 
-void QQTInput::mouseMoveEvent(QMouseEvent* e)
+void QQtInput::mouseMoveEvent(QMouseEvent* e)
 {
     if (mousePressed && (e->buttons() && Qt::LeftButton))
     {
@@ -43,7 +43,7 @@ void QQTInput::mouseMoveEvent(QMouseEvent* e)
     }
 }
 
-void QQTInput::mousePressEvent(QMouseEvent* e)
+void QQtInput::mousePressEvent(QMouseEvent* e)
 {
     if (e->button() == Qt::LeftButton)
     {
@@ -53,12 +53,12 @@ void QQTInput::mousePressEvent(QMouseEvent* e)
     }
 }
 
-void QQTInput::mouseReleaseEvent(QMouseEvent*)
+void QQtInput::mouseReleaseEvent(QMouseEvent*)
 {
     mousePressed = false;
 }
 
-void QQTInput::InitForm()
+void QQtInput::InitForm()
 {
     this->mousePressed = false;
     this->setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
@@ -191,7 +191,7 @@ void QQTInput::InitForm()
     qApp->installEventFilter(this);
 }
 
-void QQTInput::InitProperty()
+void QQtInput::InitProperty()
 {
     ui->btnOther1->setProperty("btnOther", true);
     ui->btnOther2->setProperty("btnOther", true);
@@ -282,12 +282,12 @@ void QQTInput::InitProperty()
     }
 }
 
-void QQTInput::ShowPanel()
+void QQtInput::ShowPanel()
 {
     this->setVisible(true);
 }
 
-bool QQTInput::checkPress()
+bool QQtInput::checkPress()
 {
     /*
      * 只有属于输入法键盘的合法按钮才继续处理
@@ -304,7 +304,7 @@ bool QQTInput::checkPress()
     return false;
 }
 
-void QQTInput::reClicked()
+void QQtInput::reClicked()
 {
     if (isPress)
     {
@@ -313,7 +313,7 @@ void QQTInput::reClicked()
     }
 }
 
-void QQTInput::btn_clicked()
+void QQtInput::btn_clicked()
 {
     /*
      * 如果当前焦点控件类型为空,则返回不需要继续处理
@@ -566,7 +566,7 @@ void QQTInput::btn_clicked()
 /*
  * 事件过滤器,用于识别鼠标单击汉字标签处获取对应汉字
  */
-bool QQTInput::eventFilter(QObject* obj, QEvent* event)
+bool QQtInput::eventFilter(QObject* obj, QEvent* event)
 {
     //pline() << obj->objectName() << currentEditType << event->type();
     if (event->type() == QEvent::MouseButtonPress)
@@ -774,7 +774,7 @@ bool QQTInput::eventFilter(QObject* obj, QEvent* event)
     return QWidget::eventFilter(obj, event);
 }
 
-void QQTInput::focusChanged(QWidget* oldWidget, QWidget* nowWidget)
+void QQtInput::focusChanged(QWidget* oldWidget, QWidget* nowWidget)
 {
     currentFocusWidget = nowWidget;
 
@@ -878,7 +878,7 @@ void QQTInput::focusChanged(QWidget* oldWidget, QWidget* nowWidget)
     //pline() << currentEditType;
 }
 
-void QQTInput::changeType()
+void QQtInput::changeType()
 {
     /*
      * 如果需要更改输入法初始模式,改变currentType这个变量即可
@@ -920,7 +920,7 @@ void QQTInput::changeType()
     ui->labPY->setText("");
 }
 
-void QQTInput::changeLetter(bool isUpper)
+void QQtInput::changeLetter(bool isUpper)
 {
     QList<QPushButton*> btn = this->findChildren<QPushButton*>();
 
@@ -940,7 +940,7 @@ void QQTInput::changeLetter(bool isUpper)
     }
 }
 
-void QQTInput::selectChinese()
+void QQtInput::selectChinese()
 {
     clearChinese();
     QSqlQuery query(m_db);
@@ -969,7 +969,7 @@ void QQTInput::selectChinese()
     showChinese();
 }
 
-void QQTInput::showChinese()
+void QQtInput::showChinese()
 {
     /*
      * 每个版面最多显示10个汉字
@@ -999,7 +999,7 @@ void QQTInput::showChinese()
     qDebug() << "currentPY_index:" << currentPY_index << "currentPY_count:" << currentPY_count;
 }
 
-void QQTInput::insertValue(QString value)
+void QQtInput::insertValue(QString value)
 {
     if (currentEditType == "QLineEdit")
     {
@@ -1024,7 +1024,7 @@ void QQTInput::insertValue(QString value)
     }
 }
 
-void QQTInput::deleteValue()
+void QQtInput::deleteValue()
 {
     if (currentEditType == "QLineEdit")
     {
@@ -1085,7 +1085,7 @@ void QQTInput::deleteValue()
     }
 }
 
-void QQTInput::setChinese(int index)
+void QQtInput::setChinese(int index)
 {
     int count = currentPY.count();
 
@@ -1100,7 +1100,7 @@ void QQTInput::setChinese(int index)
     }
 }
 
-void QQTInput::clearChinese()
+void QQtInput::clearChinese()
 {
     /*
      * 清空汉字,重置索引
@@ -1116,7 +1116,7 @@ void QQTInput::clearChinese()
     currentPY_count = 0;
 }
 
-void QQTInput::changeRect()
+void QQtInput::changeRect()
 {
     QRect geo = geometry();
 
@@ -1133,7 +1133,7 @@ void QQTInput::changeRect()
     setGeometry(geo);
 }
 
-void QQTInput::changePosition()
+void QQtInput::changePosition()
 {
     /*
      * 如果需要更改输入法面板的显示位置,改变currentPosition这个变量即可
@@ -1230,7 +1230,7 @@ void QQTInput::changePosition()
     }
 }
 
-void QQTInput::ChangeStyle()
+void QQtInput::ChangeStyle()
 {
     /*
      * 如果需要更改输入法面板的样式,改变currentStyle这个变量即可
@@ -1276,7 +1276,7 @@ void QQTInput::ChangeStyle()
     }
 }
 
-void QQTInput::ChangeFont()
+void QQtInput::ChangeFont()
 {
     /*
      * 输入法面板字体大小,如果需要更改面板字体大小,该这里即可
@@ -1306,11 +1306,11 @@ void QQTInput::ChangeFont()
     ui->btnClose->setFont(labFont);
 }
 
-void QQTInput::changeStyle(QString topColor, QString bottomColor, QString borderColor, QString textColor)
+void QQtInput::changeStyle(QString topColor, QString bottomColor, QString borderColor, QString textColor)
 {
     QStringList qss;
 
-    qss.append(QString("QWidget#frmInput{background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 %1,stop:1 %2);}")
+    qss.append(QString("QWidget#QQtInput{background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 %1,stop:1 %2);}")
                .arg(topColor).arg(bottomColor));
     qss.append(
         QString("QWidget#widgetTopPinyin{background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 %1,stop:1 %2);}")

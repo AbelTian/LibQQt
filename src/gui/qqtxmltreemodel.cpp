@@ -3,12 +3,12 @@
 #include "qqtcore.h"
 #include <QModelIndex>
 
-QQTXmlTreeModel::QQTXmlTreeModel ( QObject* parent ) : QQtTreeModel ( parent )
+QQtXmlTreeModel::QQtXmlTreeModel ( QObject* parent ) : QQtTreeModel ( parent )
 {
 
 }
 
-void QQTXmlTreeModel::setFilePath ( QString fileName )
+void QQtXmlTreeModel::setFilePath ( QString fileName )
 {
     QFile file ( fileName );
 
@@ -44,7 +44,7 @@ void QQTXmlTreeModel::setFilePath ( QString fileName )
     return;
 }
 
-bool QQTXmlTreeModel::query ( QString condition )
+bool QQtXmlTreeModel::query ( QString condition )
 {
     Q_UNUSED ( condition )
     //TODO:
@@ -52,12 +52,12 @@ bool QQTXmlTreeModel::query ( QString condition )
 }
 
 /**
- * @brief QQTXmlTreeModel::parseChildElement
+ * @brief QQtXmlTreeModel::parseChildElement
  * @param element
  * @param parent
  * 这套递归代码，第一次和最后一次不同。
  */
-void QQTXmlTreeModel::parseChildElement ( const QDomElement& element, QStandardItem* itemParent )
+void QQtXmlTreeModel::parseChildElement ( const QDomElement& element, QStandardItem* itemParent )
 {
     /**
      * @brief element name

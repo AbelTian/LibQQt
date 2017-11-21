@@ -30,11 +30,11 @@
 #define __PRETTY_FUNCTION__  __FUNCTION__
 #endif
 
-class QQTSHARED_EXPORT QQTPluginWatcher : public QThread
+class QQTSHARED_EXPORT QQtPluginWatcher : public QThread
 {
     Q_OBJECT
 public:
-    static QQTPluginWatcher* Instance();
+    static QQtPluginWatcher* Instance();
 
     enum
     {
@@ -60,23 +60,23 @@ public:
     QString printerFile() { return "/dev/usb/lp0"; }
 
 signals:
-    void storageChanged(int stat);
+    void storageChanged ( int stat );
 
 public slots:
-    void slotDeviceAdded(const QString& dev);
-    void slotDeviceRemoved(const QString& dev);
-    void slotDeviceChanged(const QString& dev);
+    void slotDeviceAdded ( const QString& dev );
+    void slotDeviceRemoved ( const QString& dev );
+    void slotDeviceChanged ( const QString& dev );
     void slotDeviceDriver();
 
 protected:
-    virtual bool event(QEvent* e);
+    virtual bool event ( QEvent* e );
 
 private:
 
 private:
     QDeviceWatcher* watcher;
-    explicit QQTPluginWatcher(QObject* parent = 0);
-    static QQTPluginWatcher* _instance;
+    explicit QQtPluginWatcher ( QObject* parent = 0 );
+    static QQtPluginWatcher* _instance;
     quint32 m_devType;
     quint32 m_devStat;
     QString m_storage;

@@ -4,14 +4,14 @@
 #include <QHeaderView>
 #include <qqt-local.h>
 /**
- * @brief The QQTHeaderView class
+ * @brief The QQtHeaderView class
  * Qt4.8.7 不能HeaderView背景全部透明，重写
  */
-class QQTSHARED_EXPORT QQTHeaderView : public QHeaderView
+class QQTSHARED_EXPORT QQtHeaderView : public QHeaderView
 {
     Q_OBJECT
 public:
-    explicit QQTHeaderView ( Qt::Orientation orientation = Qt::Horizontal, QWidget* parent = 0 );
+    explicit QQtHeaderView ( Qt::Orientation orientation = Qt::Horizontal, QWidget* parent = 0 );
 
 signals:
 

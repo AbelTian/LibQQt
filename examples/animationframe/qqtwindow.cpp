@@ -14,7 +14,7 @@ QQTWindow::QQTWindow(QWidget* parent) :
 {
     ui->setupUi(this);
 
-    QQTObjectFactory::registerObject(this);
+    QQtObjectFactory::registerObject(this);
 
 #ifdef __EMBEDDED_LINUX__
     /*
@@ -29,15 +29,15 @@ QQTWindow::QQTWindow(QWidget* parent) :
     setFixedSize(1024, 600);
     moveCenter(this);
 
-    QQTObjectFactory::registerObject(ui->pushButton);
-    QQTObjectFactory::registerObject(ui->pushButton_2);
-    QQTObjectFactory::registerObject(ui->pushButton_3);
-    QQTObjectFactory::registerObject(ui->pushButton_4);
-    QQTObjectFactory::registerObject(ui->pushButton_5);
-    QQTObjectFactory::registerObject(ui->pushButton_6);
+    QQtObjectFactory::registerObject(ui->pushButton);
+    QQtObjectFactory::registerObject(ui->pushButton_2);
+    QQtObjectFactory::registerObject(ui->pushButton_3);
+    QQtObjectFactory::registerObject(ui->pushButton_4);
+    QQtObjectFactory::registerObject(ui->pushButton_5);
+    QQtObjectFactory::registerObject(ui->pushButton_6);
 
     /**
-     * @brief QQTAnimationManager::Instance
+     * @brief QQtAnimationManager::Instance
      * 开启或者关闭动画
      */
     AnimationManager::Instance(this);

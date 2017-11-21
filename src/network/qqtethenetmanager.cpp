@@ -3,18 +3,18 @@
 #include "qqtcore.h"
 #include "qqt-qt.h"
 
-QQTEthenetManager* QQTEthenetManager::_instance = NULL;
+QQtEthenetManager* QQtEthenetManager::_instance = NULL;
 
-QQTEthenetManager* QQTEthenetManager::Instance(QObject* parent)
+QQtEthenetManager* QQtEthenetManager::Instance(QObject* parent)
 {
     if (_instance)
         return _instance;
 
-    _instance = new QQTEthenetManager(parent);
+    _instance = new QQtEthenetManager(parent);
     return _instance;
 }
 
-bool QQTEthenetManager::setCurrentWifi(QString bssid_mac, QString password)
+bool QQtEthenetManager::setCurrentWifi(QString bssid_mac, QString password)
 {
     for (QList<TWifi>::Iterator it = m_wifiList.begin();
          it != m_wifiList.end(); it++)
@@ -38,13 +38,13 @@ bool QQTEthenetManager::setCurrentWifi(QString bssid_mac, QString password)
     return true;
 }
 
-void QQTEthenetManager::ipconfig()
+void QQtEthenetManager::ipconfig()
 {
     saveScript();
     config();
 }
 
-QString QQTEthenetManager::currentNetName()
+QString QQtEthenetManager::currentNetName()
 {
     if ("eth0" == m_netName)
         return "Wired Lan";
@@ -56,7 +56,7 @@ QString QQTEthenetManager::currentNetName()
     return "";
 }
 
-void QQTEthenetManager::readStatus()
+void QQtEthenetManager::readStatus()
 {
     /*
      * 从 status 中读取
@@ -99,7 +99,7 @@ void QQTEthenetManager::readStatus()
     return;
 }
 
-void QQTEthenetManager::refreshWifiList()
+void QQtEthenetManager::refreshWifiList()
 {
     static int scanid = 0;
 
@@ -162,7 +162,7 @@ void QQTEthenetManager::refreshWifiList()
     emit sigRefreshed();
 }
 
-void QQTEthenetManager::refreshWifiStatus()
+void QQtEthenetManager::refreshWifiStatus()
 {
     readStatus();
 
@@ -188,7 +188,7 @@ void QQTEthenetManager::refreshWifiStatus()
         emit sigDisConnected();
 }
 
-void QQTEthenetManager::checkLanConnection()
+void QQtEthenetManager::checkLanConnection()
 {
     char cmdbuf[MAX_PATH];
     char cmdresult[MAX_PATH]; //设置一个合适的长度，以存储每一行输出
@@ -219,7 +219,7 @@ void QQTEthenetManager::checkLanConnection()
     return;
 }
 
-void QQTEthenetManager::DhcpPassed(QString netname)
+void QQtEthenetManager::DhcpPassed(QString netname)
 {
     int sockfd;
     struct ifreq ifr;
@@ -291,20 +291,20 @@ void QQTEthenetManager::DhcpPassed(QString netname)
     saveScript();
 }
 
-void QQTEthenetManager::checkNetworkClear()
+void QQtEthenetManager::checkNetworkClear()
 {
     return;
     m_clearThread->start();
 }
 
-QQTEthenetManager::QQTEthenetManager(QObject* parent) :
+QQtEthenetManager::QQtEthenetManager(QObject* parent) :
     QObject(parent)
 {
     m_bUseDHCP = false;
-    m_clearThread = new QQTNetworkClearThread(this);
+    m_clearThread = new QQtNetWorkClearThread(this);
     connect(m_clearThread, SIGNAL(cleared()), this, SIGNAL(sigNetworkClear()));
     connect(m_clearThread, SIGNAL(notcleared()), this, SIGNAL(sigNetworkNotClear()));
-    m_thread = new QQTDhcpThread(this);
+    m_thread = new QQtDHCPThread(this);
     connect(m_thread, SIGNAL(passed(QString)), this, SLOT(DhcpPassed(QString)));
     /*
      * 检查网线
@@ -326,7 +326,7 @@ QQTEthenetManager::QQTEthenetManager(QObject* parent) :
 #endif
 }
 
-void QQTEthenetManager::restoreWifi()
+void QQtEthenetManager::restoreWifi()
 {
     QString name = m_curWifi[ESSID_NAME];
     QString password = m_curWifi[ESSID_PASS];
@@ -380,7 +380,7 @@ void QQTEthenetManager::restoreWifi()
     fclose(fp);
 }
 
-bool QQTEthenetManager::restartWifi()
+bool QQtEthenetManager::restartWifi()
 {
     char cmdbuf[MAX_PATH];
     char cmdresult[MAX_PATH]; //设置一个合适的长度，以存储每一行输出
@@ -397,7 +397,7 @@ bool QQTEthenetManager::restartWifi()
     return true;
 }
 
-void QQTEthenetManager::saveScript()
+void QQtEthenetManager::saveScript()
 {
     QString ip, mask, gw, dns;
     getAddr(ip, mask, gw, dns);
@@ -445,7 +445,7 @@ void QQTEthenetManager::saveScript()
     system(cmdbuf);
 }
 
-void QQTEthenetManager::config()
+void QQtEthenetManager::config()
 {
     char cmdbuf[MAX_PATH];
     bzero(cmdbuf, MAX_PATH);
@@ -507,7 +507,7 @@ void QQTEthenetManager::config()
     system(cmdbuf);
 }
 
-void QQTEthenetManager::setAddr(QString ip, QString mask, QString gw, QString dns)
+void QQtEthenetManager::setAddr(QString ip, QString mask, QString gw, QString dns)
 {
     QSettings netSet;
     netSet.setValue("/Network/IP", ip);
@@ -517,7 +517,7 @@ void QQTEthenetManager::setAddr(QString ip, QString mask, QString gw, QString dn
     netSet.sync();
 }
 
-void QQTEthenetManager::getAddr(QString& ip, QString& mask, QString& gw, QString& dns)
+void QQtEthenetManager::getAddr(QString& ip, QString& mask, QString& gw, QString& dns)
 {
     QSettings netSet;
     ip = netSet.value("/Network/IP").toString();
@@ -526,7 +526,7 @@ void QQTEthenetManager::getAddr(QString& ip, QString& mask, QString& gw, QString
     dns = netSet.value("/Network/DNS").toString();
 }
 
-void QQTDhcpThread::run()
+void QQtDHCPThread::run()
 {
     char cmdbuf[MAX_PATH];
     bzero(cmdbuf, MAX_PATH);
@@ -536,7 +536,7 @@ void QQTDhcpThread::run()
 }
 
 
-void QQTNetworkClearThread::run()
+void QQtNetWorkClearThread::run()
 {
     static bool _bclear = false;
     bool bclear = false;

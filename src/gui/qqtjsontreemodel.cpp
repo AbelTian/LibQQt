@@ -52,7 +52,7 @@ bool QQtJsonTreeModel::query ( QString condition )
 }
 
 /**
- * @brief QQTXmlTreeModel::parseChildElement
+ * @brief QQtXmlTreeModel::parseChildElement
  * @param element
  * @param parent
  * 这套递归代码，第一次和最后一次不同。

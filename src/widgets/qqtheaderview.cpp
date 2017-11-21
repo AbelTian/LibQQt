@@ -6,19 +6,19 @@
 #include <QStandardItemModel>
 #include <QStringListModel>
 
-QQTHeaderView::QQTHeaderView(Qt::Orientation orientation, QWidget* parent) :
+QQtHeaderView::QQtHeaderView(Qt::Orientation orientation, QWidget* parent) :
     QHeaderView(orientation, parent), ori(orientation)
 {
     setFocusPolicy(Qt::NoFocus);
     setStyleSheet("QHeaderView, QHeaderView::section{background:transparent;}");
 }
 
-void QQTHeaderView::paintSection(QPainter* painter, const QRect& rect, int logicalIndex) const
+void QQtHeaderView::paintSection(QPainter* painter, const QRect& rect, int logicalIndex) const
 {
     painter->drawText(rect, Qt::AlignCenter, model()->headerData(logicalIndex, ori).toString());
 }
 
-QSize QQTHeaderView::sectionSizeFromContents(int logicalIndex) const
+QSize QQtHeaderView::sectionSizeFromContents(int logicalIndex) const
 {
     /*
      * 文字宽度 不是section宽度
@@ -26,7 +26,7 @@ QSize QQTHeaderView::sectionSizeFromContents(int logicalIndex) const
     return QHeaderView::sectionSizeFromContents(logicalIndex);
 }
 
-void QQTHeaderView::paintEvent(QPaintEvent* e)
+void QQtHeaderView::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
     QStylePainter p(this->viewport());

@@ -37,7 +37,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QQTLineEditWithSearch" name="lineEdit">
+         <widget class="QQtLineEditWithSearch" name="lineEdit">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -78,7 +78,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QQTLineEditWithSearch</class>
+   <class>QQtLineEditWithSearch</class>
    <extends>QLineEdit</extends>
    <header location="global">qqtlineeditwithsearch.h</header>
   </customwidget>

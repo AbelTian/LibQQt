@@ -6,8 +6,8 @@
 QQtTableView::QQtTableView(QWidget* parent) :
     QTableView(parent)
 {
-    m_header = new QQTHeaderView(Qt::Horizontal, this);
-    m_vheader = new QQTHeaderView(Qt::Vertical, this);
+    m_header = new QQtHeaderView(Qt::Horizontal, this);
+    m_vheader = new QQtHeaderView(Qt::Vertical, this);
 
     setSelectionMode(QAbstractItemView::SingleSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);

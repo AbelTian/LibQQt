@@ -143,16 +143,13 @@ equals(QT_VERSION, 5.9.1) {
     }
 }
 #Qt 5.9.2, android support this feature
-#Qt 5.9.2, ios can't use printsupport, but Qt Charts work well, it don't use QPrinter.
+#Qt 5.9.2, ios can't use printsupport
 contains(QKIT_PRIVATE, iOS||iOSSimulator) {
     DEFINES -= __PRINTSUPPORT__
 }
 contains (DEFINES, __PRINTSUPPORT__) {
     #qtHaveModule(printsupport) : message(qqt use module printsupport)
     greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
-    #if you use qcustomplot, open this annotation
-    #qcustomplot use QPrinter to export png file.
-    DEFINES += __CUSTOMPLOT__
 }
 
 ##################Exquisite Module###############################
@@ -181,7 +178,7 @@ contains (DEFINES, __EXQUISITE__) {
 ##################WebSocket Module###############################
 #don't close this macro ...
 DEFINES += __TCPUDPSOCKET__
-#if you use Qt Service Spoort ( QtSoap ), open this annotation
+#if you use Qt Service Support ( QtSoap ), open this annotation
 DEFINES += __WEBSERVICESUPPORT__
 #One Ftp Http 单工...
 #Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
@@ -202,6 +199,18 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
     #TODO: QT += webkit
 }
+
+##################Charts Module###############################
+#if you use QQtCharts, open this annotation
+DEFINES += __QQTCHARTS__
+#based on QtCharts, need charts module
+contains(DEFINES, __QQTCHARTS__) {
+    QT += charts
+}
+#if you use qcustomplot, open this annotation
+#qcustomplot use QPrinter to export pdf file, QChart haven't use it, but compiler ok.
+#in ios qcustomplot can't call savePdf now, no result but a log no printer error.
+DEFINES += __CUSTOMPLOT__
 
 ##################################################################
 ##library
@@ -245,6 +254,7 @@ INCLUDEPATH += $$PWD/pluginwatcher
 INCLUDEPATH += $$PWD/printsupport
 INCLUDEPATH += $$PWD/sql
 INCLUDEPATH += $$PWD/widgets
+INCLUDEPATH += $$PWD/charts
 
 #exquisite widget
 INCLUDEPATH += $$PWD/exquisite

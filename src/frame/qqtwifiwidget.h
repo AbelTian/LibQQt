@@ -10,50 +10,51 @@
 #include "qqtcore.h"
 #include "qqt-local.h"
 
-class QQTSHARED_EXPORT QQTWIFIIDTextDelegate : public QItemDelegate
+class QQTSHARED_EXPORT QQtWiFiIdTextDelegate : public QItemDelegate
 {
     Q_OBJECT
 public:
-    QQTWIFIIDTextDelegate(QObject* parent = 0): QItemDelegate(parent), parent(parent) { }
+    QQtWiFiIdTextDelegate ( QObject* parent = 0 ) : QItemDelegate ( parent ), parent ( parent ) { }
 
 private:
     QObject* parent;
 
     // QItemDelegate interface
 protected:
-    void drawCheck(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect, Qt::CheckState state) const;
+    void drawCheck ( QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect, Qt::CheckState state ) const;
 
     // QItemDelegate interface
 protected:
-    void drawDisplay(QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect, const QString& text) const;
+    void drawDisplay ( QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect,
+                       const QString& text ) const;
 };
 
 namespace Ui {
-class QQTWIFIWidget;
+class QQtWiFiWidget;
 }
 
-class QQTWIFIWidget : public QQTTableView
+class QQtWiFiWidget : public QQTTableView
 {
     Q_OBJECT
 
 public:
-    explicit QQTWIFIWidget(QWidget* parent = 0);
-    ~QQTWIFIWidget();
+    explicit QQtWiFiWidget ( QWidget* parent = 0 );
+    ~QQtWiFiWidget();
 
 private slots:
     void clickWIFI();
     void wifiRefreshed();
 protected:
     TWifi currentWifi();
-    bool setCurrentWifi(QString bssid_mac, QString password = "");
+    bool setCurrentWifi ( QString bssid_mac, QString password = "" );
 private:
-    QQTEthenetManager* m_pManager;
-    QQTWIFIIDTextDelegate* dg;
+    QQtEthenetManager* m_pManager;
+    QQtWiFiIdTextDelegate* dg;
 
 private:
-    Ui::QQTWIFIWidget* ui;
+    Ui::QQtWiFiWidget* ui;
     QStandardItemModel* m_model;
-    QQTPasswordDialog* m_pass;
+    QQtPasswordDialog* m_pass;
 };
 
 #endif // QQTWIFIWIDGET_H

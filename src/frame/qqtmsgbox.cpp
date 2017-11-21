@@ -2,9 +2,9 @@
 #include "ui_qqtmsgbox.h"
 #include "qqtcore.h"
 
-QQTMsgBox::QQTMsgBox(QWidget* parent) :
+QQtMsgBox::QQtMsgBox(QWidget* parent) :
     QQtDialog(parent),
-    ui(new Ui::QQTMsgBox)
+    ui(new Ui::QQtMsgBox)
 {
     ui->setupUi(this);
 
@@ -83,41 +83,41 @@ QQTMsgBox::QQTMsgBox(QWidget* parent) :
 
 }
 
-QQTMsgBox::~QQTMsgBox()
+QQtMsgBox::~QQtMsgBox()
 {
     delete ui;
 }
 
 
 
-int QQTMsgBox::warning(QWidget* parent, QString content)
+int QQtMsgBox::warning(QWidget* parent, QString content)
 {
-    QQTMsgBox* msgBox = new QQTMsgBox(parent);
+    QQtMsgBox* msgBox = new QQtMsgBox(parent);
 
     return msgBox->_warning(content);
 }
 
-int QQTMsgBox::question(QWidget* parent, QString content)
+int QQtMsgBox::question(QWidget* parent, QString content)
 {
-    QQTMsgBox* msgBox = new QQTMsgBox(parent);
+    QQtMsgBox* msgBox = new QQtMsgBox(parent);
     return msgBox->_question(content);
 }
 
-int QQTMsgBox::_warning(QString content)
+int QQtMsgBox::_warning(QString content)
 {
     ui->lbContent->setText(content);
     showYes();;
     return exec();
 }
 
-int QQTMsgBox::_question(QString content)
+int QQtMsgBox::_question(QString content)
 {
     ui->lbContent->setText(content);
     showYesAndNo();
     return exec();
 }
 
-void QQTMsgBox::showYes()
+void QQtMsgBox::showYes()
 {
     ui->btnYes->setHidden(false);
     ui->btnNo->setHidden(true);
@@ -126,7 +126,7 @@ void QQTMsgBox::showYes()
     ui->btnYes->setGeometry(x0, y0, btnW, btnH);
 }
 
-void QQTMsgBox::showYesAndNo()
+void QQtMsgBox::showYesAndNo()
 {
     ui->btnYes->setHidden(false);
     ui->btnNo->setHidden(false);
@@ -136,7 +136,7 @@ void QQTMsgBox::showYesAndNo()
     ui->btnNo->setGeometry(x0 + btnW + x0, y0, btnW, btnH);
 }
 
-void QQTMsgBox::showNull()
+void QQtMsgBox::showNull()
 {
     ui->btnYes->setHidden(true);
     ui->btnNo->setHidden(true);
@@ -147,7 +147,7 @@ void QQTMsgBox::showNull()
 
 
 
-void QQTMsgBox::warning(QString content)
+void QQtMsgBox::warning(QString content)
 {
     setAttribute(Qt::WA_DeleteOnClose, false);
     ui->lbContent->setText(content);
@@ -158,7 +158,7 @@ void QQTMsgBox::warning(QString content)
     QQTSleep(delayShow);
 }
 
-void QQTMsgBox::question(QString content)
+void QQtMsgBox::question(QString content)
 {
     setAttribute(Qt::WA_DeleteOnClose, false);
     ui->lbContent->setText(content);
@@ -169,7 +169,7 @@ void QQTMsgBox::question(QString content)
     QQTSleep(delayShow);
 }
 
-void QQTMsgBox::information(QString content)
+void QQtMsgBox::information(QString content)
 {
     setAttribute(Qt::WA_DeleteOnClose, false);
     ui->lbContent->setText(content);
@@ -180,7 +180,7 @@ void QQTMsgBox::information(QString content)
     QQTSleep(delayShow);
 }
 
-void QQTMsgBox::timerEvent(QTimerEvent* e)
+void QQtMsgBox::timerEvent(QTimerEvent* e)
 {
     return;
 

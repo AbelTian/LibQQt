@@ -5,11 +5,11 @@
 #include <QDomDocument>
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT QQTXmlTreeModel : public QQtTreeModel
+class QQTSHARED_EXPORT QQtXmlTreeModel : public QQtTreeModel
 {
     Q_OBJECT
 public:
-    explicit QQTXmlTreeModel ( QObject* parent = 0 );
+    explicit QQtXmlTreeModel ( QObject* parent = 0 );
 
 
 signals:

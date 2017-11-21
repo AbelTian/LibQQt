@@ -7,21 +7,21 @@
 #include "qqt-local.h"
 #include "qqtcore.h"
 
-class QQTSHARED_EXPORT QQTServer : public QTcpServer
+class QQTSHARED_EXPORT QQtServer : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit QQTServer(QObject* parent = 0);
-    ~QQTServer();
+    explicit QQtServer ( QObject* parent = 0 );
+    ~QQtServer();
 
-    void installProtocol(QQtProtocol* stack);
-    void uninstallProtocol(QQtProtocol* stack);
+    void installProtocol ( QQtProtocol* stack );
+    void uninstallProtocol ( QQtProtocol* stack );
     QQtProtocol* installedProtocol();
 
 signals:
     // QTcpServer interface
 protected:
-    virtual void incomingConnection(qintptr handle) override;
+    virtual void incomingConnection ( qintptr handle ) override;
 private:
     QQtProtocol* m_protocol;
 };

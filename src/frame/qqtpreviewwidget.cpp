@@ -1,9 +1,9 @@
 #include "qqtpreviewwidget.h"
 #include "ui_qqtpreviewwidget.h"
 
-QQTPreviewWidget::QQTPreviewWidget(QWidget* parent) :
+QQtPreviewWidget::QQtPreviewWidget(QWidget* parent) :
     QWidget(parent),
-    ui(new Ui::QQTPreviewWidget)
+    ui(new Ui::QQtPreviewWidget)
 {
     ui->setupUi(this);
 
@@ -33,12 +33,12 @@ QQTPreviewWidget::QQTPreviewWidget(QWidget* parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 }
 
-QQTPreviewWidget::~QQTPreviewWidget()
+QQtPreviewWidget::~QQtPreviewWidget()
 {
     delete ui;
 }
 
-int QQTPreviewWidget::play()
+int QQtPreviewWidget::play()
 {
     /*
      * 这块代码放在哪里
@@ -153,7 +153,7 @@ int QQTPreviewWidget::play()
     return fd;
 }
 
-int QQTPreviewWidget::close()
+int QQtPreviewWidget::close()
 {
     bool ret = false;
 
@@ -190,7 +190,7 @@ int QQTPreviewWidget::close()
 }
 
 
-int QQTPreviewWidget::convert_yuv_to_rgb_pixel(int y, int u, int v)
+int QQtPreviewWidget::convert_yuv_to_rgb_pixel(int y, int u, int v)
 {
     unsigned int pixel32 = 0;
     unsigned char* pixel = (unsigned char*)&pixel32;
@@ -207,7 +207,7 @@ int QQTPreviewWidget::convert_yuv_to_rgb_pixel(int y, int u, int v)
     return pixel32;
 }
 
-int QQTPreviewWidget::convert_yuv_to_rgb_buffer(unsigned char* yuv, unsigned char* rgb, unsigned int width,
+int QQtPreviewWidget::convert_yuv_to_rgb_buffer(unsigned char* yuv, unsigned char* rgb, unsigned int width,
                                                 unsigned int height)
 {
     unsigned int in, out = 0;
@@ -247,7 +247,7 @@ int QQTPreviewWidget::convert_yuv_to_rgb_buffer(unsigned char* yuv, unsigned cha
 }
 
 
-void QQTPreviewWidget::paintEvent(QPaintEvent*)
+void QQtPreviewWidget::paintEvent(QPaintEvent*)
 {
     if (fd <= 0)
         return;
@@ -287,7 +287,7 @@ void QQTPreviewWidget::paintEvent(QPaintEvent*)
 }
 
 
-void QQTPreviewWidget::mousePressEvent(QMouseEvent* e)
+void QQtPreviewWidget::mousePressEvent(QMouseEvent* e)
 {
     static bool bGInit = false;
 

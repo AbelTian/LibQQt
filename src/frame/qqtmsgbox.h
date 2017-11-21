@@ -5,40 +5,40 @@
 #include <qqt-local.h>
 
 namespace Ui {
-class QQTMsgBox;
+class QQtMsgBox;
 }
 
 /**
- * @brief The QQTMsgBox class
+ * @brief The QQtMsgBox class
  *
  */
-class QQTSHARED_EXPORT QQTMsgBox : public QQtDialog
+class QQTSHARED_EXPORT QQtMsgBox : public QQtDialog
 {
     Q_OBJECT
 
 public:
-    explicit QQTMsgBox(QWidget* parent = 0);
-    ~QQTMsgBox();
+    explicit QQtMsgBox ( QWidget* parent = 0 );
+    ~QQtMsgBox();
 
-    void warning(QString content);
-    void question(QString content);
-    void information(QString content);
+    void warning ( QString content );
+    void question ( QString content );
+    void information ( QString content );
 
     /*
      * 警告，不可选择
      */
-    static int warning(QWidget* parent = 0, QString content = "");
+    static int warning ( QWidget* parent = 0, QString content = "" );
     /*
      * 提醒，供用户选择
      */
-    static int question(QWidget* parent = 0, QString content = "");
+    static int question ( QWidget* parent = 0, QString content = "" );
 
 protected:
-    int _warning(QString content);
-    int _question(QString content);
+    int _warning ( QString content );
+    int _question ( QString content );
 
 private:
-    Ui::QQTMsgBox* ui;
+    Ui::QQtMsgBox* ui;
     quint32 m_time;
     int delayShow;
 
@@ -58,7 +58,7 @@ private:
 
     // QObject interface
 protected:
-    void timerEvent(QTimerEvent*);
+    void timerEvent ( QTimerEvent* );
 };
 
 #endif // QQTMSGBOX_H

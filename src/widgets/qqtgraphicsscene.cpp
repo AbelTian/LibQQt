@@ -3,25 +3,25 @@
 #include <QPainter>
 #include "qqtcore.h"
 #include "qqt-qt.h"
-QQTGraphicsScene::QQTGraphicsScene(QObject* parent) :
+QQtGraphicsScene::QQtGraphicsScene(QObject* parent) :
     QGraphicsScene(parent)
 {
 }
 
-QQTGraphicsScene::QQTGraphicsScene(const QRectF& sceneRect, QObject* parent) :
+QQtGraphicsScene::QQtGraphicsScene(const QRectF& sceneRect, QObject* parent) :
     QGraphicsScene(sceneRect, parent)
 {
 
 }
 
-QQTGraphicsScene::QQTGraphicsScene(qreal x, qreal y, qreal width, qreal height, QObject* parent) :
+QQtGraphicsScene::QQtGraphicsScene(qreal x, qreal y, qreal width, qreal height, QObject* parent) :
     QGraphicsScene(x, y, width, height, parent)
 {
 
 }
 
 /**
- * @brief QQTGraphicsScene::render
+ * @brief QQtGraphicsScene::render
  * 经过测试，失真是由于render放缩QPainter和drawItems里面的itemPaint共同导致失真
  * 现在规整理如下，原则：Qpainter不允许改变
  * 重写itemPaint函数
@@ -30,7 +30,7 @@ QQTGraphicsScene::QQTGraphicsScene(qreal x, qreal y, qreal width, qreal height, 
  * @param source
  * @param aspectRatioMode
  */
-void QQTGraphicsScene::render(QPainter* painter, const QRectF& target, const QRectF& source,
+void QQtGraphicsScene::render(QPainter* painter, const QRectF& target, const QRectF& source,
                               Qt::AspectRatioMode aspectRatioMode)
 {
     Q_UNUSED(aspectRatioMode)
@@ -101,18 +101,18 @@ void QQTGraphicsScene::render(QPainter* painter, const QRectF& target, const QRe
     painter->restore();
 }
 
-QQTGraphicsTextItem* QQTGraphicsScene::addText(const QString& text, const QFont& font)
+QQtGraphicsTextItem* QQtGraphicsScene::addText(const QString& text, const QFont& font)
 {
-    QQTGraphicsTextItem* item = new QQTGraphicsTextItem;
+    QQtGraphicsTextItem* item = new QQtGraphicsTextItem;
     item->setFont(font);
     item->setPlainText(text);
     addItem(item);
     return item;
 }
 
-QQTGraphicsRectItem* QQTGraphicsScene::addRect(const QRectF& rect, const QPen& pen, const QBrush& brush)
+QQtGraphicsRectItem* QQtGraphicsScene::addRect(const QRectF& rect, const QPen& pen, const QBrush& brush)
 {
-    QQTGraphicsRectItem* item = new QQTGraphicsRectItem;
+    QQtGraphicsRectItem* item = new QQtGraphicsRectItem;
     item->setRect(rect);
     item->setPen(pen);
     item->setBrush(brush);
@@ -121,9 +121,9 @@ QQTGraphicsRectItem* QQTGraphicsScene::addRect(const QRectF& rect, const QPen& p
     return item;
 }
 
-QQTGraphicsLineItem* QQTGraphicsScene::addLine(const QLineF& line, const QPen& pen)
+QQtGraphicsLineItem* QQtGraphicsScene::addLine(const QLineF& line, const QPen& pen)
 {
-    QQTGraphicsLineItem* item = new QQTGraphicsLineItem;
+    QQtGraphicsLineItem* item = new QQtGraphicsLineItem;
     item->setLine(line);
     item->setPen(pen);
     item->moveBy(line.x1(), line.y1());
@@ -133,13 +133,13 @@ QQTGraphicsLineItem* QQTGraphicsScene::addLine(const QLineF& line, const QPen& p
 }
 
 
-void QQTGraphicsScene::drawItems(QPainter* painter, int numItems, QGraphicsItem* items[],
+void QQtGraphicsScene::drawItems(QPainter* painter, int numItems, QGraphicsItem* items[],
                                  const QStyleOptionGraphicsItem options[], QWidget* widget)
 {
     for (int i = 0; i < numItems; ++i)
     {
 
-        QQTGraphicsItem* item = (QQTGraphicsItem*)items[i];
+        QQtGraphicsItem* item = (QQtGraphicsItem*)items[i];
 
         if (item->flags() & QGraphicsItem::ItemClipsToShape)
         {

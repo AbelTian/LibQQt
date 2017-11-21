@@ -14,7 +14,32 @@
 #-------------------------------------------------
 SOURCES +=
 HEADERS +=
+contains(DEFINES, __QQTCHARTS__) {
+    SOURCES += \
+        $$PWD/charts/qqtchart.cpp \
+        $$PWD/charts/qqtchartview.cpp
+    HEADERS += \
+        $$PWD/charts/qqtchart.h \
+        $$PWD/charts/qqtchartview.h
+}
 
+#customplot
+#DEFINES += __CUSTOMPLOT__
+contains (DEFINES, __CUSTOMPLOT__) {
+    #message (qcustomplot is used in $${TARGET})
+    win32 {
+        contains (DEFINES, QQT_LIBRARY) {
+            DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
+        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+            #build static library - customplot
+            DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
+        }
+    }
+    SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
+                $$PWD/customplot/qcustomplot.cpp
+    HEADERS += $$PWD/customplot/qcpdocumentobject.h \
+                $$PWD/customplot/qcustomplot.h
+}
 
 #root dir
 HEADERS += $$PWD/qqt.h \
@@ -169,24 +194,6 @@ contains (DEFINES, __PRINTSUPPORT__) {
     HEADERS += \
         $$PWD/frame/qqtword.h
 
-    #customplot
-    #need print support
-    #DEFINES += __CUSTOMPLOT__
-    contains (DEFINES, __CUSTOMPLOT__) {
-        #message (qcustomplot is used in $${TARGET})
-        win32 {
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
-            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                #build static library - customplot
-                DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
-            }
-        }
-        SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
-                    $$PWD/customplot/qcustomplot.cpp
-        HEADERS += $$PWD/customplot/qcpdocumentobject.h \
-                    $$PWD/customplot/qcustomplot.h
-    }
 }
 
 #network

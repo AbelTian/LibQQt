@@ -424,10 +424,10 @@ public:
 };
 
 
-QQTClient *QQTUpgradeClientInstance(QObject *parent);
+QQtClient *QQTUpgradeClientInstance(QObject *parent);
 
 
-QQTClient *QQTCloudClientInstance(QObject *parent);
+QQtClient *QQTCloudClientInstance(QObject *parent);
 
 
 #endif // QQTCLOUDPROTOCOL_H

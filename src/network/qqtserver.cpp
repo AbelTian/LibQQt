@@ -2,25 +2,25 @@
 #include "qqtnetwork.h"
 
 
-QQTServer::QQTServer(QObject* parent) :
+QQtServer::QQtServer(QObject* parent) :
     QTcpServer(parent)
 {
 }
 
-QQTServer::~QQTServer()
+QQtServer::~QQtServer()
 {
     close();
 }
 
-void QQTServer::incomingConnection(qintptr handle)
+void QQtServer::incomingConnection(qintptr handle)
 {
-    QQTClient* clientSocket = new QQTClient(this);
+    QQtClient* clientSocket = new QQtClient(this);
     clientSocket->setSocketDescriptor(handle);
     connect(clientSocket, SIGNAL(disconnected()), clientSocket, SLOT(deleteLater()));
     clientSocket->installProtocol(m_protocol);
 }
 
-void QQTServer::installProtocol(QQtProtocol* stack)
+void QQtServer::installProtocol(QQtProtocol* stack)
 {
     if (m_protocol)
         return;
@@ -28,7 +28,7 @@ void QQTServer::installProtocol(QQtProtocol* stack)
     m_protocol = stack;
 }
 
-void QQTServer::uninstallProtocol(QQtProtocol* stack)
+void QQtServer::uninstallProtocol(QQtProtocol* stack)
 {
     Q_UNUSED(stack)
 
@@ -38,7 +38,7 @@ void QQTServer::uninstallProtocol(QQtProtocol* stack)
     m_protocol = NULL;
 }
 
-QQtProtocol* QQTServer::installedProtocol()
+QQtProtocol* QQtServer::installedProtocol()
 {
     return m_protocol;
 }

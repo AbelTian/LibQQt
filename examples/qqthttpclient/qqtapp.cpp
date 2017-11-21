@@ -17,7 +17,7 @@
  */
 void QQTLanServer(QObject* parent = 0)
 {
-    static QQTServer* s = new QQTServer(parent);
+    static QQtServer* s = new QQtServer(parent);
     s->listen(QHostAddress::Any, 8000);
 
     s->installedProtocol();
@@ -100,20 +100,20 @@ QQTApp::QQTApp(int &argc, char **argv) : QApplication(argc, argv)
 #endif
 
 #ifdef __EMBEDDED_LINUX__
-    QQTInput::Instance()->Init("min", "control", "QQT", 14, 14);
+    QQtInput::Instance()->Init("min", "control", "QQT", 14, 14);
 #endif
 
     qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 
-    QObject::connect(QQTPluginWatcher::Instance(), SIGNAL(storageChanged(int)),
+    QObject::connect(QQtPluginWatcher::Instance(), SIGNAL(storageChanged(int)),
                      this, SLOT(slotUPanAutoRun(int)));
-    //QQTClient
+    //QQtClient
     //QQTCloudClientInstance(this);
 #ifdef __EMBEDDED_LINUX__
     //QQTEthManager
-    QQTEthenetManager::Instance(this);
+    QQtEthenetManager::Instance(this);
 #endif
-    //QQTServer
+    //QQtServer
     //QQTPeerPort
 
     //QQTPeerPortInstance(this);
@@ -140,13 +140,13 @@ void QQTApp::setLanguage()
 
 void QQTApp::slotUPanAutoRun(int status)
 {
-    if(QQTPluginWatcher::E_ADD == status)
+    if(QQtPluginWatcher::E_ADD == status)
     {
-        QString mP = QQTPluginWatcher::Instance()->upanMountPath();
+        QString mP = QQtPluginWatcher::Instance()->upanMountPath();
         QString app = QString("%1/autorun.sh").arg(mP);
         QFile file(app);
         if(file.exists())
-            if(QDialog::Rejected == QQTMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
+            if(QDialog::Rejected == QQtMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
                 return;
         QProcess* p = new QProcess(this);
         p->setWorkingDirectory(mP);

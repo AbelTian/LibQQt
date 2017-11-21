@@ -1,13 +1,13 @@
 #include "qqtmplayer.h"
 #include "qqtcore.h"
 
-QQTPlayer::QQTPlayer(QObject* parent) :
+QQtPlayer::QQtPlayer(QObject* parent) :
     QObject(parent)
 {
     app = new QProcess(this);
 }
 
-void QQTPlayer::play(QString filename, int wid, int width, int height)
+void QQtPlayer::play(QString filename, int wid, int width, int height)
 {
     QString mppath = "mplayer";
     QStringList mpargs;
@@ -32,14 +32,14 @@ void QQTPlayer::play(QString filename, int wid, int width, int height)
     pline() << "mpp start success :)";
 }
 
-void QQTPlayer::pause()
+void QQtPlayer::pause()
 {
     char buf[256] = {0};
     sprintf(buf, "pause\n");
     app->write(buf);
 }
 
-void QQTPlayer::stop()
+void QQtPlayer::stop()
 {
     char buf[256] = {0};
     sprintf(buf, "stop\n");
@@ -48,7 +48,7 @@ void QQTPlayer::stop()
     app->write(buf);
 }
 
-double QQTPlayer::timeLength()
+double QQtPlayer::timeLength()
 {
     char buf[256] = {0};
     sprintf(buf, "get_time_length\n");
@@ -60,7 +60,7 @@ double QQTPlayer::timeLength()
     return length;
 }
 
-double QQTPlayer::timePos()
+double QQtPlayer::timePos()
 {
     char buf[256] = {0};
     sprintf(buf, "get_time_pos\n");
@@ -72,7 +72,7 @@ double QQTPlayer::timePos()
     return pos;
 }
 
-int QQTPlayer::percent()
+int QQtPlayer::percent()
 {
     char buf[256] = {0};
     sprintf(buf, "get_percent\n");
@@ -84,28 +84,28 @@ int QQTPlayer::percent()
     return pos;
 }
 
-void QQTPlayer::seekPos(double second)
+void QQtPlayer::seekPos(double second)
 {
     char buf[256] = {0};
     sprintf(buf, "seek %lf\n", second);
     app->write(buf);
 }
 
-void QQTPlayer::setVolume(int v)
+void QQtPlayer::setVolume(int v)
 {
     char buf[256] = {0};
     sprintf(buf, "volume %d 1\n", v);
     app->write(buf);
 }
 
-void QQTPlayer::mute(bool m)
+void QQtPlayer::mute(bool m)
 {
     char buf[256] = {0};
     sprintf(buf, "mute %d\n", m);
     app->write(buf);
 }
 
-void QQTPlayer::setRect(int x, int y, int width, int height)
+void QQtPlayer::setRect(int x, int y, int width, int height)
 {
     char buf[256] = {0};
     sprintf(buf, "change_rectangle 0 %d \n", width);

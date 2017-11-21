@@ -9,11 +9,11 @@
 #include "qqtcore.h"
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT QQTAnimation : public QParallelAnimationGroup
+class QQTSHARED_EXPORT QQtAnimation : public QParallelAnimationGroup
 {
     Q_OBJECT
 public:
-    explicit QQTAnimation(QObject* parent = nullptr);
+    explicit QQtAnimation ( QObject* parent = nullptr );
 
 signals:
 

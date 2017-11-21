@@ -13,15 +13,15 @@ public:
     explicit QQtTableView(QWidget* parent = 0);
     virtual ~QQtTableView();
 
-    QQTHeaderView* QQTHHeader() { return m_header; }
-    QQTHeaderView* QQTVHeader() { return m_vheader; }
+    QQtHeaderView* QQTHHeader() { return m_header; }
+    QQtHeaderView* QQTVHeader() { return m_vheader; }
     void setQQTHeader();
     void setQQTVHeader();
     void setObjectName(const QString& name);
 private:
 
-    QQTHeaderView* m_vheader;
-    QQTHeaderView* m_header;
+    QQtHeaderView* m_vheader;
+    QQtHeaderView* m_header;
 };
 
 #endif // QQTTABLEVIEW_H

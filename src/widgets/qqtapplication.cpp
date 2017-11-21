@@ -57,11 +57,11 @@ QQtApplication::QQtApplication(int& argc, char** argv) :
 
 
 #ifdef __EMBEDDED_LINUX__
-    QQTInput::Instance()->Init("min", "control", "QQT", 14, 14);
+    QQtInput::Instance()->Init("min", "control", "QQT", 14, 14);
 #endif
 
 #ifdef __PLUGINWATCHER__
-    QObject::connect(QQTPluginWatcher::Instance(), SIGNAL(storageChanged(int)),
+    QObject::connect(QQtPluginWatcher::Instance(), SIGNAL(storageChanged(int)),
                      this, SLOT(slotUPanAutoRun(int)));
 #endif
 }
@@ -99,15 +99,15 @@ void QQtApplication::slotUPanAutoRun(int status)
 
 #ifdef __PLUGINWATCHER__
 
-    if (QQTPluginWatcher::E_ADD == status)
+    if (QQtPluginWatcher::E_ADD == status)
     {
-        QString mP = QQTPluginWatcher::Instance()->upanMountPath();
+        QString mP = QQtPluginWatcher::Instance()->upanMountPath();
         QString app = QString("%1/autorun.sh").arg(mP);
         QFile file(app);
 
         if (file.exists())
         {
-            if (QDialog::Rejected == QQTMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
+            if (QDialog::Rejected == QQtMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
             {
                 return;
             }
