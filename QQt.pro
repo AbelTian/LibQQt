@@ -26,7 +26,8 @@ SUBDIRS += examples/exquisite
 #SUBDIRS += examples/QQtInstaller
 
 #can't support ios
-#SUBDIRS += examples/qqtprintsupportexample
+#
+SUBDIRS += examples/qqtprintsupportexample
 
 #-----------------------------------------------------------------
 #need vlcQt libvlc library

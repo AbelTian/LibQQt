@@ -84,10 +84,10 @@ class QCPBars;
 //dynamic and static are different
 #if   defined(QCUSTOMPLOT_COMPILE_LIBRARY)
 #     define QCP_LIB_DECL Q_DECL_EXPORT
-#elif defined(QCUSTOMPLOT_USE_LIBRARY)
-#     define QCP_LIB_DECL Q_DECL_IMPORT
-#else
+#elif defined(QCUSTOMPLOT_STATIC_LIBRARY)
 #     define QCP_LIB_DECL
+#else
+#     define QCP_LIB_DECL Q_DECL_IMPORT
 #endif
 #else
 //dynamic and static are equal to each other
