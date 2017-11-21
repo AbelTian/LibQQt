@@ -10,7 +10,7 @@
 #################################################################
 ##Usage
 #################################################################
-#Suggest Qt v5.9.2/4.8.6/4.8.7
+#Suggest Qt 5.9.2/4.8.6/4.8.7
 #please dont use Qt 5.9.1, it is broken with android and ios.
 
 #################################################################
@@ -39,8 +39,8 @@ include ($$PWD/qqt_kit.pri)
 
 ##win platform: some target, special lib lib_bundle staticlib
 contains(QKIT_PRIVATE, WIN32|WIN64) {
-    #when Qt is static by mingw32 building 5.9.1
-    equals(QT_VERSION, 5.9.1){
+    #Qt is static by mingw32 building
+    mingw {
         CONFIG += staticlib
         DEFINES += QQT_STATIC_LIBRARY
     } else {
