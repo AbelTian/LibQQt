@@ -63,7 +63,8 @@ SUBDIRS += examples/exquisite
 #some example project
 #maybe demo
 #-----------------------------------------------------------------
-#SUBDIRS += demo/VegeTablesPrice
+#
+SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS += demo/cmdwidget
 
 #-----------------------------------------------------------------
