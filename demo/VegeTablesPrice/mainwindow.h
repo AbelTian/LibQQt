@@ -5,7 +5,7 @@
 #include <QListWidget>
 
 #include "qqtcore.h"
-#include "qqtwebprotocolmanager.h"
+#include "qqtwebaccessmanager.h"
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QBarSeries>

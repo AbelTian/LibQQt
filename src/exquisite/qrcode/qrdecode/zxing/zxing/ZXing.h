@@ -42,8 +42,8 @@ typedef bool boolean;
 #include <float.h>
 
 namespace zxing {
-inline bool isnan_z(float v) {return _isnan(v) != 0;}
-inline bool isnan_z(double v) {return _isnan(v) != 0;}
+inline bool isnan_z ( float v ) {return _isnan ( v ) != 0;}
+inline bool isnan_z ( double v ) {return _isnan ( v ) != 0;}
 inline float nan() {return std::numeric_limits<float>::quiet_NaN();}
 }
 
@@ -52,14 +52,16 @@ inline float nan() {return std::numeric_limits<float>::quiet_NaN();}
 //#include <cmath>
 
 #include <math.h>
-
+using namespace std;
 
 namespace zxing {
-inline bool isnan_z(float v) {
-    return isnan(v);
+inline bool isnan_z ( float v )
+{
+    return isnan ( v );
 }
-inline bool isnan_z(double v) {
-    return isnan(v);
+inline bool isnan_z ( double v )
+{
+    return isnan ( v );
 }
 inline float nan() {return std::numeric_limits<float>::quiet_NaN();}
 }
@@ -84,41 +86,43 @@ using std::ostream;
 
 namespace zxing {
 
-class DebugTimer {
+class DebugTimer
+{
 public:
-  DebugTimer(char const* string_) : chars(string_) {
-    gettimeofday(&start, 0);
-  }
-
-  DebugTimer(std::string const& string_) : chars(0), string(string_) {
-    gettimeofday(&start, 0);
-  }
-
-  void mark(char const* string) {
-    struct timeval end;
-    gettimeofday(&end, 0);
-    int diff =
-      (end.tv_sec - start.tv_sec)*1000*1000+(end.tv_usec - start.tv_usec);
-    
-    cerr << diff << " " << string << '\n';
-  }
-
-  void mark(std::string string) {
-    mark(string.c_str());
-  }
-
-  ~DebugTimer() {
-    if (chars) {
-      mark(chars);
-    } else {
-      mark(string.c_str());
+    DebugTimer ( char const* string_ ) : chars ( string_ ) {
+        gettimeofday ( &start, 0 );
     }
-  }
+
+    DebugTimer ( std::string const& string_ ) : chars ( 0 ), string ( string_ ) {
+        gettimeofday ( &start, 0 );
+    }
+
+    void mark ( char const* string ) {
+        struct timeval end;
+        gettimeofday ( &end, 0 );
+        int diff =
+            ( end.tv_sec - start.tv_sec ) * 1000 * 1000 + ( end.tv_usec - start.tv_usec );
+
+        cerr << diff << " " << string << '\n';
+    }
+
+    void mark ( std::string string ) {
+        mark ( string.c_str() );
+    }
+
+    ~DebugTimer() {
+        if ( chars ) {
+            mark ( chars );
+        }
+        else {
+            mark ( string.c_str() );
+        }
+    }
 
 private:
-  char const* const chars;
-  std::string string;
-  struct timeval start;
+    char const* const chars;
+    std::string string;
+    struct timeval start;
 };
 
 }
