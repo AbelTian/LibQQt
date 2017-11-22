@@ -15,59 +15,62 @@
 #ifdef __PROCESSMODULE__
 #include <QProcess>
 #endif
+#ifdef __EMBEDDED_LINUX__
+#include <qqtinput.h>
+#endif
 
-QQtApplication::QQtApplication(int& argc, char** argv) :
-    QApplication(argc, argv),
-    bUPanAutoRun(false)
+QQtApplication::QQtApplication ( int& argc, char** argv ) :
+    QApplication ( argc, argv ),
+    bUPanAutoRun ( false )
 {
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+    QTextCodec::setCodecForTr ( QTextCodec::codecForName ( "UTF-8" ) );
+    QTextCodec::setCodecForCStrings ( QTextCodec::codecForName ( "UTF-8" ) );
 #endif
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
+    QTextCodec::setCodecForLocale ( QTextCodec::codecForName ( "UTF-8" ) );
 
-    QCoreApplication::setOrganizationName(COMPANY_NAME);
-    QCoreApplication::setOrganizationDomain(COMPANY_DOMAIN);  // 专为Mac OS X 准备的
-    QCoreApplication::setApplicationName(PRODUCT_NAME);
-    QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH);
-    QSettings::setPath(QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH);
+    QCoreApplication::setOrganizationName ( COMPANY_NAME );
+    QCoreApplication::setOrganizationDomain ( COMPANY_DOMAIN ); // 专为Mac OS X 准备的
+    QCoreApplication::setApplicationName ( PRODUCT_NAME );
+    QSettings::setPath ( QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH );
+    QSettings::setPath ( QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH );
 
 #ifdef __EMBEDDED_LINUX__
-    system("rm -f /tmp/LCK..ttyS*");
+    system ( "rm -f /tmp/LCK..ttyS*" );
 #endif
 
     pline() << qApp->applicationDirPath();
 
-    language = new QTranslator(this);
+    language = new QTranslator ( this );
     setLanguage();
 
-    qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+    qsrand ( QTime ( 0, 0, 0 ).secsTo ( QTime::currentTime() ) );
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     /*
      * 打印失真与否与此处无关
      */
-    QApplication::setGraphicsSystem("raster");
+    QApplication::setGraphicsSystem ( "raster" );
 #endif
 
 #ifdef __EMBEDDED_LINUX__
     //QApplication::setOverrideCursor(Qt::ArrowCursor);
-    QWSServer::setCursorVisible(false);
+    QWSServer::setCursorVisible ( false );
 #endif
 
 
 #ifdef __EMBEDDED_LINUX__
-    QQtInput::Instance()->Init("min", "control", "QQT", 14, 14);
+    QQtInput::Instance()->Init ( "min", "control", "QQT", 14, 14 );
 #endif
 
 #ifdef __PLUGINWATCHER__
-    QObject::connect(QQtPluginWatcher::Instance(), SIGNAL(storageChanged(int)),
-                     this, SLOT(slotUPanAutoRun(int)));
+    QObject::connect ( QQtPluginWatcher::Instance(), SIGNAL ( storageChanged ( int ) ),
+                       this, SLOT ( slotUPanAutoRun ( int ) ) );
 #endif
 }
 
 
-void QQtApplication::setQSSStyle(QString qssfile)
+void QQtApplication::setQSSStyle ( QString qssfile )
 {
     /*
      * Could not parse application stylesheet 告警 可以忽略
@@ -75,11 +78,11 @@ void QQtApplication::setQSSStyle(QString qssfile)
      * 可以实现橙色一行选中
      * 肯定也能实现表头透明和QQT效果。
      */
-    QFile styleFile(qssfile);
-    styleFile.open(QIODevice::ReadOnly);
-    QString styleString(styleFile.readAll());;
+    QFile styleFile ( qssfile );
+    styleFile.open ( QIODevice::ReadOnly );
+    QString styleString ( styleFile.readAll() );;
     styleFile.close();
-    setStyleSheet(styleString);
+    setStyleSheet ( styleString );
     /*
      * 设置所有默认颜色
      */
@@ -87,27 +90,27 @@ void QQtApplication::setQSSStyle(QString qssfile)
 }
 
 
-void QQtApplication::setUPanAutorun(bool run)
+void QQtApplication::setUPanAutorun ( bool run )
 {
     bUPanAutoRun = run;
 }
 
-void QQtApplication::slotUPanAutoRun(int status)
+void QQtApplication::slotUPanAutoRun ( int status )
 {
-    if (!bUPanAutoRun)
+    if ( !bUPanAutoRun )
         return;
 
 #ifdef __PLUGINWATCHER__
 
-    if (QQtPluginWatcher::E_ADD == status)
+    if ( QQtPluginWatcher::E_ADD == status )
     {
         QString mP = QQtPluginWatcher::Instance()->upanMountPath();
-        QString app = QString("%1/autorun.sh").arg(mP);
-        QFile file(app);
+        QString app = QString ( "%1/autorun.sh" ).arg ( mP );
+        QFile file ( app );
 
-        if (file.exists())
+        if ( file.exists() )
         {
-            if (QDialog::Rejected == QQtMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
+            if ( QDialog::Rejected == QQtMsgBox::question ( 0, tr ( "Some app want to run in u disk!accepted?" ) ) )
             {
                 return;
             }
@@ -118,9 +121,9 @@ void QQtApplication::slotUPanAutoRun(int status)
         }
 
 #ifdef __PROCESSMODULE__
-        QProcess* p = new QProcess(this);
-        p->setWorkingDirectory(mP);
-        p->start(app);
+        QProcess* p = new QProcess ( this );
+        p->setWorkingDirectory ( mP );
+        p->start ( app );
 #else
         //TODO:
 #endif
@@ -130,22 +133,22 @@ void QQtApplication::slotUPanAutoRun(int status)
 }
 
 
-void QQtApplication::setTextFont(QString fontfile, int fontsize)
+void QQtApplication::setTextFont ( QString fontfile, int fontsize )
 {
     QFontDatabase db;
 
-    int fontID = db.addApplicationFont(fontfile);
-    QString ziti = db.applicationFontFamilies(fontID).at(0);
+    int fontID = db.addApplicationFont ( fontfile );
+    QString ziti = db.applicationFontFamilies ( fontID ).at ( 0 );
     pline() << ziti;
 
-    QFont font(ziti, fontsize);
-    QApplication::setFont(font);
+    QFont font ( ziti, fontsize );
+    QApplication::setFont ( font );
 }
 
 
-void QQtApplication::setLanguage(QString qmfile)
+void QQtApplication::setLanguage ( QString qmfile )
 {
-    language->load(qmfile);
+    language->load ( qmfile );
     pline() << "currentLanguage" << qmfile;
-    installTranslator(language);
+    installTranslator ( language );
 }
