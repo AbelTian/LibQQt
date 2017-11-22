@@ -2,75 +2,75 @@
 #include "qqtcore.h"
 #include "qqt-qt.h"
 
-void QQTWritePassAck::pack(QByteArray& l)
+void QQTWritePassAck::pack ( QByteArray& l )
 {
-    setCmd(_SERIAL_WRITEPASSACK);
+    setCmd ( _SERIAL_WRITEPASSACK );
     translate();
-    QQTSerialMessage::packer(l);
+    QQTSerialMessage::packer ( l );
 }
 
 
-void QQTWriteSerialNoAck::pack(QByteArray& l)
+void QQTWriteSerialNoAck::pack ( QByteArray& l )
 {
-    setCmd(_SERIAL_WRITEDEVNOACK);
+    setCmd ( _SERIAL_WRITEDEVNOACK );
     translate();
-    QQTSerialMessage::packer(l);
+    QQTSerialMessage::packer ( l );
 }
 
 
-void QQTHandupAck::pack(QByteArray& l)
+void QQTHandupAck::pack ( QByteArray& l )
 {
-    setCmd(_SERIAL_HANDACK);
+    setCmd ( _SERIAL_HANDACK );
     translate();
-    QQTSerialMessage::packer(l);
+    QQTSerialMessage::packer ( l );
 }
 
 
-void QQTCloseAck::pack(QByteArray& l)
+void QQTCloseAck::pack ( QByteArray& l )
 {
-    setCmd(_SERIAL_CLOSEACK);
+    setCmd ( _SERIAL_CLOSEACK );
     translate();
-    QQTSerialMessage::packer(l);
+    QQTSerialMessage::packer ( l );
 }
 
 
-void QQTReadSerialNoAck::pack(QByteArray& l)
+void QQTReadSerialNoAck::pack ( QByteArray& l )
 {
-    setCmd(_SERIAL_READDEVNOACK);
+    setCmd ( _SERIAL_READDEVNOACK );
     translate();
-    QQTSerialMessage::packer(l);
+    QQTSerialMessage::packer ( l );
 }
 
 
-void QQTReadPassAck::pack(QByteArray& l)
+void QQTReadPassAck::pack ( QByteArray& l )
 {
-    setCmd(_SERIAL_READPASSACK);
+    setCmd ( _SERIAL_READPASSACK );
     translate();
-    QQTSerialMessage::packer(l);
+    QQTSerialMessage::packer ( l );
 }
 
 
-void QQTExceptionAck::pack(QByteArray& l)
+void QQTExceptionAck::pack ( QByteArray& l )
 {
-    setCmd(_SERIAL_EXCEPTIONACK);
+    setCmd ( _SERIAL_EXCEPTIONACK );
     translate();
-    QQTSerialMessage::packer(l);
+    QQTSerialMessage::packer ( l );
 }
 
-QQTUserSerialProtocol::QQTUserSerialProtocol(QObject* parent) :
-    QQtProtocol(parent)
+QQTUserSerialProtocol::QQTUserSerialProtocol ( QObject* parent ) :
+    QQtProtocol ( parent )
 {
 #ifdef __EMBEDDED_LINUX__
-    QString portName("/dev/ttyS2");
+    QString portName ( "/dev/ttyS2" );
 #else
-    QString portName("/dev/ttyS2");
+    QString portName ( "/dev/ttyS2" );
 #endif
-    s0 = QQTUserSerialPortInstance(this, portName, QQTSerialPort::Baud57600);
+    s0 = QQTUserSerialPortInstance ( this, portName, QQtSerialPort::Baud57600 );
 
-    if (s0->open(QIODevice::ReadWrite)) //Open Port dev.
-        pline() << QString("serial port %1 open success!").arg(portName);
+    if ( s0->open ( QIODevice::ReadWrite ) ) //Open Port dev.
+        pline() << QString ( "serial port %1 open success!" ).arg ( portName );
     else
-        pline() << QString("serial port %1 open failed! errcode =").arg(portName) << s0->errorString();
+        pline() << QString ( "serial port %1 open failed! errcode =" ).arg ( portName ) << s0->errorString();
 }
 
 QQTUserSerialProtocol::~QQTUserSerialProtocol()
@@ -78,7 +78,7 @@ QQTUserSerialProtocol::~QQTUserSerialProtocol()
     s0->close();
 }
 
-void QQTUserSerialProtocol::recvHandup(const QByteArray& l)
+void QQTUserSerialProtocol::recvHandup ( const QByteArray& l )
 {
     sendHandupAck();
 }
@@ -87,15 +87,15 @@ void QQTUserSerialProtocol::sendHandupAck()
 {
     //status c51 + local
     QByteArray s;
-    s << quint8(0x00);
+    s << quint8 ( 0x00 );
     QByteArray l;
     QQTHandupAck ack;
-    ack.setData(s);
-    ack.pack(l);
-    write(l);
+    ack.setData ( s );
+    ack.pack ( l );
+    write ( l );
 }
 
-void QQTUserSerialProtocol::recvClose(const QByteArray& l)
+void QQTUserSerialProtocol::recvClose ( const QByteArray& l )
 {
     sendCloseAck();
 }
@@ -103,18 +103,18 @@ void QQTUserSerialProtocol::recvClose(const QByteArray& l)
 void QQTUserSerialProtocol::sendCloseAck()
 {
     QByteArray s;
-    s << quint8(0x00);
+    s << quint8 ( 0x00 );
     QByteArray l;
     QQTCloseAck ack;
-    ack.setData(s);
-    ack.pack(l);
-    write(l);
+    ack.setData ( s );
+    ack.pack ( l );
+    write ( l );
 }
 
-void QQTUserSerialProtocol::recvWriteSerialNumber(const QByteArray& l)
+void QQTUserSerialProtocol::recvWriteSerialNumber ( const QByteArray& l )
 {
     QSettings set;
-    set.setValue("Device/DeviceNo", l);
+    set.setValue ( "Device/DeviceNo", l );
     set.sync();
     sendWriteSerialNumberAck();
     emit sigSerialUnlock();
@@ -124,14 +124,14 @@ void QQTUserSerialProtocol::sendWriteSerialNumberAck()
 {
     QQTWriteSerialNoAck ack;
     QSettings set;
-    QByteArray sn = set.value("/Device/DeviceNo").toByteArray();
-    ack.setData(sn);
+    QByteArray sn = set.value ( "/Device/DeviceNo" ).toByteArray();
+    ack.setData ( sn );
     QByteArray l;
-    ack.pack(l);
-    write(l);
+    ack.pack ( l );
+    write ( l );
 }
 
-void QQTUserSerialProtocol::recvReadSerial(const QByteArray& l)
+void QQTUserSerialProtocol::recvReadSerial ( const QByteArray& l )
 {
     sendReadSerialAck();
 }
@@ -139,18 +139,18 @@ void QQTUserSerialProtocol::recvReadSerial(const QByteArray& l)
 void QQTUserSerialProtocol::sendReadSerialAck()
 {
     QSettings set;
-    QByteArray serial = set.value("Device/DeviceNo").toByteArray();
+    QByteArray serial = set.value ( "Device/DeviceNo" ).toByteArray();
     QByteArray l;
     QQTReadSerialNoAck ack;
-    ack.setData(serial);
-    ack.pack(l);
-    write(l);
+    ack.setData ( serial );
+    ack.pack ( l );
+    write ( l );
 }
 
-void QQTUserSerialProtocol::recvWritePassword(const QByteArray& l)
+void QQTUserSerialProtocol::recvWritePassword ( const QByteArray& l )
 {
     QSettings set;
-    set.setValue("Device/Password", l);
+    set.setValue ( "Device/Password", l );
     set.sync();
     sendWritePasswordAck();
 }
@@ -159,14 +159,14 @@ void QQTUserSerialProtocol::sendWritePasswordAck()
 {
     QQTWritePassAck ack;
     QSettings set;
-    QByteArray sn = set.value("/Device/Password").toByteArray();
-    ack.setData(sn);
+    QByteArray sn = set.value ( "/Device/Password" ).toByteArray();
+    ack.setData ( sn );
     QByteArray l;
-    ack.pack(l);
-    write(l);
+    ack.pack ( l );
+    write ( l );
 }
 
-void QQTUserSerialProtocol::  recvReadPassword(const QByteArray& l)
+void QQTUserSerialProtocol::  recvReadPassword ( const QByteArray& l )
 {
     sendReadPasswordAck();
 }
@@ -174,12 +174,12 @@ void QQTUserSerialProtocol::  recvReadPassword(const QByteArray& l)
 void QQTUserSerialProtocol::sendReadPasswordAck()
 {
     QSettings set;
-    QByteArray serial = set.value("Device/Password").toByteArray();
+    QByteArray serial = set.value ( "Device/Password" ).toByteArray();
     QByteArray l;
     QQTReadPassAck ack;
-    ack.setData(serial);
-    ack.pack(l);
-    write(l);
+    ack.setData ( serial );
+    ack.pack ( l );
+    write ( l );
 }
 
 void QQTUserSerialProtocol::sendExceptionAck()
@@ -190,8 +190,8 @@ void QQTUserSerialProtocol::sendExceptionAck()
     QByteArray l;
     QQTExceptionAck ack;
     //ack.setData("");
-    ack.pack(l);
-    write(l);
+    ack.pack ( l );
+    write ( l );
 }
 
 quint16 QQTUserSerialProtocol::minlength()
@@ -204,64 +204,73 @@ quint16 QQTUserSerialProtocol::maxlength()
     return 128;
 }
 
-quint16 QQTUserSerialProtocol::splitter(const QByteArray& s)
+quint16 QQTUserSerialProtocol::splitter ( const QByteArray& s )
 {
-    QByteArray l = s.left(4);
+    QByteArray l = s.left ( 4 );
     quint16 b0 = 0, b1 = 0;
     l >> b0 >> b1;
     return b1;
 }
 
 
-bool QQTUserSerialProtocol::dispatcher(const QByteArray& m)
+bool QQTUserSerialProtocol::dispatcher ( const QByteArray& m )
 {
     bool ret = true;
 
     QQTSerialMessage qMsg;
-    qMsg.parser(m);
+    qMsg.parser ( m );
     pline() << qMsg;
 
-    switch (qMsg.cmd())
+    switch ( qMsg.cmd() )
     {
     case _SERIAL_HAND:
-        recvHandup(qMsg.data());
+        recvHandup ( qMsg.data() );
         break;
+
     case _SERIAL_CLOSE:
-        recvClose(qMsg.data());
+        recvClose ( qMsg.data() );
         break;
+
     case _SERIAL_WRITEDEVNO:
-        recvWriteSerialNumber(qMsg.data());
+        recvWriteSerialNumber ( qMsg.data() );
         break;
+
     case _SERIAL_READDEVNO:
-        recvReadSerial(qMsg.data());
+        recvReadSerial ( qMsg.data() );
         break;
+
     case _SERIAL_WRITEPASS:
-        recvWritePassword(qMsg.data());
+        recvWritePassword ( qMsg.data() );
         break;
+
     case _SERIAL_READPASS:
-        recvReadPassword(qMsg.data());
+        recvReadPassword ( qMsg.data() );
         break;
+
     default:
         ret = false;
         pline() << "receive unknown command:" << hex << qMsg.cmd();
         break;
     }
+
     return ret;
 }
 
-QQTSerialPort* QQTUserSerialPortInstance(QObject* parent, QString name, QQTSerialPort::BaudRate)
+QQtSerialPort* QQTUserSerialPortInstance ( QObject* parent, QString name, QQtSerialPort::BaudRate )
 {
-    static QQTSerialPort* s0 = NULL;
-    if (s0 == 0)
+    static QQtSerialPort* s0 = NULL;
+
+    if ( s0 == 0 )
     {
-        s0 = new QQTSerialPort(parent);
-        s0->setPortName(name);
-        s0->setBaudRate(QQTSerialPort::Baud57600);
-        s0->setDataBits(QQTSerialPort::Data8);
-        s0->setParity(QQTSerialPort::NoParity);
-        s0->setStopBits(QQTSerialPort::OneStop);
-        s0->setFlowControl(QQTSerialPort::NoFlowControl);
+        s0 = new QQtSerialPort ( parent );
+        s0->setPortName ( name );
+        s0->setBaudRate ( QQtSerialPort::Baud57600 );
+        s0->setDataBits ( QQtSerialPort::Data8 );
+        s0->setParity ( QQtSerialPort::NoParity );
+        s0->setStopBits ( QQtSerialPort::OneStop );
+        s0->setFlowControl ( QQtSerialPort::NoFlowControl );
     }
+
     return s0;
 }
 

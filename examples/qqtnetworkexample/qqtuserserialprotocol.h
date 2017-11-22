@@ -123,8 +123,8 @@ public:
     bool dispatcher(const QByteArray& m) override;
 
 private:
-    QQTSerialPort* s0;
+    QQtSerialPort* s0;
 };
 
-QQTSerialPort* QQTUserSerialPortInstance(QObject* parent = 0, QString name = "/dev/tty0", QQTSerialPort::BaudRate = QQTSerialPort::Baud57600);
+QQtSerialPort* QQTUserSerialPortInstance(QObject* parent = 0, QString name = "/dev/tty0", QQtSerialPort::BaudRate = QQtSerialPort::Baud57600);
 #endif // QQTUSERSERIALPROTOCOL_H

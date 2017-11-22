@@ -3,7 +3,7 @@
 # Project created by QtCreator 2017-10-21T21:26:55
 #
 #-------------------------------------------------
-include(../qqtframe2/link_qqt_library.pri)
+include(../../examples/qqtframe2/link_qqt_library.pri)
 
 ############
 ##install

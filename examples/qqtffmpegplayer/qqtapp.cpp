@@ -116,7 +116,7 @@ QQTApp::QQTApp(int& argc, char** argv) : QApplication(argc, argv)
     //QQTPeerPort
 
     //QQTPeerPortInstance(this);
-    //QQTSerialPort
+    //QQtSerialPort
     //QQTUserSerialPortInstance(this);
 }
 

@@ -41,7 +41,7 @@ MOBILITY =
 #link qqt library
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
 #-------------------------------------------------
-include(../qqtframe2/link_qqt_library.pri)
+include(../../examples/qqtframe2/link_qqt_library.pri)
 
 #-------------------------------------------------
 #install
