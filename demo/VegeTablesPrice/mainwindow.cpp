@@ -5,6 +5,7 @@
 #include <GumboQuerySelection.h>
 #include <GumboQueryNode.h>
 #include <QStringList>
+#include <QTextCodec>
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -166,19 +167,24 @@ void MainWindow::replyFinished ( QNetworkReply* reply )
 
     QByteArray resultContent = reply->readAll();
     //pline() << QString ( resultContent );
+    QString result1 = resultContent;
+    //pline() << result1.toLatin1().constData();
+    pline() << QTextCodec::codecForHtml(resultContent)->name();
+
     /*用页面源文件的编码来进行解码 GB2312 or UTF-8*/
-    QTextCodec* pCodec = QTextCodec::codecForName ( "GB2312" );
+    QTextCodec* pCodec = QTextCodec::codecForName ( "GBK" );
     QString strResult = pCodec->toUnicode ( resultContent );
     //pline() << strResult;
-    QTextCodec* pCodec2 = QTextCodec::codecForName ( "GB2312" );
-    QByteArray strResult2 = pCodec2->fromUnicode ( strResult );
-    QString txt0 = strResult2;
-    //pline() << txt0;
-    QString cc = resultContent;
-    //pline() << cc.toLatin1().constData();
+
+    QTextCodec* pCodec2 = QTextCodec::codecForName ( "UTF-8" );
+    QByteArray resultContent2 = pCodec2->fromUnicode ( strResult );
+    QString result2 = resultContent2;
+    //pline() << result2;
+
+    pline() << QTextCodec::codecForLocale()->name();
 
     GumboQueryDocument doc;
-    doc.parse ( strResult.toLocal8Bit().constData() );
+    doc.parse ( result2.toLocal8Bit().constData() );
     GumboQuerySelection s = doc.find ( "table" );
 
     GumboQueryNode pNode = s.nodeAt ( 0 );
