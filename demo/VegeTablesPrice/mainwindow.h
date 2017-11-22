@@ -36,7 +36,7 @@ private slots:
 
 private:
     Ui::MainWindow* ui;
-    QQtWebProtocolManager* m_client;
+    QQtWebAccessManager* m_client;
     QMap<QString, QString> m_mapVege;
     QBarSet* m_barSet0;
     QBarSet* m_barSet1;

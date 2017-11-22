@@ -2,12 +2,14 @@
 #define QQTCHART_H
 
 #include <QWidget>
+#include <qqtcore.h>
+#include <qqt-local.h>
 
-class QQtChart : public QWidget
+class QQTSHARED_EXPORT QQtChart : public QWidget
 {
     Q_OBJECT
 public:
-    explicit QQtChart(QWidget *parent = nullptr);
+    explicit QQtChart(QWidget* parent = nullptr);
 
 signals:
 

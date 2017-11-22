@@ -33,7 +33,7 @@
         - QQtSerialPort 兼容QSerialPort and QextSerialPort
         - QQtSocketTcpClient、QQtSocketTcpServer、QQtSocketUdpClient、QQtSocketUdpServer
         - QQtBluetoothSocket +QQtBluetoothManager
-        - QQtWebProtocolManager，支持http、ftp等主流协议，高并发传输。
+        - QQtWebAccessManager，支持http、ftp等主流协议，高并发传输。
         - QQtWebSocket接口
      - 协议虚类（接口类） QQtProtocol QQtWebSocketProtocol
      - 报文虚类（接口类） QQtMessage

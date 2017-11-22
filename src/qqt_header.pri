@@ -183,9 +183,9 @@ DEFINES += __WEBSERVICESUPPORT__
 #One Ftp Http 单工...
 #Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
 #if you use QNetworkAccessManagerSupport , open this annotation
-DEFINES += __WEBPROTOCOLSUPPORT__
-lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBPROTOCOLSUPPORT__
-contains (DEFINES, __WEBPROTOCOLSUPPORT__) {
+DEFINES += __WEBACCESSSUPPORT__
+lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
+contains (DEFINES, __WEBACCESSSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
     #TODO: QT += webkit
 }
@@ -203,6 +203,7 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
 ##################Charts Module###############################
 #if you use QQtCharts, open this annotation
 DEFINES += __QQTCHARTS__
+lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__
 #based on QtCharts, need charts module
 contains(DEFINES, __QQTCHARTS__) {
     QT += charts

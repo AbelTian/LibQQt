@@ -3,7 +3,24 @@
 # Project created by QtCreator 2016-09-30T09:34:03
 #
 #-------------------------------------------------
-include(../qqtframe2/link_qqt_library.pri)
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = cmdwidget
+TEMPLATE = app
+
+
+SOURCES += main.cpp\
+        cmdwidget.cpp \
+    rlineedit.cpp
+
+HEADERS  += cmdwidget.h \
+    rlineedit.h
+
+FORMS    += cmdwidget.ui
+
+include($$PWD/../../examples/qqtframe2/link_qqt_library.pri)
 
 ############
 ##install
@@ -31,19 +48,3 @@ equals(QKIT_PRIVATE, ANDROID) {
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
 
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-TARGET = cmdwidget
-TEMPLATE = app
-
-
-SOURCES += main.cpp\
-        cmdwidget.cpp \
-    rlineedit.cpp
-
-HEADERS  += cmdwidget.h \
-    rlineedit.h
-
-FORMS    += cmdwidget.ui

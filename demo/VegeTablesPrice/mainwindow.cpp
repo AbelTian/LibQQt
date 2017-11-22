@@ -14,7 +14,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
     //ui->b0->setFixedHeight ( 50 );
     //ui->b1->setFixedHeight ( 50 );
-    m_client = new QQtWebProtocolManager ( this );
+    m_client = new QQtWebAccessManager ( this );
     connect ( m_client, SIGNAL ( replyFinished ( QNetworkReply* ) ),
               this, SLOT ( replyFinished ( QNetworkReply* ) ) );
 

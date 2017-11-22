@@ -252,11 +252,12 @@ contains(DEFINES, __WEBSERVICESUPPORT__) {
     HEADERS += \
         $$PWD/network/soap/qtsoap.h
 }
-contains (DEFINES, __WEBPROTOCOLSUPPORT__) {
+#webaccess manager
+contains (DEFINES, __WEBACCESSSUPPORT__) {
     SOURCES += \
-        $$PWD/network/qqtwebprotocolmanager.cpp
+        $$PWD/network/qqtwebaccessmanager.cpp
     HEADERS += \
-        $$PWD/network/qqtwebprotocolmanager.h
+        $$PWD/network/qqtwebaccessmanager.h
 }
 
 contains (DEFINES, __WEBSOCKETSUPPORT__) {

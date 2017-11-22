@@ -1,8 +1,7 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = src/qqt.pro \
-    examples/qqthttpdownload
+SUBDIRS = src/qqt.pro
 
 #-----------------------------------------------------------------
 #basic example
@@ -20,10 +19,11 @@ SUBDIRS += examples/animationframe
 SUBDIRS += examples/exquisite
 SUBDIRS += examples/tabwidgetexamples
 SUBDIRS += examples/qrcodeexample
-SUBDIRS += examples/qqtnetworkexample
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/qqtnetworkexample
 SUBDIRS += examples/QtBuildTool
 SUBDIRS += examples/QtSdkManager
 SUBDIRS += examples/QQtInstaller
+greaterThan(QT_MAJOR_VERSION, 4):SUBDIRS += examples/qqthttpdownload
 
 #can't support ios
 SUBDIRS += examples/qqtprintsupportexample
@@ -58,14 +58,12 @@ SUBDIRS += examples/soapQQtOnline
 #need webwork - WebSupport
 #-----------------------------------------------------------------
 SUBDIRS += examples/qqtftpclient
-SUBDIRS += examples/qqthttpdownload
 
 #-----------------------------------------------------------------
 #some example project
 #maybe demo
 #-----------------------------------------------------------------
-
-SUBDIRS += demo/VegeTablesPrice
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 SUBDIRS += demo/cmdwidget
 
 #-----------------------------------------------------------------

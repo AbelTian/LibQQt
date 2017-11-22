@@ -1,25 +1,25 @@
 #ifndef QQTHTTPDOWNLOADPROTOCOL_H
 #define QQTHTTPDOWNLOADPROTOCOL_H
 
-#include <qqtwebsocketprotocol.h>
-#include <qqtwebprotocolmanager.h>
+#include <qqtwebaccessmanager.h>
 
-class QQtHttpDownloadWebWorkSession: public QQtWebWorkSession
+class QQtHttpDownloadWebWorkSession: public QQtWebAccessSession
 {
     Q_OBJECT
 public:
-    explicit QQtHttpDownloadWebWorkSession ( QObject* parent = 0 ) : QQtWebWorkSession ( parent ) {}
+    explicit QQtHttpDownloadWebWorkSession(QObject* parent = 0) : QQtWebAccessSession(parent) {}
     virtual ~QQtHttpDownloadWebWorkSession() {}
 };
 
-class QQtHttpDownloadProtocol : public QQtWebSocketProtocol
+class QQtHttpDownloadProtocol : public QQtWebAccessManager
 {
     Q_OBJECT
 public:
-    explicit QQtHttpDownloadProtocol ( QObject* parent = nullptr );
+    explicit QQtHttpDownloadProtocol(QObject* parent = nullptr);
     virtual ~QQtHttpDownloadProtocol() {}
 
-    void sendRequstUrl ( QString& url ) {
+    void sendRequstUrl(QString& url)
+    {
         m_url = url;
 
     }
