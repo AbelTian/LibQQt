@@ -59,7 +59,7 @@ void QQtMPTableWidget::query ( QString filter )
     ptime(); //3ms
 
     //high?
-    QQTSleep ( 478 );
+    QQtSleep ( 478 );
 
     QSqlQuery query ( m_db );
     query.exec ( QString ( "select count(*) from %1" ).arg ( m_table ) );

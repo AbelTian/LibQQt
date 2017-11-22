@@ -155,7 +155,7 @@ void QQtMsgBox::warning(QString content)
     m_time = 0;
     //startTimer(1000);
     show();
-    QQTSleep(delayShow);
+    QQtSleep(delayShow);
 }
 
 void QQtMsgBox::question(QString content)
@@ -166,7 +166,7 @@ void QQtMsgBox::question(QString content)
     m_time = 0;
     //startTimer(1000);
     show();
-    QQTSleep(delayShow);
+    QQtSleep(delayShow);
 }
 
 void QQtMsgBox::information(QString content)
@@ -177,7 +177,7 @@ void QQtMsgBox::information(QString content)
     m_time = 0;
     //startTimer(1000);
     show();
-    QQTSleep(delayShow);
+    QQtSleep(delayShow);
 }
 
 void QQtMsgBox::timerEvent(QTimerEvent* e)

@@ -86,7 +86,7 @@ typedef unsigned char uint8_t;
 #define NOTICE "Notice"
 
 
-QQTSHARED_EXPORT void QQTSleep ( int millsecond );
+QQTSHARED_EXPORT void QQtSleep ( int millsecond );
 
 #ifdef __cplusplus
 }
