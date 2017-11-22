@@ -14,7 +14,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
     //ui->b0->setFixedHeight ( 50 );
     //ui->b1->setFixedHeight ( 50 );
-    m_client = new QQtWebWorkClient ( this );
+    m_client = new QQtWebProtocolManager ( this );
     connect ( m_client, SIGNAL ( replyFinished ( QNetworkReply* ) ),
               this, SLOT ( replyFinished ( QNetworkReply* ) ) );
 
@@ -151,6 +151,7 @@ void MainWindow::currentItemChanged ( QListWidgetItem* cur, QListWidgetItem* pre
 void MainWindow::replyFinished ( QNetworkReply* reply )
 {
     //pline() << reply->readAll();
+    pline() << reply->url();
     int nHttpCode = reply->attribute ( QNetworkRequest::HttpStatusCodeAttribute ).toInt(); //http返回码
 
     if ( nHttpCode == 200 ) //成功

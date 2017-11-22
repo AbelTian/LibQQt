@@ -2,7 +2,7 @@
 #define QQTLANPROTOCOL_H
 
 #include "qqtprotocol.h"
-#include "qqtserver.h"
+#include "qqtsockettcpserver.h"
 
 class QQTLanProtocol : public QQtProtocol
 {
@@ -17,6 +17,6 @@ public:
     bool dispatcher(const QByteArray &m) override;
 };
 
-QQtServer *QQTSingleServer(QObject* parent);
+QQtSocketTcpServer *QQTSingleServer(QObject* parent);
 
 #endif // QQTLANPROTOCOL_H

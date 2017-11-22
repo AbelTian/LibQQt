@@ -6,12 +6,13 @@
 #include <QNetworkReply>
 #include <QSslError>
 #include <qqt-local.h>
+#include <qqtprotocol.h>
 
-class QQTSHARED_EXPORT QQtWebProtocol : public QObject
+class QQTSHARED_EXPORT QQtWebSocketProtocol : public QQtProtocol
 {
     Q_OBJECT
 public:
-    explicit QQtWebProtocol(QObject* parent = 0);
+    explicit QQtWebSocketProtocol ( QObject* parent = 0 );
 
 signals:
 

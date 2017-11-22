@@ -3,29 +3,29 @@
 #include "qqtcore.h"
 #include "qqt-qt.h"
 
-QQtClient* QQTUpgradeClientInstance(QObject* parent)
+QQtSocketTcpClient* QQTUpgradeClientInstance(QObject* parent)
 {
-    static QQtClient* cli = NULL;
+    static QQtSocketTcpClient* cli = NULL;
     if (!cli)
     {
         QStringList ip;
         ip << "222.175.114.244" << "124.133.1.54";
         //"www.QQToo.com"
-        cli = new QQtClient(parent);
+        cli = new QQtSocketTcpClient(parent);
         cli->SetServerIPAddress(ip);
         cli->SetServerPort(8089);
     }
     return cli;
 }
 
-QQtClient* QQTCloudClientInstance(QObject* parent)
+QQtSocketTcpClient* QQTCloudClientInstance(QObject* parent)
 {
-    static QQtClient* cli = NULL;
+    static QQtSocketTcpClient* cli = NULL;
     if (!cli)
     {
         QStringList ip;
         ip << "222.175.114.244" << "124.133.1.54";
-        cli = new QQtClient(parent);
+        cli = new QQtSocketTcpClient(parent);
         cli->SetServerIPAddress(ip);
         cli->SetServerPort(7079);
     }

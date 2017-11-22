@@ -14,32 +14,6 @@
 #-------------------------------------------------
 SOURCES +=
 HEADERS +=
-contains(DEFINES, __QQTCHARTS__) {
-    SOURCES += \
-        $$PWD/charts/qqtchart.cpp \
-        $$PWD/charts/qqtchartview.cpp
-    HEADERS += \
-        $$PWD/charts/qqtchart.h \
-        $$PWD/charts/qqtchartview.h
-}
-
-#customplot
-#DEFINES += __CUSTOMPLOT__
-contains (DEFINES, __CUSTOMPLOT__) {
-    #message (qcustomplot is used in $${TARGET})
-    win32 {
-        contains (DEFINES, QQT_LIBRARY) {
-            DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
-        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-            #build static library - customplot
-            DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
-        }
-    }
-    SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
-                $$PWD/customplot/qcustomplot.cpp
-    HEADERS += $$PWD/customplot/qcpdocumentobject.h \
-                $$PWD/customplot/qcustomplot.h
-}
 
 #root dir
 HEADERS += $$PWD/qqt.h \
@@ -197,25 +171,26 @@ contains (DEFINES, __PRINTSUPPORT__) {
 }
 
 #network
-#udpsocket
 SOURCES += \
-    $$PWD/network/qqtudpclient.cpp \
-    $$PWD/network/qqtudpserver.cpp
-HEADERS += \
-    $$PWD/network/qqtudpclient.h \
-    $$PWD/network/qqtudpserver.h
-#tcpsocket
-SOURCES += \
-    $$PWD/network/qqtclient.cpp \
-    $$PWD/network/qqtserver.cpp \
     $$PWD/network/qqtprotocol.cpp \
     $$PWD/network/qqtnetwork.cpp
 HEADERS += \
-    $$PWD/network/qqtclient.h \
-    $$PWD/network/qqtserver.h \
     $$PWD/network/qqtmessage.h \
     $$PWD/network/qqtprotocol.h \
     $$PWD/network/qqtnetwork.h
+
+#tcpsocket udpsocket
+SOURCES += \
+    $$PWD/network/qqtsocketudpserver.cpp \
+    $$PWD/network/qqtsocketudpclient.cpp \
+    $$PWD/network/qqtsockettcpclient.cpp \
+    $$PWD/network/qqtsockettcpserver.cpp
+HEADERS += \
+    $$PWD/network/qqtsockettcpclient.h \
+    $$PWD/network/qqtsockettcpserver.h \
+    $$PWD/network/qqtsocketudpclient.h \
+    $$PWD/network/qqtsocketudpserver.h
+
 #serialport
 SOURCES += \
     $$PWD/network/qqtserialport.cpp
@@ -242,11 +217,11 @@ contains (DEFINES, __QEXTSERIALPORT__) {
 contains (DEFINES, __BLUETOOTH__) {
     #bluetooth socket
     SOURCES += \
-        $$PWD/network/qqtbluetoothclient.cpp \
-        $$PWD/network/qqtbluetoothserver.cpp
+        $$PWD/network/qqtsocketbluetoothclient.cpp \
+        $$PWD/network/qqtsocketbluetoothserver.cpp
     HEADERS += \
-        $$PWD/network/qqtbluetoothclient.h \
-        $$PWD/network/qqtbluetoothserver.h
+        $$PWD/network/qqtsocketbluetoothserver.h \
+        $$PWD/network/qqtsocketbluetoothclient.h
     #bluetooth manager
     SOURCES += \
         $$PWD/network/qqtbluetoothmanager.cpp
@@ -277,29 +252,22 @@ contains(DEFINES, __WEBSERVICESUPPORT__) {
     HEADERS += \
         $$PWD/network/soap/qtsoap.h
 }
-contains (DEFINES, __WEBWORKSUPPORT__) {
+contains (DEFINES, __WEBPROTOCOLSUPPORT__) {
     SOURCES += \
-        $$PWD/network/qqtftpprotocol.cpp \
-        $$PWD/network/qqthttpprotocol.cpp \
-        $$PWD/network/qqtwebprotocol.cpp
+        $$PWD/network/qqtwebprotocolmanager.cpp
     HEADERS += \
-        $$PWD/network/qqtftpprotocol.h \
-        $$PWD/network/qqthttpprotocol.h \
-        $$PWD/network/qqtwebprotocol.h
-    SOURCES += \
-        $$PWD/network/qqtwebworkclient.cpp \
-        $$PWD/network/qqtwebworkserver.cpp
-    HEADERS += \
-        $$PWD/network/qqtwebworkclient.h \
-        $$PWD/network/qqtwebworkserver.h
+        $$PWD/network/qqtwebprotocolmanager.h
 }
+
 contains (DEFINES, __WEBSOCKETSUPPORT__) {
     SOURCES += \
-        $$PWD/network/qqtwebclient.cpp \
-        $$PWD/network/qqtwebserver.cpp
+        $$PWD/network/qqtwebsocketserver.cpp \
+        $$PWD/network/qqtwebsocketclient.cpp \
+        $$PWD/network/qqtwebsocketprotocol.cpp
     HEADERS += \
-        $$PWD/network/qqtwebclient.h \
-        $$PWD/network/qqtwebserver.h
+        $$PWD/network/qqtwebsocketclient.h \
+        $$PWD/network/qqtwebsocketserver.h \
+        $$PWD/network/qqtwebsocketprotocol.h
 }
 
 
@@ -421,6 +389,33 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/svgwidgets/qqtsvglabel.h \
             $$PWD/exquisite/svgwidgets/qqtsvgprogressbar.h
     }
+}
+
+contains(DEFINES, __QQTCHARTS__) {
+    SOURCES += \
+        $$PWD/charts/qqtchart.cpp \
+        $$PWD/charts/qqtchartview.cpp
+    HEADERS += \
+        $$PWD/charts/qqtchart.h \
+        $$PWD/charts/qqtchartview.h
+}
+
+#customplot
+#DEFINES += __CUSTOMPLOT__
+contains (DEFINES, __CUSTOMPLOT__) {
+    #message (qcustomplot is used in $${TARGET})
+    win32 {
+        contains (DEFINES, QQT_LIBRARY) {
+            DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
+        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+            #build static library - customplot
+            DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
+        }
+    }
+    SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
+                $$PWD/customplot/qcustomplot.cpp
+    HEADERS += $$PWD/customplot/qcpdocumentobject.h \
+                $$PWD/customplot/qcustomplot.h
 }
 
 include ($$PWD/qqt_3rdparty.pri)

@@ -4,11 +4,11 @@
 #include <QUdpSocket>
 #include <qqtcore.h>
 
-class QQtUdpServer : public QUdpSocket
+class QQtSocketUdpServer : public QUdpSocket
 {
     Q_OBJECT
 public:
-    explicit QQtUdpServer(QObject* parent = nullptr);
+    explicit QQtSocketUdpServer ( QObject* parent = nullptr );
 
 signals:
 

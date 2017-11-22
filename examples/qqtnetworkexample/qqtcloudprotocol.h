@@ -4,7 +4,7 @@
 #include <QTimer>
 #include "qqtprotocol.h"
 #include "qqtnetworkmessage.h"
-#include "qqtclient.h"
+#include "qqtsockettcpclient.h"
 
 #define _TCPCMD_HEART                     0x0010
 #define _TCPCMD_HEARTBEATRESP             0x8010
@@ -424,10 +424,10 @@ public:
 };
 
 
-QQtClient *QQTUpgradeClientInstance(QObject *parent);
+QQtSocketTcpClient *QQTUpgradeClientInstance(QObject *parent);
 
 
-QQtClient *QQTCloudClientInstance(QObject *parent);
+QQtSocketTcpClient *QQTCloudClientInstance(QObject *parent);
 
 
 #endif // QQTCLOUDPROTOCOL_H

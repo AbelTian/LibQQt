@@ -5,8 +5,8 @@
 #include "qqtinput.h"
 #include "qqtmsgbox.h"
 #include "qqtframe.h"
-#include "qqtclient.h"
-#include "qqtserver.h"
+#include "qqtsockettcpclient.h"
+#include "qqtsockettcpserver.h"
 #include "qqtserialport.h"
 #include "qqtpluginwatcher.h"
 #include "qqtversion.h"
@@ -16,7 +16,7 @@
  */
 void QQTLanServer ( QObject* parent = 0 )
 {
-    static QQtServer* s = new QQtServer ( parent );
+    static QQtSocketTcpServer* s = new QQtSocketTcpServer ( parent );
     s->listen ( QHostAddress::Any, 8000 );
 
     s->installedProtocol();
@@ -109,13 +109,13 @@ QQTApp::QQTApp ( int& argc, char** argv ) : QApplication ( argc, argv )
                        this, SLOT ( slotUPanAutoRun ( int ) ) );
 #endif
 
-    //QQtClient
+    //QQtSocketTcpClient
     //QQTCloudClientInstance(this);
 #ifdef __EMBEDDED_LINUX__
     //QQTEthManager
     QQtEthenetManager::Instance ( this );
 #endif
-    //QQtServer
+    //QQtSocketTcpServer
     //QQTPeerPort
 
     //QQTPeerPortInstance(this);

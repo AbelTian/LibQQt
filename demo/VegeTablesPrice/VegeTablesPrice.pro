@@ -63,13 +63,7 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
     CONFIG += mobility
     MOBILITY =
     DISTFILES += \
-        android/AndroidManifest.xml \
-        android/gradle/wrapper/gradle-wrapper.jar \
-        android/gradlew \
-        android/res/values/libs.xml \
-        android/build.gradle \
-        android/gradle/wrapper/gradle-wrapper.properties \
-        android/gradlew.bat
+        android/AndroidManifest.xml
 
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 }

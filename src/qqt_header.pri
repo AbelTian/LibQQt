@@ -183,9 +183,9 @@ DEFINES += __WEBSERVICESUPPORT__
 #One Ftp Http 单工...
 #Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
 #if you use QNetworkAccessManagerSupport , open this annotation
-DEFINES += __WEBWORKSUPPORT__
-lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBWORKSUPPORT__
-contains (DEFINES, __WEBWORKSUPPORT__) {
+DEFINES += __WEBPROTOCOLSUPPORT__
+lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBPROTOCOLSUPPORT__
+contains (DEFINES, __WEBPROTOCOLSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
     #TODO: QT += webkit
 }

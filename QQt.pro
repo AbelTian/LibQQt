@@ -1,7 +1,8 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = src/qqt.pro
+SUBDIRS = src/qqt.pro \
+    examples/qqthttpdownload
 
 #-----------------------------------------------------------------
 #basic example
@@ -57,11 +58,13 @@ SUBDIRS += examples/soapQQtOnline
 #need webwork - WebSupport
 #-----------------------------------------------------------------
 SUBDIRS += examples/qqtftpclient
+SUBDIRS += examples/qqthttpdownload
 
 #-----------------------------------------------------------------
 #some example project
 #maybe demo
 #-----------------------------------------------------------------
+
 SUBDIRS += demo/VegeTablesPrice
 SUBDIRS += demo/cmdwidget
 

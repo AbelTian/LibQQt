@@ -7,6 +7,7 @@
 #include <qthread.h>
 #include "qqtcore.h"
 #include "qqt-local.h"
+#include "qqtnetwork.h"
 
 class QQTSHARED_EXPORT QQtNetWorkClearThread : public QThread
 {

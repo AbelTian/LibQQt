@@ -5,7 +5,7 @@
 #include <QListWidget>
 
 #include "qqtcore.h"
-#include "qqtwebworkclient.h"
+#include "qqtwebprotocolmanager.h"
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QBarSeries>
@@ -36,7 +36,7 @@ private slots:
 
 private:
     Ui::MainWindow* ui;
-    QQtWebWorkClient* m_client;
+    QQtWebProtocolManager* m_client;
     QMap<QString, QString> m_mapVege;
     QBarSet* m_barSet0;
     QBarSet* m_barSet1;

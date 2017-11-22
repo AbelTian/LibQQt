@@ -1,8 +1,8 @@
-#include "qqtwebworkclient.h"
+#include "qqtwebprotocolmanager.h"
 #include "qqtcore.h"
 
 
-QQtWebWorkClient::QQtWebWorkClient ( QObject* parent ) : QNetworkAccessManager ( parent )
+QQtWebProtocolManager::QQtWebProtocolManager ( QObject* parent ) : QNetworkAccessManager ( parent )
 {
     m_listWebWorkSession.clear();
 
@@ -28,7 +28,7 @@ QQtWebWorkClient::QQtWebWorkClient ( QObject* parent ) : QNetworkAccessManager (
               this, SLOT ( networkSessionConnected() ) );
 }
 
-void QQtWebWorkClient::sendGetRequest ( QString& strUrl )
+void QQtWebProtocolManager::sendGetRequest ( QString& strUrl )
 {
     QQtWebWorkSession* s0 = new QQtWebWorkSession ( this );
 
@@ -72,7 +72,7 @@ void QQtWebWorkClient::sendGetRequest ( QString& strUrl )
     s0->m_pTimer->start ( );
 }
 
-void QQtWebWorkClient::sendPostRequest ( QString& strUrl )
+void QQtWebProtocolManager::sendPostRequest ( QString& strUrl )
 {
     //post
 //    QString strBody; //http body部分，可封装参数信息
@@ -80,7 +80,7 @@ void QQtWebWorkClient::sendPostRequest ( QString& strUrl )
 //    m_pNetworkReply = m_pNetworkManager->post(netRequest,contentByteArray);//发起post请求
 }
 
-void QQtWebWorkClient::finished ( QNetworkReply* reply )
+void QQtWebProtocolManager::finished ( QNetworkReply* reply )
 {
     pline() << reply;
 
@@ -109,32 +109,32 @@ void QQtWebWorkClient::finished ( QNetworkReply* reply )
     m_listWebWorkSession.removeOne ( s0 );
 }
 
-void QQtWebWorkClient::authenticationRequired ( QNetworkReply* r, QAuthenticator* a )
+void QQtWebProtocolManager::authenticationRequired ( QNetworkReply* r, QAuthenticator* a )
 {
     pline() << r << a;
 }
 
-void QQtWebWorkClient::proxyAuthenticationRequired ( QNetworkProxy p, QAuthenticator* a )
+void QQtWebProtocolManager::proxyAuthenticationRequired ( QNetworkProxy p, QAuthenticator* a )
 {
     pline() << p.hostName() << a;
 }
 
-void QQtWebWorkClient::sslErrors ( QNetworkReply* r, QList<QSslError> e )
+void QQtWebProtocolManager::sslErrors ( QNetworkReply* r, QList<QSslError> e )
 {
     pline() << r << e.size();
 }
 
-void QQtWebWorkClient::networkAccessibleChanged ( QNetworkAccessManager::NetworkAccessibility a )
+void QQtWebProtocolManager::networkAccessibleChanged ( QNetworkAccessManager::NetworkAccessibility a )
 {
     pline() << a;
 }
 
-void QQtWebWorkClient::networkSessionConnected()
+void QQtWebProtocolManager::networkSessionConnected()
 {
     pline();
 }
 
-void QQtWebWorkClient::localReplyTimeOut()
+void QQtWebProtocolManager::localReplyTimeOut()
 {
     QTimer* obj = ( QTimer* ) sender();
     pline() << obj;
@@ -161,21 +161,21 @@ void QQtWebWorkClient::localReplyTimeOut()
     s0->m_pNetworkReply->deleteLater();
 }
 
-void QQtWebWorkClient::localReadyRead()
+void QQtWebProtocolManager::localReadyRead()
 {
     QNetworkReply* obj = ( QNetworkReply* ) sender();
     pline() << obj;
     emit readyRead ( obj );
 }
 
-void QQtWebWorkClient::localUpdateUploadProgress ( qint64 bytesSent, qint64 bytesTotal )
+void QQtWebProtocolManager::localUpdateUploadProgress ( qint64 bytesSent, qint64 bytesTotal )
 {
     QNetworkReply* obj = ( QNetworkReply* ) sender();
     pline() << obj;
     emit updateUploadProgress ( obj, bytesSent, bytesTotal );
 }
 
-void QQtWebWorkClient::localUpdateDownloadProgress ( qint64 bytesReceived, qint64 bytesTotal )
+void QQtWebProtocolManager::localUpdateDownloadProgress ( qint64 bytesReceived, qint64 bytesTotal )
 {
     QNetworkReply* obj = ( QNetworkReply* ) sender();
     pline() << obj;

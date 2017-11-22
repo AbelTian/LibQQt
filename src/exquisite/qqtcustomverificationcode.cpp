@@ -10,7 +10,7 @@
 #include <QDebug>
 #include <QEventLoop>
 #include <QTimer>
-#include <qqt.h>
+#include <qglobal.h>
 
 /**
  * @brief The QQtVerificationCode_p class 验证码操作类
@@ -22,7 +22,7 @@ public:
      * @brief QQtVerificationCodePrivate 构造函数
      * @param parent
      */
-    explicit QQtCustomVerificationCodePrivate(QObject* parent = 0);
+    explicit QQtCustomVerificationCodePrivate ( QObject* parent = 0 );
 
 public:
     /**
@@ -30,7 +30,7 @@ public:
      * @param paramCount 字符串个数
      * @return
      */
-    QString generateLetter(quint16 paramCount);
+    QString generateLetter ( quint16 paramCount );
 
     /**
      * @brief generateRandom 获取指定范围的随机数
@@ -38,7 +38,7 @@ public:
      * @param paramHigh 范围的最大数字
      * @return
      */
-    qint16 generateRandom(qint16 paramLow, qint16 paramHigh);
+    qint16 generateRandom ( qint16 paramLow, qint16 paramHigh );
 
     /**
      * @brief generateBrush 获取画刷
@@ -46,7 +46,7 @@ public:
      * @param paramFont 文字的字体
      * @return 画刷
      */
-    QBrush generateBrush(QString paramText, QFont paramFont);
+    QBrush generateBrush ( QString paramText, QFont paramFont );
 
     /**
      * @brief generateRandomColor 获取随机(字体)颜色
@@ -64,14 +64,14 @@ public:
      * @brief sleepNow 休息一会
      * @param paramMilsecond
      */
-    void sleepNow(quint32 paramMilsecond);
+    void sleepNow ( quint32 paramMilsecond );
 
 };
 
-QQtCustomVerificationCode::QQtCustomVerificationCode(QWidget* parent, quint16 width, quint16 height, quint8 count)
-    : QWidget(parent)
+QQtCustomVerificationCode::QQtCustomVerificationCode ( QWidget* parent, quint16 width, quint16 height, quint8 count )
+    : QWidget ( parent )
 {
-    captchaInstance = new QQtCustomVerificationCodePrivate(this);
+    captchaInstance = new QQtCustomVerificationCodePrivate ( this );
     canvasWidth = width;
     canvasHeight = height;
     captchaSize = count;
@@ -84,63 +84,63 @@ QPixmap QQtCustomVerificationCode::generateOneCaptcha()
     // 生成画布
     int canvas_w = canvasWidth;
     int canvas_h = canvasHeight;
-    QImage image(QSize(canvas_w, canvas_h), QImage::Format_RGB32);
-    image.fill(captchaInstance->generateRandomBgColor());
+    QImage image ( QSize ( canvas_w, canvas_h ), QImage::Format_RGB32 );
+    image.fill ( captchaInstance->generateRandomBgColor() );
 
     // 噪音线
-    QPainter painter(&image);
+    QPainter painter ( &image );
 
-    for (int i = 0; i < 10; i++)
+    for ( int i = 0; i < 10; i++ )
     {
-        QPen penHText(captchaInstance->generateRandomColor(), 2);
-        painter.setPen(penHText);
-        painter.drawLine(captchaInstance->generateRandom(0, canvas_w),
-                         captchaInstance->generateRandom(0, canvas_h),
-                         captchaInstance->generateRandom(-canvas_w, canvas_w),
-                         captchaInstance->generateRandom(-canvas_h, canvas_h));
-        captchaInstance->sleepNow(5);
+        QPen penHText ( captchaInstance->generateRandomColor(), 2 );
+        painter.setPen ( penHText );
+        painter.drawLine ( captchaInstance->generateRandom ( 0, canvas_w ),
+                           captchaInstance->generateRandom ( 0, canvas_h ),
+                           captchaInstance->generateRandom ( -canvas_w, canvas_w ),
+                           captchaInstance->generateRandom ( -canvas_h, canvas_h ) );
+        captchaInstance->sleepNow ( 5 );
     }
 
     painter.end();
     // 验证码
-    int xStart = captchaInstance->generateRandom(canvas_w / captchaCount / 3 * 2, canvas_w / captchaCount);
-    int yStart = captchaInstance->generateRandom(canvas_h / 2, canvas_h / 5 * 4);
-    int fontSize = captchaInstance->generateRandom(canvas_h / 5 * 2, canvas_h / 5 * 3);
+    int xStart = captchaInstance->generateRandom ( canvas_w / captchaCount / 3 * 2, canvas_w / captchaCount );
+    int yStart = captchaInstance->generateRandom ( canvas_h / 2, canvas_h / 5 * 4 );
+    int fontSize = captchaInstance->generateRandom ( canvas_h / 5 * 2, canvas_h / 5 * 3 );
     int rotateVar = 0;
     QString captchaString;
 
-    for (int i = 0; i < captchaCount; i++)
+    for ( int i = 0; i < captchaCount; i++ )
     {
-        QPainter painter(&image);
+        QPainter painter ( &image );
         // 字符颜色
-        QPen penC(captchaInstance->generateRandomColor(), 2);
-        painter.setPen(penC);
+        QPen penC ( captchaInstance->generateRandomColor(), 2 );
+        painter.setPen ( penC );
         // 字符值
-        QString letter = captchaInstance->generateLetter(1);
+        QString letter = captchaInstance->generateLetter ( 1 );
         captchaString += letter;
         // 字符字体
-        painter.setFont(QFont("微软雅黑", fontSize, QFont::Bold));
+        painter.setFont ( QFont ( "微软雅黑", fontSize, QFont::Bold ) );
         // 字体旋转值
-        rotateVar = captchaInstance->generateRandom(-10, 10);
-        painter.rotate(rotateVar);
+        rotateVar = captchaInstance->generateRandom ( -10, 10 );
+        painter.rotate ( rotateVar );
         // 画出字符
-        painter.drawText(xStart, yStart, letter);
+        painter.drawText ( xStart, yStart, letter );
         // 休息一会
-        captchaInstance->sleepNow(5);
+        captchaInstance->sleepNow ( 5 );
         // 重新计算开始值
-        xStart += captchaInstance->generateRandom(canvas_w / captchaCount / 3 * 2, canvas_w / captchaCount);
-        yStart = captchaInstance->generateRandom(canvas_h / 2, canvas_h / 5 * 4);
+        xStart += captchaInstance->generateRandom ( canvas_w / captchaCount / 3 * 2, canvas_w / captchaCount );
+        yStart = captchaInstance->generateRandom ( canvas_h / 2, canvas_h / 5 * 4 );
         // 偏移量的反方向
-        painter.rotate(-rotateVar);
+        painter.rotate ( -rotateVar );
         painter.end();
     }
 
     // 验证码转小写
     captchaString = captchaString.toLower();
     // 保存验证码
-    setCurrentCaptcha(captchaString);
+    setCurrentCaptcha ( captchaString );
     // 返回图片
-    return QPixmap::fromImage(image);
+    return QPixmap::fromImage ( image );
 }
 
 QString QQtCustomVerificationCode::getCurrentCaptcha() const
@@ -148,7 +148,7 @@ QString QQtCustomVerificationCode::getCurrentCaptcha() const
     return currentCaptcha;
 }
 
-void QQtCustomVerificationCode::setCurrentCaptcha(const QString& value)
+void QQtCustomVerificationCode::setCurrentCaptcha ( const QString& value )
 {
     currentCaptcha = value;
 }
@@ -158,7 +158,7 @@ quint16 QQtCustomVerificationCode::getCanvasWidth() const
     return canvasWidth;
 }
 
-void QQtCustomVerificationCode::setCanvasWidth(const quint16& value)
+void QQtCustomVerificationCode::setCanvasWidth ( const quint16& value )
 {
     canvasWidth = value;
 }
@@ -168,7 +168,7 @@ quint16 QQtCustomVerificationCode::getCanvasHeight() const
     return canvasHeight;
 }
 
-void QQtCustomVerificationCode::setCanvasHeight(const quint16& value)
+void QQtCustomVerificationCode::setCanvasHeight ( const quint16& value )
 {
     canvasHeight = value;
 }
@@ -178,114 +178,114 @@ quint8 QQtCustomVerificationCode::getCaptchaSize() const
     return captchaSize;
 }
 
-void QQtCustomVerificationCode::setCaptchaSize(const quint8& value)
+void QQtCustomVerificationCode::setCaptchaSize ( const quint8& value )
 {
     captchaSize = value;
 }
 
-QQtCustomVerificationCodePrivate::QQtCustomVerificationCodePrivate(QObject* parent)
+QQtCustomVerificationCodePrivate::QQtCustomVerificationCodePrivate ( QObject* parent )
 {
-    Q_UNUSED(parent);
+    Q_UNUSED ( parent );
 }
 
-QString QQtCustomVerificationCodePrivate::generateLetter(quint16 paramCount)
+QString QQtCustomVerificationCodePrivate::generateLetter ( quint16 paramCount )
 {
     QByteArray allowedChars = "abcdfhikmnstuvwxyzABCDEFGHJKLMNPRSTUVWXYZ01245689";
     int randomIndex;
     QByteArray outputString = "";
 
-    for (uint i = 0; i < paramCount; ++i)
+    for ( uint i = 0; i < paramCount; ++i )
     {
-        randomIndex = rand() % allowedChars.length();
+        randomIndex = qrand() % allowedChars.length();
         outputString += allowedChars[randomIndex];
     }
 
-    return QString(outputString);
+    return QString ( outputString );
 }
 
-qint16 QQtCustomVerificationCodePrivate::generateRandom(qint16 paramLow, qint16 paramHigh)
+qint16 QQtCustomVerificationCodePrivate::generateRandom ( qint16 paramLow, qint16 paramHigh )
 {
     QTime time = QTime::currentTime();
-    qsrand((uint)time.msec());
-    sleepNow(2);
+    qsrand ( ( uint ) time.msec() );
+    sleepNow ( 2 );
 
-    if (paramLow > 0)
+    if ( paramLow > 0 )
     {
-        return paramLow + rand() % (paramHigh - paramLow);
+        return paramLow + qrand() % ( paramHigh - paramLow );
     }
     else
     {
-        return paramLow + rand() % (abs(paramLow) + paramHigh);
+        return paramLow + qrand() % ( abs ( paramLow ) + paramHigh );
     }
 }
 
-QBrush QQtCustomVerificationCodePrivate::generateBrush(QString paramText, QFont paramFont)
+QBrush QQtCustomVerificationCodePrivate::generateBrush ( QString paramText, QFont paramFont )
 {
-    QFontMetrics font_metrics(paramFont);
-    QPixmap pixmap(font_metrics.boundingRect(paramText).size());
-    pixmap.fill(Qt::transparent);
-    QPainter painter(&pixmap);
-    painter.setFont(paramFont);
-    painter.drawText(pixmap.rect(), paramText);
+    QFontMetrics font_metrics ( paramFont );
+    QPixmap pixmap ( font_metrics.boundingRect ( paramText ).size() );
+    pixmap.fill ( Qt::transparent );
+    QPainter painter ( &pixmap );
+    painter.setFont ( paramFont );
+    painter.drawText ( pixmap.rect(), paramText );
     painter.end();
-    return QBrush(pixmap);
+    return QBrush ( pixmap );
 }
 
 QColor QQtCustomVerificationCodePrivate::generateRandomColor()
 {
     QVector<QColor> avaliableColor;
     // 灯草灰
-    avaliableColor.push_back(QColor(54, 53, 50));
+    avaliableColor.push_back ( QColor ( 54, 53, 50 ) );
     // 草黄
-    avaliableColor.push_back(QColor(219, 206, 84));
+    avaliableColor.push_back ( QColor ( 219, 206, 84 ) );
     // 湛蓝
-    avaliableColor.push_back(QColor(27, 84, 242));
+    avaliableColor.push_back ( QColor ( 27, 84, 242 ) );
     // 紫薇花
-    avaliableColor.push_back(QColor(238, 165, 209));
+    avaliableColor.push_back ( QColor ( 238, 165, 209 ) );
     // 洋红
-    avaliableColor.push_back(QColor(220, 20, 60));
+    avaliableColor.push_back ( QColor ( 220, 20, 60 ) );
     // 紫藤灰
-    avaliableColor.push_back(QColor(133, 126, 149));
+    avaliableColor.push_back ( QColor ( 133, 126, 149 ) );
     // 鹦鹉绿
-    avaliableColor.push_back(QColor(0, 142, 89));
+    avaliableColor.push_back ( QColor ( 0, 142, 89 ) );
     // 柠檬黄
-    avaliableColor.push_back(QColor(233, 219, 57));
+    avaliableColor.push_back ( QColor ( 233, 219, 57 ) );
     // 桔黄
-    avaliableColor.push_back(QColor(232, 133, 59));
+    avaliableColor.push_back ( QColor ( 232, 133, 59 ) );
     // 柏坊灰蓝
-    avaliableColor.push_back(QColor(78, 24, 146));
-    return avaliableColor[generateRandom(1, avaliableColor.size()) - 1];
+    avaliableColor.push_back ( QColor ( 78, 24, 146 ) );
+    return avaliableColor[generateRandom ( 1, avaliableColor.size() ) - 1];
 }
 
 QColor QQtCustomVerificationCodePrivate::generateRandomBgColor()
 {
     QVector<QColor> avaliableColor;
     // 鸭蛋青
-    avaliableColor.push_back(QColor(209, 227, 219));
+    avaliableColor.push_back ( QColor ( 209, 227, 219 ) );
     // 米色
-    avaliableColor.push_back(QColor(245, 245, 220));
+    avaliableColor.push_back ( QColor ( 245, 245, 220 ) );
     // 胡粉
-    avaliableColor.push_back(QColor(235, 232, 219));
+    avaliableColor.push_back ( QColor ( 235, 232, 219 ) );
     // 米灰
-    avaliableColor.push_back(QColor(197, 191, 173));
+    avaliableColor.push_back ( QColor ( 197, 191, 173 ) );
     // 甘石粉
-    avaliableColor.push_back(QColor(234, 220, 214));
+    avaliableColor.push_back ( QColor ( 234, 220, 214 ) );
     // 雪色
-    avaliableColor.push_back(QColor(255, 250, 25));
+    avaliableColor.push_back ( QColor ( 255, 250, 25 ) );
     // 水黄
-    avaliableColor.push_back(QColor(190, 210, 182));
+    avaliableColor.push_back ( QColor ( 190, 210, 182 ) );
     // 春蓝
-    avaliableColor.push_back(QColor(123, 161, 168));
+    avaliableColor.push_back ( QColor ( 123, 161, 168 ) );
     // 浅藤紫
-    avaliableColor.push_back(QColor(186, 195, 203));
+    avaliableColor.push_back ( QColor ( 186, 195, 203 ) );
     // 浅血牙
-    avaliableColor.push_back(QColor(234, 205, 209));
-    return avaliableColor[generateRandom(1, avaliableColor.size()) - 1];
+    avaliableColor.push_back ( QColor ( 234, 205, 209 ) );
+    return avaliableColor[generateRandom ( 1, avaliableColor.size() ) - 1];
 }
 
-void QQtCustomVerificationCodePrivate::sleepNow(quint32 paramMilsecond)
+void QQtCustomVerificationCodePrivate::sleepNow ( quint32 paramMilsecond )
 {
     QEventLoop eventloop;
-    QTimer::singleShot(paramMilsecond, &eventloop, SLOT(quit()));
+    QTimer::singleShot ( paramMilsecond, &eventloop, SLOT ( quit() ) );
     eventloop.exec();
 }

@@ -16,18 +16,19 @@
  * Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
  * Multi New Protocol 全双工 QWebSocket
  * need ssl
+ * Qt team 实现了几种协议的管理，就能进行几种协议的通讯。supportedSchemes
  */
 class QQtWebWorkSession;
-class QQTSHARED_EXPORT QQtWebWorkClient : public QNetworkAccessManager
+class QQTSHARED_EXPORT QQtWebProtocolManager : public QNetworkAccessManager
 {
     Q_OBJECT
 public:
-    explicit QQtWebWorkClient ( QObject* parent = 0 );
+    explicit QQtWebProtocolManager ( QObject* parent = 0 );
+
+    QNetworkReply* getReplyHandler ( QString& strUrl ) {}
 
     void sendGetRequest ( QString& strUrl );
     void sendPostRequest ( QString& strUrl );
-    //void installProtocol();
-    //void uninstallProtocol();
 
 signals:
     void updateUploadProgress ( QNetworkReply* reply, qint64 bytesSent, qint64 bytesTotal );
@@ -58,7 +59,7 @@ private:
     QList<QQtWebWorkSession*> m_listWebWorkSession;
 };
 
-class QQtWebWorkSession : QObject
+class QQtWebWorkSession : public QObject
 {
     Q_OBJECT
 public:
@@ -69,6 +70,11 @@ public:
     QNetworkReply* m_pNetworkReply; //封装请求返回信息
     QTimer* m_pTimer; //请求超时计时器
     QString m_strUrl; //记录当前请求的url
+    /**
+     * @brief m_sessionName
+     * talk with whom, which protocol, req content, all represented by this name;
+     */
+    QString m_sessionName;
 } ;
 
 #endif // QQTWEBWORKCLIENT_H

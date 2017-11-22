@@ -15,6 +15,6 @@ signals:
 public slots:
 };
 
-QQtBluetoothClient* QQtUserBluetoothClientInstance(QObject* parent = 0);
+QQtSocketBluetoothClient* QQtUserBluetoothClientInstance(QObject* parent = 0);
 
 #endif // QUSERBLUETOOTHPROTOCOL_H
