@@ -213,6 +213,9 @@ contains(DEFINES, __QQTCHARTS__) {
 #in ios qcustomplot can't call savePdf now, no result but a log no printer error.
 DEFINES += __CUSTOMPLOT__
 
+##################Mathes Module###############################
+DEFINES += __MATHSUPPORT__
+
 ##################################################################
 ##library
 ##################################################################

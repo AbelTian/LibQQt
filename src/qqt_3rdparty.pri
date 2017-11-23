@@ -40,3 +40,12 @@ contains (DEFINES, __EXQUISITE__) {
         include ($$PWD/exquisite/gumbo/query/gumbo-query.pri)
     }
 }
+
+contains (DEFINES, __EXQUISITE__) {
+    #gumbo widget
+    #DEFINES += __MATHSUPPORT__
+    contains (DEFINES, __MATHSUPPORT__) {
+        SOURCES += $$PWD/exquisite/mathml/qtmmlwidget.cpp
+        HEADERS += $$PWD/exquisite/mathml/qtmmlwidget.h
+    }
+}
