@@ -23,7 +23,6 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/QtBuildTool
 #SUBDIRS += examples/QtSdkManager
 #SUBDIRS += examples/QQtInstaller
-#greaterThan(QT_MAJOR_VERSION, 4):SUBDIRS += examples/qqthttpdownload
 #
 ##can't support ios
 #SUBDIRS += examples/qqtprintsupportexample
@@ -55,14 +54,16 @@ SUBDIRS = src/qqt.pro
 ##SUBDIRS += examples/qqthttpclient
 #
 ##-----------------------------------------------------------------
-##need webwork - WebSupport
+##need webaccessmanager - WebSupport
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/qqtftpclient
-#
+#greaterThan(QT_MAJOR_VERSION, 4):SUBDIRS += examples/qqthttpdownload
+
 ##-----------------------------------------------------------------
 ##some example project
 ##maybe demo
 ##-----------------------------------------------------------------
+#
 #
 greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS += demo/cmdwidget

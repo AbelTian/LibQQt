@@ -44,7 +44,8 @@
 5. 支持Qt5.9.2   
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
 1. 添加svg support widgets  
-     - 比如 QQtSvgProgressbar  
+     - 比如 QQtSvgProgressbar
+     - QQtSvgCheckBox  
 
 # Usage  
 

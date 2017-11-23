@@ -26,11 +26,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    qqthttpdownloadprotocol.cpp
+    qqthttpdownloadmanager.cpp
 
 HEADERS += \
         mainwindow.h \
-    qqthttpdownloadprotocol.h
+    qqthttpdownloadmanager.h
 
 FORMS += \
         mainwindow.ui

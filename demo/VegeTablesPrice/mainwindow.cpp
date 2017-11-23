@@ -15,9 +15,9 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
     //ui->b0->setFixedHeight ( 50 );
     //ui->b1->setFixedHeight ( 50 );
-    m_client = new QQtWebAccessManager ( this );
-    connect ( m_client, SIGNAL ( replyFinished ( QNetworkReply* ) ),
-              this, SLOT ( replyFinished ( QNetworkReply* ) ) );
+    m_webmanager = new QQtWebAccessManager ( this );
+    connect ( m_webmanager, SIGNAL ( replyFinished ( QQtWebAccessSession* ) ),
+              this, SLOT ( replyFinished ( QQtWebAccessSession* ) ) );
 
 
     m_mapVege["西葫芦"] = "xihulu" ;
@@ -146,11 +146,12 @@ void MainWindow::currentItemChanged ( QListWidgetItem* cur, QListWidgetItem* pre
 
     //QString url = QString ( "http://www.baidu.com/s?wd=%1%2" ).arg ( cur->text() ).arg ( "价格" );
     QString url = QString ( "http://nong.gold600.com/cx?pz=%1&c=shandong" ).arg ( m_mapVege[cur->text()] );
-    m_client->sendGetRequest ( url );
+    m_webmanager->sendGetRequest ( url );
 }
 
-void MainWindow::replyFinished ( QNetworkReply* reply )
+void MainWindow::replyFinished ( QQtWebAccessSession* session )
 {
+    QNetworkReply* reply = session->getWebAccessReply();
     //pline() << reply->readAll();
     pline() << reply->url();
     int nHttpCode = reply->attribute ( QNetworkRequest::HttpStatusCodeAttribute ).toInt(); //http返回码
@@ -169,7 +170,7 @@ void MainWindow::replyFinished ( QNetworkReply* reply )
     //pline() << QString ( resultContent );
     QString result1 = resultContent;
     //pline() << result1.toLatin1().constData();
-    pline() << QTextCodec::codecForHtml(resultContent)->name();
+    pline() << QTextCodec::codecForHtml ( resultContent )->name();
 
     /*用页面源文件的编码来进行解码 GB2312 or UTF-8*/
     QTextCodec* pCodec = QTextCodec::codecForName ( "GBK" );

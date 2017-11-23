@@ -29,14 +29,14 @@ public:
     ~MainWindow();
 private slots:
     void currentItemChanged ( QListWidgetItem*, QListWidgetItem* );
-    void replyFinished ( QNetworkReply* reply );
+    void replyFinished ( QQtWebAccessSession* session );
 
     void seeplot();
     void seereport();
 
 private:
     Ui::MainWindow* ui;
-    QQtWebAccessManager* m_client;
+    QQtWebAccessManager* m_webmanager;
     QMap<QString, QString> m_mapVege;
     QBarSet* m_barSet0;
     QBarSet* m_barSet1;
