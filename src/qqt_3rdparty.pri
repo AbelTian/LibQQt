@@ -42,9 +42,18 @@ contains (DEFINES, __EXQUISITE__) {
 }
 
 contains (DEFINES, __EXQUISITE__) {
-    #gumbo widget
+    #mathml widget
     #DEFINES += __MATHSUPPORT__
     contains (DEFINES, __MATHSUPPORT__) {
+
+        contains(QKIT_PRIVATE, WIN32|WIN64) {
+            #mathml
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += QT_QTMMLWIDGET_LIBRARY
+            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+                DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
+            }
+        }
         SOURCES += $$PWD/exquisite/mathml/qtmmlwidget.cpp
         HEADERS += $$PWD/exquisite/mathml/qtmmlwidget.h
     }

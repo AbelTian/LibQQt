@@ -64,20 +64,19 @@
 
 class MmlDocument;
 
-#if defined(Q_WS_WIN)
-#  if !defined(QT_QTMMLWIDGET_EXPORT) && !defined(QT_QTMMLWIDGET_IMPORT)
-#    define QT_QTMMLWIDGET_EXPORT
-#  elif defined(QT_QTMMLWIDGET_IMPORT)
-#    if defined(QT_QTMMLWIDGET_EXPORT)
-#      undef QT_QTMMLWIDGET_EXPORT
-#    endif
-#    define QT_QTMMLWIDGET_EXPORT __declspec(dllimport)
-#  elif defined(QT_QTMMLWIDGET_EXPORT)
-#    undef QT_QTMMLWIDGET_EXPORT
-#    define QT_QTMMLWIDGET_EXPORT __declspec(dllexport)
-#  endif
+#include <QtCore/qglobal.h>
+#if defined(Q_OS_WIN)
+//dynamic and static are different
+#if   defined(QT_QTMMLWIDGET_LIBRARY)
+#     define QT_QTMMLWIDGET_EXPORT Q_DECL_EXPORT
+#elif defined(QT_QTMMLWIDGET_STATIC_LIBRARY)
+#     define QT_QTMMLWIDGET_EXPORT
 #else
-#  define QT_QTMMLWIDGET_EXPORT
+#     define QT_QTMMLWIDGET_EXPORT Q_DECL_IMPORT
+#endif
+#else
+//dynamic and static are equal to each other
+#     define QT_QTMMLWIDGET_EXPORT
 #endif
 
 class QT_QTMMLWIDGET_EXPORT QtMmlWidget : public QFrame
