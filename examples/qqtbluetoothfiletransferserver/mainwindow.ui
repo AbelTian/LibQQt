@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,13 +10,98 @@
     <height>480</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralWidget" />
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Bluetooth</string>
+       </attribute>
+       <widget class="QListWidget" name="lw0">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>60</y>
+          <width>161</width>
+          <height>351</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>60</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Local:</string>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="lw1">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>60</y>
+          <width>221</width>
+          <height>341</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>20</y>
+          <width>60</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Remote:</string>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="lw2">
+        <property name="geometry">
+         <rect>
+          <x>550</x>
+          <y>60</y>
+          <width>201</width>
+          <height>341</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnRefresh">
+        <property name="geometry">
+         <rect>
+          <x>540</x>
+          <y>10</y>
+          <width>113</width>
+          <height>32</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Refresh</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>

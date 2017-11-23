@@ -16,13 +16,15 @@ SUBDIRS = src/qqt.pro
 ##QQt installed to sdk or
 ##QQt is build
 ##-----------------------------------------------------------------
-#SUBDIRS += examples/exquisite
+#
+SUBDIRS += examples/exquisite
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
-#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/qqtnetworkexample
 #SUBDIRS += examples/QtBuildTool
 #SUBDIRS += examples/QtSdkManager
 #SUBDIRS += examples/QQtInstaller
+#SUBDIRS += examples/qqtnetworkexample
+
 #
 ##can't support ios
 #SUBDIRS += examples/qqtprintsupportexample
@@ -40,6 +42,7 @@ SUBDIRS = src/qqt.pro
 ##need bluetooth library
 #SUBDIRS += examples/qqtbluetoothfiletransferserver
 #
+
 ##-----------------------------------------------------------------
 ##need QtSoap - WebSupport
 ##-----------------------------------------------------------------
@@ -55,17 +58,18 @@ SUBDIRS = src/qqt.pro
 #
 ##-----------------------------------------------------------------
 ##need webaccessmanager - WebSupport
+##need GumoQuery
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/qqtftpclient
 #greaterThan(QT_MAJOR_VERSION, 4):SUBDIRS += examples/qqthttpdownload
-
+#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
+#
 ##-----------------------------------------------------------------
 ##some example project
 ##maybe demo
 ##-----------------------------------------------------------------
 #
 #
-greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS += demo/cmdwidget
 #
 ##-----------------------------------------------------------------

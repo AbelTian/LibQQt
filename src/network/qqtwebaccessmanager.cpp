@@ -65,7 +65,7 @@ void QQtWebAccessManager::sendGetRequest ( QQtWebAccessSession* session )
     timer->start();
 }
 
-QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( QString& strUrl )
+QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( QString strUrl )
 {
     QQtWebAccessSession* session = manager->newWebAccessSession();
     session->setWebAccessUrl ( strUrl );
@@ -87,7 +87,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendGetRequests ( QList<QNetworkReques
 
 }
 
-QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( QString& strUrl )
+QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( QString strUrl )
 {
     //post
 //    QString strBody; //http body部分，可封装参数信息

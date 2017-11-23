@@ -18,12 +18,21 @@ public:
     explicit QQtHttpDownloadManager ( QObject* parent = nullptr );
     virtual ~QQtHttpDownloadManager() {}
 
+    void sendRequest ( QString strUrl ) {
+        QQtHttpDownloadWebWorkSession* session = new QQtHttpDownloadWebWorkSession ( this );
+        session->setWebAccessUrl ( strUrl );
+        session->setWebAccessSessionName ( QUuid::createUuid().toString() );
+        getWebAccessSessionManager()->addWebAccessSession ( session );
+        sendGetRequest ( session );
+        connect ( this, SIGNAL ( readyRead ( QQtWebAccessSession* ) ),
+                  this, SLOT ( replyReadyRead ( QQtWebAccessSession* ) ) );
+    }
 signals:
 
 public slots:
 
 private slots:
-    //void replyReadyRead ( QNetworkReply* reply );
+    void replyReadyRead ( QQtWebAccessSession* session );
 private:
 };
 

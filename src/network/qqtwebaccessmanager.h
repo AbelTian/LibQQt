@@ -139,6 +139,10 @@ class QQTSHARED_EXPORT QQtWebAccessManager : public QNetworkAccessManager
     Q_OBJECT
 public:
     explicit QQtWebAccessManager ( QObject* parent = 0 );
+
+    QQtWebAccessSessionManager* getWebAccessSessionManager() {
+        return manager;
+    }
     /**
      * @brief sendGetRequest
      * use for custom session;
@@ -146,12 +150,12 @@ public:
      */
     void sendGetRequest ( QQtWebAccessSession* session );
 
-    QQtWebAccessSession* sendGetRequest ( QString& strUrl );
+    QQtWebAccessSession* sendGetRequest ( QString strUrl );
     QQtWebAccessSession* sendGetRequests ( QStringList& strUrls );
     QQtWebAccessSession* sendGetRequest ( QNetworkRequest& netRequest );
     QQtWebAccessSession* sendGetRequests ( QList<QNetworkRequest*>& netRequests );
 
-    QQtWebAccessSession* sendPostRequest ( QString& strUrl );
+    QQtWebAccessSession* sendPostRequest ( QString strUrl );
 
 signals:
     void updateUploadProgress ( QQtWebAccessSession* session, qint64 bytesSent, qint64 bytesTotal );

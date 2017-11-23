@@ -3,11 +3,15 @@
 
 #include "qqtobjectfactory.h"
 #include "qqtcore.h"
+#include "qqthttpdownloadmanager.h"
+#include "qqtapplication.h"
+#include "qqtqtiowebpageparser.h"
 
 int main ( int argc, char* argv[] )
 {
-    QApplication a ( argc, argv );
+    QQtApplication a ( argc, argv );
 
+    /*
     QQtWidgetFactory::registerObject<QPushButton>();
     QObject* obj = QQtWidgetFactory::createObject ( "QPushButton" );
     pline() << obj->inherits ( "QWidget" );
@@ -16,10 +20,13 @@ int main ( int argc, char* argv[] )
     obj->setObjectName ( "bbb" );
     pline() << obj->objectName();
     QQtObjectParcel::registerObject ( obj );
+    */
 
+    QQtQtIOWebPageParser webparser;
+    webparser.sendRequest ( );
 
-    MainWindow w;
-    w.show();
+    //MainWindow w;
+    //w.show();
 
     return a.exec();
 }
