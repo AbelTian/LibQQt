@@ -7,23 +7,6 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
-
-class QQTSHARED_EXPORT QQtDictNode : public QObject
-{
-    Q_OBJECT
-public:
-    explicit QQtDictNode ( QObject* parent = nullptr ) :
-        QObject ( parent ) {
-        m_list.clear();
-        m_map.clear();
-    }
-    virtual ~QQtDictNode() {}
-private:
-    /*是个list*/
-    QList<QVariant> m_list;
-    /*是个map*/
-    QMap<QString, QVariant> m_map;
-};
 /**
  * @brief The QQtDictionary class
  * QQt 字典
@@ -37,7 +20,7 @@ private:
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量。
  * 而且，接口设计也不够灵活，存入和取出都不太方便。
  */
-class QQTSHARED_EXPORT QQtDictionary : public QObject
+class QQTSHARED_EXPORT QQtDict : public QObject
 {
     Q_OBJECT
     Q_ENUMS ( EDictType )
@@ -45,103 +28,115 @@ class QQTSHARED_EXPORT QQtDictionary : public QObject
 public:
     typedef enum tagDictType
     {
+        /*只有一个值*/
         DictValue,
-        DictValueList,
-        DictValueMap,
+        /*是个列表，List不为空，name根据用户设置或许为空*/
         DictList,
+        /*是个映射，可能嵌套映射，Map不空，name根据用户设置或许为空*/
         DictMap,
         DictMax
     } EDictType;
 
-    explicit QQtDictionary ( QObject* parent = 0 );
-    virtual ~QQtDictionary() {}
+    explicit QQtDict ( QObject* parent = 0 );
+    virtual ~QQtDict() {}
 
-    bool isNull();
-    bool isValid();
-    bool isEmpty();
+    bool isNull() const;
+    bool isValid() const;
+    bool isEmpty() const;
 
-    bool isValue( );
-    bool isList();
-    bool isValueList();
-    bool isMap();
-    bool isValueMap();
+    bool isValue( ) const;
+    bool isList() const;
+    bool isMap() const;
 
     /*获取数据*/
-    QString& getName();
+    QString& getName() const;
     /*获取全部数据*/
-    QMap<QString, QQtDictionary>& getMap();
-    QList<QQtDictionary>& getList();
-    QMap<QString, QVariant>& getValueMap();
-    QList<QVariant>& getValueList();
+    QMap<QString, QQtDict>& getMap() const;
+    QList<QQtDict>& getList() const ;
+
     /*获取单个数据*/
-    QVariant& getValue();
-    QVariant& getValue ( int index );
-    QVariant& getValue ( QString key );
+    QVariant& getValue() const;
+    QQtDict& getValue ( int index ) const;
+    QQtDict& getValue ( const QString& key );
     /*获取一个个孩子*/
     /*list item*/
-    QQtDictionary& getChild ( int index );
+    QQtDict& getChild ( int index );
     /*map item*/
-    QQtDictionary& getChild ( QString key );
+    QQtDict& getChild ( QString key );
 
     /*类型*/
-    EDictType getType();
+    EDictType getType() const;
     /*如果设置Value的时候改变了Type，将会以新的Type为准*/
     void setType ( EDictType type );
 
     /*插入数据，自动设置type*/
+
     /*自己本身没有孩子，是个叶子，添加值*/
     void setValue ( QVariant& value );
-    /*whole value list*/
-    void setValue ( QList<QVariant>& list );
-    /*whole value map*/
-    void setValue ( QMap<QString, QVariant>& map );
-    /*自己本身没有孩子，添加一个个的孩子*/
-    void addValue ( QVariant& value );
-    void insertValue ( QString key, QVariant& value );
-    void insertValue ( int index, QVariant& value );
     /*自己本身有孩子，添加全部孩子*/
+    /*whole value list*/
+    void setValue ( QList<QQtDict>& list );
+    /*whole value map*/
+    void setValue ( QMap<QString, QQtDict>& map );
     /*list*/
-    void setChild ( QList<QQtDictionary>& list );
+    void setChild ( QList<QQtDict>& list );
     /*map*/
-    void setChild ( QMap<QString, QQtDictionary>& map );
+    void setChild ( QMap<QString, QQtDict>& map );
+
+    /*自己本身没有孩子，添加一个个的孩子*/
+    void appendValue ( const QString& value );
+    void appendValue ( const QQtDict& dict );
+    void appendChild ( const QString& value );
+    void appendChild ( const QQtDict& dict );
     /*自己本身有孩子，添加一个个的孩子*/
-    void addChild ( QQtDictionary& dict );
-    void insertChild ( QString key, QQtDictionary& dict );
-    void addChild ( int index, QQtDictionary& dict );
+    void insertValue ( const QString& key, QQtDict& dict );
+    void insertChild ( const QString& key, QQtDict& dict );
+    void insertValue ( int index, QQtDict& dict );
+    void insertChild ( int index, QQtDict& dict );
 
     /*遍历字典*/
-    int count();
-    bool hasValue ( QString key );
-    bool hasValue ( QVariant& value );
-    /*这个说的就是map和valuemap了*/
-    bool hasChild ( QString& key );
-    bool hasChild ( QQtDictionary& value );
+    int count() const;
+
+    bool hasKey ( const QString& key ) const;
+    bool hasKey ( const QQtDict& value ) const;
+    bool hasChild ( const QString& key ) const;
+    bool hasChild ( const QQtDict& value ) const;
 
     /*操作数据，改变数据*/
     void modValue ( QVariant& value );
-    void modValue ( int index, QVariant& value );
-    void modValue ( QString key, QVariant& value );
-    void modChild ( int index, QQtDictionary& value );
-    void modChild ( QString key, QQtDictionary& value );
+    void modValue ( int index, QQtDict& value );
+    void modValue ( QString key, QQtDict& value );
+    void modChild ( int index, QQtDict& value );
+    void modChild ( QString key, QQtDict& value );
 
     /*删除数据*/
     void clear ( );
     void remove ( int index );
-    void remove ( QString key );
+    void remove ( const QString& key );
 
     /*深拷贝*/
-    explicit QQtDictionary ( QQtDictionary& other, QObject* parent = 0 );
-    explicit QQtDictionary ( QString& name, EDictType type = DictMap, QObject* parent = 0 );
-    explicit QQtDictionary ( EDictType type, QObject* parent = 0 );
+    explicit QQtDict ( const QQtDict& other, QObject* parent = 0 );
+    explicit QQtDict ( const QVariant& value, QObject* parent = 0 );
+    explicit QQtDict ( const QString name, EDictType type = DictMap, QObject* parent = 0 );
+    explicit QQtDict ( const EDictType type, QObject* parent = 0 );
 
     /*操作符*/
-    QQtDictionary& operator [] ( int index );
-    QQtDictionary& operator [] ( QString key );
-    QQtDictionary& operator = ( QMap<QString, QVariant>& map );
-    QQtDictionary& operator = ( QMap<QString, QQtDictionary>& map );
-    QQtDictionary& operator = ( QList<QVariant>& list );
-    QQtDictionary& operator = ( QList<QQtDictionary>& list );
-    QQtDictionary& operator = ( QQtDictionary& other );
+    /*don't out of range*/
+    QQtDict& operator [] ( int index );
+    /**/
+    QQtDict& operator [] ( QString key );
+    QQtDict& operator = ( const QMap<QString, QQtDict>& map );
+    QQtDict& operator = ( const QList<QQtDict>& list );
+    QQtDict& operator = ( const QQtDict& other );
+    QQtDict& operator = ( const QVariant& value );
+    bool operator == ( const QQtDict& other ) const;
+
+    /*与其他数据结构兼容*/
+    QString toXML();
+    QString toJson();
+    void fromJson ( QString& jsonContent );
+    void fromXML ( QString& xmlContent );
+
 signals:
 
 public slots:
@@ -155,15 +150,13 @@ private:
     /*节点的可能内容枚举*/
     /*叶子：是个数据*/
     QVariant m_value;
-    /*叶子：是个值列表*/
-    QList<QVariant> m_valueList; //[index]
-    /*叶子：是个值字典*/
-    QMap<QString, QVariant> m_valueMap;
-    /*不是叶子，是个列表*/
-    QList<QQtDictionary> m_list; //[index]
-    /*不是叶子，是个子字典*/
-    QMap<QString, QQtDictionary> m_map;
+    /*不是叶子列表，是个叶子列表，是个叶子列表的值*/
+    QList<QQtDict> m_list; //[index]
+    /*不是叶子映射，是个子字典，是个叶子，是个叶子的值组合*/
+    QMap<QString, QQtDict> m_map;
     /*是个列表和子字典，这是错误的，不可能的*/
 };
+
+QDebug operator<< ( QDebug dbg, const QQtDict& d );
 
 #endif // QQTDICTIONARY_H
