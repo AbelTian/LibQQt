@@ -6,6 +6,7 @@
 #include "qqthttpdownloadmanager.h"
 #include "qqtapplication.h"
 #include "qqtqtiowebpageparser.h"
+#include "qqtdictionary.h"
 
 int main ( int argc, char* argv[] )
 {
@@ -22,11 +23,13 @@ int main ( int argc, char* argv[] )
     QQtObjectParcel::registerObject ( obj );
     */
 
-    QQtQtIOWebPageParser webparser;
-    webparser.startNewParse ( );
+    //QQtQtIOWebPageParser webparser;
+    //webparser.startNewParse ( );
 
     //MainWindow w;
     //w.show();
+
+    QQtDictionary dict;
 
     return a.exec();
 }

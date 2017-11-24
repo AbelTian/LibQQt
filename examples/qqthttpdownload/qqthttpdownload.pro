@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     qqthttpdownloadmanager.cpp \
-    qqtqtiowebpageparser.cpp
+    qqtqtiowebpageparser.cpp \
+    qqtdictionary.cpp
 
 HEADERS += \
         mainwindow.h \
     qqthttpdownloadmanager.h \
-    qqtqtiowebpageparser.h
+    qqtqtiowebpageparser.h \
+    qqtdictionary.h
 
 FORMS += \
         mainwindow.ui
