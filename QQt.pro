@@ -16,8 +16,7 @@ SUBDIRS = src/qqt.pro
 ##QQt installed to sdk or
 ##QQt is build
 ##-----------------------------------------------------------------
-#
-SUBDIRS += examples/exquisite
+#SUBDIRS += examples/exquisite
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
 #SUBDIRS += examples/QtBuildTool
@@ -61,7 +60,8 @@ SUBDIRS += examples/exquisite
 ##need GumoQuery
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/qqtftpclient
-#greaterThan(QT_MAJOR_VERSION, 4):SUBDIRS += examples/qqthttpdownload
+#
+greaterThan(QT_MAJOR_VERSION, 4):SUBDIRS += examples/qqthttpdownload
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #
 ##-----------------------------------------------------------------

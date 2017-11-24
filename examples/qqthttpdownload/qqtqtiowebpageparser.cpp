@@ -4,7 +4,6 @@
 #include <GumboQueryNode.h>
 #include <QStringList>
 #include <QTextCodec>
-#include <QDomDocument>
 /**
  * @brief QQtQtIOWebPageParser::QQtQtIOWebPageParser
  * bad xml
@@ -13,33 +12,15 @@
 QQtQtIOWebPageParser::QQtQtIOWebPageParser ( QObject* parent ) : QQtWebAccessManager ( parent )
 {
     m_baseUrl = "http://download.qt.io/official_releases/qt/";
-    m_xmlfile = "/Users/abel/Develop/c2-test/cc.xml";
     connect ( this, SIGNAL ( replyFinished (  QQtWebAccessSession* ) ),
               this, SLOT ( replyFinished ( QQtWebAccessSession* ) ) );
-
-    QTimer* timer = new QTimer();
-    timer->setSingleShot ( true );
-    timer->setInterval ( 10000 );
-    connect ( timer, &QTimer::timeout,
-              [this]
-    {
-        QFile file ( m_xmlfile );
-        file.open ( QFile::Append );
-        QTextStream stream ( &file );
-        m_doc.save ( stream, 0 );
-        file.close();
-        pline() << m_doc.childNodes().at ( 0 ).nodeValue();
-        pline() << "save ok";
-    } );
-    timer->start();
 }
 
-void QQtQtIOWebPageParser::sendRequest ( QString url1, QString url2 )
+void QQtQtIOWebPageParser::startNewParse ( QString url1, QString url2 )
 {
     if ( url1 == "" && url2 == "" )
     {
-        m_doc.clear();
-        m_doc.createElement ( "Qt version list" );
+        sdkGroup.clear();
     }
 
     QString strUrl = QString ( "%1%2%3" ).arg ( m_baseUrl ).arg ( url1 ).arg ( url2 );
@@ -56,6 +37,7 @@ void QQtQtIOWebPageParser::sendRequest ( QString url1, QString url2 )
 void QQtQtIOWebPageParser::replyFinished ( QQtWebAccessSession* s0 )
 {
     QQtQtIOWebUrlSession* session = ( QQtQtIOWebUrlSession* ) s0;
+    /*判断返回码 200*/
     QNetworkReply* reply = session->getWebAccessReply();
     //pline() << reply->readAll();
     pline() << reply->url();
@@ -67,10 +49,11 @@ void QQtQtIOWebPageParser::replyFinished ( QQtWebAccessSession* s0 )
     }
     else
     {
-        pline() << "fail";
+        pline() << "fail" << nHttpCode;
         return;
     }
 
+    /*读取content*/
     QByteArray resultContent = reply->readAll();
     //pline() << QString ( resultContent );
     QString result1 = resultContent;
@@ -89,6 +72,7 @@ void QQtQtIOWebPageParser::replyFinished ( QQtWebAccessSession* s0 )
 
     pline() << QTextCodec::codecForLocale()->name();
 
+    /*处理一下页面 原页面没有\n，而我需要\n*/
     //before </td> + /n
     result2.replace ( "</td>", "\n</td>" );
     result2.replace ( "</a>", "\n</a>" );
@@ -101,14 +85,14 @@ void QQtQtIOWebPageParser::replyFinished ( QQtWebAccessSession* s0 )
 
     GumboQueryNode pNode = s.nodeAt ( 0 );
     QString items = QString::fromStdString ( pNode.text() );
-    qDebug() << items;
+    //qDebug() << items;
 
     QStringList itemList = items.split ( "\n", QString::SkipEmptyParts );
 
     for ( int i = 0; i < itemList.count(); i++ )
     {
         QString txt = itemList.at ( i );
-        qDebug() << txt;
+        //qDebug() << txt;
         /*
         txt = txt.trimmed();
 
@@ -126,6 +110,7 @@ void QQtQtIOWebPageParser::replyFinished ( QQtWebAccessSession* s0 )
     QString url1 = session->url1;
     QString url2 = session->url2;
 
+    TSdkGroup group;
 
     for ( int i = 0; i < itemList.count(); i++ )
     {
@@ -137,13 +122,11 @@ void QQtQtIOWebPageParser::replyFinished ( QQtWebAccessSession* s0 )
             {
                 QString item = itemList.at ( i );
 
-                /*是个子目录 5.9*/
+                /*是第二层目录 5.9*/
                 if ( item.endsWith ( '/' ) )
                 {
-                    QDomNode node;
-                    node.setNodeValue ( item );
-                    m_doc.appendChild ( node );
-                    sendRequest ( item );
+                    /*保存下来url1*/
+                    startNewParse ( item );
                 }
             }
             /*进入第二层目录 e.g. 5.9*/
@@ -151,34 +134,46 @@ void QQtQtIOWebPageParser::replyFinished ( QQtWebAccessSession* s0 )
             {
                 QString item = itemList.at ( i );
 
-                /*是个子目录 5.9.1*/
+                /*是第二层目录 5.9.1*/
                 if ( item.endsWith ( '/' ) )
                 {
-
-                    QDomNodeList dl = m_doc.childNodes();
-                    int j = 0;
-
-                    for ( j = 0; j < dl.count(); j++ )
-                    {
-                        if ( dl.at ( j ).nodeValue() == url1 )
-                        {
-                            break;
-                        }
-                    }
-
-                    QDomNode node ;
-                    node.setNodeValue ( item );
-                    dl.at ( j ).appendChild ( node );
-                    //url1 url2
-                    sendRequest ( url1, item );
+                    /*保存下来url1，url2*/
+                    startNewParse ( url1, item );
                 }
             }
             /*最后一层目录*/
             else
             {
-                qDebug() << itemList[i];
+                QString item = itemList[i];
+
+                /*new sdk node*/
+                if ( item.contains ( '.' ) || item.contains ( '-' ) )
+                {
+                    TSdkNode node;
+                    node.name = item;
+
+                    if ( i + 1 < itemList.count() )
+                        node.time = itemList[i + 1];
+
+                    if ( i + 2 < itemList.count() )
+                        node.size = itemList[i + 2];
+
+                    if ( i + 3 < itemList.count() )
+                        node.detail = itemList[i + 3];
+
+                    qDebug() << node.name << node.time << node.size << node.detail;
+                    group.list.push_back ( node );
+                }
             }
         }
     }
 
+    group.url1 = url1;
+    group.url2 = url2;
+
+    if ( url1 != "" && url2 != "" )
+    {
+        sdkGroup.push_back ( group );
+        pline() << sdkGroup.size();
+    }
 }

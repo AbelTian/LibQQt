@@ -23,7 +23,7 @@ int main ( int argc, char* argv[] )
     */
 
     QQtQtIOWebPageParser webparser;
-    webparser.sendRequest ( );
+    webparser.startNewParse ( );
 
     //MainWindow w;
     //w.show();

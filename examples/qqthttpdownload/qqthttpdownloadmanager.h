@@ -7,8 +7,13 @@ class QQtHttpDownloadWebWorkSession: public QQtWebAccessSession
 {
     Q_OBJECT
 public:
-    explicit QQtHttpDownloadWebWorkSession ( QObject* parent = 0 ) : QQtWebAccessSession ( parent ) {}
+    explicit QQtHttpDownloadWebWorkSession ( QObject* parent = 0 ) :
+        QQtWebAccessSession ( parent ) {
+        filename = "tmp.download";
+    }
     virtual ~QQtHttpDownloadWebWorkSession() {}
+
+    QString filename;
 };
 
 class QQtHttpDownloadManager : public QQtWebAccessManager
@@ -18,15 +23,7 @@ public:
     explicit QQtHttpDownloadManager ( QObject* parent = nullptr );
     virtual ~QQtHttpDownloadManager() {}
 
-    void sendRequest ( QString strUrl ) {
-        QQtHttpDownloadWebWorkSession* session = new QQtHttpDownloadWebWorkSession ( this );
-        session->setWebAccessUrl ( strUrl );
-        session->setWebAccessSessionName ( QUuid::createUuid().toString() );
-        getWebAccessSessionManager()->addWebAccessSession ( session );
-        sendGetRequest ( session );
-        connect ( this, SIGNAL ( readyRead ( QQtWebAccessSession* ) ),
-                  this, SLOT ( replyReadyRead ( QQtWebAccessSession* ) ) );
-    }
+    void sendRequest ( QString strUrl, QString filename );
 signals:
 
 public slots:
