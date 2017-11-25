@@ -14,13 +14,12 @@ message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
     at $${QT_VERSION} $${SYSNAME} $${BUILD} \
     on $${QMAKE_HOST.os})
 
+#this configration need Qt Creator set default build directory
+#%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}")}
 contains(CONFIG, link_from_build) {
-    #this configration need Qt Creator set default build directory
-    #%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}")}
-    QQT_BUILD_OUT_PWD = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src/$${DESTDIR}
-    QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_BUILD_OUT_PWD}
+    QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/src/$${DESTDIR}
 } else {
-    QQT_LIB_PWD = $$PWD/../../sdk/lib
+    QQT_LIB_PWD = $${PWD}/../../$${QQT_STD_DIR}/lib
 }
 message (Link QQt from: $$QQT_LIB_PWD)
 
@@ -55,7 +54,7 @@ equals(QKIT_PRIVATE, macOS) {
     command += mkdir -p $$QQT_BUNDLE_VER_DIR $$CMD_SEP
     command += mkdir -p $$QQT_BUNDLE_INC_DIR $$CMD_SEP
     #copy lib
-    command += cp -rf $$QQT_LIB_PWD/$${MODULE_NAME}.framework/$${QQT_BUNDLE_VER_DIR}/* $$QQT_BUNDLE_VER_DIR $$CMD_SEP
+    command += cp -rf $${QQT_LIB_PWD}/$${MODULE_NAME}.framework/$${QQT_BUNDLE_VER_DIR}/* $$QQT_BUNDLE_VER_DIR $$CMD_SEP
     #link header current resources
     command += cd Versions $$CMD_SEP
     command += ln -sf $${QQT_MAJOR_VERSION} $${QQT_BUNDLE_CUR_LINK} $$CMD_SEP

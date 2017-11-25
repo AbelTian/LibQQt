@@ -134,7 +134,7 @@ defineTest(write_file) {
 defineReplace(create_dir_struct) {
     #if it's qt library, don't create
     command =
-    !equals(QQT_SDK_DIR , $$[QT_INSTALL_DATA]){
+    !equals(QQT_SDK_PWD , $$[QT_INSTALL_DATA]){
         !contains(QKIT_PRIVATE, macOS) {
             command += $$MK_DIR $$QQT_INC_DIR $$CMD_SEP
         }
@@ -241,8 +241,8 @@ contains(CONFIG, qqt_create_sdk){
 
     QQT_BUILD_DIR=$$OUT_PWD/bin
     #sdk path
-    QQT_SDK_DIR = $$PWD/../../sdk
-    message(QQt sdk install here:$${QQT_SDK_DIR})
+    QQT_SDK_PWD = $${PWD}/../../$${QQT_STD_DIR}
+    message(QQt sdk install here:$${QQT_SDK_PWD})
 
     QQT_INC_DIR = include/$${MODULE_NAME}
     QQT_LIB_DIR = lib
@@ -251,9 +251,9 @@ contains(CONFIG, qqt_create_sdk){
     QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${module_name}.pri
 
     post_link =
-    post_link += $$RM_DIR $$QQT_SDK_DIR $$CMD_SEP
-    post_link += $$MK_DIR $$QQT_SDK_DIR $$CMD_SEP
-    post_link += $$CD $$QQT_SDK_DIR $$CMD_SEP
+    post_link += $$RM_DIR $$QQT_SDK_PWD $$CMD_SEP
+    post_link += $$MK_DIR $$QQT_SDK_PWD $$CMD_SEP
+    post_link += $$CD $$QQT_SDK_PWD $$CMD_SEP
     post_link += $$create_dir_struct()
 
     contains(QKIT_PRIVATE, macOS) {
@@ -280,6 +280,6 @@ contains(CONFIG, install_to_qt_library){
     MODULE_NAME=QQt
     QQT_BUILD_DIR=$$OUT_PWD/bin
     #sdk path
-    QQT_SDK_DIR=$$[QT_INSTALL_DATA]
-    message(QQt sdk install here:$${QQT_SDK_DIR})
+    QQT_SDK_PWD=$$[QT_INSTALL_DATA]
+    message(QQt sdk install here:$${QQT_SDK_PWD})
 }

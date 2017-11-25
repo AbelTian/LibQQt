@@ -78,7 +78,7 @@ QMAKE_CXXFLAGS +=  $${CLFLAGS}
 #QMAKE_POST_LINK won't work until source changed
 #qmake pro pri prf change won't effect to QMAKE_POST_LINK
 #but I need it before I complete this pri.
-system("touch $${PWD}/widgets/qqtapplication.cpp")
+system("touch $${PWD}/frame/qqtapplication.cpp")
 #################################################################
 ##project Headers
 #################################################################
