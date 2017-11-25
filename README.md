@@ -15,16 +15,16 @@
     - 二维码生成器、识别器，校验码生成器
     - 九宫格技术展示图片
     - Html解析器
-    - 以及未列出等20余种自定义widget。
+    - 以及未列出的等20余种自定义widget。
 4. 有线和无线网络自动连接管理类  
 6. 解决Qt4.8.7在嵌入式屏幕上QGraphics系统不正常绘画的问题 
 7. QQt输入法
     - 重写了UI，适配多种屏幕
-8. Qt对象工厂，允许注册和查找和删除所有来自QObject的类。
+8. Qt对象工厂，允许注册、生成、查找和删除所有来自QObject以及QWidget的类。
 9. 嵌入式视频播放器，模拟端口实时预览器
 0. QQt打印机，支持打印pdf
 2. QQtWord，支持doc文档编写，输出pdf格式。
-4. QQt TreeView，添加Qt4内部没有TreeView
+4. QQtTreeView，添加Qt4内部没有TreeView
     - 包括QQtXmlTreeModel、QQtJsonTreeModel、QQtFileSystemTreeModel、QQtSqlTreeModel
 5. 支持工程的版本变更
     - 添加config.h.in支持
@@ -45,7 +45,9 @@
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
 1. 添加svg support widgets  
      - 比如 QQtSvgProgressbar
-     - QQtSvgCheckBox  
+     - QQtSvgCheckBox
+2. 添加QQtDictionary
+     - 解决C Plus Plus中没有字典类别的尴尬。    
 
 # Usage  
 

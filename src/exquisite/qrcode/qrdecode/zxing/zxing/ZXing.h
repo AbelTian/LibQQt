@@ -52,17 +52,23 @@ inline float nan() {return std::numeric_limits<float>::quiet_NaN();}
 //#include <cmath>
 
 #include <math.h>
-using namespace std;
 
 namespace zxing {
 inline bool isnan_z ( float v )
 {
     return isnan ( v );
 }
+
 inline bool isnan_z ( double v )
 {
-    return isnan ( v );
+    //std::? x
+    //:: y
+    return ( ( sizeof ( v ) == sizeof ( float ) ) ? isnanf ( v )
+             : ( sizeof ( v ) == sizeof ( double ) ) ? isnan ( v )
+             : __isnanl ( v ) );
+    //return isnan ( v );
 }
+
 inline float nan() {return std::numeric_limits<float>::quiet_NaN();}
 }
 
