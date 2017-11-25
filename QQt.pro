@@ -1,8 +1,7 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = src/qqt.pro \
-    test/qqtdicttest
+SUBDIRS = src/qqt.pro
 
 ##-----------------------------------------------------------------
 ##basic example
@@ -81,3 +80,4 @@ greaterThan(QT_MAJOR_VERSION, 4):SUBDIRS += examples/qqthttpdownload
 #SUBDIRS += test/svgtest
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
+#SUBDIRS += test/qqtdicttest

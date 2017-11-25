@@ -19,7 +19,7 @@ private Q_SLOTS:
     void testCase2();
 
 private:
-    QQtDict dict;
+    QQtDictNode dict;
 };
 
 QqtdicttestTest::QqtdicttestTest()

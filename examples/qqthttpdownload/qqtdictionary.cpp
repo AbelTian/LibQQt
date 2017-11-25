@@ -1,12 +1,12 @@
 #include "qqtdictionary.h"
 
-QQtDict::QQtDict ( QObject* parent ) :
+QQtDictNode::QQtDictNode ( QObject* parent ) :
     QObject ( parent )
 {
     m_type = DictMax;
 }
 
-bool QQtDict::isValue() const
+bool QQtDictNode::isValue() const
 {
     bool is = false;
 
@@ -16,89 +16,68 @@ bool QQtDict::isValue() const
     return is;
 }
 
-QQtDict::EDictType QQtDict::getType() const
+QQtDictNode::EDictType QQtDictNode::getType() const
 {
     return m_type;
 }
 
-void QQtDict::setType ( QQtDict::EDictType type )
+void QQtDictNode::setType ( QQtDictNode::EDictType type )
 {
     m_type = type;
 }
 
-void QQtDict::setValue ( QVariant& value )
+void QQtDictNode::setChild ( const QVariant& value )
 {
     m_type = DictValue;
     m_value = value;
 }
 
-void QQtDict::setValue ( QList<QQtDict>& list )
+void QQtDictNode::setChild ( const QList<QQtDictNode>& list )
 {
     m_type = DictList;
     m_list = list;
 }
 
-void QQtDict::setValue ( QMap<QString, QQtDict>& map )
+void QQtDictNode::setChild ( const QMap<QString, QQtDictNode>& map )
 {
     m_type = DictMap;
     m_map = map;
 }
 
-void QQtDict::setChild ( QList<QQtDict>& list )
+void QQtDictNode::appendChild ( const QString& value )
 {
-    setValue ( list );
+    appendChild ( QQtDictNode ( QVariant ( value ) ) );
 }
 
-void QQtDict::setChild ( QMap<QString, QQtDict>& map )
-{
-    setValue ( map );
-}
-
-void QQtDict::appendValue ( const QString& value )
-{
-    m_type = DictList;
-    m_list.push_back ( QQtDict ( QVariant ( value ) ) );
-}
-
-void QQtDict::appendValue ( const QQtDict& dict )
+void QQtDictNode::appendChild ( const QQtDictNode& dict )
 {
     m_type = DictList;
     m_list.append ( dict );
 }
 
-void QQtDict::appendChild ( const QQtDict& dict )
-{
-    appendValue ( dict );
-}
-
-void QQtDict::insertValue ( const QString& key, QQtDict& dict )
+void QQtDictNode::insertChild ( const QString& key, const QQtDictNode& dict )
 {
     m_type = DictMap;
     m_map.insert ( key, dict );
 }
 
-void QQtDict::insertChild ( const QString& key, QQtDict& dict )
+void QQtDictNode::insertChild ( int index, const QString& value )
 {
-    insertValue ( key, dict );
+    insertChild ( index, QQtDictNode ( QVariant ( value ) ) );
 }
 
-void QQtDict::insertValue ( int index, QQtDict& dict )
+void QQtDictNode::insertChild ( int index, const QQtDictNode& dict )
 {
     m_type = DictList;
     m_list.insert ( index, dict );
 }
 
-void QQtDict::appendChild ( const QString& value )
+void QQtDictNode::insertChild ( const QString& key, const QString& value )
 {
-    appendValue ( value );
+    insertChild ( key, QQtDictNode ( QVariant ( value ) ) );
 }
 
-void QQtDict::insertChild ( int index, QQtDict& dict )
-{
-    insertValue ( index, dict );
-}
-
-int QQtDict::count() const
+int QQtDictNode::count() const
 {
     int cnt = -1;
 
@@ -112,7 +91,7 @@ int QQtDict::count() const
     return cnt;
 }
 
-bool QQtDict::isNull() const
+bool QQtDictNode::isNull() const
 {
     if ( m_type == DictMax )
         return true;
@@ -120,11 +99,11 @@ bool QQtDict::isNull() const
     return false;
 }
 
-bool QQtDict::isValid() const
+bool QQtDictNode::isValid() const
 {
     return isNull();
 }
-bool QQtDict::isEmpty() const
+bool QQtDictNode::isEmpty() const
 {
     bool isEmpty = true;
 
@@ -156,179 +135,137 @@ bool QQtDict::isEmpty() const
 }
 
 
-bool QQtDict::isList() const
+bool QQtDictNode::isList() const
 {
     bool is = false;
-
-    if ( !m_type == DictList )
-        is = true;
-
-    return is;
-}
-
-bool QQtDict::isMap() const
-{
-    bool is = false;
-
-    if ( !m_type == DictMap )
-        is = true;
-
-    return is;
-
-}
-
-QString& QQtDict::getName() const
-{
-    return ( QString& ) m_name;
-}
-
-bool QQtDict::hasKey ( const QString& key ) const
-{
-    bool has = false;
-
-    if ( m_type == DictMap )
-        if ( m_map.contains ( key ) )
-            has = true;
-
-    return has;
-}
-
-bool QQtDict::hasKey ( const QQtDict& value ) const
-{
-    bool has = false;
 
     if ( m_type == DictList )
-        if ( m_list.contains ( value ) )
-            has = true;
+        is = true;
+
+    return is;
+}
+
+bool QQtDictNode::isMap() const
+{
+    bool is = false;
+
+    if ( m_type == DictMap )
+        is = true;
+
+    return is;
+
+}
+
+bool QQtDictNode::hasChild ( const QString& key ) const
+{
+    bool has = false;
+
+    if ( m_map.contains ( key ) )
+        has = true;
 
     return has;
 }
 
-bool QQtDict::hasChild ( const QString& key ) const
+bool QQtDictNode::hasChild ( const QQtDictNode& value ) const
 {
-    return hasKey ( key );
+    bool has = false;
+
+    if ( m_list.contains ( value ) )
+        has = true;
+
+    return has;
 }
 
-bool QQtDict::hasChild ( const QQtDict& value ) const
+void QQtDictNode::modValue ( const QVariant& value )
 {
-    return hasKey ( value );
+    m_type = DictValue;
+    m_value = value;
 }
 
-void QQtDict::modValue ( QVariant& value )
+void QQtDictNode::modChild ( int index, const QQtDictNode& value )
 {
-    if ( DictValue == m_type )
-    {
-        m_value = value;
-    }
+    m_type = DictList;
+    m_list[index] = value;
 }
 
-void QQtDict::modValue ( int index, QQtDict& value )
+void QQtDictNode::modChild ( QString key, const QQtDictNode& value )
 {
-    if ( DictList == m_type )
-    {
-        m_list[index] = value;
-    }
+    m_type = DictMap;
+    m_map[key] = value;
 }
 
-void QQtDict::modValue ( QString key, QQtDict& value )
+void QQtDictNode::clear()
 {
-    if ( DictMap == m_type )
-    {
-        m_map[key] = value;
-    }
+    m_value.clear();
+    m_list.clear();
+    m_map.clear();
 }
 
-void QQtDict::modChild ( int index, QQtDict& value )
+void QQtDictNode::remove ( int index )
 {
-    modValue ( index, value );
+    m_list.removeAt ( index );
 }
 
-void QQtDict::modChild ( QString key, QQtDict& value )
+void QQtDictNode::remove ( const QString& key )
 {
-    modValue ( key, value );
+    m_map.remove ( key );
 }
 
-void QQtDict::clear()
-{
-    if ( DictValue == m_type )
-    {
-        m_value.clear();
-    }
-    else if ( DictList == m_type )
-    {
-        m_list.clear();
-    }
-    else if ( DictMap == m_type )
-    {
-        m_map.clear();
-    }
-}
-
-void QQtDict::remove ( int index )
-{
-    if ( DictList == m_type )
-    {
-        m_list.removeAt ( index );
-    }
-}
-
-void QQtDict::remove ( const QString& key )
-{
-    if ( DictMap == m_type )
-    {
-        m_map.remove ( key );
-    }
-}
-
-QQtDict::QQtDict ( const QQtDict& other, QObject* parent ) :
+QQtDictNode::QQtDictNode ( const QQtDictNode& other, QObject* parent ) :
     QObject ( parent )
 {
     *this = other;
 }
 
-QQtDict::QQtDict ( const QString name, QQtDict::EDictType type, QObject* parent ) :
-    QObject ( parent )
-{
-    m_name = name;
-    m_type = type;
-}
-
-QQtDict::QQtDict ( const QQtDict::EDictType type, QObject* parent ) :
+QQtDictNode::QQtDictNode ( const QQtDictNode::EDictType type, QObject* parent ) :
     QObject ( parent )
 {
     m_type = type;
 }
 
-QQtDict::QQtDict ( const QVariant& value, QObject* parent ) :
+const QQtDictNode& QQtDictNode::operator[] ( const QString& key ) const
+{
+    return m_map[key];
+}
+
+const QQtDictNode& QQtDictNode::operator[] ( int index ) const
+{
+    return m_list[index];
+}
+
+QQtDictNode::QQtDictNode ( const QVariant& value, QObject* parent ) :
     QObject ( parent )
 {
-    m_value = value;
-    m_type = DictValue;
+    *this = value;
 }
 
-QQtDict& QQtDict::operator [] ( int index )
+QQtDictNode& QQtDictNode::operator [] ( int index )
 {
-    return ( QQtDict& ) m_list.operator [] ( index );
+    m_type = DictList;
+    return ( QQtDictNode& ) m_list.operator [] ( index );
 }
 
-QQtDict& QQtDict::operator [] ( QString key )
+QQtDictNode& QQtDictNode::operator [] ( const QString& key )
 {
+    m_type = DictMap;
     return m_map.operator [] ( key );
 }
 
-QQtDict& QQtDict::operator = ( const QMap<QString, QQtDict>& map )
+QQtDictNode& QQtDictNode::operator = ( const QMap<QString, QQtDictNode>& map )
 {
+    m_type = DictMap;
     m_map = map;
     return *this;
 }
 
-QQtDict& QQtDict::operator = ( const QList<QQtDict>& list )
+QQtDictNode& QQtDictNode::operator = ( const QList<QQtDictNode>& list )
 {
+    m_type = DictList;
     m_list = list;
     return *this;
 }
 
-QQtDict& QQtDict::operator = ( const QQtDict& other )
+QQtDictNode& QQtDictNode::operator = ( const QQtDictNode& other )
 {
     EDictType type = other.getType();
 
@@ -352,21 +289,20 @@ QQtDict& QQtDict::operator = ( const QQtDict& other )
         break;
     }
 
-    m_name = other.getName();
     m_type = type;
     return *this;
 }
 
-QQtDict& QQtDict::operator = ( const QVariant& value )
+QQtDictNode& QQtDictNode::operator = ( const QVariant& value )
 {
+    m_type = DictValue;
     m_value = value;
     return *this;
 }
 
-bool QQtDict::operator == ( const QQtDict& other ) const
+bool QQtDictNode::operator == ( const QQtDictNode& other ) const
 {
     if ( m_type == other.getType() &&
-         other.getName() == m_name &&
          other.getList() == m_list &&
          other.getMap() == m_map &&
          other.getValue() == m_value )
@@ -375,51 +311,41 @@ bool QQtDict::operator == ( const QQtDict& other ) const
     return false;
 }
 
-QMap<QString, QQtDict>& QQtDict::getMap() const
+QMap<QString, QQtDictNode>& QQtDictNode::getMap() const
 {
-    return ( QMap<QString, QQtDict>& ) m_map;
+    return ( QMap<QString, QQtDictNode>& ) m_map;
 }
 
-QList<QQtDict>& QQtDict::getList() const
+QList<QQtDictNode>& QQtDictNode::getList() const
 {
-    return ( QList<QQtDict>& ) m_list;
+    return ( QList<QQtDictNode>& ) m_list;
 }
 
-QVariant& QQtDict::getValue() const
+QVariant& QQtDictNode::getValue() const
 {
     return ( QVariant& ) m_value;
 }
 
-QQtDict& QQtDict::getValue ( int index ) const
-{
-    return ( QQtDict& ) m_list[index];
-}
-
-QQtDict& QQtDict::getValue ( const QString& key )
-{
-    return m_map[key];
-}
-
-QQtDict& QQtDict::getChild ( int index )
+QQtDictNode& QQtDictNode::getChild ( int index )
 {
     return m_list[index];
 }
 
-QQtDict& QQtDict::getChild ( QString key )
+QQtDictNode& QQtDictNode::getChild ( const QString& key )
 {
     return m_map[key];
 }
 
 
-QDebug operator<< ( QDebug dbg, const QQtDict& d )
+
+QDebug operator<< ( QDebug dbg, const QQtDictNode& d )
 {
-    dbg.nospace() << "{" <<
-                  "\n Type:" << d.getType() <<
-                  "\n Count:" << d.count() <<
-                  "\n Name:" << d.getName() <<
-                  "\n Value:" << d.getValue() <<
-                  "\n List:" << d.getList() <<
-                  "\n Map:" << d.getMap() <<
-                  "\n}";
+    dbg.nospace() << "\n{" <<
+                  " Type:" << d.getType() <<
+                  " Count:" << d.count() <<
+                  " Value:" << d.getValue() <<
+                  " List:" << d.getList() <<
+                  " Map:" << d.getMap() <<
+                  "}";
     return dbg.space();
 }
