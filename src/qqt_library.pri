@@ -20,7 +20,7 @@ contains(CONFIG, link_from_build) {
     QQT_BUILD_OUT_PWD = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}/src/$${DESTDIR}
     QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_BUILD_OUT_PWD}
 } else {
-    QQT_LIB_PWD = $$PWD/../sdk/lib
+    QQT_LIB_PWD = $$PWD/../../sdk/lib
 }
 message (Link QQt from: $$QQT_LIB_PWD)
 

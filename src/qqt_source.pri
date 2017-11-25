@@ -38,12 +38,11 @@ contains (QKIT_PRIVATE, WIN32||WIN64) {
 #core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
-    $$PWD/core/qqtanimation.cpp \
-    $$PWD/core/qqtobjectfactory.cpp \
-    $$PWD/widgets/qqtapplication.cpp
+    $$PWD/core/qqtdictionary.cpp \
+    $$PWD/core/qqtobjectfactory.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
-    $$PWD/core/qqtanimation.h \
+    $$PWD/core/qqtdictionary.h \
     $$PWD/core/qqtobjectfactory.h
 
 #sql
@@ -112,7 +111,6 @@ HEADERS += \
     $$PWD/widgets/qqttreewidget.h \
     $$PWD/widgets/qqtwidget.h \
     $$PWD/widgets/qqtwidgets.h \
-    $$PWD/widgets/qqtapplication.h \
     $$PWD/widgets/qqtlabel.h
 FORMS += \
     $$PWD/widgets/qqtprogressbar.ui \
@@ -169,6 +167,49 @@ contains (DEFINES, __PRINTSUPPORT__) {
         $$PWD/frame/qqtword.h
 
 }
+
+
+#dmmu preview
+#arm mips
+#TODO: +wince +android +ios +macOS +win +linux
+equals(QKIT_PRIVATE, EMBEDDED) {
+    SOURCES += $$PWD/frame/dmmu/dmmu.c
+    HEADERS += $$PWD/frame/dmmu/dmmu.h \
+                $$PWD/frame/dmmu/jz_cim.h \
+                $$PWD/frame/dmmu/graphics.h \
+                $$PWD/frame/dmmu/hal.h
+    SOURCES += $$PWD/frame/qqtpreviewwidget.cpp
+    HEADERS += $$PWD/frame/qqtpreviewwidget.h
+    FORMS += $$PWD/frame/qqtpreviewwidget.ui
+}
+
+#frame
+SOURCES += \
+    $$PWD/frame/qqtanimation.cpp \
+    $$PWD/frame/qqtapplication.cpp \
+    $$PWD/frame/qqtwifidbwidget.cpp \
+    $$PWD/frame/qqtprogressdialog.cpp \
+    $$PWD/frame/qqtpassworddialog.cpp \
+    $$PWD/frame/qqtframe.cpp \
+    $$PWD/frame/qqtdialog.cpp \
+    $$PWD/frame/qqtmsgbox.cpp \
+    $$PWD/frame/qqtinput.cpp
+HEADERS += \
+    $$PWD/frame/qqtanimation.h \
+    $$PWD/frame/qqtapplication.h \
+    $$PWD/frame/qqtwifidbwidget.h \
+    $$PWD/frame/qqtprogressdialog.h \
+    $$PWD/frame/qqtpassworddialog.h \
+    $$PWD/frame/qqtframe.h \
+    $$PWD/frame/qqtdialog.h \
+    $$PWD/frame/qqtmsgbox.h \
+    $$PWD/frame/qqtinput.h
+FORMS += \
+    $$PWD/frame/qqtprogressdialog.ui \
+    $$PWD/frame/qqtpassworddialog.ui \
+    $$PWD/frame/qqtinput.ui \
+    $$PWD/frame/qqtmsgbox.ui
+
 
 #network
 SOURCES += \
@@ -270,46 +311,6 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
         $$PWD/network/qqtwebsocketserver.h \
         $$PWD/network/qqtwebsocketprotocol.h
 }
-
-
-#dmmu preview
-#arm mips
-#TODO: +wince +android +ios +macOS +win +linux
-equals(QKIT_PRIVATE, EMBEDDED) {
-    SOURCES += $$PWD/frame/dmmu/dmmu.c
-    HEADERS += $$PWD/frame/dmmu/dmmu.h \
-                $$PWD/frame/dmmu/jz_cim.h \
-                $$PWD/frame/dmmu/graphics.h \
-                $$PWD/frame/dmmu/hal.h
-    SOURCES += $$PWD/frame/qqtpreviewwidget.cpp
-    HEADERS += $$PWD/frame/qqtpreviewwidget.h
-    FORMS += $$PWD/frame/qqtpreviewwidget.ui
-}
-
-#frame
-SOURCES += \
-    $$PWD/frame/qqtwifidbwidget.cpp
-HEADERS += \
-    $$PWD/frame/qqtwifidbwidget.h
-SOURCES += \
-    $$PWD/frame/qqtprogressdialog.cpp \
-    $$PWD/frame/qqtpassworddialog.cpp \
-    $$PWD/frame/qqtframe.cpp \
-    $$PWD/frame/qqtdialog.cpp \
-    $$PWD/frame/qqtmsgbox.cpp \
-    $$PWD/frame/qqtinput.cpp
-HEADERS += \
-    $$PWD/frame/qqtprogressdialog.h \
-    $$PWD/frame/qqtpassworddialog.h \
-    $$PWD/frame/qqtframe.h \
-    $$PWD/frame/qqtdialog.h \
-    $$PWD/frame/qqtmsgbox.h \
-    $$PWD/frame/qqtinput.h
-FORMS += \
-    $$PWD/frame/qqtprogressdialog.ui \
-    $$PWD/frame/qqtpassworddialog.ui \
-    $$PWD/frame/qqtinput.ui \
-    $$PWD/frame/qqtmsgbox.ui
 
 
 contains (DEFINES, __EXQUISITE__) {

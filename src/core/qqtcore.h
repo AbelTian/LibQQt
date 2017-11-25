@@ -15,8 +15,8 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSslError>
-#include <qqt-local.h>
 #include "qglobal.h"
+#include <qqt-local.h>
 
 #ifdef __cplusplus
 extern "C" {

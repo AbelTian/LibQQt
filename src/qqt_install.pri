@@ -241,7 +241,7 @@ contains(CONFIG, qqt_create_sdk){
 
     QQT_BUILD_DIR=$$OUT_PWD/bin
     #sdk path
-    QQT_SDK_DIR = $$PWD/../sdk
+    QQT_SDK_DIR = $$PWD/../../sdk
     message(QQt sdk install here:$${QQT_SDK_DIR})
 
     QQT_INC_DIR = include/$${MODULE_NAME}

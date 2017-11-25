@@ -27,11 +27,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         tst_qqtdicttesttest.cpp 
 
-SOURCES += $$PWD/../../examples/qqthttpdownload/qqtdictionary.cpp
-HEADERS += $$PWD/../../examples/qqthttpdownload/qqtdictionary.h
-INCLUDEPATH += $$PWD/../../examples/qqthttpdownload
-
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
-
 
 include (../../examples/qqtframe2/link_qqt_library.pri)
