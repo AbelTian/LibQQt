@@ -24,9 +24,10 @@ SUBDIRS += examples/qqtchartexample
 
 #-----------------------------------------------------------------
 #need webaccessmanager - WebSupport
+#need QSsl
 #need GumoQuery
 #-----------------------------------------------------------------
-SUBDIRS += examples/QtSdkManager
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
 greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #-----------------------------------------------------------------
 #some test project

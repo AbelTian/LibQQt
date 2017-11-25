@@ -125,7 +125,6 @@ protected:
 
 private:
     QList<QQtWebAccessSession*> m_listWebAccessSession;
-    friend class QQtWebAccessManager;
 } ;
 
 
@@ -187,8 +186,6 @@ private slots:
 
 private:
     QQtWebAccessSessionManager* manager;
-
-    friend class QQtWebAccessSessionManager;
 };
 
 #endif // QQTWEBWORKCLIENT_H

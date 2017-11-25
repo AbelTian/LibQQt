@@ -187,8 +187,15 @@ DEFINES += __WEBACCESSSUPPORT__
 lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
 contains (DEFINES, __WEBACCESSSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
+}
+DEFINES += __WEBKITSUPPORT__
+contains (DEFINES, __WEBKITSUPPORT__) {
     #TODO: QT += webkit
 }
+DEFINES += __WEBENGINESUPPORT__
+contains (DEFINES, __WEBENGINESUPPORT__) {
+}
+
 #Multi New Protocol 全双工 QWebSocket
 #if you use QWebSocketSupport , open this annotation
 DEFINES += __WEBSOCKETSUPPORT__
