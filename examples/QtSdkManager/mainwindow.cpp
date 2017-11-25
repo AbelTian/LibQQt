@@ -4,6 +4,7 @@
 #include "qqt-qt.h"
 #include "qqtcore.h"
 #include "qqtwidgets.h"
+#include "qqtqtiowebpageparser.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
     //setFixedSize(1024, 600);
     //moveCenter(this);
+    m_webpageparser = new QQtQtIOWebPageParser ( this );
+    connect ( m_webpageparser, SIGNAL ( replyFinished ( QQtWebAccessSession* ) ),
+              this, SLOT ( replyFinished ( QQtWebAccessSession* ) ) );
 }
 
 MainWindow::~MainWindow()

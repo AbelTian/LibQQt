@@ -64,7 +64,7 @@ void QQt4FrameMsgHandler ( QtMsgType type, const char* msg )
     QQtFrameMsgHandler ( type, msg );
 }
 
-
+#if QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
 void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, const QString& content )
 {
 
@@ -76,4 +76,5 @@ void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, co
 //              content.toLocal8Bit().constData() );
     QQtFrameMsgHandler ( type, content.toLocal8Bit().constData() );
 }
+#endif
 

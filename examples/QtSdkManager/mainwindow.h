@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <qqtqtiowebpageparser.h>
 
 namespace Ui
 {
@@ -18,6 +19,7 @@ public:
 
 private:
     Ui::MainWindow* ui;
+    QQtQtIOWebPageParser* m_webpageparser;
 };
 
 #endif // MAINWINDOW_H

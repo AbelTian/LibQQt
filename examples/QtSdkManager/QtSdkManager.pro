@@ -14,7 +14,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 QT += core gui network sql xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 #this name must be equals to pro name? no, this must place before qqt_library.pri
@@ -30,10 +30,19 @@ INCLUDEPATH +=  $$PWD
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    httpdownloaddialog.cpp \
+    qqthttpdownloadmanager.cpp \
+    qqtqtiofilezise.cpp \
+    qqtqtiowebpageparser.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    httpdownloaddialog.h \
+    qqthttpdownloadmanager.h \
+    qqtqtiofilezise.h \
+    qqtqtiowebpageparser.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    httpdownloaddialog.ui

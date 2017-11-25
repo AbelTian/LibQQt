@@ -217,7 +217,7 @@ DEFINES += __CUSTOMPLOT__
 DEFINES += __MATHSUPPORT__
 
 ##################QQtLogFile Module###############################
-DEFINES += __QQTLOGSUPPORT__
+DEFINES += __QQTLOGFILESUPPORT__
 
 ##################################################################
 ##library

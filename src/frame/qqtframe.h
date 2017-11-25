@@ -171,7 +171,8 @@ extern QString gPassword;
 #endif  /* __cplusplus */
 
 void QQt4FrameMsgHandler ( QtMsgType type, const char* msg );
+#if QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
 void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, const QString& content );
-
+#endif
 
 #endif // QQTFRAMEDEFINE_H

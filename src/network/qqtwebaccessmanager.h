@@ -53,7 +53,7 @@ private:
     QNetworkReply* m_pNetworkReply;
     //call time out
     QTimer* m_pTimer;
-    //calling url [user set]
+    //calling url [user set] to make request
     QString m_strUrl;
     /**
      * @brief m_sessionName be a uuid [user set or auto]

@@ -149,7 +149,7 @@ void QQtWebAccessManager::localReplyTimeOut()
         return;
 
     emit replyTimeOut ( s0 ); //请求失败
-
+    s0->getWebAccessReply()->abort();
     s0->getWebAccessReply()->deleteLater();
     manager->removeWebAccessSession ( s0 );
 }

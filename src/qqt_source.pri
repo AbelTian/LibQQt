@@ -51,6 +51,7 @@ HEADERS += $$PWD/sql/qqtsql.h
 
 #gui
 SOURCES += \
+    $$PWD/gui/qqtdicttreemodel.cpp \
     $$PWD/gui/qqtftptreemodel.cpp \
     $$PWD/gui/qqtsqltreemodel.cpp \
     $$PWD/gui/qqttablemodel.cpp \
@@ -60,6 +61,7 @@ SOURCES += \
     $$PWD/gui/qqtxmltreemodel.cpp
 
 HEADERS += \
+    $$PWD/gui/qqtdicttreemodel.h \
     $$PWD/gui/qqtftptreemodel.h \
     $$PWD/gui/qqtsqltreemodel.h \
     $$PWD/gui/qqttablemodel.h \
