@@ -96,6 +96,10 @@ public:
      */
     QQtWebAccessSession* newWebAccessSession();
 
+    int getSessionCount() const {
+        return m_listWebAccessSession.count();
+    }
+
     QNetworkReply* getReplyHandlerByUrl ( QString& strUrl );
     QString getSessionNameByUrl ( QString& strUrl );
     QQtWebAccessSession* getSessionByUrl ( QString& strUrl );

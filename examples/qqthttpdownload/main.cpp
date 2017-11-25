@@ -8,10 +8,14 @@
 #include "qqtqtiowebpageparser.h"
 #include "qqtdictionary.h"
 
-#define plinen() pline() << "\n"
 int main ( int argc, char* argv[] )
 {
     QQtApplication a ( argc, argv );
+
+    QString tt;
+    tt = QString ( "%1" ).sprintf ( "%4d", 13 );//"  13"
+    tt = QString ( "%1" ).arg ( 13, 4, 10 );
+    pline() << tt;
 
     /*
     QQtWidgetFactory::registerObject<QPushButton>();
@@ -24,26 +28,20 @@ int main ( int argc, char* argv[] )
     QQtObjectParcel::registerObject ( obj );
     */
 
-    //QQtQtIOWebPageParser webparser;
-    //webparser.startNewParse ( );
-
-    //MainWindow w;
-    //w.show();
-
     QQtDictNode d0;
     d0["cc"] = "dd";
-    qDebug() << d0["cc"].getValue();
+    pline() << d0["cc"].getValue();
 
     QQtDictNode d1;
     QQtDictNode d2 ( QVariant ( "CCCC" ) );
     d1.appendChild ( d2 );
-    qDebug() << d1[0].getValue();
+    pline() << d1[0].getValue();
     d1[0] = "ff";
-    qDebug() << d1[0].getValue();
+    pline() << d1[0].getValue();
 
     QQtDictNode d3;
     d3["cc"]["dd"] = "ee";
-    qDebug() << d3["cc"]["dd"].getValue().toString();
+    pline() << d3["cc"]["dd"].getValue().toString();
 
     QQtDictNode d4;
 
@@ -53,11 +51,11 @@ int main ( int argc, char* argv[] )
         d4.appendChild ( d );
     }
 
-    qDebug() << d4.count();
+    pline() << d4.count();
 
     for ( int i = 0; i < d4.count(); i++ )
     {
-        qDebug() << d4[i].getValue().toString();
+        pline() << d4[i].getValue().toString();
     }
 
     QQtDictNode d5;
@@ -95,11 +93,11 @@ int main ( int argc, char* argv[] )
 
     for ( int i = 0; i < d5["5.7"]["5.7.4"][0].count(); i++ )
     {
-        plinen() << d5["5.7"]["5.7.4"][0][i].getValue().toString();
+        pline() << d5["5.7"]["5.7.4"][0][i].getValue().toString();
     }
 
     QQtDictNode node = d5;
-    plinen() << node["5.7"]["5.7.4"][0][0].getValue().toString();
+    pline() << node["5.7"]["5.7.4"][0][0].getValue().toString();
 
     /*在这里有list操作，前边"5.7"的map就没有用了*/
     /*但是再过去做过的list类型的操作都会被保留，也就是说中间出现过概念错误，没问题还保留着*/
@@ -110,5 +108,17 @@ int main ( int argc, char* argv[] )
         pline() << d5["5.7"][i].getValue().toString();
     }
 
-    return 0;//a.exec();
+    char* cc = NULL;
+    char* bb = "ddddd";
+
+    QString ccq = QString ( "%1%2" ).arg ( cc ).arg ( bb );
+    pline() << ccq;
+
+    QQtQtIOWebPageParser webparser;
+    webparser.startNewParse ( );
+
+    MainWindow w;
+    w.show();
+
+    return a.exec();
 }

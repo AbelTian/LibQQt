@@ -14,6 +14,11 @@ QQtQtIOWebPageParser::QQtQtIOWebPageParser ( QObject* parent ) : QQtWebAccessMan
     m_baseUrl = "http://download.qt.io/official_releases/qt/";
     connect ( this, SIGNAL ( replyFinished (  QQtWebAccessSession* ) ),
               this, SLOT ( replyFinished ( QQtWebAccessSession* ) ) );
+    m_timer = new QTimer ( this );
+    m_timer->setInterval ( 2000 );
+    m_timer->setSingleShot ( false );
+    connect ( m_timer, SIGNAL ( timeout() ), this, SLOT ( detecteTimeout() ) );
+    m_time = QTime::currentTime();
 }
 
 void QQtQtIOWebPageParser::startNewParse ( QString url1, QString url2 )
@@ -21,6 +26,8 @@ void QQtQtIOWebPageParser::startNewParse ( QString url1, QString url2 )
     if ( url1 == "" && url2 == "" )
     {
         sdkGroup.clear();
+        m_time = QTime::currentTime();
+        m_timer->start();
     }
 
     QString strUrl = QString ( "%1%2%3" ).arg ( m_baseUrl ).arg ( url1 ).arg ( url2 );
@@ -161,8 +168,15 @@ void QQtQtIOWebPageParser::replyFinished ( QQtWebAccessSession* s0 )
                     if ( i + 3 < itemList.count() )
                         node.detail = itemList[i + 3];
 
-                    qDebug() << node.name << node.time << node.size << node.detail;
+                    pline() << node.name << node.time << node.size << node.detail;
                     group.list.push_back ( node );
+
+                    //QQtDict Code
+                    m_sdkGroup[url1][url2][0] = itemList[i + 0];
+                    m_sdkGroup[url1][url2][1] = itemList[i + 1];
+                    m_sdkGroup[url1][url2][2] = itemList[i + 2];
+                    m_sdkGroup[url1][url2][3] = itemList[i + 3];
+                    //OK Success
                 }
             }
         }
@@ -175,5 +189,23 @@ void QQtQtIOWebPageParser::replyFinished ( QQtWebAccessSession* s0 )
     {
         sdkGroup.push_back ( group );
         pline() << sdkGroup.size();
+    }
+}
+
+void QQtQtIOWebPageParser::detecteTimeout()
+{
+    if ( this->getWebAccessSessionManager()->getSessionCount() == 0 )
+    {
+        QTime curTime = QTime::currentTime();
+
+        if ( qAbs<int> ( curTime.secsTo ( m_time ) ) > 10 )
+            emit fetchTimeout();
+        else
+            emit fetchFinish();
+
+        m_timer->stop();
+        pline() << qAbs ( curTime.secsTo ( m_time ) );
+        pline() << curTime.secsTo ( m_time );
+        pline() << QString ( __FILE__ ).split ( "/" ).last();
     }
 }

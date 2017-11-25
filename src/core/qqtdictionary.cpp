@@ -223,7 +223,7 @@ QQtDictNode::QQtDictNode ( const QQtDictNode::EDictType type, QObject* parent ) 
     m_type = type;
 }
 
-const QQtDictNode& QQtDictNode::operator[] ( const QString& key ) const
+const QQtDictNode QQtDictNode::operator[] ( const QString& key ) const
 {
     return m_map[key];
 }
@@ -242,6 +242,20 @@ QQtDictNode::QQtDictNode ( const QVariant& value, QObject* parent ) :
 QQtDictNode& QQtDictNode::operator [] ( int index )
 {
     m_type = DictList;
+
+    /*如果index>count，补全*/
+    //pline() << m_list.count() << index;
+
+    if ( m_list.count() < index + 1 )
+    {
+        int cnt = m_list.count();
+
+        /*相差的数量*///count -> index+1 = index+1 - count
+
+        for ( int i = 0; i < index + 1 - cnt; i++ )
+            m_list.append ( QQtDictNode() );
+    }
+
     return ( QQtDictNode& ) m_list.operator [] ( index );
 }
 

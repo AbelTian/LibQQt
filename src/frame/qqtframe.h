@@ -170,7 +170,8 @@ extern QString gPassword;
 }
 #endif  /* __cplusplus */
 
-void qqtFrameMsgHandler(QtMsgType type, const char* msg);
+void QQt4FrameMsgHandler ( QtMsgType type, const char* msg );
+void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, const QString& content );
 
 
 #endif // QQTFRAMEDEFINE_H

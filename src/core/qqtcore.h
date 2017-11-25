@@ -93,10 +93,11 @@ QQTSHARED_EXPORT void QQtSleep ( int millsecond );
 #endif  /* __cplusplus */
 
 
-#define pline() qDebug() << __FILE__ << __LINE__ << __func__
-#define perr(var, cond) if(var == cond) pline() << hex << cond
+#define pline() qDebug() << __FILE__ << QString("%1").arg(__LINE__, 3, 10) << __func__
+#define perr(req, rsl) if(req == rsl) pline() << hex << rsl
 #define ptime() pline() << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss zzz")
-
+//-----------------------
+#define packline() pline() << qDebug().nospace()
 
 QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint8 r );
 

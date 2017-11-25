@@ -123,7 +123,7 @@ public:
     QQtDictNode& operator [] ( int index );
     const QQtDictNode& operator[] ( int index ) const;
     QQtDictNode& operator [] ( const QString& key );
-    const QQtDictNode& operator[] ( const QString& key ) const;
+    const QQtDictNode operator[] ( const QString& key ) const;
 
     QQtDictNode& operator = ( const QMap<QString, QQtDictNode>& map );
     QQtDictNode& operator = ( const QList<QQtDictNode>& list );

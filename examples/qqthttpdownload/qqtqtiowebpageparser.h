@@ -3,7 +3,9 @@
 
 #include <QObject>
 #include <qqtwebaccessmanager.h>
-#include <QDomDocument>
+#include <qqtdictionary.h>
+#include <QTimer>
+#include <QTime>
 
 class QQtQtIOWebUrlSession: public QQtWebAccessSession
 {
@@ -46,13 +48,22 @@ public:
     QString getBaseUrl() { return m_baseUrl; }
     QList<TSdkGroup>& getSdkGroup() { return sdkGroup; }
 signals:
-
+    void fetchFinish();
+    //timeout
+    void fetchTimeout();
 public slots:
 private slots:
     void replyFinished ( QQtWebAccessSession* session );
+    void detecteTimeout();
 private:
     QString m_baseUrl;
+    /*过去有用这种自定义的，有用xml的，有用json的，留作纪念*/
     QList<TSdkGroup> sdkGroup;
+    /*现在用QQtDict*/
+    QQtDictNode m_sdkGroup;
+    /*格式：["5.7"]["5.7.3"][0-3]*/
+    QTimer* m_timer;
+    QTime m_time;
 };
 
 #endif // QQTQTIOWEBPROTOCOL_H

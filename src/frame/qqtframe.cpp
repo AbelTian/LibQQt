@@ -1,54 +1,79 @@
 #include "qqtframe.h"
+#include <QDir>
 
 QSqlDatabase managerDB;
 QString gUserName;
 QString gPassword;
 
-void qqtFrameMsgHandler(QtMsgType type, const char* msg)
+void QQtFrameMsgHandler ( QtMsgType type, const char* msg )
 {
+    if ( !QDir ( LOG_PATH ).exists() )
+        QDir().mkpath ( LOG_PATH );
+
     static QMutex mutex;
+
     mutex.lock();
 
-    QString text;
+    QString level;
 
-    switch (type)
+    switch ( type )
     {
     case QtDebugMsg:
-        text = QString("Debug");
+        level = QString ( "Debug" );
         break;
 
     case QtWarningMsg:
-        text = QString("Warning");
+        level = QString ( "Warning" );
         break;
 
     case QtCriticalMsg:
-        text = QString("Critical");
+        level = QString ( "Critical" );
         break;
 
     case QtFatalMsg:
-        text = QString("Fatal");
+        level = QString ( "Fatal" );
     }
 
-    QString current_date_time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ddd");
-    QString message = QString("%1 %2 %3").arg(current_date_time).arg(text).arg(msg);
-    QString current_date = QDateTime::currentDateTime().toString("yyyy-MM-dd");
+    QString current_date_time = QDateTime::currentDateTime().toString ( "yyyy-MM-dd hh:mm:ss ddd" );
+    QString message = QString ( "%1 %2 %3" ).arg ( current_date_time ).arg ( level ).arg ( msg );
+
+    QString current_date = QDateTime::currentDateTime().toString ( "yyyy-MM-dd" );
 
     //check file num when start stay 30 days
     //check file size, overtop max size out to new, one day one file
-    QString filename = QString("./log/log-%1.txt").arg(current_date);
+    QString filename = QString ( "%1/log-%2.txt" ).arg ( LOG_PATH ).arg ( current_date );
 
 #ifdef __EMBEDDED_LINUX__
-    system(QString("touch %1").arg(filename).toLatin1().data());
+    system ( QString ( "touch %1" ).arg ( filename ).toLatin1().data() );
 #endif
 
-    QFile file(filename);
-    file.open(QIODevice::WriteOnly | QIODevice::Append);
-    QTextStream text_stream(&file);
+    QFile logfile ( filename );
+    logfile.open ( QIODevice::WriteOnly | QIODevice::Append );
+    QTextStream text_stream ( &logfile );
     text_stream << message << "\r\n";
-    file.flush();
-    file.close();
+    logfile.flush();
+    logfile.close();
 
     mutex.unlock();
 
-    fprintf(stderr, "%s\n", msg);
+    fprintf ( stderr, "%s\n", msg );
 }
+
+void QQt4FrameMsgHandler ( QtMsgType type, const char* msg )
+{
+    QQtFrameMsgHandler ( type, msg );
+}
+
+
+void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, const QString& content )
+{
+
+//    fprintf ( stderr, "%d %s %s %d %s %s\n", type,
+//              context.category,
+//              context.file,
+//              context.line,
+//              context.function,
+//              content.toLocal8Bit().constData() );
+    QQtFrameMsgHandler ( type, content.toLocal8Bit().constData() );
+}
+

@@ -35,6 +35,14 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QSettings::setPath ( QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH );
     QSettings::setPath ( QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH );
 
+#ifdef __QQTLOGSUPPORT__
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+    qInstallMsgHandler ( QQt4FrameMsgHandler );
+#else
+    qInstallMessageHandler ( QQt5FrameMsgHandler );
+#endif
+#endif
+
 #ifdef __EMBEDDED_LINUX__
     system ( "rm -f /tmp/LCK..ttyS*" );
 #endif
@@ -67,6 +75,7 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QObject::connect ( QQtPluginWatcher::Instance(), SIGNAL ( storageChanged ( int ) ),
                        this, SLOT ( slotUPanAutoRun ( int ) ) );
 #endif
+
 }
 
 
