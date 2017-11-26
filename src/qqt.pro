@@ -129,8 +129,8 @@ RESOURCES += \
 #qmake pro pri prf change won't effect to QMAKE_POST_LINK
 #but I need it before I complete this pri.
 system("touch $${PWD}/frame/qqtapplication.cpp")
-!contains(QKIT_PRIVATE, WIN32|WIN64) {
-    CONFIG += qqt_create_sdk
+CONFIG += qqt_create_sdk
+contains(QKIT_PRIVATE, WIN32|WIN64) {
 }
 include ($$PWD/qqt_install.pri)
 

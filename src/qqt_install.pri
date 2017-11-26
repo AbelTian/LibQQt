@@ -9,7 +9,7 @@ contains(QMAKE_HOST.os,Windows) {
     CMD_SEP = &
     MOVE = move /y
     COPY = copy /y
-    COPY_DIR = xcopy /s /q /y /i
+    COPY_DIR = xcopy /s /q /y /i /r /h
     MK_DIR = mkdir
     RM = del
     CD = cd /d
@@ -151,8 +151,8 @@ defineReplace(create_windows_sdk) {
     #need cd sdk root
 
     command =
-    command += cp -rf $$HEADERS_WIN $${QQT_INC_DIR} $$CMD_SEP
-    command += $$COPY_DIR $${QQT_BUILD_DIR}\* $${QQT_LIB_DIR}
+    command += $${COPY_DIR} $${QQT_SRC_DIR}\*.h* $${QQT_INC_DIR} $$CMD_SEP
+    command += $${COPY_DIR} $${QQT_BUILD_DIR}\* $${QQT_LIB_DIR}
 
     return ($$command)
 }
@@ -259,7 +259,7 @@ contains(CONFIG, qqt_create_sdk){
     module_name = $$lower($${MODULE_NAME})
 
     #-------define the all path
-    QQT_BUILD_DIR=$$OUT_PWD/bin
+    QQT_BUILD_DIR=$${OUT_PWD}/$${DESTDIR}
     #sdk path
     QQT_SDK_PWD = $${PWD}/../../$${QQT_STD_DIR}
     message(QQt sdk install here:$${QQT_SDK_PWD})
@@ -272,6 +272,8 @@ contains(CONFIG, qqt_create_sdk){
 
     contains(QKIT_PRIVATE, WIN32|WIN64) {
         #on windows every path must use \ sep.
+        QQT_SRC_DIR=$${PWD}
+        QQT_SRC_DIR~=s,/,\\,g
         QQT_BUILD_DIR~=s,/,\\,g
         QQT_SDK_PWD~=s,/,\\,g
 
@@ -281,8 +283,10 @@ contains(CONFIG, qqt_create_sdk){
         QQT_PRI_PATH~=s,/,\\,g
         QQT_PRI_FILEPATH~=s,/,\\,g
 
+        #ignored
         HEADERS_WIN=$${HEADERS}
         HEADERS_WIN~=s,/,\\,g
+        #on windows, copy all *.h*, include closed feature header.
         #qmake regexp use perl grammer
         #HEADERS_WIN~=s/[d ]+/h+/g how to mod space to +
 
@@ -318,7 +322,7 @@ contains(CONFIG, qqt_create_sdk){
     }
     post_link += $$create_qt_lib_pri()
     QMAKE_POST_LINK += $${post_link}
-    message ($$post_link)
+    #message ($$post_link)
 }
 
 #if you want to use QQt with QT += QQt please open this feature
