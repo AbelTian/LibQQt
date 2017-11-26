@@ -24,6 +24,7 @@
 #include <zxing/common/Array.h>
 #include <zxing/common/Counted.h>
 #include <zxing/common/Str.h>
+#include <zxing/common/Types.h>
 #include <zxing/ResultPoint.h>
 #include <zxing/BarcodeFormat.h>
 
@@ -32,21 +33,23 @@ namespace zxing {
 class Result : public Counted {
 private:
   Ref<String> text_;
-  ArrayRef<char> rawBytes_;
+  ArrayRef<byte> rawBytes_;
   ArrayRef< Ref<ResultPoint> > resultPoints_;
   BarcodeFormat format_;
+  std::string charSet_;
 
 public:
   Result(Ref<String> text,
-         ArrayRef<char> rawBytes,
+         ArrayRef<byte> rawBytes,
          ArrayRef< Ref<ResultPoint> > resultPoints,
-         BarcodeFormat format);
+         BarcodeFormat format, std::string charSet = "");
   ~Result();
   Ref<String> getText();
-  ArrayRef<char> getRawBytes();
+  ArrayRef<byte> getRawBytes();
   ArrayRef< Ref<ResultPoint> > const& getResultPoints() const;
   ArrayRef< Ref<ResultPoint> >& getResultPoints();
   BarcodeFormat getBarcodeFormat() const;
+  std::string getCharSet() const;
 
   friend std::ostream& operator<<(std::ostream &out, Result& result);
 };

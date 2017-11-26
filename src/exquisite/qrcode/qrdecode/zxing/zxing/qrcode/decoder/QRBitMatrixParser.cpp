@@ -116,7 +116,7 @@ Version *BitMatrixParser::readVersion() {
   throw ReaderException("Could not decode version");
 }
 
-ArrayRef<char> BitMatrixParser::readCodewords() {
+ArrayRef<byte> BitMatrixParser::readCodewords() {
   Ref<FormatInformation> formatInfo = readFormatInformation();
   Version *version = readVersion();
 
@@ -138,7 +138,7 @@ ArrayRef<char> BitMatrixParser::readCodewords() {
   //	cout << *functionPattern << endl;
 
   bool readingUp = true;
-  ArrayRef<char> result(version->getTotalCodewords());
+  ArrayRef<byte> result(version->getTotalCodewords());
   int resultOffset = 0;
   int currentByte = 0;
   int bitsRead = 0;
@@ -163,7 +163,7 @@ ArrayRef<char> BitMatrixParser::readCodewords() {
           }
           // If we've made a whole byte, save it off
           if (bitsRead == 8) {
-            result[resultOffset++] = (char)currentByte;
+            result[resultOffset++] = (byte)currentByte;
             bitsRead = 0;
             currentByte = 0;
           }
@@ -177,6 +177,33 @@ ArrayRef<char> BitMatrixParser::readCodewords() {
     throw ReaderException("Did not read all codewords");
   }
   return result;
+}
+
+void BitMatrixParser::remask() {
+    if (parsedFormatInfo_ == 0) {
+        return; // We have no format information, and have no data mask
+    }
+
+    DataMask &dataMask = DataMask::forReference((int)parsedFormatInfo_->getDataMask());
+    int dimension = bitMatrix_->getHeight();
+    dataMask.unmaskBitMatrix(*bitMatrix_, dimension);
+}
+
+void BitMatrixParser::setMirror(boolean mirror) {
+    parsedVersion_ = 0;
+    parsedFormatInfo_ = 0;
+    mirror_ = mirror;
+}
+
+void BitMatrixParser::mirror() {
+    for (int x = 0; x < bitMatrix_->getWidth(); x++) {
+        for (int y = x + 1; y < bitMatrix_->getHeight(); y++) {
+            if (bitMatrix_->get(x, y) != bitMatrix_->get(y, x)) {
+                bitMatrix_->flip(y, x);
+                bitMatrix_->flip(x, y);
+            }
+        }
+    }
 }
 
 }

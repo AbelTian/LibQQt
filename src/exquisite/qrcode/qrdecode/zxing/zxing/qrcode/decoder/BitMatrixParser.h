@@ -35,6 +35,7 @@ private:
   Ref<BitMatrix> bitMatrix_;
   Version *parsedVersion_;
   Ref<FormatInformation> parsedFormatInfo_;
+  bool mirror_;
 
   int copyBit(size_t x, size_t y, int versionBits);
 
@@ -42,7 +43,10 @@ public:
   BitMatrixParser(Ref<BitMatrix> bitMatrix);
   Ref<FormatInformation> readFormatInformation();
   Version *readVersion();
-  ArrayRef<char> readCodewords();
+  ArrayRef<byte> readCodewords();
+  void remask();
+  void setMirror(boolean mirror);
+  void mirror();
 
 private:
   BitMatrixParser(const BitMatrixParser&);

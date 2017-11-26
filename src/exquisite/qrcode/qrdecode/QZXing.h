@@ -1,3 +1,19 @@
+/*
+ * Copyright 2011 QZXing authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #ifndef QZXING_H
 #define QZXING_H
 
@@ -5,10 +21,15 @@
 #include <QObject>
 #include <QImage>
 
-#if QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
-#include <QtQml/qqml.h>
-#include "imagehandler.h"
+#if QT_VERSION >= 0x050000
+    class QQmlEngine;
 #endif
+
+// forward declaration
+namespace zxing {
+class MultiFormatReader;
+}
+class ImageHandler;
 
 /**
   * A class containing a very very small subset of the ZXing library.
@@ -19,21 +40,23 @@
   *
   * Regarding DecoderFormat, by default all of those are enabled (except DataMatrix will is still not supported)
   */
-
-class QZXing : public QObject
-{
+class
+        #ifndef DISABLE_LIBRARY_FEATURES
+        QZXINGSHARED_EXPORT
+        #endif
+        QZXing : public QObject {
 
     Q_OBJECT
-    Q_ENUMS ( DecoderFormat )
-    Q_PROPERTY ( int processingTime READ getProcessTimeOfLastDecoding )
-    Q_PROPERTY ( uint enabledDecoders READ getEnabledFormats WRITE setDecoder NOTIFY enabledFormatsChanged )
+    Q_ENUMS(DecoderFormat)
+    Q_PROPERTY(int processingTime READ getProcessTimeOfLastDecoding)
+    Q_PROPERTY(uint enabledDecoders READ getEnabledFormats WRITE setDecoder NOTIFY enabledFormatsChanged)
+    Q_PROPERTY(bool tryHarder READ getTryHarder WRITE setTryHarder)
 
 public:
     /*
      *
      */
-    enum DecoderFormat
-    {
+    enum DecoderFormat {
         DecoderFormat_None = 0,
         DecoderFormat_Aztec = 1 << 1,
         DecoderFormat_CODABAR = 1 << 2,
@@ -51,35 +74,33 @@ public:
         DecoderFormat_RSS_EXPANDED = 1 << 14,
         DecoderFormat_UPC_A = 1 << 15,
         DecoderFormat_UPC_E = 1 << 16,
-        DecoderFormat_UPC_EAN_EXTENSION = 1 << 17
+        DecoderFormat_UPC_EAN_EXTENSION = 1 << 17,
+        DecoderFormat_CODE_128_GS1 = 1 << 18
     } ;
     typedef unsigned int DecoderFormatType;
 
-    QZXing ( QObject* parent = NULL );
+    QZXing(QObject *parent = NULL);
+    ~QZXing();
 
-    QZXing ( DecoderFormat decodeHints, QObject* parent = NULL );
+    QZXing(DecoderFormat decodeHints, QObject *parent = NULL);
 
-#if QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
-    static void registerQMLTypes() {
-        qmlRegisterType<QZXing> ( "QZXing", 2, 3, "QZXing" );
-    }
-#endif
+#ifdef QZXING_QML
 
-#if QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
-    /**
-      * The decoding function accessible from QML
-      */
-    void decodeImageQML ( QObject* item );
+#if QT_VERSION >= 0x040700
+    static void registerQMLTypes();
+#endif //QT_VERSION >= Qt 4.7
 
-    /**
-      * The decoding function accessible from QML. Able to set the decoding
-      * of a portion of the image.
-      */
-    void decodeSubImageQML ( QObject* item,
-                             const double offsetX = 0, const double offsetY = 0,
-                             const double width = 0, const double height = 0 );
+#if  QT_VERSION >= 0x050000
+    static void registerQMLImageProvider(QQmlEngine& view);
+#endif //QT_VERSION >= Qt 5.0
 
-#endif
+#endif //QZXING_QML
+
+    void setTryHarder(bool tryHarder);
+    bool getTryHarder();
+    static QString decoderFormatToString(int fmt);
+    Q_INVOKABLE QString foundedFormat() const;
+    Q_INVOKABLE QString charSet() const;
 
 public slots:
     /**
@@ -91,14 +112,48 @@ public slots:
       * The smoothTransformation flag determines whether the transformation will be smooth or fast.
       * Smooth transformation provides better results but fast transformation is...faster.
       */
-    QString decodeImage ( QImage image, int maxWidth = -1, int maxHeight = -1, bool smoothTransformation = false );
+    QString decodeImage(const QImage &image, int maxWidth = -1, int maxHeight = -1, bool smoothTransformation = false);
 
     /**
       * The decoding function. Will try to decode the given image based on the enabled decoders.
       * The input image is read from a local image file.
       */
-    QString decodeImageFromFile ( QString imageFilePath, int maxWidth = -1, int maxHeight = -1,
-                                  bool smoothTransformation = false );
+    QString decodeImageFromFile(const QString& imageFilePath, int maxWidth=-1, int maxHeight=-1, bool smoothTransformation = false);
+    /**
+     * The decoding function accessible from QML. (Suggested for Qt 4.x)
+     */
+    QString decodeImageQML(QObject *item);
+
+    /**
+     * The decoding function accessible from QML. Able to set the decoding
+     * of a portion of the image. (Suggested for Qt 4.x)
+     */
+    QString decodeSubImageQML(QObject *item,
+                              const int offsetX = 0, const int offsetY = 0,
+                              const int width = 0, const int height = 0);
+
+    /**
+     * The decoding function accessible from QML. (Suggested for Qt 5.x)
+     * Can be used to decode image from the Camera element preview by providing
+     * the following string: image://camera/preview_1
+     */
+    QString decodeImageQML(const QUrl &imageUrl);
+
+    /**
+     * The decoding function accessible from QML. Able to set the decoding
+     * of a portion of the image.
+     * Can be used to decode image from the Camera element preview by providing
+     * the following string: image://camera/preview_1
+     * (Suggested for Qt 5.x)
+     */
+    QString decodeSubImageQML(const QUrl &imageUrl,
+                              const int offsetX = 0, const int offsetY = 0,
+                              const int width = 0, const int height = 0);
+
+    /**
+     * The main encoding function. Currently supports only Qr code encoding
+     */
+    static QImage encodeData(const QString& data);
 
     /**
       * Get the prossecing time in millisecond of the last decode operation.
@@ -117,21 +172,25 @@ public slots:
       * As argument it is possible to pass conjuction of decoders by using logic OR.
       * e.x. setDecoder ( DecoderFormat_QR_CODE | DecoderFormat_EAN_13 | DecoderFormat_CODE_39 )
       */
-    void setDecoder ( const uint& hint );
+    void setDecoder(const uint &hint);
 
 signals:
     void decodingStarted();
-    void decodingFinished ( bool succeeded );
-    void tagFound ( QString tag );
+    void decodingFinished(bool succeeded);
     void enabledFormatsChanged();
+    void tagFound(QString tag);
+    void tagFoundAdvanced(const QString &tag, const QString &format, const QString &charSet) const;
+    void tagFoundAdvanced(const QString &tag, const QString &format, const QString &charSet, const QRectF &rect) const;
+    void error(QString msg);
 
 private:
-    void* decoder;
+    zxing::MultiFormatReader *decoder;
     DecoderFormatType enabledDecoders;
-#if QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
-    ImageHandler* imageHandler;
-#endif
+    ImageHandler *imageHandler;
     int processingTime;
+    QString foundedFmt;
+    QString charSet_;
+    bool tryHarder_;
 
     /**
       * If true, the decoding operation will take place at a different thread.

@@ -14,16 +14,16 @@ message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
     at $${QT_VERSION} $${SYSNAME} $${BUILD} \
     on $${QMAKE_HOST.os})
 
-defineTest(link_qqt_specifically) {
+defineReplace(link_qqt_library) {
     contains(DEFINES, __DARWIN__) {
-        LIBS += -F$${QQT_LIB_PWD}
-        LIBS += -framework QQt
+        LINK += -F$${QQT_LIB_PWD}
+        LINK += -framework QQt
     } else {
-        LIBS += -L$${QQT_LIB_PWD}
+        LINK += -L$${QQT_LIB_PWD}
         #win can't with the blank! error: -l QQt
-        LIBS += -lQQt
+        LINK += -lQQt
     }
-    return (false)
+    return ($${LINK})
 }
 
 defineTest(link_qqt_on_mac) {
@@ -77,14 +77,14 @@ defineTest(link_qqt_on_mac) {
 contains(CONFIG, link_from_build) {
     QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/src/$${DESTDIR}
     message (Link QQt from: $$QQT_LIB_PWD)
-    link_qqt_specifically()
+    LIBS += $$link_qqt_library()
     link_qqt_on_mac()
 }
 
 contains(CONFIG, link_from_sdk) {
     QQT_LIB_PWD = $${PWD}/../../$${QQT_STD_DIR}/lib
     message (Link QQt from: $$QQT_LIB_PWD)
-    link_qqt_specifically()
+    LIBS += $$link_qqt_library()
     link_qqt_on_mac()
 }
 

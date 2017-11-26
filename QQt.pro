@@ -19,8 +19,7 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
 #SUBDIRS += examples/qqtnetworkexample
-#
-SUBDIRS += examples/qqtchartexample
+#SUBDIRS += examples/qqtchartexample
 #
 #
 ##-----------------------------------------------------------------
@@ -29,7 +28,8 @@ SUBDIRS += examples/qqtchartexample
 ##need GumoQuery
 ##-----------------------------------------------------------------
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
-#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
+#
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 ##-----------------------------------------------------------------
 ##some test project
 ##-----------------------------------------------------------------

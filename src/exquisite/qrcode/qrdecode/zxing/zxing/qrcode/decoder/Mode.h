@@ -23,20 +23,26 @@
 
 #include <zxing/common/Counted.h>
 #include <zxing/qrcode/Version.h>
+#include <zxing/common/Counted.h>
 
 namespace zxing {
 namespace qrcode {
 
-class Mode {
+class Mode : public Counted
+{
 private:
   int characterCountBitsForVersions0To9_;
   int characterCountBitsForVersions10To26_;
   int characterCountBitsForVersions27AndHigher_;
+  int bits_;
   std::string name_;
 
   Mode(int cbv0_9, int cbv10_26, int cbv27, int bits, char const* name);
 
 public:
+  Mode(const Mode& mode);
+  Mode();
+
   static Mode TERMINATOR;
   static Mode NUMERIC;
   static Mode ALPHANUMERIC;
@@ -49,7 +55,18 @@ public:
   static Mode HANZI;
 
   static Mode& forBits(int bits);
-  int getCharacterCountBits(Version *version);
+  int getCharacterCountBits(const Version *version) const;
+  int getBits() const { return bits_; }
+
+  bool operator==(const Mode& other);
+  bool operator!=(const Mode& other);
+
+  std::string getName() const {
+      if(name_ == "")
+          return "null";
+      else
+          return name_;
+  }
 };
 }
 }

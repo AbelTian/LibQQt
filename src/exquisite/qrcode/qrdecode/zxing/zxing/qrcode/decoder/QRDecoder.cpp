@@ -29,7 +29,6 @@
 #include <zxing/ChecksumException.h>
 #include <zxing/common/reedsolomon/ReedSolomonException.h>
 
-using zxing::qrcode::Decoder;
 using zxing::DecoderResult;
 using zxing::Ref;
 
@@ -37,11 +36,14 @@ using zxing::Ref;
 using zxing::ArrayRef;
 using zxing::BitMatrix;
 
+namespace zxing {
+namespace qrcode {
+
 Decoder::Decoder() :
   rsDecoder_(GenericGF::QR_CODE_FIELD_256) {
 }
 
-void Decoder::correctErrors(ArrayRef<char> codewordBytes, int numDataCodewords) {
+void Decoder::correctErrors(ArrayRef<byte> codewordBytes, int numDataCodewords) {
   int numCodewords = codewordBytes->size();
   ArrayRef<int> codewordInts(numCodewords);
   for (int i = 0; i < numCodewords; i++) {
@@ -57,7 +59,7 @@ void Decoder::correctErrors(ArrayRef<char> codewordBytes, int numDataCodewords) 
   }
 
   for (int i = 0; i < numDataCodewords; i++) {
-    codewordBytes[i] = (char)codewordInts[i];
+    codewordBytes[i] = (byte)codewordInts[i];
   }
 }
 
@@ -72,7 +74,7 @@ Ref<DecoderResult> Decoder::decode(Ref<BitMatrix> bits) {
 
 
   // Read codewords
-  ArrayRef<char> codewords(parser.readCodewords());
+  ArrayRef<byte> codewords(parser.readCodewords());
 
 
   // Separate into data blocks
@@ -84,18 +86,18 @@ Ref<DecoderResult> Decoder::decode(Ref<BitMatrix> bits) {
   for (size_t i = 0; i < dataBlocks.size(); i++) {
     totalBytes += dataBlocks[i]->getNumDataCodewords();
   }
-  ArrayRef<char> resultBytes(totalBytes);
+  ArrayRef<byte> resultBytes(totalBytes);
   int resultOffset = 0;
 
 
   // Error-correct and copy data blocks together into a stream of bytes
   for (size_t j = 0; j < dataBlocks.size(); j++) {
     Ref<DataBlock> dataBlock(dataBlocks[j]);
-    ArrayRef<char> codewordBytes = dataBlock->getCodewords();
+    ArrayRef<byte> codewordBytes = dataBlock->getCodewords();
     int numDataCodewords = dataBlock->getNumDataCodewords();
     correctErrors(codewordBytes, numDataCodewords);
     for (int i = 0; i < numDataCodewords; i++) {
-      resultBytes[resultOffset++] = codewordBytes[i];
+      resultBytes[resultOffset++] = (byte)codewordBytes[i];
     }
   }
 
@@ -105,3 +107,5 @@ Ref<DecoderResult> Decoder::decode(Ref<BitMatrix> bits) {
                                         DecodedBitStreamParser::Hashtable());
 }
 
+}
+}

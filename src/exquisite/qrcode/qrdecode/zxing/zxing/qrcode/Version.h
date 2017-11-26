@@ -42,12 +42,13 @@ public:
 
 class ECBlocks {
 private:
-  int ecCodewords_;
+  int ecCodewordsPerBloc_;
   std::vector<ECB*> ecBlocks_;
 public:
-  ECBlocks(int ecCodewords, ECB *ecBlocks);
-  ECBlocks(int ecCodewords, ECB *ecBlocks1, ECB *ecBlocks2);
-  int getECCodewords();
+  ECBlocks(int ecCodewordsPerBloc, ECB *ecBlocks);
+  ECBlocks(int ecCodewordsPerBloc, ECB *ecBlocks1, ECB *ecBlocks2);
+  int getECCodewordsPerBloc();
+  int getTotalECCodewords();
   std::vector<ECB*>& getECBlocks();
   ~ECBlocks();
 };
@@ -68,14 +69,14 @@ public:
   static std::vector<Ref<Version> > VERSIONS;
 
   ~Version();
-  int getVersionNumber();
+  int getVersionNumber() const;
   std::vector<int> &getAlignmentPatternCenters();
   int getTotalCodewords();
   int getDimensionForVersion();
-  ECBlocks &getECBlocksForLevel(ErrorCorrectionLevel &ecLevel);
-  static Version *getProvisionalVersionForDimension(int dimension);
-  static Version *getVersionForNumber(int versionNumber);
-  static Version *decodeVersionInformation(unsigned int versionBits);
+  ECBlocks &getECBlocksForLevel(const ErrorCorrectionLevel &ecLevel) const;
+  static Ref<Version> getProvisionalVersionForDimension(int dimension);
+  static Ref<Version> getVersionForNumber(int versionNumber);
+  static Ref<Version> decodeVersionInformation(unsigned int versionBits);
   Ref<BitMatrix> buildFunctionPattern();
   static int buildVersions();
 };

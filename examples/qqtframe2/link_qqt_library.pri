@@ -30,7 +30,6 @@ include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
 #-------------------------------------------------------------
 #link qqt settings
 #-------------------------------------------------------------
-#CONFIG += link_from_build
 equals(QMAKE_HOST.os, Darwin) {
     QQT_BUILD_ROOT = /Users/abel/Develop/c0-buildstation
 } else: equals(QMAKE_HOST.os, Linux) {
@@ -40,8 +39,6 @@ equals(QMAKE_HOST.os, Darwin) {
 }
 
 #default sdk path is qqt-source/../qqt-std-dir, don't modify this path
-#link from sdk is default setting
-CONFIG += link_from_sdk
 equals(QMAKE_HOST.os, Darwin) {
     QQT_SDK_ROOT = $${QQT_SOURCE_ROOT}/../${QQT_STD_DIR}
 } else: equals(QMAKE_HOST.os, Linux) {
@@ -61,6 +58,9 @@ contains (CONFIG, LINK_QQT_SOURCE) {
     #need QQT_BUILD_ROOT
     #need QKIT_PRIVATE from qqt_kit.pri
     #you can open one or more macro to make sdk or link from build.
+    #link from sdk is default setting
+    CONFIG += link_from_sdk
+    #CONFIG += link_from_build
     #especially some occations need some sure macro.
     contains(QKIT_PRIVATE, iOS|iOSSimulator) {
         #mac ios .framework .a 里面的快捷方式必须使用里面的相对路径，不能使用绝对路径

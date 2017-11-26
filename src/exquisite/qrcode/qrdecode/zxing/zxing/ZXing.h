@@ -30,52 +30,55 @@
 #define ZXING_DEBUG 0
 #endif
 
-namespace zxing {
-typedef char byte;
-typedef bool boolean;
-}
-
 #include <limits>
+#include "common/Types.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <float.h>
+#include <cmath>
 
 namespace zxing {
-inline bool isnan_z ( float v ) {return _isnan ( v ) != 0;}
-inline bool isnan_z ( double v ) {return _isnan ( v ) != 0;}
-inline float nan() {return std::numeric_limits<float>::quiet_NaN();}
+inline bool isnan_z(float v) {return std::isnan(v) != 0;}
+inline bool isnan_z(double v) {return std::isnan(v) != 0;}
 }
 
-#else
-
-//#include <cmath>
-
+#elif (__cplusplus >= 201103L)
+#include <cmath>
+namespace zxing {
+inline bool isnan_z(float v) {
+    return std::isnan(v);
+}
+inline bool isnan_z(double v) {
+    return std::isnan(v);
+}
+}
+#elif(__STDC_VERSION__ >= 199901L)
 #include <math.h>
+namespace zxing {
+inline bool isnan_z(float v) {
+    return isnan(v);
+}
+inline bool isnan_z(double v) {
+    return isnan(v);
+}
+}
+#else
+namespace zxing {
+inline bool isnan_z(float v) {
+    volatile float d = v;
+    return d != d;
+}
+inline bool isnan_z(double v) {
+    volatile double d = v;
+    return d != d;
+}
+}
+#endif
 
 namespace zxing {
-inline bool isnan_z ( float v )
-{
-    return isnan ( v );
+	inline float nan() {return std::numeric_limits<float>::quiet_NaN();}
 }
-
-inline bool isnan_z ( double v )
-{
-    //std::? x
-    //:: y
-#ifdef __ANDROIDX86__
-    return ( ( sizeof ( v ) == sizeof ( float ) ) ? isnanf ( v )
-             : ( sizeof ( v ) == sizeof ( double ) ) ? isnan ( v )
-             : __isnanl ( v ) );
-#else
-    return isnan ( v );
-#endif
-}
-
-inline float nan() {return std::numeric_limits<float>::quiet_NaN();}
-}
-
-#endif
 
 #if ZXING_DEBUG
 
@@ -95,43 +98,41 @@ using std::ostream;
 
 namespace zxing {
 
-class DebugTimer
-{
+class DebugTimer {
 public:
-    DebugTimer ( char const* string_ ) : chars ( string_ ) {
-        gettimeofday ( &start, 0 );
-    }
+  DebugTimer(char const* string_) : chars(string_) {
+    gettimeofday(&start, 0);
+  }
 
-    DebugTimer ( std::string const& string_ ) : chars ( 0 ), string ( string_ ) {
-        gettimeofday ( &start, 0 );
-    }
+  DebugTimer(std::string const& string_) : chars(0), string(string_) {
+    gettimeofday(&start, 0);
+  }
 
-    void mark ( char const* string ) {
-        struct timeval end;
-        gettimeofday ( &end, 0 );
-        int diff =
-            ( end.tv_sec - start.tv_sec ) * 1000 * 1000 + ( end.tv_usec - start.tv_usec );
+  void mark(char const* string) {
+    struct timeval end;
+    gettimeofday(&end, 0);
+    int diff =
+      (end.tv_sec - start.tv_sec)*1000*1000+(end.tv_usec - start.tv_usec);
+    
+    cerr << diff << " " << string << '\n';
+  }
 
-        cerr << diff << " " << string << '\n';
-    }
+  void mark(std::string string) {
+    mark(string.c_str());
+  }
 
-    void mark ( std::string string ) {
-        mark ( string.c_str() );
+  ~DebugTimer() {
+    if (chars) {
+      mark(chars);
+    } else {
+      mark(string.c_str());
     }
-
-    ~DebugTimer() {
-        if ( chars ) {
-            mark ( chars );
-        }
-        else {
-            mark ( string.c_str() );
-        }
-    }
+  }
 
 private:
-    char const* const chars;
-    std::string string;
-    struct timeval start;
+  char const* const chars;
+  std::string string;
+  struct timeval start;
 };
 
 }

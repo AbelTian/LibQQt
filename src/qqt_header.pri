@@ -322,5 +322,5 @@ win32-msvc*{
 INCLUDEPATH += $$PWD/exquisite/gumbo/parser/src
 INCLUDEPATH += $$PWD/exquisite/gumbo/query/src
 win32{
-    INCLUDEPATH += $$PWD/visualc/include
+    INCLUDEPATH += $$PWD/exquisite/gumbo/parser/visualc/include
 }

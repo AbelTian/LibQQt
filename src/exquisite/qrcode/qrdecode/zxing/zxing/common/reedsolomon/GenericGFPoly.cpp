@@ -31,7 +31,7 @@ using zxing::Ref;
 // VC++
 using zxing::GenericGF;
 
-GenericGFPoly::GenericGFPoly(Ref<GenericGF> field,
+GenericGFPoly::GenericGFPoly(GenericGF *field,
                              ArrayRef<int> coefficients)
   :  field_(field) {
   if (coefficients->size() == 0) {
@@ -47,7 +47,7 @@ GenericGFPoly::GenericGFPoly(Ref<GenericGF> field,
     if (firstNonZero == coefficientsLength) {
       coefficients_ = field->getZero()->getCoefficients();
     } else {
-      coefficients_ = ArrayRef<int>(new Array<int>(coefficientsLength-firstNonZero));
+      coefficients_ = ArrayRef<int>(coefficientsLength-firstNonZero);
       for (int i = 0; i < (int)coefficients_->size(); i++) {
         coefficients_[i] = coefficients[i + firstNonZero];
       }
@@ -96,7 +96,7 @@ int GenericGFPoly::evaluateAt(int a) {
 }
   
 Ref<GenericGFPoly> GenericGFPoly::addOrSubtract(Ref<zxing::GenericGFPoly> other) {
-  if (!(field_.object_ == other->field_.object_)) {
+  if (!(field_ == other->field_)) {
     throw IllegalArgumentException("GenericGFPolys do not have same GenericGF field");
   }
   if (isZero()) {
@@ -114,7 +114,7 @@ Ref<GenericGFPoly> GenericGFPoly::addOrSubtract(Ref<zxing::GenericGFPoly> other)
     largerCoefficients = temp;
   }
     
-  ArrayRef<int> sumDiff(new Array<int>(largerCoefficients->size()));
+  ArrayRef<int> sumDiff(largerCoefficients->size());
   int lengthDiff = largerCoefficients->size() - smallerCoefficients->size();
   // Copy high-order terms only found in higher-degree polynomial's coefficients
   for (int i = 0; i < lengthDiff; i++) {
@@ -130,7 +130,7 @@ Ref<GenericGFPoly> GenericGFPoly::addOrSubtract(Ref<zxing::GenericGFPoly> other)
 }
   
 Ref<GenericGFPoly> GenericGFPoly::multiply(Ref<zxing::GenericGFPoly> other) {
-  if (!(field_.object_ == other->field_.object_)) {
+  if (!(field_ == other->field_)) {
     throw IllegalArgumentException("GenericGFPolys do not have same GenericGF field");
   }
     
@@ -144,7 +144,7 @@ Ref<GenericGFPoly> GenericGFPoly::multiply(Ref<zxing::GenericGFPoly> other) {
   ArrayRef<int> bCoefficients = other->getCoefficients();
   int bLength = bCoefficients->size();
     
-  ArrayRef<int> product(new Array<int>(aLength + bLength - 1));
+  ArrayRef<int> product(aLength + bLength - 1);
   for (int i = 0; i < aLength; i++) {
     int aCoeff = aCoefficients[i];
     for (int j = 0; j < bLength; j++) {
@@ -164,7 +164,7 @@ Ref<GenericGFPoly> GenericGFPoly::multiply(int scalar) {
     return Ref<GenericGFPoly>(this);
   }
   int size = coefficients_->size();
-  ArrayRef<int> product(new Array<int>(size));
+  ArrayRef<int> product(size);
   for (int i = 0; i < size; i++) {
     product[i] = field_->multiply(coefficients_[i], scalar);
   }
@@ -179,15 +179,15 @@ Ref<GenericGFPoly> GenericGFPoly::multiplyByMonomial(int degree, int coefficient
     return field_->getZero();
   }
   int size = coefficients_->size();
-  ArrayRef<int> product(new Array<int>(size+degree));
+  ArrayRef<int> product(size+degree);
   for (int i = 0; i < size; i++) {
     product[i] = field_->multiply(coefficients_[i], coefficient);
   }
   return Ref<GenericGFPoly>(new GenericGFPoly(field_, product));
 }
   
-std::vector<Ref<GenericGFPoly> > GenericGFPoly::divide(Ref<GenericGFPoly> other) {
-  if (!(field_.object_ == other->field_.object_)) {
+std::vector<Ref<GenericGFPoly>> GenericGFPoly::divide(Ref<GenericGFPoly> other) {
+  if (!(field_ == other->field_)) {
     throw IllegalArgumentException("GenericGFPolys do not have same GenericGF field");
   }
   if (other->isZero()) {
@@ -212,7 +212,7 @@ std::vector<Ref<GenericGFPoly> > GenericGFPoly::divide(Ref<GenericGFPoly> other)
   }
     
   std::vector<Ref<GenericGFPoly> > returnValue;
-  returnValue[0] = quotient;
-  returnValue[1] = remainder;
+  returnValue.push_back(quotient);
+  returnValue.push_back(remainder);
   return returnValue;
 }
