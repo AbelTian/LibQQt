@@ -37,7 +37,9 @@ SUBDIRS += test/svgtest
 SUBDIRS += test/framelesshelperwidget
 SUBDIRS += test/treeviewtest
 SUBDIRS += test/qqtdicttest
-SUBDIRS += test/cmdwidget
+!contains(QKIT_PRIVATE, iOS|iOSSimulator){
+    SUBDIRS += test/cmdwidget
+}
 SUBDIRS += test/coretest
 
 #-----------------------------------------------------------------

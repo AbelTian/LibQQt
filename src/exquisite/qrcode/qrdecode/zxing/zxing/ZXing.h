@@ -63,10 +63,13 @@ inline bool isnan_z ( double v )
 {
     //std::? x
     //:: y
+#ifdef __ANDROIDX86__
     return ( ( sizeof ( v ) == sizeof ( float ) ) ? isnanf ( v )
              : ( sizeof ( v ) == sizeof ( double ) ) ? isnan ( v )
              : __isnanl ( v ) );
-    //return isnan ( v );
+#else
+    return isnan ( v );
+#endif
 }
 
 inline float nan() {return std::numeric_limits<float>::quiet_NaN();}
