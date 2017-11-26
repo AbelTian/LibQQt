@@ -14,6 +14,7 @@ contains(QMAKE_HOST.os,Windows) {
     RM = del
     CD = cd /d
     RM_DIR = rd /s /q
+    PATH_SEP=\\
 } else {
     SCRIPT_SUFFIX=sh
     CMD_SEP = &&
@@ -25,6 +26,7 @@ contains(QMAKE_HOST.os,Windows) {
     CD = cd
     LN = ln -sf
     RM_DIR = rm -rf
+    PATH_SEP=/
 }
 ################################################
 ##get command string
@@ -145,6 +147,16 @@ defineReplace(create_dir_struct) {
     return ($$command)
 }
 
+defineReplace(create_windows_sdk) {
+    #need cd sdk root
+
+    command =
+    command += $$COPY $$HEADERS_WIN $${QQT_INC_DIR} $$CMD_SEP
+    command += $$COPY_DIR $${QQT_BUILD_DIR}\\* $${QQT_LIB_DIR}
+
+    return ($$command)
+}
+
 defineReplace(create_linux_sdk) {
     #need cd sdk root
 
@@ -196,9 +208,6 @@ defineReplace(create_qt_lib_pri){
     #need cd sdk root
     #QQT_BASE_DIR MODULE_NAME QQT_VERSION MODULE_CNAME
     ##write qt_lib_qqtcore.pri
-    module_name = $$lower($$MODULE_NAME)
-    QQT_PRI_PATH=mkspecs/modules
-    QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${module_name}.pri
 
     command =
     command += $$get_empty_file($${QQT_PRI_FILEPATH}) $$CMD_SEP
@@ -236,9 +245,11 @@ defineReplace(create_qt_lib_pri){
 ##this don't need any other path set.
 ################################################
 contains(CONFIG, qqt_create_sdk){
+    #-------module name QQt
     MODULE_NAME=QQt
     module_name = $$lower($${MODULE_NAME})
 
+    #-------define the all path
     QQT_BUILD_DIR=$$OUT_PWD/bin
     #sdk path
     QQT_SDK_PWD = $${PWD}/../../$${QQT_STD_DIR}
@@ -250,29 +261,55 @@ contains(CONFIG, qqt_create_sdk){
     QQT_PRI_PATH=mkspecs/modules
     QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${module_name}.pri
 
-    post_link =
-    post_link += $$RM_DIR $$QQT_SDK_PWD $$CMD_SEP
-    post_link += $$MK_DIR $$QQT_SDK_PWD $$CMD_SEP
-    post_link += $$CD $$QQT_SDK_PWD $$CMD_SEP
-    post_link += $$create_dir_struct()
+    contains(QKIT_PRIVATE, WIN32|WIN64) {
+        #on windows every path must use \ sep.
+        QQT_BUILD_DIR~=s,/,\\,g
+        QQT_SDK_PWD~=s,/,\\,g
 
-    contains(QKIT_PRIVATE, macOS) {
-        #message(create QQt mac bundle framework)
-        post_link += $$MK_DIR lib/$${MODULE_NAME}.framework $$CMD_SEP
-        post_link += $$CD lib/$${MODULE_NAME}.framework $$CMD_SEP
-        post_link += $$create_mac_sdk() $$CMD_SEP
-        post_link += $$CD ../../ $$CMD_SEP
-        #create prl
-        post_link += $$COPY $$QQT_BUILD_DIR/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl lib/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl $$CMD_SEP
+        QQT_INC_DIR~=s,/,\\,g
+        QQT_LIB_DIR = lib
+        QQT_CMAKE_DIR~=s,/,\\,g
+        QQT_PRI_PATH~=s,/,\\,g
+        QQT_PRI_FILEPATH~=s,/,\\,g
+
+        HEADERS_WIN=$${HEADERS}
+        HEADERS_WIN~=s,/,\\,g
+
+        post_link =
+        post_link += $$RM_DIR $$QQT_SDK_PWD $$CMD_SEP
+        post_link += $$MK_DIR $$QQT_SDK_PWD $$CMD_SEP
+        post_link += $$CD $$QQT_SDK_PWD $$CMD_SEP
+        post_link += $$create_dir_struct()
+
+        #message(create QQt windows struct library)
+        post_link += $$create_windows_sdk() $$CMD_SEP
+        post_link += $$COPY $$QQT_BUILD_DIR\\*.prl lib $$CMD_SEP
     } else {
-        #message(create QQt linux struct library)
-        post_link += $$create_linux_sdk() $$CMD_SEP
-        post_link += $$COPY $$QQT_BUILD_DIR/*.prl lib $$CMD_SEP
+        post_link =
+        post_link += $$RM_DIR $$QQT_SDK_PWD $$CMD_SEP
+        post_link += $$MK_DIR $$QQT_SDK_PWD $$CMD_SEP
+        post_link += $$CD $$QQT_SDK_PWD $$CMD_SEP
+        post_link += $$create_dir_struct()
+
+        contains(QKIT_PRIVATE, macOS) {
+            #message(create QQt mac bundle framework)
+            post_link += $$MK_DIR lib/$${MODULE_NAME}.framework $$CMD_SEP
+            post_link += $$CD lib/$${MODULE_NAME}.framework $$CMD_SEP
+            post_link += $$create_mac_sdk() $$CMD_SEP
+            post_link += $$CD ../../ $$CMD_SEP
+            #create prl
+            post_link += $$COPY $$QQT_BUILD_DIR/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl lib/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl $$CMD_SEP
+        } else {
+            #message(create QQt linux struct library)
+            post_link += $$create_linux_sdk() $$CMD_SEP
+            post_link += $$COPY $$QQT_BUILD_DIR/*.prl lib $$CMD_SEP
+        }
     }
     post_link += $$create_qt_lib_pri()
     QMAKE_POST_LINK += $${post_link}
     #message ($$post_link)
 }
+
 
 #if you want to use QQt with QT += QQt please open this feature
 #unimplete: CONFIG += install_to_qt_library
