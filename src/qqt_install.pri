@@ -151,8 +151,8 @@ defineReplace(create_windows_sdk) {
     #need cd sdk root
 
     command =
-    command += $$COPY $$HEADERS_WIN $${QQT_INC_DIR} $$CMD_SEP
-    command += $$COPY_DIR $${QQT_BUILD_DIR}\\* $${QQT_LIB_DIR}
+    command += cp -rf $$HEADERS_WIN $${QQT_INC_DIR} $$CMD_SEP
+    command += $$COPY_DIR $${QQT_BUILD_DIR}\* $${QQT_LIB_DIR}
 
     return ($$command)
 }
@@ -214,9 +214,18 @@ defineReplace(create_qt_lib_pri){
     command += echo "QT.$${module_name}.VERSION = $${QQT_VERSION}" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${module_name}.name = $${MODULE_NAME}"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${module_name}.module = $${MODULE_NAME}"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
-    command += echo "QT.$${module_name}.libs = '\$$QT_MODULE_LIB_BASE'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
-    command += echo "QT.$${module_name}.bins = '\$$QT_MODULE_BIN_BASE'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
-    equals(QKIT_PRIVATE, macOS) {
+    contains(QKIT_PRIVATE, WIN32|WIN64) {
+        command += echo "QT.$${module_name}.libs = \$$QT_MODULE_LIB_BASE"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${module_name}.bins = \$$QT_MODULE_BIN_BASE"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
+    } else {
+        command += echo "QT.$${module_name}.libs = '\$$QT_MODULE_LIB_BASE'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${module_name}.bins = '\$$QT_MODULE_BIN_BASE'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
+    }
+    contains(QKIT_PRIVATE, WIN32|WIN64) {
+        command += echo "QT.$${module_name}.includes = \$$QT_MODULE_INCLUDE_BASE \$$QT_MODULE_INCLUDE_BASE/$${MODULE_NAME}" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${module_name}.frameworks = " >> $${QQT_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${module_name}.module_config = v2 " >> $${QQT_PRI_FILEPATH} $$CMD_SEP
+    }else:equals(QKIT_PRIVATE, macOS) {
         command += echo "QT.$${module_name}.includes = '\$$QT_MODULE_LIB_BASE/$${MODULE_NAME}.framework/Headers'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.frameworks = '\$$QT_MODULE_LIB_BASE'" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.module_config = v2 lib_bundle" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
@@ -274,6 +283,8 @@ contains(CONFIG, qqt_create_sdk){
 
         HEADERS_WIN=$${HEADERS}
         HEADERS_WIN~=s,/,\\,g
+        #qmake regexp use perl grammer
+        #HEADERS_WIN~=s/[d ]+/h+/g how to mod space to +
 
         post_link =
         post_link += $$RM_DIR $$QQT_SDK_PWD $$CMD_SEP
@@ -283,7 +294,7 @@ contains(CONFIG, qqt_create_sdk){
 
         #message(create QQt windows struct library)
         post_link += $$create_windows_sdk() $$CMD_SEP
-        post_link += $$COPY $$QQT_BUILD_DIR\\*.prl lib $$CMD_SEP
+        post_link += $$COPY $$QQT_BUILD_DIR\*.prl lib $$CMD_SEP
     } else {
         post_link =
         post_link += $$RM_DIR $$QQT_SDK_PWD $$CMD_SEP
@@ -307,9 +318,8 @@ contains(CONFIG, qqt_create_sdk){
     }
     post_link += $$create_qt_lib_pri()
     QMAKE_POST_LINK += $${post_link}
-    #message ($$post_link)
+    message ($$post_link)
 }
-
 
 #if you want to use QQt with QT += QQt please open this feature
 #unimplete: CONFIG += install_to_qt_library

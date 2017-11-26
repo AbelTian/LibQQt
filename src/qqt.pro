@@ -74,11 +74,6 @@ build_pass:CONFIG(debug, debug|release) {
 CLFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long
 QMAKE_CFLAGS +=  $${CLFLAGS}
 QMAKE_CXXFLAGS +=  $${CLFLAGS}
-#debug.
-#QMAKE_POST_LINK won't work until source changed
-#qmake pro pri prf change won't effect to QMAKE_POST_LINK
-#but I need it before I complete this pri.
-system("touch $${PWD}/frame/qqtapplication.cpp")
 #################################################################
 ##project Headers
 #################################################################
@@ -127,7 +122,13 @@ RESOURCES += \
 ################################################
 ##install to Qt library
 ##in this section, I use QMAKE_POST_LINK, it won't work until project source changed
+##on windows, I use touch.exe and cp.exe, you need download it and put it in system dir.
 ################################################
+#debug.
+#QMAKE_POST_LINK won't work until source changed
+#qmake pro pri prf change won't effect to QMAKE_POST_LINK
+#but I need it before I complete this pri.
+system("touch $${PWD}/frame/qqtapplication.cpp")
 !contains(QKIT_PRIVATE, WIN32|WIN64) {
     CONFIG += qqt_create_sdk
 }
