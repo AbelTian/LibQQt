@@ -46,6 +46,38 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 #defined in qqtcore.h
 #lessThan(QT_MAJOR_VERSION, 5):DEFINES += nullptr=0
+
+#################################################################
+##build qqt or link qqt
+#################################################################
+##different target:
+##-----------------------------------------------
+##win platform:
+##build qqt dll + QQT_LIBRARY
+##build qqt lib + QQT_STATIC_LIBRARY
+##link qqt lib + QQT_STATIC_LIBRARY
+##link qqt dll + ~~
+##- - - - - - - - - - - - - - - - - - - - -
+##*nix platform:
+##build and link qqt dll or lib + ~~
+##-----------------------------------------------
+#link QQt static library in some occation on windows
+#when link QQt    static library, if no this macro, headers can't be linked on windows.
+contains(QKIT_PRIVATE, WIN32) {
+    #Qt is static by mingw32 building
+    mingw{
+        DEFINES += QQT_STATIC_LIBRARY
+    }
+    #link and build all need this macro
+    contains(DEFINES, QQT_STATIC_LIBRARY) {
+        DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
+        DEFINES += QZXING_STATIC_LIBRARY
+        DEFINES += QT_QTSOAP_STATIC_LIBRARY
+        DEFINES += BUILD_QDEVICEWATCHER_STATIC
+        DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
+    }
+}
+
 ################################################################
 ##build cache
 ################################################################

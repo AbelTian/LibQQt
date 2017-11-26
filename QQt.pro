@@ -19,7 +19,8 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
 #SUBDIRS += examples/qqtnetworkexample
-#SUBDIRS += examples/qqtchartexample
+#
+SUBDIRS += examples/qqtchartexample
 #
 #
 ##-----------------------------------------------------------------

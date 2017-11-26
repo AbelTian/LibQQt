@@ -25,26 +25,20 @@ TEMPLATE = lib
 ################################################
 include ($$PWD/qqt_kit.pri)
 
-##different target:
-##-----------------------------------------------
-##win platform:
-##build qqt dll + QQT_LIBRARY
-##build qqt lib + QQT_STATIC_LIBRARY
-##link qqt lib + QQT_STATIC_LIBRARY
-##link qqt dll + ~~
-##- - - - - - - - - - - - - - - - - - - - -
-##*nix platform:
-##build and link qqt dll or lib + ~~
-##-----------------------------------------------
-
 ##win platform: some target, special lib lib_bundle staticlib
+##only deal dynamic is ok, static all in headers dealing.
+##define macro before header.
 contains(QKIT_PRIVATE, WIN32|WIN64) {
     #Qt is static by mingw32 building
     mingw {
+        #create static lib (important, only occured at builder pro)
         CONFIG += staticlib
-        DEFINES += QQT_STATIC_LIBRARY
+        #in qqt_header.pri
+        #DEFINES += QQT_STATIC_LIBRARY
     } else {
+        #create dynamic lib (important, only occured at builder pro)
         CONFIG += dll
+        #no other one deal this, define it here, right here.
         DEFINES += QQT_LIBRARY
     }
 #*nux platform: no macro
@@ -61,6 +55,7 @@ contains(QKIT_PRIVATE, WIN32|WIN64) {
         #DEFINES += QQT_LIBRARY
     }
 }
+
 #create prl
 CONFIG += create_prl
 #CONFIG += build_pass
@@ -128,12 +123,12 @@ RESOURCES += \
 #QMAKE_POST_LINK won't work until source changed
 #qmake pro pri prf change won't effect to QMAKE_POST_LINK
 #but I need it before I complete this pri.
-system("touch $${PWD}/frame/qqtapplication.cpp")
 CONFIG += qqt_create_sdk
-contains(QKIT_PRIVATE, WIN32|WIN64) {
+contains(CONFIG, qqt_create_sdk) {
+    system("touch $${PWD}/frame/qqtapplication.cpp")
+    include ($$PWD/qqt_install.pri)
 }
-include ($$PWD/qqt_install.pri)
-
+#QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD what?
 
 #################################################################
 ##project environ
