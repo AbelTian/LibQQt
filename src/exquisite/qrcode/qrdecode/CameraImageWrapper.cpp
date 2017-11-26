@@ -77,7 +77,7 @@ CameraImageWrapper::CameraImageWrapper ( const QImage& sourceImage ) : Luminance
 
     delegate = Ref<GreyscaleLuminanceSource> (
                    new GreyscaleLuminanceSource ( getMatrixP(), sourceImage.width(), sourceImage.height(), 0, 0, sourceImage.width(),
-                                                  sourceImage.height() ) );
+                           sourceImage.height() ) );
 }
 
 CameraImageWrapper::CameraImageWrapper ( CameraImageWrapper& otherInstance ) : LuminanceSource (
@@ -92,7 +92,7 @@ CameraImageWrapper::~CameraImageWrapper()
 }
 
 CameraImageWrapper* CameraImageWrapper::Factory ( const QImage& sourceImage, int maxWidth, int maxHeight,
-                                                  bool smoothTransformation )
+        bool smoothTransformation )
 {
     if ( ( maxWidth != -1 && sourceImage.width() > maxWidth ) || ( maxHeight != -1 && sourceImage.height() > maxHeight ) )
     {
@@ -194,7 +194,11 @@ byte CameraImageWrapper::gray ( unsigned int r, unsigned int g, unsigned int b )
 
 void CameraImageWrapper::updateImageAsGrayscale ( const QImage& origin )
 {
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+    bool needsConvesionToGrayscale = true;
+#else
     bool needsConvesionToGrayscale = origin.format() != QImage::Format_Grayscale8;
+#endif
 
     QRgb pixel;
     byte pixelGrayscale;

@@ -23,37 +23,39 @@
 
 namespace zxing {
 
-class BarcodeFormat {
+class BarcodeFormat
+{
 public:
-  // if you update the enum, update BarcodeFormat.cpp
+    // if you update the enum, update BarcodeFormat.cpp
 
-  enum Value {
-    NONE,
-    AZTEC,
-    CODABAR,
-    CODE_39,
-    CODE_93,
-    CODE_128,
-    DATA_MATRIX,
-    EAN_8,
-    EAN_13,
-    ITF,
-    MAXICODE,
-    PDF_417,
-    QR_CODE,
-    RSS_14,
-    RSS_EXPANDED,
-    UPC_A,
-    UPC_E,
-    UPC_EAN_EXTENSION,
-    ASSUME_GS1
-  };
+    enum Value
+    {
+        NONE,
+        AZTEC,
+        CODABAR,
+        CODE_39,
+        CODE_93,
+        CODE_128,
+        DATA_MATRIX,
+        EAN_8,
+        EAN_13,
+        ITF,
+        MAXICODE,
+        PDF_417,
+        QR_CODE,
+        RSS_14,
+        RSS_EXPANDED,
+        UPC_A,
+        UPC_E,
+        UPC_EAN_EXTENSION,
+        ASSUME_GS1
+    };
 
-  BarcodeFormat(Value v) : value(v) {}  
-  const Value value;
-  operator Value () const {return value;}
+    BarcodeFormat ( Value v ) : value ( v ) {}
+    const Value value;
+    operator Value () const {return value;}
 
-  static char const* barcodeFormatNames[];
+    static char const* barcodeFormatNames[];
 };
 
 }

@@ -59,8 +59,8 @@ contains (CONFIG, LINK_QQT_SOURCE) {
     #need QKIT_PRIVATE from qqt_kit.pri
     #you can open one or more macro to make sdk or link from build.
     #link from sdk is default setting
-    CONFIG += link_from_sdk
-    #CONFIG += link_from_build
+    #CONFIG += link_from_sdk
+    CONFIG += link_from_build
     #especially some occations need some sure macro.
     contains(QKIT_PRIVATE, iOS|iOSSimulator) {
         #mac ios .framework .a 里面的快捷方式必须使用里面的相对路径，不能使用绝对路径

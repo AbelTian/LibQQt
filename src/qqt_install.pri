@@ -161,7 +161,7 @@ defineReplace(create_linux_sdk) {
     #need cd sdk root
 
     command =
-    command += $$COPY $$HEADERS $${QQT_INC_DIR} $$CMD_SEP
+    command += $$COPY_DIR $${QQT_SRC_DIR}/*.h* $${QQT_INC_DIR} $$CMD_SEP
     command += $$COPY_DIR $${QQT_BUILD_DIR}/* $${QQT_LIB_DIR}
 
     return ($$command)
@@ -259,6 +259,7 @@ contains(CONFIG, qqt_create_sdk){
     module_name = $$lower($${MODULE_NAME})
 
     #-------define the all path
+    QQT_SRC_DIR=$${PWD}
     QQT_BUILD_DIR=$${OUT_PWD}/$${DESTDIR}
     #sdk path
     QQT_SDK_PWD = $${PWD}/../../$${QQT_STD_DIR}
@@ -272,7 +273,6 @@ contains(CONFIG, qqt_create_sdk){
 
     contains(QKIT_PRIVATE, WIN32|WIN64) {
         #on windows every path must use \ sep.
-        QQT_SRC_DIR=$${PWD}
         QQT_SRC_DIR~=s,/,\\,g
         QQT_BUILD_DIR~=s,/,\\,g
         QQT_SDK_PWD~=s,/,\\,g
