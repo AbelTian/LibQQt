@@ -40,13 +40,6 @@ HEADERS += \
     qqtuserserialprotocol.h \
     qqtsubprotocoltest.h
 
-contains (DEFINES, __BLUETOOTH__){
-    SOURCES += \
-        quserbluetoothprotocol.cpp
-    HEADERS += \
-        quserbluetoothprotocol.h
-}
-
 FORMS += \
         mainwindow.ui
 
@@ -59,6 +52,13 @@ system("touch main.cpp")
 #user can modify any infomation under this annotation
 #-------------------------------------------------
 include(../../examples/qqtframe2/link_qqt_library.pri)
+
+contains (DEFINES, __BLUETOOTH__){
+    SOURCES += \
+        quserbluetoothprotocol.cpp
+    HEADERS += \
+        quserbluetoothprotocol.h
+}
 
 #-------------------------------------------------
 #user app may use these these settings prefertly

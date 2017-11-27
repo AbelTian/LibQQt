@@ -45,9 +45,10 @@ SUBDIRS += test/coretest
 #-----------------------------------------------------------------
 #need webkit webkitwidgets - WebSupport
 #webengine
+#ignored
 #-----------------------------------------------------------------
-lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
-lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
+#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
+#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
 #-----------------------------------------------------------------
 #need QtSoap - WebSupport
 #-----------------------------------------------------------------
@@ -64,5 +65,5 @@ SUBDIRS += test/soapQQtOnline
 #SUBDIRS += test/qqtffmpegplayer
 
 #need bluetooth library
-SUBDIRS += test/qqtbtfileserver
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += test/qqtbtfileserver
 
