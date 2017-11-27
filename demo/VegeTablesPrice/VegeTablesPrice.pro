@@ -32,6 +32,10 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
+
+#debug.
+system("touch main.cpp")
+
 #-------------------------------------------------
 #link qqt library
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
@@ -42,5 +46,5 @@ include(../../examples/qqtframe2/link_qqt_library.pri)
 #-------------------------------------------------
 #user app may use these these settings prefertly
 #-------------------------------------------------
-include(../../examples/qqtframe2/user_app_may_settings.pri)
+include(../../examples/qqtframe2/app_settings.pri)
 

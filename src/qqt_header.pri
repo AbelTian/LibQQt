@@ -277,41 +277,48 @@ win32 {
 ##################################################################
 ##include directories
 ##################################################################
-INCLUDEPATH += $$PWD
-INCLUDEPATH += $$PWD/core
-INCLUDEPATH += $$PWD/customplot
-INCLUDEPATH += $$PWD/frame
-INCLUDEPATH += $$PWD/frame/dmmu
-INCLUDEPATH += $$PWD/gui
-INCLUDEPATH += $$PWD/multimedia
-INCLUDEPATH += $$PWD/network
-INCLUDEPATH += $$PWD/network/qextserialport
-INCLUDEPATH += $$PWD/network/soap
-INCLUDEPATH += $$PWD/pluginwatcher
-INCLUDEPATH += $$PWD/printsupport
-INCLUDEPATH += $$PWD/sql
-INCLUDEPATH += $$PWD/widgets
-INCLUDEPATH += $$PWD/charts
+defineReplace(qqt_header){
+    path = $$1
+    isEmpty(1) : error("qqt_header(path) requires one arguments.")
+    command += $${path}
+    command += $${path}/core
+    command += $${path}/customplot
+    command += $${path}/frame
+    command += $${path}/frame/dmmu
+    command += $${path}/gui
+    command += $${path}/multimedia
+    command += $${path}/network
+    command += $${path}/network/qextserialport
+    command += $${path}/network/soap
+    command += $${path}/pluginwatcher
+    command += $${path}/printsupport
+    command += $${path}/sql
+    command += $${path}/widgets
+    command += $${path}/charts
 
-#exquisite widget
-INCLUDEPATH += $$PWD/exquisite
-INCLUDEPATH += $$PWD/exquisite/svgwidgets
+    #exquisite widget
+    command += $${path}/exquisite
+    command += $${path}/exquisite/svgwidgets
 
-##qr code library
-INCLUDEPATH += $$PWD/exquisite/qrcode/qrencode
-INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode
-INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode/zxing
-win32-g++{
-    INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode/zxing/win32/zxing
-}
-win32-msvc*{
-    INCLUDEPATH += $$PWD/exquisite/qrcode/qrdecode/zxing/win32/zxing \
-                $$PWD/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
+    ##qr code library
+    command += $${path}/exquisite/qrcode/qrencode
+    command += $${path}/exquisite/qrcode/qrdecode
+    command += $${path}/exquisite/qrcode/qrdecode/zxing
+    win32-g++{
+        command += $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing
+    }
+    win32-msvc*{
+        command += $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing \
+                    $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
+    }
+
+    ##gumbo library
+    command += $${path}/exquisite/gumbo/parser/src
+    command += $${path}/exquisite/gumbo/query/src
+    win32{
+        command += $${path}/exquisite/gumbo/parser/visualc/include
+    }
+    return ($$command)
 }
 
-##gumbo library
-INCLUDEPATH += $$PWD/exquisite/gumbo/parser/src
-INCLUDEPATH += $$PWD/exquisite/gumbo/query/src
-win32{
-    INCLUDEPATH += $$PWD/exquisite/gumbo/parser/visualc/include
-}
+INCLUDEPATH += $$qqt_header($$PWD)

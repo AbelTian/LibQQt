@@ -1,6 +1,10 @@
 ################################################
 ##qqt_install.pri
 ##install to Qt library
+##install to SDK path
+##link from build
+##MLMA technology (Multi Link, Multi App technology)
+##MLMA技术，支持多链接、多应用的一门工程管理技术。
 ##please don't modify this pri
 ##need qqt_version.pri qqt_header.pri qqt_source.pri
 ################################################
@@ -69,8 +73,8 @@ defineReplace(get_copy_dir_and_file) {
     target = $$3
     !isEmpty(4): error("get_copy_dir_and_file(source, pattern, target) requires three arguments.")
     isEmpty(3) : error("get_copy_dir_and_file(source, pattern, target) requires three arguments.")
-    command = chmod +x $${PWD}/../extra/linux_cp_files.sh $${CMD_SEP}
-    command += $${PWD}/../extra/linux_cp_files.sh $${source} $${pattern} $${target}
+    command = chmod +x $${PWD}/linux_cp_files.sh $${CMD_SEP}
+    command += $${PWD}/linux_cp_files.sh $${source} $${pattern} $${target}
     return ($$command)
 }
 
@@ -173,27 +177,28 @@ defineReplace(create_windows_sdk) {
     #need cd sdk root
 
     command =
-    command += $${COPY_DIR} $${QQT_SRC_DIR}\*.h* $${QQT_INC_DIR} $$CMD_SEP
+    #copy header
+    command += $${COPY_DIR} $${QQT_SRC_PWD}\*.h* $${QQT_INC_DIR} $$CMD_SEP
     #should be *.dll *.lib
-    command += $${COPY_DIR} $${QQT_BUILD_DIR}\* $${QQT_LIB_DIR}
+    command += $${COPY_DIR} $${QQT_BUILD_PWD}\* $${QQT_LIB_DIR}
 
     return ($$command)
 }
 
 defineReplace(create_linux_sdk) {
     #need cd sdk root
-    copy_command = $$get_copy_dir_and_file($${QQT_SRC_DIR}, "*.h*", $${QQT_INC_DIR})
+    copy_command = $$get_copy_dir_and_file($${QQT_SRC_PWD}, "*.h*", $${QQT_INC_DIR})
     command =
     command += $${copy_command} $$CMD_SEP
     #should be *.so.* *.a
-    command += $$COPY_DIR $${QQT_BUILD_DIR}/* $${QQT_LIB_DIR}
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/* $${QQT_LIB_DIR}
 
     return ($$command)
 }
 
 defineReplace(create_mac_sdk){
     #need cd framework root
-    #QQT_BUILD_DIR MODULE_NAME QQT_MAJOR_VERSION
+    #QQT_BUILD_PWD MODULE_NAME QQT_MAJOR_VERSION
     QQT_BUNDLE_VER_DIR   = Versions/$${QQT_MAJOR_VERSION}
     QQT_BUNDLE_CUR_DIR   = Versions/Current
     QQT_BUNDLE_INC_DIR   = $${QQT_BUNDLE_VER_DIR}/Headers
@@ -214,9 +219,9 @@ defineReplace(create_mac_sdk){
     command += $$MK_DIR $$QQT_BUNDLE_INC_DIR $$CMD_SEP
     #copy lib
     #should be *
-    command += $$COPY_DIR $${QQT_BUILD_DIR}/$${MODULE_NAME}.framework/$${QQT_BUNDLE_VER_DIR}/* $$QQT_BUNDLE_VER_DIR $$CMD_SEP
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/$${MODULE_NAME}.framework/$${QQT_BUNDLE_VER_DIR}/* $$QQT_BUNDLE_VER_DIR $$CMD_SEP
     #copy header
-    copy_command = $$get_copy_dir_and_file($${QQT_SRC_DIR}, "*.h*", $${QQT_BUNDLE_INC_DIR})
+    copy_command = $$get_copy_dir_and_file($${QQT_SRC_PWD}, "*.h*", $${QQT_BUNDLE_INC_DIR})
     command += $${copy_command} $$CMD_SEP
     #link header current resources
     command += $$CD Versions $$CMD_SEP
@@ -278,15 +283,15 @@ defineReplace(create_library_sdk){
     #QQT_BASE_DIR MODULE_NAME QQT_VERSION MODULE_CNAME
 
     command =
-    command += $$RM_DIR $$QQT_SDK_PWD $$CMD_SEP
-    command += $$MK_DIR $$QQT_SDK_PWD $$CMD_SEP
-    command += $$CD $$QQT_SDK_PWD $$CMD_SEP
+    command += $$RM_DIR $${QQT_SDK_PWD} $$CMD_SEP
+    command += $$MK_DIR $${QQT_SDK_PWD} $$CMD_SEP
+    command += $$CD $${QQT_SDK_PWD} $$CMD_SEP
     command += $$create_dir_struct()
 
     contains(QKIT_PRIVATE, WIN32|WIN64) {
         #message(create QQt windows struct library)
         command += $$create_windows_sdk() $$CMD_SEP
-        command += $$COPY $$QQT_BUILD_DIR\*.prl lib $$CMD_SEP
+        command += $$COPY $${QQT_BUILD_PWD}\*.prl lib $$CMD_SEP
     } else {
         contains(QKIT_PRIVATE, macOS) {
             #message(create QQt mac bundle framework)
@@ -295,11 +300,11 @@ defineReplace(create_library_sdk){
             command += $$create_mac_sdk() $$CMD_SEP
             command += $$CD ../../ $$CMD_SEP
             #create prl
-            command += $$COPY $$QQT_BUILD_DIR/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl lib/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl $$CMD_SEP
+            command += $$COPY $${QQT_BUILD_PWD}/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl lib/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl $$CMD_SEP
         } else {
             #message(create QQt linux struct library)
             command += $$create_linux_sdk() $$CMD_SEP
-            command += $$COPY $$QQT_BUILD_DIR/*.prl lib $$CMD_SEP
+            command += $$COPY $${QQT_BUILD_PWD}/*.prl lib $$CMD_SEP
         }
     }
     command += $$create_qt_lib_pri()
@@ -316,13 +321,7 @@ defineReplace(create_qqt_sdk){
     MODULE_NAME=QQt
     module_name = $$lower($${MODULE_NAME})
 
-    #-------define the all path
-    QQT_SRC_DIR=$${PWD}
-    QQT_BUILD_DIR=$${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/src/bin
-    #sdk path
-    QQT_SDK_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}
-    #message(QQt sdk install here:$${QQT_SDK_PWD})
-
+    #qqt defined these dir struct, used from qt library
     QQT_INC_DIR = include/$${MODULE_NAME}
     QQT_LIB_DIR = lib
     QQT_CMAKE_DIR=lib/cmake/$${MODULE_NAME}
@@ -331,8 +330,8 @@ defineReplace(create_qqt_sdk){
 
     contains(QKIT_PRIVATE, WIN32|WIN64) {
         #on windows every path must use \ sep.
-        QQT_SRC_DIR~=s,/,\\,g
-        QQT_BUILD_DIR~=s,/,\\,g
+        QQT_SRC_PWD~=s,/,\\,g
+        QQT_BUILD_PWD~=s,/,\\,g
         QQT_SDK_PWD~=s,/,\\,g
 
         QQT_INC_DIR~=s,/,\\,g
@@ -348,18 +347,20 @@ defineReplace(create_qqt_sdk){
         #qmake regexp use perl grammer
         #HEADERS_WIN~=s/[d ]+/h+/g how to mod space to +
     }
+    #create library struct
+    #create platform sdk
+    #create mkspec module pri
+    command = $$create_library_sdk()
 
-    post_link = $$create_library_sdk()
-    #message ($$post_link)
-    return ($$post_link)
+    #message ($$command)
+    return ($$command)
 }
 
 #if you want to use QQt with QT += QQt please open this feature
 #unimplete: CONFIG += install_to_qt_library
 defineReplace(install_to_qt_library){
     MODULE_NAME=QQt
-    QQT_BUILD_DIR=$$OUT_PWD/bin
-    #sdk path
+    #QQT_BUILD_PWD
     QQT_SDK_PWD=$$[QT_INSTALL_DATA]
     message(QQt sdk install here:$${QQT_SDK_PWD})
 }

@@ -138,6 +138,8 @@ void QQtApplication::slotUPanAutoRun ( int status )
 #endif
     }
 
+#else
+    Q_UNUSED ( status )
 #endif
 }
 

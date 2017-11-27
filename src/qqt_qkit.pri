@@ -121,5 +121,3 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 message(Build $${TARGET} to $${QKIT_PRIVATE})
 message(Build $${TARGET} at $${QT_VERSION} $${SYSNAME} $${BUILD})
 message(Build $${TARGET} on $${QMAKE_HOST.os})
-
-QQT_STD_DIR = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}

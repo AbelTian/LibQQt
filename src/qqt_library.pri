@@ -11,7 +11,7 @@
 ##include qqt_install.pri using these function to install qqt
 ##install to Qt library
 ##install to SDK path
-##in this section, I use QMAKE_POST_LINK, it won't work until project source changed
+##in this section, I use QMAKE_PRE_LINK QMAKE_POST_LINK, it won't work until project source changed
 ##on windows, I use touch.exe, you need download it and put it in system dir.
 ################################################
 #QMAKE_POST_LINK won't work until source changed
@@ -20,7 +20,7 @@
 #debug.
 system("touch $${PWD}/frame/qqtapplication.cpp")
 include ($$PWD/qqt_install.pri)
-#QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD what?
+#QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD
 
 #TARGET must be equals to pro name ? no, TARGET must be placeed before qqt_library.pri
 #qmake pro pri is sequential
@@ -44,45 +44,60 @@ defineReplace(link_qqt_library) {
     return ($${LINK})
 }
 
-defineReplace(link_qqt_on_mac) {
-    equals(QKIT_PRIVATE, macOS) {
-        MODULE_NAME = QQt
-        command = $$create_mac_sdk()
+defineReplace(copy_qqt_on_mac) {
+    #need QQT_BUILD_PWD
+    create_command = $$create_mac_sdk()
 
-        post_link += rm -rf bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-        post_link += mkdir -p bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-        post_link += cd bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-        post_link += $${command} &&
-        post_link += cd $${OUT_PWD} &&
-        #Qt Creator create framework but use absolute path to make link
-        #QMAKE_POST_LINK += cp -rf $${QQT_LIB_PWD}/QQt.framework \
-        #        bin/$${TARGET}.app/Contents/Frameworks &&
-        post_link += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
-             @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
-             bin/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
-        post_link += macdeployqt bin/$${TARGET}.app -verbose=1
-        message($$post_link)
-        return ($$post_link)
-    }
+    command += rm -rf bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
+    command += mkdir -p bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
+    command += cd bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
+    command += $${create_command} &&
+    command += cd $${OUT_PWD} &&
+    #Qt Creator create framework but use absolute path to make link
+    #QMAKE_POST_LINK += cp -rf $${QQT_LIB_PWD}/QQt.framework \
+    #        bin/$${TARGET}.app/Contents/Frameworks &&
+    command += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
+         @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
+         bin/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
+    command += macdeployqt bin/$${TARGET}.app -verbose=1
+    message($$command)
+    return ($$command)
 }
 
 
 ################################################
 ##link qqt work flow
 ################################################
+#-------module name QQt
+MODULE_NAME=QQt
+module_name = $$lower($${MODULE_NAME})
+
+#-------define the all path
+#create platform sdk need this
+QQT_SRC_PWD=$${PWD}
+#need use qqt subdir proj
+QQT_BUILD_PWD=$${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
+#sdk path
+QQT_SDK_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}
+#message(QQt sdk install here:$${QQT_SDK_PWD})
+
 contains(CONFIG, link_from_sdk) {
-    QQT_LIB_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}/lib
-    message (Link QQt from: $$QQT_LIB_PWD)
     #create sdk first
-    LIBS += $$link_qqt_library()
     QMAKE_PRE_LINK = $$create_qqt_sdk()
-    QMAKE_POST_LINK += $$link_qqt_on_mac()
-}
-contains(CONFIG, link_from_build) {
-    QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/src/bin
-    message (Link QQt from: $$QQT_LIB_PWD)
-    LIBS += $$link_qqt_library()
-    QMAKE_POST_LINK = $$link_qqt_on_mac()
+    equals(QKIT_PRIVATE, macOS) {
+        QMAKE_POST_LINK += $$copy_qqt_on_mac()
+    }
+    #private struct
+    QQT_LIB_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}/lib
 }
 
+contains(CONFIG, link_from_build) {
+    equals(QKIT_PRIVATE, macOS) {
+        QMAKE_POST_LINK += $$copy_qqt_on_mac()
+    }
+    QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
+}
+
+message (Link QQt from: $$QQT_LIB_PWD)
+LIBS += $$link_qqt_library()
 
