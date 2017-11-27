@@ -15,7 +15,6 @@ QKIT_PRIVATE = $$(QKIT)
 #macOS __DARWIN__
 #ANDROID __ANDROID__
 #ANDROIDX86 __ANDROIDX86__
-message(Build $${TARGET} to $${QKIT_PRIVATE})
 equals(QKIT_PRIVATE, EMBEDDED) {
     #embedded common macro
     DEFINES += __EMBEDDED_LINUX__
@@ -118,6 +117,8 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 } else:equals(QKIT_PRIVATE, ANDROIDX86) {
     SYSNAME = Android_x86
 }
+
+message(Build $${TARGET} to $${QKIT_PRIVATE})
 message(Build $${TARGET} at $${QT_VERSION} $${SYSNAME} $${BUILD})
 message(Build $${TARGET} on $${QMAKE_HOST.os})
 

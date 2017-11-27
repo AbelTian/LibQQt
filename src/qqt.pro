@@ -12,6 +12,7 @@
 #################################################################
 #Suggest Qt 5.9.2/4.8.6/4.8.7
 #please dont use Qt 5.9.1, it is broken with android and ios.
+#please dont modify this pro
 
 #################################################################
 ##project name
@@ -23,7 +24,7 @@ TEMPLATE = lib
 ##project config definition
 ##need QKIT to compitible with some occasion
 ################################################
-include ($$PWD/qqt_kit.pri)
+include ($$PWD/qqt_qkit.pri)
 
 ##win platform: some target, special lib lib_bundle staticlib
 ##only deal dynamic is ok, static all in headers dealing.
@@ -104,31 +105,21 @@ win32 {
     RC_CODEPAGE=
 }
 
-
-
-
 ################################################
 ##project resource
 ################################################
 RESOURCES += \
     qqt.qrc
 
+################################################################
+##build cache
+################################################################
+OBJECTS_DIR = obj
+MOC_DIR = obj/moc.cpp
+UI_DIR = obj/ui.h
+RCC_DIR = qrc
+DESTDIR = bin
 
-################################################
-##install to Qt library
-##in this section, I use QMAKE_POST_LINK, it won't work until project source changed
-##on windows, I use touch.exe and cp.exe, you need download it and put it in system dir.
-################################################
-#debug.
-#QMAKE_POST_LINK won't work until source changed
-#qmake pro pri prf change won't effect to QMAKE_POST_LINK
-#but I need it before I complete this pri.
-CONFIG += qqt_create_sdk
-contains(CONFIG, qqt_create_sdk) {
-    system("touch $${PWD}/frame/qqtapplication.cpp")
-    include ($$PWD/qqt_install.pri)
-}
-#QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD what?
 
 #################################################################
 ##project environ

@@ -19,7 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #2017年11月10日18:53:56
 
 ##Don't modify this file outside QQt project
-##this is QQt feature pri you can modify QQt feature in QQt project at this pri
+##this is QQt feature pri you can modify QQt feature at this pri in QQt project
 
 #################################################################
 ##definition and configration
@@ -77,15 +77,6 @@ contains(QKIT_PRIVATE, WIN32) {
         DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
     }
 }
-
-################################################################
-##build cache
-################################################################
-OBJECTS_DIR = obj
-MOC_DIR = obj/moc.cpp
-UI_DIR = obj/ui.h
-RCC_DIR = qrc
-DESTDIR = bin
 
 ################################################################
 ##QQt Functions Macro

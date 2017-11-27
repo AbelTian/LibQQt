@@ -35,35 +35,12 @@ FORMS += \
 #-------------------------------------------------
 #link qqt library
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
+#user can modify any infomation under this annotation
 #-------------------------------------------------
 include(../../examples/qqtframe2/link_qqt_library.pri)
 
 #-------------------------------------------------
-#install
+#user app may use these these settings prefertly
 #-------------------------------------------------
-#CONFIG += can_install
-can_install:equals(QKIT_PRIVATE, EMBEDDED) {
-    target.path = /Application
-    INSTALLS += target
-} else: unix {
-    equals(QKIT_PRIVATE, macOS) {
-        target.path = /Applications
-        INSTALLS += target
-    }
-}
+include(../../examples/qqtframe2/user_app_may_settings.pri)
 
-#-------------------------------------------------
-##project environ
-#-------------------------------------------------
-#default
-message ($${TARGET} config $${CONFIG})
-message ($${TARGET} define $${DEFINES})
-
-contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
-    CONFIG += mobility
-    MOBILITY =
-    DISTFILES += \
-        android/AndroidManifest.xml
-
-    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-}
