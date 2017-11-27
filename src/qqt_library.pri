@@ -47,19 +47,20 @@ defineReplace(link_qqt_library) {
 defineReplace(copy_qqt_on_mac) {
     #need QQT_BUILD_PWD
     create_command = $$create_mac_sdk()
-
-    command += rm -rf bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-    command += mkdir -p bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-    command += cd bin/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
+    QQT_DESTDIR=$${DESTDIR}
+    isEmpty(QQT_DESTDIR):QQT_DESTDIR=.
+    command += rm -rf $${QQT_DESTDIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
+    command += mkdir -p $${QQT_DESTDIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
+    command += cd $${QQT_DESTDIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
     command += $${create_command} &&
     command += cd $${OUT_PWD} &&
     #Qt Creator create framework but use absolute path to make link
     #QMAKE_POST_LINK += cp -rf $${QQT_LIB_PWD}/QQt.framework \
-    #        bin/$${TARGET}.app/Contents/Frameworks &&
+    #        $${DESTDIR}/$${TARGET}.app/Contents/Frameworks &&
     command += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
          @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
-         bin/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
-    command += macdeployqt bin/$${TARGET}.app -verbose=1
+         $${QQT_DESTDIR}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
+    command += macdeployqt $${QQT_DESTDIR}/$${TARGET}.app -verbose=1
     #message($$command)
     return ($$command)
 }

@@ -79,6 +79,15 @@ contains(QKIT_PRIVATE, WIN32) {
 }
 
 ################################################################
+##build cache
+################################################################
+isEmpty(OBJECTS_DIR):OBJECTS_DIR = obj
+isEmpty(MOC_DIR):MOC_DIR = obj/moc.cpp
+isEmpty(UI_DIR):UI_DIR = obj/ui.h
+isEmpty(RCC_DIR):RCC_DIR = qrc
+isEmpty(DESTDIR):DESTDIR = bin
+
+################################################################
 ##QQt Functions Macro
 ################################################################
 #You need switch these more macro according to your needs when you build this library

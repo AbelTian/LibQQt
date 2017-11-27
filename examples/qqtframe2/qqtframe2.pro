@@ -13,35 +13,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
-include(../qqtframe2/link_qqt_library.pri)
-
-############
-##install
-############
-#CONFIG += can_install
-can_install:equals(QKIT_PRIVATE, EMBEDDED) {
-    target.path = /Application
-    INSTALLS += target
-} else: unix {
-    equals(QKIT_PRIVATE, macOS) {
-        target.path = /Applications
-        INSTALLS += target
-    }
-}
-
-equals(QKIT_PRIVATE, ANDROID) {
-    CONFIG += mobility
-    MOBILITY =
-}
-
-#################################################################
-##project environ
-#################################################################
-#default
-message ($${TARGET} config $${CONFIG})
-message ($${TARGET} define $${DEFINES})
-
 TARGET = qqtframe2
 TEMPLATE = app
 
@@ -54,3 +25,7 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+
+include(../qqtframe2/link_qqt_library.pri)
+include(../qqtframe2/app_settings.pri)

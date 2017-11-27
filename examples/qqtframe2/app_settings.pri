@@ -25,7 +25,7 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
     DISTFILES += \
         android/AndroidManifest.xml
 
-    ANDROID_PACKAGE_SOURCE_DIR = android
+    ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
 }
 
 ################################################################

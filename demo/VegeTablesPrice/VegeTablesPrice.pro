@@ -33,7 +33,7 @@ FORMS += \
     mainwindow.ui
 
 
-#debug.
+#qmake_pre/post_link will work after source changed but not pro pri changed.
 system("touch main.cpp")
 
 #-------------------------------------------------
@@ -46,5 +46,42 @@ include(../../examples/qqtframe2/link_qqt_library.pri)
 #-------------------------------------------------
 #user app may use these these settings prefertly
 #-------------------------------------------------
-include(../../examples/qqtframe2/app_settings.pri)
+#-------------------------------------------------
+#install app
+#-------------------------------------------------
+#CONFIG += can_install
+can_install:equals(QKIT_PRIVATE, EMBEDDED) {
+    target.path = /Application
+    INSTALLS += target
+} else: unix {
+    equals(QKIT_PRIVATE, macOS) {
+        target.path = /Applications
+        INSTALLS += target
+    }
+}
+
+############
+##config defination
+############
+equals(QKIT_PRIVATE, macOS) {
+    CONFIG += app_bundle
+}
+
+contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
+    CONFIG += mobility
+    MOBILITY =
+    DISTFILES += \
+        android/AndroidManifest.xml
+
+    ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
+}
+
+
+#-------------------------------------------------
+##project environ
+#-------------------------------------------------
+#default
+message ($${TARGET} config $${CONFIG})
+message ($${TARGET} define $${DEFINES})
+
 

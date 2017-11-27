@@ -49,12 +49,6 @@ equals(QMAKE_HOST.os, Darwin) {
 #all cross platform setting is from here.
 include($${QQT_SOURCE_ROOT}/src/qqt_qkit.pri)
 
-#if you dont modify Qt Creator default build directory, you may need mod this path variable.
-#link operation all will need this variable
-QQT_STD_DIR = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}
-#link from build need this
-QQT_DST_DIR = src/bin
-
 #qqt version
 include($${QQT_SOURCE_ROOT}/src/qqt_version.pri)
 
@@ -64,6 +58,12 @@ include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
 #-------------------------------------------------------------
 #link qqt settings: use source or link library?
 #-------------------------------------------------------------
+#if you dont modify Qt Creator default build directory, you may need mod this path variable.
+#link operation all will need this variable
+QQT_STD_DIR = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}
+#link from build need this, if you mod DESTDIR, you will need modify this
+QQT_DST_DIR = src/bin
+
 #if you want to build qqt source open this annotation
 #CONFIG += LINK_QQT_SOURCE
 contains (CONFIG, LINK_QQT_SOURCE) {

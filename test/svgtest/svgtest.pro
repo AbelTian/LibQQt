@@ -37,14 +37,21 @@ CONFIG += mobility
 MOBILITY = 
 
 
+#qmake_pre/post_link will work after source changed but not pro pri changed.
+system("touch main.cpp")
+
 #-------------------------------------------------
 #link qqt library
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
+#user can modify any infomation under this annotation
 #-------------------------------------------------
 include(../../examples/qqtframe2/link_qqt_library.pri)
 
 #-------------------------------------------------
-#install
+#user app may use these these settings prefertly
+#-------------------------------------------------
+#-------------------------------------------------
+#install app
 #-------------------------------------------------
 #CONFIG += can_install
 can_install:equals(QKIT_PRIVATE, EMBEDDED) {
@@ -57,6 +64,23 @@ can_install:equals(QKIT_PRIVATE, EMBEDDED) {
     }
 }
 
+############
+##config defination
+############
+equals(QKIT_PRIVATE, macOS) {
+    CONFIG += app_bundle
+}
+
+contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
+    CONFIG += mobility
+    MOBILITY =
+    DISTFILES += \
+        android/AndroidManifest.xml
+
+    ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
+}
+
+
 #-------------------------------------------------
 ##project environ
 #-------------------------------------------------
@@ -64,17 +88,4 @@ can_install:equals(QKIT_PRIVATE, EMBEDDED) {
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
 
-contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
-    CONFIG += mobility
-    MOBILITY =
-    DISTFILES += \
-        android/AndroidManifest.xml \
-        android/gradle/wrapper/gradle-wrapper.jar \
-        android/gradlew \
-        android/res/values/libs.xml \
-        android/build.gradle \
-        android/gradle/wrapper/gradle-wrapper.properties \
-        android/gradlew.bat
 
-    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-}
