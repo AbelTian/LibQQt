@@ -48,11 +48,11 @@ equals(QKIT_PRIVATE, EMBEDDED) {
     DEFINES += __ANDROIDX86__
 }
 
-QMAKESPEC_NAME = $${QMAKESPEC}
-QMAKESPEC_NAME ~= s@^/.*/([^/]+)/?@\1@g
-QMAKESPECS = $${QMAKESPEC}
-QMAKESPECS ~= s:/[^/]*$::p
-message (used spec: $$QMAKESPEC_NAME at here: $$QMAKESPECS )
+#QMAKESPEC_NAME = $${QMAKESPEC}
+#QMAKESPEC_NAME ~= s@^/.*/([^/]+)/?@\1@g
+#QMAKESPECS = $${QMAKESPEC}
+#QMAKESPECS ~= s:/[^/]*$::p
+#message (used spec: $$QMAKESPEC_NAME at here: $$QMAKESPECS )
 #equals(QMAKESPEC_NAME, EMBEDDED) {
 #    #embedded common macro
 #    DEFINES += __EMBEDDED_LINUX__

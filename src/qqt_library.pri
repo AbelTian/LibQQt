@@ -60,7 +60,7 @@ defineReplace(copy_qqt_on_mac) {
          @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
          bin/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     command += macdeployqt bin/$${TARGET}.app -verbose=1
-    message($$command)
+    #message($$command)
     return ($$command)
 }
 
