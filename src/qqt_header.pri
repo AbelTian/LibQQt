@@ -153,7 +153,10 @@ contains (DEFINES, __CPP11__) {
 
 ##################MultiMedia Module###############################
 DEFINES += __MULTIMEDIA__
-lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__MULTIMEDIA__
+#mac no multimedia
+contains(QKIT_PRIVATE, macOS) {
+    lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__MULTIMEDIA__
+}
 contains (DEFINES, __MULTIMEDIA__) {
     QT += multimedia
 }
@@ -201,7 +204,9 @@ contains (DEFINES, __EXQUISITE__) {
     }
     #if you use Svg widgets, open this annotation
     DEFINES += __SVGWIDGETS__
-    lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__SVGWIDGETS__
+    contains(QKIT_PRIVATE, macOS) {
+        lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__SVGWIDGETS__
+    }
     contains (DEFINES, __SVGWIDGETS__) {
         QT += svg
     }
