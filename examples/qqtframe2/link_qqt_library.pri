@@ -61,7 +61,7 @@ include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
 #if you dont modify Qt Creator default build directory, you may need mod this path variable.
 #link operation all will need this variable
 QQT_STD_DIR = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}
-#link from build need this, if you mod DESTDIR, you will need modify this
+#link from build need this, if you havent mod QQt.pro, this can only be two value, qqt's: [src]/$DESTDIR
 QQT_DST_DIR = src/bin
 
 #if you want to build qqt source open this annotation

@@ -44,24 +44,39 @@ defineReplace(link_qqt_library) {
     return ($${LINK})
 }
 
-defineReplace(copy_qqt_on_mac) {
+#在Mac上，运行前必须拷贝依赖，是个deploy过程。
+#Mac不用于其他操作系统，对于bundle，任何运行时刻都需要拷贝依赖，包括build完成后。
+defineReplace(deploy_qqt_on_mac) {
     #need QQT_BUILD_PWD
+    deploy_path = $$1
+    isEmpty(1): error("deploy_qqt_on_mac(deploy_path) requires one argument")
     create_command = $$create_mac_sdk()
-    QQT_DESTDIR=$${DESTDIR}
-    isEmpty(QQT_DESTDIR):QQT_DESTDIR=.
-    command += rm -rf $${QQT_DESTDIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-    command += mkdir -p $${QQT_DESTDIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-    command += cd $${QQT_DESTDIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
+    DEPLOY_DESTDIR=$${deploy_path}
+    isEmpty(DEPLOY_DESTDIR):DEPLOY_DESTDIR=.
+    command =
+    command += chmod +x $${PWD}/linux_cur_path.sh &&
+    command += . $${PWD}/linux_cur_path.sh &&
+    command += rm -rf $${DEPLOY_DESTDIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
+    command += mkdir -p $${DEPLOY_DESTDIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
+    command += cd $${DEPLOY_DESTDIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
     command += $${create_command} &&
-    command += cd $${OUT_PWD} &&
+    command += chmod +x $${PWD}/linux_cd_path.sh &&
+    command += . $${PWD}/linux_cd_path.sh &&
+
     #Qt Creator create framework but use absolute path to make link
     #QMAKE_POST_LINK += cp -rf $${QQT_LIB_PWD}/QQt.framework \
-    #        $${DESTDIR}/$${TARGET}.app/Contents/Frameworks &&
+    #        $${DEPLOY_DESTDIR}/$${TARGET}.app/Contents/Frameworks &&
     command += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
          @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
-         $${QQT_DESTDIR}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
-    command += macdeployqt $${QQT_DESTDIR}/$${TARGET}.app -verbose=1
-    #message($$command)
+         $${DEPLOY_DESTDIR}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
+    command += macdeployqt $${DEPLOY_DESTDIR}/$${TARGET}.app -verbose=1
+    message($$command)
+    return ($$command)
+}
+
+defineReplace(copy_qqt_on_mac) {
+    #need QQT_BUILD_PWD
+    command = $$deploy_qqt_on_mac($${DESTDIR})
     return ($$command)
 }
 

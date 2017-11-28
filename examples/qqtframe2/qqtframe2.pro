@@ -27,5 +27,6 @@ FORMS += \
         mainwindow.ui
 
 
-include(../qqtframe2/link_qqt_library.pri)
 include(../qqtframe2/app_settings.pri)
+include(../qqtframe2/link_qqt_library.pri)
+include(../qqtframe2/app_deploy.pri)
