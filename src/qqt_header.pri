@@ -153,6 +153,7 @@ contains (DEFINES, __CPP11__) {
 
 ##################MultiMedia Module###############################
 DEFINES += __MULTIMEDIA__
+lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__MULTIMEDIA__
 contains (DEFINES, __MULTIMEDIA__) {
     QT += multimedia
 }
@@ -191,13 +192,16 @@ contains (DEFINES, __EXQUISITE__) {
     #if you use QR encode, open this annotation
     DEFINES += __QRENCODE__
     #if you use QR decode, open this annotation
-    DEFINES += __QRDECODE__
+    #QZXing isnan_z function error. fixed
+    #QZxing delegating constructors used. need c++11,but qt4.8.7 dont support c++11
+    #DEFINES += __QRDECODE__
     contains(DEFINES, __QRDECODE__) {
         #lessThan(QT_MAJOR_VERSION, 5): QT += declarative
         greaterThan(QT_MAJOR_VERSION, 4): QT += quick
     }
     #if you use Svg widgets, open this annotation
     DEFINES += __SVGWIDGETS__
+    lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__SVGWIDGETS__
     contains (DEFINES, __SVGWIDGETS__) {
         QT += svg
     }

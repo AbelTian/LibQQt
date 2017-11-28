@@ -7,7 +7,8 @@ SUBDIRS = src/qqt.pro
 ##basic example
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe
-#SUBDIRS += examples/qqtframe2
+#
+SUBDIRS += examples/qqtframe2
 #SUBDIRS += examples/animationframe
 #
 ##-----------------------------------------------------------------
@@ -28,8 +29,7 @@ SUBDIRS = src/qqt.pro
 ##need GumoQuery
 ##-----------------------------------------------------------------
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
-#
-greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
+#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 ##-----------------------------------------------------------------
 ##some test project
 ##-----------------------------------------------------------------

@@ -54,6 +54,12 @@ defineReplace(deploy_qqt_on_mac) {
          @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
          $${DEPLOY_DESTDIR}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     command += macdeployqt $${DEPLOY_DESTDIR}/$${TARGET}.app -verbose=1
+
+    lessThan(QT_MAJOR_VERSION, 5){
+        command += &&
+        command += chmod +x $${PWD}/mac_deploy_qt4.sh &&
+        command += $${PWD}/mac_deploy_qt4.sh $${DEPLOY_DESTDIR}/$${TARGET}.app/Contents/MacOS/$${TARGET}
+    }
     message($$command)
     return ($$command)
 }

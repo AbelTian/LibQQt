@@ -111,7 +111,9 @@ win32 {
 RESOURCES += \
     qqt.qrc
 DISTFILES += \
-    linux_cp_files.sh
+    linux_cp_files.sh \
+    linux_cur_path.sh \
+    linux_cd_path.sh
 
 #################################################################
 ##project environ
@@ -119,4 +121,3 @@ DISTFILES += \
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
-

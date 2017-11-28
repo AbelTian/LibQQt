@@ -230,7 +230,11 @@ defineReplace(create_mac_sdk){
     command += $$LN $$QQT_BUNDLE_CUR_INC_DIR  $${QQT_BUNDLE_INC_LINK} $$CMD_SEP
     command += $$LN $$QQT_BUNDLE_CUR_RES_DIR  $${QQT_BUNDLE_RES_LINK} $$CMD_SEP
     command += $$LN $$QQT_BUNDLE_CUR_EXE_FILE $${QQT_BUNDLE_EXE_LINK}
-
+    lessThan(QT_MAJOR_VERSION, 5){
+        command += &&
+        command += chmod +x $${PWD}/mac_deploy_qt4.sh &&
+        command += $${PWD}/mac_deploy_qt4.sh $${QQT_BUNDLE_VER_DIR}/$${MODULE_NAME}
+    }
     return ($$command)
 }
 
@@ -281,7 +285,7 @@ defineReplace(create_qt_lib_pri){
 defineReplace(create_library_sdk){
     #need cd sdk root
     #QQT_BASE_DIR MODULE_NAME QQT_VERSION MODULE_CNAME
-
+    #$1 $2 $3...
     command =
     command += $$RM_DIR $${QQT_SDK_PWD} $$CMD_SEP
     command += $$MK_DIR $${QQT_SDK_PWD} $$CMD_SEP
