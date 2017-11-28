@@ -26,6 +26,7 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
+system(touch main.cpp)
 
 include(../qqtframe2/app_settings.pri)
 include(../qqtframe2/link_qqt_library.pri)

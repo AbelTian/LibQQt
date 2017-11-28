@@ -43,4 +43,3 @@ DESTDIR = bin
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
-

@@ -42,10 +42,8 @@ system("touch main.cpp")
 #user can modify any infomation under this annotation
 #-------------------------------------------------
 include(../../examples/qqtframe2/link_qqt_library.pri)
+include(../../examples/qqtframe2/app_deploy.pri)
 
-#-------------------------------------------------
-#user app may use these these settings prefertly
-#-------------------------------------------------
 #-------------------------------------------------
 #install app
 #-------------------------------------------------
@@ -76,12 +74,9 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
     ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
 }
 
-
 #-------------------------------------------------
 ##project environ
 #-------------------------------------------------
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
-
-

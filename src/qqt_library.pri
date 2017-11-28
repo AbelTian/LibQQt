@@ -6,22 +6,6 @@
 ##https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0
 ##2017年10月29日08:54:28
 ################################################
-
-################################################
-##include qqt_install.pri using these function to install qqt
-##install to Qt library
-##install to SDK path
-##in this section, I use QMAKE_PRE_LINK QMAKE_POST_LINK, it won't work until project source changed
-##on windows, I use touch.exe, you need download it and put it in system dir.
-################################################
-#QMAKE_POST_LINK won't work until source changed
-#qmake pro pri prf change won't effect to QMAKE_POST_LINK
-#but I need it before I complete this pri.
-#debug.
-system("touch $${PWD}/frame/qqtapplication.cpp")
-include ($$PWD/qqt_install.pri)
-#QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD
-
 #TARGET must be equals to pro name ? no, TARGET must be placeed before qqt_library.pri
 #qmake pro pri is sequential
 message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
@@ -100,20 +84,20 @@ QQT_SDK_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}
 contains(CONFIG, link_from_sdk) {
     #create sdk first
     QMAKE_PRE_LINK = $$create_qqt_sdk()
+    #private struct
+    QQT_LIB_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}/lib
     equals(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$copy_qqt_on_mac()
     }
-    #private struct
-    QQT_LIB_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}/lib
 }
 
 contains(CONFIG, link_from_build) {
+    QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
     equals(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$copy_qqt_on_mac()
     }
-    QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
 }
 
-message (Link QQt from: $$QQT_LIB_PWD)
 LIBS += $$link_qqt_library()
+message (Link QQt from: $${QQT_LIB_PWD})
 

@@ -96,5 +96,20 @@ contains (CONFIG, LINK_QQT_SOURCE) {
         #...
     }
 
+    ################################################
+    ##include qqt_install.pri using these function to install qqt
+    ##install to Qt library
+    ##install to SDK path
+    ##in this section, I use QMAKE_PRE_LINK QMAKE_POST_LINK, it won't work until project source changed
+    ##on windows, I use touch.exe, you need download it and put it in system dir.
+    ################################################
+    #QMAKE_POST_LINK won't work until source changed
+    #qmake pro pri prf change won't effect to QMAKE_POST_LINK
+    #but I need it before I complete this pri.
+    #debug.
+    system("touch $${QQT_SOURCE_ROOT}/src/frame/qqtapplication.cpp")
+    include ($${QQT_SOURCE_ROOT}/src/qqt_install.pri)
+    #QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD
+
     include($${QQT_SOURCE_ROOT}/src/qqt_library.pri)
 }
