@@ -9,6 +9,17 @@
 #auto copy QQt when deploy app
 
 #-------------------------------------------------------------
+#link path init
+#-------------------------------------------------------------
+
+QKIT_PRIVATE=$$(QKIT)
+isEmpty(QKIT_PRIVATE) {
+    message(env variable QKIT is equired!)
+    message(pleace check qqt_qkit.pri)
+    error(error occured!)
+}
+
+#-------------------------------------------------------------
 #user computer path settings
 #-------------------------------------------------------------
 #qqt source root, QQt's root pro path. subdir and
@@ -48,6 +59,9 @@ equals(QMAKE_HOST.os, Darwin) {
 #qqt qkit
 #all cross platform setting is from here.
 include($${QQT_SOURCE_ROOT}/src/qqt_qkit.pri)
+
+#qqt function
+include($${QQT_SOURCE_ROOT}/src/qqt_function.pri)
 
 #qqt version
 include($${QQT_SOURCE_ROOT}/src/qqt_version.pri)

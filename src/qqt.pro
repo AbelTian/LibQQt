@@ -26,6 +26,13 @@ TEMPLATE = lib
 ################################################
 include ($$PWD/qqt_qkit.pri)
 
+################################################
+##project function
+##support some commonly used function
+################################################
+include ($$PWD/qqt_function.pri)
+
+
 ##win platform: some target, special lib lib_bundle staticlib
 ##only deal dynamic is ok, static all in headers dealing.
 ##define macro before header.
@@ -113,7 +120,9 @@ RESOURCES += \
 DISTFILES += \
     linux_cp_files.sh \
     linux_cur_path.sh \
-    linux_cd_path.sh
+    linux_cd_path.sh \
+    linux_read_ini.sh \
+    win_read_ini.bat
 
 #################################################################
 ##project environ

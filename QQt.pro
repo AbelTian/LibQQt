@@ -8,6 +8,7 @@ SUBDIRS = src/qqt.pro
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe
 #
+#
 SUBDIRS += examples/qqtframe2
 #SUBDIRS += examples/animationframe
 #
@@ -30,7 +31,7 @@ SUBDIRS += examples/qqtframe2
 ##-----------------------------------------------------------------
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
-SUBDIRS +=     examples/GuiBuildTool
+#SUBDIRS +=     examples/GuiBuildTool
 ##-----------------------------------------------------------------
 ##some test project
 ##-----------------------------------------------------------------
