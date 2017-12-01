@@ -3,13 +3,13 @@
 
 #define PRODUCT_ICON              "qqt.ico"
 
-#define FILE_VERSION              2,1,0,0
-#define FILE_VERSION_STR          "2.1.0.0"
+#define FILE_VERSION              2,1,1,0
+#define FILE_VERSION_STR          "2.1.1.0"
 #define FILE_DESCRIPTION          "QQt"
 
-#define PRODUCT_VERSION           2,1
+#define PRODUCT_VERSION           2,1,1
 #define PRODUCT_VERSION_MAJOR     2
-#define PRODUCT_VERSION_STR       "2.1"
+#define PRODUCT_VERSION_STR       "2.1.1"
 #define PRODUCT_VERSION_MAJOR_STR "2"
 #define PRODUCT_NAME              "QQt"
 
