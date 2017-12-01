@@ -60,7 +60,7 @@ defineReplace(deploy_qqt_on_mac) {
         command += chmod +x $${PWD}/mac_deploy_qt4.sh &&
         command += $${PWD}/mac_deploy_qt4.sh $${DEPLOY_DESTDIR}/$${TARGET}.app/Contents/MacOS/$${TARGET}
     }
-    message($$command)
+    #message($$command)
     return ($$command)
 }
 
