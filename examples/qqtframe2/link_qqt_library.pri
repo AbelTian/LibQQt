@@ -95,7 +95,7 @@ contains (CONFIG, QQT_SOURCE_BUILDIN) {
     #qqt also can install sdk to qt library path, then to do that.
     #need QQT_BUILD_ROOT
     #need QKIT_PRIVATE from qqt_qkit.pri
-    !exists(.config.ini) {
+    !contains(CONFIG, TDR):!exists(.config.ini) {
         $$system(echo [ROOT] > .config.ini)
         $$system(echo QQT_BUILD_ROOT = >> .config.ini)
         $$system(echo QQT_SDK_ROOT = >> .config.ini)

@@ -7,9 +7,7 @@ SUBDIRS = src/qqt.pro
 ##basic example
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe
-#
-#
-SUBDIRS += examples/qqtframe2
+#SUBDIRS += examples/qqtframe2
 #SUBDIRS += examples/animationframe
 #
 ##-----------------------------------------------------------------
