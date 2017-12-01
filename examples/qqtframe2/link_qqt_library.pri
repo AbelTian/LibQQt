@@ -9,19 +9,9 @@
 #auto copy QQt when deploy app
 
 #-------------------------------------------------------------
-#link path init
-#-------------------------------------------------------------
-
-QKIT_PRIVATE=$$(QKIT)
-isEmpty(QKIT_PRIVATE) {
-    message(env variable QKIT is equired!)
-    message(pleace check qqt_qkit.pri)
-    error(error occured!)
-}
-
-#-------------------------------------------------------------
 #user computer path settings
 #-------------------------------------------------------------
+#same app project, same relative path.
 #qqt source root, QQt's root pro path. subdir and
 equals(QMAKE_HOST.os, Darwin) {
     QQT_SOURCE_ROOT = $$PWD/../..
@@ -29,28 +19,6 @@ equals(QMAKE_HOST.os, Darwin) {
     QQT_SOURCE_ROOT = $$PWD/../..
 } else: equals(QMAKE_HOST.os, Windows) {
     QQT_SOURCE_ROOT = $$PWD/../..
-}
-
-#qqt build root, build station root
-#link_from_build will need this path.
-equals(QMAKE_HOST.os, Darwin) {
-    QQT_BUILD_ROOT = /Users/abel/Develop/c0-buildstation
-} else: equals(QMAKE_HOST.os, Linux) {
-    QQT_BUILD_ROOT = /home/abel/Develop/c0-buildstation
-} else: equals(QMAKE_HOST.os, Windows) {
-    QQT_BUILD_ROOT = C:/Users/Administrator/Develop/c0-build
-}
-
-
-#default sdk root is qqt-source/..
-#user can modify this path
-#create_qqt_sdk and link_from_sdk will need this.
-equals(QMAKE_HOST.os, Darwin) {
-    QQT_SDK_ROOT = $${QQT_SOURCE_ROOT}/..
-} else: equals(QMAKE_HOST.os, Linux) {
-    QQT_SDK_ROOT = $${QQT_SOURCE_ROOT}/..
-} else: equals(QMAKE_HOST.os, Windows) {
-    QQT_SDK_ROOT = $${QQT_SOURCE_ROOT}/..
 }
 
 #-------------------------------------------------------------
@@ -70,6 +38,43 @@ include($${QQT_SOURCE_ROOT}/src/qqt_version.pri)
 include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
 
 #-------------------------------------------------------------
+#link path init
+#-------------------------------------------------------------
+isEmpty(QKIT_PRIVATE) {
+    message(env variable QKIT is required!)
+    message(pleace check qqt_qkit.pri)
+    error(  error occured!)
+}
+
+#-------------------------------------------------------------
+#link path init
+#-------------------------------------------------------------
+#qqt build root, build station root
+#link_from_build will need this path.
+
+#default sdk root is qqt-source/..
+#user can modify this path
+#create_qqt_sdk and link_from_sdk will need this.
+
+CONFIG += TDR
+contains(CONFIG,  TDR) {
+    equals(QMAKE_HOST.os, Darwin) {
+        QQT_BUILD_ROOT = /Users/abel/Develop/c0-buildstation
+    } else: equals(QMAKE_HOST.os, Linux) {
+        QQT_BUILD_ROOT = /home/abel/Develop/c0-buildstation
+    } else: equals(QMAKE_HOST.os, Windows) {
+        QQT_BUILD_ROOT = C:/Users/Administrator/Develop/c0-build
+    }
+    equals(QMAKE_HOST.os, Darwin) {
+        QQT_SDK_ROOT = $${QQT_SOURCE_ROOT}/..
+    } else: equals(QMAKE_HOST.os, Linux) {
+        QQT_SDK_ROOT = $${QQT_SOURCE_ROOT}/..
+    } else: equals(QMAKE_HOST.os, Windows) {
+        QQT_SDK_ROOT = $${QQT_SOURCE_ROOT}/..
+    }
+}
+
+#-------------------------------------------------------------
 #link qqt settings: use source or link library?
 #-------------------------------------------------------------
 #if you dont modify Qt Creator default build directory, you may need mod this path variable.
@@ -79,8 +84,8 @@ QQT_STD_DIR = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}
 QQT_DST_DIR = src/bin
 
 #if you want to build qqt source open this annotation
-#CONFIG += LINK_QQT_SOURCE
-contains (CONFIG, LINK_QQT_SOURCE) {
+#CONFIG += QQT_SOURCE_BUILDIN
+contains (CONFIG, QQT_SOURCE_BUILDIN) {
     #if you want to build src but not link QQt lib in your project
     #if you don't want to modify Qt Creator's default build directory, this maybe a choice.
     include($${QQT_SOURCE_ROOT}/src/qqt_source.pri)
@@ -90,8 +95,20 @@ contains (CONFIG, LINK_QQT_SOURCE) {
     #qqt also can install sdk to qt library path, then to do that.
     #need QQT_BUILD_ROOT
     #need QKIT_PRIVATE from qqt_qkit.pri
-    #you can open one or more macro to make sdk or link from build.
+    !exists(.config.ini) {
+        $$system(echo [ROOT] > .config.ini)
+        $$system(echo QQT_BUILD_ROOT = >> .config.ini)
+        $$system(echo QQT_SDK_ROOT = >> .config.ini)
+    }
 
+    isEmpty(QQT_BUILD_ROOT): QQT_BUILD_ROOT = $$read_ini("$${PWD}/.config.ini", "ROOT", "QQT_BUILD_ROOT")
+    isEmpty(QQT_SDK_ROOT): QQT_SDK_ROOT = $$read_ini($${PWD}/.config.ini, ROOT, QQT_SDK_ROOT)
+    message(QQt build root: $$QQT_BUILD_ROOT)
+    message(QQt sdk root: $$QQT_SDK_ROOT)
+    isEmpty(QQT_BUILD_ROOT):error(QQT_BUILD_ROOT required please check .config.ini at $$PWD)
+    isEmpty(QQT_SDK_ROOT):error(QQT_SDK_ROOT required please check .config.ini at $$PWD)
+
+    #you can open one or more macro to make sdk or link from build.
     #link from sdk is default setting
     CONFIG += link_from_sdk
     #CONFIG += link_from_build

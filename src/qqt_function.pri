@@ -88,8 +88,10 @@ defineReplace(get_read_ini_command) {
         #if use $${PWD}/...directoly this PWD is the refrence pri file path
         command = $${WIN_READ_INI} %file_name% %sect_name% %key_name%
     } else {
-        command = $${LINUX_READ_INI} $${file_name} $${sect_name} $${key_name}
+        command = chmod +x $${LINUX_READ_INI} $$CMD_SEP
+        command += $${LINUX_READ_INI} $${file_name} $${sect_name} $${key_name}
     }
+    #message ($$command)
     return ($$command)
 }
 
@@ -170,13 +172,15 @@ defineTest(copy_dir_and_file) {
     system_errcode($${command}): return (true)
     return (false)
 }
+
 defineReplace(read_ini) {
     file_name = $$1
     sect_name = $$2
     key_name = $$3
     !isEmpty(4): error("read_ini(file, section, key) requires three arguments.")
     isEmpty(3) : error("read_ini(file, section, key) requires three arguments.")
-    command = $$get_read_ini_command($$file_name, $$sect_name, $$key_name)
-    echo = $$system("$$command")
-    return ($$echo)
+    command = $$get_read_ini_command($${file_name}, $${sect_name}, $${key_name})
+    echo = $$system("$${command}")
+    #message($$command $$echo)
+    return ($${echo})
 }
