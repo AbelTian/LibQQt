@@ -3,13 +3,13 @@
 
 #define PRODUCT_ICON              "qqt.ico"
 
-#define FILE_VERSION              2,0,0,0
-#define FILE_VERSION_STR          "2.0.0.0"
+#define FILE_VERSION              2,1,0,0
+#define FILE_VERSION_STR          "2.1.0.0"
 #define FILE_DESCRIPTION          "QQt"
 
-#define PRODUCT_VERSION           2,0
+#define PRODUCT_VERSION           2,1
 #define PRODUCT_VERSION_MAJOR     2
-#define PRODUCT_VERSION_STR       "2.0"
+#define PRODUCT_VERSION_STR       "2.1"
 #define PRODUCT_VERSION_MAJOR_STR "2"
 #define PRODUCT_NAME              "QQt"
 
@@ -20,6 +20,6 @@
 #define LEGAL_TRADE_MARKS1        "All rights reserved"
 #define LEGALTRADEMARKS2          "All rights reserved"
 
-#define COMPANY_DOMAIN            "www.qqt.com"
+#define COMPANY_DOMAIN            "www.QQt.com"
 
 #endif // QQTVERSION_H
