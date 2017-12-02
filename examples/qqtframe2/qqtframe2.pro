@@ -28,5 +28,4 @@ FORMS += \
 
 system(touch main.cpp)
 
-include(../qqtframe2/app_configure.pri)
-include(../qqtframe2/app_deploy.pri)
+include(../../src/app_configure.pri)
