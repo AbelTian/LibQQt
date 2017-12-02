@@ -115,14 +115,14 @@ win32 {
 ################################################
 ##project resource
 ################################################
-RESOURCES += \
-    qqt.qrc
 DISTFILES += \
+    qqt.qrc \
     linux_cp_files.sh \
     linux_cur_path.sh \
     linux_cd_path.sh \
     linux_read_ini.sh \
     win_read_ini.bat
+
 
 #################################################################
 ##project environ

@@ -48,12 +48,15 @@
      - QQtSvgCheckBox
 2. 添加QQtDictionary
      - 解决C Plus Plus中没有字典类别的尴尬。    
+3. 添加MLMA技术  
+     - Multi-link Multi-app technology，既多应用多链接库技术。
+     - 基于qmake，用户可以轻易的添加自定义library和Application。
 
 # Usage  
 
 ==============================================  
-include (link_qqt_library.pri)  to your app.  
-*MOD: QQT_SOURCE_ROOT and QQT_BUILD_ROOT(if link from build) in your computer.*
+1. include (relative/path/to/qqt/src/app_configure.pri).  
+2. *MOD: QQT_SOURCE_ROOT QQT_BUILD_ROOT and APP_DEPLOY_ROOT on your computer at config root path.* 
 
 
 # Contact Me  
