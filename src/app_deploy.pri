@@ -36,7 +36,7 @@ defineReplace(deploy_app_on_mac) {
     #need QQT_BUILD_PWD
     command = &&
     command += rm -fr $${APP_DEPLOY_ROOT}/$${TARGET}.app &&
-    command += cp -fa $${DESTDIR}/$${TARGET}.app $${APP_DEPLOY_ROOT}/
+    command += cp -fa $${DESTDIR}/$${TARGET}.app $${APP_DEPLOY_ROOT}/$${TARGET}.app
     message($$command)
     return ($$command)
 }
