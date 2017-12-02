@@ -28,7 +28,6 @@ isEmpty(APP_DEPLOY_ROOT){
     message(APP_DEPLOY_ROOT = is required )
     error(  please check app.ini at $$CONFIG_PATH)
 }
-
 message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
 isEmpty(APP_DEPLOY_ROOT):error(APP_DEPLOY_ROOT required please check app.ini at $$CONFIG_PATH)
 
@@ -37,13 +36,29 @@ defineReplace(deploy_app_on_mac) {
     command = &&
     command += rm -fr $${APP_DEPLOY_ROOT}/$${TARGET}.app &&
     command += cp -fa $${DESTDIR}/$${TARGET}.app $${APP_DEPLOY_ROOT}/$${TARGET}.app
-    message($$command)
+    #message($$command)
+    return ($$command)
+}
+
+defineReplace(deploy_app_on_win) {
+    #need QQT_BUILD_PWD
+    #message($$command)
+    return ($$command)
+}
+
+defineReplace(deploy_app_on_linux) {
+    #need QQT_BUILD_PWD
+    #message($$command)
     return ($$command)
 }
 
 CONFIG += deploy_app
 contains(CONFIG, deploy_app) {
-    contains(QKIT_PRIVATE, macOS) {
+    contains(QKIT_PRIVATE, WIN32||WIN64) {
+        QMAKE_POST_LINK += $$deploy_app_on_win()
+    } else: contains(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$deploy_app_on_mac()
+    } else {
+        QMAKE_POST_LINK += $$deploy_app_on_linux()
     }
 }
