@@ -89,7 +89,7 @@ QQT_SDK_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}
 
 contains(CONFIG, link_from_sdk) {
     #create sdk first
-    QMAKE_PRE_LINK = $$create_qqt_sdk()
+    QMAKE_PRE_LINK += $$create_qqt_sdk()
     #private struct
     QQT_LIB_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}/lib
     equals(QKIT_PRIVATE, macOS) {
