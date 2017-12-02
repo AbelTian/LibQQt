@@ -55,7 +55,7 @@ equals(QKIT_PRIVATE, macOS) {
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
 #user can modify any infomation under this annotation
 #-------------------------------------------------
-include(../qqtframe2/link_qqt_library.pri)
+include(../../src/app_configure.pri)
 
 #-------------------------------------------------
 #user app may use these these settings prefertly

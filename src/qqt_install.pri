@@ -3,8 +3,6 @@
 ##install to Qt library
 ##install to SDK path
 ##link from build
-##MLMA technology (Multi Link, Multi App technology)
-##MLMA技术，支持多链接、多应用的一门工程管理技术。
 ##please don't modify this pri
 ##need qqt_version.pri qqt_header.pri qqt_source.pri
 ################################################

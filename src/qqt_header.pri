@@ -67,6 +67,7 @@ contains(QKIT_PRIVATE, WIN32) {
     #Qt is static by mingw32 building
     mingw{
         DEFINES += QQT_STATIC_LIBRARY
+        message($${TARGET} QQT_STATIC_LIBRARY is defined. build or link)
     }
     #link and build all need this macro
     contains(DEFINES, QQT_STATIC_LIBRARY) {

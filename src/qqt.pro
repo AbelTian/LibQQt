@@ -121,6 +121,7 @@ DISTFILES += \
     linux_cur_path.sh \
     linux_cd_path.sh \
     linux_read_ini.sh \
+    linux_write_ini.sh \
     win_read_ini.bat
 
 

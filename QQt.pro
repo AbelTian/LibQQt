@@ -29,7 +29,8 @@ SUBDIRS += examples/qqtframe2
 ##need GumoQuery
 ##-----------------------------------------------------------------
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
-#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
+#
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS +=     examples/GuiBuildTool
 ##-----------------------------------------------------------------
 ##some test project

@@ -11,10 +11,10 @@ function WriteINIfile()
     echo $WriteINI
 }
 
-WriteINIfile $1 $2 $3 $4
+#WriteINIfile $1 $2 $3 $4
 
 # 解析INI
-function rini()
+rini()
 {
     # 判断参数数量
     if [ $# -lt 2 ];then
@@ -66,3 +66,5 @@ function rini()
         fi
     fi
 }
+
+rini $1 $2 $3 $4

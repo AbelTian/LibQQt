@@ -31,9 +31,6 @@ include($${QQT_SOURCE_ROOT}/qqt_version.pri)
 #qqt header
 include($${QQT_SOURCE_ROOT}/qqt_header.pri)
 
-#-------------------------------------------------------------
-#link path init
-#-------------------------------------------------------------
 isEmpty(QKIT_PRIVATE) {
     message(env variable QKIT is required!)
     message(pleace check qqt_qkit.pri)
@@ -43,71 +40,8 @@ isEmpty(QKIT_PRIVATE) {
 #-------------------------------------------------------------
 #link qqt settings: use source or link library?
 #-------------------------------------------------------------
-#if you dont modify Qt Creator default build directory, you may need mod this path variable.
-#link operation all will need this variable
-QQT_STD_DIR = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}
-#link from build need this, if you havent mod QQt.pro, this can only be two value, qqt's: [src]/$DESTDIR
-QQT_DST_DIR = src/bin
-
 #if you want to build qqt source open this annotation
 #CONFIG += QQT_SOURCE_BUILDIN
-
-#-------------------------------------------------------------
-#link path init
-#-------------------------------------------------------------
-!contains (CONFIG, QQT_SOURCE_BUILDIN) {
-    #qqt build root, build station root
-    #link_from_build will need this path.
-
-    #default sdk root is qqt-source/..
-    #user can modify this path
-    #create_qqt_sdk and link_from_sdk will need this.
-    #different in every operate system
-    CONFIG_PATH =
-    CONFIG_FILE =
-
-    win32 {
-        CONFIG_PATH = $$user_config_path()\\QQt
-        CONFIG_FILE = $${CONFIG_PATH}\\config.ini
-    } else {
-        CONFIG_PATH = $$user_config_path()/.QQt
-        CONFIG_FILE = $${CONFIG_PATH}/config.ini
-    }
-    message(config path: $$CONFIG_PATH config file: $${CONFIG_FILE})
-
-    !exists($${CONFIG_FILE}) {
-        mkdir("$${CONFIG_PATH}")
-        empty_file($${CONFIG_FILE})
-        #qt4 need this ret, why?
-        ret = $$system(echo [ROOT] >> $${CONFIG_FILE})
-        ret = $$system(echo QQT_SDK_ROOT =  >> $${CONFIG_FILE})
-        ret = $$system(echo QQT_BUILD_ROOT =  >> $${CONFIG_FILE})
-    }
-
-    isEmpty(QQT_BUILD_ROOT): QQT_BUILD_ROOT = $$read_ini("$${CONFIG_FILE}", "ROOT", "QQT_BUILD_ROOT")
-    isEmpty(QQT_SDK_ROOT): QQT_SDK_ROOT = $$read_ini($${CONFIG_FILE}, ROOT, QQT_SDK_ROOT)
-    message(QQt build root: $$QQT_BUILD_ROOT)
-    message(QQt sdk root: $$QQT_SDK_ROOT)
-    isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT):error(QQT_BUILD_ROOT and QQT_SDK_ROOT required please check config.ini at $$CONFIG_PATH)
-}
-
-#-------------------------------------------------------------
-#install qqt to sdk or qt library path
-#include qqt_install.pri using these function to install qqt
-#install to Qt library
-#install to SDK path
-#in this section, I use QMAKE_PRE_LINK QMAKE_POST_LINK, it won't work until project source changed
-#on windows, I use touch.exe, you need download it and put it in system dir.
-#-------------------------------------------------------------
-#QMAKE_POST_LINK won't work until source changed
-#qmake pro pri prf change won't effect to QMAKE_POST_LINK
-#but I need it before I complete this pri.
-!contains (CONFIG, QQT_SOURCE_BUILDIN) {
-    #debug.
-    system("touch $${QQT_SOURCE_ROOT}/frame/qqtapplication.cpp")
-    include ($${QQT_SOURCE_ROOT}/qqt_install.pri)
-}
-
 contains (CONFIG, QQT_SOURCE_BUILDIN) {
     #if you want to build src but not link QQt lib in your project
     #if you don't want to modify Qt Creator's default build directory, this maybe a choice.
@@ -138,7 +72,27 @@ contains (CONFIG, QQT_SOURCE_BUILDIN) {
         #...
     }
 
-    #QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD
+    #-------------------------------------------------------------
+    #install qqt to sdk or qt library path
+    #include qqt_install.pri using these function to install qqt
+    #install to Qt library
+    #install to SDK path
+    #in this section, I use QMAKE_PRE_LINK QMAKE_POST_LINK, it won't work until project source changed
+    #on windows, I use touch.exe, you need download it and put it in system dir.
+    #-------------------------------------------------------------
+    #QMAKE_POST_LINK won't work until source changed
+    #qmake pro pri prf change won't effect to QMAKE_POST_LINK
+    #but I need it before I complete this pri.
+
+    #debug.
+    #move to app link pri
+    #link_from_sdk do move qqt to sdk path at app pre link command not lib build time
+    #mod qqt source to start post link is not needed here.
+    #need mod app souce after every pri mod.
+    #system("touch $${QQT_SOURCE_ROOT}/frame/qqtapplication.cpp")
+    include ($${QQT_SOURCE_ROOT}/qqt_install.pri)
+
+    #in this pri use QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD
     #need qqt_install.pri
     include($${QQT_SOURCE_ROOT}/qqt_library.pri)
 }

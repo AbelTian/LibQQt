@@ -45,7 +45,7 @@ UI_DIR = obj/ui.h
 RCC_DIR = qrc
 DESTDIR = bin
 
-include(../qqtframe2/link_qqt_library.pri)
+include(../../src/app_configure.pri)
 
 #-------------------------------------------------
 #install app

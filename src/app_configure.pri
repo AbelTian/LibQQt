@@ -19,15 +19,6 @@ equals(QKIT_PRIVATE, macOS) {
     CONFIG += app_bundle
 }
 
-contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
-    CONFIG += mobility
-    MOBILITY =
-    DISTFILES += \
-        android/AndroidManifest.xml
-
-    ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
-}
-
 ################################################################
 ##build cache
 ################################################################

@@ -6,13 +6,6 @@
 ##https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0
 ##2017年10月29日08:54:28
 ################################################
-#TARGET must be equals to pro name ? no, TARGET must be placeed before qqt_library.pri
-#qmake pro pri is sequential
-message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
-    at $${QT_VERSION} $${SYSNAME} $${BUILD} \
-    on $${QMAKE_HOST.os})
-
-
 ################################################
 ##link QQt logic function
 ################################################
@@ -74,11 +67,61 @@ defineReplace(copy_qqt_on_mac) {
 ################################################
 ##link qqt work flow
 ################################################
+#TARGET must be equals to pro name ? no, TARGET must be placeed before qqt_library.pri
+#qmake pro pri is sequential
+message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
+    at $${QT_VERSION} $${SYSNAME} $${BUILD} \
+    on $${QMAKE_HOST.os})
+
+#-------------------------------------------------------------
+#link path init
+#-------------------------------------------------------------
+##MLMA technology (Multi Link, Multi App technology)
+##MLMA技术，支持多链接、多应用的一门工程管理技术。
+#default sdk root is qqt-source/..
+#user can modify this path in user_config_path/app_configure.pri
+#create_qqt_sdk and link_from_sdk will need this.
+#different in every operate system
+CONFIG_PATH =
+CONFIG_FILE =
+
+win32 {
+    CONFIG_PATH = $$user_config_path()\\qmake
+    CONFIG_FILE = $${CONFIG_PATH}\\app_configure.pri
+} else {
+    CONFIG_PATH = $$user_config_path()/.qmake
+    CONFIG_FILE = $${CONFIG_PATH}/app_configure.pri
+}
+message($${TARGET} config file: $${CONFIG_FILE})
+
+!exists($${CONFIG_FILE}) {
+    mkdir("$${CONFIG_PATH}")
+    empty_file($${CONFIG_FILE})
+}
+
+include ($${CONFIG_FILE})
+#qqt build root, build station root
+#link_from_build will need this path.
+isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT) {
+    message($${TARGET})
+    message($${CONFIG_FILE})
+    message(QQT_BUILD_ROOT = is required )
+    message(QQT_SDK_ROOT = is required )
+    error(  please check $$CONFIG_FILE)
+}
+message(QQt build root: $$QQT_BUILD_ROOT)
+message(QQt sdk root: $$QQT_SDK_ROOT)
+
 #-------module name QQt
 MODULE_NAME=QQt
 module_name = $$lower($${MODULE_NAME})
 
 #-------define the all path
+#if you dont modify Qt Creator default build directory, you may need mod this path variable.
+#link operation all will need this variable
+QQT_STD_DIR = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}
+#link from build need this, if you havent mod QQt.pro, this can only be two value, qqt's: [src]/$DESTDIR
+QQT_DST_DIR = src/bin
 #create platform sdk need this
 QQT_SRC_PWD=$${PWD}
 #need use qqt subdir proj
