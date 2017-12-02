@@ -104,6 +104,28 @@ defineReplace(get_read_ini_command) {
     #message ($$command)
     return ($$command)
 }
+
+WIN_WRITE_INI = $${PWD}/win_write_ini.bat
+LINUX_WRITE_INI = $${PWD}/linux_write_ini.sh
+defineReplace(get_write_ini_command) {
+    file_name = $$1
+    sect_name = $$2
+    key_name = $$3
+    new_value = $4
+    !isEmpty(5): error("get_write_ini_command(file, section, key, value) requires four arguments.")
+    isEmpty(4) : error("get_write_ini_command(file, section, key, value) requires four arguments.")
+    command =
+    win32{
+        #if use $${PWD}/...directoly this PWD is the refrence pri file path
+        command = $${WIN_WRITE_INI} %file_name% %sect_name% %key_name% %new_value%
+    } else {
+        command = chmod +x $${LINUX_WRITE_INI} $$CMD_SEP
+        command += $${LINUX_WRITE_INI} $${file_name} $${sect_name} $${key_name} $${new_value}
+    }
+    #message ($$command)
+    return ($$command)
+}
+
 defineReplace(get_user_home) {
     command =
     win32{
@@ -216,6 +238,20 @@ defineReplace(read_ini) {
     !isEmpty(4): error("read_ini(file, section, key) requires three arguments.")
     isEmpty(3) : error("read_ini(file, section, key) requires three arguments.")
     command = $$get_read_ini_command($${file_name}, $${sect_name}, $${key_name})
+    echo = $$system("$${command}")
+    #message($$command)
+    #message($$echo)
+    return ($${echo})
+}
+
+defineReplace(write_ini) {
+    file_name = $$1
+    sect_name = $$2
+    key_name = $$3
+    new_value = $$4
+    !isEmpty(5): error("write_ini_command(file, section, key, value) requires four arguments.")
+    isEmpty(4) : error("write_ini_command(file, section, key, value) requires four arguments.")
+    command = $$get_write_ini_command($${file_name}, $${sect_name}, $${key_name}, $${new_value})
     echo = $$system("$${command}")
     #message($$command)
     #message($$echo)

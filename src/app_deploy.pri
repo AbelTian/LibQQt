@@ -22,10 +22,15 @@ message($${TARGET} config path: $$CONFIG_PATH config file: $${CONFIG_FILE})
     ret = $$system(echo APP_DEPLOY_ROOT =  >> $${CONFIG_FILE})
 }
 
-isEmpty(APP_DEPLOY_ROOT): APP_DEPLOY_ROOT = $$read_ini("$${CONFIG_FILE}", "$${TARGET}", "APP_DEPLOY_ROOT")
+APP_DEPLOY_ROOT = $$read_ini("$${CONFIG_FILE}", "$${TARGET}", "APP_DEPLOY_ROOT")
+isEmpty(APP_DEPLOY_ROOT){
+    message([$${TARGET}])
+    message(APP_DEPLOY_ROOT = is required )
+    error(  please check app.ini at $$CONFIG_PATH)
+}
+
 message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
 isEmpty(APP_DEPLOY_ROOT):error(APP_DEPLOY_ROOT required please check app.ini at $$CONFIG_PATH)
-
 
 defineReplace(deploy_app_on_mac) {
     #need QQT_BUILD_PWD
