@@ -56,7 +56,10 @@
 
 ==============================================  
 1. include (relative/path/to/qqt/src/app_configure.pri).  
-2. *MOD: QQT_SOURCE_ROOT QQT_BUILD_ROOT and APP_DEPLOY_ROOT on your computer at config root path.* 
+2. *MOD Variables: on your computer at config root path.* 
+   - QQT_SOURCE_ROOT  
+   - QQT_BUILD_ROOT  
+   - APP_DEPLOY_ROOT (optional)   
 
 
 # Contact Me  

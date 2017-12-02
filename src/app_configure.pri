@@ -49,7 +49,9 @@ include($${PWD}/link_qqt_library.pri)
 ################################################################
 ##deploy app for install update deploy
 ################################################################
-include($${PWD}/app_deploy.pri)
+#optional
+#if you have this request, include this pri in your app pro
+#include($${PWD}/app_deploy.pri)
 
 #-------------------------------------------------
 ##project environ print

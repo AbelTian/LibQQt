@@ -1,6 +1,6 @@
 #!/bin/sh
 
-function ReadINIfile()    
+ReadINIfile()
 {     
     Configfile=$1
     Section=$2
