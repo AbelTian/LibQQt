@@ -33,9 +33,9 @@ defineReplace(create_windows_sdk) {
 
     command =
     #copy header
-    command += $${COPY_DIR} $${QQT_SRC_PWD}\*.h* $${QQT_INC_DIR} $$CMD_SEP
+    command += $${COPY_DIR} $${QQT_SRC_PWD}\\*.h* $${QQT_INC_DIR} $$CMD_SEP
     #should be *.dll *.lib
-    command += $${COPY_DIR} $${QQT_BUILD_PWD}\* $${QQT_LIB_DIR}
+    command += $${COPY_DIR} $${QQT_BUILD_PWD}\\* $${QQT_LIB_DIR}
 
     return ($$command)
 }

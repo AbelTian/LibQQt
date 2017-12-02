@@ -33,33 +33,38 @@ contains(QMAKE_HOST.os,Windows) {
 defineReplace(get_mkdir) {
     filepath = $$1
     isEmpty(1): error("get_mkdir(filepath) requires one argument")
-    command = $${MKDIR} $${filepath}
-    return ($$command)
+    command = $${MK_DIR} $${filepath}
+    #message($${command})
+    return ($${command})
 }
 defineReplace(get_errcode) {
-    command = $$1
+    cmd_exec = $$1
     isEmpty(1): error("get_errcode(command) requires one argument")
     contains(QMAKE_HOST.os,Windows) {
-        command = $${command} >nul & echo %errorlevel%
+        command = $${cmd_exec} >nul & echo %errorlevel%
     } else {
-        command = $${command} >/dev/null; echo $?
+        command = "$${cmd_exec}" 2>/dev/null; echo $?
     }
+    #message($$command)
     return ($$command)
 }
 defineReplace(get_empty_file) {
     filename = $$1
     isEmpty(1): error("get_empty_file(filename) requires one argument")
-    command = echo . 2> $${filename}
+    command =
+    win32 {
+        command = echo . 2> $${filename}
+    } else {
+        command = echo 2> $${filename}
+    }
     return ($$command)
 }
 defineReplace(get_write_file) {
     filename = $$1
     variable = $$2
-    !isEmpty(3): error("get_write_file(name, [content]) requires one or two arguments.")
-    isEmpty(2) {
-        return ( $$get_empty_file($$filename) )
-    }
-    command = echo $$variable >> $$filename
+    !isEmpty(3): error("get_write_file(name, content) requires two arguments.")
+    isEmpty(2): error("get_write_file(name, content) requires two arguments.")
+    command = echo $${variable} >> $${filename}
     return ($$command)
 }
 
@@ -70,8 +75,13 @@ defineReplace(get_copy_dir_and_file) {
     target = $$3
     !isEmpty(4): error("get_copy_dir_and_file(source, pattern, target) requires three arguments.")
     isEmpty(3) : error("get_copy_dir_and_file(source, pattern, target) requires three arguments.")
-    command = chmod +x $${LINUX_CP_FILES} $${CMD_SEP}
-    command += $${LINUX_CP_FILES} $${source} $${pattern} $${target}
+    command =
+    win32{
+        command = $${COPY_DIR} $${source}\\$${pattern} $${target}
+    } else {
+        command = chmod +x $${LINUX_CP_FILES} $${CMD_SEP}
+        command += $${LINUX_CP_FILES} $${source} $${pattern} $${target}
+    }
     return ($$command)
 }
 
@@ -94,6 +104,26 @@ defineReplace(get_read_ini_command) {
     #message ($$command)
     return ($$command)
 }
+defineReplace(get_user_home) {
+    command =
+    win32{
+        command = echo %HOMEPATH%
+    } else {
+        command = echo $HOME
+    }
+    #message ($$command)
+    return ($$command)
+}
+defineReplace(get_user_config_path) {
+    command =
+    win32{
+        command = echo %APPDATA%
+    } else {
+        command = echo $HOME
+    }
+    #message ($$command)
+    return ($$command)
+}
 
 ################################################
 ##custom functions
@@ -110,30 +140,35 @@ defineTest(system_errcode) {
     command = $$get_errcode($$command)
     #the command is only return ret(0,1) wrappered by get_errcode
     ret = $$system("$${command}")
+    #message($$command)
+    #message($$ret)
     #if eval configed ...
     #error: if(ret) : return (false)
     #erro : eval(ret = 0): return (false)
     #succ: equals(ret, 0):return (false)
-    return ($$ret)
+    return ($${ret})
 }
 
+#can be used in condition
+#test function and replace function can be same name
 defineTest(mkdir) {
     filename = $$1
     isEmpty(1): error("mkdir(name) requires one argument")
-    command = $$get_mkdir($$filename)
-    system_errcode($${command}): return (true)
+    command = $$get_mkdir($${filename})
+    #message ($$command)
+    system_errcode("$${command}"): return (true)
     return (false)
 }
 
-#can be used in condition or values
+#can be used in values
 #must $$ !
 #return values. true is 'true', false is 'false', xx0, xx1 is list
 defineReplace(mkdir) {
     filename = $$1
     isEmpty(1): error("mkdir(name) requires one argument")
-    command = $$get_mkdir($$filename)
-    result = $$system($${command})
-    return ($$result)
+    command = $$get_mkdir($${filename})
+    result = $$system("$${command}")
+    return ($${result})
 }
 
 
@@ -144,20 +179,21 @@ defineTest(empty_file) {
     filename = $$1
     isEmpty(1): error("empty_file(filename) requires one argument")
     command = $$get_empty_file($$filename)
+    #message($$command)
     system_errcode($${command}) : return (true)
     return(false)
 }
 
 ## but system write_file where ?
-defineTest(write_file) {
+## but qt4 write twice... when file exist, if empty_file first, write once....
+defineTest(write_line) {
     filename = $$1
     variable = $$2
-    !isEmpty(3): error("write_file(name, [content]) requires one or two arguments.")
-    isEmpty(2) {
-        empty_file($$filename)
-    }
-    command = $$get_write_file($$filename, $$variable)
-    system_errcode($$command) : return(true)
+    !isEmpty(3): error("write_line(name, content) requires two arguments.")
+    isEmpty(2): error("write_line(name, content) requires two arguments.")
+    command = $$get_write_file($${filename}, $${variable})
+    #message($$command)
+    system_errcode($$command): return(true)
     return (false)
 }
 
@@ -181,6 +217,23 @@ defineReplace(read_ini) {
     isEmpty(3) : error("read_ini(file, section, key) requires three arguments.")
     command = $$get_read_ini_command($${file_name}, $${sect_name}, $${key_name})
     echo = $$system("$${command}")
-    #message($$command $$echo)
+    #message($$command)
+    #message($$echo)
+    return ($${echo})
+}
+
+defineReplace(user_home) {
+    command = $$get_user_home()
+    echo = $$system("$${command}")
+    #message($$command)
+    #message($$echo)
+    return ($${echo})
+}
+
+defineReplace(user_config_path) {
+    command = $$get_user_config_path()
+    echo = $$system("$${command}")
+    #message($$command)
+    #message($$echo)
     return ($${echo})
 }

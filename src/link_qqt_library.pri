@@ -63,19 +63,32 @@ QQT_DST_DIR = src/bin
     #user can modify this path
     #create_qqt_sdk and link_from_sdk will need this.
     #different in every operate system
-    CONFIG_FILE = $${PWD}/.config.ini
+    CONFIG_PATH =
+    CONFIG_FILE =
+
+    win32 {
+        CONFIG_PATH = $$user_config_path()\\QQt
+        CONFIG_FILE = $${CONFIG_PATH}\\config.ini
+    } else {
+        CONFIG_PATH = $$user_config_path()/.QQt
+        CONFIG_FILE = $${CONFIG_PATH}/config.ini
+    }
+    message(config path: $$CONFIG_PATH config file: $${CONFIG_FILE})
+
     !exists($${CONFIG_FILE}) {
-        $$system(echo [ROOT] > $${CONFIG_FILE})
-        $$system(echo QQT_BUILD_ROOT = >> $${CONFIG_FILE})
-        $$system(echo QQT_SDK_ROOT = >> $${CONFIG_FILE})
+        mkdir("$${CONFIG_PATH}")
+        empty_file($${CONFIG_FILE})
+        #qt4 need this ret, why?
+        ret = $$system(echo [ROOT] >> $${CONFIG_FILE})
+        ret = $$system(echo QQT_SDK_ROOT =  >> $${CONFIG_FILE})
+        ret = $$system(echo QQT_BUILD_ROOT =  >> $${CONFIG_FILE})
     }
 
     isEmpty(QQT_BUILD_ROOT): QQT_BUILD_ROOT = $$read_ini("$${CONFIG_FILE}", "ROOT", "QQT_BUILD_ROOT")
     isEmpty(QQT_SDK_ROOT): QQT_SDK_ROOT = $$read_ini($${CONFIG_FILE}, ROOT, QQT_SDK_ROOT)
     message(QQt build root: $$QQT_BUILD_ROOT)
     message(QQt sdk root: $$QQT_SDK_ROOT)
-    isEmpty(QQT_BUILD_ROOT):error(QQT_BUILD_ROOT required please check .config.ini at $$PWD)
-    isEmpty(QQT_SDK_ROOT):error(QQT_SDK_ROOT required please check .config.ini at $$PWD)
+    isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT):error(QQT_BUILD_ROOT and QQT_SDK_ROOT required please check config.ini at $$CONFIG_PATH)
 }
 
 #-------------------------------------------------------------
