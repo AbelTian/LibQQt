@@ -2,7 +2,7 @@
 #install app
 #-------------------------------------------------
 #CONFIG += can_install
-can_install:equals(QKIT_PRIVATE, EMBEDDED) {
+can_install:contains(QKIT_PRIVATE, EMBEDDED) {
     target.path = /Application
     INSTALLS += target
 } else: unix {

@@ -139,9 +139,7 @@ contains(CONFIG, link_from_sdk) {
     equals(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$copy_qqt_on_mac()
     }
-}
-
-contains(CONFIG, link_from_build) {
+} else : contains(CONFIG, link_from_build) {
     QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
     equals(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$copy_qqt_on_mac()

@@ -26,6 +26,8 @@ defineReplace(deploy_app_on_win) {
 
 defineReplace(deploy_app_on_linux) {
     #need QQT_BUILD_PWD
+    command += rm -fr $${APP_DEPLOY_ROOT}/$${TARGET} &&
+    command += cp -fa $${DESTDIR}/$${TARGET} $${APP_DEPLOY_ROOT}/$${TARGET}
     #message($$command)
     return ($$command)
 }
