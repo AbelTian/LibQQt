@@ -57,7 +57,7 @@
 ==============================================  
 1. include (relative/path/to/qqt/src/app_configure.pri) (No.1, Suggest no modify)    
 2. *MOD Variables: on your computer app_configure.pri (No.2, auto created) under qqt_library.pri.* 
-   - QQT_SOURCE_ROOT =  
+   - QQT_SDK_ROOT =  
    - QQT_BUILD_ROOT =  
    - APP_DEPLOY_ROOT = (optional)   
 
