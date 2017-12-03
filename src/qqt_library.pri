@@ -105,12 +105,13 @@ include ($${CONFIG_FILE})
 isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT) {
     message($${TARGET})
     message($${CONFIG_FILE})
-    message(QQT_BUILD_ROOT = is required )
-    message(QQT_SDK_ROOT = is required )
-    error(  please check $$CONFIG_FILE)
+    message(QQT_BUILD_ROOT = /user/set/path is required )
+    message(QQT_SDK_ROOT = /user/set/path is required )
+    error(  please check $$CONFIG_FILE under qqt_library.pri)
 }
 message(QQt build root: $$QQT_BUILD_ROOT)
 message(QQt sdk root: $$QQT_SDK_ROOT)
+
 
 #-------module name QQt
 MODULE_NAME=QQt

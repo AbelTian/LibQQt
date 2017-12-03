@@ -4,7 +4,6 @@
 #endif
 #include <qqtwidgets.h>
 #include <qqtmsgbox.h>
-#include <qqtversion.h>
 #include <qqtframe.h>
 #include <qqtcore.h>
 #include <QFile>
@@ -29,9 +28,11 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
     QTextCodec::setCodecForLocale ( QTextCodec::codecForName ( "UTF-8" ) );
 
-    QCoreApplication::setOrganizationName ( COMPANY_NAME );
-    QCoreApplication::setOrganizationDomain ( COMPANY_DOMAIN ); // 专为Mac OS X 准备的
-    QCoreApplication::setApplicationName ( PRODUCT_NAME );
+    /*嵌入式，应用名称必须指定*/
+    QCoreApplication::setOrganizationName ( "QQt" );
+    QCoreApplication::setOrganizationDomain ( "www.qqt.com" ); // 专为Mac OS X 准备的
+    QCoreApplication::setApplicationName ( "QQt" );
+
     QSettings::setPath ( QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH );
     QSettings::setPath ( QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH );
 

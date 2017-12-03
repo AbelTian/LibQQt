@@ -4,8 +4,8 @@
 #deploy root
 isEmpty(APP_DEPLOY_ROOT){
     message($${TARGET} $${CONFIG_FILE})
-    message(APP_DEPLOY_ROOT = is required )
-    error(  please check $$CONFIG_FILE)
+    message(APP_DEPLOY_ROOT = /user/set/path is required )
+    error(  please check $$CONFIG_FILE under qqt_library.pri)
 }
 message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
 
