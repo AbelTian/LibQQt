@@ -125,32 +125,38 @@ module_name = $$lower($${MODULE_NAME})
 #if you dont modify Qt Creator default build directory, you may need mod this path variable.
 #link operation all will need this variable
 QQT_STD_DIR = QQt/$${QT_VERSION}/$${SYSNAME}/$${BUILD}
-contains(QKIT_PRIVATE, WIN32|WIN64): QQT_STD_DIR~=s,/,\\,g
 #link from build need this, if you havent mod QQt.pro, this can only be two value, qqt's: [src]/$DESTDIR
 QQT_DST_DIR = src/bin
-contains(QKIT_PRIVATE, WIN32|WIN64): QQT_DST_DIR~=s,/,\\,g
 #create platform sdk need this
 QQT_SRC_PWD=$${PWD}
 #need use qqt subdir proj
 QQT_BUILD_PWD=$${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
-contains(QKIT_PRIVATE, WIN32|WIN64): QQT_BUILD_PWD~=s,/,\\,g
 #sdk path
 QQT_SDK_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}
-contains(QKIT_PRIVATE, WIN32|WIN64): QQT_SDK_PWD~=s,/,\\,g
 #message(QQt sdk install here:$${QQT_SDK_PWD})
+
+contains(CONFIG, link_from_sdk) {
+    QQT_LIB_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}/lib
+} else: contains(CONFIG, link_from_build)  {
+    QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
+}
+
+contains(QKIT_PRIVATE, WIN32|WIN64) {
+    QQT_STD_DIR~=s,/,\\,g
+    QQT_DST_DIR~=s,/,\\,g
+    QQT_BUILD_PWD~=s,/,\\,g
+    QQT_SDK_PWD~=s,/,\\,g
+    QQT_LIB_PWD~=s,/,\\,g
+}
 
 contains(CONFIG, link_from_sdk) {
     #create sdk first
     QMAKE_PRE_LINK += $$create_qqt_sdk()
     #private struct
-    QQT_LIB_PWD = $${QQT_SDK_ROOT}/$${QQT_STD_DIR}/lib
-    contains(QKIT_PRIVATE, WIN32|WIN64): QQT_LIB_PWD~=s,/,\\,g
     equals(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$copy_qqt_on_mac()
     }
 } else : contains(CONFIG, link_from_build) {
-    QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
-    contains(QKIT_PRIVATE, WIN32|WIN64): QQT_LIB_PWD~=s,/,\\,g
     equals(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$copy_qqt_on_mac()
     }
