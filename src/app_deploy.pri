@@ -20,6 +20,11 @@ defineReplace(deploy_app_on_mac) {
 
 defineReplace(deploy_app_on_win) {
     #need QQT_BUILD_PWD
+    command =
+    command += $$RM $${APP_DEPLOY_ROOT}\\$${TARGET}.exe $$CMD_SEP
+    command += $$COPY $${QQT_BUILD_PWD}\\QQt.dll $${APP_DEPLOY_ROOT}\\QQt.dll $$CMD_SEP
+    command += $$COPY $${DESTDIR}\\$${TARGET}.exe $${APP_DEPLOY_ROOT}\\$${TARGET}.exe $$CMD_SEP
+    command += windeployqt $${APP_DEPLOY_ROOT}\\$${TARGET}.exe --release -verbose=1
     #message($$command)
     return ($$command)
 }
