@@ -26,8 +26,14 @@ defineReplace(deploy_app_on_win) {
 
 defineReplace(deploy_app_on_linux) {
     #need QQT_BUILD_PWD
-    command += rm -fr $${APP_DEPLOY_ROOT}/$${TARGET} &&
-    command += cp -fa $${DESTDIR}/$${TARGET} $${APP_DEPLOY_ROOT}/$${TARGET}
+    command =
+    command += $$RM $${APP_DEPLOY_ROOT}/libQQt.so* &&
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION3} $${APP_DEPLOY_ROOT} &&
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION2} $${APP_DEPLOY_ROOT} &&
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION1} $${APP_DEPLOY_ROOT} &&
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_ROOT} &&
+    command += $$RM $${APP_DEPLOY_ROOT}/$${TARGET} &&
+    command += $$COPY $${DESTDIR}/$${TARGET} $${APP_DEPLOY_ROOT}/$${TARGET}
     #message($$command)
     return ($$command)
 }
