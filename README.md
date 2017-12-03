@@ -49,14 +49,14 @@
 2. 添加QQtDictionary
      - 解决C Plus Plus中没有字典类别的尴尬。    
 3. 添加MLMA技术  
-     - Multi-link Multi-app technology，既多应用多链接库技术。
+     - Multi-link Multi-app technology，既多应用多链接库工程管理技术。
      - 基于qmake，用户可以轻易的添加自定义library和Application。
 
 # Usage  
 
 ==============================================  
-1. include (relative/path/to/qqt/src/app_configure.pri).  
-2. *MOD Variables: on your computer app_configure(No.2, auto created).pri under qqt_library.pri.* 
+1. include (relative/path/to/qqt/src/app_configure.pri) (No.1, Suggest no modify)    
+2. *MOD Variables: on your computer app_configure.pri (No.2, auto created) under qqt_library.pri.* 
    - QQT_SOURCE_ROOT =  
    - QQT_BUILD_ROOT =  
    - APP_DEPLOY_ROOT = (optional)   
