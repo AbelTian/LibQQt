@@ -147,6 +147,17 @@ defineReplace(get_user_config_path) {
     return ($$command)
 }
 
+defineReplace(get_lrelease_language){
+    filepath = $$1
+    filename = $$2
+    !isEmpty(3): error("get_lrelease_language(filepath, filename) requires two argument")
+    isEmpty(2): error("get_lrelease_language(filepath, filename) requires two argument")
+    command =
+    command = lrelease $${filepath}/$${filename}.ts -qm $${filepath}/$${filename}.qm
+    #message($${command})
+    return ($${command})
+}
+
 ################################################
 ##custom functions
 ################################################
@@ -207,7 +218,8 @@ defineTest(empty_file) {
 }
 
 ## but system write_file where ?
-## but qt4 write twice... when file exist, if empty_file first, write once....
+## bug: but qt4 write twice... when file exist, if empty_file first, write once....
+## bug: this is a test function, but it wont exec, because + 2>/dev/null.
 defineTest(write_line) {
     filename = $$1
     variable = $$2
@@ -227,6 +239,16 @@ defineTest(copy_dir_and_file) {
     isEmpty(3) : error("copy_dir_and_file(source, pattern, target) requires three arguments.")
 
     command = $$get_copy_dir_and_file($$filename)
+    system_errcode($${command}): return (true)
+    return (false)
+}
+
+defineTest(lrelease_language){
+    filepath = $$1
+    filename = $$2
+    !isEmpty(3): error("lrelease_language(filepath, filename) requires two argument")
+    isEmpty(2): error("lrelease_language(filepath, filename) requires two argument")
+    command = $$get_lrelease_language($${filepath}, $${filename})
     system_errcode($${command}): return (true)
     return (false)
 }
