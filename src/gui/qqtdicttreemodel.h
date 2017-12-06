@@ -2,8 +2,8 @@
 #define QQTDICTTREEMODEL_H
 
 #include <qqttreemodel.h>
-#include <qqt-local.h>
 #include <qqtdictionary.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQtDictTreeModel : public QQtTreeModel
 {
@@ -16,7 +16,7 @@ signals:
 
 public slots:
 
-    // QQtJsonTreeModel interface
+    // QQtDictTreeModel interface
 public:
     bool query ( QString condition ) override;
     void setFilePath ( QString dictfile ) override;
