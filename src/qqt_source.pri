@@ -12,8 +12,8 @@
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
 #-------------------------------------------------
-SOURCES +=
-HEADERS +=
+SOURCES =
+HEADERS =
 
 #root dir
 HEADERS += $$PWD/qqt.h \

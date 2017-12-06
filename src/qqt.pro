@@ -20,15 +20,22 @@
 TARGET = QQt
 TEMPLATE = lib
 
+lessThan(QT_VERSION, 4.8.6) {
+    message(A. ensure your compiler support c++11 feature)
+    message(B. ensure Qt version > 4.8.5)
+    error(  error occured!)
+}
+
 ################################################
 ##project config definition
 ##need QKIT to compitible with some occasion
 ################################################
 include ($$PWD/qqt_qkit.pri)
 
+
 isEmpty(QKIT_PRIVATE) {
-    message(env variable QKIT is required!)
-    message(pleace check qqt_qkit.pri)
+    message(1. you should change qt default build directory to your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name})
+    message(2. env variable QKIT is required! pleace check qqt_qkit.pri)
     error(  error occured!)
 }
 
