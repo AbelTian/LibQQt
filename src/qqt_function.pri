@@ -13,7 +13,7 @@ contains(QMAKE_HOST.os,Windows) {
     RM = del
     CD = cd /d
     RM_DIR = rd /s /q
-    PATH_SEP=\\
+    #PATH_SEP=\\
 } else {
     SCRIPT_SUFFIX=sh
     CMD_SEP = &&
@@ -25,7 +25,7 @@ contains(QMAKE_HOST.os,Windows) {
     CD = cd
     LN = ln -sf
     RM_DIR = rm -rf
-    PATH_SEP=/
+    #PATH_SEP=/
 }
 ################################################
 ##get command string

@@ -26,6 +26,12 @@ TEMPLATE = lib
 ################################################
 include ($$PWD/qqt_qkit.pri)
 
+isEmpty(QKIT_PRIVATE) {
+    message(env variable QKIT is required!)
+    message(pleace check qqt_qkit.pri)
+    error(  error occured!)
+}
+
 ################################################
 ##project function
 ##support some commonly used function
