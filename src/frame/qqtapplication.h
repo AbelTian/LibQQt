@@ -10,6 +10,7 @@ class QQTSHARED_EXPORT QQtApplication : public QApplication
 public:
 public:
     explicit QQtApplication ( int& argc, char** argv );
+    virtual ~QQtApplication() {}
 
     void setLanguage ( QString qmfile = "./lang/en_US.qm" );
     //palette
