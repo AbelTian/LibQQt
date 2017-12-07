@@ -20,10 +20,10 @@
 TARGET = QQt
 TEMPLATE = lib
 
-lessThan(QT_VERSION, 4.8.6) {
+lessThan(QT_VERSION, 4.8.0) {
     message(A. ensure your compiler support c++11 feature)
-    message(B. ensure Qt version > 4.8.5)
-    error(  error occured!)
+    message(B. suggest Qt version >= 4.8.0)
+    #error(  error occured!)
 }
 
 ################################################
