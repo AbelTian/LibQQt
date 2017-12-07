@@ -52,15 +52,17 @@ include ($$PWD/qqt_function.pri)
 contains(QKIT_PRIVATE, WIN32|WIN64) {
     #Qt is static by mingw32 building
     mingw {
-        #create static lib (important, only occured at builder pro)
-        CONFIG += staticlib
-        #in qqt_header.pri
-        #DEFINES += QQT_STATIC_LIBRARY
-    } else {
-        #create dynamic lib (important, only occured at builder pro)
-        CONFIG += dll
-        #no other one deal this, define it here, right here.
-        DEFINES += QQT_LIBRARY
+        contains(QT_VERSION, 5.9) {
+            #create static lib (important, only occured at builder pro)
+            CONFIG += staticlib
+            #in qqt_header.pri
+            #DEFINES += QQT_STATIC_LIBRARY
+        } else {
+            #create dynamic lib (important, only occured at builder pro)
+            CONFIG += dll
+            #no other one deal this, define it here, right here.
+            DEFINES += QQT_LIBRARY
+        }
     }
 #*nux platform: no macro
 } else {
