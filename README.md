@@ -48,18 +48,9 @@
      - QQtSvgCheckBox
 2. 添加QQtDictionary
      - 解决C Plus Plus中没有字典类别的尴尬。    
-3. 添加MLMA技术  
-     - Multi-link Multi-app technology，既多应用多链接库工程管理技术。
-     - 基于qmake，用户可以轻易的添加自定义library和Application。
-
-# Usage  
-
-==============================================  
-1. include (relative/path/to/qqt/src/app_configure.pri) (No.1, Suggest no modify)    
-2. *MOD Variables: on your computer app_configure.pri (No.2, auto created) under qqt_library.pri.* 
-   - QQT_SDK_ROOT =  
-   - QQT_BUILD_ROOT =  
-   - APP_DEPLOY_ROOT = (optional)   
+3. 添加Multi Link技术  
+     - Multi Link technology，既多应用多链接库工程管理技术。
+     - 基于qmake，用户可以轻易的添加自定义library。
 
 
 # Contact Me  
@@ -68,6 +59,17 @@
 Mail me: tianduanrui@163.com  
 My qq: 2657635903  
 Make issues: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
+
+
+# Usage  
+
+==============================================  
+![设置Qt Creator默认编译路径](screenshot/1.png "这是Qt Creator的设置")
+![设置Qt Creator构建套件](screenshot/2.png "这是Qt Creator的设置，设置File System Name")
+![设置当前工程的环境变量](screenshot/3.png "这是工程的环境变量设置，注意那几点")
+![链接QQt](screenshot/4.png "这是链接QQt的方法，pri都在LibQQt目录里")
+![QQt内部pri的一点点设置](screenshot/5.png "这是LibQQt需要设置的几个路径，编译路径，Sdk路径，发布路径")
+
 
 
 

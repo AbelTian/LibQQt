@@ -76,8 +76,8 @@ message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
 #-------------------------------------------------------------
 #link path init
 #-------------------------------------------------------------
-##MLMA technology (Multi Link, Multi App technology)
-##MLMA技术，支持多链接、多应用的一门工程管理技术。
+##Multi Link technology (Multi Link technology)
+##Multi Link 技术，支持多链接库增删的一门工程管理技术。
 #default sdk root is qqt-source/..
 #user can modify this path in user_config_path/app_configure.pri
 #create_qqt_sdk and link_from_sdk will need this.
