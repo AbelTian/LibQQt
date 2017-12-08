@@ -13,6 +13,9 @@
 #Suggest Qt 5.9.2/4.8.6/4.8.7
 #please dont use Qt 5.9.1, it is broken with android and ios.
 #please dont modify this pro
+#modify Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}
+#def env QKIT
+#in app_configure.pri (auto createed) define QQT_BUILD_ROOT= and QQT_SDK_ROOT= and or APP_DEPLOY_ROOT
 
 #################################################################
 ##project name
@@ -63,6 +66,11 @@ contains(QKIT_PRIVATE, WIN32|WIN64) {
             #no other one deal this, define it here, right here.
             DEFINES += QQT_LIBRARY
         }
+    } else {
+        #create dynamic lib (important, only occured at builder pro)
+        CONFIG += dll
+        #no other one deal this, define it here, right here.
+        DEFINES += QQT_LIBRARY
     }
 #*nux platform: no macro
 } else {
