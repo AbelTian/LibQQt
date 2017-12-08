@@ -6,4 +6,4 @@
 ![链接QQt](screenshot/4.png "这是链接QQt的方法，pri都在LibQQt目录里")
 ![QQt内部pri的一点点设置](screenshot/5.png "这是LibQQt需要设置的几个路径，编译路径，Sdk路径，发布路径")
 
-[返回](README.md)
+[返回](.)
