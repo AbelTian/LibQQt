@@ -151,14 +151,19 @@ void QQtPictureEffectTabBar::drawPicture ( QPainter* p )
 {
     for ( int index = 0; index < count(); index++ )
     {
-        QRect iconRect = tabRect ( index );
+        QRect tRect0 = tabRect ( index );
+
+        tRect0.adjust ( contentsMargins().left(),
+                        contentsMargins().top(),
+                        -contentsMargins().right(),
+                        -contentsMargins().bottom() );
 
         if ( imgList.size() > index )
         {
             p->save();
             int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
             //tabRect = rect()?
-            p->drawPixmap ( iconRect, QIcon ( imgList[index][sel] ).pixmap ( iconRect.size(), QIcon::Normal, QIcon::On ) );
+            p->drawPixmap ( tRect0, QIcon ( imgList[index][sel] ).pixmap ( tRect0.size(), QIcon::Normal, QIcon::On ) );
             /*
              * 失真不明显，使用以下方法
              */
@@ -174,9 +179,15 @@ void QQtPictureEffectTabBar::drawColor ( QPainter* p )
     for ( int index = 0; index < count(); index++ )
     {
         p->save();
-
         p->setBrush ( QBrush ( backgroundColor ) );
-        p->fillRect ( tabRect ( index ), backgroundColor );
+
+        QRect tRect0 = tabRect ( index );
+        tRect0.adjust ( contentsMargins().left(),
+                        contentsMargins().top(),
+                        -contentsMargins().right(),
+                        -contentsMargins().bottom() );
+
+        p->fillRect ( tRect0, backgroundColor );
         p->restore();
     }
 }
@@ -188,36 +199,41 @@ void QQtPictureEffectTabBar::drawIcon ( QPainter* p )
 
     for ( int index = 0; index < count(); index++ )
     {
-        QRect iconRect = tabRect ( index );
+        QRect tRect0 = tabRect ( index );
+
+        tRect0.adjust ( contentsMargins().left(),
+                        contentsMargins().top(),
+                        -contentsMargins().right(),
+                        -contentsMargins().bottom() );
 
         if ( iconStyle == IconStyle_Top_And_BottomText )
-            iconRect = QRect ( iconRect.left(), iconRect.top(),
-                               iconRect.width(), iconRect.width() );
+            tRect0 = QRect ( tRect0.left(), tRect0.top(),
+                             tRect0.width(), tRect0.width() );
         else if ( iconStyle == IconStyle_Bottom_And_TopText )
-            iconRect = QRect ( iconRect.left(),
-                               iconRect.bottom() - iconRect.width(),
-                               iconRect.width(),
-                               iconRect.width() );
+            tRect0 = QRect ( tRect0.left(),
+                             tRect0.bottom() - tRect0.width(),
+                             tRect0.width(),
+                             tRect0.width() );
         else if ( iconStyle == IconStyle_Right_And_LeftText )
-            iconRect = QRect ( iconRect.right() - iconRect.height(),
-                               iconRect.top(),
-                               iconRect.height(),
-                               iconRect.height() );
+            tRect0 = QRect ( tRect0.right() - tRect0.height(),
+                             tRect0.top(),
+                             tRect0.height(),
+                             tRect0.height() );
         else if ( iconStyle == IconStyle_Left_And_RightText )
-            iconRect = QRect ( iconRect.left(), iconRect.top(),
-                               iconRect.height(), iconRect.height() );
+            tRect0 = QRect ( tRect0.left(), tRect0.top(),
+                             tRect0.height(), tRect0.height() );
 
         QIcon::Mode mode = QIcon::Normal;
 
         if ( currentIndex() == index )
-            mode = QIcon::Selected;
+            ;//mode = QIcon::Selected;
 
         if ( iconList.size() > index )
         {
             p->save();
             int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
             //tabRect = rect()?
-            p->drawPixmap ( iconRect, QIcon ( iconList[index][sel] ).pixmap ( iconRect.size(), mode, QIcon::On ) );
+            p->drawPixmap ( tRect0, QIcon ( iconList[index][sel] ).pixmap ( tRect0.size(), mode, QIcon::On ) );
             /*
              * 失真不明显，使用以下方法
              */
@@ -232,45 +248,43 @@ void QQtPictureEffectTabBar::drawText ( QPainter* p )
 {
     for ( int index = 0; index < count(); index++ )
     {
-        QRect tabTextRect = tabRect ( index );
+        QRect tRect0 = tabRect ( index );
+
+        tRect0.adjust ( contentsMargins().left(),
+                        contentsMargins().top(),
+                        -contentsMargins().right(),
+                        -contentsMargins().bottom() );
+
         //-rect.height()/20 上移
-        verticalTabs() ? tabTextRect.adjust ( 0, 0, 0, 0 ) : tabTextRect.adjust ( 0, 0, 0, 0 );
+        verticalTabs() ? tRect0.adjust ( 0, 0, 0, 0 ) : tRect0.adjust ( 0, 0, 0, 0 );
 
         if ( iconStyle == IconStyle_Top_And_BottomText )
         {
-            tabTextRect.adjust ( 0, 0, 0, -2 );
-            tabTextRect = QRect ( tabTextRect.left(),
-                                  tabTextRect.top() + tabTextRect.width(),
-                                  tabTextRect.width(),
-                                  tabTextRect.height() - tabTextRect.width() );
+            tRect0 = QRect ( tRect0.left(),
+                             tRect0.top() + tRect0.width(),
+                             tRect0.width(),
+                             tRect0.height() - tRect0.width() );
         }
         else if ( iconStyle == IconStyle_Bottom_And_TopText )
         {
-            tabTextRect.adjust ( 0, +2, 0, 0 );
-            tabTextRect = QRect ( tabTextRect.left(),
-                                  tabTextRect.top(),
-                                  tabTextRect.width(),
-                                  tabTextRect.height() - tabTextRect.width() );
+            tRect0 = QRect ( tRect0.left(),
+                             tRect0.top(),
+                             tRect0.width(),
+                             tRect0.height() - tRect0.width() );
         }
         else if ( iconStyle == IconStyle_Right_And_LeftText )
         {
-            tabTextRect.adjust ( +2, 0, 0, 0 );
-            tabTextRect = QRect ( tabTextRect.left(),
-                                  tabTextRect.top(),
-                                  tabTextRect.width() - tabTextRect.height(),
-                                  tabTextRect.height() );
+            tRect0 = QRect ( tRect0.left(),
+                             tRect0.top(),
+                             tRect0.width() - tRect0.height(),
+                             tRect0.height() );
         }
         else if ( iconStyle == IconStyle_Left_And_RightText )
         {
-            tabTextRect.adjust ( 0, 0, -2, 0 );
-            tabTextRect = QRect ( tabTextRect.left() + tabTextRect.height(),
-                                  tabTextRect.top(),
-                                  tabTextRect.width() - tabTextRect.height(),
-                                  tabTextRect.height() );
-        }
-        else if ( iconStyle == IconStyle_MiddleText )
-        {
-            tabTextRect.adjust ( 0, 0, 0, 0 );
+            tRect0 = QRect ( tRect0.left() + tRect0.height(),
+                             tRect0.top(),
+                             tRect0.width() - tRect0.height(),
+                             tRect0.height() );
         }
 
         int flags = Qt::AlignCenter;
@@ -296,7 +310,7 @@ void QQtPictureEffectTabBar::drawText ( QPainter* p )
         else
             p->setPen ( textColor );
 
-        p->drawText ( tabTextRect, flags, tabText ( index ) );
+        p->drawText ( tRect0, flags, tabText ( index ) );
         p->restore();
     }
 }

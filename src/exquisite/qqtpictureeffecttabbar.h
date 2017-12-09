@@ -31,6 +31,8 @@ public:
         IconStyle_Max_Style
     };
 
+    //setContentsMargins(left, top, right, bottom); is a gool idea.
+
     /*TabBar的风格*/
     IconStyle getIconStyle() const { return iconStyle; }
     void setIconStyle ( IconStyle iconStyle );
