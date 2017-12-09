@@ -225,6 +225,7 @@ void QQtPictureEffectTabBar::drawIcon ( QPainter* p )
 
         QIcon::Mode mode = QIcon::Normal;
 
+        /*这个效果没法看*/
         if ( currentIndex() == index )
             ;//mode = QIcon::Selected;
 
