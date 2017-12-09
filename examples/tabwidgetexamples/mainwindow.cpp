@@ -53,7 +53,8 @@ MainWindow::MainWindow ( QWidget* parent ) :
     tab1->setTabIcon ( 0, "./skin/default/bk_user_normal.png", "./skin/default/bk_user_press.png" );
     tab1->setTabPixmap ( 1, "./skin/default/bt_bt_hover.png", "./skin/default/bt_bt_press.png" );
     pline() << tab1->contentsMargins();
-    tab1->setContentsMargins ( 0, 0, 6, 0 );
+    tab1->setContentsMargins ( 2, 2, 8, 2 );
+    pline() << tab1->contentsMargins();
 
     ui->tb0->setStyleSheet ( "QTabWidget#tb0 QTabBar::tab { width:90px; height:30px; }" );
 }

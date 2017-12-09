@@ -153,11 +153,6 @@ void QQtPictureEffectTabBar::drawPicture ( QPainter* p )
     {
         QRect tRect0 = tabRect ( index );
 
-        tRect0.adjust ( contentsMargins().left(),
-                        contentsMargins().top(),
-                        -contentsMargins().right(),
-                        -contentsMargins().bottom() );
-
         if ( imgList.size() > index )
         {
             p->save();
@@ -182,10 +177,6 @@ void QQtPictureEffectTabBar::drawColor ( QPainter* p )
         p->setBrush ( QBrush ( backgroundColor ) );
 
         QRect tRect0 = tabRect ( index );
-        tRect0.adjust ( contentsMargins().left(),
-                        contentsMargins().top(),
-                        -contentsMargins().right(),
-                        -contentsMargins().bottom() );
 
         p->fillRect ( tRect0, backgroundColor );
         p->restore();
