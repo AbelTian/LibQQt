@@ -62,6 +62,7 @@ protected:
     virtual void paintEvent ( QPaintEvent* );
     virtual void drawBackground ( QPainter* p );
     virtual void drawPicture ( QPainter* p );
+    virtual void drawColor ( QPainter* p );
     virtual void drawIcon ( QPainter* p );
     virtual void drawText ( QPainter* p );
 

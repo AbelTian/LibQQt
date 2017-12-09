@@ -115,27 +115,35 @@ void QQtPictureEffectTabBar::paintEvent ( QPaintEvent* e )
     Q_UNUSED ( e )
     QPainter p ( this );
     drawBackground ( &p );
-    drawPicture ( &p );
     drawIcon ( &p );
     drawText ( &p );
 }
 
 void QQtPictureEffectTabBar::drawBackground ( QPainter* p )
 {
-
     bool b = drawBase();
 
     /*setDrawBase(True)启动ColorStyle*/
-    if ( b )
-    {
-        for ( int index = 0; index < count(); index++ )
-        {
-            p->save();
+    if ( !b )
+        return;
 
-            p->setBrush ( QBrush ( backgroundColor ) );
-            p->fillRect ( tabRect ( index ), backgroundColor );
-            p->restore();
-        }
+    switch ( iconStyle )
+    {
+    case IconStyle_Top_And_BottomText:
+    case IconStyle_Bottom_And_TopText:
+    case IconStyle_Left_And_RightText:
+    case IconStyle_Right_And_LeftText:
+    case IconStyle_MiddleText:
+        drawPicture ( p );
+        break;
+
+    case ColorStyle_Left_And_RightText:
+        drawColor ( p );
+        break;
+
+    case IconStyle_Max_Style:
+    default:
+        break;
     }
 }
 
@@ -158,6 +166,18 @@ void QQtPictureEffectTabBar::drawPicture ( QPainter* p )
             //p.drawItemPixmap(tabRectValue, Qt::AlignLeft |Qt::AlignTop, QPixmap::fromImage(image.scaled(tabRectValue.size(), Qt::KeepAspectRatio)));
             p->restore();
         }
+    }
+}
+
+void QQtPictureEffectTabBar::drawColor ( QPainter* p )
+{
+    for ( int index = 0; index < count(); index++ )
+    {
+        p->save();
+
+        p->setBrush ( QBrush ( backgroundColor ) );
+        p->fillRect ( tabRect ( index ), backgroundColor );
+        p->restore();
     }
 }
 
