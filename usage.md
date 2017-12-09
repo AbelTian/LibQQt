@@ -1,4 +1,4 @@
-# 用法
+# 入门用法
 
 ![设置Qt Creator默认编译路径](screenshot/1.png "这是Qt Creator的设置")
 ![设置Qt Creator构建套件](screenshot/2.png "这是Qt Creator的设置，设置File System Name")

@@ -49,7 +49,7 @@
 2. 添加QQtDictionary
      - 解决C Plus Plus中没有字典类别的尴尬。    
 3. 添加Multi Link技术  
-     - Multi Link technology，既多应用多链接库工程管理技术。
+     - Multi Link technology，既多链接工程管理技术。
      - 基于qmake，用户可以轻易的添加自定义library。
 
 
@@ -64,12 +64,16 @@ Make issues: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5B
 # Usage  
 
 ==============================================  
-[点击用法](usage.md)
+[走，去看看入门用法](usage.md)
 
 # 截图
 
 ==============================================  
 [看截图](screenshot.md)
 
+# 维基百科
+
+==============================================  
+[去Wiki](https://gitee.com/drabel/LibQt/wikis/Home "Wiki Home")
 
 

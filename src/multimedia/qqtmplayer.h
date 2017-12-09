@@ -4,11 +4,11 @@
 #include <QProcess>
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT QQtPlayer : public QObject
+class QQTSHARED_EXPORT QQtMPlayer : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtPlayer ( QObject* parent = 0 );
+    explicit QQtMPlayer ( QObject* parent = 0 );
 
     void play ( QString filename, int wid = 0, int width = 20, int height = 20 );
     void pause();

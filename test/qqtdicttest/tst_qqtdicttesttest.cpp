@@ -49,6 +49,10 @@ void QqtdicttestTest::testCase1()
     QFETCH ( QString, result );
     dict[data] = result;
     QVERIFY2 ( dict[data].getValue() == result, "Failure" );
+
+    QQtDictNode dict;
+    dict["CC"]["DD"]["EE"][0] = "This is a value";
+    qDebug() << dict["CC"]["DD"]["EE"][0].getValue().toString();
 }
 
 void QqtdicttestTest::testCase2_data()
