@@ -16,7 +16,7 @@ QQtPictureEffectTabBar::QQtPictureEffectTabBar ( QWidget* parent ) :
     backgroundColor = QColor ( 0, 0, 0 );
     selectedTextColor = QColor ( 255, 255, 255 );
     textFont = QApplication::font();
-    setDrawBase ( false );
+    setDrawBase ( true );
 }
 
 void QQtPictureEffectTabBar::setIconStyle ( QQtPictureEffectTabBar::IconStyle iconStyle )
