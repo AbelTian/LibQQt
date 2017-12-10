@@ -320,6 +320,7 @@ defineReplace(qqt_header){
     #exquisite widget
     command += $${path}/exquisite
     command += $${path}/exquisite/svgwidgets
+    command += $${path}/exquisite/gifwidgets
 
     ##qr code library
     command += $${path}/exquisite/qrcode/qrencode
