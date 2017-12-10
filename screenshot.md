@@ -5,6 +5,7 @@
 ![a](screenshot/c.png "圆盘进度条")
 ![a](screenshot/d.png "QQtDict Qt字典类")
 ![a](screenshot/e.png "QQtSqlTreeModel")
+![a](screenshot/f.png "QQt Custom TabBar")
 ![a](screenshot/z0.png "QQtFramelessHelper")
 
 [返回](.)
