@@ -16,8 +16,7 @@ SUBDIRS = src/qqt.pro
 ##QQt is build
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/exquisite
-#
-SUBDIRS += examples/tabwidgetexamples
+#SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
 #SUBDIRS += examples/qqtnetworkexample
 #SUBDIRS += examples/qqtchartexample
