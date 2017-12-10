@@ -40,11 +40,12 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->w77->setFixedHeight ( 28 );
 
 
-    ui->tw0->setStyleSheet ( "QTabWidget#tw0 QTabBar::tab { width:90px; height:30px; }" );
+    ui->tw0->setStyleSheet ( "QTabWidget#tw0 QTabBar::tab { width:72px; height:90px; }" );
     QQtPictureEffectTabBar* tab = ( QQtPictureEffectTabBar* ) ui->tw0->localTabBar();
-    tab->setIconStyle ( QQtPictureEffectTabBar::IconStyle_Left_And_RightText );
+    tab->setIconStyle ( QQtPictureEffectTabBar::IconStyle_Top_And_BottomText );
     tab->setTabPixmap ( 0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png" );
-    tab->setTabPixmap ( 1, "./skin/default/bt_user.png", "./skin/default/bt_user_press.png" );
+    tab->setTabPixmap ( 1, "./skin/default/bt_dispel.png", "./skin/default/bt_dispel_press.png" );
+    tab->setContentsMargins ( 2, 2, 2, 2 );
 
     ui->tw1->setStyleSheet ( "QTabWidget#tw1 QTabBar::tab { width:90px; height:30px; }" );
     QQtPictureEffectTabBar* tab1 = ( QQtPictureEffectTabBar* ) ui->tw1->localTabBar();

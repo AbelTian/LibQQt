@@ -198,8 +198,10 @@ void QQtPictureEffectTabBar::drawIcon ( QPainter* p )
                         -contentsMargins().bottom() );
 
         if ( iconStyle == IconStyle_Top_And_BottomText )
-            tRect0 = QRect ( tRect0.left(), tRect0.top(),
-                             tRect0.width(), tRect0.width() );
+            tRect0 = QRect ( tRect0.left(),
+                             tRect0.top(),
+                             tRect0.width(),
+                             tRect0.width() );
         else if ( iconStyle == IconStyle_Bottom_And_TopText )
             tRect0 = QRect ( tRect0.left(),
                              tRect0.bottom() - tRect0.width(),
