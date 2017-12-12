@@ -11,34 +11,45 @@ message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
 
 defineReplace(deploy_app_on_mac) {
     #need QQT_BUILD_PWD
+    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
     command = &&
-    command += rm -fr $${APP_DEPLOY_ROOT}/$${TARGET}.app &&
-    command += cp -fa $${DESTDIR}/$${TARGET}.app $${APP_DEPLOY_ROOT}/$${TARGET}.app
+    command += rm -fr $${APP_DEPLOY_PWD}/$${TARGET}.app &&
+    command += cp -fa $${DESTDIR}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app
     #message($$command)
     return ($$command)
 }
 
 defineReplace(deploy_app_on_win) {
     #need QQT_BUILD_PWD
+    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}\\$${TARGET}\\$${QKIT_STD_DIR}
     command =
-    command += $$RM $${APP_DEPLOY_ROOT}\\$${TARGET}.exe $$CMD_SEP
-    command += $$COPY $${QQT_BUILD_PWD}\\QQt.dll $${APP_DEPLOY_ROOT}\\QQt.dll $$CMD_SEP
-    command += $$COPY $${DESTDIR}\\$${TARGET}.exe $${APP_DEPLOY_ROOT}\\$${TARGET}.exe $$CMD_SEP
-    command += windeployqt $${APP_DEPLOY_ROOT}\\$${TARGET}.exe --release -verbose=1
+    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$RM $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
+    command += $$COPY $${QQT_BUILD_PWD}\\QQt.dll $${APP_DEPLOY_PWD}\\QQt.dll $$CMD_SEP
+    command += $$COPY $${DESTDIR}\\$${TARGET}.exe $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
+    #all windows need deploy release version?
+    equals(BUILD, Debug) {
+        #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
+    } else: equals(BUILD, Release) {
+        #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
+    }
+    command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
     #message($$command)
     return ($$command)
 }
 
 defineReplace(deploy_app_on_linux) {
     #need QQT_BUILD_PWD
+    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
+
     command =
-    command += $$RM $${APP_DEPLOY_ROOT}/libQQt.so* &&
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION3} $${APP_DEPLOY_ROOT} &&
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION2} $${APP_DEPLOY_ROOT} &&
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION1} $${APP_DEPLOY_ROOT} &&
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_ROOT} &&
-    command += $$RM $${APP_DEPLOY_ROOT}/$${TARGET} &&
-    command += $$COPY $${DESTDIR}/$${TARGET} $${APP_DEPLOY_ROOT}/$${TARGET}
+    command += $$RM $${APP_DEPLOY_PWD}/libQQt.so* &&
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION3} $${APP_DEPLOY_PWD} &&
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION2} $${APP_DEPLOY_PWD} &&
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION1} $${APP_DEPLOY_PWD} &&
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_PWD} &&
+    command += $$RM $${APP_DEPLOY_PWD}/$${TARGET} &&
+    command += $$COPY $${DESTDIR}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET}
     #message($$command)
     return ($$command)
 }

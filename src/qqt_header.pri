@@ -66,10 +66,9 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 contains(QKIT_PRIVATE, WIN32) {
     #Qt is static by mingw32 building
     mingw{
-        contains(QT_VERSION, 5.9) {
-            DEFINES += QQT_STATIC_LIBRARY
-            message($${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
-        }
+        #on my computer, Qt library are all static library?
+        DEFINES += QQT_STATIC_LIBRARY
+        message($${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
     }
     #link and build all need this macro
     contains(DEFINES, QQT_STATIC_LIBRARY) {

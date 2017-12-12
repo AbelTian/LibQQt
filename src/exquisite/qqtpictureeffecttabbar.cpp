@@ -219,13 +219,17 @@ void QQtPictureEffectTabBar::drawIcon ( QPainter* p )
         QIcon::Mode mode = QIcon::Normal;
 
         /*这个效果没法看*/
-        if ( currentIndex() == index )
+        if ( currentIndex() == index ) {
             ;//mode = QIcon::Selected;
+        }
 
+        int sel = BTN_NORMAL;
+        sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
+
+        //pline() << iconList.size() << index << iconList[index][sel];
         if ( iconList.size() > index )
         {
             p->save();
-            int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
             //tabRect = rect()?
             p->drawPixmap ( tRect0, QIcon ( iconList[index][sel] ).pixmap ( tRect0.size(), mode, QIcon::On ) );
             /*
