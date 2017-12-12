@@ -4,6 +4,10 @@
 #include <QApplication>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtApplication class
+ * 建议多使用./skin 而不是://skin Qt qrc命令 在linux下 需要qrc文件有变动才会编译 local图片文件变化不会引发编译
+ */
 class QQTSHARED_EXPORT QQtApplication : public QApplication
 {
     Q_OBJECT
