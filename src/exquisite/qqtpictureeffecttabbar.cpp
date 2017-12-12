@@ -219,7 +219,8 @@ void QQtPictureEffectTabBar::drawIcon ( QPainter* p )
         QIcon::Mode mode = QIcon::Normal;
 
         /*这个效果没法看*/
-        if ( currentIndex() == index ) {
+        if ( currentIndex() == index )
+        {
             ;//mode = QIcon::Selected;
         }
 
@@ -227,6 +228,7 @@ void QQtPictureEffectTabBar::drawIcon ( QPainter* p )
         sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
 
         //pline() << iconList.size() << index << iconList[index][sel];
+
         if ( iconList.size() > index )
         {
             p->save();

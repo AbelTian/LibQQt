@@ -13,6 +13,7 @@ defineReplace(deploy_app_on_mac) {
     #need QQT_BUILD_PWD
     APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
     command = &&
+    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += rm -fr $${APP_DEPLOY_PWD}/$${TARGET}.app &&
     command += cp -fa $${DESTDIR}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app
     #message($$command)
@@ -43,6 +44,7 @@ defineReplace(deploy_app_on_linux) {
     APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
 
     command =
+    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM $${APP_DEPLOY_PWD}/libQQt.so* &&
     command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION3} $${APP_DEPLOY_PWD} &&
     command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION2} $${APP_DEPLOY_PWD} &&
