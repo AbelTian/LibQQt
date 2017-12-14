@@ -212,7 +212,7 @@ contains (DEFINES, __EXQUISITE__) {
     contains (DEFINES, __SVGWIDGETS__) {
         QT += svg
     }
-    #need std support
+    #Gumbo need std support
     QMAKE_CFLAGS += -std=c99
     #c++ html parser query
     #if you use Gumbo parser query, open this annotation
