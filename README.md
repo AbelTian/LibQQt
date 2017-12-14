@@ -57,7 +57,6 @@
 
 ==============================================  
 [走，去看看入门用法](usage.md)  
-[预习Git入门用法](usage-git.md)
 
 # 截图
 
@@ -77,3 +76,8 @@ Mail me: tianduanrui@163.com
 My qq: 2657635903  
 Make issues: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
+# Refrence   
+
+==============================================  
+
+[预习Git入门用法](usage-git.md)
