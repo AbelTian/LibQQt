@@ -66,18 +66,18 @@
 # 维基百科
 
 ==============================================  
-[去Wiki](https://gitee.com/drabel/LibQt/wikis/Home "Wiki Home")
+[去维基](https://gitee.com/drabel/LibQt/wikis/Home "Wiki Home")
 
 
-# Contact Me  
-
-==============================================  
-Mail me: tianduanrui@163.com  
-My qq: 2657635903  
-Make issues: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
-
-# Refrence   
+# 联系我  
 
 ==============================================  
+邮箱: tianduanrui@163.com  
+QQ: 2657635903  
+发现了个问题: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
-[预习Git入门用法](usage-git.md)
+# 依赖项   
+
+==============================================  
+
+[预习Git 入门](usage-git.md)
