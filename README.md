@@ -53,18 +53,11 @@
      - 基于qmake，用户可以轻易的添加自定义library。
 
 
-# Contact Me  
-
-==============================================  
-Mail me: tianduanrui@163.com  
-My qq: 2657635903  
-Make issues: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
-
-
 # Usage  
 
 ==============================================  
-[走，去看看入门用法](usage.md)
+[走，去看看入门用法](usage.md)  
+[预习Git入门用法](usage-git.md)
 
 # 截图
 
@@ -76,4 +69,11 @@ Make issues: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5B
 ==============================================  
 [去Wiki](https://gitee.com/drabel/LibQt/wikis/Home "Wiki Home")
 
+
+# Contact Me  
+
+==============================================  
+Mail me: tianduanrui@163.com  
+My qq: 2657635903  
+Make issues: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
