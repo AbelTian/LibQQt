@@ -2,6 +2,7 @@
 # QQt Foundation Class  
 
 ==============================================  
+
 1. 支持绘制图表
     - QQtChart (compatiable with QChart and QCustomPlot)  
 2. 支持检测USB设备热插拔  
@@ -52,7 +53,9 @@
      - Multi Link technology，既多链接工程管理技术。
      - 基于qmake，用户可以轻易的添加自定义library。
 
-#介绍下  
+
+
+# 摘要介绍下  
 
 ==============================================  
 *LibQQt包括基础组成、精美组成*
@@ -62,7 +65,7 @@
 *如果用户希望精简LibQQt，qqt_header.pri里面有很多模块开关，开开关关能修剪。*  
 *不建议使用cmake，建议使用qmake。*
 
-# Usage  
+# 使用方法  
 
 ==============================================  
 [走，去看看入门用法](usage.md)  
@@ -71,12 +74,12 @@
 # 截图
 
 ==============================================  
-[看截图](screenshot.md)
+[看入门用例截图](screenshot.md)
 
 # 维基百科
 
 ==============================================  
-[去维基](https://gitee.com/drabel/LibQt/wikis/Home "Wiki Home")
+[跳到转维基](https://gitee.com/drabel/LibQt/wikis/Home "Wiki Home")
 
 
 # 联系我  
@@ -86,7 +89,7 @@
 QQ: 2657635903  
 发现了个问题: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
-# 依赖项   
+# 依赖学习知识   
 
 ==============================================  
 

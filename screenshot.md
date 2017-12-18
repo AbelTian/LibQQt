@@ -1,4 +1,4 @@
-# 屏幕截图
+# 入门用例截图
 
 ![a](screenshot/a.png "矢量绘图")
 ![a](screenshot/b.png "QQtChart 绘制图表")
