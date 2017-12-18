@@ -32,22 +32,22 @@
 6. QQt通讯套件。
      - 通讯口类   
         - QQtSerialPort 兼容QSerialPort and QextSerialPort
-        - QQtSocketTcpClient、QQtSocketTcpServer、QQtSocketUdpClient、QQtSocketUdpServer
+        - [QQtSocketTcpClient](src/network/qqtsockettcpclient.h)、QQtSocketTcpServer、QQtSocketUdpClient、QQtSocketUdpServer
         - QQtBluetoothSocket +QQtBluetoothManager
         - QQtWebAccessManager，支持http、ftp等主流协议，高并发传输。
         - QQtWebSocket接口
-     - 协议虚类（接口类） QQtProtocol QQtWebSocketProtocol
-     - 报文虚类（接口类） QQtMessage
+     - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) QQtWebSocketProtocol
+     - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)
 5. 支持webservice
 7. 添加应用中常用的form
 8. 支持多页TableWidget
-9. 添加QQtApplication，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
+9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
 5. 支持Qt5.9.2   
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
 1. 添加svg support widgets  
      - 比如 QQtSvgProgressbar
      - QQtSvgCheckBox
-2. 添加QQtDictionary
+2. 添加 [QQtDictionary](src/core/qqtdictionary.h)   
      - 解决C Plus Plus中没有字典类别的尴尬。    
 3. 添加Multi Link技术  
      - Multi Link technology，既多链接工程管理技术。
