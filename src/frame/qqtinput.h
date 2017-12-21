@@ -14,6 +14,11 @@
 #include <QTextEdit>
 #include <QPlainTextEdit>
 #include <QTextBrowser>
+#include <qqtspinbox.h>
+#include <qqtdoublespinbox.h>
+#include <qqtdateedit.h>
+#include <qqttimeedit.h>
+#include <qqtdatetimeedit.h>
 #include <QtSql>
 #include <QPushButton>
 #include <QTimer>
@@ -120,6 +125,7 @@ private:
     QTextEdit* currentTextEdit;     //当前焦点的多行文本框
     QPlainTextEdit* currentPlain;   //当前焦点的富文本框
     QTextBrowser* currentBrowser;   //当前焦点的文本浏览框
+    QWidget* currentTextWidget;     //当前焦点的通用文本框
 
     QString currentEditType;        //当前焦点控件的类型
     QString currentPosition;        //当前输入法面板位置类型

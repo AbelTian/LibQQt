@@ -11,8 +11,8 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui ( new Ui::MainWindow )
 {
     ui->setupUi ( this );
-    QString svg =
-        QString ( "/Users/abel/Develop/b0-toolskits/macLibraries/Qt/Examples/Qt-5.9.2/svg/svgviewer/files/bubbles.svg" );
+    //QString svg = QString ( "/Users/abel/Develop/b0-toolskits/macLibraries/Qt/Examples/Qt-5.9.2/svg/svgviewer/files/bubbles.svg" );
+    QString svg = QString ( "/Users/abel/Downloads/2916415846_lanrentuku.com/aa.svg" );
     ui->w->setSvgFile ( svg );
 
     ui->b0->iconTable() [BTN_NORMAL] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir.svg";

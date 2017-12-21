@@ -2,67 +2,90 @@
 #include <QStylePainter>
 #include "qqtcore.h"
 
-QQtWidget::QQtWidget(QWidget* parent) :
-    QWidget(parent)
+QQtWidget::QQtWidget ( QWidget* parent ) :
+    QWidget ( parent )
 {
     m_style = QQTCENTER;
+
+    m_lcTimer = new QTimer ( this );
+    m_lcTimer->setSingleShot ( true );
+    m_lcTimer->setInterval ( 2200 );
+    connect ( m_lcTimer, SIGNAL ( timeout() ),
+              this, SLOT ( slot_timeout() ) );
 }
 
 QQtWidget::~QQtWidget()
 {
 }
 
-void QQtWidget::setPixmap(QString pic)
+void QQtWidget::setPixmap ( QString pic )
 {
     m_pic = pic;
     update();
 }
 
-void QQtWidget::paintEvent(QPaintEvent* event)
+void QQtWidget::paintEvent ( QPaintEvent* event )
 {
-    QStylePainter p(this);
+    QStylePainter p ( this );
 
-    if (m_pic.isEmpty())
+    if ( m_pic.isEmpty() )
         return;
 
-    QImage image(m_pic);
+    QImage image ( m_pic );
 
-    switch (m_style)
+    switch ( m_style )
     {
     case QQTCENTER:
-        p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(m_pic).pixmap(rect().size(), QIcon::Normal, QIcon::On));
+        p.drawItemPixmap ( rect(), Qt::AlignCenter, QIcon ( m_pic ).pixmap ( rect().size(), QIcon::Normal, QIcon::On ) );
         break;
 
     case QQTTILEDWIDTH:
-        p.drawItemPixmap(rect(), Qt::AlignLeft | Qt::AlignTop,
-                         QPixmap::fromImage(image.copy(rect())
-                                            .scaledToWidth(rect().width())
-                                           ));
+        p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                           QPixmap::fromImage ( image.copy ( rect() )
+                                                .scaledToWidth ( rect().width() )
+                                              ) );
         break;
 
     case QQTZOOMWIDTH:
-        p.drawItemPixmap(rect(), Qt::AlignLeft | Qt::AlignTop,
-                         QPixmap::fromImage(image
-                                            .scaled(rect().width(), image.height(), Qt::IgnoreAspectRatio)
-                                           ));
+        p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                           QPixmap::fromImage ( image
+                                                .scaled ( rect().width(), image.height(), Qt::IgnoreAspectRatio )
+                                              ) );
         break;
 
     default:
         break;
     }
 
-    return QWidget::paintEvent(event);
+    return QWidget::paintEvent ( event );
 }
 
 
-void QQtWidget::mouseReleaseEvent(QMouseEvent* event)
+void QQtWidget::mousePressEvent ( QMouseEvent* event )
 {
-    emit click();
-    return QWidget::mouseReleaseEvent(event);
+    m_lcTimer->start();
+    return QWidget::mousePressEvent ( event );
 }
 
-void QQtWidget::mouseDoubleClickEvent(QMouseEvent* event)
+void QQtWidget::mouseReleaseEvent ( QMouseEvent* event )
+{
+    if ( m_lcTimer->isActive() )
+    {
+        m_lcTimer->stop();
+        emit click();
+    }
+
+    return QWidget::mouseReleaseEvent ( event );
+}
+
+void QQtWidget::mouseDoubleClickEvent ( QMouseEvent* event )
 {
     emit doubleClick();
-    return QWidget::mouseDoubleClickEvent(event);
+    return QWidget::mouseDoubleClickEvent ( event );
 }
+
+void QQtWidget::slot_timeout()
+{
+    emit longClick();
+}
+

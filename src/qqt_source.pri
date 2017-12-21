@@ -73,6 +73,18 @@ HEADERS += \
 
 #widgets
 SOURCES += \
+    $$PWD/widgets/qqtspinbox.cpp \
+    $$PWD/widgets/qqtdoublespinbox.cpp \
+    $$PWD/widgets/qqtdateedit.cpp \
+    $$PWD/widgets/qqttimeedit.cpp \
+    $$PWD/widgets/qqtdatetimeedit.cpp
+HEADERS += \
+    $$PWD/widgets/qqtspinbox.h \
+    $$PWD/widgets/qqtdoublespinbox.h \
+    $$PWD/widgets/qqtdateedit.h \
+    $$PWD/widgets/qqttimeedit.h \
+    $$PWD/widgets/qqtdatetimeedit.h
+SOURCES += \
     $$PWD/widgets/qqtcheckbox.cpp \
     $$PWD/widgets/qqtheaderview.cpp \
     $$PWD/widgets/qqtlistview.cpp \

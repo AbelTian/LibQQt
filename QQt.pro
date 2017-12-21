@@ -16,8 +16,7 @@ SUBDIRS = src/qqt.pro
 ##QQt is build
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/exquisite
-#
-SUBDIRS += examples/tabwidgetexamples
+#SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
 #SUBDIRS += examples/qqtnetworkexample
 #SUBDIRS += examples/qqtchartexample
@@ -35,7 +34,8 @@ SUBDIRS += examples/tabwidgetexamples
 ##some test project
 ##-----------------------------------------------------------------
 #SUBDIRS += test/gumbo_query_test
-#SUBDIRS += test/svgtest
+#
+SUBDIRS += test/svgtest
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest
