@@ -24,6 +24,9 @@ public:
         IconStyle_Left_And_RightText,
         IconStyle_Right_And_LeftText,
         IconStyle_MiddleText,
+        /*小Icon，大文字*/
+        /*依赖iconSize的height，width无效。*/
+        IconStyle_Little_Top_And_BottomText,
 
         //color style
         ColorStyle_Left_And_RightText,
@@ -37,22 +40,21 @@ public:
     IconStyle getIconStyle() const { return iconStyle; }
     void setIconStyle ( IconStyle iconStyle );
 
-    /*背景部分 使用颜色*/
-    //effected by drawbase
+    /*背景部分，这里设置的是Tab的背景图*/
+    /*使用颜色*/
     QColor getBackgroundColor() const { return backgroundColor; }
-    void setBackgroundColor ( QColor backgroundColor );
-
-    /*背景部分 使用图片*/
+    void setBackgroundColor ( QColor backgroundColor );//effected by drawbase
+    /*使用图片*/
     void tabPixmap ( int index, QImage& img, QImage& imgSel );
     void setTabPixmap ( int index, const QString& img = QString(),
                         const QString& imgSel = QString() );
 
-    /*Icon部分*/
+    /*Icon部分，这里设置的是Tab里的Icon*/
     void tabIcon ( int index, QImage& icon, QImage& iconSel );
     void setTabIcon ( int index, const QString& icon = QString(),
                       const QString& iconSel = QString() );
 
-    /*文字部分*/
+    /*文字部分，这里设置的是Tab里显示的文字*/
     QFont getTextFont() const { return textFont; }
     void setTextFont ( QFont textFont );
     QColor getTextColor() const { return textColor; }
