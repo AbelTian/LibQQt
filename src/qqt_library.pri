@@ -109,8 +109,8 @@ include ($${CONFIG_FILE})
 isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT) {
     message($${TARGET})
     message($${CONFIG_FILE})
-    message(QQT_BUILD_ROOT = /user/set/path is required, please modify qmake/app_configure.pri )
-    message(QQT_SDK_ROOT = /user/set/path is required )
+    message("QQT_BUILD_ROOT = /user/set/path is required, please modify qmake/app_configure.pri")
+    message("QQT_SDK_ROOT = /user/set/path is required")
     error(  please check $$CONFIG_FILE under qqt_library.pri)
 }
 message(QQt build root: $$QQT_BUILD_ROOT)
@@ -131,6 +131,7 @@ QQT_STD_DIR = QQt/$${QKIT_STD_DIR}
 QQT_DST_DIR = src/bin
 #create platform sdk need this
 QQT_SRC_PWD=$${PWD}
+
 #need use qqt subdir proj
 QQT_BUILD_PWD=$${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
 #sdk path
@@ -143,7 +144,11 @@ contains(CONFIG, link_from_sdk) {
     QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
 }
 
-contains(QKIT_PRIVATE, WIN32|WIN64) {
+contains(QKIT_PRIVATE, WIN32||WIN64) {
+    QQT_BUILD_ROOT~=s,/,\\,g
+    QQT_SDK_ROOT~=s,/,\\,g
+    APP_DEPLOY_ROOT~=s,/,\\,g
+
     QKIT_STD_DIR~=s,/,\\,g
     QQT_STD_DIR~=s,/,\\,g
     QQT_DST_DIR~=s,/,\\,g

@@ -39,7 +39,7 @@ include ($$PWD/qqt_qkit.pri)
 isEmpty(QKIT_PRIVATE) {
     message(1. you should change qt default build directory to your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name})
     message(2. env variable QKIT is required! pleace check qqt_qkit.pri)
-    error(  error occured!)
+    error(  error occured!, please check build output panel.)
 }
 
 ################################################

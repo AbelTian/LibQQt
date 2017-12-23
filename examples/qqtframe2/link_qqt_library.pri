@@ -43,7 +43,7 @@ include($${QQT_SOURCE_ROOT}/src/qqt_header.pri)
 isEmpty(QKIT_PRIVATE) {
     message(env variable QKIT is required!)
     message(pleace check qqt_qkit.pri)
-    error(  error occured!)
+    error(  error occured!, please check build output panel.)
 }
 
 #-------------------------------------------------------------
