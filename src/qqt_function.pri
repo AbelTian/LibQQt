@@ -277,14 +277,12 @@ defineTest(is_same_file) {
 
     command1 = $$get_md5_command($${filename1})
     command2 = $$get_md5_command($${filename2})
-
     result1 = $$system($${command1})
     result2 = $$system($${command2})
 
-    message($$filename1 $$result1)
-    message($$filename2 $$result2)
-
-    equals(result1, result2): return(true)
+    #message($$filename1 $$result1)
+    #message($$filename2 $$result2)
+    equals(result1, $${result2}) : return(true)
     return (false)
 }
 
