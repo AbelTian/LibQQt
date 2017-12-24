@@ -158,6 +158,18 @@ defineReplace(get_lrelease_language){
     return ($${command})
 }
 
+defineReplace(get_md5_command) {
+    filename = $$1
+    isEmpty(1): error("get_md5_command(filename) requires one argument")
+    command =
+    win32 {
+        command = md5 -n $${filename}
+    } else {
+        command = echo 2> $${filename}
+    }
+    return ($$command)
+}
+
 ################################################
 ##custom functions
 ################################################
