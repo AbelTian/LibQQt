@@ -168,7 +168,7 @@ defineReplace(get_md5_command) {
     } else:mac* {
         command = md5 -q $${filename}
     } else {
-        command = md5sum -b $${filename} | cut -d ' ' -f1
+        command = md5sum -b $${filename} | cut -d \' \' -f1
     }
     return ($$command)
 }
