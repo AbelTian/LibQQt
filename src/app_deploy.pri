@@ -9,20 +9,24 @@ isEmpty(APP_DEPLOY_ROOT){
 }
 message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
 
+#set app deploy pwd
+APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
+contains(QKIT_PRIVATE, WIN32||WIN64) {
+    APP_DEPLOY_PWD~=s,/,\\,g
+}
+
 defineReplace(deploy_app_on_mac) {
     #need QQT_BUILD_PWD
-    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
     command = &&
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += rm -fr $${APP_DEPLOY_PWD}/$${TARGET}.app &&
-    command += cp -fa $${DESTDIR}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app
+    command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app &&
+    command += $$COPY_DIR $${DESTDIR}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app
     #message($$command)
     return ($$command)
 }
 
 defineReplace(deploy_app_on_win) {
     #need QQT_BUILD_PWD
-    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}\\$${TARGET}\\$${QKIT_STD_DIR}
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
@@ -41,7 +45,6 @@ defineReplace(deploy_app_on_win) {
 
 defineReplace(deploy_app_on_linux) {
     #need QQT_BUILD_PWD
-    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
