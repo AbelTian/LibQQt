@@ -88,4 +88,4 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
 
-
+is_same_file(svgtest.pro, svgtest.pro)

@@ -161,11 +161,14 @@ defineReplace(get_lrelease_language){
 defineReplace(get_md5_command) {
     filename = $$1
     isEmpty(1): error("get_md5_command(filename) requires one argument")
+    !isEmpty(2): error("get_md5_command(filename) requires one argument")
     command =
     win32 {
         command = md5 -n $${filename}
+    } else:mac* {
+        command = md5 -q $${filename}
     } else {
-        command = echo 2> $${filename}
+        command = md5sum -b $${filename} | cut -d ' ' -f1
     }
     return ($$command)
 }
@@ -262,6 +265,26 @@ defineTest(lrelease_language){
     isEmpty(2): error("lrelease_language(filepath, filename) requires two argument")
     command = $$get_lrelease_language($${filepath}, $${filename})
     system_errcode($${command}): return (true)
+    return (false)
+}
+
+
+defineTest(is_same_file) {
+    filename1 = $$1
+    filename2 = $$2
+    isEmpty(2): error("is_same_file(filename1, filename2) requires two argument")
+    !isEmpty(3): error("is_same_file(filename1, filename2) requires two argument")
+
+    command1 = $$get_md5_command($${filename1})
+    command2 = $$get_md5_command($${filename2})
+
+    result1 = $$system($${command1})
+    result2 = $$system($${command2})
+
+    message($$filename1 $$result1)
+    message($$filename2 $$result2)
+
+    equals(result1, result2): return(true)
     return (false)
 }
 
