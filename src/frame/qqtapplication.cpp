@@ -64,8 +64,12 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
 
 #ifdef __EMBEDDED_LINUX__
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     //QApplication::setOverrideCursor(Qt::ArrowCursor);
     QWSServer::setCursorVisible ( false );
+#else
+    //TODO:
+#endif
 #endif
 
 

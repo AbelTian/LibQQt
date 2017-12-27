@@ -1,10 +1,6 @@
 
 #include "qqtpluginwatcher.h"
-
-#ifdef __QT4__
-#include <QWSServer>
-#include <QMouseDriverFactory>
-#endif
+#include "qqt-qt.h"
 
 QQtPluginWatcher* QQtPluginWatcher::_instance = NULL;
 QQtPluginWatcher::QQtPluginWatcher(QObject* parent) :
@@ -73,10 +69,14 @@ void QQtPluginWatcher::slotDeviceDriver()
 
     if (E_MOUSE == m_devType)
     {
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
         if (E_ADD == m_devStat)
             QWSServer::setCursorVisible(true);
         else if (E_RM == m_devStat)
             QWSServer::setCursorVisible(false);
+#else
+        //TODO:
+#endif
     }
     else if (E_STORAGE == m_devType)
     {

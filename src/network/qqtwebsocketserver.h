@@ -2,6 +2,7 @@
 #define QQTWEBSERVER_H
 
 #include <QObject>
+#include <qqtcore.h>
 
 class QQtWebSocketServer : public QObject
 {

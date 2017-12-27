@@ -2,6 +2,7 @@
 #define QQTWEBCLIENT_H
 
 #include <QtWebSockets/QWebSocket>
+#include <qqtcore.h>
 /**
  * @brief The QQtWebClient class
  * QQtWebSocketClient通过安装QQtWebProtocol来实现和RawSocket相似的通信方式。

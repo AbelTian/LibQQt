@@ -2,6 +2,7 @@
 #define QQTDATEEDIT_H
 
 #include <QDateEdit>
+#include <qqtcore.h>
 
 class QQtDateEdit : public QDateEdit
 {

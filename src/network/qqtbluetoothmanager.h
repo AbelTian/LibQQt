@@ -16,6 +16,8 @@
 #include <QMap>
 #include <QList>
 
+#include <qqtcore.h>
+
 class QQTSHARED_EXPORT QQtBluetoothManager : public QBluetoothLocalDevice
 {
     Q_OBJECT

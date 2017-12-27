@@ -254,6 +254,7 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
 #if you use QQtCharts, open this annotation
 DEFINES += __QQTCHARTS__
 lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__
+contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES-=__QQTCHARTS__
 #based on QtCharts, need charts module
 contains(DEFINES, __QQTCHARTS__) {
     QT += charts

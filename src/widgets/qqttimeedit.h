@@ -2,6 +2,7 @@
 #define QQTTIMEEDIT_H
 
 #include <QTimeEdit>
+#include <qqtcore.h>
 
 class QQtTimeEdit : public QTimeEdit
 {
