@@ -2,6 +2,7 @@
 #define QQTSPINBOX_H
 
 #include <QSpinBox>
+#include <qqtcore.h>
 
 class QQtSpinBox : public QSpinBox
 {

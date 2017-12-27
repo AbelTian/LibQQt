@@ -34,8 +34,7 @@ SUBDIRS = src/qqt.pro
 ##some test project
 ##-----------------------------------------------------------------
 #SUBDIRS += test/gumbo_query_test
-#
-SUBDIRS += test/svgtest
+#SUBDIRS += test/svgtest
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest

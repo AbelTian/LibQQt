@@ -6,12 +6,19 @@
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 #include <QtCore>
 #include <QtGui>
-#include <QWSInputMethod>
 #else
 #include <QtCore>
 #include <QtGui>
 #include <QtWidgets>
 #include <QtGlobal>
+#endif
+
+#if defined __EMBEDDED_LINUX__
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+#include <QWSInputMethod>
+#include <QWSServer>
+#include <QMouseDriverFactory>
+#endif
 #endif
 
 #include <QApplication>

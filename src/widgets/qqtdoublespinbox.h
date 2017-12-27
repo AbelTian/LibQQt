@@ -2,6 +2,7 @@
 #define QQTDOUBLESPINBOX_H
 
 #include <QDoubleSpinBox>
+#include <qqtcore.h>
 
 class QQtDoubleSpinBox : public QDoubleSpinBox
 {
