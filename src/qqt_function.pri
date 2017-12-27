@@ -14,6 +14,18 @@ contains(QMAKE_HOST.os,Windows) {
     CD = cd /d
     RM_DIR = rd /s /q
     #PATH_SEP=\\
+} else:contains(QMAKE_HOST.os, Darwin) {
+    SCRIPT_SUFFIX=sh
+    CMD_SEP = &&
+    MOVE = mv
+    COPY = cp -f
+    COPY_DIR = cp -fa
+    MK_DIR = mkdir -p
+    RM = rm -f
+    CD = cd
+    LN = ln -sf
+    RM_DIR = rm -rf
+    #PATH_SEP=/
 } else {
     SCRIPT_SUFFIX=sh
     CMD_SEP = &&

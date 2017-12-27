@@ -314,7 +314,7 @@ void QQtPictureEffectTabBar::drawText ( QPainter* p )
         else if ( iconStyle == IconStyle_MiddleText )
             flags = Qt::AlignVCenter | Qt::AlignHCenter;
         else if ( iconStyle == IconStyle_Little_Top_And_BottomText )
-            flags = Qt::AlignHCenter | Qt::AlignBottom;
+            flags = Qt::AlignHCenter | Qt::AlignVCenter;
 
         //pline() << objectName() << rect;
         //if on board text is normal, this is right. otherwise the palette is right
