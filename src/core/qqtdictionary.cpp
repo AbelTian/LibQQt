@@ -69,7 +69,8 @@ void QQtDictNode::insertChild ( int index, const QString& value )
 void QQtDictNode::insertChild ( int index, const QQtDictNode& dict )
 {
     m_type = DictList;
-    m_list.insert ( index, dict );
+    //m_list.insert ( index, dict );
+    this->operator [](index) = dict;
 }
 
 void QQtDictNode::insertChild ( const QString& key, const QString& value )

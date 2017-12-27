@@ -93,10 +93,13 @@ public:
     void setChild ( const QMap<QString, QQtDictNode>& map );
 
     /*自己本身没有孩子，添加一个个的孩子*/
+    /*index = int*/
     void appendChild ( const QString& value );
     void appendChild ( const QQtDictNode& dict );
 
     /*自己本身有孩子，添加一个个的孩子*/
+    /*index = int, 会在之前之后插入，现更改为会替换存在的index*/
+    /*index = string, 会替换存在的index*/
     void insertChild ( int index, const QString& value );
     void insertChild ( int index, const QQtDictNode& dict );
     void insertChild ( const QString& key, const QString& value );
