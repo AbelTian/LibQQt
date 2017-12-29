@@ -24,9 +24,11 @@ public:
         IconStyle_Left_And_RightText,
         IconStyle_Right_And_LeftText,
         IconStyle_MiddleText,
-        /*小Icon，大文字*/
-        /*依赖iconSize的height，width无效。*/
-        IconStyle_Little_Top_And_BottomText,
+
+        /*
+         * 依赖layoutSpacing 设置文字和图片的间距。
+         */
+        IconStyle_2_Top_And_BottomText,
 
         //color style
         ColorStyle_Left_And_RightText,
@@ -34,6 +36,7 @@ public:
         IconStyle_Max_Style
     };
 
+    void setLayoutSpacing(int spacing = 0) { this->spacing = spacing; }
     //setContentsMargins(left, top, right, bottom); is a gool idea.
 
     /*TabBar的风格*/
@@ -80,6 +83,7 @@ private:
     QColor textColor;
     QColor selectedTextColor;
     QColor backgroundColor;
+    int spacing;
 };
 
 #endif // QQTPICTUREEFFECTTABBAR_H
