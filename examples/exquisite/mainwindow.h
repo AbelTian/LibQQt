@@ -4,8 +4,7 @@
 #include <QMainWindow>
 #include <QTimer>
 
-namespace Ui
-{
+namespace Ui {
 class MainWindow;
 }
 

@@ -228,6 +228,7 @@ DEFINES += __WEBSERVICESUPPORT__
 #if you use QNetworkAccessManagerSupport , open this annotation
 DEFINES += __WEBACCESSSUPPORT__
 lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
+contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES -= __WEBACCESSSUPPORT__
 contains (DEFINES, __WEBACCESSSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
 }

@@ -111,7 +111,8 @@ isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT) {
     message($${CONFIG_FILE})
     message("QQT_BUILD_ROOT = /user/set/path is required, please modify qmake/app_configure.pri")
     message("QQT_SDK_ROOT = /user/set/path is required")
-    error(  please check $$CONFIG_FILE under qqt_library.pri)
+    message("linux platform this pri is under qqt_library.pri")
+    error("  please check $$CONFIG_FILE")
 }
 message(QQt build root: $$QQT_BUILD_ROOT)
 message(QQt sdk root: $$QQT_SDK_ROOT)

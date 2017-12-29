@@ -89,7 +89,7 @@ contains (CONFIG, QQT_SOURCE_BUILDIN) {
     #link_from_sdk do move qqt to sdk path at app pre link command not lib build time
     #mod qqt source to start post link is not needed here.
     #need mod app souce after every pri mod.
-    #system("touch $${QQT_SOURCE_ROOT}/frame/qqtapplication.cpp")
+    system("touch $${QQT_SOURCE_ROOT}/frame/qqtapplication.cpp")
     include ($${QQT_SOURCE_ROOT}/qqt_install.pri)
 
     #in this pri use QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD
