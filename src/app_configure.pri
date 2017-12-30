@@ -1,17 +1,3 @@
-#-------------------------------------------------
-#install app
-#-------------------------------------------------
-#CONFIG += can_install
-can_install:contains(QKIT_PRIVATE, EMBEDDED) {
-    target.path = /Application
-    INSTALLS += target
-} else: unix {
-    equals(QKIT_PRIVATE, macOS) {
-        target.path = /Applications
-        INSTALLS += target
-    }
-}
-
 ############
 ##config defination
 ############
@@ -43,6 +29,22 @@ include($${PWD}/link_qqt_library.pri)
 #optional
 #if you have this request, include this pri in your app pro
 #include($${PWD}/app_deploy.pri)
+
+#-------------------------------------------------
+#install app
+#-------------------------------------------------
+contains(QKIT_PRIVATE, EMBEDDED||MIPS32||ARM32) {
+    target.path = /Application
+    INSTALLS += target
+}
+
+#CONFIG += can_install
+can_install: unix {
+    equals(QKIT_PRIVATE, macOS) {
+        target.path = /Applications
+        INSTALLS += target
+    }
+}
 
 #-------------------------------------------------
 ##project environ print
