@@ -12,6 +12,7 @@ QQtPictureEffectTabBar::QQtPictureEffectTabBar ( QWidget* parent ) :
 {
     setFocusPolicy ( Qt::NoFocus );
     iconStyle = IconStyle_Left_And_RightText;
+    spacing = 0;
     textColor = QColor ( 0, 0, 0 );
     backgroundColor = QColor ( 0, 0, 0 );
     selectedTextColor = QColor ( 255, 255, 255 );
@@ -134,7 +135,7 @@ void QQtPictureEffectTabBar::drawBackground ( QPainter* p )
     case IconStyle_Left_And_RightText:
     case IconStyle_Right_And_LeftText:
     case IconStyle_MiddleText:
-    case IconStyle_Little_Top_And_BottomText:
+    case IconStyle_2_Top_And_BottomText:
         drawPicture ( p );
         break;
 
@@ -216,11 +217,11 @@ void QQtPictureEffectTabBar::drawIcon ( QPainter* p )
         else if ( iconStyle == IconStyle_Left_And_RightText )
             tRect0 = QRect ( tRect0.left(), tRect0.top(),
                              tRect0.height(), tRect0.height() );
-        else if ( iconStyle == IconStyle_Little_Top_And_BottomText )
+        else if ( iconStyle == IconStyle_2_Top_And_BottomText )
             tRect0 = QRect ( tRect0.left(),
                              tRect0.top(),
                              tRect0.width(),
-                             iconSize().height() );
+                             tRect0.height()/2-spacing/2 );
 
         QIcon::Mode mode = QIcon::Normal;
 
@@ -292,12 +293,12 @@ void QQtPictureEffectTabBar::drawText ( QPainter* p )
                              tRect0.width() - tRect0.height(),
                              tRect0.height() );
         }
-        else if ( iconStyle == IconStyle_Little_Top_And_BottomText )
+        else if ( iconStyle == IconStyle_2_Top_And_BottomText )
         {
             tRect0 = QRect ( tRect0.left(),
                              tRect0.top() + iconSize().height(),
                              tRect0.width(),
-                             tRect0.height() - iconSize().height() );
+                             tRect0.height()/2-spacing/2 );
         }
 
 
@@ -313,7 +314,7 @@ void QQtPictureEffectTabBar::drawText ( QPainter* p )
             flags = Qt::AlignVCenter | Qt::AlignRight;
         else if ( iconStyle == IconStyle_MiddleText )
             flags = Qt::AlignVCenter | Qt::AlignHCenter;
-        else if ( iconStyle == IconStyle_Little_Top_And_BottomText )
+        else if ( iconStyle == IconStyle_2_Top_And_BottomText )
             flags = Qt::AlignHCenter | Qt::AlignVCenter;
 
         //pline() << objectName() << rect;
