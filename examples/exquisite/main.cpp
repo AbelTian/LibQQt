@@ -10,6 +10,9 @@ public:
         QApplication::setOrganizationName ( "QQt" );
         QApplication::setOrganizationDomain ( "www.qqt.com" );
         setQSSStyle();
+#ifdef __EMBEDDED_LINUX__
+        setTextFont("/usr/local/Trolltech/lib/fonts/wenquanyi.ttf", 14);
+#endif
     }
     virtual ~MainApplication() {}
 };
