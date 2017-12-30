@@ -56,6 +56,7 @@ equals(QKIT_PRIVATE, macOS) {
 #user can modify any infomation under this annotation
 #-------------------------------------------------
 include(../../src/app_configure.pri)
+include(../../src/app_deploy.pri)
 
 #-------------------------------------------------
 #user app may use these these settings prefertly

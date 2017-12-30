@@ -1,8 +1,7 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = src/qqt.pro \
-    test/customqvariant
+SUBDIRS = src/qqt.pro
 
 ##-----------------------------------------------------------------
 ##basic example
@@ -37,6 +36,7 @@ SUBDIRS += examples/exquisite
 ##-----------------------------------------------------------------
 #SUBDIRS += test/gumbo_query_test
 #SUBDIRS += test/svgtest
+#SUBDIRS += test/customqvariant
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest

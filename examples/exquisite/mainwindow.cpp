@@ -4,12 +4,17 @@
 #include <QKeyEvent>
 #include <qqtcore.h>
 #include <QTime>
+#include <qqtethenetmanager.h>
 
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+#ifdef __EMBEDDED_LINUX__
+    QQtEthenetManager::Instance(this);
+#endif
 
     value = 0;
     curmaxValue = 80;

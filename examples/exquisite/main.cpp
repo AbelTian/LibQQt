@@ -1,9 +1,22 @@
 #include "mainwindow.h"
-#include <QApplication>
+#include <qqtapplication.h>
+
+class MainApplication: public QQtApplication
+{
+public:
+    explicit MainApplication ( int argc, char* argv[] ) :
+        QQtApplication ( argc, argv ) {
+        QApplication::setApplicationName ( "exquisite" );
+        QApplication::setOrganizationName ( "QQt" );
+        QApplication::setOrganizationDomain ( "www.qqt.com" );
+        setQSSStyle();
+    }
+    virtual ~MainApplication() {}
+};
 
 int main(int argc, char* argv[])
 {
-    QApplication a(argc, argv);
+    MainApplication a(argc, argv);
     MainWindow w;
     w.show();
 

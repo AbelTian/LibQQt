@@ -286,7 +286,7 @@ contains (DEFINES, __BLUETOOTH__) {
 #ethnet(+wifi) manager
 #arm mips
 #TODO: +wince +android +ios +macOS? +win? +linux?
-equals(QKIT_PRIVATE, EMBEDDED) {
+contains(QKIT_PRIVATE, EMBEDDED||ARM32||MIPS32) {
     SOURCES += $$PWD/network/qqtethenetmanager.cpp
     HEADERS += $$PWD/network/qqtethenetmanager.h
     SOURCES += $$PWD/frame/qqtwifiwidget.cpp

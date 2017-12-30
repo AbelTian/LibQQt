@@ -47,7 +47,7 @@ void QQtWiFiIdTextDelegate::drawDisplay(QPainter* painter, const QStyleOptionVie
 }
 
 QQtWiFiWidget::QQtWiFiWidget(QWidget* parent) :
-    QQTTableView(parent),
+    QQtTableView(parent),
     ui(new Ui::QQtWiFiWidget)
 {
     ui->setupUi(this);
@@ -82,9 +82,9 @@ QQtWiFiWidget::QQtWiFiWidget(QWidget* parent) :
         setColumnHidden(i, true);
 
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-    horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
-#else
     horizontalHeader()->setResizeMode(0, QHeaderView::Fixed);
+#else
+    horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
 #endif
     setColumnWidth(ESSID_STATUS, 40);
 

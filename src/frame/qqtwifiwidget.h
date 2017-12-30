@@ -8,6 +8,9 @@
 #include <QItemDelegate>
 #include <QStylePainter>
 #include "qqtcore.h"
+#include "qqtethenetmanager.h"
+#include "qqttableview.h"
+#include "qqtnetwork.h"
 #include "qqt-local.h"
 
 class QQTSHARED_EXPORT QQtWiFiIdTextDelegate : public QItemDelegate
@@ -33,7 +36,7 @@ namespace Ui {
 class QQtWiFiWidget;
 }
 
-class QQtWiFiWidget : public QQTTableView
+class QQtWiFiWidget : public QQtTableView
 {
     Q_OBJECT
 

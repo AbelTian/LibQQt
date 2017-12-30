@@ -3,7 +3,7 @@
  <comment/>
  <exportmacro/>
  <class>QQtWiFiWidget</class>
- <widget name="QQtWiFiWidget" class="QQTTableView">
+ <widget name="QQtWiFiWidget" class="QQtTableView">
   <property name="geometry">
    <rect>
     <x>0</x>
