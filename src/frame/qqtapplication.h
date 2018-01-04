@@ -16,7 +16,7 @@ public:
     explicit QQtApplication ( int& argc, char** argv );
     virtual ~QQtApplication() {}
 
-    void setLanguage ( QString qmfile = "./lang/en_US.qm" );
+    void setLanguage ( QString qmfile = "./lang/zh_CN.qm" );
     //palette
     void setTextFont ( QString fontfile = "/usr/lib/fonts/heiti.ttf",
                        int fontsize = 11 );

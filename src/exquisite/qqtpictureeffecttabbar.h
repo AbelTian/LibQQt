@@ -18,17 +18,18 @@ public:
 
     enum IconStyle
     {
+        /*
+         * 依赖iconSize，layoutSpacing设置图片位置
+         */
         //picture style
         IconStyle_Top_And_BottomText,
         IconStyle_Bottom_And_TopText,
+        /*
+         * 依赖iconSize，layoutSpacing设置图片位置
+         */
         IconStyle_Left_And_RightText,
         IconStyle_Right_And_LeftText,
         IconStyle_MiddleText,
-
-        /*
-         * 依赖layoutSpacing 设置文字和图片的间距。
-         */
-        IconStyle_2_Top_And_BottomText,
 
         //color style
         ColorStyle_Left_And_RightText,
@@ -36,6 +37,9 @@ public:
         IconStyle_Max_Style
     };
 
+    /*
+     * 设置x方向、y方向的layout间距。
+     */
     void setLayoutSpacing(int spacing = 0) { this->spacing = spacing; }
     //setContentsMargins(left, top, right, bottom); is a gool idea.
 

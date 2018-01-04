@@ -159,6 +159,17 @@ defineReplace(get_user_config_path) {
     return ($$command)
 }
 
+defineReplace(get_lupdate_language){
+    #pro file
+    filepath = $$1
+    !isEmpty(2): error("get_lupdate_language(filepath) requires one argument")
+    isEmpty(1): error("get_lupdate_language(filepath) requires one argument")
+    command =
+    command = lupdate $${filepath}
+    #message($${command})
+    return ($${command})
+}
+
 defineReplace(get_lrelease_language){
     filepath = $$1
     filename = $$2
@@ -266,6 +277,16 @@ defineTest(copy_dir_and_file) {
     isEmpty(3) : error("copy_dir_and_file(source, pattern, target) requires three arguments.")
 
     command = $$get_copy_dir_and_file($$filename)
+    system_errcode($${command}): return (true)
+    return (false)
+}
+
+defineTest(lupdate_language){
+    #pro file
+    filepath = $$1
+    !isEmpty(2): error("get_lupdate_language(filepath) requires one argument")
+    isEmpty(1): error("get_lupdate_language(filepath) requires one argument")
+    command = $$get_lupdate_language($${filepath})
     system_errcode($${command}): return (true)
     return (false)
 }

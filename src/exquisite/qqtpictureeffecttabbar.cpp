@@ -135,7 +135,6 @@ void QQtPictureEffectTabBar::drawBackground ( QPainter* p )
     case IconStyle_Left_And_RightText:
     case IconStyle_Right_And_LeftText:
     case IconStyle_MiddleText:
-    case IconStyle_2_Top_And_BottomText:
         drawPicture ( p );
         break;
 
@@ -194,34 +193,39 @@ void QQtPictureEffectTabBar::drawIcon ( QPainter* p )
     {
         QRect tRect0 = tabRect ( index );
 
+        /*
+         * 适配contentMargin
+         */
         tRect0.adjust ( contentsMargins().left(),
                         contentsMargins().top(),
                         -contentsMargins().right(),
                         -contentsMargins().bottom() );
+        /*
+         * 适配图片的上下左右
+         */
+        int x = ( tRect0.width() - iconSize().width() ) / 2;
+        int y = ( tRect0.height() - iconSize().height() ) / 2;
 
         if ( iconStyle == IconStyle_Top_And_BottomText )
-            tRect0 = QRect ( tRect0.left(),
+            tRect0 = QRect ( tRect0.left() + x,
                              tRect0.top(),
-                             tRect0.width(),
-                             tRect0.width() );
+                             iconSize().width(),
+                             iconSize().height() );
         else if ( iconStyle == IconStyle_Bottom_And_TopText )
-            tRect0 = QRect ( tRect0.left(),
-                             tRect0.bottom() - tRect0.width(),
-                             tRect0.width(),
-                             tRect0.width() );
+            tRect0 = QRect ( tRect0.left() + x,
+                             tRect0.bottom() - iconSize().height(),
+                             iconSize().width(),
+                             iconSize().height() );
         else if ( iconStyle == IconStyle_Right_And_LeftText )
-            tRect0 = QRect ( tRect0.right() - tRect0.height(),
-                             tRect0.top(),
-                             tRect0.height(),
-                             tRect0.height() );
+            tRect0 = QRect ( tRect0.right() - iconSize().width(),
+                             tRect0.top() + y,
+                             iconSize().width(),
+                             iconSize().height() );
         else if ( iconStyle == IconStyle_Left_And_RightText )
-            tRect0 = QRect ( tRect0.left(), tRect0.top(),
-                             tRect0.height(), tRect0.height() );
-        else if ( iconStyle == IconStyle_2_Top_And_BottomText )
             tRect0 = QRect ( tRect0.left(),
-                             tRect0.top(),
-                             tRect0.width(),
-                             tRect0.height()/2-spacing/2 );
+                             tRect0.top() + y,
+                             iconSize().width(),
+                             iconSize().height() );
 
         QIcon::Mode mode = QIcon::Normal;
 
@@ -268,54 +272,44 @@ void QQtPictureEffectTabBar::drawText ( QPainter* p )
         if ( iconStyle == IconStyle_Top_And_BottomText )
         {
             tRect0 = QRect ( tRect0.left(),
-                             tRect0.top() + tRect0.width(),
+                             tRect0.top() + iconSize().height() + spacing,
                              tRect0.width(),
-                             tRect0.height() - tRect0.width() );
+                             tRect0.height() - (iconSize().height() + spacing) );
         }
         else if ( iconStyle == IconStyle_Bottom_And_TopText )
         {
             tRect0 = QRect ( tRect0.left(),
                              tRect0.top(),
                              tRect0.width(),
-                             tRect0.height() - tRect0.width() );
+                             tRect0.height() - (iconSize().height() + spacing) );
         }
         else if ( iconStyle == IconStyle_Right_And_LeftText )
         {
             tRect0 = QRect ( tRect0.left(),
                              tRect0.top(),
-                             tRect0.width() - tRect0.height(),
+                             tRect0.width() - ( iconSize().width() + spacing ),
                              tRect0.height() );
         }
         else if ( iconStyle == IconStyle_Left_And_RightText )
         {
-            tRect0 = QRect ( tRect0.left() + tRect0.height(),
+            tRect0 = QRect ( tRect0.left() + ( iconSize().width() + spacing ),
                              tRect0.top(),
-                             tRect0.width() - tRect0.height(),
+                             tRect0.width() - ( iconSize().width() + spacing ),
                              tRect0.height() );
         }
-        else if ( iconStyle == IconStyle_2_Top_And_BottomText )
-        {
-            tRect0 = QRect ( tRect0.left(),
-                             tRect0.top() + iconSize().height() + spacing,
-                             tRect0.width(),
-                             tRect0.height()/2-spacing/2 );
-        }
-
 
         int flags = Qt::AlignCenter;
 
         if ( iconStyle == IconStyle_Top_And_BottomText )
-            flags = Qt::AlignHCenter | Qt::AlignBottom;
+            flags = Qt::AlignHCenter | Qt::AlignVCenter;
         else if ( iconStyle == IconStyle_Bottom_And_TopText )
-            flags = Qt::AlignHCenter | Qt::AlignTop;
+            flags = Qt::AlignHCenter | Qt::AlignVCenter;
         else if ( iconStyle == IconStyle_Right_And_LeftText )
-            flags = Qt::AlignVCenter | Qt::AlignLeft;
+            flags = Qt::AlignVCenter | Qt::AlignHCenter;
         else if ( iconStyle == IconStyle_Left_And_RightText )
-            flags = Qt::AlignVCenter | Qt::AlignRight;
+            flags = Qt::AlignVCenter | Qt::AlignHCenter;
         else if ( iconStyle == IconStyle_MiddleText )
             flags = Qt::AlignVCenter | Qt::AlignHCenter;
-        else if ( iconStyle == IconStyle_2_Top_And_BottomText )
-            flags = Qt::AlignHCenter | Qt::AlignVCenter;
 
         //pline() << objectName() << rect;
         //if on board text is normal, this is right. otherwise the palette is right
