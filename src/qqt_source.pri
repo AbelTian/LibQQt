@@ -12,8 +12,10 @@
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
 #-------------------------------------------------
-SOURCES =
-HEADERS =
+SOURCES = \
+    $$PWD/sql/qqtsqlquery.cpp
+HEADERS = \
+    $$PWD/sql/qqtsqlquery.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \

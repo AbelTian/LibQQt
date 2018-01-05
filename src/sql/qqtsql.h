@@ -29,7 +29,9 @@ extern "C" {
 
 QQTSHARED_EXPORT QSqlDatabase newDatabaseConn();
 
+/*已经将数据库打开，不必重复打开*/
 QQTSHARED_EXPORT void setDatabaseName(QSqlDatabase& db, QString dbName);
+//=setDatabaseName
 QQTSHARED_EXPORT void useDatabase(QSqlDatabase& db, QString dbName);
 
 QQTSHARED_EXPORT void openDatabase(QSqlDatabase& db);
