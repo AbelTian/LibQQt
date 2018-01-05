@@ -59,12 +59,27 @@ defineReplace(deploy_app_on_linux) {
     return ($$command)
 }
 
+defineReplace(deploy_app_for_android) {
+    #need QQT_BUILD_PWD
+
+    command =
+    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$RM $${APP_DEPLOY_PWD}/libQQt.so* &&
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_PWD} &&
+    command += $$RM $${APP_DEPLOY_PWD}/$${TARGET} &&
+    command += $$COPY $${DESTDIR}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET}
+    #message($$command)
+    return ($$command)
+}
+
 CONFIG += deploy_app
 contains(CONFIG, deploy_app) {
     contains(QKIT_PRIVATE, WIN32||WIN64) {
         QMAKE_POST_LINK += $$deploy_app_on_win()
     } else: contains(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$deploy_app_on_mac()
+    } else: contains(QKIT_PRIVATE, ANDROID||ANDROIDX86) {
+        QMAKE_POST_LINK += $$deploy_app_on_android()
     } else {
         QMAKE_POST_LINK += $$deploy_app_on_linux()
     }

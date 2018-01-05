@@ -46,8 +46,14 @@ HEADERS += \
     $$PWD/core/qqtobjectfactory.h
 
 #sql
-SOURCES += $$PWD/sql/qqtsql.cpp
-HEADERS += $$PWD/sql/qqtsql.h
+SOURCES += \
+    $$PWD/sql/qqtsql.cpp
+HEADERS += \
+    $$PWD/sql/qqtsql.h
+SOURCES += \
+    $$PWD/sql/qqtsqlquery.cpp
+HEADERS += \
+    $$PWD/sql/qqtsqlquery.h
 
 #gui
 SOURCES += \
