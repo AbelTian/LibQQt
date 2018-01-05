@@ -152,11 +152,13 @@ void QQtApplication::slotUPanAutoRun ( int status )
 
 void QQtApplication::setTextFont ( QString fontfile, int fontsize )
 {
+    //ignored
     QFontDatabase db;
 
-    int fontID = db.addApplicationFont ( fontfile );
-    pline() << "font id:" << fontID << "family size:" << db.applicationFontFamilies ( fontID ).size();
-    QString ziti = db.applicationFontFamilies ( fontID ).at ( 0 );
+    int fontID = QFontDatabase::addApplicationFont ( fontfile );
+    pline() << "font file:" << fontfile;
+    pline() << "font id:" << fontID << "family size:" << QFontDatabase::applicationFontFamilies ( fontID ).size();
+    QString ziti = QFontDatabase::applicationFontFamilies ( fontID ).at ( 0 );
     pline() << ziti;
 
     QFont font ( ziti, fontsize );

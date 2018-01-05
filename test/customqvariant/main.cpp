@@ -29,7 +29,9 @@ int main ( int argc, char* argv[] )
 
     vv.setValue<TBtnIconTable2> ( icc );
 
+    /*目标输出 "icon" */
     /*tested on arm linux, qt5.5.1*/
+    /*tested on arm linux, qt4.8.5*/
     qDebug() << vv.value<TBtnIconTable2>().pixmap[0];
 
     //MainWindow w;
