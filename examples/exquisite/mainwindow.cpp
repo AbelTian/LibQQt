@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget* parent) :
     ui->setupUi(this);
 
 #ifdef __EMBEDDED_LINUX__
-    QQtEthenetManager::Instance(this);
+    //QQtEthenetManager::Instance(this);
 #endif
 
     value = 0;

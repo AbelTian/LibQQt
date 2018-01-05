@@ -155,6 +155,7 @@ void QQtApplication::setTextFont ( QString fontfile, int fontsize )
     QFontDatabase db;
 
     int fontID = db.addApplicationFont ( fontfile );
+    pline() << "font id:" << fontID << "family size:" << db.applicationFontFamilies ( fontID ).size();
     QString ziti = db.applicationFontFamilies ( fontID ).at ( 0 );
     pline() << ziti;
 

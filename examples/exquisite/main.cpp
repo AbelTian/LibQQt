@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <qqtapplication.h>
+#include <QProcess>
 
 class MainApplication: public QQtApplication
 {
@@ -9,9 +10,11 @@ public:
         QApplication::setApplicationName ( "exquisite" );
         QApplication::setOrganizationName ( "QQt" );
         QApplication::setOrganizationDomain ( "www.qqt.com" );
-        setQSSStyle();
+        //setQSSStyle();
 #ifdef __EMBEDDED_LINUX__
-        setTextFont("/usr/local/Trolltech/lib/fonts/wenquanyi.ttf", 14);
+        QString value = QProcessEnvironment::systemEnvironment().value("QTDIR");
+        value += "/lib/fonts/wenquanyi.ttf";
+        setTextFont(value, 14);
 #endif
     }
     virtual ~MainApplication() {}
@@ -20,6 +23,7 @@ public:
 int main(int argc, char* argv[])
 {
     MainApplication a(argc, argv);
+
     MainWindow w;
     w.show();
 
