@@ -41,6 +41,24 @@ private:
 };
 
 // thread unsafe
+/**
+ * @brief The QQtEthenetManager class
+ * 原理：
+ * S1:系统启动，调用init_net.sh
+ * S2:系统运行，用户通过页面设置WiFi或者有线的IP等，或者设置为自动获取。
+ *      保存IP到配置文件，启动时显示到用户页面上
+ *      保存IP等到init_net.sh，系统启动时，网络连接状态正常。
+ *      保存WiFi设置等到/etc/wpa_supplicant.conf
+ * S3:用户插拔网线，WiFi自动切换为有线。
+ * S4:用户重启系统，进入S1.
+ *
+ * 使用说明：
+ * 调用QQtEthnetManager::Instance(parent)，并且连接相应的WiFi信号和用户的槽
+ * 通过wifiList()，显示给用户看WiFi列表。每5s自动更新一次。在槽当中调用并更新界面
+ * 通过setCurrentWiFi()更换用户连接的WiFi。用户点击更改输入密码了，就调这个保存。会自动配置WiFi和根据用户IP或者DHCP重来连接新WiFi。
+ *
+ *
+ */
 class QQTSHARED_EXPORT QQtEthenetManager : public QObject
 {
     Q_OBJECT
@@ -57,7 +75,7 @@ public:
     /**
      * @brief configIPAddress
      * wpa_suplicant.conf
-     * net.sh
+     * init_net.sh
      * ipaddr.conf
      */
     void ipconfig();
