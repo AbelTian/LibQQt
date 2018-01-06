@@ -84,6 +84,10 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 
 }
 
+QQtApplication::~QQtApplication() {
+    QFontDatabase::removeAllApplicationFonts();
+}
+
 
 void QQtApplication::setQSSStyle ( QString qssfile )
 {
@@ -157,9 +161,10 @@ void QQtApplication::setTextFont ( QString fontfile, int fontsize )
 
     int fontID = QFontDatabase::addApplicationFont ( fontfile );
     pline() << "font file:" << fontfile;
-    pline() << "font id:" << fontID << "family size:" << QFontDatabase::applicationFontFamilies ( fontID ).size();
+    pline() << "font id:" << fontID;
+    pline() << "font families:" << QFontDatabase::applicationFontFamilies ( fontID );
     QString ziti = QFontDatabase::applicationFontFamilies ( fontID ).at ( 0 );
-    pline() << ziti;
+    pline() << "font name:" << ziti;
 
     QFont font ( ziti, fontsize );
     QApplication::setFont ( font );
