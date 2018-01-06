@@ -54,3 +54,9 @@ void deleteDatabaseConn(QString connectionName)
 {
     QSqlDatabase::removeDatabase(connectionName);
 }
+
+void deleteDatabaseConn(QSqlDatabase &db)
+{
+    QString connectionName = db.connectionName();
+    deleteDatabaseConn(connectionName);
+}

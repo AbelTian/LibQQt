@@ -42,6 +42,7 @@ public:
     QQtTableWidget* selectedRows ( int column = 0 );
     int pageNum();
     int currentPage();
+    //1-pagenum
     void setCurrentPage ( int page );
 
 public slots:

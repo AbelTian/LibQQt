@@ -21,7 +21,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 #define DB_TYPE "QSQLITE"
-#define DB_PATH "./db/"
+#define DB_PATH "./db"
 
 #ifdef __cplusplus
 }
@@ -38,5 +38,6 @@ QQTSHARED_EXPORT void openDatabase(QSqlDatabase& db);
 QQTSHARED_EXPORT void closeDatabase(QSqlDatabase& db);
 
 QQTSHARED_EXPORT void deleteDatabaseConn(QString connectionName);
+QQTSHARED_EXPORT void deleteDatabaseConn(QSqlDatabase& db);
 
 #endif // QQTSQLDEFINE_H
