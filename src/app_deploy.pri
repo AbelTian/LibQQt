@@ -28,7 +28,7 @@ defineReplace(deploy_app_on_mac) {
 defineReplace(deploy_app_on_win) {
     #need QQT_BUILD_PWD
     command =
-    command += if not exist $${APP_DEPLOY_PWD} $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
     command += $$COPY $${QQT_BUILD_PWD}\\QQt.dll $${APP_DEPLOY_PWD}\\QQt.dll $$CMD_SEP
     command += $$COPY $${DESTDIR}\\$${TARGET}.exe $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP

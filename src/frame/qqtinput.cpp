@@ -3,7 +3,6 @@
 #include "qdesktopwidget.h"
 #include "qqtcore.h"
 #include "qqtsql.h"
-#include "qqtframe.h"
 
 QQtInput* QQtInput::_instance = 0;
 QQtInput::QQtInput ( QWidget* parent ) :

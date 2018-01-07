@@ -4,6 +4,7 @@
 QSqlDatabase managerDB;
 QString gUserName;
 QString gPassword;
+QString gAuthority;
 
 void QQtFrameMsgHandler ( QtMsgType type, const char* msg )
 {

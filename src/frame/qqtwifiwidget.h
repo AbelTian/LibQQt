@@ -3,7 +3,6 @@
 
 #include "qstandarditemmodel.h"
 #include "qqt-qt.h"
-#include "qqtgui.h"
 #include "qqtpassworddialog.h"
 #include <QItemDelegate>
 #include <QStylePainter>

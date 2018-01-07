@@ -5,7 +5,6 @@
 
 #include "qqtnetwork.h"
 #include "qqtcore.h"
-#include "qqt.h"
 
 QQtSocketTcpClient::QQtSocketTcpClient ( QObject* parent ) :
     QTcpSocket ( parent )

@@ -164,6 +164,7 @@ enum
 extern QSqlDatabase managerDB;
 extern QString gUserName;
 extern QString gPassword;
+extern QString gAuthority;
 
 
 #ifdef __cplusplus

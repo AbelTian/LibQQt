@@ -7,7 +7,8 @@
 #include <QHash>
 #include <QList>
 #include <QListIterator>
-#include "qqt.h"
+#include <QWidget>
+#include "qqt-local.h"
 
 #if 0
 class QQTSHARED_EXPORT QQtConstructer : public QObject

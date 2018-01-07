@@ -26,8 +26,11 @@ public:
      * @param ids 需要删除的列值列表
      */
     void removeRows(int column, QList<QStringList> ids);
-
     void selectedRows(int column, QMap<int, QStringList>& ids);
+
+    /*
+     * 用于将表列动态显示到其他控件上。
+     */
 private:
     QQtTableModel* m_model;
     QSqlDatabase m_db;

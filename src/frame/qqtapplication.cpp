@@ -2,10 +2,9 @@
 #ifdef __PLUGINWATCHER__
 #include "qqtpluginwatcher.h"
 #endif
-#include <qqtwidgets.h>
 #include <qqtmsgbox.h>
-#include <qqtframe.h>
 #include <qqtcore.h>
+#include <qqtframe.h>
 #include <QFile>
 #include <QTextCodec>
 #include <QSettings>
@@ -22,6 +21,7 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QApplication ( argc, argv ),
     bUPanAutoRun ( false )
 {
+    /*设置Qt框架内部文本编码系统，基础编码。*/
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     QTextCodec::setCodecForTr ( QTextCodec::codecForName ( "UTF-8" ) );
     QTextCodec::setCodecForCStrings ( QTextCodec::codecForName ( "UTF-8" ) );
@@ -33,10 +33,12 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QCoreApplication::setOrganizationDomain ( "www.qqt.com" ); // 专为Mac OS X 准备的
     QCoreApplication::setApplicationName ( "QQt" );
 
+    /*设置配置文件所在路径*/
     QSettings::setDefaultFormat(QSettings::IniFormat);
     QSettings::setPath ( QSettings::IniFormat, QSettings::UserScope, CONFIG_PATH );
     QSettings::setPath ( QSettings::IniFormat, QSettings::SystemScope, CONFIG_PATH );
 
+    /*设置日志系统*/
 #ifdef __QQTLOGFILESUPPORT__
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     qInstallMsgHandler ( QQt4FrameMsgHandler );
@@ -45,15 +47,16 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
 #endif
 
+    /*解决，嵌入式板子上，串口关闭后有时无法打开的问题*/
 #ifdef __EMBEDDED_LINUX__
     system ( "rm -f /tmp/LCK..ttyS*" );
 #endif
 
     pline() << qApp->applicationDirPath();
-
+    /*设置语言翻译器，用户需要自己设置语言，（默认为页面上的词汇，设置后为翻译的中文或者英文）*/
     language = new QTranslator ( this );
-    setLanguage();
 
+    /*设置随机数种子*/
     qsrand ( QTime ( 0, 0, 0 ).secsTo ( QTime::currentTime() ) );
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
@@ -63,6 +66,7 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QApplication::setGraphicsSystem ( "raster" );
 #endif
 
+    /*设置鼠标隐藏*/
 #ifdef __EMBEDDED_LINUX__
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     //QApplication::setOverrideCursor(Qt::ArrowCursor);
@@ -72,11 +76,12 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
 #endif
 
-
+    /*嵌入式板子上，初始化输入法*/
 #ifdef __EMBEDDED_LINUX__
     QQtInput::Instance()->Init ( "min", "control", "QQT", 14, 14 );
 #endif
 
+    /*设置USB热插拔检测，支持U盘，键盘，鼠标检测*/
 #ifdef __PLUGINWATCHER__
     QObject::connect ( QQtPluginWatcher::Instance(), SIGNAL ( storageChanged ( int ) ),
                        this, SLOT ( slotUPanAutoRun ( int ) ) );
