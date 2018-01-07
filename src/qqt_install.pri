@@ -1,5 +1,5 @@
 ################################################
-##qqt_install.pri
+##qqt_install.pri, making sdk function
 ##install to Qt library
 ##install to SDK path
 ##link from build

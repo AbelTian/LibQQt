@@ -45,7 +45,7 @@ UI_DIR = obj/ui.h
 RCC_DIR = qrc
 DESTDIR = bin
 
-include(../../src/app_configure.pri)
+include(../../src/app_linking.pri)
 
 #-------------------------------------------------
 #install app

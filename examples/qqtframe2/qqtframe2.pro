@@ -28,5 +28,5 @@ FORMS += \
 
 system(touch main.cpp)
 
-include(../../src/app_configure.pri)
+include(../../src/app_linking.pri)
 include(../../src/app_deploy.pri)
