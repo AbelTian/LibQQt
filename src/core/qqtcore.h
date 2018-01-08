@@ -16,7 +16,20 @@
 #include <QSqlError>
 #include <QSslError>
 #include "qglobal.h"
+#include "qqt-qt.h"
 #include <qqt-local.h>
+
+#if defined(__WIN32__) || defined(__WIN64__)
+#include "qqtwin.h"
+#elif defined(__LINUX__) || defined(__LINUX64__) \
+    || defined(__EMBEDDED_LINUX__) \
+    || defined(__ARM_LINUX__) || defined(__MIPS_LINUX__)
+#include "qqtlinux.h"
+#elif defined (__ANDROID__) || defined (__ANDROIDX86__)
+#include "qqtandroid.h"
+#elif defined (__DARWIN__)  || defined(__IOS__)
+#include "qqtdarwin.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {

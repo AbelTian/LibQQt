@@ -9,6 +9,7 @@
 #include <QListIterator>
 #include <QWidget>
 #include "qqt-local.h"
+#include "qqtcore.h"
 
 #if 0
 class QQTSHARED_EXPORT QQtConstructer : public QObject
