@@ -43,11 +43,11 @@ MOC_DIR = obj/moc.cpp
 UI_DIR = obj/ui.h
 RCC_DIR = qrc
 #user can change this dir
-DESTDIR = bin
+#DESTDIR = bin
 
 equals(QKIT_PRIVATE, macOS) {
     QMAKE_PRE_LINK += echo hello
-    QMAKE_PRE_LINK += rm -rf $${DESTDIR}/$${TARGET}.app
+    #QMAKE_PRE_LINK += rm -rf $${DESTDIR}/$${TARGET}.app
 }
 
 #-------------------------------------------------
@@ -55,7 +55,7 @@ equals(QKIT_PRIVATE, macOS) {
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
 #user can modify any infomation under this annotation
 #-------------------------------------------------
-include(../../src/app_linking.pri)
+include(../../src/app_link_qqt_library.pri)
 include(../../src/app_deploy.pri)
 
 #-------------------------------------------------

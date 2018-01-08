@@ -1,3 +1,6 @@
+################################################################
+##link QQt
+################################################################
 #here is all your app common defination and configration
 #you can modify this pri to link qqt_library
 #only link QQt, this pri file.
@@ -78,7 +81,7 @@ isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT) {
     message($${CONFIG_FILE})
     message("QQT_BUILD_ROOT = /user/set/path is required, please modify qmake/app_configure.pri")
     message("QQT_SDK_ROOT = /user/set/path is required")
-    message("linux platform this pri is under qqt_library.pri")
+    message("linux platform this pri is under app_link_qqt_library.pri")
     error("  please check $$CONFIG_FILE")
 }
 message(QQt build root: $$QQT_BUILD_ROOT)
@@ -143,3 +146,5 @@ contains (CONFIG, QQT_SOURCE_BUILDIN) {
     #need qqt_install.pri
     include($${QQT_SOURCE_ROOT}/qqt_library.pri)
 }
+
+

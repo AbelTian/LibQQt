@@ -3,7 +3,7 @@
 # Project created by QtCreator 2016-06-17T10:03:52
 #
 #-------------------------------------------------
-include(../../src/app_linking.pri)
+include(../../src/app_link_qqt_library.pri)
 
 
 QT       += core gui

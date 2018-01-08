@@ -1,11 +1,4 @@
 ################################################################
-##config defination
-################################################################
-equals(QKIT_PRIVATE, macOS) {
-    CONFIG += app_bundle
-}
-
-################################################################
 ##build cache
 ################################################################
 OBJECTS_DIR = obj
@@ -17,18 +10,18 @@ DESTDIR = bin
 ################################################################
 ##link QQt
 ################################################################
-include($${PWD}/link_qqt_library.pri)
+include($${PWD}/app_link_qqt_library.pri)
 
 ################################################################
 ##link Other library
 ################################################################
 
 ################################################################
-##deploy app for install update deploy
+##config defination
 ################################################################
-#optional
-#if you have this request, include this pri in your app pro
-#include($${PWD}/app_deploy.pri)
+equals(QKIT_PRIVATE, macOS) {
+    CONFIG += app_bundle
+}
 
 #-------------------------------------------------
 #install app
@@ -52,3 +45,5 @@ can_install: unix {
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
+
+

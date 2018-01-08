@@ -94,6 +94,13 @@ build_pass:CONFIG(debug, debug|release) {
 CLFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
 QMAKE_CFLAGS +=  $${CLFLAGS}
 QMAKE_CXXFLAGS +=  $${CLFLAGS}
+
+#################################################################
+##build cache
+#################################################################
+#LibQQt工程里，这个值是不允许改变的，但是再App工程里可以改变。
+DESTDIR = bin
+
 #################################################################
 ##project Headers
 #################################################################

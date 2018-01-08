@@ -35,7 +35,7 @@ win32:DEFINES          += _TTY_WIN_
 win32:LIBS             += -lsetupapi
 
 
-DESTDIR                 = build
+#DESTDIR                 = build
 #DESTDIR				= examples/enumerator/debug
 #DESTDIR				= examples/qespta/debug
 #DESTDIR				= examples/event/debug
