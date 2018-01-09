@@ -73,7 +73,6 @@
 *把LibQQt/extra/md5.exe 复制到C:\Windows*   
 
 [走，去看看入门用法](usage.md)  
-[学习一下，设置工程目录](project.md)  
 
 # 截图
 
@@ -97,4 +96,7 @@ QQ: 2657635903
 
 ==============================================  
 
-[预习Git 入门](usage-git.md)
+[预习Git 入门](usage-git.md)  
+[学习一下，软件基础概念](software.md)  
+[学习一下，设置工程目录](project.md)  
+

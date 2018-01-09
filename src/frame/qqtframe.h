@@ -139,10 +139,10 @@ enum
 };
 
 
-#define CONFIG_PATH "./conf/"
-#define LOG_PATH "./log/"
-#define DB_METHOD_PATH "Method/"
-#define DB_DATA_PATH "Data/"
+#define CONFIG_PATH "./conf"
+#define LOG_PATH "./log"
+#define DB_METHOD_PATH "Method"
+#define DB_DATA_PATH "Data"
 #define AV_PATH "./res"
 #define DB_PINYIN "PinYin.db"
 #define DB_MANAGER "Manager.db"

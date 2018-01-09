@@ -22,6 +22,7 @@ public:
                        int fontsize = 11 );
     void setQSSStyle ( QString qssfile = "./skin/default.qss" );
     void setUPanAutorun ( bool run = false );
+    void setWriteLogSystem ( bool open = true );
 
     virtual int initInstance() { return 0; }
     virtual int unInitInstance() { return 0; }

@@ -34,26 +34,17 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QCoreApplication::setApplicationName ( "QQt" );
 
     /*设置配置文件所在路径*/
-    QSettings::setDefaultFormat(QSettings::IniFormat);
+    QSettings::setDefaultFormat ( QSettings::IniFormat );
     QSettings::setPath ( QSettings::IniFormat, QSettings::UserScope, CONFIG_PATH );
     QSettings::setPath ( QSettings::IniFormat, QSettings::SystemScope, CONFIG_PATH );
-
-    /*设置日志系统*/
-#ifdef __QQTLOGFILESUPPORT__
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    qInstallMsgHandler ( QQt4FrameMsgHandler );
-#else
-    qInstallMessageHandler ( QQt5FrameMsgHandler );
-#endif
-#endif
 
     pline() << "app root:" << qApp->applicationDirPath();
     pline() << "app work root:" << QDir::currentPath();
     pline() << "Qt version:" << QT_VERSION_STR;
 
 #ifdef __EMBEDDED_LINUX__
-    pline() << "QTDIR:" << QProcessEnvironment::systemEnvironment().value("QTDIR");
-    pline() << "TSLIB_TSDEVICE:" << QProcessEnvironment::systemEnvironment().value("TSLIB_TSDEVICE");
+    pline() << "QTDIR:" << QProcessEnvironment::systemEnvironment().value ( "QTDIR" );
+    pline() << "TSLIB_TSDEVICE:" << QProcessEnvironment::systemEnvironment().value ( "TSLIB_TSDEVICE" );
 #endif
 
     /*解决，嵌入式板子上，串口关闭后有时无法打开的问题*/
@@ -98,7 +89,8 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 
 }
 
-QQtApplication::~QQtApplication() {
+QQtApplication::~QQtApplication()
+{
     QFontDatabase::removeAllApplicationFonts();
 }
 
@@ -126,6 +118,31 @@ void QQtApplication::setQSSStyle ( QString qssfile )
 void QQtApplication::setUPanAutorun ( bool run )
 {
     bUPanAutoRun = run;
+}
+
+void QQtApplication::setWriteLogSystem ( bool open )
+{
+    /*设置日志系统*/
+#ifdef __QQTLOGFILESUPPORT__
+
+    if ( open )
+    {
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+        qInstallMsgHandler ( QQt4FrameMsgHandler );
+#else
+        qInstallMessageHandler ( QQt5FrameMsgHandler );
+#endif
+    }
+    else
+    {
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+        qInstallMsgHandler ( NULL );
+#else
+        qInstallMessageHandler ( NULL );
+#endif
+    }
+
+#endif
 }
 
 void QQtApplication::slotUPanAutoRun ( int status )
