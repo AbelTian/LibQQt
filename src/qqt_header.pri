@@ -67,12 +67,13 @@ contains(QKIT_PRIVATE, WIN32) {
 }
 
 ################################################################
-##build cache (此处为中间目标，对用户并不重要)
+##build cache (此处为中间目标目录，对用户并不重要)
 ##此处加以干涉，使目录清晰。
 ##此处关于DESTDIR的设置，导致用户必须把这个文件的包含，提前到最前边的位置，才能进行App里的目录操作。
 ##删除干涉?
-##用户注意：首先include(app_link_qqt_library.pri)，然后做app的工作，和include其他pri，包括LibQQt提供的其他pri，保证这个顺序就不会出错了。
+##用户注意：(done in app_base_manager), 首先include(app_link_qqt_library.pri)，然后做app的工作，和include其他pri，包括LibQQt提供的其他pri，保证这个顺序就不会出错了。
 ##对编译目标目录进行干涉管理，显得更加细腻。
+##用户注意：这里相当于给编译中间目录加了一个自动校准，属于校正范畴。
 ################################################################
 isEmpty(OBJECTS_DIR):OBJECTS_DIR = obj
 isEmpty(MOC_DIR):MOC_DIR = obj/moc.cpp

@@ -36,4 +36,4 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
-include ($${PWD}/../../src/app_link_qqt_library.pri)
+include ($${PWD}/../../src/app_base_manager.pri)

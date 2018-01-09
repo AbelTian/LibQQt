@@ -47,12 +47,20 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
 #endif
 
+    pline() << "app root:" << qApp->applicationDirPath();
+    pline() << "app work root:" << QDir::currentPath();
+    pline() << "Qt version:" << QT_VERSION_STR;
+
+#ifdef __EMBEDDED_LINUX__
+    pline() << "QTDIR:" << QProcessEnvironment::systemEnvironment().value("QTDIR");
+    pline() << "TSLIB_TSDEVICE:" << QProcessEnvironment::systemEnvironment().value("TSLIB_TSDEVICE");
+#endif
+
     /*解决，嵌入式板子上，串口关闭后有时无法打开的问题*/
 #ifdef __EMBEDDED_LINUX__
     system ( "rm -f /tmp/LCK..ttyS*" );
 #endif
 
-    pline() << qApp->applicationDirPath();
     /*设置语言翻译器，用户需要自己设置语言，（默认为页面上的词汇，设置后为翻译的中文或者英文）*/
     language = new QTranslator ( this );
 
@@ -77,6 +85,7 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
 
     /*嵌入式板子上，初始化输入法*/
+    /*要求：数据库在CONF_PATH/PinYin.db必须存在，否则会弹出out of memory Error opening database*/
 #ifdef __EMBEDDED_LINUX__
     QQtInput::Instance()->Init ( "min", "control", "QQT", 14, 14 );
 #endif
@@ -161,6 +170,8 @@ void QQtApplication::slotUPanAutoRun ( int status )
 
 void QQtApplication::setTextFont ( QString fontfile, int fontsize )
 {
+    /*这个函数没有任何问题，检测完毕。过去的报错是工作目录不对，无法加载其他数据库*/
+    /*此处，改为使用QFontDatabase的经典静态方法调用方式*/
     //ignored
     QFontDatabase db;
 

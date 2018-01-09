@@ -3,7 +3,7 @@
 #如果需要修改拷贝到发布目录里的配置文件，修改配置PWD下的文件，即可引起编译PWD和发布PWD配置文件的改变。
 #这个pri会拷贝配置PWD下的所有文件、文件夹到编译PWD和发布PWD下。
 #---------------------------------------------------------------------
-#依赖 APP_CONFIG_PWD APP_DEPLOY_PWD(in app deploy)
+#依赖 APP_CONFIG_PWD(in app pro) APP_DEPLOY_PWD(in app deploy)
 
 #example（in app's pro file）
 #APP_CONFIG_PWD = $${PWD}/../SysRoot
