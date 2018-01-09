@@ -2,23 +2,13 @@
 #应用程序配置文件拷贝qmake文件。通过qmake与编译调用。
 #如果需要修改拷贝到发布目录里的配置文件，修改配置PWD下的文件，即可引起编译PWD和发布PWD配置文件的改变。
 #这个pri会拷贝配置PWD下的所有文件、文件夹到编译PWD和发布PWD下。
-#---------------------------------------------------------------------
 #依赖 APP_CONFIG_PWD(in app pro) APP_DEPLOY_PWD(in app deploy)
-
+#---------------------------------------------------------------------
 #example（in app's pro file）
 #APP_CONFIG_PWD = $${PWD}/../SysRoot
 #win32 {
 #    APP_CONFIG_PWD ~=s,/,\\,g
 #}
-
-#如果 TARGET 没有配置 APP_CONFIG_PWD 那么返回，不拷贝任何配置
-isEmpty(APP_CONFIG_PWD)||isEmpty(APP_DEPLOY_PWD) {
-    message("$${TARGET} hasn't deploy any cofig file")
-    return()
-}
-
-APP_DEST_DIR=$${DESTDIR}
-isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
 
 defineReplace(copy_config_on_mac) {
     #need QQT_BUILD_PWD
@@ -48,8 +38,24 @@ defineReplace(copy_config) {
     return ($$command)
 }
 
-CONFIG += app_copy_config
+##-------------------------------------------------
+##work flow
+##-------------------------------------------------
+#如果 TARGET 没有配置 APP_CONFIG_PWD 那么返回，不拷贝任何配置
+isEmpty(APP_CONFIG_PWD) | isEmpty(APP_DEPLOY_PWD) {
+    message("$${TARGET} hasn't deploied any cofig files")
+    greaterThan(QT_MAJOR_VERSION, 5):return()
+}
+
+##4.8 qmake arm32 return() 函数无效
+!isEmpty(APP_CONFIG_PWD) & !isEmpty(APP_DEPLOY_PWD) {
+    CONFIG += app_copy_config
+    message("$${TARGET} has deploied some cofig files")
+}
+
 contains(CONFIG, app_copy_config) {
+    APP_DEST_DIR=$${DESTDIR}
+    isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
     contains(QKIT_PRIVATE, WIN32||WIN64) {
         QMAKE_POST_LINK += $$copy_config("$${APP_CONFIG_PWD}\\*")
     } else: contains(QKIT_PRIVATE, macOS) {

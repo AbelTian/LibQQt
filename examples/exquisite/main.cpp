@@ -18,7 +18,7 @@ public:
         QString fontfile = QProcessEnvironment::systemEnvironment().value("QTDIR");
         fontfile += "/lib/fonts/wenquanyi.ttf";
         int fontsize = 14;
-        setTextFont(fontfile, fontsize);
+        //setTextFont(fontfile, fontsize);
 #endif
     }
     virtual ~MainApplication() {}
