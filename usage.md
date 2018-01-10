@@ -14,4 +14,4 @@ QQT_SDK_ROOT = /Users/abel/Develop/d1-product
 APP_DEPLOY_ROOT = /Users/abel/Develop/d1-product  
 
 
-[返回](README.md)  
+[返回](.)  

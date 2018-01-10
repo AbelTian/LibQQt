@@ -10,4 +10,4 @@
 ![a](screenshot/z3.png "Old project")  
 ![a](screenshot/z2.png "Old project")  
   
-[返回](README.md)  
+[返回](.)  
