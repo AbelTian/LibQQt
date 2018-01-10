@@ -115,6 +115,7 @@ include ($$PWD/qqt_source.pri)
 ##project version
 #################################################################
 include ($$PWD/qqt_version.pri)
+
 unix:VERSION = $${QQT_VERSION}
 #bug?:open this macro, TARGET will suffixed with major version.
 #win32:VERSION = $${QQT_VERSION4}
