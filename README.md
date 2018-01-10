@@ -82,7 +82,7 @@
 # 维基百科
 
 ==============================================  
-[跳到转维基](https://gitee.com/drabel/LibQt/wikis/Home "Wiki Home")
+[跳转到维基](wiki/wiki.md "Wiki Page")
 
 
 # 联系我  
@@ -90,7 +90,7 @@
 ==============================================  
 邮箱: tianduanrui@163.com  
 QQ: 2657635903  
-发现了个问题: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
+发现了一个问题: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
 # 依赖学习知识   
 
