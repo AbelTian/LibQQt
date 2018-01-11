@@ -7,13 +7,14 @@
 /**
  * @brief The QQtTabWidget class
  * 用于解决QtTabWidget接口上的错误
+ * 这个类，没有实际使用意义，它的子类才有，在exquisite里面。
  */
 class QQTSHARED_EXPORT QQtTabWidget : public QTabWidget
 {
     Q_OBJECT
 
 public:
-    explicit QQtTabWidget(QWidget* parent = 0);
+    explicit QQtTabWidget ( QWidget* parent = 0 );
     ~QQtTabWidget();
     /**
      * @brief setObjectName
@@ -22,7 +23,7 @@ public:
      * override 不支持c++ 多继承中的其中一个父类里的函数? 似乎不支持父类中不带virtual的函数
      * @param name
      */
-    virtual void setObjectName(const QString& name) /*override*/;
+    virtual void setObjectName ( const QString& name ) /*override*/;
     /**
      * @brief setToolTipDuration
      * bug? unset cause compiler error...
@@ -52,7 +53,7 @@ public:
      * protected公开为public
      * @param b
      */
-    virtual void setTabBar(QTabBar* b) /*override*/ { return QTabWidget::setTabBar(b); }
+    virtual void setTabBar ( QTabBar* b ) /*override*/ { return QTabWidget::setTabBar ( b ); }
 
 private:
 };

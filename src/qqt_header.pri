@@ -189,14 +189,19 @@ DEFINES += __EXQUISITE__
 contains (DEFINES, __EXQUISITE__) {
     #if you use QR encode, open this annotation
     DEFINES += __QRENCODE__
+
     #if you use QR decode, open this annotation
     #QZXing isnan_z function error. fixed
-    #QZxing delegating constructors used. need c++11,but qt4.8.7 dont support c++11
+    #QZxing delegating constructors used. need c++11,but qt4.8.7 dont support c++11,compiler gcc 5.4.0 20160609 support....
     #DEFINES += __QRDECODE__
     contains(DEFINES, __QRDECODE__) {
         #lessThan(QT_MAJOR_VERSION, 5): QT += declarative
         greaterThan(QT_MAJOR_VERSION, 4): QT += quick
     }
+
+    #if you use gif widgets, open this annotation
+    DEFINES += __GIFWIDGETS__
+
     #if you use Svg widgets, open this annotation
     DEFINES += __SVGWIDGETS__
     contains(QKIT_PRIVATE, macOS) {
@@ -207,6 +212,7 @@ contains (DEFINES, __EXQUISITE__) {
     }
     #Gumbo need std support
     QMAKE_CFLAGS += -std=c99
+
     #c++ html parser query
     #if you use Gumbo parser query, open this annotation
     DEFINES += __GUMBOSUPPORT__
@@ -314,6 +320,7 @@ defineReplace(qqt_header){
     #exquisite widget
     command += $${path}/exquisite
     command += $${path}/exquisite/svgwidgets
+    command += $${path}/exquisite/gifwidgets
 
     ##qr code library
     command += $${path}/exquisite/qrcode/qrencode

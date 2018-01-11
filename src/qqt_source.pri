@@ -12,8 +12,18 @@
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
 #-------------------------------------------------
-SOURCES =
-HEADERS =
+SOURCES = \
+    $$PWD/exquisite/gifwidgets/qqtgiflabel.cpp \
+    $$PWD/exquisite/gifwidgets/qqtgifpushbutton.cpp \
+    $$PWD/exquisite/gifwidgets/qqtgifcheckbox.cpp \
+    $$PWD/exquisite/gifwidgets/qqtgifradiobutton.cpp \
+    $$PWD/exquisite/gifwidgets/qqtgifprogressbar.cpp
+HEADERS = \
+    $$PWD/exquisite/gifwidgets/qqtgiflabel.h \
+    $$PWD/exquisite/gifwidgets/qqtgifpushbutton.h \
+    $$PWD/exquisite/gifwidgets/qqtgifcheckbox.h \
+    $$PWD/exquisite/gifwidgets/qqtgifradiobutton.h \
+    $$PWD/exquisite/gifwidgets/qqtgifprogressbar.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \

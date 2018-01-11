@@ -23,6 +23,7 @@
 TARGET = QQt
 TEMPLATE = lib
 
+#in theory, this should not be limited to 4.8.0, no limit is good.
 lessThan(QT_VERSION, 4.8.0) {
     message(A. ensure your compiler support c++11 feature)
     message(B. suggest Qt version >= 4.8.0)
