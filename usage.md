@@ -13,5 +13,12 @@ QQT_BUILD_ROOT = /Users/abel/Develop/c0-buildstation
 QQT_SDK_ROOT = /Users/abel/Develop/d1-product  
 APP_DEPLOY_ROOT = /Users/abel/Develop/d1-product  
 
+![设置成功显示](screenshot/6.png)  
+如果设置成功，qmake应当显示如上例程的样子  
+
+#V2.1.6更新链接QQt的方法  
+![链接QQt](screenshot/7.png "这是链接QQt的方法，pri都在LibQQt目录里")  
+
+
 
 [返回](.)  

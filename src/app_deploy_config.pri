@@ -44,7 +44,7 @@ defineReplace(copy_config) {
 #如果 TARGET 没有配置 APP_CONFIG_PWD 那么返回，不拷贝任何配置
 #qmake 或逻辑为 | 或者 ||
 isEmpty(APP_CONFIG_PWD)|isEmpty(APP_DEPLOY_PWD) {
-    message("$${TARGET} hasn't deploied any cofig files")
+    message("$${TARGET} hasn't deploied any config files")
     greaterThan(QT_MAJOR_VERSION, 5):return()
 }
 
@@ -52,7 +52,7 @@ isEmpty(APP_CONFIG_PWD)|isEmpty(APP_DEPLOY_PWD) {
 ##qmake 与逻辑为 :
 !isEmpty(APP_CONFIG_PWD):!isEmpty(APP_DEPLOY_PWD) {
     CONFIG += app_copy_config
-    message("$${TARGET} has deploied some cofig files")
+    message("$${TARGET} has deploied some config files")
 }
 
 contains(CONFIG, app_copy_config) {

@@ -1,10 +1,17 @@
 #include "qqtframe.h"
-#include <QDir>
 
 QSqlDatabase managerDB;
 QString gUserName;
 QString gPassword;
-QString gAuthority;
+int gAuthority;
+
+bool hasAuthority ( int authId )
+{
+    if ( authId < gAuthority )
+        return false;
+
+    return true;
+}
 
 void QQtFrameMsgHandler ( QtMsgType type, const char* msg )
 {

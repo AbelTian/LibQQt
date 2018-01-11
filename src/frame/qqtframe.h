@@ -15,6 +15,8 @@
 #include <QDebug>
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <QDir>
+#include <qqt-local.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,6 +46,14 @@ enum
 {
     Authority_Id = 0,
     Authority_Level,
+};
+
+enum
+{
+    Auth_Admin = 0,
+    Auth_Manager,
+    Auth_User,
+    Auth_Max
 };
 
 enum
@@ -164,7 +174,7 @@ enum
 extern QSqlDatabase managerDB;
 extern QString gUserName;
 extern QString gPassword;
-extern QString gAuthority;
+extern int gAuthority;
 
 
 #ifdef __cplusplus
@@ -175,5 +185,8 @@ void QQt4FrameMsgHandler ( QtMsgType type, const char* msg );
 #if QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
 void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, const QString& content );
 #endif
+
+/*当前登陆用户 是否具有 函数要求的权限*/
+bool hasAuthority ( int authId = Auth_Admin );
 
 #endif // QQTFRAMEDEFINE_H

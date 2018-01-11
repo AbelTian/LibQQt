@@ -5,6 +5,7 @@
 #include <qqtmsgbox.h>
 #include <qqtcore.h>
 #include <qqtframe.h>
+#include <qqtversion.h>
 #include <QFile>
 #include <QTextCodec>
 #include <QSettings>
@@ -38,9 +39,14 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QSettings::setPath ( QSettings::IniFormat, QSettings::UserScope, CONFIG_PATH );
     QSettings::setPath ( QSettings::IniFormat, QSettings::SystemScope, CONFIG_PATH );
 
+#ifdef __DARWIN__
+    QDir::setCurrent ( qApp->applicationDirPath() );
+#endif
+
     pline() << "app root:" << qApp->applicationDirPath();
     pline() << "app work root:" << QDir::currentPath();
     pline() << "Qt version:" << QT_VERSION_STR;
+    pline() << "LibQQt version:" << STR ( QQT_VERSION );
 
 #ifdef __EMBEDDED_LINUX__
     pline() << "QTDIR:" << QProcessEnvironment::systemEnvironment().value ( "QTDIR" );

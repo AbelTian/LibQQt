@@ -71,9 +71,9 @@ defineReplace(copy_qqt_on_mac) {
 ################################################
 #TARGET must be equals to pro name ? no, TARGET must be placeed before qqt_library.pri
 #qmake pro pri is sequential
-message(Link QQt to $${TARGET} $${QKIT_PRIVATE} \
-    at $${QT_VERSION} $${SYSNAME} $${BUILD} \
-    on $${QMAKE_HOST.os})
+message(Build $${TARGET} at $${OUT_PWD}/$${QKIT_STD_DIR})
+message(Link QQt to $${TARGET} [QKIT=$${QKIT_PRIVATE}] \
+    at [QKIT STD DIR=$${QKIT_STD_DIR}] on [Operating System=$${QMAKE_HOST.os}])
 
 #-------module name QQt
 MODULE_NAME=QQt
