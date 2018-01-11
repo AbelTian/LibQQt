@@ -9,6 +9,7 @@ class QQtSocketUdpServer : public QUdpSocket
     Q_OBJECT
 public:
     explicit QQtSocketUdpServer ( QObject* parent = nullptr );
+    virtual ~QQtSocketUdpServer() {}
 
 signals:
 
