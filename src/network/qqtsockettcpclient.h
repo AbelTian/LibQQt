@@ -19,6 +19,11 @@
 
 /**
  * @brief 客户端决定和协议的交互关系;只跟协议打交道；
+ * 处理粘包，数少包。
+ * 通过安装协议，支持客户通信
+ * 打开，
+ * 发送，接收，splitter，dispatcher
+ * 关闭。
  */
 class QQTSHARED_EXPORT QQtSocketTcpClient : public QTcpSocket
 {

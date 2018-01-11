@@ -9,7 +9,8 @@ QQtSocketTcpServer::QQtSocketTcpServer ( QObject* parent ) :
 
 QQtSocketTcpServer::~QQtSocketTcpServer()
 {
-    close();
+    if ( isListening() )
+        close();
 }
 
 void QQtSocketTcpServer::incomingConnection ( qintptr handle )
