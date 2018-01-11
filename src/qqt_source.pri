@@ -12,18 +12,8 @@
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
 #-------------------------------------------------
-SOURCES = \
-    $$PWD/exquisite/gifwidgets/qqtgiflabel.cpp \
-    $$PWD/exquisite/gifwidgets/qqtgifpushbutton.cpp \
-    $$PWD/exquisite/gifwidgets/qqtgifcheckbox.cpp \
-    $$PWD/exquisite/gifwidgets/qqtgifradiobutton.cpp \
-    $$PWD/exquisite/gifwidgets/qqtgifprogressbar.cpp
-HEADERS = \
-    $$PWD/exquisite/gifwidgets/qqtgiflabel.h \
-    $$PWD/exquisite/gifwidgets/qqtgifpushbutton.h \
-    $$PWD/exquisite/gifwidgets/qqtgifcheckbox.h \
-    $$PWD/exquisite/gifwidgets/qqtgifradiobutton.h \
-    $$PWD/exquisite/gifwidgets/qqtgifprogressbar.h
+SOURCES =
+HEADERS =
 
 #root dir
 HEADERS += $$PWD/qqt.h \
@@ -420,6 +410,21 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/svgwidgets/qqtgraphicssvgitem.h \
             $$PWD/exquisite/svgwidgets/qqtsvglabel.h \
             $$PWD/exquisite/svgwidgets/qqtsvgprogressbar.h
+    }
+    #gif widgets
+    contains (DEFINES, __GIFWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/gifwidgets/qqtgiflabel.cpp \
+            $$PWD/exquisite/gifwidgets/qqtgifpushbutton.cpp \
+            $$PWD/exquisite/gifwidgets/qqtgifcheckbox.cpp \
+            $$PWD/exquisite/gifwidgets/qqtgifradiobutton.cpp \
+            $$PWD/exquisite/gifwidgets/qqtgifprogressbar.cpp
+        HEADERS += \
+            $$PWD/exquisite/gifwidgets/qqtgiflabel.h \
+            $$PWD/exquisite/gifwidgets/qqtgifpushbutton.h \
+            $$PWD/exquisite/gifwidgets/qqtgifcheckbox.h \
+            $$PWD/exquisite/gifwidgets/qqtgifradiobutton.h \
+            $$PWD/exquisite/gifwidgets/qqtgifprogressbar.h
     }
 }
 

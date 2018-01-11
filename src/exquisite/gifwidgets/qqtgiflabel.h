@@ -2,8 +2,10 @@
 #define QQTGIFLABEL_H
 
 #include <qqtlabel.h>
+#include <qqt-local.h>
+#include <qqtcore.h>
 
-class QQtGifLabel : public QQtLabel
+class QQTSHARED_EXPORT QQtGifLabel : public QQtLabel
 {
     Q_OBJECT
 public:

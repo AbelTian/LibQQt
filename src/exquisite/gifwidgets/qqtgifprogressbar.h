@@ -2,8 +2,10 @@
 #define QQTGIFPROGRESSBAR_H
 
 #include <qqtgiflabel.h>
+#include <qqt-local.h>
+#include <qqtcore.h>
 
-class QQtGifProgressBar : public QQtGifLabel
+class QQTSHARED_EXPORT QQtGifProgressBar : public QQtGifLabel
 {
     Q_OBJECT
 public:

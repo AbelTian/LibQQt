@@ -2,8 +2,10 @@
 #define QQTGIFPUSHBUTTON_H
 
 #include <qqtpushbutton.h>
+#include <qqt-local.h>
+#include <qqtcore.h>
 
-class QQtGifPushButton : public QQtPushButton
+class QQTSHARED_EXPORT QQtGifPushButton : public QQtPushButton
 {
     Q_OBJECT
 public:

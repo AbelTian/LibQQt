@@ -2,8 +2,10 @@
 #define QQTGIFCHECKBOX_H
 
 #include <qqtcheckbox.h>
+#include <qqt-local.h>
+#include <qqtcore.h>
 
-class QQtGifCheckBox : public QQtCheckBox
+class QQTSHARED_EXPORT QQtGifCheckBox : public QQtCheckBox
 {
     Q_OBJECT
 public:
