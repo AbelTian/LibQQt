@@ -80,9 +80,6 @@ MODULE_NAME=QQt
 module_name = $$lower($${MODULE_NAME})
 
 #-------define the all path
-#if you dont modify Qt Creator default build directory, you may need mod this path variable.
-#link operation all will need this variable
-QKIT_STD_DIR = $${QT_VERSION}/$${SYSNAME}/$${BUILD}
 #QQT std dir is not same to app std dir
 QQT_STD_DIR = QQt/$${QKIT_STD_DIR}
 #link from build need this, if you havent mod QQt.pro, this can only be two value, qqt's: [src]/$DESTDIR

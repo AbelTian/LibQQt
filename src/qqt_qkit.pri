@@ -118,6 +118,11 @@ equals(QKIT_PRIVATE, EMBEDDED) {
     SYSNAME = Android_x86
 }
 
-message(Build $${TARGET} to $${QKIT_PRIVATE})
-message(Build $${TARGET} at $${QT_VERSION} $${SYSNAME} $${BUILD})
-message(Build $${TARGET} on $${QMAKE_HOST.os})
+#if you dont modify Qt Creator default build directory, you may need mod this path variable.
+#link operation all will need this variable
+QKIT_STD_DIR = $${QT_VERSION}/$${SYSNAME}/$${BUILD}
+
+message(qqt_qkit.pri)
+message(Build $${TARGET} to [QKIT=$${QKIT_PRIVATE}] \(configed in project build page.\))
+message(Build $${TARGET} at [$${QKIT_STD_DIR}] \([Qt Version=$${QT_VERSION}] [Qt Kit SysName=$${SYSNAME}] [Build Type=$${BUILD}]\))
+message(Build $${TARGET} on [Operating System=$${QMAKE_HOST.os}])
