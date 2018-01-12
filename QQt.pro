@@ -11,7 +11,8 @@ SUBDIRS = src/qqt.pro
 ##basic example
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe
-#SUBDIRS += examples/qqtframe2
+#
+SUBDIRS += examples/qqtframe2
 #SUBDIRS += examples/animationframe
 #
 ##-----------------------------------------------------------------
@@ -19,8 +20,7 @@ SUBDIRS = src/qqt.pro
 ##QQt installed to sdk or
 ##QQt is build
 ##-----------------------------------------------------------------
-#
-SUBDIRS += examples/exquisite
+#SUBDIRS += examples/exquisite
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
 #SUBDIRS += examples/qqtnetworkexample

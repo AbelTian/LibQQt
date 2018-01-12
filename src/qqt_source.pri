@@ -234,23 +234,27 @@ FORMS += \
 #network
 SOURCES += \
     $$PWD/network/qqtprotocol.cpp \
+    $$PWD/network/qqtudpprotocol.cpp \
     $$PWD/network/qqtnetwork.cpp
 HEADERS += \
     $$PWD/network/qqtmessage.h \
     $$PWD/network/qqtprotocol.h \
+    $$PWD/network/qqtudpprotocol.h \
     $$PWD/network/qqtnetwork.h
 
 #tcpsocket udpsocket
 SOURCES += \
     $$PWD/network/qqtsocketudpserver.cpp \
-    $$PWD/network/qqtsocketudpclient.cpp \
+    $$PWD/network/qqtsocketudpclient.cpp
+HEADERS += \
+    $$PWD/network/qqtsocketudpclient.h \
+    $$PWD/network/qqtsocketudpserver.h
+SOURCES += \
     $$PWD/network/qqtsockettcpclient.cpp \
     $$PWD/network/qqtsockettcpserver.cpp
 HEADERS += \
     $$PWD/network/qqtsockettcpclient.h \
-    $$PWD/network/qqtsockettcpserver.h \
-    $$PWD/network/qqtsocketudpclient.h \
-    $$PWD/network/qqtsocketudpserver.h
+    $$PWD/network/qqtsockettcpserver.h
 
 #serialport
 SOURCES += \

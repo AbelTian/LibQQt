@@ -18,7 +18,6 @@ public:
 int main ( int argc, char* argv[] )
 {
     MyApp a ( argc, argv );
-    pline() << hex << QT_VERSION;
 
     MainWindow w;
     w.show();

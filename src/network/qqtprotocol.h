@@ -23,12 +23,20 @@ Q_SIGNALS:
 public:
     /**
      * @brief 协议处理器
+     * 这个处理器是给QQtTcpSocket用的，不是给客户用的。
      * @param Qt通讯口readAll()读到的bytes
      * @return
      */
     void translator ( const QByteArray& bytes );
 
+    /*
+     * 以下函数，用户必须继承下去，重写，need override
+     */
 protected:
+    /**
+     * @brief 最小包长
+     * @return
+     */
     inline virtual quint16 minlength() { return 0; }
     /**
      * @brief 最大包长
