@@ -21,6 +21,17 @@ RCC_DIR = qrc
 DESTDIR = bin
 
 ################################################################
+##administrator policy
+##如果用户App需要管理员权限，那么打开这个CONFIG
+################################################################
+#CONFIG += administrator
+contains(CONFIG, administrator){
+    win32 {
+        QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
+    }
+}
+
+################################################################
 ##link QQt
 ################################################################
 include($${PWD}/app_link_qqt_library.pri)
