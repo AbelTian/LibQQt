@@ -20,7 +20,8 @@ SUBDIRS += examples/qqtframe2
 ##QQt installed to sdk or
 ##QQt is build
 ##-----------------------------------------------------------------
-#SUBDIRS += examples/exquisite
+#
+SUBDIRS += examples/exquisite
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
 #SUBDIRS += examples/qqtnetworkexample

@@ -112,11 +112,17 @@ QQTSHARED_EXPORT void QQtSleep ( int millsecond );
 //-----------------------
 #define packline() pline() << qDebug().nospace()
 
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint8 r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint8& r );
 
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint16 r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint16& r );
 
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint32 r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint32& r );
+
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint8& r );
+
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint16& r );
+
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint32& r );
 
 QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const QByteArray& r );
 
@@ -125,12 +131,6 @@ QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, quint8& r );
 QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, quint16& r );
 
 QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, quint32& r );
-
-QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, QByteArray& r );
-
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint16 r );
-
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint32 r );
 
 QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, qint8& r );
 
