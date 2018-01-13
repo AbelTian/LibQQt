@@ -1,6 +1,5 @@
 #include "qqtframe.h"
 
-QSqlDatabase managerDB;
 QString gUserName;
 QString gPassword;
 int gAuthority;

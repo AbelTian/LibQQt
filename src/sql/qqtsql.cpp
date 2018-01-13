@@ -1,5 +1,7 @@
 #include "qqtsql.h"
 
+QSqlDatabase managerDB;
+
 QSqlDatabase newDatabaseConn()
 {
     QUuid uuid = QUuid::createUuid();

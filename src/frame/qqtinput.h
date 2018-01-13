@@ -24,7 +24,7 @@
 #include <QTimer>
 #include <QTextCodec>
 #include <qqt-local.h>
-#include <qqtframe.h>
+#include <qqtsql.h>
 
 namespace Ui {
 class QQtInput;
