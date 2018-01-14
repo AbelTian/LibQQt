@@ -209,6 +209,14 @@ void QQtMPTableWidget::setAlternatingRowColors ( bool alt )
     altColor = alt;
 }
 
+void QQtMPTableWidget::setHeaderData(Qt::Orientation, QStringList dataList)
+{
+    for(int i =0; i < dataList.size(); i++)
+    {
+        m_headerData.insert(i, dataList.at(i));
+    }
+}
+
 void QQtMPTableWidget::setHeaderData ( int i, Qt::Orientation, QString data )
 {
     m_headerData.insert ( i, data );

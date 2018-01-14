@@ -35,6 +35,7 @@ public:
     void setResizeMode ( QHeaderView::ResizeMode mode = QHeaderView::ResizeToContents );
     void setResizeMode ( int column, QHeaderView::ResizeMode mode = QHeaderView::ResizeToContents );
     void setAlternatingRowColors ( bool alt = true );
+    void setHeaderData ( Qt::Orientation, QStringList dataList );
     void setHeaderData ( int i, Qt::Orientation, QString data );
     void setColumnWidth ( int column, int width );
     void query ( QString filter = "1=1" );
