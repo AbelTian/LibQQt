@@ -7,6 +7,7 @@
 #include "qqtcore.h"
 #include <QThread>
 
+/*QQtSocketUdpServer和QQtSocketUdpClient功能相同，实现方法不同。*/
 class QQtSocketUdpServer : public QUdpSocket
 {
     Q_OBJECT
