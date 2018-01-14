@@ -6,6 +6,8 @@
 #include "qqt-local.h"
 #include "qqtcore.h"
 
+/*默认情况下，就可以发送数据了，在协议里发送。*/
+/*只有绑定本地IP、端口才能进行接收*/
 class QQtSocketUdpClient : public QUdpSocket
 {
     Q_OBJECT

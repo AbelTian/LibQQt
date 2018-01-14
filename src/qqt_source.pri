@@ -244,15 +244,11 @@ HEADERS += \
 
 #tcpsocket udpsocket
 SOURCES += \
-    $$PWD/network/qqtsocketudpserver.cpp \
-    $$PWD/network/qqtsocketudpclient.cpp
-HEADERS += \
-    $$PWD/network/qqtsocketudpclient.h \
-    $$PWD/network/qqtsocketudpserver.h
-SOURCES += \
+    $$PWD/network/qqtsocketudpclient.cpp \
     $$PWD/network/qqtsockettcpclient.cpp \
     $$PWD/network/qqtsockettcpserver.cpp
 HEADERS += \
+    $$PWD/network/qqtsocketudpclient.h \
     $$PWD/network/qqtsockettcpclient.h \
     $$PWD/network/qqtsockettcpserver.h
 

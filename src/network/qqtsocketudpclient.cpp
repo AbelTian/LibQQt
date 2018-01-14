@@ -150,9 +150,10 @@ void QQtSocketUdpClient::readyReadData()
         /*能够一次收够一条报文？测试的能。*/
         QNetworkDatagram da = receiveDatagram();
 
-        pline() << "udp sender:" << da.senderAddress() << da.senderPort();
-        pline() << "udp receiver:" << da.destinationAddress() << da.destinationPort();
-        pline() << "udp new msg size:" << size;
+        //pline() << "udp sender:" << da.senderAddress() << da.senderPort();
+        /*数据无意义 "" -1*/
+        //pline() << "udp receiver:" << da.destinationAddress() << da.destinationPort();
+        //pline() << "udp new msg size:" << size;
 
         m_protocol->translator ( da );
     }
