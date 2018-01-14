@@ -1,4 +1,5 @@
 #include "qqtsocketudpclient.h"
+#include <QNetworkDatagram>
 
 QQtSocketUdpClient::QQtSocketUdpClient ( QObject* parent ) : QUdpSocket ( parent )
 {
@@ -150,8 +151,10 @@ void QQtSocketUdpClient::readyReadData()
         /*能够一次收够一条报文？测试的能。*/
         QNetworkDatagram da = receiveDatagram();
 
+        /*数据无意义 "" -1 在此设置*/
+        da.setDestination(this->localAddress(), this->localPort());
+
         //pline() << "udp sender:" << da.senderAddress() << da.senderPort();
-        /*数据无意义 "" -1*/
         //pline() << "udp receiver:" << da.destinationAddress() << da.destinationPort();
         //pline() << "udp new msg size:" << size;
 
