@@ -16,16 +16,18 @@ public:
 public:
     /**
      * @brief 从流中解析报文
+     * 这个函数会更改局部变量
      * @param m
      * @param l
      */
     inline virtual void parser(const QByteArray&) {}
     /**
      * @brief 将报文组装为流
+     * 这个函数不会更改局部变量
      * @param l
      * @param m
      */
-    inline virtual void packer(QByteArray&) {}
+    inline virtual void packer(QByteArray&) const {}
     /**
      * @brief 最小包长
      * @return
