@@ -10,28 +10,28 @@
 class QQTSerialMessage : public QQtMessage
 {
 public:
-    explicit QQTSerialMessage(QObject* parent = 0);
+    explicit QQTSerialMessage ( QObject* parent = 0 );
 
     const quint16& head() const;
-    void setHead(quint16 head);
+    void setHead ( quint16 head );
     const quint16& size() const;
-    void setSize(quint16 size);
+    void setSize ( quint16 size );
     //user
     const quint16& cmd() const;
-    void setCmd(quint16 cmd);
+    void setCmd ( quint16 cmd );
     //user
     const QByteArray& data() const;
-    void setData(QByteArray& data);
+    void setData ( QByteArray& data );
     const quint16& sum() const;
-    void setSum(quint16 sum);
+    void setSum ( quint16 sum );
     const quint16& tail() const;
-    void setTail(quint16 tail);
+    void setTail ( quint16 tail );
     void translate();
 
     // QQTSyntax interface
 public:
-    void parser(const QByteArray &l) override;
-    void packer(QByteArray &l) override;
+    void parser ( const QByteArray& l ) override;
+    void packer ( QByteArray& l ) const override;
 private:
     quint16 m_Head;
     quint16 m_Size;
@@ -41,6 +41,6 @@ private:
     quint16 m_Tail;
 };
 
-QDebug operator<< (QDebug dbg, const QQTSerialMessage &c);
+QDebug operator<< ( QDebug dbg, const QQTSerialMessage& c );
 
 #endif // QQTSERIALMESSAGE_H

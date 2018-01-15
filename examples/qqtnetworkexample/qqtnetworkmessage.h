@@ -10,22 +10,22 @@ class QQTNetworkMessage : public QQtMessage
 {
     Q_OBJECT
 public:
-    explicit QQTNetworkMessage(QObject *parent = 0);
+    explicit QQTNetworkMessage ( QObject* parent = 0 );
 
     const quint16& head() const;
-    void setHead(quint16 head);
+    void setHead ( quint16 head );
     const quint16& size() const;
-    void setSize(quint16 size);
+    void setSize ( quint16 size );
     const quint16& cmd() const;
-    void setCmd(quint16 cmd);
+    void setCmd ( quint16 cmd );
     const quint32& uid() const;
-    void setUid(quint32 uid);
+    void setUid ( quint32 uid );
     const QByteArray& data() const;
-    void setData(QByteArray &data);
+    void setData ( QByteArray& data );
     const quint16& sum() const;
-    void setSum(quint16 sum);
+    void setSum ( quint16 sum );
     const quint32& tail() const;
-    void setTail(quint32 tail);
+    void setTail ( quint32 tail );
     void translate();
 
 signals:
@@ -35,9 +35,9 @@ public slots:
     // QQtMessage interface
 public:
 
-    void parser(const QByteArray &l) override;
+    void parser ( const QByteArray& l ) override;
 
-    void packer(QByteArray &l) override;
+    void packer ( QByteArray& l ) const override;
 private:
     quint16 m_Head;
     quint16 m_Size;
@@ -50,7 +50,7 @@ private:
 
 };
 
-QDebug operator<< (QDebug dbg, const QQTNetworkMessage &c);
+QDebug operator<< ( QDebug dbg, const QQTNetworkMessage& c );
 
 
 #endif // QQTNETWORKMESSAGE_H

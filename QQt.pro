@@ -24,7 +24,8 @@ SUBDIRS += examples/qqtframe2
 SUBDIRS += examples/exquisite
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
-#SUBDIRS += examples/qqtnetworkexample
+#
+SUBDIRS += examples/qqtnetworkexample
 #SUBDIRS += examples/qqtchartexample
 #
 #
@@ -33,7 +34,8 @@ SUBDIRS += examples/exquisite
 ##need QSsl
 ##need GumoQuery
 ##-----------------------------------------------------------------
-#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
+#
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS +=     examples/GuiBuildTool
 ##-----------------------------------------------------------------
