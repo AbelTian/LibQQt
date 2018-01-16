@@ -43,7 +43,8 @@ greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
 ##-----------------------------------------------------------------
 #SUBDIRS += test/gumbo_query_test
 #SUBDIRS += test/svgtest
-#SUBDIRS += test/customqvariant
+#
+SUBDIRS += test/customqvariant
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest

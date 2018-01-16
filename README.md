@@ -51,8 +51,10 @@
      - 解决C Plus Plus中没有字典类别的尴尬。    
 3. 添加Multi Link技术  
      - Multi Link technology，既多链接工程管理技术。
-     - 基于qmake，用户可以轻易的添加自定义library。
-
+     - 基于qmake，用户可以轻易的链接LibQQt和添加自定义library。  
+4. 添加gif support Widgets  
+    - 可以方便的设置动态按钮等。  
+    - 有QQtGifWidget、QQtGifButton等。  
 
 
 # 摘要介绍下  
@@ -63,7 +65,8 @@
 - 精美组成，包括高级业务功能和超级图形功能。（都在src/exquisite文件夹里）  
 
 *如果用户希望精简LibQQt，qqt_header.pri里面有很多模块开关，开开关关能修剪。*  
-*不建议使用cmake，建议使用qmake。*
+*不建议使用cmake，建议使用qmake。*  
+
 
 # 使用方法  
 
