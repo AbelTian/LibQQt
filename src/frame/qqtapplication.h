@@ -28,7 +28,7 @@ public:
     virtual int unInitInstance() { return 0; }
 
 signals:
-
+    void languageChanged();
 public slots:
     void slotUPanAutoRun ( int status );
 private:
@@ -37,5 +37,7 @@ private:
 private:
     QTranslator* language;
 };
+
+extern QQtApplication* qqtApp;
 
 #endif // QQTAPPLICATION_H

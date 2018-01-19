@@ -18,6 +18,8 @@
 #include <qqtinput.h>
 #endif
 
+QQtApplication* qqtApp = NULL;
+
 QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QApplication ( argc, argv ),
     bUPanAutoRun ( false )
@@ -38,6 +40,8 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QSettings::setDefaultFormat ( QSettings::IniFormat );
     QSettings::setPath ( QSettings::IniFormat, QSettings::UserScope, CONFIG_PATH );
     QSettings::setPath ( QSettings::IniFormat, QSettings::SystemScope, CONFIG_PATH );
+
+    qqtApp = this;
 
 #ifdef __DARWIN__
     QDir::setCurrent ( qApp->applicationDirPath() );
@@ -215,4 +219,5 @@ void QQtApplication::setLanguage ( QString qmfile )
     language->load ( qmfile );
     pline() << "currentLanguage" << qmfile;
     installTranslator ( language );
+    emit languageChanged();
 }
