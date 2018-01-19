@@ -20,6 +20,7 @@ public:
      * insert into <table> (<names>) values (<values>)
     */
     bool insert ( const QString& table, const QStringList& names, const QStringList& values );
+    bool insert ( const QString& table, const QStringList& names, const QList<qreal>& values );
     /*
      * update <table> set <name1>='<value1>',<name2>='<value2>' where <expression>
     */

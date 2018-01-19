@@ -66,6 +66,56 @@ bool QQtSqlQuery::insert ( const QString& table, const QStringList& names, const
     return exec ( sql );
 }
 
+bool QQtSqlQuery::insert ( const QString& table, const QStringList& names, const QList<qreal>& values )
+{
+    int length = names.count();
+    int count = values.count();
+
+    if ( length != count )
+    {
+        return false;
+    }
+
+    QString sql = QString ( "insert into " ) + table + QString ( "(" );
+
+    //pline() << names;
+    //pline() << values;
+
+    int i;
+
+    for ( i = 0; i < length; i++ )
+    {
+        sql = sql + names.value ( i );
+
+        if ( i < length - 1 )
+        {
+            sql += QString ( "," );
+        }
+        else
+        {
+
+            sql = sql + QString ( ")" );
+        }
+    }
+
+    sql = sql + QString ( "values (" );
+
+    for ( i = 0; i < count; i++ )
+    {
+        sql = sql + QString ( "'" ) + values.value ( i ) + QString ( "'" );
+
+        if ( i < count - 1 )
+        {
+            sql = sql + QString ( "," );
+        }
+        else
+            sql = sql + QString ( ")" );
+    }
+
+
+    return exec ( sql );
+}
+
 bool QQtSqlQuery::update ( const QString& table, const QStringList& names, const QStringList& values,
                            const QString& expression )
 {
