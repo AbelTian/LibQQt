@@ -102,7 +102,7 @@ bool QQtSqlQuery::insert ( const QString& table, const QStringList& names, const
 
     for ( i = 0; i < count; i++ )
     {
-        sql = sql + QString ( "'" ) + values.value ( i ) + QString ( "'" );
+        sql = sql + QString ( "'" ) + QString ( "%1" ).arg ( values.value ( i ) ) + QString ( "'" );
 
         if ( i < count - 1 )
         {
