@@ -33,7 +33,8 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 
     /*嵌入式，应用名称必须指定*/
     QCoreApplication::setOrganizationName ( "QQt" );
-    QCoreApplication::setOrganizationDomain ( "www.qqt.com" ); // 专为Mac OS X 准备的
+    /*专为Mac OS X 准备的，macOS下配置文件: CONF_PATH/organizationDomain/ApplicationName.ini ... */
+    QCoreApplication::setOrganizationDomain ( "www.qqt.com" ); //
     QCoreApplication::setApplicationName ( "QQt" );
 
     /*设置配置文件所在路径*/
@@ -41,6 +42,7 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QSettings::setPath ( QSettings::IniFormat, QSettings::UserScope, CONFIG_PATH );
     QSettings::setPath ( QSettings::IniFormat, QSettings::SystemScope, CONFIG_PATH );
 
+    /*程序中，需要更改语言的位置，可以通过qqtApp->setLanguage实现。languageChanged信号连接到每个页面的更换语言的函数*/
     qqtApp = this;
 
 #ifdef __DARWIN__
