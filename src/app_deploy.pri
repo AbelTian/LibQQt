@@ -1,6 +1,10 @@
 #-------------------------------------------------------------
 #user computer path settings
 #-------------------------------------------------------------
+#windows: C:\Users\[userName]\AppData\Roaming\qmake\app_configure.pri
+#linux: /home/[usrName]/.qmake/app_configure.pri
+#macOS: /Users/[userName]/.qmake/app_configure.pri
+
 #example（in /user/conf/path/.qmake/app_configure.pri）
 #APP_DEPLOY_ROOT = /where/app/wants/to/deploy/app/root
 
@@ -65,6 +69,7 @@ defineReplace(deploy_app_for_android) {
 ##work flow
 ##-------------------------------------------------
 #set app deploy pwd
+#APP_DEPLOY_PWD is here.
 APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
 contains(QKIT_PRIVATE, WIN32||WIN64) {
     APP_DEPLOY_PWD~=s,/,\\,g
