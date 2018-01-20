@@ -28,7 +28,7 @@
 
 最后注意一下，目录的层次要按照图中的层次安排，才会清晰。  
 工程目录和编译目录并排，和工具并排，和发布目录并排。  
-工程目录里面，Library和Application工程并排。
+工程目录里面，Library和Application工程并排。  
 
 ![补充一点Android开发用目录](screenshot/y6.png "这是Android开发目录")    
 补充一点Android开发需要设置的目录  

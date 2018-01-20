@@ -1,22 +1,8 @@
 #-------------------------------------------------------------
 #user computer path settings
 #-------------------------------------------------------------
-#deploy root
-isEmpty(APP_DEPLOY_ROOT){
-    message($${TARGET} $${CONFIG_FILE})
-    message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
-    error(  please check $$CONFIG_FILE under qqt_library.pri)
-}
-message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
-
-#set app deploy pwd
-APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
-contains(QKIT_PRIVATE, WIN32||WIN64) {
-    APP_DEPLOY_PWD~=s,/,\\,g
-}
-
-APP_DEST_DIR=$${DESTDIR}
-isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
+#example（in /user/conf/path/.qmake/app_configure.pri）
+#APP_DEPLOY_ROOT = /where/app/wants/to/deploy/app/root
 
 defineReplace(deploy_app_on_mac) {
     #need QQT_BUILD_PWD
@@ -75,7 +61,40 @@ defineReplace(deploy_app_for_android) {
     return ($$command)
 }
 
-CONFIG += deploy_app
+##-------------------------------------------------
+##work flow
+##-------------------------------------------------
+#set app deploy pwd
+APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
+contains(QKIT_PRIVATE, WIN32||WIN64) {
+    APP_DEPLOY_PWD~=s,/,\\,g
+}
+
+APP_DEST_DIR=$${DESTDIR}
+isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
+
+#deploy root
+isEmpty(APP_DEPLOY_ROOT){
+    message($${TARGET} $${CONFIG_FILE})
+    message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
+    error(  please check $$CONFIG_FILE under link_qqt_library.pri)
+}
+message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
+
+#如果 配置文件里 没有配置 APP_DEPLOY_ROOT 那么返回，不拷贝发布任何应用
+#不会走到。
+isEmpty(APP_DEPLOY_ROOT) {
+    message("$${TARGET} hasn't deploied any app files")
+    greaterThan(QT_MAJOR_VERSION, 5):return()
+}
+
+##4.8 qmake arm32 return() 函数无效
+!isEmpty(APP_DEPLOY_ROOT) {
+    CONFIG += deploy_app
+    message("$${TARGET} has deploied some app files")
+}
+
+
 contains(CONFIG, deploy_app) {
     contains(QKIT_PRIVATE, WIN32||WIN64) {
         QMAKE_POST_LINK += $$deploy_app_on_win()

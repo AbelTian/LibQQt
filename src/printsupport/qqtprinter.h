@@ -7,7 +7,7 @@
 class QQTSHARED_EXPORT QQtPrinter : public QPrinter
 {
 public:
-    QQtPrinter ( PrinterMode mode = HighResolution );
+    explicit QQtPrinter ( PrinterMode mode = HighResolution );
 
     void setOutputFileName ( const QString& );
     void print();

@@ -11,123 +11,6 @@
 #include "qqt-local.h"
 #include "qqtcore.h"
 
-#if 0
-class QQTSHARED_EXPORT QQtConstructer : public QObject
-
-{
-    Q_OBJECT
-public:
-    explicit QQtConstructer ( QObject* parent = 0 ) :
-        QObject ( parent ) {}
-    virtual ~QQtConstructer() {}
-
-protected:
-    virtual QString constructorName()  = 0;
-};
-
-/**
- * @brief The QQtObjectConstructer class
- * QQt 对象生产器
- */
-class QQTSHARED_EXPORT QQtObjectConstructer : public QQtConstructer
-
-{
-    Q_OBJECT
-public:
-    explicit QQtObjectConstructer ( QObject* parent = 0 ) :
-        QQtConstructer ( parent ) {}
-    virtual ~QQtObjectConstructer() {}
-
-    virtual QString constructorName() { return "QObject"; }
-
-private:
-    typedef QObject* ( *Constructor ) ( QObject* parent );
-
-    template<typename T>
-    static QObject* constructorHelper ( QObject* parent = 0 ) {
-        return new T ( parent );
-    }
-
-    static QHash<QByteArray, Constructor>& constructors() {
-        /*
-         * 保存生成类对象的具体（非模板）函数
-         */
-        static QHash<QByteArray, Constructor> instance;
-        return instance;
-    }
-};
-
-/**
- * @brief The QQtWidgetConstructer class
- * QQt 对象生产器
- */
-class QQTSHARED_EXPORT QQtWidgetConstructer : public QQtConstructer
-
-{
-    Q_OBJECT
-public:
-    explicit QQtWidgetConstructer ( QObject* parent = 0 ) :
-        QQtConstructer ( parent ) {}
-    virtual ~QQtWidgetConstructer() {}
-
-    virtual QString constructorName() { return "QWidget"; }
-
-private:
-    typedef QWidget* ( *Constructor ) ( QWidget* parent );
-
-    template<typename T>
-    static QWidget* constructorHelper ( QWidget* parent = 0 ) {
-        return new T ( parent );
-    }
-
-    static QHash<QByteArray, Constructor>& constructors() {
-        /*
-         * 保存生成类对象的具体（非模板）函数
-         */
-        static QHash<QByteArray, Constructor> instance;
-        return instance;
-    }
-};
-
-/**
- * @brief The QQtObjectFactory class
- * QQt 对象生产器 工厂模式
- */
-class QQTSHARED_EXPORT QQtObjectFactory2
-{
-public:
-
-private:
-    template<typename T>
-    static QQtConstructer* objectContructor() {
-        static QList<QQtConstructer*>* objcList = NULL;
-
-        if ( !objcList ) {
-            objcList = new QList<QQtConstructer*>();
-            //add custom contructor
-            objcList->push_back ( new QQtObjectConstructer() );
-            objcList->push_back ( new QQtWidgetConstructer() );
-        }
-
-        T obj;
-        QQtConstructer* objcc = NULL;
-        /*
-        QListIterator itor ( objcList );
-
-        while ( itor.hasNext() ) {
-            QQtConstructer* objc = *itor.next();
-
-            if ( obj.inherits ( objc->constructorName() ) ) {
-                objcc = objc;
-                break;
-            }
-        }
-        */
-
-        return objcc;
-    }
-};
-#endif
 
 /**
  * @brief The QQtObjectFactory class
@@ -293,5 +176,123 @@ private:
         return instance;
     }
 };
+
+#if 0
+class QQTSHARED_EXPORT QQtConstructer : public QObject
+
+{
+    Q_OBJECT
+public:
+    explicit QQtConstructer ( QObject* parent = 0 ) :
+        QObject ( parent ) {}
+    virtual ~QQtConstructer() {}
+
+protected:
+    virtual QString constructorName()  = 0;
+};
+
+/**
+ * @brief The QQtObjectConstructer class
+ * QQt 对象生产器
+ */
+class QQTSHARED_EXPORT QQtObjectConstructer : public QQtConstructer
+
+{
+    Q_OBJECT
+public:
+    explicit QQtObjectConstructer ( QObject* parent = 0 ) :
+        QQtConstructer ( parent ) {}
+    virtual ~QQtObjectConstructer() {}
+
+    virtual QString constructorName() { return "QObject"; }
+
+private:
+    typedef QObject* ( *Constructor ) ( QObject* parent );
+
+    template<typename T>
+    static QObject* constructorHelper ( QObject* parent = 0 ) {
+        return new T ( parent );
+    }
+
+    static QHash<QByteArray, Constructor>& constructors() {
+        /*
+         * 保存生成类对象的具体（非模板）函数
+         */
+        static QHash<QByteArray, Constructor> instance;
+        return instance;
+    }
+};
+
+/**
+ * @brief The QQtWidgetConstructer class
+ * QQt 对象生产器
+ */
+class QQTSHARED_EXPORT QQtWidgetConstructer : public QQtConstructer
+
+{
+    Q_OBJECT
+public:
+    explicit QQtWidgetConstructer ( QObject* parent = 0 ) :
+        QQtConstructer ( parent ) {}
+    virtual ~QQtWidgetConstructer() {}
+
+    virtual QString constructorName() { return "QWidget"; }
+
+private:
+    typedef QWidget* ( *Constructor ) ( QWidget* parent );
+
+    template<typename T>
+    static QWidget* constructorHelper ( QWidget* parent = 0 ) {
+        return new T ( parent );
+    }
+
+    static QHash<QByteArray, Constructor>& constructors() {
+        /*
+         * 保存生成类对象的具体（非模板）函数
+         */
+        static QHash<QByteArray, Constructor> instance;
+        return instance;
+    }
+};
+
+/**
+ * @brief The QQtObjectFactory class
+ * QQt 对象生产器 工厂模式
+ */
+class QQTSHARED_EXPORT QQtObjectFactory2
+{
+public:
+
+private:
+    template<typename T>
+    static QQtConstructer* objectContructor() {
+        static QList<QQtConstructer*>* objcList = NULL;
+
+        if ( !objcList ) {
+            objcList = new QList<QQtConstructer*>();
+            //add custom contructor
+            objcList->push_back ( new QQtObjectConstructer() );
+            objcList->push_back ( new QQtWidgetConstructer() );
+        }
+
+        T obj;
+        QQtConstructer* objcc = NULL;
+        /*
+        QListIterator itor ( objcList );
+
+        while ( itor.hasNext() ) {
+            QQtConstructer* objc = *itor.next();
+
+            if ( obj.inherits ( objc->constructorName() ) ) {
+                objcc = objc;
+                break;
+            }
+        }
+        */
+
+        return objcc;
+    }
+};
+#endif
 
 #endif // QQTOBJECTFACTORY_H

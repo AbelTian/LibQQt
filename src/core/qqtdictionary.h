@@ -122,7 +122,7 @@ public:
 
     /*操作符*/
     /*警告：可读、可写*/
-    /*don't out of range*/
+    /*don't out of range? no, it is ok now.*/
     QQtDictNode& operator [] ( int index );
     const QQtDictNode& operator[] ( int index ) const;
     QQtDictNode& operator [] ( const QString& key );
