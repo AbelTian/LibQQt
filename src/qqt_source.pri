@@ -411,15 +411,18 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/svgwidgets/qqtsvglabel.h \
             $$PWD/exquisite/svgwidgets/qqtsvgprogressbar.h
     }
+
     #gif widgets
     contains (DEFINES, __GIFWIDGETS__) {
         SOURCES += \
+            $$PWD/exquisite/gifwidgets/qqtgifwidget.cpp \
             $$PWD/exquisite/gifwidgets/qqtgiflabel.cpp \
             $$PWD/exquisite/gifwidgets/qqtgifpushbutton.cpp \
             $$PWD/exquisite/gifwidgets/qqtgifcheckbox.cpp \
             $$PWD/exquisite/gifwidgets/qqtgifradiobutton.cpp \
             $$PWD/exquisite/gifwidgets/qqtgifprogressbar.cpp
         HEADERS += \
+            $$PWD/exquisite/gifwidgets/qqtgifwidget.h \
             $$PWD/exquisite/gifwidgets/qqtgiflabel.h \
             $$PWD/exquisite/gifwidgets/qqtgifpushbutton.h \
             $$PWD/exquisite/gifwidgets/qqtgifcheckbox.h \

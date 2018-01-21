@@ -11,8 +11,7 @@ SUBDIRS = src/qqt.pro
 ##basic example
 ##-----------------------------------------------------------------
 #SUBDIRS += examples/qqtframe
-#
-SUBDIRS += examples/qqtframe2
+#SUBDIRS += examples/qqtframe2
 #SUBDIRS += examples/animationframe
 #
 ##-----------------------------------------------------------------
@@ -20,12 +19,10 @@ SUBDIRS += examples/qqtframe2
 ##QQt installed to sdk or
 ##QQt is build
 ##-----------------------------------------------------------------
-#
-SUBDIRS += examples/exquisite
+#SUBDIRS += examples/exquisite
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
-#
-SUBDIRS += examples/qqtnetworkexample
+#SUBDIRS += examples/qqtnetworkexample
 #SUBDIRS += examples/qqtchartexample
 #
 #
@@ -34,8 +31,7 @@ SUBDIRS += examples/qqtnetworkexample
 ##need QSsl
 ##need GumoQuery
 ##-----------------------------------------------------------------
-#
-greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
+#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS +=     examples/GuiBuildTool
 ##-----------------------------------------------------------------
@@ -43,15 +39,18 @@ greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
 ##-----------------------------------------------------------------
 #SUBDIRS += test/gumbo_query_test
 #SUBDIRS += test/svgtest
-#
-SUBDIRS += test/customqvariant
+#SUBDIRS += test/customqvariant
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest
+#SUBDIRS += test/qqtdicttest2
+
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
 #    SUBDIRS += test/cmdwidget
 #}
 #SUBDIRS += test/coretest
+#
+SUBDIRS += test/giftest
 #
 ##-----------------------------------------------------------------
 ##need webkit webkitwidgets - WebSupport
