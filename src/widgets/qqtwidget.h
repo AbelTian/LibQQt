@@ -1,9 +1,12 @@
 #ifndef QQTWIDGET_H
 #define QQTWIDGET_H
 
+#include <qqt-local.h>
+#include <qqtcore.h>
+
 #include <QWidget>
 #include <QTimer>
-#include <qqt-local.h>
+#include <QImage>
 
 class QQTSHARED_EXPORT QQtWidget : public QWidget
 {
@@ -24,8 +27,11 @@ public:
         QQTZOOMWIDTH,
         QQTZOOMHEIGHT,
     };
-    void setPixmap ( QString pic = QString() );
     void setType ( ImageStyle style = QQTCENTER ) { m_style = style; }
+
+    void setPixmap ( const QString& pic = QString() );
+    void setPixmap ( const QPixmap& pixmap );
+    void setPixmap ( const QImage& image );
 
 signals:
     void click();
@@ -46,9 +52,12 @@ protected slots:
     void slot_timeout();
 
 private:
-    QString m_pic;
     quint32 m_style;
     QTimer* m_lcTimer;
+    /*pixmap是必要的。绘图用pixmap。*/
+    /*内部没有使用QPixmap存储，因为如果缩放widget，pixmap就没办法了，img有*/
+    /*内部对QIcon的使用删除了，icon不是必要的。*/
+    QImage mImg;
 };
 
 #endif // QPICWIDGET_H

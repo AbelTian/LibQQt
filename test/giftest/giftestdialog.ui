@@ -20,19 +20,56 @@
       <attribute name="title">
        <string>Tab 1</string>
       </attribute>
-      <widget class="QQtGifLabel" name="labelGif">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>60</y>
-         <width>151</width>
-         <height>131</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>gif label</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>gif widget</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>qqt widget</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QQtGifLabel" name="labelGif">
+         <property name="styleSheet">
+          <string notr="true">border-color: rgb(17, 54, 13);
+border-width:2px;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QQtGifWidget" name="widgetGif" native="true">
+         <property name="styleSheet">
+          <string notr="true">border-color: rgb(17, 54, 13);
+border-width:2px;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QQtWidget" name="widgetQQt" native="true">
+         <property name="styleSheet">
+          <string notr="true">border-color: rgb(17, 54, 13);
+border-width:2px;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -49,6 +86,18 @@
    <class>QQtGifLabel</class>
    <extends>QLabel</extends>
    <header>qqtgiflabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QQtGifWidget</class>
+   <extends>QWidget</extends>
+   <header>qqtgifwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QQtWidget</class>
+   <extends>QWidget</extends>
+   <header>qqtwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

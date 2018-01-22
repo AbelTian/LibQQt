@@ -116,7 +116,7 @@ contains (DEFINES, __QEXTSERIALPORT__) {
 ##################Bluetooth Module###############################
 #if you use qtbluetooth, open this annotation
 DEFINES += __BLUETOOTH__
-#if you compiler QtBluetooth module manual, note this line is a good idea. default qt4 don't use bluetooth
+#if you compiler QtBluetooth module manual, note this line is a good idea. default qt4 doesn't use bluetooth
 lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __BLUETOOTH__
 #condation
 contains (DEFINES, __BLUETOOTH__) {
@@ -148,7 +148,7 @@ contains (DEFINES, __CPP11__) {
 
 ##################MultiMedia Module###############################
 DEFINES += __MULTIMEDIA__
-#mac no multimedia
+#on mac qt has no multimedia
 contains(QKIT_PRIVATE, macOS) {
     lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__MULTIMEDIA__
 }
@@ -251,6 +251,7 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
 }
 
 ##################Charts Module###############################
+#Qt Charts has a problem, you can't mod tip label's style.
 #if you use QQtCharts, open this annotation
 DEFINES += __QQTCHARTS__
 lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__

@@ -7,6 +7,8 @@ GifTestDialog::GifTestDialog ( QWidget* parent ) :
 {
     ui->setupUi ( this );
     ui->labelGif->setGifFile ( "./waiting.gif" );
+    ui->widgetGif->setGifFile ( "./waiting.gif" );
+    ui->widgetQQt->setPixmap ( "./yun.png" );
     pline() << QMovie::supportedFormats();
 }
 

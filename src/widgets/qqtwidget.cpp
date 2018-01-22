@@ -18,9 +18,23 @@ QQtWidget::~QQtWidget()
 {
 }
 
-void QQtWidget::setPixmap ( QString pic )
+void QQtWidget::setPixmap ( const QString& pic )
 {
-    m_pic = pic;
+    bool ret = mImg.load ( pic );
+    /*请确认文件是否拷贝成功。*/
+    //pline() << ret << mImg.isNull();
+    update();
+}
+
+void QQtWidget::setPixmap ( const QPixmap& pixmap )
+{
+    mImg = pixmap.toImage();
+    update();
+}
+
+void QQtWidget::setPixmap ( const QImage& image )
+{
+    mImg = image;
     update();
 }
 
@@ -28,28 +42,41 @@ void QQtWidget::paintEvent ( QPaintEvent* event )
 {
     QStylePainter p ( this );
 
-    if ( m_pic.isEmpty() )
+    if ( mImg.isNull() )
         return;
-
-    QImage image ( m_pic );
 
     switch ( m_style )
     {
     case QQTCENTER:
-        p.drawItemPixmap ( rect(), Qt::AlignCenter, QIcon ( m_pic ).pixmap ( rect().size(), QIcon::Normal, QIcon::On ) );
-        break;
+    {
+        /*
+         * 要达到居中的目标，QImage需要做的size判断很繁复，这里使用QIcon做一些中间转换的后续转换，可以很容易的达到绘制合理大小的pixmap的目的。
+         * source: pixmap file image
+         * QImage 输入、输出两侧是pixmap
+         * 借助(+QIcon) QIcon 输入、输出两侧也是pixmap
+         * dest: 所需要的、合理大小的pixmap
+         */
+        QIcon icon;
+        icon.addPixmap ( QPixmap::fromImage ( mImg ), QIcon::Normal, QIcon::On );
+        p.drawItemPixmap ( rect(), Qt::AlignCenter, icon.pixmap ( rect().size(), QIcon::Normal, QIcon::On ) );
+        //QSize mSize = mImg.rect() > rect() ? rect().size() : mImg.size();
+        //p.drawItemPixmap ( rect(), Qt::AlignCenter, QPixmap::fromImage ( mImg.scaled ( mSize, Qt::KeepAspectRatio ) ) );
+    }
+    break;
 
     case QQTTILEDWIDTH:
         p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
-                           QPixmap::fromImage ( image.copy ( rect() )
+                           /*.copy() 切出图片的左上部分使用*/
+                           QPixmap::fromImage ( mImg.copy ( rect() )
                                                 .scaledToWidth ( rect().width() )
                                               ) );
         break;
 
     case QQTZOOMWIDTH:
         p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
-                           QPixmap::fromImage ( image
-                                                .scaled ( rect().width(), image.height(), Qt::IgnoreAspectRatio )
+                           /*不.copy() 切出图片的中间部分使用*/
+                           QPixmap::fromImage ( mImg
+                                                .scaled ( rect().width(), mImg.height(), Qt::IgnoreAspectRatio )
                                               ) );
         break;
 

@@ -36,5 +36,12 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
+#促使qqt_deploy_config配置执行，没有这个变量不执行。
+APP_CONFIG_PWD = $${PWD}/AppRoot
+win32 {
+    APP_CONFIG_PWD ~=s,/,\\,g
+}
+
+#促使编译源代码，qmake pri配置里面的QMAKE_XX_LINK命令就会执行。
 system("touch main.cpp")
 include(../../src/app_base_manager.pri)
