@@ -8,6 +8,8 @@ QQtGifLabel::QQtGifLabel ( QWidget* parent ) : QQtLabel ( parent )
 
 void QQtGifLabel::setGifFile ( QString gifFile )
 {
+    m_movie->stop();
+
     m_movie->setFileName ( gifFile );
     m_movie->start();
 }

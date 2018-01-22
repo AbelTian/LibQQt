@@ -41,19 +41,19 @@ typedef struct QQTSHARED_EXPORT tagBtnIconTable
     QString pixmap[BTN_MAX];
 
     tagBtnIconTable();
-    QString pixMap(int index);
-    void setPixMap(int index, QString pix);
-    void initNormal(QString normal, QString press);
-    void initCheck(QString uncheck, QString check);
-    void initOther(QString hover, QString disable);
-    const QString& operator[](int index) const;
-    QString& operator [](int index);
+    QString pixMap ( int index );
+    void setPixMap ( int index, QString pix );
+    void initNormal ( QString normal, QString press );
+    void initCheck ( QString uncheck, QString check );
+    void initOther ( QString hover, QString disable );
+    const QString& operator[] ( int index ) const;
+    QString& operator [] ( int index );
 } TBtnIconTable;
 
 
-QQTSHARED_EXPORT void moveCenter(QWidget* w);
-
-QQTSHARED_EXPORT void moveRight(QWidget* w);
+QQTSHARED_EXPORT void moveCenter ( QWidget* w );
+QQTSHARED_EXPORT void moveRight ( QWidget* w );
+QQTSHARED_EXPORT void moveFull ( QWidget* w );
 
 
 

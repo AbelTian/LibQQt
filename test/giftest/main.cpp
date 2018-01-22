@@ -1,5 +1,7 @@
 #include "giftestdialog.h"
 #include <qqtapplication.h>
+#include "qqtcore.h"
+#include "qqtwidgets.h"
 
 int main ( int argc, char* argv[] )
 {
@@ -8,6 +10,7 @@ int main ( int argc, char* argv[] )
 
     GifTestDialog w;
     w.show();
+    moveFull ( &w );
 
     return a.exec();
 }

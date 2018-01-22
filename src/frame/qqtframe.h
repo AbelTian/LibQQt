@@ -117,6 +117,7 @@ enum
 #define CONFIG_PATH "./conf"
 #define LOG_PATH "./log"
 #define AV_PATH "./res"
+#define SKIN_PATH "./skin"
 
 #define TABLE_LIBRARY "Library"
 #define TABLE_METHOD "Method"

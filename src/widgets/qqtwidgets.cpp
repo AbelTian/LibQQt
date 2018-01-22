@@ -17,85 +17,92 @@ tagBtnIconTable::tagBtnIconTable()
     pixmap[BTN_DISABLE] = "./skin/default/bt_bt_disable.png";
 }
 
-QString tagBtnIconTable::pixMap(int index)
+QString tagBtnIconTable::pixMap ( int index )
 {
-    if (index < 0 || index + 1 > BTN_MAX)
+    if ( index < 0 || index + 1 > BTN_MAX )
         return pixmap[BTN_NORMAL];
 
     return pixmap[index];
 }
 
-void tagBtnIconTable::setPixMap(int index, QString pix)
+void tagBtnIconTable::setPixMap ( int index, QString pix )
 {
-    if (index < 0 || index + 1 > BTN_MAX)
+    if ( index < 0 || index + 1 > BTN_MAX )
         return;
 
     pixmap[index] = pix;
 }
 
-void tagBtnIconTable::initNormal(QString normal, QString press)
+void tagBtnIconTable::initNormal ( QString normal, QString press )
 {
-    if (!normal.isEmpty())
+    if ( !normal.isEmpty() )
         pixmap[BTN_NORMAL] = normal;
 
-    if (!press.isEmpty())
+    if ( !press.isEmpty() )
         pixmap[BTN_PRESS] = press;
 }
 
-void tagBtnIconTable::initCheck(QString uncheck, QString check)
+void tagBtnIconTable::initCheck ( QString uncheck, QString check )
 {
-    if (!uncheck.isEmpty())
+    if ( !uncheck.isEmpty() )
         pixmap[BTN_UNCHECK] = uncheck;
 
-    if (!check.isEmpty())
+    if ( !check.isEmpty() )
         pixmap[BTN_CHECK] = check;
 }
 
-void tagBtnIconTable::initOther(QString hover, QString disable)
+void tagBtnIconTable::initOther ( QString hover, QString disable )
 {
-    if (!hover.isEmpty())
+    if ( !hover.isEmpty() )
         pixmap[BTN_HOVER] = hover;
 
-    if (!disable.isEmpty())
+    if ( !disable.isEmpty() )
         pixmap[BTN_DISABLE] = disable;
 }
 
-QString& tagBtnIconTable::operator [](int index)
+QString& tagBtnIconTable::operator [] ( int index )
 {
-    if (index < 0 || index >= BTN_MAX)
+    if ( index < 0 || index >= BTN_MAX )
         return pixmap[0];
 
     return pixmap[index];
 }
 
-const QString& tagBtnIconTable::operator[](int index) const
+const QString& tagBtnIconTable::operator[] ( int index ) const
 {
-    if (index < 0 || index >= BTN_MAX)
+    if ( index < 0 || index >= BTN_MAX )
         return pixmap[0];
 
     return pixmap[index];
 }
 
 
-void moveCenter(QWidget* w)
+void moveCenter ( QWidget* w )
 {
     int x1 = 0, y1 = 0;
 
-    x1 = (QApplication::desktop()->availableGeometry().width()
-          - w->width()) / 2;
-    y1 = (QApplication::desktop()->availableGeometry().height()
-          - w->height()) / 2;
+    x1 = ( QApplication::desktop()->availableGeometry().width()
+           - w->width() ) / 2;
+    y1 = ( QApplication::desktop()->availableGeometry().height()
+           - w->height() ) / 2;
 
 
-    w->move(x1, y1);
+    w->move ( x1, y1 );
 
     return;
 }
 
 
-void moveRight(QWidget* w)
+void moveRight ( QWidget* w )
 {
-    w->move((QApplication::desktop()->width() - w->width()), 0);
+    w->move ( ( QApplication::desktop()->width() - w->width() ), 0 );
 }
 
 
+
+void moveFull ( QWidget* w )
+{
+    QRect rect0 = QApplication::desktop()->availableGeometry();
+    w->setGeometry ( rect0 );
+    w->move ( rect0.left(), rect0.top() );
+}

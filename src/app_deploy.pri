@@ -52,7 +52,7 @@ defineReplace(deploy_app_on_linux) {
     return ($$command)
 }
 
-defineReplace(deploy_app_for_android) {
+defineReplace(deploy_app_on_android) {
     #need QQT_BUILD_PWD
 
     command =
@@ -106,7 +106,7 @@ contains(CONFIG, deploy_app) {
     } else: contains(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$deploy_app_on_mac()
     } else: contains(QKIT_PRIVATE, ANDROID||ANDROIDX86) {
-        QMAKE_POST_LINK += $$deploy_app_on_android()
+        #QMAKE_POST_LINK += $$deploy_app_on_android()
     } else {
         QMAKE_POST_LINK += $$deploy_app_on_linux()
     }

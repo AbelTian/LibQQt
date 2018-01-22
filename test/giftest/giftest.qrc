@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>AppRoot/waiting.gif</file>
+        <file>AppRoot/yun.png</file>
+    </qresource>
+</RCC>

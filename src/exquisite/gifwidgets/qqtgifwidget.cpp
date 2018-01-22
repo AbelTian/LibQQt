@@ -11,6 +11,8 @@ QQtGifWidget::QQtGifWidget ( QWidget* parent ) : QQtWidget ( parent )
 
 void QQtGifWidget::setGifFile ( QString gifFile )
 {
+    m_movie->stop();
+
     m_movie->setFileName ( gifFile );
     m_movie->start();
     m_frameTimer->setInterval ( m_movie->speed() );
