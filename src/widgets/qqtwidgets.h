@@ -54,7 +54,13 @@ typedef struct QQTSHARED_EXPORT tagBtnIconTable
 QQTSHARED_EXPORT void moveCenter ( QWidget* w );
 QQTSHARED_EXPORT void moveRight ( QWidget* w );
 QQTSHARED_EXPORT void moveFull ( QWidget* w );
+QQTSHARED_EXPORT void moveHCenter ( QWidget* w );
+QQTSHARED_EXPORT void moveVCenter ( QWidget* w );
 
+QQTSHARED_EXPORT void moveCenter ( QWidget* w, QWidget* parent );
+QQTSHARED_EXPORT void moveFull ( QWidget* w, QWidget* parent );
+QQTSHARED_EXPORT void moveHCenter ( QWidget* w, QWidget* parent );
+QQTSHARED_EXPORT void moveVCenter ( QWidget* w, QWidget* parent );
 
 
 #endif //__QQT_WIDGETS_DEFINE_H__

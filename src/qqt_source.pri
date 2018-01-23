@@ -153,28 +153,6 @@ contains (DEFINES, __MULTIMEDIA__) {
     }
 }
 
-#pluginwatcher
-#TODO: macOS dump
-contains(DEFINES, __PLUGINWATCHER__) {
-    contains(QKIT_PRIVATE, WIN32|WIN64) {
-        contains (DEFINES, QQT_LIBRARY) {
-            DEFINES += BUILD_QDEVICEWATCHER_LIB
-        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-            DEFINES += BUILD_QDEVICEWATCHER_STATIC
-        }
-        wince*: SOURCES += $$PWD/pluginwatcher/qdevicewatcher_wince.cpp
-        else:  SOURCES += $$PWD/pluginwatcher/qdevicewatcher_win32.cpp
-    }else:contains(QKIT_PRIVATE, macOS) {
-        SOURCES += $$PWD/pluginwatcher/qdevicewatcher_mac.cpp
-    }else {
-        SOURCES += $$PWD/pluginwatcher/qdevicewatcher_linux.cpp
-    }
-    SOURCES += $$PWD/pluginwatcher/qdevicewatcher.cpp \
-                $$PWD/pluginwatcher/qqtpluginwatcher.cpp
-    HEADERS += $$PWD/pluginwatcher/qqtpluginwatcher.h \
-                $$PWD/pluginwatcher/qdevicewatcher.h \
-                $$PWD/pluginwatcher/qdevicewatcher_p.h
-}
 
 #printsupport
 #DEFINES += __PRINTSUPPORT__
@@ -429,6 +407,63 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/gifwidgets/qqtgifradiobutton.h \
             $$PWD/exquisite/gifwidgets/qqtgifprogressbar.h
     }
+
+    #mathml widget
+    #DEFINES += __MATHSUPPORT__
+    contains (DEFINES, __MATHSUPPORT__) {
+
+        contains(QKIT_PRIVATE, WIN32|WIN64) {
+            #mathml
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += QT_QTMMLWIDGET_LIBRARY
+            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+                DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
+            }
+        }
+        SOURCES += $$PWD/exquisite/mathml/qtmmlwidget.cpp
+        HEADERS += $$PWD/exquisite/mathml/qtmmlwidget.h
+    }
+
+    #customplot
+    #DEFINES += __CUSTOMPLOT__
+    contains (DEFINES, __CUSTOMPLOT__) {
+        #message (qcustomplot is used in $${TARGET})
+        win32 {
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
+            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+                #build static library - customplot
+                DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
+            }
+        }
+        SOURCES += $$PWD/exquisite/customplot/qcpdocumentobject.cpp \
+                    $$PWD/exquisite/customplot/qcustomplot.cpp
+        HEADERS += $$PWD/exquisite/customplot/qcpdocumentobject.h \
+                    $$PWD/exquisite/customplot/qcustomplot.h
+    }
+
+    #pluginwatcher
+    #TODO: macOS dump
+    contains(DEFINES, __PLUGINWATCHER__) {
+        contains(QKIT_PRIVATE, WIN32|WIN64) {
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += BUILD_QDEVICEWATCHER_LIB
+            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+                DEFINES += BUILD_QDEVICEWATCHER_STATIC
+            }
+            wince*: SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher_wince.cpp
+            else:  SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher_win32.cpp
+        }else:contains(QKIT_PRIVATE, macOS) {
+            SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher_mac.cpp
+        }else {
+            SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher_linux.cpp
+        }
+        SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher.cpp \
+                    $$PWD/exquisite/pluginwatcher/qqtpluginwatcher.cpp
+        HEADERS += $$PWD/exquisite/pluginwatcher/qqtpluginwatcher.h \
+                    $$PWD/exquisite/pluginwatcher/qdevicewatcher.h \
+                    $$PWD/exquisite/pluginwatcher/qdevicewatcher_p.h
+    }
 }
 
 contains(DEFINES, __QQTCHARTS__) {
@@ -440,22 +475,5 @@ contains(DEFINES, __QQTCHARTS__) {
         $$PWD/charts/qqtchartview.h
 }
 
-#customplot
-#DEFINES += __CUSTOMPLOT__
-contains (DEFINES, __CUSTOMPLOT__) {
-    #message (qcustomplot is used in $${TARGET})
-    win32 {
-        contains (DEFINES, QQT_LIBRARY) {
-            DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
-        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-            #build static library - customplot
-            DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
-        }
-    }
-    SOURCES += $$PWD/customplot/qcpdocumentobject.cpp \
-                $$PWD/customplot/qcustomplot.cpp
-    HEADERS += $$PWD/customplot/qcpdocumentobject.h \
-                $$PWD/customplot/qcustomplot.h
-}
 
 include ($$PWD/qqt_3rdparty.pri)

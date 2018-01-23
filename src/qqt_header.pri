@@ -251,7 +251,6 @@ contains (DEFINES, __WEBSOCKETSUPPORT__) {
 }
 
 ##################Charts Module###############################
-#Qt Charts has a problem, you can't mod tip label's style.
 #if you use QQtCharts, open this annotation
 DEFINES += __QQTCHARTS__
 lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__
@@ -261,7 +260,7 @@ contains(DEFINES, __QQTCHARTS__) {
     QT += charts
 }
 #if you use qcustomplot, open this annotation
-#qcustomplot use QPrinter to export pdf file, QChart haven't use it, but compiler ok.
+#qcustomplot use QPrinter to export pdf file, QChart haven't use it, I fix it, now compiler ok.
 #in ios qcustomplot can't call savePdf now, no result but a log no printer error.
 DEFINES += __CUSTOMPLOT__
 
@@ -301,27 +300,29 @@ win32 {
 ##################################################################
 defineReplace(qqt_header){
     path = $$1
+    !isEmpty(2) : error("qqt_header(path) requires one arguments.")
     isEmpty(1) : error("qqt_header(path) requires one arguments.")
     command += $${path}
     command += $${path}/core
-    command += $${path}/customplot
     command += $${path}/frame
     command += $${path}/frame/dmmu
-    command += $${path}/gui
-    command += $${path}/multimedia
     command += $${path}/network
     command += $${path}/network/qextserialport
     command += $${path}/network/soap
-    command += $${path}/pluginwatcher
-    command += $${path}/printsupport
-    command += $${path}/sql
+    command += $${path}/gui
     command += $${path}/widgets
     command += $${path}/charts
+    command += $${path}/multimedia
+    command += $${path}/sql
+    command += $${path}/printsupport
 
     #exquisite widget
     command += $${path}/exquisite
     command += $${path}/exquisite/svgwidgets
     command += $${path}/exquisite/gifwidgets
+    command += $${path}/exquisite/mathml
+    command += $${path}/exquisite/customplot
+    command += $${path}/exquisite/pluginwatcher
 
     ##qr code library
     command += $${path}/exquisite/qrcode/qrencode
@@ -336,11 +337,12 @@ defineReplace(qqt_header){
     }
 
     ##gumbo library
-    command += $${path}/exquisite/gumbo/parser/src
     command += $${path}/exquisite/gumbo/query/src
+    command += $${path}/exquisite/gumbo/parser/src
     win32{
         command += $${path}/exquisite/gumbo/parser/visualc/include
     }
+
     return ($$command)
 }
 

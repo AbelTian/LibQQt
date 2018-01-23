@@ -5,11 +5,14 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
+/*
+ * Qt Charts has a problem, you can't mod tip label's style.
+*/
 class QQTSHARED_EXPORT QQtChart : public QWidget
 {
     Q_OBJECT
 public:
-    explicit QQtChart(QWidget* parent = nullptr);
+    explicit QQtChart ( QWidget* parent = nullptr );
 
 signals:
 

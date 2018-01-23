@@ -1,7 +1,9 @@
 #include "giftestdialog.h"
 #include "ui_giftestdialog.h"
 
-#if defined (__ANDROID__) || defined (__ANDROIDX86__)
+#if defined (__ANDROIDX86__)
+#define res(file) QString("%1/%2").arg("assets:").arg(file)
+#elif defined (__ANDROID__)
 #define res(file) QString("%1/%2").arg("://AppRoot").arg(file)
 #else
 #define res(file) QString("%1/%2").arg(".").arg(file)

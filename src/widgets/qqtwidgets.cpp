@@ -102,7 +102,92 @@ void moveRight ( QWidget* w )
 
 void moveFull ( QWidget* w )
 {
-    QRect rect0 = QApplication::desktop()->availableGeometry();
-    w->setGeometry ( rect0 );
-    w->move ( rect0.left(), rect0.top() );
+    w->setGeometry ( QApplication::desktop()->availableGeometry() );
+    w->move ( QApplication::desktop()->availableGeometry().left(),
+              QApplication::desktop()->availableGeometry().top() );
+}
+
+void moveHCenter ( QWidget* w )
+{
+    int x1 = 0, y1 = 0;
+
+    x1 = ( QApplication::desktop()->availableGeometry().width()
+           - w->width() ) / 2;
+    y1 = w->geometry().top();
+
+    w->move ( x1, y1 );
+}
+
+void moveVCenter ( QWidget* w )
+{
+    int x1 = 0, y1 = 0;
+
+    x1 = w->geometry().left();
+    y1 = ( QApplication::desktop()->availableGeometry().height()
+           - w->height() ) / 2;
+
+    w->move ( x1, y1 );
+
+    return;
+}
+
+void moveCenter ( QWidget* w, QWidget* parent )
+{
+    if ( !parent )
+        parent = QApplication::desktop();
+
+    int x1 = 0, y1 = 0;
+
+    x1 = ( parent->geometry().width() - w->width() ) / 2;
+    y1 = ( parent->geometry().height() - w->height() ) / 2;
+
+    w->move ( x1, y1 );
+
+    return;
+}
+
+void moveFull ( QWidget* w, QWidget* parent )
+{
+    if ( !parent )
+        parent = QApplication::desktop();
+
+    int x1 = 0, y1 = 0;
+
+    x1 = parent->geometry().left();
+    y1 = parent->geometry().top();
+
+    w->setGeometry ( parent->geometry() );
+    w->move ( x1, y1 );
+
+    return;
+}
+
+void moveHCenter ( QWidget* w, QWidget* parent )
+{
+    if ( !parent )
+        parent = QApplication::desktop();
+
+    int x1 = 0, y1 = 0;
+
+    x1 = ( parent->geometry().width() - w->width() ) / 2;
+    y1 = w->geometry().top();
+
+    w->move ( x1, y1 );
+
+    return;
+}
+
+void moveVCenter ( QWidget* w, QWidget* parent )
+{
+    if ( !parent )
+        parent = QApplication::desktop();
+
+    int x1 = 0, y1 = 0;
+
+    x1 = w->geometry().left();
+    y1 = ( parent->geometry().height() - w->height() ) / 2;
+
+    w->move ( x1, y1 );
+
+    return;
 }
