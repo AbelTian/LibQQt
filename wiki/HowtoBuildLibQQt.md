@@ -44,3 +44,7 @@ MLMA技术会制作一套pri，能够自动生成一些lib_*.pri和app_*.pri，�
 在User新开发的App当中使用QQt，不需要拷贝pri，只要include app_configure.pri就可以了，如果有需要，还可以include app_deploy.pri完成app发布工作。
 
 另外我再单独写一篇文章介绍Multi Link技术，说说这个技术的特点和包含有哪些功能丰富的pri。 
+
+#注释  
+
+链接方法在v2.1.6就更新了，细节请参照博客。（参照首页链接）
