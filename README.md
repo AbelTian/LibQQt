@@ -72,5 +72,5 @@ QQ: 2657635903
 
 ![logo](screenshot/logo2.png "Logo")  ![logo](screenshot/logo2_zh_CN.png "Logo zh_CN")   
 
-LibQQt使用权，一份24万，酌情收取。     
+LibQQt使用权不免费，一份24万，酌情收取。     
 
