@@ -1,7 +1,6 @@
 
 # QQt Foundation Class  
 
-&emsp;&emsp; 
 LibQQt为基于Qt开发的App提供中间问题处理层，适配桌面、嵌入式以及Android、IOS的开发。
 LibQQt为用户自动生成Library SDK，主动帮助用户发布App和资源文件。
 2018年1月，LibQQt代码变更数量已达30万，主要面向初、中、高级软件相关专业、有一定App开发经验的工程师。
@@ -68,9 +67,8 @@ QQ: 2657635903
 
 # 项目标识  
 
-油漆字体  
-
 ![logo](screenshot/logo2.png "Logo")  ![logo](screenshot/logo2_zh_CN.png "Logo zh_CN")   
 
-LibQQt使用权不免费，一份24万，酌情收取。     
+Logo上为油漆字体。  
+LibQQt的使用权不免费，一份24万，酌情收取。     
 
