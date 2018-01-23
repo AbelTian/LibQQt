@@ -119,6 +119,15 @@ enum
 #define AV_PATH "./res"
 #define SKIN_PATH "./skin"
 
+#if defined (__ANDROIDX86__)
+#define res(file) QString("%1/%2").arg("assets:").arg(file)
+#elif defined (__ANDROID__)
+#define res(file) QString("%1/%2").arg(":/").arg(file)
+#else
+#define res(file) QString("%1/%2").arg(SKIN_PATH).arg(file)
+#endif
+
+
 #define TABLE_LIBRARY "Library"
 #define TABLE_METHOD "Method"
 #define TABLE_STAGE "Stage"

@@ -82,8 +82,8 @@ can_install: unix {
 #-------------------------------------------------
 ##project environ print
 #-------------------------------------------------
-#default
-message ($${TARGET} config $${CONFIG})
-message ($${TARGET} define $${DEFINES})
+#default ignore
+#message ($${TARGET} config $${CONFIG})
+#message ($${TARGET} define $${DEFINES})
 
 

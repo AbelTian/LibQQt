@@ -8,6 +8,10 @@
 #include <QTimer>
 #include <QImage>
 
+/*
+ * QSS美化，和QQtWidget图片背景不能共存
+ * QSS部分影响QQtWidget，比如Size等
+*/
 class QQTSHARED_EXPORT QQtWidget : public QWidget
 {
     Q_OBJECT

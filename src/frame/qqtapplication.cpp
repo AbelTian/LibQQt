@@ -208,6 +208,7 @@ void QQtApplication::setTextFont ( QString fontfile, int fontsize )
     pline() << "font file:" << fontfile;
     pline() << "font id:" << fontID;
     pline() << "font families:" << QFontDatabase::applicationFontFamilies ( fontID );
+    //如果字体不对，这个地方会崩溃，那么我要加处理吗？
     QString ziti = QFontDatabase::applicationFontFamilies ( fontID ).at ( 0 );
     pline() << "font name:" << ziti;
 
