@@ -124,7 +124,7 @@ enum
 #elif defined (__ANDROID__)
 #define res(file) QString("%1/%2").arg(":/").arg(file)
 #else
-#define res(file) QString("%1/%2").arg(SKIN_PATH).arg(file)
+#define res(file) QDir().relativeFilePath(QString("%1/%2").arg(SKIN_PATH).arg(file))
 #endif
 
 

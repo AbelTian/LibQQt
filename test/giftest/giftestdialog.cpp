@@ -29,7 +29,10 @@ GifTestDialog::GifTestDialog ( QWidget* parent ) :
 
     //使用了res函数以后 代码得到了极大简化
     pline() << res ( "waiting.gif" );
-    ui->labelGif->setGifFile ( res ( "waiting.gif" ) );
+    pline() << res ( "../waiting.gif" );
+    pline() << QDir ( "." ).relativeFilePath ( "skin/yun.png" );
+    pline() << QDir ( res ( "../waiting.gif" ) ).absolutePath();
+    ui->labelGif->setGifFile (  res ( "waiting.gif" ) );
     ui->widgetGif->setGifFile ( res ( "waiting.gif" ) );
     ui->widgetQQt->setPixmap ( res ( "yun.png" ) );
 

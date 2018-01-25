@@ -10,7 +10,7 @@ int main ( int argc, char* argv[] )
 
     GifTestDialog w;
     w.show();
-    moveFull ( &w );
+    //moveFull ( &w );
 
     return a.exec();
 }
