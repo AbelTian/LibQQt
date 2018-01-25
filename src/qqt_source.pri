@@ -212,23 +212,29 @@ FORMS += \
 #network
 SOURCES += \
     $$PWD/network/qqtprotocol.cpp \
-    $$PWD/network/qqtudpprotocol.cpp \
     $$PWD/network/qqtnetwork.cpp
 HEADERS += \
     $$PWD/network/qqtmessage.h \
     $$PWD/network/qqtprotocol.h \
-    $$PWD/network/qqtudpprotocol.h \
     $$PWD/network/qqtnetwork.h
 
-#tcpsocket udpsocket
+#tcpsocket
 SOURCES += \
-    $$PWD/network/qqtsocketudpclient.cpp \
     $$PWD/network/qqtsockettcpclient.cpp \
     $$PWD/network/qqtsockettcpserver.cpp
 HEADERS += \
-    $$PWD/network/qqtsocketudpclient.h \
     $$PWD/network/qqtsockettcpclient.h \
     $$PWD/network/qqtsockettcpserver.h
+
+#udpsocket
+!contains(QKIT_PRIVATE, MIPS32||ARM32) {
+    SOURCES += \
+        $$PWD/network/qqtudpprotocol.cpp \
+        $$PWD/network/qqtsocketudpclient.cpp
+    HEADERS += \
+        $$PWD/network/qqtudpprotocol.h \
+        $$PWD/network/qqtsocketudpclient.h
+}
 
 #serialport
 SOURCES += \
