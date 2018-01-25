@@ -44,7 +44,7 @@ defineReplace(get_version_string_4) {
 QQT_MAJOR_VERSION = 2
 QQT_MINOR_VERSION = 1
 QQT_PATCH_VERSION = 7
-QQT_BUILD_VERSION = 0
+QQT_BUILD_VERSION = 1
 
 QQT_VERSION1 = $$get_version_string_1( $${QQT_MAJOR_VERSION} )
 QQT_VERSION2 = $$get_version_string_2( $${QQT_MAJOR_VERSION}, $${QQT_MINOR_VERSION} )
