@@ -67,8 +67,7 @@ QQ: 2657635903
 
 # 项目标识  
 
-![logo](screenshot/logo2.png "Logo")  ![logo](screenshot/logo2_zh_CN.png "Logo zh_CN")   
+![logo](screenshot/logo.png "Logo")  
 
-Logo上为油漆效果。  
-LibQQt的使用权不免费，一份24万，酌情收取。     
+LibQQt使用权不免费，一份使用权24万，酌情收取。       
 
