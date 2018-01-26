@@ -67,7 +67,7 @@ QQ: 2657635903
 
 # 项目标识  
 
-![logo](screenshot/logo.png "Logo")  
+![logo](screenshot/logo.png "Logo")    
 
-LibQQt使用权不免费，一份使用权24万，酌情收取。       
+LibQQt使用权不免费，一份使用权24万。       
 
