@@ -29,12 +29,7 @@ SOURCES += \
     qqtnetworkmessage.cpp \
     qqtserialmessage.cpp \
     qqtuserserialprotocol.cpp \
-    qqtsubprotocoltest.cpp \
-    cedianudpmessage.cpp \
-    cedianudpprotocol.cpp \
-    cedianudpserver.cpp \
-    kongzhiqiudpmessage.cpp \
-    kongzhiqiudpprotocol.cpp
+    qqtsubprotocoltest.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -43,12 +38,7 @@ HEADERS += \
     qqtnetworkmessage.h \
     qqtserialmessage.h \
     qqtuserserialprotocol.h \
-    qqtsubprotocoltest.h \
-    cedianudpmessage.h \
-    cedianudpprotocol.h \
-    cedianudpserver.h \
-    kongzhiqiudpmessage.h \
-    kongzhiqiudpprotocol.h
+    qqtsubprotocoltest.h
 
 FORMS += \
         mainwindow.ui

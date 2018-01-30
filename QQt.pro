@@ -22,7 +22,11 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/exquisite
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
-#SUBDIRS += examples/qqtnetworkexample
+#
+SUBDIRS += examples/qqtnetworkexample
+#udp 嵌入式linux，Qt编译了udp后支持
+#
+SUBDIRS += examples/qqtudpexample
 #SUBDIRS += examples/qqtchartexample
 #
 #
