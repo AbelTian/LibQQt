@@ -37,10 +37,6 @@ contains(CONFIG, administrator){
 include($${PWD}/app_link_qqt_library.pri)
 
 ################################################################
-##link Other library
-################################################################
-
-################################################################
 ##deploy app for install update deploy
 ##config defination
 ##依赖：DESTDIR APP_DEPLOY_ROOT
