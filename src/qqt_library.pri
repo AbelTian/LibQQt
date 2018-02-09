@@ -125,6 +125,10 @@ contains(CONFIG, link_from_sdk) {
     }
 }
 
+contains(ANDROID_TARGET_ARCH, armeabi-v7a) {
+    ANDROID_EXTRA_LIBS = \
+        $${QQT_LIB_PWD}/lib$${MODULE_NAME}.so
+}
+
 LIBS += $$link_qqt_library()
 message (Link QQt from: $${QQT_LIB_PWD})
-

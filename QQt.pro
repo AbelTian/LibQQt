@@ -46,8 +46,9 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest
 #SUBDIRS += test/qqtdicttest2
+#SUBDIRS += test/consoletest
 #
-SUBDIRS += test/consoletest
+SUBDIRS += test/voicetest
 
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
 #    SUBDIRS += test/cmdwidget
