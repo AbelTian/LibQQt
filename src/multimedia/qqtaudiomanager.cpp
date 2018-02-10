@@ -41,6 +41,13 @@ void QQtAudioManager::startInput()
 {
     stopInput();
     mInputManager = new QAudioInput ( mInputDeviceInfo, mInputAudioFormat, this );
+    if ( QAudio::NoError != mInputManager->error() )
+    {
+        pline() << mInputDeviceInfo.deviceName() << mInputAudioFormat.sampleSize() << mInputAudioFormat.sampleRate() <<
+                mInputAudioFormat.channelCount() << "open failed, errcode:" << mInputManager->error();
+        delete mInputManager;
+        return;
+    }
     mInputDevice = mInputManager->start();
     connect ( mInputDevice, SIGNAL ( readyRead() ), this, SIGNAL ( readyRead() ) );
 }
@@ -76,6 +83,13 @@ void QQtAudioManager::startOutput()
 {
     stopOutput();
     mOutputManager = new QAudioOutput ( mOutputDeviceInfo, mOutputAudioFormat, this );
+    if ( QAudio::NoError != mOutputManager->error() )
+    {
+        pline() << mOutputDeviceInfo.deviceName() << mOutputAudioFormat.sampleSize() << mOutputAudioFormat.sampleRate() <<
+                mOutputAudioFormat.channelCount() << "open failed, errcode:" << mOutputManager->error();
+        delete mOutputManager;
+        return;
+    }
     mOutputDevice = mOutputManager->start();
 }
 

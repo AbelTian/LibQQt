@@ -9,7 +9,7 @@ int main ( int argc, char* argv[] )
 
     MainWindow w;
     w.show();
-    moveFull ( &w );
+    w.showMaximized();
 
     return a.exec();
 }
