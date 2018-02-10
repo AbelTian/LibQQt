@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>917</width>
-    <height>587</height>
+    <width>1198</width>
+    <height>591</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -89,6 +89,19 @@
     </property>
     <property name="text">
      <string>stop (optional)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>40</y>
+      <width>291</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>start take voice and play (default device)</string>
     </property>
    </widget>
    <widget class="QWidget" name="">

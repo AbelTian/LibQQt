@@ -228,10 +228,14 @@ void MainWindow::currentOutputRowChanged ( QModelIndex cur, QModelIndex )
 void MainWindow::on_pushButton_clicked()
 {
     /*这里是自定义输入、输出设备*/
-    QString name = ui->inputListWidget->currentIndex().data().toString();
+    QString name = QQtAudioManager::defaultInputDevice().deviceName();
+    if ( ui->inputListWidget->currentIndex().isValid() )
+        name = ui->inputListWidget->currentIndex().data().toString();
     QAudioDeviceInfo dev = findInputAudioDeviceInfoByName ( name );
 
-    name = ui->outputListWidget->currentIndex().data().toString();
+    name = QQtAudioManager::defaultOutputDevice().deviceName();
+    if ( ui->outputListWidget->currentIndex().isValid() )
+        name = ui->outputListWidget->currentIndex().data().toString();
     QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
 
     /*使用默认输入、输出设备*/
@@ -249,17 +253,42 @@ void MainWindow::on_pushButton_clicked()
     //如果格式不同，在mac电脑上本地输入输出设备是可以使用的，但是对于连接的语音蓝牙话筒，却是不可以使用的，原因未知。
     //格式相同的时候，实在是太好用啦。
     //这个建议默认就相同，但是，在QQtAudioManager当中，并没有直接将其相等处理，如果用户在readyRead槽函数里，可以更改采样率进行某些特殊处理。一般不需要差异处理的，相等就行了。
-    manager.inputAudioFormat() = manager.outputDeviceInfo().preferredFormat();
-    manager.outputAudioFormat() = manager.outputDeviceInfo().preferredFormat();
+//    int inBit = ui->inBit->currentIndex().data().toInt();
+//    int inChn = ui->inChn->currentIndex().data().toInt();
+//    int inRate = ui->intRate->currentIndex().data().toInt();
+//    QAudioFormat inFmt;
+//    inFmt.setChannelCount ( inChn );
+//    inFmt.setSampleSize ( inBit );
+//    inFmt.setSampleRate ( inRate );
+//    inFmt.setCodec ( "audio/pcm" );
+//    manager.inputAudioFormat() = inFmt;
+
+    QAudioFormat outFmt = manager.outputDeviceInfo().preferredFormat();
+
+    int outBit = outFmt.sampleSize(), outChn = outFmt.channelCount(), outRate = outFmt.sampleRate();
+    if ( ui->outBit->currentIndex().isValid() )
+        outBit = ui->outBit->currentIndex().data().toInt();
+    if ( ui->outChn->currentIndex().isValid() )
+        outChn = ui->outChn->currentIndex().data().toInt();
+    if ( ui->outRate->currentIndex().isValid() )
+        outRate = ui->outRate->currentIndex().data().toInt();
+
+    outFmt.setChannelCount ( outChn );
+    outFmt.setSampleSize ( outBit );
+    outFmt.setSampleRate ( outRate );
+    outFmt.setCodec ( "audio/pcm" );
+
+    manager.inputAudioFormat() = outFmt;
+    manager.outputAudioFormat() = outFmt;
 
     pline() << "in prefer" << dev.preferredFormat().channelCount() << dev.preferredFormat().sampleRate() <<
             dev.preferredFormat().sampleSize();
 
-    pline() << "out prefer" << devOut.preferredFormat().channelCount() << devOut.preferredFormat().sampleRate() <<
-            devOut.preferredFormat().sampleSize();
-
     pline() << "in" << manager.inputAudioFormat().channelCount() << manager.inputAudioFormat().sampleRate() <<
             manager.inputAudioFormat().sampleSize();
+
+    pline() << "out prefer" << devOut.preferredFormat().channelCount() << devOut.preferredFormat().sampleRate() <<
+            devOut.preferredFormat().sampleSize();
 
     pline() << "out" << manager.outputAudioFormat().channelCount() << manager.outputAudioFormat().sampleRate() <<
             manager.outputAudioFormat().sampleSize();
@@ -315,4 +344,13 @@ void MainWindow::on_outHS_valueChanged ( int value )
     qreal vol = qreal ( value ) / 100;
     pline() << "输出音量" << vol ;
     manager.outputManager()->setVolume ( vol );
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    manager.inputAudioFormat() = QQtAudioManager::defaultOutputDevice().preferredFormat();
+    manager.outputAudioFormat() = QQtAudioManager::defaultOutputDevice().preferredFormat();
+
+    manager.startDefaultInput();
+    manager.startDefaultOutput();
 }

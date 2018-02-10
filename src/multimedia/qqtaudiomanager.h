@@ -31,6 +31,8 @@
  * 然后，读写设备即可。
  * manager把读写声音设备当做读写一个设备处理。支持本地声卡，蓝牙连接的声卡，hdmi接口上的声卡，其他接口上的声卡。只要系统显示的，一般都支持。
  *
+ * *******使用QQtAudioManager，用户关注输入、输出设备的切换，和输入、输出格式的改变即可，其他的不必关注。*******
+ *
  * 原理：
  * 声音三要素： 采样率， 量化精度， 声道
  * 通常我们用一位二进制表示两种状态， 如1表示高电平， 0表示低电平。在音频领域里，如只用一位二进制表示声音，那么只能表示发声和不发声两种状态（蜂鸣器）。
@@ -58,6 +60,10 @@ public:
     static QAudioDeviceInfo defaultOutputDevice();
 
     /*一般建议设置一个AudioFormat，然后这个format和设置的相等。default为preffered格式*/
+    //这里保证输入、输出使用格式相等 或者 不同
+    //如果格式不同，在mac电脑上本地输入输出设备是可以使用的，但是对于连接的语音蓝牙话筒，却是不可以使用的，原因未知。
+    //格式相同的时候，实在是太好用啦。
+    //这个建议默认就相同，但是，在QQtAudioManager当中，并没有直接将其相等处理，如果用户在readyRead槽函数里，可以更改采样率进行某些特殊处理。一般不需要差异处理的，相等就行了。
     QAudioFormat& inputAudioFormat ( void );
     QAudioFormat& outputAudioFormat ( void );
 
@@ -79,6 +85,14 @@ public:
     QAudioOutput* outputManager();
     QIODevice* outputDevice();
 
+    //这是个方便
+    //如果使用这个函数，建议：设置公共的AudioFormat，比如输出的format，或者输入、输出都支持的Format。
+    //这个Format不会跟随默认设备的改变而改变，有初始值，但是用户在使用过程中，有必要关注和更改。
+    //prefer和nearest并不是default，所以还是需要用户设置。
+    QAudioFormat& defaultAudioFormat();
+    void startDefaultInput();
+    void startDefaultOutput();
+
 signals:
     /*输入音频数据准备就绪，readAll即可读取。*/
     void readyRead();
@@ -96,10 +110,10 @@ private:
     /*操作输入、输出设备的工具*/
     QAudioInput* mInputManager;
     QAudioOutput* mOutputManager;
+
     /*读写输入、输出设备的流控制器，QIODevice*/
     QIODevice* mInputDevice;
     QIODevice* mOutputDevice;
-
 };
 
 #endif // QQTAUDIOMANAGER_H

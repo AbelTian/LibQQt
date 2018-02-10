@@ -2,11 +2,11 @@
 
 QQtAudioManager::QQtAudioManager ( QObject* parent ) : QObject ( parent )
 {
-    mInputAudioFormat = QAudioDeviceInfo::defaultInputDevice().preferredFormat();
-    mOutputAudioFormat = QAudioDeviceInfo::defaultOutputDevice().preferredFormat();
+    mInputAudioFormat = defaultInputDevice().preferredFormat();
+    mOutputAudioFormat = defaultOutputDevice().preferredFormat();
 
-    mInputDeviceInfo = QAudioDeviceInfo::defaultInputDevice();
-    mOutputDeviceInfo = QAudioDeviceInfo::defaultOutputDevice();
+    mInputDeviceInfo = defaultInputDevice();
+    mOutputDeviceInfo = defaultOutputDevice();
 
     mInputDevice = NULL;
     mOutputDevice = NULL;
@@ -47,8 +47,10 @@ void QQtAudioManager::startInput()
 
 void QQtAudioManager::stopInput()
 {
+    //输入设备还开着，那么输入流设备一定开着。这是QQtAudioManager的功能设定。
     if ( mInputDevice )
     {
+        //关闭QAudioInput，等于关闭了拾音器。
         mInputManager->stop();
         mInputManager->deleteLater();
         mInputManager = NULL;
@@ -96,3 +98,34 @@ void QQtAudioManager::writeBytes ( QByteArray& bytes )
 QAudioOutput* QQtAudioManager::outputManager() { return mOutputManager; }
 
 QIODevice* QQtAudioManager::outputDevice() { return mOutputDevice; }
+
+/*用户只需要处理音频输入、输出设备和每个的格式，QAudioInput、QAudioOutput、QIODevice(in + out)，都被QQtAudioManager处理了。*/
+void QQtAudioManager::startDefaultInput()
+{
+    /*使用默认输入设备*/
+    mInputDeviceInfo = QQtAudioManager::defaultInputDevice();
+
+//    pline() << "in prefer" << mInputDeviceInfo.preferredFormat().channelCount() <<
+//            mInputDeviceInfo.preferredFormat().sampleRate() <<
+//            mInputDeviceInfo.preferredFormat().sampleSize();
+
+//    pline() << "in" << mInputAudioFormat.channelCount() << mInputAudioFormat.sampleRate() <<
+//            mInputAudioFormat.sampleSize();
+
+    startInput();
+}
+
+void QQtAudioManager::startDefaultOutput()
+{
+    /*使用默认输出设备*/
+    mOutputDeviceInfo = QQtAudioManager::defaultOutputDevice();
+
+//    pline() << "out prefer" << mOutputDeviceInfo.preferredFormat().channelCount() <<
+//            mOutputDeviceInfo.preferredFormat().sampleRate() <<
+//            mOutputDeviceInfo.preferredFormat().sampleSize();
+
+//    pline() << "out" << mOutputAudioFormat.channelCount() << mOutputAudioFormat.sampleRate() <<
+//            mOutputAudioFormat.sampleSize();
+
+    startOutput();
+}

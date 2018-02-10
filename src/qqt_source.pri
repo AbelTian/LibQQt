@@ -12,10 +12,8 @@
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
 #-------------------------------------------------
-SOURCES = \
-    $$PWD/multimedia/qqtaudiomanager.cpp
-HEADERS = \
-    $$PWD/multimedia/qqtaudiomanager.h
+SOURCES =
+HEADERS =
 
 #root dir
 HEADERS += $$PWD/qqt.h \
@@ -146,13 +144,21 @@ contains(QKIT_PRIVATE, iOS||iOSSimulator) {
 
 
 #multimedia
-#arm mips
-#TODO: +wince +android +ios +macOS +win +linux
+#audio success.
+#video arm mips
+#TODO: video +wince +android +ios +macOS +win +linux
 contains (DEFINES, __MULTIMEDIA__) {
+    #mplayer
     contains (DEFINES, __PROCESSMODULE__){
         SOURCES += $$PWD/multimedia/qqtmplayer.cpp
         HEADERS += $$PWD/multimedia/qqtmplayer.h
     }
+
+    #audio
+    SOURCES += \
+        $$PWD/multimedia/qqtaudiomanager.cpp
+    HEADERS += \
+        $$PWD/multimedia/qqtaudiomanager.h
 }
 
 
