@@ -50,13 +50,15 @@ void QQtAudioManager::stopInput()
     //输入设备还开着，那么输入流设备一定开着。这是QQtAudioManager的功能设定。
     if ( mInputDevice )
     {
+        disconnect ( mInputDevice, SIGNAL ( readyRead() ), this, SIGNAL ( readyRead() ) );
+        mInputDevice = NULL;
+
         //关闭QAudioInput，等于关闭了拾音器。
+        //这两个函数有一个（应该是deleteLater，迅速执行了）会释放mInputDevice，导致野指针，在android设备上会崩溃。此处注意。把disconnect函数提前。
+        //注释：mInputDevice是mInputManager的读写口，由mInputManager内部产生和释放。
         mInputManager->stop();
         mInputManager->deleteLater();
         mInputManager = NULL;
-
-        disconnect ( mInputDevice, SIGNAL ( readyRead() ), this, SIGNAL ( readyRead() ) );
-        mInputDevice = NULL;
     }
 }
 
@@ -81,11 +83,12 @@ void QQtAudioManager::stopOutput()
 {
     if ( mOutputDevice )
     {
+        mOutputDevice = NULL;
+
         mOutputManager->stop();
         mOutputManager->deleteLater();
         mOutputManager = NULL;
 
-        mOutputDevice = NULL;
     }
 }
 
