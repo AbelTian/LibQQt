@@ -159,6 +159,9 @@ contains (DEFINES, __MULTIMEDIA__) {
         $$PWD/multimedia/qqtaudiomanager.cpp
     HEADERS += \
         $$PWD/multimedia/qqtaudiomanager.h
+
+    #audio effect
+    #using QSound (QSoundEffect optional)
 }
 
 

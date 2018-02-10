@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <qqtaudiomanager.h>
 #include <qqtcore.h>
+#include <qsound.h>
+#include <qsoundeffect.h>
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -9,9 +11,27 @@ MainWindow::MainWindow ( QWidget* parent ) :
 {
     ui->setupUi ( this );
 
+    pline() << QSoundEffect::supportedMimeTypes();
+
+    QSoundEffect e;
+    e.setLoopCount ( 1 );
+    e.setVolume ( 0.9f );
+    e.setMuted ( false );
+
+    //不响
+    QUrl u;
+    u.setUrl ( "http://xmdx.sc.chinaz.com/Files/DownLoad/sound1/201802/9733.wav" );
+    e.setSource ( u );
+    e.play();
+
+    //不响
+    e.setSource ( QUrl::fromLocalFile ( "://9733" ) );
+    e.play();
+
+    //响
+    QSound::play ( "://9733" );
+
     connect ( &manager, SIGNAL ( readyRead() ), this, SLOT ( readyRead() ) );
-
-
 
     QList<QAudioDeviceInfo> ladInfo;
     ladInfo = QAudioDeviceInfo::availableDevices ( QAudio::AudioInput );

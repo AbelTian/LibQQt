@@ -49,3 +49,6 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
 
     ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
 }
+
+RESOURCES += \
+    voicetest.qrc
