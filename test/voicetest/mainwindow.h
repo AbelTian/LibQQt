@@ -28,6 +28,10 @@ private slots:
     void readyRead();
     void on_pushButton_3_clicked();
 
+    void on_inHS_valueChanged ( int value );
+
+    void on_outHS_valueChanged ( int value );
+
 private:
     Ui::MainWindow* ui;
     QQtAudioManager manager;

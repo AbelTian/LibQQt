@@ -58,7 +58,7 @@ void QQtAudioManager::stopInput()
     }
 }
 
-QByteArray QQtAudioManager::readStreamBytes()
+QByteArray QQtAudioManager::readBytes()
 {
     if ( mInputDevice )
         return mInputDevice->readAll();
@@ -87,7 +87,7 @@ void QQtAudioManager::stopOutput()
     }
 }
 
-void QQtAudioManager::writeStreamBytes ( QByteArray& bytes )
+void QQtAudioManager::writeBytes ( QByteArray& bytes )
 {
     if ( mOutputDevice )
         mOutputDevice->write ( bytes );

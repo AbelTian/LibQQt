@@ -12,9 +12,24 @@
 #include <QAudioInputSelectorControl>
 #include <QAudioOutputSelectorControl>
 
+
+#include <qqtcore.h>
+#include <qqt-local.h>
+
+
 /**
  * @brief The QQtAudioManager class
- * 为用户提供连接声卡的通道，一个connection包括：输入选择，输出选择，输入信号，输出函数。
+ * 为用户提供连接声卡的通道，一个Manager包括：输入选择，输出选择，输入信号，输出函数。
+ *
+ * 处理声音三要点
+ * 声音的格式 ，也就是声音三要素，输入一个、输出一个，manager对其分开管理，但是建议用户合并为一个置等。通道数、采样位宽、采样率
+ * 声音设备 ，输入一个、输出一个，manager管理start\stop等接口，manager内部的inputManager和outputManager负责其他接口。
+ * 声音设备的读写出入口 ，manager管理，包括可读信号和写入函数。
+ *
+ * 先确定输入、输出设备，
+ * Qt提供建议格式，一般建议用户选择使用输出设备的建议格式，或者使用两个公共的格式。
+ * 然后，读写设备即可。
+ * manager把读写声音设备当做读写一个设备处理。支持本地声卡，蓝牙连接的声卡，hdmi接口上的声卡，其他接口上的声卡。只要系统显示的，一般都支持。
  *
  * 原理：
  * 声音三要素： 采样率， 量化精度， 声道
@@ -29,10 +44,6 @@
  * 高保真肯定是用最高的采样率48000, 量化精度16位(2字节)， 立体声2声道. 一首歌通常200秒
  * 48000 * 2 * 2 * 200 = 38400000字节,  大概38M一首歌曲
 **/
-
-#include <qqtcore.h>
-#include <qqt-local.h>
-
 class QQTSHARED_EXPORT QQtAudioManager : public QObject
 {
     Q_OBJECT
@@ -57,14 +68,14 @@ public:
     /*对输入设备进行操作*/
     void startInput();
     void stopInput();
-    QByteArray readStreamBytes();
+    QByteArray readBytes();
     QAudioInput* inputManager();
     QIODevice* inputDevice();
 
     /*对输出设备进行操作*/
     void startOutput();
     void stopOutput();
-    void writeStreamBytes ( QByteArray& bytes );
+    void writeBytes ( QByteArray& bytes );
     QAudioOutput* outputManager();
     QIODevice* outputDevice();
 

@@ -63,6 +63,17 @@ MainWindow::MainWindow ( QWidget* parent ) :
               this, SLOT ( currentInputRowChanged ( QModelIndex, QModelIndex ) ) );
     connect ( ui->outputListWidget->selectionModel(), SIGNAL ( currentRowChanged ( QModelIndex, QModelIndex ) ),
               this, SLOT ( currentOutputRowChanged ( QModelIndex, QModelIndex ) ) );
+
+//    on_pushButton_2_clicked();
+//    ui->inputListWidget->setCurrentRow ( 0 );
+//    ui->outputListWidget->setCurrentRow ( 0 );
+//    ui->inputListWidget->setFocus();
+
+    ui->inHS->setRange ( 0, 100 );
+    ui->inHS->setValue ( 100 );
+
+    ui->outHS->setRange ( 0, 100 );
+    ui->outHS->setValue ( 100 );
 }
 
 MainWindow::~MainWindow()
@@ -208,6 +219,12 @@ void MainWindow::currentOutputRowChanged ( QModelIndex cur, QModelIndex )
     }
 }
 
+/*
+ * 处理声音三要点
+ * 声音的格式 ，也就是声音三要素，输入一个、输出一个，manager对其分开管理，但是建议用户合并为一个置等。通道数、采样位宽、采样率
+ * 声音设备 ，输入一个、输出一个，manager管理start\stop等接口，manager内部的inputManager和outputManager负责其他接口。
+ * 声音设备的读写出入口 ，manager管理，包括可读信号和写入函数。
+*/
 void MainWindow::on_pushButton_clicked()
 {
     /*这里是自定义输入、输出设备*/
@@ -253,12 +270,49 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::readyRead()
 {
-    QByteArray bytes = manager.readStreamBytes();
-    manager.writeStreamBytes ( bytes );
+    //这里是用户实现，任何用户希望做的事情，都在这里做完。
+    //可以 录音、保存文件
+    //可以 直接播放
+    //可以 混音 +保存 +播放...
+    //可以 消音
+    //可以 将pcm转换为其他格式音频
+    //可以 降噪
+    //可以 ...
+    QByteArray bytes = manager.readBytes();
+    manager.writeBytes ( bytes );
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
     manager.stopOutput();
     manager.stopInput();
+}
+
+/*bug:Qt 设置音量会报错退出*/
+void MainWindow::on_inHS_valueChanged ( int value )
+{
+    return;
+
+    if ( !manager.inputDevice() )
+        return;
+
+    qreal linearVolume = QAudio::convertVolume ( value / qreal ( 100.0 ),
+                                                 QAudio::LogarithmicVolumeScale,
+                                                 QAudio::LinearVolumeScale );
+
+    pline() << "输入音量" << value << linearVolume << qRound ( linearVolume * 100 ) ;
+    manager.inputManager()->setVolume ( qRound ( linearVolume * 100 ) );
+}
+
+/*bug:Qt 设置音量会报错退出*/
+void MainWindow::on_outHS_valueChanged ( int value )
+{
+    return;
+
+    if ( !manager.outputDevice() )
+        return;
+
+    qreal vol = qreal ( value ) / 100;
+    pline() << "输出音量" << vol ;
+    manager.outputManager()->setVolume ( vol );
 }
