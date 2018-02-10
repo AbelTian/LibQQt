@@ -36,4 +36,16 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
+#这句话很重要 启动拷贝很多东西
+system (touch main.cpp)
+
 include (../../src/app_base_manager.pri)
+
+contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
+    CONFIG += mobility
+    MOBILITY =
+    DISTFILES += \
+        $${PWD}/android/AndroidManifest.xml
+
+    ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
+}

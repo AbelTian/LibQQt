@@ -1,11 +1,15 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QApplication>
+#include <qqtwidgets.h>
+#include <qqtapplication.h>
 
-int main(int argc, char *argv[])
+int main ( int argc, char* argv[] )
 {
-    QApplication a(argc, argv);
+    QQtApplication a ( argc, argv );
+
     MainWindow w;
     w.show();
+    moveFull ( &w );
 
     return a.exec();
 }

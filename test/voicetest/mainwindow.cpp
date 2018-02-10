@@ -284,11 +284,11 @@ void MainWindow::on_pushButton_clicked()
     pline() << "in prefer" << dev.preferredFormat().channelCount() << dev.preferredFormat().sampleRate() <<
             dev.preferredFormat().sampleSize();
 
-    pline() << "in" << manager.inputAudioFormat().channelCount() << manager.inputAudioFormat().sampleRate() <<
-            manager.inputAudioFormat().sampleSize();
-
     pline() << "out prefer" << devOut.preferredFormat().channelCount() << devOut.preferredFormat().sampleRate() <<
             devOut.preferredFormat().sampleSize();
+
+    pline() << "in" << manager.inputAudioFormat().channelCount() << manager.inputAudioFormat().sampleRate() <<
+            manager.inputAudioFormat().sampleSize();
 
     pline() << "out" << manager.outputAudioFormat().channelCount() << manager.outputAudioFormat().sampleRate() <<
             manager.outputAudioFormat().sampleSize();
@@ -313,8 +313,8 @@ void MainWindow::readyRead()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    manager.stopOutput();
     manager.stopInput();
+    manager.stopOutput();
 }
 
 /*bug:Qt 设置音量会报错退出*/
@@ -350,6 +350,20 @@ void MainWindow::on_pushButton_4_clicked()
 {
     manager.inputAudioFormat() = QQtAudioManager::defaultOutputDevice().preferredFormat();
     manager.outputAudioFormat() = QQtAudioManager::defaultOutputDevice().preferredFormat();
+
+    pline() << "in prefer" << QQtAudioManager::defaultInputDevice().preferredFormat().channelCount() <<
+            QQtAudioManager::defaultInputDevice().preferredFormat().sampleRate() <<
+            QQtAudioManager::defaultInputDevice().preferredFormat().sampleSize();
+
+    pline() << "out prefer" << QQtAudioManager::defaultOutputDevice().preferredFormat().channelCount() <<
+            QQtAudioManager::defaultOutputDevice().preferredFormat().sampleRate() <<
+            QQtAudioManager::defaultOutputDevice().preferredFormat().sampleSize();
+
+    pline() << "in" << manager.inputAudioFormat().channelCount() << manager.inputAudioFormat().sampleRate() <<
+            manager.inputAudioFormat().sampleSize();
+
+    pline() << "out" << manager.outputAudioFormat().channelCount() << manager.outputAudioFormat().sampleRate() <<
+            manager.outputAudioFormat().sampleSize();
 
     manager.startDefaultInput();
     manager.startDefaultOutput();
