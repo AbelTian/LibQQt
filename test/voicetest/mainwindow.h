@@ -26,6 +26,8 @@ private slots:
     void currentOutputRowChanged ( QModelIndex, QModelIndex );
     void on_pushButton_clicked();
     void readyRead();
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow* ui;
     QQtAudioManager manager;

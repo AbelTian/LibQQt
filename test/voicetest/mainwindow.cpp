@@ -112,8 +112,6 @@ void MainWindow::on_pushButton_2_clicked()
         ui->inputListWidget->addItem ( adInfo.deviceName() );
     }
 
-    ui->inputListWidget->setCurrentRow ( 0 );
-
 
     ui->outputListWidget->clear();
 
@@ -127,8 +125,6 @@ void MainWindow::on_pushButton_2_clicked()
         pline() << adInfo.deviceName();
         ui->outputListWidget->addItem ( adInfo.deviceName() );
     }
-
-    ui->outputListWidget->setCurrentRow ( 0 );
 
 }
 
@@ -214,17 +210,42 @@ void MainWindow::currentOutputRowChanged ( QModelIndex cur, QModelIndex )
 
 void MainWindow::on_pushButton_clicked()
 {
+    /*这里是自定义输入、输出设备*/
     QString name = ui->inputListWidget->currentIndex().data().toString();
     QAudioDeviceInfo dev = findInputAudioDeviceInfoByName ( name );
 
     name = ui->outputListWidget->currentIndex().data().toString();
     QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
 
-    manager.inputAudioFormat() = dev.preferredFormat();
-    manager.outputAudioFormat() = devOut.preferredFormat();
+    /*使用默认输入、输出设备*/
+    //如果开启这段代码，页面上的输入、输出设备选择，就仅仅是个显示了，不具备操作能力。
+    /*
+    dev = QQtAudioManager::defaultInputDevice();
+    devOut = QQtAudioManager::defaultOutputDevice();
+    */
 
+    //把设备设进manager去
     manager.inputDeviceInfo() = dev;
     manager.outputDeviceInfo() = devOut;
+
+    //这里保证输入、输出使用格式相等 或者 不同
+    //如果格式不同，在mac电脑上本地输入输出设备是可以使用的，但是对于连接的语音蓝牙话筒，却是不可以使用的，原因未知。
+    //格式相同的时候，实在是太好用啦。
+    //这个建议默认就相同，但是，在QQtAudioManager当中，并没有直接将其相等处理，如果用户在readyRead槽函数里，可以更改采样率进行某些特殊处理。一般不需要差异处理的，相等就行了。
+    manager.inputAudioFormat() = manager.outputDeviceInfo().preferredFormat();
+    manager.outputAudioFormat() = manager.outputDeviceInfo().preferredFormat();
+
+    pline() << "in prefer" << dev.preferredFormat().channelCount() << dev.preferredFormat().sampleRate() <<
+            dev.preferredFormat().sampleSize();
+
+    pline() << "out prefer" << devOut.preferredFormat().channelCount() << devOut.preferredFormat().sampleRate() <<
+            devOut.preferredFormat().sampleSize();
+
+    pline() << "in" << manager.inputAudioFormat().channelCount() << manager.inputAudioFormat().sampleRate() <<
+            manager.inputAudioFormat().sampleSize();
+
+    pline() << "out" << manager.outputAudioFormat().channelCount() << manager.outputAudioFormat().sampleRate() <<
+            manager.outputAudioFormat().sampleSize();
 
     manager.startInput();
     manager.startOutput();
@@ -234,4 +255,10 @@ void MainWindow::readyRead()
 {
     QByteArray bytes = manager.readStreamBytes();
     manager.writeStreamBytes ( bytes );
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    manager.stopOutput();
+    manager.stopInput();
 }
