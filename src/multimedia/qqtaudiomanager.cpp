@@ -42,6 +42,7 @@ void QQtAudioManager::startInput()
     stopInput();
     mInputManager = new QAudioInput ( mInputDeviceInfo, mInputAudioFormat, this );
     mInputDevice = mInputManager->start();
+
     if ( !mInputDevice || QAudio::NoError != mInputManager->error() )
     {
         pline() << mInputDeviceInfo.deviceName() << mInputAudioFormat.sampleSize() << mInputAudioFormat.sampleRate() <<
@@ -49,6 +50,7 @@ void QQtAudioManager::startInput()
         delete mInputManager;
         return;
     }
+
     //对IODevice读写，总是主动读写，但是在音频操作场合，读取音频输入，是被动的读，乐哉快哉。
     //在网络读写IODevice当中，也是变成了被动的读，快哉乐哉。
     connect ( mInputDevice, SIGNAL ( readyRead() ), this, SIGNAL ( readyRead() ) );
@@ -71,10 +73,16 @@ void QQtAudioManager::stopInput()
     }
 }
 
-QByteArray QQtAudioManager::readBytes()
+QByteArray QQtAudioManager::readAll()
 {
     if ( mInputDevice )
         return mInputDevice->readAll();
+}
+
+QByteArray QQtAudioManager::read ( qint64 maxlen )
+{
+    if ( mInputDevice )
+        return mInputDevice->read ( maxlen );
 }
 
 QAudioInput* QQtAudioManager::inputManager() { return mInputManager; }
@@ -86,6 +94,7 @@ void QQtAudioManager::startOutput()
     stopOutput();
     mOutputManager = new QAudioOutput ( mOutputDeviceInfo, mOutputAudioFormat, this );
     mOutputDevice = mOutputManager->start();
+
     if ( !mOutputDevice || QAudio::NoError != mOutputManager->error() )
     {
         pline() << mOutputDeviceInfo.deviceName() << mOutputAudioFormat.sampleSize() << mOutputAudioFormat.sampleRate() <<
@@ -108,7 +117,7 @@ void QQtAudioManager::stopOutput()
     }
 }
 
-void QQtAudioManager::writeBytes ( QByteArray& bytes )
+void QQtAudioManager::write ( QByteArray& bytes )
 {
     if ( mOutputDevice )
         mOutputDevice->write ( bytes );
@@ -127,7 +136,11 @@ void QQtAudioManager::startDefaultInput()
     //注意：用户一定要设置输入、输出Format，否则，如果默认输入输出设备格式不同，悲剧就要发生了。
     //这里的设置仅仅是个意见
     if ( !mInputAudioFormat.isValid() )
+    {
+        pline() << "user hasn't setted output format";
+
         mInputAudioFormat = defaultInputDevice().preferredFormat();
+    }
 
 //    pline() << "in prefer" << mInputDeviceInfo.preferredFormat().channelCount() <<
 //            mInputDeviceInfo.preferredFormat().sampleRate() <<
@@ -147,7 +160,10 @@ void QQtAudioManager::startDefaultOutput()
     //注意：用户一定要设置输入、输出Format，否则，如果默认输入输出设备格式不同，悲剧就要发生了。
     //这里的设置仅仅是个意见
     if ( !mOutputAudioFormat.isValid() )
+    {
+        pline() << "user hasn't setted output format";
         mOutputAudioFormat = defaultOutputDevice().preferredFormat();
+    }
 
 //    pline() << "out prefer" << mOutputDeviceInfo.preferredFormat().channelCount() <<
 //            mOutputDeviceInfo.preferredFormat().sampleRate() <<

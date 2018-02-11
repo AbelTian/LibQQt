@@ -54,7 +54,8 @@ SUBDIRS += test/voicetest
 #    SUBDIRS += test/cmdwidget
 #}
 #SUBDIRS += test/coretest
-#SUBDIRS += test/giftest
+#
+SUBDIRS += test/giftest
 #
 ##-----------------------------------------------------------------
 ##need webkit webkitwidgets - WebSupport

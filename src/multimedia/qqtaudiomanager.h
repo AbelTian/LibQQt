@@ -77,14 +77,15 @@ public:
     /*带输入形参的接口，和这个接口功能相同，忽略那个。*/
     void startInput();
     void stopInput();
-    QByteArray readBytes();
+    QByteArray readAll();
+    QByteArray read ( qint64 maxlen );
     QAudioInput* inputManager();
     QIODevice* inputDevice();
 
     /*对输出设备进行操作*/
     void startOutput();
     void stopOutput();
-    void writeBytes ( QByteArray& bytes );
+    void write ( QByteArray& bytes );
     QAudioOutput* outputManager();
     QIODevice* outputDevice();
 

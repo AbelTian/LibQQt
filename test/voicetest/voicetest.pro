@@ -39,6 +39,12 @@ MOBILITY =
 #这句话很重要 启动拷贝很多东西
 system (touch main.cpp)
 
+#用本地文件做测试
+APP_CONFIG_PWD = $${PWD}/approot
+win32 {
+    APP_CONFIG_PWD ~=s,/,\\,g
+}
+
 include (../../src/app_base_manager.pri)
 
 contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {

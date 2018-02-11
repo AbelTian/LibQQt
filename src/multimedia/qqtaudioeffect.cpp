@@ -17,7 +17,7 @@ void QQtAudioEffect::play ( QString localFile )
 
     outputAudioFormat() = defaultOutputDevice().preferredFormat();
     startDefaultOutput();
-    writeBytes ( bytes );
+    write ( bytes );
     return;
 }
 
@@ -36,7 +36,8 @@ void QQtAudioEffect::customPlay ( QString localFile )
         outputAudioFormat() = defaultOutputDevice().preferredFormat();
         outputDeviceInfo() = defaultOutputDevice();
     }
+
     startOutput();
-    writeBytes ( bytes );
+    write ( bytes );
 
 }

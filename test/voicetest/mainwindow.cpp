@@ -104,6 +104,9 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
     QQtWavAudioEffect e1;
     e1.play ( "://9733" );
+    //e1.play ( "./res/9733.wav" );
+
+    //QApplication::beep();
 
     QQtSleep ( 3000 );
 
@@ -360,8 +363,8 @@ void MainWindow::readyRead()
     //可以 降噪
     //可以 ...
     //ptime();//11-12ms 是个10ms timer
-    QByteArray bytes = manager.readBytes();
-    manager.writeBytes ( bytes );
+    QByteArray bytes = manager.readAll();
+    manager.write ( bytes );
 }
 
 void MainWindow::on_pushButton_3_clicked()
