@@ -4,6 +4,7 @@
 #include <qqtcore.h>
 #include <qsound.h>
 #include <qsoundeffect.h>
+#include <qqtaudioeffect.h>
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -22,14 +23,19 @@ MainWindow::MainWindow ( QWidget* parent ) :
     QUrl u;
     u.setUrl ( "http://xmdx.sc.chinaz.com/Files/DownLoad/sound1/201802/9733.wav" );
     e.setSource ( u );
-    e.play();
-
-    //不响
-    e.setSource ( QUrl::fromLocalFile ( "://9733" ) );
-    e.play();
+    //e.play();
 
     //响
-    QSound::play ( "://9733" );
+    e.setSource ( QUrl::fromLocalFile ( "://9733" ) );
+    //e.play();
+
+    //响
+    //QSound::play ( "://9733" );
+
+    QQtAudioEffect e1;
+    e1.play ( "://9733" );
+
+    QQtSleep ( 3000 );
 
     connect ( &manager, SIGNAL ( readyRead() ), this, SLOT ( readyRead() ) );
 

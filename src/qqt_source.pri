@@ -144,8 +144,8 @@ contains(QKIT_PRIVATE, iOS||iOSSimulator) {
 
 
 #multimedia
-#audio success.
-#video arm mips
+#support Qt5, if Qt4 want to use, you need compile QtMultiMedia for Qt4.
+#audio success. video arm mips
 #TODO: video +wince +android +ios +macOS +win +linux
 contains (DEFINES, __MULTIMEDIA__) {
     #mplayer
@@ -162,6 +162,10 @@ contains (DEFINES, __MULTIMEDIA__) {
 
     #audio effect
     #using QSound (QSoundEffect optional)
+    SOURCES += \
+        $$PWD/multimedia/qqtaudioeffect.cpp
+    HEADERS += \
+        $$PWD/multimedia/qqtaudioeffect.h
 }
 
 

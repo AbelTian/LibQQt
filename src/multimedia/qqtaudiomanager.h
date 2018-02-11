@@ -74,6 +74,7 @@ public:
     QAudioDeviceInfo& outputDeviceInfo();
 
     /*对输入设备进行操作*/
+    /*带输入形参的接口，和这个接口功能相同，忽略那个。*/
     void startInput();
     void stopInput();
     QByteArray readBytes();
@@ -91,7 +92,8 @@ public:
     //如果使用这个函数，建议：设置公共的AudioFormat，比如输出的format，或者输入、输出都支持的Format。
     //这个Format不会跟随默认设备的改变而改变，有初始值，但是用户在使用过程中，有必要关注和更改。
     //prefer和nearest并不是default，所以还是需要用户设置。
-    QAudioFormat& defaultAudioFormat();
+    //分开在输入、输出format里进行设置
+    //QAudioFormat& defaultAudioFormat();
     void startDefaultInput();
     void startDefaultOutput();
 
