@@ -12,42 +12,20 @@ MainWindow::MainWindow ( QWidget* parent ) :
 {
     ui->setupUi ( this );
 
-    pline() << QSoundEffect::supportedMimeTypes();
-
-    QSoundEffect e;
-    e.setLoopCount ( 1 );
-    e.setVolume ( 0.9f );
-    e.setMuted ( false );
-
-    //不响
-    QUrl u;
-    u.setUrl ( "http://xmdx.sc.chinaz.com/Files/DownLoad/sound1/201802/9733.wav" );
-    e.setSource ( u );
-    //e.play();
-
-    //响
-    e.setSource ( QUrl::fromLocalFile ( "://9733" ) );
-    //e.play();
-
-    //响
-    //QSound::play ( "://9733" );
-
-    QQtAudioEffect e1;
-    e1.play ( "://9733" );
-
-    QQtSleep ( 3000 );
-
     connect ( &manager, SIGNAL ( readyRead() ), this, SLOT ( readyRead() ) );
 
     QList<QAudioDeviceInfo> ladInfo;
     ladInfo = QAudioDeviceInfo::availableDevices ( QAudio::AudioInput );
     QListIterator<QAudioDeviceInfo> itor ( ladInfo );
     pline() << "本机音频输入设备列表";
+
     while ( itor.hasNext() )
         pline() << itor.next().deviceName();
+
     pline() << "默认输入设备" << QAudioDeviceInfo::defaultInputDevice().deviceName();
     pline() << "输入设备详细信息";
     itor.toFront();
+
     while ( itor.hasNext() )
     {
         QAudioDeviceInfo adInfo = itor.next();
@@ -65,11 +43,14 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ladOutputInfo = QAudioDeviceInfo::availableDevices ( QAudio::AudioOutput );
     QListIterator<QAudioDeviceInfo> itor2 ( ladOutputInfo );
     pline() << "本机音频输出设备列表";
+
     while ( itor2.hasNext() )
         pline() << itor2.next().deviceName();
+
     pline() << "默认输出设备" << QAudioDeviceInfo::defaultOutputDevice().deviceName();
     pline() << "输出设备详细信息";
     itor2.toFront();
+
     while ( itor2.hasNext() )
     {
         QAudioDeviceInfo adInfo = itor2.next();
@@ -100,6 +81,32 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
     ui->outHS->setRange ( 0, 100 );
     ui->outHS->setValue ( 100 );
+
+    //pline() << QSoundEffect::supportedMimeTypes();
+
+    QSoundEffect e;
+    e.setLoopCount ( 1 );
+    e.setVolume ( 0.9f );
+    e.setMuted ( false );
+
+    //不响
+    QUrl u;
+    u.setUrl ( "http://xmdx.sc.chinaz.com/Files/DownLoad/sound1/201802/9733.wav" );
+    e.setSource ( u );
+    //e.play();
+
+    //响
+    e.setSource ( QUrl::fromLocalFile ( "://9733" ) );
+    //e.play();
+
+    //响
+    //QSound::play ( "://9733" );
+
+    QQtWavAudioEffect e1;
+    e1.play ( "://9733" );
+
+    QQtSleep ( 3000 );
+
 }
 
 MainWindow::~MainWindow()
@@ -112,9 +119,11 @@ QAudioDeviceInfo MainWindow::findInputAudioDeviceInfoByName ( QString devName )
     QList<QAudioDeviceInfo> ladInfo;
     ladInfo = QQtAudioManager::availableInputDevices();
     QListIterator<QAudioDeviceInfo> itor ( ladInfo );
+
     while ( itor.hasNext() )
     {
         QAudioDeviceInfo adInfo = itor.next();
+
         if ( devName == adInfo.deviceName() )
             return adInfo;
     }
@@ -125,9 +134,11 @@ QAudioDeviceInfo MainWindow::findOutputAudioDeviceInfoByName ( QString devName )
     QList<QAudioDeviceInfo> ladInfo;
     ladInfo = QQtAudioManager::availableOutputDevices();
     QListIterator<QAudioDeviceInfo> itor ( ladInfo );
+
     while ( itor.hasNext() )
     {
         QAudioDeviceInfo adInfo = itor.next();
+
         if ( devName == adInfo.deviceName() )
             return adInfo;
     }
@@ -142,6 +153,7 @@ void MainWindow::on_pushButton_2_clicked()
     ladInfo = QQtAudioManager::availableInputDevices();
     QListIterator<QAudioDeviceInfo> itor ( ladInfo );
     pline() << "本机音频输入设备列表";
+
     while ( itor.hasNext() )
     {
         QAudioDeviceInfo adInfo = itor.next();
@@ -156,6 +168,7 @@ void MainWindow::on_pushButton_2_clicked()
     ladOutputInfo = QQtAudioManager::availableOutputDevices();
     QListIterator<QAudioDeviceInfo> itor2 ( ladOutputInfo );
     pline() << "本机音频输出设备列表";
+
     while ( itor2.hasNext() )
     {
         QAudioDeviceInfo adInfo = itor2.next();
@@ -184,6 +197,7 @@ void MainWindow::currentInputRowChanged ( QModelIndex cur, QModelIndex )
 
     QList<int> size = dev.supportedSampleSizes();
     QListIterator<int> itor ( size );
+
     while ( itor.hasNext() )
     {
         QString s0 = QString::number ( itor.next() );
@@ -191,6 +205,7 @@ void MainWindow::currentInputRowChanged ( QModelIndex cur, QModelIndex )
     }
 
     itor = dev.supportedChannelCounts();
+
     while ( itor.hasNext() )
     {
         QString s0 = QString::number ( itor.next() );
@@ -198,6 +213,7 @@ void MainWindow::currentInputRowChanged ( QModelIndex cur, QModelIndex )
     }
 
     itor = dev.supportedSampleRates();
+
     while ( itor.hasNext() )
     {
         QString s0 = QString::number ( itor.next() );
@@ -224,6 +240,7 @@ void MainWindow::currentOutputRowChanged ( QModelIndex cur, QModelIndex )
 
     QList<int> size = dev.supportedSampleSizes();
     QListIterator<int> itor ( size );
+
     while ( itor.hasNext() )
     {
         QString s0 = QString::number ( itor.next() );
@@ -231,6 +248,7 @@ void MainWindow::currentOutputRowChanged ( QModelIndex cur, QModelIndex )
     }
 
     itor = dev.supportedChannelCounts();
+
     while ( itor.hasNext() )
     {
         QString s0 = QString::number ( itor.next() );
@@ -238,6 +256,7 @@ void MainWindow::currentOutputRowChanged ( QModelIndex cur, QModelIndex )
     }
 
     itor = dev.supportedSampleRates();
+
     while ( itor.hasNext() )
     {
         QString s0 = QString::number ( itor.next() );
@@ -255,13 +274,17 @@ void MainWindow::on_pushButton_clicked()
 {
     /*这里是自定义输入、输出设备*/
     QString name = QQtAudioManager::defaultInputDevice().deviceName();
+
     if ( ui->inputListWidget->currentIndex().isValid() )
         name = ui->inputListWidget->currentIndex().data().toString();
+
     QAudioDeviceInfo dev = findInputAudioDeviceInfoByName ( name );
 
     name = QQtAudioManager::defaultOutputDevice().deviceName();
+
     if ( ui->outputListWidget->currentIndex().isValid() )
         name = ui->outputListWidget->currentIndex().data().toString();
+
     QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
 
     /*使用默认输入、输出设备*/
@@ -292,10 +315,13 @@ void MainWindow::on_pushButton_clicked()
     QAudioFormat outFmt = manager.outputDeviceInfo().preferredFormat();
 
     int outBit = outFmt.sampleSize(), outChn = outFmt.channelCount(), outRate = outFmt.sampleRate();
+
     if ( ui->outBit->currentIndex().isValid() )
         outBit = ui->outBit->currentIndex().data().toInt();
+
     if ( ui->outChn->currentIndex().isValid() )
         outChn = ui->outChn->currentIndex().data().toInt();
+
     if ( ui->outRate->currentIndex().isValid() )
         outRate = ui->outRate->currentIndex().data().toInt();
 
@@ -333,6 +359,7 @@ void MainWindow::readyRead()
     //可以 将pcm转换为其他格式音频
     //可以 降噪
     //可以 ...
+    //ptime();//11-12ms 是个10ms timer
     QByteArray bytes = manager.readBytes();
     manager.writeBytes ( bytes );
 }

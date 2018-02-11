@@ -49,6 +49,8 @@ void QQtAudioManager::startInput()
         delete mInputManager;
         return;
     }
+    //对IODevice读写，总是主动读写，但是在音频操作场合，读取音频输入，是被动的读，乐哉快哉。
+    //在网络读写IODevice当中，也是变成了被动的读，快哉乐哉。
     connect ( mInputDevice, SIGNAL ( readyRead() ), this, SIGNAL ( readyRead() ) );
 }
 
@@ -122,6 +124,11 @@ void QQtAudioManager::startDefaultInput()
     /*使用默认输入设备*/
     mInputDeviceInfo = QQtAudioManager::defaultInputDevice();
 
+    //注意：用户一定要设置输入、输出Format，否则，如果默认输入输出设备格式不同，悲剧就要发生了。
+    //这里的设置仅仅是个意见
+    if ( !mInputAudioFormat.isValid() )
+        mInputAudioFormat = defaultInputDevice().preferredFormat();
+
 //    pline() << "in prefer" << mInputDeviceInfo.preferredFormat().channelCount() <<
 //            mInputDeviceInfo.preferredFormat().sampleRate() <<
 //            mInputDeviceInfo.preferredFormat().sampleSize();
@@ -135,7 +142,12 @@ void QQtAudioManager::startDefaultInput()
 void QQtAudioManager::startDefaultOutput()
 {
     /*使用默认输出设备*/
-    mOutputDeviceInfo = QQtAudioManager::defaultOutputDevice();
+    mOutputDeviceInfo = defaultOutputDevice();
+
+    //注意：用户一定要设置输入、输出Format，否则，如果默认输入输出设备格式不同，悲剧就要发生了。
+    //这里的设置仅仅是个意见
+    if ( !mOutputAudioFormat.isValid() )
+        mOutputAudioFormat = defaultOutputDevice().preferredFormat();
 
 //    pline() << "out prefer" << mOutputDeviceInfo.preferredFormat().channelCount() <<
 //            mOutputDeviceInfo.preferredFormat().sampleRate() <<
