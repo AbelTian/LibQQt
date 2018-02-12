@@ -1,4 +1,4 @@
-﻿#ifndef QQTAUDIOEFFECT_H
+#ifndef QQTAUDIOEFFECT_H
 #define QQTAUDIOEFFECT_H
 
 #include <qqtaudiomanager.h>
@@ -106,6 +106,7 @@ public:
         manager.outputAudioFormat() = mFormat;
         manager.startDefaultOutput();
 
+        /*
         QTimer* timer = new QTimer ( this );
         connect ( timer, &QTimer::timeout, [&]() {
             static int i = 52;
@@ -121,6 +122,7 @@ public:
             pline() << i;
         } );
         timer->start();
+        */
     }
 
     //需要用户设置输出设备

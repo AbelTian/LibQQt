@@ -1,4 +1,4 @@
-﻿#include "qqtsocketudpclient.h"
+#include "qqtsocketudpclient.h"
 
 QQtSocketUdpClient::QQtSocketUdpClient ( QObject* parent ) : QUdpSocket ( parent )
 {
@@ -151,7 +151,7 @@ void QQtSocketUdpClient::readyReadData()
         QHostAddress host;
         quint16 port;
 
-#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+#if QT_VERSION > QT_VERSION_DATAGRAM
         /*能够一次收够一条报文？测试的能。*/
         QNetworkDatagram datagram = receiveDatagram();
         /*由于添加了兼容Qt4的代码，以上注释起来。*/

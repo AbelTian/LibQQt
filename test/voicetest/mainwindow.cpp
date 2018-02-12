@@ -1,4 +1,4 @@
-﻿#include "mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <qqtaudiomanager.h>
 #include <qqtcore.h>
@@ -381,11 +381,12 @@ void MainWindow::on_inHS_valueChanged ( int value )
     if ( !manager.inputDevice() )
         return;
 
-    qreal linearVolume = QAudio::convertVolume ( value / qreal ( 100.0 ),
-                                                 QAudio::LogarithmicVolumeScale,
-                                                 QAudio::LinearVolumeScale );
+    qreal linearVolume;
+//    qreal linearVolume = QAudio::convertVolume ( value / qreal ( 100.0 ),
+//                                                 QAudio::LogarithmicVolumeScale,
+//                                                 QAudio::LinearVolumeScale );
 
-    pline() << "输入音量" << value << linearVolume << qRound ( linearVolume * 100 ) ;
+//    pline() << "输入音量" << value << linearVolume << qRound ( linearVolume * 100 ) ;
     manager.inputManager()->setVolume ( qRound ( linearVolume * 100 ) );
 }
 

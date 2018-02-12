@@ -1,4 +1,4 @@
-﻿#ifndef QQTUDPPROTOCOL_H
+#ifndef QQTUDPPROTOCOL_H
 #define QQTUDPPROTOCOL_H
 
 #include <QObject>
@@ -6,7 +6,9 @@
 #include "qqtmessage.h"
 #include "qqtcore.h"
 
-#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+#define QT_VERSION_DATAGRAM QT_VERSION_CHECK(5,8,0)
+
+#if QT_VERSION > QT_VERSION_DATAGRAM
 #include <QNetworkDatagram>
 #endif
 
@@ -21,7 +23,7 @@ public:
     }
     virtual ~QQtUdpProtocol() {}
 
-#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+#if QT_VERSION > QT_VERSION_DATAGRAM
     qint64 writeDatagram ( const QNetworkDatagram& datagram ) {
         //emit writeDatagram();
     }
@@ -47,7 +49,7 @@ protected:
     /*
      * 这两个dispatcher，任选其一重写。
      */
-#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+#if QT_VERSION > QT_VERSION_DATAGRAM
     inline virtual bool dispatcher ( const QNetworkDatagram& ) { return 0; }
 #endif
 
@@ -62,7 +64,7 @@ public:
                       const QHostAddress& host, quint16 port ) {
         dispatcher ( datagram, host, port );
     }
-#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+#if QT_VERSION > QT_VERSION_DATAGRAM
     void translator ( const QNetworkDatagram& datagram ) {
         dispatcher ( datagram );
     }
