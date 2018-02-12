@@ -39,5 +39,4 @@ contains (DEFINES, __EXQUISITE__) {
         include ($$PWD/exquisite/gumbo/parser/gumbo-parser.pri)
         include ($$PWD/exquisite/gumbo/query/gumbo-query.pri)
     }
-
 }

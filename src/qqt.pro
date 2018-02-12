@@ -3,9 +3,14 @@
 # Project created by QtCreator 2016-03-24T14:08:11
 #
 #-------------------------------------------------
-#Project link: https://gitee.com/drabel/LibQt
-#if you succeed with LibQQt, please thumb up.
+#Project link: https://gitee.com/drabel/LibQQt
+#github link: https://github.com/AbelTian/LibQQt
+
 #2017年11月10日18:53:56
+#if you succeed with LibQQt, please thumb up.
+
+#2018年02月09日10:40:10
+#开发者建议：中级工程师及以上学者，再打算学习这些pri文件的思路、结构、编写。
 
 #################################################################
 ##Usage
@@ -13,8 +18,8 @@
 #Suggest Qt 5.9.2/4.8.6/4.8.7
 #please dont use Qt 5.9.1, it is broken with android and ios.
 #please dont modify this pro
-#modify Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}
-#def env QKIT
+#use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}
+#in project build page, def env QKIT
 #in app_configure.pri (auto createed) define QQT_BUILD_ROOT= and QQT_SDK_ROOT= and or APP_DEPLOY_ROOT
 
 #################################################################
@@ -31,7 +36,7 @@ lessThan(QT_VERSION, 4.8.0) {
 }
 
 ################################################
-##project config definition
+##project config and definition
 ##need QKIT to compitible with some occasion
 ################################################
 include ($$PWD/qqt_qkit.pri)
@@ -92,13 +97,9 @@ build_pass:CONFIG(debug, debug|release) {
 #CONFIG += debug_and_release
 #CONFIG += build_all
 #if some bug occured, maybe this help me, close some warning
-CLFLAGS =
-mingw {
-    CLFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
-}
-
-QMAKE_CFLAGS +=  $${CLFLAGS}
-QMAKE_CXXFLAGS +=  $${CLFLAGS}
+CFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
+QMAKE_CFLAGS +=  $${CFLAGS}
+QMAKE_CXXFLAGS +=  $${CFLAGS}
 
 #################################################################
 ##build cache
@@ -121,6 +122,7 @@ include ($$PWD/qqt_source.pri)
 #################################################################
 include ($$PWD/qqt_version.pri)
 
+#user can use app_version.pri to modify app version once, once is all. DEFINES += APP_VERSION=0.0.0 is very good.
 unix:VERSION = $${QQT_VERSION}
 #bug?:open this macro, TARGET will suffixed with major version.
 #win32:VERSION = $${QQT_VERSION4}
@@ -129,7 +131,7 @@ QMAKE_TARGET_FILE = "$${TARGET}"
 QMAKE_TARGET_PRODUCT = "$${TARGET}"
 QMAKE_TARGET_COMPANY = "www.qqt.com"
 QMAKE_TARGET_DESCRIPTION = "QQt Foundation Class"
-QMAKE_TARGET_COPYRIGHT = "Copyright 2015-2020 QQT Co., Ltd. All rights reserved"
+QMAKE_TARGET_COPYRIGHT = "Copyright 2015-2020 QQt Co., Ltd. All rights reserved"
 
 win32 {
     #common to use upload, this can be ignored.

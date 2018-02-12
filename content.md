@@ -53,6 +53,11 @@
 4. 添加gif support Widgets  
     - 可以方便的设置动态按钮等。  
     - 有QQtGifWidget、QQtGifButton等。   
+5. 添加QQtAudioManager  
+    - 帮助App选择音频输入、输出设备  
+    - 帮助App设置音频格式，差分处理，但是，依然建议输入、输出格式相等。  
+    - 将AudioDevice当做一个设备进行读写，App处理获取到的声音，处理后，自行使用，或者放音均可。  
+    
 
 
 [返回](.)  

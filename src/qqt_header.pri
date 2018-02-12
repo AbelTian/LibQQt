@@ -148,7 +148,7 @@ contains (DEFINES, __CPP11__) {
 
 ##################MultiMedia Module###############################
 DEFINES += __MULTIMEDIA__
-#on mac qt has no multimedia
+#on mac qt4 has no multimedia
 contains(QKIT_PRIVATE, macOS) {
     lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__MULTIMEDIA__
 }
@@ -222,10 +222,13 @@ contains (DEFINES, __EXQUISITE__) {
 ##################WebSocket Module###############################
 #don't close this macro ...
 DEFINES += __TCPUDPSOCKET__
+
 #if you use Qt Service Support ( QtSoap ), open this annotation
 DEFINES += __WEBSERVICESUPPORT__
+
 #One Ftp Http 单工...
 #Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
+#QNetworkAccessManager 提供多路并发 HTTP session。
 #if you use QNetworkAccessManagerSupport , open this annotation
 DEFINES += __WEBACCESSSUPPORT__
 lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
@@ -233,6 +236,7 @@ contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES -= __WEBACCESSSUPPORT__
 contains (DEFINES, __WEBACCESSSUPPORT__) {
     #QSslError not found, you need recompiler Qt4
 }
+
 DEFINES += __WEBKITSUPPORT__
 contains (DEFINES, __WEBKITSUPPORT__) {
     #TODO: QT += webkit
@@ -269,10 +273,10 @@ DEFINES += __CUSTOMPLOT__
 ##################Mathes Module###############################
 DEFINES += __MATHSUPPORT__
 
-##################QQtLogFile Module###############################
-DEFINES += __QQTLOGFILESUPPORT__
+##################QQtLogSystem Module###############################
+DEFINES += __QQTLOGSYSTEMSUPPORT__
 
-##################################################################
+#################################################################
 ##library
 ##################################################################
 equals (QKIT_PRIVATE, iOSSimulator):{

@@ -1,4 +1,4 @@
-#include "qqtapplication.h"
+﻿#include "qqtapplication.h"
 #ifdef __PLUGINWATCHER__
 #include "qqtpluginwatcher.h"
 #endif
@@ -135,7 +135,7 @@ void QQtApplication::setUPanAutorun ( bool run )
 void QQtApplication::setWriteLogSystem ( bool open )
 {
     /*设置日志系统*/
-#ifdef __QQTLOGFILESUPPORT__
+#ifdef __QQTLOGSYSTEMSUPPORT__
 
     if ( open )
     {

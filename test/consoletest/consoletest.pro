@@ -1,6 +1,11 @@
 QT -= gui
 
-CONFIG += c++11 console
+CONFIG += c++11
+#防止弹出一个控制台窗口
+CONFIG -= console
+#我需要使用console窗口，所以
+CONFIG += console
+
 CONFIG -= app_bundle
 
 # The following define makes your compiler emit warnings if you use
@@ -18,4 +23,6 @@ SOURCES += main.cpp
 
 #促使编译源代码，qmake pri配置里面的QMAKE_XX_LINK命令就会执行。
 system("touch main.cpp")
+#用户在console工程中，只要不使用LibQQt的图形Class，就可以在控制台程序中游刃有余的完成app功能了。
+#你用也没必要，而且不能用，控制台工程就是不能用widgets。不如在widgets工程当中隐藏窗口，然后在某个时机显示。
 include(../../src/app_base_manager.pri)
