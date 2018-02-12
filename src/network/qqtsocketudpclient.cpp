@@ -1,5 +1,4 @@
-#include "qqtsocketudpclient.h"
-#include <QNetworkDatagram>
+﻿#include "qqtsocketudpclient.h"
 
 QQtSocketUdpClient::QQtSocketUdpClient ( QObject* parent ) : QUdpSocket ( parent )
 {
@@ -30,8 +29,12 @@ void QQtSocketUdpClient::installProtocol ( QQtUdpProtocol* stack )
         return;
 
     m_protocol = stack;
+    connect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
+              this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
     connect ( m_protocol, SIGNAL ( writeDatagram ( const QNetworkDatagram& ) ),
               this, SLOT ( slotWriteDatagram ( const QNetworkDatagram& ) ) );
+#endif
 }
 
 void QQtSocketUdpClient::uninstallProtocol ( QQtUdpProtocol* stack )
@@ -41,8 +44,12 @@ void QQtSocketUdpClient::uninstallProtocol ( QQtUdpProtocol* stack )
     if ( !m_protocol )
         return;
 
+    disconnect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
+                 this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
     disconnect ( m_protocol, SIGNAL ( writeDatagram ( const QNetworkDatagram& ) ),
                  this, SLOT ( slotWriteDatagram ( const QNetworkDatagram& ) ) );
+#endif
     m_protocol = NULL;
 }
 
@@ -67,21 +74,21 @@ void QQtSocketUdpClient::socketStateChanged ( QAbstractSocket::SocketState eSock
 
     switch ( eSocketState )
     {
-    case QAbstractSocket::HostLookupState:
-    case QAbstractSocket::ConnectingState:
-        break;
+        case QAbstractSocket::HostLookupState:
+        case QAbstractSocket::ConnectingState:
+            break;
 
-    case QAbstractSocket::ConnectedState:
-        break;
+        case QAbstractSocket::ConnectedState:
+            break;
 
-    case QAbstractSocket::ClosingState:
-        break;
+        case QAbstractSocket::ClosingState:
+            break;
 
-    case QAbstractSocket::UnconnectedState:
-        break;
+        case QAbstractSocket::UnconnectedState:
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 }
 
@@ -99,13 +106,13 @@ void QQtSocketUdpClient::socketErrorOccured ( QAbstractSocket::SocketError e )
 
     switch ( e )
     {
-    case QAbstractSocket::RemoteHostClosedError:
-        break;
+        case QAbstractSocket::RemoteHostClosedError:
+            break;
 
-    case QAbstractSocket::HostNotFoundError:
-    default:
-        emit signalConnectFail();
-        break;
+        case QAbstractSocket::HostNotFoundError:
+        default:
+            emit signalConnectFail();
+            break;
     }
 }
 
@@ -137,28 +144,41 @@ void QQtSocketUdpClient::updateProgress ( qint64 bytes )
     //pline() << bytes;
 }
 
-qint64 QQtSocketUdpClient::slotWriteDatagram ( const QNetworkDatagram& datagram )
-{
-    return writeDatagram ( datagram );
-}
-
 void QQtSocketUdpClient::readyReadData()
 {
-    /*为什么用while?*/
+    /*为什么用while?*/ //Qt4 没有那么高级的一次性读取的接口
     while ( hasPendingDatagrams() )
     {
+        QByteArray bytes;
+        qint64 maxlen = 0;
+        QHostAddress host;
+        quint16 port;
+
         qint64 size = pendingDatagramSize();
+        //这里的buf用完, 已经释放。
+        char* data = new char[size + 1]();
+        qint64 len = readDatagram ( data, size, &host, &port );
+        pline() << len;
+        bytes.setRawData ( data, size );
+        delete[] data;
+
+        m_protocol->translator ( bytes, host, port );
+
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
         /*能够一次收够一条报文？测试的能。*/
-        QNetworkDatagram da = receiveDatagram();
+        QNetworkDatagram datagram;
+        //datagrame = receiveDatagram();
+        /*由于添加了兼容Qt4的代码，以上注释起来。*/
+        datagram.setData ( bytes );
+        datagram.setSender ( host, port );
 
         /*数据无意义 "" -1 在此设置*/
-        da.setDestination(this->localAddress(), this->localPort());
-
-        //pline() << "udp sender:" << da.senderAddress() << da.senderPort();
-        //pline() << "udp receiver:" << da.destinationAddress() << da.destinationPort();
+        datagram.setDestination ( this->localAddress(), this->localPort() );
+        //pline() << "udp sender:" << datagram.senderAddress() << datagram.senderPort();
+        //pline() << "udp receiver:" << datagram.destinationAddress() << datagram.destinationPort();
         //pline() << "udp new msg size:" << size;
-
-        m_protocol->translator ( da );
+        m_protocol->translator ( datagram );
+#endif
     }
 }
 

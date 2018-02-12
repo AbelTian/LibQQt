@@ -1,4 +1,4 @@
-#ifndef QQTUDPCLIENT_H
+﻿#ifndef QQTUDPCLIENT_H
 #define QQTUDPCLIENT_H
 
 #include <QUdpSocket>
@@ -40,7 +40,17 @@ private slots:
     void socketConnected();
     void socketDisconnect();
     void updateProgress ( qint64 bytes );
-    qint64 slotWriteDatagram ( const QNetworkDatagram& datagram );
+    //如果有一个同名的槽，参数不同，并且被用宏控制起来，Qt编译不过。
+    //Qt的元对象系统，解析信号和槽函数，不支持宏。
+    qint64 slotWriteDatagram ( const QByteArray& datagram,
+                               const QHostAddress& host, quint16 port ) {
+        return writeDatagram ( datagram, host, port );
+    }
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+    qint64 slotWriteDatagram ( const QNetworkDatagram& datagram ) {
+        return writeDatagram ( datagram );
+    }
+#endif
 
 private:
     QQtUdpProtocol* m_protocol;
