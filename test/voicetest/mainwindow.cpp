@@ -103,7 +103,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //QSound::play ( "://9733" );
 
     //响
-    QQtWavAudioEffect e1;
+    QQtWavSoundEffect e1;
     //e1.play ( "://9733" );
     //e1.play ( "./res/9733.wav" );
 
@@ -111,10 +111,10 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //QApplication::beep();
 
     //建议初始化
-    QQtWavAudioEffect::Instance ( this );
+    QQtWavSoundEffect::Instance ( this );
 
     //可以多次循环调用。
-    QQtWavAudio ( "://9733" );
+    QQtWavSound ( "://9733" );
 
     //QQtSleep ( 3000 );
 
@@ -443,8 +443,8 @@ void MainWindow::on_pushButton_5_clicked()
 
     QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
 
-    QQtWavAudioEffect::Instance()->useCustomOutputDevice ( devOut );
-    QQtWavAudio ( "./res/9733.wav" );
+    QQtWavSoundEffect::Instance()->useCustomOutputDevice ( devOut );
+    QQtWavSound ( "./res/9733.wav" );
 }
 
 void MainWindow::on_pushButton_6_clicked()
@@ -456,6 +456,7 @@ void MainWindow::on_pushButton_6_clicked()
 
     QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
 
-    QQtWavAudioEffect::Instance()->useCustomOutputDevice ( devOut );
-    QQtWavAudio ( "./res/9763.wav" );
+    QQtWavSoundEffect::Instance()->useCustomOutputDevice ( devOut );
+    QQtWavSound ( "./res/9763.wav" );
+    //QSound::play ( "./res/9763.wav" );
 }

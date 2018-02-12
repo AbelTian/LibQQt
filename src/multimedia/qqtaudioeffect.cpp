@@ -472,165 +472,131 @@ bool wavParse ( QString fileName, WAVFILEHEADER& WavFileHeader )
     fileInfo.close();
 }
 
-QQtWavAudioEffect* QQtWavAudioEffect::msInstance = NULL;
-
-QQtWavAudioEffect* QQtWavAudioEffect::Instance ( QObject* parent )
-{
-    if ( !msInstance )
-        msInstance = new QQtWavAudioEffect ( parent );
-
-    return msInstance;
-}
-
-QQtWavAudioEffect::QQtWavAudioEffect ( QObject* parent ) : QObject ( parent )
+QQtWavAudioInput::QQtWavAudioInput ( QObject* parent ) : QObject ( parent )
 {
     mTimer = new QTimer ( this );
     connect ( mTimer, SIGNAL ( timeout() ), SLOT ( slotTimeout() ) );
 
-    mVolume = 1;
+    mFileBytes.clear();
+    mBytes.clear();
+    mBytesBuffer.setBuffer ( &mBytes );
+
+    mTimerInterval = 20;
 }
 
-void QQtWavAudioEffect::useDefaultOutputDevice()
+QIODevice* QQtWavAudioInput::setSourceFile ( QString localFile )
 {
-    manager.outputDeviceInfo() = QQtAudioManager::defaultOutputDevice();
-}
+    //如果开着，不管。
+    mSourceFile = localFile;
 
-void QQtWavAudioEffect::useCustomOutputDevice ( const QAudioDeviceInfo& output )
-{
-    manager.outputDeviceInfo() = output;
-}
-
-void QQtWavAudioEffect::play ( QString localFile )
-{
     //判断文件类型是否接受
     QMimeDatabase mimedb;
-    QMimeType mimetype = mimedb.mimeTypeForFile ( localFile );
+    QMimeType mimetype = mimedb.mimeTypeForFile ( mSourceFile );
     pline() << "filename" << localFile << "mimetype" << mimetype.name()
             << QSoundEffect::supportedMimeTypes().contains ( mimetype.name(), Qt::CaseInsensitive ) ;
 
     if ( !QSoundEffect::supportedMimeTypes().contains ( mimetype.name(), Qt::CaseInsensitive ) )
     {
         pline() << "can't play file";
-        return;
+        return NULL;
     }
 
     //判断音频具体格式
     //支持qrc文件
-    bool ret = anlysisWavFileHeader ( localFile );
+    bool ret = anlysisWavFileHeader ( mSourceFile );
     //仅仅支持本地文件
     //bool ret = anlysisWavFileHeader_C ( localFile );
 
     if ( !ret )
     {
         pline() << "wav format parse fail";
-        return;
+        return NULL;
     }
 
-    //如果正在播放，先关闭写入音频数据流。
-    mTimer->stop();
-    manager.stopOutput();
+    return &mBytesBuffer;
+}
+
+void QQtWavAudioInput::setTimerInterval ( int millSecond ) { mTimerInterval = millSecond; }
+
+
+bool QQtWavAudioInput::start()
+{
+    stop();
+
+    mChannelCount = mFormat.channelCount();
+    mSampleSize = mFormat.sampleSize();
+    mSampleRate = mFormat.sampleRate();
 
     //读取到数据
-    QFile f ( localFile );
+    QFile f ( mSourceFile );
     f.open ( QFile::ReadOnly );
-    QByteArray b = f.read ( fileHeaderSize );
+    QByteArray b = f.read ( mFileHeaderSize );
     pline() << b;
-    mBytes = f.read ( fileDataSize );
+    mFileBytes = f.read ( mFileDataSize );
     f.close();
 
-    manager.outputAudioFormat() = mFormat;
-    QAudioDeviceInfo& usingOutput = manager.outputDeviceInfo();
-
-    //默认输出设备是否支持格式是否支持
-    if ( !usingOutput.isFormatSupported ( mFormat ) )
-    {
-        //当前使用设备是否支持
-        pline() << "output cant support" << mFormat;
-        mFormat = usingOutput.nearestFormat ( mFormat ); //转换为最接近格式
-    }
-
-    pline() << "use format" << mFormat;
-
-    manager.startOutput();
-    //默认是静音的。
-    manager.outputManager()->setVolume ( mVolume );
-
-    //不响，音频输出设备接受顺序的间隔的输出，不接受一股脑输出。
-    //manager.write ( bytes );
-    //OK, 达到QSound效果。
-    mTimer->start ( 10 );
+    mBytesBuffer.open ( QIODevice::ReadWrite );
+    mTimer->start ( mTimerInterval );
+    return true;
 }
 
-void QQtWavAudioEffect::setVolume ( qreal volume )
+void QQtWavAudioInput::stop()
 {
-    mVolume = volume;
-    manager.outputManager()->setVolume ( mVolume );
+    //如果正在播放，先关闭写入音频数据流。
+    mTimer->stop();
+    //如果存在，则清空。
+    //这两个变量Buffer是什么操作关系？QBuffer是QByteArray的QIODevice套。
+    //改变QByteArray，会直接影响QBuffer的读写。QBuffer也会影响QByteArray的内容。
+    mFileBytes.clear();
+    mBytes.clear();
+    mBytesBuffer.close();
 }
 
-void QQtWavAudioEffect::slotTimeout()
+int QQtWavAudioInput::fileTotalSize() {return mFileTotalSize;}
+
+int QQtWavAudioInput::fileHeaderSize() { return mFileHeaderSize; }
+
+int QQtWavAudioInput::fileDataSize() {return mFileDataSize;}
+
+int QQtWavAudioInput::fileTailSize() {return mFileTailSize;}
+
+
+void QQtWavAudioInput::slotTimeout()
 {
-    //10ms 字节数
     //1s 字节数 = 采样率 * 采样深度（位宽）* 通道数 / 8
-    int frameSize = mFormat.sampleRate() * mFormat.sampleSize() * mFormat.channelCount() / 8 / 100;
+    //mTimerInterval ms 字节数 = 1s 字节数 / (1000/mTimerInterval)
+    int frameSize = mSampleRate * mSampleSize * mChannelCount / 8 / ( 1000 / mTimerInterval );
     QByteArray tempBytes;
 
-    if ( mBytes.size() > frameSize )
+    if ( mFileBytes.size() > frameSize )
     {
         tempBytes.resize ( frameSize );
     }
     else
     {
-        tempBytes.resize ( mBytes.size() );
+        tempBytes.resize ( mFileBytes.size() );
     }
 
-    pline() << mBytes.size() << tempBytes.size() << frameSize;
-    mBytes >> tempBytes;
+    pline() << mFileBytes.size() << tempBytes.size() << frameSize;
+    //mFileBytes 逐渐减少
+    mFileBytes >> tempBytes;
+    //这是给用户的。
+    mBytes = tempBytes;
+    //回到初始位置
+    mBytesBuffer.seek ( 0 );
+    //激发readyRead信号
+    mBytesBuffer.write ( 0 );
 
-    manager.write ( tempBytes );
-
-    if ( mBytes.isEmpty() )
+    if ( mFileBytes.isEmpty() )
     {
-        pline() << mBytes.size() << 0 << frameSize;
+        pline() << mFileBytes.size() << 0 << frameSize;
         mTimer->stop();
-        manager.stopOutput();
     }
 
     return;
-
-    QAudioOutput* audioOutput = manager.outputManager();
-    QIODevice* streamOut = manager.outputDevice();
-
-    if ( audioOutput && audioOutput->state() != QAudio::StoppedState &&
-         audioOutput->state() != QAudio::SuspendedState )
-    {
-        int chunks = audioOutput->bytesFree() / audioOutput->periodSize();
-        //1136 2048 无用的代码
-        pline() << audioOutput->bytesFree() << audioOutput->periodSize();
-
-        while ( chunks )
-        {
-            if ( tempBytes.length() >= audioOutput->periodSize() )
-            {
-                //写入到扬声器
-                streamOut->write ( tempBytes.data(), audioOutput->periodSize() );
-                tempBytes = tempBytes.mid ( audioOutput->periodSize() );
-            }
-            else
-            {
-                //写入到扬声器
-                streamOut->write ( tempBytes );
-                tempBytes.clear();
-                break;
-            }
-
-            --chunks;
-        }
-    }
-
-
 }
 
-bool QQtWavAudioEffect::anlysisWavFileHeader_C ( QString localFile )
+bool QQtWavAudioInput::anlysisWavFileHeader_C ( QString localFile )
 {
     wav_t* wav = NULL;
     wav = wav_open ( localFile.toLocal8Bit().data() );
@@ -645,10 +611,10 @@ bool QQtWavAudioEffect::anlysisWavFileHeader_C ( QString localFile )
     mFormat.setCodec ( "audio/pcm" );
     mFormat.setSampleType ( QAudioFormat::SignedInt );
 
-    fileTotalSize = wav->file_size;
-    fileHeaderSize = wav->data_offset;
-    fileDataSize = wav->data_size;
-    fileTailSize = wav->file_size - wav->data_offset - wav->data_size;
+    mFileTotalSize = wav->file_size;
+    mFileHeaderSize = wav->data_offset;
+    mFileDataSize = wav->data_size;
+    mFileTailSize = wav->file_size - wav->data_offset - wav->data_size;
 
     wav_dump ( wav );
     wav_close ( &wav );
@@ -659,14 +625,10 @@ bool QQtWavAudioEffect::anlysisWavFileHeader_C ( QString localFile )
 /*
  * 解析方法2 支援Qt 资源文件
  */
-bool QQtWavAudioEffect::anlysisWavFileHeader ( QString fileName )
+bool QQtWavAudioInput::anlysisWavFileHeader ( QString fileName )
 {
     WAVFILEHEADER WavFileHeader;
     bool ret = wavParse ( fileName, WavFileHeader );
-    fileTotalSize = WavFileHeader.fileTotalSize;
-    fileHeaderSize = WavFileHeader.fileHeaderSize;
-    fileDataSize = WavFileHeader.fileDataSize;
-    fileTailSize = WavFileHeader.fileTailSize;
 
     mFormat.setChannelCount ( WavFileHeader.nChannleNumber );
     mFormat.setSampleRate ( WavFileHeader.nSampleRate );
@@ -674,10 +636,115 @@ bool QQtWavAudioEffect::anlysisWavFileHeader ( QString fileName )
     mFormat.setByteOrder ( QAudioFormat::LittleEndian );
     mFormat.setCodec ( "audio/pcm" );
     mFormat.setSampleType ( QAudioFormat::SignedInt );
+
+    mFileTotalSize = WavFileHeader.fileTotalSize;
+    mFileHeaderSize = WavFileHeader.fileHeaderSize;
+    mFileDataSize = WavFileHeader.fileDataSize;
+    mFileTailSize = WavFileHeader.fileTailSize;
     return true;
 }
 
-void QQtWavAudio ( QString localFile )
+void QQtWavSound ( QString localFile )
 {
-    QQtWavAudioEffect::Instance ( )->play ( localFile );
+    QQtWavSoundEffect::Instance ( )->play ( localFile );
+}
+
+QQtWavSoundEffect* QQtWavSoundEffect::msInstance = NULL;
+
+QQtWavSoundEffect* QQtWavSoundEffect::Instance ( QObject* parent )
+{
+    if ( !msInstance )
+        msInstance = new QQtWavSoundEffect ( parent );
+
+    return msInstance;
+}
+
+QQtWavSoundEffect::QQtWavSoundEffect ( QObject* parent ) : QObject ( parent )
+{
+    mVolume = 1;
+    mIOInput = NULL;
+}
+
+void QQtWavSoundEffect::setOutputDevice ( const QAudioDeviceInfo& output )
+{
+    if ( output.isNull() )
+        manager.outputDeviceInfo() = QQtAudioManager::defaultOutputDevice();
+    else
+        manager.outputDeviceInfo() = output;
+}
+
+void QQtWavSoundEffect::useDefaultOutputDevice()
+{
+    manager.outputDeviceInfo() = QQtAudioManager::defaultOutputDevice();
+}
+
+void QQtWavSoundEffect::useCustomOutputDevice ( const QAudioDeviceInfo& output )
+{
+    manager.outputDeviceInfo() = output;
+}
+
+void QQtWavSoundEffect::play ( QString localFile )
+{
+    //判断文件类型是否接受
+    QMimeDatabase mimedb;
+    QMimeType mimetype = mimedb.mimeTypeForFile ( localFile );
+    pline() << "filename" << localFile << "mimetype" << mimetype.name()
+            << QSoundEffect::supportedMimeTypes().contains ( mimetype.name(), Qt::CaseInsensitive ) ;
+
+    if ( !QSoundEffect::supportedMimeTypes().contains ( mimetype.name(), Qt::CaseInsensitive ) )
+    {
+        pline() << "can't play file";
+        return;
+    }
+
+    //如果正在播放，先关闭
+    if ( mIOInput )
+    {
+        mWavInput.stop();
+        manager.stopOutput();
+        disconnect ( mIOInput, SIGNAL ( readyRead() ),
+                     this, SLOT ( readyRead() ) );
+        mIOInput = NULL;
+    }
+
+    mIOInput = mWavInput.setSourceFile ( localFile );
+    connect ( mIOInput, SIGNAL ( readyRead() ),
+              this, SLOT ( readyRead() ) );
+
+    QAudioDeviceInfo& usingOutput = manager.outputDeviceInfo();
+
+    QAudioFormat fmt = mWavInput.format();
+
+    //输出设备是否支持格式是否支持
+    if ( !usingOutput.isFormatSupported ( fmt ) )
+    {
+        //当前使用设备是否支持
+        pline() << "output cant support" << fmt;
+        fmt = usingOutput.nearestFormat ( fmt ); //转换为最接近格式
+    }
+
+    pline() << "use format" << fmt;
+    manager.outputAudioFormat() = fmt;
+
+    manager.startOutput();
+    //默认是静音的。
+    manager.outputManager()->setVolume ( mVolume );
+
+    //不响，音频输出设备接受顺序的间隔的输出，不接受一股脑输出。
+    //manager.write ( bytes );
+    //OK, 达到QSound效果。
+    mWavInput.start();
+}
+
+void QQtWavSoundEffect::setVolume ( qreal volume )
+{
+    mVolume = volume;
+    manager.outputManager()->setVolume ( mVolume );
+}
+
+void QQtWavSoundEffect::readyRead()
+{
+    QByteArray bytes = mIOInput->readAll();
+    //pline() << bytes.size();
+    manager.write ( bytes );
 }
