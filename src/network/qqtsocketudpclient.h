@@ -42,15 +42,9 @@ private slots:
     void updateProgress ( qint64 bytes );
     //如果有一个同名的槽，参数不同，并且被用宏控制起来，Qt编译不过。
     //Qt的元对象系统，解析信号和槽函数，不支持宏。
+    //QtUdpSocket，writeDatagram不是个槽。
     qint64 slotWriteDatagram ( const QByteArray& datagram,
-                               const QHostAddress& host, quint16 port ) {
-        return writeDatagram ( datagram, host, port );
-    }
-#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
-    qint64 slotWriteDatagram ( const QNetworkDatagram& datagram ) {
-        return writeDatagram ( datagram );
-    }
-#endif
+                               const QHostAddress& host, quint16 port );
 
 private:
     QQtUdpProtocol* m_protocol;

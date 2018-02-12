@@ -1,4 +1,4 @@
-#include "qqtwidget.h"
+﻿#include "qqtwidget.h"
 #include <QStylePainter>
 #include "qqtcore.h"
 

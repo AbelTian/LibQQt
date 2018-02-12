@@ -31,10 +31,6 @@ void QQtSocketUdpClient::installProtocol ( QQtUdpProtocol* stack )
     m_protocol = stack;
     connect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
               this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
-#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
-    connect ( m_protocol, SIGNAL ( writeDatagram ( const QNetworkDatagram& ) ),
-              this, SLOT ( slotWriteDatagram ( const QNetworkDatagram& ) ) );
-#endif
 }
 
 void QQtSocketUdpClient::uninstallProtocol ( QQtUdpProtocol* stack )
@@ -46,10 +42,6 @@ void QQtSocketUdpClient::uninstallProtocol ( QQtUdpProtocol* stack )
 
     disconnect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
                  this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
-#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
-    disconnect ( m_protocol, SIGNAL ( writeDatagram ( const QNetworkDatagram& ) ),
-                 this, SLOT ( slotWriteDatagram ( const QNetworkDatagram& ) ) );
-#endif
     m_protocol = NULL;
 }
 
@@ -144,9 +136,14 @@ void QQtSocketUdpClient::updateProgress ( qint64 bytes )
     //pline() << bytes;
 }
 
+qint64 QQtSocketUdpClient::slotWriteDatagram ( const QByteArray& datagram, const QHostAddress& host, quint16 port )
+{
+    return writeDatagram ( datagram, host, port );
+}
+
 void QQtSocketUdpClient::readyReadData()
 {
-    /*为什么用while?*/ //Qt4 没有那么高级的一次性读取的接口
+    /*为什么用while?*/ //Qt4 没有那么高级的一次性读取的接口?有
     while ( hasPendingDatagrams() )
     {
         QByteArray bytes;
@@ -154,7 +151,24 @@ void QQtSocketUdpClient::readyReadData()
         QHostAddress host;
         quint16 port;
 
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+        /*能够一次收够一条报文？测试的能。*/
+        QNetworkDatagram datagram = receiveDatagram();
+        /*由于添加了兼容Qt4的代码，以上注释起来。*/
+
+        /*数据无意义 "" -1 在此设置*/
+        datagram.setDestination ( this->localAddress(), this->localPort() );
+        //pline() << "udp sender:" << datagram.senderAddress() << datagram.senderPort();
+        //pline() << "udp receiver:" << datagram.destinationAddress() << datagram.destinationPort();
+        m_protocol->translator ( datagram );
+
+        bytes = datagram.data();
+        host = datagram.senderAddress();
+        port = datagram.senderPort();
+        m_protocol->translator ( bytes, host, port );
+#else
         qint64 size = pendingDatagramSize();
+        //pline() << "udp new msg size:" << size;
         //这里的buf用完, 已经释放。
         char* data = new char[size + 1]();
         qint64 len = readDatagram ( data, size, &host, &port );
@@ -163,22 +177,8 @@ void QQtSocketUdpClient::readyReadData()
         delete[] data;
 
         m_protocol->translator ( bytes, host, port );
-
-#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
-        /*能够一次收够一条报文？测试的能。*/
-        QNetworkDatagram datagram;
-        //datagrame = receiveDatagram();
-        /*由于添加了兼容Qt4的代码，以上注释起来。*/
-        datagram.setData ( bytes );
-        datagram.setSender ( host, port );
-
-        /*数据无意义 "" -1 在此设置*/
-        datagram.setDestination ( this->localAddress(), this->localPort() );
-        //pline() << "udp sender:" << datagram.senderAddress() << datagram.senderPort();
-        //pline() << "udp receiver:" << datagram.destinationAddress() << datagram.destinationPort();
-        //pline() << "udp new msg size:" << size;
-        m_protocol->translator ( datagram );
 #endif
+
     }
 }
 

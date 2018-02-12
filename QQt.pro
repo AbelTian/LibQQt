@@ -24,7 +24,8 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/qrcodeexample
 #SUBDIRS += examples/qqtnetworkexample
 #udp 嵌入式linux，Qt编译了udp后支持
-#SUBDIRS += examples/qqtudpexample
+#
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/qqtudpexample
 #SUBDIRS += examples/qqtchartexample
 #
 #
@@ -48,7 +49,7 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += test/qqtdicttest2
 #SUBDIRS += test/consoletest
 #
-SUBDIRS += test/voicetest
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += test/voicetest
 
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
 #    SUBDIRS += test/cmdwidget

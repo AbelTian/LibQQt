@@ -1,4 +1,4 @@
-#ifndef QQTWIFIDBWIDGET_H
+﻿#ifndef QQTWIFIDBWIDGET_H
 #define QQTWIFIDBWIDGET_H
 
 #include <qqtwidget.h>
@@ -26,7 +26,7 @@ public:
     virtual ~QQtWifiDBWidget() {}
 
     void setDB ( DB_STAT s );
-    void setDbPixMap ( DB_STAT s, QString pixname );
+    void setDbPixMap ( DB_STAT s, const QString& pixname );
 
 signals:
 
