@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <qqtaudiomanager.h>
 #include <qqtcore.h>
@@ -102,13 +102,21 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //响
     //QSound::play ( "://9733" );
 
+    //响
     QQtWavAudioEffect e1;
-    e1.play ( "://9733" );
+    //e1.play ( "://9733" );
     //e1.play ( "./res/9733.wav" );
 
+    //响
     //QApplication::beep();
 
-    QQtSleep ( 3000 );
+    //建议初始化
+    QQtWavAudioEffect::Instance ( this );
+
+    //可以多次循环调用。
+    QQtWavAudio ( "://9733" );
+
+    //QQtSleep ( 3000 );
 
 }
 
@@ -424,4 +432,30 @@ void MainWindow::on_pushButton_4_clicked()
 
     manager.startDefaultInput();
     manager.startDefaultOutput();
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    QString name = QQtAudioManager::defaultOutputDevice().deviceName();
+
+    if ( ui->outputListWidget->currentIndex().isValid() )
+        name = ui->outputListWidget->currentIndex().data().toString();
+
+    QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
+
+    QQtWavAudioEffect::Instance()->useCustomOutputDevice ( devOut );
+    QQtWavAudio ( "./res/9733.wav" );
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    QString name = QQtAudioManager::defaultOutputDevice().deviceName();
+
+    if ( ui->outputListWidget->currentIndex().isValid() )
+        name = ui->outputListWidget->currentIndex().data().toString();
+
+    QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
+
+    QQtWavAudioEffect::Instance()->useCustomOutputDevice ( devOut );
+    QQtWavAudio ( "./res/9763.wav" );
 }

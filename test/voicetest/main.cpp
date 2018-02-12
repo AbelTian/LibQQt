@@ -9,7 +9,10 @@ int main ( int argc, char* argv[] )
 
     MainWindow w;
     w.show();
+
+#ifdef __ANDROID__
     w.showMaximized();
+#endif
 
     return a.exec();
 }
