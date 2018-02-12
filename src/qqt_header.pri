@@ -210,12 +210,14 @@ contains (DEFINES, __EXQUISITE__) {
     contains (DEFINES, __SVGWIDGETS__) {
         QT += svg
     }
-    #Gumbo need std support
-    QMAKE_CFLAGS += -std=c99
 
     #c++ html parser query
     #if you use Gumbo parser query, open this annotation
     DEFINES += __GUMBOSUPPORT__
+    contains (DEFINES, __GUMBOSUPPORT__) {
+        #Gumbo need std support
+        QMAKE_CFLAGS += -std=c99
+    }
 }
 ##################WebSocket Module###############################
 #don't close this macro ...
