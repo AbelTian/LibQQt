@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>932</width>
-    <height>461</height>
+    <width>940</width>
+    <height>411</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,14 +18,14 @@
     <item row="0" column="0" rowspan="2">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Tab 1</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0" rowspan="6">
+        <item row="0" column="0">
          <layout class="QGridLayout" name="gridLayout">
           <item row="3" column="1">
            <widget class="QListWidget" name="inBit"/>
@@ -55,7 +55,7 @@
           </item>
          </layout>
         </item>
-        <item row="0" column="1" rowspan="6">
+        <item row="0" column="1">
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="3" column="0">
            <widget class="QListWidget" name="outChn"/>
@@ -85,112 +85,143 @@
           </item>
          </layout>
         </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>start take voice and play</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="pushButton_4">
-          <property name="text">
-           <string>start take voice 
-and play (default device)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="text">
-           <string>stop (optional)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>refresh device list</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>input volume</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="inHS">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>output volume</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="outHS">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="5" column="2">
-         <widget class="QWidget" name="widget" native="true">
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <widget class="QPushButton" name="pushButton_5">
-             <property name="text">
-              <string>sound effect 1</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_6">
-             <property name="text">
-              <string>sound effect 2</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_7">
-             <property name="text">
-              <string>sound effect 3</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_12">
-             <property name="text">
-              <string>I record this voice</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
         <string>Tab 2</string>
        </attribute>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>190</y>
+          <width>141</width>
+          <height>151</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>input volume</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="inHS">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>output volume</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="outHS">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="widget" native="true">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>179</width>
+          <height>221</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QPushButton" name="pushButton_5">
+           <property name="text">
+            <string>sound effect 1</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_6">
+           <property name="text">
+            <string>sound effect 2</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_7">
+           <property name="text">
+            <string>sound effect 3</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_12">
+           <property name="text">
+            <string>sound effect 4</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>20</y>
+          <width>191</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>start take voice and play</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="text">
+            <string>start take voice 
+and play (default device)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="text">
+            <string>stop (optional)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>refresh device list</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Tab 3</string>
+       </attribute>
        <widget class="QPushButton" name="pushButton_8">
         <property name="geometry">
          <rect>
           <x>50</x>
-          <y>20</y>
+          <y>30</y>
           <width>171</width>
           <height>41</height>
          </rect>
@@ -199,24 +230,11 @@ and play (default device)</string>
          <string>record 0</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_9">
-        <property name="geometry">
-         <rect>
-          <x>240</x>
-          <y>20</y>
-          <width>171</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>play record 0</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="pushButton_10">
         <property name="geometry">
          <rect>
           <x>50</x>
-          <y>60</y>
+          <y>70</y>
           <width>171</width>
           <height>41</height>
          </rect>
@@ -229,13 +247,26 @@ and play (default device)</string>
         <property name="geometry">
          <rect>
           <x>240</x>
-          <y>60</y>
+          <y>70</y>
           <width>171</width>
           <height>41</height>
          </rect>
         </property>
         <property name="text">
          <string>stop playing</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>30</y>
+          <width>171</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>play record 0</string>
         </property>
        </widget>
       </widget>

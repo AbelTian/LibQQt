@@ -550,5 +550,5 @@ void MainWindow::on_pushButton_11_clicked()
 void MainWindow::on_pushButton_12_clicked()
 {
     //android support 16bit but 24bit
-    //QQtWavSound ( res ( "9999.wav" ) );
+    QQtWavSound ( res ( "9767.wav" ) );
 }
