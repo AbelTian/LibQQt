@@ -444,6 +444,7 @@ void MainWindow::on_pushButton_5_clicked()
     QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
 
     QQtWavSoundEffect::Instance()->useCustomOutputDevice ( devOut );
+    QQtWavSound()->setLoops ( 3 );
     QQtWavSound ( "./res/9733.wav" );
 }
 
@@ -459,4 +460,18 @@ void MainWindow::on_pushButton_6_clicked()
     QQtWavSoundEffect::Instance()->useCustomOutputDevice ( devOut );
     QQtWavSound ( "./res/9763.wav" );
     //QSound::play ( "./res/9763.wav" );
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    QString name = QQtAudioManager::defaultOutputDevice().deviceName();
+
+    if ( ui->outputListWidget->currentIndex().isValid() )
+        name = ui->outputListWidget->currentIndex().data().toString();
+
+    QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
+
+    QQtWavSoundEffect::Instance()->useCustomOutputDevice ( devOut );
+    QQtWavSound()->setLoops ( 1 );
+    QQtWavSound ( "./res/9612.wav" );
 }

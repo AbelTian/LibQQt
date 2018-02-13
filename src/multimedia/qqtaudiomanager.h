@@ -16,10 +16,16 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
+//设计思路：QQtAudioManager两端是内存和声卡（输入输出差分可选的）设备，为内存服务。
 
 /**
  * @brief The QQtAudioManager class
- * 为用户提供连接声卡的通道，一个Manager包括：输入选择，输出选择，输入信号，输出函数。
+ * 为用户提供连接声卡的通道，一个Manager包括：输入选择，输出选择，输入读信号，输出函数。
+ * 关于回听：打开输入，不开输出=QAudioInput，开输出增加QAudioOutput=回听。
+ * 关于输出：可以按照Timer时序write音频数据帧Bytes到输出设备。
+ * 关于输入：可以在readyRead里面接收到来自选定输入设备的音频帧。
+ * 地位等高于QQtWavSoundEffect，目标为用户提供声卡输入端（音频输入设备）（拾音器）的音频数据帧，附加回听功能。（地位：封装层次）
+ * QQtWavSoundEffect，目标为用户提供连续播放Wav的能力。
  *
  * 处理声音三要点
  * 声音的格式 ，也就是声音三要素，输入一个、输出一个，manager对其分开管理，但是建议用户合并为一个置等。通道数、采样位宽、采样率

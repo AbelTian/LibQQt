@@ -519,7 +519,7 @@ QIODevice* QQtWavAudioInput::setSourceFile ( QString localFile )
 void QQtWavAudioInput::setTimerInterval ( int millSecond ) { mTimerInterval = millSecond; }
 
 
-bool QQtWavAudioInput::start()
+void QQtWavAudioInput::start()
 {
     stop();
 
@@ -537,7 +537,7 @@ bool QQtWavAudioInput::start()
 
     mBytesBuffer.open ( QIODevice::ReadWrite );
     mTimer->start ( mTimerInterval );
-    return true;
+    return;
 }
 
 void QQtWavAudioInput::stop()
@@ -577,7 +577,7 @@ void QQtWavAudioInput::slotTimeout()
         tempBytes.resize ( mFileBytes.size() );
     }
 
-    pline() << mFileBytes.size() << tempBytes.size() << frameSize;
+    //pline() << mFileBytes.size() << tempBytes.size() << frameSize;
     //mFileBytes 逐渐减少
     mFileBytes >> tempBytes;
     //这是给用户的。
@@ -589,7 +589,8 @@ void QQtWavAudioInput::slotTimeout()
 
     if ( mFileBytes.isEmpty() )
     {
-        pline() << mFileBytes.size() << 0 << frameSize;
+        //pline() << mFileBytes.size() << 0 << frameSize;
+        //这里不要关闭Buffer，客户一般还没用完。
         mTimer->stop();
     }
 
@@ -644,11 +645,6 @@ bool QQtWavAudioInput::anlysisWavFileHeader ( QString fileName )
     return true;
 }
 
-void QQtWavSound ( QString localFile )
-{
-    QQtWavSoundEffect::Instance ( )->play ( localFile );
-}
-
 QQtWavSoundEffect* QQtWavSoundEffect::msInstance = NULL;
 
 QQtWavSoundEffect* QQtWavSoundEffect::Instance ( QObject* parent )
@@ -663,6 +659,8 @@ QQtWavSoundEffect::QQtWavSoundEffect ( QObject* parent ) : QObject ( parent )
 {
     mVolume = 1;
     mIOInput = NULL;
+    mLooping = 1;
+    mLoops = 1;
 }
 
 void QQtWavSoundEffect::setOutputDevice ( const QAudioDeviceInfo& output )
@@ -697,15 +695,9 @@ void QQtWavSoundEffect::play ( QString localFile )
         return;
     }
 
-    //如果正在播放，先关闭
-    if ( mIOInput )
-    {
-        mWavInput.stop();
-        manager.stopOutput();
-        disconnect ( mIOInput, SIGNAL ( readyRead() ),
-                     this, SLOT ( readyRead() ) );
-        mIOInput = NULL;
-    }
+    mSourceFile = localFile;
+
+    stop();
 
     mIOInput = mWavInput.setSourceFile ( localFile );
     connect ( mIOInput, SIGNAL ( readyRead() ),
@@ -736,10 +728,38 @@ void QQtWavSoundEffect::play ( QString localFile )
     mWavInput.start();
 }
 
+void QQtWavSoundEffect::stop()
+{
+    //如果正在播放，先关闭
+    if ( mIOInput )
+    {
+        mWavInput.stop();
+        manager.stopOutput();
+        disconnect ( mIOInput, SIGNAL ( readyRead() ),
+                     this, SLOT ( readyRead() ) );
+        mIOInput = NULL;
+    }
+
+    mLooping = 1;
+    mDataSize = 0;
+}
+
 void QQtWavSoundEffect::setVolume ( qreal volume )
 {
     mVolume = volume;
     manager.outputManager()->setVolume ( mVolume );
+}
+
+int QQtWavSoundEffect::loops() const { return mLoops; }
+
+int QQtWavSoundEffect::loopsRemaining() const
+{
+    return mLoops - mLooping;
+}
+
+void QQtWavSoundEffect::setLoops ( int loops )
+{
+    mLoops = loops;
 }
 
 void QQtWavSoundEffect::readyRead()
@@ -747,4 +767,24 @@ void QQtWavSoundEffect::readyRead()
     QByteArray bytes = mIOInput->readAll();
     //pline() << bytes.size();
     manager.write ( bytes );
+
+    mDataSize += bytes.size();
+
+    if ( mDataSize == mWavInput.fileDataSize() )
+    {
+        int loop = mLooping;
+
+        if ( loop < loops() )
+            play ( mSourceFile );
+
+        mLooping = loop + 1;
+    }
+}
+
+QQtWavSoundEffect* QQtWavSound ( QString localFile )
+{
+    if ( !localFile.isEmpty() )
+        QQtWavSoundEffect::Instance ( )->play ( localFile );
+
+    return QQtWavSoundEffect::Instance();
 }

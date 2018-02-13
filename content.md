@@ -30,7 +30,7 @@
 6. QQt通讯套件。
      - 通讯口类   
         - QQtSerialPort 兼容QSerialPort and QextSerialPort
-        - [QQtSocketTcpClient](src/network/qqtsockettcpclient.h)、QQtSocketTcpServer、QQtSocketUdpClient、QQtSocketUdpServer
+        - [QQtSocketTcpClient](src/network/qqtsockettcpclient.h)、QQtSocketTcpServer、QQtSocketUdpClient
         - QQtBluetoothSocket +QQtBluetoothManager
         - QQtWebAccessManager，支持http、ftp等主流协议，高并发传输。
         - QQtWebSocket接口
@@ -42,20 +42,22 @@
 9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
 5. 支持Qt5.9.2   
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
-1. 添加svg support widgets  
+1. 添加矢量图形widgets  
      - 比如 QQtSvgProgressbar
      - QQtSvgCheckBox
-2. 添加 [QQtDictionary](src/core/qqtdictionary.h)   
-     - 解决C Plus Plus中没有字典类别的尴尬。    
-3. 添加Multi Link技术  
+2. 添加核心类之[QQtDictionary](src/core/qqtdictionary.h)   
+     - 化解C Plus Plus中没有字典类别的尴尬。    
+3. 添加Multi Link工程管理pri组  
      - Multi Link technology，既多链接工程管理技术。
      - 基于qmake，用户可以轻易的链接LibQQt和添加自定义library。  
 4. 添加gif support Widgets  
     - 可以方便的设置动态按钮等。  
     - 有QQtGifWidget、QQtGifButton等。   
-5. 添加QQtAudioManager  
+5. 添加多媒体音频内存处理器
+    - 目标，把需要输出输出的音频对象，通过QIODevice，处理到内存当中供App工程师使用。
+    - 包括QQtAudioManager、QQtWavAudioEffect、  
     - 帮助App选择音频输入、输出设备  
-    - 帮助App设置音频格式，差分处理，但是，依然建议输入、输出格式相等。  
+    - 帮助App设置音频格式，差分处理输入、输出，但是，依然建议输入、输出格式相等。  
     - 将AudioDevice当做一个设备进行读写，App处理获取到的声音，处理后，自行使用，或者放音均可。  
     
 

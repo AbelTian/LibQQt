@@ -12,12 +12,27 @@
 #include <QSound>
 #include <QSoundEffect>
 
+//设计思路：QQtWavAudioInput和QQtWavAudioOutput两边都是内存和wav文件，为内存服务。
+
 /**
  * @brief The QQtWavAudioInput class
+ * QQtWavAudioInput具备QAudioInput的能力，可以把wav文件的音频帧，通过readyRead输出。
  * 每次/10ms一帧，通过QIODevice readyRead发射给用户。
- * 原理，设置Sourcefile，返回QIODevice，进行读取。一次加载，逐渐读取。
  * 升级目标：QQtAudioInput里支持的设备比较广泛，文件类型比较多。
+ *
+ * 原理，设置Sourcefile，返回QIODevice，进行读取。一次加载，逐渐读取。
+ *
  * 不要使用大文件。
+ * Qt 中有一个 QBuffer 类，可以将 QByteArray 包装成一个 QIODevice。QMemIODevice = QBuffer
+ * 如果来的是个QByteArray，那么，用QBuffer封装，
+ * 在 open 函数中调用 QIODevice::open(mode)
+ * 要解析wav，用自定义程序，还是用开源Library（libsndfile）？自定义程序
+ * 要播放wav，是用wav的音频格式来设定输出设备，还是用个输出设备支持的音频格式，wav里选取进行使用？使用wav的。
+ *
+ * 尝试用QAudioDecoder，解码器不支持x-wav，defaultServiceProvider::requestService(): no service found for - "org.qt-project.qt.audiodecode"
+ * 为什么QSoundEffect支持那么多wav格式？("audio/x-wav", "audio/wav", "audio/wave", "audio/x-pn-wav")
+ * QAudioDecoder保存了一个提交，#5643241
+ * QWavAudioEffect保存了一个提交，#5f43622
  */
 class QQTSHARED_EXPORT QQtWavAudioInput : public QObject
 {
@@ -25,13 +40,15 @@ class QQTSHARED_EXPORT QQtWavAudioInput : public QObject
 
 public:
     explicit QQtWavAudioInput ( QObject* parent = nullptr );
-
+    //自动解析格式，和文件大小
     QIODevice* setSourceFile ( QString localFile );
 
     //采样间隔 10-100ms default:20
+    int timerInterval() const { return mTimerInterval; }
     void setTimerInterval ( int millSecond = 20 );
-
-    bool start();
+    //可以频繁开启，tip：用完一定要关闭，系统会自动关闭。
+    //已经检查测试，没有文件设备漏开关问题。
+    void start();
     void stop();
 
     const QAudioFormat& format() { return mFormat; }
@@ -80,20 +97,10 @@ protected:
     bool anlysisWavFileHeader ( QString fileName );
 };
 
-//在使用QQtWavSound等函数之前，调用类的instance函数，+parent 初始化一下实例。
-//=QSound::play()
-void QQtWavSound ( QString localFile  );
-
 /*
- * QQtWavAudioEffect = QSoundEffect
- * QQtWavAudioEffect支持从wav获取声音并输出，弥补QSoundEffect（+他的高级点的封装QSound）不能支持选择设备的缺失。
- * 同时QQtWavAudioEffect又具备QAudioInput的能力，可以把wav文件的音频帧，通过readyRead输出。
+ * QQtWavSoundEffect = QSoundEffect + QSound +...
+ * QQtWavSoundEffect支持从wav获取声音并输出，弥补QSoundEffect（+他的高级点的封装QSound）不能支持选择设备的缺失。
  *
- * Qt 中有一个 QBuffer 类，可以将 QByteArray 包装成一个 QIODevice。QMemBuffer
- * inputFile->isReadable() 一直都是 false 状态。原因是没在 open 函数中调用 QIODevice::open(mode)
- * 要解析wav，用自定义程序，还是用开源Library（libsndfile）？
- * 要播放wav，是用wav的音频格式来设定输出设备，还是用个输出设备支持的音频格式，wav里选取进行使用？
- * 如果来的是个QByteArray，那么，用QBuffer封装，
  */
 class QQTSHARED_EXPORT QQtWavSoundEffect : public QObject
 {
@@ -106,6 +113,7 @@ public:
 
     explicit QQtWavSoundEffect ( QObject* parent = nullptr );
 
+    //设置设备以后，不需要每次都设置
     //更换设备不会引发播放更改，只会更改内部设备记录。调用play才会导致播放更改。
     void setOutputDevice ( const QAudioDeviceInfo& output = QAudioDeviceInfo() );
 
@@ -115,7 +123,15 @@ public:
 
     void play ( QString localFile );
 
+    void stop();
+
+    //设置声音以后，不需要每次都要设置。
     void setVolume ( qreal volume );
+
+    //设置loop会保存下来，不需要每次设置。
+    int loops() const;
+    int loopsRemaining() const;
+    void setLoops ( int loops );
 
 private slots:
     void readyRead();
@@ -127,22 +143,25 @@ private:
     QQtWavAudioInput mWavInput;
     QIODevice* mIOInput;
     QQtAudioManager manager;
+    QString mSourceFile;
+    int mDataSize;
     //volume会被记住。
     qreal mVolume;
+    int mLoops;
+    int mLooping;
 };
+
+//在使用QQtWavSound等函数之前，调用类的instance函数，+parent 初始化一下实例。
+//=QSound::play()
+QQtWavSoundEffect* QQtWavSound ( QString localFile = "" );
 
 /**
  * @brief The QQtAudioEffect class
  * QSound、QSoundEffect是不能指定输出设备的。
  * 用于播放音效文件，接受指定输出设备。
- * 支持一边播放音效，一边输入声音。
  *
- * 请不要用来播放大文件
+ * 请不要用来播放大文件，会全部读入内存，然后逐渐删除。
  * 尝试用QQt的，需要切掉wav文件的44头。
- * 尝试用QAudioDecoder，解码器不支持x-wav，defaultServiceProvider::requestService(): no service found for - "org.qt-project.qt.audiodecode"
- * 为什么QSoundEffect支持那么多wav格式？("audio/x-wav", "audio/wav", "audio/wave", "audio/x-pn-wav")
- * QAudioDecoder保存了一个提交，#5643241
- * QWavAudioEffect保存了一个提交，#5f43622
  * 现在更新为用QQt的，QQtAudioEffect目标支持多种格式的音效文件。
  */
 class QQTSHARED_EXPORT QQtAudioEffect : public QQtAudioManager
