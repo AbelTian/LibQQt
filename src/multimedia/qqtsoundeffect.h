@@ -76,6 +76,8 @@ QQtWavSoundEffect* QQtWavSound ( QString localFile = "" );
  * 尝试用QQt的，需要切掉wav文件的44头。
  * 现在更新为用QQt的，QQtAudioEffect目标支持多种格式的音效文件。
  * 未实现
+ *
+ * lame是编码器，解码器用mpg123
  */
 class QQTSHARED_EXPORT QQtSoundEffect : public QQtAudioManager
 {

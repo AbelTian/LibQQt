@@ -498,6 +498,7 @@ void MainWindow::on_pushButton_7_clicked()
 void MainWindow::on_pushButton_8_clicked()
 {
     //不需要停止录音？需要
+    //android 不支持./temp.wav....
 
     //record
     QAudioDeviceInfo input = QQtAudioManager::defaultInputDevice();

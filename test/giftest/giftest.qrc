@@ -1,6 +1,6 @@
 ﻿<RCC>
-    <qresource prefix="/">
-        <file>AppRoot/skin/waiting.gif</file>
-        <file>AppRoot/skin/yun.png</file>
+    <qresource prefix="/skin">
+        <file alias="waiting.gif">AppRoot/skin/waiting.gif</file>
+        <file alias="yun.png">AppRoot/skin/yun.png</file>
     </qresource>
 </RCC>

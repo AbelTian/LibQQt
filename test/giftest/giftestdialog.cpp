@@ -1,4 +1,4 @@
-#include "giftestdialog.h"
+﻿#include "giftestdialog.h"
 #include "ui_giftestdialog.h"
 #include "qqtframe.h"
 
@@ -32,9 +32,9 @@ GifTestDialog::GifTestDialog ( QWidget* parent ) :
     pline() << res ( "../waiting.gif" );
     pline() << QDir ( "." ).relativeFilePath ( "skin/yun.png" );
     pline() << QDir ( res ( "../waiting.gif" ) ).absolutePath();
-    ui->labelGif->setGifFile (  res ( "waiting.gif" ) );
-    ui->widgetGif->setGifFile ( res ( "waiting.gif" ) );
-    ui->widgetQQt->setPixmap ( res ( "yun.png" ) );
+    ui->labelGif->setGifFile (  skin ( "waiting.gif" ) );
+    ui->widgetGif->setGifFile ( skin ( "waiting.gif" ) );
+    ui->widgetQQt->setPixmap ( skin ( "yun.png" ) );
 
     pline() << QMovie::supportedFormats();
 }
