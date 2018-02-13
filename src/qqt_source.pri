@@ -156,16 +156,18 @@ contains (DEFINES, __MULTIMEDIA__) {
 
     #audio
     SOURCES += \
+        $$PWD/multimedia/qqtwavaudiomanager.cpp \
         $$PWD/multimedia/qqtaudiomanager.cpp
     HEADERS += \
+        $$PWD/multimedia/qqtwavaudiomanager.h \
         $$PWD/multimedia/qqtaudiomanager.h
 
     #audio effect
     #using QSound (QSoundEffect optional)
     SOURCES += \
-        $$PWD/multimedia/qqtaudioeffect.cpp
+        $$PWD/multimedia/qqtsoundeffect.cpp
     HEADERS += \
-        $$PWD/multimedia/qqtaudioeffect.h
+        $$PWD/multimedia/qqtsoundeffect.h
 }
 
 

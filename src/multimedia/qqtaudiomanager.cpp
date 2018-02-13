@@ -117,7 +117,7 @@ void QQtAudioManager::stopOutput()
     }
 }
 
-void QQtAudioManager::write ( QByteArray& bytes )
+void QQtAudioManager::write ( const QByteArray& bytes )
 {
     if ( mOutputDevice )
         mOutputDevice->write ( bytes );

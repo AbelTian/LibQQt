@@ -91,7 +91,7 @@ public:
     /*对输出设备进行操作*/
     void startOutput();
     void stopOutput();
-    void write ( QByteArray& bytes );
+    void write ( const QByteArray& bytes );
     QAudioOutput* outputManager();
     QIODevice* outputDevice();
 

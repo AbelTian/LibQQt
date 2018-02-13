@@ -2,12 +2,16 @@
 #define TEMPCLASS_H
 
 #include <QObject>
+#include <qqtcore.h>
+#include <qqt-local.h>
 
-class TempClass : public QObject
+class QQTSHARED_EXPORT TempClass : public QObject
 {
     Q_OBJECT
 public:
-    explicit TempClass ( QObject* parent = nullptr ) ;
+    explicit TempClass ( QObject* parent = nullptr ) : QObject ( parent ) {
+
+    }
 
 signals:
 

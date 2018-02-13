@@ -53,12 +53,11 @@
 4. 添加gif support Widgets  
     - 可以方便的设置动态按钮等。  
     - 有QQtGifWidget、QQtGifButton等。   
-5. 添加多媒体音频内存处理器
-    - 目标，把需要输出输出的音频对象，通过QIODevice，处理到内存当中供App工程师使用。
-    - 包括QQtAudioManager、QQtWavAudioEffect、  
-    - 帮助App选择音频输入、输出设备  
-    - 帮助App设置音频格式，差分处理输入、输出，但是，依然建议输入、输出格式相等。  
-    - 将AudioDevice当做一个设备进行读写，App处理获取到的声音，处理后，自行使用，或者放音均可。  
+5. 升级多媒体音频  
+    - 添加内存处理器，处理内存和设备之间的数据交互。  
+    - QQtAudioManager、QQtWavAudioManager、  
+    - QQtWavSoundEffect  
+    - 将AudioDevice、wav输入输出文件，当做一个设备进行读写，App处理获取到的声音。  
     
 
 
