@@ -57,10 +57,8 @@ lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
 #    SUBDIRS += test/cmdwidget
 #}
 #SUBDIRS += test/coretest
-#
-SUBDIRS += test/giftest
-#
-SUBDIRS += test/tmpproj
+#SUBDIRS += test/giftest
+#SUBDIRS += test/tmpproj
 #
 ##-----------------------------------------------------------------
 ##need webkit webkitwidgets - WebSupport
