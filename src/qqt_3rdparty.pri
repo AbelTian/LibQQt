@@ -36,7 +36,7 @@ contains (DEFINES, __EXQUISITE__) {
     #gumbo widget
     #DEFINES += __GUMBOSUPPORT__
     contains (DEFINES, __GUMBOSUPPORT__) {
-        include ($$PWD/exquisite/gumbo/parser/gumbo-parser.pri)
-        include ($$PWD/exquisite/gumbo/query/gumbo-query.pri)
+        include ($$PWD/network/gumbo/parser/gumbo-parser.pri)
+        include ($$PWD/network/gumbo/query/gumbo-query.pri)
     }
 }

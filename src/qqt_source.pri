@@ -457,10 +457,10 @@ contains (DEFINES, __EXQUISITE__) {
                 DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
             }
         }
-        SOURCES += $$PWD/exquisite/customplot/qcpdocumentobject.cpp \
-                    $$PWD/exquisite/customplot/qcustomplot.cpp
-        HEADERS += $$PWD/exquisite/customplot/qcpdocumentobject.h \
-                    $$PWD/exquisite/customplot/qcustomplot.h
+        SOURCES += $$PWD/charts/customplot/qcpdocumentobject.cpp \
+                    $$PWD/charts/customplot/qcustomplot.cpp
+        HEADERS += $$PWD/charts/customplot/qcpdocumentobject.h \
+                    $$PWD/charts/customplot/qcustomplot.h
     }
 
     #pluginwatcher

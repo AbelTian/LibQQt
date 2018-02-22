@@ -1,4 +1,4 @@
-#ifndef QQTPROTOCOL_H
+﻿#ifndef QQTPROTOCOL_H
 #define QQTPROTOCOL_H
 
 #include <QObject>
@@ -17,6 +17,9 @@ public:
     explicit QQtProtocol ( QObject* parent = 0 );
     virtual ~QQtProtocol();
 
+    /*
+     * 建议：用户在继承类里的函数里直接调用[emit] write(...)
+    */
 Q_SIGNALS:
     qint64 write ( const QByteArray& );
 

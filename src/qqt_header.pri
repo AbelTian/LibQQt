@@ -310,24 +310,25 @@ defineReplace(qqt_header){
     isEmpty(1) : error("qqt_header(path) requires one arguments.")
     command += $${path}
     command += $${path}/core
-    command += $${path}/frame
-    command += $${path}/frame/dmmu
-    command += $${path}/network
-    command += $${path}/network/qextserialport
-    command += $${path}/network/soap
     command += $${path}/gui
     command += $${path}/widgets
-    command += $${path}/charts
     command += $${path}/multimedia
     command += $${path}/sql
     command += $${path}/printsupport
+    command += $${path}/network
+    command += $${path}/network/qextserialport
+    command += $${path}/frame
+    command += $${path}/frame/dmmu
+
+    #charts
+    command += $${path}/charts
+    command += $${path}/charts/customplot
 
     #exquisite widget
     command += $${path}/exquisite
     command += $${path}/exquisite/svgwidgets
     command += $${path}/exquisite/gifwidgets
     command += $${path}/exquisite/mathml
-    command += $${path}/exquisite/customplot
     command += $${path}/exquisite/pluginwatcher
 
     ##qr code library
@@ -342,11 +343,14 @@ defineReplace(qqt_header){
                     $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
     }
 
+    ##soap (web service)
+    command += $${path}/network/soap
+
     ##gumbo library
-    command += $${path}/exquisite/gumbo/query/src
-    command += $${path}/exquisite/gumbo/parser/src
+    command += $${path}/network/gumbo/query/src
+    command += $${path}/network/gumbo/parser/src
     win32{
-        command += $${path}/exquisite/gumbo/parser/visualc/include
+        command += $${path}/network/gumbo/parser/visualc/include
     }
 
     return ($$command)
