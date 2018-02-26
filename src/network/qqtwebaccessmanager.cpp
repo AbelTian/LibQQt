@@ -1,4 +1,4 @@
-#include "qqtwebaccessmanager.h"
+﻿#include "qqtwebaccessmanager.h"
 #include "qqtcore.h"
 
 
@@ -31,20 +31,8 @@ void QQtWebAccessManager::sendGetRequest ( QQtWebAccessSession* session )
     connect ( timer, SIGNAL ( timeout() ),
               this, SLOT ( localReplyTimeOut() ) ); //超时信号
 
-    QNetworkRequest netRequest;
-    netRequest.setHeader ( QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded" );
-    netRequest.setUrl ( QUrl ( session->getWebAccessUrl() ) ); //地址信息
-
-    if ( session->getWebAccessUrl().toLower().startsWith ( "https" ) ) //https请求，需ssl支持(下载openssl拷贝libeay32.dll和ssleay32.dll文件至Qt bin目录或程序运行目录)
-    {
-        QSslConfiguration sslConfig;
-        sslConfig.setPeerVerifyMode ( QSslSocket::VerifyNone );
-        sslConfig.setProtocol ( QSsl::TlsV1_1 );
-        netRequest.setSslConfiguration ( sslConfig );
-    }
-
-    QNetworkReply* reply = NULL;
-    reply = get ( netRequest );
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = get ( netRequest );
     session->setWebAccessReply ( reply ); //发起get请求
     /*下面关联信号和槽*/
 
@@ -67,24 +55,61 @@ void QQtWebAccessManager::sendGetRequest ( QQtWebAccessSession* session )
 
 QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( QString strUrl )
 {
-    QQtWebAccessSession* session = manager->newWebAccessSession();
-    session->setWebAccessUrl ( strUrl );
-    sendGetRequest ( session );
+    QNetworkRequest netRequest;
+    netRequest.setHeader ( QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded" );
+    netRequest.setUrl ( QUrl ( strUrl ) ); //地址信息
+
+    if ( strUrl.toLower().startsWith ( "https" ) ) //https请求，需ssl支持(下载openssl拷贝libeay32.dll和ssleay32.dll文件至Qt bin目录或程序运行目录)
+    {
+        QSslConfiguration sslConfig;
+        sslConfig.setPeerVerifyMode ( QSslSocket::VerifyNone );
+        sslConfig.setProtocol ( QSsl::TlsV1_1 );
+        netRequest.setSslConfiguration ( sslConfig );
+    }
+
+    QQtWebAccessSession* session = sendGetRequest ( netRequest );
+
+    return session;
 }
 
-QQtWebAccessSession* QQtWebAccessManager::sendGetRequests ( QStringList& strUrl )
+QList<QQtWebAccessSession*> QQtWebAccessManager::sendGetRequests ( QStringList& strUrl )
 {
+    QStringListIterator itor ( strUrl );
+    QList<QQtWebAccessSession*> sessionList;
 
+    while ( itor.hasNext() )
+    {
+        QString  url = itor.next();
+        QQtWebAccessSession* session = sendGetRequest ( url );
+        sessionList.push_back ( session );
+    }
+
+    //当即使用有效，后续使用无效。
+    return sessionList;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( QNetworkRequest& netRequest )
 {
-
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = netRequest;
+    sendGetRequest ( session );
+    return session;
 }
 
-QQtWebAccessSession* QQtWebAccessManager::sendGetRequests ( QList<QNetworkRequest*>& netRequests )
+QList<QQtWebAccessSession*> QQtWebAccessManager::sendGetRequests ( QList<QNetworkRequest>& netRequests )
 {
+    QListIterator<QNetworkRequest> itor ( netRequests );
+    QList<QQtWebAccessSession*> sessionList;
 
+    while ( itor.hasNext() )
+    {
+        QNetworkRequest  req = itor.next();
+        QQtWebAccessSession* session = sendGetRequest ( req );
+        sessionList.push_back ( session );
+    }
+
+    //当即使用有效，后续使用无效。
+    return sessionList;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( QString strUrl )
@@ -115,7 +140,7 @@ void QQtWebAccessManager::finished ( QNetworkReply* reply )
 
 void QQtWebAccessManager::authenticationRequired ( QNetworkReply* r, QAuthenticator* a )
 {
-    //pline() << r << a;
+    pline() << r << a;
 }
 
 void QQtWebAccessManager::proxyAuthenticationRequired ( QNetworkProxy p, QAuthenticator* a )

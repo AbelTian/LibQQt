@@ -23,8 +23,7 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/tabwidgetexamples
 #SUBDIRS += examples/qrcodeexample
 #SUBDIRS += examples/qqtnetworkexample
-#
-SUBDIRS += test/voicetest
+#SUBDIRS += test/voicetest
 mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 #udp 嵌入式linux，Qt编译了udp支持，默认是支持的
 #SUBDIRS += examples/qqtudpexample

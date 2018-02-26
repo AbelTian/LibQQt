@@ -1,15 +1,23 @@
-#ifndef QQTWEBWORKCLIENT_H
+﻿#ifndef QQTWEBWORKCLIENT_H
 #define QQTWEBWORKCLIENT_H
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QNetworkRequest>
+
 //import this struct will not build fail
 #include <QNetworkProxy>
 #include <QSslError>
+#include <QStringList>
+#include <QUuid>
+
+#include <QNetworkCookie>
+#include <QNetworkCookieJar>
+
+
 #include <qqt-qt.h>
 #include <qqt-local.h>
 #include <qqtcore.h>
-#include <QUuid>
 
 class QQTSHARED_EXPORT QQtWebAccessSession : public QObject
 {
@@ -23,24 +31,34 @@ public:
     }
     virtual ~QQtWebAccessSession() {}
 
+    //timer
     void setTimeOut ( int timeout ) {
         m_pTimer->setInterval ( timeout );
     }
     QTimer* getTimer() {
         return m_pTimer;
     }
+
+    //request
+    QString getWebAccessUrl() {
+        return mNetworkRequest.url().toString();
+    }
+    void setWebAccessUrl ( QString strUrl ) {
+        mNetworkRequest.setUrl ( QUrl ( m_strUrl ) );
+    }
+    QNetworkRequest& webAccessRequest() {
+        return mNetworkRequest;
+    }
+
+    //reply
     QNetworkReply* getWebAccessReply() {
         return m_pNetworkReply;
     }
     void setWebAccessReply ( QNetworkReply* reply ) {
         m_pNetworkReply = reply;
     }
-    QString getWebAccessUrl() {
-        return m_strUrl;
-    }
-    void setWebAccessUrl ( QString strUrl ) {
-        m_strUrl = strUrl;
-    }
+
+    //session name
     QString getWebAccessSessionName() {
         return m_strSessionName;
     }
@@ -49,6 +67,8 @@ public:
     }
 
 private:
+    //request
+    QNetworkRequest mNetworkRequest;
     //call back
     QNetworkReply* m_pNetworkReply;
     //call time out
@@ -154,9 +174,9 @@ public:
     void sendGetRequest ( QQtWebAccessSession* session );
 
     QQtWebAccessSession* sendGetRequest ( QString strUrl );
-    QQtWebAccessSession* sendGetRequests ( QStringList& strUrls );
+    QList<QQtWebAccessSession*> sendGetRequests ( QStringList& strUrls );
     QQtWebAccessSession* sendGetRequest ( QNetworkRequest& netRequest );
-    QQtWebAccessSession* sendGetRequests ( QList<QNetworkRequest*>& netRequests );
+    QList<QQtWebAccessSession*> sendGetRequests ( QList<QNetworkRequest>& netRequests );
 
     QQtWebAccessSession* sendPostRequest ( QString strUrl );
 
