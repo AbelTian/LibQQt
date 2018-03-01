@@ -1,6 +1,6 @@
+# LibQQt  
 
-# QQt Foundation Class  
-
+LibQQt全名QQt Foundation Class。  
 LibQQt为基于Qt开发的App提供中间问题处理层，适配桌面、嵌入式以及Android、IOS的开发。
 LibQQt为用户自动生成Library SDK，主动帮助用户发布App和资源文件。
 2018年1月，LibQQt代码变更数量已达30万，主要面向初、中、高级软件相关专业、有一定App开发经验的工程师。
@@ -18,15 +18,14 @@ LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。
 *不建议使用cmake，建议使用qmake。*  
 *自动发布应用程序，自动拷贝应用配置。（请正确配置目录系统）*  
 
+
 ========================================================================  
 # 详细介绍  
-
 
 [详细介绍](content.md)  
 
 
 ========================================================================  
-
 # 使用案例  
 
 [看入门用例截图](screenshot.md)  
@@ -40,37 +39,39 @@ LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。
 *把LibQQt/extra/md5.exe 复制到C:\Windows*   
 
 [走，去看看入门用法](usage.md)  
+[参考我的LibQQt博客](http://blog.csdn.net/Dr_Abel)   
+发现了一个问题: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
 
 ========================================================================  
+# LibQQt百科   
 
-# LibQQt百科
-
-[跳转到LibQQt的百科知识页面](wiki/wiki.md "Wiki Page")
+[跳转到LibQQt的百科知识页面](wiki/wiki.md "Wiki Page")  
 
 
 ========================================================================  
-
 # 依赖学习知识   
 
 [预习Git入门](usage-git.md)  
 [去看看软件基础概念](software.md)  
-[去看看如何设置工程目录](project.md)  
+[去看看学习设置工程目录](project.md)  
+
 
 ========================================================================  
-
 # 联系我  
 
 邮箱: tianduanrui@163.com  
 QQ: 2657635903  
-发现了一个问题: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
-[参考我的LibQQt博客](http://blog.csdn.net/Dr_Abel)   
+
 
 ========================================================================  
+# 收费处  
 
+[LibQQt收费处](charge.md)   
+
+
+========================================================================  
 # 项目标识  
 
 ![logo](screenshot/logo.png "Logo")    
-
-LibQQt使用权不免费，一份使用权24万。       
 
