@@ -23,6 +23,8 @@ QQtWebAccessManager::QQtWebAccessManager ( QObject* parent ) : QNetworkAccessMan
 
     connect ( this, SIGNAL ( networkSessionConnected() ),
               this, SLOT ( networkSessionConnected() ) );
+
+    //在用户业务当中，如果有必要setCookieJar ( cookieJar );
 }
 
 void QQtWebAccessManager::sendGetRequest ( QQtWebAccessSession* session )

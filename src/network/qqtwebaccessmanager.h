@@ -147,15 +147,67 @@ private:
     QList<QQtWebAccessSession*> m_listWebAccessSession;
 } ;
 
+/**
+ * @brief QQtWebAccessCookie
+ * QNetworkCookie parseCookie函数有错误，在QQtWebAccessCookieJar里面重新实现
+ * QQtWebAccessCookie沿用QNetworkCookie。
+ * 一个cookie包括name和value，和其他信息。
+ */
+typedef QNetworkCookie QQtWebAccessCookie;
+
+/**
+ * @brief The QQtWebAccessCookieJar class
+ * 一个QQtWebAccessManager对应一个cookieJar
+ */
+class QQTSHARED_EXPORT QQtWebAccessCookieJar: public QNetworkCookieJar
+{
+    Q_OBJECT
+
+public:
+    explicit QQtWebAccessCookieJar ( QObject* parent = Q_NULLPTR ) : QNetworkCookieJar ( parent ) {
+
+    }
+    virtual ~QQtWebAccessCookieJar() {
+
+    }
+
+    //一个网址对应一组cookie [网址相当于组cookie的名字]
+    //给这个函数改改名字
+    virtual bool setCookiesForUrl ( const QList<QNetworkCookie>& cookieList, const QUrl& url ) {
+        return setCookiesFromUrl ( cookieList, url );
+    }
+
+    //QNetworkCookie里面的这个函数是个废物。
+    static QList<QNetworkCookie> parseCookies ( const QByteArray& cookieString ) {
+        QList<QByteArray> cookieBytesList = cookieString.split ( ';' );
+        QList<QNetworkCookie> cookieList;
+        QListIterator<QByteArray> itor ( cookieBytesList );
+
+        while ( itor.hasNext() ) {
+            QByteArray cookieBytes = itor.next();
+            QList<QByteArray> cookieNameAndValue = cookieBytes.split ( '=' );
+            QNetworkCookie cookie;
+            cookie.setName ( cookieNameAndValue[0].trimmed() );
+            cookie.setValue ( cookieNameAndValue[1].trimmed() );
+            cookieList.push_back ( cookie );
+        }
+
+        return cookieList;
+    }
+};
 
 /**
  * @brief The QQtWebAccessManager class
  * XXProtocol One Ftp Http QWebSocket(Custom Web Protocol) 单工...(全双工通信)
  * Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
  * Multi 全双工 QNetworkAccessManager
- * need ssl
+ * 加密 need ssl
  * Qt team 实现了几种协议的管理，就能进行几种协议的通讯。supportedSchemes
  * 用户输入的session，还可以被完整返回来，所以不必自己再实现一个链表进行管理，在session当中完整的保存就好了。
+ *
+ * 支持cookie
+ * 一个QQtWebAccessManager有一个cookieJar，一个cookieJar可以保存一组组针对网址的cookies。
+ * 用户只需要知道cookie的通信过程，就可以使用QQtWebAccessManager的cookieJar了。
  */
 class QQTSHARED_EXPORT QQtWebAccessManager : public QNetworkAccessManager
 {
