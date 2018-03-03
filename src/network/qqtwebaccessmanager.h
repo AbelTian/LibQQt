@@ -19,6 +19,55 @@
 #include <qqt-local.h>
 #include <qqtcore.h>
 
+/**
+ * @brief QQtWebAccessCookie
+ * QNetworkCookie parseCookie函数有错误，在QQtWebAccessCookieJar里面重新实现
+ * QQtWebAccessCookie沿用QNetworkCookie。
+ * 一个cookie包括name和value，和其他信息。
+ */
+typedef QNetworkCookie QQtWebAccessCookie;
+
+/**
+ * @brief The QQtWebAccessCookieJar class
+ * 一个QQtWebAccessManager对应一个cookieJar
+ */
+class QQTSHARED_EXPORT QQtWebAccessCookieJar: public QNetworkCookieJar
+{
+    Q_OBJECT
+
+public:
+    explicit QQtWebAccessCookieJar ( QObject* parent = Q_NULLPTR ) : QNetworkCookieJar ( parent ) {
+
+    }
+    virtual ~QQtWebAccessCookieJar() {
+
+    }
+
+    //一个网址对应一组cookie [网址相当于组cookie的名字]
+    //给这个函数改改名字
+    virtual bool setCookiesForUrl ( const QList<QNetworkCookie>& cookieList, const QUrl& url ) {
+        return setCookiesFromUrl ( cookieList, url );
+    }
+
+    //QNetworkCookie里面的这个函数是个废物。
+    static QList<QNetworkCookie> parseCookies ( const QByteArray& cookieString ) {
+        QList<QByteArray> cookieBytesList = cookieString.split ( ';' );
+        QList<QNetworkCookie> cookieList;
+        QListIterator<QByteArray> itor ( cookieBytesList );
+
+        while ( itor.hasNext() ) {
+            QByteArray cookieBytes = itor.next();
+            QList<QByteArray> cookieNameAndValue = cookieBytes.split ( '=' );
+            QNetworkCookie cookie;
+            cookie.setName ( cookieNameAndValue[0].trimmed() );
+            cookie.setValue ( cookieNameAndValue[1].trimmed() );
+            cookieList.push_back ( cookie );
+        }
+
+        return cookieList;
+    }
+};
+
 class QQTSHARED_EXPORT QQtWebAccessSession : public QObject
 {
     Q_OBJECT
@@ -148,55 +197,6 @@ private:
 } ;
 
 /**
- * @brief QQtWebAccessCookie
- * QNetworkCookie parseCookie函数有错误，在QQtWebAccessCookieJar里面重新实现
- * QQtWebAccessCookie沿用QNetworkCookie。
- * 一个cookie包括name和value，和其他信息。
- */
-typedef QNetworkCookie QQtWebAccessCookie;
-
-/**
- * @brief The QQtWebAccessCookieJar class
- * 一个QQtWebAccessManager对应一个cookieJar
- */
-class QQTSHARED_EXPORT QQtWebAccessCookieJar: public QNetworkCookieJar
-{
-    Q_OBJECT
-
-public:
-    explicit QQtWebAccessCookieJar ( QObject* parent = Q_NULLPTR ) : QNetworkCookieJar ( parent ) {
-
-    }
-    virtual ~QQtWebAccessCookieJar() {
-
-    }
-
-    //一个网址对应一组cookie [网址相当于组cookie的名字]
-    //给这个函数改改名字
-    virtual bool setCookiesForUrl ( const QList<QNetworkCookie>& cookieList, const QUrl& url ) {
-        return setCookiesFromUrl ( cookieList, url );
-    }
-
-    //QNetworkCookie里面的这个函数是个废物。
-    static QList<QNetworkCookie> parseCookies ( const QByteArray& cookieString ) {
-        QList<QByteArray> cookieBytesList = cookieString.split ( ';' );
-        QList<QNetworkCookie> cookieList;
-        QListIterator<QByteArray> itor ( cookieBytesList );
-
-        while ( itor.hasNext() ) {
-            QByteArray cookieBytes = itor.next();
-            QList<QByteArray> cookieNameAndValue = cookieBytes.split ( '=' );
-            QNetworkCookie cookie;
-            cookie.setName ( cookieNameAndValue[0].trimmed() );
-            cookie.setValue ( cookieNameAndValue[1].trimmed() );
-            cookieList.push_back ( cookie );
-        }
-
-        return cookieList;
-    }
-};
-
-/**
  * @brief The QQtWebAccessManager class
  * XXProtocol One Ftp Http QWebSocket(Custom Web Protocol) 单工...(全双工通信)
  * Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
@@ -215,22 +215,33 @@ class QQTSHARED_EXPORT QQtWebAccessManager : public QNetworkAccessManager
 public:
     explicit QQtWebAccessManager ( QObject* parent = 0 );
 
-    QQtWebAccessSessionManager* getWebAccessSessionManager() {
-        return manager;
-    }
+    QQtWebAccessSessionManager* getWebAccessSessionManager();
     /**
      * @brief sendGetRequest
      * use for custom session;
+     * 内部重要函数
      * @param session
      */
     void sendGetRequest ( QQtWebAccessSession* session );
-
     QQtWebAccessSession* sendGetRequest ( QString strUrl );
     QList<QQtWebAccessSession*> sendGetRequests ( QStringList& strUrls );
-    QQtWebAccessSession* sendGetRequest ( QNetworkRequest& netRequest );
-    QList<QQtWebAccessSession*> sendGetRequests ( QList<QNetworkRequest>& netRequests );
+    QQtWebAccessSession* sendGetRequest ( const QNetworkRequest& netRequest );
+    QList<QQtWebAccessSession*> sendGetRequests ( const QList<QNetworkRequest>& netRequests );
 
-    QQtWebAccessSession* sendPostRequest ( QString strUrl );
+    QQtWebAccessSession* sendHeadRequest ( const QNetworkRequest& request );
+    QQtWebAccessSession* sendPostRequest ( const QNetworkRequest& request, QIODevice* data );
+    QQtWebAccessSession* sendPostRequest ( const QNetworkRequest& request, const QByteArray& data );
+    QQtWebAccessSession* sendPostRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart );
+    QQtWebAccessSession* sendPutRequest ( const QNetworkRequest& request, QIODevice* data );
+    QQtWebAccessSession* sendPutRequest ( const QNetworkRequest& request, const QByteArray& data );
+    QQtWebAccessSession* sendPutRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart );
+    QQtWebAccessSession* sendDeleteResourceRequest ( const QNetworkRequest& request );
+    QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
+                                             QIODevice* data = Q_NULLPTR );
+    QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
+                                             const QByteArray& data );
+    QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
+                                             QHttpMultiPart* multiPart );
 
 signals:
     void updateUploadProgress ( QQtWebAccessSession* session, qint64 bytesSent, qint64 bytesTotal );

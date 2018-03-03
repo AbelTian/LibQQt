@@ -1,4 +1,4 @@
-#ifndef FILETRANSFERPROTOCOL_H
+﻿#ifndef FILETRANSFERPROTOCOL_H
 #define FILETRANSFERPROTOCOL_H
 
 #include <QObject>
@@ -9,16 +9,14 @@ class FiletransferMessage: public QQtMessage
 {
     Q_OBJECT
 public:
-    explicit FiletransferMessage(QObject* parent = 0): QQtMessage(parent) {}
+    explicit FiletransferMessage ( QObject* parent = 0 ) : QQtMessage ( parent ) {}
 
 
     // QQTMessage interface
 public:
-    virtual void parser(const QByteArray& l) override
-    {
+    virtual void parser ( const QByteArray& l ) override {
     }
-    virtual void packer(QByteArray& l) override
-    {
+    virtual void packer ( QByteArray& l ) const override {
     }
 private:
     quint16 header;
@@ -30,7 +28,7 @@ class FiletransferProtocol : public QQtProtocol
 {
     Q_OBJECT
 public:
-    explicit FiletransferProtocol(QObject* parent = nullptr);
+    explicit FiletransferProtocol ( QObject* parent = nullptr );
 
 signals:
 

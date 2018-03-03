@@ -27,6 +27,11 @@ QQtWebAccessManager::QQtWebAccessManager ( QObject* parent ) : QNetworkAccessMan
     //在用户业务当中，如果有必要setCookieJar ( cookieJar );
 }
 
+QQtWebAccessSessionManager* QQtWebAccessManager::getWebAccessSessionManager()
+{
+    return manager;
+}
+
 void QQtWebAccessManager::sendGetRequest ( QQtWebAccessSession* session )
 {
     QTimer* timer = session->getTimer();
@@ -74,6 +79,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( QString strUrl )
     return session;
 }
 
+//当即使用有效，后续使用无效。
 QList<QQtWebAccessSession*> QQtWebAccessManager::sendGetRequests ( QStringList& strUrl )
 {
     QStringListIterator itor ( strUrl );
@@ -86,11 +92,10 @@ QList<QQtWebAccessSession*> QQtWebAccessManager::sendGetRequests ( QStringList& 
         sessionList.push_back ( session );
     }
 
-    //当即使用有效，后续使用无效。
     return sessionList;
 }
 
-QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( QNetworkRequest& netRequest )
+QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( const QNetworkRequest& netRequest )
 {
     QQtWebAccessSession* session = manager->newWebAccessSession();
     session->webAccessRequest() = netRequest;
@@ -98,7 +103,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( QNetworkRequest& netR
     return session;
 }
 
-QList<QQtWebAccessSession*> QQtWebAccessManager::sendGetRequests ( QList<QNetworkRequest>& netRequests )
+//当即使用有效，后续使用无效。
+QList<QQtWebAccessSession*> QQtWebAccessManager::sendGetRequests ( const QList<QNetworkRequest>& netRequests )
 {
     QListIterator<QNetworkRequest> itor ( netRequests );
     QList<QQtWebAccessSession*> sessionList;
@@ -110,24 +116,359 @@ QList<QQtWebAccessSession*> QQtWebAccessManager::sendGetRequests ( QList<QNetwor
         sessionList.push_back ( session );
     }
 
-    //当即使用有效，后续使用无效。
     return sessionList;
 }
 
-QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( QString strUrl )
+QQtWebAccessSession* QQtWebAccessManager::sendHeadRequest ( const QNetworkRequest& request )
 {
-    //post
-//    QString strBody; //http body部分，可封装参数信息
-//    QByteArray contentByteArray = strBody.toLatin1();//转成二进制
-//    m_pNetworkReply = m_pNetworkManager->post(netRequest,contentByteArray);//发起post请求
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = head ( netRequest );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( const QNetworkRequest& request, QIODevice* data )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = post ( netRequest, data );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( const QNetworkRequest& request, const QByteArray& data )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    ////http body部分，可封装参数信息
+    QNetworkReply* reply = post ( netRequest, data );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = post ( netRequest, multiPart );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendPutRequest ( const QNetworkRequest& request, QIODevice* data )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = put ( netRequest, data );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendPutRequest ( const QNetworkRequest& request, const QByteArray& data )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = put ( netRequest, data );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendPutRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = put ( netRequest, multiPart );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendDeleteResourceRequest ( const QNetworkRequest& request )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = deleteResource ( netRequest );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
+                                                              QIODevice* data )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = QNetworkAccessManager::sendCustomRequest ( netRequest, verb, data );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
+                                                              const QByteArray& data )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = QNetworkAccessManager::sendCustomRequest ( netRequest, verb, data );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
+}
+
+QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
+                                                              QHttpMultiPart* multiPart )
+{
+    QQtWebAccessSession* session = manager->newWebAccessSession();
+    session->webAccessRequest() = request;
+
+    QTimer* timer = session->getTimer();
+    connect ( timer, SIGNAL ( timeout() ),
+              this, SLOT ( localReplyTimeOut() ) ); //超时信号
+
+    QNetworkRequest& netRequest = session->webAccessRequest();
+    QNetworkReply* reply = QNetworkAccessManager::sendCustomRequest ( netRequest, verb, multiPart );
+    session->setWebAccessReply ( reply ); //发起get请求
+    /*下面关联信号和槽*/
+
+    /*下载完成后开始一阵一阵堆取数据*/
+    connect ( reply, SIGNAL ( readyRead() ),
+              this, SLOT ( localReadyRead() ) );
+
+    /*有可用数据时 */
+    connect ( reply, SIGNAL ( downloadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateDownloadProgress ( qint64, qint64 ) ) );
+    connect ( reply, SIGNAL ( uploadProgress ( qint64, qint64 ) ),
+              this, SLOT ( localUpdateUploadProgress ( qint64, qint64 ) ) );
+
+    //ignore
+//    connect ( s0->m_pNetworkReply, SIGNAL ( finished() ),
+//              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
+
+    timer->start();
 }
 
 void QQtWebAccessManager::finished ( QNetworkReply* reply )
 {
-    //pline() << reply;
-
     //clear resource
     QQtWebAccessSession* s0 = manager->getSessionByReply ( reply );
+    //pline() << reply << s0;
 
     if ( !s0 )
         return;

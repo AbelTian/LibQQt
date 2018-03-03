@@ -39,6 +39,8 @@ lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS +=     examples/GuiBuildTool
+#
+SUBDIRS += test/LearnCookieTest
 ##-----------------------------------------------------------------
 ##some test project
 ##-----------------------------------------------------------------
