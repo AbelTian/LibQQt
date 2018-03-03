@@ -830,3 +830,146 @@ QString QQtWebAccessSessionManager::getSessionName ( QQtWebAccessSession* sessio
 
     return session->getWebAccessSessionName();
 }
+
+QQtWebAccessCookieJar::QQtWebAccessCookieJar ( QObject* parent ) : QNetworkCookieJar ( parent )
+{
+
+}
+
+QQtWebAccessCookieJar::~QQtWebAccessCookieJar()
+{
+
+}
+
+void QQtWebAccessCookieJar::setCookieJarName ( const QString& name )
+{
+    setObjectName ( name );
+}
+
+QString QQtWebAccessCookieJar::cookieJarName() const
+{
+    return objectName();
+}
+
+bool QQtWebAccessCookieJar::hasCookieForUrl ( const QNetworkCookie& cookie, const QUrl& url )
+{
+    QList<QNetworkCookie> cookieList = cookiesForUrl ( url );
+    QListIterator<QNetworkCookie> itor ( cookieList );
+    bool hasCookieName = false;
+
+    while ( itor.hasNext() )
+    {
+        QNetworkCookie c0 = itor.next();
+
+        if ( c0.name() == cookie.name() )
+        {
+            hasCookieName = true;
+            break;
+        }
+    }
+
+    return hasCookieName;
+}
+
+bool QQtWebAccessCookieJar::insertCookieForUrl ( const QNetworkCookie& cookie, const QUrl& url )
+{
+    QList<QNetworkCookie> cookieList = cookiesForUrl ( url );
+
+    QListIterator<QNetworkCookie> itor ( cookieList );
+    bool hasCookieName = false;
+
+    while ( itor.hasNext() )
+    {
+        QNetworkCookie c0 = itor.next();
+
+        if ( c0.name() == cookie.name() )
+        {
+            hasCookieName = true;
+            break;
+        }
+    }
+
+    if ( hasCookieName )
+        //if contains cookie [name]
+        updateCookieForUrl ( cookie, url );
+    else
+        //if not contains cookie [name]
+        cookieList.push_back ( cookie );
+
+    return setCookiesForUrl ( cookieList, url );
+}
+
+bool QQtWebAccessCookieJar::updateCookieForUrl ( const QNetworkCookie& cookie, const QUrl& url )
+{
+    QList<QNetworkCookie> cookieList = cookiesForUrl ( url );
+
+    QMutableListIterator<QNetworkCookie> itor ( cookieList );
+
+    while ( itor.hasNext() )
+    {
+        QNetworkCookie& c0 = itor.next();
+
+        if ( c0.name() == cookie.name() )
+        {
+            c0.setValue ( cookie.value() );
+            break;
+        }
+    }
+
+    return setCookiesForUrl ( cookieList, url );
+}
+
+bool QQtWebAccessCookieJar::deleteCookieForUrl ( const QNetworkCookie& cookie, const QUrl& url )
+{
+    QList<QNetworkCookie> cookieList = cookiesForUrl ( url );
+
+    QListIterator<QNetworkCookie> itor ( cookieList );
+
+    bool hasCookieName = false;
+    QNetworkCookie c0;
+
+    while ( itor.hasNext() )
+    {
+        //这里不可以用引用，否则空引用，引发remove失败。
+        c0 = itor.next();
+
+        if ( c0.name() == cookie.name() )
+        {
+            hasCookieName = true;
+            break;
+        }
+    }
+
+    if ( hasCookieName )
+        cookieList.removeOne ( c0 );
+
+    return setCookiesForUrl ( cookieList, url );
+}
+
+bool QQtWebAccessCookieJar::setCookiesForUrl ( const QList<QNetworkCookie>& cookieList, const QUrl& url )
+{
+    return setCookiesFromUrl ( cookieList, url );
+}
+
+QList<QNetworkCookie> QQtWebAccessCookieJar::parseCookies ( const QByteArray& cookieString )
+{
+    QList<QByteArray> cookieBytesList = cookieString.split ( ';' );
+    QList<QNetworkCookie> cookieList;
+    QListIterator<QByteArray> itor ( cookieBytesList );
+
+    while ( itor.hasNext() )
+    {
+        QByteArray cookieBytes = itor.next();
+        QList<QByteArray> cookieNameAndValue = cookieBytes.split ( '=' );
+        QNetworkCookie cookie;
+        cookie.setName ( cookieNameAndValue[0].trimmed() );
+
+        //HttpOnly;
+        if ( cookieNameAndValue.size() > 1 )
+            cookie.setValue ( cookieNameAndValue[1].trimmed() );
+
+        cookieList.push_back ( cookie );
+    }
+
+    return cookieList;
+}

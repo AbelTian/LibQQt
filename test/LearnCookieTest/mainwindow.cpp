@@ -26,6 +26,57 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+QList<QNetworkCookie> MainWindow::getLoginCookies()
+{
+    QUuid uuid = QUuid::createUuid ( );
+    QString uuidStr = uuid.toString();
+    uuidStr.remove ( '-' ).remove ( '{' ).remove ( '}' );
+    uuidStr = uuidStr.toUpper();
+    //pline() << uuidStr;
+
+    const int size = 3;
+    QNetworkCookie cookies[size] =
+    {
+        QNetworkCookie ( "orgId", "1" ),
+        QNetworkCookie ( "orgName", "%25u8D44%25u9633%25u5E02%25u536B%25u8BA1%25u59D4" ),
+        QNetworkCookie ( "userName", "ss_admin" )
+    };
+
+    QList<QNetworkCookie> cookieList;
+
+    for ( int i = 0; i < size; i++ )
+        cookieList.push_back ( cookies[i] );
+
+    return cookieList;
+}
+
+QList<QNetworkCookie> MainWindow::getSessionCookies()
+{
+    QUuid uuid = QUuid::createUuid ( );
+    QString uuidStr = uuid.toString();
+    uuidStr.remove ( '-' ).remove ( '{' ).remove ( '}' );
+    uuidStr = uuidStr.toUpper();
+    //pline() << uuidStr;
+    static QString myuuidstr = uuidStr;
+
+    const int size = 4;
+    QNetworkCookie cookies[size] =
+    {
+        QNetworkCookie ( "JSESSIONID", myuuidstr.toLocal8Bit().constData() ),
+        QNetworkCookie ( "orgId", "1" ),
+        QNetworkCookie ( "orgName", "%25u8D44%25u9633%25u5E02%25u536B%25u8BA1%25u59D4" ),
+        QNetworkCookie ( "userName", "ss_admin" )
+    };
+
+    QList<QNetworkCookie> cookieList;
+
+    for ( int i = 0; i < size; i++ )
+        cookieList.push_back ( cookies[i] );
+
+    return cookieList;
+
+}
+
 void MainWindow::sendInitPage()
 {
     QString url =
@@ -128,6 +179,7 @@ void MainWindow::replyFinished ( QQtWebAccessSession* session )
     pline() << "请求的网址" << reply->url().toString();
 
     QList<QNetworkCookie>  cookies = m_webmanager->cookieJar()->cookiesForUrl ( reply->url() );
+    //=外部设置的CookieJar
     //pline() << "内部cookie" << cookies;
     cookies = cookiejar.cookiesForUrl ( reply->url() );
     static QList<QNetworkCookie> staticCookieList = cookies;
@@ -139,6 +191,11 @@ void MainWindow::replyFinished ( QQtWebAccessSession* session )
     }
 
     pline() << "我本地存储的cookie" << cookies;
+
+    //经过测试，QNetworkCookieJar可以保存多个网址的cookie组。
+//    pline() << "cookie for " << "http://124.161.179.36:8080/index/ssologin.action" <<
+//            m_webmanager->cookieJar()->cookiesForUrl (
+//                QUrl ( "http://124.161.179.36:8080/index/ssologin.action" ) );
 
     int nHttpCode = reply->attribute ( QNetworkRequest::HttpStatusCodeAttribute ).toInt(); //http返回码
 

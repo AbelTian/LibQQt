@@ -30,42 +30,38 @@ typedef QNetworkCookie QQtWebAccessCookie;
 /**
  * @brief The QQtWebAccessCookieJar class
  * 一个QQtWebAccessManager对应一个cookieJar
+ * 这个CookieJar是具名的CookieJar。
+ * QNetworkCookieJar可以保存多个网址的Cookie组
+ * 添加一些函数丰富QQtWebAccessCookieJar的功能
  */
 class QQTSHARED_EXPORT QQtWebAccessCookieJar: public QNetworkCookieJar
 {
     Q_OBJECT
 
 public:
-    explicit QQtWebAccessCookieJar ( QObject* parent = Q_NULLPTR ) : QNetworkCookieJar ( parent ) {
+    explicit QQtWebAccessCookieJar ( QObject* parent = Q_NULLPTR );
+    virtual ~QQtWebAccessCookieJar();
 
-    }
-    virtual ~QQtWebAccessCookieJar() {
+    void setCookieJarName ( const QString& name );
+    QString cookieJarName() const;
 
-    }
+    //这几个函数的作用不明确，在此改写。[或许影响所有url的cookie组]
+    //virtual bool insertCookie(const QNetworkCookie &cookie);
+    //virtual bool updateCookie(const QNetworkCookie &cookie);
+    //virtual bool deleteCookie(const QNetworkCookie &cookie);
+
+    virtual bool hasCookieForUrl ( const QNetworkCookie& cookie, const QUrl& url );
+    //行为：不存在cookie[name]时插入，存在cookie[name]时改写。(这样做省却了一个判定步骤。)
+    virtual bool insertCookieForUrl ( const QNetworkCookie& cookie, const QUrl& url );
+    virtual bool updateCookieForUrl ( const QNetworkCookie& cookie, const QUrl& url );
+    virtual bool deleteCookieForUrl ( const QNetworkCookie& cookie, const QUrl& url );
 
     //一个网址对应一组cookie [网址相当于组cookie的名字]
     //给这个函数改改名字
-    virtual bool setCookiesForUrl ( const QList<QNetworkCookie>& cookieList, const QUrl& url ) {
-        return setCookiesFromUrl ( cookieList, url );
-    }
+    virtual bool setCookiesForUrl ( const QList<QNetworkCookie>& cookieList, const QUrl& url );
 
     //QNetworkCookie里面的这个函数是个废物。
-    static QList<QNetworkCookie> parseCookies ( const QByteArray& cookieString ) {
-        QList<QByteArray> cookieBytesList = cookieString.split ( ';' );
-        QList<QNetworkCookie> cookieList;
-        QListIterator<QByteArray> itor ( cookieBytesList );
-
-        while ( itor.hasNext() ) {
-            QByteArray cookieBytes = itor.next();
-            QList<QByteArray> cookieNameAndValue = cookieBytes.split ( '=' );
-            QNetworkCookie cookie;
-            cookie.setName ( cookieNameAndValue[0].trimmed() );
-            cookie.setValue ( cookieNameAndValue[1].trimmed() );
-            cookieList.push_back ( cookie );
-        }
-
-        return cookieList;
-    }
+    static QList<QNetworkCookie> parseCookies ( const QByteArray& cookieString );
 };
 
 class QQTSHARED_EXPORT QQtWebAccessSession : public QObject
