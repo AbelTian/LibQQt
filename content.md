@@ -36,7 +36,6 @@
         - QQtWebSocket接口
      - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) QQtWebSocketProtocol
      - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)
-5. 支持webservice
 7. 添加应用中常用的form
 8. 支持多页TableWidget
 9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
@@ -59,7 +58,10 @@
     - QQtWavAudioInput、QQtWavAudioOutput、QQtWavAudioManager、  
     - QQtWavSoundEffect  
     - 将AudioDevice、wav输入输出文件，当做一个设备进行读写，App处理获取到的声音。  
-    
+6. 添加Http功能支持工具
+    - QQtWebAccessManager，支持管理Session、Cookies。    
+    - 添加GumboQuery爬虫工具。  
+    - 支持webservice (QtSoap)  
 
 
 [返回](.)  
