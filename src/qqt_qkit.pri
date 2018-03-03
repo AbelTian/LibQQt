@@ -123,7 +123,7 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 QKIT_STD_DIR = $${QT_VERSION}/$${SYSNAME}/$${BUILD}
 
 message(qqt_qkit.pri)
-message(Build $${TARGET} to [QKIT=$${QKIT_PRIVATE}] \(configed in project build page.\))
-message(Build $${TARGET} at [$${QKIT_STD_DIR}] \([Qt Version=$${QT_VERSION}] [Qt Kit SysName=$${SYSNAME}] [Build Type=$${BUILD}]\))
-message(Build $${TARGET} on [Operating System=$${QMAKE_HOST.os}])
-message(Build $${TARGET} explain a decision [Qt Kit SysName=$${SYSNAME}] \(Qt kit page - File System Name\) is decided by env var QKIT)
+message(Build $${TARGET} to $${QKIT_PRIVATE} \(QKIT=$${QKIT_PRIVATE} is configed in project build page.\) )
+message(Build $${TARGET} at $${QKIT_STD_DIR} \(Qt Kit page FileSystem Name=$${SYSNAME}\) )
+message(Build $${TARGET} on $${QMAKE_HOST.os} \(Operating System=$${QMAKE_HOST.os}\) )
+message(Build $${TARGET} Qt Kit page FileSystem Name is decided by env variable QKIT. Please set it. )
