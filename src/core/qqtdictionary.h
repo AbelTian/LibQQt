@@ -1,4 +1,4 @@
-#ifndef QQTDICTIONARY_H
+﻿#ifndef QQTDICTIONARY_H
 #define QQTDICTIONARY_H
 
 #include <QObject>
@@ -14,9 +14,11 @@
 class QQtDictNode;
 typedef QMap<QString, QQtDictNode> QQtMapNode;
 typedef QMapIterator<QString, QQtDictNode> QQtMapNodeIterator;
+typedef QMutableMapIterator<QString, QQtDictNode> QQtMutableMapNodeIterator;
 
 typedef QList<QQtDictNode> QQtListNode;
 typedef QListIterator<QQtDictNode> QQtListNodeIterator;
+typedef QMutableListIterator<QQtDictNode> QQtMutableListNodeIterator;
 
 /**
  * @brief The QQtDictionary class

@@ -1,4 +1,4 @@
-#include "qqtdictionary.h"
+﻿#include "qqtdictionary.h"
 
 QQtDictNode::QQtDictNode ( QObject* parent ) :
     QObject ( parent )
@@ -70,7 +70,7 @@ void QQtDictNode::insertChild ( int index, const QQtDictNode& dict )
 {
     m_type = DictList;
     //m_list.insert ( index, dict );
-    this->operator [](index) = dict;
+    this->operator [] ( index ) = dict;
 }
 
 void QQtDictNode::insertChild ( const QString& key, const QString& value )
@@ -110,26 +110,26 @@ bool QQtDictNode::isEmpty() const
 
     switch ( m_type )
     {
-    case DictValue:
-        if ( !m_value.isNull() )
-            isEmpty = false;
+        case DictValue:
+            if ( !m_value.isNull() )
+                isEmpty = false;
 
-        break;
+            break;
 
-    case DictList:
-        if ( !m_list.isEmpty() )
-            isEmpty = false;
+        case DictList:
+            if ( !m_list.isEmpty() )
+                isEmpty = false;
 
-        break;
+            break;
 
-    case DictMap:
-        if ( !m_map.isEmpty() )
-            isEmpty = false;
+        case DictMap:
+            if ( !m_map.isEmpty() )
+                isEmpty = false;
 
-        break;
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
     return isEmpty;
@@ -171,6 +171,7 @@ bool QQtDictNode::hasChild ( const QQtDictNode& value ) const
 {
     bool has = false;
 
+    //对于list，不同于map，list当中value相等就是包含。
     if ( m_list.contains ( value ) )
         has = true;
 
@@ -286,22 +287,22 @@ QQtDictNode& QQtDictNode::operator = ( const QQtDictNode& other )
 
     switch ( type )
     {
-    case DictValue:
-        m_value = other.getValue() ;
-        break;
+        case DictValue:
+            m_value = other.getValue() ;
+            break;
 
-    case DictList:
-        m_list = other.getList();
+        case DictList:
+            m_list = other.getList();
 
-        break;
+            break;
 
-    case DictMap:
-        m_map = other.getMap();
+        case DictMap:
+            m_map = other.getMap();
 
-        break;
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
     m_type = type;
