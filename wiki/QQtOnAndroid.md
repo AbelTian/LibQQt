@@ -24,5 +24,7 @@ LibQQt支持 macOS Android Linux Embedded Linux arm mips windows等等等等
 QQt是基于Qt的库 嵌入式的，桌面版用起来也好用
 最近在研究这个滑动tab 还在研究
 
+# 使用方法  
+请参照README.md里面 入门用法 和 设置工程目录 两节课。  
 
 
