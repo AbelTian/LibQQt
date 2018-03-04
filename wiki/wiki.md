@@ -2,7 +2,7 @@
 
 ## Welcom to QQt foundation  
 
-[家](home.md)  
+[家](Home.md)  
 
 ## How to build LibQQt  
 
