@@ -5,7 +5,7 @@
 QQtSqlTreeModel::QQtSqlTreeModel ( QObject* parent ) :
     QQtTreeModel ( parent )
 {
-    m_db = newDatabaseConn();
+    m_db = newDatabaseConnection();
 }
 
 void QQtSqlTreeModel::setFilePath ( QString dbname )

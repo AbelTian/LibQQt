@@ -103,7 +103,7 @@ void QQtInput::InitForm()
         btnHeight = 50;
     }
 
-    m_db = newDatabaseConn();
+    m_db = newDatabaseConnection();
     setDatabaseName ( m_db, DB_PINYIN );
 
     isFirst = true;

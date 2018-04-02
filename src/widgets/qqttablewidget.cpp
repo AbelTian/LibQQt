@@ -6,7 +6,7 @@
 QQtTableWidget::QQtTableWidget ( QWidget* parent ) :
     QQtTableView ( parent )
 {
-    m_db = newDatabaseConn();
+    m_db = newDatabaseConnection();
     m_model = new QQtTableModel ( this, m_db );
     setModel ( m_model );
     /*

@@ -1,4 +1,4 @@
-﻿#ifndef QQTDICTIONARY_H
+#ifndef QQTDICTIONARY_H
 #define QQTDICTIONARY_H
 
 #include <QObject>
@@ -12,13 +12,13 @@
  * 遍历时
  */
 class QQtDictNode;
-typedef QMap<QString, QQtDictNode> QQtMapNode;
-typedef QMapIterator<QString, QQtDictNode> QQtMapNodeIterator;
-typedef QMutableMapIterator<QString, QQtDictNode> QQtMutableMapNodeIterator;
+typedef QMap<QString, QQtDictNode> QQtDictNodeMap;
+typedef QMapIterator<QString, QQtDictNode> QQtDictNodeMapIterator;
+typedef QMutableMapIterator<QString, QQtDictNode> QQtDictNodeMutableMapIterator;
 
-typedef QList<QQtDictNode> QQtListNode;
-typedef QListIterator<QQtDictNode> QQtListNodeIterator;
-typedef QMutableListIterator<QQtDictNode> QQtMutableListNodeIterator;
+typedef QList<QQtDictNode> QQtDictNodeList;
+typedef QListIterator<QQtDictNode> QQtDictNodeListIterator;
+typedef QMutableListIterator<QQtDictNode> QQtDictNodeMutableListIterator;
 
 /**
  * @brief The QQtDictionary class
@@ -141,6 +141,18 @@ public:
     QString toJson();
     void fromJson ( QString& jsonContent );
     void fromXML ( QString& xmlContent );
+
+    //update for new using
+    template <typename T>
+    bool operator == ( const T& inst ) const{
+        return *this == QVariant(inst);
+    }
+    bool operator == ( const QVariant& var ) const{
+        return *this == QQtDictNode( var );
+    }
+
+    //内部类型转换
+    //toValue() toList() toMap(); 不丢失数据方式。
 
 signals:
 

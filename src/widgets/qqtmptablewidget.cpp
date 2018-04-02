@@ -10,7 +10,7 @@ QQtMPTableWidget::QQtMPTableWidget ( QWidget* parent ) :
 {
     ui->setupUi ( this );
 
-    m_db = newDatabaseConn();
+    m_db = newDatabaseConnection();
 
     m_pageNum = 0;
     m_numPerPage = 14;

@@ -1,4 +1,4 @@
-﻿#include "qqtdictionary.h"
+#include "qqtdictionary.h"
 
 QQtDictNode::QQtDictNode ( QObject* parent ) :
     QObject ( parent )
@@ -69,8 +69,17 @@ void QQtDictNode::insertChild ( int index, const QString& value )
 void QQtDictNode::insertChild ( int index, const QQtDictNode& dict )
 {
     m_type = DictList;
+    //insert不能实现max count以后插入。
+    //[]不能实现插入操作，而是实现覆盖操作。
+    //怎么办？
+
     //m_list.insert ( index, dict );
-    this->operator [] ( index ) = dict;
+    //this->operator [] ( index ) = dict;
+
+    //先补全
+    this->operator [] ( index );
+    //后插入
+    m_list.insert ( index, dict );
 }
 
 void QQtDictNode::insertChild ( const QString& key, const QString& value )
