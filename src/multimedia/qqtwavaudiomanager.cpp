@@ -8,7 +8,9 @@
 #include "string.h"
 #include "stdlib.h"
 
-__BEGIN_DECLS
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct _wav_riff_t
 {
@@ -65,7 +67,9 @@ int wav_read_data ( wav_t* wav, char* buffer, int buffer_size );
 void wav_dump ( wav_t* wav );
 
 
-__END_DECLS
+#ifdef __cplusplus
+}
+#endif
 
 /*
 int strncasecmp ( char* s1, char* s2, register int n )

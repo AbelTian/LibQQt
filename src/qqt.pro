@@ -100,7 +100,9 @@ build_pass:CONFIG(debug, debug|release) {
 #CONFIG += debug_and_release
 #CONFIG += build_all
 #if some bug occured, maybe this help me, close some warning
-CFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
+!win32{
+    CFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
+}
 QMAKE_CFLAGS +=  $${CFLAGS}
 QMAKE_CXXFLAGS +=  $${CFLAGS}
 
