@@ -49,7 +49,7 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 ##-----------------------------------------------
 #link QQt static library in some occation on windows
 #when link QQt    static library, if no this macro, headers can't be linked on windows.
-contains(QKIT_PRIVATE, WIN32) {
+contains(QKIT_PRIVATE, WIN32||WIN64) {
     #Qt is static by mingw32 building
     mingw{
         #on my computer, Qt library are all static library?

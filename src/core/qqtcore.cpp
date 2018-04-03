@@ -42,7 +42,7 @@ QByteArray& operator<< ( QByteArray& l, const qint32& r )
     return l;
 }
 
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint64& r )
+QByteArray& operator<< ( QByteArray& l, const qint64& r )
 {
     quint64 ubyte = quint64 ( r );
     l << ubyte;
@@ -77,7 +77,7 @@ QByteArray& operator>> ( QByteArray& l, quint32& r )
     return l;
 }
 
-QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, quint64& r )
+QByteArray& operator>> ( QByteArray& l, quint64& r )
 {
     quint8 r0 = 0, r1 = 0, r2 = 0, r3 = 0, r4 = 0, r5 = 0, r6 = 0, r7 = 0;
     l >> r0 >> r1 >> r2 >> r3 >> r4 >> r5 >> r6 >> r7;

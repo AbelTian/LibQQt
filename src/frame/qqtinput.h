@@ -2,8 +2,8 @@
 #define FRMINPUT_H
 
 /**
- * 原作者 刘典武 mod引用 LGPLv2.1
- * T.D.R (QQ:2657635903) mod 2015年12月20日19:44:04
+ * 原作者 刘典武 mod引用
+ * 2015年12月20日19:44:04 T.D.R (QQ:2657635903) mod LGPLv2.1
 **/
 
 #include <QWidget>
