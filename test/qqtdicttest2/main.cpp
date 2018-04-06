@@ -74,7 +74,7 @@ int main ( int argc, char* argv[] )
     //pline() << "\n" << d5;
     pline() << "\n" << d5["5.7"];
 
-    QQtMapNodeIterator itor ( d5["5.7"].getMap() );
+    QQtDictNodeMapIterator itor ( d5["5.7"].getMap() );
 
     while ( itor.hasNext() )
     {
