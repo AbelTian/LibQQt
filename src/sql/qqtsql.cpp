@@ -2,7 +2,7 @@
 
 QSqlDatabase managerDB;
 
-QSqlDatabase newDatabaseConn()
+QSqlDatabase newDatabaseConnection()
 {
     QUuid uuid = QUuid::createUuid();
     //qDebug() << uuid.toString();
@@ -52,13 +52,13 @@ void useDatabase(QSqlDatabase& db, QString dbName)
     setDatabaseName(db, dbName);
 }
 
-void deleteDatabaseConn(QString connectionName)
+void deleteDatabaseConnection(QString connectionName)
 {
     QSqlDatabase::removeDatabase(connectionName);
 }
 
-void deleteDatabaseConn(QSqlDatabase &db)
+void deleteDatabaseConnection(QSqlDatabase &db)
 {
     QString connectionName = db.connectionName();
-    deleteDatabaseConn(connectionName);
+    deleteDatabaseConnection(connectionName);
 }

@@ -48,7 +48,7 @@ include ($$PWD/qqt_qkit.pri)
 isEmpty(QKIT_PRIVATE) {
     message(1. you should change qt default build directory to your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name})
     message(2. env variable QKIT is required! pleace check qqt_qkit.pri)
-    error(  error occured!, please check build output panel.)
+    error(error occured! please check build output panel.)
 }
 
 ################################################
@@ -100,7 +100,9 @@ build_pass:CONFIG(debug, debug|release) {
 #CONFIG += debug_and_release
 #CONFIG += build_all
 #if some bug occured, maybe this help me, close some warning
-CFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
+!win32{
+    CFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
+}
 QMAKE_CFLAGS +=  $${CFLAGS}
 QMAKE_CXXFLAGS +=  $${CFLAGS}
 

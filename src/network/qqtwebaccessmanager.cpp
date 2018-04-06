@@ -400,6 +400,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
     timer->start();
 }
 
+#ifndef Q_OS_WIN
+
 QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
                                                               const QByteArray& data )
 {
@@ -463,6 +465,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
 
     timer->start();
 }
+#endif
 
 void QQtWebAccessManager::finished ( QNetworkReply* reply )
 {

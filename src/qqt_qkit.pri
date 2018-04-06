@@ -40,7 +40,7 @@ equals(QKIT_PRIVATE, EMBEDDED) {
     DEFINES += __IOS__
 } else:equals(QKIT_PRIVATE, iOSSimulator) {
     DEFINES += __IOS__
-    #TODO:no customplot word printer process
+    #TODO:no qcustomplot word printer process
 } else:equals(QKIT_PRIVATE, ANDROID) {
     DEFINES += __ANDROID__
 } else:equals(QKIT_PRIVATE, ANDROIDX86) {
@@ -83,7 +83,7 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 #    DEFINES += __ANDROID__
 #} else:equals(QMAKESPEC_NAME, ANDROIDX86) {
 #    DEFINES += __ANDROID__
-#    #todo:no customplot word printer
+#    #todo:no qcustomplot word printer
 #}
 
 #################################################################

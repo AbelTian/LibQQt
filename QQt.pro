@@ -8,79 +8,86 @@ CONFIG += ordered
 SUBDIRS = src/qqt.pro
 
 ##-----------------------------------------------------------------
-##basic example
+##Q1 V1
 ##-----------------------------------------------------------------
+#第一种引用LibQQt的方法
 #SUBDIRS += examples/qqtframe
-#SUBDIRS += examples/qqtframe2
 #SUBDIRS += examples/animationframe
 #
-##-----------------------------------------------------------------
-##QQt installed to Qt library or
-##QQt installed to sdk or
-##QQt is build
-##-----------------------------------------------------------------
-#SUBDIRS += examples/exquisite
-#SUBDIRS += examples/tabwidgetexamples
+#need vlcQt libvlc library
+#SUBDIRS += test/qqtliveplayer
+#need ffmpeg library
+#SUBDIRS += test/qqtffmpegplayer
+
+#need webkit webkitwidgets - WebSupport
+#webengine
+#ignored
+#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
+#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
+
+#-----------------------------------------------------------------
+#Q3 V2
+#QQt installed to Qt library or
+#QQt installed to sdk or
+#QQt is build
+#-----------------------------------------------------------------
+#第二种引用LibQQt的方式
+#SUBDIRS += examples/qqtframe2
+#
+SUBDIRS += examples/exquisite
+#
+SUBDIRS += examples/tabwidgetexamples
+#need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
-#SUBDIRS += examples/qqtnetworkexample
-#SUBDIRS += test/voicetest
+#
+SUBDIRS += examples/qqtnetworkexample
+#
+greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
+#
 mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
+
 #udp 嵌入式linux，Qt编译了udp支持，默认是支持的
-#SUBDIRS += examples/qqtudpexample
+#
+SUBDIRS += examples/qqtudpexample
+#
 lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
-#SUBDIRS += examples/qqtchartexample
 #
+SUBDIRS += examples/qqtchartexample
 #
-##-----------------------------------------------------------------
-##need webaccessmanager - WebSupport
-##need QSsl
-##need GumoQuery
-##-----------------------------------------------------------------
+#-----------------------------------------------------------------
+#need webaccessmanager - WebSupport
+#need QSsl
+#need GumoQuery
+#-----------------------------------------------------------------
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
-#SUBDIRS +=     examples/GuiBuildTool
+#SUBDIRS += examples/GuiBuildTool
 #SUBDIRS += test/LearnCookieTest
-##-----------------------------------------------------------------
-##some test project
-##-----------------------------------------------------------------
+#-----------------------------------------------------------------
+#some test project
 #SUBDIRS += test/gumbo_query_test
 #SUBDIRS += test/svgtest
-#SUBDIRS += test/customqvariant
+#
+SUBDIRS += test/customqvariant
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest
-#SUBDIRS += test/qqtdicttest2
+#
+SUBDIRS += test/qqtdicttest2
 #SUBDIRS += test/consoletest
-#greaterThan(QT_VERSION , 4.6.0):SUBDIRS += test/voicetest
-
+#
+SUBDIRS += test/bytearraytest
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
 #    SUBDIRS += test/cmdwidget
 #}
 #SUBDIRS += test/coretest
-#SUBDIRS += test/giftest
+#
+SUBDIRS += test/giftest
 #SUBDIRS += test/tmpproj
 #
-##-----------------------------------------------------------------
-##need webkit webkitwidgets - WebSupport
-##webengine
-##ignored
-##-----------------------------------------------------------------
-##lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
-##lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
-##-----------------------------------------------------------------
-##need QtSoap - WebSupport
-##-----------------------------------------------------------------
-#SUBDIRS += test/easter
+#need QtSoap - WebSupport
+##SUBDIRS += test/easter
 #SUBDIRS += test/soapQQtOnline
-##-----------------------------------------------------------------
-##need vlcQt libvlc library
-##-----------------------------------------------------------------
-##SUBDIRS += test/qqtliveplayer
-#
-##-----------------------------------------------------------------
-##need ffmpeg library
-##-----------------------------------------------------------------
-##SUBDIRS += test/qqtffmpegplayer
 #
 ##need bluetooth library
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += test/qqtbtfileserver

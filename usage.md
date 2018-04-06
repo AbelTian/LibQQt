@@ -16,7 +16,7 @@ APP_DEPLOY_ROOT = /Users/abel/Develop/d1-product
 ![设置成功显示](screenshot/6.png)  
 如果设置成功，qmake应当显示如上例程的样子  
 
-#V2.1.6更新链接QQt的方法  
+# V2.1.6更新链接QQt的方法  
 
 ![链接QQt](screenshot/7.png "这是链接QQt的方法，pri都在LibQQt目录里")  
 ![QQt内部pri的设置](screenshot/8.png "这是LibQQt需要设置的几个路径，这是新的版本，pri位置有改动")  

@@ -234,10 +234,13 @@ public:
     QQtWebAccessSession* sendDeleteResourceRequest ( const QNetworkRequest& request );
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
                                              QIODevice* data = Q_NULLPTR );
+
+#ifndef Q_OS_WIN
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
                                              const QByteArray& data );
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
                                              QHttpMultiPart* multiPart );
+#endif
 
 signals:
     void updateUploadProgress ( QQtWebAccessSession* session, qint64 bytesSent, qint64 bytesTotal );

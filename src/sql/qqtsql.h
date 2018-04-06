@@ -76,7 +76,9 @@ extern QSqlDatabase managerDB;
 }
 #endif  /* __cplusplus */
 
-QQTSHARED_EXPORT QSqlDatabase newDatabaseConn();
+typedef QSqlDatabase QQtSqlDatabaseConnection;
+
+QQTSHARED_EXPORT QSqlDatabase newDatabaseConnection();
 
 /*已经将数据库打开，不必重复打开*/
 QQTSHARED_EXPORT void setDatabaseName(QSqlDatabase& db, QString dbName);
@@ -86,7 +88,7 @@ QQTSHARED_EXPORT void useDatabase(QSqlDatabase& db, QString dbName);
 QQTSHARED_EXPORT void openDatabase(QSqlDatabase& db);
 QQTSHARED_EXPORT void closeDatabase(QSqlDatabase& db);
 
-QQTSHARED_EXPORT void deleteDatabaseConn(QString connectionName);
-QQTSHARED_EXPORT void deleteDatabaseConn(QSqlDatabase& db);
+QQTSHARED_EXPORT void deleteDatabaseConnection(QString connectionName);
+QQTSHARED_EXPORT void deleteDatabaseConnection(QSqlDatabase& db);
 
 #endif // QQTSQLDEFINE_H

@@ -1,5 +1,5 @@
 ﻿#include "qqtapplication.h"
-#ifdef __PLUGINWATCHER__
+#ifdef __PLUGINSUPPORT__
 #include "qqtpluginwatcher.h"
 #endif
 #include <qqtmsgbox.h>
@@ -94,7 +94,7 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
 
     /*设置USB热插拔检测，支持U盘，键盘，鼠标检测*/
-#ifdef __PLUGINWATCHER__
+#ifdef __PLUGINSUPPORT__
     QObject::connect ( QQtPluginWatcher::Instance(), SIGNAL ( storageChanged ( int ) ),
                        this, SLOT ( slotUPanAutoRun ( int ) ) );
 #endif
@@ -162,7 +162,7 @@ void QQtApplication::slotUPanAutoRun ( int status )
     if ( !bUPanAutoRun )
         return;
 
-#ifdef __PLUGINWATCHER__
+#ifdef __PLUGINSUPPORT__
 
     if ( QQtPluginWatcher::E_ADD == status )
     {

@@ -61,7 +61,7 @@ endif(WIN32)
 
 #内部编译 解决头文件发现不了的问题
 include_directories( core sql network
-	customplot gui widgets frame
+	qcustomplot gui widgets frame
 	pluginwatcher printsupport )
 
 add_library(${SUBLIBRARY_NAME} ${SOURCES})

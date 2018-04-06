@@ -5,7 +5,7 @@
 #ifndef QQTPROGRESSBAR_H
 #define QQTPROGRESSBAR_H
 
-#include <QWidget>
+#include <qqtwidget.h>
 #include "qqt-local.h"
 #include "qqtwidgets.h"
 #include "qqtframe.h"

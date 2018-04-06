@@ -1,4 +1,4 @@
-﻿#include "qqtwidget.h"
+#include "qqtwidget.h"
 #include <QStylePainter>
 #include "qqtcore.h"
 
@@ -97,6 +97,7 @@ void QQtWidget::paintEvent ( QPaintEvent* event )
 
 void QQtWidget::mousePressEvent ( QMouseEvent* event )
 {
+    mlongClickPoint = event->pos();
     m_lcTimer->start();
     return QWidget::mousePressEvent ( event );
 }
@@ -107,6 +108,7 @@ void QQtWidget::mouseReleaseEvent ( QMouseEvent* event )
     {
         m_lcTimer->stop();
         emit click();
+        emit clickWithPoint(event->pos());
     }
 
     return QWidget::mouseReleaseEvent ( event );
@@ -115,11 +117,13 @@ void QQtWidget::mouseReleaseEvent ( QMouseEvent* event )
 void QQtWidget::mouseDoubleClickEvent ( QMouseEvent* event )
 {
     emit doubleClick();
+    emit doubleClickWithPoint(event->pos());
     return QWidget::mouseDoubleClickEvent ( event );
 }
 
 void QQtWidget::slot_timeout()
 {
     emit longClick();
+    emit longClickWithPoint(mlongClickPoint);
 }
 

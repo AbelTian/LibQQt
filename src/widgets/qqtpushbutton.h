@@ -2,10 +2,12 @@
 #define QQTPUSHBUTTON_H
 
 #include <QPushButton>
-#include "qqtwidgets.h"
-#include <qqt-local.h>
-#include "qqtwidgets.h"
 #include <QTimer>
+
+#include "qqtcore.h"
+#include <qqt-local.h>
+
+#include "qqtwidgets.h"
 
 class QQTSHARED_EXPORT QQtPushButton : public QPushButton
 {

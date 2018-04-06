@@ -11,7 +11,7 @@ include_directories(
 	${PROJECT_SOURCE_DIR}/src/core
 	${PROJECT_SOURCE_DIR}/src/sql
 	${PROJECT_SOURCE_DIR}/src/network
-	${PROJECT_SOURCE_DIR}/src/customplot
+	${PROJECT_SOURCE_DIR}/src/qcustomplot
 	${PROJECT_SOURCE_DIR}/src/gui
 	${PROJECT_SOURCE_DIR}/src/widgets
 	${PROJECT_SOURCE_DIR}/src/frame

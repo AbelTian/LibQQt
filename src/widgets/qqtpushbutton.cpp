@@ -1,7 +1,6 @@
 #include "qqtpushbutton.h"
 #include <QStylePainter>
 #include <QMouseEvent>
-#include "qqtcore.h"
 
 QQtPushButton::QQtPushButton ( QWidget* parent ) :
     QPushButton ( parent )
