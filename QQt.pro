@@ -32,7 +32,8 @@ greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #udp 嵌入式linux，Qt编译了udp支持，默认是支持的
 #SUBDIRS += examples/qqtudpexample
 #lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
-#SUBDIRS += examples/qqtchartexample
+#
+SUBDIRS += examples/qqtchartexample
 #
 #
 ##-----------------------------------------------------------------

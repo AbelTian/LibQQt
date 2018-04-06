@@ -104,7 +104,7 @@ QQTApp::QQTApp ( int& argc, char** argv ) : QApplication ( argc, argv )
 
     qsrand ( QTime ( 0, 0, 0 ).secsTo ( QTime::currentTime() ) );
 
-#ifdef __PLUGINWATCHER__
+#ifdef __PLUGINSUPPORT__
     QObject::connect ( QQtPluginWatcher::Instance(), SIGNAL ( storageChanged ( int ) ),
                        this, SLOT ( slotUPanAutoRun ( int ) ) );
 #endif
@@ -141,7 +141,7 @@ void QQTApp::setLanguage()
 
 void QQTApp::slotUPanAutoRun ( int status )
 {
-#ifdef __PLUGINWATCHER__
+#ifdef __PLUGINSUPPORT__
 
     if ( QQtPluginWatcher::E_ADD == status )
     {

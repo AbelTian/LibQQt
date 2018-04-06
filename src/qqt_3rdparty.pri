@@ -1,3 +1,93 @@
+#-------------------------------------------------------
+#qqt_3rdparty.pri
+#这个文件用于指示版权。
+#-------------------------------------------------------
+#pluginsupport
+#DEFINES += __PLUGINSUPPORT__
+#TODO: macOS crash
+contains (DEFINES, __PLUGINSUPPORT__) {
+    contains(QKIT_PRIVATE, WIN32|WIN64) {
+        contains (DEFINES, QQT_LIBRARY) {
+            DEFINES += BUILD_QDEVICEWATCHER_LIB
+        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+            DEFINES += BUILD_QDEVICEWATCHER_STATIC
+        }
+        wince*: SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_wince.cpp
+        else:  SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_win32.cpp
+    }else:contains(QKIT_PRIVATE, macOS) {
+        SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_mac.cpp
+    }else {
+        SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_linux.cpp
+    }
+    SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher.cpp
+    HEADERS += $$PWD/pluginsupport/devicewatcher/qdevicewatcher.h \
+                $$PWD/pluginsupport/devicewatcher/qdevicewatcher_p.h
+
+    SOURCES += $$PWD/pluginsupport/qqtpluginwatcher.cpp
+    HEADERS += $$PWD/pluginsupport/qqtpluginwatcher.h
+}
+
+contains(DEFINES, __QQTCHARTS__) {
+    #qcustomplot
+    #DEFINES += __CUSTOMPLOT__
+    contains (DEFINES, __CUSTOMPLOT__) {
+        #message (qcustomplot is used in $${TARGET})
+        win32 {
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
+            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+                #build static library - qcustomplot
+                DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
+            }
+        }
+        SOURCES += $$PWD/charts/qcustomplot/qcpdocumentobject.cpp \
+                    $$PWD/charts/qcustomplot/qcustomplot.cpp
+        HEADERS += $$PWD/charts/qcustomplot/qcpdocumentobject.h \
+                    $$PWD/charts/qcustomplot/qcustomplot.h
+    }
+}
+
+contains (DEFINES, __NETWORKSUPPORT__) {
+    #qextserialport support
+    #if you use qextserialport, open the two annotation
+    #DEFINES += __QEXTSERIALPORT__
+    contains (DEFINES, __QEXTSERIALPORT__) {
+        #include ( $$PWD/network/qextserialport/qextserialport.pri )
+        HEADERS += $$PWD/network/qextserialport/qextserialbase.h \
+                  $$PWD/network/qextserialport/qextserialport.h \
+                  $$PWD/network/qextserialport/qextserialenumerator.h
+        SOURCES += $$PWD/network/qextserialport/qextserialbase.cpp \
+                  $$PWD/network/qextserialport/qextserialport.cpp \
+                  $$PWD/network/qextserialport/qextserialenumerator.cpp
+        unix:HEADERS += $$PWD/network/qextserialport/posix_qextserialport.h
+        unix:SOURCES += $$PWD/network/qextserialport/posix_qextserialport.cpp
+        win32:HEADERS += $$PWD/network/qextserialport/win_qextserialport.h
+        win32:SOURCES += $$PWD/network/qextserialport/win_qextserialport.cpp
+    }
+
+    #Qt soap, webservice
+    contains(DEFINES, __WEBSERVICESUPPORT__) {
+        win32 {
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += QT_QTSOAP_LIBRARY
+            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+                DEFINES += QT_QTSOAP_STATIC_LIBRARY
+            }
+        }
+        SOURCES += \
+            $$PWD/network/soap/qtsoap.cpp
+        HEADERS += \
+            $$PWD/network/soap/qtsoap.h
+    }
+
+    #gumbo support
+    #DEFINES += __GUMBOSUPPORT__
+    contains (DEFINES, __GUMBOSUPPORT__) {
+        include ($$PWD/network/gumbo/parser/gumbo-parser.pri)
+        include ($$PWD/network/gumbo/query/gumbo-query.pri)
+    }
+}
+
 ##-------------------------------------------------------
 ##exquisite widget dependence
 ##-------------------------------------------------------
@@ -33,10 +123,34 @@ contains (DEFINES, __EXQUISITE__) {
 
     }
 
-    #gumbo widget
-    #DEFINES += __GUMBOSUPPORT__
-    contains (DEFINES, __GUMBOSUPPORT__) {
-        include ($$PWD/network/gumbo/parser/gumbo-parser.pri)
-        include ($$PWD/network/gumbo/query/gumbo-query.pri)
+    #mathml widget
+    #DEFINES += __MATHSUPPORT__
+    contains (DEFINES, __MATHSUPPORT__) {
+        contains(QKIT_PRIVATE, WIN32|WIN64) {
+            #mathml
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += QT_QTMMLWIDGET_LIBRARY
+            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+                DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
+            }
+        }
+        SOURCES += $$PWD/exquisite/mathml/qtmmlwidget.cpp
+        HEADERS += $$PWD/exquisite/mathml/qtmmlwidget.h
+    }
+
+    contains (DEFINES, __LOGICCAMERA__) {
+        #dmmu support
+        #arm mips
+        #TODO: +wince +android +ios +macOS +win +linux
+        equals(QKIT_PRIVATE, EMBEDDED) {
+            SOURCES += $$PWD/exquisite/dmmu/dmmu.c
+            HEADERS += $$PWD/exquisite/dmmu/dmmu.h \
+                        $$PWD/exquisite/dmmu/jz_cim.h \
+                        $$PWD/exquisite/dmmu/graphics.h \
+                        $$PWD/exquisite/dmmu/hal.h
+            SOURCES += $$PWD/exquisite/qqtpreviewwidget.cpp
+            HEADERS += $$PWD/exquisite/qqtpreviewwidget.h
+            FORMS += $$PWD/exquisite/qqtpreviewwidget.ui
+        }
     }
 }

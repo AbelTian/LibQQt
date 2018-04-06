@@ -11,6 +11,8 @@
 #Project link: https://gitee.com/drabel/LibQt
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
+#2018年4月6日18点12分
+#这里是LibQQt源文件pri，所有开关宏都在LibQQt头文件pri里开关。
 #-------------------------------------------------
 SOURCES =
 HEADERS =
@@ -22,16 +24,16 @@ HEADERS += $$PWD/qqt.h \
     $$PWD/qqt-qt.h
 #platform header
 contains (QKIT_PRIVATE, WIN32||WIN64) {
-    #win32 base type
+    #win32 base header
     HEADERS += $$PWD/qqtwin.h
 } else:contains (QKIT_PRIVATE, macOS||iOS||iOSSimulator) {
-    #mac base type
+    #mac base header
     HEADERS += $$PWD/qqtdarwin.h
 } else:contains (QKIT_PRIVATE, ANDROID||ANDROIDX86) {
-    #android base type
+    #android base header
     HEADERS += $$PWD/qqtandroid.h
 } else {
-    #linux base type
+    #linux base header
     HEADERS += $$PWD/qqtlinux.h
 }
 
@@ -45,6 +47,13 @@ HEADERS += \
     $$PWD/core/qqtdictionary.h \
     $$PWD/core/qqtobjectfactory.h
 
+#后台进程支持，这个只有ios不支持，这个支持在源文件pri里处理。
+DEFINES += __PROCESSMODULE__
+#ios has no backend process
+contains(QKIT_PRIVATE, iOS||iOSSimulator) {
+    DEFINES -= __PROCESSMODULE__
+}
+
 #sql
 SOURCES += \
     $$PWD/sql/qqtsql.cpp
@@ -57,24 +66,24 @@ HEADERS += \
 
 #gui
 SOURCES += \
+    $$PWD/gui/qqttablemodel.cpp \
     $$PWD/gui/qqtdicttreemodel.cpp \
+    $$PWD/gui/qqttreemodel.cpp \
     $$PWD/gui/qqtftptreemodel.cpp \
     $$PWD/gui/qqtsqltreemodel.cpp \
-    $$PWD/gui/qqttablemodel.cpp \
-    $$PWD/gui/qqttreemodel.cpp \
-    $$PWD/gui/qqtfilesystemtreemodel.cpp \
     $$PWD/gui/qqtjsontreemodel.cpp \
-    $$PWD/gui/qqtxmltreemodel.cpp
+    $$PWD/gui/qqtxmltreemodel.cpp \
+    $$PWD/gui/qqtfilesystemtreemodel.cpp
 
 HEADERS += \
+    $$PWD/gui/qqttablemodel.h \
+    $$PWD/gui/qqttreemodel.h \
     $$PWD/gui/qqtdicttreemodel.h \
     $$PWD/gui/qqtftptreemodel.h \
     $$PWD/gui/qqtsqltreemodel.h \
-    $$PWD/gui/qqttablemodel.h \
-    $$PWD/gui/qqttreemodel.h \
-    $$PWD/gui/qqtfilesystemtreemodel.h \
     $$PWD/gui/qqtjsontreemodel.h \
     $$PWD/gui/qqtxmltreemodel.h \
+    $$PWD/gui/qqtfilesystemtreemodel.h \
     $$PWD/gui/qqtgui.h
 
 #widgets
@@ -136,11 +145,32 @@ FORMS += \
     $$PWD/widgets/qqtprogressbar.ui \
     $$PWD/widgets/qqtmptablewidget.ui
 
-DEFINES += __PROCESSMODULE__
-#ios has no backend process
-contains(QKIT_PRIVATE, iOS||iOSSimulator) {
-    DEFINES -= __PROCESSMODULE__
-}
+#frame
+SOURCES += \
+    $$PWD/frame/qqtanimation.cpp \
+    $$PWD/frame/qqtapplication.cpp \
+    $$PWD/frame/qqtwifidbwidget.cpp \
+    $$PWD/frame/qqtprogressdialog.cpp \
+    $$PWD/frame/qqtpassworddialog.cpp \
+    $$PWD/frame/qqtframe.cpp \
+    $$PWD/frame/qqtdialog.cpp \
+    $$PWD/frame/qqtmsgbox.cpp \
+    $$PWD/frame/qqtinput.cpp
+HEADERS += \
+    $$PWD/frame/qqtanimation.h \
+    $$PWD/frame/qqtapplication.h \
+    $$PWD/frame/qqtwifidbwidget.h \
+    $$PWD/frame/qqtprogressdialog.h \
+    $$PWD/frame/qqtpassworddialog.h \
+    $$PWD/frame/qqtframe.h \
+    $$PWD/frame/qqtdialog.h \
+    $$PWD/frame/qqtmsgbox.h \
+    $$PWD/frame/qqtinput.h
+FORMS += \
+    $$PWD/frame/qqtprogressdialog.ui \
+    $$PWD/frame/qqtpassworddialog.ui \
+    $$PWD/frame/qqtinput.ui \
+    $$PWD/frame/qqtmsgbox.ui
 
 
 #multimedia
@@ -183,154 +213,95 @@ contains (DEFINES, __PRINTSUPPORT__) {
 
 }
 
-
-#dmmu preview
-#arm mips
-#TODO: +wince +android +ios +macOS +win +linux
-equals(QKIT_PRIVATE, EMBEDDED) {
-    SOURCES += $$PWD/frame/dmmu/dmmu.c
-    HEADERS += $$PWD/frame/dmmu/dmmu.h \
-                $$PWD/frame/dmmu/jz_cim.h \
-                $$PWD/frame/dmmu/graphics.h \
-                $$PWD/frame/dmmu/hal.h
-    SOURCES += $$PWD/frame/qqtpreviewwidget.cpp
-    HEADERS += $$PWD/frame/qqtpreviewwidget.h
-    FORMS += $$PWD/frame/qqtpreviewwidget.ui
+contains(DEFINES, __QQTCHARTS__) {
+    SOURCES += \
+        $$PWD/charts/qqtchart.cpp \
+        $$PWD/charts/qqtchartview.cpp
+    HEADERS += \
+        $$PWD/charts/qqtchart.h \
+        $$PWD/charts/qqtchartview.h
 }
-
-#frame
-SOURCES += \
-    $$PWD/frame/qqtanimation.cpp \
-    $$PWD/frame/qqtapplication.cpp \
-    $$PWD/frame/qqtwifidbwidget.cpp \
-    $$PWD/frame/qqtprogressdialog.cpp \
-    $$PWD/frame/qqtpassworddialog.cpp \
-    $$PWD/frame/qqtframe.cpp \
-    $$PWD/frame/qqtdialog.cpp \
-    $$PWD/frame/qqtmsgbox.cpp \
-    $$PWD/frame/qqtinput.cpp
-HEADERS += \
-    $$PWD/frame/qqtanimation.h \
-    $$PWD/frame/qqtapplication.h \
-    $$PWD/frame/qqtwifidbwidget.h \
-    $$PWD/frame/qqtprogressdialog.h \
-    $$PWD/frame/qqtpassworddialog.h \
-    $$PWD/frame/qqtframe.h \
-    $$PWD/frame/qqtdialog.h \
-    $$PWD/frame/qqtmsgbox.h \
-    $$PWD/frame/qqtinput.h
-FORMS += \
-    $$PWD/frame/qqtprogressdialog.ui \
-    $$PWD/frame/qqtpassworddialog.ui \
-    $$PWD/frame/qqtinput.ui \
-    $$PWD/frame/qqtmsgbox.ui
-
 
 #network
-SOURCES += \
-    $$PWD/network/qqtprotocol.cpp \
-    $$PWD/network/qqtudpprotocol.cpp \
-    $$PWD/network/qqtnetwork.cpp
-HEADERS += \
-    $$PWD/network/qqtmessage.h \
-    $$PWD/network/qqtprotocol.h \
-    $$PWD/network/qqtudpprotocol.h \
-    $$PWD/network/qqtnetwork.h
+contains (DEFINES, __NETWORKSUPPORT__) {
+    SOURCES += \
+        $$PWD/network/qqtprotocol.cpp \
+        $$PWD/network/qqtudpprotocol.cpp \
+        $$PWD/network/qqtnetwork.cpp
+    HEADERS += \
+        $$PWD/network/qqtmessage.h \
+        $$PWD/network/qqtprotocol.h \
+        $$PWD/network/qqtudpprotocol.h \
+        $$PWD/network/qqtnetwork.h
 
-#tcpudpsocket
-contains(DEFINES, __TCPUDPSOCKET__){
-    SOURCES += \
-        $$PWD/network/qqtsockettcpclient.cpp \
-        $$PWD/network/qqtsockettcpserver.cpp
-    HEADERS += \
-        $$PWD/network/qqtsockettcpclient.h \
-        $$PWD/network/qqtsockettcpserver.h
+    #tcpudpsocket
+    contains(DEFINES, __TCPUDPSOCKET__){
+        SOURCES += \
+            $$PWD/network/qqtsockettcpclient.cpp \
+            $$PWD/network/qqtsockettcpserver.cpp
+        HEADERS += \
+            $$PWD/network/qqtsockettcpclient.h \
+            $$PWD/network/qqtsockettcpserver.h
 
-    SOURCES += \
-        $$PWD/network/qqtsocketudpclient.cpp
-    HEADERS += \
-        $$PWD/network/qqtsocketudpclient.h
-}
-#serialport
-SOURCES += \
-    $$PWD/network/qqtserialport.cpp
-HEADERS += \
-    $$PWD/network/qqtserialport.h
-#qextserialport support
-#if you use qextserialport, open the two annotation
-#DEFINES += __QEXTSERIALPORT__
-contains (DEFINES, __QEXTSERIALPORT__) {
-    #include ( $$PWD/network/qextserialport/qextserialport.pri )
-    HEADERS += $$PWD/network/qextserialport/qextserialbase.h \
-              $$PWD/network/qextserialport/qextserialport.h \
-              $$PWD/network/qextserialport/qextserialenumerator.h
-    SOURCES += $$PWD/network/qextserialport/qextserialbase.cpp \
-              $$PWD/network/qextserialport/qextserialport.cpp \
-              $$PWD/network/qextserialport/qextserialenumerator.cpp
-    unix:HEADERS += $$PWD/network/qextserialport/posix_qextserialport.h
-    unix:SOURCES += $$PWD/network/qextserialport/posix_qextserialport.cpp
-    win32:HEADERS += $$PWD/network/qextserialport/win_qextserialport.h
-    win32:SOURCES += $$PWD/network/qextserialport/win_qextserialport.cpp
-}
-#bluetooth
-#DEFINES += __BLUETOOTH__
-contains (DEFINES, __BLUETOOTH__) {
-    #bluetooth socket
-    SOURCES += \
-        $$PWD/network/qqtsocketbluetoothclient.cpp \
-        $$PWD/network/qqtsocketbluetoothserver.cpp
-    HEADERS += \
-        $$PWD/network/qqtsocketbluetoothserver.h \
-        $$PWD/network/qqtsocketbluetoothclient.h
-    #bluetooth manager
-    SOURCES += \
-        $$PWD/network/qqtbluetoothmanager.cpp
-    HEADERS += \
-        $$PWD/network/qqtbluetoothmanager.h
-}
-#ethnet(+wifi) manager
-#arm mips
-#TODO: +wince +android +ios +macOS? +win? +linux?
-contains(QKIT_PRIVATE, EMBEDDED||ARM32||MIPS32) {
-    SOURCES += $$PWD/network/qqtethenetmanager.cpp
-    HEADERS += $$PWD/network/qqtethenetmanager.h
-    SOURCES += $$PWD/frame/qqtwifiwidget.cpp
-    HEADERS += $$PWD/frame/qqtwifiwidget.h
-    FORMS += $$PWD/frame/qqtwifiwidget.ui
-}
-##webservice
-contains(DEFINES, __WEBSERVICESUPPORT__) {
-    win32 {
-        contains (DEFINES, QQT_LIBRARY) {
-            DEFINES += QT_QTSOAP_LIBRARY
-        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-            DEFINES += QT_QTSOAP_STATIC_LIBRARY
-        }
+        SOURCES += \
+            $$PWD/network/qqtsocketudpclient.cpp
+        HEADERS += \
+            $$PWD/network/qqtsocketudpclient.h
     }
-    SOURCES += \
-        $$PWD/network/soap/qtsoap.cpp
-    HEADERS += \
-        $$PWD/network/soap/qtsoap.h
-}
-#webaccess manager
-contains (DEFINES, __WEBACCESSSUPPORT__) {
-    SOURCES += \
-        $$PWD/network/qqtwebaccessmanager.cpp
-    HEADERS += \
-        $$PWD/network/qqtwebaccessmanager.h
-}
 
-contains (DEFINES, __WEBSOCKETSUPPORT__) {
+    #serialport
     SOURCES += \
-        $$PWD/network/qqtwebsocketserver.cpp \
-        $$PWD/network/qqtwebsocketclient.cpp \
-        $$PWD/network/qqtwebsocketprotocol.cpp
+        $$PWD/network/qqtserialport.cpp
     HEADERS += \
-        $$PWD/network/qqtwebsocketclient.h \
-        $$PWD/network/qqtwebsocketserver.h \
-        $$PWD/network/qqtwebsocketprotocol.h
-}
+        $$PWD/network/qqtserialport.h
 
+    #bluetooth
+    #DEFINES += __BLUETOOTH__
+    contains (DEFINES, __BLUETOOTH__) {
+        #bluetooth socket
+        SOURCES += \
+            $$PWD/network/qqtsocketbluetoothclient.cpp \
+            $$PWD/network/qqtsocketbluetoothserver.cpp
+        HEADERS += \
+            $$PWD/network/qqtsocketbluetoothserver.h \
+            $$PWD/network/qqtsocketbluetoothclient.h
+        #bluetooth manager
+        SOURCES += \
+            $$PWD/network/qqtbluetoothmanager.cpp
+        HEADERS += \
+            $$PWD/network/qqtbluetoothmanager.h
+    }
+
+    #ethnet(+wifi) manager
+    #arm mips
+    #TODO: +wince +android +ios +macOS? +win? +linux?
+    contains(QKIT_PRIVATE, EMBEDDED||ARM32||MIPS32) {
+        SOURCES += $$PWD/network/qqtethenetmanager.cpp
+        HEADERS += $$PWD/network/qqtethenetmanager.h
+        SOURCES += $$PWD/frame/qqtwifiwidget.cpp
+        HEADERS += $$PWD/frame/qqtwifiwidget.h
+        FORMS += $$PWD/frame/qqtwifiwidget.ui
+    }
+
+    #webaccess manager
+    contains (DEFINES, __WEBACCESSSUPPORT__) {
+        SOURCES += \
+            $$PWD/network/qqtwebaccessmanager.cpp
+        HEADERS += \
+            $$PWD/network/qqtwebaccessmanager.h
+    }
+
+    contains (DEFINES, __WEBSOCKETSUPPORT__) {
+        SOURCES += \
+            $$PWD/network/qqtwebsocketserver.cpp \
+            $$PWD/network/qqtwebsocketclient.cpp \
+            $$PWD/network/qqtwebsocketprotocol.cpp
+        HEADERS += \
+            $$PWD/network/qqtwebsocketclient.h \
+            $$PWD/network/qqtwebsocketserver.h \
+            $$PWD/network/qqtwebsocketprotocol.h
+    }
+}
 
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
@@ -428,73 +399,6 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/gifwidgets/qqtgifradiobutton.h \
             $$PWD/exquisite/gifwidgets/qqtgifprogressbar.h
     }
-
-    #mathml widget
-    #DEFINES += __MATHSUPPORT__
-    contains (DEFINES, __MATHSUPPORT__) {
-
-        contains(QKIT_PRIVATE, WIN32|WIN64) {
-            #mathml
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += QT_QTMMLWIDGET_LIBRARY
-            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
-            }
-        }
-        SOURCES += $$PWD/exquisite/mathml/qtmmlwidget.cpp
-        HEADERS += $$PWD/exquisite/mathml/qtmmlwidget.h
-    }
-
-    #customplot
-    #DEFINES += __CUSTOMPLOT__
-    contains (DEFINES, __CUSTOMPLOT__) {
-        #message (qcustomplot is used in $${TARGET})
-        win32 {
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
-            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                #build static library - customplot
-                DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
-            }
-        }
-        SOURCES += $$PWD/charts/customplot/qcpdocumentobject.cpp \
-                    $$PWD/charts/customplot/qcustomplot.cpp
-        HEADERS += $$PWD/charts/customplot/qcpdocumentobject.h \
-                    $$PWD/charts/customplot/qcustomplot.h
-    }
-
-    #pluginwatcher
-    #TODO: macOS dump
-    contains(DEFINES, __PLUGINWATCHER__) {
-        contains(QKIT_PRIVATE, WIN32|WIN64) {
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += BUILD_QDEVICEWATCHER_LIB
-            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                DEFINES += BUILD_QDEVICEWATCHER_STATIC
-            }
-            wince*: SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher_wince.cpp
-            else:  SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher_win32.cpp
-        }else:contains(QKIT_PRIVATE, macOS) {
-            SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher_mac.cpp
-        }else {
-            SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher_linux.cpp
-        }
-        SOURCES += $$PWD/exquisite/pluginwatcher/qdevicewatcher.cpp \
-                    $$PWD/exquisite/pluginwatcher/qqtpluginwatcher.cpp
-        HEADERS += $$PWD/exquisite/pluginwatcher/qqtpluginwatcher.h \
-                    $$PWD/exquisite/pluginwatcher/qdevicewatcher.h \
-                    $$PWD/exquisite/pluginwatcher/qdevicewatcher_p.h
-    }
 }
-
-contains(DEFINES, __QQTCHARTS__) {
-    SOURCES += \
-        $$PWD/charts/qqtchart.cpp \
-        $$PWD/charts/qqtchartview.cpp
-    HEADERS += \
-        $$PWD/charts/qqtchart.h \
-        $$PWD/charts/qqtchartview.h
-}
-
 
 include ($$PWD/qqt_3rdparty.pri)

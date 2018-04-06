@@ -88,41 +88,7 @@ isEmpty(DESTDIR):DESTDIR = bin
 #You need switch these more macro according to your needs when you build this library
 #You can tailor QQt  with these macro.
 #Default: macroes is configed, some open, some close, compatibled to special accotation.
-
-##################SerialPort Module##################################
-#if you use qextserialport, open the annotation
-#suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
-#DEFINES += __QEXTSERIALPORT__
-#if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
-lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
-#to ios, use qextserialport #android qt5 support serialport default?
-contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
-contains (DEFINES, __QEXTSERIALPORT__) {
-    CONFIG += thread
-    unix:DEFINES += _TTY_POSIX_
-    win32:DEFINES += _TTY_WIN_
-    #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
-} else {
-    #message ( __QSERIALPORT__ Defined in $${TARGET})
-    greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
-    lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
-    unix {
-        DEFINES += _TTY_POSIX_
-    } else {
-        DEFINES += _TTY_WIN_
-    }
-}
-
-##################Bluetooth Module###############################
-#if you use qtbluetooth, open this annotation
-DEFINES += __BLUETOOTH__
-#if you compiler QtBluetooth module manual, note this line is a good idea. default qt4 doesn't use bluetooth
-lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __BLUETOOTH__
-#condation
-contains (DEFINES, __BLUETOOTH__) {
-    greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
-    lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
-}
+##App希望裁剪LibQQt，开关这个文件里的组件宏，用户有必要读懂这个头文件。up to so.
 
 ##################C++11 Module###############################
 #if you use C++11, open this annotation. suggest: ignore
@@ -156,12 +122,13 @@ contains (DEFINES, __MULTIMEDIA__) {
     QT += multimedia
 }
 
-##################DeviceWatcher Module###############################
+##################PluginSupport Module###############################
 #used in windows linux e-linux android, mac ios not support exactly
+#plugin notifer, and plugin device managament.
 #if you use DeviceWatcher , open this annotation
-DEFINES += __PLUGINWATCHER__
+DEFINES += __PLUGINSUPPORT__
 contains(QKIT_PRIVATE, iOS||iOSSimulator||macOS) {
-    DEFINES -= __PLUGINWATCHER__
+    DEFINES -= __PLUGINSUPPORT__
 }
 
 ##################PrintSupport Module###############################
@@ -183,8 +150,120 @@ contains (DEFINES, __PRINTSUPPORT__) {
     greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 }
 
-##################Exquisite Module###############################
+##################Charts Module###############################
+#if you use QQtCharts, open this annotation
+DEFINES += __QQTCHARTS__
+lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__
+contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES-=__QQTCHARTS__
+#based on QtCharts, need charts module
+contains(DEFINES, __QQTCHARTS__) {
+    QT += charts
+
+    #if you use qcustomplot, open this annotation
+    #qcustomplot use QPrinter to export pdf file, QChart haven't use it, I fix it, now compiler ok.
+    #in ios qcustomplot can't call savePdf now, no result but a log no printer error.
+    DEFINES += __CUSTOMPLOT__
+}
+
+##################QQtLogSystem Module###############################
+DEFINES += __QQTLOGSYSTEMSUPPORT__
+
+##################QQt Network Module##################################
+#包括SerialPort Bluetooth TcpUdp
+#包括HttpFtp 多路的HttpFtp，QQtAccessManager WebService WebSocket Gumbo
+#包括WebKit WebEngine
+DEFINES += __NETWORKSUPPORT__
+contains (DEFINES, __NETWORKSUPPORT__) {
+    ##################SerialPort Module##################################
+    #if you use qextserialport, open the annotation
+    #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
+    #DEFINES += __QEXTSERIALPORT__
+    #if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
+    lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
+    #to ios, use qextserialport #android qt5 support serialport default?
+    contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
+    contains (DEFINES, __QEXTSERIALPORT__) {
+        CONFIG += thread
+        unix:DEFINES += _TTY_POSIX_
+        win32:DEFINES += _TTY_WIN_
+        #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
+    } else {
+        #message ( __QSERIALPORT__ Defined in $${TARGET})
+        greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
+        lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
+        unix {
+            DEFINES += _TTY_POSIX_
+        } else {
+            DEFINES += _TTY_WIN_
+        }
+    }
+
+    ##################Bluetooth Module###############################
+    #if you use qtbluetooth, open this annotation
+    DEFINES += __BLUETOOTH__
+    #if you compiler QtBluetooth module manual, note this line is a good idea. default qt4 doesn't use bluetooth
+    lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __BLUETOOTH__
+    #condation
+    contains (DEFINES, __BLUETOOTH__) {
+        greaterThan(QT_MAJOR_VERSION, 4): QT += bluetooth
+        lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
+    }
+
+    ##################WebSocket Module###############################
+    #raw socket, 这个是常用的，不要关，dont close。...
+    DEFINES += __TCPUDPSOCKET__
+
+    ##################WebService Module###############################
+    #if you use Qt Service Support ( QtSoap ), open this annotation
+    DEFINES += __WEBSERVICESUPPORT__
+
+    #One Ftp Http 单工...
+    #Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
+    #QNetworkAccessManager 提供多路并发 HTTP session。
+    #if you use QNetworkAccessManagerSupport , open this annotation
+    DEFINES += __WEBACCESSSUPPORT__
+    lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
+    contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES -= __WEBACCESSSUPPORT__
+    contains (DEFINES, __WEBACCESSSUPPORT__) {
+        #QSslError not found, you need recompiler Qt4
+    }
+
+    DEFINES += __WEBKITSUPPORT__
+    contains (DEFINES, __WEBKITSUPPORT__) {
+        #TODO: QT += webkit
+    }
+
+    DEFINES += __WEBENGINESUPPORT__
+    contains (DEFINES, __WEBENGINESUPPORT__) {
+    }
+
+    #Multi New Protocol 全双工 QWebSocket
+    #if you use QWebSocketSupport , open this annotation
+    DEFINES += __WEBSOCKETSUPPORT__
+    #equals(QKIT_PRIVATE, macOS):DEFINES += __WEBSOCKETSUPPORT__
+    lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBSOCKETSUPPORT__
+    contains (DEFINES, __WEBSOCKETSUPPORT__) {
+        QT += websockets
+        #Qt4 QSslError not found, you need recompiler Qt4
+        #TODO: QT += webkit
+    }
+
+    #c++ html parser query
+    #if you use Gumbo parser query, open this annotation
+    #这个组件用于解析网页，获得网页数据。
+    #gumbo属于网络模块，中高级工具，经常用于写爬虫。
+    DEFINES += __GUMBOSUPPORT__
+    contains (DEFINES, __GUMBOSUPPORT__) {
+        #Gumbo need std support, c99...
+        QMAKE_CFLAGS += -std=c99
+    }
+
+}
+
+
+##################Exquisite Widgets Module###############################
 #if you use Exquisite widgets, open this annotation
+#精美模块，包含不少的精美组件，这个模块可以集中开关。
 DEFINES += __EXQUISITE__
 contains (DEFINES, __EXQUISITE__) {
     #if you use QR encode, open this annotation
@@ -211,70 +290,16 @@ contains (DEFINES, __EXQUISITE__) {
         QT += svg
     }
 
-    #c++ html parser query
-    #if you use Gumbo parser query, open this annotation
-    DEFINES += __GUMBOSUPPORT__
-    contains (DEFINES, __GUMBOSUPPORT__) {
-        #Gumbo need std support
-        QMAKE_CFLAGS += -std=c99
-    }
+    ##################Mathes Module###############################
+    DEFINES += __MATHSUPPORT__
+
+    #LOGIC CAMERA PREVIEW
+    #depend on dmmu
+    DEFINES += __LOGICCAMERA__
+
+    #opengl module
+    DEFINES += __OPENGLWIDGETS__
 }
-##################WebSocket Module###############################
-#don't close this macro ...
-DEFINES += __TCPUDPSOCKET__
-
-#if you use Qt Service Support ( QtSoap ), open this annotation
-DEFINES += __WEBSERVICESUPPORT__
-
-#One Ftp Http 单工...
-#Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
-#QNetworkAccessManager 提供多路并发 HTTP session。
-#if you use QNetworkAccessManagerSupport , open this annotation
-DEFINES += __WEBACCESSSUPPORT__
-lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
-contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES -= __WEBACCESSSUPPORT__
-contains (DEFINES, __WEBACCESSSUPPORT__) {
-    #QSslError not found, you need recompiler Qt4
-}
-
-DEFINES += __WEBKITSUPPORT__
-contains (DEFINES, __WEBKITSUPPORT__) {
-    #TODO: QT += webkit
-}
-DEFINES += __WEBENGINESUPPORT__
-contains (DEFINES, __WEBENGINESUPPORT__) {
-}
-
-#Multi New Protocol 全双工 QWebSocket
-#if you use QWebSocketSupport , open this annotation
-DEFINES += __WEBSOCKETSUPPORT__
-#equals(QKIT_PRIVATE, macOS):DEFINES += __WEBSOCKETSUPPORT__
-lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBSOCKETSUPPORT__
-contains (DEFINES, __WEBSOCKETSUPPORT__) {
-    QT += websockets
-    #QSslError not found, you need recompiler Qt4
-    #TODO: QT += webkit
-}
-
-##################Charts Module###############################
-#if you use QQtCharts, open this annotation
-DEFINES += __QQTCHARTS__
-lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__
-contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES-=__QQTCHARTS__
-#based on QtCharts, need charts module
-contains(DEFINES, __QQTCHARTS__) {
-    QT += charts
-}
-#if you use qcustomplot, open this annotation
-#qcustomplot use QPrinter to export pdf file, QChart haven't use it, I fix it, now compiler ok.
-#in ios qcustomplot can't call savePdf now, no result but a log no printer error.
-DEFINES += __CUSTOMPLOT__
-
-##################Mathes Module###############################
-DEFINES += __MATHSUPPORT__
-
-##################QQtLogSystem Module###############################
-DEFINES += __QQTLOGSYSTEMSUPPORT__
 
 #################################################################
 ##library
@@ -301,6 +326,7 @@ win32 {
         QMAKE_IOS_DEPLOYMENT_TARGET = 8
     }
 }
+
 ##################################################################
 ##include directories
 ##################################################################
@@ -308,28 +334,45 @@ defineReplace(qqt_header){
     path = $$1
     !isEmpty(2) : error("qqt_header(path) requires one arguments.")
     isEmpty(1) : error("qqt_header(path) requires one arguments.")
+
+    #basic
     command += $${path}
     command += $${path}/core
     command += $${path}/gui
     command += $${path}/widgets
     command += $${path}/multimedia
     command += $${path}/sql
-    command += $${path}/printsupport
-    command += $${path}/network
-    command += $${path}/network/qextserialport
     command += $${path}/frame
-    command += $${path}/frame/dmmu
+    command += $${path}/printsupport
 
     #charts
     command += $${path}/charts
-    command += $${path}/charts/customplot
+    command += $${path}/charts/qcustomplot
 
-    #exquisite widget
+    #network
+    command += $${path}/network
+    command += $${path}/network/qextserialport
+
+    ##soap (web service)
+    command += $${path}/network/soap
+
+    ##gumbo library
+    command += $${path}/network/gumbo/query/src
+    command += $${path}/network/gumbo/parser/src
+    win32{
+        command += $${path}/network/gumbo/parser/visualc/include
+    }
+
+    #plugin support
+    command += $${path}/pluginsupport
+    command += $${path}/pluginsupport/devicewatcher
+
+    #exquisite widgets
     command += $${path}/exquisite
     command += $${path}/exquisite/svgwidgets
     command += $${path}/exquisite/gifwidgets
     command += $${path}/exquisite/mathml
-    command += $${path}/exquisite/pluginwatcher
+    command += $${path}/exquisite/dmmu
 
     ##qr code library
     command += $${path}/exquisite/qrcode/qrencode
@@ -341,16 +384,6 @@ defineReplace(qqt_header){
     win32-msvc*{
         command += $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing \
                     $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
-    }
-
-    ##soap (web service)
-    command += $${path}/network/soap
-
-    ##gumbo library
-    command += $${path}/network/gumbo/query/src
-    command += $${path}/network/gumbo/parser/src
-    win32{
-        command += $${path}/network/gumbo/parser/visualc/include
     }
 
     return ($$command)
