@@ -8,7 +8,7 @@ CONFIG += ordered
 SUBDIRS = src/qqt.pro
 
 ##-----------------------------------------------------------------
-##Q1 V1
+##Q1级别 V1 第一版、第一代
 ##-----------------------------------------------------------------
 #第一种引用LibQQt的方法
 #SUBDIRS += examples/qqtframe
@@ -26,7 +26,7 @@ SUBDIRS = src/qqt.pro
 #lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
 
 #-----------------------------------------------------------------
-#Q3 V2
+#Q3级别 V2 第二版、第二代
 #QQt installed to Qt library or
 #QQt installed to sdk or
 #QQt is build
