@@ -70,7 +70,8 @@ SUBDIRS += examples/qqtchartexample
 #
 SUBDIRS += test/customqvariant
 #SUBDIRS += test/framelesshelperwidget
-#SUBDIRS += test/treeviewtest
+#
+SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest
 #
 SUBDIRS += test/qqtdicttest2

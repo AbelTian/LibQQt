@@ -5,7 +5,7 @@
 #依赖 APP_CONFIG_PWD(in app pro) APP_DEPLOY_PWD(in app deploy)
 #---------------------------------------------------------------------
 #example（in app's pro file）
-#APP_CONFIG_PWD = $${PWD}/../SysRoot
+#APP_CONFIG_PWD = $${PWD}/../AppRoot
 #win32 {
 #    APP_CONFIG_PWD ~=s,/,\\,g
 #}

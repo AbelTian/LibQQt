@@ -36,9 +36,4 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
-APP_CONFIG_PWD = $${PWD}/AppRoot
-win32 {
-    APP_CONFIG_PWD ~=s,/,\\,g
-}
-
 include(../../src/app_base_manager.pri)
