@@ -1,4 +1,4 @@
-#include "qqtmptablewidget.h"
+﻿#include "qqtmptablewidget.h"
 #include "ui_qqtmptablewidget.h"
 #include "qqtcore.h"
 #include "qqtsql.h"
@@ -209,11 +209,11 @@ void QQtMPTableWidget::setAlternatingRowColors ( bool alt )
     altColor = alt;
 }
 
-void QQtMPTableWidget::setHeaderData(Qt::Orientation, QStringList dataList)
+void QQtMPTableWidget::setHeaderData ( Qt::Orientation, QStringList dataList )
 {
-    for(int i =0; i < dataList.size(); i++)
+    for ( int i = 0; i < dataList.size(); i++ )
     {
-        m_headerData.insert(i, dataList.at(i));
+        m_headerData.insert ( i, dataList.at ( i ) );
     }
 }
 
