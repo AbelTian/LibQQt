@@ -56,6 +56,7 @@ equals(QKIT_PRIVATE, macOS) {
 #user can modify any infomation under this annotation
 #-------------------------------------------------
 include(../../src/app_base_manager.pri)
+#include(/Users/abel/Develop/a0-develop/LibQQt/src/app_base_manager.pri)
 
 #-------------------------------------------------
 #user app may use these these settings prefertly

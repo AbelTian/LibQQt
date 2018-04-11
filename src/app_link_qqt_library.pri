@@ -41,9 +41,6 @@ isEmpty(QKIT_PRIVATE) {
     error("error occured, please check build output panel.")
 }
 
-#-------------------------------------------------------------
-#link path init
-#-------------------------------------------------------------
 ##Multi Link technology (Multi Link technology)
 ##Multi Link 技术，支持多链接库增删的一门工程管理技术。
 #default sdk root is qqt-source/..
