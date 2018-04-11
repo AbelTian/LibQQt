@@ -3,8 +3,8 @@
 ![设置Qt Creator默认编译路径](screenshot/1.png "这是Qt Creator的设置")  
 Qt Creator  
 Default build directory:   
-/xxx/xxx/xxx/xxx/c0-buildstation 这是个你电脑上的绝对路径，根据自己情况设置  
-/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name} 这里是个通配  
+/xxx/xxx/xxx/xxx/c0-buildstation 这是个你电脑上的绝对路径，根据自己把编译根放在哪里设置  
+/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name} 这里是个通配，直接拷贝上去  
 ![设置Qt Creator构建套件](screenshot/2.png "这是Qt Creator的设置，设置File System Name")  
 ![设置当前工程的环境变量](screenshot/3.png "这是工程的环境变量设置，注意那几点")  
 ![链接QQt](screenshot/4.png "这是链接QQt的方法，pri都在LibQQt目录里")  
@@ -16,7 +16,7 @@ APP_DEPLOY_ROOT = /Users/abel/Develop/d1-product
 ![设置成功显示](screenshot/6.png)  
 如果设置成功，qmake应当显示如上例程的样子  
 
-# V2.1.6更新链接QQt的方法  
+# v2.1.6更新链接QQt的方法  
 
 ![链接QQt](screenshot/7.png "这是链接QQt的方法，pri都在LibQQt目录里")  
 ![QQt内部pri的设置](screenshot/8.png "这是LibQQt需要设置的几个路径，这是新的版本，pri位置有改动")  
@@ -35,7 +35,8 @@ APP_DEPLOY_ROOT = /Users/abel/Develop/d1-product
 # Qt Kit、Kit File System Name和QKIT、SYSNAME的关系  
 
 LibQQt有复杂的环境设置，那么这些设置之间的关系是什么样子的呢？  
-先说说，每个value在Qt Creator中的位置  
+
+#### 先说说，每个value在Qt Creator中的位置  
 
 - 首选项-构建和运行-构建套件(Kit)-Every kit (初始化)    
     - File system name
@@ -48,7 +49,7 @@ LibQQt有复杂的环境设置，那么这些设置之间的关系是什么样�
     - QQT_BUILD_ROOT 所有LibQQt应用的编译根位置
     - APP_DEPLOY_ROOT 所有LibQQt应用的发布根目录  
 
-再说说，他们之间的对应关系  
+#### 再说说，他们之间的对应关系  
 
 | Qt Kit | Kit File System Name | QKIT | SYSNAME |   
 | ---- | ---- | :---- | :---- |  
@@ -65,7 +66,7 @@ LibQQt有复杂的环境设置，那么这些设置之间的关系是什么样�
 | Android armeabi |﻿Android | ANDROID |﻿Android |  
 | Android x86 |﻿Android_x86 | ANDROIDX86 |﻿Android_x86 |  
 
-最后说说，他们的决定关系和由来  
+#### 最后说说，他们的决定关系和由来  
 
 QKIT决定SYSNAME，SYSNAME等于Kit File System Name.   
 Qt Kit的名字，第一列，就是Qt Creator的构建套件。  
@@ -84,6 +85,14 @@ Qt Creator里的两处配置都是为了配合qmake进行配置的，
 目的在于确认用户的开发、工具、编译、产品目录的设置，用于辅助qmake执行多link。   
 
 欢迎建筑工程师、机械工程师、电子工程师、软件工程师、美术工程师等技术人员，学习使用。  
+
+# v2.2.1更新链接LibQQt的方法  
+
+磁盘上的和先前的没有变化，只不过用户在工程树里看到的app_configure.pri从app_link_qqt_library.pri里移动到了app_multi_link_config.pri里。  
+并且Multi-link技术主动依赖qqt_function.pri里的qmake用户自定义函数集。  
+图上写的比较简单，Windows下在，用户主目录\\AppData\\Roaming\\qmake里。
+![app_configure.pri移动了](screenshot/9.png "这是LibQQt需要设置的几个路径，pri位置有改动")  
+
 
 [返回](.)   
 
