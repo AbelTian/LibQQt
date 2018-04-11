@@ -100,7 +100,8 @@ LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。
 *把LibQQt/extra/md5.exe 复制到C:\Windows*   
 
 [走，去看看入门用法](usage.md)  
-[参考我的LibQQt博客](http://blog.csdn.net/Dr_Abel)   
+[可以了，去看看学习设置工程目录](project.md)  
+[阅读我的LibQQt博客进行一系列的学习](http://blog.csdn.net/Dr_Abel)   
 发现了一个问题: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
 
@@ -115,7 +116,6 @@ LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。
 
 [预习Git入门](usage-git.md)  
 [去看看软件基础概念](software.md)  
-[去看看学习设置工程目录](project.md)  
 
 
 ========================================================================  

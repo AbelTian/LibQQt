@@ -35,7 +35,7 @@ FORMS += \
 
 #促使qqt_deploy_config配置执行，没有这个变量不执行。
 APP_CONFIG_PWD = $${PWD}/AppRoot
-win32 {
+equals(QMAKE_HOST.os, Windows) {
     APP_CONFIG_PWD ~=s,/,\\,g
 }
 

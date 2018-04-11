@@ -41,49 +41,6 @@ isEmpty(QKIT_PRIVATE) {
     error("error occured, please check build output panel.")
 }
 
-##Multi Link technology (Multi Link technology)
-##Multi Link 技术，支持多链接库增删的一门工程管理技术。
-#default sdk root is qqt-source/..
-#user can modify this path in user_config_path()/app_configure.pri, then it will be included here.
-#create_qqt_sdk and link_from_sdk will need this.
-#different in every operate system
-#qqt_library need this configure
-CONFIG_PATH =
-CONFIG_FILE =
-
-win32 {
-    CONFIG_PATH = $$user_config_path()\qmake
-    CONFIG_FILE = $${CONFIG_PATH}\\app_configure.pri
-} else {
-    CONFIG_PATH = $$user_config_path()/.qmake
-    CONFIG_FILE = $${CONFIG_PATH}/app_configure.pri
-}
-message($${TARGET} config file: $${CONFIG_FILE})
-
-!exists($${CONFIG_FILE}) {
-    mkdir("$${CONFIG_PATH}")
-    empty_file($${CONFIG_FILE})
-    ret = $$system(echo QQT_SDK_ROOT = > $${CONFIG_FILE})
-    ret = $$system(echo QQT_BUILD_ROOT = >> $${CONFIG_FILE})
-    ret = $$system(echo APP_DEPLOY_ROOT = >> $${CONFIG_FILE})
-}
-
-#your must config this file! following readme!
-include ($${CONFIG_FILE})
-
-#qqt build root, build station root
-#link_from_build will need this path.
-isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT) {
-    message($${TARGET})
-    message($${CONFIG_FILE})
-    message("QQT_BUILD_ROOT = /user/set/path is required, please modify qmake/app_configure.pri")
-    message("QQT_SDK_ROOT = /user/set/path is required")
-    message("linux platform this pri is under app_link_qqt_library.pri")
-    error("  please check $$CONFIG_FILE")
-}
-message(QQt build root: $$QQT_BUILD_ROOT)
-message(QQt sdk root: $$QQT_SDK_ROOT)
-
 #-------------------------------------------------------------
 #link qqt settings: use source or link library?
 #-------------------------------------------------------------

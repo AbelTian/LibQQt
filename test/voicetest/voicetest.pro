@@ -41,7 +41,7 @@ system (touch main.cpp)
 
 #用本地文件做测试
 APP_CONFIG_PWD = $${PWD}/approot
-win32 {
+equals(QMAKE_HOST.os, Windows) {
     APP_CONFIG_PWD ~=s,/,\\,g
 }
 

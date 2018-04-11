@@ -10,8 +10,10 @@ SUBDIRS = src/qqt.pro
 ##-----------------------------------------------------------------
 ##Q1级别 V1 第一版、第一代
 ##-----------------------------------------------------------------
-#第一种引用LibQQt的方法
+#古老的链接LibQQt的方式废弃。
+#App管理Application句柄的方式废弃。
 #SUBDIRS += examples/qqtframe
+
 #SUBDIRS += examples/animationframe
 #
 #need vlcQt libvlc library
@@ -32,7 +34,9 @@ SUBDIRS = src/qqt.pro
 #QQt is build
 #-----------------------------------------------------------------
 #第二种引用LibQQt的方式
-#SUBDIRS += examples/qqtframe2
+#方法：include(.../LibQQt/src/app_base_manager.pri)
+#QQt提供QQtApplication帮助App管理Application句柄。
+SUBDIRS += examples/qqtframe2
 #
 SUBDIRS += examples/exquisite
 #
@@ -54,6 +58,8 @@ lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
 #
 SUBDIRS += examples/qqtchartexample
 #
+#
+SUBDIRS += examples/console_app
 #-----------------------------------------------------------------
 #need webaccessmanager - WebSupport
 #need QSsl
@@ -75,7 +81,6 @@ SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest
 #
 SUBDIRS += test/qqtdicttest2
-#SUBDIRS += test/consoletest
 #
 SUBDIRS += test/bytearraytest
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){

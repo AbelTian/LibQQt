@@ -5,7 +5,7 @@ CONFIG += c++11
 CONFIG -= console
 #我需要使用console窗口，所以
 CONFIG += console
-
+#苹果电脑下我不使用bundle
 CONFIG -= app_bundle
 
 # The following define makes your compiler emit warnings if you use

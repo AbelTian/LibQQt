@@ -64,7 +64,7 @@ defineReplace(get_empty_file) {
     filename = $$1
     isEmpty(1): error("get_empty_file(filename) requires one argument")
     command =
-    win32 {
+    equals(QMAKE_HOST.os, Windows) {
         command = echo . 2> $${filename}
     } else {
         command = echo 2> $${filename}
@@ -88,7 +88,7 @@ defineReplace(get_copy_dir_and_file) {
     !isEmpty(4): error("get_copy_dir_and_file(source, pattern, target) requires three arguments.")
     isEmpty(3) : error("get_copy_dir_and_file(source, pattern, target) requires three arguments.")
     command =
-    win32{
+    equals(QMAKE_HOST.os, Windows) {
         command = $${COPY_DIR} $${source}\\$${pattern} $${target}
     } else {
         command = chmod +x $${LINUX_CP_FILES} $${CMD_SEP}
@@ -106,7 +106,7 @@ defineReplace(get_read_ini_command) {
     !isEmpty(4): error("get_read_ini_command(file, section, key) requires three arguments.")
     isEmpty(3) : error("get_read_ini_command(file, section, key) requires three arguments.")
     command =
-    win32{
+    equals(QMAKE_HOST.os, Windows) {
         #if use $${PWD}/...directoly this PWD is the refrence pri file path
         command = $${WIN_READ_INI} %file_name% %sect_name% %key_name%
     } else {
@@ -127,33 +127,12 @@ defineReplace(get_write_ini_command) {
     !isEmpty(5): error("get_write_ini_command(file, section, key, value) requires four arguments.")
     isEmpty(4) : error("get_write_ini_command(file, section, key, value) requires four arguments.")
     command =
-    win32{
+    equals(QMAKE_HOST.os, Windows) {
         #if use $${PWD}/...directoly this PWD is the refrence pri file path
         command = $${WIN_WRITE_INI} %file_name% %sect_name% %key_name% %new_value%
     } else {
         command = chmod +x $${LINUX_WRITE_INI} $$CMD_SEP
         command += $${LINUX_WRITE_INI} $${file_name} $${sect_name} $${key_name} $${new_value}
-    }
-    #message ($$command)
-    return ($$command)
-}
-
-defineReplace(get_user_home) {
-    command =
-    win32{
-        command = echo %HOMEPATH%
-    } else {
-        command = echo $HOME
-    }
-    #message ($$command)
-    return ($$command)
-}
-defineReplace(get_user_config_path) {
-    command =
-    win32{
-        command = echo %APPDATA%
-    } else {
-        command = echo $HOME
     }
     #message ($$command)
     return ($$command)
@@ -186,13 +165,39 @@ defineReplace(get_md5_command) {
     isEmpty(1): error("get_md5_command(filename) requires one argument")
     !isEmpty(2): error("get_md5_command(filename) requires one argument")
     command =
-    win32 {
+    equals(QMAKE_HOST.os, Windows) {
         command = md5 -n $${filename}
     } else:mac* {
         command = md5 -q $${filename}
     } else {
         command = md5sum -b $${filename} | cut -d \' \' -f1
     }
+    return ($$command)
+}
+
+defineReplace(get_user_home) {
+    command =
+    equals(QMAKE_HOST.os, Windows) {
+        command = echo %HOMEPATH%
+    } else {
+        command = echo $HOME
+    }
+    #message ($$command)
+    return ($$command)
+}
+
+defineReplace(get_user_config_path) {
+    command =
+    #windows下编译android工程，qmake CONFIG里面不包含win32而是android、linux、unix。
+    #win32 只有在目标是win32的时候才会在CONFIG里面出现。开发平台用QMAKE_HOST.os
+    #注意：qmake在windows平台下，无论目标，明令行一律按照windows控制台风格。不以目标区分，Attention!。
+    #win32 {
+    equals(QMAKE_HOST.os, Windows) {
+        command = echo %APPDATA%
+    } else {
+        command = echo $HOME
+    }
+    #message ($$command)
     return ($$command)
 }
 
