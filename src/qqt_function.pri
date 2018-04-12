@@ -178,7 +178,7 @@ defineReplace(get_md5_command) {
 defineReplace(get_user_home) {
     command =
     equals(QMAKE_HOST.os, Windows) {
-        command = echo %HOMEPATH%
+        command = echo %HOMEDRIVE%%HOMEPATH%
     } else {
         command = echo $HOME
     }
@@ -199,6 +199,11 @@ defineReplace(get_user_config_path) {
     }
     #message ($$command)
     return ($$command)
+}
+
+#将路径里的[反]斜杠转换为开发机上的格式。
+#注意：不是按照目标进行转换的，所以仅仅用于命令行操作的FLOW。
+defineReplace(get_path) {
 }
 
 ################################################

@@ -66,6 +66,11 @@ contains(CONFIG, app_copy_config) {
     } else: contains(QKIT_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$copy_config_on_mac("$${APP_CONFIG_PWD}/*")
     } else: contains(QKIT_PRIVATE, ANDROID||ANDROIDX86) {
+        #分为Host为Windows和类Unix两种情况。
+        #Android下使用qrc，无法发布配置文件。
+        equals(QMAKE_HOST.os, Windows){
+        } else {
+        }
         #QMAKE_POST_LINK += $$deploy_app_on_android()
     } else {
         QMAKE_POST_LINK += $$copy_config("$${APP_CONFIG_PWD}/*")

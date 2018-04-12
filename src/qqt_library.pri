@@ -99,7 +99,10 @@ contains(CONFIG, link_from_sdk) {
     QQT_LIB_PWD = $${QQT_BUILD_ROOT}/$${QQT_STD_DIR}/$${QQT_DST_DIR}
 }
 
-contains(QKIT_PRIVATE, WIN32||WIN64) {
+#这里不仅仅目标为windows的时候，才会转换，
+#开发Host为Windows的时候，都要转换。
+#contains(QKIT_PRIVATE, WIN32||WIN64) {
+equals(QMAKE_HOST.os, Windows) {
     QQT_BUILD_ROOT~=s,/,\\,g
     QQT_SDK_ROOT~=s,/,\\,g
     APP_DEPLOY_ROOT~=s,/,\\,g
@@ -125,6 +128,8 @@ contains(CONFIG, link_from_sdk) {
     }
 }
 
+#这个地方的判断方式有两种，使用QKIT_PRIVATE也可以。
+#是不是只有armeabi-v7a需要这个extra？
 contains(ANDROID_TARGET_ARCH, armeabi-v7a) {
     ANDROID_EXTRA_LIBS = \
         $${QQT_LIB_PWD}/lib$${MODULE_NAME}.so

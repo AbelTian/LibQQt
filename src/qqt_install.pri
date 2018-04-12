@@ -145,10 +145,13 @@ defineReplace(create_library_sdk){
     command += $$CD $${QQT_SDK_PWD} $$CMD_SEP
     command += $$create_dir_struct()
 
-    contains(QKIT_PRIVATE, WIN32|WIN64) {
+    #这里不是目标为Windows才拷贝，而是开发机是Windows就得这么拷贝。
+    #Windows下，Win目标、Android目标都走这里。
+    #contains(QKIT_PRIVATE, WIN32|WIN64) {
+    equals(QMAKE_HOST.os, Windows) {
         #message(create QQt windows struct library)
         command += $$create_windows_sdk() $$CMD_SEP
-        command += $$COPY $${QQT_BUILD_PWD}\*.prl lib $$CMD_SEP
+        command += $$COPY $${QQT_BUILD_PWD}\\*.prl lib $$CMD_SEP
     } else {
         contains(QKIT_PRIVATE, macOS) {
             #message(create QQt mac bundle framework)
@@ -159,11 +162,13 @@ defineReplace(create_library_sdk){
             #create prl
             command += $$COPY $${QQT_BUILD_PWD}/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl lib/$${MODULE_NAME}.framework/$${MODULE_NAME}.prl $$CMD_SEP
         } else {
+            #Android在linux开发机下也会走这里，Android目标，LibQQt可以发布Win和Linux两种格式的SDK。
             #message(create QQt linux struct library)
             command += $$create_linux_sdk() $$CMD_SEP
             command += $$COPY $${QQT_BUILD_PWD}/*.prl lib $$CMD_SEP
         }
     }
+
     command += $$create_qt_lib_pri()
     return ($$command)
 }
@@ -185,7 +190,10 @@ defineReplace(create_qqt_sdk){
     QQT_PRI_PATH=mkspecs/modules
     QQT_PRI_FILEPATH=$${QQT_PRI_PATH}/qt_lib_$${module_name}.pri
 
-    contains(QKIT_PRIVATE, WIN32|WIN64) {
+    #不仅仅发布目标为Windows的时候需要改变，
+    #开发Host是Windows的时候都要改变。路径问题是两种操作系统固有的痛。
+    #contains(QKIT_PRIVATE, WIN32||WIN64) {
+    equals(QMAKE_HOST.os, Windows) {
         #on windows every path must use \ sep.
         QQT_SRC_PWD~=s,/,\\,g
         QQT_BUILD_PWD~=s,/,\\,g

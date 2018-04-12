@@ -71,7 +71,10 @@ defineReplace(deploy_app_on_android) {
 #set app deploy pwd
 #APP_DEPLOY_PWD is here.
 APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QKIT_STD_DIR}
-contains(QKIT_PRIVATE, WIN32||WIN64) {
+#不仅仅发布目标为Windows的时候，才需要改变路径
+#开发机为Windows就必须改变。
+#contains(QKIT_PRIVATE, WIN32||WIN64) {
+equals(QMAKE_HOST.os, Windows) {
     APP_DEPLOY_PWD~=s,/,\\,g
 }
 
@@ -102,12 +105,20 @@ isEmpty(APP_DEPLOY_ROOT) {
 
 contains(CONFIG, deploy_app) {
     contains(QKIT_PRIVATE, WIN32||WIN64) {
+        #发布windows版本
         QMAKE_POST_LINK += $$deploy_app_on_win()
     } else: contains(QKIT_PRIVATE, macOS) {
+        #发布苹果版本，iOS版本也是这个？
         QMAKE_POST_LINK += $$deploy_app_on_mac()
     } else: contains(QKIT_PRIVATE, ANDROID||ANDROIDX86) {
+        #发布Android版本，这个分为开发Host为windows和类Unix两种情况。
+        #Android下Qt Creator自动使用androidDeployQt，无法发布应用。
+        equals(QMAKE_HOST.os, Windows){
+        } else {
+        }
         #QMAKE_POST_LINK += $$deploy_app_on_android()
     } else {
+        #发布linux、e-linux，这个是一样的。
         QMAKE_POST_LINK += $$deploy_app_on_linux()
     }
 }
