@@ -32,7 +32,6 @@ equals(QMAKE_HOST.os, Windows) {
     CONFIG_PATH = $$user_config_path()/.qmake
     CONFIG_FILE = $${CONFIG_PATH}/app_configure.pri
 }
-message($${TARGET} config file: $${CONFIG_FILE})
 
 !exists($${CONFIG_FILE}) {
     mkdir("$${CONFIG_PATH}")
@@ -48,12 +47,12 @@ include ($${CONFIG_FILE})
 #qqt build root, build station root
 #link_from_build will need this path.
 isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT) {
-    message($${TARGET})
-    message($${CONFIG_FILE})
-    message("QQT_BUILD_ROOT = /user/setted/path is required, please modify qmake/app_configure.pri")
-    message("QQT_SDK_ROOT = /user/setted/path is required")
-    message("linux platform this pri is under app_link_qqt_library.pri")
-    error("  please check $$CONFIG_FILE")
+    message($${TARGET} multipal link config file: $${CONFIG_FILE})
+    message("QQT_BUILD_ROOT = is required, please modify $${CONFIG_FILE}")
+    message("QQT_SDK_ROOT = is required")
+    message("APP_DEPLOY_ROOT = is required [optional]")
+    message("[linux platform, ]this pri is under app_multi_link_config.pri")
+    error("please check $$CONFIG_FILE")
 }
 message(QQt build root: $$QQT_BUILD_ROOT)
 message(QQt sdk root: $$QQT_SDK_ROOT)

@@ -1,4 +1,4 @@
-#include "qqtmsgbox.h"
+﻿#include "qqtmsgbox.h"
 #include "ui_qqtmsgbox.h"
 #include "qqtcore.h"
 #include <QSpacerItem>
@@ -41,22 +41,6 @@ QQtMsgBox::QQtMsgBox ( QWidget* parent ) :
         ui->btnNo->setFixedSize ( btnW, btnH );
         ui->btnYes->setFixedSize ( btnW, btnH );
         ui->widgetBottom->setFixedHeight ( botoomH );
-
-        //text
-        ui->btnNo->setText ( "" );
-        ui->btnYes->setText ( "" );
-
-        //pic
-        ui->btnNo->iconTable().initNormal ( "./skin/default/bt_back_normal.png",
-                                            "./skin/default/bt_back_press.png" );
-        ui->btnNo->iconTable().initOther ( "./skin/default/bt_back_hover.png",
-                                           "./skin/default/bt_back_disable.png" );
-
-        ui->btnYes->iconTable().initNormal ( "./skin/default/bt_login_normal.png",
-                                             "./skin/default/bt_login_press.png" );
-        ui->btnYes->iconTable().initOther ( "./skin/default/bt_login_hover.png",
-                                            "./skin/default/bt_login_disable.png" );
-
     }
     else if ( qApp->desktop()->size() == QSize ( 800, 480 ) )
     {
@@ -81,6 +65,22 @@ QQtMsgBox::QQtMsgBox ( QWidget* parent ) :
         ui->btnYes->setFixedSize ( btnW, btnH );
         ui->widgetBottom->setFixedHeight ( botoomH );
     }
+
+    //text
+    ui->btnNo->setText ( "" );
+    ui->btnYes->setText ( "" );
+
+    //pic
+    ui->btnNo->iconTable().initNormal ( "./skin/default/bt_back_normal.png",
+                                        "./skin/default/bt_back_press.png" );
+    ui->btnNo->iconTable().initOther ( "./skin/default/bt_back_hover.png",
+                                       "./skin/default/bt_back_disable.png" );
+
+    ui->btnYes->iconTable().initNormal ( "./skin/default/bt_login_normal.png",
+                                         "./skin/default/bt_login_press.png" );
+    ui->btnYes->iconTable().initOther ( "./skin/default/bt_login_hover.png",
+                                        "./skin/default/bt_login_disable.png" );
+
 
 }
 

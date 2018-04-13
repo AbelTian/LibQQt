@@ -49,13 +49,14 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 ##-----------------------------------------------
 #link QQt static library in some occation on windows
 #when link QQt    static library, if no this macro, headers can't be linked on windows.
-contains(QKIT_PRIVATE, WIN32||WIN64) {
+contains(QKIT_PRIVATE, WIN32|WIN64 || iOS|iOSSimulator) {
     #Qt is static by mingw32 building
-    mingw{
+    mingw|ios{
         #on my computer, Qt library are all static library?
         DEFINES += QQT_STATIC_LIBRARY
-        message($${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
+        message(Build $${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
     }
+
     #link and build all need this macro
     contains(DEFINES, QQT_STATIC_LIBRARY) {
         DEFINES += QCUSTOMPLOT_STATIC_LIBRARY

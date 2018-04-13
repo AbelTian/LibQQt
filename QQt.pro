@@ -36,6 +36,7 @@ SUBDIRS = src/qqt.pro
 #第二种引用LibQQt的方式
 #方法：include(.../LibQQt/src/app_base_manager.pri)
 #QQt提供QQtApplication帮助App管理Application句柄。
+#
 SUBDIRS += examples/qqtframe2
 #
 SUBDIRS += examples/exquisite
