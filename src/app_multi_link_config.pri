@@ -26,7 +26,9 @@ CONFIG_PATH =
 CONFIG_FILE =
 
 equals(QMAKE_HOST.os, Windows) {
-    CONFIG_PATH = $$user_config_path()\\qmake
+    #<v2.2.2
+    #CONFIG_PATH = $$user_config_path()\\qmake
+    CONFIG_PATH = $$user_config_path()\\.qmake
     CONFIG_FILE = $${CONFIG_PATH}\\app_configure.pri
 } else {
     CONFIG_PATH = $$user_config_path()/.qmake

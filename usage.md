@@ -93,6 +93,17 @@ Qt Creator里的两处配置都是为了配合qmake进行配置的，
 图上写的比较简单，Windows下在，用户主目录\\AppData\\Roaming\\qmake里。
 ![app_configure.pri移动了](screenshot/9.png "这是LibQQt需要设置的几个路径，pri位置有改动")  
 
+# v2.2.2 更新LibQQt Multi-link技术  
+
+这次相比v2.2.1更改了Windows平台app_configure.pri的位置，过去在C:\\Users\\Administrator\\AppData\\qmake里面，  
+现在更改到了C:\\Users\\Administrator\\.qmake里面，也就是放到了用户主目录根下，    
+这次改动统一符合了类Unix配置文件的规范。  
+但是在Windows下，Qt Creator还是不会在qmake error函数以后依然加载app_configure.pri，  
+还是需要用户手动去打开这个文件进行编辑。  
+无奈之举。  
+
+另外，更新了QKIT和SYSNAME的关系
+
 
 [返回](.)   
 
