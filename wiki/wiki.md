@@ -24,6 +24,10 @@
 
 [Multi-link 技术](Multi-Link.md)  
 
+## LibQQt在操作系统中的地位    
+
+[LibQQt的地位](LibQQt's-position.md)  
+
 ## 返回  
 
 [返回](../)  
