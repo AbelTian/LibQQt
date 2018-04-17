@@ -144,5 +144,22 @@ int main ( int argc, char* argv[] )
     //windows
     //经过测试，QQtDictNode内部空间成功和外部空间分离，bug清除。
 
+    QQtDictNode v00;
+    pline() << v00;
+
+    QQtDictNode v0 ( "This is a value" );
+    pline() << v0;
+
+    QQtDictNode v1;
+    v1.appendChild ( "CCCC" );
+    v1.appendChild ( "DDDD" );
+    v1[0].appendChild ( "2-CCCC" );
+    pline() << v1;
+    pline() << v1[0];
+
+    QQtDictNode v2;
+    v2["AAAA"] = "NNNN";
+    v2["BBBB"] = "MMMM";
+    pline() << v2;
     return 0;//a.exec();
 }

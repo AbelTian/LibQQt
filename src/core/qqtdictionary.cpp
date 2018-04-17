@@ -21,6 +21,19 @@ QQtDictNode::EDictType QQtDictNode::getType() const
     return m_type;
 }
 
+QString QQtDictNode::getTypeName() const
+{
+    QString type = "Invalid";
+    if ( DictValue == m_type )
+        type = "Dict Value";
+    else if ( DictList == m_type )
+        type = "Dict List";
+    else if ( DictMap == m_type )
+        type = "Dict Map";
+
+    return type;
+}
+
 void QQtDictNode::setType ( QQtDictNode::EDictType type )
 {
     m_type = type;
@@ -368,14 +381,61 @@ QQtDictNode& QQtDictNode::getChild ( const QString& key )
 
 
 
-QDebug operator<< ( QDebug dbg, const QQtDictNode& d )
+QDebug& operator<< ( QDebug& dbg, const QQtDictNode& d )
 {
-    dbg.nospace() << "\n{" <<
-                  " Type:" << d.getType() <<
-                  " Count:" << d.count() <<
-                  " Value:" << d.getValue() <<
-                  " List:" << d.getList() <<
-                  " Map:" << d.getMap() <<
-                  "}";
+    if ( d.getType() == QQtDictNode::DictMax )
+    {
+        dbg << "\n{"
+            << "\n"
+            << "  Type:" << d.getTypeName()
+            << "\n"
+            << "  Value:" << d.getValue()
+            << "\n}";
+    }
+    else if ( d.getType() == QQtDictNode::DictValue )
+    {
+        dbg << "\n{"
+            << "\n"
+            << "  Type:" << d.getTypeName()
+            << "\n"
+            << "  Value:" << d.getValue()
+            << "\n}";
+    }
+    else
+    {
+        dbg << "\n{"
+            << "\n"
+            << "  Type:" << d.getTypeName()
+            << "\n"
+            << "  Count:" << d.count();
+
+        if ( d.getType() == QQtDictNode::DictList )
+        {
+            dbg << "\n"
+                << "  List:" << "{";
+            for ( int i = 0; i < d.getList().size(); i++ )
+            {
+                dbg << "\n"
+                    << "    id:" << i << "Type:" << d[i].getTypeName() << "Value:" << d[i].getValue();
+            }
+            dbg << "\n"
+                << "  }";
+        }
+        else if ( d.getType() == QQtDictNode::DictMap )
+        {
+            dbg << "\n"
+                << "  Map:" << "{";
+            foreach ( QString key, d.getMap().keys() )
+            {
+                dbg << "\n"
+                    << "    id:" << key << "Type:" << d[key].getTypeName() << "Value:" << d[key].getValue();
+            }
+            dbg << "\n"
+                << "  }";
+        }
+
+        dbg << "\n}";
+    }
+
     return dbg.space();
 }
