@@ -202,7 +202,7 @@ contains (DEFINES, __MULTIMEDIA__) {
 
 
 #printsupport
-#DEFINES += __PRINTSUPPORT__
+#注释：在qqt_header.pri打开 DEFINES += __PRINTSUPPORT__
 contains (DEFINES, __PRINTSUPPORT__) {
     SOURCES += $$PWD/printsupport/qqtprinter.cpp
     HEADERS += $$PWD/printsupport/qqtprinter.h
@@ -256,7 +256,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         $$PWD/network/qqtserialport.h
 
     #bluetooth
-    #DEFINES += __BLUETOOTH__
+    #注释：在qqt_header.pri打开 DEFINES += __BLUETOOTH__
     contains (DEFINES, __BLUETOOTH__) {
         #bluetooth socket
         SOURCES += \

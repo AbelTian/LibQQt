@@ -52,7 +52,10 @@ void QQtDictNode::appendChild ( const QString& value )
 void QQtDictNode::appendChild ( const QQtDictNode& dict )
 {
     m_type = DictList;
-    m_list.append ( dict );
+    //list类
+    //append函数，会引用外部变量，push_back是不是在list内部生成了新的实例？
+    //m_list.append ( dict );
+    m_list.push_back ( dict );
 }
 
 void QQtDictNode::insertChild ( const QString& key, const QQtDictNode& dict )
@@ -69,6 +72,7 @@ void QQtDictNode::insertChild ( int index, const QString& value )
 void QQtDictNode::insertChild ( int index, const QQtDictNode& dict )
 {
     m_type = DictList;
+    //list类
     //insert不能实现max count以后插入。
     //[]不能实现插入操作，而是实现覆盖操作。
     //怎么办？
@@ -247,6 +251,7 @@ const QQtDictNode& QQtDictNode::operator[] ( int index ) const
 QQtDictNode::QQtDictNode ( const QVariant& value, QObject* parent ) :
     QObject ( parent )
 {
+    m_type = DictValue;
     *this = value;
 }
 

@@ -551,5 +551,7 @@ void MainWindow::on_pushButton_11_clicked()
 void MainWindow::on_pushButton_12_clicked()
 {
     //android support 16bit but 24bit
+    QQtWavSoundEffect* e0 = QQtWavSound();
+    e0->setTimerInterval ( 100 );
     QQtWavSound ( res ( "9767.wav" ) );
 }
