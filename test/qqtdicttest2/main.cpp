@@ -89,6 +89,7 @@ int main ( int argc, char* argv[] )
     {
         pline() << d5["5.7"]["5.7.4"][0][i].getValue().toString();
     }
+    pline() << d5["5.7"]["5.7.4"][0];
 
     QQtDictNode node = d5;
     pline() << node["5.7"]["5.7.4"][0][0].getValue().toString();
@@ -101,6 +102,7 @@ int main ( int argc, char* argv[] )
     {
         pline() << d5["5.7"][i].getValue().toString();
     }
+    pline() << d5["5.7"];
 
     char* cc = NULL;
     char* bb = "ddddd";

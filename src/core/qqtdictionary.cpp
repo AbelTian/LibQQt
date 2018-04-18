@@ -86,17 +86,24 @@ void QQtDictNode::insertChild ( int index, const QQtDictNode& dict )
 {
     m_type = DictList;
     //list类
-    //insert不能实现max count以后插入。
-    //[]不能实现插入操作，而是实现覆盖操作。
+    //insert不能实现max count以后插入？不能。
+    //[]不能实现out of range插入操作，而是实现覆盖操作。插入补全。
     //怎么办？
 
+    //不对，插入失败
     //m_list.insert ( index, dict );
     //this->operator [] ( index ) = dict;
 
+    //不对，多了一项。
     //先补全
-    this->operator [] ( index );
+    //this->operator [] ( index );
     //后插入
-    m_list.insert ( index, dict );
+    //m_list.insert ( index, dict );
+
+    //正确
+    //[] 提供out of range补全index。
+    //还需要insert吗？不需要。
+    this->operator [] ( index ) = dict;
 }
 
 void QQtDictNode::insertChild ( const QString& key, const QString& value )
@@ -275,7 +282,8 @@ QQtDictNode& QQtDictNode::operator [] ( int index )
     /*如果index>count，补全*/
     //pline() << m_list.count() << index;
 
-    if ( m_list.count() < index + 1 )
+    //list size = 4, 最大index = 3。新 index = 4, 添加，新index才可以使用，否则out of range。
+    if ( m_list.size() < index + 1 )
     {
         int cnt = m_list.count();
 
