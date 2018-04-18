@@ -41,7 +41,8 @@ SUBDIRS = src/qqt.pro
 #SUBDIRS += examples/tabwidgetexamples
 #need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
-#SUBDIRS += examples/qqtnetworkexample
+#
+SUBDIRS += examples/qqtnetworkexample
 #greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
@@ -57,7 +58,8 @@ SUBDIRS = src/qqt.pro
 #need GumoQuery
 #-----------------------------------------------------------------
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
-#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
+#
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS += examples/GuiBuildTool
 #SUBDIRS += test/LearnCookieTest
 #-----------------------------------------------------------------
