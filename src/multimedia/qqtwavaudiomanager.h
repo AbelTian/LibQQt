@@ -1,4 +1,4 @@
-﻿#ifndef QQTWAVAUDIOMANAGER_H
+#ifndef QQTWAVAUDIOMANAGER_H
 #define QQTWAVAUDIOMANAGER_H
 
 #include <QObject>
@@ -144,12 +144,15 @@ public:
 
     ~QQtWavAudioManager();
 
+    //设置输入或者输出wav文件
     void setInputSourceFile ( const QString& localFile );
     QString inputSourceFile();
     void setOutputSourceFile ( const QString& localFile );
     QString outputSourceFile();
 
+    //获取输入文件的音频流格式
     const QAudioFormat& inputAudioFormat();
+    //获取输出音频流的音频格式，可以设置，输出保存的时候使用。
     QAudioFormat& outputAudioFormat();
 
     //每次修改SourceFile，这些都会改变。
@@ -158,9 +161,13 @@ public:
     int inputFileDataSize();
     int inputFileTailSize();
 
+
     QQtWavAudioInput* inputManager();
+    //如果输入，从这里读取帧
     QIODevice* inputDevice();
+
     QQtWavAudioOutput* outputManager();
+    //如果输出，从这里写入帧，提前设置好格式哦...
     QIODevice* outputDevice();
 
     void startInput();
@@ -169,6 +176,7 @@ public:
     void startOutput();
     void stopOutput();
 
+    //这两个是方便函数，一般都用这几个进行读写，不使用上边的。
     QByteArray readAll();
     QByteArray read ( qint64 maxlen );
     void write ( const QByteArray& bytes );

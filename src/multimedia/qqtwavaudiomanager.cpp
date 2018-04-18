@@ -1,4 +1,4 @@
-﻿#include "qqtwavaudiomanager.h"
+#include "qqtwavaudiomanager.h"
 
 /*
  * 解析方法1 C语言
@@ -574,6 +574,7 @@ void QQtWavAudioInput::slotTimeout()
 {
     //1s 字节数 = 采样率 * 采样深度（位宽）* 通道数 / 8
     //mTimerInterval ms 字节数 = 1s 字节数 / (1000/mTimerInterval)
+    //每个音符 字节数 = 采样深度（位宽）* 通道数 / 8;
     int frameSize = mSampleRate * mSampleSize * mChannelCount / 8 / ( 1000 / mTimerInterval );
     QByteArray tempBytes;
 
