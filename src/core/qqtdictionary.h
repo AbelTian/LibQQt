@@ -81,6 +81,7 @@ public:
 
     /*类型*/
     EDictType getType() const;
+    QString getTypeName() const;
 
     /*如果设置Value的时候改变了Type，将会以新的Type为准*/
     void setType ( EDictType type );
@@ -144,11 +145,11 @@ public:
 
     //update for new using
     template <typename T>
-    bool operator == ( const T& inst ) const{
-        return *this == QVariant(inst);
+    bool operator == ( const T& inst ) const {
+        return *this == QVariant ( inst );
     }
-    bool operator == ( const QVariant& var ) const{
-        return *this == QQtDictNode( var );
+    bool operator == ( const QVariant& var ) const {
+        return *this == QQtDictNode ( var );
     }
 
     //内部类型转换
@@ -175,6 +176,6 @@ private:
     /*是个列表和子字典，这是错误的，不可能的*/
 };
 
-QDebug operator<< ( QDebug dbg, const QQtDictNode& d );
+QDebug& operator<< ( QDebug& dbg, const QQtDictNode& d );
 
 #endif // QQTDICTIONARY_H

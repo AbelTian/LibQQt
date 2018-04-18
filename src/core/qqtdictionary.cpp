@@ -21,6 +21,19 @@ QQtDictNode::EDictType QQtDictNode::getType() const
     return m_type;
 }
 
+QString QQtDictNode::getTypeName() const
+{
+    QString type = "Invalid";
+    if ( DictValue == m_type )
+        type = "Dict Value";
+    else if ( DictList == m_type )
+        type = "Dict List";
+    else if ( DictMap == m_type )
+        type = "Dict Map";
+
+    return type;
+}
+
 void QQtDictNode::setType ( QQtDictNode::EDictType type )
 {
     m_type = type;
@@ -52,7 +65,10 @@ void QQtDictNode::appendChild ( const QString& value )
 void QQtDictNode::appendChild ( const QQtDictNode& dict )
 {
     m_type = DictList;
-    m_list.append ( dict );
+    //list类
+    //append函数，会引用外部变量，push_back是不是在list内部生成了新的实例？
+    //m_list.append ( dict );
+    m_list.push_back ( dict );
 }
 
 void QQtDictNode::insertChild ( const QString& key, const QQtDictNode& dict )
@@ -69,17 +85,25 @@ void QQtDictNode::insertChild ( int index, const QString& value )
 void QQtDictNode::insertChild ( int index, const QQtDictNode& dict )
 {
     m_type = DictList;
-    //insert不能实现max count以后插入。
-    //[]不能实现插入操作，而是实现覆盖操作。
+    //list类
+    //insert不能实现max count以后插入？不能。
+    //[]不能实现out of range插入操作，而是实现覆盖操作。插入补全。
     //怎么办？
 
+    //不对，插入失败
     //m_list.insert ( index, dict );
     //this->operator [] ( index ) = dict;
 
+    //不对，多了一项。
     //先补全
-    this->operator [] ( index );
+    //this->operator [] ( index );
     //后插入
-    m_list.insert ( index, dict );
+    //m_list.insert ( index, dict );
+
+    //正确
+    //[] 提供out of range补全index。
+    //还需要insert吗？不需要。
+    this->operator [] ( index ) = dict;
 }
 
 void QQtDictNode::insertChild ( const QString& key, const QString& value )
@@ -247,6 +271,7 @@ const QQtDictNode& QQtDictNode::operator[] ( int index ) const
 QQtDictNode::QQtDictNode ( const QVariant& value, QObject* parent ) :
     QObject ( parent )
 {
+    m_type = DictValue;
     *this = value;
 }
 
@@ -257,7 +282,8 @@ QQtDictNode& QQtDictNode::operator [] ( int index )
     /*如果index>count，补全*/
     //pline() << m_list.count() << index;
 
-    if ( m_list.count() < index + 1 )
+    //list size = 4, 最大index = 3。新 index = 4, 添加，新index才可以使用，否则out of range。
+    if ( m_list.size() < index + 1 )
     {
         int cnt = m_list.count();
 
@@ -363,14 +389,61 @@ QQtDictNode& QQtDictNode::getChild ( const QString& key )
 
 
 
-QDebug operator<< ( QDebug dbg, const QQtDictNode& d )
+QDebug& operator<< ( QDebug& dbg, const QQtDictNode& d )
 {
-    dbg.nospace() << "\n{" <<
-                  " Type:" << d.getType() <<
-                  " Count:" << d.count() <<
-                  " Value:" << d.getValue() <<
-                  " List:" << d.getList() <<
-                  " Map:" << d.getMap() <<
-                  "}";
+    if ( d.getType() == QQtDictNode::DictMax )
+    {
+        dbg << "\n{"
+            << "\n"
+            << "  Type:" << d.getTypeName()
+            << "\n"
+            << "  Value:" << d.getValue()
+            << "\n}";
+    }
+    else if ( d.getType() == QQtDictNode::DictValue )
+    {
+        dbg << "\n{"
+            << "\n"
+            << "  Type:" << d.getTypeName()
+            << "\n"
+            << "  Value:" << d.getValue()
+            << "\n}";
+    }
+    else
+    {
+        dbg << "\n{"
+            << "\n"
+            << "  Type:" << d.getTypeName()
+            << "\n"
+            << "  Count:" << d.count();
+
+        if ( d.getType() == QQtDictNode::DictList )
+        {
+            dbg << "\n"
+                << "  List:" << "{";
+            for ( int i = 0; i < d.getList().size(); i++ )
+            {
+                dbg << "\n"
+                    << "    id:" << i << "Type:" << d[i].getTypeName() << "Value:" << d[i].getValue();
+            }
+            dbg << "\n"
+                << "  }";
+        }
+        else if ( d.getType() == QQtDictNode::DictMap )
+        {
+            dbg << "\n"
+                << "  Map:" << "{";
+            foreach ( QString key, d.getMap().keys() )
+            {
+                dbg << "\n"
+                    << "    id:" << key << "Type:" << d[key].getTypeName() << "Value:" << d[key].getValue();
+            }
+            dbg << "\n"
+                << "  }";
+        }
+
+        dbg << "\n}";
+    }
+
     return dbg.space();
 }

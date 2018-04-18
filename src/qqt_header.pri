@@ -181,7 +181,8 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #DEFINES += __QEXTSERIALPORT__
     #if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
     lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
-    #to ios, use qextserialport #android qt5 support serialport default?
+    #to ios, use qextserialport
+    #android qt5 support serialport default?
     contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
     contains (DEFINES, __QEXTSERIALPORT__) {
         CONFIG += thread

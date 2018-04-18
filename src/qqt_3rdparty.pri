@@ -3,7 +3,7 @@
 #这个文件用于指示版权。
 #-------------------------------------------------------
 #pluginsupport
-#DEFINES += __PLUGINSUPPORT__
+#注释：在qqt_header.pri打开 DEFINES += __PLUGINSUPPORT__
 #TODO: macOS crash
 contains (DEFINES, __PLUGINSUPPORT__) {
     contains(QKIT_PRIVATE, WIN32|WIN64) {
@@ -29,7 +29,7 @@ contains (DEFINES, __PLUGINSUPPORT__) {
 
 contains(DEFINES, __QQTCHARTS__) {
     #qcustomplot
-    #DEFINES += __CUSTOMPLOT__
+    #注释：在qqt_header.pri打开 DEFINES += __CUSTOMPLOT__
     contains (DEFINES, __CUSTOMPLOT__) {
         #message (qcustomplot is used in $${TARGET})
         win32 {
@@ -50,7 +50,7 @@ contains(DEFINES, __QQTCHARTS__) {
 contains (DEFINES, __NETWORKSUPPORT__) {
     #qextserialport support
     #if you use qextserialport, open the two annotation
-    #DEFINES += __QEXTSERIALPORT__
+    #注释：在qqt_header.pri打开 DEFINES += __QEXTSERIALPORT__
     contains (DEFINES, __QEXTSERIALPORT__) {
         #include ( $$PWD/network/qextserialport/qextserialport.pri )
         HEADERS += $$PWD/network/qextserialport/qextserialbase.h \
@@ -81,7 +81,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     }
 
     #gumbo support
-    #DEFINES += __GUMBOSUPPORT__
+    #注释：在qqt_header.pri打开 DEFINES += __GUMBOSUPPORT__
     contains (DEFINES, __GUMBOSUPPORT__) {
         include ($$PWD/network/gumbo/parser/gumbo-parser.pri)
         include ($$PWD/network/gumbo/query/gumbo-query.pri)
@@ -93,7 +93,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 ##-------------------------------------------------------
 contains (DEFINES, __EXQUISITE__) {
     #qrencode widgets
-    #DEFINES += __QRENCODE__
+    #注释：在qqt_header.pri打开 DEFINES += __QRENCODE__
     contains (DEFINES, __QRENCODE__) {
         include ($$PWD/exquisite/qrcode/qrencode/qrencode.pri)
 
@@ -104,7 +104,7 @@ contains (DEFINES, __EXQUISITE__) {
     }
 
     #qrdecode widget
-    #DEFINES += __QRDECODE__
+    #注释：在qqt_header.pri打开 DEFINES += __QRDECODE__
     contains (DEFINES, __QRDECODE__) {
         contains(QKIT_PRIVATE, WIN32|WIN64) {
             #ignore: QZXing has no need to export
@@ -124,7 +124,7 @@ contains (DEFINES, __EXQUISITE__) {
     }
 
     #mathml widget
-    #DEFINES += __MATHSUPPORT__
+    #注释：在qqt_header.pri打开 DEFINES += __MATHSUPPORT__
     contains (DEFINES, __MATHSUPPORT__) {
         contains(QKIT_PRIVATE, WIN32|WIN64) {
             #mathml

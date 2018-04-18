@@ -37,13 +37,17 @@
 如果不使用pymake，每次编译一个android平台的，都要设置一遍，不能出错哦。  
 其他操作系统平台类比设置即可。  
 
-# 针对多环境、多配置开发的多环境任意切工具  
+# Multi-environ Manager 多环境任意切工具   
+
+上文提到了pymake，其全名为Multi-environ Manager。  
+我有很复杂的发布目标?借助工具是必要的。  
+Multi-environ Manager是针对多环境、多配置开发的多环境任意切工具。  
 PyMake可以有效应对Multi-environ工作场景下的工作任务。  
 只需要配置一次，任意切换、可临时使用的多环境工作场景就可以轻松展开。  
 这个工具是跨平台、多目标、多类型、近似功能工作活动的绝佳配置。  
 附：[PyMake链接](https://gitee.com/drabel/PyMake)  
 附：[PyMake使用的json配置文件链接](https://gitee.com/drabel/BuildConfig)  
-附：[一些PyMake的例程](https://gitee.com/drabel/BuildConfig)  
+附：[一些PyMake的例程](https://gitee.com/drabel/BuildShell)  
 
 
 [返回](.)  

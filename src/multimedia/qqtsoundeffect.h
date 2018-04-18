@@ -45,6 +45,13 @@ public:
     int loopsRemaining() const;
     void setLoops ( int loops );
 
+    //设置读文件的时钟快慢（硬盘快，时钟快，每次读的少；硬盘慢，时钟慢，每次读的多）
+    //默认使用 macOS SSD 20ms
+    //Windows上，机械硬盘，可能会延迟，可以设置100ms。
+    void setTimerInterval ( int millSecond = 20 ) {
+        mWavInput.setTimerInterval ( millSecond );
+    }
+
 private slots:
     void readyRead();
 

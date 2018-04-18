@@ -49,8 +49,9 @@ public:
     //读取用。这个是个内部公用的，并不是临时的。碰巧了。
     QIODevice* device() { return &mBytesBuffer; }
 
-    //采样间隔 10-100ms default: macOS 20 ms
-    //windows suggest 50ms, windows is slower than macOS.
+    //设置读文件的时钟快慢（硬盘快，时钟快，每次读的少；硬盘慢，时钟慢，每次读的多）
+    //采样间隔 10-100ms default: macOS SSD 20 ms
+    //windows 机械硬盘 100ms, windows 机械硬盘 is slower than macOS SSD.
     int timerInterval() const { return mTimerInterval; }
     void setTimerInterval ( int millSecond = 20 );
     //可以频繁开启，tip：用完一定要关闭，系统会自动关闭。
