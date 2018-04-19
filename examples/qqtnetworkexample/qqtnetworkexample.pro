@@ -29,7 +29,42 @@ SOURCES += \
     qqtnetworkmessage.cpp \
     qqtserialmessage.cpp \
     qqtuserserialprotocol.cpp \
-    qqtsubprotocoltest.cpp
+    qqtsubprotocoltest.cpp \
+    qqtuserprotocol1.cpp \
+    qqtuserprotocol2.cpp \
+    qqtuserprotocol3.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    qqtcloudprotocol.cpp \
+    qqtlanprotocol.cpp \
+    qqtnetworkmessage.cpp \
+    qqtserialmessage.cpp \
+    qqtsubprotocoltest.cpp \
+    qqtuserprotocol1.cpp \
+    qqtuserprotocol2.cpp \
+    qqtuserprotocol3.cpp \
+    qqtuserserialprotocol.cpp \
+    quserbluetoothprotocol.cpp \
+    usernode0protocol.cpp \
+    usernode1protocol.cpp \
+    usernode2protocol.cpp \
+    usernode3protocol.cpp \
+    usernode4protocol.cpp \
+    usernode5protocol.cpp \
+    usernode6protocol.cpp \
+    usernode7protocol.cpp \
+    usernode8protocol.cpp \
+    usernode9protocol.cpp \
+    usertest0protocol.cpp \
+    usertest1protocol.cpp \
+    usertest2protocol.cpp \
+    usertest3protocol.cpp \
+    usertest4protocol.cpp \
+    usertest5protocol.cpp \
+    usertest6protocol.cpp \
+    usertest7protocol.cpp \
+    usertest8protocol.cpp \
+    usertest9protocol.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,10 +73,45 @@ HEADERS += \
     qqtnetworkmessage.h \
     qqtserialmessage.h \
     qqtuserserialprotocol.h \
-    qqtsubprotocoltest.h
+    qqtsubprotocoltest.h \
+    qqtuserprotocol1.h \
+    qqtuserprotocol2.h \
+    qqtuserprotocol3.h \
+    mainwindow.h \
+    qqtcloudprotocol.h \
+    qqtlanprotocol.h \
+    qqtnetworkmessage.h \
+    qqtserialmessage.h \
+    qqtsubprotocoltest.h \
+    qqtuserprotocol1.h \
+    qqtuserprotocol2.h \
+    qqtuserprotocol3.h \
+    qqtuserserialprotocol.h \
+    quserbluetoothprotocol.h \
+    usernode0protocol.h \
+    usernode1protocol.h \
+    usernode2protocol.h \
+    usernode3protocol.h \
+    usernode4protocol.h \
+    usernode5protocol.h \
+    usernode6protocol.h \
+    usernode7protocol.h \
+    usernode8protocol.h \
+    usernode9protocol.h \
+    usertest0protocol.h \
+    usertest1protocol.h \
+    usertest2protocol.h \
+    usertest3protocol.h \
+    usertest4protocol.h \
+    usertest5protocol.h \
+    usertest6protocol.h \
+    usertest7protocol.h \
+    usertest8protocol.h \
+    usertest9protocol.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    mainwindow.ui
 
 #qmake_pre/post_link will work after source changed but not pro pri changed.
 system("touch main.cpp")
@@ -100,5 +170,8 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
+
+SUBDIRS += \
+    qqtnetworkexample.pro
 
 

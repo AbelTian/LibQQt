@@ -45,6 +45,7 @@ SUBDIRS += examples/qqtaudioexample
 #SUBDIRS += examples/qrcodeexample
 #
 SUBDIRS += examples/qqtnetworkexample
+SUBDIRS += demo/QQtNetworkCreator
 #greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
