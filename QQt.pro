@@ -38,6 +38,8 @@ SUBDIRS = src/qqt.pro
 #QQt提供QQtApplication帮助App管理Application句柄。
 #SUBDIRS += examples/qqtframe2
 #SUBDIRS += examples/exquisite
+#必开
+SUBDIRS += examples/qqtaudioexample
 #SUBDIRS += examples/tabwidgetexamples
 #need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
@@ -77,7 +79,8 @@ SUBDIRS += test/qqtdicttest2
 #    SUBDIRS += test/cmdwidget
 #}
 #SUBDIRS += test/coretest
-#SUBDIRS += test/giftest
+#必开
+SUBDIRS += test/giftest
 #SUBDIRS += test/tmpproj
 #
 #need QtSoap - WebSupport
