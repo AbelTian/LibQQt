@@ -346,11 +346,12 @@ equals (QKIT_PRIVATE, iOSSimulator):{
     #QMAKE_CXXFLAGS +=-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
 }
 
+contains (DEFINES, __OPENGLWIDGETS__) {
+    LIBS += -lopengl32 -lglu32
+}
+
 win32 {
     LIBS += -luser32
-    contains (DEFINES, __OPENGLWIDGETS__) {
-        LIBS += -lopengl32 -lglu32
-    }
 }else: unix {
     equals(QKIT_PRIVATE, macOS) {
         #min macosx target
