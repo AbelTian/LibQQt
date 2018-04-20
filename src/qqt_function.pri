@@ -193,9 +193,7 @@ defineReplace(get_user_config_path) {
     #注意：qmake在windows平台下，无论目标，明令行一律按照windows控制台风格。不以目标区分，Attention!。
     #win32 {
     equals(QMAKE_HOST.os, Windows) {
-        #<v2.2.2
-        #command = echo %APPDATA%
-        command = echo %HOMEDRIVE%%HOMEPATH%
+        command = echo %APPDATA%
     } else {
         command = echo $HOME
     }
