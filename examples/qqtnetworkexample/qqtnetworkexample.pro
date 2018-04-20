@@ -22,29 +22,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    qqtcloudprotocol.cpp \
-    qqtlanprotocol.cpp \
-    qqtnetworkmessage.cpp \
-    qqtserialmessage.cpp \
-    qqtuserserialprotocol.cpp \
-    qqtsubprotocoltest.cpp \
     qqtuserprotocol1.cpp \
     qqtuserprotocol2.cpp \
     qqtuserprotocol3.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    qqtcloudprotocol.cpp \
-    qqtlanprotocol.cpp \
-    qqtnetworkmessage.cpp \
-    qqtserialmessage.cpp \
-    qqtsubprotocoltest.cpp \
-    qqtuserprotocol1.cpp \
-    qqtuserprotocol2.cpp \
-    qqtuserprotocol3.cpp \
-    qqtuserserialprotocol.cpp \
-    quserbluetoothprotocol.cpp \
     usernode0protocol.cpp \
     usernode1protocol.cpp \
     usernode2protocol.cpp \
@@ -67,27 +47,9 @@ SOURCES += \
     usertest9protocol.cpp
 
 HEADERS += \
-        mainwindow.h \
-    qqtcloudprotocol.h \
-    qqtlanprotocol.h \
-    qqtnetworkmessage.h \
-    qqtserialmessage.h \
-    qqtuserserialprotocol.h \
-    qqtsubprotocoltest.h \
     qqtuserprotocol1.h \
     qqtuserprotocol2.h \
     qqtuserprotocol3.h \
-    mainwindow.h \
-    qqtcloudprotocol.h \
-    qqtlanprotocol.h \
-    qqtnetworkmessage.h \
-    qqtserialmessage.h \
-    qqtsubprotocoltest.h \
-    qqtuserprotocol1.h \
-    qqtuserprotocol2.h \
-    qqtuserprotocol3.h \
-    qqtuserserialprotocol.h \
-    quserbluetoothprotocol.h \
     usernode0protocol.h \
     usernode1protocol.h \
     usernode2protocol.h \
@@ -109,8 +71,27 @@ HEADERS += \
     usertest8protocol.h \
     usertest9protocol.h
 
+SOURCES += \
+        main.cpp \
+        mainwindow.cpp \
+    qqtcloudprotocol.cpp \
+    qqtlanprotocol.cpp \
+    qqtnetworkmessage.cpp \
+    qqtserialmessage.cpp \
+    qqtuserserialprotocol.cpp \
+    qqtsubprotocoltest.cpp
+
+
+HEADERS += \
+        mainwindow.h \
+    qqtcloudprotocol.h \
+    qqtlanprotocol.h \
+    qqtnetworkmessage.h \
+    qqtserialmessage.h \
+    qqtuserserialprotocol.h \
+    qqtsubprotocoltest.h
+
 FORMS += \
-        mainwindow.ui \
     mainwindow.ui
 
 #qmake_pre/post_link will work after source changed but not pro pri changed.
@@ -170,8 +151,4 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
-
-SUBDIRS += \
-    qqtnetworkexample.pro
-
 
