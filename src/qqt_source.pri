@@ -14,8 +14,10 @@
 #2018年4月6日18点12分
 #这里是LibQQt源文件pri，所有开关宏都在LibQQt头文件pri里开关。
 #-------------------------------------------------
-SOURCES =
-HEADERS =
+SOURCES = \
+    $$PWD/exquisite/openglwidgets/qqtopenglwidget.cpp
+HEADERS = \
+    $$PWD/exquisite/openglwidgets/qqtopenglwidget.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \

@@ -5,7 +5,8 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = src/qqt.pro
+SUBDIRS = src/qqt.pro \
+    test/openglwidgettest
 
 ##-----------------------------------------------------------------
 ##Q1级别 V1 第一版、第一代
