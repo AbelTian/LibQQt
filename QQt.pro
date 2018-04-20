@@ -43,7 +43,7 @@ SUBDIRS += examples/qqtaudioexample
 #SUBDIRS += examples/tabwidgetexamples
 #need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
-#
+#必开
 SUBDIRS += examples/qqtnetworkexample
 SUBDIRS += demo/QQtNetworkCreator
 #greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
@@ -61,8 +61,7 @@ SUBDIRS += demo/QQtNetworkCreator
 #need GumoQuery
 #-----------------------------------------------------------------
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += examples/QtSdkManager
-#
-greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
+#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS += examples/GuiBuildTool
 #SUBDIRS += test/LearnCookieTest
 #-----------------------------------------------------------------
@@ -73,7 +72,7 @@ greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest
-#
+#必开
 SUBDIRS += test/qqtdicttest2
 #SUBDIRS += test/bytearraytest
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){

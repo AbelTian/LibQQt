@@ -22,6 +22,7 @@ int main ( int argc, char* argv[] )
     QQtObjectParcel::registerObject ( obj );
     */
 
+    //对QQtDictNode的使用进行测试。
     QQtDictNode d0;
     d0["cc"] = "dd";
     pline() << d0["cc"].getValue();
@@ -113,7 +114,7 @@ int main ( int argc, char* argv[] )
     //Widget w;
     //w.show();
 
-    //QQtDictNode appendChild函数存在一个问题，
+    //QQtDictNode appendChild函数存在一个问题，在这里测试是否解决。
     //内部实现使用list的append函数，会引用外部的类实例，这导致在free空间的时候，存在很多莫名其妙的二次free，尤其外部实例和QObject关联的时候。
     //现在内部实现使用push_back，这里检测QQtDictNode还有没有二次free这个bug。
     QQtDictNode* n0 = new QQtDictNode ( QVariant ( "This is a value" ) );
@@ -146,6 +147,7 @@ int main ( int argc, char* argv[] )
     //windows
     //经过测试，QQtDictNode内部空间成功和外部空间分离，bug清除。
 
+    //测试QQtDictNode的打印能力
     QQtDictNode v00;
     pline() << v00;
 

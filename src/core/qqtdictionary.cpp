@@ -67,7 +67,9 @@ void QQtDictNode::appendChild ( const QQtDictNode& dict )
     m_type = DictList;
     //list类
     //append函数，会引用外部变量，push_back是不是在list内部生成了新的实例？
+    //如果要使用外部实例，可以getList，然后append value。
     //m_list.append ( dict );
+    //生成内部新空间
     m_list.push_back ( dict );
 }
 
