@@ -13,6 +13,7 @@
 #include <QtGlobal>
 #endif
 
+//来自qqt_qkit.pri
 #if defined __EMBEDDED_LINUX__
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 #include <QWSInputMethod>
@@ -44,6 +45,7 @@
 #include <QMouseEvent>
 #include <QUuid>
 
+//来自qqt_header.pri
 #ifdef __PRINTSUPPORT__
 #include <QPrinter>
 #endif
@@ -93,6 +95,7 @@
 #include <QEventTransition>
 #include <QTimeLine>
 
+//来自qqt_header.pri
 #ifdef __PROCESSMODULE__
 #include <QProcess>
 #endif

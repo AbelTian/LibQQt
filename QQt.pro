@@ -5,5 +5,6 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = src/qqt.pro
+SUBDIRS = src/qqt.pro \
+    test/openglwidgettest
 SUBDIRS += QQtExample.pro

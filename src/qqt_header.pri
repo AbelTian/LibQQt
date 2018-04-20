@@ -1,6 +1,6 @@
 #---------------------------------------------------------------
 #qqt_header.pri
-#Project link: https://gitee.com/drabel/LibQt
+#Project link: https://gitee.com/drabel/LibQQt
 #if you succeed with LibQQt, please thumb up.
 #2017年11月10日18:53:56
 ##Don't modify this file outside QQt project
@@ -32,6 +32,17 @@ greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 #defined in qqtcore.h
 #lessThan(QT_MAJOR_VERSION, 5):DEFINES += nullptr=0
+
+#指定/mp编译选项，编译器将使用并行编译，同时起多个编译进程并行编译不同的cpp
+#QMAKE_CXXFLAGS += /MP
+#错误：这个FLAG只能用于MSVC
+
+#指定stable.h这个头文件作为编译预处理文件，MFC里这个文件一般叫stdafx.h 然后在 stable.h里 包含你所用到的所有 Qt 头文件
+#在.pro 文件中加入一行, 加在这里，加速编译。
+#PRECOMPILED_HEADER = $${PWD}/stable.h (qqt-qt.h)
+#错误：precompiler header只能用于MSVC
+
+#要加速编译，make -j20，-j参数是最好的解决办法。
 
 #################################################################
 ##build qqt or link qqt
@@ -307,6 +318,9 @@ contains (DEFINES, __EXQUISITE__) {
 
     #opengl module
     DEFINES += __OPENGLWIDGETS__
+    contains (DEFINES, __OPENGLWIDGETS__) {
+        QT += opengl
+    }
 }
 
 ########################################################################
@@ -331,8 +345,12 @@ equals (QKIT_PRIVATE, iOSSimulator):{
     #error need
     #QMAKE_CXXFLAGS +=-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
 }
+
 win32 {
     LIBS += -luser32
+    contains (DEFINES, __OPENGLWIDGETS__) {
+        LIBS += -lopengl32 -lglu32
+    }
 }else: unix {
     equals(QKIT_PRIVATE, macOS) {
         #min macosx target
@@ -394,6 +412,7 @@ defineReplace(qqt_header){
     command += $${path}/exquisite
     command += $${path}/exquisite/svgwidgets
     command += $${path}/exquisite/gifwidgets
+    command += $${path}/exquisite/openglwidgets
     command += $${path}/exquisite/mathml
     command += $${path}/exquisite/dmmu
 
