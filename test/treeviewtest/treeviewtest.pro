@@ -45,6 +45,13 @@ system("touch main.cpp")
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
 #user can modify any infomation under this annotation
 #-------------------------------------------------
+#open copy config command
+APP_CONFIG_PWD = $${PWD}/AppRoot
+equals(QMAKE_HOST.os, Windows) {
+    APP_CONFIG_PWD ~=s,/,\\,g
+}
+
+#include manager
 include(../../src/app_base_manager.pri)
 
 #-------------------------------------------------

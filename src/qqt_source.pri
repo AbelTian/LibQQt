@@ -15,9 +15,11 @@
 #这里是LibQQt源文件pri，所有开关宏都在LibQQt头文件pri里开关。
 #-------------------------------------------------
 SOURCES = \
-    $$PWD/exquisite/openglwidgets/qqtopenglwidget.cpp
+    $$PWD/exquisite/openglwidgets/qqtopenglwidget.cpp \
+    $$PWD/exquisite/openglwidgets/qqtopenglwindow.cpp
 HEADERS = \
-    $$PWD/exquisite/openglwidgets/qqtopenglwidget.h
+    $$PWD/exquisite/openglwidgets/qqtopenglwidget.h \
+    $$PWD/exquisite/openglwidgets/qqtopenglwindow.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \

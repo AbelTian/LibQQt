@@ -55,4 +55,4 @@ QQT_VERSION4 = $$get_version_string_4( $${QQT_MAJOR_VERSION}, $${QQT_MINOR_VERSI
 QQT_VERSION = $${QQT_VERSION3}
 #源代码 域宏
 DEFINES += QQT_VERSION=$${QQT_VERSION}
-message (Build QQt version: $$QQT_VERSION4)
+message (Build QQt version: v$$QQT_VERSION4)
