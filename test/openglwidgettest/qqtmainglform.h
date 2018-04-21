@@ -1,13 +1,13 @@
 #ifndef QQTMAINGLFORM_H
 #define QQTMAINGLFORM_H
 
-#include <qqtopenglwidget.h>
+#include <qqtopenglwindow.h>
 
 namespace Ui {
 class QQtMainGLForm;
 }
 
-class QQtMainGLForm : public QQtOpenGLWidget
+class QQtMainGLForm : public QQtOpenGLWindow
 {
     Q_OBJECT
 

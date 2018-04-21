@@ -2,7 +2,7 @@
 #include "ui_qqtmainglform.h"
 
 QQtMainGLForm::QQtMainGLForm ( QWidget* parent ) :
-    QQtOpenGLWidget ( parent ),
+    QQtOpenGLWindow ( parent ),
     ui ( new Ui::QQtMainGLForm )
 {
     ui->setupUi ( this );
