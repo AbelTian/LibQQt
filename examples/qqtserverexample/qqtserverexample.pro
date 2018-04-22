@@ -25,10 +25,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    qqtserverprotocolmanager.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    qqtserverprotocolmanager.h
 
 FORMS += \
         mainwindow.ui
+
+#qmake_pre/post_link will work after source changed but not pro pri changed.
+system("touch main.cpp")
+
+#-------------------------------------------------
+#link qqt library
+#if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
+#user can modify any infomation under this annotation
+#-------------------------------------------------
+include(../../src/app_base_manager.pri)

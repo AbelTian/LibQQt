@@ -18,29 +18,30 @@ void QQtTcpServer::incomingConnection ( qintptr handle )
     QQtTcpClient* clientSocket = new QQtTcpClient ( this );
     clientSocket->setSocketDescriptor ( handle );
     connect ( clientSocket, SIGNAL ( disconnected() ), clientSocket, SLOT ( deleteLater() ) );
-    clientSocket->installProtocol ( m_protocol );
+    QQtProtocol* protocolInstance = m_protocolManager->createProtocol();
+    clientSocket->installProtocol ( protocolInstance );
 }
 
-void QQtTcpServer::installProtocol ( QQtProtocol* stack )
+void QQtTcpServer::installProtocolManager ( QQtProtocolManager* stackGroup )
 {
-    if ( m_protocol )
+    if ( m_protocolManager )
         return;
 
-    m_protocol = stack;
+    m_protocolManager = stackGroup;
 }
 
-void QQtTcpServer::uninstallProtocol ( QQtProtocol* stack )
+void QQtTcpServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )
 {
-    Q_UNUSED ( stack )
+    Q_UNUSED ( stackGroup )
 
-    if ( !m_protocol )
+    if ( !m_protocolManager )
         return;
 
-    m_protocol = NULL;
+    m_protocolManager = NULL;
 }
 
-QQtProtocol* QQtTcpServer::installedProtocol()
+QQtProtocolManager* QQtTcpServer::installedProtocolManager()
 {
-    return m_protocol;
+    return m_protocolManager;
 }
 

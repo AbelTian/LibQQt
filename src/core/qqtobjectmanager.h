@@ -2,7 +2,7 @@
 #define QQTOBJECTMANAGER_H
 
 #include <QObject>
-#include <QByteArray>
+#include <QString>
 #include <QMetaObject>
 #include <QHash>
 #include <QList>
@@ -32,7 +32,7 @@ public:
      * @param parent
      * @return
      */
-    static QObject* createObject ( const QByteArray& className, QObject* parent = NULL ) {
+    static QObject* createObject ( const QString& className, QObject* parent = NULL ) {
         /*
          * 搜索生成此类对象的函数
          */
@@ -55,11 +55,11 @@ private:
         return new T ( parent );
     }
 
-    static QHash<QByteArray, Constructor>& constructors() {
+    static QHash<QString, Constructor>& constructors() {
         /*
          * 保存生成类对象的具体（非模板）函数
          */
-        static QHash<QByteArray, Constructor> instance;
+        static QHash<QString, Constructor> instance;
         return instance;
     }
 };
@@ -88,7 +88,7 @@ public:
      * @param parent
      * @return
      */
-    static QWidget* createObject ( const QByteArray& className, QWidget* parent = NULL ) {
+    static QWidget* createObject ( const QString& className, QWidget* parent = NULL ) {
         /*
          * 搜索生成此类对象的函数
          */
@@ -112,11 +112,11 @@ private:
         return new T ( parent );
     }
 
-    static QHash<QByteArray, Constructor>& constructors() {
+    static QHash<QString, Constructor>& constructors() {
         /*
          * 保存生成类对象的具体（非模板）函数
          */
-        static QHash<QByteArray, Constructor> instance;
+        static QHash<QString, Constructor> instance;
         return instance;
     }
 };
@@ -216,11 +216,11 @@ private:
         return new T ( parent );
     }
 
-    static QHash<QByteArray, Constructor>& constructors() {
+    static QHash<QString, Constructor>& constructors() {
         /*
          * 保存生成类对象的具体（非模板）函数
          */
-        static QHash<QByteArray, Constructor> instance;
+        static QHash<QString, Constructor> instance;
         return instance;
     }
 };
@@ -248,11 +248,11 @@ private:
         return new T ( parent );
     }
 
-    static QHash<QByteArray, Constructor>& constructors() {
+    static QHash<QString, Constructor>& constructors() {
         /*
          * 保存生成类对象的具体（非模板）函数
          */
-        static QHash<QByteArray, Constructor> instance;
+        static QHash<QString, Constructor> instance;
         return instance;
     }
 };

@@ -10,6 +10,8 @@ QQtProtocolManager::~QQtProtocolManager()
 
 }
 
+#if 0
+
 #define pline2() pline() << metaObject()->className()
 
 void QQtProtocolManager::translator ( const QByteArray& bytes )
@@ -68,3 +70,5 @@ void QQtProtocolManager::translator ( const QByteArray& bytes )
 
     sqbaBlockOnNet.clear();
 }
+
+#endif
