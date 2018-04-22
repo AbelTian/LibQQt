@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "qqtobjectfactory.h"
+#include "qqtobjectmanager.h"
 #include "qqt-qt.h"
 #include "qqtcore.h"
 #include "qqtwidgets.h"

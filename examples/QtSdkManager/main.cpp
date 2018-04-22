@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include "qqtobjectfactory.h"
+#include "qqtobjectmanager.h"
 #include "qqtcore.h"
 #include "qqthttpdownloadmanager.h"
 #include "qqtapplication.h"

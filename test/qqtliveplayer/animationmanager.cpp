@@ -1,5 +1,5 @@
 #include "animationmanager.h"
-#include "qqtobjectfactory.h"
+#include "qqtobjectmanager.h"
 #include "qqtanimation.h"
 #include "qqt-qt.h"
 #include "qqtwindow.h"
