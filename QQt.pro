@@ -43,9 +43,12 @@ SUBDIRS += examples/qqtaudioexample
 #SUBDIRS += examples/tabwidgetexamples
 #need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
-#必开
+#必开 客户端的 basic
 SUBDIRS += examples/qqtnetworkexample
 SUBDIRS += demo/QQtNetworkCreator
+#服务器的 highgrade
+SUBDIRS += examples/qqtserverexample
+SUBDIRS += demo/QQtServerCreator
 #greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 

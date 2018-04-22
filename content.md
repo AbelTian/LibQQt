@@ -30,7 +30,7 @@
 6. QQt通讯套件。
      - 通讯口类   
         - QQtSerialPort 兼容QSerialPort and QextSerialPort
-        - [QQtSocketTcpClient](src/network/qqtsockettcpclient.h)、QQtSocketTcpServer、QQtSocketUdpClient
+        - [QQtTcpClient](src/network/qqttcpclient.h)、QQtTcpServer、QQtUdpClient
         - QQtBluetoothSocket +QQtBluetoothManager
         - QQtWebAccessManager，支持http、ftp等主流协议，高并发传输。
         - QQtWebSocket接口

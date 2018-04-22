@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------------------
-#app_multi_link_configure.pri
+#app_multi_link_technology.pri
 
 ##Multi-link technology (Multi Link technology)
 ##Multi-link 技术，支持多链接库增删的一门工程管理技术。

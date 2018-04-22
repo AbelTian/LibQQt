@@ -1,27 +1,27 @@
-#include "qqtsockettcpserver.h"
+#include "qqttcpserver.h"
 #include "qqtnetwork.h"
 
 
-QQtSocketTcpServer::QQtSocketTcpServer ( QObject* parent ) :
+QQtTcpServer::QQtTcpServer ( QObject* parent ) :
     QTcpServer ( parent )
 {
 }
 
-QQtSocketTcpServer::~QQtSocketTcpServer()
+QQtTcpServer::~QQtTcpServer()
 {
     if ( isListening() )
         close();
 }
 
-void QQtSocketTcpServer::incomingConnection ( qintptr handle )
+void QQtTcpServer::incomingConnection ( qintptr handle )
 {
-    QQtSocketTcpClient* clientSocket = new QQtSocketTcpClient ( this );
+    QQtTcpClient* clientSocket = new QQtTcpClient ( this );
     clientSocket->setSocketDescriptor ( handle );
     connect ( clientSocket, SIGNAL ( disconnected() ), clientSocket, SLOT ( deleteLater() ) );
     clientSocket->installProtocol ( m_protocol );
 }
 
-void QQtSocketTcpServer::installProtocol ( QQtProtocol* stack )
+void QQtTcpServer::installProtocol ( QQtProtocol* stack )
 {
     if ( m_protocol )
         return;
@@ -29,7 +29,7 @@ void QQtSocketTcpServer::installProtocol ( QQtProtocol* stack )
     m_protocol = stack;
 }
 
-void QQtSocketTcpServer::uninstallProtocol ( QQtProtocol* stack )
+void QQtTcpServer::uninstallProtocol ( QQtProtocol* stack )
 {
     Q_UNUSED ( stack )
 
@@ -39,7 +39,7 @@ void QQtSocketTcpServer::uninstallProtocol ( QQtProtocol* stack )
     m_protocol = NULL;
 }
 
-QQtProtocol* QQtSocketTcpServer::installedProtocol()
+QQtProtocol* QQtTcpServer::installedProtocol()
 {
     return m_protocol;
 }

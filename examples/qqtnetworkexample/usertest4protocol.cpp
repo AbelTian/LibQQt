@@ -12,12 +12,12 @@ QDebug& operator << ( QDebug& dbg, const UserTest4Message& msg )
 UserTest4Protocol* UserTest4ConnectionInstance ( QObject* parent )
 {
     static UserTest4Protocol* p0 = NULL;
-    static QQtSocketTcpServer* s0 = NULL;
+    static QQtTcpServer* s0 = NULL;
     if ( !p0 && !s0 )
     {
         p0 = new UserTest4Protocol ( parent );
 
-        s0 = new QQtSocketTcpServer ( parent );
+        s0 = new QQtTcpServer ( parent );
         s0->installProtocol ( p0 );
         s0->listen ( QHostAddress::Any, 8000 );
 

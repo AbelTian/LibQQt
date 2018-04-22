@@ -1,6 +1,6 @@
 /**************************************************
- * QQtSocketTcpClient
- * 在一个工程当中仅仅存在一个实例，通过调用QQtSocketTcpClient实现。
+ * QQtTcpClient
+ * 在一个工程当中仅仅存在一个实例，通过调用QQtTcpClient实现。
  **************************************************/
 #ifndef QQT_CLIENT_H
 #define QQT_CLIENT_H
@@ -25,12 +25,12 @@
  * 发送，接收，splitter，dispatcher
  * 关闭。
  */
-class QQTSHARED_EXPORT QQtSocketTcpClient : public QTcpSocket
+class QQTSHARED_EXPORT QQtTcpClient : public QTcpSocket
 {
     Q_OBJECT
 public:
-    explicit QQtSocketTcpClient ( QObject* parent = 0 );
-    virtual ~QQtSocketTcpClient();
+    explicit QQtTcpClient ( QObject* parent = 0 );
+    virtual ~QQtTcpClient();
 
     void SetServerIPAddress ( QStringList ip ) { m_serverIP = ip; }
     void SetServerPort ( quint32 p = 7079 ) { m_PORT = p; }

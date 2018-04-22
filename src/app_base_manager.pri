@@ -34,7 +34,7 @@ contains(CONFIG, administrator){
 ################################################################
 ##Multi-link technology
 ################################################################
-include($$PWD/app_multi_link_config.pri)
+include($$PWD/app_multi_link_technology.pri)
 
 ################################################################
 ##link QQt

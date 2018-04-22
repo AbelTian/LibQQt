@@ -2,7 +2,7 @@
 #define QUSERBLUETOOTHPROTOCOL_H
 
 #include <QObject>
-#include "qqtsocketbluetoothclient.h"
+#include "qqtbluetoothclient.h"
 
 class QUserBluetoothProtocol : public QObject
 {
@@ -15,6 +15,6 @@ signals:
 public slots:
 };
 
-QQtSocketBluetoothClient* QQtUserBluetoothClientInstance ( QObject* parent = 0 );
+QQtBluetoothClient* QQtUserBluetoothClientInstance ( QObject* parent = 0 );
 
 #endif // QUSERBLUETOOTHPROTOCOL_H

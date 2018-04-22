@@ -25,7 +25,10 @@ public:
 
 #if QT_VERSION > QT_VERSION_DATAGRAM
     qint64 writeDatagram ( const QNetworkDatagram& datagram ) {
-        //emit writeDatagram();
+        QByteArray dg = datagram.data();
+        QHostAddress addr = datagram.destinationAddress();
+        int port = datagram.destinationPort();
+        emit writeDatagram ( dg, addr, ( quint16 ) port );
     }
 #endif
 
@@ -56,7 +59,7 @@ protected:
 public:
     /**
      * @brief 协议处理器
-     * @brief 这个处理器是给QQtSocketUdpSocket用的，不需要用户管理。
+     * @brief 这个处理器是给QQtUdpSocket用的，不需要用户管理。
      * @param Qt通讯口readAll()读到的bytes
      * @return
      */

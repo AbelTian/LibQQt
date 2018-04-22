@@ -3,16 +3,16 @@
 
 #include <QTcpServer>
 #include "qqtprotocol.h"
-#include "qqtsockettcpclient.h"
+#include "qqttcpclient.h"
 #include "qqt-local.h"
 #include "qqtcore.h"
 
-class QQTSHARED_EXPORT QQtSocketTcpServer : public QTcpServer
+class QQTSHARED_EXPORT QQtTcpServer : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit QQtSocketTcpServer ( QObject* parent = 0 );
-    ~QQtSocketTcpServer();
+    explicit QQtTcpServer ( QObject* parent = 0 );
+    ~QQtTcpServer();
 
     void installProtocol ( QQtProtocol* stack );
     void uninstallProtocol ( QQtProtocol* stack );

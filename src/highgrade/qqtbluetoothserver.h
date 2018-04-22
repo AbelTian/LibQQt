@@ -5,12 +5,12 @@
 #include "qqtprotocol.h"
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT QQtSocketBluetoothServer : public QBluetoothServer
+class QQTSHARED_EXPORT QQtBluetoothServer : public QBluetoothServer
 {
     Q_OBJECT
 public:
-    explicit QQtSocketBluetoothServer ( QBluetoothServiceInfo::Protocol serverType, QObject* parent = nullptr );
-    ~QQtSocketBluetoothServer();
+    explicit QQtBluetoothServer ( QBluetoothServiceInfo::Protocol serverType, QObject* parent = nullptr );
+    ~QQtBluetoothServer();
 
     void installProtocol ( QQtProtocol* stack );
     void uninstallProtocol ( QQtProtocol* stack );

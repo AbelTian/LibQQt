@@ -549,15 +549,6 @@ void QQtWebAccessManager::localUpdateDownloadProgress ( qint64 bytesReceived, qi
     emit updateDownloadProgress ( session, bytesReceived, bytesTotal );
 }
 
-QQtWebAccessSession* QQtWebAccessSessionManager::newWebAccessSession()
-{
-    QUuid uuid = QUuid::createUuid();
-    QQtWebAccessSession* session = new QQtWebAccessSession ( this );
-    session->setWebAccessSessionName ( uuid.toString() );
-    m_listWebAccessSession.push_back ( session );
-    return session;
-}
-
 QNetworkReply* QQtWebAccessSessionManager::getReplyHandlerByUrl ( QString& strUrl )
 {
     QQtWebAccessSession* s0 = NULL;

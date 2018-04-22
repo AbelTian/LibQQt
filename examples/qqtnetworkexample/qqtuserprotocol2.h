@@ -3,7 +3,7 @@
 
 #include <qqtmessage.h>
 #include <qqtprotocol.h>
-#include <qqtsockettcpclient.h>
+#include <qqttcpclient.h>
 
 #include <QHostAddress>
 

@@ -3,12 +3,14 @@
 
 #include <QtWebSockets/QWebSocket>
 #include <qqtcore.h>
+#include <qqt-local.h>
+
 /**
  * @brief The QQtWebClient class
  * QQtWebSocketClient通过安装QQtWebProtocol来实现和RawSocket相似的通信方式。
  * 暂时不确定QQtWebProtocol是否和QQtProtocol格式相同，所以暂时使用QQtWebProtocol继承QQtProtocol。
  */
-class QQtWebSocketClient : public QWebSocket
+class QQTSHARED_EXPORT QQtWebSocketClient : public QWebSocket
 {
     Q_OBJECT
 public:

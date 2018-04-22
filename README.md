@@ -23,12 +23,12 @@ LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。
 # 详细介绍  
 
 1. 支持绘制图表
-    - QQtChart (compatiable with QChart and QCustomPlot)  
+    - [QQtChart](src/charts/qqtchartview.h) (compatiable with QChart and QCustomPlot)  
 2. 支持检测USB设备热插拔  
 3. 自定义了一部分特殊需要的控件，用来解决Qt的嵌入式bug。
     - 包括完全使用图片的checkbox（switchbutton）
     - QQtTabWidget，解决QtTab不能竖排横显文字的问题
-    - QQt进度条，解决Qt进度条在Dialog中导致系统死机的问题
+    - QQt进度条，解决Qt进度条在Dialog中导致系统死机的问题(e-linux)    
 1. 添加精美控件
     - 包括复杂的圆盘进度条, SpeedMeter    
     - 包括有多种效果的Widget、Dialog
@@ -36,7 +36,7 @@ LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。
     - 九宫格技术展示图片
     - Html解析器
     - 以及未列出的等20余种自定义widget。
-4. 有线和无线网络自动连接管理类  
+4. 有线和无线网络自动连接管理器  
 6. 解决Qt4.8.7在嵌入式屏幕上QGraphics系统不正常绘画的问题 
 7. QQt输入法
     - 重写了UI，适配多种屏幕
@@ -47,36 +47,37 @@ LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。
 4. QQtTreeView，添加Qt4内部没有TreeView
     - 包括QQtXmlTreeModel、QQtJsonTreeModel、QQtFileSystemTreeModel、QQtSqlTreeModel
 5. 支持工程的版本变更
-    - 在qqt_version.pri里面是QQt的版本和源文件内版本宏定义  
-    - 在app_version.pri里面是App的版本和源文件内版本宏定义  
+    - 在[qqt_version.pri](src/qqt_version.pri)里面是QQt的版本和源文件内版本宏定义  
+    - 在[app_version.pri](app/app_version.pri)里面是App的版本和源文件内版本宏定义  
 6. QQt通讯套件。
      - 通讯口类   
         - QQtSerialPort 兼容QSerialPort and QextSerialPort
-        - [QQtSocketTcpClient](src/network/qqtsockettcpclient.h)、QQtSocketTcpServer、QQtSocketUdpClient
+        - [QQtTcpClient](src/network/qqttcpclient.h)、QQtTcpServer、QQtUdpClient
         - QQtBluetoothSocket +QQtBluetoothManager
         - QQtWebAccessManager，支持http、ftp等主流协议，高并发传输。
-        - QQtWebSocket接口
+        - [QQtWebSocket](src/network/qqtwebsocketclient.h) 接口
      - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) QQtWebSocketProtocol
-     - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)
+     - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)  
 7. 添加应用中常用的form
-8. 支持多页TableWidget
+8. 支持多页表格 [QQtMPTableWidget](src/widgets/qqtmptablewidget.h)  
 9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
 5. 支持Qt5.9.2   
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
 1. 添加矢量图形widgets  
      - 比如 QQtSvgProgressbar
      - QQtSvgCheckBox
+     - [QQtSvgPushButton](src/exquisite/svgwidgets/qqtsvgpushbutton.h)  
 2. 添加核心类之[QQtDictionary](src/core/qqtdictionary.h)   
      - 化解C Plus Plus中没有字典类别的尴尬。    
 3. 添加Multi Link工程管理pri组  
-     - Multi Link technology，既多链接工程管理技术。
+     - [Multi Link technology](src/app_multi_link_technology.pri)，既多链接工程管理技术。
      - 基于qmake，用户可以轻易的链接LibQQt和添加自定义library。  
 4. 添加gif support Widgets  
     - 可以方便的设置动态按钮等。  
-    - 有QQtGifWidget、QQtGifButton等。   
+    - 有[QQtGifWidget](src/exquisite/gifwidgets/qqtgifwidget.h)、QQtGifButton等。   
 5. 升级多媒体音频  
     - 添加内存服务器，处理内存和设备之间的数据交互。  
-    - QQtAudioManager、  
+    - [QQtAudioManager](src/multimedia/qqtaudiomanager.h)、  
     - QQtWavAudioInput、QQtWavAudioOutput、QQtWavAudioManager、  
     - QQtWavSoundEffect  
     - 将AudioDevice、wav输入输出文件，当做一个设备进行读写，App处理获取到的声音。  

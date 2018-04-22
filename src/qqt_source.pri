@@ -237,16 +237,14 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #tcpudpsocket
     contains(DEFINES, __TCPUDPSOCKET__){
         SOURCES += \
-            $$PWD/network/qqtsockettcpclient.cpp \
-            $$PWD/network/qqtsockettcpserver.cpp
+            $$PWD/network/qqttcpclient.cpp
         HEADERS += \
-            $$PWD/network/qqtsockettcpclient.h \
-            $$PWD/network/qqtsockettcpserver.h
+            $$PWD/network/qqttcpclient.h
 
         SOURCES += \
-            $$PWD/network/qqtsocketudpclient.cpp
+            $$PWD/network/qqtudpclient.cpp
         HEADERS += \
-            $$PWD/network/qqtsocketudpclient.h
+            $$PWD/network/qqtudpclient.h
     }
 
     #serialport
@@ -260,11 +258,9 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     contains (DEFINES, __BLUETOOTH__) {
         #bluetooth socket
         SOURCES += \
-            $$PWD/network/qqtsocketbluetoothclient.cpp \
-            $$PWD/network/qqtsocketbluetoothserver.cpp
+            $$PWD/network/qqtbluetoothclient.cpp
         HEADERS += \
-            $$PWD/network/qqtsocketbluetoothserver.h \
-            $$PWD/network/qqtsocketbluetoothclient.h
+            $$PWD/network/qqtbluetoothclient.h
         #bluetooth manager
         SOURCES += \
             $$PWD/network/qqtbluetoothmanager.cpp
@@ -293,12 +289,10 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 
     contains (DEFINES, __WEBSOCKETSUPPORT__) {
         SOURCES += \
-            $$PWD/network/qqtwebsocketserver.cpp \
             $$PWD/network/qqtwebsocketclient.cpp \
             $$PWD/network/qqtwebsocketprotocol.cpp
         HEADERS += \
             $$PWD/network/qqtwebsocketclient.h \
-            $$PWD/network/qqtwebsocketserver.h \
             $$PWD/network/qqtwebsocketprotocol.h
     }
 }
@@ -398,6 +392,40 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/gifwidgets/qqtgifcheckbox.h \
             $$PWD/exquisite/gifwidgets/qqtgifradiobutton.h \
             $$PWD/exquisite/gifwidgets/qqtgifprogressbar.h
+    }
+}
+
+contains (DEFINES, __HIGHGRADE__) {
+    SOURCES += \
+        $$PWD/highgrade/qqtprotocolmanager.cpp \
+        $$PWD/highgrade/qqtserverprotocol.cpp \
+        $$PWD/highgrade/qqtudpserverprotocol.cpp
+    HEADERS += \
+        $$PWD/highgrade/qqtprotocolmanager.h \
+        $$PWD/highgrade/qqtserverprotocol.h \
+        $$PWD/highgrade/qqtudpserverprotocol.h
+
+    contains(DEFINES, __TCPUDPSOCKET__){
+        SOURCES += \
+            $$PWD/highgrade/qqttcpserver.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqttcpserver.h
+        SOURCES += \
+            $$PWD/highgrade/qqtudpserver.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtudpserver.h
+    }
+    contains(DEFINES, __BLUETOOTH) {
+        SOURCES += \
+            $$PWD/highgrade/qqtbluetoothserver.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtbluetoothserver.h
+    }
+    contains (DEFINES, __WEBSOCKETSUPPORT__) {
+        SOURCES += \
+            $$PWD/highgrade/qqtwebsocketserver.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtwebsocketserver.h
     }
 }
 

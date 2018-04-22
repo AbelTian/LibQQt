@@ -12,12 +12,12 @@ QDebug& operator << ( QDebug& dbg, const QQtUserMessage2& msg )
 QQtUserProtocol2* QQtUserConnectionInstance2 ( QObject* parent )
 {
     static QQtUserProtocol2* p0 = NULL;
-    static QQtSocketTcpClient* s0 = NULL;
+    static QQtTcpClient* s0 = NULL;
     if ( !p0 && !s0 )
     {
         p0 = new QQtUserProtocol2 ( parent );
 
-        s0 = new QQtSocketTcpClient ( parent );
+        s0 = new QQtTcpClient ( parent );
         s0->installProtocol ( p0 );
         s0->connectToHost ( QHostAddress ( "192.168.0.100" ), 8000 );
     }

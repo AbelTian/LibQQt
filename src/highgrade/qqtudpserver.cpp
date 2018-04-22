@@ -1,6 +1,6 @@
-#include "qqtsocketudpclient.h"
+#include "qqtudpserver.h"
 
-QQtSocketUdpClient::QQtSocketUdpClient ( QObject* parent ) : QUdpSocket ( parent )
+QQtUdpServer::QQtUdpServer ( QObject* parent ) : QUdpSocket ( parent )
 {
     connect ( this, SIGNAL ( stateChanged ( QAbstractSocket::SocketState ) ), this,
               SLOT ( socketStateChanged ( QAbstractSocket::SocketState ) ) );
@@ -23,7 +23,7 @@ QQtSocketUdpClient::QQtSocketUdpClient ( QObject* parent ) : QUdpSocket ( parent
     m_protocol = NULL;
 }
 
-void QQtSocketUdpClient::installProtocol ( QQtUdpProtocol* stack )
+void QQtUdpServer::installProtocol ( QQtUdpProtocol* stack )
 {
     if ( m_protocol )
         return;
@@ -33,7 +33,7 @@ void QQtSocketUdpClient::installProtocol ( QQtUdpProtocol* stack )
               this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
 }
 
-void QQtSocketUdpClient::uninstallProtocol ( QQtUdpProtocol* stack )
+void QQtUdpServer::uninstallProtocol ( QQtUdpProtocol* stack )
 {
     Q_UNUSED ( stack )
 
@@ -45,22 +45,22 @@ void QQtSocketUdpClient::uninstallProtocol ( QQtUdpProtocol* stack )
     m_protocol = NULL;
 }
 
-QQtUdpProtocol* QQtSocketUdpClient::installedProtocol()
+QQtUdpProtocol* QQtUdpServer::installedProtocol()
 {
     return m_protocol;
 }
 
-void QQtSocketUdpClient::domainHostFound()
+void QQtUdpServer::domainHostFound()
 {
     pline();
 }
 
 /**
- * @brief QQtSocketUdpClient::socketStateChanged
+ * @brief QQtUdpClient::socketStateChanged
  * @param eSocketState
  * 状态函数
  */
-void QQtSocketUdpClient::socketStateChanged ( QAbstractSocket::SocketState eSocketState )
+void QQtUdpServer::socketStateChanged ( QAbstractSocket::SocketState eSocketState )
 {
     pline() << eSocketState;
 
@@ -85,11 +85,11 @@ void QQtSocketUdpClient::socketStateChanged ( QAbstractSocket::SocketState eSock
 }
 
 /**
- * @brief QQtSocketUdpClient::socketErrorOccured
+ * @brief QQtUdpClient::socketErrorOccured
  * @param e
  * 状态函数
  */
-void QQtSocketUdpClient::socketErrorOccured ( QAbstractSocket::SocketError e )
+void QQtUdpServer::socketErrorOccured ( QAbstractSocket::SocketError e )
 {
     /*
      * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
@@ -109,10 +109,10 @@ void QQtSocketUdpClient::socketErrorOccured ( QAbstractSocket::SocketError e )
 }
 
 /**
- * @brief QQtSocketUdpClient::socketConnected
+ * @brief QQtUdpClient::socketConnected
  * 功能接口
  */
-void QQtSocketUdpClient::socketConnected()
+void QQtUdpServer::socketConnected()
 {
     pline() << peerName() << peerAddress().toString() << peerPort();
     /*
@@ -122,26 +122,26 @@ void QQtSocketUdpClient::socketConnected()
 }
 
 /**
- * @brief QQtSocketUdpClient::socketDisconnect
+ * @brief QQtUdpClient::socketDisconnect
  * 功能接口
  */
-void QQtSocketUdpClient::socketDisconnect()
+void QQtUdpServer::socketDisconnect()
 {
     pline();
 }
 
-void QQtSocketUdpClient::updateProgress ( qint64 bytes )
+void QQtUdpServer::updateProgress ( qint64 bytes )
 {
     Q_UNUSED ( bytes )
     //pline() << bytes;
 }
 
-qint64 QQtSocketUdpClient::slotWriteDatagram ( const QByteArray& datagram, const QHostAddress& host, quint16 port )
+qint64 QQtUdpServer::slotWriteDatagram ( const QByteArray& datagram, const QHostAddress& host, quint16 port )
 {
     return writeDatagram ( datagram, host, port );
 }
 
-void QQtSocketUdpClient::readyReadData()
+void QQtUdpServer::readyReadData()
 {
     /*为什么用while?*/ //Qt4 没有那么高级的一次性读取的接口?有
     while ( hasPendingDatagrams() )

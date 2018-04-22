@@ -28,9 +28,9 @@ bool QQTLanProtocol::dispatcher ( const QByteArray& m )
 }
 
 
-QQtSocketTcpServer* QQTSingleServer ( QObject* parent )
+QQtTcpServer* QQTSingleServer ( QObject* parent )
 {
-    static QQtSocketTcpServer* s = new QQtSocketTcpServer ( parent );
+    static QQtTcpServer* s = new QQtTcpServer ( parent );
     s->listen ( QHostAddress::Any, 8000 );
     return s;
 }
@@ -38,12 +38,12 @@ QQtSocketTcpServer* QQTSingleServer ( QObject* parent )
 QQTLanProtocol* QQtLanServer ( QObject* parent )
 {
     static QQTLanProtocol* p0 = NULL;
-    static QQtSocketTcpServer* s0 = NULL;
+    static QQtTcpServer* s0 = NULL;
     if ( !p0 && !s0 )
     {
         p0 = new QQTLanProtocol ( parent );
 
-        s0 = new QQtSocketTcpServer ( parent );
+        s0 = new QQtTcpServer ( parent );
         s0->listen ( QHostAddress::Any, 8000 );
         s0->installProtocol ( p0 );
 

@@ -124,8 +124,8 @@ contains (DEFINES, __EXQUISITE__) {
     }
 
     #mathml widget
-    #注释：在qqt_header.pri打开 DEFINES += __MATHSUPPORT__
-    contains (DEFINES, __MATHSUPPORT__) {
+    #注释：在qqt_header.pri打开 DEFINES += __MATHWIDGETSUPPORT__
+    contains (DEFINES, __MATHWIDGETSUPPORT__) {
         contains(QKIT_PRIVATE, WIN32|WIN64) {
             #mathml
             contains (DEFINES, QQT_LIBRARY) {
@@ -138,7 +138,7 @@ contains (DEFINES, __EXQUISITE__) {
         HEADERS += $$PWD/exquisite/mathml/qtmmlwidget.h
     }
 
-    contains (DEFINES, __LOGICCAMERA__) {
+    contains (DEFINES, __LOGICCAMERAMODULE__) {
         #dmmu support
         #arm mips
         #TODO: +wince +android +ios +macOS +win +linux

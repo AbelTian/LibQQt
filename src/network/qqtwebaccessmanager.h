@@ -159,7 +159,13 @@ public:
      * user set
      * @return
      */
-    QQtWebAccessSession* newWebAccessSession();
+    QQtWebAccessSession* newWebAccessSession() {
+        QUuid uuid = QUuid::createUuid();
+        QQtWebAccessSession* session = new QQtWebAccessSession ( this );
+        session->setWebAccessSessionName ( uuid.toString() );
+        m_listWebAccessSession.push_back ( session );
+        return session;
+    }
 
     int getSessionCount() const {
         return m_listWebAccessSession.count();

@@ -1,10 +1,10 @@
 #ifndef CEDIANUDPSERVER_H
 #define CEDIANUDPSERVER_H
 
-#include <qqtsocketudpclient.h>
+#include <qqtudpclient.h>
 #include <qqtcore.h>
 
-class CedianUdpServer : public QQtSocketUdpClient
+class CedianUdpServer : public QQtUdpClient
 {
     Q_OBJECT
 public:

@@ -5,13 +5,13 @@
 #include "qqtprotocol.h"
 #include "qqt-local.h"
 
-class QQTSHARED_EXPORT QQtSocketBluetoothClient : public QBluetoothSocket
+class QQTSHARED_EXPORT QQtBluetoothClient : public QBluetoothSocket
 {
     Q_OBJECT
 public:
-    explicit QQtSocketBluetoothClient ( QBluetoothServiceInfo::Protocol socketType = QBluetoothServiceInfo::RfcommProtocol,
+    explicit QQtBluetoothClient ( QBluetoothServiceInfo::Protocol socketType = QBluetoothServiceInfo::RfcommProtocol,
                                         QObject* parent = nullptr );
-    explicit QQtSocketBluetoothClient ( QObject* parent = nullptr );
+    explicit QQtBluetoothClient ( QObject* parent = nullptr );
 
     /**
      * @brief setServiceInfo

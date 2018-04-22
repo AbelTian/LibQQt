@@ -3,7 +3,7 @@
 
 #include "qqtprotocol.h"
 #include "qqtmessage.h"
-#include "qqtsockettcpserver.h"
+#include "qqttcpserver.h"
 
 class QQtLanMessage : public QQtMessage
 {
@@ -58,7 +58,7 @@ public:
     bool dispatcher ( const QByteArray& m ) override;
 };
 
-QQtSocketTcpServer* QQTSingleServer ( QObject* parent );
+QQtTcpServer* QQTSingleServer ( QObject* parent );
 //new
 QQTLanProtocol* QQtLanServer ( QObject* parent = 0 );
 #endif // QQTLANPROTOCOL_H

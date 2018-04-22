@@ -1,4 +1,4 @@
-#include "qqtsockettcpclient.h"
+#include "qqttcpclient.h"
 
 #include <QTcpSocket>
 #include <QHostInfo>
@@ -6,7 +6,7 @@
 #include "qqtnetwork.h"
 #include "qqtcore.h"
 
-QQtSocketTcpClient::QQtSocketTcpClient ( QObject* parent ) :
+QQtTcpClient::QQtTcpClient ( QObject* parent ) :
     QTcpSocket ( parent )
 {
     connect ( this, SIGNAL ( stateChanged ( QAbstractSocket::SocketState ) ), this,
@@ -43,11 +43,11 @@ QQtSocketTcpClient::QQtSocketTcpClient ( QObject* parent ) :
     m_protocol = NULL;
 }
 
-QQtSocketTcpClient::~QQtSocketTcpClient()
+QQtTcpClient::~QQtTcpClient()
 {
 }
 
-void QQtSocketTcpClient::installProtocol ( QQtProtocol* stack )
+void QQtTcpClient::installProtocol ( QQtProtocol* stack )
 {
     if ( m_protocol )
         return;
@@ -57,7 +57,7 @@ void QQtSocketTcpClient::installProtocol ( QQtProtocol* stack )
               this, SLOT ( write ( const QByteArray& ) ) );
 }
 
-void QQtSocketTcpClient::uninstallProtocol ( QQtProtocol* stack )
+void QQtTcpClient::uninstallProtocol ( QQtProtocol* stack )
 {
     Q_UNUSED ( stack )
 
@@ -69,12 +69,12 @@ void QQtSocketTcpClient::uninstallProtocol ( QQtProtocol* stack )
     m_protocol = NULL;
 }
 
-QQtProtocol* QQtSocketTcpClient::installedProtocol()
+QQtProtocol* QQtTcpClient::installedProtocol()
 {
     return m_protocol;
 }
 
-void QQtSocketTcpClient::SendConnectMessage()
+void QQtTcpClient::SendConnectMessage()
 {
     pline() << isValid() << isOpen() << state();
 
@@ -98,7 +98,7 @@ void QQtSocketTcpClient::SendConnectMessage()
 }
 
 
-int QQtSocketTcpClient::SendDisConnectFromHost()
+int QQtTcpClient::SendDisConnectFromHost()
 {
     pline() << isValid() << isOpen() << state();
 
@@ -118,17 +118,17 @@ int QQtSocketTcpClient::SendDisConnectFromHost()
     return true;
 }
 
-void QQtSocketTcpClient::domainHostFound()
+void QQtTcpClient::domainHostFound()
 {
     pline();
 }
 
 /**
- * @brief QQtSocketTcpClient::socketStateChanged
+ * @brief QQtTcpClient::socketStateChanged
  * @param eSocketState
  * 状态函数
  */
-void QQtSocketTcpClient::socketStateChanged ( QAbstractSocket::SocketState eSocketState )
+void QQtTcpClient::socketStateChanged ( QAbstractSocket::SocketState eSocketState )
 {
     pline() << eSocketState;
 
@@ -154,11 +154,11 @@ void QQtSocketTcpClient::socketStateChanged ( QAbstractSocket::SocketState eSock
 }
 
 /**
- * @brief QQtSocketTcpClient::socketErrorOccured
+ * @brief QQtTcpClient::socketErrorOccured
  * @param e
  * 状态函数
  */
-void QQtSocketTcpClient::socketErrorOccured ( QAbstractSocket::SocketError e )
+void QQtTcpClient::socketErrorOccured ( QAbstractSocket::SocketError e )
 {
     /*
      * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
@@ -178,10 +178,10 @@ void QQtSocketTcpClient::socketErrorOccured ( QAbstractSocket::SocketError e )
 }
 
 /**
- * @brief QQtSocketTcpClient::socketConnected
+ * @brief QQtTcpClient::socketConnected
  * 功能接口
  */
-void QQtSocketTcpClient::socketConnected()
+void QQtTcpClient::socketConnected()
 {
     pline() << peerName() << peerAddress().toString() << peerPort();
     /*
@@ -191,21 +191,21 @@ void QQtSocketTcpClient::socketConnected()
 }
 
 /**
- * @brief QQtSocketTcpClient::socketDisconnect
+ * @brief QQtTcpClient::socketDisconnect
  * 功能接口
  */
-void QQtSocketTcpClient::socketDisconnect()
+void QQtTcpClient::socketDisconnect()
 {
     pline();
 }
 
-void QQtSocketTcpClient::updateProgress ( qint64 bytes )
+void QQtTcpClient::updateProgress ( qint64 bytes )
 {
     Q_UNUSED ( bytes )
     //pline() << bytes;
 }
 
-void QQtSocketTcpClient::connectToSingelHost()
+void QQtTcpClient::connectToSingelHost()
 {
     int contype = eConType % m_serverIP.size();
     QString ip = m_serverIP.at ( contype );
@@ -215,7 +215,7 @@ void QQtSocketTcpClient::connectToSingelHost()
 }
 
 
-void QQtSocketTcpClient::readyReadData()
+void QQtTcpClient::readyReadData()
 {
     QByteArray bytes;
     bytes = readAll();

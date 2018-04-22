@@ -1,5 +1,5 @@
 #include "quserbluetoothprotocol.h"
-#include "qqtsocketbluetoothclient.h"
+#include "qqtbluetoothclient.h"
 #include "qqtbluetoothmanager.h"
 
 QUserBluetoothProtocol::QUserBluetoothProtocol ( QObject* parent ) : QObject ( parent )
@@ -7,15 +7,15 @@ QUserBluetoothProtocol::QUserBluetoothProtocol ( QObject* parent ) : QObject ( p
 
 }
 
-QQtSocketBluetoothClient* QQtUserBluetoothClientInstance ( QObject* parent )
+QQtBluetoothClient* QQtUserBluetoothClientInstance ( QObject* parent )
 {
-    static QQtSocketBluetoothClient* cli = nullptr;
+    static QQtBluetoothClient* cli = nullptr;
 
     if ( !cli )
     {
         QQtBluetoothManager* inst = QQtBluetoothManager::Instance ( parent );
         inst->getDeviceList().first().address();
-        cli = new QQtSocketBluetoothClient ( QBluetoothServiceInfo::RfcommProtocol, parent );
+        cli = new QQtBluetoothClient ( QBluetoothServiceInfo::RfcommProtocol, parent );
         cli->setServiceAddress ( inst->getDeviceList().first().address() );
 
     }

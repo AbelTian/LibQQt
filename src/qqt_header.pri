@@ -169,6 +169,9 @@ contains(DEFINES, __QQTCHARTS__) {
 ##################QQtLogSystem Module###############################
 DEFINES += __QQTLOGSYSTEMSUPPORT__
 
+###########################################################################
+###QQtSocketClient多组功能组件。
+############
 ##################QQt Network Module##################################
 #包括SerialPort Bluetooth TcpUdp
 #包括HttpFtp 多路的HttpFtp，QQtAccessManager WebService WebSocket Gumbo
@@ -266,6 +269,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 ##################Exquisite Widgets Module###############################
 #if you use Exquisite widgets, open this annotation
 #精美模块，包含不少的精美组件，这个模块可以集中开关。
+#依赖基础控件
 DEFINES += __EXQUISITE__
 contains (DEFINES, __EXQUISITE__) {
     #if you use QR encode, open this annotation
@@ -293,14 +297,29 @@ contains (DEFINES, __EXQUISITE__) {
     }
 
     ##################Mathes Module###############################
-    DEFINES += __MATHSUPPORT__
+    DEFINES += __MATHWIDGETSUPPORT__
 
     #LOGIC CAMERA PREVIEW
     #depend on dmmu
-    DEFINES += __LOGICCAMERA__
+    DEFINES += __LOGICCAMERAMODULE__
 
     #opengl module
     DEFINES += __OPENGLWIDGETS__
+}
+
+########################################################################
+###这个模块名为高级模块，初始置入QQtSocketServer一组组件。
+###如果初中级工程师能使用这个模块完成App，那么必定是高分实现力学员。
+###建议中级以上工程师尝试。2018年4月22日 星期天 11点08分
+############
+##################HighGrade Module###############################
+#if you use HighGrade module, open this annotation
+#高级模块，包含不少的高级功能组件，这个模块可以集中开关。
+DEFINES += __HIGHGRADE__
+#依赖网络模块
+!contains (DEFINES, __NETWORKSUPPORT__): DEFINES -= __HIGHGRADE__
+contains (DEFINES, __HIGHGRADE__) {
+
 }
 
 #################################################################
@@ -387,6 +406,9 @@ defineReplace(qqt_header){
         command += $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing \
                     $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
     }
+
+    #highgrade module
+    command += $${path}/highgrade
 
     return ($$command)
 }

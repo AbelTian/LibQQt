@@ -3,16 +3,16 @@
 #include "qqtcore.h"
 #include "qqt-qt.h"
 
-QQtSocketTcpClient* QQTUpgradeClientInstance ( QObject* parent )
+QQtTcpClient* QQTUpgradeClientInstance ( QObject* parent )
 {
-    static QQtSocketTcpClient* cli = NULL;
+    static QQtTcpClient* cli = NULL;
 
     if ( !cli )
     {
         QStringList ip;
         ip << "222.175.114.244" << "124.133.1.54";
         //"www.QQToo.com"
-        cli = new QQtSocketTcpClient ( parent );
+        cli = new QQtTcpClient ( parent );
         cli->SetServerIPAddress ( ip );
         cli->SetServerPort ( 8089 );
     }
@@ -20,15 +20,15 @@ QQtSocketTcpClient* QQTUpgradeClientInstance ( QObject* parent )
     return cli;
 }
 
-QQtSocketTcpClient* QQTCloudClientInstance ( QObject* parent )
+QQtTcpClient* QQTCloudClientInstance ( QObject* parent )
 {
-    static QQtSocketTcpClient* cli = NULL;
+    static QQtTcpClient* cli = NULL;
 
     if ( !cli )
     {
         QStringList ip;
         ip << "222.175.114.244" << "124.133.1.54";
-        cli = new QQtSocketTcpClient ( parent );
+        cli = new QQtTcpClient ( parent );
         cli->SetServerIPAddress ( ip );
         cli->SetServerPort ( 7079 );
     }

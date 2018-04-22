@@ -7,16 +7,19 @@
 #include "qqtcore.h"
 
 /*
- * Udp通信不区分服务器和客户端，都用这个就行啊。操作区别：服务器需要绑定本地端口。
+ * Udp通信客户端
+ *
+ * 和服务器操作区别：服务器需要绑定本地端口。
+ *
  * 默认情况下，就可以接收发送数据了。在协议里处理接收、发送。
  * 只有绑定本地IP、端口才能进行接收
  */
-class QQtSocketUdpClient : public QUdpSocket
+class QQTSHARED_EXPORT QQtUdpClient : public QUdpSocket
 {
     Q_OBJECT
 public:
-    explicit QQtSocketUdpClient ( QObject* parent = nullptr );
-    virtual ~QQtSocketUdpClient() {}
+    explicit QQtUdpClient ( QObject* parent = nullptr );
+    virtual ~QQtUdpClient() {}
 
     void installProtocol ( QQtUdpProtocol* stack );
     void uninstallProtocol ( QQtUdpProtocol* stack );
