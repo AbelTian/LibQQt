@@ -40,7 +40,9 @@ LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。
 6. 解决Qt4.8.7在嵌入式屏幕上QGraphics系统不正常绘画的问题 
 7. QQt输入法
     - 重写了UI，适配多种屏幕
-8. Qt对象工厂，允许注册、生成、查找和删除所有来自QObject以及QWidget的类。
+8. Qt对象管理器  
+    - 用于管理已经生成的Qt对象实例，objectName是唯一查找索引。  
+    - 含有QQtObjectFactory，用于动态注册、生成来自QObject和QWidget的类。
 9. 嵌入式视频播放器，模拟端口实时预览器
 0. QQt打印机，支持打印pdf
 2. QQtWord，支持doc文档编写，输出pdf格式。

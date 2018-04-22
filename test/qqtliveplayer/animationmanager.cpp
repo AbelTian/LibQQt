@@ -25,7 +25,7 @@ AnimationManager::AnimationManager(QObject *parent) : QObject(parent)
      * user can't decate qqtwindow
      */
     QQTWindow* qqtwindow = (QQTWindow*)
-            QQtObjectParcel::registeredObject("QQTWindow");
+            QQtObjectManager::registeredObject("QQTWindow");
     QQtAnimation* ani = new QQtAnimation(this);
     QSequentialAnimationGroup* sani = new QSequentialAnimationGroup(ani);
     QParallelAnimationGroup* pani = new QParallelAnimationGroup(ani);

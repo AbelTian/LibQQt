@@ -134,22 +134,22 @@ void QQtTcpClient::socketStateChanged ( QAbstractSocket::SocketState eSocketStat
 
     switch ( eSocketState )
     {
-    case QAbstractSocket::HostLookupState:
-    case QAbstractSocket::ConnectingState:
-        break;
+        case QAbstractSocket::HostLookupState:
+        case QAbstractSocket::ConnectingState:
+            break;
 
-    case QAbstractSocket::ConnectedState:
-        break;
+        case QAbstractSocket::ConnectedState:
+            break;
 
-    case QAbstractSocket::ClosingState:
-        break;
+        case QAbstractSocket::ClosingState:
+            break;
 
-    case QAbstractSocket::UnconnectedState:
-        eConType++;
-        break;
+        case QAbstractSocket::UnconnectedState:
+            eConType++;
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 }
 
@@ -167,13 +167,13 @@ void QQtTcpClient::socketErrorOccured ( QAbstractSocket::SocketError e )
 
     switch ( e )
     {
-    case QAbstractSocket::RemoteHostClosedError:
-        break;
+        case QAbstractSocket::RemoteHostClosedError:
+            break;
 
-    case QAbstractSocket::HostNotFoundError:
-    default:
-        emit signalConnectFail();
-        break;
+        case QAbstractSocket::HostNotFoundError:
+        default:
+            emit signalConnectFail();
+            break;
     }
 }
 
@@ -217,6 +217,7 @@ void QQtTcpClient::connectToSingelHost()
 
 void QQtTcpClient::readyReadData()
 {
+    //self, protocol, message
     QByteArray bytes;
     bytes = readAll();
     m_protocol->translator ( bytes );

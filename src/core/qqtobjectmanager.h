@@ -1,5 +1,5 @@
-#ifndef QQTOBJECTFACTORY_H
-#define QQTOBJECTFACTORY_H
+#ifndef QQTOBJECTMANAGER_H
+#define QQTOBJECTMANAGER_H
 
 #include <QObject>
 #include <QByteArray>
@@ -122,10 +122,12 @@ private:
 };
 
 /**
- * @brief The QQtObjectParcel class
- * QQt 对象管理器 工厂模式
+ * @brief The QQtObjectManager class
+ * QQt 对象管理器
+ * 用于管理Qt对象实例。
+ * 曾用名 QQtObjectParcel
  */
-class QQTSHARED_EXPORT QQtObjectParcel
+class QQTSHARED_EXPORT QQtObjectManager
 {
 public:
     /**
@@ -295,4 +297,4 @@ private:
 };
 #endif
 
-#endif // QQTOBJECTFACTORY_H
+#endif // QQTOBJECTMANAGER_H

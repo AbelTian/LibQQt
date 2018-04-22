@@ -19,7 +19,7 @@ int main ( int argc, char* argv[] )
     pline() << obj->inherits ( "QObject" );
     obj->setObjectName ( "bbb" );
     pline() << obj->objectName();
-    QQtObjectParcel::registerObject ( obj );
+    QQtObjectManager::registerObject ( obj );
     */
 
     //对QQtDictNode的使用进行测试。

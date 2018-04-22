@@ -7,6 +7,10 @@
 #include "qqt-local.h"
 #include "qqtcore.h"
 
+/**
+ * @brief The QQtTcpServer class
+ * 这个类相当于QQtTcpClient管理器，相当于Socket管理器，它包含很多Socket。
+ */
 class QQTSHARED_EXPORT QQtTcpServer : public QTcpServer
 {
     Q_OBJECT

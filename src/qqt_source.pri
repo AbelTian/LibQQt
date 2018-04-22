@@ -41,11 +41,11 @@ contains (QKIT_PRIVATE, WIN32||WIN64) {
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
     $$PWD/core/qqtdictionary.cpp \
-    $$PWD/core/qqtobjectfactory.cpp
+    $$PWD/core/qqtobjectmanager.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
     $$PWD/core/qqtdictionary.h \
-    $$PWD/core/qqtobjectfactory.h
+    $$PWD/core/qqtobjectmanager.h
 
 #后台进程支持，这个只有ios不支持，这个支持在源文件pri里处理。
 DEFINES += __PROCESSMODULE__

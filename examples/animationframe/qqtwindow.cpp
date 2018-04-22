@@ -14,7 +14,7 @@ QQTWindow::QQTWindow(QWidget* parent) :
 {
     ui->setupUi(this);
 
-    QQtObjectParcel::registerObject(this);
+    QQtObjectManager::registerObject(this);
 
 #ifdef __EMBEDDED_LINUX__
     /*
@@ -29,12 +29,12 @@ QQTWindow::QQTWindow(QWidget* parent) :
     setFixedSize(1024, 600);
     moveCenter(this);
 
-    QQtObjectParcel::registerObject(ui->pushButton);
-    QQtObjectParcel::registerObject(ui->pushButton_2);
-    QQtObjectParcel::registerObject(ui->pushButton_3);
-    QQtObjectParcel::registerObject(ui->pushButton_4);
-    QQtObjectParcel::registerObject(ui->pushButton_5);
-    QQtObjectParcel::registerObject(ui->pushButton_6);
+    QQtObjectManager::registerObject(ui->pushButton);
+    QQtObjectManager::registerObject(ui->pushButton_2);
+    QQtObjectManager::registerObject(ui->pushButton_3);
+    QQtObjectManager::registerObject(ui->pushButton_4);
+    QQtObjectManager::registerObject(ui->pushButton_5);
+    QQtObjectManager::registerObject(ui->pushButton_6);
 
     /**
      * @brief QQtAnimationManager::Instance
