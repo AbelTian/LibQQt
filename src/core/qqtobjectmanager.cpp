@@ -1,1 +1,1 @@
-#include "qqtobjectmanager.h"
+﻿#include "qqtobjectmanager.h"

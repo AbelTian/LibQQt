@@ -1,4 +1,4 @@
-#ifndef QQTOBJECTMANAGER_H
+﻿#ifndef QQTOBJECTMANAGER_H
 #define QQTOBJECTMANAGER_H
 
 #include <QObject>
@@ -58,6 +58,8 @@ private:
     static QHash<QString, Constructor>& constructors() {
         /*
          * 保存生成类对象的具体（非模板）函数
+         * 这个变量是全局的。
+         * 无论是否使用静态函数包裹，这个变量用于是全局的，一直存在，不受类的实例存在与否控制。
          */
         static QHash<QString, Constructor> instance;
         return instance;
@@ -135,6 +137,8 @@ public:
      * @param w
      */
     static void registerObject ( const QObject* const& w ) {
+        if ( !containers().contains ( w ) )
+            return;
         containers().push_back ( w );
     }
     /**
@@ -173,6 +177,10 @@ public:
     }
 
 private:
+    //包裹一下，有利于省却全局声明。
+    //强调：这个static不论是否被静态成员函数包裹，永远存在。
+    //类不决定生存周期。
+    //类决定作用域。
     static QList<const QObject*>& containers() {
         static QList<const QObject*> instance;
         return instance;
