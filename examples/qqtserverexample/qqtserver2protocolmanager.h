@@ -142,6 +142,6 @@ protected:
 };
 
 //业务层初始化一下这个实例，总是从这里获取协议句柄进行对外读写。
-QQtServer2Protocol* QQtServer2ConnectionInstance ( QObject* parent = 0 );
+QQtProtocolManager* QQtServer2ConnectionInstance ( QObject* parent = 0 );
 
 #endif // QQTSERVER2PROTOCOL_H

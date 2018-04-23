@@ -1,4 +1,4 @@
-#include "qqtserverprotocolmanager.h"
+﻿#include "qqtserverprotocolmanager.h"
 
 QQtServerProtocolManager::QQtServerProtocolManager ( QObject* parent ) : QQtProtocolManager ( parent )
 {
@@ -33,7 +33,7 @@ QQtServerProtocolManager* QQtServerInstance ( QObject* parent )
     return m0;
 }
 
-QDebug& operator << ( QDebug dbg, const QQtServerMessage& msg )
+QDebug& operator << ( QDebug& dbg, const QQtServerMessage& msg )
 {
     dbg << msg.getASize() << msg.getACmd() << msg.getAData();
     dbg << msg.getBSize() << msg.getBCmd() << msg.getBData();

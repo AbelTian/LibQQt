@@ -1,4 +1,4 @@
-#ifndef QQTSERVERPROTOCOLMANAGER_H
+﻿#ifndef QQTSERVERPROTOCOLMANAGER_H
 #define QQTSERVERPROTOCOLMANAGER_H
 
 #include <QObject>
@@ -17,8 +17,8 @@ class QQtServerMessage : public QQtMessage
     Q_OBJECT
 public:
     explicit QQtServerMessage ( QObject* parent = 0 ) {
-        bstart = 0x00;
-        bend = 0x01;
+        bstart = 0xAA;
+        bend = 0xBB;
     }
 
     quint16& getASize() {
@@ -62,7 +62,7 @@ public:
     }
 
     void translate() {
-        bsize = 1 + 2 + 1 + bdata.length() + 1;
+        bsize = 1 + 2 + 1 + bdata.size() + 1;
     }
 
 
@@ -97,7 +97,7 @@ private:
     quint8 bend;
 };
 
-QDebug& operator << ( QDebug dbg, const QQtServerMessage& msg );
+QDebug& operator << ( QDebug& dbg, const QQtServerMessage& msg );
 
 /**
  * @brief The QQtServerProtocol class

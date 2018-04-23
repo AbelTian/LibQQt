@@ -9,7 +9,7 @@ QDebug& operator << ( QDebug& dbg, const QQtClient2Message& msg )
     return dbg.space();
 }
 
-QQtServer2Protocol* QQtServer2ConnectionInstance ( QObject* parent )
+QQtProtocolManager* QQtServer2ConnectionInstance ( QObject* parent )
 {
     static QQtProtocolManager* m0 = 0;
     if ( !m0 )
