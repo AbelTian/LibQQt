@@ -27,7 +27,7 @@ void MainWindow::recvANotify ( const QQtProtocol* protocol, const QQtMessage* me
     {
         case 0x01:
         {
-            if ( m->getAData().contains ( "hello" ) )
+            if ( QString ( m->getAData() ).contains ( "hello" ) )
                 p->sendB1Command();
             else
                 p->sendB10Command();
