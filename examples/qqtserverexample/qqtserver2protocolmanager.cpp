@@ -11,7 +11,7 @@ QDebug& operator << ( QDebug& dbg, const QQtClient2Message& msg )
 
 QQtProtocolManager* QQtServer2ConnectionInstance ( QObject* parent )
 {
-    static QQtProtocolManager* m0 = 0;
+    static QQtProtocolManager* m0 = NULL;
     if ( !m0 )
     {
         //创建Protocol管理者
@@ -21,7 +21,7 @@ QQtProtocolManager* QQtServer2ConnectionInstance ( QObject* parent )
         //初始化Protocol管理者完成。
     }
 
-    static QQtTcpServer* s0 = 0;
+    static QQtTcpServer* s0 = NULL;
     if ( !s0 )
     {
         //新建服务器
