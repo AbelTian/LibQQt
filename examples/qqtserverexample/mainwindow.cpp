@@ -21,9 +21,9 @@ void MainWindow::recvANotify ( const QQtProtocol* protocol, const QQtMessage* me
     QQtServerProtocol* p = ( QQtServerProtocol* ) protocol;
     QQtServerMessage* m = ( QQtServerMessage* ) message;
 
-    pline() << m->getAData();
+    pline() << QString ( m->getAData() );
 
-    switch ( m->getBCmd() )
+    switch ( m->getACmd() )
     {
         case 0x01:
         {

@@ -29,5 +29,6 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_recv_say_hello ( QString a )
 {
-    ui->plainTextEdit->appendPlainText ( a );
+    pline() << a;
+    //ui->plainTextEdit->appendPlainText ( a );
 }
