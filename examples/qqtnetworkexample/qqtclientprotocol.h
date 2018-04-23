@@ -122,8 +122,8 @@ public:
 
     void sendA1Command ( QString data ) {
         QQtClientMessage msg;
-        msg.getBCmd() = 0x01;
-        msg.getBData() = data.toLocal8Bit();
+        msg.getACmd() = 0x01;
+        msg.getAData() = data.toLocal8Bit();
         msg.translate();
 
         QByteArray l;
