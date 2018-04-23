@@ -19,13 +19,17 @@ public:
      * 这个函数不会更改局部变量
      * @return
      */
-    inline virtual quint16 minlength() const {}
+    inline virtual quint16 minlength() const {
+        return 0;
+    }
     /**
      * @brief 最大报文长
      * 这个函数不会更改局部变量
      * @return
      */
-    inline virtual quint16 maxlength() const {}
+    inline virtual quint16 maxlength() const {
+        return 0x07FF;
+    }
     /**
      * @brief 将报文组装为流
      * 这个函数不会更改局部变量

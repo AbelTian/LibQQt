@@ -315,7 +315,7 @@ contains (DEFINES, __EXQUISITE__) {
 ##################HighGrade Module###############################
 #if you use HighGrade module, open this annotation
 #高级模块，包含不少的高级功能组件，这个模块可以集中开关。
-DEFINES += __HIGHGRADE__
+#DEFINES += __HIGHGRADE__
 #依赖网络模块
 !contains (DEFINES, __NETWORKSUPPORT__): DEFINES -= __HIGHGRADE__
 contains (DEFINES, __HIGHGRADE__) {
