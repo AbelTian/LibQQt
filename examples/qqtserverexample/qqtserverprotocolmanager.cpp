@@ -32,3 +32,10 @@ QQtServerProtocolManager* QQtServerInstance ( QObject* parent )
     //等待客户端发消息过来，Protocol就处理了，去业务层看看。
     return m0;
 }
+
+QDebug& operator << ( QDebug dbg, const QQtServerMessage& msg )
+{
+    dbg << msg.getASize() << msg.getACmd() << msg.getAData();
+    dbg << msg.getBSize() << msg.getBCmd() << msg.getBData();
+    return dbg;
+}

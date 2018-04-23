@@ -97,6 +97,8 @@ private:
     quint8 bend;
 };
 
+QDebug& operator << ( QDebug dbg, const QQtServerMessage& msg );
+
 /**
  * @brief The QQtServerProtocol class
  * 这是我定义的服务器和客户端的协议
@@ -122,7 +124,8 @@ public:
         msg.getBData() = "Recived, Also hello to you.";
         msg.translate();
 
-        //pline() << msg.getBCmd() << msg.getBData();
+        //pline() << msg.getBSize() << msg.getBCmd() << msg.getBData();
+        pline() << msg;
 
         QByteArray l;
         msg.packer ( l );
@@ -135,7 +138,8 @@ public:
         msg.getBData() = "Please, say hello to me.";
         msg.translate();
 
-        //pline() << msg.getBCmd() << msg.getBData();
+        //pline() << msg.getBSize() << msg.getBCmd() << msg.getBData();
+        pline() << msg;
 
         QByteArray l;
         msg.packer ( l );
