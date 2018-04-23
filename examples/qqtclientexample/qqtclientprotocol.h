@@ -56,7 +56,7 @@ public:
     }
 
     void translate() {
-        asize = 2 + 1 + adata.length();
+        asize = 2 + 1 + adata.size();
     }
 
 

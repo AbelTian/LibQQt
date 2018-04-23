@@ -81,7 +81,8 @@ SOURCES += \
     qqtnetworkmessage.cpp \
     qqtserialmessage.cpp \
     qqtuserserialprotocol.cpp \
-    qqtsubprotocoltest.cpp
+    qqtsubprotocoltest.cpp \
+    qqtclient2protocol.cpp
 
 
 HEADERS += \
@@ -91,7 +92,8 @@ HEADERS += \
     qqtnetworkmessage.h \
     qqtserialmessage.h \
     qqtuserserialprotocol.h \
-    qqtsubprotocoltest.h
+    qqtsubprotocoltest.h \
+    qqtclient2protocol.h
 
 FORMS += \
     mainwindow.ui

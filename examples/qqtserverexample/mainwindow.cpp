@@ -9,6 +9,8 @@ MainWindow::MainWindow ( QWidget* parent ) :
     pm0 = QQtServerInstance ( this );
     connect ( pm0, SIGNAL ( notifyToBusinessLevel ( const QQtProtocol*, const QQtMessage* ) ),
               this, SLOT ( recvANotify ( const QQtProtocol*, const QQtMessage* ) ) );
+
+    QQtServer2ConnectionInstance ( this );
 }
 
 MainWindow::~MainWindow()

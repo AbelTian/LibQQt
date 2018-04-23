@@ -48,13 +48,11 @@ SUBDIRS += examples/qqtaudioexample
 #必开 客户端的 basic
 SUBDIRS += examples/qqtnetworkexample
 #这边是个组合项，客户端和服务器一起的。
-contains(DEFINES, __HIGHGRADE__) {
-    SUBDIRS += examples/qqtclientexample
-    SUBDIRS += demo/QQtClientCreator
-    #服务器的 highgrade
-    SUBDIRS += examples/qqtserverexample
-    SUBDIRS += demo/QQtServerCreator
-}
+SUBDIRS += examples/qqtclientexample
+SUBDIRS += demo/QQtClientCreator
+#服务器的 highgrade
+SUBDIRS += examples/qqtserverexample
+SUBDIRS += demo/QQtServerCreator
 #greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
