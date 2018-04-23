@@ -1,4 +1,4 @@
-﻿#ifndef QQTCLIENTPROTOCOL_H
+#ifndef QQTCLIENTPROTOCOL_H
 #define QQTCLIENTPROTOCOL_H
 
 #include <qqtmessage.h>
@@ -141,7 +141,7 @@ public slots:
 protected:
     //报文的最小长度
     virtual quint16 minlength() override {
-        return 0x00;
+        return 0x03;
     }
     //报文的最大长度
     virtual quint16 maxlength() override {
@@ -149,16 +149,25 @@ protected:
     }
 
     virtual quint16 splitter ( const QByteArray& l ) override { //stream
+        pline() << l[0] << l[1] << l[2] << l[3] << l[4] << l[5] << l[6] << l[7];
+        for ( int i = 0; i < l.size(); i++ ) {
+            pline() << l[i];
+        }
+
         QByteArray s0 = l.left ( 3 );
         quint8 start = 0;
         quint16 size = 0;
-        s0 << start;
-        s0 << size;
+        pline() << s0[0] << s0[1] << s0[2];
+
+        s0 >> start;
+        s0 >> size;
+        pline() << start << size;
         return size;
     }
 
     //报文现在被切开，发了进来，第二个字节是cmd，解析出来，在函数里处理处理数据，告诉业务层，拿到数据了干点什么。
     virtual bool dispatcher ( const QByteArray& m ) override { //message
+
         bool ret = true;
 
         QQtClientMessage qMsg;
@@ -170,7 +179,7 @@ protected:
                 recvCommand1 ( qMsg );
                 break;
 
-            case 0x0100://protocol command 2
+            case 0x0A://protocol command 2
                 recvCommand2 ( qMsg );
                 break;
 
