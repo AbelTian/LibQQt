@@ -141,7 +141,7 @@ public slots:
 protected:
     //报文的最小长度
     virtual quint16 minlength() override {
-        return 0x00;
+        return 0x03;
     }
     //报文的最大长度
     virtual quint16 maxlength() override {
@@ -159,6 +159,7 @@ protected:
 
     //报文现在被切开，发了进来，第二个字节是cmd，解析出来，在函数里处理处理数据，告诉业务层，拿到数据了干点什么。
     virtual bool dispatcher ( const QByteArray& m ) override { //message
+
         bool ret = true;
 
         QQtClientMessage qMsg;
@@ -170,7 +171,7 @@ protected:
                 recvCommand1 ( qMsg );
                 break;
 
-            case 0x0100://protocol command 2
+            case 0x0A://protocol command 2
                 recvCommand2 ( qMsg );
                 break;
 
