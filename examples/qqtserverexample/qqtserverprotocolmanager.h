@@ -21,19 +21,50 @@ public:
         bend = 0x01;
     }
 
+    quint16& getASize() {
+        return asize;
+    }
+    const quint16& getASize() const {
+        return asize;
+    }
+
     quint8& getACmd() {
+        return acmd;
+    }
+    const quint8& getACmd() const {
         return acmd;
     }
     QByteArray& getAData() {
         return adata;
     }
+    const QByteArray& getAData() const {
+        return adata;
+    }
+
+    quint16& getBSize() {
+        return bsize;
+    }
+    const quint16& getBSize() const {
+        return bsize;
+    }
 
     quint8& getBCmd() {
+        return bcmd;
+    }
+    const quint8& getBCmd() const {
         return bcmd;
     }
     QByteArray& getBData() {
         return bdata;
     }
+    const QByteArray& getBData() const {
+        return bdata;
+    }
+
+    void translate() {
+        bsize = 1 + 2 + 1 + bdata.length() + 1;
+    }
+
 
     // QQtMessage interface
 public:
@@ -45,7 +76,6 @@ public:
         l >> adata;
     }
     virtual void packer ( QByteArray& l ) const override {
-        bsize = 1 + 2 + 1 + bdata.length() + 1;
         l << bstart;
         l << bsize;
         l << bcmd;
@@ -87,7 +117,25 @@ public:
     }
 
     void sendB1Command() {
-        //write ( "Recived, Thanks." );
+        QQtServerMessage msg;
+        msg.getBCmd() = 0x01;
+        msg.getBData() = "Recived, Also hello to you.";
+        msg.translate();
+
+        QByteArray l;
+        msg.packer ( l );
+        write ( l );
+    }
+
+    void sendB10Command() {
+        QQtServerMessage msg;
+        msg.getBCmd() = 0x0100;
+        msg.getBData() = "Please, say hello to me.";
+        msg.translate();
+
+        QByteArray l;
+        msg.packer ( l );
+        write ( l );
     }
 
     // QQtProtocol interface

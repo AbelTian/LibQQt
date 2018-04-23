@@ -12,15 +12,19 @@ QDebug& operator << ( QDebug& dbg, const QQtUserMessage& msg )
 QQtUserProtocol* QQtUserConnectionInstance ( QObject* parent )
 {
     static QQtUserProtocol* p0 = NULL;
-    static QQtTcpServer* s0 = NULL;
-    if ( !p0 && !s0 )
+    if ( !p0 )
     {
         p0 = new QQtUserProtocol ( parent );
 
-        s0 = new QQtTcpServer ( parent );
-        s0->installProtocol ( p0 );
-        s0->listen ( QHostAddress::Any, 8000 );
 
+    }
+
+    static QQtTcpServer* s0 = NULL;
+    if ( !s0 )
+    {
+        s0 = new QQtTcpServer ( parent );
+        //... s0->installProtocol ( p0 );
+        s0->listen ( QHostAddress::Any, 8000 );
     }
 
     return p0;

@@ -60,7 +60,7 @@ public:
      */
     template <typename T>
     void registerProtocol ( QString protocolTypeName ) {
-        pline() << typeid ( T ) << typeid ( T ).name();
+        //pline() << typeid ( T ) << typeid ( T ).name();
         mProtocolName = protocolTypeName;
         QQtObjectFactory::registerObject<T>();
     }

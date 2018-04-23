@@ -21,7 +21,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
+SOURCES -= \
+    qqtlanprotocol.cpp \
     qqtuserprotocol1.cpp \
     qqtuserprotocol2.cpp \
     qqtuserprotocol3.cpp \
@@ -46,7 +47,8 @@ SOURCES += \
     usertest8protocol.cpp \
     usertest9protocol.cpp
 
-HEADERS += \
+HEADERS -= \
+    qqtlanprotocol.h \
     qqtuserprotocol1.h \
     qqtuserprotocol2.h \
     qqtuserprotocol3.h \
@@ -74,8 +76,8 @@ HEADERS += \
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+    qqtclientprotocol.cpp \
     qqtcloudprotocol.cpp \
-    qqtlanprotocol.cpp \
     qqtnetworkmessage.cpp \
     qqtserialmessage.cpp \
     qqtuserserialprotocol.cpp \
@@ -84,8 +86,8 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
+    qqtclientprotocol.h \
     qqtcloudprotocol.h \
-    qqtlanprotocol.h \
     qqtnetworkmessage.h \
     qqtserialmessage.h \
     qqtuserserialprotocol.h \

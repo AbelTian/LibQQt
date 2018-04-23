@@ -54,7 +54,7 @@ void QQtTcpClient::installProtocol ( QQtProtocol* stack )
 
     m_protocol = stack;
     connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
-              this, SLOT ( write ( const QByteArray& ) ) );
+              this, SLOT ( writeData ( const QByteArray& ) ) );
 }
 
 void QQtTcpClient::uninstallProtocol ( QQtProtocol* stack )
@@ -65,7 +65,7 @@ void QQtTcpClient::uninstallProtocol ( QQtProtocol* stack )
         return;
 
     disconnect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
-                 this, SLOT ( write ( const QByteArray& ) ) );
+                 this, SLOT ( writeData ( const QByteArray& ) ) );
     m_protocol = NULL;
 }
 
@@ -221,4 +221,9 @@ void QQtTcpClient::readyReadData()
     QByteArray bytes;
     bytes = readAll();
     m_protocol->translator ( bytes );
+}
+
+void QQtTcpClient::writeData ( const QByteArray& data )
+{
+    write ( data );
 }

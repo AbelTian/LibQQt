@@ -61,6 +61,7 @@ private slots:
 
 protected slots:
     void readyReadData();
+    void writeData ( const QByteArray& );
 
 private:
     void connectToSingelHost();
