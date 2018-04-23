@@ -122,6 +122,8 @@ public:
         msg.getBData() = "Recived, Also hello to you.";
         msg.translate();
 
+        //pline() << msg.getBCmd() << msg.getBData();
+
         QByteArray l;
         msg.packer ( l );
         write ( l );
@@ -129,9 +131,11 @@ public:
 
     void sendB10Command() {
         QQtServerMessage msg;
-        msg.getBCmd() = 0x0100;
+        msg.getBCmd() = 0x0A;
         msg.getBData() = "Please, say hello to me.";
         msg.translate();
+
+        //pline() << msg.getBCmd() << msg.getBData();
 
         QByteArray l;
         msg.packer ( l );
@@ -141,7 +145,7 @@ public:
     // QQtProtocol interface
 protected:
     virtual quint16 minlength() override {
-        return 0;
+        return 0x02;
     }
     virtual quint16 maxlength() override {
         return 0x07FF;
