@@ -41,18 +41,18 @@ SUBDIRS =
 #SUBDIRS += examples/qqtframe2
 #SUBDIRS += examples/exquisite
 #必开
-SUBDIRS += examples/qqtaudioexample
+#SUBDIRS += examples/qqtaudioexample
 #SUBDIRS += examples/tabwidgetexamples
 #need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
 #必开 客户端的 basic
-SUBDIRS += examples/qqtnetworkexample
+#SUBDIRS += examples/qqtnetworkexample
 #这边是个组合项，客户端和服务器一起的。
-SUBDIRS += examples/qqtclientexample
-SUBDIRS += demo/QQtClientCreator
+#SUBDIRS += examples/qqtclientexample
+#SUBDIRS += demo/QQtClientCreator
 #服务器的 highgrade
 SUBDIRS += examples/qqtserverexample
-SUBDIRS += demo/QQtServerCreator
+#SUBDIRS += demo/QQtServerCreator
 #greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
@@ -80,14 +80,14 @@ SUBDIRS += demo/QQtServerCreator
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest
 #必开
-SUBDIRS += test/qqtdicttest2
+#SUBDIRS += test/qqtdicttest2
 #SUBDIRS += test/bytearraytest
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
 #    SUBDIRS += test/cmdwidget
 #}
 #SUBDIRS += test/coretest
 #必开
-SUBDIRS += test/giftest
+#SUBDIRS += test/giftest
 #SUBDIRS += test/tmpproj
 #
 #need QtSoap - WebSupport

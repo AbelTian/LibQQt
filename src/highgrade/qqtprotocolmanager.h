@@ -59,9 +59,9 @@ public:
      * registerProtocol<QQtXXXProtocol>("QQtXXXProtocol"); ... 如此
      */
     template <typename T>
-    void registerProtocol ( QString protocolTypeName ) {
+    void registerProtocol () {
         //pline() << typeid ( T ) << typeid ( T ).name();
-        mProtocolName = protocolTypeName;
+        mProtocolName = T::staticMetaObject.className();
         QQtObjectFactory::registerObject<T>();
     }
 
@@ -73,11 +73,8 @@ public:
      * @return
      */
     QQtProtocol* createProtocol () {
-        QQtProtocol* p0 = 0;
-        p0 = ( QQtProtocol* ) QQtObjectFactory::createObject ( mProtocolName, this );
-        if ( !p0 ) {
-            pline() << "please register user protocol.";
-        }
+        //如果不能生成，根本不返回，而是崩溃。
+        QQtProtocol* p0 = ( QQtProtocol* ) QQtObjectFactory::createObject ( mProtocolName, this );
         //帮助Protocol给用户发数据。
         connect ( p0, SIGNAL ( notifyToProtocolManager ( const QQtProtocol*, const QQtMessage* ) ),
                   this, SIGNAL ( notifyToBusinessLevel ( const QQtProtocol*, const QQtMessage* ) ) );
@@ -85,7 +82,7 @@ public:
     }
 
 private:
-    QString mProtocolName;
+    QByteArray mProtocolName;
 
 #if 0
     /*

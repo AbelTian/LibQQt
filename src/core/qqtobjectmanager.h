@@ -2,7 +2,7 @@
 #define QQTOBJECTMANAGER_H
 
 #include <QObject>
-#include <QString>
+#include <QByteArray>
 #include <QMetaObject>
 #include <QHash>
 #include <QList>
@@ -15,16 +15,35 @@
 /**
  * @brief The QQtObjectFactory class
  * QQt 对象生产器 工厂模式
+ * 这是个模板函数，可以typedef出非常多基于基础类别的对象工厂。
+ * 这里提供
+ * QQtObjectFactory,
+ * QQtWidgetFactory,
  */
-class QQTSHARED_EXPORT QQtObjectFactory
+template <class ObjectType>
+class QQTSHARED_EXPORT __QQtObjectFactory__
 {
 public:
+    /**
+     * 方便函数
+     * 用于指针类型之间的随意互转，以void*为中转。
+     * 用于模板函数和模板函数实例之间进行转换，绝佳。
+     */
+    template<typename dst_type, typename src_type>
+    static dst_type pointer_cast ( src_type src ) {
+        return *static_cast<dst_type*> ( static_cast<void*> ( &src ) );
+    }
+
     template<typename T>
     static void registerObject() {
         /*
          * 将生成此类对象的具体（非模板）函数注册进Hash
          */
-        constructors().insert ( T::staticMetaObject.className(), &constructorHelper<T> );
+        void* a = pointer_cast<void*> ( &__QQtObjectFactory__::constructorHelper<T> );
+        //pline() << a;
+        Constructor* constructor = ( Constructor* ) a;
+        //pline() << constructor;
+        constructors().insert ( T::staticMetaObject.className(), constructor );
     }
     /**
      * @brief createObject 根据对象类型（类名）生成类对象实例
@@ -32,96 +51,72 @@ public:
      * @param parent
      * @return
      */
-    static QObject* createObject ( const QString& className, QObject* parent = NULL ) {
+    static ObjectType* createObject ( const QByteArray& className, ObjectType* parent = NULL ) {
         /*
          * 搜索生成此类对象的函数
          */
-        Constructor constructor = constructors().value ( className );
+        //pline() << constructors();
+        Constructor* constructor = 0;//constructors().value( ( className, 0 );
+        QHashIterator<QByteArray, Constructor*> itor ( constructors() );
+        while ( itor.hasNext() ) {
+            itor.next();
+            //pline() << itor.key() << itor.value();
+            //pline() << ( bool ) ( className == itor.key() );
+            if ( ( bool ) ( className == itor.key() ) ) {
+                constructor = itor.value();
+            }
+#if 0
+            QByteArray cc;
+            QByteArray dd;
+            cc = itor.key();//?
+            dd = className;
+            pline() << cc << dd;
+
+            if ( cc == dd ) //??? 不能比较吗？能，但是必须加bool转换。
+                constructor = itor.value();
+#endif
+        }
+        //pline() << constructor;
 
         if ( constructor == NULL )
             return NULL;
 
+        //pline() << *constructor;
+        //pline() << **constructor;
+        //pline() << &*constructor;
+        //pline() << &constructor;
+        //pline() << *& constructor;
+
         /*
          * 生成对象,调用的是constructorHelper<className>(parent)
          */
-        return ( *constructor ) ( parent );
+        Constructor* a = pointer_cast<Constructor*> ( &constructor );
+        //pline() << a << *a;
+        return ( *a ) ( parent );
     }
 
 private:
-    typedef QObject* ( *Constructor ) ( QObject* parent );
+    typedef ObjectType* ( *Constructor ) ( ObjectType* parent );
 
     template<typename T>
-    static QObject* constructorHelper ( QObject* parent = 0 ) {
+    static ObjectType* constructorHelper ( ObjectType* parent = 0 ) {
+        //pline() << "created ";
         return new T ( parent );
     }
 
-    static QHash<QString, Constructor>& constructors() {
+    static QHash<QByteArray, Constructor*>& constructors() {
         /*
          * 保存生成类对象的具体（非模板）函数
          * 这个变量是全局的。
          * 无论是否使用静态函数包裹，这个变量用于是全局的，一直存在，不受类的实例存在与否控制。
          */
-        static QHash<QString, Constructor> instance;
+        static QHash<QByteArray, Constructor*> instance;
         return instance;
     }
 };
 
-/**
- * @brief The QQtWidgetFactory class
- * QQt Widget生产器 工厂模式
- */
-class QQTSHARED_EXPORT QQtWidgetFactory
-{
-public:
-    /**
-     * call this function, you must add ()
-     * registerObject<T> &registerObject<T> is only a function address, but print true...
-     */
-    template<typename T>
-    static void registerObject() {
-        /*
-         * 将生成此类对象的具体（非模板）函数注册进Hash
-         */
-        constructors().insert ( T::staticMetaObject.className(), &constructorHelper<T> );
-    }
-    /**
-     * @brief createObject 根据对象类型（类名）生成类对象实例
-     * @param className
-     * @param parent
-     * @return
-     */
-    static QWidget* createObject ( const QString& className, QWidget* parent = NULL ) {
-        /*
-         * 搜索生成此类对象的函数
-         */
-        Constructor constructor = constructors().value ( className );
-
-        if ( constructor == NULL ) {
-            return NULL;
-        }
-
-        /*
-         * 生成对象,调用的是constructorHelper<className>(parent)
-         */
-        return ( *constructor ) ( parent );
-    }
-
-private:
-    typedef QWidget* ( *Constructor ) ( QWidget* parent );
-
-    template<typename T>
-    static QWidget* constructorHelper ( QWidget* parent = 0 ) {
-        return new T ( parent );
-    }
-
-    static QHash<QString, Constructor>& constructors() {
-        /*
-         * 保存生成类对象的具体（非模板）函数
-         */
-        static QHash<QString, Constructor> instance;
-        return instance;
-    }
-};
+typedef __QQtObjectFactory__<QObject> QQtObjectFactory;
+typedef __QQtObjectFactory__<QWidget> QQtWidgetFactory;
 
 /**
  * @brief The QQtObjectManager class
@@ -145,7 +140,7 @@ public:
      * @brief unregisterObject 取消对象在工厂中注册
      * @param w
      */
-    static void unregisterObject ( const QObject*& w ) {
+    static void unregisterObject ( const QObject* const& w ) {
         QListIterator<const QObject*> itor ( containers() );
 
         while ( itor.hasNext() ) {
@@ -162,7 +157,7 @@ public:
      * @param objName
      * @return
      */
-    static const QObject* registeredObject ( const QString objName ) {
+    static const QObject* registeredObject ( const QByteArray& objName ) {
         QListIterator<const QObject*> itor ( containers() );
 
         while ( itor.hasNext() ) {
@@ -186,123 +181,5 @@ private:
         return instance;
     }
 };
-
-#if 0
-class QQTSHARED_EXPORT QQtConstructer : public QObject
-
-{
-    Q_OBJECT
-public:
-    explicit QQtConstructer ( QObject* parent = 0 ) :
-        QObject ( parent ) {}
-    virtual ~QQtConstructer() {}
-
-protected:
-    virtual QString constructorName()  = 0;
-};
-
-/**
- * @brief The QQtObjectConstructer class
- * QQt 对象生产器
- */
-class QQTSHARED_EXPORT QQtObjectConstructer : public QQtConstructer
-
-{
-    Q_OBJECT
-public:
-    explicit QQtObjectConstructer ( QObject* parent = 0 ) :
-        QQtConstructer ( parent ) {}
-    virtual ~QQtObjectConstructer() {}
-
-    virtual QString constructorName() { return "QObject"; }
-
-private:
-    typedef QObject* ( *Constructor ) ( QObject* parent );
-
-    template<typename T>
-    static QObject* constructorHelper ( QObject* parent = 0 ) {
-        return new T ( parent );
-    }
-
-    static QHash<QString, Constructor>& constructors() {
-        /*
-         * 保存生成类对象的具体（非模板）函数
-         */
-        static QHash<QString, Constructor> instance;
-        return instance;
-    }
-};
-
-/**
- * @brief The QQtWidgetConstructer class
- * QQt 对象生产器
- */
-class QQTSHARED_EXPORT QQtWidgetConstructer : public QQtConstructer
-
-{
-    Q_OBJECT
-public:
-    explicit QQtWidgetConstructer ( QObject* parent = 0 ) :
-        QQtConstructer ( parent ) {}
-    virtual ~QQtWidgetConstructer() {}
-
-    virtual QString constructorName() { return "QWidget"; }
-
-private:
-    typedef QWidget* ( *Constructor ) ( QWidget* parent );
-
-    template<typename T>
-    static QWidget* constructorHelper ( QWidget* parent = 0 ) {
-        return new T ( parent );
-    }
-
-    static QHash<QString, Constructor>& constructors() {
-        /*
-         * 保存生成类对象的具体（非模板）函数
-         */
-        static QHash<QString, Constructor> instance;
-        return instance;
-    }
-};
-
-/**
- * @brief The QQtObjectFactory class
- * QQt 对象生产器 工厂模式
- */
-class QQTSHARED_EXPORT QQtObjectFactory2
-{
-public:
-
-private:
-    template<typename T>
-    static QQtConstructer* objectContructor() {
-        static QList<QQtConstructer*>* objcList = NULL;
-
-        if ( !objcList ) {
-            objcList = new QList<QQtConstructer*>();
-            //add custom contructor
-            objcList->push_back ( new QQtObjectConstructer() );
-            objcList->push_back ( new QQtWidgetConstructer() );
-        }
-
-        T obj;
-        QQtConstructer* objcc = NULL;
-        /*
-        QListIterator itor ( objcList );
-
-        while ( itor.hasNext() ) {
-            QQtConstructer* objc = *itor.next();
-
-            if ( obj.inherits ( objc->constructorName() ) ) {
-                objcc = objc;
-                break;
-            }
-        }
-        */
-
-        return objcc;
-    }
-};
-#endif
 
 #endif // QQTOBJECTMANAGER_H

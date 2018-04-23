@@ -17,7 +17,7 @@ QQtProtocolManager* QQtServer2ConnectionInstance ( QObject* parent )
         //创建Protocol管理者
         m0 = new QQtProtocolManager ( parent );
         //注册我实现的Protocol
-        m0->registerProtocol<QQtServer2Protocol> ( "QQtServer2Protocol" );
+        m0->registerProtocol<QQtServer2Protocol> ( );
         //初始化Protocol管理者完成。
     }
 
