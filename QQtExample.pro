@@ -48,7 +48,7 @@ SUBDIRS =
 #必开 客户端的 basic
 #SUBDIRS += examples/qqtnetworkexample
 #这边是个组合项，客户端和服务器一起的。
-#SUBDIRS += examples/qqtclientexample
+SUBDIRS += examples/qqtclientexample
 #SUBDIRS += demo/QQtClientCreator
 #服务器的 highgrade
 SUBDIRS += examples/qqtserverexample
