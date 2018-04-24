@@ -60,16 +60,21 @@ public:
         /*
          * 搜索生成此类对象的函数
          */
-        pline() << constructors();
+        //pline() << constructors();
         Constructor* constructor = 0;//constructors().value( ( className, 0 );
         QMapIterator<QByteArray, Constructor*> itor ( constructors() );
 
-        pline() << constructors().isDetached();
+        //pline() << constructors().isDetached();
         while ( itor.hasNext() ) {
             itor.next();
-            pline() << itor.key() << itor.value();
+            //pline() << itor.key() << itor.value();
 
 #if 0
+            /**
+             * @brief 这里发现一个bug，记录
+             * 这里的QByteArray = == 运算全崩溃了。
+             * 经过调查，发现，在跨线程的时候，这个操作无法进行。
+             */
             QByteArray cc;
             QByteArray dd;
             cc = itor.key();//?
@@ -80,10 +85,11 @@ public:
                 constructor = itor.value();
 #endif
 
-            pline() << itor.key() << itor.value();
-            pline() << ( bool ) ( className == itor.key() );
+            pline() << className << itor.key() << itor.value();
+            //pline() << ( bool ) ( className == itor.key() );
             if ( ( bool ) ( className == itor.key() ) ) {
                 constructor = itor.value();
+                break;
             }
         }
         //pline() << constructor;

@@ -14,7 +14,7 @@ class QQTSHARED_EXPORT QQtProtocol : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtProtocol ( QObject* parent = 0 );
+    Q_INVOKABLE explicit QQtProtocol ( QObject* parent = 0 );
     virtual ~QQtProtocol();
 
     /*
@@ -22,16 +22,6 @@ public:
     */
 Q_SIGNALS:
     qint64 write ( const QByteArray& );
-
-public:
-    /**
-     * @brief 协议处理器
-     * 这个处理器是给QQtTcpSocket用的，不是给客户用的。
-     * @param Qt通讯口readAll()读到的bytes
-     * @return
-     */
-    void translator ( const QByteArray& bytes );
-
     /*
      * 以下函数，用户必须继承下去，重写，need override
      */
@@ -72,6 +62,16 @@ signals:
      * @param message
      */
     void notifyToProtocolManager ( const QQtProtocol* self, const QQtMessage* message );
+
+    /*以下和用户无关。*/
+public:
+    /**
+     * @brief 协议处理器
+     * 这个处理器是给QQtTcpSocket用的，不是给客户用的。
+     * @param Qt通讯口readAll()读到的bytes
+     * @return
+     */
+    void translator ( const QByteArray& bytes );
 };
 
 #endif // QQTPROTOCOL_H

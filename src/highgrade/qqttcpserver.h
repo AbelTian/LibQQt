@@ -28,6 +28,8 @@ public:
     QQtProtocolManager* installedProtocolManager();
 
 signals:
+protected slots:
+    void slotNewConnection();
     // QTcpServer interface
 protected:
     virtual void incomingConnection ( qintptr handle ) override;
