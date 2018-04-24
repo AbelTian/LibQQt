@@ -5,6 +5,9 @@
 QQtTcpServer::QQtTcpServer ( QObject* parent ) :
     QTcpServer ( parent )
 {
+    connect ( this, SIGNAL ( newConnection() ),
+              this, SLOT ( slotNewConnection() ),
+              Qt::AutoConnection );
 }
 
 QQtTcpServer::~QQtTcpServer()
@@ -15,6 +18,8 @@ QQtTcpServer::~QQtTcpServer()
 
 void QQtTcpServer::incomingConnection ( qintptr handle )
 {
+    return QTcpServer::incomingConnection ( handle );
+
     QQtTcpClient* clientSocket = new QQtTcpClient ( this );
     clientSocket->setSocketDescriptor ( handle );
     connect ( clientSocket, SIGNAL ( disconnected() ), clientSocket, SLOT ( deleteLater() ) );
@@ -43,5 +48,21 @@ void QQtTcpServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )
 QQtProtocolManager* QQtTcpServer::installedProtocolManager()
 {
     return m_protocolManager;
+}
+
+void QQtTcpServer::slotNewConnection()
+{
+    bool has = hasPendingConnections();
+    if ( !has )
+        return;
+
+    QTcpSocket* p = nextPendingConnection();
+
+    QQtTcpClient* clientSocket = new QQtTcpClient ( this );
+    clientSocket->setSocketDescriptor ( p->socketDescriptor() );
+
+    connect ( clientSocket, SIGNAL ( disconnected() ), clientSocket, SLOT ( deleteLater() ) );
+    QQtProtocol* protocolInstance = m_protocolManager->createProtocol();
+    clientSocket->installProtocol ( protocolInstance );
 }
 

@@ -77,6 +77,11 @@ public:
     }
     void recvCommand2 ( const QQtClient2Message& msg ) {
         //what do you want to do?
+        pline() << "dddd";
+    }
+
+    void sendCommand() {
+        pline() << "ffff";
     }
 
     void sendCommand1() {
@@ -123,7 +128,7 @@ protected:
         pline() << qMsg;
 
         switch ( qMsg.cmd() ) {
-            case 0x0a://protocol command 1
+            case 0x01://protocol command 1
                 recvCommand1 ( qMsg );
                 break;
 
