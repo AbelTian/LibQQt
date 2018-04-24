@@ -78,7 +78,7 @@ public:
 
     void sendCommand1() {
         QQtClient2Message msg;
-        msg.cmd() = 0x0a;
+        msg.cmd() = 0x01;
         msg.data() = "EEEE";
         msg.translate();
 
@@ -105,9 +105,15 @@ protected:
     }
     //报文现在在流里，第一个字节，就是size，读出来，通过返回值告诉QQtProtocol
     virtual quint16 splitter ( const QByteArray& l ) override { //stream
+        for ( int i = 0; i < l.size(); i++ ) {
+            pline() << l[i];
+        }
+
+
         QByteArray s0 = l.left ( 2 );
         quint16 size = 0;
         s0 >> size;
+        pline() << size;
         return size;
     }
 

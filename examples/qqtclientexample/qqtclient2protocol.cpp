@@ -24,7 +24,7 @@ QQtClient2Protocol* QQtClient2ConnectionInstance ( QObject* parent )
         s0->installProtocol ( p0 );
 
         QStringList ip;
-        ip << "192.168.0.100";
+        ip << "192.168.0.101";
         s0->SetServerIPAddress ( ip );
         s0->SetServerPort ( 8500 );
 
