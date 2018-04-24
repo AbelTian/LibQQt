@@ -106,7 +106,7 @@ LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。
 [去看看Qt入门基础须知](usage-Qt.md)  
 [去看看Qt Creator入门安装须知](usage-QtCreator.md)  
 [入门了，去看看学习设置工程目录](project.md)  
-发现了一个问题: [new issue link](https://gitee.com/drabel/LibQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
+发现了一个问题: [new issue link](https://gitee.com/drabel/LibQQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
 
 ========================================================================  
