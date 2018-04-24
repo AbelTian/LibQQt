@@ -20,10 +20,15 @@
  * QQtObjectFactory,
  * QQtWidgetFactory,
  */
+
+QQTSHARED_EXPORT bool operator< (  QByteArray& l,  QByteArray& r );
+QQTSHARED_EXPORT bool operator== (  QByteArray& l,  QByteArray& r );
+
 template <class ObjectType>
 class QQTSHARED_EXPORT __QQtObjectFactory__
 {
 public:
+
     /**
      * 方便函数
      * 用于指针类型之间的随意互转，以void*为中转。
@@ -55,16 +60,15 @@ public:
         /*
          * 搜索生成此类对象的函数
          */
-        //pline() << constructors();
+        pline() << constructors();
         Constructor* constructor = 0;//constructors().value( ( className, 0 );
-        QHashIterator<QByteArray, Constructor*> itor ( constructors() );
+        QMapIterator<QByteArray, Constructor*> itor ( constructors() );
+
+        pline() << constructors().isDetached();
         while ( itor.hasNext() ) {
             itor.next();
-            //pline() << itor.key() << itor.value();
-            //pline() << ( bool ) ( className == itor.key() );
-            if ( ( bool ) ( className == itor.key() ) ) {
-                constructor = itor.value();
-            }
+            pline() << itor.key() << itor.value();
+
 #if 0
             QByteArray cc;
             QByteArray dd;
@@ -75,6 +79,12 @@ public:
             if ( cc == dd ) //??? 不能比较吗？能，但是必须加bool转换。
                 constructor = itor.value();
 #endif
+
+            pline() << itor.key() << itor.value();
+            pline() << ( bool ) ( className == itor.key() );
+            if ( ( bool ) ( className == itor.key() ) ) {
+                constructor = itor.value();
+            }
         }
         //pline() << constructor;
 
@@ -104,13 +114,13 @@ private:
         return new T ( parent );
     }
 
-    static QHash<QByteArray, Constructor*>& constructors() {
+    static QMap<QByteArray, Constructor*>& constructors() {
         /*
          * 保存生成类对象的具体（非模板）函数
          * 这个变量是全局的。
          * 无论是否使用静态函数包裹，这个变量用于是全局的，一直存在，不受类的实例存在与否控制。
          */
-        static QHash<QByteArray, Constructor*> instance;
+        static QMap<QByteArray, Constructor*> instance;
         return instance;
     }
 };

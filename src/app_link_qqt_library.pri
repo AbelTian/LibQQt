@@ -59,8 +59,8 @@ contains (CONFIG, QQT_SOURCE_BUILDIN) {
 
     #you can open one or more macro to make sdk or link from build.
     #link from sdk is default setting
-    CONFIG += link_from_sdk
-    #CONFIG += link_from_build
+    #CONFIG += link_from_sdk
+    CONFIG += link_from_build
     #CONFIG += link_from_qt_lib_path
 
     #especially some occations need some sure macro.
