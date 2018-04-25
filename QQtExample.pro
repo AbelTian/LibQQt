@@ -69,6 +69,7 @@ SUBDIRS =
 #}
 #SUBDIRS += test/coretest
 #SUBDIRS += test/tmpproj
+
 #
 #need QtSoap - WebSupport
 ##SUBDIRS += test/easter
