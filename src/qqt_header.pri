@@ -80,7 +80,7 @@ isEmpty(OBJECTS_DIR):OBJECTS_DIR = obj
 isEmpty(MOC_DIR):MOC_DIR = obj/moc.cpp
 isEmpty(UI_DIR):UI_DIR = obj/ui.h
 isEmpty(RCC_DIR):RCC_DIR = qrc
-#这样做保持了App工程和LibQQt工程目录的一致性，但是并不必要。
+#这样做保持了App工程和LibQQt工程中间目录的一致性，但是并不必要。
 isEmpty(DESTDIR):DESTDIR = bin
 
 ################################################################
@@ -214,7 +214,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
     }
 
-    ##################WebSocket Module###############################
+    ##################RawSocket Module###############################
     #raw socket, 这个是常用的，不要关，dont close。...
     DEFINES += __TCPUDPSOCKET__
 
@@ -242,6 +242,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     contains (DEFINES, __WEBENGINESUPPORT__) {
     }
 
+    ##################WebSocket Module###############################
     #Multi New Protocol 全双工 QWebSocket
     #if you use QWebSocketSupport , open this annotation
     DEFINES += __WEBSOCKETSUPPORT__

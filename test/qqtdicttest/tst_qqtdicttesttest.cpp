@@ -19,7 +19,7 @@ private Q_SLOTS:
     void testCase2();
 
 private:
-    QQtDictNode dict;
+    QQtDictionary dict;
 };
 
 QqtdicttestTest::QqtdicttestTest()
@@ -50,7 +50,7 @@ void QqtdicttestTest::testCase1()
     dict[data] = result;
     QVERIFY2 ( dict[data].getValue() == result, "Failure" );
 
-    QQtDictNode dict;
+    QQtDictionary dict;
     dict["CC"]["DD"]["EE"][0] = "This is a value";
     qDebug() << dict["CC"]["DD"]["EE"][0].getValue().toString();
 }

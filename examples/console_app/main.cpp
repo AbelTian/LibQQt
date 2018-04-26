@@ -10,7 +10,7 @@ int main ( int argc, char* argv[] )
 
     qDebug() << "ccc";
 
-    QQtDictNode dict;
+    QQtDictionary dict;
     dict[0][1][2][3][4]["my name"][5][6] = "a string";
     pline() << dict[0][1][2][3][4]["my name"][5][6].getValue().toString();
 

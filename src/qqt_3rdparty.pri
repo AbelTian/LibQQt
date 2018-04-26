@@ -4,7 +4,7 @@
 #-------------------------------------------------------
 #pluginsupport
 #注释：在qqt_header.pri打开 DEFINES += __PLUGINSUPPORT__
-#TODO: macOS crash
+#TODO: macOS runtime crash
 contains (DEFINES, __PLUGINSUPPORT__) {
     contains(QKIT_PRIVATE, WIN32|WIN64) {
         contains (DEFINES, QQT_LIBRARY) {

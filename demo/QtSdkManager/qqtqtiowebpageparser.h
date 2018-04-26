@@ -60,7 +60,7 @@ private:
     /*过去有用这种自定义的，有用xml的，有用json的，留作纪念*/
     QList<TSdkGroup> sdkGroup;
     /*现在用QQtDict*/
-    QQtDictNode m_sdkGroup;
+    QQtDictionary m_sdkGroup;
     /*格式：["5.7"]["5.7.3"][0-3]*/
     QTimer* m_timer;
     QTime m_time;
