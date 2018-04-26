@@ -22,27 +22,27 @@ int main ( int argc, char* argv[] )
     QQtObjectManager::registerObject ( obj );
     */
 
-    //对QQtDictNode的使用进行测试。
-    QQtDictNode d0;
+    //对QQtDictionary的使用进行测试。
+    QQtDictionary d0;
     d0["cc"] = "dd";
     pline() << d0["cc"].getValue();
 
-    QQtDictNode d1;
-    QQtDictNode d2 ( QVariant ( "CCCC" ) );
+    QQtDictionary d1;
+    QQtDictionary d2 ( QVariant ( "CCCC" ) );
     d1.appendChild ( d2 );
     pline() << d1[0].getValue();
     d1[0] = "ff";
     pline() << d1[0].getValue();
 
-    QQtDictNode d3;
+    QQtDictionary d3;
     d3["cc"]["dd"] = "ee";
     pline() << d3["cc"]["dd"].getValue().toString();
 
-    QQtDictNode d4;
+    QQtDictionary d4;
 
     for ( int i = 0; i < 5; i++ )
     {
-        QQtDictNode d ( QVariant ( QString::number ( i ) ) );
+        QQtDictionary d ( QVariant ( QString::number ( i ) ) );
         d4.appendChild ( d );
     }
 
@@ -53,7 +53,7 @@ int main ( int argc, char* argv[] )
         pline() << d4[i].getValue().toString();
     }
 
-    QQtDictNode d5;
+    QQtDictionary d5;
 
     /*后续有map操作，这一步就没有用了*/
     d5.appendChild ( "5.7" );
@@ -75,7 +75,7 @@ int main ( int argc, char* argv[] )
     //pline() << "\n" << d5;
     pline() << "\n" << d5["5.7"];
 
-    QQtDictNodeMapIterator itor ( d5["5.7"].getMap() );
+    QQtDictionaryMapIterator itor ( d5["5.7"].getMap() );
 
     while ( itor.hasNext() )
     {
@@ -92,7 +92,7 @@ int main ( int argc, char* argv[] )
     }
     pline() << d5["5.7"]["5.7.4"][0];
 
-    QQtDictNode node = d5;
+    QQtDictionary node = d5;
     pline() << node["5.7"]["5.7.4"][0][0].getValue().toString();
 
     /*在这里有list操作，前边"5.7"的map就没有用了*/
@@ -114,15 +114,15 @@ int main ( int argc, char* argv[] )
     //Widget w;
     //w.show();
 
-    //QQtDictNode appendChild函数存在一个问题，在这里测试是否解决。
+    //QQtDictionary appendChild函数存在一个问题，在这里测试是否解决。
     //内部实现使用list的append函数，会引用外部的类实例，这导致在free空间的时候，存在很多莫名其妙的二次free，尤其外部实例和QObject关联的时候。
-    //现在内部实现使用push_back，这里检测QQtDictNode还有没有二次free这个bug。
-    QQtDictNode* n0 = new QQtDictNode ( QVariant ( "This is a value" ) );
+    //现在内部实现使用push_back，这里检测QQtDictionary还有没有二次free这个bug。
+    QQtDictionary* n0 = new QQtDictionary ( QVariant ( "This is a value" ) );
     //这里打印一下n0的值和地址
     pline() << n0->getValue().value<QString>();
     pline() << hex << n0->getValue().constData();
 
-    QQtDictNode t0;
+    QQtDictionary t0;
     //这里appendChild，t0变成一个list。
     t0.appendChild ( *n0 );
 
@@ -145,23 +145,23 @@ int main ( int argc, char* argv[] )
     pline() << "检测内部空间的地址：" << hex << t0[0].getValue().constData() ;
 
     //windows
-    //经过测试，QQtDictNode内部空间成功和外部空间分离，bug清除。
+    //经过测试，QQtDictionary内部空间成功和外部空间分离，bug清除。
 
-    //测试QQtDictNode的打印能力
-    QQtDictNode v00;
+    //测试QQtDictionary的打印能力
+    QQtDictionary v00;
     pline() << v00;
 
-    QQtDictNode v0 ( "This is a value" );
+    QQtDictionary v0 ( "This is a value" );
     pline() << v0;
 
-    QQtDictNode v1;
+    QQtDictionary v1;
     v1.appendChild ( "CCCC" );
     v1.appendChild ( "DDDD" );
     v1[0].appendChild ( "2-CCCC" );
     pline() << v1;
     pline() << v1[0];
 
-    QQtDictNode v2;
+    QQtDictionary v2;
     v2["AAAA"] = "NNNN";
     v2["BBBB"] = "MMMM";
     pline() << v2;

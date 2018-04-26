@@ -1,4 +1,4 @@
-﻿#ifndef QQTAUDIOMANAGER_H
+#ifndef QQTAUDIOMANAGER_H
 #define QQTAUDIOMANAGER_H
 
 #include <QObject>
@@ -62,11 +62,27 @@ public:
     explicit QQtAudioManager ( QObject* parent = nullptr );
     ~QQtAudioManager();
 
+
+    /**
+     * 选择输入、输出设备
+     */
+
     /*输入、输出音频设备列表，用于显示*/
     static QList<QAudioDeviceInfo> availableInputDevices();
     static QList<QAudioDeviceInfo> availableOutputDevices();
+    /*当前正在使用的默认输入、输出设备的信息*/
     static QAudioDeviceInfo defaultInputDevice();
     static QAudioDeviceInfo defaultOutputDevice();
+
+    /*Manager的输入、输出设备的信息，用于切换Manager使用的输入、输出设备*/
+    /*读取和修改输入、输出设备。default为默认输入、输出设备*/
+    QAudioDeviceInfo& inputDeviceInfo();
+    QAudioDeviceInfo& outputDeviceInfo();
+
+
+    /**
+     * 选择音频流的格式
+     */
 
     /*一般建议设置一个AudioFormat，然后这个format和设置的相等。default为preffered格式*/
     //这里保证输入、输出使用格式相等 或者 不同
@@ -76,9 +92,10 @@ public:
     QAudioFormat& inputAudioFormat ( void );
     QAudioFormat& outputAudioFormat ( void );
 
-    /*读取和修改输入、输出设备。default为默认输入、输出设备*/
-    QAudioDeviceInfo& inputDeviceInfo();
-    QAudioDeviceInfo& outputDeviceInfo();
+
+    /**
+     * 操作输入、输出设备
+     */
 
     /*对输入设备进行操作*/
     /*带输入形参的接口，和这个接口功能相同，忽略那个。*/
@@ -87,6 +104,7 @@ public:
     QByteArray readAll();
     QByteArray read ( qint64 maxlen );
     QAudioInput* inputManager();
+    //输入设备流句柄，用于对其读取数据。和上边的read函数一样的效果。
     QIODevice* inputDevice();
 
     /*对输出设备进行操作*/
@@ -94,9 +112,11 @@ public:
     void stopOutput();
     void write ( const QByteArray& bytes );
     QAudioOutput* outputManager();
+    //输出设备流句柄，用于对其写入数据。和上边的write函数一样的效果。
     QIODevice* outputDevice();
 
-    //这是个方便
+    //这是个方便，操作默认输入、输出设备的开关
+    //用上边的stop等函数关闭。
     //如果使用这个函数，建议：设置公共的AudioFormat，比如输出的format，或者输入、输出都支持的Format。
     //这个Format不会跟随默认设备的改变而改变，有初始值，但是用户在使用过程中，有必要关注和更改。
     //prefer和nearest并不是default，所以还是需要用户设置。
