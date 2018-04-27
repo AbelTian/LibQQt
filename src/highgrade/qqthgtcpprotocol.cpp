@@ -1,25 +1,21 @@
-#include "qqtprotocolmanager.h"
+#include "qqthgtcpprotocol.h"
 
-QQtProtocolManager::QQtProtocolManager ( QObject* parent ) : QObject ( parent )
+QQtHgTcpProtocol::QQtHgTcpProtocol ( QObject* parent ) : QQtHgProtocol ( parent )
 {
 
 }
 
-QQtProtocolManager::~QQtProtocolManager()
+QQtHgTcpProtocol::~QQtHgTcpProtocol()
 {
 
 }
 
-#if 0
 
-#define pline2() pline() << metaObject()->className()
-
-void QQtProtocolManager::translator ( const QByteArray& bytes )
+void QQtHgTcpProtocol::translator ( const QAbstractSocket* client, QByteArray& bytes )
 {
     // queued conn and queued package;
     // direct conn and direct package;
-
-    static QByteArray sqbaBlockOnNet;
+    QByteArray& sqbaBlockOnNet = clientBuffer() [client];
     sqbaBlockOnNet += bytes;
     //qint64 aaa = bytesAvailable();
     //pline() << aaa;
@@ -28,7 +24,7 @@ void QQtProtocolManager::translator ( const QByteArray& bytes )
     {
         quint16 nBlockLen = this->splitter ( sqbaBlockOnNet );
 
-        pline2() << sqbaBlockOnNet.size() << "..." << nBlockLen;
+        pmeta() << sqbaBlockOnNet.size() << "..." << nBlockLen;
 
         if ( sqbaBlockOnNet.length() < nBlockLen || nBlockLen < minlength() )
         {
@@ -43,7 +39,7 @@ void QQtProtocolManager::translator ( const QByteArray& bytes )
              * 数据包长超过了最大长度
              */
             sqbaBlockOnNet.clear();
-            pline2() << "forbidden package" << sqbaBlockOnNet.length() << nBlockLen;
+            pmeta() << "forbidden package" << sqbaBlockOnNet.length() << nBlockLen;
             return;
         }
         else if ( sqbaBlockOnNet.length() > nBlockLen )
@@ -53,22 +49,22 @@ void QQtProtocolManager::translator ( const QByteArray& bytes )
              * 还没有处理完毕，数据已经接收到，异步信号处理出现这种异常
              * 疑问:如果异步调用这个函数绘出现什么问题？正常情况，同步获取数据，异步处理；检测异步获取并且处理会有什么状况
              */
-            pline2() << "stick package" << sqbaBlockOnNet.length() << nBlockLen;
+            pmeta() << "stick package" << sqbaBlockOnNet.length() << nBlockLen;
             QByteArray netData;
             netData.resize ( nBlockLen );
             sqbaBlockOnNet >> netData;
-            dispatcher ( netData );
+            dispatcher ( client, netData );
+            emit notifyForDispatcher ( client, netData );
             continue;
         }
 
         /*
          * 正常分发
          */
-        dispatcher ( sqbaBlockOnNet );
+        dispatcher ( client, sqbaBlockOnNet );
+        emit notifyForDispatcher ( client, sqbaBlockOnNet );
         break;
     } while ( 1 );
 
     sqbaBlockOnNet.clear();
 }
-
-#endif
