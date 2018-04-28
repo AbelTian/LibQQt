@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "qqthgprotocol.h"
-
+#include "qqthgudpclient.h"
 #include <qqt-local.h>
 #include "qqtcore.h"
 
@@ -33,9 +33,19 @@ public:
     }
 #endif
 
-signals:
+    /**
+     * @brief writeDatagram
+     * 会发送给writeToClient
+     * @param datagram
+     * @param host
+     * @param port
+     * @return
+     */
     qint64 writeDatagram ( const QByteArray& datagram,
-                           const QHostAddress& host, quint16 port );
+                           const QHostAddress& host, quint16 port ) {
+        QQtHgUdpClient client;
+        client;
+    }
 
 public slots:
 
@@ -56,6 +66,9 @@ protected:
 #if QT_VERSION > QT_VERSION_DATAGRAM
     inline virtual void dispatcher ( const QNetworkDatagram& ) { return; }
 #endif
+    inline virtual void dispatcher ( const QAbstractSocket* client, const QByteArray& bytes ) {
+        return;
+    }
 
 public:
     /**
@@ -64,10 +77,6 @@ public:
      * @param Qt通讯口readAll()读到的bytes
      * @return
      */
-    void translator ( const QAbstractSocket* client, const QByteArray& bytes ) {
-        dispatcher ( client, bytes );
-        return;
-    }
     void translator ( const QByteArray& datagram,
                       const QHostAddress& host, quint16 port ) {
         dispatcher ( datagram, host, port );
@@ -77,6 +86,16 @@ public:
         dispatcher ( datagram );
     }
 #endif
+    /**
+     * @brief 协议处理器
+     * @brief 这个处理器是给QQtHgUdpSocket用的，不需要用户管理。
+     * @param Qt通讯口readAll()读到的bytes
+     * @return
+     */
+    void translator ( const QAbstractSocket* client, const QByteArray& bytes ) {
+        dispatcher ( client, bytes );
+        return;
+    }
 };
 
 #endif // QQTUDPPROTOCOL_H

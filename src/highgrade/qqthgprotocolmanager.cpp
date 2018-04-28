@@ -18,7 +18,7 @@ void QQtHgProtocolManager::installProtocol ( QQtHgProtocol* stack )
     mProtoList.push_back ( stack );
     connect ( stack, SIGNAL ( notifyToHgProtocolManager ( const QAbstractSocket*, const QQtHgProtocol*,
                                                           const QQtMessage*  ) ),
-              this, SIGNAL ( recvFrom ( const QAbstractSocket*, const QQtHgProtocol*, const QQtMessage* ) ) );
+              this, SIGNAL ( notifyToBusinessLevel ( const QAbstractSocket*, const QQtHgProtocol*, const QQtMessage* ) ) );
 }
 
 void QQtHgProtocolManager::uninstallProtocol ( QQtHgProtocol* stack )
@@ -29,7 +29,7 @@ void QQtHgProtocolManager::uninstallProtocol ( QQtHgProtocol* stack )
     mProtoList.removeOne ( stack );
     disconnect ( stack, SIGNAL ( notifyToHgProtocolManager ( const QAbstractSocket*, const QQtHgProtocol*,
                                                              const QQtMessage*  ) ),
-                 this, SIGNAL ( recvFrom ( const QAbstractSocket*, const QQtHgProtocol*, const QQtMessage* ) ) );
+                 this, SIGNAL ( notifyToBusinessLevel ( const QAbstractSocket*, const QQtHgProtocol*, const QQtMessage* ) ) );
 }
 
 QList<QQtHgProtocol*>& QQtHgProtocolManager::installedProtocol()

@@ -34,11 +34,15 @@ signals:
     void notifyToHgProtocolManager ( const QAbstractSocket* client, const QQtHgProtocol* self, const QQtMessage* message );
 
 Q_SIGNALS:
-    /*
+    /**
      * 群发
      * 这个write会发给所有的client instance
     */
     qint64 write ( const QByteArray& );
+    /**
+     * 单发
+     */
+    qint64 writeToClient ( const QAbstractSocket* client, const QByteArray& );
     /**
      * @brief notifyForDispatcher
      * 这是个上报报文的信号，在每次dispatcher的时候会自动调用。

@@ -59,7 +59,7 @@ void QQtHgTcpClient::installProtocolManager ( QQtHgProtocolManager* stackGroup )
         //安装一个一个的句柄
         QQtHgProtocol* stack = itor.next();
         connect ( stack, SIGNAL ( write ( const QByteArray& ) ),
-                  this, SLOT ( writeData ( const QByteArray& ) ) );
+                  this, SLOT ( slotWriteData ( const QByteArray& ) ) );
         stack->createClientBuffer ( this );
     }
 
@@ -78,7 +78,7 @@ void QQtHgTcpClient::uninstallProtocolManager ( QQtHgProtocolManager* stackGroup
         //安装一个一个的句柄
         QQtHgProtocol* stack = itor.next();
         disconnect ( stack, SIGNAL ( write ( const QByteArray& ) ),
-                     this, SLOT ( writeData ( const QByteArray& ) ) );
+                     this, SLOT ( slotWriteData ( const QByteArray& ) ) );
         stack->deleteClientBuffer ( this );
     }
 
@@ -244,16 +244,15 @@ void QQtHgTcpClient::readyReadData()
     QByteArray bytes;
     bytes = readAll();
 
-    QByteArray tmpBytes = bytes;
     QListIterator<QQtHgProtocol*> itor ( m_protocolManager->installedProtocol() );
     while ( itor.hasNext() )
     {
         QQtHgProtocol* protocol = itor.next();
-        protocol->translator ( this, tmpBytes );
+        protocol->translator ( this, bytes );
     }
 }
 
-void QQtHgTcpClient::writeData ( const QByteArray& data )
+void QQtHgTcpClient::slotWriteData ( const QByteArray& data )
 {
     write ( data );
 }

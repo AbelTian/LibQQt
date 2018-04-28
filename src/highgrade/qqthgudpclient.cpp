@@ -1,4 +1,4 @@
-#include "qqtudpclient.h"
+#include "qqthgudpclient.h"
 
 QQtHgUdpClient::QQtHgUdpClient ( QObject* parent ) : QUdpSocket ( parent )
 {
@@ -20,34 +20,51 @@ QQtHgUdpClient::QQtHgUdpClient ( QObject* parent ) : QUdpSocket ( parent )
 
     connect ( this, SIGNAL ( bytesWritten ( qint64 ) ), this, SIGNAL ( signalUpdateProgress ( qint64 ) ) );
 
-    m_protocol = NULL;
+    m_protocolManager = NULL;
 }
 
-void QQtHgUdpClient::installProtocol ( QQtHgUdpProtocol* stack )
+void QQtHgUdpClient::installProtocolManager ( QQtHgProtocolManager* stackGroup )
 {
-    if ( m_protocol )
+    if ( m_protocolManager )
         return;
 
-    m_protocol = stack;
-    connect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
-              this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
+    m_protocolManager = stackGroup;
+
+    QListIterator<QQtHgProtocol*> itor ( m_protocolManager->installedProtocol() );
+    while ( itor.hasNext() )
+    {
+        //安装一个一个的句柄
+        QQtHgProtocol* stack = itor.next();
+        connect ( stack, SIGNAL ( write ( const QByteArray& ) ),
+                  this, SLOT ( writeData ( const QByteArray& ) ) );
+        stack->createClientBuffer ( this );
+    }
+
 }
 
-void QQtHgUdpClient::uninstallProtocol ( QQtHgUdpProtocol* stack )
+void QQtHgUdpClient::uninstallProtocolManager ( QQtHgProtocolManager* stackGroup )
 {
-    Q_UNUSED ( stack )
+    Q_UNUSED ( stackGroup )
 
-    if ( !m_protocol )
+    if ( !m_protocolManager )
         return;
 
-    disconnect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
-                 this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
-    m_protocol = NULL;
+    QListIterator<QQtHgProtocol*> itor ( m_protocolManager->installedProtocol() );
+    while ( itor.hasNext() )
+    {
+        //安装一个一个的句柄
+        QQtHgProtocol* stack = itor.next();
+        disconnect ( stack, SIGNAL ( write ( const QByteArray& ) ),
+                     this, SLOT ( writeData ( const QByteArray& ) ) );
+        stack->deleteClientBuffer ( this );
+    }
+
+    m_protocolManager = NULL;
 }
 
-QQtHgUdpProtocol* QQtHgUdpClient::installedProtocol()
+QQtHgProtocolManager* QQtHgUdpClient::installedProtocolManager()
 {
-    return m_protocol;
+    return m_protocolManager;
 }
 
 void QQtHgUdpClient::domainHostFound()
@@ -143,6 +160,13 @@ qint64 QQtHgUdpClient::slotWriteDatagram ( const QByteArray& datagram, const QHo
 
 void QQtHgUdpClient::readyReadData()
 {
+    if ( !m_protocolManager )
+    {
+        pline() << "please install protocol manager for your client.";
+        deleteLater();
+        return;
+    }
+
     /*为什么用while?*/ //Qt4 没有那么高级的一次性读取的接口?有
     while ( hasPendingDatagrams() )
     {
@@ -150,6 +174,7 @@ void QQtHgUdpClient::readyReadData()
         qint64 maxlen = 0;
         QHostAddress host;
         quint16 port;
+
 
 #if QT_VERSION > QT_VERSION_DATAGRAM
         /*能够一次收够一条报文？测试的能。*/
@@ -166,7 +191,16 @@ void QQtHgUdpClient::readyReadData()
         host = datagram.senderAddress();
         port = datagram.senderPort();
         m_protocol->translator ( bytes, host, port );
+
+        QListIterator<QQtHgProtocol*> itor ( m_protocolManager->installedProtocol() );
+        while ( itor.hasNext() )
+        {
+            QQtHgProtocol* protocol = itor.next();
+            protocol->translator ( this, bytes );
+        }
+
 #else
+
         qint64 size = pendingDatagramSize();
         //pline() << "udp new msg size:" << size;
         //这里的buf用完, 已经释放。
@@ -177,6 +211,7 @@ void QQtHgUdpClient::readyReadData()
         delete[] data;
 
         m_protocol->translator ( bytes, host, port );
+
 #endif
 
     }

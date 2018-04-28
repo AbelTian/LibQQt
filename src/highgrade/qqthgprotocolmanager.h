@@ -26,6 +26,14 @@
  * 这个Manager可以安装多个Protocol，并且用于多个客户端
  * Multi-protocol，Multi-client。
  * Multi-message。
+ *
+ * 注意：
+ * 多客户端，单协议，比较多见。
+ * 单客户端，多协议，不多见。
+ * 单客户端，单协议，最多使用。
+ * 多客户端，多协议，很晕眩。
+ *
+ * 这个类的信号主要用于，业务层感兴趣的信息发送到上层。
  */
 class QQTSHARED_EXPORT QQtHgProtocolManager : public QObject
 {
@@ -51,7 +59,7 @@ signals:
      * @param protocol
      * @param message
      */
-    void recvFrom ( const QAbstractSocket* client,  const QQtHgProtocol* protocol, const QQtMessage* message );
+    void notifyToBusinessLevel ( const QAbstractSocket* client,  const QQtHgProtocol* protocol, const QQtMessage* message );
     /**
      * @brief sendMessageToClient
      * 这个信号是给用户的，
@@ -60,7 +68,8 @@ signals:
      * @param protocol
      * @param message
      */
-    void sendTo ( const QAbstractSocket* client,  const QQtHgProtocol* protocol, const QQtMessage* message );
+    void sendMessageToClientSocket ( const QAbstractSocket* client,  const QQtHgProtocol* protocol,
+                                     const QQtMessage* message );
 
 public:
     /**

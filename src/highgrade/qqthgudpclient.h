@@ -2,7 +2,7 @@
 #define QQTHGUDPCLIENT_H
 
 #include <QUdpSocket>
-#include "qqthgudpprotocol.h"
+#include "qqthgprotocolmanager.h"
 #include "qqt-local.h"
 #include "qqtcore.h"
 
@@ -21,9 +21,9 @@ public:
     explicit QQtHgUdpClient ( QObject* parent = nullptr );
     virtual ~QQtHgUdpClient() {}
 
-    void installProtocol ( QQtHgUdpProtocol* stack );
-    void uninstallProtocol ( QQtHgUdpProtocol* stack );
-    QQtHgUdpProtocol* installedProtocol();
+    void installProtocolManager ( QQtHgProtocolManager* stackGroup );
+    void uninstallProtocolManager ( QQtHgProtocolManager* stackGroup );
+    QQtHgProtocolManager* installedProtocolManager();
 
 signals:
     void signalConnecting();
@@ -50,7 +50,7 @@ private slots:
                                const QHostAddress& host, quint16 port );
 
 private:
-    QQtHgUdpProtocol* m_protocol;
+    QQtHgProtocolManager* m_protocolManager;
 };
 
 #endif // QQTUDPCLIENT_H
