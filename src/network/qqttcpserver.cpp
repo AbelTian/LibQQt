@@ -1,10 +1,9 @@
 #include "qqttcpserver.h"
-#include "qqtnetwork.h"
-
 
 QQtTcpServer::QQtTcpServer ( QObject* parent ) :
     QTcpServer ( parent )
 {
+    m_protocolManager = NULL;
 }
 
 QQtTcpServer::~QQtTcpServer()
@@ -17,30 +16,48 @@ void QQtTcpServer::incomingConnection ( qintptr handle )
 {
     QQtTcpClient* clientSocket = new QQtTcpClient ( this );
     clientSocket->setSocketDescriptor ( handle );
-    connect ( clientSocket, SIGNAL ( disconnected() ), clientSocket, SLOT ( deleteLater() ) );
-    clientSocket->installProtocol ( m_protocol );
+    if ( !m_protocolManager )
+    {
+        pline() << "please install protocol manager for your server.";
+        clientSocket->deleteLater();
+        return;
+    }
+
+    connect ( clientSocket, SIGNAL ( disconnected() ), this, SLOT ( clientSocketDisConnected() ) );
+    //如果崩溃，对这个操作进行加锁。
+    QQtProtocol* protocol = m_protocolManager->createProtocol();
+    clientSocket->installProtocol ( protocol );
 }
 
-void QQtTcpServer::installProtocol ( QQtProtocol* stack )
+void QQtTcpServer::clientSocketDisConnected()
 {
-    if ( m_protocol )
+    QObject* obj = sender();
+    QQtTcpClient* clientSocket = ( QQtTcpClient* ) obj;
+    QQtProtocol* protocol = clientSocket->installedProtocol();
+    clientSocket->uninstallProtocol ( protocol );
+    clientSocket->deleteLater();
+    protocol->deleteLater();
+}
+
+void QQtTcpServer::installProtocolManager ( QQtProtocolManager* stackGroup )
+{
+    if ( m_protocolManager )
         return;
 
-    m_protocol = stack;
+    m_protocolManager = stackGroup;
 }
 
-void QQtTcpServer::uninstallProtocol ( QQtProtocol* stack )
+void QQtTcpServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )
 {
-    Q_UNUSED ( stack )
+    Q_UNUSED ( stackGroup )
 
-    if ( !m_protocol )
+    if ( !m_protocolManager )
         return;
 
-    m_protocol = NULL;
+    m_protocolManager = NULL;
 }
 
-QQtProtocol* QQtTcpServer::installedProtocol()
+QQtProtocolManager* QQtTcpServer::installedProtocolManager()
 {
-    return m_protocol;
+    return m_protocolManager;
 }
-

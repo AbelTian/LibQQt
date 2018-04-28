@@ -9,13 +9,21 @@
 /**
  * @brief The QQtProtocol class
  * very good ideology and impliment
+ *
+ * 特点
+ * C-P
+ * ClientSocket Protocol 1:1的关系
  */
 class QQTSHARED_EXPORT QQtProtocol : public QObject
 {
     Q_OBJECT
 public:
-    Q_INVOKABLE explicit QQtProtocol ( QObject* parent = 0 );
-    virtual ~QQtProtocol();
+    Q_INVOKABLE explicit QQtProtocol ( QObject* parent = 0 ) : QObject ( parent ) {
+
+    }
+    virtual ~QQtProtocol() {
+
+    }
 
     /*
      * 建议：用户在继承类里的函数里直接调用[emit] write(...)
@@ -25,7 +33,7 @@ Q_SIGNALS:
     /*
      * 以下函数，用户必须继承下去，重写，need override
      */
-protected:
+public:
     /**
      * @brief 最小包长
      * @return
@@ -38,12 +46,14 @@ protected:
     inline virtual quint16 maxlength() { return 0xFFFF; }
     /**
      * @brief 语法解析器 从流中解析报文长度
+     * /.../quint16 size/.../.../...
      * @param 接收到的数据段
      * @return 按照协议解析到的数据长度 可用，继续接收，丢弃，粘包。
      */
     inline virtual quint16 splitter ( const QByteArray& ) { return 0; }
     /**
      * @brief 语义解析器
+     * /.../quint16 size/.../QByteArray data/.../
      * @param 数据包
      * @return 0 no dispatched(others) 1 dispatched(own)
      */
@@ -62,16 +72,6 @@ signals:
      * @param message
      */
     void notifyToProtocolManager ( const QQtProtocol* self, const QQtMessage* message );
-
-    /*以下和用户无关。*/
-public:
-    /**
-     * @brief 协议处理器
-     * 这个处理器是给QQtTcpSocket用的，不是给客户用的。
-     * @param Qt通讯口readAll()读到的bytes
-     * @return
-     */
-    void translator ( const QByteArray& bytes );
 };
 
 #endif // QQTPROTOCOL_H

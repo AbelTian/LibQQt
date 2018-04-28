@@ -13,8 +13,8 @@ QQtTcpClient* QQTUpgradeClientInstance ( QObject* parent )
         ip << "222.175.114.244" << "124.133.1.54";
         //"www.QQToo.com"
         cli = new QQtTcpClient ( parent );
-        cli->SetServerIPAddress ( ip );
-        cli->SetServerPort ( 8089 );
+        cli->setServerIPAddress ( ip );
+        cli->setServerPort ( 8089 );
     }
 
     return cli;
@@ -29,8 +29,8 @@ QQtTcpClient* QQTCloudClientInstance ( QObject* parent )
         QStringList ip;
         ip << "222.175.114.244" << "124.133.1.54";
         cli = new QQtTcpClient ( parent );
-        cli->SetServerIPAddress ( ip );
-        cli->SetServerPort ( 7079 );
+        cli->setServerIPAddress ( ip );
+        cli->setServerPort ( 7079 );
     }
 
     return cli;

@@ -29,9 +29,14 @@ class QQTSHARED_EXPORT QQtProtocolManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtProtocolManager ( QObject* parent = 0 );
-    virtual ~QQtProtocolManager();
+    explicit QQtProtocolManager ( QObject* parent = 0 ) : QObject ( parent ) {
+        mProtocol = NULL;
+    }
+    virtual ~QQtProtocolManager() {
 
+    }
+
+    //获取Protocol列表
     //这里列举的函数是给BusinessLevel用的，Protocol里面不要用
     //findProtocolInstanceByXXX(...);
     //findClientInfoByProtocolInstance(Protocol);
@@ -56,15 +61,20 @@ public:
      * 用于ProtocolManager内部生成用户协议实例。
      * 这个用户在生成ProtocolManager对象的时候，需要注册一下自己的协议类，需要调用一次。
      * 注意：
-     * registerProtocol<QQtXXXProtocol>("QQtXXXProtocol"); ... 如此
+     * registerProtocol<QQtXXXProtocol>();
      */
     template <typename T>
-    void registerProtocol () {
-        //pline() << typeid ( T ) << typeid ( T ).name();
-        mProtocolName = T::staticMetaObject.className();
-        QQtObjectFactory::registerObject<T>();
+    bool registerProtocol () {
+        if ( mProtocol )
+            return false;
+        mProtocol = new T ( this );
+        return true;
     }
 
+    /**
+     * 以下和用户无关
+     */
+public:
     /**
      * @brief createProtocol
      * 这个函数给QQtSocketServer用的，不是给用户用的。
@@ -74,59 +84,21 @@ public:
      */
     QQtProtocol* createProtocol () {
         //如果不能生成，根本不返回，而是崩溃。
-        QQtProtocol* p0 = ( QQtProtocol* ) QQtObjectFactory::createObject ( mProtocolName, this );
+        if ( !mProtocol )
+            return NULL;
+
+        pmeta ( mProtocol );
+        QQtProtocol* p0 = ( QQtProtocol* ) mProtocol->metaObject()->newInstance ( Q_ARG ( QQtProtocolManager*, this ) );
         //帮助Protocol给用户发数据。
         connect ( p0, SIGNAL ( notifyToProtocolManager ( const QQtProtocol*, const QQtMessage* ) ),
                   this, SIGNAL ( notifyToBusinessLevel ( const QQtProtocol*, const QQtMessage* ) ) );
         return p0;
     }
 
+private slots:
+    void clientSocketDisConnected();
 private:
-    QByteArray mProtocolName;
-
-#if 0
-    /*
-     * 建议：用户在继承类里的函数里直接调用[emit] write(...)
-    */
-Q_SIGNALS:
-    qint64 write ( const QByteArray& );
-
-public:
-    /**
-     * @brief 协议处理器
-     * 这个处理器是给QQtTcpSocket用的，不是给客户用的。
-     * @param Qt通讯口readAll()读到的bytes
-     * @return
-     */
-    void translator ( const QByteArray& bytes );
-
-    /*
-     * 以下函数，用户必须继承下去，重写，need override
-     */
-protected:
-    /**
-     * @brief 最小包长
-     * @return
-     */
-    inline virtual quint16 minlength() { return 0; }
-    /**
-     * @brief 最大包长
-     * @return
-     */
-    inline virtual quint16 maxlength() { return 0xFFFF; }
-    /**
-     * @brief 语法解析器 从流中解析报文长度
-     * @param 接收到的数据段
-     * @return 按照协议解析到的数据长度 可用，继续接收，丢弃，粘包。
-     */
-    inline virtual quint16 splitter ( const QByteArray& ) { return 0; }
-    /**
-     * @brief 语义解析器
-     * @param 数据包
-     * @return 0 no dispatched(others) 1 dispatched(own)
-     */
-    inline virtual bool dispatcher ( const QByteArray& ) { return 0; }
-#endif
+    QQtProtocol* mProtocol;
 };
 
 #endif // QQTPROTOCOLMANAGER_H

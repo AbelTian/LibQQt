@@ -23,29 +23,29 @@ QQtUdpClient::QQtUdpClient ( QObject* parent ) : QUdpSocket ( parent )
     m_protocol = NULL;
 }
 
-void QQtUdpClient::installProtocol ( QQtUdpProtocol* stack )
+void QQtUdpClient::installProtocol ( QQtProtocol* stack )
 {
     if ( m_protocol )
         return;
 
     m_protocol = stack;
-    connect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
-              this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
+    connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
+              this, SLOT ( slotWriteData ( const QByteArray& ) ) );
 }
 
-void QQtUdpClient::uninstallProtocol ( QQtUdpProtocol* stack )
+void QQtUdpClient::uninstallProtocol ( QQtProtocol* stack )
 {
     Q_UNUSED ( stack )
 
     if ( !m_protocol )
         return;
 
-    disconnect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
-                 this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
+    disconnect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
+                 this, SLOT ( slotWriteData ( const QByteArray& ) ) );
     m_protocol = NULL;
 }
 
-QQtUdpProtocol* QQtUdpClient::installedProtocol()
+QQtProtocol* QQtUdpClient::installedProtocol()
 {
     return m_protocol;
 }
@@ -119,6 +119,10 @@ void QQtUdpClient::socketConnected()
      * 这个步骤，socket重建，资源重新开始
      */
     emit signalConnectSucc();
+    if ( !m_protocol )
+    {
+        pline() << "please install protocol for your udp client.";
+    }
 }
 
 /**
@@ -136,9 +140,35 @@ void QQtUdpClient::updateProgress ( qint64 bytes )
     //pline() << bytes;
 }
 
-qint64 QQtUdpClient::slotWriteDatagram ( const QByteArray& datagram, const QHostAddress& host, quint16 port )
+void QQtUdpClient::translator ( const QByteArray& bytes )
 {
-    return writeDatagram ( datagram, host, port );
+    //pline() << m_protocol;
+    m_protocol->dispatcher ( bytes );
+}
+
+void QQtUdpClient::recvDatagram ( QByteArray& bytes, QHostAddress& address, quint16& port )
+{
+#if QT_VERSION > QT_VERSION_DATAGRAM
+    /*能够一次收够一条报文？测试的能。*/
+    QNetworkDatagram datagram = receiveDatagram();
+    /*由于添加了兼容Qt4的代码，以上注释起来。*/
+    /*数据无意义 "" -1 在此设置*/
+    datagram.setDestination ( this->localAddress(), this->localPort() );
+    //pline() << "udp sender:" << datagram.senderAddress() << datagram.senderPort();
+    //pline() << "udp receiver:" << datagram.destinationAddress() << datagram.destinationPort();
+    bytes = datagram.data();
+    address = datagram.senderAddress();
+    port = datagram.senderPort();
+#else
+    qint64 size = pendingDatagramSize();
+    //pline() << "udp new msg size:" << size;
+    //这里的buf用完, 已经释放。
+    char* data = new char[size + 1]();
+    qint64 len = readDatagram ( data, size, &address, &port );
+    pline() << len;
+    bytes.setRawData ( data, size );
+    delete[] data;
+#endif
 }
 
 void QQtUdpClient::readyReadData()
@@ -147,38 +177,23 @@ void QQtUdpClient::readyReadData()
     while ( hasPendingDatagrams() )
     {
         QByteArray bytes;
-        qint64 maxlen = 0;
-        QHostAddress host;
+        QHostAddress address;
         quint16 port;
-
-#if QT_VERSION > QT_VERSION_DATAGRAM
-        /*能够一次收够一条报文？测试的能。*/
-        QNetworkDatagram datagram = receiveDatagram();
-        /*由于添加了兼容Qt4的代码，以上注释起来。*/
-
-        /*数据无意义 "" -1 在此设置*/
-        datagram.setDestination ( this->localAddress(), this->localPort() );
-        //pline() << "udp sender:" << datagram.senderAddress() << datagram.senderPort();
-        //pline() << "udp receiver:" << datagram.destinationAddress() << datagram.destinationPort();
-        m_protocol->translator ( datagram );
-
-        bytes = datagram.data();
-        host = datagram.senderAddress();
-        port = datagram.senderPort();
-        m_protocol->translator ( bytes, host, port );
-#else
-        qint64 size = pendingDatagramSize();
-        //pline() << "udp new msg size:" << size;
-        //这里的buf用完, 已经释放。
-        char* data = new char[size + 1]();
-        qint64 len = readDatagram ( data, size, &host, &port );
-        pline() << len;
-        bytes.setRawData ( data, size );
-        delete[] data;
-
-        m_protocol->translator ( bytes, host, port );
-#endif
-
+        recvDatagram ( bytes, address, port );
+        translator ( bytes );
     }
+}
+
+void QQtUdpClient::slotWriteData ( const QByteArray& bytes )
+{
+#if QT_VERSION > QT_VERSION_DATAGRAM
+    QNetworkDatagram datagram;
+    datagram.setData ( dg );
+    datagram.setDestination ( QHostAddress ( mIP ), mPort );
+    datagram.setSender ( localAddress(), localPort() );
+    writeDatagram ( datagram );
+#else
+    writeDatagram ( bytes, QHostAddress ( mIP ), mPort );
+#endif
 }
 

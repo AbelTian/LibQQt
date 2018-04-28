@@ -25,10 +25,10 @@ QQtClient2Protocol* QQtClient2ConnectionInstance ( QObject* parent )
 
         QStringList ip;
         ip << "192.168.0.101";
-        s0->SetServerIPAddress ( ip );
-        s0->SetServerPort ( 8500 );
+        s0->setServerIPAddress ( ip );
+        s0->setServerPort ( 8500 );
 
-        s0->SendConnectMessage();
+        s0->sendConnectToHost();
     }
 
     return p0;

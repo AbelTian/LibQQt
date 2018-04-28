@@ -1,145 +1,76 @@
 #include "qqtudpserver.h"
 
-QQtUdpServer::QQtUdpServer ( QObject* parent ) : QUdpSocket ( parent )
+QQtUdpServer::QQtUdpServer ( QObject* parent ) : QQtUdpClient ( parent )
 {
-    connect ( this, SIGNAL ( stateChanged ( QAbstractSocket::SocketState ) ), this,
-              SLOT ( socketStateChanged ( QAbstractSocket::SocketState ) ) );
-    // connected
-    connect ( this, SIGNAL ( connected() ), this, SLOT ( socketConnected() ) );
-    // disconnected
-    connect ( this, SIGNAL ( disconnected() ), this, SLOT ( socketDisconnect() ) );
-    // domain
-    connect ( this, SIGNAL ( hostFound() ), this, SLOT ( domainHostFound() ) );
-    // error
-    connect ( this, SIGNAL ( error ( QAbstractSocket::SocketError ) ), this,
-              SLOT ( socketErrorOccured ( QAbstractSocket::SocketError ) ) );
-
-    connect ( this, SIGNAL ( readyRead() ), this, SLOT ( readyReadData() ) );
-
-    connect ( this, SIGNAL ( bytesWritten ( qint64 ) ), this, SLOT ( updateProgress ( qint64 ) ) );
-
-    connect ( this, SIGNAL ( bytesWritten ( qint64 ) ), this, SIGNAL ( signalUpdateProgress ( qint64 ) ) );
-
-    m_protocol = NULL;
+    m_protocolManager = NULL;
 }
 
-void QQtUdpServer::installProtocol ( QQtUdpProtocol* stack )
+void QQtUdpServer::installProtocolManager ( QQtProtocolManager* stackGroup )
 {
-    if ( m_protocol )
+    if ( m_protocolManager )
         return;
 
-    m_protocol = stack;
-    connect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
-              this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
+    m_protocolManager = stackGroup;
 }
 
-void QQtUdpServer::uninstallProtocol ( QQtUdpProtocol* stack )
+void QQtUdpServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )
 {
-    Q_UNUSED ( stack )
+    Q_UNUSED ( stackGroup )
 
-    if ( !m_protocol )
+    if ( !m_protocolManager )
         return;
 
-    disconnect ( m_protocol, SIGNAL ( writeDatagram ( QByteArray, QHostAddress, quint16 ) ),
-                 this, SLOT ( slotWriteDatagram ( QByteArray, QHostAddress, quint16 ) ) );
-    m_protocol = NULL;
+    m_protocolManager = NULL;
 }
 
-QQtUdpProtocol* QQtUdpServer::installedProtocol()
+QQtProtocolManager* QQtUdpServer::installedProtocolManager()
 {
-    return m_protocol;
+    return m_protocolManager;
 }
 
-void QQtUdpServer::domainHostFound()
+void QQtUdpServer::clientSocketDisConnected()
 {
-    pline();
+    QObject* obj = sender();
+    QQtUdpClient* clientSocket = ( QQtUdpClient* ) obj;
+    QQtProtocol* protocol = clientSocket->installedProtocol();
+    clientSocket->uninstallProtocol ( protocol );
+    clientSocket->deleteLater();
+    protocol->deleteLater();
+    m_clientList.removeOne ( clientSocket );
 }
 
-/**
- * @brief QQtUdpClient::socketStateChanged
- * @param eSocketState
- * 状态函数
- */
-void QQtUdpServer::socketStateChanged ( QAbstractSocket::SocketState eSocketState )
+QQtUdpClient* QQtUdpServer::findClientByProtocolInstance ( QQtProtocol* protocol )
 {
-    pline() << eSocketState;
-
-    switch ( eSocketState )
+    QListIterator<QQtUdpClient*> itor ( m_clientList );
+    while ( itor.hasNext() )
     {
-        case QAbstractSocket::HostLookupState:
-        case QAbstractSocket::ConnectingState:
-            break;
-
-        case QAbstractSocket::ConnectedState:
-            break;
-
-        case QAbstractSocket::ClosingState:
-            break;
-
-        case QAbstractSocket::UnconnectedState:
-            break;
-
-        default:
-            break;
+        QQtUdpClient* client = itor.next();
+        QQtProtocol* cprotocol = client->installedProtocol();
+        if ( cprotocol == protocol )
+        {
+            return client;
+        }
     }
+    return NULL;
 }
 
-/**
- * @brief QQtUdpClient::socketErrorOccured
- * @param e
- * 状态函数
- */
-void QQtUdpServer::socketErrorOccured ( QAbstractSocket::SocketError e )
+QQtUdpClient* QQtUdpServer::findClientByIPAddress ( QString ip, quint16 port )
 {
-    /*
-     * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
-     */
-    pline() << e;
-
-    switch ( e )
+    QListIterator<QQtUdpClient*> itor ( m_clientList );
+    while ( itor.hasNext() )
     {
-        case QAbstractSocket::RemoteHostClosedError:
-            break;
-
-        case QAbstractSocket::HostNotFoundError:
-        default:
-            emit signalConnectFail();
-            break;
+        QQtUdpClient* client = itor.next();
+        QString aip;
+        quint16 aport;
+        client->getServer ( aip, aport );
+        if ( aip == ip && aport == port )
+        {
+            return client;
+        }
     }
+    return NULL;
 }
 
-/**
- * @brief QQtUdpClient::socketConnected
- * 功能接口
- */
-void QQtUdpServer::socketConnected()
-{
-    pline() << peerName() << peerAddress().toString() << peerPort();
-    /*
-     * 这个步骤，socket重建，资源重新开始
-     */
-    emit signalConnectSucc();
-}
-
-/**
- * @brief QQtUdpClient::socketDisconnect
- * 功能接口
- */
-void QQtUdpServer::socketDisconnect()
-{
-    pline();
-}
-
-void QQtUdpServer::updateProgress ( qint64 bytes )
-{
-    Q_UNUSED ( bytes )
-    //pline() << bytes;
-}
-
-qint64 QQtUdpServer::slotWriteDatagram ( const QByteArray& datagram, const QHostAddress& host, quint16 port )
-{
-    return writeDatagram ( datagram, host, port );
-}
 
 void QQtUdpServer::readyReadData()
 {
@@ -147,38 +78,34 @@ void QQtUdpServer::readyReadData()
     while ( hasPendingDatagrams() )
     {
         QByteArray bytes;
-        qint64 maxlen = 0;
-        QHostAddress host;
+        QHostAddress address;
         quint16 port;
+        recvDatagram ( bytes, address, port );
 
-#if QT_VERSION > QT_VERSION_DATAGRAM
-        /*能够一次收够一条报文？测试的能。*/
-        QNetworkDatagram datagram = receiveDatagram();
-        /*由于添加了兼容Qt4的代码，以上注释起来。*/
-
-        /*数据无意义 "" -1 在此设置*/
-        datagram.setDestination ( this->localAddress(), this->localPort() );
-        //pline() << "udp sender:" << datagram.senderAddress() << datagram.senderPort();
-        //pline() << "udp receiver:" << datagram.destinationAddress() << datagram.destinationPort();
-        m_protocol->translator ( datagram );
-
-        bytes = datagram.data();
-        host = datagram.senderAddress();
-        port = datagram.senderPort();
-        m_protocol->translator ( bytes, host, port );
-#else
-        qint64 size = pendingDatagramSize();
-        //pline() << "udp new msg size:" << size;
-        //这里的buf用完, 已经释放。
-        char* data = new char[size + 1]();
-        qint64 len = readDatagram ( data, size, &host, &port );
-        pline() << len;
-        bytes.setRawData ( data, size );
-        delete[] data;
-
-        m_protocol->translator ( bytes, host, port );
-#endif
-
+        QString sip;
+        quint16 sport;
+        getServer ( sip, sport );
+        if ( address.toString() == sip && sport == port )
+        {
+            //如果，特别的那个目标。
+            translator ( bytes );
+        }
+        else
+        {
+            QQtUdpClient* clientSocket = findClientByIPAddress ( address.toString(), port );
+            if ( !clientSocket )
+            {
+                clientSocket = new QQtUdpClient ( this );
+                clientSocket->setServer ( address.toString(), port );
+                connect ( clientSocket, SIGNAL ( disconnected() ), this, SLOT ( clientSocketDisConnected() ) );
+                //如果崩溃，对这个操作进行加锁。
+                QQtProtocol* protocol = m_protocolManager->createProtocol();
+                clientSocket->installProtocol ( protocol );
+                m_clientList.push_back ( clientSocket );
+            }
+            clientSocket->translator ( bytes );
+        }
     }
 }
+
 
