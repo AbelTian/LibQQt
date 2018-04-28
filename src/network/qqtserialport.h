@@ -10,7 +10,7 @@ class QSerialPort : public QextSerialPort
 {
     Q_OBJECT
 public:
-    explicit QSerialPort(QObject* parent = 0) {}
+    explicit QSerialPort ( QObject* parent = 0 ) {}
     virtual ~QSerialPort() {}
     enum BaudRate
     {
@@ -24,7 +24,7 @@ public:
         Baud115200 = BAUD115200,
         UnknownBaud = -1
     };
-    Q_ENUMS(BaudRate)
+    Q_ENUMS ( BaudRate )
     enum DataBits
     {
         Data5 = DATA_5,
@@ -33,7 +33,7 @@ public:
         Data8 = DATA_8,
         UnknownDataBits = -1
     };
-    Q_ENUMS(DataBits)
+    Q_ENUMS ( DataBits )
     enum Parity
     {
         NoParity = PAR_NONE,
@@ -43,7 +43,7 @@ public:
         MarkParity = PAR_MARK,
         UnknownParity = -1
     };
-    Q_ENUMS(Parity)
+    Q_ENUMS ( Parity )
     enum StopBits
     {
         OneStop = STOP_1,
@@ -51,7 +51,7 @@ public:
         TwoStop = STOP_2,
         UnknownStopBits = -1
     };
-    Q_ENUMS(StopBits)
+    Q_ENUMS ( StopBits )
     enum FlowControl
     {
         NoFlowControl = FLOW_OFF,
@@ -59,14 +59,14 @@ public:
         SoftwareControl = FLOW_XONXOFF,
         UnknownFlowControl = -1
     };
-    Q_ENUMS(FlowControl)
+    Q_ENUMS ( FlowControl )
     // QextSerialBase interface
 public:
-    virtual void setBaudRate(BaudRate v) { QextSerialPort::setBaudRate((BaudRateType)v); }
-    virtual void setDataBits(DataBits v) { QextSerialPort::setDataBits((DataBitsType)v); }
-    virtual void setParity(Parity v) { QextSerialPort::setParity((ParityType)v); }
-    virtual void setStopBits(StopBits v) { QextSerialPort::setStopBits((StopBitsType)v); }
-    virtual void setFlowControl(FlowControl v) { QextSerialPort::setFlowControl((FlowType)v); }
+    virtual void setBaudRate ( BaudRate v ) { QextSerialPort::setBaudRate ( ( BaudRateType ) v ); }
+    virtual void setDataBits ( DataBits v ) { QextSerialPort::setDataBits ( ( DataBitsType ) v ); }
+    virtual void setParity ( Parity v ) { QextSerialPort::setParity ( ( ParityType ) v ); }
+    virtual void setStopBits ( StopBits v ) { QextSerialPort::setStopBits ( ( StopBitsType ) v ); }
+    virtual void setFlowControl ( FlowControl v ) { QextSerialPort::setFlowControl ( ( FlowType ) v ); }
 };
 #else
 #include <QSerialPort>
@@ -76,16 +76,24 @@ class QQTSHARED_EXPORT QQtSerialPort : public QSerialPort
 {
     Q_OBJECT
 public:
-    explicit QQtSerialPort(QObject* parent = 0);
+    explicit QQtSerialPort ( QObject* parent = 0 );
     ~QQtSerialPort();
 
-    void installProtocol(QQtProtocol* stack);
-    void uninstallProtocol(QQtProtocol* stack);
+    void installProtocol ( QQtProtocol* stack );
+    void uninstallProtocol ( QQtProtocol* stack );
     QQtProtocol* installedProtocol();
 
 private slots:
     void readyReadData();
+    void slotWriteData ( const QByteArray& bytes );
 
+protected:
+    /**
+     * @brief translator
+     * 用于拆分和分发数据报
+     * @param bytes
+     */
+    virtual void translator ( const QByteArray& bytes );
 private:
     QQtProtocol* m_protocol;
 };

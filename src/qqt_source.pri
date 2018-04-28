@@ -224,91 +224,65 @@ contains(DEFINES, __QQTCHARTS__) {
 
 #network
 contains (DEFINES, __NETWORKSUPPORT__) {
-    SOURCES += \
-        $$PWD/network/qqtnetwork.cpp
-    HEADERS += \
-        $$PWD/network/qqtnetwork.h
+    SOURCES += $$PWD/network/qqtnetwork.cpp
+    HEADERS += $$PWD/network/qqtnetwork.h
 
     #报文 用户重要
-    HEADERS += \
-        $$PWD/network/qqtmessage.h
+    HEADERS += $$PWD/network/qqtmessage.h
 
     #协议 用户重要
-    HEADERS += \
-        $$PWD/network/qqtprotocol.h
+    HEADERS += $$PWD/network/qqtprotocol.h
 
     #protocol manager for server iodevice
-    SOURCES += \
-        $$PWD/network/qqtprotocolmanager.cpp
-    HEADERS += \
-        $$PWD/network/qqtprotocolmanager.h
+    SOURCES += $$PWD/network/qqtprotocolmanager.cpp
+    HEADERS += $$PWD/network/qqtprotocolmanager.h
 
     #tcp and udp iodevice
     contains(DEFINES, __TCPUDPSOCKET__){
         #tcp client iodevice
-        SOURCES += \
-            $$PWD/network/qqttcpclient.cpp
-        HEADERS += \
-            $$PWD/network/qqttcpclient.h
+        SOURCES += $$PWD/network/qqttcpclient.cpp
+        HEADERS += $$PWD/network/qqttcpclient.h
 
         #tcp server iodevice
-        SOURCES += \
-            $$PWD/network/qqttcpserver.cpp
-        HEADERS += \
-            $$PWD/network/qqttcpserver.h
+        SOURCES += $$PWD/network/qqttcpserver.cpp
+        HEADERS += $$PWD/network/qqttcpserver.h
 
         #udp client iodevice
-        SOURCES += \
-            $$PWD/network/qqtudpclient.cpp
-        HEADERS += \
-            $$PWD/network/qqtudpclient.h
+        SOURCES += $$PWD/network/qqtudpclient.cpp
+        HEADERS += $$PWD/network/qqtudpclient.h
 
         #udp server iodevice
-        SOURCES += \
-            $$PWD/network/qqtudpserver.cpp
-        HEADERS += \
-            $$PWD/network/qqtudpserver.h
+        SOURCES += $$PWD/network/qqtudpserver.cpp
+        HEADERS += $$PWD/network/qqtudpserver.h
     }
 
     #serialport iodevice
-    SOURCES += \
-        $$PWD/network/qqtserialport.cpp
-    HEADERS += \
-        $$PWD/network/qqtserialport.h
+    SOURCES += $$PWD/network/qqtserialport.cpp
+    HEADERS += $$PWD/network/qqtserialport.h
 
     #bluetooth iodevice
     #注释：在qqt_header.pri打开 DEFINES += __BLUETOOTH__
     contains (DEFINES, __BLUETOOTH__) {
         #bluetooth client iodevice
-        SOURCES += \
-            $$PWD/network/qqtbluetoothclient.cpp
-        HEADERS += \
-            $$PWD/network/qqtbluetoothclient.h
+        SOURCES += $$PWD/network/qqtbluetoothclient.cpp
+        HEADERS += $$PWD/network/qqtbluetoothclient.h
 
         #bluetooth server iodevice
-        SOURCES += \
-            $$PWD/network/qqtbluetoothserver.cpp
-        HEADERS += \
-            $$PWD/network/qqtbluetoothserver.h
+        SOURCES += $$PWD/network/qqtbluetoothserver.cpp
+        HEADERS += $$PWD/network/qqtbluetoothserver.h
 
         #bluetooth manager
-        SOURCES += \
-            $$PWD/network/qqtbluetoothmanager.cpp
-        HEADERS += \
-            $$PWD/network/qqtbluetoothmanager.h
+        SOURCES += $$PWD/network/qqtbluetoothmanager.cpp
+        HEADERS += $$PWD/network/qqtbluetoothmanager.h
     }
 
     contains (DEFINES, __WEBSOCKETSUPPORT__) {
         #websocket client iodevice
-        SOURCES += \
-            $$PWD/network/qqtwebsocketclient.cpp
-        HEADERS += \
-            $$PWD/network/qqtwebsocketclient.h
+        SOURCES += $$PWD/network/qqtwebsocketclient.cpp
+        HEADERS += $$PWD/network/qqtwebsocketclient.h
         #websocket server iodevice
-        SOURCES += \
-            $$PWD/network/qqtwebsocketserver.cpp
-        HEADERS += \
-            $$PWD/network/qqtwebsocketserver.h
+        SOURCES += $$PWD/network/qqtwebsocketserver.cpp
+        HEADERS += $$PWD/network/qqtwebsocketserver.h
     }
 
     #ethnet(+wifi) manager
@@ -324,10 +298,8 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 
     #webaccess manager
     contains (DEFINES, __WEBACCESSSUPPORT__) {
-        SOURCES += \
-            $$PWD/network/qqtwebaccessmanager.cpp
-        HEADERS += \
-            $$PWD/network/qqtwebaccessmanager.h
+        SOURCES += $$PWD/network/qqtwebaccessmanager.cpp
+        HEADERS += $$PWD/network/qqtwebaccessmanager.h
     }
 }
 

@@ -1,14 +1,14 @@
-#ifndef QQTWEBCLIENT_H
-#define QQTWEBCLIENT_H
+#ifndef QQTWEBSOCKETCLIENT_H
+#define QQTWEBSOCKETCLIENT_H
 
 #include <QtWebSockets/QWebSocket>
+#include <qqtprotocol.h>
 #include <qqtcore.h>
 #include <qqt-local.h>
 
 /**
- * @brief The QQtWebClient class
- * QQtWebSocketClient通过安装QQtWebProtocol来实现和RawSocket相似的通信方式。
- * 暂时不确定QQtWebProtocol是否和QQtProtocol格式相同，所以暂时使用QQtWebProtocol继承QQtProtocol。
+ * @brief The QQtWebSocketClient class
+ * QQtWebSocketClient通过安装QQtProtocol来实现和RawSocket相似的通信方式。
  */
 class QQTSHARED_EXPORT QQtWebSocketClient : public QWebSocket
 {
@@ -18,11 +18,26 @@ public:
                                   const QString& origin = QString(),
                                   QWebSocketProtocol::Version version = QWebSocketProtocol::VersionLatest );
 
+    void installProtocol ( QQtProtocol* stack );
+    void uninstallProtocol ( QQtProtocol* stack );
+    QQtProtocol* installedProtocol();
+
 signals:
 
-public slots:
+private slots:
+    void slotReadData ( const QByteArray& bytes );
+    void slotWriteData ( const QByteArray& bytes );
+
+protected:
+    /**
+     * @brief translator
+     * 用于拆分和分发数据报
+     * @param bytes
+     */
+    virtual void translator ( const QByteArray& bytes );
 
 private:
+    QQtProtocol* m_protocol;
 };
 
-#endif // QQTWEBCLIENT_H
+#endif // QQTWEBSOCKETCLIENT_H

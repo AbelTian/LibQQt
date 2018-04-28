@@ -1,10 +1,10 @@
-#ifndef QQTWEBSERVER_H
-#define QQTWEBSERVER_H
+#ifndef QQTWEBSOCKETSERVER_H
+#define QQTWEBSOCKETSERVER_H
 
-#include <QObject>
+#include <QWebSocketServer>
 #include <qqtcore.h>
 
-class QQtWebSocketServer : public QObject
+class QQtWebSocketServer : public QWebSocketServer
 {
     Q_OBJECT
 public:
@@ -15,4 +15,4 @@ signals:
 public slots:
 };
 
-#endif // QQTWEBSERVER_H
+#endif // QQTWEBSOCKETSERVER_H
