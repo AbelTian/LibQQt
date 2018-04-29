@@ -19,7 +19,7 @@ class QQTSHARED_EXPORT QQtProtocol : public QObject
     Q_OBJECT
 public:
     Q_INVOKABLE explicit QQtProtocol ( QObject* parent = 0 ) : QObject ( parent ) {
-
+        detach();
     }
     virtual ~QQtProtocol() {
 
@@ -59,6 +59,9 @@ public:
      */
     inline virtual bool dispatcher ( const QByteArray& ) { return 0; }
 
+    /*
+     * 以下函数，与用户无关。
+     */
 signals:
     /**
      * @brief notifyToProtocolManager
@@ -72,6 +75,15 @@ signals:
      * @param message
      */
     void notifyToProtocolManager ( const QQtProtocol* self, const QQtMessage* message );
+    /**
+     * 如果Socket和这个Protocol关联，就会设置关联。
+     */
+public:
+    void detach() { mIsDetached = true; }
+    void attach() { mIsDetached = false; }
+    bool detached() { return mIsDetached; }
+private:
+    bool mIsDetached;
 };
 
 #endif // QQTPROTOCOL_H
