@@ -98,7 +98,7 @@ void QQtUdpClient::socketErrorOccured ( QAbstractSocket::SocketError e )
     /*
      * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
      */
-    pline() << e << state() << socketType() << isSequential();
+    pline() << e;
 
     switch ( e )
     {
