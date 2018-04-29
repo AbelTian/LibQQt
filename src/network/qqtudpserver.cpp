@@ -1,4 +1,4 @@
-#include "qqtudpserver.h"
+﻿#include "qqtudpserver.h"
 
 QQtUdpServer::QQtUdpServer ( QObject* parent ) : QQtUdpClient ( parent )
 {
@@ -35,7 +35,6 @@ void QQtUdpServer::clientSocketDisConnected()
     QQtProtocol* protocol = clientSocket->installedProtocol();
     clientSocket->uninstallProtocol ( protocol );
     clientSocket->deleteLater();
-    protocol->deleteLater();
     m_clientList.removeOne ( clientSocket );
 }
 

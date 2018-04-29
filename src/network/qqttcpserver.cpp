@@ -41,7 +41,6 @@ void QQtTcpServer::clientSocketDisConnected()
     QQtProtocol* protocol = clientSocket->installedProtocol();
     clientSocket->uninstallProtocol ( protocol );
     clientSocket->deleteLater();
-    protocol->deleteLater();
     m_clientList.removeOne ( clientSocket );
 }
 
