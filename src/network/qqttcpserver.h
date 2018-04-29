@@ -1,4 +1,4 @@
-#ifndef QQTTCPSERVER_H
+﻿#ifndef QQTTCPSERVER_H
 #define QQTTCPSERVER_H
 
 #include <QTcpServer>
@@ -32,6 +32,8 @@ protected:
     virtual void incomingConnection ( qintptr handle ) override;
 public slots:
     void clientSocketDisConnected();
+private slots:
+    void comingNewConnection();
 private:
     QQtProtocolManager* m_protocolManager;
     QList<QQtTcpClient*> m_clientList;

@@ -1,4 +1,4 @@
-#include "qqttcpclient.h"
+﻿#include "qqttcpclient.h"
 
 #include <QTcpSocket>
 #include <QHostInfo>
@@ -49,9 +49,10 @@ void QQtTcpClient::installProtocol ( QQtProtocol* stack )
     if ( m_protocol )
         return;
 
-    m_protocol = stack;
-    connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
+    connect ( stack, SIGNAL ( write ( const QByteArray& ) ),
               this, SLOT ( slotWriteData ( const QByteArray& ) ) );
+    stack->attach();
+    m_protocol = stack;
 }
 
 void QQtTcpClient::uninstallProtocol ( QQtProtocol* stack )
@@ -63,6 +64,7 @@ void QQtTcpClient::uninstallProtocol ( QQtProtocol* stack )
 
     disconnect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
                  this, SLOT ( slotWriteData ( const QByteArray& ) ) );
+    m_protocol->detach();
     m_protocol = NULL;
 }
 

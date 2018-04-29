@@ -24,13 +24,15 @@
  *
  * 关于识别Protocl，
  * 用户的客户端可以发个人信息上来，Protocol保存在句柄内部。
+ *
+ * 定位：
+ * 对同种类型的协议句柄，可以管理1024个。
  */
 class QQTSHARED_EXPORT QQtProtocolManager : public QObject
 {
     Q_OBJECT
 public:
     explicit QQtProtocolManager ( QObject* parent = 0 ) : QObject ( parent ) {
-        mProtocol = NULL;
     }
     virtual ~QQtProtocolManager() {
 
@@ -65,9 +67,10 @@ public:
      */
     template <typename T>
     bool registerProtocol () {
-        if ( mProtocol )
-            return false;
-        mProtocol = new T ( this );
+        for ( int i = 0; i < 1024; i++ ) {
+            QQtProtocol* p0 = new T ( this );
+            m_protocol_list.push_back ( p0 );
+        }
         return true;
     }
 
@@ -83,20 +86,34 @@ public:
      * @return
      */
     QQtProtocol* createProtocol () {
-        //如果不能生成，根本不返回，而是崩溃。
-        if ( !mProtocol )
+        if ( m_protocol_list.isEmpty() )
             return NULL;
 
-        pmeta ( mProtocol );
-        QQtProtocol* p0 = ( QQtProtocol* ) mProtocol->staticMetaObject.newInstance ( Q_ARG ( QQtProtocolManager*, this ) );
+        //无论如何，使用对象工厂也一样，都不能正确生成。对象工厂崩溃退出。
+        //QQtProtocol* p0 = ( QQtProtocol* ) mProtocol->metaObject()->newInstance ( Q_ARG(QQtProtocolManager*, this) );
+        QQtProtocol* p0 = findDetachedInstance();
+        if ( p0 == 0 )
+            return NULL;
+        pmeta ( p0 ) << p0;
+
         //帮助Protocol给用户发数据。
         connect ( p0, SIGNAL ( notifyToProtocolManager ( const QQtProtocol*, const QQtMessage* ) ),
                   this, SIGNAL ( notifyToBusinessLevel ( const QQtProtocol*, const QQtMessage* ) ) );
         return p0;
     }
 
+protected:
+    QQtProtocol* findDetachedInstance() {
+        QListIterator<QQtProtocol*> itor ( m_protocol_list );
+        while ( itor.hasNext() ) {
+            QQtProtocol* p = itor.next();
+            if ( p->detached() )
+                return p;
+        }
+        return NULL;
+    }
 private:
-    QQtProtocol* mProtocol;
+    QList<QQtProtocol*> m_protocol_list;
 };
 
 #endif // QQTPROTOCOLMANAGER_H
