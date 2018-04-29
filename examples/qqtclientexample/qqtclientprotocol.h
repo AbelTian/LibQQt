@@ -3,7 +3,8 @@
 
 #include <qqtmessage.h>
 #include <qqtprotocol.h>
-#include <qqttcpserver.h>
+#include <qqttcpclient.h>
+#include "qqtudpclient.h"
 
 class QQtClientMessage : public QQtMessage
 {
