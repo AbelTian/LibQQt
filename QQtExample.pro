@@ -45,14 +45,15 @@ SUBDIRS =
 #SUBDIRS += examples/tabwidgetexamples
 #need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
-#必开 客户端的 basic
-#SUBDIRS += examples/qqtnetworkexample
+#网络创建工具
+SUBDIRS += demo/QQtClientCreator
+SUBDIRS += demo/QQtServerCreator
 #这边是个组合项，客户端和服务器一起的。
 SUBDIRS += examples/qqtclientexample
-#SUBDIRS += demo/QQtClientCreator
-#服务器的 highgrade
 SUBDIRS += examples/qqtserverexample
-#SUBDIRS += demo/QQtServerCreator
+#通信协议的复杂的例子
+SUBDIRS += examples/qqtnetworkexample
+
 #greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 

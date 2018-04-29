@@ -3,7 +3,7 @@
 
 #include <qqtmessage.h>
 #include <qqtprotocol.h>
-#include <qqttcpserver.h>
+#include <qqttcpclient.h>
 
 class QQtUserMessage : public QQtMessage
 {
@@ -69,6 +69,9 @@ public:
     void recvCommand2 ( const QQtUserMessage& msg ) {
         //what do you want to do?
     }
+    void sendCommand1() {
+        //what do you want to do?
+    }
 
 signals:
     //给业务层发的信号
@@ -122,6 +125,6 @@ protected:
 };
 
 //业务层初始化一下这个实例，总是从这里获取协议句柄进行对外读写。
-QQtUserProtocol* QQtUserConnectionInstance ( QObject* parent = 0 );
+QQtTcpClient* QQtUserInstance ( QQtUserProtocol*& protocol, QObject* parent = 0 );
 
 #endif // QQTUSERPROTOCOL_H

@@ -9,23 +9,23 @@ QDebug& operator << ( QDebug& dbg, const QQtUserMessage& msg )
     return dbg.space();
 }
 
-QQtUserProtocol* QQtUserConnectionInstance ( QObject* parent )
+QQtTcpClient* QQtUserInstance ( QQtUserProtocol*& protocol, QObject* parent )
 {
     static QQtUserProtocol* p0 = NULL;
     if ( !p0 )
     {
         p0 = new QQtUserProtocol ( parent );
-
-
     }
+    protocol = p0;
 
-    static QQtTcpServer* s0 = NULL;
+    static QQtTcpClient* s0 = NULL;
     if ( !s0 )
     {
-        s0 = new QQtTcpServer ( parent );
-        //... s0->installProtocol ( p0 );
-        s0->listen ( QHostAddress::Any, 8000 );
+        s0 = new QQtTcpClient ( parent );
+        s0->installProtocol ( p0 );
+        //s0->setServer
+        //s0->sendConnectToHost();
     }
 
-    return p0;
+    return s0;
 }

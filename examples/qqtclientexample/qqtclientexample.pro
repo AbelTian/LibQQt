@@ -22,56 +22,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES -= \
-    qqtlanprotocol.cpp \
-    qqtuserprotocol1.cpp \
-    qqtuserprotocol2.cpp \
-    qqtuserprotocol3.cpp \
-    usernode0protocol.cpp \
-    usernode1protocol.cpp \
-    usernode2protocol.cpp \
-    usernode3protocol.cpp \
-    usernode4protocol.cpp \
-    usernode5protocol.cpp \
-    usernode6protocol.cpp \
-    usernode7protocol.cpp \
-    usernode8protocol.cpp \
-    usernode9protocol.cpp \
-    usertest0protocol.cpp \
-    usertest1protocol.cpp \
-    usertest2protocol.cpp \
-    usertest3protocol.cpp \
-    usertest4protocol.cpp \
-    usertest5protocol.cpp \
-    usertest6protocol.cpp \
-    usertest7protocol.cpp \
-    usertest8protocol.cpp \
-    usertest9protocol.cpp
+    qqtlanprotocol.cpp
 
 HEADERS -= \
-    qqtlanprotocol.h \
-    qqtuserprotocol1.h \
-    qqtuserprotocol2.h \
-    qqtuserprotocol3.h \
-    usernode0protocol.h \
-    usernode1protocol.h \
-    usernode2protocol.h \
-    usernode3protocol.h \
-    usernode4protocol.h \
-    usernode5protocol.h \
-    usernode6protocol.h \
-    usernode7protocol.h \
-    usernode8protocol.h \
-    usernode9protocol.h \
-    usertest0protocol.h \
-    usertest1protocol.h \
-    usertest2protocol.h \
-    usertest3protocol.h \
-    usertest4protocol.h \
-    usertest5protocol.h \
-    usertest6protocol.h \
-    usertest7protocol.h \
-    usertest8protocol.h \
-    usertest9protocol.h
+    qqtlanprotocol.h
 
 SOURCES += \
         main.cpp \

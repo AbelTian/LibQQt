@@ -26,17 +26,20 @@
  * 用户的客户端可以发个人信息上来，Protocol保存在句柄内部。
  *
  * 定位：
- * 对同种类型的协议句柄，可以管理1024个。
+ * 只可以安装同一种类型的句柄。
+ * 可以通过多次注册改变内部的句柄数量。
+ *
+ * 模型：
+ * 业  PM  S           业
+ * 务  |   |           务
+ * 层  P - C :: C - P  层
  */
 class QQTSHARED_EXPORT QQtProtocolManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtProtocolManager ( QObject* parent = 0 ) : QObject ( parent ) {
-    }
-    virtual ~QQtProtocolManager() {
-
-    }
+    explicit QQtProtocolManager ( QObject* parent = 0 );
+    virtual ~QQtProtocolManager();
 
     //获取Protocol列表
     //这里列举的函数是给BusinessLevel用的，Protocol里面不要用
@@ -63,11 +66,12 @@ public:
      * 用于ProtocolManager内部生成用户协议实例。
      * 这个用户在生成ProtocolManager对象的时候，需要注册一下自己的协议类，需要调用一次。
      * 注意：
-     * registerProtocol<QQtXXXProtocol>();
+     * registerProtocol<QQtXXXProtocol>(1);
+     * 可以根据Protocol ObjectName区分Protocol 或者metaObject()->className()
      */
     template <typename T>
-    bool registerProtocol () {
-        for ( int i = 0; i < 1024; i++ ) {
+    bool registerProtocol ( int count = 1024 ) {
+        for ( int i = 0; i < count; i++ ) {
             QQtProtocol* p0 = new T ( this );
             m_protocol_list.push_back ( p0 );
         }
@@ -85,33 +89,9 @@ public:
      * @param protocolTypeName
      * @return
      */
-    QQtProtocol* createProtocol () {
-        if ( m_protocol_list.isEmpty() )
-            return NULL;
-
-        //无论如何，使用对象工厂也一样，都不能正确生成。对象工厂崩溃退出。
-        //QQtProtocol* p0 = ( QQtProtocol* ) mProtocol->metaObject()->newInstance ( Q_ARG(QQtProtocolManager*, this) );
-        QQtProtocol* p0 = findDetachedInstance();
-        if ( p0 == 0 )
-            return NULL;
-        pmeta ( p0 ) << p0;
-
-        //帮助Protocol给用户发数据。
-        connect ( p0, SIGNAL ( notifyToProtocolManager ( const QQtProtocol*, const QQtMessage* ) ),
-                  this, SIGNAL ( notifyToBusinessLevel ( const QQtProtocol*, const QQtMessage* ) ) );
-        return p0;
-    }
-
+    QQtProtocol* createProtocol ();
 protected:
-    QQtProtocol* findDetachedInstance() {
-        QListIterator<QQtProtocol*> itor ( m_protocol_list );
-        while ( itor.hasNext() ) {
-            QQtProtocol* p = itor.next();
-            if ( p->detached() )
-                return p;
-        }
-        return NULL;
-    }
+    QQtProtocol* findDetachedInstance();
 private:
     QList<QQtProtocol*> m_protocol_list;
 };
