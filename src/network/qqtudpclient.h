@@ -49,10 +49,10 @@ signals:
     void signalDisConnectFail();//
     void signalUpdateProgress ( qint64 value );
 public slots:
+    void slotWriteData ( const QByteArray& );
 
 protected slots:
     virtual void readyReadData();
-    void slotWriteData ( const QByteArray& );
 private slots:
     void domainHostFound();
     void socketStateChanged ( QAbstractSocket::SocketState );

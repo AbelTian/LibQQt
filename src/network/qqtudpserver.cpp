@@ -30,6 +30,7 @@ QQtProtocolManager* QQtUdpServer::installedProtocolManager()
 
 void QQtUdpServer::clientSocketDisConnected()
 {
+    pline();
     QObject* obj = sender();
     QQtUdpClient* clientSocket = ( QQtUdpClient* ) obj;
     QQtProtocol* protocol = clientSocket->installedProtocol();
@@ -87,6 +88,7 @@ void QQtUdpServer::readyReadData()
         if ( address.toString() == sip && sport == port )
         {
             //如果，特别的那个目标。
+            pline() << "udp server use self only protocol";
             translator ( bytes );
         }
         else
@@ -100,8 +102,11 @@ void QQtUdpServer::readyReadData()
                 //如果崩溃，对这个操作进行加锁。
                 QQtProtocol* protocol = m_protocolManager->createProtocol();
                 clientSocket->installProtocol ( protocol );
+                disconnect ( protocol, SIGNAL ( write ( QByteArray ) ), clientSocket, SLOT ( slotWriteData ( QByteArray ) ) );
+                connect ( protocol, SIGNAL ( write ( QByteArray ) ), this, SLOT ( slotWriteData ( QByteArray ) ) );
                 m_clientList.push_back ( clientSocket );
             }
+            pline() << "udp server use sub client protocol " << clientSocket << address << port;
             clientSocket->translator ( bytes );
         }
     }
