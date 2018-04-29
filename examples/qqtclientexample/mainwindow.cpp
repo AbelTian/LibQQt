@@ -34,5 +34,5 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_recv_say_hello ( QString a )
 {
     pline() << a;
-    ui->textBrowser->append ( a + "\r\n" );
+    ui->textBrowser->append ( a );
 }
