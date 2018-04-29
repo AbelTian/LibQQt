@@ -34,5 +34,6 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_recv_say_hello ( QString a )
 {
     pline() << a;
+    //这个地方不要加/r/n 程序会死。
     ui->textBrowser->append ( a );
 }
