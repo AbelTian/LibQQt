@@ -1,19 +1,19 @@
 ﻿#include "qqtserverprotocolmanager.h"
 
-QQtHgProtocolManager::QQtHgProtocolManager ( QObject* parent ) : QQtProtocolManager ( parent )
+QQtServerProtocolManager::QQtServerProtocolManager ( QObject* parent ) : QQtProtocolManager ( parent )
 {
 
 }
 
-QQtHgProtocolManager* QQtServerInstance ( QObject* parent )
+QQtServerProtocolManager* QQtServerInstance ( QObject* parent )
 {
-    static QQtHgProtocolManager* m0 = 0;
+    static QQtServerProtocolManager* m0 = 0;
     if ( !m0 )
     {
         //创建Protocol管理者
-        m0 = new QQtHgProtocolManager ( parent );
+        m0 = new QQtServerProtocolManager ( parent );
         //注册我实现的Protocol
-        m0->registerProtocol<QQtHgProtocol> ( );
+        m0->registerProtocol<QQtServerProtocol> ( );
         //初始化Protocol管理者完成。
     }
 

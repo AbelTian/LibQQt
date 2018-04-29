@@ -20,7 +20,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::recvANotify ( const QQtProtocol* protocol, const QQtMessage* message )
 {
-    QQtHgProtocol* p = ( QQtHgProtocol* ) protocol;
+    QQtServerProtocol* p = ( QQtServerProtocol* ) protocol;
     QQtServerMessage* m = ( QQtServerMessage* ) message;
 
     pline() << QString ( m->getAData() );

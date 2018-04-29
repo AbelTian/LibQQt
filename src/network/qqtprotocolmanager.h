@@ -88,7 +88,7 @@ public:
             return NULL;
 
         pmeta ( mProtocol );
-        QQtProtocol* p0 = ( QQtProtocol* ) mProtocol->metaObject()->newInstance ( Q_ARG ( QQtProtocolManager*, this ) );
+        QQtProtocol* p0 = ( QQtProtocol* ) mProtocol->staticMetaObject.newInstance ( Q_ARG ( QQtProtocolManager*, this ) );
         //帮助Protocol给用户发数据。
         connect ( p0, SIGNAL ( notifyToProtocolManager ( const QQtProtocol*, const QQtMessage* ) ),
                   this, SIGNAL ( notifyToBusinessLevel ( const QQtProtocol*, const QQtMessage* ) ) );

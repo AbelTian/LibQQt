@@ -100,16 +100,16 @@ private:
 QDebug& operator << ( QDebug& dbg, const QQtServerMessage& msg );
 
 /**
- * @brief The QQtHgProtocol class
+ * @brief The QQtServerProtocol class
  * 这是我定义的服务器和客户端的协议
  * 在这里我实现服务器要干的事情。
  * 具体的：这是我按照服务器和客户端的通信协议，实现的服务器端通信功能。
  */
-class QQtHgProtocol : public QQtProtocol
+class QQtServerProtocol : public QQtProtocol
 {
     Q_OBJECT
 public:
-    explicit QQtHgProtocol ( QObject* parent = nullptr ) : QQtProtocol ( parent ) {
+    explicit QQtServerProtocol ( QObject* parent = nullptr ) : QQtProtocol ( parent ) {
 
     }
 
@@ -176,20 +176,20 @@ protected:
 };
 
 /**
- * @brief The QQtHgProtocolManager class
+ * @brief The QQtServerProtocolManager class
  * ...
  */
-class QQtHgProtocolManager : public QQtProtocolManager
+class QQtServerProtocolManager : public QQtProtocolManager
 {
     Q_OBJECT
 public:
-    explicit QQtHgProtocolManager ( QObject* parent = nullptr );
+    explicit QQtServerProtocolManager ( QObject* parent = nullptr );
 
 signals:
 
 public slots:
 };
 
-QQtHgProtocolManager* QQtServerInstance ( QObject* parent = 0 );
+QQtServerProtocolManager* QQtServerInstance ( QObject* parent = 0 );
 
 #endif // QQTSERVERPROTOCOLMANAGER_H
