@@ -6,6 +6,8 @@ LibQQt为用户自动生成Library SDK，主动帮助用户发布App和资源文
 2018年1月，LibQQt代码变更数量已达30万，主要面向初、中、高级软件相关专业、有一定App开发经验的工程师。
 LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。  
 
+gitee link: https://gitee.com/drabel/LibQQt  
+github link: https://github.com/AbelTian/LibQQt  
 
 ========================================================================  
 # 摘要介绍  
