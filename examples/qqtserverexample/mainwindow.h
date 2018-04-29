@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::MainWindow* ui;
-    QQtServerProtocolManager* pm0;
+    QQtHgProtocolManager* pm0;
 };
 
 #endif // MAINWINDOW_H

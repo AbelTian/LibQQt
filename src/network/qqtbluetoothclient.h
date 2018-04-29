@@ -10,7 +10,7 @@ class QQTSHARED_EXPORT QQtBluetoothClient : public QBluetoothSocket
     Q_OBJECT
 public:
     explicit QQtBluetoothClient ( QBluetoothServiceInfo::Protocol socketType = QBluetoothServiceInfo::RfcommProtocol,
-                                        QObject* parent = nullptr );
+                                  QObject* parent = nullptr );
     explicit QQtBluetoothClient ( QObject* parent = nullptr );
 
     /**
@@ -56,6 +56,15 @@ private slots:
 
 protected slots:
     void readyReadData();
+    void slotWriteData ( const QByteArray& bytes );
+
+protected:
+    /**
+     * @brief translator
+     * 用于拆分和分发数据报
+     * @param bytes
+     */
+    virtual void translator ( const QByteArray& bytes );
 
 private:
     void connectToSingelHost();

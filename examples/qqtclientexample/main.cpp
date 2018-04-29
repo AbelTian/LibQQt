@@ -11,7 +11,6 @@ int main ( int argc, char* argv[] )
     //测试一下，数据字段不够，内部如何处理。
     QQtSubProtocolTest* p = new QQtSubProtocolTest();
     QByteArray bytes = "CCCCCCCC";
-    p->translator ( bytes );
 
     //这个例程里，讲解了QQt Application Framework里network module的功能。
     //这是一个例子，

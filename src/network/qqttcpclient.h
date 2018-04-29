@@ -2,8 +2,8 @@
  * QQtTcpClient
  * 在一个工程当中仅仅存在一个实例，通过调用QQtTcpClient实现。
  **************************************************/
-#ifndef QQT_CLIENT_H
-#define QQT_CLIENT_H
+#ifndef QQTTCPCLIENT_H
+#define QQTTCPCLIENT_H
 
 #include <QTcpSocket>
 #include "QStringList"
@@ -32,15 +32,21 @@ public:
     explicit QQtTcpClient ( QObject* parent = 0 );
     virtual ~QQtTcpClient();
 
-    void SetServerIPAddress ( QStringList ip ) { m_serverIP = ip; }
-    void SetServerPort ( quint32 p = 7079 ) { m_PORT = p; }
+    void setServerIPAddress ( QString ip ) {
+        if ( m_serverIP.contains ( ip ) )
+            return;
+        m_serverIP.push_back ( ip );
+    }
+    QStringList& serverIPAddress() { return m_serverIP; }
+    void setServerIPAddress ( QStringList ipList ) { m_serverIP = ipList; }
+    void setServerPort ( quint32 p = 7079 ) { m_PORT = p; }
 
     void installProtocol ( QQtProtocol* stack );
     void uninstallProtocol ( QQtProtocol* stack );
     QQtProtocol* installedProtocol();
 
-    void SendConnectMessage();
-    int SendDisConnectFromHost();
+    void sendConnectToHost();
+    int sendDisConnectFromHost();
 
 signals:
     void signalConnecting();
@@ -61,11 +67,18 @@ private slots:
 
 protected slots:
     void readyReadData();
-    void writeData ( const QByteArray& );
+    void slotWriteData ( const QByteArray& );
 
-private:
+protected:
+    /**
+     * @brief translator
+     * 用于拆分和分发数据报
+     * @param bytes
+     */
+    virtual void translator ( const QByteArray& bytes );
     void connectToSingelHost();
 
+private:
     /*
      * TODO:如果文件传输影响到了UI线程，那么需要将QTcpSocket局部变量化
      * 阻塞UI不必考虑此处
@@ -80,4 +93,4 @@ private:
 };
 
 
-#endif // QQT_CLIENT_H
+#endif // QQTTCPCLIENT_H

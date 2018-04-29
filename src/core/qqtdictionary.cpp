@@ -1,9 +1,13 @@
 #include "qqtdictionary.h"
 
-QQtDictNode::QQtDictNode ( QObject* parent ) :
-    QObject ( parent )
+QQtDictNode::QQtDictNode ()
 {
     m_type = DictMax;
+}
+
+QQtDictNode::~QQtDictNode()
+{
+
 }
 
 bool QQtDictNode::isValue() const
@@ -248,14 +252,12 @@ void QQtDictNode::remove ( const QString& key )
     m_map.remove ( key );
 }
 
-QQtDictNode::QQtDictNode ( const QQtDictNode& other, QObject* parent ) :
-    QObject ( parent )
+QQtDictNode::QQtDictNode ( const QQtDictNode& other )
 {
     *this = other;
 }
 
-QQtDictNode::QQtDictNode ( const QQtDictNode::EDictType type, QObject* parent ) :
-    QObject ( parent )
+QQtDictNode::QQtDictNode ( const QQtDictNode::EDictType type )
 {
     m_type = type;
 }
@@ -270,8 +272,7 @@ const QQtDictNode& QQtDictNode::operator[] ( int index ) const
     return m_list[index];
 }
 
-QQtDictNode::QQtDictNode ( const QVariant& value, QObject* parent ) :
-    QObject ( parent )
+QQtDictNode::QQtDictNode ( const QVariant& value )
 {
     m_type = DictValue;
     *this = value;

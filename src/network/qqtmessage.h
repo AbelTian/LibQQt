@@ -20,7 +20,7 @@ public:
      * @return
      */
     inline virtual quint16 minlength() const {
-        return 0;
+        return 0x00;
     }
     /**
      * @brief 最大报文长

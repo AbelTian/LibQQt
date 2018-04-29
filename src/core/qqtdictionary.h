@@ -33,9 +33,8 @@ typedef QMutableListIterator<QQtDictNode> QQtDictNodeMutableListIterator;
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量。
  * 而且，接口设计也不够灵活，存入和取出都不太方便。
  */
-class QQTSHARED_EXPORT QQtDictNode : public QObject
+class QQTSHARED_EXPORT QQtDictNode
 {
-    Q_OBJECT
     Q_ENUMS ( EDictType )
 
 public:
@@ -51,8 +50,8 @@ public:
     } EDictType;
 
     /*explicit 函数只能作为构造函数，不能作为拷贝构造函数，拷贝构造函数不可加*/
-    explicit QQtDictNode ( QObject* parent = 0 );
-    virtual ~QQtDictNode() {}
+    explicit QQtDictNode ();
+    virtual ~QQtDictNode ();
 
     bool isNull() const;
     bool isValid() const;
@@ -119,9 +118,9 @@ public:
     void remove ( const QString& key );
 
     /*深拷贝*/
-    QQtDictNode ( const QQtDictNode& other, QObject* parent = 0 );
-    QQtDictNode ( const QVariant& value, QObject* parent = 0 );
-    QQtDictNode ( const EDictType type, QObject* parent = 0 );
+    QQtDictNode ( const QQtDictNode& other );
+    QQtDictNode ( const QVariant& value );
+    QQtDictNode ( const EDictType type );
 
     /*操作符*/
     /*警告：可读、可写*/
