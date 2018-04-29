@@ -1,4 +1,4 @@
-#include "qqtwebsocketserver.h"
+﻿#include "qqtwebsocketserver.h"
 
 QQtWebSocketServer::QQtWebSocketServer ( const QString& serverName, SslMode secureMode,
                                          QObject* parent ) : QWebSocketServer ( serverName, secureMode, parent )
@@ -85,7 +85,6 @@ void QQtWebSocketServer::clientSocketDisConnected()
     QQtProtocol* protocol = clientSocket->installedProtocol();
     clientSocket->uninstallProtocol ( protocol );
     clientSocket->deleteLater();
-    protocol->deleteLater();
     m_clientList.removeOne ( clientSocket );
 }
 

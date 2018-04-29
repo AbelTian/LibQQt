@@ -1,4 +1,4 @@
-#ifndef QQTCORE_H
+﻿#ifndef QQTCORE_H
 #define QQTCORE_H
 
 #include <QWidget>
@@ -110,6 +110,8 @@ QQTSHARED_EXPORT void QQtSleep ( int millsecond );
 #define perr(req, rsl) if(req == rsl) pline() << hex << rsl
 #define ptime() pline() << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss zzz")
 #define pmeta(inst) pline() << inst->metaObject()->className()
+#define pdebug() qDebug()
+#define pdebugo() qDebug().nospace()
 //-----------------------
 #define packline() pline() << qDebug().nospace()
 

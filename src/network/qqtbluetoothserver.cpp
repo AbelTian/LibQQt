@@ -1,4 +1,4 @@
-#include "qqtbluetoothserver.h"
+﻿#include "qqtbluetoothserver.h"
 #include "qqtbluetoothclient.h"
 
 QQtBluetoothServer::QQtBluetoothServer ( QBluetoothServiceInfo::Protocol serverType,
@@ -44,7 +44,6 @@ void QQtBluetoothServer::clientSocketDisConnected()
     QQtProtocol* protocol = clientSocket->installedProtocol();
     clientSocket->uninstallProtocol ( protocol );
     clientSocket->deleteLater();
-    protocol->deleteLater();
     m_clientList.removeOne ( clientSocket );
 }
 
