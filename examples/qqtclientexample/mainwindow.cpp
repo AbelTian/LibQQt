@@ -13,8 +13,8 @@ MainWindow::MainWindow ( QWidget* parent ) :
     // websocket?
     //
     //Tcp OK
-    //p = QQtClientConnectionInstance ( this );
-    p = QQtClientUdpConnectionInstance ( this );
+    p = QQtClientConnectionInstance ( this );
+    //p = QQtClientUdpConnectionInstance ( this );
     connect ( p, SIGNAL ( signalServerSay ( QString ) ),
               this, SLOT ( on_recv_say_hello ( QString ) ),
               Qt::QueuedConnection );
