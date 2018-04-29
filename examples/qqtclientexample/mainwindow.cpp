@@ -14,7 +14,8 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //
     p = QQtClientConnectionInstance ( this );
     connect ( p, SIGNAL ( signalServerSay ( QString ) ),
-              this, SLOT ( on_recv_say_hello ( QString ) ) );
+              this, SLOT ( on_recv_say_hello ( QString ) ),
+              Qt::QueuedConnection );
 
     //QQtClient2Protocol* p0 = QQtClient2ConnectionInstance ( this );
     //p0->sendCommand1();

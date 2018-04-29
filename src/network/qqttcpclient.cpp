@@ -143,10 +143,6 @@ void QQtTcpClient::socketStateChanged ( QAbstractSocket::SocketState eSocketStat
 
         case QAbstractSocket::UnconnectedState:
         {
-            eConType++;
-            QSettings set;
-            set.setValue ( "Network/eConType", eConType );
-            set.sync();
             break;
         }
         default:
@@ -173,8 +169,19 @@ void QQtTcpClient::socketErrorOccured ( QAbstractSocket::SocketError e )
 
         case QAbstractSocket::HostNotFoundError:
         default:
+        {
+            QSettings set;
+            int contype = set.value ( "Network/eConType", 0 ).toInt();
+            contype++;
+            contype = contype % m_serverIP.size();
+            set.setValue ( "Network/eConType", contype );
+            set.sync();
+
+            eConType = contype;
+
             emit signalConnectFail();
-            break;
+        }
+        break;
     }
 }
 
@@ -212,9 +219,12 @@ void QQtTcpClient::updateProgress ( qint64 bytes )
 
 void QQtTcpClient::connectToSingelHost()
 {
+    //int contype = eConType % m_serverIP.size();
+
     QSettings set;
     int contype = set.value ( "Network/eConType", 0 ).toInt();
-    //int contype = eConType % m_serverIP.size();
+    contype = contype % m_serverIP.size();
+
     QString ip = m_serverIP.at ( contype );
     connectToHost ( QHostAddress ( ip ), m_PORT );
 

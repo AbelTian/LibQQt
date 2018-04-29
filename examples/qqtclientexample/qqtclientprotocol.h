@@ -149,7 +149,6 @@ protected:
     }
 
     virtual quint16 splitter ( const QByteArray& l ) override { //stream
-        pline() << l[0] << l[1] << l[2] << l[3] << l[4] << l[5] << l[6] << l[7];
         for ( int i = 0; i < l.size(); i++ ) {
             pline() << l[i];
         }
@@ -157,7 +156,6 @@ protected:
         QByteArray s0 = l.left ( 3 );
         quint8 start = 0;
         quint16 size = 0;
-        pline() << s0[0] << s0[1] << s0[2];
 
         s0 >> start;
         s0 >> size;
