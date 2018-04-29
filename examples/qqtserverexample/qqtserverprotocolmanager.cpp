@@ -64,7 +64,7 @@ QQtServerProtocolManager* QQtServer2Instance ( QObject* parent )
         //安装协议管理者
         s0->installProtocolManager ( m0 );
         //开始监听
-        s0->bind ( 8001 );
+        s0->bind ( QHostAddress::Any, 8001 );
         //服务器初始化完成。
     }
 

@@ -6,7 +6,8 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui ( new Ui::MainWindow )
 {
     ui->setupUi ( this );
-    pm0 = QQtServer2Instance ( this );
+    pm0 = QQtServerInstance ( this );
+    //pm0 = QQtServer2Instance(this);
     connect ( pm0, SIGNAL ( notifyToBusinessLevel ( const QQtProtocol*, const QQtMessage* ) ),
               this, SLOT ( recvANotify ( const QQtProtocol*, const QQtMessage* ) ) );
 
