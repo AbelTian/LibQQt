@@ -6,7 +6,6 @@
 #include <qqtprotocol.h>
 #include <qqtprotocolmanager.h>
 #include <qqtcore.h>
-#include <qqttcpserver.h>
 
 /**
  * @brief The QQtServerMessage class
@@ -191,5 +190,6 @@ public slots:
 };
 
 QQtServerProtocolManager* QQtServerInstance ( QObject* parent = 0 );
+QQtServerProtocolManager* QQtServer2Instance ( QObject* parent = 0 );
 
 #endif // QQTSERVERPROTOCOLMANAGER_H
