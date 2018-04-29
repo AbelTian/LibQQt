@@ -188,7 +188,7 @@ void QQtUdpClient::slotWriteData ( const QByteArray& bytes )
 {
 #if QT_VERSION > QT_VERSION_DATAGRAM
     QNetworkDatagram datagram;
-    datagram.setData ( dg );
+    datagram.setData ( bytes );
     datagram.setDestination ( QHostAddress ( mIP ), mPort );
     datagram.setSender ( localAddress(), localPort() );
     writeDatagram ( datagram );

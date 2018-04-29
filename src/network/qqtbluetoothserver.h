@@ -2,7 +2,8 @@
 #define QQTBLUETOOTHSERVER_H
 
 #include <QBluetoothServer>
-#include "qqtprotocol.h"
+#include <qqtbluetoothclient.h>
+#include "qqtprotocolmanager.h"
 #include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQtBluetoothServer : public QBluetoothServer
@@ -12,9 +13,14 @@ public:
     explicit QQtBluetoothServer ( QBluetoothServiceInfo::Protocol serverType, QObject* parent = nullptr );
     ~QQtBluetoothServer();
 
-    void installProtocol ( QQtProtocol* stack );
-    void uninstallProtocol ( QQtProtocol* stack );
-    QQtProtocol* installedProtocol();
+    void installProtocolManager ( QQtProtocolManager* stackGroup );
+    void uninstallProtocolManager ( QQtProtocolManager* stackGroup );
+    QQtProtocolManager* installedProtocolManager();
+
+public:
+    QQtBluetoothClient* findClientByProtocolInstance ( QQtProtocol* protocol );
+    QQtBluetoothClient* findClientByIPAddress ( QString ip, quint16 port );
+    QList<QQtBluetoothClient*>& clientList() { return m_clientList; }
 
 signals:
 
@@ -24,9 +30,11 @@ signals:
 
 private slots:
     void comingNewConnection();
-
+public slots:
+    void clientSocketDisConnected();
 private:
-    QQtProtocol* m_protocol;
+    QQtProtocolManager* m_protocolManager;
+    QList<QQtBluetoothClient*> m_clientList;
 };
 
 #endif // QQTBLUETOOTHSERVER_H

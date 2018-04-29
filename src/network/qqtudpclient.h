@@ -64,13 +64,15 @@ private slots:
     //Qt的元对象系统，解析信号和槽函数，不支持宏。
     //QtUdpSocket，writeDatagram不是个槽。
 
-protected:
+public:
     /**
      * @brief translator
      * 用于拆分和分发数据报
      * @param bytes
      */
     void translator ( const QByteArray& bytes );
+
+protected:
     virtual void recvDatagram ( QByteArray& bytes, QHostAddress& address, quint16& port );
 private:
     QQtProtocol* m_protocol;

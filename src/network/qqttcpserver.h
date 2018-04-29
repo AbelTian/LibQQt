@@ -21,14 +21,20 @@ public:
     void uninstallProtocolManager ( QQtProtocolManager* stackGroup );
     QQtProtocolManager* installedProtocolManager();
 
+public:
+    QQtTcpClient* findClientByProtocolInstance ( QQtProtocol* protocol );
+    QQtTcpClient* findClientByIPAddress ( QString ip, quint16 port );
+    QList<QQtTcpClient*>& clientList() { return m_clientList; }
+
 signals:
     // QTcpServer interface
 protected:
     virtual void incomingConnection ( qintptr handle ) override;
-private:
-    QQtProtocolManager* m_protocolManager;
 public slots:
     void clientSocketDisConnected();
+private:
+    QQtProtocolManager* m_protocolManager;
+    QList<QQtTcpClient*> m_clientList;
 };
 
 

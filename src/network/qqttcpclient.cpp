@@ -3,9 +3,6 @@
 #include <QTcpSocket>
 #include <QHostInfo>
 
-#include "qqtnetwork.h"
-#include "qqtcore.h"
-
 QQtTcpClient::QQtTcpClient ( QObject* parent ) :
     QTcpSocket ( parent )
 {
@@ -145,12 +142,13 @@ void QQtTcpClient::socketStateChanged ( QAbstractSocket::SocketState eSocketStat
             break;
 
         case QAbstractSocket::UnconnectedState:
+        {
             eConType++;
             QSettings set;
             set.setValue ( "Network/eConType", eConType );
             set.sync();
             break;
-
+        }
         default:
             break;
     }

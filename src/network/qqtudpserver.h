@@ -50,7 +50,7 @@ public:
 public:
     QQtUdpClient* findClientByProtocolInstance ( QQtProtocol* protocol );
     QQtUdpClient* findClientByIPAddress ( QString ip, quint16 port );
-    QList<QQtUdpClient*>& clientList() const { return m_clientList; }
+    QList<QQtUdpClient*>& clientList() { return m_clientList; }
 
     /**
      * 以下和用户无关

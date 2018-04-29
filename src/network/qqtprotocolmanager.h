@@ -95,8 +95,6 @@ public:
         return p0;
     }
 
-private slots:
-    void clientSocketDisConnected();
 private:
     QQtProtocol* mProtocol;
 };
