@@ -102,8 +102,8 @@ void QQtUdpServer::readyReadData()
                 //如果崩溃，对这个操作进行加锁。
                 QQtProtocol* protocol = m_protocolManager->createProtocol();
                 clientSocket->installProtocol ( protocol );
-                disconnect ( protocol, SIGNAL ( write ( QByteArray ) ), clientSocket, SLOT ( slotWriteData ( QByteArray ) ) );
-                connect ( protocol, SIGNAL ( write ( QByteArray ) ), this, SLOT ( slotWriteData ( QByteArray ) ) );
+                //disconnect ( protocol, SIGNAL ( write ( QByteArray ) ), clientSocket, SLOT ( slotWriteData ( QByteArray ) ) );
+                //connect ( protocol, SIGNAL ( write ( QByteArray ) ), this, SLOT ( slotWriteData ( QByteArray ) ) );
                 m_clientList.push_back ( clientSocket );
             }
             pline() << "udp server use sub client protocol " << clientSocket << address << port;
