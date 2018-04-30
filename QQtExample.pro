@@ -39,21 +39,23 @@ SUBDIRS =
 #方法：include(.../LibQQt/src/app_base_manager.pri)
 #QQt提供QQtApplication帮助App管理Application句柄。
 #SUBDIRS += examples/qqtframe2
+#必看
 #SUBDIRS += examples/exquisite
-#必开
-#SUBDIRS += examples/qqtaudioexample
 #SUBDIRS += examples/tabwidgetexamples
 #need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
-#网络创建工具
-SUBDIRS += demo/QQtClientCreator
-SUBDIRS += demo/QQtServerCreator
-#这边是个组合项，客户端和服务器一起的。
-SUBDIRS += examples/qqtclientexample
-SUBDIRS += examples/qqtserverexample
-#通信协议的复杂的例子
-SUBDIRS += examples/qqtnetworkexample
 
+#网络创建工具
+#SUBDIRS += demo/QQtClientCreator
+#SUBDIRS += demo/QQtServerCreator
+#这边是个组合项，客户端和服务器一起的。必看
+#SUBDIRS += examples/qqtclientexample
+#SUBDIRS += examples/qqtserverexample
+#通信协议的复杂的例子
+#SUBDIRS += examples/qqtnetworkexample
+
+#必开 这两个例子是关于QQtAudio的最好展示
+SUBDIRS += examples/qqtaudioexample
 #greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
@@ -81,7 +83,6 @@ SUBDIRS += examples/qqtnetworkexample
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/qqtdicttest
 #必开
-#
 SUBDIRS += test/qqtdicttest2
 #SUBDIRS += test/bytearraytest
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
@@ -89,7 +90,7 @@ SUBDIRS += test/qqtdicttest2
 #}
 #SUBDIRS += test/coretest
 #必开
-#SUBDIRS += test/giftest
+SUBDIRS += test/giftest
 #SUBDIRS += test/tmpproj
 #
 #need QtSoap - WebSupport

@@ -19,9 +19,11 @@ public:
     explicit MainWindow ( QWidget* parent = 0 );
     ~MainWindow();
 
+public slots:
+    void on_play_frame();
+
 private slots:
     void on_pushButton_clicked();
-    void on_play_frame();
 
 private:
     Ui::MainWindow* ui;
