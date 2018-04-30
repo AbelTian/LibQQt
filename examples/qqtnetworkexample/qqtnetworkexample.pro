@@ -21,6 +21,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+SOURCES -= \
+    qqtlanprotocol.cpp
+
+HEADERS -= \
+    qqtlanprotocol.h
+
+SOURCES += \
+    qqtcloudprotocol.cpp \
+    qqtnetworkmessage.cpp \
+    qqtserialmessage.cpp \
+    qqtuserserialprotocol.cpp \
+    qqtsubprotocoltest.cpp
+
+
+HEADERS += \
+    qqtcloudprotocol.h \
+    qqtnetworkmessage.h \
+    qqtserialmessage.h \
+    qqtuserserialprotocol.h \
+    qqtsubprotocoltest.h
 
 
 SOURCES += \
@@ -36,3 +56,19 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
+#qmake_pre/post_link will work after source changed but not pro pri changed.
+system("touch main.cpp")
+
+#-------------------------------------------------
+#link qqt library
+#if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
+#user can modify any infomation under this annotation
+#-------------------------------------------------
+include(../../src/app_base_manager.pri)
+
+contains (DEFINES, __BLUETOOTH__){
+    SOURCES += \
+        quserbluetoothprotocol.cpp
+    HEADERS += \
+        quserbluetoothprotocol.h
+}

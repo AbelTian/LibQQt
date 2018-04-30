@@ -21,32 +21,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES -= \
-    qqtlanprotocol.cpp
-
-HEADERS -= \
-    qqtlanprotocol.h
-
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
     qqtclientprotocol.cpp \
-    qqtcloudprotocol.cpp \
-    qqtnetworkmessage.cpp \
-    qqtserialmessage.cpp \
-    qqtuserserialprotocol.cpp \
-    qqtsubprotocoltest.cpp \
     qqtclient2protocol.cpp
 
 
 HEADERS += \
         mainwindow.h \
     qqtclientprotocol.h \
-    qqtcloudprotocol.h \
-    qqtnetworkmessage.h \
-    qqtserialmessage.h \
-    qqtuserserialprotocol.h \
-    qqtsubprotocoltest.h \
     qqtclient2protocol.h
 
 FORMS += \
@@ -61,13 +45,6 @@ system("touch main.cpp")
 #user can modify any infomation under this annotation
 #-------------------------------------------------
 include(../../src/app_base_manager.pri)
-
-contains (DEFINES, __BLUETOOTH__){
-    SOURCES += \
-        quserbluetoothprotocol.cpp
-    HEADERS += \
-        quserbluetoothprotocol.h
-}
 
 #-------------------------------------------------
 #user app may use these these settings prefertly
