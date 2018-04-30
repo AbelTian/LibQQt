@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    qqtserverprotocolmanager.cpp
+    qqtserverprotocolmanager.cpp \
+    qqtserver2protocolmanager.cpp
 
 HEADERS += \
         mainwindow.h \
-    qqtserverprotocolmanager.h
+    qqtserverprotocolmanager.h \
+    qqtserver2protocolmanager.h
 
 FORMS += \
         mainwindow.ui

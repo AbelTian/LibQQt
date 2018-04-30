@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow ( QWidget* parent ) :
@@ -7,8 +7,11 @@ MainWindow::MainWindow ( QWidget* parent ) :
 {
     ui->setupUi ( this );
     pm0 = QQtServerInstance ( this );
+    //pm0 = QQtServer2Instance(this);
     connect ( pm0, SIGNAL ( notifyToBusinessLevel ( const QQtProtocol*, const QQtMessage* ) ),
               this, SLOT ( recvANotify ( const QQtProtocol*, const QQtMessage* ) ) );
+
+    //QQtServer2ConnectionInstance ( this );
 }
 
 MainWindow::~MainWindow()

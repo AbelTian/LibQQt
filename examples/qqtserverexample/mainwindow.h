@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "qqtserverprotocolmanager.h"
+#include "qqtserver2protocolmanager.h"
 
 namespace Ui {
 class MainWindow;

@@ -3,7 +3,8 @@
 
 #include <qqtmessage.h>
 #include <qqtprotocol.h>
-#include <qqttcpserver.h>
+#include <qqttcpclient.h>
+#include "qqtudpclient.h"
 
 class QQtClientMessage : public QQtMessage
 {
@@ -56,7 +57,7 @@ public:
     }
 
     void translate() {
-        asize = 2 + 1 + adata.length();
+        asize = 2 + 1 + adata.size();
     }
 
 
@@ -149,15 +150,12 @@ protected:
     }
 
     virtual quint16 splitter ( const QByteArray& l ) override { //stream
-        pline() << l[0] << l[1] << l[2] << l[3] << l[4] << l[5] << l[6] << l[7];
-        for ( int i = 0; i < l.size(); i++ ) {
-            pline() << l[i];
-        }
+        if ( l.size() < 3 )
+            return 0;
 
         QByteArray s0 = l.left ( 3 );
         quint8 start = 0;
         quint16 size = 0;
-        pline() << s0[0] << s0[1] << s0[2];
 
         s0 >> start;
         s0 >> size;
@@ -195,5 +193,6 @@ protected:
 
 //业务层初始化一下这个实例，总是从这里获取协议句柄进行对外读写。
 QQtClientProtocol* QQtClientConnectionInstance ( QObject* parent = 0 );
+QQtClientProtocol* QQtClientUdpConnectionInstance ( QObject* parent = 0 );
 
 #endif // QQTCLIENTPROTOCOL_H

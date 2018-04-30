@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "qqtclientprotocol.h"
+#include "qqtclient2protocol.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,9 +17,10 @@ public:
     explicit MainWindow ( QWidget* parent = 0 );
     ~MainWindow();
 
+public slots:
+    void on_recv_say_hello ( QString );
 private slots:
     void on_pushButton_clicked();
-    void on_recv_say_hello ( QString );
 
 private:
     Ui::MainWindow* ui;

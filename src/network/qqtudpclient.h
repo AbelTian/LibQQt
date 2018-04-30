@@ -2,9 +2,15 @@
 #define QQTUDPCLIENT_H
 
 #include <QUdpSocket>
-#include "qqtudpprotocol.h"
+#include "qqtprotocol.h"
 #include "qqt-local.h"
 #include "qqtcore.h"
+
+#define QT_VERSION_DATAGRAM QT_VERSION_CHECK(5,8,0)
+
+#if QT_VERSION > QT_VERSION_DATAGRAM
+#include <QNetworkDatagram>
+#endif
 
 /*
  * Udp通信客户端
@@ -13,6 +19,7 @@
  *
  * 默认情况下，就可以接收发送数据了。在协议里处理接收、发送。
  * 只有绑定本地IP、端口才能进行接收
+ *
  */
 class QQTSHARED_EXPORT QQtUdpClient : public QUdpSocket
 {
@@ -21,9 +28,18 @@ public:
     explicit QQtUdpClient ( QObject* parent = nullptr );
     virtual ~QQtUdpClient() {}
 
-    void installProtocol ( QQtUdpProtocol* stack );
-    void uninstallProtocol ( QQtUdpProtocol* stack );
-    QQtUdpProtocol* installedProtocol();
+    void setServer ( QString ip, quint16 port ) {
+        mIP = ip;
+        mPort = port;
+    }
+    void getServer ( QString& ip, quint16& port ) {
+        ip = mIP;
+        port = mPort;
+    }
+
+    void installProtocol ( QQtProtocol* stack );
+    void uninstallProtocol ( QQtProtocol* stack );
+    QQtProtocol* installedProtocol();
 
 signals:
     void signalConnecting();
@@ -33,9 +49,10 @@ signals:
     void signalDisConnectFail();//
     void signalUpdateProgress ( qint64 value );
 public slots:
+    void slotWriteData ( const QByteArray& );
 
 protected slots:
-    void readyReadData();
+    virtual void readyReadData();
 private slots:
     void domainHostFound();
     void socketStateChanged ( QAbstractSocket::SocketState );
@@ -46,11 +63,21 @@ private slots:
     //如果有一个同名的槽，参数不同，并且被用宏控制起来，Qt编译不过。
     //Qt的元对象系统，解析信号和槽函数，不支持宏。
     //QtUdpSocket，writeDatagram不是个槽。
-    qint64 slotWriteDatagram ( const QByteArray& datagram,
-                               const QHostAddress& host, quint16 port );
 
+public:
+    /**
+     * @brief translator
+     * 用于拆分和分发数据报
+     * @param bytes
+     */
+    void translator ( const QByteArray& bytes );
+
+protected:
+    virtual void recvDatagram ( QByteArray& bytes, QHostAddress& address, quint16& port );
 private:
-    QQtUdpProtocol* m_protocol;
+    QQtProtocol* m_protocol;
+    QString mIP;
+    quint16 mPort;
 };
 
 #endif // QQTUDPCLIENT_H

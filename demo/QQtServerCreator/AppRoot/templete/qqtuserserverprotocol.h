@@ -1,18 +1,19 @@
-﻿#ifndef QQTUSERPROTOCOL_H
-#define QQTUSERPROTOCOL_H
+﻿#ifndef QQTUSERSERVERPROTOCOL_H
+#define QQTUSERSERVERPROTOCOL_H
 
 #include <qqtmessage.h>
 #include <qqtprotocol.h>
-#include <qqttcpclient.h>
+#include <qqtprotocolmanager.h>
+#include <qqttcpserver.h>
 
-class QQtUserMessage : public QQtMessage
+class QQtUserServerMessage : public QQtMessage
 {
     Q_OBJECT
 public:
-    explicit QQtUserMessage ( QObject* parent = nullptr ) {
+    explicit QQtUserServerMessage ( QObject* parent = nullptr ) {
         mSize = 0x03;//报文定长
     }
-    ~QQtUserMessage() {
+    ~QQtUserServerMessage() {
 
     }
 
@@ -47,28 +48,28 @@ public:
     }
 };
 
-QDebug& operator << ( QDebug&, const QQtUserMessage& msg );
-
+QDebug& operator << ( QDebug& dbg, const QQtUserServerMessage& msg );
 
 //业务层总是用这个协议工作，读来到的，写出去的。
-class QQtUserProtocol : public QQtProtocol
+class QQtUserServerProtocol : public QQtProtocol
 {
     Q_OBJECT
 public:
-    explicit QQtUserProtocol ( QObject* parent = nullptr ) {
+    explicit QQtUserServerProtocol ( QObject* parent = nullptr ) {
 
     }
-    ~QQtUserProtocol() {
+    ~QQtUserServerProtocol() {
 
     }
 
     //收到外部发来的很多命令，处理一下告诉业务层干点什么。
-    void recvCommand1 ( const QQtUserMessage& msg ) {
+    void recvCommand1 ( const QQtUserServerMessage& msg ) {
         //what do you want to do?
     }
-    void recvCommand2 ( const QQtUserMessage& msg ) {
+    void recvCommand2 ( const QQtUserServerMessage& msg ) {
         //what do you want to do?
     }
+
     void sendCommand1() {
         //what do you want to do?
     }
@@ -101,7 +102,7 @@ protected:
     virtual bool dispatcher ( const QByteArray& m ) override { //message
         bool ret = true;
 
-        QQtUserMessage qMsg;
+        QQtUserServerMessage qMsg;
         qMsg.parser ( m );
         pline() << qMsg;
 
@@ -124,7 +125,7 @@ protected:
     }
 };
 
-//业务层初始化一下这个实例，总是从这里获取协议句柄进行对外读写。
-QQtTcpClient* QQtUserInstance ( QQtUserProtocol*& protocol, QObject* parent = 0 );
+//用户使用这里的ProtocolManager进行必要的和客户端的通信。一般在QQtUserServerProtocol里面解决。
+QQtTcpServer* QQtUserServerInstance ( QQtProtocolManager*& protocolManager, QObject* parent );
 
-#endif // QQTUSERPROTOCOL_H
+#endif // QQTUSERSERVERPROTOCOL_H

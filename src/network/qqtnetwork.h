@@ -1,63 +1,32 @@
 #ifndef QQTNETWORKDEFINE_H
 #define QQTNETWORKDEFINE_H
 
-#include <QWidget>
-#include <QUuid>
-#include <QApplication>
-#include <QMessageBox>
-#include <QFile>
-#include <QMutex>
-#include <QDateTime>
-#include <QTextStream>
-#include <QElapsedTimer>
-#include <QDesktopWidget>
-#include <QDebug>
-#include <qqt-local.h>
+#include <qqtprotocolmanager.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+#include <qqtprotocol.h>
+#include <qqtmessage.h>
 
-enum
-{
-    ESSID_STATUS = 0,
-    ESSID_NAME,//SSID
-    ESSID_TYPE,
-    ESSID_ENCRYP,
-    ESSID_PASS,
-    ESSID_BSSID,
-    ESSID_FREQ,
-    ESSID_SIGNAL,
-    ESSID_FLAG,
-    ESSID_MAX,
-};
+#include <qqttcpclient.h>
+#include <qqttcpserver.h>
 
+#include <qqtudpclient.h>
+#include <qqtudpserver.h>
 
-#ifdef __cplusplus
-}
-#endif  /* __cplusplus */
+#include <qqtserialport.h>
 
-
-typedef struct QQTSHARED_EXPORT tagWifi
-{
-    QString wifi[ESSID_MAX];
-
-    bool isValid();
-
-    /* only mips32 no use const, arm used
-     * 只有MIPS32不使用const，ARM32使用了。
-     */
-#ifdef __MIPS_LINUX__
-    tagWifi& operator= (tagWifi& w);
-#else
-    tagWifi& operator=(const tagWifi& w);
+#ifdef __BLUETOOTH__
+#include <qqtbluetoothclient.h>
+#include <qqtbluetoothserver.h>
+#include <qqtbluetoothmanager.h>
 #endif
 
-    const QString& operator[](int index) const;
+#ifdef __WEBSOCKETSUPPORT__
+#include <qqtwebsocketclient.h>
+#include <qqtwebsocketserver.h>
+#endif
 
-    QString& operator[](int index);
-} TWifi;
-
-
+#ifdef __WEBACCESSSUPPORT__
+#include <qqtwebaccessmanager.h>
+#endif
 
 #endif // QQTNETWORKDEFINE_H
