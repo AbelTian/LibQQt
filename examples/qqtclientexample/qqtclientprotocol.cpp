@@ -31,7 +31,6 @@ QQtClientProtocol* QQtClientConnectionInstance ( QObject* parent )
     return p0;
 }
 
-#include "qqtudpclient.h"
 
 QQtClientProtocol* QQtClientUdpConnectionInstance ( QObject* parent )
 {
