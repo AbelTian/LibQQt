@@ -1,4 +1,4 @@
-#ifndef QQTMPTABLEWIDGET_H
+﻿#ifndef QQTMPTABLEWIDGET_H
 #define QQTMPTABLEWIDGET_H
 
 #include <QWidget>
@@ -17,6 +17,10 @@ class QQtMPTableWidget;
  * 关于视图规格的改变改变到上层
  * 这里的控件使用默认视图
  * 这里的控件只是Table-DB关系，没有Tree/List模型
+ *
+ * 第一次查询，为数据准备页面，速度较慢。
+ * 后来，变动时，只有导致页数变动时才会慢一点点的感觉。
+ * 平时查看，都是极速。
  */
 class QQTSHARED_EXPORT QQtMPTableWidget : public QWidget
 {
