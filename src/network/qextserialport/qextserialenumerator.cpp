@@ -9,6 +9,9 @@
 #if defined ( _TTY_WIN_ )
 #include <objbase.h>
 #include <initguid.h>
+#undef PHYSICAL_ADDRESS
+#define PHYSICAL_ADDRESS LARGE_INTEGER
+#include <ntddser.h>
 #endif
 
 

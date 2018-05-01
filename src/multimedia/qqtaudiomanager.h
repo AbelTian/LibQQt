@@ -9,9 +9,10 @@
 #include <QAudioDeviceInfo>
 #include <QAudioFormat>
 
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
 #include <QAudioInputSelectorControl>
 #include <QAudioOutputSelectorControl>
-
+#endif
 
 #include <qqtcore.h>
 #include <qqt-local.h>

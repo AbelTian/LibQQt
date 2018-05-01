@@ -495,6 +495,8 @@ QIODevice* QQtWavAudioInput::setSourceFile ( const QString& localFile )
     //如果开着，不管。
     mSourceFile = localFile;
 
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+
     //判断文件类型是否接受
     QMimeDatabase mimedb;
     QMimeType mimetype = mimedb.mimeTypeForFile ( mSourceFile );
@@ -506,6 +508,7 @@ QIODevice* QQtWavAudioInput::setSourceFile ( const QString& localFile )
         pline() << "can't play file";
         return NULL;
     }
+#endif
 
     //判断音频具体格式
     //支持qrc文件
