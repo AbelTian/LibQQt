@@ -3,6 +3,9 @@
 
 #include <QGLWidget>
 
+#include "qqtcore.h"
+#include "qqt-local.h"
+
 /**
  * @brief The QQtOpenGLWindow class
  * Apple平台和Windows平台对OpenGL API使用加以了限制，一些会导致使用bug的限制。
@@ -12,7 +15,7 @@
  * 建议用户继承下去，方便添加子GL窗口，也可以闲置，仅仅作为OpenGL Widget的parent存在。
  * 好比在MainWindow下添加centralWidget。
  */
-class QQtOpenGLWindow : public QGLWidget
+class QQTSHARED_EXPORT QQtOpenGLWindow : public QGLWidget
 {
     Q_OBJECT
 public:

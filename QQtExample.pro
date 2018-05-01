@@ -45,23 +45,6 @@ SUBDIRS =
 #need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
 
-#网络创建工具
-#SUBDIRS += demo/QQtClientCreator
-#SUBDIRS += demo/QQtServerCreator
-#这边是个组合项，客户端和服务器一起的。必看
-#SUBDIRS += examples/qqtclientexample
-#SUBDIRS += examples/qqtserverexample
-#通信协议的复杂的例子
-#SUBDIRS += examples/qqtnetworkexample
-
-#必开 这两个例子是关于QQtAudio的最好展示
-SUBDIRS += examples/qqtaudioexample
-#greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
-#mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
-
-#udp 嵌入式linux，Qt编译了udp支持，默认是支持的
-#SUBDIRS += examples/qqtudpexample
-#lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
 #SUBDIRS += examples/qqtchartexample
 #
 #SUBDIRS += examples/console_app
@@ -77,20 +60,14 @@ SUBDIRS += examples/qqtaudioexample
 #-----------------------------------------------------------------
 #some test project
 #SUBDIRS += test/gumbo_query_test
-#SUBDIRS += test/svgtest
 #SUBDIRS += test/customqvariant
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
-#SUBDIRS += test/qqtdicttest
-#必开
-SUBDIRS += test/qqtdicttest2
 #SUBDIRS += test/bytearraytest
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
 #    SUBDIRS += test/cmdwidget
 #}
 #SUBDIRS += test/coretest
-#必开
-SUBDIRS += test/giftest
 #SUBDIRS += test/tmpproj
 #
 #need QtSoap - WebSupport
@@ -100,3 +77,29 @@ SUBDIRS += test/giftest
 ##need bluetooth library
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += test/qqtbtfileserver
 
+#SUBDIRS += test/svgtest
+#SUBDIRS += test/qqtdicttest
+#必开
+SUBDIRS += test/qqtdicttest2
+#必开
+SUBDIRS += test/giftest
+
+#必开 这两个例子是关于QQtAudio的最好展示
+SUBDIRS += examples/qqtaudioexample
+#greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
+#mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
+
+#网络创建工具
+#SUBDIRS += demo/QQtClientCreator
+#SUBDIRS += demo/QQtServerCreator
+#这边是个组合项，客户端和服务器一起的。必看
+#SUBDIRS += examples/qqtclientexample
+#SUBDIRS += examples/qqtserverexample
+#通信协议的复杂的例子
+#SUBDIRS += examples/qqtnetworkexample
+
+#udp 嵌入式linux，Qt编译了udp支持，默认是支持的
+#SUBDIRS += examples/qqtudpexample
+#lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
+
+SUBDIRS += test/openglwidgettest

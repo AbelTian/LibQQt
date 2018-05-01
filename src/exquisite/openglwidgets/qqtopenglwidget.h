@@ -4,6 +4,9 @@
 #include <QGLWidget>
 #include <QGLFunctions>
 
+#include "qqtcore.h"
+#include "qqt-local.h"
+
 #if 0
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -22,7 +25,7 @@
  * Windows平台 支持
  * Android平台
  */
-class QQtOpenGLWidget : public QGLWidget
+class QQTSHARED_EXPORT QQtOpenGLWidget : public QGLWidget
 {
     Q_OBJECT
 public:
