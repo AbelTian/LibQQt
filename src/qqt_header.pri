@@ -191,6 +191,8 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         CONFIG += thread
         unix:DEFINES += _TTY_POSIX_
         win32:DEFINES += _TTY_WIN_
+        #Qt4 is not a very good Cross Qt version, Qt5 suggest.
+        win32:LIBS += -lsetupapi -ladvapi32
         #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
     } else {
         #message ( __QSERIALPORT__ Defined in $${TARGET})

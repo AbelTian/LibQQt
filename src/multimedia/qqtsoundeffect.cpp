@@ -37,8 +37,17 @@ void QQtWavSoundEffect::useCustomOutputDevice ( const QAudioDeviceInfo& output )
     manager.outputDeviceInfo() = output;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+QDebug& operator <<(QDebug& dbg, const QAudioFormat& fmt)
+{
+    return dbg;
+}
+#endif
+
 void QQtWavSoundEffect::play ( QString localFile )
 {
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+
     //判断文件类型是否接受
     QMimeDatabase mimedb;
     QMimeType mimetype = mimedb.mimeTypeForFile ( localFile );
@@ -50,6 +59,7 @@ void QQtWavSoundEffect::play ( QString localFile )
         pline() << "can't play file";
         return;
     }
+#endif
 
     mSourceFile = localFile;
 
@@ -75,8 +85,11 @@ void QQtWavSoundEffect::play ( QString localFile )
     manager.outputAudioFormat() = fmt;
 
     manager.startOutput();
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+
     //默认是静音的。
     manager.outputManager()->setVolume ( mVolume );
+#endif
 
     //不响，音频输出设备接受顺序的间隔的输出，不接受一股脑输出。
     //manager.write ( bytes );
@@ -103,7 +116,10 @@ void QQtWavSoundEffect::stop()
 void QQtWavSoundEffect::setVolume ( qreal volume )
 {
     mVolume = volume;
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
+
     manager.outputManager()->setVolume ( mVolume );
+#endif
 }
 
 int QQtWavSoundEffect::loops() const { return mLoops; }

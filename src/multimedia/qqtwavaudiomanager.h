@@ -5,12 +5,14 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
+#if QT_VERSION > QT_VERSION_CHECK(5,0,0)
 #include <QMimeType>
 #include <QMimeData>
 #include <QMimeDatabase>
 
 #include <QSound>
 #include <QSoundEffect>
+#endif
 
 #include <qqtaudiomanager.h>
 

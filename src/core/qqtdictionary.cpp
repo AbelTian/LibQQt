@@ -450,3 +450,4 @@ QDebug& operator<< ( QDebug& dbg, const QQtDictNode& d )
 
     return dbg.space();
 }
+

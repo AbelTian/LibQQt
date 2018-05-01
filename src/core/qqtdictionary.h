@@ -175,6 +175,6 @@ private:
     /*是个列表和子字典，这是错误的，不可能的*/
 };
 
-QDebug& operator<< ( QDebug& dbg, const QQtDictNode& d );
+QQTSHARED_EXPORT QDebug& operator<< ( QDebug& dbg, const QQtDictNode& d );
 
 #endif // QQTDICTIONARY_H
