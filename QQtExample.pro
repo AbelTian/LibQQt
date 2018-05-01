@@ -78,7 +78,8 @@ SUBDIRS =
 ##need bluetooth library
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += test/qqtbtfileserver
 
-#SUBDIRS += test/svgtest
+#
+SUBDIRS += test/svgtest
 #SUBDIRS += test/qqtdicttest
 #必开
 SUBDIRS += test/qqtdicttest2
@@ -104,3 +105,4 @@ SUBDIRS += examples/qqtaudioexample
 #lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
 
 SUBDIRS += test/openglwidgettest
+SUBDIRS += test/osdtest

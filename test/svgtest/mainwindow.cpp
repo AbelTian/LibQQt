@@ -6,35 +6,36 @@
 #include "qqt-qt.h"
 #include <QObject>
 
+#include <qqtframe.h>
+
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
     ui ( new Ui::MainWindow )
 {
     ui->setupUi ( this );
-    //QString svg = QString ( "/Users/abel/Develop/b0-toolskits/macLibraries/Qt/Examples/Qt-5.9.2/svg/svgviewer/files/bubbles.svg" );
-    QString svg = QString ( "/Users/abel/Downloads/2916415846_lanrentuku.com/aa.svg" );
+    QString svg = QString ( qrc ( "aa.svg" ) );
     ui->w->setSvgFile ( svg );
 
-    ui->b0->iconTable() [BTN_NORMAL] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir.svg";
-    ui->b0->iconTable() [BTN_HOVER] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir.svg";
-    ui->b0->iconTable() [BTN_PRESS] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir_press.svg";
+    ui->b0->iconTable() [BTN_NORMAL] = qrc ( "bt_stir.svg" );
+    ui->b0->iconTable() [BTN_HOVER] = qrc ( "bt_stir.svg" );
+    ui->b0->iconTable() [BTN_PRESS] = qrc ( "bt_stir_press.svg" );
     ui->b0->renderToVariable();
 
-    ui->c0->iconTable() [BTN_NORMAL] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir.svg";
-    ui->c0->iconTable() [BTN_HOVER] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir.svg";
-    ui->c0->iconTable() [BTN_PRESS] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir_press.svg";
+    ui->c0->iconTable() [BTN_NORMAL] = qrc ( "bt_stir.svg" );
+    ui->c0->iconTable() [BTN_HOVER] = qrc ( "bt_stir.svg" );
+    ui->c0->iconTable() [BTN_PRESS] = qrc ( "bt_stir_press.svg" );
     ui->c0->renderToVariable();
-    ui->r0->iconTable() [BTN_NORMAL] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir.svg";
-    ui->r0->iconTable() [BTN_HOVER] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir.svg";
-    ui->r0->iconTable() [BTN_PRESS] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir_press.svg";
+    ui->r0->iconTable() [BTN_NORMAL] = qrc ( "bt_stir.svg" );
+    ui->r0->iconTable() [BTN_HOVER] = qrc ( "bt_stir.svg" );
+    ui->r0->iconTable() [BTN_PRESS] = qrc ( "bt_stir_press.svg" );
     ui->r0->renderToVariable();
-    ui->r1->iconTable() [BTN_NORMAL] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir.svg";
-    ui->r1->iconTable() [BTN_HOVER] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir.svg";
-    ui->r1->iconTable() [BTN_PRESS] = "/Users/abel/Develop/d1-product/App/skin/default/bt_stir_press.svg";
+    ui->r1->iconTable() [BTN_NORMAL] = qrc ( "bt_stir.svg" );
+    ui->r1->iconTable() [BTN_HOVER] = qrc ( "bt_stir.svg" );
+    ui->r1->iconTable() [BTN_PRESS] = qrc ( "bt_stir_press.svg" );
     ui->r1->renderToVariable();
 
-    ui->p0->setSvgFile ( "/Users/abel/Develop/d1-product/App/skin/default/bk_progress_background.svg",
-                         "/Users/abel/Develop/d1-product/App/skin/default/bk_progress_trunk.svg" );
+    ui->p0->setSvgFile ( qrc ( "bk_progress_background.svg" ),
+                         qrc ( "bk_progress_trunk.svg" ) );
     ui->p0->setRange ( 0, 100 );
     ui->p0->setValue ( 60 );
 

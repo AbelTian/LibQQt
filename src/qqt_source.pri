@@ -14,12 +14,8 @@
 #2018年4月6日18点12分
 #这里是LibQQt源文件pri，所有开关宏都在LibQQt头文件pri里开关。
 #-------------------------------------------------
-SOURCES = \
-    $$PWD/exquisite/openglwidgets/qqtopenglwidget.cpp \
-    $$PWD/exquisite/openglwidgets/qqtopenglwindow.cpp
-HEADERS = \
-    $$PWD/exquisite/openglwidgets/qqtopenglwidget.h \
-    $$PWD/exquisite/openglwidgets/qqtopenglwindow.h
+SOURCES =
+HEADERS =
 
 #root dir
 HEADERS += $$PWD/qqt.h \
@@ -103,6 +99,7 @@ HEADERS += \
     $$PWD/widgets/qqtdateedit.h \
     $$PWD/widgets/qqttimeedit.h \
     $$PWD/widgets/qqtdatetimeedit.h
+
 SOURCES += \
     $$PWD/widgets/qqtcheckbox.cpp \
     $$PWD/widgets/qqtheaderview.cpp \
@@ -114,8 +111,6 @@ SOURCES += \
     $$PWD/widgets/qqttabbar.cpp \
     $$PWD/widgets/qqttabwidget.cpp \
     $$PWD/widgets/qqttreeview.cpp \
-    $$PWD/widgets/qqtlineeditwithsearch.cpp \
-    $$PWD/widgets/qqtmptablewidget.cpp \
     $$PWD/widgets/qqttablewidget.cpp \
     $$PWD/widgets/qqtgraphicsscene.cpp \
     $$PWD/widgets/qqtgraphicsitem.cpp \
@@ -135,8 +130,6 @@ HEADERS += \
     $$PWD/widgets/qqttabbar.h \
     $$PWD/widgets/qqttabwidget.h \
     $$PWD/widgets/qqttreeview.h \
-    $$PWD/widgets/qqtlineeditwithsearch.h \
-    $$PWD/widgets/qqtmptablewidget.h \
     $$PWD/widgets/qqttablewidget.h \
     $$PWD/widgets/qqtgraphicsscene.h \
     $$PWD/widgets/qqtgraphicsitem.h \
@@ -146,10 +139,23 @@ HEADERS += \
     $$PWD/widgets/qqtwidgets.h \
     $$PWD/widgets/qqtlabel.h
 FORMS += \
-    $$PWD/widgets/qqtprogressbar.ui \
-    $$PWD/widgets/qqtmptablewidget.ui
+    $$PWD/widgets/qqtprogressbar.ui
 
 #frame
+SOURCES += \
+    $$PWD/frame/qqtlineeditwithsearch.cpp \
+    $$PWD/frame/qqtosdwidget.cpp
+HEADERS += \
+    $$PWD/frame/qqtlineeditwithsearch.h \
+    $$PWD/frame/qqtosdwidget.h
+
+SOURCES += \
+    $$PWD/frame/qqtmptablewidget.cpp
+HEADERS += \
+    $$PWD/frame/qqtmptablewidget.h
+FORMS += \
+    $$PWD/frame/qqtmptablewidget.ui
+
 SOURCES += \
     $$PWD/frame/qqtanimation.cpp \
     $$PWD/frame/qqtapplication.cpp \
@@ -402,6 +408,16 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/gifwidgets/qqtgifcheckbox.h \
             $$PWD/exquisite/gifwidgets/qqtgifradiobutton.h \
             $$PWD/exquisite/gifwidgets/qqtgifprogressbar.h
+    }
+
+    #opengl widgets
+    contains (DEFINES, __OPENGLWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/openglwidgets/qqtopenglwidget.cpp \
+            $$PWD/exquisite/openglwidgets/qqtopenglwindow.cpp
+        HEADERS += \
+            $$PWD/exquisite/openglwidgets/qqtopenglwidget.h \
+            $$PWD/exquisite/openglwidgets/qqtopenglwindow.h
     }
 }
 
