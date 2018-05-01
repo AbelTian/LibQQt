@@ -46,6 +46,7 @@ include($${PWD}/app_link_qqt_library.pri)
 ##config defination
 ##依赖：DESTDIR APP_DEPLOY_ROOT
 ################################################################
+#Qt4 is not a very good Cross Qt version, Qt5 suggest.
 #if you have this request, include this pri in your app pro
 include($${PWD}/app_deploy.pri)
 
