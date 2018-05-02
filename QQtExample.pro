@@ -88,7 +88,8 @@ SUBDIRS += test/giftest
 
 #必开 这两个例子是关于QQtAudio的最好展示
 SUBDIRS += examples/qqtaudioexample
-#greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
+#
+greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
 #网络创建工具
