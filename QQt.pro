@@ -6,4 +6,4 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS = src/qqt.pro
-#SUBDIRS += QQtExample.pro
+SUBDIRS += QQtExample.pro
