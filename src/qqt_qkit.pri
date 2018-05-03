@@ -1,6 +1,14 @@
 #this configration need Qt Creator set default build directory
 #%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}")}
 
+#这里暂时使用QKIT - FileSystemName这样的决定格式。
+#如果QtCreator把编译器名称、FileSystemName传递过来就好了。
+#或者QtCreator把Qt SDK目录名传过来也好。
+#或者QtCreator自动生成QKIT描述符、FileSystemName，并且传递过来，也好。
+#哎，但是现在没有，无奈之下，用户设定QKIT。
+
+#FileSystemName的终极状态是编译器_目标系统名，比如gcc_macOS, clang_macOS这样。
+
 #target arch type
 #You need define a env variable QKIT=XX
 QKIT_PRIVATE = $$(QKIT)
