@@ -126,6 +126,11 @@ void QQtApplication::setQSSStyle ( QString qssfile )
     //setPalette(QPalette(QColor("#F0F0F0")));
 }
 
+void QQtApplication::setFrameworkStyle ( QString style )
+{
+    setStyle ( style );
+}
+
 
 void QQtApplication::setUPanAutorun ( bool run )
 {

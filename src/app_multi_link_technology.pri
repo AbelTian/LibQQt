@@ -17,6 +17,9 @@
 #Ubuntu:   /home/xxx/.qmake/app_configure.pri
 #公共路径：应用编译路径、LibrarySDK路径、产品输出路径
 
+#2018年5月3日 08点55分
+#Multi-link技术只能应用于Qt5，Qt4没有windeployqt程序。
+
 #--------------------------------------------------------------------------------
 #这个pri依赖qqt_function.pri
 #qqt_function.pri，哪里需要就在哪里包含。

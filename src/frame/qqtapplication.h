@@ -21,18 +21,30 @@ public:
     //palette
     void setTextFont ( QString fontfile = "/usr/lib/fonts/heiti.ttf",
                        int fontsize = 11 );
+    //这是设置全部控件的，基本的QSS，通用的QSS，全在这个里，特殊不变的也在这里。
     void setQSSStyle ( QString qssfile = "./skin/default.qss" );
     void setUPanAutorun ( bool run = false );
     void setWriteLogSystem ( bool open = true );
+
+    /**
+     * 这个是设置应用程序框架窗口风格的，
+     * "windows", "motif", "cde", "plastique", "windowsxp", or "macintosh"
+     */
+    void setFrameworkStyle ( QString style = "macintosh" );
 
     //这两个函数和MFC架构里的那两个函数一样的功能，但是Qt提供了main函数里的更好的窗口方法，所以，这里无效。
     virtual int initInstance() { return 0; }
     virtual int unInitInstance() { return 0; }
 
+    /**
+     * 用户从这里接收语言更改信号，更改所有窗口的语言。
+     */
 signals:
     void languageChanged();
+
+    //这个是给PluginWatcher用的，和用户无关。允许重写
 public slots:
-    void slotUPanAutoRun ( int status );
+    virtual void slotUPanAutoRun ( int status );
 private:
     bool bUPanAutoRun;
 

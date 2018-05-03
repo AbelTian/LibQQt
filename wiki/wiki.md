@@ -28,6 +28,11 @@
 
 [LibQQt的地位](LibQQt's-position.md)  
 
+## LibQQt程序开发诀窍    
+
+[QQt应用程序的开发诀窍](knack.md)  
+
+
 ## 返回  
 
 [返回](../)  
