@@ -14,12 +14,6 @@
 #2018年4月6日18点12分
 #这里是LibQQt源文件pri，所有开关宏都在LibQQt头文件pri里开关。
 #-------------------------------------------------
-SOURCES = \
-    $$PWD/frame/systeminfo/qqtsysteminfo.cpp \
-    $$PWD/frame/systeminfo/qqtsysteminfoprivate.cpp
-HEADERS = \
-    $$PWD/frame/systeminfo/qqtsysteminfo.h \
-    $$PWD/frame/systeminfo/qqtsysteminfoprivate.h
 
 #root dir
 HEADERS += $$PWD/qqt.h \
@@ -146,6 +140,11 @@ FORMS += \
     $$PWD/widgets/qqtprogressbar.ui
 
 #frame
+SOURCES += \
+    $$PWD/frame/qqtsysteminfo.cpp
+HEADERS += \
+    $$PWD/frame/qqtsysteminfo.h
+
 SOURCES += \
     $$PWD/frame/qqtlineeditwithsearch.cpp \
     $$PWD/frame/qqtosdwidget.cpp
