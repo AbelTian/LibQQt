@@ -126,9 +126,13 @@ void QQtApplication::setQSSStyle ( QString qssfile )
     //setPalette(QPalette(QColor("#F0F0F0")));
 }
 
-void QQtApplication::setFrameworkStyle ( QString style )
+void QQtApplication::setFrameworkStyle ( QString frameStyle )
 {
-    setStyle ( style );
+    pline() << "supported styles:" << QStyleFactory::keys();
+    pline() << "current setting style:" << frameStyle;
+    return;
+    setStyle (  frameStyle );
+    //setPalette ( style()->standardPalette() );
 }
 
 
