@@ -2,18 +2,33 @@
 #define QQTSYSTEMINFO_H
 
 #include <QObject>
+#include <qqt-local.h>
+#include <qqtcore.h>
+
+#if defined (Q_OS_WIN32) || defined( Q_OS_WIN64)
+#pragma once
+#pragma comment(lib,"Kernel32.lib")
+#pragma comment(lib,"Psapi.lib")
+#include <Windows.h>
+#include <TlHelp32.h>
+#include <direct.h>
+#include <winternl.h>
+#include <Psapi.h>
+#endif
+#include <QMap>
+
 
 typedef struct tDiskInfo
 {
     tDiskInfo() {}
-    quint32 mSize; //B
-    quint32 mAvalableSize; //B
+    quint64 mSize; //B
+    quint64 mAvalableSize; //B
 } TDiskInfo;
 
 typedef struct tDiskTable
 {
     tDiskTable() {}
-    quint32 mNum;
+    quint64 mNum;
     QList<TDiskInfo> mList;
 } TDiskTable;
 
@@ -25,38 +40,43 @@ typedef struct tMemInfo
 typedef struct tMemTable
 {
     tMemTable() {}
-    quint32 mTotalSize;//B
-    quint32 mAvalableSize;//B
-    quint32 mNum;
+    quint64 mTotalSize;//B
+    quint64 mAvalableSize;//B
+    quint64 mNum;
     QList<TMemInfo> mList;
 } TMemTable;
 
 typedef struct tCPUInfo
 {
     tCPUInfo() {}
-    quint32 mCoreNum;
-    quint32 mThreadNumPerCore;
-    quint32 mRate;
+    quint64 mCoreNum;
+    quint64 mThreadNumPerCore;
+    quint64 mRate;
 } TCPUInfo;
 
 typedef struct tCPUTable
 {
     tCPUTable() {}
-    quint32 mNum;
+    quint64 mNum;
     QList<TCPUInfo> mList;
 } TCPUTable;
 
-class QQtSystemInfo : public QObject
+class QQTSHARED_EXPORT QQtSystemInfo : public QObject
 {
     Q_OBJECT
 public:
     explicit QQtSystemInfo ( QObject* parent = nullptr );
 
     bool getCPUInfo ( TCPUTable& cpuInfo ) {
-#if 0
-#if defined(Q_OS_WIN32) || defined (Q_OS_WIN64)
+#if defined(Q_OS_WIN)
         SYSTEM_INFO systemInfo;
         GetSystemInfo ( &systemInfo );
+
+        TCPUInfo info;
+        info.mCoreNum = systemInfo.dwNumberOfProcessors;
+        cpuInfo.mNum = 1;
+        cpuInfo.mList.push_back ( info );
+
         qDebug() << QStringLiteral ( "处理器掩码:" ) << systemInfo.dwActiveProcessorMask;
         qDebug() << QStringLiteral ( "处理器个数:" ) << systemInfo.dwNumberOfProcessors;
         qDebug() << QStringLiteral ( "处理器分页大小:" ) << systemInfo.dwPageSize;
@@ -68,8 +88,36 @@ public:
 #else
 
 #endif
+    }
+    bool getMEMInfo ( TMemTable& memInfo ) {
+#if defined (Q_OS_WIN)
+#define MB (1024 * 1024)
+        MEMORYSTATUSEX statex;
+        statex.dwLength = sizeof ( statex );
+        GlobalMemoryStatusEx ( &statex );
+
+        memInfo.mTotalSize = statex.ullTotalPhys;
+        memInfo.mAvalableSize = statex.ullAvailPhys;
+        memInfo.mNum = 1;
+
+        qDebug() << QStringLiteral ( "物理内存使用率:" ) << statex.dwMemoryLoad;
+        qDebug() << QStringLiteral ( "物理内存总量:" ) << statex.ullTotalPhys / MB;
+        qDebug() << QStringLiteral ( "可用的物理内存:" ) << statex.ullAvailPhys / MB;
+        qDebug() << QStringLiteral ( "系统页面文件大小:" ) << statex.ullTotalPageFile / MB;
+        qDebug() << QStringLiteral ( "系统可用页面文件大小:" ) << statex.ullAvailPageFile / MB;
+        qDebug() << QStringLiteral ( "虚拟内存总量:" ) << statex.ullTotalVirtual / MB;
+        qDebug() << QStringLiteral ( "可用的虚拟内存:" ) << statex.ullAvailVirtual / MB;
+        qDebug() << QStringLiteral ( "保留（值为0）:" ) << statex.ullAvailExtendedVirtual / MB;
+#else
 #endif
     }
+    bool getDiskInfo ( TDiskTable& diskInfo ) {
+#if defined (Q_OS_WIN)
+
+#else
+#endif
+    }
+
 signals:
 
 public slots:
