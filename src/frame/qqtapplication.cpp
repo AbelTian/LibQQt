@@ -126,16 +126,6 @@ void QQtApplication::setQSSStyle ( QString qssfile )
     //setPalette(QPalette(QColor("#F0F0F0")));
 }
 
-void QQtApplication::setFrameworkStyle ( QString frameStyle )
-{
-    pline() << "supported styles:" << QStyleFactory::keys();
-    pline() << "current setting style:" << frameStyle;
-    return;
-    setStyle (  frameStyle );
-    //setPalette ( style()->standardPalette() );
-}
-
-
 void QQtApplication::setUPanAutorun ( bool run )
 {
     bUPanAutoRun = run;

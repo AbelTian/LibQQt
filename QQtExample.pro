@@ -107,4 +107,6 @@ SUBDIRS =
 
 #SUBDIRS += test/openglwidgettest
 #SUBDIRS += test/osdtest
-SUBDIRS += test/inputtest
+#SUBDIRS += test/inputtest
+SUBDIRS += demo/SysInfoNotify
+

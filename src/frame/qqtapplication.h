@@ -26,14 +26,6 @@ public:
     void setUPanAutorun ( bool run = false );
     void setWriteLogSystem ( bool open = true );
 
-    /**
-     * 这个是设置应用程序框架窗口风格的，
-     * "Windows", "WindowsXP", "WindowsVista", "Fusion"
-     * "motif", "cde", "plastique", or "macintosh"
-     * 无效
-     */
-    void setFrameworkStyle ( QString frameStyle = "Macintosh" );
-
     //这两个函数和MFC架构里的那两个函数一样的功能，但是Qt提供了main函数里的更好的窗口方法，所以，这里无效。
     virtual int initInstance() { return 0; }
     virtual int unInitInstance() { return 0; }

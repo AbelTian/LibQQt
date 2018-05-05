@@ -63,7 +63,7 @@ github link: https://github.com/AbelTian/LibQQt
      - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) QQtWebSocketProtocol
      - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)  
 7. 添加应用中常用的form
-8. 支持多页表格 [QQtMPTableWidget](src/widgets/qqtmptablewidget.h)  
+8. 支持多页表格 [QQtMultiPageTableWidget](src/widgets/qqtmultipagetablewidget.h)  
 9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
 5. 支持Qt5.9.2   
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
@@ -89,6 +89,15 @@ github link: https://github.com/AbelTian/LibQQt
     - QQtWebAccessManager，支持管理Session、Cookies。    
     - 添加GumboQuery爬虫工具。  
     - 支持webservice (QtSoap)  
+
+
+========================================================================  
+# 多链接发布技术    
+
+LibQQt为方便用户开发App过程方便的发布程序，所以添加了多链接和自动发布功能，基于qmake工程管理器的多链接发布技术。  
+用户只需要做相应的目录设定，甚至包括自己的配置文件的目录设置，LibQQt提供的base manager就会自动将用户的程序，配置发布到指定位置，  
+并且支持其他依赖的链接库。  
+经过发布的App直接点击就可以运行，*大的省去了用户手动发布App的劳烦过程。    
 
 
 ========================================================================  
