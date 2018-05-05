@@ -31,9 +31,9 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
     QTextCodec::setCodecForLocale ( QTextCodec::codecForName ( "UTF-8" ) );
 
-    /*嵌入式，应用名称必须指定*/
+    /*嵌入式，应用名称必须指定 配置文件路径$CONF_PATH/organizationName/applicationName.conf[.ini]*/
     QCoreApplication::setOrganizationName ( "QQt" );
-    /*专为Mac OS X 准备的，macOS下配置文件: CONF_PATH/organizationDomain/ApplicationName.ini ... */
+    /*专为Mac OS X 准备的，macOS下配置文件: $CONF_PATH/organizationDomain/ApplicationName.ini ... */
     QCoreApplication::setOrganizationDomain ( "www.qqt.com" ); //
     QCoreApplication::setApplicationName ( "QQt" );
 
@@ -48,6 +48,9 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #ifdef __DARWIN__
     QDir::setCurrent ( qApp->applicationDirPath() );
 #endif
+
+    /*在linux系统，不自动在当前目录寻找lib，需要命令行设置LD_LIBRARY_PATH，这里添加一下自动查找，不冲突。*/
+    addLibraryPath ( qApp->applicationDirPath() );//[qApp->]
 
     pline() << "app root:" << qApp->applicationDirPath();
     pline() << "app work root:" << QDir::currentPath();
