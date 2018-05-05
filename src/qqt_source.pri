@@ -440,6 +440,15 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/openglwidgets/qqtopenglwidget.h \
             $$PWD/exquisite/openglwidgets/qqtopenglwindow.h
     }
+
+    contains (DEFINES, __COLORWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/colorwidgets/qqtcolorwidget.cpp \
+            $$PWD/exquisite/colorwidgets/qqtcolorlabel.cpp
+        HEADERS += \
+            $$PWD/exquisite/colorwidgets/qqtcolorwidget.h \
+            $$PWD/exquisite/colorwidgets/qqtcolorlabel.h
+    }
 }
 
 include ($$PWD/qqt_3rdparty.pri)
