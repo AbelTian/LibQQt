@@ -9,9 +9,15 @@ class QQtColorWidget : public QWidget
 public:
     explicit QQtColorWidget ( QWidget* parent = nullptr );
 
+    void setColor ( const QRgb& rgb );
+
+    QRgb getColor();
+
 signals:
 
 public slots:
+private:
+    QRgb mRgb;
 };
 
 #endif // QQTCOLORWIDGET_H
