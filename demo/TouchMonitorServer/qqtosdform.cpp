@@ -1,4 +1,4 @@
-#include "qqtosdform.h"
+﻿#include "qqtosdform.h"
 #include "ui_qqtosdform.h"
 #include <QPainter>
 #include <QBitmap>
@@ -16,7 +16,7 @@ QQtOsdForm::QQtOsdForm ( QWidget* parent ) :
 
     QPalette pal = palette();
     pal.setColor ( QPalette::Background, QColor ( 255, 255, 255, 255 ) );
-    setPalette ( pal );
+    //setPalette ( pal );
 
 }
 
@@ -28,7 +28,7 @@ QQtOsdForm::~QQtOsdForm()
 
 void QQtOsdForm::paintEvent ( QPaintEvent* event )
 {
-    //return QWidget::paintEvent ( event );
+    return QWidget::paintEvent ( event );
 
     // Use a bitmap as a mask. A bitmap only has two kind of colors: white(value is 0)
     // or black(other values). When we use it to set mask, we can see the window at the position
