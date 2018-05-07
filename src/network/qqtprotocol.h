@@ -1,4 +1,4 @@
-﻿#ifndef QQTPROTOCOL_H
+#ifndef QQTPROTOCOL_H
 #define QQTPROTOCOL_H
 
 #include <QObject>
@@ -43,7 +43,7 @@ public:
      * @brief 最大包长
      * @return
      */
-    inline virtual quint16 maxlength() { return 0xFFFF; }
+    inline virtual quint16 maxlength() { return 0x7FFF; }
     /**
      * @brief 语法解析器 从流中解析报文长度
      * /.../quint16 size/.../.../...
