@@ -1,4 +1,4 @@
-#include "qqtosdform.h"
+﻿#include "qqtosdform.h"
 #include "ui_qqtosdform.h"
 #include <QPainter>
 #include <QBitmap>

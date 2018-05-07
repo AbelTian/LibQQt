@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QQtApplication>
 #include <qqtosdwidget.h>
 #include <testwidget.h>
@@ -14,7 +14,10 @@ int main ( int argc, char* argv[] )
 
     MainWindow w;
     //TestWidget w;
+    //macOS success
     //QQtOsdForm w;
+    //macOS success
+    //QQtOSDWidget w;
     w.show();
     //w.setWindowOpacity ( 1 );
     //w.setWindowFlags ( Qt::FramelessWindowHint );

@@ -1,13 +1,17 @@
-#ifndef QQTCOLORWIDGET_H
+﻿#ifndef QQTCOLORWIDGET_H
 #define QQTCOLORWIDGET_H
 
 #include <QWidget>
 
-class QQtColorWidget : public QWidget
+#include <qqt-local.h>
+#include <qqtcore.h>
+
+class QQTSHARED_EXPORT QQtColorWidget : public QWidget
 {
     Q_OBJECT
 public:
     explicit QQtColorWidget ( QWidget* parent = nullptr );
+    virtual ~QQtColorWidget() {}
 
     void setColor ( const QRgb& rgb );
 

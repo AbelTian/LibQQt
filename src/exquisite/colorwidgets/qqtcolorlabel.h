@@ -1,15 +1,18 @@
-#ifndef QQTCOLORLABEL_H
+﻿#ifndef QQTCOLORLABEL_H
 #define QQTCOLORLABEL_H
 
 #include <QLabel>
 #include <QRgb>
 
-class QQtColorLabel : public QLabel
+#include <qqt-local.h>
+#include <qqtcore.h>
+
+class QQTSHARED_EXPORT QQtColorLabel : public QLabel
 {
     Q_OBJECT
 public:
     explicit QQtColorLabel ( QWidget* parent = nullptr );
-    virtual ~QQtColorLabel();
+    virtual ~QQtColorLabel() {}
 
     void setColor ( const QRgb& rgb );
 
