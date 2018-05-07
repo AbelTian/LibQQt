@@ -63,6 +63,7 @@ public:
 
     /*遍历字典*/
     int count() const;
+    int size() const;
 
     bool hasChild ( const QString& key ) const;
     bool hasChild ( const QQtDictionary& value ) const;

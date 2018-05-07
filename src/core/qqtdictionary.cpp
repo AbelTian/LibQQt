@@ -131,6 +131,20 @@ int QQtDictionary::count() const
     return cnt;
 }
 
+int QQtDictionary::size() const
+{
+    int cnt = -1;
+
+    if ( DictList == m_type )
+        cnt = m_list.size();
+    else if ( DictMap == m_type )
+        cnt = m_map.size();
+    else if ( DictValue == m_type )
+        cnt = 1;
+
+    return cnt;
+}
+
 bool QQtDictionary::isNull() const
 {
     if ( m_type == DictMax )
