@@ -61,7 +61,8 @@ SUBDIRS =
 #some test project
 #SUBDIRS += test/gumbo_query_test
 #SUBDIRS += test/customqvariant
-#SUBDIRS += test/framelesshelperwidget
+#
+SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/bytearraytest
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
