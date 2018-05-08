@@ -319,6 +319,7 @@ contains (DEFINES, __EXQUISITE__) {
 
     #opengl module
     DEFINES += __OPENGLWIDGETS__
+    contains(QKIT_PRIVATE, MIPS32||ARM32||EMBEDDED):DEFINES-=__OPENGLWIDGETS__
     contains (DEFINES, __OPENGLWIDGETS__) {
         QT += opengl
     }

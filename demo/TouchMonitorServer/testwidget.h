@@ -2,6 +2,7 @@
 #define TESTWIDGET_H
 
 #include <QWidget>
+#include <qqtcore.h>
 
 class TestWidget : public QWidget
 {

@@ -155,8 +155,35 @@ bool QQtDictionary::isNull() const
 
 bool QQtDictionary::isValid() const
 {
-    return isNull();
+    bool isValid = false;
+
+    switch ( m_type )
+    {
+        case DictValue:
+            if ( !m_value.isValid() )
+                isValid = true;
+
+            break;
+
+        case DictList:
+            if ( !m_list.isEmpty() )
+                isValid = true;
+
+            break;
+
+        case DictMap:
+            if ( !m_map.isEmpty() )
+                isValid = true;
+
+            break;
+
+        default:
+            break;
+    }
+
+    return isValid;
 }
+
 bool QQtDictionary::isEmpty() const
 {
     bool isEmpty = true;
@@ -302,12 +329,12 @@ QQtDictionary& QQtDictionary::operator [] ( int index )
     //list size = 4, 最大index = 3。新 index = 4, 添加，新index才可以使用，否则out of range。
     if ( m_list.size() < index + 1 )
     {
-        int cnt = m_list.count();
+        int cnt = m_list.size();
 
         /*相差的数量*///count -> index+1 = index+1 - count
 
         for ( int i = 0; i < index + 1 - cnt; i++ )
-            m_list.append ( QQtDictionary() );
+            m_list.push_back ( QQtDictionary() );
     }
 
     return ( QQtDictionary& ) m_list.operator [] ( index );
@@ -389,9 +416,14 @@ QList<QQtDictionary>& QQtDictionary::getList() const
     return ( QList<QQtDictionary>& ) m_list;
 }
 
-QVariant& QQtDictionary::getValue() const
+QVariant& QQtDictionary::getValue()
 {
     return ( QVariant& ) m_value;
+}
+
+const QVariant& QQtDictionary::getValue() const
+{
+    return ( const QVariant& ) m_value;
 }
 
 QQtDictionary& QQtDictionary::getChild ( int index )

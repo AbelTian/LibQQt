@@ -78,7 +78,8 @@ public:
 
     /*获取单个数据*/
     /*保存为value的*/
-    QVariant& getValue() const;
+    QVariant& getValue();
+    const QVariant& getValue() const;
     QQtDictionary& getChild ( int index );
     QQtDictionary& getChild ( const QString& key );
     /*获取一个个孩子*/

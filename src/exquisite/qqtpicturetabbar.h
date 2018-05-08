@@ -39,15 +39,17 @@ public:
 
     /*
      * 设置x方向、y方向的layout间距。
+     * setContentsMargins(left, top, right, bottom); is a gool idea.
      */
     void setLayoutSpacing ( int spacing = 0 ) { this->spacing = spacing; }
-    //setContentsMargins(left, top, right, bottom); is a gool idea.
 
     /*TabBar的风格*/
     IconStyle getIconStyle() const { return iconStyle; }
     void setIconStyle ( IconStyle iconStyle );
 
-    /*背景部分，这里设置的是Tab的背景图*/
+    /**
+     * 背景部分，这里设置的是Tab的背景图
+     */
     /*使用颜色*/
     QColor getBackgroundColor() const { return backgroundColor; }
     void setBackgroundColor ( QColor backgroundColor );//effected by drawbase
@@ -56,7 +58,10 @@ public:
     void setTabPixmap ( int index, const QString& img = QString(),
                         const QString& imgSel = QString() );
 
-    /*Icon部分，这里设置的是Tab里的Icon*/
+    /**
+     * Icon部分，这里设置的是Tab里的Icon
+     * 不设置背景则显示icon
+     */
     void tabIcon ( int index, QImage& icon, QImage& iconSel );
     void setTabIcon ( int index, const QString& icon = QString(),
                       const QString& iconSel = QString() );

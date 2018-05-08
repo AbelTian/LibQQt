@@ -1,4 +1,4 @@
-﻿#include "qqtosdform.h"
+#include "qqtosdform.h"
 #include "ui_qqtosdform.h"
 #include <QPainter>
 #include <QBitmap>
@@ -11,7 +11,7 @@ QQtOsdForm::QQtOsdForm ( QWidget* parent ) :
     ui->setupUi ( this );
     //setStyleSheet ( "QQtOsdForm{ background-color: rgb(222, 222, 222, 0);}" );
     //setWindowFlag ( Qt::FramelessWindowHint, true );
-    setWindowFlag ( Qt::WindowStaysOnTopHint, true );
+    //setWindowFlag ( Qt::WindowStaysOnTopHint, true );
     //setWindowFlag ( Qt::Tool, true );
     setAttribute ( Qt::WA_TranslucentBackground, true );
     //setAttribute ( Qt::WA_TransparentForMouseEvents, true );
@@ -32,8 +32,7 @@ QQtOsdForm::QQtOsdForm ( QWidget* parent ) :
     //setWindowFlag ( Qt::FramelessWindowHint, true );
     //setWindowFlag ( Qt::CustomizeWindowHint, true );
     //setWindowFlag ( Qt::SubWindow, true );
-    setWindowFlag ( Qt::WindowSystemMenuHint, true );
-
+    //setWindowFlag ( Qt::WindowSystemMenuHint, true );
 }
 
 QQtOsdForm::~QQtOsdForm()

@@ -1,4 +1,4 @@
-﻿#ifndef QQTFRAMEDEFINE_H
+#ifndef QQTFRAMEDEFINE_H
 #define QQTFRAMEDEFINE_H
 
 
@@ -114,6 +114,7 @@ enum
 };
 
 
+#define CONFIG_ROOT "."
 #define CONFIG_PATH "./conf"
 #define LOG_PATH "./log"
 #define AV_PATH "./res"
@@ -128,9 +129,9 @@ enum
 #define res(file) QString("%1/%2").arg("://res").arg(file)
 #define skin(file) QString("%1/%2").arg("://skin").arg(file)
 #else
-#define qrc(file) QDir(qApp->applicationDirPath()).relativeFilePath(QString("./%1").arg(file))
-#define res(file) QDir(qApp->applicationDirPath()).relativeFilePath(QString("./res/%1").arg(file))
-#define skin(file) QDir(qApp->applicationDirPath()).relativeFilePath(QString("./skin/%1").arg(file))
+#define qrc(file) QDir(qApp->applicationDirPath()).relativeFilePath(QString("%1/%2").arg(CONFIG_ROOT).arg(file))
+#define res(file) QDir(qApp->applicationDirPath()).relativeFilePath(QString("%1/%2").arg(AV_PATH).arg(file))
+#define skin(file) QDir(qApp->applicationDirPath()).relativeFilePath(QString("%1/%2").arg(SKIN_PATH).arg(file))
 #endif
 
 
