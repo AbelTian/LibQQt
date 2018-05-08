@@ -61,8 +61,7 @@ SUBDIRS =
 #some test project
 #SUBDIRS += test/gumbo_query_test
 #SUBDIRS += test/customqvariant
-#
-SUBDIRS += test/framelesshelperwidget
+#SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/bytearraytest
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
@@ -94,10 +93,8 @@ SUBDIRS += test/framelesshelperwidget
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
 #网络创建工具
-#
-SUBDIRS += demo/QQtClientCreator
-#
-SUBDIRS += demo/QQtServerCreator
+#SUBDIRS += demo/QQtClientCreator
+#SUBDIRS += demo/QQtServerCreator
 #这边是个组合项，客户端和服务器一起的。必看
 #SUBDIRS += examples/qqtclientexample
 #SUBDIRS += examples/qqtserverexample
@@ -112,6 +109,7 @@ SUBDIRS += demo/QQtServerCreator
 #SUBDIRS += test/osdtest
 #SUBDIRS += test/inputtest
 #SUBDIRS += demo/SysInfoNotify
-SUBDIRS += demo/TouchMonitor
-SUBDIRS += demo/TouchMonitorServer
+#移除
+#SUBDIRS += demo/TouchMonitor
+#SUBDIRS += demo/TouchMonitorServer
 
