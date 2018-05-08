@@ -94,8 +94,10 @@ SUBDIRS += test/framelesshelperwidget
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
 #网络创建工具
-#SUBDIRS += demo/QQtClientCreator
-#SUBDIRS += demo/QQtServerCreator
+#
+SUBDIRS += demo/QQtClientCreator
+#
+SUBDIRS += demo/QQtServerCreator
 #这边是个组合项，客户端和服务器一起的。必看
 #SUBDIRS += examples/qqtclientexample
 #SUBDIRS += examples/qqtserverexample

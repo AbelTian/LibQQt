@@ -9,9 +9,12 @@ MainWindow::MainWindow ( QWidget* parent ) :
 {
     ui->setupUi ( this );
 
-    QQtOSDWidget* w = new QQtOSDWidget ( 0 );
-    w->show();
-    w->setGeometry ( 0, 0, 400, 400 );
+    //QQtOSDWidget* w = new QQtOSDWidget ( 0 );
+    //w->show();
+    //w->setGeometry ( 0, 0, 400, 400 );
+
+    w0 = new ControlorWidget ( 0 );
+    w0->hide();;
 }
 
 MainWindow::~MainWindow()
@@ -20,3 +23,13 @@ MainWindow::~MainWindow()
 }
 
 
+
+void MainWindow::on_pushButton_clicked()
+{
+
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+
+}
