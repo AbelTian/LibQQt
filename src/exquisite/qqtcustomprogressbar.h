@@ -55,6 +55,7 @@ class QQTSHARED_EXPORT QQtCustomProgressBar : public QWidget
     Q_PROPERTY ( int nullPosition READ getNullPosition WRITE setNullPosition )
     Q_PROPERTY ( int lineWidth READ getLineWidth WRITE setLineWidth )
     Q_PROPERTY ( int cornerRadius READ getCornerRaduis WRITE setCornerRadius )
+    Q_PROPERTY ( int lineCapStyle READ getLineCapStyle WRITE setLineCapStyle )
 
     Q_PROPERTY ( bool showPercent READ getShowPercent WRITE setShowPercent )
     Q_PROPERTY ( bool showFree READ getShowFree WRITE setShowFree )
@@ -112,11 +113,11 @@ public:
 
     enum TextStyle
     {
-        TextStyle_None = 0,           /*不显示*/
+        TextStyle_None = 0,                     /*不显示*/
         TextStyle_Middle_Percent = 1,           /*只在中央显示百分比*/
-        TextStyle_Percent = 2,           /*只显示百分比*/
-        TextStyle_Text = 3,      /*只显示文字*/
-        TextStyle_Percent_Text = 4,          /*显示百分比和文字*/
+        TextStyle_Percent = 2,                  /*只在下部显示百分比*/
+        TextStyle_Text = 3,                     /*不在下部显示百分比，只在中央显示文字*/
+        TextStyle_Percent_Text = 4,             /*和在下部显示百分比，和在中央显示文字*/
     };
 
     explicit QQtCustomProgressBar ( QWidget* parent = 0 );
@@ -130,6 +131,7 @@ public:
     int getNullPosition()           const;
     int getLineWidth()              const;
     int getCornerRaduis() const { return cornerRadius; }
+    int getLineCapStyle() const { return lineCapStyle; }
 
     bool getShowPercent()           const;
     bool getShowFree()              const;
@@ -176,6 +178,8 @@ public Q_SLOTS:
     void setNullPosition ( int nullPosition );
     /*设置线条宽度*/
     void setLineWidth ( int lineWidth );
+    /*设置线条的帽子（线头）的样式 = Qt::PenCapStyle*/
+    void setLineCapStyle ( int lineCapStyle );
 
     /*设置是否显示百分比*/
     void setShowPercent ( bool showPercent );
@@ -231,13 +235,13 @@ signals:
 public slots:
 
 protected:
-    void paintEvent ( QPaintEvent* );
-    void drawBackground ( QPainter* painter, int radius );
-    void drawArc ( QPainter* painter, int radius );
-    void drawPolo ( QPainter* painter, int radius );
-    void drawWave ( QPainter* painter, int radius );
-    void drawText ( QPainter* painter, int radius );
-    void drawPercentText ( QPainter* painter, int radius );
+    virtual void paintEvent ( QPaintEvent* );
+    virtual void drawBackground ( QPainter* painter, int radius );
+    virtual void drawArc ( QPainter* painter, int radius );
+    virtual void drawPolo ( QPainter* painter, int radius );
+    virtual void drawWave ( QPainter* painter, int radius );
+    virtual void drawText ( QPainter* painter, int radius );
+    virtual void drawPercentText ( QPainter* painter, int radius );
 
 private:
     int maxValue;                   /*最小值*/
@@ -246,6 +250,7 @@ private:
 
     int nullPosition;               /*起始角度*/
     int lineWidth;                  /*线条宽度*/
+    int lineCapStyle;               /*线条的帽子（线头）的样式*/
 
     bool showPercent;               /*是否显示百分比*/
     QString text; /*文字*/
