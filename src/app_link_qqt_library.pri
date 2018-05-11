@@ -93,7 +93,15 @@ contains (CONFIG, QQT_SOURCE_BUILDIN) {
     #link_from_sdk do move qqt to sdk path at app pre link command not lib build time
     #mod qqt source to start post link is not needed here.
     #need mod app souce after every pri mod.
-    system("touch $${QQT_SOURCE_ROOT}/frame/qqtapplication.cpp")
+    #起初,qmake步骤被安置在QQt里,所以只有更改源代码才能启动POSTLINK.现在放置在App里了,这里的touch修改源代码不需要了.
+    #App修改源代码,Creator会自动qmake,启动qmake步骤PRILINK+POSTLINK
+    #App修改pro,必须手动qmake,Creator才会qmake,启动qmake步骤PRILINK+POSTLINK
+    #App必须注意,此处不再持续编译QQt.
+    #QQt持续编译配置开关
+    CONFIG += continued_build
+    contains(CONFIG, continued_build){
+        system("touch $${QQT_SOURCE_ROOT}/frame/qqtapplication.cpp")
+    }
     include ($${QQT_SOURCE_ROOT}/qqt_install.pri)
 
     #in this pri use QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD
