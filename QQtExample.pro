@@ -106,7 +106,8 @@ SUBDIRS =
 #lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
 
 #SUBDIRS += test/openglwidgettest
-#SUBDIRS += test/osdtest
+#
+SUBDIRS += test/osdtest
 #SUBDIRS += test/inputtest
 #SUBDIRS += demo/SysInfoNotify
 #移除
