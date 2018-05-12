@@ -45,11 +45,13 @@ isEmpty(QKIT_PRIVATE) {
 #link qqt settings: use source or link library?
 #-------------------------------------------------------------
 #if you want to build qqt source open this annotation
-#CONFIG += QQT_SOURCE_BUILDIN
+CONFIG += QQT_SOURCE_BUILDIN
 contains (CONFIG, QQT_SOURCE_BUILDIN) {
     #if you want to build src but not link QQt lib in your project
     #if you don't want to modify Qt Creator's default build directory, this maybe a choice.
-    #notice: msvc, DLL_IMPORT macro is no problem to use in app + lib source?
+    #notice: msvc, DLL_IMPORT macro is no problem to use in app + lib source? 静态成员的定义无法编译通过，dllimport在app里不允许实现静态成员变量。
+    #so, here ,force static, QQt的静态编译，dllexport一律定义为空，引用的时候也是空，所以能过。
+    DEFINES += QQT_STATIC_LIBRARY
     include($${QQT_SOURCE_ROOT}/qqt_source.pri)
 } else {
     #if you want to link QQt library
