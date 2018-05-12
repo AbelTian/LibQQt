@@ -49,6 +49,7 @@ isEmpty(QKIT_PRIVATE) {
 contains (CONFIG, QQT_SOURCE_BUILDIN) {
     #if you want to build src but not link QQt lib in your project
     #if you don't want to modify Qt Creator's default build directory, this maybe a choice.
+    #notice: msvc, DLL_IMPORT macro is no problem to use in app + lib source?
     include($${QQT_SOURCE_ROOT}/qqt_source.pri)
 } else {
     #if you want to link QQt library
