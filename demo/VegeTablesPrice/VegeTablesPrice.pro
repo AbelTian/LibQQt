@@ -32,7 +32,9 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-DESTDIR = bin
+msvc{
+    DESTDIR = bin
+}
 
 #qmake_pre/post_link will work after source changed but not pro pri changed.
 system("touch main.cpp")
@@ -44,10 +46,8 @@ system("touch main.cpp")
 #-------------------------------------------------
 msvc{
     include($${PWD}\\..\\..\\src\\app_base_manager.pri)
-    include($${PWD}\\..\\..\\src\\app_deploy.pri)
 }else{
     include(../../src/app_base_manager.pri)
-    include(../../src/app_deploy.pri)
 }
 #-------------------------------------------------
 #install app
@@ -85,3 +85,5 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
+message ($${TARGET} prelink $${QMAKE_PRE_LINK})
+message ($${TARGET} postlink $${QMAKE_POST_LINK})
