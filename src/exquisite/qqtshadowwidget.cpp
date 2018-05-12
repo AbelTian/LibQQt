@@ -1,4 +1,4 @@
-#include "qqtshadowwidget.h"
+﻿#include "qqtshadowwidget.h"
 
 QQtShadowWidget::QQtShadowWidget(QWidget* parent) : QWidget(parent)
 {

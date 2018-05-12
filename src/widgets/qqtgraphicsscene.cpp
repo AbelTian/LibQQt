@@ -1,4 +1,4 @@
-#include "qqtgraphicsscene.h"
+﻿#include "qqtgraphicsscene.h"
 #include <QGraphicsItem>
 #include <QPainter>
 #include "qqtcore.h"
@@ -99,6 +99,16 @@ void QQtGraphicsScene::render(QPainter* painter, const QRectF& target, const QRe
     delete [] styleOptionArray;
 
     painter->restore();
+}
+
+QQtGraphicsEllipseItem *QQtGraphicsScene::addEllipse(const QRectF &rect, const QPen &pen, const QBrush &brush)
+{
+    QQtGraphicsEllipseItem* item = new QQtGraphicsEllipseItem;
+    item->setRect(rect);
+    item->setPen(pen);
+    item->setBrush(brush);
+    addItem(item);
+    return item;
 }
 
 QQtGraphicsTextItem* QQtGraphicsScene::addText(const QString& text, const QFont& font)

@@ -1,4 +1,4 @@
-#ifndef QQTNETWORKDEFINE_H
+﻿#ifndef QQTNETWORKDEFINE_H
 #define QQTNETWORKDEFINE_H
 
 #include <qqtprotocolmanager.h>

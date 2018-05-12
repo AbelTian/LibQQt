@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *
  * $Id$
  *
@@ -19,8 +19,9 @@
 #include <gumbo.h>
 #include <string>
 #include "GumboQuerySelection.h"
+#include "GumboQueryLocal.h"
 
-class GumboQueryDocument: public GumboQueryObject
+class QT_GUMBO_EXPORT GumboQueryDocument: public GumboQueryObject
 {
 public:
 

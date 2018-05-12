@@ -1,4 +1,4 @@
-#ifndef _LIBICONV_H
+﻿#ifndef _LIBICONV_H
 #define _LIBICONV_H
 #include <stddef.h>
 #ifdef __cplusplus

@@ -1,4 +1,4 @@
-#include "QZXingFilter.h"
+﻿#include "QZXingFilter.h"
 
 #include <QDebug>
 #include <QtConcurrent/QtConcurrent>

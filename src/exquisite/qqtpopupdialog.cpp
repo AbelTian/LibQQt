@@ -1,4 +1,4 @@
-#include "qqtpopupdialog.h"
+﻿#include "qqtpopupdialog.h"
 
 QQtPopUpDialog::QQtPopUpDialog ( QWidget* parent ) : QDialog ( parent )
 {

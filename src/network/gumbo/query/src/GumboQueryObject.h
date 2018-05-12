@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *
  * $Id$
  *
@@ -16,7 +16,9 @@
 #ifndef OBJECT_H_
 #define OBJECT_H_
 
-class GumboQueryObject
+#include "GumboQueryLocal.h"
+
+class QT_GUMBO_EXPORT GumboQueryObject
 {
 public:
 

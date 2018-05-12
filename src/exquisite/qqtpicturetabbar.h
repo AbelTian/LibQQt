@@ -1,4 +1,4 @@
-#ifndef QQTPICTURETABBAR_H
+﻿#ifndef QQTPICTURETABBAR_H
 #define QQTPICTURETABBAR_H
 
 #include <QTabBar>

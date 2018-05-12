@@ -1,4 +1,4 @@
-#include "qqttabbar.h"
+﻿#include "qqttabbar.h"
 #include "QStylePainter"
 #include "QStyleOptionTabV3"
 #include "QDebug"

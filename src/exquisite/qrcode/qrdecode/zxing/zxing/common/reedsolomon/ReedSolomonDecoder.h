@@ -1,4 +1,4 @@
-#ifndef __REED_SOLOMON_DECODER_H__
+﻿#ifndef __REED_SOLOMON_DECODER_H__
 #define __REED_SOLOMON_DECODER_H__
 
 /*

@@ -1,4 +1,4 @@
-#include "qqtdialog.h"
+﻿#include "qqtdialog.h"
 #include "qqtcore.h"
 #include <QIcon>
 

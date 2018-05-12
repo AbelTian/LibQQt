@@ -1,4 +1,4 @@
-#include "MatrixUtil.h"
+﻿#include "MatrixUtil.h"
 #include "MaskUtil.h"
 #include <zxing/WriterException.h>
 #include "QRCode.h"

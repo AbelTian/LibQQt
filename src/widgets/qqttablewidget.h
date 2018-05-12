@@ -1,4 +1,4 @@
-#ifndef QQTTABLEWIDGET_H
+﻿#ifndef QQTTABLEWIDGET_H
 #define QQTTABLEWIDGET_H
 
 #include "qqttableview.h"

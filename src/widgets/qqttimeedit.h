@@ -1,4 +1,4 @@
-#ifndef QQTTIMEEDIT_H
+﻿#ifndef QQTTIMEEDIT_H
 #define QQTTIMEEDIT_H
 
 #include <QTimeEdit>

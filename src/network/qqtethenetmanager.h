@@ -1,4 +1,4 @@
-#ifndef QQTETHMANAGER_H
+﻿#ifndef QQTETHMANAGER_H
 #define QQTETHMANAGER_H
 
 #include <QObject>

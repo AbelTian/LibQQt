@@ -1,16 +1,17 @@
 ﻿#include "qqtbluetoothclient.h"
 #include <qqtcore.h>
 
+QQtBluetoothClient::QQtBluetoothClient ( QObject* parent ) : QBluetoothSocket ( parent )
+{
+    initSocket();
+}
+
 QQtBluetoothClient::QQtBluetoothClient ( QBluetoothServiceInfo::Protocol socketType, QObject* parent ) :
     QBluetoothSocket ( socketType, parent )
 {
     initSocket();
 }
 
-QQtBluetoothClient::QQtBluetoothClient ( QObject* parent ) : QBluetoothSocket ( parent )
-{
-    initSocket();
-}
 
 void QQtBluetoothClient::initSocket()
 {

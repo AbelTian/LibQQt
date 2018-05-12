@@ -1,4 +1,4 @@
-#ifndef QQTTABLEVIEW_H
+﻿#ifndef QQTTABLEVIEW_H
 #define QQTTABLEVIEW_H
 
 #include <QTableView>

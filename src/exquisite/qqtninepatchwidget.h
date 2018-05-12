@@ -1,4 +1,4 @@
-#ifndef QQTNINEPATCHWIDGET_H
+﻿#ifndef QQTNINEPATCHWIDGET_H
 #define QQTNINEPATCHWIDGET_H
 
 #include <QWidget>

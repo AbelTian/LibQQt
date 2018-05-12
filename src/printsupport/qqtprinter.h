@@ -1,4 +1,4 @@
-#ifndef QQTPRINTER_H
+﻿#ifndef QQTPRINTER_H
 #define QQTPRINTER_H
 
 #include <QPrinter>

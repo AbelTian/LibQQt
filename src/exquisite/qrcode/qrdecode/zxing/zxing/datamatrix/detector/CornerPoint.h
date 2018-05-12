@@ -1,4 +1,4 @@
-#ifndef __CORNER_FINDER_H__
+﻿#ifndef __CORNER_FINDER_H__
 #define __CORNER_FINDER_H__
 
 /*

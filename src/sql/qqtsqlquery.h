@@ -1,4 +1,4 @@
-#ifndef QQTSQLQUERY_H
+﻿#ifndef QQTSQLQUERY_H
 #define QQTSQLQUERY_H
 
 #include <QSqlQuery>

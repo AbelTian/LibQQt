@@ -1,4 +1,4 @@
-#ifndef QQTAUDIOMANAGER_H
+﻿#ifndef QQTAUDIOMANAGER_H
 #define QQTAUDIOMANAGER_H
 
 #include <QObject>

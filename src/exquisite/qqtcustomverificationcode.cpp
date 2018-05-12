@@ -1,4 +1,4 @@
-#include "qqtcustomverificationcode.h"
+﻿#include "qqtcustomverificationcode.h"
 
 #include <QTime>
 #include <QBrush>

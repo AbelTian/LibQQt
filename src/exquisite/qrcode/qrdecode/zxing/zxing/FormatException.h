@@ -1,4 +1,4 @@
-#ifndef __FORMAT_EXCEPTION_H__
+﻿#ifndef __FORMAT_EXCEPTION_H__
 #define __FORMAT_EXCEPTION_H__
 
 /*

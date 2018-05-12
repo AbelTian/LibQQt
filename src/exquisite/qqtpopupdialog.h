@@ -1,4 +1,4 @@
-#ifndef QQTPOPUPDIALOG_H
+﻿#ifndef QQTPOPUPDIALOG_H
 #define QQTPOPUPDIALOG_H
 
 /**

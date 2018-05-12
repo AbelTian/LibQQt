@@ -1,4 +1,4 @@
-#ifndef QQTOPENGLWINDOW_H
+﻿#ifndef QQTOPENGLWINDOW_H
 #define QQTOPENGLWINDOW_H
 
 #include <QGLWidget>

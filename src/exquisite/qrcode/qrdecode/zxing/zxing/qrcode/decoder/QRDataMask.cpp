@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  DataMask.cpp
  *  zxing
  *

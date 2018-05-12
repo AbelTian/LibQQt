@@ -203,8 +203,10 @@ defineReplace(get_user_config_path) {
 
 #将路径里的[反]斜杠转换为开发机上的格式。
 #注意：不是按照目标进行转换的，所以仅仅用于命令行操作的FLOW。
-defineReplace(get_path) {
-}
+#defineReplace(get_path) {
+#    command =
+#    return ($$command)
+#}
 
 ################################################
 ##custom functions
@@ -237,7 +239,7 @@ defineTest(mkdir) {
     isEmpty(1): error("mkdir(name) requires one argument")
     command = $$get_mkdir($${filename})
     #message ($$command)
-    system_errcode("$${command}"): return (true)
+    system_errcode($${command}): return (true)
     return (false)
 }
 
@@ -261,7 +263,7 @@ defineTest(empty_file) {
     isEmpty(1): error("empty_file(filename) requires one argument")
     command = $$get_empty_file($$filename)
     #message($$command)
-    system_errcode($${command}) : return (true)
+    system_errcode($${command}): return (true)
     return(false)
 }
 
@@ -275,7 +277,7 @@ defineTest(write_line) {
     isEmpty(2): error("write_line(name, content) requires two arguments.")
     command = $$get_write_file($${filename}, $${variable})
     #message($$command)
-    system_errcode($$command): return(true)
+    system_errcode($${command}): return(true)
     return (false)
 }
 

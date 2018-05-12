@@ -1,4 +1,4 @@
-#include "qqtdictionary.h"
+﻿#include "qqtdictionary.h"
 
 QQtDictionary::QQtDictionary ()
 {

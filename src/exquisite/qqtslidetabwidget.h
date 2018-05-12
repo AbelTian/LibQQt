@@ -1,4 +1,4 @@
-#ifndef QQTSLIDETABWIDGET_H
+﻿#ifndef QQTSLIDETABWIDGET_H
 #define QQTSLIDETABWIDGET_H
 
 #include <qqttabwidget.h>

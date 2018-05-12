@@ -1,4 +1,4 @@
-#ifndef __JZ_CIM_H__
+﻿#ifndef __JZ_CIM_H__
 #define __JZ_CIM_H__
 
 #define CIMIO_SHUTDOWN                 0x01   // stop preview

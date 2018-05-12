@@ -1,4 +1,4 @@
-#ifndef QZXING_GLOBAL_H
+﻿#ifndef QZXING_GLOBAL_H
 #define QZXING_GLOBAL_H
 
 #include <QtCore>

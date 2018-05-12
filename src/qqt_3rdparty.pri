@@ -83,6 +83,13 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #gumbo support
     #注释：在qqt_header.pri打开 DEFINES += __GUMBOSUPPORT__
     contains (DEFINES, __GUMBOSUPPORT__) {
+        win32 {
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += QT_GUMBO_LIBRARY
+            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
+                DEFINES += QT_GUMBO_STATIC_LIBRARY
+            }
+        }
         include ($$PWD/network/gumbo/parser/gumbo-parser.pri)
         include ($$PWD/network/gumbo/query/gumbo-query.pri)
     }

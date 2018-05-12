@@ -1,4 +1,4 @@
-#ifndef QQTSVGCHECKBOX_H
+﻿#ifndef QQTSVGCHECKBOX_H
 #define QQTSVGCHECKBOX_H
 
 #include <qqtcheckbox.h>

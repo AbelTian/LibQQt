@@ -1,4 +1,4 @@
-#ifndef __DECODER_DM_H__
+﻿#ifndef __DECODER_DM_H__
 #define __DECODER_DM_H__
 
 /*

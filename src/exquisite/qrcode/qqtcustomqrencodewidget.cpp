@@ -1,4 +1,4 @@
-#include "qqtcustomqrencodewidget.h"
+﻿#include "qqtcustomqrencodewidget.h"
 
 QQtCustomQrEncodeWidget::QQtCustomQrEncodeWidget(QWidget* parent) : QWidget(parent)
 {

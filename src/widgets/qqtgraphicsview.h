@@ -1,4 +1,4 @@
-#ifndef QQTGRAPHICSVIEW_H
+﻿#ifndef QQTGRAPHICSVIEW_H
 #define QQTGRAPHICSVIEW_H
 
 #include <QGraphicsView>

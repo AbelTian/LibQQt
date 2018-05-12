@@ -1,4 +1,4 @@
-#include "qqtlineeditwithsearch.h"
+﻿#include "qqtlineeditwithsearch.h"
 #include <QHBoxLayout>
 #include "qqtwidgets.h"
 

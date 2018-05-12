@@ -1,4 +1,4 @@
-#ifndef __MULTI_FORMAT_READER_H__
+﻿#ifndef __MULTI_FORMAT_READER_H__
 #define __MULTI_FORMAT_READER_H__
 
 /*

@@ -1,4 +1,4 @@
-#include "qqtdicttreemodel.h"
+﻿#include "qqtdicttreemodel.h"
 #include "qqtcore.h"
 #include <QModelIndex>
 #include <QFile>

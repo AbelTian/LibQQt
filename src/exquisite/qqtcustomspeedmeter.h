@@ -1,4 +1,4 @@
-#ifndef __QQTCUSTOMSPEEDMDTER_H__
+﻿#ifndef __QQTCUSTOMSPEEDMDTER_H__
 #define __QQTCUSTOMSPEEDMDTER_H__
 
 /**

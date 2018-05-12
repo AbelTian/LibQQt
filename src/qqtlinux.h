@@ -1,4 +1,4 @@
-#ifndef QQTLINUX_H
+﻿#ifndef QQTLINUX_H
 #define QQTLINUX_H
 
 #ifdef __cplusplus

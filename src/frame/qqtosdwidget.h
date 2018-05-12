@@ -1,4 +1,4 @@
-#ifndef QQTOSDWIDGET_H
+﻿#ifndef QQTOSDWIDGET_H
 #define QQTOSDWIDGET_H
 
 #include <qqtwidget.h>

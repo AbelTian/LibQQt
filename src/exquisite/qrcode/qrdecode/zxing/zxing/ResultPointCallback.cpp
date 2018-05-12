@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  ResultPointCallback.cpp
  *  zxing
  *

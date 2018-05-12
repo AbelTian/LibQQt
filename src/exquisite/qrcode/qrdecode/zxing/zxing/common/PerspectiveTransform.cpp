@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  PerspectiveTransform.cpp
  *  zxing
  *

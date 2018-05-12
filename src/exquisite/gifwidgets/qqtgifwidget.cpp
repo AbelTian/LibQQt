@@ -1,4 +1,4 @@
-#include "qqtgifwidget.h"
+﻿#include "qqtgifwidget.h"
 
 QQtGifWidget::QQtGifWidget ( QWidget* parent ) : QQtWidget ( parent )
 {

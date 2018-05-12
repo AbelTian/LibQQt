@@ -1,4 +1,4 @@
-#include "qqtslidetabwidget.h"
+﻿#include "qqtslidetabwidget.h"
 
 QQtSlideTabWidget::QQtSlideTabWidget(QWidget* parent) : QQtTabWidget(parent)
 {

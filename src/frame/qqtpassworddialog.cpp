@@ -1,4 +1,4 @@
-#include "qqtpassworddialog.h"
+﻿#include "qqtpassworddialog.h"
 #include "ui_qqtpassworddialog.h"
 
 QQtPasswordDialog::QQtPasswordDialog(QWidget* parent) :

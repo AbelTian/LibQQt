@@ -1,4 +1,4 @@
-#include "qqtethenetmanager.h"
+﻿#include "qqtethenetmanager.h"
 #include "qqtlinux.h"
 #include "qqtcore.h"
 #include "qqt-qt.h"

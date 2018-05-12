@@ -1,4 +1,4 @@
-#ifndef QQTPROTOCOL_H
+﻿#ifndef QQTPROTOCOL_H
 #define QQTPROTOCOL_H
 
 #include <QObject>

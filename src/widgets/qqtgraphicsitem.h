@@ -1,4 +1,4 @@
-#ifndef QQTGRAPHICSITEM_H
+﻿#ifndef QQTGRAPHICSITEM_H
 #define QQTGRAPHICSITEM_H
 
 #include <QGraphicsItem>

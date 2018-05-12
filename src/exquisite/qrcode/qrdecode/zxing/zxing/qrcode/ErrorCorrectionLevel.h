@@ -1,4 +1,4 @@
-#ifndef __ERROR_CORRECTION_LEVEL_H__
+﻿#ifndef __ERROR_CORRECTION_LEVEL_H__
 #define __ERROR_CORRECTION_LEVEL_H__
 
 /*

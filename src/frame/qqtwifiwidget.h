@@ -1,4 +1,4 @@
-#ifndef QQTWIFIWIDGET_H
+﻿#ifndef QQTWIFIWIDGET_H
 #define QQTWIFIWIDGET_H
 
 #include "qstandarditemmodel.h"

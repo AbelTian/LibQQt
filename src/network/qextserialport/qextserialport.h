@@ -1,4 +1,4 @@
-
+﻿
 #ifndef _QEXTSERIALPORT_H_
 #define _QEXTSERIALPORT_H_
 

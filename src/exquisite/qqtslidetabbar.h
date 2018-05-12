@@ -1,4 +1,4 @@
-#ifndef QQTSLIDETABBAR_H
+﻿#ifndef QQTSLIDETABBAR_H
 #define QQTSLIDETABBAR_H
 
 /*

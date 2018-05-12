@@ -1,4 +1,4 @@
-#ifndef QQTCHECKBOX_H
+﻿#ifndef QQTCHECKBOX_H
 #define QQTCHECKBOX_H
 
 #include <QCheckBox>

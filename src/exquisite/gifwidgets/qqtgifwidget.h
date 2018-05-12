@@ -1,4 +1,4 @@
-#ifndef QQTGIFWIDGET_H
+﻿#ifndef QQTGIFWIDGET_H
 #define QQTGIFWIDGET_H
 
 #include <qqtwidget.h>

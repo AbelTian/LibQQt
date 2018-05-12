@@ -1,4 +1,4 @@
-#ifndef QQTBLUETOOTHMANAGER_H
+﻿#ifndef QQTBLUETOOTHMANAGER_H
 #define QQTBLUETOOTHMANAGER_H
 
 #include <qbluetoothglobal.h>

@@ -1,4 +1,4 @@
-#ifndef QQTAPPLICATION_H
+﻿#ifndef QQTAPPLICATION_H
 #define QQTAPPLICATION_H
 
 #include <QApplication>

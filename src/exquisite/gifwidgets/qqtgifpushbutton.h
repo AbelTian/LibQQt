@@ -1,4 +1,4 @@
-#ifndef QQTGIFPUSHBUTTON_H
+﻿#ifndef QQTGIFPUSHBUTTON_H
 #define QQTGIFPUSHBUTTON_H
 
 #include <qqtpushbutton.h>

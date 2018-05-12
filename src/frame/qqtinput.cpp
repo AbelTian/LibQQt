@@ -1,4 +1,4 @@
-#include "qqtinput.h"
+﻿#include "qqtinput.h"
 #include "ui_qqtinput.h"
 #include "qdesktopwidget.h"
 #include "qqtcore.h"

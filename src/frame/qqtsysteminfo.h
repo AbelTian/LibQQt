@@ -88,6 +88,7 @@ public:
 #else
 
 #endif
+            return true;
     }
     bool getMEMInfo ( TMemTable& memInfo ) {
 #if defined (Q_OS_WIN)
@@ -110,12 +111,14 @@ public:
         qDebug() << QStringLiteral ( "保留（值为0）:" ) << statex.ullAvailExtendedVirtual / MB;
 #else
 #endif
+        return true;
     }
     bool getDiskInfo ( TDiskTable& diskInfo ) {
 #if defined (Q_OS_WIN)
 
 #else
 #endif
+        return true;
     }
 
 signals:

@@ -1,4 +1,4 @@
-#include "qqtfadewidget.h"
+﻿#include "qqtfadewidget.h"
 
 QQtFadeWidget::QQtFadeWidget ( QWidget* parent ) : QWidget ( parent )
 {

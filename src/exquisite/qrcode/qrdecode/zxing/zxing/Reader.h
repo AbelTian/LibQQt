@@ -1,4 +1,4 @@
-#ifndef __READER_H__
+﻿#ifndef __READER_H__
 #define __READER_H__
 
 /*

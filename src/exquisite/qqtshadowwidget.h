@@ -1,4 +1,4 @@
-#ifndef QQTSHADOWWIDGET_H
+﻿#ifndef QQTSHADOWWIDGET_H
 #define QQTSHADOWWIDGET_H
 
 /**

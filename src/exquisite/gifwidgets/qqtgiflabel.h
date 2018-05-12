@@ -1,4 +1,4 @@
-#ifndef QQTGIFLABEL_H
+﻿#ifndef QQTGIFLABEL_H
 #define QQTGIFLABEL_H
 
 #include <qqtlabel.h>

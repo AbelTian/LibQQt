@@ -1,4 +1,4 @@
-#include "qqtcolorlabel.h"
+﻿#include "qqtcolorlabel.h"
 
 QQtColorLabel::QQtColorLabel ( QWidget* parent ) : QLabel ( parent )
 {

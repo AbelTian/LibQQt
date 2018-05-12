@@ -1,4 +1,4 @@
-#include "qqtcolorwidget.h"
+﻿#include "qqtcolorwidget.h"
 
 QQtColorWidget::QQtColorWidget ( QWidget* parent ) : QWidget ( parent )
 {

@@ -1,4 +1,4 @@
-#ifndef QQTFADEWIDGET_H
+﻿#ifndef QQTFADEWIDGET_H
 #define QQTFADEWIDGET_H
 
 /**

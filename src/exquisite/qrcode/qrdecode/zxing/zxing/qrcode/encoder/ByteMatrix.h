@@ -1,4 +1,4 @@
-#ifndef BYTEMATRIX_H
+﻿#ifndef BYTEMATRIX_H
 #define BYTEMATRIX_H
 
 #include <vector>

@@ -1,4 +1,4 @@
-#ifndef QQTDICTIONARY_H
+﻿#ifndef QQTDICTIONARY_H
 #define QQTDICTIONARY_H
 
 #include <QObject>

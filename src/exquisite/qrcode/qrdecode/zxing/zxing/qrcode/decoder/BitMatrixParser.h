@@ -1,4 +1,4 @@
-#ifndef __BIT_MATRIX_PARSER_H__
+﻿#ifndef __BIT_MATRIX_PARSER_H__
 #define __BIT_MATRIX_PARSER_H__
 
 /*

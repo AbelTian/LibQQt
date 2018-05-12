@@ -1,4 +1,4 @@
-#include "qqthorizontaltexttabwidget.h"
+﻿#include "qqthorizontaltexttabwidget.h"
 
 QQtHorizontalTextTabWidget::QQtHorizontalTextTabWidget(QWidget* parent) : QQtTabWidget(parent)
 {

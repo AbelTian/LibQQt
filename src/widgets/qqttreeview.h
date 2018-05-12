@@ -1,4 +1,4 @@
-#ifndef QQTTREEVIEW_H
+﻿#ifndef QQTTREEVIEW_H
 #define QQTTREEVIEW_H
 
 #include <QTreeView>

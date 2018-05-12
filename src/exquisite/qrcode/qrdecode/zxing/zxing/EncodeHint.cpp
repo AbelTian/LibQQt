@@ -1,4 +1,4 @@
-#include "EncodeHint.h"
+﻿#include "EncodeHint.h"
 
 namespace zxing {
 

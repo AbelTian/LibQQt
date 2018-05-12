@@ -1,4 +1,4 @@
-#include "qqtosdwidget.h"
+﻿#include "qqtosdwidget.h"
 
 QQtOSDWidget::QQtOSDWidget ( QWidget* parent ) : QQtWidget ( parent )
 {

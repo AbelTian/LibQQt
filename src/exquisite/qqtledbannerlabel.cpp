@@ -1,4 +1,4 @@
-#include "qqtledbannerlabel.h"
+﻿#include "qqtledbannerlabel.h"
 
 QQtLedBannerLabel::QQtLedBannerLabel(QWidget* parent) : QLabel(parent)
 {

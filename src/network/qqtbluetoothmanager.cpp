@@ -1,4 +1,4 @@
-#include "qqtbluetoothmanager.h"
+﻿#include "qqtbluetoothmanager.h"
 #include "qqtcore.h"
 
 QQtBluetoothManager* QQtBluetoothManager::_instance = NULL;

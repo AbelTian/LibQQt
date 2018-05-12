@@ -1,4 +1,4 @@
-#ifndef QQTHEADERVIEW_H
+﻿#ifndef QQTHEADERVIEW_H
 #define QQTHEADERVIEW_H
 
 #include <QHeaderView>

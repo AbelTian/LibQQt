@@ -1,4 +1,4 @@
-#ifndef QQTPICTURETABWIDGET_H
+﻿#ifndef QQTPICTURETABWIDGET_H
 #define QQTPICTURETABWIDGET_H
 
 #include <qqttabwidget.h>

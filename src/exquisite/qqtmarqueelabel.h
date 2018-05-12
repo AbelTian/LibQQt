@@ -1,4 +1,4 @@
-#ifndef QQTMARQUEELABEL_H
+﻿#ifndef QQTMARQUEELABEL_H
 #define QQTMARQUEELABEL_H
 
 /**

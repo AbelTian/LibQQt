@@ -1,4 +1,4 @@
-#include "qqtslidetabbar.h"
+﻿#include "qqtslidetabbar.h"
 #include <QMouseEvent>
 #include <QPalette>
 #include <qqtcore.h>

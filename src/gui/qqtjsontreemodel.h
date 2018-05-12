@@ -1,4 +1,4 @@
-#ifndef QQTJSONTREEMODEL_H
+﻿#ifndef QQTJSONTREEMODEL_H
 #define QQTJSONTREEMODEL_H
 
 #include <qqttreemodel.h>

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2010 - Andre Maa脽dorf
  *
  * Use, change and distribution of the code below is hereby

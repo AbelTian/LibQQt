@@ -1,4 +1,4 @@
-#include "qqtcore.h"
+﻿#include "qqtcore.h"
 
 QByteArray& operator<< ( QByteArray& l, const quint8& r )
 {

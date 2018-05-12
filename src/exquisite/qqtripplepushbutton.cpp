@@ -1,4 +1,4 @@
-#include "qqtripplepushbutton.h"
+﻿#include "qqtripplepushbutton.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <QPropertyAnimation>

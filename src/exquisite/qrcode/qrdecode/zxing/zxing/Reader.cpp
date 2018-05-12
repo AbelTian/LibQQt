@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Reader.cpp
  *  zxing
  *

@@ -1,4 +1,4 @@
-
+﻿
 #ifndef QPREVIEWUI_H
 #define QPREVIEWUI_H
 

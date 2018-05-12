@@ -1,4 +1,4 @@
-// -*- mode:c++; tab-width:2; indent-tabs-mode:nil; c-basic-offset:2 -*-
+﻿// -*- mode:c++; tab-width:2; indent-tabs-mode:nil; c-basic-offset:2 -*-
 #ifndef __GLOBALHISTOGRAMBINARIZER_H__
 #define __GLOBALHISTOGRAMBINARIZER_H__
 /*

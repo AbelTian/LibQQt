@@ -1,4 +1,4 @@
-#ifndef REEDSOLOMONENCODER_H
+﻿#ifndef REEDSOLOMONENCODER_H
 #define REEDSOLOMONENCODER_H
 
 #include <zxing/common/reedsolomon/GenericGFPoly.h>

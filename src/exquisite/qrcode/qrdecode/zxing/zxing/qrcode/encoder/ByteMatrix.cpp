@@ -1,4 +1,4 @@
-#include "ByteMatrix.h"
+﻿#include "ByteMatrix.h"
 #include <sstream>
 
 namespace zxing {

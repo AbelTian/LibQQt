@@ -148,6 +148,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendHeadRequest ( const QNetworkReques
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( const QNetworkRequest& request, QIODevice* data )
@@ -179,6 +181,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( const QNetworkReques
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( const QNetworkRequest& request, const QByteArray& data )
@@ -211,6 +215,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( const QNetworkReques
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart )
@@ -242,6 +248,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendPostRequest ( const QNetworkReques
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendPutRequest ( const QNetworkRequest& request, QIODevice* data )
@@ -273,6 +281,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendPutRequest ( const QNetworkRequest
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendPutRequest ( const QNetworkRequest& request, const QByteArray& data )
@@ -304,6 +314,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendPutRequest ( const QNetworkRequest
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendPutRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart )
@@ -335,6 +347,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendPutRequest ( const QNetworkRequest
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendDeleteResourceRequest ( const QNetworkRequest& request )
@@ -366,6 +380,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendDeleteResourceRequest ( const QNet
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
@@ -398,6 +414,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 #ifndef Q_OS_WIN
@@ -432,6 +450,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
@@ -464,6 +484,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
 //              this, SLOT ( finished(QNetworkReply*); ) ); //请求完成信号
 
     timer->start();
+
+    return session;
 }
 #endif
 

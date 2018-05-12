@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Decoder.cpp
  *  zxing
  *

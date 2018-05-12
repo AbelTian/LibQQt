@@ -1,4 +1,4 @@
-// Begin CVS Header
+﻿// Begin CVS Header
 //   $Source: /fs/turing/cvs/copasi_dev/copasi/mml/qtmmlwidget.h,v $
 //   $Revision: 1.5 $
 //   $Name:  $

@@ -1,4 +1,4 @@
-#ifndef QQTGRAPHICSSCENE_H
+﻿#ifndef QQTGRAPHICSSCENE_H
 #define QQTGRAPHICSSCENE_H
 
 #include <QGraphicsScene>
@@ -18,7 +18,7 @@ public:
                   const QRectF& target = QRectF(), const QRectF& source = QRectF(),
                   Qt::AspectRatioMode aspectRatioMode = Qt::KeepAspectRatio );
     QQtGraphicsEllipseItem* addEllipse ( const QRectF& rect, const QPen& pen = QPen(), const QBrush& brush = QBrush() );
-    inline QGraphicsEllipseItem* addEllipse ( qreal x, qreal y, qreal w, qreal h, const QPen& pen = QPen(),
+    inline QQtGraphicsEllipseItem* addEllipse ( qreal x, qreal y, qreal w, qreal h, const QPen& pen = QPen(),
                                               const QBrush& brush = QBrush() )
     { return addEllipse ( QRectF ( x, y, w, h ), pen, brush ); }
 

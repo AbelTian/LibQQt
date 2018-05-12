@@ -1,4 +1,4 @@
-#ifndef QQTTABBAR_H
+﻿#ifndef QQTTABBAR_H
 #define QQTTABBAR_H
 
 #include <QTabBar>

@@ -1,4 +1,4 @@
-#include "qqtrulerslider.h"
+﻿#include "qqtrulerslider.h"
 #include "qpainter.h"
 #include "qevent.h"
 #include "qtimer.h"

@@ -1,4 +1,4 @@
-#ifndef ENCODEHINTTYPE_H
+﻿#ifndef ENCODEHINTTYPE_H
 #define ENCODEHINTTYPE_H
 
 #include <string>

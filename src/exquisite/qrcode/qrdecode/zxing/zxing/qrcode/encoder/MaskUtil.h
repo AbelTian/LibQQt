@@ -1,4 +1,4 @@
-#ifndef MASKUTIL_H
+﻿#ifndef MASKUTIL_H
 #define MASKUTIL_H
 
 #include "ByteMatrix.h"

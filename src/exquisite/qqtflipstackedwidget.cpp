@@ -1,4 +1,4 @@
-#include "qqtflipstackedwidget.h"
+﻿#include "qqtflipstackedwidget.h"
 
 QQtFlipStackedWidget::QQtFlipStackedWidget ( QWidget* parent )
 {

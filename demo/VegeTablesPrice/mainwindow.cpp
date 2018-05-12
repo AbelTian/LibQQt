@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <GumboQueryDocument.h>
@@ -6,6 +6,8 @@
 #include <GumboQueryNode.h>
 #include <QStringList>
 #include <QTextCodec>
+
+//#include "qqtcore.h"
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),

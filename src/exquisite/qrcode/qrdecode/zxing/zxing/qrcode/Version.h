@@ -1,4 +1,4 @@
-#ifndef __VERSION_H__
+﻿#ifndef __VERSION_H__
 #define __VERSION_H__
 
 /*

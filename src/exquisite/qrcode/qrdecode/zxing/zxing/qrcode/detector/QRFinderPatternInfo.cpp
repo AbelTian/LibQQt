@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  FinderPatternInfo.cpp
  *  zxing
  *

@@ -1,4 +1,4 @@
-#include "qqthorizontaltexttabbar.h"
+﻿#include "qqthorizontaltexttabbar.h"
 #include "QStylePainter"
 #include "QStyleOptionTabV3"
 #include "QDebug"

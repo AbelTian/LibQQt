@@ -1,4 +1,4 @@
-#ifndef QQTMPLAYER_H
+﻿#ifndef QQTMPLAYER_H
 #define QQTMPLAYER_H
 
 #include <QProcess>

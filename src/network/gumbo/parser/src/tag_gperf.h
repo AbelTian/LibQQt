@@ -1,4 +1,4 @@
-static unsigned int tag_hash(
+﻿static unsigned int tag_hash(
     register const char *str, register unsigned int len) {
   static unsigned short asso_values[] = {296, 296, 296, 296, 296, 296, 296, 296,
       296, 296, 296, 296, 296, 296, 296, 296, 296, 296, 296, 296, 296, 296, 296,

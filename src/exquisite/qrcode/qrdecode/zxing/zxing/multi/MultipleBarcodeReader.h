@@ -1,4 +1,4 @@
-#ifndef __MULTIPLE_BARCODE_READER_H__
+﻿#ifndef __MULTIPLE_BARCODE_READER_H__
 #define __MULTIPLE_BARCODE_READER_H__
 
 /*

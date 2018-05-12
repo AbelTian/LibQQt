@@ -1,4 +1,4 @@
-#ifndef __RESULT_POINT_CALLBACK_H__
+﻿#ifndef __RESULT_POINT_CALLBACK_H__
 #define __RESULT_POINT_CALLBACK_H__
 
 /*

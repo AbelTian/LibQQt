@@ -1,4 +1,4 @@
-#ifndef QQTFRAMEDEFINE_H
+﻿#ifndef QQTFRAMEDEFINE_H
 #define QQTFRAMEDEFINE_H
 
 

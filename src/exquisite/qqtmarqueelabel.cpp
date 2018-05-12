@@ -1,4 +1,4 @@
-#include "qqtmarqueelabel.h"
+﻿#include "qqtmarqueelabel.h"
 
 QQtMarqueeLabel::QQtMarqueeLabel(QWidget* parent, Qt::WindowFlags f)
     : QLabel(parent, f)

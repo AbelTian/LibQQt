@@ -1,4 +1,4 @@
-#include "qqtwavaudiomanager.h"
+﻿#include "qqtwavaudiomanager.h"
 
 /*
  * 解析方法1 C语言
@@ -71,8 +71,8 @@ void wav_dump ( wav_t* wav );
 }
 #endif
 
-/*
-int strncasecmp ( char* s1, char* s2, register int n )
+#ifdef _MSC_VER
+int strncasecmp ( const char* s1, const char* s2, register int n )
 {
     while ( --n >= 0 && toupper ( ( unsigned char ) *s1 ) == toupper ( ( unsigned char ) *s2++ ) )
         if ( *s1++ == ' ' )
@@ -80,7 +80,7 @@ int strncasecmp ( char* s1, char* s2, register int n )
 
     return ( n < 0 ? 0 : toupper ( ( unsigned char ) * s1 ) - toupper ( ( unsigned char ) * --s2 ) );
 }
-*/
+#endif
 
 wav_t* wav_open ( char* file_name )
 {

@@ -1,4 +1,4 @@
-#ifndef __DECODER_RESULT_H__
+﻿#ifndef __DECODER_RESULT_H__
 #define __DECODER_RESULT_H__
 
 /*

@@ -1,4 +1,4 @@
-#ifndef QQTDARWIN_H
+﻿#ifndef QQTDARWIN_H
 #define QQTDARWIN_H
 
 #ifdef __cplusplus

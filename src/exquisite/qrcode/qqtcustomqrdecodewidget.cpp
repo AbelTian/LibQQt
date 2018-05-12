@@ -1,4 +1,4 @@
-#include "qqtcustomqrdecodewidget.h"
+﻿#include "qqtcustomqrdecodewidget.h"
 #include "QZXing.h"
 
 #include <QPainter>

@@ -1,4 +1,4 @@
-#include "MaskUtil.h"
+﻿#include "MaskUtil.h"
 #include <zxing/common/IllegalArgumentException.h>
 #include <stdlib.h>
 #include <algorithm> 

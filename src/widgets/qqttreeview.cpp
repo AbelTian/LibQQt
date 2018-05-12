@@ -1,4 +1,4 @@
-#include "qqttreeview.h"
+﻿#include "qqttreeview.h"
 #include <QHeaderView>
 
 QQtTreeView::QQtTreeView(QWidget* parent) :

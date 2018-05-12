@@ -1,4 +1,4 @@
-#ifndef __MODULUS_GFPOLY_PDF_H__
+﻿#ifndef __MODULUS_GFPOLY_PDF_H__
 #define __MODULUS_GFPOLY_PDF_H__
 
 /*

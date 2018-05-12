@@ -1,4 +1,4 @@
-#include "qqtpicturetabwidget.h"
+﻿#include "qqtpicturetabwidget.h"
 
 QQtPictureTabWidget::QQtPictureTabWidget ( QWidget* parent ) : QQtTabWidget ( parent )
 {

@@ -1,4 +1,4 @@
-#ifndef __DECOCER_PDF_H__
+﻿#ifndef __DECOCER_PDF_H__
 #define __DECOCER_PDF_H__
 
 /*

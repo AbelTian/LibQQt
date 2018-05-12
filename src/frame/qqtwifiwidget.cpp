@@ -1,4 +1,4 @@
-#include "qqtwifiwidget.h"
+﻿#include "qqtwifiwidget.h"
 #include "ui_qqtwifiwidget.h"
 #include "qqtlinux.h"
 #include "qqtcore.h"

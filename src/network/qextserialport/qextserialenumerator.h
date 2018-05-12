@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * \file qextserialenumerator.h
  * \author Michal Policht
  * \see QextSerialEnumerator

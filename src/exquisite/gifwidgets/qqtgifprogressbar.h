@@ -1,4 +1,4 @@
-#ifndef QQTGIFPROGRESSBAR_H
+﻿#ifndef QQTGIFPROGRESSBAR_H
 #define QQTGIFPROGRESSBAR_H
 
 #include <qqtgiflabel.h>

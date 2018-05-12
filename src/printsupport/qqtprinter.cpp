@@ -1,4 +1,4 @@
-#include "qqtprinter.h"
+﻿#include "qqtprinter.h"
 #include "stdlib.h"
 
 QQtPrinter::QQtPrinter ( QPrinter::PrinterMode mode ) :

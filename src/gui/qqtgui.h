@@ -1,4 +1,4 @@
-#ifndef QQTGUI_H
+﻿#ifndef QQTGUI_H
 #define QQTGUI_H
 
 #endif // QQTGUI_H

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  DataBlock.cpp
  *  zxing
  *

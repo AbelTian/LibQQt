@@ -1,4 +1,4 @@
-#ifndef QQTRULERSLIDER_H
+﻿#ifndef QQTRULERSLIDER_H
 #define QQTRULERSLIDER_H
 
 #include <QSlider>
