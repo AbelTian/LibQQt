@@ -73,7 +73,7 @@
        <attribute name="title">
         <string>Tab 2</string>
        </attribute>
-       <widget class="QQtSlideEffectTabBar" name="w77" native="true">
+       <widget class="QQtSlideTabBar" name="w77" native="true">
         <property name="geometry">
          <rect>
           <x>30</x>
@@ -83,7 +83,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QQtSlideEffectTabWidget" name="tb0">
+       <widget class="QQtSlideTabWidget" name="tb0">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -136,7 +136,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QQtPictureEffectTabWidget" name="tw0">
+         <widget class="QQtPictureTabWidget" name="tw0">
           <property name="tabPosition">
            <enum>QTabWidget::West</enum>
           </property>
@@ -146,7 +146,7 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
-             <widget class="QQtPictureEffectTabWidget" name="tw1">
+             <widget class="QQtPictureTabWidget" name="tw1">
               <widget class="QWidget" name="tab_14">
                <attribute name="title">
                 <string>Tab 1</string>
@@ -184,19 +184,19 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQtSlideEffectTabBar</class>
+   <class>QQtSlideTabBar</class>
    <extends>QWidget</extends>
    <header>qqtslideeffecttabbar.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQtSlideEffectTabWidget</class>
+   <class>QQtSlideTabWidget</class>
    <extends>QTabWidget</extends>
    <header location="global">qqtslideeffecttabwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQtPictureEffectTabWidget</class>
+   <class>QQtPictureTabWidget</class>
    <extends>QTabWidget</extends>
    <header location="global">qqtpictureeffecttabwidget.h</header>
    <container>1</container>

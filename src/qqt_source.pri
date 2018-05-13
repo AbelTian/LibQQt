@@ -14,13 +14,6 @@
 #2018年4月6日18点12分
 #这里是LibQQt源文件pri，所有开关宏都在LibQQt头文件pri里开关。
 #-------------------------------------------------
-SOURCES = \
-    $$PWD/exquisite/openglwidgets/qqtopenglwidget.cpp \
-    $$PWD/exquisite/openglwidgets/qqtopenglwindow.cpp
-HEADERS = \
-    $$PWD/exquisite/openglwidgets/qqtopenglwidget.h \
-    $$PWD/exquisite/openglwidgets/qqtopenglwindow.h
-
 #root dir
 HEADERS += $$PWD/qqt.h \
     $$PWD/qqt-local.h \
@@ -103,6 +96,7 @@ HEADERS += \
     $$PWD/widgets/qqtdateedit.h \
     $$PWD/widgets/qqttimeedit.h \
     $$PWD/widgets/qqtdatetimeedit.h
+
 SOURCES += \
     $$PWD/widgets/qqtcheckbox.cpp \
     $$PWD/widgets/qqtheaderview.cpp \
@@ -114,8 +108,6 @@ SOURCES += \
     $$PWD/widgets/qqttabbar.cpp \
     $$PWD/widgets/qqttabwidget.cpp \
     $$PWD/widgets/qqttreeview.cpp \
-    $$PWD/widgets/qqtlineeditwithsearch.cpp \
-    $$PWD/widgets/qqtmptablewidget.cpp \
     $$PWD/widgets/qqttablewidget.cpp \
     $$PWD/widgets/qqtgraphicsscene.cpp \
     $$PWD/widgets/qqtgraphicsitem.cpp \
@@ -135,8 +127,6 @@ HEADERS += \
     $$PWD/widgets/qqttabbar.h \
     $$PWD/widgets/qqttabwidget.h \
     $$PWD/widgets/qqttreeview.h \
-    $$PWD/widgets/qqtlineeditwithsearch.h \
-    $$PWD/widgets/qqtmptablewidget.h \
     $$PWD/widgets/qqttablewidget.h \
     $$PWD/widgets/qqtgraphicsscene.h \
     $$PWD/widgets/qqtgraphicsitem.h \
@@ -146,10 +136,28 @@ HEADERS += \
     $$PWD/widgets/qqtwidgets.h \
     $$PWD/widgets/qqtlabel.h
 FORMS += \
-    $$PWD/widgets/qqtprogressbar.ui \
-    $$PWD/widgets/qqtmptablewidget.ui
+    $$PWD/widgets/qqtprogressbar.ui
 
 #frame
+SOURCES += \
+    $$PWD/frame/qqtsysteminfo.cpp
+HEADERS += \
+    $$PWD/frame/qqtsysteminfo.h
+
+SOURCES += \
+    $$PWD/frame/qqtlineeditwithsearch.cpp \
+    $$PWD/frame/qqtosdwidget.cpp
+HEADERS += \
+    $$PWD/frame/qqtlineeditwithsearch.h \
+    $$PWD/frame/qqtosdwidget.h
+
+SOURCES += \
+    $$PWD/frame/qqtmultipagetablewidget.cpp
+HEADERS += \
+    $$PWD/frame/qqtmultipagetablewidget.h
+FORMS += \
+    $$PWD/frame/qqtmultipagetablewidget.ui
+
 SOURCES += \
     $$PWD/frame/qqtanimation.cpp \
     $$PWD/frame/qqtapplication.cpp \
@@ -158,8 +166,8 @@ SOURCES += \
     $$PWD/frame/qqtpassworddialog.cpp \
     $$PWD/frame/qqtframe.cpp \
     $$PWD/frame/qqtdialog.cpp \
-    $$PWD/frame/qqtmsgbox.cpp \
-    $$PWD/frame/qqtinput.cpp
+    $$PWD/frame/qqtinput.cpp \
+    $$PWD/frame/qqtmsgbox.cpp
 HEADERS += \
     $$PWD/frame/qqtanimation.h \
     $$PWD/frame/qqtapplication.h \
@@ -168,8 +176,8 @@ HEADERS += \
     $$PWD/frame/qqtpassworddialog.h \
     $$PWD/frame/qqtframe.h \
     $$PWD/frame/qqtdialog.h \
-    $$PWD/frame/qqtmsgbox.h \
-    $$PWD/frame/qqtinput.h
+    $$PWD/frame/qqtinput.h \
+    $$PWD/frame/qqtmsgbox.h
 FORMS += \
     $$PWD/frame/qqtprogressdialog.ui \
     $$PWD/frame/qqtpassworddialog.ui \
@@ -310,61 +318,80 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
     SOURCES += \
-        $$PWD/exquisite/qqtninepatcheffectwidget.cpp \
-        $$PWD/exquisite/qqtcustompianokeyboard.cpp \
-        $$PWD/exquisite/qqtrippleeffectpushbutton.cpp \
-        $$PWD/exquisite/qqtrulereffectslider.cpp \
-        $$PWD/exquisite/qqtcustomverificationcode.cpp \
         $$PWD/exquisite/qqtframelesshelper.cpp \
-        $$PWD/exquisite/qqtframelesshelperprivate.cpp \
-        $$PWD/exquisite/qqtflipeffectstackedwidget.cpp \
-        $$PWD/exquisite/qqtfadeeffectwidget.cpp \
-        $$PWD/exquisite/qqtshadoweffectwidget.cpp \
-        $$PWD/exquisite/qqtpopeffectdialog.cpp
+        $$PWD/exquisite/qqtframelesshelperprivate.cpp
     HEADERS += \
-        $$PWD/exquisite/qqtninepatcheffectwidget.h \
         $$PWD/exquisite/qqtframelesshelper.h \
-        $$PWD/exquisite/qqtframelesshelperprivate.h \
+        $$PWD/exquisite/qqtframelesshelperprivate.h
+
+    #dialog
+    SOURCES += \
+        $$PWD/exquisite/qqtpopupdialog.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtpopupdialog.h
+
+    #widget
+    SOURCES += \
+        $$PWD/exquisite/qqtfadewidget.cpp \
+        $$PWD/exquisite/qqtninepatchwidget.cpp \
+        $$PWD/exquisite/qqtshadowwidget.cpp \
+        $$PWD/exquisite/qqtflipstackedwidget.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtninepatchwidget.h \
+        $$PWD/exquisite/qqtfadewidget.h \
+        $$PWD/exquisite/qqtshadowwidget.h \
+        $$PWD/exquisite/qqtflipstackedwidget.h
+
+    #special
+    SOURCES += \
+        $$PWD/exquisite/qqtcustompianokeyboard.cpp \
+        $$PWD/exquisite/qqtcustomverificationcode.cpp \
+        $$PWD/exquisite/qqtrulerslider.cpp
+    HEADERS += \
         $$PWD/exquisite/qqtcustompianokeyboard.h \
-        $$PWD/exquisite/qqtrippleeffectpushbutton.h \
-        $$PWD/exquisite/qqtrulereffectslider.h \
-        $$PWD/exquisite/qqtflipeffectstackedwidget.h \
         $$PWD/exquisite/qqtcustomverificationcode.h \
-        $$PWD/exquisite/qqtfadeeffectwidget.h \
-        $$PWD/exquisite/qqtshadoweffectwidget.h \
-        $$PWD/exquisite/qqtpopeffectdialog.h
+        $$PWD/exquisite/qqtrulerslider.h
 
     #progressbar
     SOURCES += \
-        $$PWD/exquisite/qqtcustomspeedmeter.cpp \
-        $$PWD/exquisite/qqtcustomeffectprogressbar.cpp
+        $$PWD/exquisite/qqtcustomprogressbar.cpp \
+        $$PWD/exquisite/qqtcustomspeedmeter.cpp
     HEADERS += \
-        $$PWD/exquisite/qqtcustomspeedmeter.h \
-        $$PWD/exquisite/qqtcustomeffectprogressbar.h
+        $$PWD/exquisite/qqtcustomprogressbar.h \
+        $$PWD/exquisite/qqtcustomspeedmeter.h
+
+    #pushbutton
+    SOURCES += \
+        $$PWD/exquisite/qqtripplepushbutton.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtripplepushbutton.h
 
     #label
     SOURCES += \
-        $$PWD/exquisite/qqtledbannereffectlabel.cpp \
-        $$PWD/exquisite/qqtmarqueeeffectlabel.cpp
+        $$PWD/exquisite/qqtledbannerlabel.cpp \
+        $$PWD/exquisite/qqtmarqueelabel.cpp
+
     HEADERS += \
-        $$PWD/exquisite/qqtmarqueeeffectlabel.h \
-        $$PWD/exquisite/qqtledbannereffectlabel.h
+        $$PWD/exquisite/qqtmarqueelabel.h \
+        $$PWD/exquisite/qqtledbannerlabel.h
 
     #tabwidget
     SOURCES += \
-        $$PWD/exquisite/qqthorizontaltexteffecttabbar.cpp \
-        $$PWD/exquisite/qqthorizontaltexteffecttabwidget.cpp \
-        $$PWD/exquisite/qqtpictureeffecttabbar.cpp \
-        $$PWD/exquisite/qqtpictureeffecttabwidget.cpp \
-        $$PWD/exquisite/qqtslideeffecttabbar.cpp \
-        $$PWD/exquisite/qqtslideeffecttabwidget.cpp
+        $$PWD/exquisite/qqthorizontaltexttabbar.cpp \
+        $$PWD/exquisite/qqthorizontaltexttabwidget.cpp \
+        $$PWD/exquisite/qqtpicturetabbar.cpp \
+        $$PWD/exquisite/qqtpicturetabwidget.cpp \
+        $$PWD/exquisite/qqtslidetabbar.cpp \
+        $$PWD/exquisite/qqtslidetabwidget.cpp
+
     HEADERS += \
-        $$PWD/exquisite/qqthorizontaltexteffecttabbar.h \
-        $$PWD/exquisite/qqthorizontaltexteffecttabwidget.h \
-        $$PWD/exquisite/qqtpictureeffecttabbar.h \
-        $$PWD/exquisite/qqtpictureeffecttabwidget.h \
-        $$PWD/exquisite/qqtslideeffecttabbar.h \
-        $$PWD/exquisite/qqtslideeffecttabwidget.h
+        $$PWD/exquisite/qqtslidetabbar.h \
+        $$PWD/exquisite/qqtslidetabwidget.h \
+        $$PWD/exquisite/qqtpicturetabwidget.h \
+        $$PWD/exquisite/qqtpicturetabbar.h \
+        $$PWD/exquisite/qqthorizontaltexttabwidget.h \
+        $$PWD/exquisite/qqthorizontaltexttabbar.h
+
 
     #svg widgets
     contains (DEFINES, __SVGWIDGETS__) {
@@ -402,6 +429,25 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/gifwidgets/qqtgifcheckbox.h \
             $$PWD/exquisite/gifwidgets/qqtgifradiobutton.h \
             $$PWD/exquisite/gifwidgets/qqtgifprogressbar.h
+    }
+
+    #opengl widgets
+    contains (DEFINES, __OPENGLWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/openglwidgets/qqtopenglwidget.cpp \
+            $$PWD/exquisite/openglwidgets/qqtopenglwindow.cpp
+        HEADERS += \
+            $$PWD/exquisite/openglwidgets/qqtopenglwidget.h \
+            $$PWD/exquisite/openglwidgets/qqtopenglwindow.h
+    }
+
+    contains (DEFINES, __COLORWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/colorwidgets/qqtcolorwidget.cpp \
+            $$PWD/exquisite/colorwidgets/qqtcolorlabel.cpp
+        HEADERS += \
+            $$PWD/exquisite/colorwidgets/qqtcolorwidget.h \
+            $$PWD/exquisite/colorwidgets/qqtcolorlabel.h
     }
 }
 

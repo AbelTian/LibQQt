@@ -61,7 +61,8 @@ SUBDIRS =
 #some test project
 #SUBDIRS += test/gumbo_query_test
 #SUBDIRS += test/customqvariant
-#SUBDIRS += test/framelesshelperwidget
+#
+SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
 #SUBDIRS += test/bytearraytest
 #!contains(QKIT_PRIVATE, iOS|iOSSimulator){
@@ -78,15 +79,17 @@ SUBDIRS =
 ##need bluetooth library
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += test/qqtbtfileserver
 
+#0000
 #SUBDIRS += test/svgtest
 #SUBDIRS += test/qqtdicttest
 #必开
-SUBDIRS += test/qqtdicttest2
+#SUBDIRS += test/qqtdicttest2
 #必开
-SUBDIRS += test/giftest
+#SUBDIRS += test/giftest
 
 #必开 这两个例子是关于QQtAudio的最好展示
-SUBDIRS += examples/qqtaudioexample
+#SUBDIRS += examples/qqtaudioexample
+#111111
 #greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
@@ -103,4 +106,10 @@ SUBDIRS += examples/qqtaudioexample
 #SUBDIRS += examples/qqtudpexample
 #lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
 
-SUBDIRS += test/openglwidgettest
+#SUBDIRS += test/openglwidgettest
+#SUBDIRS += test/osdtest
+#SUBDIRS += test/inputtest
+#SUBDIRS += demo/SysInfoNotify
+SUBDIRS += demo/TouchMonitor
+SUBDIRS += demo/TouchMonitorServer
+

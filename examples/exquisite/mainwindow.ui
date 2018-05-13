@@ -26,16 +26,16 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w01" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w01" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w0" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w0" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w1" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w1" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w2" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w2" native="true"/>
         </item>
        </layout>
       </widget>
@@ -45,16 +45,16 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w5" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w5" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w6" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w6" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w3" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w3" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w4" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w4" native="true"/>
         </item>
        </layout>
       </widget>
@@ -64,16 +64,16 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w50" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w50" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w51" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w51" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w52" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w52" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w53" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w53" native="true"/>
         </item>
        </layout>
       </widget>
@@ -83,16 +83,16 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w40" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w40" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w41" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w41" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w42" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w42" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomEffectProgressBar" name="w43" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w43" native="true"/>
         </item>
        </layout>
       </widget>
@@ -160,7 +160,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQtCustomEffectProgressBar</class>
+   <class>QQtCustomProgressBar</class>
    <extends>QWidget</extends>
    <header location="global">qqtcustomeffectprogressbar.h</header>
    <container>1</container>
