@@ -1,4 +1,4 @@
-#ifndef __BIT_SOURCE_H__
+﻿#ifndef __BIT_SOURCE_H__
 #define __BIT_SOURCE_H__
 
 /*

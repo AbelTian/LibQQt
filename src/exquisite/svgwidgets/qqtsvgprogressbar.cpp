@@ -1,4 +1,4 @@
-#include "qqtsvgprogressbar.h"
+﻿#include "qqtsvgprogressbar.h"
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QVBoxLayout>

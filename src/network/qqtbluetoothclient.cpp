@@ -1,16 +1,17 @@
 ﻿#include "qqtbluetoothclient.h"
 #include <qqtcore.h>
 
+QQtBluetoothClient::QQtBluetoothClient ( QObject* parent ) : QBluetoothSocket ( parent )
+{
+    initSocket();
+}
+
 QQtBluetoothClient::QQtBluetoothClient ( QBluetoothServiceInfo::Protocol socketType, QObject* parent ) :
     QBluetoothSocket ( socketType, parent )
 {
     initSocket();
 }
 
-QQtBluetoothClient::QQtBluetoothClient ( QObject* parent ) : QBluetoothSocket ( parent )
-{
-    initSocket();
-}
 
 void QQtBluetoothClient::initSocket()
 {
@@ -43,11 +44,11 @@ void QQtBluetoothClient::installProtocol ( QQtProtocol* stack )
 {
     if ( m_protocol )
         return;
-
-    connect ( stack, SIGNAL ( write ( const QByteArray& ) ),
-              this, SLOT ( slotWriteData ( const QByteArray& ) ) );
-    stack->attach();
     m_protocol = stack;
+
+    connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
+              this, SLOT ( slotWriteData ( const QByteArray& ) ) );
+    m_protocol->attach();
 }
 
 void QQtBluetoothClient::uninstallProtocol ( QQtProtocol* stack )

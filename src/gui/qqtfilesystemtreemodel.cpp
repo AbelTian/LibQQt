@@ -1,4 +1,4 @@
-#include "qqtfilesystemtreemodel.h"
+﻿#include "qqtfilesystemtreemodel.h"
 #include <QFile>
 #include "qqtcore.h"
 #include <QModelIndex>

@@ -1,4 +1,4 @@
-#ifndef __REED_SOLOMON_EXCEPTION_H__
+﻿#ifndef __REED_SOLOMON_EXCEPTION_H__
 #define __REED_SOLOMON_EXCEPTION_H__
 
 /*

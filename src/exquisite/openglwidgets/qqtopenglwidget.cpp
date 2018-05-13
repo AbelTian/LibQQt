@@ -1,4 +1,4 @@
-#include "qqtopenglwidget.h"
+﻿#include "qqtopenglwidget.h"
 
 QQtOpenGLWidget::QQtOpenGLWidget ( QWidget* parent ) : QGLWidget ( parent )
 {

@@ -1,4 +1,4 @@
-#include "qqttablewidget.h"
+﻿#include "qqttablewidget.h"
 #include "qqt-qt.h"
 #include "qqtcore.h"
 #include "qqtsql.h"

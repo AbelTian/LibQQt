@@ -1,4 +1,4 @@
-#ifndef __QQT_WIDGETS_DEFINE_H__
+﻿#ifndef __QQT_WIDGETS_DEFINE_H__
 #define __QQT_WIDGETS_DEFINE_H__
 
 #include <QWidget>

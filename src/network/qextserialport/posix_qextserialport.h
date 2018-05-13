@@ -1,4 +1,4 @@
-#ifndef _POSIX_QEXTSERIALPORT_H_
+﻿#ifndef _POSIX_QEXTSERIALPORT_H_
 #define _POSIX_QEXTSERIALPORT_H_
 
 #include <stdio.h>

@@ -1,4 +1,4 @@
-#include "qqtsvgwidget.h"
+﻿#include "qqtsvgwidget.h"
 #include <QPainter>
 #include <QSvgRenderer>
 #include <QImage>

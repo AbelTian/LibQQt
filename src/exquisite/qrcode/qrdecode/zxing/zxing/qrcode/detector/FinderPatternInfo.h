@@ -1,4 +1,4 @@
-#ifndef __FINDER_PATTERN_INFO_H__
+﻿#ifndef __FINDER_PATTERN_INFO_H__
 #define __FINDER_PATTERN_INFO_H__
 
 /*

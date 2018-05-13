@@ -1,4 +1,4 @@
-#include "qqtgraphicsview.h"
+﻿#include "qqtgraphicsview.h"
 #include <QGraphicsItem>
 #include <QStyleOptionGraphicsItem>
 #include "qqtcore.h"

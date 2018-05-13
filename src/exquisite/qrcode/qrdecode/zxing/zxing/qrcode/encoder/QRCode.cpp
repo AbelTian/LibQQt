@@ -1,4 +1,4 @@
-#include "QRCode.h"
+﻿#include "QRCode.h"
 
 #include <sstream>
 

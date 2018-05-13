@@ -1,4 +1,4 @@
-#ifndef QQTSVGLABEL_H
+﻿#ifndef QQTSVGLABEL_H
 #define QQTSVGLABEL_H
 
 #include <qqtlabel.h>

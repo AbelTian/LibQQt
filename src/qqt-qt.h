@@ -1,4 +1,4 @@
-#ifndef QQTGUIQT_H
+﻿#ifndef QQTGUIQT_H
 #define QQTGUIQT_H
 
 #include <qglobal.h>

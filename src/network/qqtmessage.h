@@ -1,4 +1,4 @@
-#ifndef QQTMESSAGE_H
+﻿#ifndef QQTMESSAGE_H
 #define QQTMESSAGE_H
 
 #include <QObject>

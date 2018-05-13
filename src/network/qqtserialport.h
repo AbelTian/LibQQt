@@ -1,4 +1,4 @@
-#ifndef QQTSERIALPORT_H
+﻿#ifndef QQTSERIALPORT_H
 #define QQTSERIALPORT_H
 
 #include "qqtprotocol.h"

@@ -1,4 +1,4 @@
-#ifndef __MODULUS_GF_PDF_H__
+﻿#ifndef __MODULUS_GF_PDF_H__
 #define __MODULUS_GF_PDF_H__
 /*
  * Copyright 2012 ZXing authors

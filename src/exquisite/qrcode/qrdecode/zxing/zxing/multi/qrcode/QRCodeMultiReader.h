@@ -1,4 +1,4 @@
-#ifndef __QRCODE_MULTI_READER_H__
+﻿#ifndef __QRCODE_MULTI_READER_H__
 #define __QRCODE_MULTI_READER_H__
 
 /*

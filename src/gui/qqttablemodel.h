@@ -1,4 +1,4 @@
-#ifndef QQTTABLEMODEL_H
+﻿#ifndef QQTTABLEMODEL_H
 #define QQTTABLEMODEL_H
 
 #include <QSqlRelationalTableModel>

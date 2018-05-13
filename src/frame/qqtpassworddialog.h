@@ -1,4 +1,4 @@
-#ifndef QQTPASSWORDDIALOG_H
+﻿#ifndef QQTPASSWORDDIALOG_H
 #define QQTPASSWORDDIALOG_H
 
 #include "qqtdialog.h"

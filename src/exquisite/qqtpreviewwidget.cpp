@@ -1,4 +1,4 @@
-#include "qqtpreviewwidget.h"
+﻿#include "qqtpreviewwidget.h"
 #include "ui_qqtpreviewwidget.h"
 
 QQtPreviewWidget::QQtPreviewWidget(QWidget* parent) :

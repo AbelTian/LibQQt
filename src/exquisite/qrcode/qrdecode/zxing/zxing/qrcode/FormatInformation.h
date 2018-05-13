@@ -1,4 +1,4 @@
-#ifndef __FORMAT_INFORMATION_H__
+﻿#ifndef __FORMAT_INFORMATION_H__
 #define __FORMAT_INFORMATION_H__
 
 /*

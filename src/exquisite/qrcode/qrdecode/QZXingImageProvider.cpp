@@ -1,4 +1,4 @@
-#include "QZXingImageProvider.h"
+﻿#include "QZXingImageProvider.h"
 #include <QZXing>
 
 QZXingImageProvider::QZXingImageProvider() : QQuickImageProvider(QQuickImageProvider::Image)

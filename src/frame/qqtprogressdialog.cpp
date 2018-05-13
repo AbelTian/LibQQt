@@ -1,4 +1,4 @@
-#include "qqtprogressdialog.h"
+﻿#include "qqtprogressdialog.h"
 #include "ui_qqtprogressdialog.h"
 #include "qqtcore.h"
 #include "qqtobjectmanager.h"

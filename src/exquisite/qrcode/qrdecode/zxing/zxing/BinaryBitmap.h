@@ -1,4 +1,4 @@
-#ifndef __BINARYBITMAP_H__
+﻿#ifndef __BINARYBITMAP_H__
 #define __BINARYBITMAP_H__
 
 /*

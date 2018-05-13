@@ -1,4 +1,4 @@
-#ifndef QQTVERSION_H
+﻿#ifndef QQTVERSION_H
 #define QQTVERSION_H
 
 #define PRODUCT_ICON              "qqt.ico"

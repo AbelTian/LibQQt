@@ -1,4 +1,4 @@
-/*
+﻿/*
  * qrencode - QR Code encoder
  *
  * Reed solomon encoder. This code is taken from Phil Karn's libfec then

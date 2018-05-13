@@ -1,4 +1,4 @@
-#ifndef WRITEREXCEPTION_H
+﻿#ifndef WRITEREXCEPTION_H
 #define WRITEREXCEPTION_H
 
 #include <zxing/Exception.h>

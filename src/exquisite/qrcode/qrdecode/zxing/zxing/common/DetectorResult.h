@@ -1,4 +1,4 @@
-#ifndef __DETECTOR_RESULT_H__
+﻿#ifndef __DETECTOR_RESULT_H__
 #define __DETECTOR_RESULT_H__
 
 /*

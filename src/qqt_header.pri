@@ -75,6 +75,7 @@ contains(QKIT_PRIVATE, WIN32|WIN64 || iOS|iOSSimulator) {
         DEFINES += QT_QTSOAP_STATIC_LIBRARY
         DEFINES += BUILD_QDEVICEWATCHER_STATIC
         DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
+        DEFINES += QT_GUMBO_STATIC_LIBRARY
     }
 }
 
@@ -319,9 +320,14 @@ contains (DEFINES, __EXQUISITE__) {
 
     #opengl module
     DEFINES += __OPENGLWIDGETS__
+    contains(QKIT_PRIVATE, MIPS32||ARM32||EMBEDDED):DEFINES-=__OPENGLWIDGETS__
     contains (DEFINES, __OPENGLWIDGETS__) {
         QT += opengl
     }
+
+    #single color only widget
+    DEFINES += __COLORWIDGETS__
+
 }
 
 ########################################################################
@@ -414,6 +420,7 @@ defineReplace(qqt_header){
     command += $${path}/exquisite/svgwidgets
     command += $${path}/exquisite/gifwidgets
     command += $${path}/exquisite/openglwidgets
+    command += $${path}/exquisite/colorwidgets
     command += $${path}/exquisite/mathml
     command += $${path}/exquisite/dmmu
 

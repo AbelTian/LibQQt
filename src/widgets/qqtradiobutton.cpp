@@ -1,4 +1,4 @@
-#include "qqtradiobutton.h"
+﻿#include "qqtradiobutton.h"
 #include <QStylePainter>
 
 QQtRadioButton::QQtRadioButton(QWidget* parent) :

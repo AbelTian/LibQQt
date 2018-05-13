@@ -1,4 +1,4 @@
-#ifndef QQTDICTTREEMODEL_H
+﻿#ifndef QQTDICTTREEMODEL_H
 #define QQTDICTTREEMODEL_H
 
 #include <qqttreemodel.h>

@@ -1,4 +1,4 @@
-#ifndef __BIT_MATRIX_PARSER__PDF_H__
+﻿#ifndef __BIT_MATRIX_PARSER__PDF_H__
 #define __BIT_MATRIX_PARSER__PDF_H__
 
 /*

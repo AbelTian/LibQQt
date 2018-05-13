@@ -1,4 +1,4 @@
-#ifndef QQTGRAPHICSSVGITEM_H
+﻿#ifndef QQTGRAPHICSSVGITEM_H
 #define QQTGRAPHICSSVGITEM_H
 
 #include <QGraphicsSvgItem>

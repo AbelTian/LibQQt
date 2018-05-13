@@ -1,4 +1,4 @@
-#ifndef QQTTABWIDGET_H
+﻿#ifndef QQTTABWIDGET_H
 #define QQTTABWIDGET_H
 
 #include <QTabWidget>

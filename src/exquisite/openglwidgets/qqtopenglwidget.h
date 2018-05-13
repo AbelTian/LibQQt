@@ -1,4 +1,4 @@
-#ifndef QQTOPENGLWIDGET_H
+﻿#ifndef QQTOPENGLWIDGET_H
 #define QQTOPENGLWIDGET_H
 
 #include <QGLWidget>

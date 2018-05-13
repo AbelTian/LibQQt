@@ -1,4 +1,4 @@
-#include "qqtinput.h"
+﻿#include "qqtinput.h"
 #include "ui_qqtinput.h"
 #include "qdesktopwidget.h"
 #include "qqtcore.h"
@@ -120,50 +120,50 @@ void QQtInput::InitForm()
     currentBrowser = 0;
     currentEditType = "";
 
-    ui->btnDel->iconTable() [BTN_NORMAL] = "./skin/default/key_del.png";
-    ui->btnDel->iconTable() [BTN_PRESS] = "./skin/default/key_del_press.png";
-    ui->btnDel->iconTable() [BTN_UNCHECK] = "./skin/default/key_del.png";
-    ui->btnDel->iconTable() [BTN_CHECK] = "./skin/default/key_del_press.png";
-    ui->btnDel->iconTable() [BTN_HOVER] = "./skin/default/key_del.png";
-    ui->btnDel->iconTable() [BTN_DISABLE] = "./skin/default/key_del.png";
+    ui->btnDel->iconTable() [BTN_NORMAL] = "./skin/input/key_del.png";
+    ui->btnDel->iconTable() [BTN_PRESS] = "./skin/input/key_del_press.png";
+    ui->btnDel->iconTable() [BTN_UNCHECK] = "./skin/input/key_del.png";
+    ui->btnDel->iconTable() [BTN_CHECK] = "./skin/input/key_del_press.png";
+    ui->btnDel->iconTable() [BTN_HOVER] = "./skin/input/key_del.png";
+    ui->btnDel->iconTable() [BTN_DISABLE] = "./skin/input/key_del.png";
 
-    ui->btnDelete->iconTable() [BTN_NORMAL] = "./skin/default/key_del.png";
-    ui->btnDelete->iconTable() [BTN_PRESS] = "./skin/default/key_del_press.png";
-    ui->btnDelete->iconTable() [BTN_UNCHECK] = "./skin/default/key_del.png";
-    ui->btnDelete->iconTable() [BTN_CHECK] = "./skin/default/key_del_press.png";
-    ui->btnDelete->iconTable() [BTN_HOVER] = "./skin/default/key_del.png";
-    ui->btnDelete->iconTable() [BTN_DISABLE] = "./skin/default/key_del.png";
+    ui->btnDelete->iconTable() [BTN_NORMAL] = "./skin/input/key_del.png";
+    ui->btnDelete->iconTable() [BTN_PRESS] = "./skin/input/key_del_press.png";
+    ui->btnDelete->iconTable() [BTN_UNCHECK] = "./skin/input/key_del.png";
+    ui->btnDelete->iconTable() [BTN_CHECK] = "./skin/input/key_del_press.png";
+    ui->btnDelete->iconTable() [BTN_HOVER] = "./skin/input/key_del.png";
+    ui->btnDelete->iconTable() [BTN_DISABLE] = "./skin/input/key_del.png";
 
-    ui->btnClose->iconTable() [BTN_NORMAL] = "./skin/default/key_close.png";
-    ui->btnClose->iconTable() [BTN_PRESS] = "./skin/default/key_close_press.png";
-    ui->btnClose->iconTable() [BTN_UNCHECK] = "./skin/default/key_close.png";
-    ui->btnClose->iconTable() [BTN_CHECK] = "./skin/default/key_close_press.png";
-    ui->btnClose->iconTable() [BTN_HOVER] = "./skin/default/key_close.png";
-    ui->btnClose->iconTable() [BTN_DISABLE] = "./skin/default/key_close.png";
+    ui->btnClose->iconTable() [BTN_NORMAL] = "./skin/input/key_close.png";
+    ui->btnClose->iconTable() [BTN_PRESS] = "./skin/input/key_close_press.png";
+    ui->btnClose->iconTable() [BTN_UNCHECK] = "./skin/input/key_close.png";
+    ui->btnClose->iconTable() [BTN_CHECK] = "./skin/input/key_close_press.png";
+    ui->btnClose->iconTable() [BTN_HOVER] = "./skin/input/key_close.png";
+    ui->btnClose->iconTable() [BTN_DISABLE] = "./skin/input/key_close.png";
 
-    ui->btnSpace->iconTable() [BTN_NORMAL] = "./skin/default/key_blank.png";
-    ui->btnSpace->iconTable() [BTN_PRESS] = "./skin/default/key_blank_press.png";
-    ui->btnSpace->iconTable() [BTN_UNCHECK] = "./skin/default/key_blank.png";
-    ui->btnSpace->iconTable() [BTN_CHECK] = "./skin/default/key_blank_press.png";
-    ui->btnSpace->iconTable() [BTN_HOVER] = "./skin/default/key_blank.png";
-    ui->btnSpace->iconTable() [BTN_DISABLE] = "./skin/default/key_blank.png";
+    ui->btnSpace->iconTable() [BTN_NORMAL] = "./skin/input/key_blank.png";
+    ui->btnSpace->iconTable() [BTN_PRESS] = "./skin/input/key_blank_press.png";
+    ui->btnSpace->iconTable() [BTN_UNCHECK] = "./skin/input/key_blank.png";
+    ui->btnSpace->iconTable() [BTN_CHECK] = "./skin/input/key_blank_press.png";
+    ui->btnSpace->iconTable() [BTN_HOVER] = "./skin/input/key_blank.png";
+    ui->btnSpace->iconTable() [BTN_DISABLE] = "./skin/input/key_blank.png";
 
-    ui->btnReturn->iconTable() [BTN_NORMAL] = "./skin/default/key_return.png";
-    ui->btnReturn->iconTable() [BTN_PRESS] = "./skin/default/key_return_press.png";
-    ui->btnReturn->iconTable() [BTN_UNCHECK] = "./skin/default/key_return.png";
-    ui->btnReturn->iconTable() [BTN_CHECK] = "./skin/default/key_return_press.png";
-    ui->btnReturn->iconTable() [BTN_HOVER] = "./skin/default/key_return.png";
-    ui->btnReturn->iconTable() [BTN_DISABLE] = "./skin/default/key_return.png";
+    ui->btnReturn->iconTable() [BTN_NORMAL] = "./skin/input/key_return.png";
+    ui->btnReturn->iconTable() [BTN_PRESS] = "./skin/input/key_return_press.png";
+    ui->btnReturn->iconTable() [BTN_UNCHECK] = "./skin/input/key_return.png";
+    ui->btnReturn->iconTable() [BTN_CHECK] = "./skin/input/key_return_press.png";
+    ui->btnReturn->iconTable() [BTN_HOVER] = "./skin/input/key_return.png";
+    ui->btnReturn->iconTable() [BTN_DISABLE] = "./skin/input/key_return.png";
 
-    ui->radioCN->setPixmap ( "./skin/default/key.png", "./skin/default/key_press.png" );
+    ui->radioCN->setPixmap ( "./skin/input/key.png", "./skin/input/key_press.png" );
     ui->radioCN->setFixedSize ( btnWidth, btnHeight );
-    ui->radioCN->setPixmap ( "./skin/default/key.png", "./skin/default/key_press.png" );
+    ui->radioCN->setPixmap ( "./skin/input/key.png", "./skin/input/key_press.png" );
     ui->radioEN->setFixedSize ( btnWidth, btnHeight );
-    ui->radioEN->setPixmap ( "./skin/default/key.png", "./skin/default/key_press.png" );
+    ui->radioEN->setPixmap ( "./skin/input/key.png", "./skin/input/key_press.png" );
     ui->radioEN->setFixedSize ( btnWidth, btnHeight );
-    ui->radioNum->setPixmap ( "./skin/default/key.png", "./skin/default/key_press.png" );
+    ui->radioNum->setPixmap ( "./skin/input/key.png", "./skin/input/key_press.png" );
     ui->radioNum->setFixedSize ( btnWidth, btnHeight );
-    ui->checkShift->setPixmap ( "./skin/default/key_shift.png", "./skin/default/key_shift_press.png" );
+    ui->checkShift->setPixmap ( "./skin/input/key_shift.png", "./skin/input/key_shift_press.png" );
     ui->checkShift->setFixedSize ( btnWidth, btnHeight );
 
     connect ( ui->radioNum, SIGNAL ( clicked() ), this, SLOT ( btn_clicked() ) );
@@ -370,7 +370,7 @@ void QQtInput::btn_clicked()
         if ( currentType == "min" || currentType == "max" )
         {
             currentType = "chinese";
-            ui->checkShift->setPixmap ( "./skin/default/key_hidden.png", "./skin/default/key_hidden.png" );
+            ui->checkShift->setPixmap ( "./skin/input/key_hidden.png", "./skin/input/key_hidden.png" );
 
             if ( ui->checkShift->isChecked() )
                 ui->checkShift->setChecked ( false );
@@ -395,7 +395,7 @@ void QQtInput::btn_clicked()
         else if ( currentType == "chinese" )
         {
             currentType = "min";
-            ui->checkShift->setPixmap ( "./skin/default/key_shift.png", "./skin/default/key_shift_press.png" );
+            ui->checkShift->setPixmap ( "./skin/input/key_shift.png", "./skin/input/key_shift_press.png" );
 
             if ( ui->checkShift->isChecked() )
                 ui->checkShift->setChecked ( false );
@@ -797,7 +797,6 @@ void QQtInput::focusChanged ( QWidget* oldWidget, QWidget* nowWidget )
 #endif
 
         isFirst = false;
-
         if ( nowWidget->inherits ( "QLineEdit" ) )
         {
             QLineEdit* lineedit = ( QLineEdit* ) nowWidget;

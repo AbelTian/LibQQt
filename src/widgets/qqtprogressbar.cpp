@@ -1,4 +1,4 @@
-#include "qqtprogressbar.h"
+﻿#include "qqtprogressbar.h"
 #include "ui_qqtprogressbar.h"
 #include "QStylePainter"
 #include "qqtcore.h"

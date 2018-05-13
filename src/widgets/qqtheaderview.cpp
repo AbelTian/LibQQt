@@ -1,4 +1,4 @@
-#include "qqtheaderview.h"
+﻿#include "qqtheaderview.h"
 #include <QPainter>
 #include "qqtwidgets.h"
 #include <QStylePainter>

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  ReedSolomonException.cpp
  *  zxing
  *

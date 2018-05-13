@@ -1,4 +1,4 @@
-#ifndef _JZ_DMMU_H_
+﻿#ifndef _JZ_DMMU_H_
 #define _JZ_DMMU_H_
 
 #include <qqt-local.h>

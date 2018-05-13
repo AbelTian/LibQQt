@@ -1,4 +1,4 @@
-/*
+﻿/*
  * DetectorException.h
  *
  *  Created on: Aug 26, 2011

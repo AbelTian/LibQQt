@@ -1,4 +1,4 @@
-#ifndef __LINESSAMPLER_H__
+﻿#ifndef __LINESSAMPLER_H__
 #define __LINESSAMPLER_H__
 
 /*

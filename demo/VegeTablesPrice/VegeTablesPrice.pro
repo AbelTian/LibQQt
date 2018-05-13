@@ -32,6 +32,9 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
+msvc{
+    DESTDIR = bin
+}
 
 #qmake_pre/post_link will work after source changed but not pro pri changed.
 system("touch main.cpp")
@@ -41,9 +44,11 @@ system("touch main.cpp")
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
 #user can modify any infomation under this annotation
 #-------------------------------------------------
-include(../../src/app_base_manager.pri)
-include(../../src/app_deploy.pri)
-
+msvc{
+    include($${PWD}\\..\\..\\src\\app_base_manager.pri)
+}else{
+    include(../../src/app_base_manager.pri)
+}
 #-------------------------------------------------
 #install app
 #-------------------------------------------------
@@ -80,3 +85,5 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
+message ($${TARGET} prelink $${QMAKE_PRE_LINK})
+message ($${TARGET} postlink $${QMAKE_POST_LINK})

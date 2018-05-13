@@ -1,4 +1,4 @@
-// -*- mode:c++; tab-width:2; indent-tabs-mode:nil; c-basic-offset:2 -*-
+﻿// -*- mode:c++; tab-width:2; indent-tabs-mode:nil; c-basic-offset:2 -*-
 
 #ifndef __DECODED_BIT_STREAM_PARSER_H__
 #define __DECODED_BIT_STREAM_PARSER_H__

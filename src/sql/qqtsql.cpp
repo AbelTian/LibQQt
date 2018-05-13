@@ -1,4 +1,4 @@
-#include "qqtsql.h"
+﻿#include "qqtsql.h"
 
 QSqlDatabase managerDB;
 

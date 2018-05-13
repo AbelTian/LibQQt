@@ -1,4 +1,4 @@
-#ifndef __DATA_MASK_H__
+﻿#ifndef __DATA_MASK_H__
 #define __DATA_MASK_H__
 
 /*

@@ -63,7 +63,7 @@ github link: https://github.com/AbelTian/LibQQt
      - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) QQtWebSocketProtocol
      - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)  
 7. 添加应用中常用的form
-8. 支持多页表格 [QQtMPTableWidget](src/widgets/qqtmptablewidget.h)  
+8. 支持多页表格 [QQtMultiPageTableWidget](src/widgets/qqtmultipagetablewidget.h)  
 9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
 5. 支持Qt5.9.2   
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
@@ -92,6 +92,15 @@ github link: https://github.com/AbelTian/LibQQt
 
 
 ========================================================================  
+# 多链接发布技术    
+
+LibQQt为方便用户开发App过程方便的发布程序，所以添加了多链接和自动发布功能，基于qmake工程管理器的多链接发布技术。  
+用户只需要做相应的目录设定，甚至包括自己的配置文件的目录设置，LibQQt提供的base manager就会自动将用户的程序，配置发布到指定位置，  
+并且支持其他依赖的链接库。  
+经过发布的App直接点击就可以运行，*大的省去了用户手动发布App的劳烦过程。    
+
+
+========================================================================  
 # 使用案例  
 
 [看入门用例截图](screenshot.md)  
@@ -105,8 +114,6 @@ github link: https://github.com/AbelTian/LibQQt
 *把LibQQt/extra/md5.exe 复制到C:\Windows*   
 
 [走，去看看入门用法](usage.md)  
-[去看看Qt入门基础须知](usage-Qt.md)  
-[去看看Qt Creator入门安装须知](usage-QtCreator.md)  
 [入门了，去看看学习设置工程目录](project.md)  
 发现了一个问题: [new issue link](https://gitee.com/drabel/LibQQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
@@ -116,14 +123,16 @@ github link: https://github.com/AbelTian/LibQQt
 
 [预习Git入门](usage-git.md)  
 [去看看软件基础概念](software.md)  
+[去看看Qt入门基础须知](usage-Qt.md)  
+[去看看Qt Creator入门安装须知](usage-QtCreator.md)  
 
 
 ========================================================================  
 # LibQQt百科   
 
 [跳转到LibQQt的百科知识页面](wiki/wiki.md "Wiki Page")  
-[阅读， 读我的LibQQt博客进行一系列的学习](http://blog.csdn.net/Dr_Abel)   
-[我来讲，LibQQt视频图说](http://www.soku.com/search_video/q_LibQQt?f=1&kb=04112010yv41000__)  
+[阅读我的LibQQt博客进行一系列的学习](http://blog.csdn.net/Dr_Abel)   
+[LibQQt视频图说](http://v.youku.com/v_show/id_XMzUzODQ4MTczMg==.html?spm=a2hzp.8244740.0.0)  
 [学会了使用？那么认识LibQQt吧](doc/knowledge-about-libQQt.md)  
 
 

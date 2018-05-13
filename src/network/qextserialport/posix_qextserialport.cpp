@@ -1,4 +1,4 @@
-
+﻿
 /*!
 \class Posix_QextSerialPort
 \version 1.0.0

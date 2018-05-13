@@ -1,4 +1,4 @@
-#ifndef __ONED_RESULT_POINT_H__
+﻿#ifndef __ONED_RESULT_POINT_H__
 #define __ONED_RESULT_POINT_H__
 /*
  *  OneDResultPoint.h

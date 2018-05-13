@@ -1,4 +1,4 @@
-#ifndef _WIN_QEXTSERIALPORT_H_
+﻿#ifndef _WIN_QEXTSERIALPORT_H_
 #define _WIN_QEXTSERIALPORT_H_
 
 #include "qextserialbase.h"

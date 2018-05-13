@@ -1,4 +1,4 @@
-#ifndef _QEXTSERIALBASE_H_
+﻿#ifndef _QEXTSERIALBASE_H_
 #define _QEXTSERIALBASE_H_
 
 #include <QIODevice>

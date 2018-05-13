@@ -1,4 +1,4 @@
-#include "qqtgraphicsitem.h"
+﻿#include "qqtgraphicsitem.h"
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include "qqtcore.h"

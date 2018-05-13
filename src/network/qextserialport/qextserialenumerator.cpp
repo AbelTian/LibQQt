@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file qextserialenumerator.cpp
  * @author Micha艂 Policht
  * @see QextSerialEnumerator

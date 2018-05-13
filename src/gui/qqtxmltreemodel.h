@@ -1,4 +1,4 @@
-#ifndef QQTXMLTREEMODEL_H
+﻿#ifndef QQTXMLTREEMODEL_H
 #define QQTXMLTREEMODEL_H
 
 #include <qqttreemodel.h>

@@ -1,4 +1,4 @@
-#ifndef QQTWEBSOCKETSERVER_H
+﻿#ifndef QQTWEBSOCKETSERVER_H
 #define QQTWEBSOCKETSERVER_H
 
 #include <QWebSocketServer>

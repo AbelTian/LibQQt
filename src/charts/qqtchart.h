@@ -1,4 +1,4 @@
-#ifndef QQTCHART_H
+﻿#ifndef QQTCHART_H
 #define QQTCHART_H
 
 #include <QWidget>

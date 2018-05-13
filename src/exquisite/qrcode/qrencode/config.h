@@ -1,4 +1,4 @@
-/* config.h.  Generated from config.h.in by configure.  */
+﻿/* config.h.  Generated from config.h.in by configure.  */
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
@@ -11,7 +11,9 @@
 // #define HAVE_INTTYPES_H 1
 
 /* Define to 1 if using pthread is enabled. */
+#ifndef _MSC_VER
 #define HAVE_LIBPTHREAD 1
+#endif
 
 /* Define to 1 if you have the <memory.h> header file. */
 // #define HAVE_MEMORY_H 1

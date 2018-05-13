@@ -1,4 +1,4 @@
-#ifndef QQT_H
+﻿#ifndef QQT_H
 #define QQT_H
 
 

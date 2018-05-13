@@ -1,4 +1,4 @@
-#ifndef FRMINPUT_H
+﻿#ifndef FRMINPUT_H
 #define FRMINPUT_H
 
 /**

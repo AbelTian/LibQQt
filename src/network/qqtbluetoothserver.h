@@ -1,4 +1,4 @@
-#ifndef QQTBLUETOOTHSERVER_H
+﻿#ifndef QQTBLUETOOTHSERVER_H
 #define QQTBLUETOOTHSERVER_H
 
 #include <QBluetoothServer>

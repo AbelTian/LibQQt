@@ -1,4 +1,4 @@
-#include "Encoder.h"
+﻿#include "Encoder.h"
 #include "MaskUtil.h"
 
 #include <zxing/common/CharacterSetECI.h>

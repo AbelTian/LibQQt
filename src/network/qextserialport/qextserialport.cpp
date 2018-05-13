@@ -1,4 +1,4 @@
-
+﻿
 /*!
 \class QextSerialPort
 \author Stefan Sander

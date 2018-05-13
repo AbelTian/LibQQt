@@ -1,4 +1,4 @@
-#ifndef QQTSVGWIDGET_H
+﻿#ifndef QQTSVGWIDGET_H
 #define QQTSVGWIDGET_H
 
 #include <QSvgWidget>

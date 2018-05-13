@@ -1,4 +1,4 @@
-#include "qqttabwidget.h"
+﻿#include "qqttabwidget.h"
 #include "qqtcore.h"
 #include <QTabBar>
 

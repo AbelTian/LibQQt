@@ -1,4 +1,4 @@
-#ifndef QQTFTPTREEMODEL_H
+﻿#ifndef QQTFTPTREEMODEL_H
 #define QQTFTPTREEMODEL_H
 
 #include <QObject>

@@ -1,4 +1,4 @@
-#ifndef QQTANDROID_H
+﻿#ifndef QQTANDROID_H
 #define QQTANDROID_H
 
 #ifdef __cplusplus

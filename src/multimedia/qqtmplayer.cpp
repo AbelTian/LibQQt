@@ -1,4 +1,4 @@
-#include "qqtmplayer.h"
+﻿#include "qqtmplayer.h"
 #include "qqtcore.h"
 
 QQtMPlayer::QQtMPlayer ( QObject* parent ) :

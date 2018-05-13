@@ -1,4 +1,4 @@
-#include "qqtframe.h"
+﻿#include "qqtframe.h"
 
 QString gUserName;
 QString gPassword;

@@ -1,4 +1,4 @@
-#ifndef QQTSVGPROGRESSBAR_H
+﻿#ifndef QQTSVGPROGRESSBAR_H
 #define QQTSVGPROGRESSBAR_H
 
 #include <qqtsvgwidget.h>

@@ -28,10 +28,15 @@ defineReplace(deploy_app_on_win) {
     #all windows need deploy release version?
     equals(BUILD, Debug) {
         #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
+        msvc{
+            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
+        } else {
+            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
+        }
     } else: equals(BUILD, Release) {
         #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
+        command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
     }
-    command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
     #message($$command)
     return ($$command)
 }
@@ -90,7 +95,7 @@ isEmpty(APP_DEPLOY_ROOT){
 message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
 
 #如果 配置文件里 没有配置 APP_DEPLOY_ROOT 那么返回，不拷贝发布任何应用
-#不会走到。
+#不会走到
 isEmpty(APP_DEPLOY_ROOT) {
     message("$${TARGET} hasn't deploied any app files")
     greaterThan(QT_MAJOR_VERSION, 5):return()
@@ -114,8 +119,8 @@ contains(CONFIG, deploy_app) {
         #发布Android版本，这个分为开发Host为windows和类Unix两种情况。
         #Android下Qt Creator自动使用androidDeployQt，无法发布应用。
         equals(QMAKE_HOST.os, Windows){
-        } else {
-        }
+            #
+        } else { }
         #QMAKE_POST_LINK += $$deploy_app_on_android()
     } else {
         #发布linux、e-linux，这个是一样的。

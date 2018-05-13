@@ -7,6 +7,7 @@ QQtSerialPort::QQtSerialPort ( QObject* parent ) : QSerialPort ( parent )
     connect ( this, SIGNAL ( readyRead() ), this, SLOT ( readyReadData() ) );
     //connect(this, SIGNAL(aboutToClose()), this, SLOT(aboutToClose()));
     //connect(this, SIGNAL(readChannelFinished()), this, SLOT(readChannelFinished()));
+    m_protocol = NULL;
 }
 
 QQtSerialPort::~QQtSerialPort()
@@ -19,11 +20,11 @@ void QQtSerialPort::installProtocol ( QQtProtocol* stack )
 {
     if ( m_protocol )
         return;
-
-    connect ( stack, SIGNAL ( write ( const QByteArray& ) ),
-              this, SLOT ( slotWriteData ( const QByteArray& ) ) );
-    stack->attach();
     m_protocol = stack;
+
+    connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
+              this, SLOT ( slotWriteData ( const QByteArray& ) ) );
+    m_protocol->attach();
 }
 
 void QQtSerialPort::uninstallProtocol ( QQtProtocol* stack )

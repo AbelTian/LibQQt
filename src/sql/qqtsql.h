@@ -1,4 +1,4 @@
-#ifndef QQTSQLDEFINE_H
+﻿#ifndef QQTSQLDEFINE_H
 #define QQTSQLDEFINE_H
 
 #include <QWidget>

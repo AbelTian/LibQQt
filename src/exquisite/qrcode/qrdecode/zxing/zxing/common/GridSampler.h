@@ -1,4 +1,4 @@
-#ifndef __GRID_SAMPLER_H__
+﻿#ifndef __GRID_SAMPLER_H__
 #define __GRID_SAMPLER_H__
 
 /*

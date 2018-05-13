@@ -1,4 +1,4 @@
-#ifndef __POINT_H__
+﻿#ifndef __POINT_H__
 #define __POINT_H__
 
 /*

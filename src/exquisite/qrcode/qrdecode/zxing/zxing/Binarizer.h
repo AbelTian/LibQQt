@@ -1,4 +1,4 @@
-#ifndef BINARIZER_H_
+﻿#ifndef BINARIZER_H_
 #define BINARIZER_H_
 
 /*

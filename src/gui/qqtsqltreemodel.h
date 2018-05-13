@@ -1,4 +1,4 @@
-#ifndef QQTSQLTREEMODEL_H
+﻿#ifndef QQTSQLTREEMODEL_H
 #define QQTSQLTREEMODEL_H
 
 #include <qqttreemodel.h>

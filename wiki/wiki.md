@@ -2,7 +2,7 @@
 
 ## Welcom to QQt foundation  
 
-[家](Home.md)  
+[首页](Home.md)  
 
 ## How to build LibQQt  
 
@@ -27,6 +27,11 @@
 ## LibQQt在操作系统中的地位    
 
 [LibQQt的地位](LibQQt's-position.md)  
+
+## LibQQt程序开发诀窍    
+
+[QQt应用程序的开发诀窍](knack.md)  
+
 
 ## 返回  
 

@@ -1,4 +1,4 @@
-#include "qqtsqlquery.h"
+﻿#include "qqtsqlquery.h"
 
 QQtSqlQuery::QQtSqlQuery ( QSqlResult* r ) : QSqlQuery ( r ) {}
 

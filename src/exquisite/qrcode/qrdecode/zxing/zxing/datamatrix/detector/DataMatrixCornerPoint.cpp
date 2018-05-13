@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  CornerPoint.cpp
  *  zxing
  *

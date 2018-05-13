@@ -1,4 +1,4 @@
-#include "qqtsvglabel.h"
+﻿#include "qqtsvglabel.h"
 #include <QStylePainter>
 #include <QStyleOptionFrame>
 

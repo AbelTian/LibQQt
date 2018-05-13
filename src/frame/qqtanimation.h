@@ -1,4 +1,4 @@
-#ifndef QQTANIMATION_H
+﻿#ifndef QQTANIMATION_H
 #define QQTANIMATION_H
 
 

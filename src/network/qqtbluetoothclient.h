@@ -1,4 +1,4 @@
-#ifndef QQTBLUETOOTHCLIENT_H
+﻿#ifndef QQTBLUETOOTHCLIENT_H
 #define QQTBLUETOOTHCLIENT_H
 
 #include <qbluetoothsocket.h>
@@ -9,9 +9,10 @@ class QQTSHARED_EXPORT QQtBluetoothClient : public QBluetoothSocket
 {
     Q_OBJECT
 public:
-    explicit QQtBluetoothClient ( QBluetoothServiceInfo::Protocol socketType = QBluetoothServiceInfo::RfcommProtocol,
-                                  QObject* parent = nullptr );
-    explicit QQtBluetoothClient ( QObject* parent = nullptr );
+    explicit QQtBluetoothClient ( QObject* parent = Q_NULLPTR );
+    explicit QQtBluetoothClient ( QBluetoothServiceInfo::Protocol socketType/* = QBluetoothServiceInfo::RfcommProtocol*/,
+                                  QObject* parent = Q_NULLPTR );
+    virtual ~QQtBluetoothClient() {}
 
     /**
      * @brief setServiceInfo

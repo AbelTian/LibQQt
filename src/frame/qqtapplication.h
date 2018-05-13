@@ -1,4 +1,4 @@
-#ifndef QQTAPPLICATION_H
+﻿#ifndef QQTAPPLICATION_H
 #define QQTAPPLICATION_H
 
 #include <QApplication>
@@ -21,6 +21,7 @@ public:
     //palette
     void setTextFont ( QString fontfile = "/usr/lib/fonts/heiti.ttf",
                        int fontsize = 11 );
+    //这是设置全部控件的，基本的QSS，通用的QSS，全在这个里，特殊不变的也允许放在这里。
     void setQSSStyle ( QString qssfile = "./skin/default.qss" );
     void setUPanAutorun ( bool run = false );
     void setWriteLogSystem ( bool open = true );
@@ -29,10 +30,15 @@ public:
     virtual int initInstance() { return 0; }
     virtual int unInitInstance() { return 0; }
 
+    /**
+     * 用户从这里接收语言更改信号，更改所有窗口的语言。
+     */
 signals:
     void languageChanged();
+
+    //这个是给PluginWatcher用的，和用户无关。允许重写
 public slots:
-    void slotUPanAutoRun ( int status );
+    virtual void slotUPanAutoRun ( int status );
 private:
     bool bUPanAutoRun;
 

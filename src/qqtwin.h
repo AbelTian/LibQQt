@@ -1,4 +1,4 @@
-#ifndef QQTWIN_H
+﻿#ifndef QQTWIN_H
 #define QQTWIN_H
 
 #ifdef __cplusplus

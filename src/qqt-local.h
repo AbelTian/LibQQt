@@ -1,4 +1,4 @@
-#ifndef QQTLOCAL_H
+﻿#ifndef QQTLOCAL_H
 #define QQTLOCAL_H
 
 

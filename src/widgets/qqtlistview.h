@@ -1,4 +1,4 @@
-#ifndef QQTLISTVIEW_H
+﻿#ifndef QQTLISTVIEW_H
 #define QQTLISTVIEW_H
 
 #include <QListView>

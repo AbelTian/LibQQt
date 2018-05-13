@@ -1,4 +1,4 @@
-#ifndef __BY_QUADRANT_READER_H__
+﻿#ifndef __BY_QUADRANT_READER_H__
 #define __BY_QUADRANT_READER_H__
 
 /*

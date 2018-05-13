@@ -1,4 +1,4 @@
-#include "qqtcheckbox.h"
+﻿#include "qqtcheckbox.h"
 #include <QStylePainter>
 #include "qqtwidgets.h"
 

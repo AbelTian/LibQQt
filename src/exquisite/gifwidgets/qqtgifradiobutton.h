@@ -1,4 +1,4 @@
-#ifndef QQTGIFRADIOBUTTON_H
+﻿#ifndef QQTGIFRADIOBUTTON_H
 #define QQTGIFRADIOBUTTON_H
 
 #include <qqtradiobutton.h>

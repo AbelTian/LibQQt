@@ -1,4 +1,4 @@
-#ifndef QQTWIDGET_H
+﻿#ifndef QQTWIDGET_H
 #define QQTWIDGET_H
 
 #include <qqt-local.h>
@@ -67,7 +67,6 @@ private:
     /*内部没有使用QPixmap存储，因为如果缩放widget，pixmap就没办法了，img有*/
     /*内部对QIcon的使用删除了，icon不是必要的。*/
     QImage mImg;
-
     //for longClickWithPoint()
     QPoint mlongClickPoint;
 };

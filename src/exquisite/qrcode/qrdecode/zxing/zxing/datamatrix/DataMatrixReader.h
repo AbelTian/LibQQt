@@ -1,4 +1,4 @@
-#ifndef __DATA_MATRIX_READER_H__
+﻿#ifndef __DATA_MATRIX_READER_H__
 #define __DATA_MATRIX_READER_H__
 
 /*

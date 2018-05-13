@@ -1,4 +1,4 @@
-#ifndef QPROGRESSWINDOW_H
+﻿#ifndef QPROGRESSWINDOW_H
 #define QPROGRESSWINDOW_H
 
 #include "qqt-local.h"

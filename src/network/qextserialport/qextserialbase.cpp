@@ -1,4 +1,4 @@
-#include "qextserialbase.h"
+﻿#include "qextserialbase.h"
 
 /*!
 \fn QextSerialBase::QextSerialBase()

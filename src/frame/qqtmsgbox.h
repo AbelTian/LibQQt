@@ -1,4 +1,4 @@
-#ifndef QQTMSGBOX_H
+﻿#ifndef QQTMSGBOX_H
 #define QQTMSGBOX_H
 
 #include "qqtdialog.h"

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  IllegalArgumentException.cpp
  *  zxing
  *

@@ -1,4 +1,4 @@
-#include "qqtgraphicssvgitem.h"
+﻿#include "qqtgraphicssvgitem.h"
 
 QQtGraphicsSvgItem::QQtGraphicsSvgItem(QQtGraphicsSvgItem* parent) :
     QGraphicsSvgItem(parent)

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * qrencode - QR Code encoder
  *
  * Binary sequence class.

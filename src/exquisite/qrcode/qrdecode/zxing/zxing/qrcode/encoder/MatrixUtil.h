@@ -1,4 +1,4 @@
-#ifndef MATRIXUTIL_H
+﻿#ifndef MATRIXUTIL_H
 #define MATRIXUTIL_H
 
 //package com.google.zxing.qrcode.encoder;

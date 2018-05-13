@@ -1,4 +1,4 @@
-#ifndef QQTDOUBLESPINBOX_H
+﻿#ifndef QQTDOUBLESPINBOX_H
 #define QQTDOUBLESPINBOX_H
 
 #include <QDoubleSpinBox>

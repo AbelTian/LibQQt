@@ -1,4 +1,4 @@
-#include "qqtxmltreemodel.h"
+﻿#include "qqtxmltreemodel.h"
 #include <QFile>
 #include "qqtcore.h"
 #include <QModelIndex>

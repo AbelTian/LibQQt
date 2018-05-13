@@ -1,4 +1,4 @@
-#include "qqttableview.h"
+﻿#include "qqttableview.h"
 #include <QFile>
 #include <QScrollBar>
 #include <QSqlRelationalDelegate>

@@ -1,4 +1,4 @@
-#include "qqtcustomspeedmeter.h"
+﻿#include "qqtcustomspeedmeter.h"
 #include <QPainter>
 #include <qmath.h>
 

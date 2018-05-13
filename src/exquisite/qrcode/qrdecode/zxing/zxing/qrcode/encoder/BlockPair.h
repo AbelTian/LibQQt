@@ -1,4 +1,4 @@
-#ifndef BLOCKPAIR_H
+﻿#ifndef BLOCKPAIR_H
 #define BLOCKPAIR_H
 
 #include <vector>

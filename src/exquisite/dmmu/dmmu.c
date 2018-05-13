@@ -1,4 +1,4 @@
-#define LOG_TAG "DMMU"
+﻿#define LOG_TAG "DMMU"
 //#define LOG_NDEBUG 0
 
 #ifdef __ANDROID__

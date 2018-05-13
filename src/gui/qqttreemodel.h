@@ -1,4 +1,4 @@
-#ifndef QQTTREEMODEL_H
+﻿#ifndef QQTTREEMODEL_H
 #define QQTTREEMODEL_H
 
 #include <QStandardItemModel>

@@ -1,4 +1,4 @@
-#ifndef QQTDATETIMEEDIT_H
+﻿#ifndef QQTDATETIMEEDIT_H
 #define QQTDATETIMEEDIT_H
 
 #include <QDateTimeEdit>

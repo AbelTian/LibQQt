@@ -1,4 +1,4 @@
-#ifndef QQTTREEWIDGET_H
+﻿#ifndef QQTTREEWIDGET_H
 #define QQTTREEWIDGET_H
 
 #include "qqttreeview.h"

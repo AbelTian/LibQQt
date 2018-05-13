@@ -1,4 +1,4 @@
-#include "qqtanimation.h"
+﻿#include "qqtanimation.h"
 
 QQtAnimation::QQtAnimation(QObject* parent) : QParallelAnimationGroup(parent)
 {

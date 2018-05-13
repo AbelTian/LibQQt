@@ -1,4 +1,4 @@
-/*
+﻿/*
  * DetectorException.cpp
  *
  *  Created on: Aug 26, 2011

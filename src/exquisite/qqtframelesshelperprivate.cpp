@@ -1,4 +1,4 @@
-#include "qqtframelesshelperprivate.h"
+﻿#include "qqtframelesshelperprivate.h"
 #include <QTimer>
 #include <QWidget>
 #include <QMouseEvent>

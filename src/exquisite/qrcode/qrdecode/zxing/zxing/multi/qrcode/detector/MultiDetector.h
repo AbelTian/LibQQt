@@ -1,4 +1,4 @@
-#ifndef __MULTI_DETECTOR_H__
+﻿#ifndef __MULTI_DETECTOR_H__
 #define __MULTI_DETECTOR_H__
 
 /*

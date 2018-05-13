@@ -47,6 +47,12 @@ isEmpty(QKIT_PRIVATE) {
 #if you want to build qqt source open this annotation
 #CONFIG += QQT_SOURCE_BUILDIN
 contains (CONFIG, QQT_SOURCE_BUILDIN) {
+    #notice: msvc, DLL_IMPORT macro is no problem to use in app + lib source? 静态成员的定义无法编译通过，dllimport在app里不允许实现静态成员变量。
+    #so, here ,force static, QQt的静态编译，dllexport一律定义为空，引用的时候也是空，所以肯定能过。
+    #ignore
+    #nouse. 报告找不到import的符号，几个静态过来的重复定义。如果定义这个宏，必须所有源文件都被覆盖。现在忽略这个功能。
+    DEFINES += QQT_STATIC_LIBRARY
+    system("touch $${QQT_SOURCE_ROOT}/frame/qqtapplication.cpp")
     #if you want to build src but not link QQt lib in your project
     #if you don't want to modify Qt Creator's default build directory, this maybe a choice.
     include($${QQT_SOURCE_ROOT}/qqt_source.pri)

@@ -1,4 +1,4 @@
-#ifndef QQTWORD_H
+﻿#ifndef QQTWORD_H
 #define QQTWORD_H
 
 #include <QObject>
