@@ -18,6 +18,7 @@ QQtCustomProgressBar::QQtCustomProgressBar ( QWidget* parent ) : QWidget ( paren
     nullPosition = 0;
     lineWidth = 10;
     cornerRadius = 10;
+    lineCapStyle = Qt::RoundCap;
 
     showPercent = true;
     showFree = false;
@@ -162,7 +163,7 @@ void QQtCustomProgressBar::drawArc ( QPainter* painter, int radius )
     pen.setWidthF ( lineWidth );
 
     /*这里可以更改画笔样式更换线条风格*/
-    pen.setCapStyle ( Qt::RoundCap );
+    pen.setCapStyle ( ( Qt::PenCapStyle ) lineCapStyle );
 
     double arcLength = 360.0 / ( maxValue - minValue ) * ( value - minValue );
     QRect rect ( -radius, -radius, radius * 2, radius * 2 );
@@ -587,6 +588,15 @@ void QQtCustomProgressBar::setLineWidth ( int lineWidth )
     if ( this->lineWidth != lineWidth )
     {
         this->lineWidth = lineWidth;
+        update();
+    }
+}
+
+void QQtCustomProgressBar::setLineCapStyle ( int lineCapStyle )
+{
+    if ( this->lineCapStyle != lineCapStyle )
+    {
+        this->lineCapStyle = lineCapStyle;
         update();
     }
 }
