@@ -83,6 +83,9 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #gumbo support
     #注释：在qqt_header.pri打开 DEFINES += __GUMBOSUPPORT__
     contains (DEFINES, __GUMBOSUPPORT__) {
+        #mingw 如果以前编译过mingw，然后编译+MSVC支持的版本，这个模块可能符号未导出。
+        #这个问题，我也不知道原因，通过手动修改(touch)一下gumbo.h可以解决。
+        #如果还是不对，那么需要为 gumbo parser 添加 gumbolocal.h。
         win32 {
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QT_GUMBO_LIBRARY
