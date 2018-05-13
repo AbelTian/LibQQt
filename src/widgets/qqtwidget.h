@@ -1,4 +1,4 @@
-#ifndef QQTWIDGET_H
+﻿#ifndef QQTWIDGET_H
 #define QQTWIDGET_H
 
 #include <qqt-local.h>

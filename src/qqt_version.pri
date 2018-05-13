@@ -42,7 +42,7 @@ defineReplace(get_version_string_4) {
 #QQt Make Version Flow
 #-------------------------------------------------------------------------------
 QQT_MAJOR_VERSION = 2
-QQT_MINOR_VERSION = 3
+QQT_MINOR_VERSION = 4
 QQT_PATCH_VERSION = 0
 QQT_BUILD_VERSION = 0
 
