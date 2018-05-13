@@ -1,4 +1,4 @@
-﻿#ifndef QQTWIDGET_H
+#ifndef QQTWIDGET_H
 #define QQTWIDGET_H
 
 #include <qqt-local.h>
@@ -22,6 +22,9 @@ public:
 
     enum ImageStyle
     {
+        /**
+         * 整个居中,全面缩放显示
+         */
         QQTCENTER,
         /*
          * 会产生label的效果，左右按照rect长，但是不缩放形状
@@ -31,7 +34,7 @@ public:
         QQTZOOMWIDTH,
         QQTZOOMHEIGHT,
     };
-    void setType ( ImageStyle style = QQTCENTER ) { m_style = style; }
+    void setImageStyle ( ImageStyle style = QQTCENTER ) { m_style = style; }
 
     void setPixmap ( const QString& pic = QString() );
     void setPixmap ( const QPixmap& pixmap );
@@ -43,9 +46,9 @@ signals:
     void longClick();
 
 signals:
-    void clickWithPoint(QPoint point);
-    void doubleClickWithPoint(QPoint point);
-    void longClickWithPoint(QPoint point);
+    void clickWithPoint ( QPoint point );
+    void doubleClickWithPoint ( QPoint point );
+    void longClickWithPoint ( QPoint point );
 
     // QWidget interface
 protected:
@@ -66,7 +69,7 @@ private:
     /*pixmap是必要的。绘图用pixmap。*/
     /*内部没有使用QPixmap存储，因为如果缩放widget，pixmap就没办法了，img有*/
     /*内部对QIcon的使用删除了，icon不是必要的。*/
-    QImage mImg;
+    QImage mImage;
     //for longClickWithPoint()
     QPoint mlongClickPoint;
 };
