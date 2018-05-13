@@ -10,11 +10,11 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->setupUi ( this );
     /*
     ui->w60->setFixedHeight(30);
-    QQtSlideEffectTabBar* bar = new QQtSlideEffectTabBar(ui->tab_6);
-    QQtSlideEffectTabBar* bar2 = new QQtSlideEffectTabBar(ui->tab_6);
+    QQtSlideTabBar* bar = new QQtSlideTabBar(ui->tab_6);
+    QQtSlideTabBar* bar2 = new QQtSlideTabBar(ui->tab_6);
     bar->addTab("xxx");
     bar->addTab("ccc");
-    bar2->setShape(QQtSlideEffectTabBar::RoundedEast);
+    bar2->setShape(QQtSlideTabBar::RoundedEast);
     bar2->addTab("yyy");
     bar2->addTab("ddd");
 
@@ -28,10 +28,10 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->tab_6->setLayout(lay);
     */
     /*
-    QQtSlideEffectTabBar* bar2 = new QQtSlideEffectTabBar(ui->tab_6);
+    QQtSlideTabBar* bar2 = new QQtSlideTabBar(ui->tab_6);
     ui->tb1->setTabBar(bar2);
     */
-    //QQtSlideEffectTabBar* bar = new QQtSlideEffectTabBar(ui->tb0);
+    //QQtSlideTabBar* bar = new QQtSlideTabBar(ui->tb0);
     //ui->tb0->setTabBar(bar);
     //ui->tb0->setObjectName("tb0");
 
@@ -41,15 +41,15 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
 
     ui->tw0->setStyleSheet ( "QTabWidget#tw0 QTabBar::tab { width:72px; height:90px; }" );
-    QQtPictureEffectTabBar* tab = ( QQtPictureEffectTabBar* ) ui->tw0->localTabBar();
-    tab->setIconStyle ( QQtPictureEffectTabBar::IconStyle_Top_And_BottomText );
+    QQtPictureTabBar* tab = ( QQtPictureTabBar* ) ui->tw0->localTabBar();
+    tab->setIconStyle ( QQtPictureTabBar::IconStyle_Top_And_BottomText );
     tab->setTabPixmap ( 0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png" );
     tab->setTabPixmap ( 1, "./skin/default/bt_dispel.png", "./skin/default/bt_dispel_press.png" );
     tab->setContentsMargins ( 2, 2, 2, 2 );
 
     ui->tw1->setStyleSheet ( "QTabWidget#tw1 QTabBar::tab { width:90px; height:30px; }" );
-    QQtPictureEffectTabBar* tab1 = ( QQtPictureEffectTabBar* ) ui->tw1->localTabBar();
-    tab1->setIconStyle ( QQtPictureEffectTabBar::IconStyle_Left_And_RightText );
+    QQtPictureTabBar* tab1 = ( QQtPictureTabBar* ) ui->tw1->localTabBar();
+    tab1->setIconStyle ( QQtPictureTabBar::IconStyle_Left_And_RightText );
     tab1->setTabPixmap ( 0, "./skin/default/bt_bt_hover.png", "./skin/default/bt_bt_press.png" );
     tab1->setTabIcon ( 0, "./skin/default/bk_user_normal.png", "./skin/default/bk_user_press.png" );
     tab1->setTabPixmap ( 1, "./skin/default/bt_bt_hover.png", "./skin/default/bt_bt_press.png" );

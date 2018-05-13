@@ -39,6 +39,10 @@ MOBILITY =
 
 #qmake_pre/post_link will work after source changed but not pro pri changed.
 system("touch main.cpp")
+APP_CONFIG_PWD = $${PWD}/AppRoot
+equals(QMAKE_HOST.os, Windows) {
+    APP_CONFIG_PWD ~=s,/,\\,g
+}
 
 #-------------------------------------------------
 #link qqt library

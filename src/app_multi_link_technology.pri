@@ -12,10 +12,13 @@
 
 #2018年04月11日18:54:58
 #这个文件用来加载用户电脑上的应用程序公共环境
-#Windows:  C:\\Users\\xxx\\AppData\\Roaming\\qmake\\app_configure.pri
+#Windows:  C:\\Users\\xxx\\.qmake\\app_configure.pri
 #Mac OS X: /Users/xxx/.qmake/app_configure.pri
 #Ubuntu:   /home/xxx/.qmake/app_configure.pri
 #公共路径：应用编译路径、LibrarySDK路径、产品输出路径
+
+#2018年5月3日 08点55分
+#Multi-link技术只能应用于Qt5，Qt4没有windeployqt程序。
 
 #--------------------------------------------------------------------------------
 #这个pri依赖qqt_function.pri
@@ -26,9 +29,9 @@ CONFIG_PATH =
 CONFIG_FILE =
 
 equals(QMAKE_HOST.os, Windows) {
-    #>v?
-    #CONFIG_PATH = $$user_home()\\.qmake
-    CONFIG_PATH = $$user_config_path()\\qmake
+    #>=v2.4
+    CONFIG_PATH = $$user_home()\\.qmake
+    #CONFIG_PATH = $$user_config_path()\\qmake
     CONFIG_FILE = $${CONFIG_PATH}\\app_configure.pri
 } else {
     CONFIG_PATH = $$user_config_path()/.qmake

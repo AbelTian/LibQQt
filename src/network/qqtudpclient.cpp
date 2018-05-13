@@ -29,11 +29,11 @@ void QQtUdpClient::installProtocol ( QQtProtocol* stack )
 {
     if ( m_protocol )
         return;
-
-    connect ( stack, SIGNAL ( write ( const QByteArray& ) ),
-              this, SLOT ( slotWriteData ( const QByteArray& ) ) );
-    stack->attach();
     m_protocol = stack;
+
+    connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
+              this, SLOT ( slotWriteData ( const QByteArray& ) ) );
+    m_protocol->attach();
 }
 
 void QQtUdpClient::uninstallProtocol ( QQtProtocol* stack )

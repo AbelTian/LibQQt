@@ -319,9 +319,14 @@ contains (DEFINES, __EXQUISITE__) {
 
     #opengl module
     DEFINES += __OPENGLWIDGETS__
+    contains(QKIT_PRIVATE, MIPS32||ARM32||EMBEDDED):DEFINES-=__OPENGLWIDGETS__
     contains (DEFINES, __OPENGLWIDGETS__) {
         QT += opengl
     }
+
+    #single color only widget
+    DEFINES += __COLORWIDGETS__
+
 }
 
 ########################################################################
@@ -414,6 +419,7 @@ defineReplace(qqt_header){
     command += $${path}/exquisite/svgwidgets
     command += $${path}/exquisite/gifwidgets
     command += $${path}/exquisite/openglwidgets
+    command += $${path}/exquisite/colorwidgets
     command += $${path}/exquisite/mathml
     command += $${path}/exquisite/dmmu
 
