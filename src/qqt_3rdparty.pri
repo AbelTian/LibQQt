@@ -86,6 +86,8 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         #mingw 如果以前编译过mingw，然后编译+MSVC支持的版本，这个模块可能符号未导出。
         #这个问题，我也不知道原因，通过手动修改(touch)一下gumbo.h可以解决。
         #如果还是不对，那么需要为 gumbo parser 添加 gumbolocal.h。
+        #如果有用户需要到处 gumbo parser的函数，那么必须加gumbolocal.h控制
+        #gumbo query默认已经导出。
         win32 {
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QT_GUMBO_LIBRARY
