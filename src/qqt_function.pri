@@ -228,7 +228,9 @@ defineTest(system_errcode) {
     #if eval configed ...
     #error: if(ret) : return (false)
     #erro : eval(ret = 0): return (false)
-    #succ: equals(ret, 0):return (false)
+    #succ:
+    #equals(ret, 0):return (false)
+    #succ:but msvc creator auto qmake....
     return ($${ret})
 }
 

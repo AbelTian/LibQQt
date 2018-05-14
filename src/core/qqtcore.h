@@ -19,11 +19,12 @@
 #include "qqt-qt.h"
 #include <qqt-local.h>
 
-#ifdef Q_OS_WIN
-#if _MSC_VER >= 1600
-#pragma execution_character_set("utf-8")
-#endif
-#endif
+//加在qqt_header.pri里面了。
+//#ifdef Q_OS_WIN
+//#if _MSC_VER >= 1600
+//#pragma execution_character_set("utf-8")
+//#endif
+//#endif
 
 #if defined(__WIN32__) || defined(__WIN64__)
 #include "qqtwin.h"

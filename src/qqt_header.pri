@@ -21,28 +21,41 @@ CONFIG(debug, debug|release) {
 } else {
     DEFINES -= QT_NO_DEBUG_OUTPUT
 }
-#close win32 no using fopen_s warning
-win32 {
-    win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
-    #this three pragma cause errors
-    #QMAKE_CXXFLAGS += /wd"4819" /wd"4244" /wd"4100"
-}
+
 #compatible old version QQt (deperated)
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 #defined in qqtcore.h
 #lessThan(QT_MAJOR_VERSION, 5):DEFINES += nullptr=0
 
-#指定/mp编译选项，编译器将使用并行编译，同时起多个编译进程并行编译不同的cpp
-#QMAKE_CXXFLAGS += /MP
-#错误：这个FLAG只能用于MSVC
+#mingw要加速编译，make -j20，-j参数是最好的解决办法。
 
-#指定stable.h这个头文件作为编译预处理文件，MFC里这个文件一般叫stdafx.h 然后在 stable.h里 包含你所用到的所有 Qt 头文件
-#在.pro 文件中加入一行, 加在这里，加速编译。
-#PRECOMPILED_HEADER = $${PWD}/stable.h (qqt-qt.h)
-#错误：precompiler header只能用于MSVC
+#close win32 no using fopen_s warning
+win32:DEFINES += _CRT_SECURE_NO_WARNINGS #fopen fopen_s
 
-#要加速编译，make -j20，-j参数是最好的解决办法。
+#msvc支持设置
+msvc {
+    MSVC_CCFLAGS =
+    #this three pragma cause mingw errors
+    msvc:MSVC_CCFLAGS += /wd"4819" /wd"4244" /wd"4100"
+
+    #UTF8编码
+    DEFINES += __MSVC_UTF8_SUPPORT__
+    msvc:MSVC_CCFLAGS += -execution-charset:utf-8
+    msvc:MSVC_CCFLAGS += -source-charset:utf-8
+
+    #指定/mp编译选项，编译器将使用并行编译，同时起多个编译进程并行编译不同的cpp
+    msvc:MSVC_CCFLAGS += /MP
+    #指出：这个FLAG只能用于MSVC
+
+    msvc:QMAKE_CFLAGS += $${MSVC_CCFLAGS}
+    msvc:QMAKE_CXXFLAGS += $${MSVC_CCFLAGS}
+
+    #指定stable.h这个头文件作为编译预处理文件，MFC里这个文件一般叫stdafx.h 然后在 stable.h里 包含你所用到的所有 Qt 头文件
+    #在.pro 文件中加入一行, 加在这里，加速编译。
+    #msvc:PRECOMPILED_HEADER = $${PWD}/qqt-qt.h
+    #指出：precompiler header只能用于MSVC
+}
 
 #################################################################
 ##build qqt or link qqt

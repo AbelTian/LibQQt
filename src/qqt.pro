@@ -101,11 +101,10 @@ build_pass:CONFIG(debug, debug|release) {
 #CONFIG += debug_and_release
 #CONFIG += build_all
 #if some bug occured, maybe this help me, close some warning
-!win32{
-    CFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
-}
-QMAKE_CFLAGS +=  $${CFLAGS}
-QMAKE_CXXFLAGS +=  $${CFLAGS}
+CCFLAG =
+!win32:CCFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
+QMAKE_CFLAGS +=  $${CCFLAGS}
+QMAKE_CXXFLAGS +=  $${CCFLAGS}
 
 #################################################################
 ##build cache

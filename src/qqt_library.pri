@@ -54,7 +54,7 @@ defineReplace(deploy_qqt_to_mac) {
         command += $${PWD}/mac_deploy_qt4.sh $${APP_DEST_DIR}/$${TARGET}.app/Contents/MacOS/$${TARGET}
     }
     #message($$command)
-    return ($$command)
+    return ($${command})
 }
 
 defineReplace(copy_qqt_on_mac) {
