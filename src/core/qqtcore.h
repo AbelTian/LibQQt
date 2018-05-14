@@ -19,12 +19,16 @@
 #include "qqt-qt.h"
 #include <qqt-local.h>
 
-//加在qqt_header.pri里面了。
-//#ifdef Q_OS_WIN
-//#if _MSC_VER >= 1600
-//#pragma execution_character_set("utf-8")
-//#endif
-//#endif
+#ifndef __MSVC_UTF8_SUPPORT__
+//在源码里有这个定义以外，还要求源文件为utf-8 with bom格式
+//加在qqt_header.pri里面了，就一下子充分解决了。
+//这个定义和CCFLAGS是冲突的，不能并存，只能定义一边。一般选择CCFLAGS。
+#ifdef Q_OS_WIN
+#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+#endif
+#endif
 
 #if defined(__WIN32__) || defined(__WIN64__)
 #include "qqtwin.h"

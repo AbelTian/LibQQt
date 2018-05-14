@@ -41,8 +41,9 @@ msvc {
 
     #UTF8编码
     DEFINES += __MSVC_UTF8_SUPPORT__
-    msvc:MSVC_CCFLAGS += -execution-charset:utf-8
-    msvc:MSVC_CCFLAGS += -source-charset:utf-8
+    msvc:MSVC_CCFLAGS += /execution-charset:utf-8
+    msvc:MSVC_CCFLAGS += /source-charset:utf-8
+    #msvc:MSVC_CCFLAGS += /utf-8 #这一个是快捷方式，顶上边两个。
 
     #指定/mp编译选项，编译器将使用并行编译，同时起多个编译进程并行编译不同的cpp
     msvc:MSVC_CCFLAGS += /MP
@@ -55,6 +56,7 @@ msvc {
     #在.pro 文件中加入一行, 加在这里，加速编译。
     #msvc:PRECOMPILED_HEADER = $${PWD}/qqt-qt.h
     #指出：precompiler header只能用于MSVC
+    #这个功能可用，可是编译问题比较多，不方便，所以默认不开开。
 }
 
 #################################################################

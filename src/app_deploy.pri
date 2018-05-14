@@ -24,6 +24,7 @@ defineReplace(deploy_app_on_win) {
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
     command += $$COPY $${QQT_BUILD_PWD}\\QQt.dll $${APP_DEPLOY_PWD}\\QQt.dll $$CMD_SEP
+    msvc:command += $$COPY_DIR $${QQT_BUILD_PWD}\\QQt.* $${APP_DEST_DIR} $$CMD_SEP
     command += $$COPY $${APP_DEST_DIR}\\$${TARGET}.exe $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
     #all windows need deploy release version?
     equals(BUILD, Debug) {
