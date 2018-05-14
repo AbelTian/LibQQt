@@ -10,14 +10,11 @@
 #this is different in every operating system
 #qqt_library.pri need this configure
 
-#2018年04月11日18:54:58
 #这个文件用来加载用户电脑上的应用程序公共环境
 #Windows:  C:\\Users\\xxx\\.qmake\\app_configure.pri
 #Mac OS X: /Users/xxx/.qmake/app_configure.pri
 #Ubuntu:   /home/xxx/.qmake/app_configure.pri
 #公共路径：应用编译路径、LibrarySDK路径、产品输出路径
-
-#2018年5月3日 08点55分
 #Multi-link技术只能应用于Qt5，Qt4没有windeployqt程序。
 
 #--------------------------------------------------------------------------------

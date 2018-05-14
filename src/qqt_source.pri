@@ -7,12 +7,11 @@
 #QQt source
 #Don't modify this pri
 #FDLv1.3 GPLv3 LGPLv2.1 PreviewCommercial
-#2017年10月29日09:16:41
-#Project link: https://gitee.com/drabel/LibQt
+
+#Project link: https://gitee.com/drabel/LibQQt
 #if you succeed with LibQQt, please thumb up.
-#2017年11月10日18:53:56
-#2018年4月6日18点12分
 #这里是LibQQt源文件pri，所有开关宏都在LibQQt头文件pri里开关。
+
 #-------------------------------------------------
 #root dir
 HEADERS += $$PWD/qqt.h \
