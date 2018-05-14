@@ -103,6 +103,45 @@ Windows平台app_configure.pri的位置 C:\\Users\\Administrator\\AppData\\qmake
 
 ![app_configure.pri移动了](screenshot/10.png "这是LibQQt需要设置的几个路径，pri位置有改动")  
 
+# v2.4支持MSVC2015的一些注意事项  
+
+用Qt VS Addin或者Qt VS Tools开发即可。    
+
+有一些约束：
+- 源代码必须使用uft-8+bom的格式保存，否则Visual Studio对文本识别会出现混乱。  
+- 注意包含一下qqtcore.h，里边有一个针对msvc编译器选项，使exe里文本按照utf-8编码。  
+- 终端输出的时候，要用utf-8的代码页。  
+
+Visual Studio使用设置：  
+- 设置环境变量  
+    - 我使用Multi-environ Manager工具进行设置，语法不一样，但是思路一样。  
+    - QTVERSION : 5.8.0
+    - QTDIR : ${qt5.8.msvc}
+    - BUILDTYPE : Debug
+    - QKIT : WIN64
+    - QSYS : Win64
+    - QQT_STD_PWD : ${QTVERSION}/${QSYS}/${BUILDTYPE}  
+    - QQT_BUILD_ROOT : C:\Users\Administrator\Develop\c0-buildstation
+    - QQT_SDK_ROOT : C:\Users\Administrator\Develop\d1-product
+    - 路径
+        - ${qt5.8.msvc.bin}  
+        - ${QQT_SDK_ROOT}/QQt/${QQT_STD_PWD}/lib 可选
+- 启动Visual Studio 2015  
+    - cd /d \"${msvc2015}\""  
+    - start devenv.exe  
+    - 注意：Visual Studio 2015的启动环境为上述环境之中。  
+- Visual Studio 2015设置  
+    - 打开QQt.pro之后，sln工程自动生成  
+    - 设置调试-QQt属性-配置属性-常规 输出目录由bin\改为${QQT_BUILD_ROOT}\$(QQT_STD_PWD)\bin\
+    - 启动生成，即可，QQt Lib和例程都可以正常生成。这个时候可以去产品输出目录点击运行。如果缺少部分QtLib，手动解决下。  
+    - App执行调试缺少QQt.dll，
+        - 设置调试-App属性-配置属性-调试 环境 Path添加${QQT_SDK_ROOT}/QQt/${QQT_STD_PWD}/lib   
+        - 如果想影响全局App调试，上边那个可选的路径加进环境变量Path里。  
+        - 这样调试App就可以开始了。  
+- 可以开始使用LibQQt编写自己的App了。  
+
+还修改了Windows下的app_configure.pri的磁盘保存位置，到用户主目录/.qmake/app_configure.pri，这块完全使用类Unix风格。  
+
 
 [返回](.)   
 
