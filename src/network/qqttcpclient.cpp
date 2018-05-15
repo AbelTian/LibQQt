@@ -109,7 +109,8 @@ int QQtTcpClient::sendDisConnectFromHost()
         shutdown ( this->socketDescriptor(), SHUT_RDWR );
 #endif
         disconnectFromHost();
-        waitForDisconnected();
+        if ( state() != UnconnectedState )
+            waitForDisconnected();
         close();
         emit signalDisConnectSucc();
     }
