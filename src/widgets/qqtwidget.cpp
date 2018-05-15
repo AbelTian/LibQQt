@@ -118,6 +118,76 @@ void QQtWidget::paintEvent ( QPaintEvent* event )
         }
         break;
 
+        case QQTTILEDHEIGHT:
+        {
+            p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                               /*.copy() 切出图片的左上部分使用*/
+                               QPixmap::fromImage ( mImage.copy ( rect() )
+                                                    .scaledToHeight ( rect().height() )
+                                                  ) );
+        }
+        break;
+
+        case QQTTILED:
+        {
+            p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                               /*.copy() 切出图片的左上部分使用*/
+                               QPixmap::fromImage ( mImage.copy ( rect() )
+                                                    .scaled ( rect().width(), rect().height(), Qt::KeepAspectRatio )
+                                                  ) );
+        }
+        break;
+
+        case QQTZOOMHEIGHT:
+        {
+            p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                               /*不.copy() 切出图片的中间部分使用*/
+                               QPixmap::fromImage ( mImage
+                                                    .scaled ( mImage.width(), rect().height(), Qt::IgnoreAspectRatio )
+                                                  ) );
+        }
+        break;
+
+        case QQTZOOM:
+        {
+            p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                               /*不.copy() 切出图片的中间部分使用*/
+                               QPixmap::fromImage ( mImage
+                                                    .scaled ( rect().width(), rect().height(), Qt::IgnoreAspectRatio )
+                                                  ) );
+        }
+        break;
+
+        case QQTZOOMWIDTH_KEEPASPECTRATIO:
+        {
+            p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                               /*不.copy() 切出图片的中间部分使用*/
+                               QPixmap::fromImage ( mImage
+                                                    .scaled ( rect().width(), mImage.height(), Qt::KeepAspectRatio )
+                                                  ) );
+        }
+        break;
+
+        case QQTZOOMHEIGHT_KEEPASPECTRATIO:
+        {
+            p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                               /*不.copy() 切出图片的中间部分使用*/
+                               QPixmap::fromImage ( mImage
+                                                    .scaled ( mImage.width(), rect().height(), Qt::KeepAspectRatio )
+                                                  ) );
+        }
+        break;
+
+        case QQTZOOM_KEEPASPECTRATIO:
+        {
+            p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                               /*不.copy() 切出图片的中间部分使用*/
+                               QPixmap::fromImage ( mImage
+                                                    .scaled ( rect().width(), rect().height(), Qt::KeepAspectRatio )
+                                                  ) );
+        }
+        break;
+
         default:
         {
 

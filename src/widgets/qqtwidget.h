@@ -26,13 +26,32 @@ public:
          * 整个居中,全面缩放显示
          */
         QQTCENTER,
-        /*
+        /**
+         * 切
+         * 从左上
          * 会产生label的效果，左右按照rect长，但是不缩放形状
          **/
         QQTTILEDWIDTH,
         QQTTILEDHEIGHT,
+        QQTTILED,
+
+        /**
+         * 缩放
+         * 忽略长宽比
+         */
         QQTZOOMWIDTH,
         QQTZOOMHEIGHT,
+        QQTZOOM,
+
+        /**
+         * 缩放
+         * 保持长宽比
+         */
+        QQTZOOMWIDTH_KEEPASPECTRATIO,
+        QQTZOOMHEIGHT_KEEPASPECTRATIO,
+        QQTZOOM_KEEPASPECTRATIO,
+
+        QQTIMAGESTYLEMAX
     };
     void setImageStyle ( ImageStyle style = QQTCENTER ) { m_style = style; }
 
