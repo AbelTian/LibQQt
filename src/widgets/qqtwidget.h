@@ -1,4 +1,4 @@
-﻿#ifndef QQTWIDGET_H
+#ifndef QQTWIDGET_H
 #define QQTWIDGET_H
 
 #include <qqt-local.h>
@@ -7,6 +7,8 @@
 #include <QWidget>
 #include <QTimer>
 #include <QImage>
+
+#include <qqtwidgetclickhelper.h>
 
 /*
  * QSS美化，和QQtWidget图片背景不能共存
@@ -17,9 +19,6 @@ class QQTSHARED_EXPORT QQtWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit QQtWidget ( QWidget* parent = 0 );
-    virtual ~QQtWidget();
-
     enum ImageStyle
     {
         /**
@@ -53,8 +52,12 @@ public:
 
         QQTIMAGESTYLEMAX
     };
-    void setImageStyle ( ImageStyle style = QQTCENTER ) { m_style = style; }
 
+public:
+    explicit QQtWidget ( QWidget* parent = 0 );
+    virtual ~QQtWidget();
+
+    void setImageStyle ( ImageStyle style = QQTCENTER ) { m_style = style; }
     void setPixmap ( const QString& pic = QString() );
     void setPixmap ( const QPixmap& pixmap );
     void setPixmap ( const QImage& image );
@@ -79,18 +82,15 @@ protected:
     virtual void mouseReleaseEvent ( QMouseEvent* event ) override;
     virtual void mouseDoubleClickEvent ( QMouseEvent* event ) override;
 
-protected slots:
-    void slot_timeout();
-
 private:
+    void installClickHelper();
+    QQtWidgetClickHelper* mClickHelper;
+
     quint32 m_style;
-    QTimer* m_lcTimer;
     /*pixmap是必要的。绘图用pixmap。*/
     /*内部没有使用QPixmap存储，因为如果缩放widget，pixmap就没办法了，img有*/
     /*内部对QIcon的使用删除了，icon不是必要的。*/
     QImage mImage;
-    //for longClickWithPoint()
-    QPoint mlongClickPoint;
 };
 
 #endif // QPICWIDGET_H

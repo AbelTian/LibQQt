@@ -1,4 +1,4 @@
-﻿#include "qqtwidget.h"
+#include "qqtwidget.h"
 #include <QStylePainter>
 #include "qqtcore.h"
 
@@ -7,11 +7,8 @@ QQtWidget::QQtWidget ( QWidget* parent ) :
 {
     m_style = QQTCENTER;
 
-    m_lcTimer = new QTimer ( this );
-    m_lcTimer->setSingleShot ( true );
-    m_lcTimer->setInterval ( 2200 );
-    connect ( m_lcTimer, SIGNAL ( timeout() ),
-              this, SLOT ( slot_timeout() ) );
+    mClickHelper = new QQtWidgetClickHelper ( this );
+    installClickHelper();
 }
 
 QQtWidget::~QQtWidget()
@@ -201,33 +198,29 @@ void QQtWidget::paintEvent ( QPaintEvent* event )
 
 void QQtWidget::mousePressEvent ( QMouseEvent* event )
 {
-    mlongClickPoint = event->pos();
-    m_lcTimer->start();
+    mClickHelper->mousePressEvent ( event, this );
     return QWidget::mousePressEvent ( event );
 }
 
 void QQtWidget::mouseReleaseEvent ( QMouseEvent* event )
 {
-    if ( m_lcTimer->isActive() )
-    {
-        m_lcTimer->stop();
-        emit click();
-        emit clickWithPoint ( event->pos() );
-    }
-
+    mClickHelper->mouseReleaseEvent ( event, this );
     return QWidget::mouseReleaseEvent ( event );
 }
 
 void QQtWidget::mouseDoubleClickEvent ( QMouseEvent* event )
 {
-    emit doubleClick();
-    emit doubleClickWithPoint ( event->pos() );
+    mClickHelper->mouseDoubleClickEvent ( event, this );
     return QWidget::mouseDoubleClickEvent ( event );
 }
 
-void QQtWidget::slot_timeout()
+void QQtWidget::installClickHelper()
 {
-    emit longClick();
-    emit longClickWithPoint ( mlongClickPoint );
+    connect ( mClickHelper, SIGNAL ( click() ), this, SIGNAL ( click() ) );
+    connect ( mClickHelper, SIGNAL ( longClick() ), this, SIGNAL ( longClick() ) );
+    connect ( mClickHelper, SIGNAL ( doubleClick() ), this, SIGNAL ( doubleClick() ) );
+    connect ( mClickHelper, SIGNAL ( clickWithPoint ( QPoint ) ), this, SIGNAL ( clickWithPoint ( QPoint ) ) );
+    connect ( mClickHelper, SIGNAL ( longClickWithPoint ( QPoint ) ), this, SIGNAL ( longClickWithPoint ( QPoint ) ) );
+    connect ( mClickHelper, SIGNAL ( doubleClickWithPoint ( QPoint ) ), this, SIGNAL ( doubleClickWithPoint ( QPoint ) ) );
 }
 

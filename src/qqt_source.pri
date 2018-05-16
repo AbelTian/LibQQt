@@ -84,6 +84,11 @@ HEADERS += \
 
 #widgets
 SOURCES += \
+    $$PWD/widgets/qqtwidgetclickhelper.cpp
+HEADERS += \
+    $$PWD/widgets/qqtwidgetclickhelper.h
+
+SOURCES += \
     $$PWD/widgets/qqtspinbox.cpp \
     $$PWD/widgets/qqtdoublespinbox.cpp \
     $$PWD/widgets/qqtdateedit.cpp \
