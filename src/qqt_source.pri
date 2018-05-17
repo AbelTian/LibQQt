@@ -335,6 +335,15 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtdoubleclickwidget.h
 
     SOURCES += \
+        $$PWD/exquisite/qqtcanclicklabel.cpp \
+        $$PWD/exquisite/qqtclicklabel.cpp \
+        $$PWD/exquisite/qqtdoubleclicklabel.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtcanclicklabel.h \
+        $$PWD/exquisite/qqtclicklabel.h \
+        $$PWD/exquisite/qqtdoubleclicklabel.h
+
+    SOURCES += \
         $$PWD/exquisite/qqtframelesshelper.cpp \
         $$PWD/exquisite/qqtframelesshelperprivate.cpp
     HEADERS += \
