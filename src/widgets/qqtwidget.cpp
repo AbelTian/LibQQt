@@ -9,6 +9,7 @@ QQtWidget::QQtWidget ( QWidget* parent ) :
 
     mClickHelper = new QQtWidgetClickHelper ( this );
     installClickHelper();
+    mDefaultClickHelper = mClickHelper;
 }
 
 QQtWidget::~QQtWidget()
@@ -222,5 +223,16 @@ void QQtWidget::installClickHelper()
     connect ( mClickHelper, SIGNAL ( clickWithPoint ( QPoint ) ), this, SIGNAL ( clickWithPoint ( QPoint ) ) );
     connect ( mClickHelper, SIGNAL ( longClickWithPoint ( QPoint ) ), this, SIGNAL ( longClickWithPoint ( QPoint ) ) );
     connect ( mClickHelper, SIGNAL ( doubleClickWithPoint ( QPoint ) ), this, SIGNAL ( doubleClickWithPoint ( QPoint ) ) );
+}
+
+void QQtWidget::uninstallClickHelper()
+{
+    disconnect ( mClickHelper, SIGNAL ( click() ), this, SIGNAL ( click() ) );
+    disconnect ( mClickHelper, SIGNAL ( longClick() ), this, SIGNAL ( longClick() ) );
+    disconnect ( mClickHelper, SIGNAL ( doubleClick() ), this, SIGNAL ( doubleClick() ) );
+    disconnect ( mClickHelper, SIGNAL ( clickWithPoint ( QPoint ) ), this, SIGNAL ( clickWithPoint ( QPoint ) ) );
+    disconnect ( mClickHelper, SIGNAL ( longClickWithPoint ( QPoint ) ), this, SIGNAL ( longClickWithPoint ( QPoint ) ) );
+    disconnect ( mClickHelper, SIGNAL ( doubleClickWithPoint ( QPoint ) ), this,
+                 SIGNAL ( doubleClickWithPoint ( QPoint ) ) );
 }
 

@@ -3,9 +3,9 @@
 
 #include <qqt-local.h>
 #include <qqtcore.h>
+#include <qqtevent.h>
 
 #include <QTimer>
-#include <QMouseEvent>
 
 /**
  * QQtWidgetClickHelper
@@ -19,25 +19,19 @@
  * 发现click只发送click.
  * 以最新click为准
  *
- * DoubleClick间隔默认掌握在Qt手中,也有间隔检测.
- * 延迟比较常规
+ * 行为
+ * releaseEvent是核心.
+ * 仅仅接收到release,就可以发生单击和双击检测,击发其中一个.
+ * 必须被press击发,才会检测发生长击,长击到点,如果没有release也不会发射信号.
+ * 仅仅使用pressEvent,不会发生任何情况.
+ * 仅仅使用DoubleClickEvent,不会发生任何情况.
+ *
+ * DoubleClick检测是独立于系统的,用户可以在页面里实现多套独立的按键时延检测,一个widget一个时延系统也没问题.
+ * 可以统计按键次数
  */
 class QQTSHARED_EXPORT QQtWidgetClickHelper : public QObject
 {
     Q_OBJECT
-
-public:
-    typedef enum
-    {
-        QQtNullClick = 0,
-
-        QQtClick,
-        QQtDoubleClick,
-        QQtLongClick,
-
-        QQtMaxClick
-    } QQtClickType;
-    Q_ENUMS ( QQtClickType )
 
 public:
     explicit QQtWidgetClickHelper ( QObject* parent = 0 );
@@ -60,24 +54,65 @@ signals:
     void doubleClickWithPoint ( QPoint point );
     void longClickWithPoint ( QPoint point );
 
+    void clickWithPointF ( QPointF point );
+    void doubleClickWithPointF ( QPointF point );
+    void longClickWithPointF ( QPointF point );
+
     //optional
 public:
-    //设置双击检测时延 default:200ms
+    //这个语法比较难,只有整型有特权.
+    static const int doubleClickInterval = 400;
+    static const int longClickInterval = 1200;
+
+    //设置双击检测时延 default: doubleClickInterval ms
     //不会影响系统默认时延
-    void setDoubleClickInterval ( int millSecond = 300 );
+    void setDoubleClickInterval ( int millSecond = doubleClickInterval ) {
+        mDoubleClickInterval = millSecond;
+    }
+    int getDoubleClickInterval() const {
+        return mDoubleClickInterval;
+    }
 
     //设置longClick超时 default:1200ms
-    void setLongClickInterval ( int millSecond = 1200 );
+    void setLongClickInterval ( int millSecond = longClickInterval ) {
+        mLongClickInterval = millSecond;
+        m_long_click_timer->setInterval ( mLongClickInterval );
+    }
+    int getLongClickInterval() const {
+        return mLongClickInterval;
+    }
+
+    quint32 clickNum() const { return nClickNum; }
+    quint32 doubleClickNum() const { return nDoubleClickNum; }
+    quint32 longClickNum() const { return nLongClickNum; }
+    quint64 totalClickNum() const { return nTotalClickNum; }
 
     /**
      * 以下用于内部
      */
+public:
+    Q_ENUMS ( QQtClickType )
+    Q_PROPERTY ( int mDoubleClickInterval READ getDoubleClickInterval WRITE setDoubleClickInterval )
+    Q_PROPERTY ( int mLongClickInterval READ getLongClickInterval WRITE setLongClickInterval )
+
+    typedef enum
+    {
+        QQtNullClick = 0,
+
+        QQtClick,
+        QQtDoubleClick,
+        QQtLongClick,
+
+        QQtMaxClick
+    } QQtClickType;
+
 public slots:
     void slotClickTimeout();
     void slotLongClickTimeout();
     void slotDoubleClickTimeout();
 
 private:
+    //用于记录点击到了什么状态.
     QQtClickType mClickType;
 
     //clickTimer
@@ -97,6 +132,19 @@ private:
 
     //click 检测使用
     QTime startClickTime;
+    QTime t1;
+    QTime t2;
+
+    //click 用
+    QWidget* mUserWidget;
+    QQtMouseEvent* mMouseEvent;
+
+    //click num
+    void checkClickNum();
+    quint32 nClickNum;
+    quint32 nDoubleClickNum;
+    quint32 nLongClickNum;
+    quint64 nTotalClickNum;
 };
 
 #endif // QQTWIDGETCLICKHELPER_H

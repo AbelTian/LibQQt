@@ -36,10 +36,12 @@ contains (QKIT_PRIVATE, WIN32||WIN64) {
 #core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
+    $$PWD/core/qqtevent.cpp \
     $$PWD/core/qqtdictionary.cpp \
     $$PWD/core/qqtobjectmanager.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
+    $$PWD/core/qqtevent.h \
     $$PWD/core/qqtdictionary.h \
     $$PWD/core/qqtobjectmanager.h
 

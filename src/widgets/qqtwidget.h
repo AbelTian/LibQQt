@@ -1,14 +1,14 @@
 #ifndef QQTWIDGET_H
 #define QQTWIDGET_H
 
-#include <qqt-local.h>
-#include <qqtcore.h>
-
 #include <QWidget>
 #include <QTimer>
 #include <QImage>
 
 #include <qqtwidgetclickhelper.h>
+
+#include <qqt-local.h>
+#include <qqtcore.h>
 
 /*
  * QSS美化，和QQtWidget图片背景不能共存
@@ -83,14 +83,32 @@ protected:
     virtual void mouseDoubleClickEvent ( QMouseEvent* event ) override;
 
 private:
-    void installClickHelper();
-    QQtWidgetClickHelper* mClickHelper;
-
     quint32 m_style;
     /*pixmap是必要的。绘图用pixmap。*/
     /*内部没有使用QPixmap存储，因为如果缩放widget，pixmap就没办法了，img有*/
     /*内部对QIcon的使用删除了，icon不是必要的。*/
     QImage mImage;
+
+    /**
+     * 按键功能支持者
+     */
+public:
+    inline void setClickHelper ( QQtWidgetClickHelper* helper = 0 ) {
+        uninstallClickHelper();
+        if ( helper == 0 )
+            mClickHelper = mDefaultClickHelper;
+        else
+            mClickHelper = helper;
+        installClickHelper();
+    }
+    inline const QQtWidgetClickHelper* clickHelper() const {
+        return mClickHelper;
+    }
+private:
+    void installClickHelper();
+    void uninstallClickHelper();
+    QQtWidgetClickHelper* mClickHelper;
+    QQtWidgetClickHelper* mDefaultClickHelper;
 };
 
 #endif // QPICWIDGET_H

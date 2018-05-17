@@ -1,4 +1,4 @@
-﻿#ifndef QQTCORE_H
+#ifndef QQTCORE_H
 #define QQTCORE_H
 
 #include <QWidget>
@@ -118,12 +118,13 @@ QQTSHARED_EXPORT void QQtSleep ( int millsecond );
 
 
 #define pline() qDebug() << __FILE__ << __LINE__/*QString("%1").arg(__LINE__, 3, 10)*/ << __func__
-#define perr(req, rsl) if(req == rsl) pline() << hex << rsl
 #define ptime() pline() << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss zzz")
+#define p2line() qDebug() << QString(__FILE__).split('/').last() << QString("%1").arg(__LINE__, 3, 10) << __func__
+//-----------------------
+#define perr(req, rsl) if(req == rsl) pline() << hex << rsl
 #define pmeta(inst) pline() << inst->metaObject()->className()
 #define pdebug() qDebug()
-#define pdebugo() qDebug().nospace()
-//-----------------------
+#define pdebug_nospace() qDebug().nospace()
 #define packline() pline() << qDebug().nospace()
 
 QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint8& r );
