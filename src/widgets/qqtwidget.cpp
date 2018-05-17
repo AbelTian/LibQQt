@@ -6,15 +6,13 @@ QQtWidget::QQtWidget ( QWidget* parent ) :
     QWidget ( parent )
 {
     m_style = QQTCENTER;
-
-    mClickHelper = new QQtWidgetClickHelper ( this );
-    installClickHelper();
-    mDefaultClickHelper = mClickHelper;
 }
 
 QQtWidget::~QQtWidget()
 {
 }
+
+void QQtWidget::setImageStyle ( QQtWidget::ImageStyle style ) { m_style = style; }
 
 void QQtWidget::setPixmap ( const QString& pic )
 {
@@ -194,45 +192,5 @@ void QQtWidget::paintEvent ( QPaintEvent* event )
     }
 
     return QWidget::paintEvent ( event );
-}
-
-
-void QQtWidget::mousePressEvent ( QMouseEvent* event )
-{
-    mClickHelper->mousePressEvent ( event, this );
-    return QWidget::mousePressEvent ( event );
-}
-
-void QQtWidget::mouseReleaseEvent ( QMouseEvent* event )
-{
-    mClickHelper->mouseReleaseEvent ( event, this );
-    return QWidget::mouseReleaseEvent ( event );
-}
-
-void QQtWidget::mouseDoubleClickEvent ( QMouseEvent* event )
-{
-    mClickHelper->mouseDoubleClickEvent ( event, this );
-    return QWidget::mouseDoubleClickEvent ( event );
-}
-
-void QQtWidget::installClickHelper()
-{
-    connect ( mClickHelper, SIGNAL ( click() ), this, SIGNAL ( click() ) );
-    connect ( mClickHelper, SIGNAL ( longClick() ), this, SIGNAL ( longClick() ) );
-    connect ( mClickHelper, SIGNAL ( doubleClick() ), this, SIGNAL ( doubleClick() ) );
-    connect ( mClickHelper, SIGNAL ( clickWithPoint ( QPoint ) ), this, SIGNAL ( clickWithPoint ( QPoint ) ) );
-    connect ( mClickHelper, SIGNAL ( longClickWithPoint ( QPoint ) ), this, SIGNAL ( longClickWithPoint ( QPoint ) ) );
-    connect ( mClickHelper, SIGNAL ( doubleClickWithPoint ( QPoint ) ), this, SIGNAL ( doubleClickWithPoint ( QPoint ) ) );
-}
-
-void QQtWidget::uninstallClickHelper()
-{
-    disconnect ( mClickHelper, SIGNAL ( click() ), this, SIGNAL ( click() ) );
-    disconnect ( mClickHelper, SIGNAL ( longClick() ), this, SIGNAL ( longClick() ) );
-    disconnect ( mClickHelper, SIGNAL ( doubleClick() ), this, SIGNAL ( doubleClick() ) );
-    disconnect ( mClickHelper, SIGNAL ( clickWithPoint ( QPoint ) ), this, SIGNAL ( clickWithPoint ( QPoint ) ) );
-    disconnect ( mClickHelper, SIGNAL ( longClickWithPoint ( QPoint ) ), this, SIGNAL ( longClickWithPoint ( QPoint ) ) );
-    disconnect ( mClickHelper, SIGNAL ( doubleClickWithPoint ( QPoint ) ), this,
-                 SIGNAL ( doubleClickWithPoint ( QPoint ) ) );
 }
 

@@ -5,8 +5,6 @@
 #include <QTimer>
 #include <QImage>
 
-#include <qqtwidgetclickhelper.h>
-
 #include <qqt-local.h>
 #include <qqtcore.h>
 
@@ -57,30 +55,14 @@ public:
     explicit QQtWidget ( QWidget* parent = 0 );
     virtual ~QQtWidget();
 
-    void setImageStyle ( ImageStyle style = QQTCENTER ) { m_style = style; }
+    void setImageStyle ( ImageStyle style = QQTCENTER );
     void setPixmap ( const QString& pic = QString() );
     void setPixmap ( const QPixmap& pixmap );
     void setPixmap ( const QImage& image );
 
-signals:
-    void click();
-    void doubleClick();
-    void longClick();
-
-signals:
-    void clickWithPoint ( QPoint point );
-    void doubleClickWithPoint ( QPoint point );
-    void longClickWithPoint ( QPoint point );
-
     // QWidget interface
 protected:
     void paintEvent ( QPaintEvent* ) override;
-
-    // QWidget interface
-protected:
-    virtual void mousePressEvent ( QMouseEvent* event ) override;
-    virtual void mouseReleaseEvent ( QMouseEvent* event ) override;
-    virtual void mouseDoubleClickEvent ( QMouseEvent* event ) override;
 
 private:
     quint32 m_style;
@@ -88,27 +70,6 @@ private:
     /*内部没有使用QPixmap存储，因为如果缩放widget，pixmap就没办法了，img有*/
     /*内部对QIcon的使用删除了，icon不是必要的。*/
     QImage mImage;
-
-    /**
-     * 按键功能支持者
-     */
-public:
-    inline void setClickHelper ( QQtWidgetClickHelper* helper = 0 ) {
-        uninstallClickHelper();
-        if ( helper == 0 )
-            mClickHelper = mDefaultClickHelper;
-        else
-            mClickHelper = helper;
-        installClickHelper();
-    }
-    inline const QQtWidgetClickHelper* clickHelper() const {
-        return mClickHelper;
-    }
-private:
-    void installClickHelper();
-    void uninstallClickHelper();
-    QQtWidgetClickHelper* mClickHelper;
-    QQtWidgetClickHelper* mDefaultClickHelper;
 };
 
-#endif // QPICWIDGET_H
+#endif // QWIDGET_H

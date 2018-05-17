@@ -86,11 +86,6 @@ HEADERS += \
 
 #widgets
 SOURCES += \
-    $$PWD/widgets/qqtwidgetclickhelper.cpp
-HEADERS += \
-    $$PWD/widgets/qqtwidgetclickhelper.h
-
-SOURCES += \
     $$PWD/widgets/qqtspinbox.cpp \
     $$PWD/widgets/qqtdoublespinbox.cpp \
     $$PWD/widgets/qqtdateedit.cpp \
@@ -323,6 +318,22 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
+    SOURCES += \
+        $$PWD/exquisite/qqtclickhelper.cpp \
+        $$PWD/exquisite/qqtdoubleclickhelper.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtclickhelper.h \
+        $$PWD/exquisite/qqtdoubleclickhelper.h
+
+    SOURCES += \
+        $$PWD/exquisite/qqtcanclickwidget.cpp \
+        $$PWD/exquisite/qqtclickwidget.cpp \
+        $$PWD/exquisite/qqtdoubleclickwidget.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtcanclickwidget.h \
+        $$PWD/exquisite/qqtclickwidget.h \
+        $$PWD/exquisite/qqtdoubleclickwidget.h
+
     SOURCES += \
         $$PWD/exquisite/qqtframelesshelper.cpp \
         $$PWD/exquisite/qqtframelesshelperprivate.cpp

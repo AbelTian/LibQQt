@@ -1,4 +1,4 @@
-﻿#include "qqtprogressdialog.h"
+#include "qqtprogressdialog.h"
 #include "ui_qqtprogressdialog.h"
 #include "qqtcore.h"
 #include "qqtobjectmanager.h"
@@ -17,7 +17,7 @@ QQtProgressDialog::QQtProgressDialog ( QWidget* parent ) :
 
     //setFixedWidth(260);
 
-#ifdef __QQTWIDGETS_K1160__
+#ifdef __QQTWIDGETS_BIGICON__
     setFixedSize ( 526, 283 );
     bar->setFixedSize ( 481, 31 );
     bar->move ( 20, 50 );

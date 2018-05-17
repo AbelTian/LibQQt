@@ -1,18 +1,11 @@
-#include "qqtwidgetclickhelper.h"
+#include "qqtdoubleclickhelper.h"
 
-QQtWidgetClickHelper::QQtWidgetClickHelper ( QObject* parent ) :
-    QObject ( parent )
+QQtDoubleClickHelper::QQtDoubleClickHelper ( QObject* parent ) :
+    QQtClickHelper ( parent )
 {
     mDoubleClickInterval = doubleClickInterval;
-    mLongClickInterval = longClickInterval;
 
-    t1 = QTime::currentTime();
-    t2 = QTime::currentTime();
-
-    nClickNum = 0;
-    nLongClickNum = 0;
     nDoubleClickNum = 0;
-    nTotalClickNum = 0;
 
     mMouseEvent = new QQtMouseEvent;
 
@@ -37,19 +30,14 @@ QQtWidgetClickHelper::QQtWidgetClickHelper ( QObject* parent ) :
 
 }
 
-QQtWidgetClickHelper::~QQtWidgetClickHelper()
+QQtDoubleClickHelper::~QQtDoubleClickHelper()
 {
 }
 
-#if 0
-#define p2debug() p2line()
-#else
-#define p2debug() QNoDebug()
-#endif
 
-void QQtWidgetClickHelper::mousePressEvent ( QMouseEvent* event , QWidget* userWidget )
+void QQtDoubleClickHelper::mousePressEvent ( QMouseEvent* event , QWidget* userWidget )
 {
-    p2debug() << event->pos() << userWidget;
+    p2debug() << "press" << event->pos() << userWidget;
     //保存位置 这个记录什么用?
     mPoint = event->pos();
 
@@ -59,9 +47,9 @@ void QQtWidgetClickHelper::mousePressEvent ( QMouseEvent* event , QWidget* userW
     m_click_timer->stop();
 }
 
-void QQtWidgetClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget )
+void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget )
 {
-    p2debug() << event->pos() << userWidget;
+    p2debug() << "release" << event->pos() << userWidget;
     //doubleClick检测不依赖press,所以只要发release就会有doubleClick发生.
     //检测方式: 两次release的间隔小于doubleClickInterval那么触发doubleClick.
     //这一次 current click
@@ -187,7 +175,7 @@ void QQtWidgetClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* user
     return;
 }
 
-void QQtWidgetClickHelper::mouseDoubleClickEvent ( QMouseEvent* event , QWidget* userWidget )
+void QQtDoubleClickHelper::mouseDoubleClickEvent ( QMouseEvent* event , QWidget* userWidget )
 {
     p2debug() << event->pos() << userWidget;
     //这里关闭状态修改,会和内部的检测冲突,分不清是单击还是双击.
@@ -198,7 +186,7 @@ void QQtWidgetClickHelper::mouseDoubleClickEvent ( QMouseEvent* event , QWidget*
     mPoint = event->pos();
 }
 
-void QQtWidgetClickHelper::slotClickTimeout()
+void QQtDoubleClickHelper::slotClickTimeout()
 {
     QTime nowTime = QTime::currentTime();
     int t0 = startClickTime.msecsTo ( nowTime );
@@ -211,32 +199,23 @@ void QQtWidgetClickHelper::slotClickTimeout()
     }
 }
 
-void QQtWidgetClickHelper::slotLongClickTimeout()
+void QQtDoubleClickHelper::slotLongClickTimeout()
 {
     //longclick超时,确认longclick.
     mClickType = QQtLongClick;
     m_long_click_timer->stop();
 }
 
-void QQtWidgetClickHelper::slotDoubleClickTimeout()
+void QQtDoubleClickHelper::slotDoubleClickTimeout()
 {
 
 }
 
-void QQtWidgetClickHelper::checkClickNum()
+void QQtDoubleClickHelper::checkClickNum()
 {
+    QQtClickHelper::checkClickNum();
     switch ( mClickType )
     {
-        case QQtClick:
-        {
-            nClickNum++;
-            if ( nClickNum >= 0xFFFFFFFF )
-            {
-                p2debug() << "out......";
-                nClickNum = 0;
-            }
-        }
-        break;
         case QQtDoubleClick:
         {
             nDoubleClickNum++;
@@ -244,16 +223,6 @@ void QQtWidgetClickHelper::checkClickNum()
             {
                 p2debug() << "out......";
                 nDoubleClickNum = 0;
-            }
-        }
-        break;
-        case QQtLongClick:
-        {
-            nLongClickNum++;
-            if ( nLongClickNum >= 0xFFFFFFFF )
-            {
-                p2debug() << "out......";
-                nLongClickNum = 0;
             }
         }
         break;
