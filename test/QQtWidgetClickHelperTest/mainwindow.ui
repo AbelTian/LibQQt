@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -42,14 +42,34 @@
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>Click</string>
+        <string>LongClick</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QTextBrowser" name="textBrowser_2"/>
         </item>
         <item>
-         <widget class="QQtClickWidget" name="widget_2" native="true">
+         <widget class="QQtLongClickWidget" name="widget_2" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Click</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QTextBrowser" name="textBrowser_3"/>
+        </item>
+        <item>
+         <widget class="QQtClickWidget" name="widget_3" native="true">
           <property name="minimumSize">
            <size>
             <width>200</width>
@@ -90,6 +110,12 @@
    <class>QQtDoubleClickWidget</class>
    <extends>QWidget</extends>
    <header>qqtdoubleclickwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QQtLongClickWidget</class>
+   <extends>QWidget</extends>
+   <header>qqtlongclickwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

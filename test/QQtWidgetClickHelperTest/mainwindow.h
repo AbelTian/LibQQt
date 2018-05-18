@@ -23,6 +23,8 @@ public slots:
     void set4Sum();
     void set5Sum();
 
+    void set6Sum();
+
 private:
     Ui::MainWindow* ui;
 };
