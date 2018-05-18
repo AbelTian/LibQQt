@@ -319,41 +319,44 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
     SOURCES += \
-        $$PWD/exquisite/qqtclicksoundhelper.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtclicksoundhelper.h
-
-    SOURCES += \
-        $$PWD/exquisite/qqtclickhelper.cpp \
-        $$PWD/exquisite/qqtdoubleclickhelper.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtclickhelper.h \
-        $$PWD/exquisite/qqtdoubleclickhelper.h
-
-    SOURCES += \
-        $$PWD/exquisite/qqtcanclickwidget.cpp \
-        $$PWD/exquisite/qqtclickwidget.cpp \
-        $$PWD/exquisite/qqtdoubleclickwidget.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtcanclickwidget.h \
-        $$PWD/exquisite/qqtclickwidget.h \
-        $$PWD/exquisite/qqtdoubleclickwidget.h
-
-    SOURCES += \
-        $$PWD/exquisite/qqtcanclicklabel.cpp \
-        $$PWD/exquisite/qqtclicklabel.cpp \
-        $$PWD/exquisite/qqtdoubleclicklabel.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtcanclicklabel.h \
-        $$PWD/exquisite/qqtclicklabel.h \
-        $$PWD/exquisite/qqtdoubleclicklabel.h
-
-    SOURCES += \
         $$PWD/exquisite/qqtframelesshelper.cpp \
         $$PWD/exquisite/qqtframelesshelperprivate.cpp
     HEADERS += \
         $$PWD/exquisite/qqtframelesshelper.h \
         $$PWD/exquisite/qqtframelesshelperprivate.h
+
+    #can click support widgets
+    contains (DEFINES, __CLICKWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtclicksoundhelper.cpp
+        HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtclicksoundhelper.h
+
+        SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtclickhelper.cpp \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickhelper.cpp
+        HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtclickhelper.h \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickhelper.h
+
+        SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtclickwidget.cpp \
+            $$PWD/exquisite/clickwidgets/qqtlongclickwidget.cpp \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickwidget.cpp
+        HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtclickwidget.h \
+            $$PWD/exquisite/clickwidgets/qqtlongclickwidget.h \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickwidget.h
+
+        SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtclicklabel.cpp \
+            $$PWD/exquisite/clickwidgets/qqtlongclicklabel.cpp \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclicklabel.cpp
+        HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtclicklabel.h \
+            $$PWD/exquisite/clickwidgets/qqtlongclicklabel.h \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclicklabel.h
+    }
 
     #dialog
     SOURCES += \

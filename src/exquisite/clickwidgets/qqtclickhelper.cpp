@@ -85,8 +85,13 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
         p2debug() << "send long click " ;
         emit longClick();
         emit longClickWithPoint ( event->pos() );
-
         emit longClickWithPointF ( event->localPos() );
+
+#if 0
+        emit longClick ( userWidget );
+        emit longClickWithPoint ( event->pos(), userWidget );
+        emit longClickWithPointF ( event->localPos(), userWidget );
+#endif
         return;
     }
     else if ( mClickType == QQtClick )
@@ -115,8 +120,14 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
         p2debug() << "send click." ;
         emit click();
         emit clickWithPoint ( event->pos() );
-
         emit clickWithPointF ( event->localPos() );
+
+#if 0
+        emit click ( userWidget );
+        emit clickWithPoint ( event->pos(), userWidget );
+        emit clickWithPointF ( event->localPos(), userWidget );
+#endif
+
         return;
     }
 
