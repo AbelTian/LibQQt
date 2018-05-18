@@ -66,7 +66,8 @@ public:
         return mDoubleClickInterval;
     }
 
-    quint32 doubleClickNum() const { return nDoubleClickNum; }
+    inline const quint32 doubleClickNum() const { return nDoubleClickNum; }
+    inline const quint32 doubleClickNumWithCancel() const { return nDoubleClickNumWithCancel; }
 
     /**
      * 以下用于内部
@@ -97,20 +98,22 @@ protected:
     QTime startClickTime;
 
     //double click检测用
-    QTime t1_doubleclick;
-    QTime t2_doubleclick;
+    QTime prev_doubleclick;
+    QTime now_doubleclick;
 
     //long click用
-    QTime t2_release_preview;
-    QTime t2_release_initial;
+    QTime prev_release;
+    QTime now_release_initial;
 
     //click 用
     QWidget* mUserWidget;
     QQtMouseEvent* mMouseEvent;
 
     //click num
-    virtual void checkClickNum();
+    virtual void checkClickNumWithCancel();
+    virtual void checkClickNum ( QQtClickType type ) override;
     quint32 nDoubleClickNum;
+    quint32 nDoubleClickNumWithCancel;
 };
 
 #endif // QQTDOUBLECLICKHELPER_H

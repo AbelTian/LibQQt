@@ -4,8 +4,12 @@ QQtClickHelper::QQtClickHelper ( QObject* parent )
 {
     mLongClickInterval = longClickInterval;
 
-    t1_press = QTime::currentTime();
-    t2_release = t1_press;
+    now_press = QTime::currentTime().addMSecs ( 1 );
+    now_release = QTime::currentTime().addMSecs ( 2 );
+
+    nClickNumWithCancel = 0;
+    nLongClickNumWithCancel = 0;
+    nTotalClickNumWithCancel = 0;
 
     nClickNum = 0;
     nLongClickNum = 0;
@@ -24,22 +28,22 @@ void QQtClickHelper::mousePressEvent ( QMouseEvent* event, QWidget* userWidget )
     p2debug() << "press" << event->pos() << userWidget;
     mPoint = event->pos();
     mClickType = QQtClick;
-    t1_press = QTime::currentTime();
+    now_press = QTime::currentTime();
 }
 
 void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget )
 {
     p2debug() << "release" << event->pos() << userWidget;
     //这一次 current click
-    QTime t2_release_preview = t2_release;
-    t2_release = QTime::currentTime();
+    QTime t2_release_preview = now_release;
+    now_release = QTime::currentTime();
     //这里加了个判断,其实肯定>=0
-    if ( t1_press.msecsTo ( t2_release ) >= 0 && t1_press.msecsTo ( t2_release ) <= mLongClickInterval )
+    if ( now_press.msecsTo ( now_release ) >= 0 && now_press.msecsTo ( now_release ) <= mLongClickInterval )
     {
         //单击发生
         mClickType = QQtClick;
     }
-    else if ( t1_press.msecsTo ( t2_release ) >= 0 && t1_press.msecsTo ( t2_release ) > mLongClickInterval )
+    else if ( now_press.msecsTo ( now_release ) >= 0 && now_press.msecsTo ( now_release ) > mLongClickInterval )
     {
         //长击发生
         mClickType = QQtLongClick;
@@ -47,8 +51,8 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
         //这次点击,
         //上次的release竟然比press晚,说明press没发生,置位click
         //第一次click, 上一次release=press也在这里被置位click
-        if ( t2_release_preview.msecsTo ( t2_release ) >= 0
-             && t2_release_preview.msecsTo ( t1_press ) <= 0 )
+        if ( t2_release_preview.msecsTo ( now_release ) >= 0
+             && t2_release_preview.msecsTo ( now_press ) <= 0 )
         {
             mClickType = QQtClick;
         }
@@ -58,7 +62,7 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
     if ( mClickType == QQtLongClick )
     {
         //计算点击数目
-        checkClickNum();
+        checkClickNumWithCancel();
 
         //修改状态
         mClickType = QQtNullClick;
@@ -75,6 +79,8 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
             }
         }
 
+        checkClickNum ( QQtLongClick );
+
         //发送长信号
         p2debug() << "send long click " ;
         emit longClick();
@@ -86,7 +92,7 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
     else if ( mClickType == QQtClick )
     {
         //计算点击数目
-        checkClickNum();
+        checkClickNumWithCancel();
 
         //修改状态
         mClickType = QQtNullClick;
@@ -102,6 +108,8 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
                 return;
             }
         }
+
+        checkClickNum ( QQtClick );
 
         //发送单击信号
         p2debug() << "send click." ;
@@ -137,15 +145,46 @@ int QQtClickHelper::getLongClickInterval() const
     return mLongClickInterval;
 }
 
-quint32 QQtClickHelper::clickNum() const { return nClickNum; }
 
-quint32 QQtClickHelper::longClickNum() const { return nLongClickNum; }
-
-quint64 QQtClickHelper::totalClickNum() const { return nTotalClickNum; }
-
-void QQtClickHelper::checkClickNum()
+void QQtClickHelper::checkClickNumWithCancel()
 {
     switch ( mClickType )
+    {
+        case QQtClick:
+        {
+            nClickNumWithCancel++;
+            if ( nClickNumWithCancel >= 0xFFFFFFFF )
+            {
+                p2debug() << "out......";
+                nClickNumWithCancel = 0;
+            }
+        }
+        break;
+        case QQtLongClick:
+        {
+            nLongClickNumWithCancel++;
+            if ( nLongClickNumWithCancel >= 0xFFFFFFFF )
+            {
+                p2debug() << "out......";
+                nLongClickNumWithCancel = 0;
+            }
+        }
+        break;
+        default:
+            break;
+    }
+
+    nTotalClickNumWithCancel = nClickNumWithCancel + nLongClickNumWithCancel;
+    if ( nTotalClickNumWithCancel >= 0xFFFFFFFFFFFFFFFF )
+    {
+        p2debug() << "out......";
+        nTotalClickNumWithCancel = 0;
+    }
+}
+
+void QQtClickHelper::checkClickNum ( QQtClickHelper::QQtClickType type )
+{
+    switch ( type )
     {
         case QQtClick:
         {

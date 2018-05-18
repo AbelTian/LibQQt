@@ -6,16 +6,17 @@ QQtDoubleClickHelper::QQtDoubleClickHelper ( QObject* parent ) :
     mDoubleClickInterval = doubleClickInterval;
 
     nDoubleClickNum = 0;
+    nDoubleClickNumWithCancel = 0;
 
-    t1_doubleclick = QTime::currentTime();
-    t2_doubleclick = t2_doubleclick;
+    prev_doubleclick = QTime::currentTime().addMSecs ( 3 );
+    now_doubleclick = QTime::currentTime().addMSecs ( 4 );
 
-    t2_release_initial = QTime::currentTime();
-    t2_release_preview = t2_release_initial;
+    p2debug() << prev_doubleclick.msecsTo ( now_doubleclick );
+
+    prev_release = QTime::currentTime().addMSecs ( 5 );
+    now_release_initial = QTime::currentTime().addMSecs ( 6 );
 
     mMouseEvent = new QQtMouseEvent;
-
-    mClickType = QQtNullClick;
 
     m_click_timer = new QTimer ( this );
     m_click_timer->setSingleShot ( false );
@@ -53,7 +54,7 @@ void QQtDoubleClickHelper::mousePressEvent ( QMouseEvent* event , QWidget* userW
     m_click_timer->stop();
 
     //复用一下t1_press t2_release 这里的实现和父类关系不太大
-    t1_press = QTime::currentTime();
+    now_press = QTime::currentTime();
 }
 
 void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget )
@@ -61,8 +62,8 @@ void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* user
     p2debug() << "release" << event->pos() << userWidget;
 
     //添加longClick检测, 更新longclick检测时间
-    t2_release_preview = t2_release;//记录上次的release
-    t2_release = QTime::currentTime();
+    prev_release = now_release;//记录上次的release
+    now_release = QTime::currentTime();
     //在release-press>longclick暨click时钟判定为longclick后 加一次判断修复误判 防止用户不发press,引起click一直longclick.
 //    if ( t1_press.msecsTo ( t2_release ) >= mLongClickInterval
 //         && t2_doubleclick.msecsTo ( t2_release ) >= 0
@@ -75,19 +76,20 @@ void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* user
     //doubleClick检测不依赖press,所以只要发release就会有doubleClick发生.
     //检测方式: 两次release的间隔小于doubleClickInterval那么触发doubleClick.
     //这一次 current click
-    t1_doubleclick = QTime::currentTime();
+    now_doubleclick = QTime::currentTime();
     //这里有小技巧: 这里没有加 && mClickType != QQtClick
     //难道不会和click时钟混淆吗?不会,因为click时钟那边用的startTime和nowTime两个变量, t2比startTime还早,t1比nowTime还晚,t1-t2绝对比nowTime-startTime还长.
     //如果是click,绝对不会混淆成doubleClick.
     //正好mDoubleClickInterval ms代表双击 不代表单击.
-    if ( t2_doubleclick.msecsTo ( t1_doubleclick ) >= 0
-         && t2_doubleclick.msecsTo ( t1_doubleclick ) < mDoubleClickInterval )
+    p2debug() << prev_doubleclick << now_doubleclick << mClickType;
+    if ( prev_doubleclick.msecsTo ( now_doubleclick ) >= 0
+         && prev_doubleclick.msecsTo ( now_doubleclick ) < mDoubleClickInterval )
     {
         //双击发生
         mClickType = QQtDoubleClick;
     }
     //上一次 prev click
-    t2_doubleclick = QTime::currentTime();
+    prev_doubleclick = QTime::currentTime();
 
     //梳理状态
     m_long_click_timer->stop();
@@ -96,7 +98,7 @@ void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* user
     if ( mClickType == QQtLongClick )
     {
         //计算点击数目
-        checkClickNum();
+        checkClickNumWithCancel();
 
         //修改状态
         mClickType = QQtNullClick;
@@ -113,6 +115,8 @@ void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* user
             }
         }
 
+        checkClickNum ( QQtLongClick );
+
         //发送长信号
         p2debug() << "send long click " ;
         emit longClick();
@@ -124,7 +128,7 @@ void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* user
     else if ( mClickType == QQtDoubleClick )
     {
         //计算点击数目
-        checkClickNum();
+        checkClickNumWithCancel();
 
         //修改状态
         mClickType = QQtNullClick;
@@ -141,6 +145,8 @@ void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* user
             }
         }
 
+        checkClickNum ( QQtDoubleClick );
+
         //发送双击信号
         p2debug() << "send double click." ;
         emit doubleClick();
@@ -152,7 +158,7 @@ void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* user
     else if ( mClickType == QQtClick )
     {
         //计算点击数目
-        checkClickNum();
+        checkClickNumWithCancel();
 
         //修改状态
         mClickType = QQtNullClick;
@@ -168,6 +174,8 @@ void QQtDoubleClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* user
                 return;
             }
         }
+
+        checkClickNum ( QQtClick );
 
         //发送单击信号
         p2debug() << "send click." ;
@@ -220,23 +228,23 @@ void QQtDoubleClickHelper::slotClickTimeout()
         //注意:必须和点击一样在超时的时候检测,否则和双击检测冲突,分不清是长击还是双击.导致长击必发.
         //注意:必须press击发.
         //不发press 发生误判 认为总是long click
-        if ( t1_press.msecsTo ( t2_release ) >= 0
-             && t1_press.msecsTo ( t2_release ) >= mLongClickInterval )
+        if ( now_press.msecsTo ( now_release ) >= 0
+             && now_press.msecsTo ( now_release ) >= mLongClickInterval )
         {
             //长击发生
             mClickType = QQtLongClick;
 
             //有误判, 未发press的时候, 这个一直都是longclick,其实还有click
             //press比前一次release小的时候 其实是click
-            if ( t2_release_preview.msecsTo ( t2_release ) >= 0
-                 && t2_release_preview.msecsTo ( t1_press ) <= 0 )
+            if ( prev_release.msecsTo ( now_release ) >= 0
+                 && prev_release.msecsTo ( now_press ) <= 0 )
             {
                 mClickType = QQtClick;
             }
 
             //initial press
-            if ( t2_release_preview.msecsTo ( t2_release ) >= 0
-                 && t2_release_preview == t2_release_initial )
+            if ( prev_release.msecsTo ( now_release ) >= 0
+                 && prev_release == now_release_initial )
             {
                 mClickType = QQtClick;
             }
@@ -265,10 +273,38 @@ void QQtDoubleClickHelper::slotDoubleClickTimeout()
 
 }
 
-void QQtDoubleClickHelper::checkClickNum()
+void QQtDoubleClickHelper::checkClickNumWithCancel()
 {
-    QQtClickHelper::checkClickNum();
+    QQtClickHelper::checkClickNumWithCancel();
     switch ( mClickType )
+    {
+        case QQtDoubleClick:
+        {
+            nDoubleClickNumWithCancel++;
+            if ( nDoubleClickNumWithCancel >= 0xFFFFFFFF )
+            {
+                p2debug() << "out......";
+                nDoubleClickNumWithCancel = 0;
+            }
+        }
+        break;
+        default:
+            break;
+    }
+
+    nTotalClickNumWithCancel = nClickNumWithCancel + nLongClickNumWithCancel + nDoubleClickNumWithCancel;
+    if ( nTotalClickNumWithCancel >= 0xFFFFFFFFFFFFFFFF )
+    {
+        p2debug() << "out......";
+        nTotalClickNumWithCancel = 0;
+    }
+}
+
+
+void QQtDoubleClickHelper::checkClickNum ( QQtClickType type )
+{
+    QQtClickHelper::checkClickNum ( type );
+    switch ( type )
     {
         case QQtDoubleClick:
         {

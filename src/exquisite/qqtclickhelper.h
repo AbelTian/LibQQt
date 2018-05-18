@@ -55,9 +55,13 @@ public:
     void setLongClickInterval ( int millSecond = longClickInterval );
     int getLongClickInterval() const;
 
-    quint32 clickNum() const;
-    quint32 longClickNum() const;
-    quint64 totalClickNum() const;
+    inline const quint32 clickNum() const { return nClickNum; }
+    inline const quint32 longClickNum() const { return nLongClickNum; }
+    inline const quint64 totalClickNum() const { return nTotalClickNum; }
+
+    inline const quint32 clickNumWithCancel() const { return nClickNumWithCancel; }
+    inline const quint32 longClickNumWithCancel() const { return nLongClickNumWithCancel; }
+    inline const quint64 totalClickNumWithCancel() const { return nTotalClickNumWithCancel; }
 
     /**
      * 以下用于内部
@@ -91,15 +95,20 @@ protected:
     int mLongClickInterval;
 
     //click 检测使用
-    QTime t1_press;//press relase
-    QTime t2_release;//release
+    QTime now_press;//press relase
+    QTime now_release;//release
 
     //click num
-    virtual void checkClickNum();
+    virtual void checkClickNumWithCancel();
+    virtual void checkClickNum ( QQtClickType type );
 
     quint32 nClickNum;
     quint32 nLongClickNum;
     quint64 nTotalClickNum;
+
+    quint32 nClickNumWithCancel;
+    quint32 nLongClickNumWithCancel;
+    quint64 nTotalClickNumWithCancel;
 };
 
 #endif // QQTCLICKHELPER_H
