@@ -4,7 +4,7 @@
 #include <qqt-local.h>
 #include <qqtcore.h>
 
-#if 0
+#if 1
 #define p2debug() p2line()
 #else
 #define p2debug() QNoDebug()
@@ -91,8 +91,8 @@ protected:
     int mLongClickInterval;
 
     //click 检测使用
-    QTime t1;//press relase
-    QTime t2;//release
+    QTime t1_press;//press relase
+    QTime t2_release;//release
 
     //click num
     virtual void checkClickNum();

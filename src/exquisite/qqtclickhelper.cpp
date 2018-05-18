@@ -4,8 +4,8 @@ QQtClickHelper::QQtClickHelper ( QObject* parent )
 {
     mLongClickInterval = longClickInterval;
 
-    t1 = QTime::currentTime();
-    t2 = QTime::currentTime();
+    t1_press = QTime::currentTime();
+    t2_release = t1_press;
 
     nClickNum = 0;
     nLongClickNum = 0;
@@ -24,28 +24,36 @@ void QQtClickHelper::mousePressEvent ( QMouseEvent* event, QWidget* userWidget )
     p2debug() << "press" << event->pos() << userWidget;
     mPoint = event->pos();
     mClickType = QQtClick;
-    t1 = QTime::currentTime();
+    t1_press = QTime::currentTime();
 }
 
 void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget )
 {
     p2debug() << "release" << event->pos() << userWidget;
     //这一次 current click
-    t2 = QTime::currentTime();
+    QTime t2_release_preview = t2_release;
+    t2_release = QTime::currentTime();
     //这里加了个判断,其实肯定>=0
-    if ( t1.msecsTo ( t2 ) >= 0 && t1.msecsTo ( t2 ) <= mLongClickInterval )
+    if ( t1_press.msecsTo ( t2_release ) >= 0 && t1_press.msecsTo ( t2_release ) <= mLongClickInterval )
     {
         //单击发生
         mClickType = QQtClick;
     }
-    else if ( t1.msecsTo ( t2 ) >= 0 && t1.msecsTo ( t2 ) > mLongClickInterval )
+    else if ( t1_press.msecsTo ( t2_release ) >= 0 && t1_press.msecsTo ( t2_release ) > mLongClickInterval )
     {
         //长击发生
         mClickType = QQtLongClick;
+
+        //这次点击,
+        //上次的release竟然比press晚,说明press没发生,置位click
+        //第一次click, 上一次release=press也在这里被置位click
+        if ( t2_release_preview.msecsTo ( t2_release ) >= 0
+             && t2_release_preview.msecsTo ( t1_press ) <= 0 )
+        {
+            mClickType = QQtClick;
+        }
+
     }
-    //更新t1 防止用户忘记press,直接release.
-    //preview click
-    t1 = QTime::currentTime();
 
     if ( mClickType == QQtLongClick )
     {

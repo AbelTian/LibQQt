@@ -13,8 +13,8 @@ QQtCanClickWidget::~QQtCanClickWidget()
 
 void QQtCanClickWidget::mousePressEvent ( QMouseEvent* event )
 {
-    if ( mClickHelper )
-        mClickHelper->mousePressEvent ( event, this );
+//    if ( mClickHelper )
+//        mClickHelper->mousePressEvent ( event, this );
     return QQtWidget::mousePressEvent ( event );
 }
 

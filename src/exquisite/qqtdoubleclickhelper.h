@@ -96,6 +96,14 @@ protected:
     //click 检测使用
     QTime startClickTime;
 
+    //double click检测用
+    QTime t1_doubleclick;
+    QTime t2_doubleclick;
+
+    //long click用
+    QTime t2_release_preview;
+    QTime t2_release_initial;
+
     //click 用
     QWidget* mUserWidget;
     QQtMouseEvent* mMouseEvent;
