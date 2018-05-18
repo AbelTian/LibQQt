@@ -319,6 +319,11 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
     SOURCES += \
+        $$PWD/exquisite/qqtclicksoundhelper.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtclicksoundhelper.h
+
+    SOURCES += \
         $$PWD/exquisite/qqtclickhelper.cpp \
         $$PWD/exquisite/qqtdoubleclickhelper.cpp
     HEADERS += \

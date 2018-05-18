@@ -8,8 +8,11 @@
 #include <qqtcore.h>
 
 /**
+ * 内置ClickHelper
+ *
  * 添加了longClick支持的QQtCanClickWidget
  * 这个Widget表示了如何使用QQtWidgetClickHelper和它的子类
+ *
 */
 class QQTSHARED_EXPORT QQtClickWidget : public QQtCanClickWidget
 {

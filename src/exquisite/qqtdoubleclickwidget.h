@@ -8,6 +8,8 @@
 #include <qqtcore.h>
 
 /**
+ * 内置DoubleClickHelper
+ *
  * 添加了doubleClick支持的QQtClickWidget
  * 这个Widget表示了如何使用QQtWidgetClickHelper和它的子类
 */

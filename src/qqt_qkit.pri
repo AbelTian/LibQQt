@@ -9,10 +9,29 @@
 
 #FileSystemName的终极状态是编译器_目标系统名，比如gcc_macOS, clang_macOS这样。
 
-#target arch type
+#当工程编译目标相同,可是编译配置的Qt版本不同的时候,这个机制有一点点缺点,
+#使用相同的中间编译目录吗? 很明显,这不合理?No,这很合理.Qt版本变化,引起链接库变化,但是,还是Qt,依然是Qt.程序中应当注意使用的Qt库(Qt4和Qt5库名字不太一样)和版本(版本号不一样,源代码会有点小区别,需要注意兼容性).
+#比如桌面 gcc_64的Qt4 和 gcc_64的Qt5,不合适使用相同的中间编译目录,可是他们的FileSystemName都是Linux64,导致中间编译目录相同.
+#为此,做出改进? No,用户请注意电脑上用Qt5开发就不要用Qt4,如果使用Qt4,请换电脑进行开发.(或者全部rebuild?其实Qt的版本之间引起的差异,如果不大,混用没什么问题,Qt库只能使用一个版本的)
+#整体而言,Qt版本变化,引发的编译会比较多源文件.建议使用不同电脑开发.
+
+#原理
+#Qt Creator kit页的FileSystemName Creator自己用,忘记了传给qmake.(存储于Qt Creator配置区域)
+#工程构建和配置页(存储于.pro.userxxx)里的环境变量QKIT给qmake用.
+#如果用户在pro里面设置QMAKE.KIT QMAKE.SYSNAME,Qt Creator从qmake里读也挺好的.
+
 #You need define a env variable QKIT=XX
+#target arch type
+#注释
+#config += xxx qmake用配置开关
+#$$(XXX) 环境变量XXX
+#$${XXX} qmake用变量XXX
+#XXX = AAA 给qmake用变量XXX赋值
+#DEFINES += XXX 源代码用宏 和上边的XXX可以重名,但是是两回事,不干扰.
+
 QKIT_PRIVATE = $$(QKIT)
-#处理文件内平台小差异
+#源文件内平台小差异
+#QKIT -> 源文件宏
 #EMBEDDED __EMBEDDED_LINUX__
 #MIPS __MIPS_LINUX__
 #ARM __ARM_LINUX__
@@ -53,7 +72,7 @@ equals(QKIT_PRIVATE, EMBEDDED) {
     DEFINES += __ANDROID__
 } else:equals(QKIT_PRIVATE, ANDROIDX86) {
     DEFINES += __ANDROID__
-    DEFINES += __ANDROIDX86__
+    DEFINES += __ANDROIDX86__ #可能废弃
 }
 
 #QMAKESPEC_NAME = $${QMAKESPEC}

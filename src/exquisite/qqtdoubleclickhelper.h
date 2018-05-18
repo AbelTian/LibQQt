@@ -39,9 +39,9 @@ public:
     //调用于userWidget相对应的Event里
     //允许重写
 public:
-    virtual void mousePressEvent ( QMouseEvent* event, QWidget* userWidget = 0 );
-    virtual void mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget = 0 );
-    virtual void mouseDoubleClickEvent ( QMouseEvent* event, QWidget* userWidget = 0 );
+    virtual void mousePressEvent ( QMouseEvent* event, QWidget* userWidget = 0 ) override;
+    virtual void mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget = 0 ) override;
+    virtual void mouseDoubleClickEvent ( QMouseEvent* event, QWidget* userWidget = 0 ) override;
 
 signals:
     void doubleClick();
@@ -55,7 +55,7 @@ signals:
     //optional
 public:
     //这个语法比较难,只有整型有特权.
-    static const int doubleClickInterval = 400;
+    static const int doubleClickInterval = 200;
 
     //设置双击检测时延 default: doubleClickInterval ms
     //不会影响系统默认时延
