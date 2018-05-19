@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "qqtcore.h"
+#include <qqtframe.h>
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -17,13 +18,21 @@ MainWindow::MainWindow ( QWidget* parent ) :
     connect ( ui->widget, SIGNAL ( longClick() ),
               this, SLOT ( set3Sum() ) );
 
+    ui->widget->clickHelper()->setClickSound ( qrc ( "click.wav" ) );
+    ui->widget->clickHelper()->setLongClickSound ( qrc ( "longclick.wav" ) );
+    ui->widget->clickHelper()->setDoubleClickSound ( qrc ( "doubleclick.wav" ) );
+
     connect ( ui->widget_2, SIGNAL ( click() ),
               this, SLOT ( set4Sum() ) );
     connect ( ui->widget_2, SIGNAL ( longClick() ),
               this, SLOT ( set5Sum() ) );
 
+    ui->widget_2->clickHelper()->setClickSound ( qrc ( "click.wav" ) );
+    ui->widget_2->clickHelper()->setLongClickSound ( qrc ( "longclick.wav" ) );
+
     connect ( ui->widget_3, SIGNAL ( click() ),
               this, SLOT ( set6Sum() ) );
+    ui->widget_3->clickHelper()->setClickSound ( qrc ( "click.wav" ) );
 }
 
 MainWindow::~MainWindow()

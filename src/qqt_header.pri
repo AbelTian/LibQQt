@@ -343,6 +343,11 @@ contains (DEFINES, __EXQUISITE__) {
     #single color only widget
     DEFINES += __COLORWIDGETS__
 
+    #click widgets
+    DEFINES += __CLICKWIDGETS__
+
+    #click sound widgets
+    DEFINES += __CLICKSOUNDWIDGETS__
 }
 
 ########################################################################
@@ -432,6 +437,8 @@ defineReplace(qqt_header){
 
     #exquisite widgets
     command += $${path}/exquisite
+    command += $${path}/exquisite/clicksoundwidgets
+    command += $${path}/exquisite/clickwidgets
     command += $${path}/exquisite/svgwidgets
     command += $${path}/exquisite/gifwidgets
     command += $${path}/exquisite/openglwidgets

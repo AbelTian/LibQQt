@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -29,7 +29,7 @@
          <widget class="QTextBrowser" name="textBrowser"/>
         </item>
         <item>
-         <widget class="QQtDoubleClickWidget" name="widget" native="true">
+         <widget class="QQtDoubleClickSoundWidget" name="widget" native="true">
           <property name="minimumSize">
            <size>
             <width>200</width>
@@ -49,7 +49,7 @@
          <widget class="QTextBrowser" name="textBrowser_2"/>
         </item>
         <item>
-         <widget class="QQtLongClickWidget" name="widget_2" native="true">
+         <widget class="QQtLongClickSoundWidget" name="widget_2" native="true">
           <property name="minimumSize">
            <size>
             <width>200</width>
@@ -69,7 +69,7 @@
          <widget class="QTextBrowser" name="textBrowser_3"/>
         </item>
         <item>
-         <widget class="QQtClickWidget" name="widget_3" native="true">
+         <widget class="QQtClickSoundWidget" name="widget_3" native="true">
           <property name="minimumSize">
            <size>
             <width>200</width>
@@ -107,21 +107,21 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QQtDoubleClickWidget</class>
+   <class>QQtDoubleClickSoundWidget</class>
    <extends>QWidget</extends>
-   <header>qqtdoubleclickwidget.h</header>
+   <header>qqtdoubleclicksoundwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQtLongClickWidget</class>
+   <class>QQtLongClickSoundWidget</class>
    <extends>QWidget</extends>
-   <header>qqtlongclickwidget.h</header>
+   <header>qqtlongclicksoundwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQtClickWidget</class>
+   <class>QQtClickSoundWidget</class>
    <extends>QWidget</extends>
-   <header>qqtclickwidget.h</header>
+   <header>qqtclicksoundwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

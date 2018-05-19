@@ -1,56 +1,61 @@
-#include "qqtclickhelper.h"
+#include "qqtlongclickhelper.h"
 
-QQtClickHelper::QQtClickHelper ( QObject* parent )
+QQtLongClickHelper::QQtLongClickHelper ( QObject* parent ) : QQtClickHelper ( parent )
 {
     mLongClickInterval = longClickInterval;
 
-    t1 = QTime::currentTime();
-    t2 = QTime::currentTime();
+    now_press = QTime::currentTime().addMSecs ( 1 );
+    now_release = QTime::currentTime().addMSecs ( 2 );
 
-    nClickNum = 0;
     nLongClickNum = 0;
-    nTotalClickNum = 0;
-
-    mClickType = QQtNullClick;
+    nLongClickNumWithCancel = 0;
 }
 
-QQtClickHelper::~QQtClickHelper()
+QQtLongClickHelper::~QQtLongClickHelper()
 {
 
 }
 
-void QQtClickHelper::mousePressEvent ( QMouseEvent* event, QWidget* userWidget )
+void QQtLongClickHelper::mousePressEvent ( QMouseEvent* event, QWidget* userWidget )
 {
     p2debug() << "press" << event->pos() << userWidget;
     mPoint = event->pos();
     mClickType = QQtClick;
-    t1 = QTime::currentTime();
+    now_press = QTime::currentTime();
 }
 
-void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget )
+void QQtLongClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget )
 {
     p2debug() << "release" << event->pos() << userWidget;
     //这一次 current click
-    t2 = QTime::currentTime();
+    QTime t2_release_preview = now_release;
+    now_release = QTime::currentTime();
     //这里加了个判断,其实肯定>=0
-    if ( t1.msecsTo ( t2 ) >= 0 && t1.msecsTo ( t2 ) <= mLongClickInterval )
+    if ( now_press.msecsTo ( now_release ) >= 0 && now_press.msecsTo ( now_release ) <= mLongClickInterval )
     {
         //单击发生
         mClickType = QQtClick;
     }
-    else if ( t1.msecsTo ( t2 ) >= 0 && t1.msecsTo ( t2 ) > mLongClickInterval )
+    else if ( now_press.msecsTo ( now_release ) >= 0 && now_press.msecsTo ( now_release ) > mLongClickInterval )
     {
         //长击发生
         mClickType = QQtLongClick;
+
+        //这次点击,
+        //上次的release竟然比press晚,说明press没发生,置位click
+        //第一次click, 上一次release=press也在这里被置位click
+        if ( t2_release_preview.msecsTo ( now_release ) >= 0
+             && t2_release_preview.msecsTo ( now_press ) <= 0 )
+        {
+            mClickType = QQtClick;
+        }
+
     }
-    //更新t1 防止用户忘记press,直接release.
-    //preview click
-    t1 = QTime::currentTime();
 
     if ( mClickType == QQtLongClick )
     {
         //计算点击数目
-        checkClickNum();
+        checkClickNumWithCancel();
 
         //修改状态
         mClickType = QQtNullClick;
@@ -67,18 +72,25 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
             }
         }
 
+        checkClickNum ( QQtLongClick );
+
         //发送长信号
         p2debug() << "send long click " ;
         emit longClick();
         emit longClickWithPoint ( event->pos() );
-
         emit longClickWithPointF ( event->localPos() );
+
+#if 0
+        emit longClick ( userWidget );
+        emit longClickWithPoint ( event->pos(), userWidget );
+        emit longClickWithPointF ( event->localPos(), userWidget );
+#endif
         return;
     }
     else if ( mClickType == QQtClick )
     {
         //计算点击数目
-        checkClickNum();
+        checkClickNumWithCancel();
 
         //修改状态
         mClickType = QQtNullClick;
@@ -95,12 +107,20 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
             }
         }
 
+        checkClickNum ( QQtClick );
+
         //发送单击信号
         p2debug() << "send click." ;
         emit click();
         emit clickWithPoint ( event->pos() );
-
         emit clickWithPointF ( event->localPos() );
+
+#if 0
+        emit click ( userWidget );
+        emit clickWithPoint ( event->pos(), userWidget );
+        emit clickWithPointF ( event->localPos(), userWidget );
+#endif
+
         return;
     }
 
@@ -113,42 +133,55 @@ void QQtClickHelper::mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget
 
 }
 
-void QQtClickHelper::mouseDoubleClickEvent ( QMouseEvent* event, QWidget* userWidget )
+void QQtLongClickHelper::mouseDoubleClickEvent ( QMouseEvent* event, QWidget* userWidget )
 {
     p2debug() << "double click" << event->pos() << userWidget;
     mPoint = event->pos();
 }
 
-void QQtClickHelper::setLongClickInterval ( int millSecond )
+void QQtLongClickHelper::setLongClickInterval ( int millSecond )
 {
     mLongClickInterval = millSecond;
 }
 
-int QQtClickHelper::getLongClickInterval() const
+int QQtLongClickHelper::getLongClickInterval() const
 {
     return mLongClickInterval;
 }
 
-quint32 QQtClickHelper::clickNum() const { return nClickNum; }
 
-quint32 QQtClickHelper::longClickNum() const { return nLongClickNum; }
-
-quint64 QQtClickHelper::totalClickNum() const { return nTotalClickNum; }
-
-void QQtClickHelper::checkClickNum()
+void QQtLongClickHelper::checkClickNumWithCancel()
 {
+    QQtClickHelper::checkClickNumWithCancel();
     switch ( mClickType )
     {
-        case QQtClick:
+        case QQtLongClick:
         {
-            nClickNum++;
-            if ( nClickNum >= 0xFFFFFFFF )
+            nLongClickNumWithCancel++;
+            if ( nLongClickNumWithCancel >= 0xFFFFFFFF )
             {
                 p2debug() << "out......";
-                nClickNum = 0;
+                nLongClickNumWithCancel = 0;
             }
         }
         break;
+        default:
+            break;
+    }
+
+    nTotalClickNumWithCancel = nClickNumWithCancel + nLongClickNumWithCancel;
+    if ( nTotalClickNumWithCancel >= 0xFFFFFFFFFFFFFFFF )
+    {
+        p2debug() << "out......";
+        nTotalClickNumWithCancel = 0;
+    }
+}
+
+void QQtLongClickHelper::checkClickNum ( QQtLongClickHelper::QQtClickType type )
+{
+    QQtClickHelper::checkClickNum ( type );
+    switch ( type )
+    {
         case QQtLongClick:
         {
             nLongClickNum++;
