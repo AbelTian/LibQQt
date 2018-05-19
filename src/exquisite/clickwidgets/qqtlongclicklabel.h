@@ -37,17 +37,17 @@ signals:
     void longClickWithPoint ( QPoint point );
 
     /**
-     * 用户需要这个进行设置ClickHelper,这个label才产生click能力.
+     * 用户可选使用
      */
 public:
-    inline void installClickHelper ( QQtClickHelper* helper ) {
+    inline void installClickHelper ( QQtLongClickHelper* helper ) {
         unConnectClickHelper();
         mClickHelper = helper;
         if ( !mClickHelper )
             return;
         connectClickHelper();
     }
-    inline const QQtClickHelper* clickHelper() const {
+    inline QQtLongClickHelper* clickHelper() const {
         return mClickHelper;
     }
 
@@ -77,7 +77,7 @@ protected:
     }
 
 private:
-    QQtClickHelper* mClickHelper;
+    QQtLongClickHelper* mClickHelper;
 
     /**
      * 子类不必重写MouseEvent函数,

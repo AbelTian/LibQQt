@@ -325,12 +325,38 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtframelesshelper.h \
         $$PWD/exquisite/qqtframelesshelperprivate.h
 
+    #can click sound support widgets
+    contains (DEFINES, __CLICKSOUNDWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundhelper.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundhelper.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundhelper.cpp
+        HEADERS += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundhelper.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundhelper.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundhelper.h
+
+        SOURCES += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundwidget.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundwidget.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundwidget.cpp
+        HEADERS += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundwidget.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundwidget.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundwidget.h
+
+        SOURCES += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundlabel.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundlabel.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundlabel.cpp
+        HEADERS += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundlabel.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundlabel.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundlabel.h
+    }
+
     #can click support widgets
     contains (DEFINES, __CLICKWIDGETS__) {
-        SOURCES += \
-            $$PWD/exquisite/clickwidgets/qqtclicksoundhelper.cpp
-        HEADERS += \
-            $$PWD/exquisite/clickwidgets/qqtclicksoundhelper.h
 
         SOURCES += \
             $$PWD/exquisite/clickwidgets/qqtclickhelper.cpp \

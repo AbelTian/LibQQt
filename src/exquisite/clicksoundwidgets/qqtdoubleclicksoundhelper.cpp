@@ -1,0 +1,1 @@
+#include "qqtdoubleclicksoundhelper.h"

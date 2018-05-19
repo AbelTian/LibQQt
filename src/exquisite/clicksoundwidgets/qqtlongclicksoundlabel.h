@@ -1,28 +1,28 @@
-#ifndef QQTLONGCLICKWIDGET_H
-#define QQTLONGCLICKWIDGET_H
+#ifndef QQTLONGCLICKSOUNDLABEL_H
+#define QQTLONGCLICKSOUNDLABEL_H
 
-#include <qqtwidget.h>
-#include <qqtlongclickhelper.h>
+#include <qqtlabel.h>
+#include <qqtlongclicksoundhelper.h>
 
 #include <qqt-local.h>
 #include <qqtcore.h>
 
 /**
+ * 这个是个虚类
  * 提供安装ClickHelper的能力
- * 为确定功能的子类Widget服务
+ * 为确定功能的子类Label服务
  */
-class QQTSHARED_EXPORT QQtLongClickWidget : public QQtWidget
+class QQTSHARED_EXPORT QQtLongClickSoundLabel : public QQtLabel
 {
     Q_OBJECT
-
 public:
-    explicit QQtLongClickWidget ( QWidget* parent = 0 ) :
-        QQtWidget ( parent ) {
+    explicit QQtLongClickSoundLabel ( QWidget* parent = 0 ) :
+        QQtLabel ( parent ) {
         mClickHelper = 0;
-        mClickHelper = new QQtLongClickHelper ( this );
+        mClickHelper = new QQtLongClickSoundHelper ( this );
         installClickHelper ( mClickHelper );
     }
-    virtual ~QQtLongClickWidget() {}
+    virtual ~QQtLongClickSoundLabel() {}
 
     /**
      * 提供给App用信号
@@ -40,14 +40,14 @@ signals:
      * 用户可选使用
      */
 public:
-    inline void installClickHelper ( QQtLongClickHelper* helper ) {
+    inline void installClickHelper ( QQtLongClickSoundHelper* helper ) {
         unConnectClickHelper();
         mClickHelper = helper;
         if ( !mClickHelper )
             return;
         connectClickHelper();
     }
-    inline QQtLongClickHelper* clickHelper() const {
+    inline QQtLongClickSoundHelper* clickHelper() const {
         return mClickHelper;
     }
 
@@ -77,7 +77,7 @@ protected:
     }
 
 private:
-    QQtLongClickHelper* mClickHelper;
+    QQtLongClickSoundHelper* mClickHelper;
 
     /**
      * 子类不必重写MouseEvent函数,
@@ -88,20 +88,21 @@ protected:
     virtual void mousePressEvent ( QMouseEvent* event ) {
         if ( mClickHelper )
             mClickHelper->mousePressEvent ( event, this );
-        return QQtWidget::mousePressEvent ( event );
+        return QQtLabel::mousePressEvent ( event );
     }
 
     virtual void mouseReleaseEvent ( QMouseEvent* event ) {
         if ( mClickHelper )
             mClickHelper->mouseReleaseEvent ( event, this );
-        return QQtWidget::mouseReleaseEvent ( event );
+        return QQtLabel::mouseReleaseEvent ( event );
     }
 
     virtual void mouseDoubleClickEvent ( QMouseEvent* event ) {
         if ( mClickHelper )
             mClickHelper->mouseDoubleClickEvent ( event, this );
-        return QQtWidget::mouseDoubleClickEvent ( event );
+        return QQtLabel::mouseDoubleClickEvent ( event );
     }
+
 };
 
-#endif // QQTLONGCLICKWIDGET_H
+#endif // QQTLONGCLICKSOUNDLABEL_H

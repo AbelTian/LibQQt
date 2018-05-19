@@ -1,8 +1,8 @@
-#ifndef QQTLONGCLICKWIDGET_H
-#define QQTLONGCLICKWIDGET_H
+#ifndef QQTLONGCLICKSOUNDWIDGET_H
+#define QQTLONGCLICKSOUNDWIDGET_H
 
 #include <qqtwidget.h>
-#include <qqtlongclickhelper.h>
+#include <qqtlongclicksoundhelper.h>
 
 #include <qqt-local.h>
 #include <qqtcore.h>
@@ -11,18 +11,18 @@
  * 提供安装ClickHelper的能力
  * 为确定功能的子类Widget服务
  */
-class QQTSHARED_EXPORT QQtLongClickWidget : public QQtWidget
+class QQTSHARED_EXPORT QQtLongClickSoundWidget : public QQtWidget
 {
     Q_OBJECT
 
 public:
-    explicit QQtLongClickWidget ( QWidget* parent = 0 ) :
+    explicit QQtLongClickSoundWidget ( QWidget* parent = 0 ) :
         QQtWidget ( parent ) {
         mClickHelper = 0;
-        mClickHelper = new QQtLongClickHelper ( this );
+        mClickHelper = new QQtLongClickSoundHelper ( this );
         installClickHelper ( mClickHelper );
     }
-    virtual ~QQtLongClickWidget() {}
+    virtual ~QQtLongClickSoundWidget() {}
 
     /**
      * 提供给App用信号
@@ -40,14 +40,14 @@ signals:
      * 用户可选使用
      */
 public:
-    inline void installClickHelper ( QQtLongClickHelper* helper ) {
+    inline void installClickHelper ( QQtLongClickSoundHelper* helper ) {
         unConnectClickHelper();
         mClickHelper = helper;
         if ( !mClickHelper )
             return;
         connectClickHelper();
     }
-    inline QQtLongClickHelper* clickHelper() const {
+    inline QQtLongClickSoundHelper* clickHelper() const {
         return mClickHelper;
     }
 
@@ -77,7 +77,7 @@ protected:
     }
 
 private:
-    QQtLongClickHelper* mClickHelper;
+    QQtLongClickSoundHelper* mClickHelper;
 
     /**
      * 子类不必重写MouseEvent函数,
@@ -104,4 +104,4 @@ protected:
     }
 };
 
-#endif // QQTLONGCLICKWIDGET_H
+#endif // QQTLONGCLICKSOUNDWIDGET_H

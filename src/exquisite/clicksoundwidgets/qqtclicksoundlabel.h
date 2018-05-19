@@ -1,28 +1,32 @@
-#ifndef QQTLONGCLICKWIDGET_H
-#define QQTLONGCLICKWIDGET_H
+#ifndef QQTCLICKSOUNDLABEL_H
+#define QQTCLICKSOUNDLABEL_H
 
-#include <qqtwidget.h>
-#include <qqtlongclickhelper.h>
+#include <qqtlabel.h>
+#include <qqtclicksoundhelper.h>
 
 #include <qqt-local.h>
 #include <qqtcore.h>
 
 /**
+ * 这个是个basic类 提供click信号
  * 提供安装ClickHelper的能力
- * 为确定功能的子类Widget服务
+ * 提供MouseEvent响应
+ *
+ * 用户使用方法
+ * new ClickHelper
+ * installClickHelper
  */
-class QQTSHARED_EXPORT QQtLongClickWidget : public QQtWidget
+class QQTSHARED_EXPORT QQtClickSoundLabel : public QQtLabel
 {
     Q_OBJECT
-
 public:
-    explicit QQtLongClickWidget ( QWidget* parent = 0 ) :
-        QQtWidget ( parent ) {
+    explicit QQtClickSoundLabel ( QWidget* parent = 0 ) :
+        QQtLabel ( parent ) {
         mClickHelper = 0;
-        mClickHelper = new QQtLongClickHelper ( this );
+        mClickHelper = new QQtClickSoundHelper ( this );
         installClickHelper ( mClickHelper );
     }
-    virtual ~QQtLongClickWidget() {}
+    virtual ~QQtClickSoundLabel() {}
 
     /**
      * 提供给App用信号
@@ -30,24 +34,22 @@ public:
      */
 signals:
     void click();
-    void longClick();
 
 signals:
     void clickWithPoint ( QPoint point );
-    void longClickWithPoint ( QPoint point );
 
     /**
      * 用户可选使用
      */
 public:
-    inline void installClickHelper ( QQtLongClickHelper* helper ) {
+    inline void installClickHelper ( QQtClickSoundHelper* helper ) {
         unConnectClickHelper();
         mClickHelper = helper;
         if ( !mClickHelper )
             return;
         connectClickHelper();
     }
-    inline QQtLongClickHelper* clickHelper() const {
+    inline QQtClickSoundHelper* clickHelper() const {
         return mClickHelper;
     }
 
@@ -61,9 +63,7 @@ protected:
             return;
 
         connect ( mClickHelper, SIGNAL ( click() ), this, SIGNAL ( click() ) );
-        connect ( mClickHelper, SIGNAL ( longClick() ), this, SIGNAL ( longClick() ) );
         connect ( mClickHelper, SIGNAL ( clickWithPoint ( QPoint ) ), this, SIGNAL ( clickWithPoint ( QPoint ) ) );
-        connect ( mClickHelper, SIGNAL ( longClickWithPoint ( QPoint ) ), this, SIGNAL ( longClickWithPoint ( QPoint ) ) );
     }
 
     virtual void unConnectClickHelper() {
@@ -71,13 +71,11 @@ protected:
             return;
 
         disconnect ( mClickHelper, SIGNAL ( click() ), this, SIGNAL ( click() ) );
-        disconnect ( mClickHelper, SIGNAL ( longClick() ), this, SIGNAL ( longClick() ) );
         disconnect ( mClickHelper, SIGNAL ( clickWithPoint ( QPoint ) ), this, SIGNAL ( clickWithPoint ( QPoint ) ) );
-        disconnect ( mClickHelper, SIGNAL ( longClickWithPoint ( QPoint ) ), this, SIGNAL ( longClickWithPoint ( QPoint ) ) );
     }
 
 private:
-    QQtLongClickHelper* mClickHelper;
+    QQtClickSoundHelper* mClickHelper;
 
     /**
      * 子类不必重写MouseEvent函数,
@@ -88,20 +86,20 @@ protected:
     virtual void mousePressEvent ( QMouseEvent* event ) {
         if ( mClickHelper )
             mClickHelper->mousePressEvent ( event, this );
-        return QQtWidget::mousePressEvent ( event );
+        return QQtLabel::mousePressEvent ( event );
     }
 
     virtual void mouseReleaseEvent ( QMouseEvent* event ) {
         if ( mClickHelper )
             mClickHelper->mouseReleaseEvent ( event, this );
-        return QQtWidget::mouseReleaseEvent ( event );
+        return QQtLabel::mouseReleaseEvent ( event );
     }
 
     virtual void mouseDoubleClickEvent ( QMouseEvent* event ) {
         if ( mClickHelper )
             mClickHelper->mouseDoubleClickEvent ( event, this );
-        return QQtWidget::mouseDoubleClickEvent ( event );
+        return QQtLabel::mouseDoubleClickEvent ( event );
     }
 };
 
-#endif // QQTLONGCLICKWIDGET_H
+#endif // QQTCLICKSOUNDLABEL_H

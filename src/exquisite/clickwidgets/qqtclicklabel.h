@@ -39,7 +39,7 @@ signals:
     void clickWithPoint ( QPoint point );
 
     /**
-     * 用户需要这个进行设置ClickHelper,这个label才产生click能力.
+     * 用户可选使用
      */
 public:
     inline void installClickHelper ( QQtClickHelper* helper ) {
@@ -49,7 +49,7 @@ public:
             return;
         connectClickHelper();
     }
-    inline const QQtClickHelper* clickHelper() const {
+    inline QQtClickHelper* clickHelper() const {
         return mClickHelper;
     }
 

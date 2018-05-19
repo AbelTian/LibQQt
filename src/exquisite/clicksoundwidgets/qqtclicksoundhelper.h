@@ -23,7 +23,7 @@ public:
     explicit QQtClickSoundHelper ( QObject* parent = 0 ) : QQtClickHelper ( parent ) {
         connect ( this, SIGNAL ( click() ), this, SLOT ( slotClick() ) );
     }
-    virtual ~QQtClickSoundHelper();
+    virtual ~QQtClickSoundHelper() {}
 
     void setClickSound ( const QString clickSoundFile ) {
         this->clickSoundFile = clickSoundFile;
@@ -34,7 +34,10 @@ public:
      */
 public slots:
     void slotClick() {
+        if ( clickSoundFile.isEmpty() )
+            return;
 
+        QQtWavSound ( clickSoundFile );
     }
 
 private:
