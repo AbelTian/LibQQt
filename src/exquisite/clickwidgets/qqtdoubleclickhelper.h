@@ -4,13 +4,18 @@
 #include <QTimer>
 
 #include <qqtevent.h>
-#include <qqtclickhelper.h>
+#include <qqtlongclickhelper.h>
 
 #include <qqt-local.h>
 #include <qqtcore.h>
 
 /**
  * @brief The QQtDoubleClickHelper class
+ *
+ * 支持
+ * click
+ * longClick
+ * doubleClick
  *
  * 原理
  * release开始检测.
@@ -28,7 +33,7 @@
  *
  * DoubleClick检测是独立于系统的,用户可以在页面里实现多套独立的按键时延检测,一个widget一个时延系统也没问题.
  */
-class QQTSHARED_EXPORT QQtDoubleClickHelper : public QQtClickHelper
+class QQTSHARED_EXPORT QQtDoubleClickHelper : public QQtLongClickHelper
 {
     Q_OBJECT
 
@@ -54,9 +59,6 @@ signals:
 
     //optional
 public:
-    //这个语法比较难,只有整型有特权.
-    static const int doubleClickInterval = 200;
-
     //设置双击检测时延 default: doubleClickInterval ms
     //不会影响系统默认时延
     void setDoubleClickInterval ( int millSecond = doubleClickInterval ) {
@@ -80,6 +82,9 @@ public slots:
     void slotDoubleClickTimeout();
 
 protected:
+    //这个语法比较难,只有整型有特权.
+    static const int doubleClickInterval = 260;
+
     //clickTimer
     QTimer* m_click_timer;
     //longClickTimer
@@ -87,8 +92,6 @@ protected:
     //doubleClickTimer
     QTimer* m_double_click_timer;
 
-    //用于记录按钮的位置
-    QPoint mPoint;
 
     //双击200ms. 这个比较符合双击舒适度.Qt内部的Timer慢一些,可能是计算了比较完整的时间.
     //在这个范围内的都 才 是双击
@@ -110,8 +113,9 @@ protected:
     QQtMouseEvent* mMouseEvent;
 
     //click num
-    virtual void checkClickNumWithCancel();
     virtual void checkClickNum ( QQtClickType type ) override;
+    virtual void checkClickNumWithCancel() override;
+
     quint32 nDoubleClickNum;
     quint32 nDoubleClickNumWithCancel;
 };

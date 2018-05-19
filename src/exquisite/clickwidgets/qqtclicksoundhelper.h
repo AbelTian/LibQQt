@@ -4,53 +4,41 @@
 #include <qqt-local.h>
 #include <qqtcore.h>
 #include <qqtclickhelper.h>
+#include <qqtsoundeffect.h>
 
 /**
  * QQtClickSoundHelper
  *
  * 为Widget提供按键声音支持.
  *
- * ClickSoundHelper和Widget共用ClickHelper,实现Widget按键同时能播放声音的能力
- * 依赖QQtClickHelper实现
+ * 支持
+ * click
+ *
  */
-class QQTSHARED_EXPORT QQtClickSoundHelper : public QObject
+class QQTSHARED_EXPORT QQtClickSoundHelper : public QQtClickHelper
 {
     Q_OBJECT
 
 public:
-    explicit QQtClickSoundHelper ( QObject* parent = 0 );
+    explicit QQtClickSoundHelper ( QObject* parent = 0 ) : QQtClickHelper ( parent ) {
+        connect ( this, SIGNAL ( click() ), this, SLOT ( slotClick() ) );
+    }
     virtual ~QQtClickSoundHelper();
 
-    void setClickSound();
-    void setLongClickSound();
-
-public:
-    //一般,调用widget的clickHelper,设置到这里.
-    inline void setClickHelper ( QQtClickHelper* helper ) {
-        uninstallClickHelper();
-        mClickHelper = helper;
-        installClickHelper();
+    void setClickSound ( const QString clickSoundFile ) {
+        this->clickSoundFile = clickSoundFile;
     }
-    inline const QQtClickHelper* clickHelper() const {
-        return mClickHelper;
-    }
-
-protected:
-    //允许重写
-    virtual void installClickHelper() {
-
-    }
-    virtual void uninstallClickHelper() {
-
-    }
-    QQtClickHelper* mClickHelper;
 
     /**
      * 内部
      */
 public slots:
-    void slotClick() {}
-    void slotLongClick() {}
+    void slotClick() {
+
+    }
+
+private:
+    QString clickSoundFile;
 };
 
 #endif // QQTCLICKSOUNDHELPER_H

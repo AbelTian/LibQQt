@@ -1,7 +1,7 @@
 #include "qqtdoubleclickhelper.h"
 
 QQtDoubleClickHelper::QQtDoubleClickHelper ( QObject* parent ) :
-    QQtClickHelper ( parent )
+    QQtLongClickHelper ( parent )
 {
     mDoubleClickInterval = doubleClickInterval;
 
@@ -275,7 +275,7 @@ void QQtDoubleClickHelper::slotDoubleClickTimeout()
 
 void QQtDoubleClickHelper::checkClickNumWithCancel()
 {
-    QQtClickHelper::checkClickNumWithCancel();
+    QQtLongClickHelper::checkClickNumWithCancel();
     switch ( mClickType )
     {
         case QQtDoubleClick:
@@ -303,7 +303,7 @@ void QQtDoubleClickHelper::checkClickNumWithCancel()
 
 void QQtDoubleClickHelper::checkClickNum ( QQtClickType type )
 {
-    QQtClickHelper::checkClickNum ( type );
+    QQtLongClickHelper::checkClickNum ( type );
     switch ( type )
     {
         case QQtDoubleClick:

@@ -334,9 +334,11 @@ contains (DEFINES, __EXQUISITE__) {
 
         SOURCES += \
             $$PWD/exquisite/clickwidgets/qqtclickhelper.cpp \
+            $$PWD/exquisite/clickwidgets/qqtlongclickhelper.cpp \
             $$PWD/exquisite/clickwidgets/qqtdoubleclickhelper.cpp
         HEADERS += \
             $$PWD/exquisite/clickwidgets/qqtclickhelper.h \
+            $$PWD/exquisite/clickwidgets/qqtlongclickhelper.h \
             $$PWD/exquisite/clickwidgets/qqtdoubleclickhelper.h
 
         SOURCES += \

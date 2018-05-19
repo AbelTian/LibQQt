@@ -2,7 +2,7 @@
 #define QQTLONGCLICKWIDGET_H
 
 #include <qqtwidget.h>
-#include <qqtclickhelper.h>
+#include <qqtlongclickhelper.h>
 
 #include <qqt-local.h>
 #include <qqtcore.h>
@@ -19,7 +19,7 @@ public:
     explicit QQtLongClickWidget ( QWidget* parent = 0 ) :
         QQtWidget ( parent ) {
         mClickHelper = 0;
-        mClickHelper = new QQtClickHelper ( this );
+        mClickHelper = new QQtLongClickHelper ( this );
         installClickHelper ( mClickHelper );
     }
     virtual ~QQtLongClickWidget() {}
