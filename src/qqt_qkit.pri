@@ -149,7 +149,7 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 #link operation all will need this variable
 QKIT_STD_DIR = $${QT_VERSION}/$${SYSNAME}/$${BUILD}
 
-message(qqt_qkit.pri)
+message(qqt_qkit.pri initialling)
 message(Build $${TARGET} to $${QKIT_PRIVATE} \(QKIT=$${QKIT_PRIVATE} is configed in project build page.\) )
 message(Build $${TARGET} at $${QKIT_STD_DIR} \(Qt Kit page FileSystem Name=$${SYSNAME}\) )
 message(Build $${TARGET} on $${QMAKE_HOST.os} \(Operating System=$${QMAKE_HOST.os}\) )

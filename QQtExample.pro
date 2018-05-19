@@ -54,8 +54,7 @@ SUBDIRS =
 #need GumoQuery
 #-----------------------------------------------------------------
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/QtSdkManager
-#
-greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
+#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS += demo/GuiBuildTool
 #SUBDIRS += demo/LearnCookieTest
 #-----------------------------------------------------------------
@@ -85,8 +84,7 @@ greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #必开
 #SUBDIRS += test/qqtdicttest2
 #必开
-#
-SUBDIRS += test/giftest
+#SUBDIRS += test/giftest
 
 #必开 这两个例子是关于QQtAudio的最好展示
 #SUBDIRS += examples/qqtaudioexample
@@ -115,5 +113,5 @@ SUBDIRS += test/giftest
 #SUBDIRS += demo/TouchMonitor
 #SUBDIRS += demo/TouchMonitorServer
 
-SUBDIRS += test/QQtWidgetClickHelperTest
+#SUBDIRS += test/QQtWidgetClickHelperTest
 SUBDIRS += test/QQtWidgetClickSoundHelperTest

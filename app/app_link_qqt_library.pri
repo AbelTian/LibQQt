@@ -17,7 +17,7 @@
 #same app project, same relative path.
 #qqt source root, QQt's root pro path. subdir and
 #private using
-QQT_SOURCE_ROOT = $$PWD
+QQT_SOURCE_ROOT = $${PWD}/../src
 
 #-------------------------------------------------------------
 #include qqt's pri

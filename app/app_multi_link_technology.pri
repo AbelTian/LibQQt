@@ -21,9 +21,9 @@
 #这个pri依赖qqt_function.pri
 #qqt_function.pri，哪里需要就在哪里包含。
 equals(QMAKE_HOST.os, Windows) {
-    include ($${PWD}\\qqt_function.pri)
+    include ($${PWD}\\..\\src\\qqt_function.pri)
 } else {
-    include ($${PWD}/qqt_function.pri)
+    include ($${PWD}/../src/qqt_function.pri)
 }
 
 CONFIG_PATH =
