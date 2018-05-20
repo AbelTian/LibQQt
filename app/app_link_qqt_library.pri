@@ -11,6 +11,8 @@
 #auto link QQt when build source
 #auto copy QQt when deploy app
 
+#第一 拷贝Library为SDK到SDKROOT
+#第二 从SDK ROOT 链接 QQt Library
 #-------------------------------------------------------------
 #user computer path settings
 #-------------------------------------------------------------
@@ -26,6 +28,12 @@ QQT_SOURCE_ROOT = $${PWD}/../src
 #all cross platform setting is from here.
 include($${QQT_SOURCE_ROOT}/qqt_qkit.pri)
 
+isEmpty(QKIT_PRIVATE) {
+    message(env variable QKIT is required!)
+    message(pleace check qqt_qkit.pri)
+    error("error occured, please check build output panel.")
+}
+
 #qqt function
 include($${QQT_SOURCE_ROOT}/qqt_function.pri)
 
@@ -34,12 +42,6 @@ include($${QQT_SOURCE_ROOT}/qqt_version.pri)
 
 #qqt header
 include($${QQT_SOURCE_ROOT}/qqt_header.pri)
-
-isEmpty(QKIT_PRIVATE) {
-    message(env variable QKIT is required!)
-    message(pleace check qqt_qkit.pri)
-    error("error occured, please check build output panel.")
-}
 
 #-------------------------------------------------------------
 #link qqt settings: use source or link library?
@@ -55,7 +57,7 @@ contains (CONFIG, QQT_SOURCE_BUILDIN) {
     system("touch $${QQT_SOURCE_ROOT}/frame/qqtapplication.cpp")
     #if you want to build src but not link QQt lib in your project
     #if you don't want to modify Qt Creator's default build directory, this maybe a choice.
-    include($${QQT_SOURCE_ROOT}/qqt_source.pri)
+    #include($${QQT_SOURCE_ROOT}/qqt_source.pri)
 } else {
     #if you want to link QQt library
     #qqt will install sdk to sdk path you set, then link it, or link from build station

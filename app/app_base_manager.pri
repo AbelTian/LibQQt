@@ -3,6 +3,23 @@
 #包含：link libqqt；deploy app；deploy config files；
 #App翻译 App版本 由App工程自行管理
 #------------------------------------------------------------------
+################################################################
+##app 的 config defination 先一步设置好
+################################################################
+contains(CONFIG, mac) {
+    CONFIG += app_bundle
+}
+
+################################################################
+##administrator policy
+##如果用户App需要管理员权限，那么打开这个CONFIG
+################################################################
+#CONFIG += administrator
+contains(CONFIG, administrator){
+    win32 {
+        QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
+    }
+}
 
 ################################################################
 ##build cache (此处为中间目标目录，对用户并不重要)
@@ -21,30 +38,25 @@ RCC_DIR = qrc
 DESTDIR = bin
 
 ################################################################
-##administrator policy
-##如果用户App需要管理员权限，那么打开这个CONFIG
-################################################################
-#CONFIG += administrator
-contains(CONFIG, administrator){
-    win32 {
-        QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
-    }
-}
-
-################################################################
 ##Multi-link technology
 ################################################################
 include($$PWD/app_multi_link_technology.pri)
+
+################################################################
+##用户lib链接其他Library的函数库
+################################################################
+include ($${PWD}/app_multi_link_function.pri)
 
 ################################################################
 ##link QQt
 ################################################################
 include($${PWD}/app_link_qqt_library.pri)
 
+
 ################################################################
 ##deploy app for install update deploy
 ##config defination
-##依赖：DESTDIR APP_DEPLOY_ROOT
+##依赖 APP_DEPLOY_ROOT DESTDIR(can set)
 ################################################################
 #Qt4 is not a very good Cross Qt version, Qt5 suggest.
 #if you have this request, include this pri in your app pro
@@ -57,13 +69,6 @@ include($${PWD}/app_deploy.pri)
 ################################################################
 #if you have this request, include this pri in your app pro
 include($${PWD}/app_deploy_config.pri)
-
-################################################################
-##config defination
-################################################################
-equals(QKIT_PRIVATE, macOS) {
-    CONFIG += app_bundle
-}
 
 #-------------------------------------------------
 #install app
@@ -87,5 +92,8 @@ can_install: unix {
 #default ignore
 #message ($${TARGET} config $${CONFIG})
 #message ($${TARGET} define $${DEFINES})
+
+#message ($${TARGET} QMAKE_PRE_LINK $${QMAKE_PRE_LINK})
+#message ($${TARGET} QMAKE_POST_LINK $${QMAKE_POST_LINK})
 
 

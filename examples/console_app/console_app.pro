@@ -25,4 +25,4 @@ SOURCES += main.cpp
 system("touch main.cpp")
 #用户在console工程中，只要不使用LibQQt的图形Class，就可以在控制台程序中游刃有余的完成app功能了。
 #你用也没必要，而且不能用，控制台工程就是不能用widgets。不如在widgets工程当中隐藏窗口，然后在某个时机显示。
-include(../../src/app_base_manager.pri)
+include(../../app/app_base_manager.pri)

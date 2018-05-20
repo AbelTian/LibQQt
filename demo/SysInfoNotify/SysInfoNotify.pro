@@ -41,5 +41,5 @@ contains(CONFIG, deploy_config) {
         APP_CONFIG_PWD ~=s,/,\\,g
     }
 }
-include(../../src/app_base_manager.pri)
+include(../../app/app_base_manager.pri)
 include(app_version.pri)

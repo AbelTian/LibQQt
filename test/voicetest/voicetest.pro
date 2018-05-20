@@ -45,7 +45,7 @@ equals(QMAKE_HOST.os, Windows) {
     APP_CONFIG_PWD ~=s,/,\\,g
 }
 
-include (../../src/app_base_manager.pri)
+include (../../app/app_base_manager.pri)
 
 contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
     CONFIG += mobility

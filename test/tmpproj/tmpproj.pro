@@ -37,4 +37,4 @@ HEADERS += \
 FORMS += \
         tempwidget.ui
 
-include (../../src/app_base_manager.pri)
+include (../../app/app_base_manager.pri)

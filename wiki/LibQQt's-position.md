@@ -13,7 +13,7 @@ LibQQt所在的linux操作系统和Android操作系统近似，理论上他们�
 LibQQt就处在Application Frameworks的位置，  
 LibQQt内富含丰富的Manager组件，管理功能无所不包，Manager需要做的工作，LibQQt将会全部提供。  
 
-很明显，Qt RunTime将会取代Android Runtime的位置。  
+在基于LibQQt开发的操作系统中，Qt RunTime将会代替Android Runtime的位置。  
 
 # LibQQt v2.2.2 包含的管理类型  
 

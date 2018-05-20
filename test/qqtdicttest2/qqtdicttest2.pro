@@ -37,4 +37,4 @@ CONFIG += mobility
 MOBILITY = 
 
 system(touch widget.cpp)
-include(../../src/app_base_manager.pri)
+include(../../app/app_base_manager.pri)

@@ -34,4 +34,4 @@ FORMS += \
         mainwindow.ui
 
 system("touch mainwindow.cpp")
-include(../../src/app_base_manager.pri)
+include(../../app/app_base_manager.pri)

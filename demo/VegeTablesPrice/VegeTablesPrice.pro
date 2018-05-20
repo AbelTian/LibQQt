@@ -47,7 +47,7 @@ system("touch main.cpp")
 msvc{
     include($${PWD}\\..\\..\\src\\app_base_manager.pri)
 }else{
-    include(../../src/app_base_manager.pri)
+    include(../../app/app_base_manager.pri)
 }
 #-------------------------------------------------
 #install app

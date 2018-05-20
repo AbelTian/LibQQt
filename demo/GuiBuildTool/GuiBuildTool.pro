@@ -45,7 +45,7 @@ UI_DIR = obj/ui.h
 RCC_DIR = qrc
 DESTDIR = bin
 
-include(../../src/app_base_manager.pri)
+include(../../app/app_base_manager.pri)
 
 #-------------------------------------------------
 #install app

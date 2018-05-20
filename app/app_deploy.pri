@@ -1,7 +1,9 @@
 #-------------------------------------------------------------
 #user computer path settings
 #-------------------------------------------------------------
-#windows: C:\Users\[userName]\AppData\Roaming\qmake\app_configure.pri
+#Multi-link技术 app_deploy部分只能应用于Qt5，Qt4没有windeployqt程序，如果用户为Qt4编译了windeployqt那么也可以用于Qt4。
+
+#windows: C:\Users\[userName]\.qmake\app_configure.pri
 #linux: /home/[usrName]/.qmake/app_configure.pri
 #macOS: /Users/[userName]/.qmake/app_configure.pri
 
@@ -10,9 +12,8 @@
 
 defineReplace(deploy_app_on_mac) {
     #need QQT_BUILD_PWD
-    command = &&
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app &&
+    command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
     command += $$COPY_DIR $${APP_DEST_DIR}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app
     #message($$command)
     return ($$command)
@@ -47,12 +48,12 @@ defineReplace(deploy_app_on_linux) {
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$RM $${APP_DEPLOY_PWD}/libQQt.so* &&
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION3} $${APP_DEPLOY_PWD} &&
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION2} $${APP_DEPLOY_PWD} &&
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION1} $${APP_DEPLOY_PWD} &&
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_PWD} &&
-    command += $$RM $${APP_DEPLOY_PWD}/$${TARGET} &&
+    command += $$RM $${APP_DEPLOY_PWD}/libQQt.so* $$CMD_SEP
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION3} $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION2} $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION1} $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$RM $${APP_DEPLOY_PWD}/$${TARGET} $$CMD_SEP
     command += $$COPY $${APP_DEST_DIR}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET}
     #message($$command)
     return ($$command)
@@ -63,9 +64,9 @@ defineReplace(deploy_app_on_android) {
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$RM $${APP_DEPLOY_PWD}/libQQt.so* &&
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_PWD} &&
-    command += $$RM $${APP_DEPLOY_PWD}/$${TARGET} &&
+    command += $$RM $${APP_DEPLOY_PWD}/libQQt.so* $$CMD_SEP
+    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$RM $${APP_DEPLOY_PWD}/$${TARGET} $$CMD_SEP
     command += $$COPY $${APP_DEST_DIR}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET}
     #message($$command)
     return ($$command)
@@ -91,9 +92,9 @@ isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
 isEmpty(APP_DEPLOY_ROOT){
     message($${TARGET} $${CONFIG_FILE})
     message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
-    error(  please check $$CONFIG_FILE under link_qqt_library.pri)
+    error(  please check $$CONFIG_FILE under app_multi_link_technology.pri)
 }
-message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
+message(Deploy $${TARGET} to $$APP_DEPLOY_ROOT/$${TARGET}/$$QKIT_STD_DIR)
 
 #如果 配置文件里 没有配置 APP_DEPLOY_ROOT 那么返回，不拷贝发布任何应用
 #不会走到
@@ -115,7 +116,7 @@ contains(CONFIG, deploy_app) {
         QMAKE_POST_LINK += $$deploy_app_on_win()
     } else: contains(QKIT_PRIVATE, macOS) {
         #发布苹果版本，iOS版本也是这个？
-        QMAKE_POST_LINK += $$deploy_app_on_mac()
+        QMAKE_POST_LINK += $$CMD_SEP $$deploy_app_on_mac()
     } else: contains(QKIT_PRIVATE, ANDROID||ANDROIDX86) {
         #发布Android版本，这个分为开发Host为windows和类Unix两种情况。
         #Android下Qt Creator自动使用androidDeployQt，无法发布应用。

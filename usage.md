@@ -26,7 +26,7 @@ APP_DEPLOY_ROOT = /Users/abel/Develop/d1-product
 1. 按照文章所说，更改Qt Creator的默认编译路径。只有这样，才能实现多平台目标、中间目标不冲突。  
 2. 参照LibQQt/src/qqt_qkit.pri里的SYSNAME变量，在Qt Creator首选项-设置构建和运行-构建套件Kit页面的每个kit的File System Name。（请使用Qt Creator 3.5以上版本，其被佩戴于Qt5.2.）  
 3. 打开LibQQt工程，根据qmake输出，在用户配置目录/[.]qmake/app_configure.pri里面设置QQT_BUILD_ROOT QQT_SDK_ROOT APP_DEPLOY_ROOT三个路径变量  
-4. 仿照LibQQt的例程，在用户工程.pro里include(.../LibQQt/src/app_base_manager.pri)  
+4. 仿照LibQQt的例程，在用户工程.pro里include(.../LibQQt/app/app_base_manager.pri)  
     - 如果需要跟随发布配置文件，按照图里的设置APP_CONFIG_PWD  
 5. 在Qt Creator项目-kit-构建设置页面，配置QKIT环境变量（LibQQt也需要，用户App需要），可以build了。  
 

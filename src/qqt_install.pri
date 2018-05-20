@@ -2,6 +2,8 @@
 ##qqt_install.pri, making sdk function
 ##install to Qt library
 ##install to SDK path
+##把QQt Library按照SDK格式安装到SDKROOT
+##发布到sdk是为Multi link准备的。
 ##link from build
 ##please don't modify this pri
 ##need qqt_version.pri qqt_header.pri qqt_source.pri
@@ -21,7 +23,7 @@ defineReplace(create_dir_struct) {
         }
         command += $$MK_DIR $$QQT_LIB_DIR $$CMD_SEP
         command += $$MK_DIR $$QQT_CMAKE_DIR $$CMD_SEP
-        command += $$MK_DIR $$QQT_PRI_PATH $$CMD_SEP
+        command += $$MK_DIR $$QQT_PRI_PATH
     }
     return ($$command)
 }
@@ -143,7 +145,7 @@ defineReplace(create_library_sdk){
     command += $$RM_DIR $${QQT_SDK_PWD} $$CMD_SEP
     command += $$MK_DIR $${QQT_SDK_PWD} $$CMD_SEP
     command += $$CD $${QQT_SDK_PWD} $$CMD_SEP
-    command += $$create_dir_struct()
+    command += $$create_dir_struct() $$CMD_SEP
 
     #这里不是目标为Windows才拷贝，而是开发机是Windows就得这么拷贝。
     #Windows下，Win目标、Android目标都走这里。

@@ -15,16 +15,58 @@
 #Mac OS X: /Users/xxx/.qmake/app_configure.pri
 #Ubuntu:   /home/xxx/.qmake/app_configure.pri
 #公共路径：应用编译路径、LibrarySDK路径、产品输出路径
-#Multi-link技术只能应用于Qt5，Qt4没有windeployqt程序。
-
 #--------------------------------------------------------------------------------
+
+#废弃
 #这个pri依赖qqt_function.pri
 #qqt_function.pri，哪里需要就在哪里包含。
-equals(QMAKE_HOST.os, Windows) {
-    include ($${PWD}\\..\\src\\qqt_function.pri)
-} else {
-    include ($${PWD}/../src/qqt_function.pri)
+#equals(QMAKE_HOST.os, Windows) {
+#    include ($${PWD}\\..\\src\\qqt_function.pri)
+#} else {
+#    include ($${PWD}/../src/qqt_function.pri)
+#}
+
+defineReplace(get_user_home) {
+    command =
+    equals(QMAKE_HOST.os, Windows) {
+        command = echo %HOMEDRIVE%%HOMEPATH%
+    } else {
+        command = echo $HOME
+    }
+    #message ($$command)
+    return ($$command)
 }
+
+defineReplace(get_user_config_path) {
+    command =
+    #windows下编译android工程，qmake CONFIG里面不包含win32而是android、linux、unix。
+    #win32 只有在目标是win32的时候才会在CONFIG里面出现。开发平台用QMAKE_HOST.os
+    #注意：qmake在windows平台下，无论目标，明令行一律按照windows控制台风格。不以目标区分，Attention!。
+    #win32 {
+    equals(QMAKE_HOST.os, Windows) {
+        command = echo %APPDATA%
+    } else {
+        command = echo $HOME
+    }
+    #message ($$command)
+    return ($$command)
+}
+defineReplace(user_home) {
+    command = $$get_user_home()
+    echo = $$system("$${command}")
+    #message($$command)
+    #message($$echo)
+    return ($${echo})
+}
+
+defineReplace(user_config_path) {
+    command = $$get_user_config_path()
+    echo = $$system("$${command}")
+    #message($$command)
+    #message($$echo)
+    return ($${echo})
+}
+
 
 CONFIG_PATH =
 CONFIG_FILE =
@@ -62,5 +104,4 @@ isEmpty(QQT_BUILD_ROOT)|isEmpty(QQT_SDK_ROOT) {
 }
 message(QQt build root: $$QQT_BUILD_ROOT)
 message(QQt sdk root: $$QQT_SDK_ROOT)
-
 

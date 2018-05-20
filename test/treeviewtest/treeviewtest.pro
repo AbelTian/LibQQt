@@ -52,7 +52,7 @@ equals(QMAKE_HOST.os, Windows) {
 }
 
 #include manager
-include(../../src/app_base_manager.pri)
+include(../../app/app_base_manager.pri)
 
 #-------------------------------------------------
 #user app may use these these settings prefertly

@@ -31,4 +31,4 @@ HEADERS  += mainwindow.h
 FORMS    += mainwindow.ui
 
 system(touch main.cpp)
-include (../../src/app_base_manager.pri)
+include (../../app/app_base_manager.pri)

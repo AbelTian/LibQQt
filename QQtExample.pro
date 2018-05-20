@@ -36,7 +36,7 @@ SUBDIRS =
 #QQt is build
 #-----------------------------------------------------------------
 #第二种引用LibQQt的方式
-#方法：include(.../LibQQt/src/app_base_manager.pri)
+#方法：include(.../LibQQt/app/app_base_manager.pri)
 #QQt提供QQtApplication帮助App管理Application句柄。
 #SUBDIRS += examples/qqtframe2
 #必看
@@ -114,4 +114,8 @@ SUBDIRS =
 #SUBDIRS += demo/TouchMonitorServer
 
 #SUBDIRS += test/QQtWidgetClickHelperTest
-SUBDIRS += test/QQtWidgetClickSoundHelperTest
+#SUBDIRS += test/QQtWidgetClickSoundHelperTest
+
+#这是一对，用于测试Multi-link对其他的lib的链接能力
+SUBDIRS += test/QQtBasedLibTest
+SUBDIRS += test/QQtMultiLinkTest

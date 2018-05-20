@@ -56,7 +56,7 @@ isEmpty(QKIT_PRIVATE) {
 ##project function
 ##support some commonly used function
 ################################################
-include ($$PWD/qqt_function.pri)
+#include ($$PWD/qqt_function.pri)
 
 
 ##win platform: some target, special lib lib_bundle staticlib
@@ -136,7 +136,7 @@ QMAKE_TARGET_FILE = "$${TARGET}"
 QMAKE_TARGET_PRODUCT = "$${TARGET}"
 QMAKE_TARGET_COMPANY = "www.qqt.com"
 QMAKE_TARGET_DESCRIPTION = "QQt Foundation Class"
-QMAKE_TARGET_COPYRIGHT = "Copyright 2015-2020 QQt Co., Ltd. All rights reserved"
+QMAKE_TARGET_COPYRIGHT = "Copyright 2017-2022 QQt Co., Ltd. All rights reserved"
 
 win32 {
     #common to use upload, this can be ignored.
@@ -152,14 +152,15 @@ win32 {
 ################################################
 ##project resource
 ################################################
-DISTFILES += \
-    qqt.qrc \
-    linux_cp_files.sh \
-    linux_cur_path.sh \
-    linux_cd_path.sh \
-    linux_read_ini.sh \
-    linux_write_ini.sh \
-    win_read_ini.bat
+#DISTFILES += \
+#    linux_cp_files.sh \
+#    linux_cur_path.sh \
+#    linux_cd_path.sh \
+#    linux_read_ini.sh \
+#    linux_write_ini.sh \
+#    win_read_ini.bat
+RESOURCES += \
+    qqt.qrc
 
 #################################################################
 ##QQt Lib工程持续编译
@@ -169,6 +170,7 @@ DISTFILES += \
 #权衡利弊,在qqt工程里开启开关.保证用户在编译源代码的时候,任何改动一定持续生效.
 #依赖touch命令 :|
 #QQt持续编译配置开关
+#QQt用户请注意，在这里我开启了持续编译，以保证用户对QQt本身的修改生效
 CONFIG += continued_build
 contains(CONFIG, continued_build){
     system("touch $${PWD}/frame/qqtapplication.cpp")

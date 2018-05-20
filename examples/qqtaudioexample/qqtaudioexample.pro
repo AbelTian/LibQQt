@@ -43,7 +43,7 @@ equals(QMAKE_HOST.os, Windows) {
 
 system(touch main.cpp)
 
-include(../../src/app_base_manager.pri)
+include(../../app/app_base_manager.pri)
 
 contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
     CONFIG += mobility

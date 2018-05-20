@@ -175,32 +175,6 @@ defineReplace(get_md5_command) {
     return ($$command)
 }
 
-defineReplace(get_user_home) {
-    command =
-    equals(QMAKE_HOST.os, Windows) {
-        command = echo %HOMEDRIVE%%HOMEPATH%
-    } else {
-        command = echo $HOME
-    }
-    #message ($$command)
-    return ($$command)
-}
-
-defineReplace(get_user_config_path) {
-    command =
-    #windows下编译android工程，qmake CONFIG里面不包含win32而是android、linux、unix。
-    #win32 只有在目标是win32的时候才会在CONFIG里面出现。开发平台用QMAKE_HOST.os
-    #注意：qmake在windows平台下，无论目标，明令行一律按照windows控制台风格。不以目标区分，Attention!。
-    #win32 {
-    equals(QMAKE_HOST.os, Windows) {
-        command = echo %APPDATA%
-    } else {
-        command = echo $HOME
-    }
-    #message ($$command)
-    return ($$command)
-}
-
 #将路径里的[反]斜杠转换为开发机上的格式。
 #注意：不是按照目标进行转换的，所以仅仅用于命令行操作的FLOW。
 #defineReplace(get_path) {
@@ -360,18 +334,3 @@ defineReplace(write_ini) {
     return ($${echo})
 }
 
-defineReplace(user_home) {
-    command = $$get_user_home()
-    echo = $$system("$${command}")
-    #message($$command)
-    #message($$echo)
-    return ($${echo})
-}
-
-defineReplace(user_config_path) {
-    command = $$get_user_config_path()
-    echo = $$system("$${command}")
-    #message($$command)
-    #message($$echo)
-    return ($${echo})
-}

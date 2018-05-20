@@ -24,7 +24,7 @@
 
 8. qqt_library.pri qqt的sdk发布工作，app链接QQt工作，要求用户进行BUILD-SDK-DEPLOY ROOT路径指定也发生在这里。它会自动生成一个pri，给用户指定这三个变量。
 
-9. link_qqt_library.pri 包含以上这几个app需要的pri，这个文件现在只能放在library目录里。
+9. qqt_library.pri 包含以上这几个app需要的pri，这个文件现在只能放在library目录里。
 
 10. app_configure.pri app配置文件，这个一般是公共配置文件，里面包含了link_qqt_library.pri。更改意义不大，将来可能会被生成，而不是开始就存在。
 

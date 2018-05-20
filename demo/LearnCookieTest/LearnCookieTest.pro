@@ -36,4 +36,4 @@ FORMS += \
 #这句话很重要 启动拷贝很多东西
 system (touch main.cpp)
 
-include (../../src/app_base_manager.pri)
+include (../../app/app_base_manager.pri)

@@ -36,4 +36,4 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
-include ($${PWD}/../../src/app_base_manager.pri)
+include ($${PWD}/../../app/app_base_manager.pri)
