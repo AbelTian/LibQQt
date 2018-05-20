@@ -39,7 +39,4 @@ equals(QMAKE_HOST.os, Windows) {
 }
 
 system(touch main.cpp)
-include (../../app/app_base_manager.pri)
-include (app_custom_manager.pri)
-include (app_version.pri)
-include (app_language.pri)
+include (../../multi-link/app_base_manager.pri)
