@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------
-#base_platform.pri
+#app_platform.pri
 #这个pri决定编译目标平台
 #-----------------------------------------------------------------------------
 #从环境变量读取QSYS保存为qmake变量QSYS_PRIVATE
@@ -27,12 +27,12 @@ contains(QSYS_PRIVATE, Embedded) {
     DEFINES += __DARWIN__
 } else:contains(QSYS_PRIVATE, iOS) {
     DEFINES += __IOS__
-} else:contains(QSYS_PRIVATE, iOS-Simulator) {
+} else:contains(QSYS_PRIVATE, iOSSimulator) {
     DEFINES += __IOS__
     #TODO:no qcustomplot word printer process
 } else:contains(QSYS_PRIVATE, Android) {
     DEFINES += __ANDROID__
-} else:contains(QSYS_PRIVATE, Android_x86) {
+} else:contains(QSYS_PRIVATE, AndroidX86) {
     DEFINES += __ANDROID__
     DEFINES += __ANDROIDX86__ #可能废弃
 }
@@ -51,6 +51,6 @@ isEmpty(QSYS_PRIVATE) : message(Build $${TARGET} Qt Kit page FileSystem Name is 
 
 isEmpty(QSYS_PRIVATE) {
     message(env variable QSYS is required!)
-    message(pleace check base_platform.pri)
+    message(pleace check app_platform.pri)
     error("error occured, please check build output panel.")
 }
