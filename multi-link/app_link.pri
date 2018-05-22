@@ -7,11 +7,11 @@
 #内部用函数
 #获取命令
 ################################################################################
-defineReplace(get_add_link) {
+defineReplace(get_app_link) {
     libname = $$1
     librealname = $$2
-    isEmpty(1): error("get_add_link(libname, librealname) requires at last one argument")
-    !isEmpty(3): error("get_add_link(libname, librealname) requires at most two argument")
+    isEmpty(1): error("get_app_link(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_app_link(libname, librealname) requires at most two argument")
     isEmpty(2): librealname = $${libname}
 
     CUR_LIB_PWD = $${LIB_SDK_ROOT}/$${libname}/$${QSYS_STD_DIR}/lib
@@ -31,11 +31,11 @@ defineReplace(get_add_link) {
     return ($${LINK})
 }
 
-defineReplace(get_add_include) {
+defineReplace(get_app_include) {
     incname = $$1
     increalname = $$2
-    isEmpty(1): error("get_add_include(incname, increalname) requires at last one argument")
-    !isEmpty(3): error("get_add_include(incname, increalname) requires at most two argument")
+    isEmpty(1): error("get_app_include(incname, increalname) requires at last one argument")
+    !isEmpty(3): error("get_app_include(incname, increalname) requires at most two argument")
 
     INCLUDE =
     contains(DEFINES, __DARWIN__) {
@@ -60,8 +60,8 @@ defineReplace(get_add_deploy) {
     #DESTDIR
     incname = $$1
     increalname = $$2
-    isEmpty(1): error("get_add_include(incname, increalname) requires at last one argument")
-    !isEmpty(3): error("get_add_include(incname, increalname) requires at most two argument")
+    isEmpty(1): error("get_app_include(incname, increalname) requires at last one argument")
+    !isEmpty(3): error("get_app_include(incname, increalname) requires at most two argument")
 
     INCLUDE =
     contains(DEFINES, __DARWIN__) {
@@ -90,14 +90,14 @@ defineReplace(get_add_deploy) {
 #[libname/5.9.2/macOS/Debug/lib/librealname.dll]
 #[libname/5.9.2/macOS/Debug/lib/lib<librealname>.so.*]
 #librealname可以为空
-defineTest(add_link) {
+defineTest(app_link) {
     libname = $$1
     librealname = $$2
-    isEmpty(1): error("add_link(libname, librealname) requires at last one argument")
-    !isEmpty(3): error("add_link(libname, librealname) requires at most two argument")
+    isEmpty(1): error("app_link(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("app_link(libname, librealname) requires at most two argument")
     isEmpty(2): librealname = $${libname}
 
-    command = $$get_add_link($${libname}, $${librealname})
+    command = $$get_app_link($${libname}, $${librealname})
     #message ($$command)
     LIBS += $${command}
 
@@ -109,13 +109,13 @@ defineTest(add_link) {
 #[incname/5.9.2/macOS/Debug/lib/incname.framework/Headers/increalname]
 #[incname/5.9.2/macOS/Debug/include/increalname]
 #increalname可以为空
-defineTest(add_include) {
+defineTest(app_include) {
     incname = $$1
     increalname = $$2
-    isEmpty(1): error("add_include(incname, increalname) requires at last one argument")
-    !isEmpty(3): error("add_include(incname, increalname) requires at most two argument")
+    isEmpty(1): error("app_include(incname, increalname) requires at last one argument")
+    !isEmpty(3): error("app_include(incname, increalname) requires at most two argument")
 
-    command = $$get_add_include($${incname}, $${increalname})
+    command = $$get_app_include($${incname}, $${increalname})
     #message ($$command)
     INCLUDEPATH += $${command}
 

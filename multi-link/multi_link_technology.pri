@@ -5,12 +5,6 @@
 #--------------------------------------------------------------------------------
 
 ################################################################################
-#包含这个pri依赖的pri
-################################################################################
-include ($${PWD}/app_platform.pri)
-include ($${PWD}/app_function.pri)
-
-################################################################################
 #多链接技术的路径依赖
 ################################################################################
 CONFIG_PATH =
@@ -39,7 +33,7 @@ include ($${CONFIG_FILE})
 
 #qqt build root, build station root
 #link_from_build will need this path.
-isEmpty(APP_BUILD_ROOT)|isEmpty(LIB_SDK_ROOT) {
+isEmpty(APP_BUILD_ROOT)|isEmpty(LIB_SDK_ROOT)|isEmpty(APP_DEPLOY_ROOT){
     message($${TARGET} multiple linking config file: $${CONFIG_FILE})
     message("APP_BUILD_ROOT = is required, please modify $${CONFIG_FILE}")
     message("APP_DEPLOY_ROOT = is required [optional]")
@@ -53,11 +47,3 @@ message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
 equals(TEMPLATE, app):message($${TARGET} use sdk root: $$LIB_SDK_ROOT)
 else:message($${TARGET} deploy sdk root: $$LIB_SDK_ROOT)
 
-################################################################################
-#这里的pri提供multi link的全部函数
-################################################################################
-#app发布所需要的函数
-include ($${PWD}/app_deploy.pri)
-
-#app链接所需要的函数
-include ($${PWD}/app_link.pri)
