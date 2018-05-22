@@ -1,7 +1,7 @@
 #ifndef QQTCLICKSOUNDLABEL_H
 #define QQTCLICKSOUNDLABEL_H
 
-#include <qqtlabel.h>
+#include <qqtvirtualclicklabel.h>
 #include <qqtclicksoundhelper.h>
 
 #include <qqt-local.h>
@@ -16,14 +16,14 @@
  * new ClickHelper
  * installClickHelper
  */
-class QQTSHARED_EXPORT QQtClickSoundLabel : public QQtLabel
+class QQTSHARED_EXPORT QQtClickSoundLabel : public QQtVirtualClickLabel
 {
     Q_OBJECT
 public:
     explicit QQtClickSoundLabel ( QWidget* parent = 0 ) :
-        QQtLabel ( parent ) {
-        mClickHelper = 0;
+        QQtVirtualClickLabel ( parent ) {
         mClickHelper = new QQtClickSoundHelper ( this );
+        mDefaultClickHelper = mClickHelper;
         installClickHelper ( mClickHelper );
     }
     virtual ~QQtClickSoundLabel() {}
@@ -37,21 +37,6 @@ signals:
 
 signals:
     void clickWithPoint ( QPoint point );
-
-    /**
-     * 用户可选使用
-     */
-public:
-    inline void installClickHelper ( QQtClickSoundHelper* helper ) {
-        unConnectClickHelper();
-        mClickHelper = helper;
-        if ( !mClickHelper )
-            return;
-        connectClickHelper();
-    }
-    inline QQtClickSoundHelper* clickHelper() const {
-        return mClickHelper;
-    }
 
     /**
      * 子类重写这两个函数,实现丰富的click能力
@@ -72,33 +57,6 @@ protected:
 
         disconnect ( mClickHelper, SIGNAL ( click() ), this, SIGNAL ( click() ) );
         disconnect ( mClickHelper, SIGNAL ( clickWithPoint ( QPoint ) ), this, SIGNAL ( clickWithPoint ( QPoint ) ) );
-    }
-
-private:
-    QQtClickSoundHelper* mClickHelper;
-
-    /**
-     * 子类不必重写MouseEvent函数,
-     * 这里实现对clickHelper的响应能力
-     */
-    // QWidget interface
-protected:
-    virtual void mousePressEvent ( QMouseEvent* event ) {
-        if ( mClickHelper )
-            mClickHelper->mousePressEvent ( event, this );
-        return QQtLabel::mousePressEvent ( event );
-    }
-
-    virtual void mouseReleaseEvent ( QMouseEvent* event ) {
-        if ( mClickHelper )
-            mClickHelper->mouseReleaseEvent ( event, this );
-        return QQtLabel::mouseReleaseEvent ( event );
-    }
-
-    virtual void mouseDoubleClickEvent ( QMouseEvent* event ) {
-        if ( mClickHelper )
-            mClickHelper->mouseDoubleClickEvent ( event, this );
-        return QQtLabel::mouseDoubleClickEvent ( event );
     }
 };
 
