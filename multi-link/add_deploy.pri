@@ -1,8 +1,8 @@
 #-------------------------------------------------------------
-#app_deploy.pri
+#add_deploy.pri
 #提供app发布函数，只是app工程使用
 #-------------------------------------------------------------
-#Multi-link技术 app_deploy部分只能应用于Qt5，Qt4没有windeployqt程序，如果用户为Qt4编译了windeployqt那么也可以用于Qt4。
+#Multi-link技术 add_deploy部分只能应用于Qt5，Qt4没有windeployqt程序，如果用户为Qt4编译了windeployqt那么也可以用于Qt4。
 
 ################################################################################
 #内部用函数
@@ -12,10 +12,10 @@
 #在build path修复app (macOS专有)
 #copy lib
 #fix bundle路径链接
-defineReplace(app_deploy_with_lib_on_mac) {
+defineReplace(add_deploy_with_lib_on_mac) {
     #need QQT_BUILD_PWD
     deploy_path = $$1
-    isEmpty(1): error("app_deploy_with_lib_on_mac(deploy_path) requires one argument")
+    isEmpty(1): error("add_deploy_with_lib_on_mac(deploy_path) requires one argument")
     create_command = $$create_mac_sdk()
     APP_DEST_DIR=$${deploy_path}
     isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
@@ -53,14 +53,14 @@ defineReplace(fix_app_bundle_with_qqt_in_building_path_on_mac) {
     #need QQT_BUILD_PWD
     APP_DEST_DIR=$${DESTDIR}
     isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
-    command = $$app_deploy_with_lib_on_mac($${APP_DEST_DIR})
+    command = $$add_deploy_with_lib_on_mac($${APP_DEST_DIR})
     return ($$command)
 }
 
 ##########################################
 #app的发布函数命令
 ##########################################
-defineReplace(get_app_deploy_on_mac) {
+defineReplace(get_add_deploy_on_mac) {
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
     command += $$COPY_DIR $${APP_DEST_DIR}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app
@@ -68,7 +68,7 @@ defineReplace(get_app_deploy_on_mac) {
     return ($$command)
 }
 
-defineReplace(get_app_deploy_on_win) {
+defineReplace(get_add_deploy_on_win) {
     #need QQT_BUILD_PWD
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
@@ -92,7 +92,7 @@ defineReplace(get_app_deploy_on_win) {
     return ($$command)
 }
 
-defineReplace(get_app_deploy_on_linux) {
+defineReplace(get_add_deploy_on_linux) {
     #need QQT_BUILD_PWD
 
     command =
@@ -108,7 +108,7 @@ defineReplace(get_app_deploy_on_linux) {
     return ($$command)
 }
 
-defineReplace(get_app_deploy_on_android) {
+defineReplace(get_add_deploy_on_android) {
     #need QQT_BUILD_PWD
 
     command =
@@ -127,11 +127,11 @@ defineReplace(get_app_deploy_on_android) {
 #app发布lib到自己的目标里，必须先发布app，如果没有先发布app会出错。
 #lib发布lib，没有的事情
 #解释，从app build目录里拷贝是有原因的，在Creator编译完成后，我把依赖库拷贝过去了，add_library()实现的。
-defineReplace(get_app_deploy_lib_on_mac) {
+defineReplace(get_add_deploy_lib_on_mac) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_app_deploy_lib_on_mac(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_lib_on_mac(libname) requires one argument")
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
@@ -141,11 +141,11 @@ defineReplace(get_app_deploy_lib_on_mac) {
     return ($$command)
 }
 
-defineReplace(get_app_deploy_lib_on_windows) {
+defineReplace(get_add_deploy_lib_on_windows) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_app_deploy_lib_on_windows(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_lib_on_windows(libname) requires one argument")
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
@@ -167,11 +167,11 @@ defineReplace(get_app_deploy_lib_on_windows) {
     return ($$command)
 }
 
-defineReplace(get_app_deploy_lib_on_linux) {
+defineReplace(get_add_deploy_lib_on_linux) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_app_deploy_lib_on_linux(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_lib_on_linux(libname) requires one argument")
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
@@ -182,11 +182,11 @@ defineReplace(get_app_deploy_lib_on_linux) {
     return ($$command)
 }
 
-defineReplace(get_app_deploy_lib_on_android) {
+defineReplace(get_add_deploy_lib_on_android) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_app_deploy_lib_on_android(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_lib_on_android(libname) requires one argument")
 
     command =
     command += $${APP_DEST_PWD}/lib$${libname}.so
@@ -198,7 +198,7 @@ defineReplace(get_app_deploy_lib_on_android) {
 ################################################################################
 #外部用函数
 ################################################################################
-defineTest(app_deploy) {
+defineTest(add_deploy) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
 
@@ -212,49 +212,53 @@ defineTest(app_deploy) {
     ##4.8 qmake arm32 return() 函数无效
     !isEmpty(APP_DEPLOY_ROOT) {
         #这里定义了一个配置开关，但是用户可以忽略
-        #CONFIG += app_deploy
+        #CONFIG += add_deploy
         message("$${TARGET} has deployed some app files")
     }
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
     contains(QSYS_PRIVATE, Win32||Win64) {
         #发布windows版本
-        QMAKE_POST_LINK += $$get_app_deploy_on_win()
+        QMAKE_POST_LINK += $$get_add_deploy_on_win()
     } else: contains(QSYS_PRIVATE, macOS) {
         #发布苹果版本，iOS版本也是这个？
-        QMAKE_POST_LINK += $$get_app_deploy_on_mac()
+        QMAKE_POST_LINK += $$get_add_deploy_on_mac()
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
-        ANDROID_EXTRA_LIBS += $$get_app_deploy_on_android()
+        ANDROID_EXTRA_LIBS += $$get_add_deploy_on_android()
     } else {
         #发布linux、e-linux，这个是一样的。
-        QMAKE_POST_LINK += $$get_app_deploy_on_linux()
+        QMAKE_POST_LINK += $$get_add_deploy_on_linux()
     }
+
+    export(QMAKE_POST_LINK)
 
     return (1)
 }
 
-defineTest(app_deploy_lib) {
+defineTest(add_deploy_lib) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
 
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("app_deploy_lib(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("add_deploy_lib(libname) requires one argument")
 
     message("$${TARGET} has deployed lib $${libname}.")
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
     contains(QSYS_PRIVATE, Win32||Win64) {
         #发布windows版本
-        QMAKE_POST_LINK += $$get_app_deploy_lib_on_win($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_lib_on_win($${libname})
     } else: contains(QSYS_PRIVATE, macOS) {
         #发布苹果版本，iOS版本也是这个？
-        QMAKE_POST_LINK += $$get_app_deploy_lib_on_mac($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_lib_on_mac($${libname})
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
-        ANDROID_EXTRA_LIBS += $$get_app_deploy_lib_on_android($${libname})
+        ANDROID_EXTRA_LIBS += $$get_add_deploy_lib_on_android($${libname})
     } else {
         #发布linux、e-linux，这个是一样的。
-        QMAKE_POST_LINK += $$get_app_deploy_lib_on_linux($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_lib_on_linux($${libname})
     }
+
+    export(QMAKE_POST_LINK)
 
     return (1)
 }

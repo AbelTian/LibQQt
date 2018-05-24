@@ -33,10 +33,8 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-APP_CONFIG_PWD = $${PWD}/AppRoot
-equals(QMAKE_HOST.os, Windows) {
-    APP_CONFIG_PWD ~=s,/,\\,g
-}
-
 system(touch main.cpp)
-include (../../multi-link/app_base_manager.pri)
+include (../../multi-link/add_base_manager.pri)
+
+add_deploy()
+message($$QMAKE_POST_LINK)

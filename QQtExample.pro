@@ -117,5 +117,8 @@ SUBDIRS =
 #SUBDIRS += test/QQtWidgetClickSoundHelperTest
 
 #这是一对，用于测试Multi-link对其他的lib的链接能力
+#注意lib工程必须独立存在
 #SUBDIRS += test/QQtBasedLibTest
-#SUBDIRS += test/QQtMultiLinkTest
+
+#
+SUBDIRS += test/QQtMultiLinkTest
