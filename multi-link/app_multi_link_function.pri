@@ -49,11 +49,11 @@ defineReplace(get_app_include) {
     return ($${INCLUDE})
 }
 
-defineReplace(get_app_add_link) {
+defineReplace(get_app_add_library) {
     libname = $$1
     lib_real_name = $$2
-    isEmpty(2): error("get_app_add_link(libname, lib_real_name) requires two argument")
-    !isEmpty(3): error("get_app_add_link(libname, lib_real_name) requires two argument")
+    isEmpty(2): error("get_app_add_library(libname, lib_real_name) requires two argument")
+    !isEmpty(3): error("get_app_add_library(libname, lib_real_name) requires two argument")
 
     CUR_LIB_PWD = $${QQT_SDK_ROOT}/$${libname}/$${QKIT_STD_DIR}/lib
     equals(QMAKE_HOST.os, Windows) {
@@ -71,11 +71,11 @@ defineReplace(get_app_add_link) {
     return ($${LINK})
 }
 
-defineReplace(get_app_add_include) {
+defineReplace(get_app_add_header) {
     libname = $$1
     lib_inc_name = $$2
-    isEmpty(2): error("get_app_add_link(libname, lib_inc_name) requires two argument")
-    !isEmpty(3): error("get_app_add_link(libname, lib_inc_name) requires two argument")
+    isEmpty(2): error("get_app_add_library(libname, lib_inc_name) requires two argument")
+    !isEmpty(3): error("get_app_add_library(libname, lib_inc_name) requires two argument")
 
     INCLUDE =
     contains(DEFINES, __DARWIN__) {
@@ -121,13 +121,13 @@ defineTest(app_include) {
 }
 
 #从QQT_SDK_ROOT按照Lib标准路径QKIT_STD_DIR链接Lib2 [libname/5.9.2/macOS/Debug/lib/librealname.framework]
-defineTest(app_add_link) {
+defineTest(app_add_library) {
     libname = $$1
     lib_real_name = $$1
-    isEmpty(2): error("app_add_link(libname) requires two argument")
-    !isEmpty(3): error("app_add_link(libname) requires two argument")
+    isEmpty(2): error("app_add_library(libname) requires two argument")
+    !isEmpty(3): error("app_add_library(libname) requires two argument")
 
-    command = $$get_app_add_link($${libname}, $${lib_real_name})
+    command = $$get_app_add_library($${libname}, $${lib_real_name})
     #message ($$command)
     LIBS += $${command}
     return (1)
@@ -135,13 +135,13 @@ defineTest(app_add_link) {
 
 
 #从QQT_SDK_ROOT按照Lib标准路径QKIT_STD_DIR包含sub_inc [libname/5.9.2/macOS/Debug/lib/libincname.framework/Headers]
-defineTest(app_add_include) {
+defineTest(app_add_header) {
     libname = $$1
     lib_inc_name = $$2
-    isEmpty(2): error("app_add_include(libname, lib_inc_name) requires two argument")
-    !isEmpty(3): error("app_add_include(libname, lib_inc_name) requires two argument")
+    isEmpty(2): error("app_add_header(libname, lib_inc_name) requires two argument")
+    !isEmpty(3): error("app_add_header(libname, lib_inc_name) requires two argument")
 
-    command = $$get_app_add_include($${libname}, $${lib_inc_name})
+    command = $$get_app_add_header($${libname}, $${lib_inc_name})
     #message ($$command)
     INCLUDEPATH += $${command}
     return (1)

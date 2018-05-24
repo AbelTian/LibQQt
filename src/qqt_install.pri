@@ -18,7 +18,7 @@ defineReplace(create_dir_struct) {
     #if it's qt library, don't create
     command =
     !equals(QQT_SDK_PWD , $$[QT_INSTALL_DATA]){
-        !contains(QKIT_PRIVATE, macOS) {
+        !contains(QSYS_PRIVATE, macOS) {
             command += $$MK_DIR $$QQT_INC_DIR $$CMD_SEP
         }
         command += $$MK_DIR $$QQT_LIB_DIR $$CMD_SEP
@@ -103,18 +103,18 @@ defineReplace(create_qt_lib_pri){
     command += echo "QT.$${module_name}.VERSION = $${QQT_VERSION}" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${module_name}.name = $${MODULE_NAME}"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${module_name}.module = $${MODULE_NAME}"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
-    contains(QKIT_PRIVATE, WIN32|WIN64) {
+    contains(QSYS_PRIVATE, Win32|Win64) {
         command += echo "QT.$${module_name}.libs = \$$QT_MODULE_LIB_BASE"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.bins = \$$QT_MODULE_BIN_BASE"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
     } else {
         command += echo "QT.$${module_name}.libs = '\$$QT_MODULE_LIB_BASE'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.bins = '\$$QT_MODULE_BIN_BASE'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
     }
-    contains(QKIT_PRIVATE, WIN32|WIN64) {
+    contains(QSYS_PRIVATE, Win32|Win64) {
         command += echo "QT.$${module_name}.includes = \$$QT_MODULE_INCLUDE_BASE \$$QT_MODULE_INCLUDE_BASE/$${MODULE_NAME}" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.frameworks = " >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.module_config = v2 " >> $${QQT_PRI_FILEPATH} $$CMD_SEP
-    }else:equals(QKIT_PRIVATE, macOS) {
+    }else:equals(QSYS_PRIVATE, macOS) {
         command += echo "QT.$${module_name}.includes = '\$$QT_MODULE_LIB_BASE/$${MODULE_NAME}.framework/Headers'"  >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.frameworks = '\$$QT_MODULE_LIB_BASE'" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${module_name}.module_config = v2 lib_bundle" >> $${QQT_PRI_FILEPATH} $$CMD_SEP
@@ -149,13 +149,13 @@ defineReplace(create_library_sdk){
 
     #这里不是目标为Windows才拷贝，而是开发机是Windows就得这么拷贝。
     #Windows下，Win目标、Android目标都走这里。
-    #contains(QKIT_PRIVATE, WIN32|WIN64) {
+    #contains(QSYS_PRIVATE, Win32|Win64) {
     equals(QMAKE_HOST.os, Windows) {
         #message(create QQt windows struct library)
         command += $$create_windows_sdk() $$CMD_SEP
         command += $$COPY $${QQT_BUILD_PWD}\\*.prl lib $$CMD_SEP
     } else {
-        contains(QKIT_PRIVATE, macOS) {
+        contains(QSYS_PRIVATE, macOS) {
             #message(create QQt mac bundle framework)
             command += $$MK_DIR lib/$${MODULE_NAME}.framework $$CMD_SEP
             command += $$CD lib/$${MODULE_NAME}.framework $$CMD_SEP
@@ -194,7 +194,7 @@ defineReplace(create_qqt_sdk){
 
     #不仅仅发布目标为Windows的时候需要改变，
     #开发Host是Windows的时候都要改变。路径问题是两种操作系统固有的痛。
-    #contains(QKIT_PRIVATE, WIN32||WIN64) {
+    #contains(QSYS_PRIVATE, Win32||Win64) {
     equals(QMAKE_HOST.os, Windows) {
         #on windows every path must use \ sep.
         QQT_SRC_PWD~=s,/,\\,g

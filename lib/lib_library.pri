@@ -127,7 +127,7 @@ module_name = $$lower($${MODULE_NAME})
 
 #-------define the all path
 #QQT std dir is not same to app std dir
-QQT_STD_DIR = QQt/$${QSYS_STD_DIR}
+QQT_STD_DIR = QQt/$${QKIT_STD_DIR}
 #link from build need this, if you havent mod QQt.pro, this can only be two value, qqt's: [src]/$DESTDIR
 QQT_DST_DIR = src/bin
 #create platform sdk need this
@@ -147,13 +147,13 @@ contains(CONFIG, link_from_sdk) {
 
 #这里不仅仅目标为windows的时候，才会转换，
 #开发Host为Windows的时候，都要转换。
-#contains(QSYS_PRIVATE, Win32||Win64) {
+#contains(QKIT_PRIVATE, WIN32||WIN64) {
 equals(QMAKE_HOST.os, Windows) {
     QQT_BUILD_ROOT~=s,/,\\,g
     QQT_SDK_ROOT~=s,/,\\,g
     APP_DEPLOY_ROOT~=s,/,\\,g
 
-    QSYS_STD_DIR~=s,/,\\,g
+    QKIT_STD_DIR~=s,/,\\,g
     QQT_STD_DIR~=s,/,\\,g
     QQT_DST_DIR~=s,/,\\,g
     QQT_BUILD_PWD~=s,/,\\,g
@@ -166,7 +166,7 @@ contains(CONFIG, link_from_sdk) {
     #create sdk first
     QMAKE_PRE_LINK += $$create_qqt_sdk()
     #private struct
-    equals(QSYS_PRIVATE, macOS) {
+    equals(QKIT_PRIVATE, macOS) {
         #Fix app里、lib里的路径问题
         #
         contains(CONFIG, app_bundle) : !contains(CONFIG, lib_bundle) {
@@ -174,14 +174,14 @@ contains(CONFIG, link_from_sdk) {
         }
     }
 } else : contains(CONFIG, link_from_build) {
-    equals(QSYS_PRIVATE, macOS) {
+    equals(QKIT_PRIVATE, macOS) {
         contains(CONFIG, app_bundle) : !contains(CONFIG, lib_bundle) {
             QMAKE_POST_LINK += $$fix_app_bundle_with_qqt_in_building_path_on_mac()
         }
     }
 }
 
-#这个地方的判断方式有两种，使用QSYS_PRIVATE也可以。
+#这个地方的判断方式有两种，使用QKIT_PRIVATE也可以。
 #是不是只有armeabi-v7a需要这个extra？
 contains(ANDROID_TARGET_ARCH, armeabi-v7a) {
     ANDROID_EXTRA_LIBS = \
@@ -192,8 +192,8 @@ contains(ANDROID_TARGET_ARCH, armeabi-v7a) {
 LIBS += $$link_qqt_library()
 
 message (Link QQt from: $${QQT_LIB_PWD})
-message(Link QQt to $${TARGET} $${QSYS_PRIVATE} on $${QMAKE_HOST.os} \
+message(Link QQt to $${TARGET} $${QKIT_PRIVATE} on $${QMAKE_HOST.os} \
     \(Qt Kit page FileSystem Name=$${SYSNAME}. Operating System=$${QMAKE_HOST.os}.\) )
 #TARGET must be equals to pro name ? no, TARGET must be placeed before qqt_library.pri
 #qmake pro pri is sequential
-message(Build $${TARGET} at $${OUT_PWD}/$${QSYS_STD_DIR})
+message(Build $${TARGET} at $${OUT_PWD}/$${QKIT_STD_DIR})

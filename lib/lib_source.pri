@@ -19,13 +19,13 @@ HEADERS += $$PWD/qqt.h \
     $$PWD/qqtversion.h \
     $$PWD/qqt-qt.h
 #platform header
-contains (QSYS_PRIVATE, Win32||Win64) {
+contains (QKIT_PRIVATE, WIN32||WIN64) {
     #win32 base header
     HEADERS += $$PWD/qqtwin.h
-} else:contains (QSYS_PRIVATE, macOS||iOS||iOSSimulator) {
+} else:contains (QKIT_PRIVATE, macOS||iOS||iOSSimulator) {
     #mac base header
     HEADERS += $$PWD/qqtdarwin.h
-} else:contains (QSYS_PRIVATE, Android||AndroidX86) {
+} else:contains (QKIT_PRIVATE, ANDROID||ANDROIDX86) {
     #android base header
     HEADERS += $$PWD/qqtandroid.h
 } else {
@@ -48,7 +48,7 @@ HEADERS += \
 #后台进程支持，这个只有ios不支持，这个支持在源文件pri里处理。
 DEFINES += __PROCESSMODULE__
 #ios has no backend process
-contains(QSYS_PRIVATE, iOS||iOSSimulator) {
+contains(QKIT_PRIVATE, iOS||iOSSimulator) {
     DEFINES -= __PROCESSMODULE__
 }
 
@@ -301,7 +301,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #ethnet(+wifi) manager
     #arm mips
     #TODO: +wince +android +ios +macOS? +win? +linux?
-    contains(QSYS_PRIVATE, Embedded||Arm32||MIPS32) {
+    contains(QKIT_PRIVATE, EMBEDDED||ARM32||MIPS32) {
         SOURCES += $$PWD/network/qqtethenetmanager.cpp
         HEADERS += $$PWD/network/qqtethenetmanager.h
         SOURCES += $$PWD/frame/qqtwifiwidget.cpp

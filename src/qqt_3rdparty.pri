@@ -6,7 +6,7 @@
 #注释：在qqt_header.pri打开 DEFINES += __PLUGINSUPPORT__
 #TODO: macOS runtime crash
 contains (DEFINES, __PLUGINSUPPORT__) {
-    contains(QKIT_PRIVATE, WIN32|WIN64) {
+    contains(QSYS_PRIVATE, Win32|Win64) {
         contains (DEFINES, QQT_LIBRARY) {
             DEFINES += BUILD_QDEVICEWATCHER_LIB
         } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
@@ -14,7 +14,7 @@ contains (DEFINES, __PLUGINSUPPORT__) {
         }
         wince*: SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_wince.cpp
         else:  SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_win32.cpp
-    }else:contains(QKIT_PRIVATE, macOS) {
+    }else:contains(QSYS_PRIVATE, macOS) {
         SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_mac.cpp
     }else {
         SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_linux.cpp
@@ -118,7 +118,7 @@ contains (DEFINES, __EXQUISITE__) {
     #qrdecode widget
     #注释：在qqt_header.pri打开 DEFINES += __QRDECODE__
     contains (DEFINES, __QRDECODE__) {
-        contains(QKIT_PRIVATE, WIN32|WIN64) {
+        contains(QSYS_PRIVATE, Win32|Win64) {
             #ignore: QZXing has no need to export
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QZXING_LIBRARY
@@ -138,7 +138,7 @@ contains (DEFINES, __EXQUISITE__) {
     #mathml widget
     #注释：在qqt_header.pri打开 DEFINES += __MATHWIDGETSUPPORT__
     contains (DEFINES, __MATHWIDGETSUPPORT__) {
-        contains(QKIT_PRIVATE, WIN32|WIN64) {
+        contains(QSYS_PRIVATE, Win32|Win64) {
             #mathml
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QT_QTMMLWIDGET_LIBRARY
@@ -154,7 +154,7 @@ contains (DEFINES, __EXQUISITE__) {
         #dmmu support
         #arm mips
         #TODO: +wince +android +ios +macOS +win +linux
-        equals(QKIT_PRIVATE, EMBEDDED) {
+        equals(QSYS_PRIVATE, Embedded) {
             SOURCES += $$PWD/exquisite/dmmu/dmmu.c
             HEADERS += $$PWD/exquisite/dmmu/dmmu.h \
                         $$PWD/exquisite/dmmu/jz_cim.h \

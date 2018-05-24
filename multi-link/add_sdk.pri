@@ -239,7 +239,7 @@ defineTest(add_sdk){
     #isEmpty(1):error(add_sdk(libname, libsrcdir, libdstdir) need at last one argument)
 
     contains(QSYS_PRIVATE, macOS) {
-        equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
+        #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
     }
 
     libname = $$TARGET
@@ -250,12 +250,12 @@ defineTest(add_sdk){
 
     #编译目标位置
     LIB_DST_DIR=$$3
-    isEmpty($$3):LIB_DST_DIR = $$DESTDIR
+    isEmpty(3):LIB_DST_DIR = $$DESTDIR
 
     #create platform sdk need this
     #源代码目录
     LIB_SRC_PWD=$$2
-    isEmpty($$2):LIB_SRC_PWD=$${PWD}
+    isEmpty(2):LIB_SRC_PWD=$${PWD}
 
     #lib major version
     libmajorver = $$APP_MAJOR_VERSION

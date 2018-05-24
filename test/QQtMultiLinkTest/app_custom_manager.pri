@@ -23,7 +23,7 @@ app_include(QQtBasedLibTest)
 #这个函数会到$$QQT_SDK_ROOT/LibName/$$QKIT_STD_DIR/include目录里找。相当于在Lib的需要inlude的头文件目录里有子目录
 #qmake函数对子目录的兼容不是非常好。所以用户链接Lib，请自行添加include目录子目录的内容
 #这两个函数的意义是在$$QQT_SDK_ROOT/QQtBasedLibTest/$$QKIT_STD_DIR/include/下的子路径添加include
-app_add_include(QQtBasedLibTest, QQtBasedLibTest)
+app_add_header(QQtBasedLibTest, QQtBasedLibTest)
 #这个函数的意义是在$$QQT_SDK_ROOT/QQtBasedLibTest/$$QKIT_STD_DIR/lib里查找添加xxx_lib
-app_add_link(QQtBasedLibTest, QQtBasedLibTest)
+app_add_library(QQtBasedLibTest, QQtBasedLibTest)
 

@@ -44,14 +44,14 @@ unix {
 
 #touch 启动post link
 system(touch qqtbasedlibtest.cpp)
-#包含基础管理者
-include (../../multi-link/lib_base_manager.pri)
 
-contains(QSYS_PRIVATE, macOS){
-    CONFIG += lib_bundle
-}
+#包含基础管理者
+include (../../multi-link/add_base_manager.pri)
 
 #设置版本 必要
 add_version(1,0,0,0)
 #发布SDK 必要
 add_sdk()
+
+#包含lib的header.pri用于公开给用户头文件。
+include (lib_header.pri)

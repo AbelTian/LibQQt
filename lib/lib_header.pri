@@ -9,7 +9,7 @@
 
 #################################################################
 ##definition and configration
-##need QSYS
+##need QKIT
 #################################################################
 
 ##Qt version
@@ -75,7 +75,7 @@ msvc {
 ##-----------------------------------------------
 #link QQt static library in some occation on windows
 #when link QQt    static library, if no this macro, headers can't be linked on windows.
-contains(QSYS_PRIVATE, Win32|Win64 || iOS|iOSSimulator) {
+contains(QKIT_PRIVATE, WIN32|WIN64 || iOS|iOSSimulator) {
     #Qt is static by mingw32 building
     mingw|ios{
         #on my computer, Qt library are all static library?
@@ -143,7 +143,7 @@ contains (DEFINES, __CPP11__) {
 ##################MultiMedia Module###############################
 DEFINES += __MULTIMEDIA__
 #on mac qt4 has no multimedia
-contains(QSYS_PRIVATE, macOS) {
+contains(QKIT_PRIVATE, macOS) {
     lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__MULTIMEDIA__
 }
 contains (DEFINES, __MULTIMEDIA__) {
@@ -155,7 +155,7 @@ contains (DEFINES, __MULTIMEDIA__) {
 #plugin notifer, and plugin device managament.
 #if you use DeviceWatcher , open this annotation
 DEFINES += __PLUGINSUPPORT__
-contains(QSYS_PRIVATE, iOS||iOSSimulator||macOS) {
+contains(QKIT_PRIVATE, iOS||iOSSimulator||macOS) {
     DEFINES -= __PLUGINSUPPORT__
 }
 
@@ -164,13 +164,13 @@ contains(QSYS_PRIVATE, iOS||iOSSimulator||macOS) {
 DEFINES += __PRINTSUPPORT__
 #Qt 5.9.1, ios and android can't support this feature, because Qt 5.9.1, broken
 equals(QT_VERSION, 5.9.1) {
-    contains(QSYS_PRIVATE, iOS||iOSSimulator||Android||AndroidX86) {
+    contains(QKIT_PRIVATE, iOS||iOSSimulator||ANDROID||ANDROIDX86) {
         DEFINES -= __PRINTSUPPORT__
     }
 }
 #Qt 5.9.2, android support this feature
 #Qt 5.9.2, ios can't use printsupport
-contains(QSYS_PRIVATE, iOS||iOSSimulator) {
+contains(QKIT_PRIVATE, iOS||iOSSimulator) {
     DEFINES -= __PRINTSUPPORT__
 }
 contains (DEFINES, __PRINTSUPPORT__) {
@@ -182,7 +182,7 @@ contains (DEFINES, __PRINTSUPPORT__) {
 #if you use QQtCharts, open this annotation
 DEFINES += __QQTCHARTS__
 lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__
-contains(QSYS_PRIVATE, Arm32||MIPS32||Embedded):DEFINES-=__QQTCHARTS__
+contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES-=__QQTCHARTS__
 #based on QtCharts, need charts module
 contains(DEFINES, __QQTCHARTS__) {
     QT += charts
@@ -257,7 +257,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #if you use QNetworkAccessManagerSupport , open this annotation
     DEFINES += __WEBACCESSSUPPORT__
     lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
-    contains(QSYS_PRIVATE, Arm32||MIPS32||Embedded):DEFINES -= __WEBACCESSSUPPORT__
+    contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES -= __WEBACCESSSUPPORT__
     contains (DEFINES, __WEBACCESSSUPPORT__) {
         #QSslError not found, you need recompiler Qt4
     }
@@ -275,7 +275,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #Multi New Protocol 全双工 QWebSocket
     #if you use QWebSocketSupport , open this annotation
     DEFINES += __WEBSOCKETSUPPORT__
-    #equals(QSYS_PRIVATE, macOS):DEFINES += __WEBSOCKETSUPPORT__
+    #equals(QKIT_PRIVATE, macOS):DEFINES += __WEBSOCKETSUPPORT__
     lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBSOCKETSUPPORT__
     contains (DEFINES, __WEBSOCKETSUPPORT__) {
         QT += websockets
@@ -319,7 +319,7 @@ contains (DEFINES, __EXQUISITE__) {
 
     #if you use Svg widgets, open this annotation
     DEFINES += __SVGWIDGETS__
-    contains(QSYS_PRIVATE, macOS) {
+    contains(QKIT_PRIVATE, macOS) {
         lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__SVGWIDGETS__
     }
     contains (DEFINES, __SVGWIDGETS__) {
@@ -335,7 +335,7 @@ contains (DEFINES, __EXQUISITE__) {
 
     #opengl module
     DEFINES += __OPENGLWIDGETS__
-    contains(QSYS_PRIVATE, MIPS32||Arm32||Embedded):DEFINES-=__OPENGLWIDGETS__
+    contains(QKIT_PRIVATE, MIPS32||ARM32||EMBEDDED):DEFINES-=__OPENGLWIDGETS__
     contains (DEFINES, __OPENGLWIDGETS__) {
         QT += opengl
     }
@@ -368,7 +368,7 @@ contains (DEFINES, __HIGHGRADE__) {
 #################################################################
 ##library
 ##################################################################
-equals (QSYS_PRIVATE, iOSSimulator):{
+equals (QKIT_PRIVATE, iOSSimulator):{
     #error need
     #QMAKE_CXXFLAGS +=-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
 }
@@ -379,7 +379,7 @@ win32 {
         LIBS += -lopengl32 -lglu32
     }
 }else: unix {
-    equals(QSYS_PRIVATE, macOS) {
+    equals(QKIT_PRIVATE, macOS) {
         #min macosx target
         QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
         #deperated
@@ -389,7 +389,7 @@ win32 {
         #LIBS += -F$${MACOSXSDK}/System/Library/Frameworks
         #LIBS += -L$${MACOSXSDK}/usr/lib
         LIBS += -framework DiskArbitration -framework Cocoa -framework IOKit
-    }else:contains(QSYS_PRIVATE, iOS|iOSSimulator){
+    }else:contains(QKIT_PRIVATE, iOS|iOSSimulator){
         QMAKE_LFLAGS += -ObjC -lsqlite3 -lz
         QMAKE_IOS_DEPLOYMENT_TARGET = 8
     }

@@ -126,7 +126,7 @@ defineReplace(get_app_deploy_on_android) {
 ##########################################
 #app发布lib到自己的目标里，必须先发布app，如果没有先发布app会出错。
 #lib发布lib，没有的事情
-#解释，从app build目录里拷贝是有原因的，在Creator编译完成后，我把依赖库拷贝过去了，add_link()实现的。
+#解释，从app build目录里拷贝是有原因的，在Creator编译完成后，我把依赖库拷贝过去了，add_library()实现的。
 defineReplace(get_app_deploy_lib_on_mac) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD

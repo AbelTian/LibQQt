@@ -23,7 +23,7 @@
 #please dont modify this pro
 #use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}
 #in Qt kit page, set kit's File System Name. (Creator Ver.>v3.5)
-#in project build page, def env QKIT
+#in project build page, def env QSYS
 #in app_configure.pri (auto createed) define QQT_BUILD_ROOT= and QQT_SDK_ROOT= and or APP_DEPLOY_ROOT
 
 #################################################################
@@ -39,30 +39,20 @@ lessThan(QT_VERSION, 4.8.0) {
     #error(  error occured!)
 }
 
-################################################
-##project config and definition
-##need QKIT to compitible with some occasion
-################################################
-include ($$PWD/qqt_qkit.pri)
+#包含基础管理者
+include (../multi-link/lib_base_manager.pri)
 
-
-isEmpty(QKIT_PRIVATE) {
+isEmpty(QSYS_PRIVATE) {
     message(1. you should change qt default build directory to your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name})
-    message(2. env variable QKIT is required! pleace check qqt_qkit.pri)
+    message(2. env variable QSYS is required! pleace check qqt_qkit.pri)
     error(error occured! please check build output panel.)
 }
-
-################################################
-##project function
-##support some commonly used function
-################################################
-#include ($$PWD/qqt_function.pri)
 
 
 ##win platform: some target, special lib lib_bundle staticlib
 ##only deal dynamic is ok, static all in headers dealing.
 ##define macro before header.
-contains(QKIT_PRIVATE, WIN32|WIN64) {
+contains(QSYS_PRIVATE, Win32|Win64) {
     #Qt is static by mingw32 building
     mingw {
         #on my computer , Qt library are all static library?
@@ -78,10 +68,10 @@ contains(QKIT_PRIVATE, WIN32|WIN64) {
     }
 #*nux platform: no macro
 } else {
-    equals(QKIT_PRIVATE, macOS) {
+    equals(QSYS_PRIVATE, macOS) {
         CONFIG += dll
         CONFIG += lib_bundle
-    } else:contains(QKIT_PRIVATE, iOS|iOSSimulator) {
+    } else:contains(QSYS_PRIVATE, iOS|iOSSimulator) {
         CONFIG += static
     } else {
         ##default build dll
@@ -113,11 +103,6 @@ QMAKE_CXXFLAGS +=  $${CCFLAGS}
 DESTDIR = bin
 
 #################################################################
-##project Headers
-#################################################################
-include ($$PWD/qqt_header.pri)
-
-#################################################################
 ##project source
 #################################################################
 include ($$PWD/qqt_source.pri)
@@ -125,16 +110,16 @@ include ($$PWD/qqt_source.pri)
 #################################################################
 ##project version
 #################################################################
-include ($$PWD/qqt_version.pri)
+#include ($$PWD/qqt_version.pri)
 
 #user can use app_version.pri to modify app version once, once is all. DEFINES += APP_VERSION=0.0.0 is very good.
-unix:VERSION = $${QQT_VERSION}
+#unix:VERSION = $${QQT_VERSION}
 #bug?:open this macro, TARGET will suffixed with major version.
 #win32:VERSION = $${QQT_VERSION4}
 
 QMAKE_TARGET_FILE = "$${TARGET}"
 QMAKE_TARGET_PRODUCT = "$${TARGET}"
-QMAKE_TARGET_COMPANY = "www.qqt.com"
+QMAKE_TARGET_COMPANY = "www.QQt.com"
 QMAKE_TARGET_DESCRIPTION = "QQt Foundation Class"
 QMAKE_TARGET_COPYRIGHT = "Copyright 2017-2022 QQt Co., Ltd. All rights reserved"
 
@@ -175,6 +160,19 @@ CONFIG += continued_build
 contains(CONFIG, continued_build){
     system("touch $${PWD}/frame/qqtapplication.cpp")
 }
+
+#################################################################
+##project header
+##这个作用比较大，lib工程需要，app工程也需要。
+#################################################################
+#包含lib的header.pri用于公开给用户头文件。
+#
+include (lib_header.pri)
+
+#设置版本 必要
+add_version(2,4,0,0)
+#发布SDK 必要
+add_sdk($$TARGET, $$PWD, src/$$DESTDIR)
 
 #################################################################
 ##project environ

@@ -1,11 +1,11 @@
 #this configration need Qt Creator set default build directory
 #%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}")}
 
-#这里暂时使用QKIT - FileSystemName这样的决定格式。
+#这里暂时使用QSYS - FileSystemName这样的决定格式。
 #如果QtCreator把编译器名称、FileSystemName传递过来就好了。
 #或者QtCreator把Qt SDK目录名传过来也好。
-#或者QtCreator自动生成QKIT描述符、FileSystemName，并且传递过来，也好。
-#哎，但是现在没有，无奈之下，用户设定QKIT。
+#或者QtCreator自动生成QSYS描述符、FileSystemName，并且传递过来，也好。
+#哎，但是现在没有，无奈之下，用户设定QSYS。
 
 #FileSystemName的终极状态是编译器_目标系统名，比如gcc_macOS, clang_macOS这样。
 
@@ -17,10 +17,10 @@
 
 #原理
 #Qt Creator kit页的FileSystemName Creator自己用,忘记了传给qmake.(存储于Qt Creator配置区域)
-#工程构建和配置页(存储于.pro.userxxx)里的环境变量QKIT给qmake用.
+#工程构建和配置页(存储于.pro.userxxx)里的环境变量QSYS给qmake用.
 #如果用户在pro里面设置QMAKE.KIT QMAKE.SYSNAME,Qt Creator从qmake里读也挺好的.
 
-#You need define a env variable QKIT=XX
+#You need define a env variable QSYS=XX
 #target arch type
 #注释
 #config += xxx qmake用配置开关
@@ -29,48 +29,48 @@
 #XXX = AAA 给qmake用变量XXX赋值
 #DEFINES += XXX 源代码用宏 和上边的XXX可以重名,但是是两回事,不干扰.
 
-QKIT_PRIVATE = $$(QKIT)
+QSYS_PRIVATE = $$(QSYS)
 #源文件内平台小差异
-#QKIT -> 源文件宏
-#EMBEDDED __EMBEDDED_LINUX__
+#QSYS -> 源文件宏
+#Embedded __EMBEDDED_LINUX__
 #MIPS __MIPS_LINUX__
 #ARM __ARM_LINUX__
-#LINUX __LINUX__
+#Linux __LINUX__
 #LINUX64 __LINUX64__
-#WIN32 __WIN32__
-#WIN64 __WIN64__
+#Win32 __WIN32__
+#Win64 __WIN64__
 #macOS __DARWIN__
-#ANDROID __ANDROID__
-#ANDROIDX86 __ANDROIDX86__
-equals(QKIT_PRIVATE, EMBEDDED) {
+#Android __ANDROID__
+#AndroidX86 __ANDROIDX86__
+equals(QSYS_PRIVATE, Embedded) {
     #embedded common macro
     DEFINES += __EMBEDDED_LINUX__
-} else:equals(QKIT_PRIVATE, ARM32) {
+} else:equals(QSYS_PRIVATE, Arm32) {
     DEFINES += __EMBEDDED_LINUX__
     #arm32 private
     DEFINES += __ARM_LINUX__
-} else:equals(QKIT_PRIVATE, MIPS32) {
+} else:equals(QSYS_PRIVATE, MIPS32) {
     DEFINES += __EMBEDDED_LINUX__
     #mips32 private
     DEFINES += __MIPS_LINUX__
-} else:equals(QKIT_PRIVATE, LINUX) {
+} else:equals(QSYS_PRIVATE, Linux) {
     DEFINES += __LINUX__
-} else:equals(QKIT_PRIVATE, LINUX64) {
+} else:equals(QSYS_PRIVATE, LINUX64) {
     DEFINES += __LINUX64__
-} else:equals(QKIT_PRIVATE, WIN32) {
+} else:equals(QSYS_PRIVATE, Win32) {
     DEFINES += __WIN32__
-} else:equals(QKIT_PRIVATE, WIN64) {
+} else:equals(QSYS_PRIVATE, Win64) {
     DEFINES += __WIN64__
-} else:equals(QKIT_PRIVATE, macOS) {
+} else:equals(QSYS_PRIVATE, macOS) {
     DEFINES += __DARWIN__
-} else:equals(QKIT_PRIVATE, iOS) {
+} else:equals(QSYS_PRIVATE, iOS) {
     DEFINES += __IOS__
-} else:equals(QKIT_PRIVATE, iOSSimulator) {
+} else:equals(QSYS_PRIVATE, iOSSimulator) {
     DEFINES += __IOS__
     #TODO:no qcustomplot word printer process
-} else:equals(QKIT_PRIVATE, ANDROID) {
+} else:equals(QSYS_PRIVATE, Android) {
     DEFINES += __ANDROID__
-} else:equals(QKIT_PRIVATE, ANDROIDX86) {
+} else:equals(QSYS_PRIVATE, AndroidX86) {
     DEFINES += __ANDROID__
     DEFINES += __ANDROIDX86__ #可能废弃
 }
@@ -80,7 +80,7 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 #QMAKESPECS = $${QMAKESPEC}
 #QMAKESPECS ~= s:/[^/]*$::p
 #message (used spec: $$QMAKESPEC_NAME at here: $$QMAKESPECS )
-#equals(QMAKESPEC_NAME, EMBEDDED) {
+#equals(QMAKESPEC_NAME, Embedded) {
 #    #embedded common macro
 #    DEFINES += __EMBEDDED_LINUX__
 #} else:equals(QMAKESPEC_NAME, *arm*) {
@@ -108,7 +108,7 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 #    DEFINES += __DARWIN__
 #} else:equals(QMAKESPEC_NAME, android-*) {
 #    DEFINES += __ANDROID__
-#} else:equals(QMAKESPEC_NAME, ANDROIDX86) {
+#} else:equals(QMAKESPEC_NAME, AndroidX86) {
 #    DEFINES += __ANDROID__
 #    #todo:no qcustomplot word printer
 #}
@@ -119,44 +119,44 @@ equals(QKIT_PRIVATE, EMBEDDED) {
 CONFIG(debug, debug|profile|release):BUILD=Debug
 CONFIG(profile, debug|profile|release):BUILD=Profile
 CONFIG(release, debug|profile|release):BUILD=Release
-equals(QKIT_PRIVATE, EMBEDDED) {
+equals(QSYS_PRIVATE, Embedded) {
     SYSNAME = Embedded
-} else:equals(QKIT_PRIVATE, ARM32) {
+} else:equals(QSYS_PRIVATE, Arm32) {
     SYSNAME = Arm32
-} else:equals(QKIT_PRIVATE, MIPS32) {
+} else:equals(QSYS_PRIVATE, MIPS32) {
     SYSNAME = Mips32
-} else:equals(QKIT_PRIVATE, LINUX) {
+} else:equals(QSYS_PRIVATE, Linux) {
     SYSNAME = Linux
-} else:equals(QKIT_PRIVATE, LINUX64) {
+} else:equals(QSYS_PRIVATE, LINUX64) {
     SYSNAME = Linux64
-} else:equals(QKIT_PRIVATE, WIN32) {
+} else:equals(QSYS_PRIVATE, Win32) {
     SYSNAME = Windows
-} else:equals(QKIT_PRIVATE, WIN64) {
+} else:equals(QSYS_PRIVATE, Win64) {
     SYSNAME = Win64
-} else:equals(QKIT_PRIVATE, macOS) {
+} else:equals(QSYS_PRIVATE, macOS) {
     SYSNAME = MacOS
-} else:equals(QKIT_PRIVATE, iOS) {
+} else:equals(QSYS_PRIVATE, iOS) {
     SYSNAME = iOS
-} else:equals(QKIT_PRIVATE, iOSSimulator) {
+} else:equals(QSYS_PRIVATE, iOSSimulator) {
     SYSNAME = iOS-simulator
-} else:equals(QKIT_PRIVATE, ANDROID) {
+} else:equals(QSYS_PRIVATE, Android) {
     SYSNAME = Android
-} else:equals(QKIT_PRIVATE, ANDROIDX86) {
+} else:equals(QSYS_PRIVATE, AndroidX86) {
     SYSNAME = Android_x86
 }
 
 #if you dont modify Qt Creator default build directory, you may need mod this path variable.
 #link operation all will need this variable
-QKIT_STD_DIR = $${QT_VERSION}/$${SYSNAME}/$${BUILD}
+QSYS_STD_DIR = $${QT_VERSION}/$${SYSNAME}/$${BUILD}
 
 message(qqt_qkit.pri)
-message(Build $${TARGET} to $${QKIT_PRIVATE} \(QKIT=$${QKIT_PRIVATE} is configed in project build page.\) )
-message(Build $${TARGET} at $${QKIT_STD_DIR} \(Qt Kit page FileSystem Name=$${SYSNAME}\) )
+message(Build $${TARGET} to $${QSYS_PRIVATE} \(QSYS=$${QSYS_PRIVATE} is configed in project build page.\) )
+message(Build $${TARGET} at $${QSYS_STD_DIR} \(Qt Kit page FileSystem Name=$${SYSNAME}\) )
 message(Build $${TARGET} on $${QMAKE_HOST.os} \(Operating System=$${QMAKE_HOST.os}\) )
-isEmpty(QKIT_PRIVATE) : message(Build $${TARGET} Qt Kit page FileSystem Name is decided by env variable QKIT. Please set it. )
+isEmpty(QSYS_PRIVATE) : message(Build $${TARGET} Qt Kit page FileSystem Name is decided by env variable QSYS. Please set it. )
 
-isEmpty(QKIT_PRIVATE) {
-    message(env variable QKIT is required!)
+isEmpty(QSYS_PRIVATE) {
+    message(env variable QSYS is required!)
     message(pleace check qqt_qkit.pri)
     error("error occured, please check build output panel.")
 }

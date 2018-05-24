@@ -25,7 +25,7 @@ include ($${PWD}/add_deploy.pri)
 include ($${PWD}/add_deploy_config.pri)
 
 #app链接所需要的函数
-include ($${PWD}/add_link.pri)
+include ($${PWD}/add_library.pri)
 
 ####################################################################################
 #app base manager 都做了一下这些事情
