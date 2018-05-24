@@ -202,6 +202,20 @@ defineTest(app_deploy) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
 
+    #如果 配置文件里 没有配置 APP_DEPLOY_ROOT 那么返回，不拷贝发布任何应用
+    #不会走到
+    isEmpty(APP_DEPLOY_ROOT) {
+        message("$${TARGET} hasn't deployed any app files")
+        greaterThan(QT_MAJOR_VERSION, 5):return()
+    }
+
+    ##4.8 qmake arm32 return() 函数无效
+    !isEmpty(APP_DEPLOY_ROOT) {
+        #这里定义了一个配置开关，但是用户可以忽略
+        #CONFIG += app_deploy
+        message("$${TARGET} has deployed some app files")
+    }
+
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
     contains(QSYS_PRIVATE, Win32||Win64) {
         #发布windows版本
@@ -276,28 +290,4 @@ equals(QMAKE_HOST.os, Windows) {
     APP_DEPLOY_PWD~=s,/,\\,g
 }
 
-#如果 配置文件里 没有配置 APP_DEPLOY_ROOT 那么返回，不拷贝发布任何应用
-#不会走到
-isEmpty(APP_DEPLOY_ROOT) {
-    message("$${TARGET} hasn't deployed any app files")
-    greaterThan(QT_MAJOR_VERSION, 5):return()
-}
 
-##4.8 qmake arm32 return() 函数无效
-!isEmpty(APP_DEPLOY_ROOT) {
-    CONFIG += app_deploy
-    message("$${TARGET} has deployed some app files")
-}
-
-##########
-#注意，此处强制发布App 不需要用户手动调用。
-#注意，此处强制依赖LibQQt，不需要用户手动发布LibQQt。
-##########
-contains(CONFIG, app_deploy) {
-    app_deploy_lib(QQt)
-    app_deploy()
-    #如果用户依赖了其他的lib，便可以用app_deploy_lib进行拷贝依赖到app发布区域。
-    #并且这个工作，后续持续收到app_deploy配置开关的控制。
-    #note: app_deploy 一个配置开关 一个函数 两个都有效使用
-    #注意，用户必须先发布lib 再发布app
-}

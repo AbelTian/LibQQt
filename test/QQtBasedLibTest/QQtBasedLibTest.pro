@@ -42,5 +42,16 @@ unix {
     #INSTALLS += target
 }
 
+#touch 启动post link
 system(touch qqtbasedlibtest.cpp)
-include (../../lib/lib_base_manager.pri)
+#包含基础管理者
+include (../../multi-link/lib_base_manager.pri)
+
+contains(QSYS_PRIVATE, macOS){
+    CONFIG += lib_bundle
+}
+
+#设置版本 必要
+add_version(1,0,0,0)
+#发布SDK 必要
+add_sdk()

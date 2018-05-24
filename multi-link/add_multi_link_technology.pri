@@ -42,8 +42,8 @@ isEmpty(APP_BUILD_ROOT)|isEmpty(LIB_SDK_ROOT)|isEmpty(APP_DEPLOY_ROOT){
     error("please check $$CONFIG_FILE")
 }
 
-message($${TARGET} build root: $$APP_BUILD_ROOT)
-message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
+#message($${TARGET} build root: $$APP_BUILD_ROOT)
+#message($${TARGET} deploy root: $$APP_DEPLOY_ROOT)
 equals(TEMPLATE, app):message($${TARGET} use sdk root: $$LIB_SDK_ROOT)
 else:message($${TARGET} deploy sdk root: $$LIB_SDK_ROOT)
 

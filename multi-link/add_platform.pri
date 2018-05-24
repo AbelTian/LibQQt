@@ -43,7 +43,7 @@ CONFIG(release, debug|profile|release):BUILD=Release
 
 QSYS_STD_DIR = $${QT_VERSION}/$${QSYS_PRIVATE}/$${BUILD}
 
-message(base_platform.pri)
+message(app_platform.pri)
 message(Build $${TARGET} to $${QSYS_PRIVATE} \(QSYS=$${QSYS_PRIVATE} is configed in project build page.\) )
 message(Build $${TARGET} at $${QSYS_STD_DIR} \(Qt Kit page FileSystem Name=$${QSYS_PRIVATE}\) )
 message(Build $${TARGET} on $${QMAKE_HOST.os} \(Operating System=$${QMAKE_HOST.os}\) )
