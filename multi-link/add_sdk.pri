@@ -6,6 +6,45 @@
 ##依赖add_version.pri
 ##please don't modify this pri
 ################################################
+THIS_PRI_PWD = $${PWD}
+
+#在build path修复app (macOS专有)
+#copy lib
+#fix bundle路径链接
+defineReplace(get_add_mac_sdk_fix_building_framework) {
+
+    #need QQT_BUILD_PWD
+    create_command = $$get_add_mac_sdk()
+
+    APP_DEST_DIR=$${DESTDIR}
+    isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
+
+    libname = $$TARGET
+    libname_temp = $${libname}_Temp
+    libname_lower = $$lower($${libname})
+    libmajorver = $$APP_MAJOR_VERSION
+
+    command =
+    command += chmod +x $${THIS_PRI_PWD}/linux_cur_path.sh &&
+    command += . $${THIS_PRI_PWD}/linux_cur_path.sh &&
+    #create temp
+    command += $$MK_DIR $${APP_DEST_DIR}/$${libname_temp}.framework &&
+    #进去
+    command += cd $${APP_DEST_DIR}/$${libname_temp}.framework &&
+    #修复framework里的快捷方式
+    command += $${create_command} &&
+    command += chmod +x $${THIS_PRI_PWD}/linux_cd_path.sh &&
+    command += . $${THIS_PRI_PWD}/linux_cd_path.sh &&
+    #拷贝prl到新的里
+    command += $$COPY $${APP_DEST_DIR}/$${libname}.framework/$${libname}.prl $${APP_DEST_DIR}/$${libname_temp}.framework/$${libname}.prl $$CMD_SEP
+    #del 原先的
+    command += $$RM_DIR $${APP_DEST_DIR}/$${libname}.framework &&
+    #rename 临时的 framework 到原先的
+    command += $$MOVE $${APP_DEST_DIR}/$${libname_temp}.framework $${APP_DEST_DIR}/$${libname}.framework
+
+    #message($$command)
+    return ($${command})
+}
 
 
 ################################################
@@ -13,7 +52,7 @@
 ##variable can be private and default inherit
 ##内部实现
 ################################################
-defineReplace(add_sdk_dir_struct) {
+defineReplace(get_add_sdk_dir_struct) {
     #if it's qt library, don't create
     command =
     !equals(LIB_SDK_PWD , $$[QT_INSTALL_DATA]){
@@ -27,7 +66,7 @@ defineReplace(add_sdk_dir_struct) {
     return ($$command)
 }
 
-defineReplace(add_windows_sdk) {
+defineReplace(get_add_windows_sdk) {
     #need cd sdk root
 
     command =
@@ -39,7 +78,7 @@ defineReplace(add_windows_sdk) {
     return ($$command)
 }
 
-defineReplace(add_linux_sdk) {
+defineReplace(get_add_linux_sdk) {
     #need cd sdk root
     copy_command = $$get_copy_dir_and_file($${LIB_SRC_PWD}, "*.h*", $${LIB_INC_DIR})
     command =
@@ -50,7 +89,7 @@ defineReplace(add_linux_sdk) {
     return ($$command)
 }
 
-defineReplace(add_mac_sdk){
+defineReplace(get_add_mac_sdk){
     #need cd framework root
     #LIB_BUILD_PWD libname libmajorver
     libname = $$TARGET
@@ -89,13 +128,14 @@ defineReplace(add_mac_sdk){
     command += $$LN $$LIB_BUNDLE_CUR_EXE_FILE $${LIB_BUNDLE_EXE_LINK}
     lessThan(QT_MAJOR_VERSION, 5){
         command += $$CMD_SEP
-        command += chmod +x $${PWD}/mac_deploy_qt4.sh $$CMD_SEP
-        command += $${PWD}/mac_deploy_qt4.sh $${LIB_BUNDLE_VER_DIR}/$${libname}
+        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${LIB_BUNDLE_VER_DIR}/$${libname}
     }
     return ($$command)
 }
 
-defineReplace(add_Qt_lib_pri){
+#这个函数是支持发布Qt Library用的，add_sdk用到了。
+defineReplace(get_add_Qt_lib_pri){
     #need cd sdk root
     #LIB_BASE_DIR libname LIB_VERSION MODULE_CNAME
     ##write qt_lib_qqtcore.pri
@@ -143,7 +183,8 @@ defineReplace(add_Qt_lib_pri){
 ##Lib deploy sdk workflow
 ##SDK发布过程
 ################################################
-defineReplace(add_sdk_work_flow){
+
+defineReplace(get_add_sdk_work_flow){
     #need cd sdk root
 
     libname = $$TARGET
@@ -151,36 +192,43 @@ defineReplace(add_sdk_work_flow){
     libmajorver = $$APP_MAJOR_VERSION
 
     command =
+    contains(QSYS_PRIVATE, macOS) {
+        #在编译路径里，创作一次sdk，完成framework链接等的修复工作
+        command += $$get_add_mac_sdk_fix_building_framework() $$CMD_SEP
+        command += echo $$libname fix framework success. $$CMD_SEP
+    }
     command += $$RM_DIR $${LIB_SDK_PWD} $$CMD_SEP
     command += $$MK_DIR $${LIB_SDK_PWD} $$CMD_SEP
     command += $$CD $${LIB_SDK_PWD} $$CMD_SEP
-    command += $$add_sdk_dir_struct() $$CMD_SEP
+    command += $$get_add_sdk_dir_struct() $$CMD_SEP
 
     #这里不是目标为Windows才拷贝，而是开发机是Windows就得这么拷贝。
     #Windows下，Win目标、Android目标都走这里。
     #contains(QSYS_PRIVATE, Win32|Win64) {
     equals(QMAKE_HOST.os, Windows) {
-        #message(create QQt windows struct library)
-        command += $$add_windows_sdk() $$CMD_SEP
+        #message(create lib windows struct library)
+        command += $$get_add_windows_sdk() $$CMD_SEP
         command += $$COPY $${LIB_BUILD_PWD}\\*.prl lib $$CMD_SEP
     } else {
         contains(QSYS_PRIVATE, macOS) {
-            #message(create QQt mac bundle framework)
+            #message(create lib mac bundle framework)
             command += $$MK_DIR lib/$${libname}.framework $$CMD_SEP
             command += $$CD lib/$${libname}.framework $$CMD_SEP
-            command += $$add_mac_sdk() $$CMD_SEP
+            command += $$get_add_mac_sdk() $$CMD_SEP
             command += $$CD ../../ $$CMD_SEP
             #create prl
             command += $$COPY $${LIB_BUILD_PWD}/$${libname}.framework/$${libname}.prl lib/$${libname}.framework/$${libname}.prl $$CMD_SEP
         } else {
-            #Android在linux开发机下也会走这里，Android目标，LibQQt可以发布Win和Linux两种格式的SDK。
-            #message(create QQt linux struct library)
-            command += $$add_linux_sdk() $$CMD_SEP
+            #Android在linux开发机下也会走这里，Android目标，Lib可以发布Win和Linux两种格式的SDK。
+            #message(create lib linux struct library)
+            command += $$get_add_linux_sdk() $$CMD_SEP
             command += $$COPY $${LIB_BUILD_PWD}/*.prl lib $$CMD_SEP
         }
     }
 
-    command += $$add_Qt_lib_pri()
+    command += $$get_add_Qt_lib_pri() $$CMD_SEP
+    command += echo $$libname create sdk success.
+
     return ($$command)
 }
 
@@ -188,7 +236,7 @@ defineReplace(add_sdk_work_flow){
 ##Lib deploy sdk work flow
 ##初始化SDK发布过程需要的变量
 ################################################
-defineReplace(add_sdk_private){
+defineReplace(get_add_sdk_private){
     libname = $$TARGET
     libname_lower = $$lower($${libname})
     libmajorver = $$APP_MAJOR_VERSION
@@ -225,11 +273,12 @@ defineReplace(add_sdk_private){
     #create library struct
     #create platform sdk
     #create mkspec module pri
-    command = $$add_sdk_work_flow()
+    command = $$get_add_sdk_work_flow()
 
     #message ($$command)
     return ($${command})
 }
+
 
 ################################################
 ##用户调用的函数
@@ -290,7 +339,7 @@ defineTest(add_sdk){
         LIB_LIB_PWD~=s,/,\\,g
     }
 
-    command += $$add_sdk_private()
+    command += $$get_add_sdk_private()
     message($$command)
     QMAKE_POST_LINK += $$command
 

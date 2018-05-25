@@ -12,13 +12,14 @@
 #在build path修复app (macOS专有)
 #copy lib
 #fix bundle路径链接
-defineReplace(add_deploy_with_lib_on_mac) {
+defineReplace(get_fix_app_bundle) {
+
     #need QQT_BUILD_PWD
-    deploy_path = $$1
-    isEmpty(1): error("add_deploy_with_lib_on_mac(deploy_path) requires one argument")
-    create_command = $$create_mac_sdk()
-    APP_DEST_DIR=$${deploy_path}
+    create_command = $$add_mac_sdk()
+
+    APP_DEST_DIR=$${DESTDIR}
     isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
+
     command =
     command += chmod +x $${PWD}/linux_cur_path.sh &&
     command += . $${PWD}/linux_cur_path.sh &&
@@ -47,14 +48,6 @@ defineReplace(add_deploy_with_lib_on_mac) {
     }
     #message($$command)
     return ($${command})
-}
-
-defineReplace(fix_app_bundle_with_qqt_in_building_path_on_mac) {
-    #need QQT_BUILD_PWD
-    APP_DEST_DIR=$${DESTDIR}
-    isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
-    command = $$add_deploy_with_lib_on_mac($${APP_DEST_DIR})
-    return ($$command)
 }
 
 ##########################################

@@ -6,3 +6,7 @@ QQtBasedLibTest::QQtBasedLibTest()
     //pline() << res ( "xxx.png" );
 }
 
+
+
+
+

@@ -85,15 +85,6 @@ msvc {
     #这个功能可用，可是编译问题比较多，不方便，所以默认不开开。
 }
 
-#macOS下必须开开bundle
-contains(QSYS_PRIVATE, macOS){
-    contains(TEMPLATE, app) {
-        CONFIG += app_bundle
-    } else: contains(TEMPLATE, lib) {
-        CONFIG += lib_bundle
-    }
-}
-
 #################################################################
 ##build lib or link lib
 #################################################################

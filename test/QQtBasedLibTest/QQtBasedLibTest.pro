@@ -55,3 +55,5 @@ add_sdk()
 
 #包含lib的header.pri用于公开给用户头文件。
 include (lib_header.pri)
+message($$CONFIG)
+message($$TEMPLATE)

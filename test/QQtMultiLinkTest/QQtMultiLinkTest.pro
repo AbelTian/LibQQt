@@ -35,6 +35,6 @@ FORMS += \
 
 system(touch main.cpp)
 include (../../multi-link/add_base_manager.pri)
-
+add_deploy_lib(QQt)
 add_deploy()
 message($$QMAKE_POST_LINK)
