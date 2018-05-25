@@ -22,7 +22,6 @@ defineReplace(get_add_mac_sdk_fix_building_framework) {
     libname = $$TARGET
     libname_temp = $${libname}_Temp
     libname_lower = $$lower($${libname})
-    libmajorver = $$APP_MAJOR_VERSION
 
     command =
     command += chmod +x $${THIS_PRI_PWD}/linux_cur_path.sh &&
@@ -93,7 +92,9 @@ defineReplace(get_add_mac_sdk){
     #need cd framework root
     #LIB_BUILD_PWD libname libmajorver
     libname = $$TARGET
-    libmajorver = $$APP_MAJOR_VERSION
+    libmajorver = $$system(readlink $${LIB_BUILD_PWD}/$${libname}.framework/Versions/Current)
+    isEmpty(libmajorver):libmajorver = 1
+    #message($$TARGET major version $$libmajor)
 
     LIB_BUNDLE_VER_DIR   = Versions/$${libmajorver}
     LIB_BUNDLE_CUR_DIR   = Versions/Current
@@ -189,7 +190,6 @@ defineReplace(get_add_sdk_work_flow){
 
     libname = $$TARGET
     libname_lower = $$lower($${libname})
-    libmajorver = $$APP_MAJOR_VERSION
 
     command =
     contains(QSYS_PRIVATE, macOS) {
@@ -239,7 +239,6 @@ defineReplace(get_add_sdk_work_flow){
 defineReplace(get_add_sdk_private){
     libname = $$TARGET
     libname_lower = $$lower($${libname})
-    libmajorver = $$APP_MAJOR_VERSION
 
     #qqt defined these dir struct, used from qt library
     LIB_INC_DIR = include/$${libname}
@@ -283,7 +282,7 @@ defineReplace(get_add_sdk_private){
 ################################################
 ##用户调用的函数
 ################################################
-#依赖 libname libsrcdir libdstdir libmajorversion
+#依赖 libname libsrcdir libdstdir
 defineTest(add_sdk){
     #isEmpty(1):error(add_sdk(libname, libsrcdir, libdstdir) need at last one argument)
 
@@ -305,9 +304,6 @@ defineTest(add_sdk){
     #源代码目录
     LIB_SRC_PWD=$$2
     isEmpty(2):LIB_SRC_PWD=$${PWD}
-
-    #lib major version
-    libmajorver = $$APP_MAJOR_VERSION
 
     #need use qqt subdir proj
     LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
