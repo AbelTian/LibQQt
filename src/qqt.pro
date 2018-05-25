@@ -167,7 +167,7 @@ contains(CONFIG, continued_build){
 #################################################################
 #包含lib的header.pri用于公开给用户头文件。
 #
-include (lib_header.pri)
+include (qqt_header.pri)
 
 #设置版本 必要
 add_version(2,4,0,0)

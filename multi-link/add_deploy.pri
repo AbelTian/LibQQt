@@ -8,6 +8,7 @@
 #内部用函数
 #获取命令
 ################################################################################
+THIS_PRI_PWD = $${PWD}
 
 #在build path修复app (macOS专有)
 #copy lib
@@ -120,25 +121,53 @@ defineReplace(get_add_deploy_on_android) {
 #app发布lib到自己的目标里，必须先发布app，如果没有先发布app会出错。
 #lib发布lib，没有的事情
 #解释，从app build目录里拷贝是有原因的，在Creator编译完成后，我把依赖库拷贝过去了，add_library()实现的。
-defineReplace(get_add_deploy_lib_on_mac) {
+defineReplace(get_add_deploy_library_on_mac) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_lib_on_mac(libname) requires one argument")
+    librealname = $$2
+    isEmpty(1): error("get_add_deploy_library_on_mac(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_deploy_library_on_mac(libname, librealname) requires at most two argument")
+    isEmpty(2): librealname = $${libname}
 
     command =
-    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$COPY_DIR $${APP_DEST_PWD}/$${TARGET}.app/Contents/Frameworks/$${libname}.framework $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks
+    command += $$MK_DIR $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    #拷贝sdk到build
+    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks/ &&
+    #更改app bundle链接Lib的位置。
+    command += install_name_tool -change $${librealname}.framework/Versions/Current/$${librealname} \
+         @rpath/$${librealname}.framework/Versions/Current/$${librealname} \
+         $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
+    command += macdeployqt $${APP_BUILD_PWD}/$${TARGET}.app -verbose=1 &&
+    lessThan(QT_MAJOR_VERSION, 5){
+        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh &&
+        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
+    }
+
+    command += $$MK_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    #拷贝sdk到deploy
+    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks/ &&
+    #更改app bundle链接Lib的位置。
+    command += install_name_tool -change $${librealname}.framework/Versions/Current/$${librealname} \
+         @rpath/$${librealname}.framework/Versions/Current/$${librealname} \
+         $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
+    command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1
+    lessThan(QT_MAJOR_VERSION, 5){
+        command += &&
+        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh &&
+        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
+    }
+
     #message($$command)
 
     return ($$command)
 }
 
-defineReplace(get_add_deploy_lib_on_windows) {
+defineReplace(get_add_deploy_library_on_windows) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_lib_on_windows(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_library_on_windows(libname) requires one argument")
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
@@ -160,11 +189,11 @@ defineReplace(get_add_deploy_lib_on_windows) {
     return ($$command)
 }
 
-defineReplace(get_add_deploy_lib_on_linux) {
+defineReplace(get_add_deploy_library_on_linux) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_lib_on_linux(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_library_on_linux(libname) requires one argument")
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
@@ -175,11 +204,11 @@ defineReplace(get_add_deploy_lib_on_linux) {
     return ($$command)
 }
 
-defineReplace(get_add_deploy_lib_on_android) {
+defineReplace(get_add_deploy_library_on_android) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_lib_on_android(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_library_on_android(libname) requires one argument")
 
     command =
     command += $${APP_DEST_PWD}/lib$${libname}.so
@@ -228,31 +257,37 @@ defineTest(add_deploy) {
     return (1)
 }
 
-defineTest(add_deploy_lib) {
+defineTest(add_deploy_library) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
 
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("add_deploy_lib(libname) requires one argument")
+    librealname = $$2
+    isEmpty(1): error("add_deploy_library(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("add_deploy_library(libname, librealname) requires at most two argument")
+    isEmpty(2): librealname = $${libname}
 
-    message("$${TARGET} has deployed lib $${libname}.")
+    LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
+    LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
+    LIB_LIB_PWD = $${LIB_SDK_PWD}/lib
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
     contains(QSYS_PRIVATE, Win32||Win64) {
         #发布windows版本
-        QMAKE_POST_LINK += $$get_add_deploy_lib_on_win($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_library_on_win($${libname})
     } else: contains(QSYS_PRIVATE, macOS) {
         #发布苹果版本，iOS版本也是这个？
-        QMAKE_POST_LINK += $$get_add_deploy_lib_on_mac($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_library_on_mac($${libname})
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
-        ANDROID_EXTRA_LIBS += $$get_add_deploy_lib_on_android($${libname})
+        ANDROID_EXTRA_LIBS += $$get_add_deploy_library_on_android($${libname})
     } else {
         #发布linux、e-linux，这个是一样的。
-        QMAKE_POST_LINK += $$get_add_deploy_lib_on_linux($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_library_on_linux($${libname})
     }
 
     export(QMAKE_POST_LINK)
 
+    message("$${TARGET} has deployed lib $${libname}.")
     return (1)
 }
 
@@ -276,6 +311,7 @@ message(Deploy $${TARGET} to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
 #起始位置 编译位置 中间目标位置
 APP_DEST_PWD=$${DESTDIR}
 isEmpty(APP_DEST_PWD):APP_DEST_PWD=.
+APP_BUILD_PWD = $$APP_DEST_PWD
 
 #set app deploy pwd
 #APP_DEPLOY_PWD is here.
@@ -286,5 +322,3 @@ APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QSYS_STD_DIR}
 equals(QMAKE_HOST.os, Windows) {
     APP_DEPLOY_PWD~=s,/,\\,g
 }
-
-

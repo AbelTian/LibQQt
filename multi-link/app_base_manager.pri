@@ -40,8 +40,8 @@ include ($${PWD}/add_version.pri)
 #注意，此处强制发布App 不需要用户手动调用。
 #注意，此处强制依赖LibQQt，不需要用户手动发布LibQQt。
 add_deploy()
-add_deploy_lib(QQt)
-#如果用户依赖了其他的lib，便可以用add_deploy_lib进行拷贝依赖到app发布区域。
+add_deploy_library(QQt)
+#如果用户依赖了其他的lib，便可以用add_deploy_library进行拷贝依赖到app发布区域。
 #并且这个工作，后续持续收到add_deploy配置开关的控制。
 #note: add_deploy 一个配置开关 一个函数 两个都有效使用
 #注意，用户必须先发布lib 再发布app

@@ -317,12 +317,6 @@ defineTest(add_sdk){
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
     #message(QQt sdk install here:$${LIB_SDK_PWD})
 
-    contains(CONFIG, link_from_sdk) {
-        LIB_LIB_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}/lib
-    } else: contains(CONFIG, link_from_build)  {
-        LIB_LIB_PWD = $${APP_BUILD_ROOT}/$${LIB_STD_DIR}/$${LIB_DST_DIR}
-    }
-
     #这里不仅仅目标为windows的时候，才会转换，
     #开发Host为Windows的时候，都要转换。
     #contains(QSYS_PRIVATE, WIN32||WIN64) {
@@ -336,11 +330,12 @@ defineTest(add_sdk){
         LIB_DST_DIR~=s,/,\\,g
         LIB_BUILD_PWD~=s,/,\\,g
         LIB_SDK_PWD~=s,/,\\,g
-        LIB_LIB_PWD~=s,/,\\,g
     }
 
     command += $$get_add_sdk_private()
-    message($$command)
+    #message($$command)
+
+    !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
     QMAKE_POST_LINK += $$command
 
     export(QMAKE_POST_LINK)
