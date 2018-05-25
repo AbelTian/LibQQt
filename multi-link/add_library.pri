@@ -1,12 +1,13 @@
 #-------------------------------------------------------------
 #add_library.pri
-#提供app链接函数，app lib工程通用
+#提供app链接library函数，app lib工程通用
 #-------------------------------------------------------------
 
 ################################################################################
 #内部用函数
 #获取命令
 ################################################################################
+#链接库的命令
 defineReplace(get_add_library) {
     libname = $$1
     librealname = $$2
@@ -31,6 +32,7 @@ defineReplace(get_add_library) {
     return ($${LINK})
 }
 
+#获取头文件路径
 defineReplace(get_add_header) {
     incname = $$1
     increalname = $$2
@@ -124,5 +126,82 @@ defineTest(add_defines) {
     DEFINES += $${command}
     export(DEFINES)
 
+    return (1)
+}
+
+##################################################################
+##include QQt directories
+##################################################################
+defineReplace(get_qqt_header){
+    path = $$1
+    !isEmpty(2) : error("get_qqt_header(path) requires one arguments.")
+    isEmpty(1) : error("get_qqt_header(path) requires one arguments.")
+
+    #basic
+    command += $${path}
+    command += $${path}/core
+    command += $${path}/gui
+    command += $${path}/widgets
+    command += $${path}/multimedia
+    command += $${path}/sql
+    command += $${path}/frame
+    command += $${path}/printsupport
+
+    #charts
+    command += $${path}/charts
+    command += $${path}/charts/qcustomplot
+
+    #network
+    command += $${path}/network
+    command += $${path}/network/qextserialport
+
+    ##soap (web service)
+    command += $${path}/network/soap
+
+    ##gumbo library
+    command += $${path}/network/gumbo/query/src
+    command += $${path}/network/gumbo/parser/src
+    win32{
+        command += $${path}/network/gumbo/parser/visualc/include
+    }
+
+    #plugin support
+    command += $${path}/pluginsupport
+    command += $${path}/pluginsupport/devicewatcher
+
+    #exquisite widgets
+    command += $${path}/exquisite
+    command += $${path}/exquisite/clicksoundwidgets
+    command += $${path}/exquisite/clickwidgets
+    command += $${path}/exquisite/svgwidgets
+    command += $${path}/exquisite/gifwidgets
+    command += $${path}/exquisite/openglwidgets
+    command += $${path}/exquisite/colorwidgets
+    command += $${path}/exquisite/mathml
+    command += $${path}/exquisite/dmmu
+
+    ##qr code library
+    command += $${path}/exquisite/qrcode/qrencode
+    command += $${path}/exquisite/qrcode/qrdecode
+    command += $${path}/exquisite/qrcode/qrdecode/zxing
+    win32-g++{
+        command += $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing
+    }
+    win32-msvc*{
+        command += $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing \
+                    $${path}/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
+    }
+
+    #highgrade module
+    command += $${path}/highgrade
+
+    return ($$command)
+}
+
+defineTest(add_qqt_header){
+    #包含QQt头文件的过程
+    header_path = $$get_add_header(QQt)
+    INCLUDEPATH += $$get_qqt_header($$header_path)
+    export(INCLUDEPATH)
     return (1)
 }

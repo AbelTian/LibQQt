@@ -130,13 +130,15 @@ defineReplace(get_add_deploy_library_on_mac) {
     !isEmpty(3): error("get_add_deploy_library_on_mac(libname, librealname) requires at most two argument")
     isEmpty(2): librealname = $${libname}
 
+    libmajorver = $$system(readlink $${LIB_LIB_PWD}/$${librealname}.framework/Versions/Current)
+
     command =
     command += $$MK_DIR $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
     #拷贝sdk到build
-    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks/ &&
+    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
     #更改app bundle链接Lib的位置。
-    command += install_name_tool -change $${librealname}.framework/Versions/Current/$${librealname} \
-         @rpath/$${librealname}.framework/Versions/Current/$${librealname} \
+    command += install_name_tool -change $${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
+         @rpath/$${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
          $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     command += macdeployqt $${APP_BUILD_PWD}/$${TARGET}.app -verbose=1 &&
     lessThan(QT_MAJOR_VERSION, 5){
@@ -146,10 +148,10 @@ defineReplace(get_add_deploy_library_on_mac) {
 
     command += $$MK_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
     #拷贝sdk到deploy
-    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks/ &&
+    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
     #更改app bundle链接Lib的位置。
-    command += install_name_tool -change $${librealname}.framework/Versions/Current/$${librealname} \
-         @rpath/$${librealname}.framework/Versions/Current/$${librealname} \
+    command += install_name_tool -change $${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
+         @rpath/$${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
          $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1
     lessThan(QT_MAJOR_VERSION, 5){

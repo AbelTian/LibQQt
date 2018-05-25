@@ -35,6 +35,15 @@ FORMS += \
 
 system(touch main.cpp)
 include (../../multi-link/add_base_manager.pri)
-add_deploy_library(QQt)
+
+#链接QQt
+add_library(QQt)
+#包含QQt的头文件
+add_qqt_header()
+
+#app从build到deploy
 add_deploy()
+#libQQt从sdk到build和deploy
+add_deploy_library(QQt)
+
 message($$QMAKE_POST_LINK)
