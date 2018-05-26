@@ -15,9 +15,11 @@ SUBDIRS =
 ##-----------------------------------------------------------------
 #古老的链接LibQQt的方式废弃。
 #App管理Application句柄的方式废弃。
-#SUBDIRS += examples/qqtframe
+#
+SUBDIRS += examples/qqtframe
 
-#SUBDIRS += examples/animationframe
+#
+SUBDIRS += examples/animationframe
 #
 #need vlcQt libvlc library
 #SUBDIRS += test/qqtliveplayer
@@ -39,46 +41,67 @@ SUBDIRS =
 #第二种引用LibQQt的方式
 #方法：include(.../LibQQt/multi-link/add_base_manager.pri)
 #QQt提供QQtApplication帮助App管理Application句柄。
-#SUBDIRS += examples/qqtframe2
+#
+SUBDIRS += examples/qqtframe2
 #必看
 #
 SUBDIRS += examples/exquisite
-#SUBDIRS += examples/tabwidgetexamples
+#
+SUBDIRS += examples/tabwidgetexamples
 #need QZXing, default closed.
 #SUBDIRS += examples/qrcodeexample
 
-#SUBDIRS += examples/qqtchartexample
 #
-#SUBDIRS += examples/console_app
+SUBDIRS += examples/qqtchartexample
+#
+#
+SUBDIRS += examples/console_app
 #-----------------------------------------------------------------
 #need webaccessmanager - WebSupport
 #need QSsl
 #need GumoQuery
 #-----------------------------------------------------------------
-#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/QtSdkManager
-#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
-#SUBDIRS += demo/GuiBuildTool
-#SUBDIRS += demo/LearnCookieTest
+#
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/QtSdkManager
+#
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
+#
+SUBDIRS += demo/GuiBuildTool
+#
+SUBDIRS += demo/LearnCookieTest
 #-----------------------------------------------------------------
 #some test project
-#SUBDIRS += test/gumbo_query_test
-#SUBDIRS += test/customqvariant
-#SUBDIRS += test/framelesshelperwidget
-#SUBDIRS += test/treeviewtest
-#SUBDIRS += test/bytearraytest
-#!contains(QSYS_PRIVATE, iOS|iOSSimulator){
-#    SUBDIRS += test/cmdwidget
-#}
-#SUBDIRS += test/coretest
-#SUBDIRS += test/tmpproj
+#
+SUBDIRS += test/gumbo_query_test
+#
+SUBDIRS += test/customqvariant
+#
+SUBDIRS += test/framelesshelperwidget
+#
+SUBDIRS += test/treeviewtest
+#
+SUBDIRS += test/bytearraytest
+#
+!contains(QSYS_PRIVATE, iOS|iOSSimulator){
+#
+    SUBDIRS += test/cmdwidget
+#
+}
+#
+SUBDIRS += test/coretest
+#
+SUBDIRS += test/tmpproj
 
 #
 #need QtSoap - WebSupport
-##SUBDIRS += test/easter
-#SUBDIRS += demo/soapQQtOnline
+##
+SUBDIRS += test/easter
+#
+SUBDIRS += demo/soapQQtOnline
 #
 ##need bluetooth library
-#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += test/qqtbtfileserver
+#
+greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += test/qqtbtfileserver
 
 #0000
 #
@@ -102,35 +125,46 @@ greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
 #网络创建工具
-#SUBDIRS += demo/QQtClientCreator
-#SUBDIRS += demo/QQtServerCreator
+#
+SUBDIRS += demo/QQtClientCreator
+#
+SUBDIRS += demo/QQtServerCreator
 #这边是个组合项，客户端和服务器一起的。必看
-#SUBDIRS += examples/qqtclientexample
-#SUBDIRS += examples/qqtserverexample
+#
+SUBDIRS += examples/qqtclientexample
+#
+SUBDIRS += examples/qqtserverexample
 #通信协议的复杂的例子
-#SUBDIRS += examples/qqtnetworkexample
+#
+SUBDIRS += examples/qqtnetworkexample
 
 #udp 嵌入式linux，Qt编译了udp支持，默认是支持的
-#SUBDIRS += examples/qqtudpexample
-#lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
+#
+SUBDIRS += examples/qqtudpexample
+#
+lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
 
 #-----------------------------------------------------------------
 #Q5级别 V2 第三版、第二代
 #和QQt脱离开的Multi-link技术
 #默认链接QQt，但是可以容易的脱开。
 #-----------------------------------------------------------------
-#SUBDIRS += test/openglwidgettest
+#
+SUBDIRS += test/openglwidgettest
 #
 SUBDIRS += test/osdtest
-#SUBDIRS += test/inputtest
-#SUBDIRS += demo/SysInfoNotify
+#
+SUBDIRS += test/inputtest
+#
+SUBDIRS += demo/SysInfoNotify
 
-#SUBDIRS += test/QQtWidgetClickHelperTest
+#
+SUBDIRS += test/QQtWidgetClickHelperTest
 #
 SUBDIRS += test/QQtWidgetClickSoundHelperTest
 
 #这是一对，用于测试Multi-link对其他的lib的链接能力
-#SUBDIRS += test/QQtMultiLinkTest
+SUBDIRS += test/QQtMultiLinkTest
 
 #在subdirs里面添加一次add_base_manager.pri是否可以影响全部子工程
-#SUBDIRS += test/SubDirBaseManagerTest
+SUBDIRS += test/SubDirBaseManagerTest

@@ -26,13 +26,14 @@ defineReplace(get_add_deploy_on_windows) {
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
-    command += $$COPY $${APP_BUILD_PWD}\\$${TARGET}.exe $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
+    command += $$COPY $${APP_BUILD_PWD}\\$${TARGET}.exe $${APP_DEPLOY_PWD}\\$${TARGET}.exe
     #msvc 在deploy lib上有点区别，mingw不发布依赖lib，在编译区也能运行，msvc却不能。
     #在运行区，都必须发布依赖lib。
     #add_deploy 仅仅发布app，不管依赖的lib。
 
     #all windows need deploy release version?
     equals(BUILD, Debug) {
+        command += $$CMD_SEP
         #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
         msvc{
             command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
@@ -40,6 +41,7 @@ defineReplace(get_add_deploy_on_windows) {
             command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
         }
     } else: equals(BUILD, Release) {
+        command += $$CMD_SEP
         #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
         command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
     }
@@ -142,7 +144,7 @@ defineReplace(get_add_deploy_library_on_windows) {
 
     command += $$RM $${APP_DEPLOY_PWD}\\$${librealname}.* $$CMD_SEP
     #拷贝sdk到deploy
-    command += $$COPY_DIR $${LIB_LIB_PWD}\\$${librealname}.* $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$COPY_DIR $${LIB_LIB_PWD}\\$${librealname}.* $${APP_DEPLOY_PWD}
 
     #message($$command)
 
@@ -164,7 +166,7 @@ defineReplace(get_add_deploy_library_on_linux) {
     command += $$COPY_DIR $${LIB_LIB_PWD}/lib$${librealname}.so* $${APP_BUILD_PWD} $$CMD_SEP
 
     command += $$RM $${APP_DEPLOY_PWD}/lib$${libname}.so* $$CMD_SEP
-    command += $$COPY_DIR $${LIB_LIB_PWD}/lib$${librealname}.so* $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$COPY_DIR $${LIB_LIB_PWD}/lib$${librealname}.so* $${APP_DEPLOY_PWD}
     #message($$command)
 
     return ($$command)
