@@ -39,8 +39,9 @@ contains(QMAKE_HOST.os,Windows) {
     RM_DIR = rm -rf
     #PATH_SEP=/
 }
+
 ################################################
-##get command string
+##get command string 这些函数一般内部使用
 ################################################
 defineReplace(get_mkdir) {
     filepath = $$1
@@ -186,7 +187,7 @@ defineReplace(get_user_config_path) {
 #}
 
 ################################################
-##custom functions
+##custom functions 用户喜欢这些函数
 ################################################
 # system is default a replace and test function, can be used in condition, but
 # system execute succ return 1 fail return 0 it is not follow command error code.

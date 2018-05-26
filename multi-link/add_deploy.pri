@@ -195,7 +195,7 @@ defineTest(add_deploy) {
         message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
         error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
     }
-    message(Deploy $${TARGET} to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
+    message($${TARGET} is deployed to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
 
     #起始位置 编译位置 中间目标位置
     APP_DEST_PWD=$${DESTDIR}
@@ -216,13 +216,11 @@ defineTest(add_deploy) {
     #不会走到
     isEmpty(APP_DEPLOY_ROOT) {
         message("$${TARGET} hasn't deployed any app files")
-        greaterThan(QT_MAJOR_VERSION, 5):return()
+        return(0)
     }
 
     ##4.8 qmake arm32 return() 函数无效
     !isEmpty(APP_DEPLOY_ROOT) {
-        #这里定义了一个配置开关，但是用户可以忽略
-        #CONFIG += add_deploy
         message("$${TARGET} has deployed some app files")
     }
 

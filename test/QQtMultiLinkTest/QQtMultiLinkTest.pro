@@ -52,7 +52,14 @@ add_deploy_library(QQt)
 #对于这个先后顺序，macOS下要求比较严格。
 #必须先发布App
 
+#添加语言 de_DE
 add_language($${PWD}/$${TARGET}.pro, $${PWD}/AppRoot/lang, de_DE)
+#添加语言 zh_CN en_US
 add_zh_CN_en_US($${PWD}/$${TARGET}.pro, $${PWD}/AppRoot/lang)
 
+
+#发布配置文件 把AppRoot里的配置项目拷贝到运行目录和发布目录
+add_deploy_config($${PWD}/AppRoot)
+
+message($$QMAKE_PRE_LINK)
 message($$QMAKE_POST_LINK)
