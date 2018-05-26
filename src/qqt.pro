@@ -47,6 +47,8 @@ include ($$PWD/qqt_source.pri)
 #################################################################
 #这个的设置有特点，要先设置
 add_version(2,4,0,0)
+#trans this macro to source files.
+DEFINES += QQT_VERSION=$$VERSION
 
 #user can use app_version.pri to modify app version once, once is all. DEFINES += APP_VERSION=0.0.0 is very good.
 #unix:VERSION = $${QQT_VERSION}
