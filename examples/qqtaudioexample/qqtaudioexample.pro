@@ -36,16 +36,11 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
-APP_CONFIG_PWD = $${PWD}/approot
-equals(QMAKE_HOST.os, Windows) {
-    APP_CONFIG_PWD ~=s,/,\\,g
-}
-
 system(touch main.cpp)
 
-include(../../app/app_base_manager.pri)
+include(../../multi-link/add_base_manager.pri)
 
-contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
+contains(QSYS_PRIVATE, ANDROID|ANDROIDX86) {
     CONFIG += mobility
     MOBILITY =
     DISTFILES += \
@@ -56,3 +51,17 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
 
 RESOURCES += \
     qqtaudioexample.qrc
+
+#这个的设置有特点，要先设置
+add_version (1,0,0,0)
+
+#先发布App
+#app从build到deploy
+add_deploy()
+
+#后发布依赖
+#libQQt从sdk到build和deploy
+add_deploy_library(QQt)
+
+#发布配置文件 把AppRoot里的配置项目拷贝到运行目录和发布目录
+add_deploy_config($${PWD}/AppRoot)

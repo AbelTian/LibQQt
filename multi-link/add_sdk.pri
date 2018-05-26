@@ -346,6 +346,83 @@ defineTest(add_sdk){
     return (1)
 }
 
+#依赖 libname libsrcdir libdstdir
+#添加一个参数 subdirs列表 包含subdirs层 子文件夹层
+#TARGET
+#PWD
+#DESTDIR
+#sub层列表 从头到尾 如果为空，则等于add_sdk()
+#支持Qt5，不支持Qt4. Qt4 qmake比较落后。
+defineTest(add_sdk_in_subdirs){
+    #isEmpty(1):error(add_subdir_sdk(libname, libsrcdir, libdstdir) need at last one argument)
+    contains(QSYS_PRIVATE, macOS) {
+        #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
+    }
+
+    libname=$$1
+    isEmpty(1):libname = $$TARGET
+    libname_lower = $$lower($${libname})
+    #LIB std dir is not same to app std dir
+    LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
+
+    #create platform sdk need this
+    #源代码目录
+    LIB_SRC_PWD=$$2
+    isEmpty(2):LIB_SRC_PWD=$${PWD}
+
+    #编译目标相对位置
+    LIB_DST_DIR=$$3
+    isEmpty(3):LIB_DST_DIR = $$DESTDIR
+
+    #编译目录的完全位置
+    LIB_BUILD_PWD=
+    isEmpty(4){
+        #add sdk level
+        LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
+        !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+    } else {
+        #sub dir level
+        LIB_SUBDIR_LIST=$$4
+        first_value = $$first(LIB_SUBDIR_LIST)
+        LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${first_value}/$${QSYS_STD_DIR}
+        LIB_SUBDIR_LIST -= $$first_value
+        for(dir, LIB_SUBDIR_LIST) {
+            LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${dir}
+        }
+        LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${TARGET}
+        !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+    }
+
+    #sdk path
+    LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
+    #message($${TARGET} sdk install here:$${LIB_SDK_PWD})
+
+    #这里不仅仅目标为windows的时候，才会转换，
+    #开发Host为Windows的时候，都要转换。
+    #contains(QSYS_PRIVATE, WIN32||WIN64) {
+    equals(QMAKE_HOST.os, Windows) {
+        APP_BUILD_ROOT~=s,/,\\,g
+        LIB_SDK_ROOT~=s,/,\\,g
+        APP_DEPLOY_ROOT~=s,/,\\,g
+
+        QSYS_STD_DIR~=s,/,\\,g
+        LIB_STD_DIR~=s,/,\\,g
+        LIB_DST_DIR~=s,/,\\,g
+        LIB_BUILD_PWD~=s,/,\\,g
+        LIB_SDK_PWD~=s,/,\\,g
+    }
+
+    command += $$get_add_sdk_private()
+    #message($$command)
+
+    !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
+    QMAKE_POST_LINK += $$command
+
+    export(QMAKE_POST_LINK)
+
+    return (1)
+}
+
 #if you want to use QQt with QT += QQt please open this feature
 #unimplete: CONFIG += add_sdk_to_Qt
 defineTest(add_sdk_to_Qt){

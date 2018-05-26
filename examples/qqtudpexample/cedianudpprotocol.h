@@ -1,16 +1,16 @@
-#ifndef CEDIANUDPPROTOCOL_H
+﻿#ifndef CEDIANUDPPROTOCOL_H
 #define CEDIANUDPPROTOCOL_H
 
-#include <qqtudpprotocol.h>
+#include <qqtprotocol.h>
 #include <cedianudpmessage.h>
 #include <qqtcore.h>
 #include <cedianudpserver.h>
 
-class CedianUdpProtocol : public QQtUdpProtocol
+class CedianUdpProtocol : public QQtProtocol
 {
     Q_OBJECT
 public:
-    explicit CedianUdpProtocol(QObject *parent = nullptr);
+    explicit CedianUdpProtocol ( QObject* parent = nullptr );
     virtual ~CedianUdpProtocol() {}
 
     QNetworkDatagram& dataGram() { return mDG; }
@@ -25,7 +25,7 @@ public slots:
 
     // QQtUdpProtocol interface
 protected:
-    virtual bool dispatcher(const QNetworkDatagram &) override;
+    virtual bool dispatcher ( const QByteArray& ) override;
 
 private:
     /*发送者IP 端口 这个IP比较重要，但是在程序中没有用*/
@@ -38,7 +38,7 @@ private:
 };
 
 /*建议空调用一次，赋值parent，进行初始化*/
-CedianUdpProtocol* cedianUdpServer(QObject* parent = 0);
-qint32 cedianUdpPort(int siteID, qint32* portList = 0);
+CedianUdpProtocol* cedianUdpServer ( QObject* parent = 0 );
+qint32 cedianUdpPort ( int siteID, qint32* portList = 0 );
 
 #endif // CEDIANUDPPROTOCOL_H

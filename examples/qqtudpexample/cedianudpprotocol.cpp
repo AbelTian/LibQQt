@@ -1,39 +1,35 @@
-#include "cedianudpprotocol.h"
+﻿#include "cedianudpprotocol.h"
 
-CedianUdpProtocol::CedianUdpProtocol(QObject *parent) : QQtUdpProtocol(parent)
+CedianUdpProtocol::CedianUdpProtocol ( QObject* parent ) : QQtProtocol ( parent )
 {
 
 }
 
-bool CedianUdpProtocol::dispatcher(const QNetworkDatagram & dg)
+bool CedianUdpProtocol::dispatcher ( const QByteArray& dg )
 {
-    mDG = dg;
-    mAddress = dg.senderAddress();
-    mPort = dg.senderPort();
-    mLocalPort = dg.destinationPort();
-    QByteArray data = dg.data();
-    mMsg.parser(data);
+    QByteArray data = dg;
+    mMsg.parser ( data );
     emit msgIncoming();
 }
 
 /*依赖已经初始化好的端口*/
-CedianUdpProtocol *cedianUdpServer(QObject *parent)
+CedianUdpProtocol* cedianUdpServer ( QObject* parent )
 {
     static CedianUdpServer* s0[9] = {NULL};
     static CedianUdpProtocol* p0 = NULL;
-    if(!s0[0] && !p0)
+    if ( !s0[0] && !p0 )
     {
-        p0 = new CedianUdpProtocol(parent);
-        for(int i =0; i < 9; i++)
+        p0 = new CedianUdpProtocol ( parent );
+        for ( int i = 0; i < 9; i++ )
         {
-            int port = cedianUdpPort(i+1);
-            pline() << i+1 << port;
+            int port = cedianUdpPort ( i + 1 );
+            pline() << i + 1 << port;
 
-            s0[i] = new CedianUdpServer(parent);
+            s0[i] = new CedianUdpServer ( parent );
             /*通讯端口：绑定本地端口*/
-            s0[i]->bind(port);
+            s0[i]->bind ( port );
             /*通讯端口：给测点协议*/
-            s0[i]->installProtocol(p0);
+            //s0[i]->installProtocol ( p0 );
         }
     }
     return p0;
@@ -46,18 +42,18 @@ CedianUdpProtocol *cedianUdpServer(QObject *parent)
  * 不要少于9个，不要越界。
  * 1-9
 */
-qint32 cedianUdpPort(int siteID, qint32* portList)
+qint32 cedianUdpPort ( int siteID, qint32* portList )
 {
-    if(siteID < 1 || siteID > 9)
+    if ( siteID < 1 || siteID > 9 )
         return 0;
 
     static qint32 sPort[9] = {0};
-    if(portList)
+    if ( portList )
     {
-        for (int i =0; i < 9; i++)
+        for ( int i = 0; i < 9; i++ )
         {
             sPort[i] = portList[i];
         }
     }
-    return sPort[siteID-1];
+    return sPort[siteID - 1];
 }

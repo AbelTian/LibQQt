@@ -1,7 +1,7 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <qqtslideeffecttabbar.h>
-#include <qqtpictureeffecttabwidget.h>
+#include <qqtslidetabbar.h>
+#include <qqtpicturetabwidget.h>
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),

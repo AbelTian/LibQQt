@@ -89,8 +89,10 @@ defineReplace(get_add_deploy_library_on_mac) {
     !isEmpty(3): error("get_add_deploy_library_on_mac(libname, librealname) requires at most two argument")
     isEmpty(2): librealname = $${libname}
 
+    #这里有个bug，用户删除了SDK以后，App qmake阶段读取这个SDK，结果读到这个位置，为0...bug，其实不应该为0，应该为用户设置的SDK版本号。
+    #解决方法一：忽略第一遍编译。也就是什么SDK都没有的时候，编译一遍，lib生成了SDK，可是不管他，再qmake后编译一遍。能解决。
     libmajorver = $$system(readlink $${LIB_LIB_PWD}/$${librealname}.framework/Versions/Current)
-    #这里是以防万一lib不存在
+    #这里是以防万一lib不存在 但是不能退出？如果是subdirs包含Library的工程，就不能退出。
     isEmpty(libmajorver){
         libmajorver=0
         message($$TARGET link $$libname, unexisted lib.)

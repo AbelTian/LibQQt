@@ -45,7 +45,7 @@ RCC_DIR = qrc
 #user can change this dir
 #DESTDIR = bin
 
-equals(QKIT_PRIVATE, macOS) {
+equals(QSYS_PRIVATE, macOS) {
     QMAKE_PRE_LINK += echo hello
     #QMAKE_PRE_LINK += rm -rf $${DESTDIR}/$${TARGET}.app
 }
@@ -55,8 +55,8 @@ equals(QKIT_PRIVATE, macOS) {
 #if you link a library to your app, on android you must select the running kit to the app, not LibQQt e.g.
 #user can modify any infomation under this annotation
 #-------------------------------------------------
-include(../../app/app_base_manager.pri)
-#include(/Users/abel/Develop/a0-develop/LibQQt/app/app_base_manager.pri)
+include(../../multi-link/add_base_manager.pri)
+#include(/Users/abel/Develop/a0-develop/LibQQt/multi-link/add_base_manager.pri)
 
 #-------------------------------------------------
 #user app may use these these settings prefertly
@@ -65,11 +65,11 @@ include(../../app/app_base_manager.pri)
 #install app
 #-------------------------------------------------
 #CONFIG += can_install
-can_install:equals(QKIT_PRIVATE, EMBEDDED) {
+can_install:equals(QSYS_PRIVATE, EMBEDDED) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
-    equals(QKIT_PRIVATE, macOS) {
+    equals(QSYS_PRIVATE, macOS) {
         target.path = /Applications
         INSTALLS += target
     }
@@ -78,11 +78,11 @@ can_install:equals(QKIT_PRIVATE, EMBEDDED) {
 ############
 ##config defination
 ############
-equals(QKIT_PRIVATE, macOS) {
+equals(QSYS_PRIVATE, macOS) {
     CONFIG += app_bundle
 }
 
-contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
+contains(QSYS_PRIVATE, ANDROID|ANDROIDX86) {
     CONFIG += mobility
     MOBILITY =
     DISTFILES += \
@@ -90,6 +90,17 @@ contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
 
     ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
 }
+
+#这个的设置有特点，要先设置
+add_version (1,0,0,0)
+
+#先发布App
+#app从build到deploy
+add_deploy()
+
+#后发布依赖
+#libQQt从sdk到build和deploy
+add_deploy_library(QQt)
 
 #-------------------------------------------------
 ##project environ

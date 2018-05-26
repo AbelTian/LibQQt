@@ -7,6 +7,7 @@
 ##definition and configration
 ##need QSYS
 #################################################################
+#...
 
 ##################################################################
 ##include directories
@@ -22,5 +23,6 @@ defineReplace(lib_header){
     return ($$command)
 }
 
+#= INCLUDEPATH += $$lib_header($$PWD)
 add_local_header( $$lib_header($$PWD) )
 message($$INCLUDEPATH)

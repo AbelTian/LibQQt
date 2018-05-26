@@ -46,14 +46,11 @@ unix {
 system(touch qqtbasedlibtest.cpp)
 
 #包含基础管理者
-include (../../multi-link/add_base_manager.pri)
+include (../../../multi-link/add_base_manager.pri)
 
-#设置版本 必要
+#设置版本
 add_version(1,0,0,0)
 #发布SDK 必要
-add_sdk()
-
-#包含lib的header.pri用于公开给用户头文件。
+add_sdk_in_subdirs($$TARGET, $$PWD, $$DESTDIR, $$escape_expand( QQtExample_Library, test/QQtMultiLinkTest ) )
+#这个lib的头文件、宏定义，集中在这里，这个是lib用app也用。必要
 include (lib_header.pri)
-message($$CONFIG)
-message($$TEMPLATE)

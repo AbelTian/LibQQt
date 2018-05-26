@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-01-30T15:14:36
+# Project created by QtCreator 2018-05-20T13:55:04
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = qqtudpexample
+TARGET = QQtMultiLinkApp
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,32 +25,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    cedianudpmessage.cpp \
-    cedianudpprotocol.cpp \
-    cedianudpserver.cpp \
-    kongzhiqiudpmessage.cpp \
-    kongzhiqiudpprotocol.cpp
-
+        mainwindow.cpp
 
 HEADERS += \
-        mainwindow.h \
-    cedianudpmessage.h \
-    cedianudpprotocol.h \
-    cedianudpserver.h \
-    kongzhiqiudpmessage.h \
-    kongzhiqiudpprotocol.h
-
+        mainwindow.h
 
 FORMS += \
         mainwindow.ui
 
-CONFIG += mobility
-MOBILITY = 
+#必须的，否则POST LINK不启动
+system(touch main.cpp)
 
-#促使编译源代码，qmake pri配置里面的QMAKE_XX_LINK命令就会执行。
-system("touch main.cpp")
-include(../../multi-link/add_base_manager.pri)
+include (../../../multi-link/add_base_manager.pri)
+
 #这个的设置有特点，要先设置
 add_version (1,0,0,0)
 
@@ -62,3 +49,18 @@ add_deploy()
 #libQQt从sdk到build和deploy
 add_deploy_library(QQt)
 
+#发布配置文件 把AppRoot里的配置项目拷贝到运行目录和发布目录
+add_deploy_config($${PWD}/AppRoot)
+
+#对于这个先后顺序，macOS下要求比较严格。
+#必须先发布App
+
+#添加语言 de_DE
+add_language($${PWD}/$${TARGET}.pro, $${PWD}/AppRoot/lang, de_DE)
+#添加语言 zh_CN en_US
+add_zh_CN_en_US($${PWD}/$${TARGET}.pro, $${PWD}/AppRoot/lang)
+
+
+
+message($$QMAKE_PRE_LINK)
+message($$QMAKE_POST_LINK)
