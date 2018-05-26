@@ -40,8 +40,11 @@ defineReplace(get_version_string_4) {
 }
 
 #-------------------------------------------------------------------------------
-#User Make Version Flow
+#User Make Version Function
 #-------------------------------------------------------------------------------
+PRE_VERSION =
+PRE_LIB_VERSION =
+PRE_APP_VERSION =
 defineTest(add_version) {
     isEmpty(4):error(add_version(major, minor, patch, build) need four arguments.)
 
@@ -55,12 +58,22 @@ defineTest(add_version) {
     APP_VERSION3 = $$get_version_string_3( $${APP_MAJOR_VERSION}, $${APP_MINOR_VERSION}, $${APP_PATCH_VERSION} )
     APP_VERSION4 = $$get_version_string_4( $${APP_MAJOR_VERSION}, $${APP_MINOR_VERSION}, $${APP_PATCH_VERSION}, $${APP_BUILD_VERSION} )
 
-    message ($${TARGET} version: V$$APP_VERSION4)
-
     #这两个变量赋值是什么关系？
     #qmake 域变量
     APP_VERSION = $${APP_VERSION3}
-    #源代码 域宏
+
+    #清理上次的源代码 域宏
+    DEFINES -= $$PRE_VERSION
+    DEFINES -= $$PRE_LIB_VERSION
+    DEFINES -= $$PRE_APP_VERSION
+    PRE_VERSION = VERSION=$${APP_VERSION}
+    PRE_LIB_VERSION = LIB_VERSION=$${APP_VERSION}
+    PRE_APP_VERSION = APP_VERSION=$${APP_VERSION}
+    export(PRE_VERSION)
+    export(PRE_LIB_VERSION)
+    export(PRE_APP_VERSION)
+
+    #源代码 域宏    
     DEFINES += VERSION=$${APP_VERSION}
     DEFINES += LIB_VERSION=$${APP_VERSION}
     DEFINES += APP_VERSION=$${APP_VERSION}
@@ -81,5 +94,12 @@ defineTest(add_version) {
     export(APP_PATCH_VERSION)
     export(APP_BUILD_VERSION)
 
+    message ($${TARGET} version: V$$APP_VERSION4)
     return (1)
 }
+
+#-------------------------------------------------------------------------------
+#User Make Version Inition
+#调用一次进行初始化，用户后续进行的更改依然有效。
+#-------------------------------------------------------------------------------
+add_version(0, 0, 0, 0)

@@ -33,17 +33,22 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
+#必须的，否则POST LINK不启动
 system(touch main.cpp)
+
 include (../../multi-link/add_base_manager.pri)
 
-#链接QQt
-add_library(QQt)
-#包含QQt的头文件
-add_qqt_header()
+add_version (1,0,0,0)
 
+#先发布App
 #app从build到deploy
 add_deploy()
+
+#后发布依赖
 #libQQt从sdk到build和deploy
 add_deploy_library(QQt)
+
+#对于这个先后顺序，macOS下要求比较严格。
+#必须先发布App
 
 message($$QMAKE_POST_LINK)

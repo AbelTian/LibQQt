@@ -398,7 +398,7 @@ win32 {
 ##################################################################
 ##include directories
 ##################################################################
-defineReplace(qqt_header){
+defineReplace(get_qqt_header){
     path = $$1
     !isEmpty(2) : error("qqt_header(path) requires one arguments.")
     isEmpty(1) : error("qqt_header(path) requires one arguments.")
@@ -464,4 +464,5 @@ defineReplace(qqt_header){
     return ($$command)
 }
 
-INCLUDEPATH += $$qqt_header($$PWD)
+#添加源代码里的头文件路径 为搜索头文件而添加
+INCLUDEPATH += $$get_qqt_header($$PWD)

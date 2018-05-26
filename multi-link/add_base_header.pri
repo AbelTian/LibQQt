@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------
-#app_base_header.pri
+#add_base_header.pri
 #应用程序和Library的基础header。
 #---------------------------------------------------------------------------------
 #################################################################
@@ -17,7 +17,7 @@ CONFIG(debug, debug|release) {
 }
 
 #compatible old version QQt (deperated)
-greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
+#greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 
 #defined in qqtcore.h
 #lessThan(QT_MAJOR_VERSION, 5):DEFINES += nullptr=0
@@ -61,28 +61,6 @@ CCFLAG =
 QMAKE_CFLAGS +=  $${CCFLAGS}
 QMAKE_CXXFLAGS +=  $${CCFLAGS}
 
-lessThan(QT_VERSION, 4.8.0) {
-    message(A. ensure your compiler support c++11 feature)
-    message(B. suggest Qt version >= 4.8.0)
-    #error(  error occured!)
-}
-
-contains(TEMPLATE, lib) {
-    #create sdk need
-    CONFIG += create_prl
-}
-
-#macOS下必须开开bundle
-contains(QSYS_PRIVATE, macOS){
-    contains(TEMPLATE, app) {
-        CONFIG += app_bundle
-    } else: contains(TEMPLATE, lib) {
-        #仅仅用这个 这个是lib用的pri
-        CONFIG += lib_bundle
-    }
-}
-
-
 #################################################################
 ##version
 #################################################################
@@ -93,7 +71,7 @@ contains(QSYS_PRIVATE, macOS){
 QMAKE_TARGET_FILE = "$${TARGET}"
 QMAKE_TARGET_PRODUCT = "$${TARGET}"
 QMAKE_TARGET_COMPANY = "www.$${TARGET}.com"
-QMAKE_TARGET_DESCRIPTION = "$${TARGET} Foundation Class"
+QMAKE_TARGET_DESCRIPTION = "$${TARGET} Classes"
 QMAKE_TARGET_COPYRIGHT = "Copyright 2017-2022 $${TARGET} Co., Ltd. All rights reserved"
 
 win32 {
@@ -193,7 +171,6 @@ equals (QKIT_PRIVATE, iOSSimulator):{
 
 win32 {
     LIBS += -luser32
-    LIBS += -lopengl32 -lglu32
 }else: unix {
     equals(QSYS_PRIVATE, macOS) {
         #min macosx target

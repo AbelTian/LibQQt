@@ -50,7 +50,21 @@ message(Build $${TARGET} on $${QMAKE_HOST.os} \(Operating System=$${QMAKE_HOST.o
 isEmpty(QSYS_PRIVATE) : message(Build $${TARGET} Qt Kit page FileSystem Name is decided by env variable QSYS. Please set it. )
 
 isEmpty(QSYS_PRIVATE) {
+    message(1. you should change qt default build directory to your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name})
+    message(2. env variable QSYS is required! pleace check app_platform.pri)
+    error(error occured! please check build output panel.)
+}
+
+isEmpty(QSYS_PRIVATE) {
     message(env variable QSYS is required!)
     message(pleace check app_platform.pri)
     error("error occured, please check build output panel.")
+}
+
+
+#in theory, this should not be limited to 4.8.0, no limit is good.
+lessThan(QT_VERSION, 4.8.0) {
+    message(A. ensure your compiler support c++11 feature)
+    message(B. suggest Qt version >= 4.8.0)
+    #error(  error occured!)
 }

@@ -10,54 +10,13 @@
 ################################################################################
 THIS_PRI_PWD = $${PWD}
 
-#在build path修复app (macOS专有)
-#copy lib
-#fix bundle路径链接
-defineReplace(get_fix_app_bundle) {
-
-    #need QQT_BUILD_PWD
-    create_command = $$add_mac_sdk()
-
-    APP_DEST_DIR=$${DESTDIR}
-    isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
-
-    command =
-    command += chmod +x $${PWD}/linux_cur_path.sh &&
-    command += . $${PWD}/linux_cur_path.sh &&
-    command += rm -rf $${APP_DEST_DIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-    #拷贝QQt.framework到app bundle里。其实，是直接在app里执行的。这个会移动走。
-    command += mkdir -p $${APP_DEST_DIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-    command += cd $${APP_DEST_DIR}/$${TARGET}.app/Contents/Frameworks/QQt.framework &&
-    #修复QQt.framework里的快捷方式
-    command += $${create_command} &&
-    command += chmod +x $${PWD}/linux_cd_path.sh &&
-    command += . $${PWD}/linux_cd_path.sh &&
-
-    #Qt Creator create framework but use absolute path to make link
-    #QMAKE_POST_LINK += cp -rf $${QQT_LIB_PWD}/QQt.framework \
-    #        $${APP_DEST_DIR}/$${TARGET}.app/Contents/Frameworks &&
-    #更改app bundle链接QQt的位置。
-    command += install_name_tool -change QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
-         @rpath/QQt.framework/Versions/$${QQT_MAJOR_VERSION}/QQt \
-         $${APP_DEST_DIR}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
-    command += macdeployqt $${APP_DEST_DIR}/$${TARGET}.app -verbose=1
-
-    lessThan(QT_MAJOR_VERSION, 5){
-        command += &&
-        command += chmod +x $${PWD}/mac_deploy_qt4.sh &&
-        command += $${PWD}/mac_deploy_qt4.sh $${APP_DEST_DIR}/$${TARGET}.app/Contents/MacOS/$${TARGET}
-    }
-    #message($$command)
-    return ($${command})
-}
-
 ##########################################
 #app的发布函数命令
 ##########################################
 defineReplace(get_add_deploy_on_mac) {
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
-    command += $$COPY_DIR $${APP_DEST_DIR}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app
+    command += $$COPY_DIR $${APP_BUILD_PWD}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app
     #message($$command)
     return ($$command)
 }
@@ -131,7 +90,11 @@ defineReplace(get_add_deploy_library_on_mac) {
     isEmpty(2): librealname = $${libname}
 
     libmajorver = $$system(readlink $${LIB_LIB_PWD}/$${librealname}.framework/Versions/Current)
-
+    #这里是以防万一lib不存在
+    isEmpty(libmajorver){
+        libmajorver=0
+        message($$TARGET link $$libname, unexisted lib.)
+    }
     command =
     command += $$MK_DIR $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
     #拷贝sdk到build
@@ -226,6 +189,29 @@ defineTest(add_deploy) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
 
+    #deploy root
+    isEmpty(APP_DEPLOY_ROOT){
+        message($${TARGET} $${CONFIG_FILE})
+        message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
+        error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
+    }
+    message(Deploy $${TARGET} to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
+
+    #起始位置 编译位置 中间目标位置
+    APP_DEST_PWD=$${DESTDIR}
+    isEmpty(APP_DEST_PWD):APP_DEST_PWD=.
+    APP_BUILD_PWD = $$APP_DEST_PWD
+
+    #set app deploy pwd
+    #APP_DEPLOY_PWD is here.
+    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QSYS_STD_DIR}
+    #不仅仅发布目标为Windows的时候，才需要改变路径
+    #开发机为Windows就必须改变。
+    #contains(QKIT_PRIVATE, WIN32||WIN64) {
+    equals(QMAKE_HOST.os, Windows) {
+        APP_DEPLOY_PWD~=s,/,\\,g
+    }
+
     #如果 配置文件里 没有配置 APP_DEPLOY_ROOT 那么返回，不拷贝发布任何应用
     #不会走到
     isEmpty(APP_DEPLOY_ROOT) {
@@ -263,6 +249,34 @@ defineTest(add_deploy_library) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
 
+    #deploy root
+    isEmpty(APP_DEPLOY_ROOT){
+        message($${TARGET} $${CONFIG_FILE})
+        message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
+        error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
+    }
+    message(Deploy $${TARGET} to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
+    isEmpty(LIB_SDK_ROOT){
+        message($${TARGET} $${CONFIG_FILE})
+        message(LIB_SDK_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
+        error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
+    }
+
+    #起始位置 编译位置 中间目标位置
+    APP_DEST_PWD=$${DESTDIR}
+    isEmpty(APP_DEST_PWD):APP_DEST_PWD=.
+    APP_BUILD_PWD = $$APP_DEST_PWD
+
+    #set app deploy pwd
+    #APP_DEPLOY_PWD is here.
+    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QSYS_STD_DIR}
+    #不仅仅发布目标为Windows的时候，才需要改变路径
+    #开发机为Windows就必须改变。
+    #contains(QKIT_PRIVATE, WIN32||WIN64) {
+    equals(QMAKE_HOST.os, Windows) {
+        APP_DEPLOY_PWD~=s,/,\\,g
+    }
+
     libname = $$1
     librealname = $$2
     isEmpty(1): error("add_deploy_library(libname, librealname) requires at last one argument")
@@ -297,30 +311,4 @@ defineTest(add_deploy_library) {
 #避免二次发布，拷贝浪费时间。
 defineTest(has_deployed_lib) {
     return(0)
-}
-
-##-------------------------------------------------
-##work flow
-##-------------------------------------------------
-#deploy root
-isEmpty(APP_DEPLOY_ROOT){
-    message($${TARGET} $${CONFIG_FILE})
-    message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
-    error(please check $$CONFIG_FILE under multi_link_technology.pri)
-}
-message(Deploy $${TARGET} to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
-
-#起始位置 编译位置 中间目标位置
-APP_DEST_PWD=$${DESTDIR}
-isEmpty(APP_DEST_PWD):APP_DEST_PWD=.
-APP_BUILD_PWD = $$APP_DEST_PWD
-
-#set app deploy pwd
-#APP_DEPLOY_PWD is here.
-APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QSYS_STD_DIR}
-#不仅仅发布目标为Windows的时候，才需要改变路径
-#开发机为Windows就必须改变。
-#contains(QKIT_PRIVATE, WIN32||WIN64) {
-equals(QMAKE_HOST.os, Windows) {
-    APP_DEPLOY_PWD~=s,/,\\,g
 }

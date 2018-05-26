@@ -32,75 +32,10 @@
 TARGET = QQt
 TEMPLATE = lib
 
-#in theory, this should not be limited to 4.8.0, no limit is good.
-lessThan(QT_VERSION, 4.8.0) {
-    message(A. ensure your compiler support c++11 feature)
-    message(B. suggest Qt version >= 4.8.0)
-    #error(  error occured!)
-}
-
+#################################################################
 #包含基础管理者
-include (../multi-link/lib_base_manager.pri)
-
-isEmpty(QSYS_PRIVATE) {
-    message(1. you should change qt default build directory to your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name})
-    message(2. env variable QSYS is required! pleace check qqt_qkit.pri)
-    error(error occured! please check build output panel.)
-}
-
-
-##win platform: some target, special lib lib_bundle staticlib
-##only deal dynamic is ok, static all in headers dealing.
-##define macro before header.
-contains(QSYS_PRIVATE, Win32|Win64) {
-    #Qt is static by mingw32 building
-    mingw {
-        #on my computer , Qt library are all static library?
-        #create static lib (important, only occured at builder pro)
-        CONFIG += staticlib
-        #in qqt_header.pri
-        #DEFINES += QQT_STATIC_LIBRARY
-    } else {
-        #create dynamic lib (important, only occured at builder pro)
-        CONFIG += dll
-        #no other one deal this, define it here, right here.
-        DEFINES += QQT_LIBRARY
-    }
-#*nux platform: no macro
-} else {
-    equals(QSYS_PRIVATE, macOS) {
-        CONFIG += dll
-        CONFIG += lib_bundle
-    } else:contains(QSYS_PRIVATE, iOS|iOSSimulator) {
-        CONFIG += static
-    } else {
-        ##default build dll
-        CONFIG += dll
-        #*nix no need this macro
-        #DEFINES += QQT_LIBRARY
-    }
-}
-
-#create prl
-CONFIG += create_prl
-#CONFIG += build_pass
-build_pass:CONFIG(debug, debug|release) {
-    #troublesome
-    #win32: TARGET = $$join(TARGET,,,d)
-}
-#CONFIG += debug_and_release
-#CONFIG += build_all
-#if some bug occured, maybe this help me, close some warning
-CCFLAG =
-!win32:CCFLAGS = -Wno-unused-parameter -Wno-reorder -Wno-c++11-extensions -Wno-c++11-long-long -Wno-comment
-QMAKE_CFLAGS +=  $${CCFLAGS}
-QMAKE_CXXFLAGS +=  $${CCFLAGS}
-
 #################################################################
-##build cache
-#################################################################
-#LibQQt工程里，这个值是不允许改变的，但是再App工程里可以改变。
-DESTDIR = bin
+include (../multi-link/add_base_manager.pri)
 
 #################################################################
 ##project source
@@ -110,13 +45,23 @@ include ($$PWD/qqt_source.pri)
 #################################################################
 ##project version
 #################################################################
-#include ($$PWD/qqt_version.pri)
+add_version(2,4,0,0)
 
 #user can use app_version.pri to modify app version once, once is all. DEFINES += APP_VERSION=0.0.0 is very good.
 #unix:VERSION = $${QQT_VERSION}
 #bug?:open this macro, TARGET will suffixed with major version.
 #win32:VERSION = $${QQT_VERSION4}
 
+#################################################################
+#发布SDK 必要
+#所有App都依赖QQt的这个步骤
+#参数比较复杂是因为在SUBDIRS工程里，如果是单独的工程就好多了。
+#################################################################
+add_sdk($$TARGET, $$PWD, src/$$DESTDIR)
+
+#################################################################
+#其他设置
+#################################################################
 QMAKE_TARGET_FILE = "$${TARGET}"
 QMAKE_TARGET_PRODUCT = "$${TARGET}"
 QMAKE_TARGET_COMPANY = "www.QQt.com"
@@ -162,20 +107,10 @@ contains(CONFIG, continued_build){
 }
 
 #################################################################
-##project header
-##这个作用比较大，lib工程需要，app工程也需要。
-#################################################################
-#包含lib的header.pri用于公开给用户头文件。
-include (qqt_header.pri)
-
-#设置版本 可选 (如果设置版本，最先设置)
-add_version(2,4,0,0)
-#发布SDK 必要 (SUBDIRS 里面形态比较复杂深邃)
-add_sdk($$TARGET, $$PWD, src/$$DESTDIR)
-
-#################################################################
 ##project environ
 #################################################################
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
+message ($${TARGET} pre link $${QMAKE_PRE_LINK})
+message ($${TARGET} post link $${QMAKE_POST_LINK})

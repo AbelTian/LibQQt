@@ -88,13 +88,19 @@ defineReplace(get_add_linux_sdk) {
     return ($$command)
 }
 
+#理论上，只要用户设置了Version，就能读到Version Major
+#add_version里面有初始化版本号，所以，用户什么都不设置，将会是0版本号。
 defineReplace(get_add_mac_sdk){
     #need cd framework root
     #LIB_BUILD_PWD libname libmajorver
     libname = $$TARGET
-    libmajorver = $$system(readlink $${LIB_BUILD_PWD}/$${libname}.framework/Versions/Current)
-    isEmpty(libmajorver):libmajorver = 1
-    #message($$TARGET major version $$libmajor)
+    libmajorver = $$VER_MAJ
+    isEmpty(libmajorver){
+        error(Have you modifyed add_version.pri, please dont modify it.)
+    }
+    #这里的isEmpty没有用。
+    #isEmpty(libmajorver):libmajorver = $$system(readlink $${LIB_BUILD_PWD}/$${libname}.framework/Versions/Current)
+    #message($${LIB_BUILD_PWD}/$${libname}.framework/Versions/Current $$TARGET major version $$libmajorver)
 
     LIB_BUNDLE_VER_DIR   = Versions/$${libmajorver}
     LIB_BUNDLE_CUR_DIR   = Versions/Current
@@ -195,7 +201,7 @@ defineReplace(get_add_sdk_work_flow){
     contains(QSYS_PRIVATE, macOS) {
         #在编译路径里，创作一次sdk，完成framework链接等的修复工作
         command += $$get_add_mac_sdk_fix_building_framework() $$CMD_SEP
-        command += echo $$libname fix framework success. $$CMD_SEP
+        #command += echo $$libname fix framework success. $$CMD_SEP
     }
     command += $$RM_DIR $${LIB_SDK_PWD} $$CMD_SEP
     command += $$MK_DIR $${LIB_SDK_PWD} $$CMD_SEP
@@ -226,8 +232,9 @@ defineReplace(get_add_sdk_work_flow){
         }
     }
 
-    command += $$get_add_Qt_lib_pri() $$CMD_SEP
-    command += echo $$libname create sdk success.
+    command += $$get_add_Qt_lib_pri()
+    #$$CMD_SEP
+    #command += echo $$libname create sdk success.
 
     return ($$command)
 }
