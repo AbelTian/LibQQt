@@ -40,6 +40,9 @@ include ($${PWD}/add_sdk.pri)
 #program version
 include ($${PWD}/add_version.pri)
 
+#program language
+include ($${PWD}/add_language.pri)
+
 ####################################################################################
 #base manager 都做了以下这些事情
 ####################################################################################

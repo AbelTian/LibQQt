@@ -38,6 +38,7 @@ system(touch main.cpp)
 
 include (../../multi-link/add_base_manager.pri)
 
+#这个的设置有特点，要先设置
 add_version (1,0,0,0)
 
 #先发布App
@@ -50,5 +51,8 @@ add_deploy_library(QQt)
 
 #对于这个先后顺序，macOS下要求比较严格。
 #必须先发布App
+
+add_language($${PWD}/$${TARGET}.pro, $${PWD}/AppRoot/lang, de_DE)
+add_zh_CN_en_US($${PWD}/$${TARGET}.pro, $${PWD}/AppRoot/lang)
 
 message($$QMAKE_POST_LINK)

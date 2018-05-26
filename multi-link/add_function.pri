@@ -138,28 +138,6 @@ defineReplace(get_write_ini_command) {
     return ($$command)
 }
 
-defineReplace(get_lupdate_language){
-    #pro file
-    filepath = $$1
-    !isEmpty(2): error("get_lupdate_language(filepath) requires one argument")
-    isEmpty(1): error("get_lupdate_language(filepath) requires one argument")
-    command =
-    command = lupdate $${filepath}
-    #message($${command})
-    return ($${command})
-}
-
-defineReplace(get_lrelease_language){
-    filepath = $$1
-    filename = $$2
-    !isEmpty(3): error("get_lrelease_language(filepath, filename) requires two argument")
-    isEmpty(2): error("get_lrelease_language(filepath, filename) requires two argument")
-    command =
-    command = lrelease $${filepath}/$${filename}.ts -qm $${filepath}/$${filename}.qm
-    #message($${command})
-    return ($${command})
-}
-
 defineReplace(get_md5_command) {
     filename = $$1
     isEmpty(1): error("get_md5_command(filename) requires one argument")
@@ -293,27 +271,6 @@ defineTest(copy_dir_and_file) {
     system_errcode($${command}): return (true)
     return (false)
 }
-
-defineTest(lupdate_language){
-    #pro file
-    filepath = $$1
-    !isEmpty(2): error("get_lupdate_language(filepath) requires one argument")
-    isEmpty(1): error("get_lupdate_language(filepath) requires one argument")
-    command = $$get_lupdate_language($${filepath})
-    system_errcode($${command}): return (true)
-    return (false)
-}
-
-defineTest(lrelease_language){
-    filepath = $$1
-    filename = $$2
-    !isEmpty(3): error("lrelease_language(filepath, filename) requires two argument")
-    isEmpty(2): error("lrelease_language(filepath, filename) requires two argument")
-    command = $$get_lrelease_language($${filepath}, $${filename})
-    system_errcode($${command}): return (true)
-    return (false)
-}
-
 
 defineTest(is_same_file) {
     filename1 = $$1

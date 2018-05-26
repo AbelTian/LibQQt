@@ -94,7 +94,7 @@ defineTest(add_version) {
     export(APP_PATCH_VERSION)
     export(APP_BUILD_VERSION)
 
-    message ($${TARGET} version: V$$APP_VERSION4)
+    !equals(APP_VERSION4, 0.0.0.0):message ($${TARGET} version: v$$APP_VERSION4)
     return (1)
 }
 
