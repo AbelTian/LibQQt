@@ -75,8 +75,11 @@ defineTest(add_version) {
 
     #源代码 域宏    
     DEFINES += VERSION=$${APP_VERSION}
-    DEFINES += LIB_VERSION=$${APP_VERSION}
-    DEFINES += APP_VERSION=$${APP_VERSION}
+    contains(TEMPLATE, lib){
+        DEFINES += LIB_VERSION=$${APP_VERSION}
+    } else : contains(TEMPLATE, app) {
+        DEFINES += APP_VERSION=$${APP_VERSION}
+    }
 
     #工程版本设置
     VERSION = $${APP_VERSION}

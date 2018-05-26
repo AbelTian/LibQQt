@@ -39,3 +39,25 @@
     -  初步规划用户要clone到library目录。
 
 相信在Multi Link技术的帮助下，用户开发Library和Application肯定会如虎添翼，节省巨大的工时和精力。（现在仅仅支持LibQQt使用）
+
+# Multi-link技术完成  
+
+千等万等，Multi-link技术终于现出原形了。  
+修复了发布QQt SDK无处安置的问题。  
+
+1. include(.../multi-link/add_base_manager.pri)  
+    - 这里是多链接技术一切的开始。  
+2. 提供函数
+    -  add_sdk() (lib工程用)  
+    -  add_version()  
+    - ﻿add_deploy()  
+    - ﻿add_deploy_library()   
+    - ﻿add_deploy_config()  
+    - ﻿add_header()  
+    - ﻿add_local_header()  
+    - ﻿add_library()  
+    - ﻿add_defines()  
+    - ﻿add_language()  
+    - ﻿add_zh_CN_en_US()  
+3. 彻底的脱离了libQQt，可是依然将其自动链接在内，有Multi-link帮助，用户可以任意的在app和lib之间设计链接关系了。  
+4. QQt提供的强大功能，并没有因为Multi-link的升级而改变，依然强大。  
