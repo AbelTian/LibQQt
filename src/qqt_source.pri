@@ -19,7 +19,7 @@ HEADERS += $$PWD/qqt.h \
     $$PWD/qqtversion.h \
     $$PWD/qqt-qt.h
 #platform header
-contains (QSYS_PRIVATE, Win32||Win64) {
+contains (QSYS_PRIVATE, Win32|Windows||Win64) {
     #win32 base header
     HEADERS += $$PWD/qqtwin.h
 } else:contains (QSYS_PRIVATE, macOS||iOS||iOSSimulator) {
@@ -301,7 +301,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #ethnet(+wifi) manager
     #arm mips
     #TODO: +wince +android +ios +macOS? +win? +linux?
-    contains(QSYS_PRIVATE, Embedded||Arm32||MIPS32) {
+    contains(QSYS_PRIVATE, Embedded||Arm32||Mips32) {
         SOURCES += $$PWD/network/qqtethenetmanager.cpp
         HEADERS += $$PWD/network/qqtethenetmanager.h
         SOURCES += $$PWD/frame/qqtwifiwidget.cpp

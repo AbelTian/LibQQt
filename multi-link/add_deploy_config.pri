@@ -80,7 +80,7 @@ defineTest(add_deploy_config) {
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
     contains(QSYS_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$add_deploy_config_on_mac("$${APP_CONFIG_PWD}/*")
-    } else: contains(QSYS_PRIVATE, Win32||Win64) {
+    } else: contains(QSYS_PRIVATE, Win32|Windows||Win64) {
         QMAKE_POST_LINK += $$add_deploy_config_on_linux("$${APP_CONFIG_PWD}\\*")
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
         #分为Host为Windows和类Unix两种情况。

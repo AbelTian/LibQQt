@@ -34,5 +34,6 @@ FORMS += \
         mainwindow.ui
 
 #这个地方qmake报错，找不到，找不到就找不到吧，不处理了。
-add_version(1,0,0,0)
-add_deploy()
+#subdirs模式的pro不能把那边的pri传递下来，这谁都没办法。必须各自干各自的。
+#add_version(1,0,0,0)
+#add_deploy()

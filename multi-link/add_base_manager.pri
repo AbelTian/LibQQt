@@ -58,14 +58,14 @@ include ($${PWD}/add_base_header.pri)
 ##only deal dynamic is ok, static all in headers dealing.
 ##define macro before header.
 equals(TEMPLATE, lib) {
-    contains(QSYS_PRIVATE, Win32|Win64) {
+    contains(QSYS_PRIVATE, Win32|Windows|Win64) {
         #Qt is static by mingw32 building
         mingw {
             #on my computer , Qt library are all static library?
             #create static lib (important, only occured at builder pro)
             CONFIG += staticlib
-            #in qqt_header.pri
-            #DEFINES += QQT_STATIC_LIBRARY
+            #在base_header里设置
+            #DEFINES += LIB_STATIC_LIBRARY
         } else {
             #create dynamic lib (important, only occured at builder pro)
             CONFIG += dll

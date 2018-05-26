@@ -75,7 +75,7 @@ include($${PWD}/lib_deploy.pri)
 #-------------------------------------------------
 #install lib
 #-------------------------------------------------
-contains(QKIT_PRIVATE, EMBEDDED||MIPS32||ARM32) {
+contains(QKIT_PRIVATE, Embedded||Mips32||Arm32) {
     target.path = /Application
     INSTALLS += target
 }

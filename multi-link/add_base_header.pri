@@ -102,7 +102,7 @@ win32 {
 #link Lib static library in some occation on windows
 #when link Lib    static library, if no this macro, headers can't be linked on windows.
 #在这里添加了LIB_STATIC_LIBRARY 用户可以使用 还有LIB_LIBRARY
-contains(QSYS_PRIVATE, Win32|Win64 || iOS|iOSSimulator) {
+contains(QSYS_PRIVATE, Win32|Windows|Win64 || iOS|iOSSimulator) {
     #Qt is static by mingw32 building
     mingw|ios{
         #on my computer, Qt library are all static library?
