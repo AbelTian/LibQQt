@@ -37,6 +37,7 @@ contains(QSYS_PRIVATE, Embedded) {
     DEFINES += __ANDROIDX86__ #可能废弃
 }
 
+BUILD=
 CONFIG(debug, debug|profile|release):BUILD=Debug
 CONFIG(profile, debug|profile|release):BUILD=Profile
 CONFIG(release, debug|profile|release):BUILD=Release

@@ -21,16 +21,19 @@ defineReplace(get_add_deploy_on_mac) {
     return ($$command)
 }
 
-defineReplace(get_add_deploy_on_win) {
+defineReplace(get_add_deploy_on_windows) {
     #need QQT_BUILD_PWD
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
-    command += $$COPY $${QQT_BUILD_PWD}\\QQt.dll $${APP_DEPLOY_PWD}\\QQt.dll $$CMD_SEP
-    msvc:command += $$COPY_DIR $${QQT_BUILD_PWD}\\QQt.* $${APP_DEST_DIR} $$CMD_SEP
-    command += $$COPY $${APP_DEST_DIR}\\$${TARGET}.exe $${APP_DEPLOY_PWD}\\$${TARGET}.exe $$CMD_SEP
+    command += $$COPY $${APP_BUILD_PWD}\\$${TARGET}.exe $${APP_DEPLOY_PWD}\\$${TARGET}.exe
+    #msvc 在deploy lib上有点区别，mingw不发布依赖lib，在编译区也能运行，msvc却不能。
+    #在运行区，都必须发布依赖lib。
+    #add_deploy 仅仅发布app，不管依赖的lib。
+
     #all windows need deploy release version?
     equals(BUILD, Debug) {
+        command += $$CMD_SEP
         #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
         msvc{
             command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
@@ -38,6 +41,7 @@ defineReplace(get_add_deploy_on_win) {
             command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
         }
     } else: equals(BUILD, Release) {
+        command += $$CMD_SEP
         #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
         command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
     }
@@ -50,13 +54,9 @@ defineReplace(get_add_deploy_on_linux) {
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$RM $${APP_DEPLOY_PWD}/libQQt.so* $$CMD_SEP
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION3} $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION2} $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so.$${QQT_VERSION1} $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM $${APP_DEPLOY_PWD}/$${TARGET} $$CMD_SEP
-    command += $$COPY $${APP_DEST_DIR}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET}
+    command += $$COPY $${APP_BUILD_PWD}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET}
+
     #message($$command)
     return ($$command)
 }
@@ -66,10 +66,8 @@ defineReplace(get_add_deploy_on_android) {
 
     command =
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$RM $${APP_DEPLOY_PWD}/libQQt.so* $$CMD_SEP
-    command += $$COPY_DIR $${QQT_BUILD_PWD}/libQQt.so $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM $${APP_DEPLOY_PWD}/$${TARGET} $$CMD_SEP
-    command += $$COPY $${APP_DEST_DIR}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET}
+    command += $$COPY $${APP_BUILD_PWD}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET}
     #message($$command)
     return ($$command)
 }
@@ -134,23 +132,20 @@ defineReplace(get_add_deploy_library_on_windows) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_library_on_windows(libname) requires one argument")
+    librealname = $$2
+    isEmpty(1): error("get_add_deploy_library_on_windows(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_deploy_library_on_windows(libname, librealname) requires at most two argument")
+    isEmpty(2): librealname = $${libname}
 
     command =
-    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
-    msvc:command += $$COPY_DIR $${APP_DEST_PWD}\\$${libname}.* $${APP_DEPLOY_PWD} $$CMD_SEP
-    #all windows need deploy release version?
-    equals(BUILD, Debug) {
-        #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
-        msvc{
-            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
-        } else {
-            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
-        }
-    } else: equals(BUILD, Release) {
-        #command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
-        command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
-    }
+    command += $$RM $${APP_BUILD_PWD}\\$${librealname}.* $$CMD_SEP
+    #拷贝sdk到build
+    command += $$COPY_DIR $${LIB_LIB_PWD}\\$${librealname}.* $${APP_BUILD_PWD} $$CMD_SEP
+
+    command += $$RM $${APP_DEPLOY_PWD}\\$${librealname}.* $$CMD_SEP
+    #拷贝sdk到deploy
+    command += $$COPY_DIR $${LIB_LIB_PWD}\\$${librealname}.* $${APP_DEPLOY_PWD}
+
     #message($$command)
 
     return ($$command)
@@ -160,12 +155,18 @@ defineReplace(get_add_deploy_library_on_linux) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_library_on_linux(libname) requires one argument")
+    librealname = $$2
+    isEmpty(1): error("get_add_deploy_library_on_windows(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_deploy_library_on_windows(libname, librealname) requires at most two argument")
+    isEmpty(2): librealname = $${libname}
 
     command =
-    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
+
+    command += $$RM $${APP_BUILD_PWD}/lib$${libname}.so* $$CMD_SEP
+    command += $$COPY_DIR $${LIB_LIB_PWD}/lib$${librealname}.so* $${APP_BUILD_PWD} $$CMD_SEP
+
     command += $$RM $${APP_DEPLOY_PWD}/lib$${libname}.so* $$CMD_SEP
-    command += $$COPY_DIR $${APP_DEST_PWD}/lib$${libname}.so* $${APP_DEPLOY_PWD} $$CMD_SEP
+    command += $$COPY_DIR $${LIB_LIB_PWD}/lib$${librealname}.so* $${APP_DEPLOY_PWD}
     #message($$command)
 
     return ($$command)
@@ -175,10 +176,13 @@ defineReplace(get_add_deploy_library_on_android) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_library_on_android(libname) requires one argument")
+    librealname = $$2
+    isEmpty(1): error("get_add_deploy_library_on_windows(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_deploy_library_on_windows(libname, librealname) requires at most two argument")
+    isEmpty(2): librealname = $${libname}
 
     command =
-    command += $${APP_DEST_PWD}/lib$${libname}.so
+    command += $${LIB_LIB_PWD}/lib$${librealname}.so
     #message($$command)
 
     return ($$command)
@@ -227,9 +231,9 @@ defineTest(add_deploy) {
     }
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
-    contains(QSYS_PRIVATE, Win32||Win64) {
+    contains(QSYS_PRIVATE, Win32|Windows||Win64) {
         #发布windows版本
-        QMAKE_POST_LINK += $$get_add_deploy_on_win()
+        QMAKE_POST_LINK += $$get_add_deploy_on_windows()
     } else: contains(QSYS_PRIVATE, macOS) {
         #发布苹果版本，iOS版本也是这个？
         QMAKE_POST_LINK += $$get_add_deploy_on_mac()
@@ -286,11 +290,14 @@ defineTest(add_deploy_library) {
     LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
     LIB_LIB_PWD = $${LIB_SDK_PWD}/lib
+    equals(QMAKE_HOST.os, Windows) {
+        LIB_LIB_PWD~=s,/,\\,g
+    }
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
-    contains(QSYS_PRIVATE, Win32||Win64) {
+    contains(QSYS_PRIVATE, Win32|Windows||Win64) {
         #发布windows版本
-        QMAKE_POST_LINK += $$get_add_deploy_library_on_win($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_library_on_windows($${libname})
     } else: contains(QSYS_PRIVATE, macOS) {
         #发布苹果版本，iOS版本也是这个？
         QMAKE_POST_LINK += $$get_add_deploy_library_on_mac($${libname})

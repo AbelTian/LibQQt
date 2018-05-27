@@ -49,7 +49,7 @@ equals(QSYS_PRIVATE, Embedded) {
     DEFINES += __EMBEDDED_LINUX__
     #arm32 private
     DEFINES += __ARM_LINUX__
-} else:equals(QSYS_PRIVATE, MIPS32) {
+} else:equals(QSYS_PRIVATE, Mips32) {
     DEFINES += __EMBEDDED_LINUX__
     #mips32 private
     DEFINES += __MIPS_LINUX__
@@ -123,7 +123,7 @@ equals(QSYS_PRIVATE, Embedded) {
     SYSNAME = Embedded
 } else:equals(QSYS_PRIVATE, Arm32) {
     SYSNAME = Arm32
-} else:equals(QSYS_PRIVATE, MIPS32) {
+} else:equals(QSYS_PRIVATE, Mips32) {
     SYSNAME = Mips32
 } else:equals(QSYS_PRIVATE, Linux) {
     SYSNAME = Linux

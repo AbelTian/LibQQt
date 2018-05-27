@@ -82,16 +82,17 @@ defineTest(add_version) {
     }
 
     #工程版本设置
-    VERSION = $${APP_VERSION}
-    VER_MAJ = $$APP_MAJOR_VERSION
-    VER_MIN = $$APP_MINOR_VERSION
-    VER_PAT = $$APP_PATCH_VERSION
+    unix:VERSION = $${APP_VERSION}
+    unix:VER_MAJ = $$APP_MAJOR_VERSION
+    unix:VER_MIN = $$APP_MINOR_VERSION
+    unix:VER_PAT = $$APP_PATCH_VERSION
 
     export(DEFINES)
     export(VERSION)
     export(VER_MAJ)
     export(VER_MIN)
     export(VER_PAT)
+    export(APP_VERSION)
     export(APP_MAJOR_VERSION)
     export(APP_MINOR_VERSION)
     export(APP_PATCH_VERSION)

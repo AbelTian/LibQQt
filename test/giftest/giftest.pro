@@ -48,7 +48,7 @@ contains(QSYS_PRIVATE, ANDROID||ANDROIDX86) {
     ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
 }
 
-!contains(QSYS_PRIVATE, ARM32||MIPS32) {
+!contains(QSYS_PRIVATE, Arm32||Mips32) {
     RESOURCES += \
         giftest.qrc
 }

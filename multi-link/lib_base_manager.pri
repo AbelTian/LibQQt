@@ -47,7 +47,7 @@ include ($${PWD}/add_sdk.pri)
 ##win platform: some target, special lib lib_bundle staticlib
 ##only deal dynamic is ok, static all in headers dealing.
 ##define macro before header.
-contains(QSYS_PRIVATE, Win32|Win64) {
+contains(QSYS_PRIVATE, Win32|Windows|Win64) {
     #Qt is static by mingw32 building
     mingw {
         #on my computer , Qt library are all static library?

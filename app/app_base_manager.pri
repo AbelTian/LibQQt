@@ -73,7 +73,7 @@ include($${PWD}/app_deploy_config.pri)
 #-------------------------------------------------
 #install app
 #-------------------------------------------------
-contains(QKIT_PRIVATE, EMBEDDED||MIPS32||ARM32) {
+contains(QKIT_PRIVATE, Embedded||Mips32||Arm32) {
     target.path = /Application
     INSTALLS += target
 }

@@ -40,7 +40,7 @@ system(touch main.cpp)
 
 include(../../multi-link/add_base_manager.pri)
 
-contains(QSYS_PRIVATE, ANDROID|ANDROIDX86) {
+contains(QSYS_PRIVATE, Android|AndroidX86) {
     CONFIG += mobility
     MOBILITY =
     DISTFILES += \

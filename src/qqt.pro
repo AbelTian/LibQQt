@@ -37,21 +37,31 @@ TEMPLATE = lib
 #################################################################
 include (../multi-link/add_base_manager.pri)
 
-#################################################################
-##project source
-#################################################################
-include ($$PWD/qqt_source.pri)
+contains(DEFINES, LIB_LIBRARY) {
+    DEFINES += QQT_LIBRARY
+}
 
 #################################################################
 ##project version
 #################################################################
 #这个的设置有特点，要先设置
 add_version(2,4,0,0)
+DEFINES += QQT_VERSION=$$VERSION
 
 #user can use app_version.pri to modify app version once, once is all. DEFINES += APP_VERSION=0.0.0 is very good.
 #unix:VERSION = $${QQT_VERSION}
 #bug?:open this macro, TARGET will suffixed with major version.
 #win32:VERSION = $${QQT_VERSION4}
+
+#################################################################
+##project header
+#################################################################
+include ($$PWD/qqt_header.pri)
+
+#################################################################
+##project source
+#################################################################
+include ($$PWD/qqt_source.pri)
 
 #################################################################
 #发布SDK 必要

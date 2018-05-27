@@ -46,7 +46,7 @@ include(../../multi-link/add_base_manager.pri)
 #install app
 #-------------------------------------------------
 #CONFIG += can_install
-can_install:equals(QSYS_PRIVATE, EMBEDDED) {
+can_install:equals(QSYS_PRIVATE, Embedded) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
@@ -63,7 +63,7 @@ equals(QSYS_PRIVATE, macOS) {
     CONFIG += app_bundle
 }
 
-contains(QSYS_PRIVATE, ANDROID|ANDROIDX86) {
+contains(QSYS_PRIVATE, Android|AndroidX86) {
     CONFIG += mobility
     MOBILITY =
     DISTFILES += \

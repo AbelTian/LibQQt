@@ -75,7 +75,7 @@ msvc {
 ##-----------------------------------------------
 #link QQt static library in some occation on windows
 #when link QQt    static library, if no this macro, headers can't be linked on windows.
-contains(QSYS_PRIVATE, Win32|Win64 || iOS|iOSSimulator) {
+contains(QSYS_PRIVATE, Win32|Windows|Win64 || iOS|iOSSimulator) {
     #Qt is static by mingw32 building
     mingw|ios{
         #on my computer, Qt library are all static library?
@@ -182,7 +182,7 @@ contains (DEFINES, __PRINTSUPPORT__) {
 #if you use QQtCharts, open this annotation
 DEFINES += __QQTCHARTS__
 lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__
-contains(QSYS_PRIVATE, Arm32||MIPS32||Embedded):DEFINES-=__QQTCHARTS__
+contains(QSYS_PRIVATE, Arm32||Mips32||Embedded):DEFINES-=__QQTCHARTS__
 #based on QtCharts, need charts module
 contains(DEFINES, __QQTCHARTS__) {
     QT += charts
@@ -268,7 +268,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #if you use QNetworkAccessManagerSupport , open this annotation
     DEFINES += __WEBACCESSSUPPORT__
     lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
-    contains(QSYS_PRIVATE, Arm32||MIPS32||Embedded):DEFINES -= __WEBACCESSSUPPORT__
+    contains(QSYS_PRIVATE, Arm32||Mips32||Embedded):DEFINES -= __WEBACCESSSUPPORT__
     contains (DEFINES, __WEBACCESSSUPPORT__) {
         #QSslError not found, you need recompiler Qt4
     }
@@ -346,7 +346,7 @@ contains (DEFINES, __EXQUISITE__) {
 
     #opengl module
     DEFINES += __OPENGLWIDGETS__
-    contains(QSYS_PRIVATE, MIPS32||Arm32||Embedded):DEFINES-=__OPENGLWIDGETS__
+    contains(QSYS_PRIVATE, Mips32||Arm32||Embedded):DEFINES-=__OPENGLWIDGETS__
     contains (DEFINES, __OPENGLWIDGETS__) {
         QT += opengl
     }

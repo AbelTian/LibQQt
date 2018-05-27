@@ -40,6 +40,15 @@ defineTest(add_deploy_config) {
     APP_CONFIG_PWD = $$1
     isEmpty(1)|!isEmpty(2): error("add_deploy_config(app_config_pwd) requires one argument")
 
+    equals(QMAKE_HOST.os, Windows) {
+        APP_CONFIG_PWD~=s,/,\\,g
+    }
+
+    #起始位置 编译位置 中间目标位置
+    APP_DEST_PWD=$${DESTDIR}
+    isEmpty(APP_DEST_PWD):APP_DEST_PWD=.
+    APP_BUILD_PWD = $$APP_DEST_PWD
+
     #deploy root
     isEmpty(APP_DEPLOY_ROOT){
         message($${TARGET} $${CONFIG_FILE})
@@ -47,11 +56,6 @@ defineTest(add_deploy_config) {
         error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
     }
     message($${TARGET} deployes config to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
-
-    #起始位置 编译位置 中间目标位置
-    APP_DEST_PWD=$${DESTDIR}
-    isEmpty(APP_DEST_PWD):APP_DEST_PWD=.
-    APP_BUILD_PWD = $$APP_DEST_PWD
 
     #set app deploy pwd
     #APP_DEPLOY_PWD is here.
@@ -80,7 +84,7 @@ defineTest(add_deploy_config) {
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
     contains(QSYS_PRIVATE, macOS) {
         QMAKE_POST_LINK += $$add_deploy_config_on_mac("$${APP_CONFIG_PWD}/*")
-    } else: contains(QSYS_PRIVATE, Win32||Win64) {
+    } else: contains(QSYS_PRIVATE, Win32|Windows||Win64) {
         QMAKE_POST_LINK += $$add_deploy_config_on_linux("$${APP_CONFIG_PWD}\\*")
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
         #分为Host为Windows和类Unix两种情况。

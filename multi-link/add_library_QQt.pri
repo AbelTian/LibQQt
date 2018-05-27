@@ -1,115 +1,32 @@
 ################################################################
+##add_library_QQt.pri
 ##link QQt
 ################################################################
-#here is all your app common defination and configration
-#you can modify this pri to link qqt_library
-#only link QQt, this pri file.
+#包含QQt的宏。
+#头文件其实没多大作用。只是提供路劲
+include ($${PWD}/../src/qqt_header.pri)
 
-#this link need Qt Creator set default build directory, replace
-#%{JS: Util.asciify("/your/local/path/to/build/root/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}")}
-
-#auto link QQt when build source
-#auto copy QQt when deploy app
-
-#第一 拷贝Library为SDK到SDKROOT
-#第二 从SDK ROOT 链接 QQt Library
-#-------------------------------------------------------------
-#user computer path settings
-#-------------------------------------------------------------
-#same app project, same relative path.
-#qqt source root, QQt's root pro path. subdir and
-#private using
-QQT_SOURCE_ROOT = $${PWD}/../src
-
-#-------------------------------------------------------------
-#include qqt's pri
-#-------------------------------------------------------------
-#qqt qkit
-#all cross platform setting is from here.
-include($${QQT_SOURCE_ROOT}/qqt_qkit.pri)
-
-isEmpty(QKIT_PRIVATE) {
-    message(env variable QKIT is required!)
-    message(pleace check qqt_qkit.pri)
-    error("error occured, please check build output panel.")
+#把QQt SDK头文件路径加入进来 为搜索头文件而添加
+#其实过去做的自动添加QQt头文件就是这个功能
+#用户包含QQt头文件，就不必加相对路径了，方便了很多
+defineTest(add_qqt_header){
+    #包含QQt头文件的过程
+    header_path = $$get_add_header(QQt)
+    INCLUDEPATH += $$get_qqt_header($$header_path)
+    export(INCLUDEPATH)
+    return (1)
 }
 
-#qqt function
-include($${QQT_SOURCE_ROOT}/qqt_function.pri)
+#包含QQt的头文件
+add_qqt_header()
 
-#qqt version
-include($${QQT_SOURCE_ROOT}/qqt_version.pri)
+#细心的用户会发现，QQt的头文件包含了两次，一个在源代码目录里，一个在SDK目录里，两个并不冲突。系统只要搜索到一个目录里的就可以使用了。
+#当然，我们确信，SDK目录里的头文件服从于源代码目录里的头文件。
 
-#qqt header
-include($${QQT_SOURCE_ROOT}/qqt_header.pri)
+#链接QQt
+add_library(QQt)
 
-#-------------------------------------------------------------
-#link qqt settings: use source or link library?
-#-------------------------------------------------------------
-#if you want to build qqt source open this annotation
-#CONFIG += QQT_SOURCE_BUILDIN
-contains (CONFIG, QQT_SOURCE_BUILDIN) {
-    #notice: msvc, DLL_IMPORT macro is no problem to use in app + lib source? 静态成员的定义无法编译通过，dllimport在app里不允许实现静态成员变量。
-    #so, here ,force static, QQt的静态编译，dllexport一律定义为空，引用的时候也是空，所以肯定能过。
-    #ignore
-    #nouse. 报告找不到import的符号，几个静态过来的重复定义。如果定义这个宏，必须所有源文件都被覆盖。现在忽略这个功能。
-    DEFINES += QQT_STATIC_LIBRARY
-    system("touch $${QQT_SOURCE_ROOT}/frame/qqtapplication.cpp")
-    #if you want to build src but not link QQt lib in your project
-    #if you don't want to modify Qt Creator's default build directory, this maybe a choice.
-    #include($${QQT_SOURCE_ROOT}/qqt_source.pri)
-} else {
-    #if you want to link QQt library
-    #qqt will install sdk to sdk path you set, then link it, or link from build station
-    #qqt also can install sdk to qt library path, then to do that.
-    #need QQT_BUILD_ROOT
-    #need QKIT_PRIVATE from qqt_qkit.pri
-
-    #you can open one or more macro to make sdk or link from build.
-    #link from sdk is default setting
-    CONFIG += link_from_sdk
-    #CONFIG += link_from_build
-    #CONFIG += link_from_qt_lib_path
-
-    #especially some occations need some sure macro.
-    contains(QKIT_PRIVATE, iOS|iOSSimulator) {
-        #mac ios .framework .a 里面的快捷方式必须使用里面的相对路径，不能使用绝对路径
-        #但是qtcreator生成framework的时候用了绝对路径，所以导致拷贝后链接失败，库不可用。
-        #qqt_install.pri 里面解决了framework的拷贝问题，但是对于ios里.a的没做，而.a被拷贝了竟然也不能用！
-        #在build的地方link就可以了
-        CONFIG += link_from_build
-    }
-    contains(CONFIG, link_from_build) {
-        #include from source header, default is this, and set in header pri
-        #...
-    }
-
-    #-------------------------------------------------------------
-    #install qqt to sdk or qt library path
-    #include qqt_install.pri using these function to install qqt
-    #install to Qt library
-    #install to SDK path
-    #in this section, I use QMAKE_PRE_LINK QMAKE_POST_LINK, it won't work until project source changed
-    #on windows, I use touch.exe, you need download it and put it in system dir.
-    #-------------------------------------------------------------
-    #QMAKE_POST_LINK won't work until source changed
-    #qmake pro pri prf change won't effect to QMAKE_POST_LINK
-    #but I need it before I complete this pri.
-
-    #debug.
-    #move to app link pri
-    #link_from_sdk do move qqt to sdk path at app pre link command not lib build time
-    #mod qqt source to start post link is not needed here.
-    #need mod app souce after every pri mod.
-    #起初,qmake步骤被安置在QQt里,所以只有更改源代码才能启动POSTLINK.现在放置在App里了,这里的touch修改源代码不需要了.
-    #App修改源代码,Creator会自动qmake,启动qmake步骤PRILINK+POSTLINK
-    #App修改pro,必须手动qmake,Creator才会qmake,启动qmake步骤PRILINK+POSTLINK
-    #App必须注意,此处不再持续编译QQt.
-    include ($${QQT_SOURCE_ROOT}/qqt_install.pri)
-
-    #in this pri use QQT_SDK_ROOT QQT_SDK_PWD QQT_LIB_PWD
-    #need qqt_install.pri
-    include($${QQT_SOURCE_ROOT}/qqt_library.pri)
-}
-
-
+#以上代码只完成了链接libQQt 包含libQQt头文件 包含libQQt宏文件(在宏文件控制下Library的头文件才有精确的意义)
+#没有发布libQQt
+#App在开发中，调用发布App以后 必然需要调用app_deploy_library(QQt)发布QQt到运行时。强大的：从sdk发布到build和deploy位置。
+#调试，正常；发布运行，正常。

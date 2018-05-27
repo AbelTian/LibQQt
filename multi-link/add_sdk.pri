@@ -149,17 +149,17 @@ defineReplace(get_add_Qt_lib_pri){
 
     command =
     command += $$get_empty_file($${LIB_PRI_FILEPATH}) $$CMD_SEP
-    command += echo "QT.$${libname_lower}.VERSION = $${VERSION}" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+    command += echo "QT.$${libname_lower}.VERSION = $${APP_VERSION}" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${libname_lower}.name = $${libname}"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${libname_lower}.module = $${libname}"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-    contains(QSYS_PRIVATE, Win32|Win64) {
+    contains(QSYS_PRIVATE, Win32|Windows|Win64) {
         command += echo "QT.$${libname_lower}.libs = \$$QT_MODULE_LIB_BASE"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${libname_lower}.bins = \$$QT_MODULE_BIN_BASE"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     } else {
         command += echo "QT.$${libname_lower}.libs = '\$$QT_MODULE_LIB_BASE'"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${libname_lower}.bins = '\$$QT_MODULE_BIN_BASE'"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     }
-    contains(QSYS_PRIVATE, Win32|Win64) {
+    contains(QSYS_PRIVATE, Win32|Windows|Win64) {
         command += echo "QT.$${libname_lower}.includes = \$$QT_MODULE_INCLUDE_BASE \$$QT_MODULE_INCLUDE_BASE/$${libname}" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${libname_lower}.frameworks = " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
         command += echo "QT.$${libname_lower}.module_config = v2 " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
@@ -210,7 +210,7 @@ defineReplace(get_add_sdk_work_flow){
 
     #这里不是目标为Windows才拷贝，而是开发机是Windows就得这么拷贝。
     #Windows下，Win目标、Android目标都走这里。
-    #contains(QSYS_PRIVATE, Win32|Win64) {
+    #contains(QSYS_PRIVATE, Win32|Windows|Win64) {
     equals(QMAKE_HOST.os, Windows) {
         #message(create lib windows struct library)
         command += $$get_add_windows_sdk() $$CMD_SEP
@@ -256,7 +256,7 @@ defineReplace(get_add_sdk_private){
 
     #不仅仅发布目标为Windows的时候需要改变，
     #开发Host是Windows的时候都要改变。路径问题是两种操作系统固有的痛。
-    #contains(QSYS_PRIVATE, Win32|Win64) {
+    #contains(QSYS_PRIVATE, Win32|Windows|Win64) {
     equals(QMAKE_HOST.os, Windows) {
         #on windows every path must use \ sep.
         LIB_SRC_PWD~=s,/,\\,g
@@ -322,7 +322,7 @@ defineTest(add_sdk){
 
     #这里不仅仅目标为windows的时候，才会转换，
     #开发Host为Windows的时候，都要转换。
-    #contains(QSYS_PRIVATE, WIN32||WIN64) {
+    #contains(QSYS_PRIVATE, Win32|Windows||Win64) {
     equals(QMAKE_HOST.os, Windows) {
         APP_BUILD_ROOT~=s,/,\\,g
         LIB_SDK_ROOT~=s,/,\\,g
@@ -399,7 +399,7 @@ defineTest(add_sdk_in_subdirs){
 
     #这里不仅仅目标为windows的时候，才会转换，
     #开发Host为Windows的时候，都要转换。
-    #contains(QSYS_PRIVATE, WIN32||WIN64) {
+    #contains(QSYS_PRIVATE, Win32|Windows||Win64) {
     equals(QMAKE_HOST.os, Windows) {
         APP_BUILD_ROOT~=s,/,\\,g
         LIB_SDK_ROOT~=s,/,\\,g

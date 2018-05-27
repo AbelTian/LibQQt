@@ -2,7 +2,7 @@
 #install app
 #-------------------------------------------------
 #CONFIG += can_install
-can_install:equals(QKIT_PRIVATE, EMBEDDED) {
+can_install:equals(QKIT_PRIVATE, Embedded) {
     target.path = /Application
     INSTALLS += target
 } else: unix {
@@ -19,7 +19,7 @@ equals(QKIT_PRIVATE, macOS) {
     CONFIG += app_bundle
 }
 
-contains(QKIT_PRIVATE, ANDROID|ANDROIDX86) {
+contains(QKIT_PRIVATE, Android|AndroidX86) {
     CONFIG += mobility
     MOBILITY =
     DISTFILES += \

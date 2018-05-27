@@ -182,7 +182,7 @@ contains (DEFINES, __PRINTSUPPORT__) {
 #if you use QQtCharts, open this annotation
 DEFINES += __QQTCHARTS__
 lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__
-contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES-=__QQTCHARTS__
+contains(QKIT_PRIVATE, Arm32||Mips32||Embedded):DEFINES-=__QQTCHARTS__
 #based on QtCharts, need charts module
 contains(DEFINES, __QQTCHARTS__) {
     QT += charts
@@ -257,7 +257,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #if you use QNetworkAccessManagerSupport , open this annotation
     DEFINES += __WEBACCESSSUPPORT__
     lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
-    contains(QKIT_PRIVATE, ARM32||MIPS32||EMBEDDED):DEFINES -= __WEBACCESSSUPPORT__
+    contains(QKIT_PRIVATE, Arm32||Mips32||Embedded):DEFINES -= __WEBACCESSSUPPORT__
     contains (DEFINES, __WEBACCESSSUPPORT__) {
         #QSslError not found, you need recompiler Qt4
     }
@@ -335,7 +335,7 @@ contains (DEFINES, __EXQUISITE__) {
 
     #opengl module
     DEFINES += __OPENGLWIDGETS__
-    contains(QKIT_PRIVATE, MIPS32||ARM32||EMBEDDED):DEFINES-=__OPENGLWIDGETS__
+    contains(QKIT_PRIVATE, Mips32||Arm32||Embedded):DEFINES-=__OPENGLWIDGETS__
     contains (DEFINES, __OPENGLWIDGETS__) {
         QT += opengl
     }
