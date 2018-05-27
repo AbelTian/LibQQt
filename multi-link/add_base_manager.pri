@@ -54,18 +54,29 @@ include ($${PWD}/add_base_header.pri)
 ##definition and configration
 ##need QSYS
 #################################################################
-##win platform: some target, special lib lib_bundle staticlib
-##only deal dynamic is ok, static all in headers dealing.
-##define macro before header.
-#专门为lib工程设置
-equals(TEMPLATE, lib) {
+contains(TEMPLATE, app) {
+    #add base manager对App的处理很少，App通过函数基本上能解决所有的事情
+    #macOS下必须开开bundle
+    contains(QSYS_PRIVATE, macOS){
+        CONFIG += app_bundle
+    }
+} else: contains(TEMPLATE, lib) {
+    ##base manager 对lib的处理很重要
+    ##区分了在不同目标下Qt library的不同形态，其实就是要求lib工程和Qt library保持一样的状态。
+    ##尤其在windows平台下，还提供了LIB_STATIC_LIBRARY 和 LIB_LIBRARY两个宏的支持
+    ##帮助用户区分lib的状态。
+
+    ##win platform: some target, special lib lib_bundle staticlib
+    ##only deal dynamic is ok, static all in headers dealing.
+    ##define macro before header.
+    #专门为lib工程设置
     contains(QSYS_PRIVATE, Win32|Windows|Win64) {
         #Qt is static by mingw32 building
         mingw {
             #on my computer , Qt library are all static library?
             #create static lib (important, only occured at builder pro)
             CONFIG += staticlib
-            #在base_header里设置
+            #在add_base_header里设置
             #DEFINES += LIB_STATIC_LIBRARY
         } else {
             #create dynamic lib (important, only occured at builder pro)
@@ -75,8 +86,9 @@ equals(TEMPLATE, lib) {
         }
     #*nux platform: no macro
     } else {
-        equals(QSYS_PRIVATE, macOS) {
+        contains(QSYS_PRIVATE, macOS) {
             CONFIG += dll
+            #macOS下必须开开bundle
             CONFIG += lib_bundle
         } else:contains(QSYS_PRIVATE, iOS|iOSSimulator) {
             CONFIG += static
@@ -93,23 +105,10 @@ equals(TEMPLATE, lib) {
         #troublesome
         #win32: TARGET = $$join(TARGET,,,d)
     }
-}
 
-#lib 必须创建prl
-contains(TEMPLATE, lib) {
+    #lib 必须创建prl
     #create sdk need
     CONFIG += create_prl
-}
-
-#macOS下必须开开bundle
-contains(QSYS_PRIVATE, macOS){
-    contains(TEMPLATE, app) {
-        #区分lib和app
-        CONFIG += app_bundle
-    } else: contains(TEMPLATE, lib) {
-        #仅仅用这个 这个是lib用的pri
-        CONFIG += lib_bundle
-    }
 }
 
 #################################################################
