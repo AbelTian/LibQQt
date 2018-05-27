@@ -289,6 +289,13 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         HEADERS += $$PWD/network/qqtbluetoothmanager.h
     }
 
+    #nfc iodevice
+    #注释：在qqt_header.pri打开 DEFINES += __NFC__
+    contains (DEFINES, __NFC__) {
+        SOURCES += $$PWD/network/qqtnfcclient.cpp
+        HEADERS += $$PWD/network/qqtnfcclient.h
+    }
+
     contains (DEFINES, __WEBSOCKETSUPPORT__) {
         #websocket client iodevice
         SOURCES += $$PWD/network/qqtwebsocketclient.cpp

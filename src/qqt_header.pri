@@ -243,6 +243,17 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         lessThan(QT_MAJOR_VERSION, 5): CONFIG += bluetooth
     }
 
+    ##################Nfc Module###############################
+    #if you use QtNfc, open this annotation
+    DEFINES += __NFC__
+    #if you compiler QtNfc module manual, note this line is a good idea. default <qt5.2 doesn't use bluetooth
+    lessThan(QT_VERSION, 5.2): DEFINES -= __NFC__
+    DEFINES -= __NFC__
+    #condation
+    contains (DEFINES, __NFC__) {
+        QT += nfc
+    }
+
     ##################RawSocket Module###############################
     #raw socket, 这个是常用的，不要关，dont close。...
     DEFINES += __TCPUDPSOCKET__
