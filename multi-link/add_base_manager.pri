@@ -54,17 +54,29 @@ include ($${PWD}/add_base_header.pri)
 ##definition and configration
 ##need QSYS
 #################################################################
-##win platform: some target, special lib lib_bundle staticlib
-##only deal dynamic is ok, static all in headers dealing.
-##define macro before header.
-equals(TEMPLATE, lib) {
+contains(TEMPLATE, app) {
+    #add base manager对App的处理很少，App通过函数基本上能解决所有的事情
+    #macOS下必须开开bundle
+    contains(QSYS_PRIVATE, macOS){
+        CONFIG += app_bundle
+    }
+} else: contains(TEMPLATE, lib) {
+    ##base manager 对lib的处理很重要
+    ##区分了在不同目标下Qt library的不同形态，其实就是要求lib工程和Qt library保持一样的状态。
+    ##尤其在windows平台下，还提供了LIB_STATIC_LIBRARY 和 LIB_LIBRARY两个宏的支持
+    ##帮助用户区分lib的状态。
+
+    ##win platform: some target, special lib lib_bundle staticlib
+    ##only deal dynamic is ok, static all in headers dealing.
+    ##define macro before header.
+    #专门为lib工程设置
     contains(QSYS_PRIVATE, Win32|Windows|Win64) {
         #Qt is static by mingw32 building
         mingw {
             #on my computer , Qt library are all static library?
             #create static lib (important, only occured at builder pro)
             CONFIG += staticlib
-            #在base_header里设置
+            #在add_base_header里设置
             #DEFINES += LIB_STATIC_LIBRARY
         } else {
             #create dynamic lib (important, only occured at builder pro)
@@ -74,8 +86,9 @@ equals(TEMPLATE, lib) {
         }
     #*nux platform: no macro
     } else {
-        equals(QSYS_PRIVATE, macOS) {
+        contains(QSYS_PRIVATE, macOS) {
             CONFIG += dll
+            #macOS下必须开开bundle
             CONFIG += lib_bundle
         } else:contains(QSYS_PRIVATE, iOS|iOSSimulator) {
             CONFIG += static
@@ -92,52 +105,16 @@ equals(TEMPLATE, lib) {
         #troublesome
         #win32: TARGET = $$join(TARGET,,,d)
     }
-}
 
-#lib 必须创建prl
-contains(TEMPLATE, lib) {
+    #lib 必须创建prl
     #create sdk need
     CONFIG += create_prl
 }
 
-#macOS下必须开开bundle
-contains(QSYS_PRIVATE, macOS){
-    contains(TEMPLATE, app) {
-        CONFIG += app_bundle
-    } else: contains(TEMPLATE, lib) {
-        #仅仅用这个 这个是lib用的pri
-        CONFIG += lib_bundle
-    }
-}
-
 #################################################################
 ##此处代码完成包含(链接)libQQt
+##这里是对QQt的lib的链接支持。
 #################################################################
-include ($${PWD}/../src/qqt_header.pri)
-
-#把QQt SDK头文件路径加入进来 为搜索头文件而添加
-#其实过去做的自动添加QQt头文件就是这个功能
-#用户包含QQt头文件，就不必加相对路径了，方便了很多
-defineTest(add_qqt_header){
-    #包含QQt头文件的过程
-    header_path = $$get_add_header(QQt)
-    INCLUDEPATH += $$get_qqt_header($$header_path)
-    export(INCLUDEPATH)
-    return (1)
-}
-
-#包含QQt的头文件
-add_qqt_header()
-
-#细心的用户会发现，QQt的头文件包含了两次，一个在源代码目录里，一个在SDK目录里，两个并不冲突。系统只要搜索到一个目录里的就可以使用了。
-#当然，我们确信，SDK目录里的头文件服从于源代码目录里的头文件。
-
-#链接QQt
 !equals(TARGET, QQt) {
-    add_library(QQt)
+    include ($${PWD}/add_library_QQt.pri)
 }
-
-#以上代码只完成了链接libQQt 包含libQQt头文件 包含libQQt宏文件(在宏文件控制下Library的头文件才有精确的意义)
-#没有发布libQQt
-#App在开发中，调用发布App以后 必然需要调用app_deploy_library(QQt)发布QQt到运行时。强大的：从sdk发布到build和deploy位置。
-#调试，正常；发布运行，正常。
