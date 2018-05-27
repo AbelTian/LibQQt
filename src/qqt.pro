@@ -46,7 +46,7 @@ contains(DEFINES, LIB_LIBRARY) {
 #################################################################
 #这个的设置有特点，要先设置
 add_version(2,4,0,0)
-DEFINES += QQT_VERSION=$$VERSION
+DEFINES += QQT_VERSION=$$APP_VERSION
 
 #user can use app_version.pri to modify app version once, once is all. DEFINES += APP_VERSION=0.0.0 is very good.
 #unix:VERSION = $${QQT_VERSION}
