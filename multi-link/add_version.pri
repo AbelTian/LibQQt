@@ -92,6 +92,7 @@ defineTest(add_version) {
     export(VER_MAJ)
     export(VER_MIN)
     export(VER_PAT)
+    export(APP_VERSION)
     export(APP_MAJOR_VERSION)
     export(APP_MINOR_VERSION)
     export(APP_PATCH_VERSION)

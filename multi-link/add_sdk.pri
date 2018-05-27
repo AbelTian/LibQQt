@@ -149,7 +149,7 @@ defineReplace(get_add_Qt_lib_pri){
 
     command =
     command += $$get_empty_file($${LIB_PRI_FILEPATH}) $$CMD_SEP
-    command += echo "QT.$${libname_lower}.VERSION = $${VERSION}" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+    command += echo "QT.$${libname_lower}.VERSION = $${APP_VERSION}" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${libname_lower}.name = $${libname}"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT.$${libname_lower}.module = $${libname}"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     contains(QSYS_PRIVATE, Win32|Windows|Win64) {
