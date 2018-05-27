@@ -208,6 +208,7 @@ defineTest(system_errcode) {
     #erro : eval(ret = 0): return (false)
     #succ:
     #equals(ret, 0):return (false)
+    #return(true)
     #succ:but msvc creator auto qmake....
     return ($${ret})
 }
