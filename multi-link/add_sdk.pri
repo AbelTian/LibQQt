@@ -297,20 +297,20 @@ defineTest(add_sdk){
         #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
     }
 
-    libname = $$TARGET
+    libname = $$1
+    isEmpty(1):libname = $$TARGET
     libname_lower = $$lower($${libname})
-
     #LIB std dir is not same to app std dir
     LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
-
-    #编译目标位置
-    LIB_DST_DIR=$$3
-    isEmpty(3):LIB_DST_DIR = $$DESTDIR
 
     #create platform sdk need this
     #源代码目录
     LIB_SRC_PWD=$$2
     isEmpty(2):LIB_SRC_PWD=$${PWD}
+
+    #编译目标位置
+    LIB_DST_DIR=$$DESTDIR
+    !isEmpty(3):LIB_DST_DIR = $$3
 
     #need use qqt subdir proj
     LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
@@ -347,13 +347,13 @@ defineTest(add_sdk){
 }
 
 #依赖 libname libsrcdir libdstdir
-#添加一个参数 subdirs列表 包含subdirs层 子文件夹层
+#添加一个参数 subdirs列表 包含subdirs层 子文件夹层 说的是build路径比较深的情况
 #TARGET
 #PWD
 #DESTDIR
 #sub层列表 从头到尾 如果为空，则等于add_sdk()
 #支持Qt5，不支持Qt4. Qt4 qmake比较落后。
-defineTest(add_sdk_in_subdirs){
+defineTest(add_sdk_from_subdirs){
     #isEmpty(1):error(add_subdir_sdk(libname, libsrcdir, libdstdir) need at last one argument)
     contains(QSYS_PRIVATE, macOS) {
         #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)

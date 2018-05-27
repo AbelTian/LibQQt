@@ -182,7 +182,7 @@ defineReplace(get_add_deploy_library_on_android) {
     isEmpty(2): librealname = $${libname}
 
     command =
-    command += $${LIB_LIB_PWD}/lib$${librealname}.so
+    command += $${LIB_ANDROID_PATH}
     #message($$command)
 
     return ($$command)
@@ -238,7 +238,8 @@ defineTest(add_deploy) {
         #发布苹果版本，iOS版本也是这个？
         QMAKE_POST_LINK += $$get_add_deploy_on_mac()
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
-        ANDROID_EXTRA_LIBS += $$get_add_deploy_on_android()
+        #Qt做了
+        #ANDROID_EXTRA_LIBS += $$get_add_deploy_on_android()
     } else {
         #发布linux、e-linux，这个是一样的。
         QMAKE_POST_LINK += $$get_add_deploy_on_linux()
@@ -302,7 +303,8 @@ defineTest(add_deploy_library) {
         #发布苹果版本，iOS版本也是这个？
         QMAKE_POST_LINK += $$get_add_deploy_library_on_mac($${libname})
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
-        ANDROID_EXTRA_LIBS += $$get_add_deploy_library_on_android($${libname})
+        #在add_library里做的。
+        #ANDROID_EXTRA_LIBS += $$get_add_deploy_library_on_android($${libname})
     } else {
         #发布linux、e-linux，这个是一样的。
         QMAKE_POST_LINK += $$get_add_deploy_library_on_linux($${libname})

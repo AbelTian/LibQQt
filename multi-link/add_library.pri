@@ -19,6 +19,7 @@ defineReplace(get_add_library) {
     equals(QMAKE_HOST.os, Windows) {
         CUR_LIB_PWD~=s,/,\\,g
     }
+    message(link $${librealname} from $$CUR_LIB_PWD)
 
     LINK =
     contains(DEFINES, __DARWIN__) {
@@ -45,7 +46,7 @@ defineReplace(get_add_header) {
         !isEmpty(2):CUR_INC_PWD=$${CUR_INC_PWD}/$${increalname}
         INCLUDE += $${CUR_INC_PWD}
     } else {
-        CUR_INC_PWD = $${LIB_SDK_ROOT}/$${incname}/$${QSYS_STD_DIR}/include
+        CUR_INC_PWD = $${LIB_SDK_ROOT}/$${incname}/$${QSYS_STD_DIR}/include/$${incname}
         !isEmpty(2):CUR_INC_PWD=$${CUR_INC_PWD}/$${increalname}
         equals(QMAKE_HOST.os, Windows) {
             CUR_INC_PWD~=s,/,\\,g
@@ -84,7 +85,7 @@ defineTest(add_library) {
 
 #从LIB_SDK_ROOT按照标准路径QSYS_STD_DIR包含
 #[incname/5.9.2/macOS/Debug/lib/incname.framework/Headers/increalname]
-#[incname/5.9.2/macOS/Debug/include/increalname]
+#[incname/5.9.2/macOS/Debug/include/incname/increalname]
 #increalname可以为空
 defineTest(add_header) {
     incname = $$1
