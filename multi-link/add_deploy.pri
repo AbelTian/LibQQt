@@ -208,7 +208,6 @@ defineTest(add_deploy) {
         message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
         error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
     }
-    message($${TARGET} is deployed to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
 
     #起始位置 编译位置 中间目标位置
     APP_DEST_PWD=$${DESTDIR}
@@ -224,6 +223,7 @@ defineTest(add_deploy) {
     equals(QMAKE_HOST.os, Windows) {
         APP_DEPLOY_PWD~=s,/,\\,g
     }
+    message($${TARGET} is deployed to $$APP_DEPLOY_PWD)
 
     #如果 配置文件里 没有配置 APP_DEPLOY_ROOT 那么返回，不拷贝发布任何应用
     #不会走到
@@ -317,7 +317,7 @@ defineTest(add_deploy_library) {
 
     export(QMAKE_POST_LINK)
 
-    message("$${TARGET} has deployed lib $${libname}.")
+    message("$${TARGET} has deployed lib $${librealname}.")
     return (1)
 }
 

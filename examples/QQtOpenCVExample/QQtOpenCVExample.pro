@@ -41,7 +41,7 @@ include (../../app-lib/add_custom_manager.pri)
 #这里做的事情，可以拷贝到custom manager里面完成。
 add_version(1,0,0,0)
 add_deploy()
-
+add_deploy_config($$PWD/AppRoot)
 
 #添加其他library
 include (../../app-lib/add_library_OpenCV.pri)
