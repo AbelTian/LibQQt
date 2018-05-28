@@ -54,8 +54,7 @@ SUBDIRS =
 #need GumoQuery
 #-----------------------------------------------------------------
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/QtSdkManager
-#
-greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
+#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
 #SUBDIRS += demo/GuiBuildTool
 #SUBDIRS += demo/LearnCookieTest
 #-----------------------------------------------------------------
