@@ -45,4 +45,5 @@ add_deploy_config($$PWD/AppRoot)
 
 #添加其他library
 include (../../app-lib/add_library_OpenCV.pri)
-
+#app 发布library OpenCV 只有app才会发布
+add_deploy_library_OpenCV()
