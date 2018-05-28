@@ -38,4 +38,11 @@ MOBILITY =
 
 include (../../multi-link/add_base_manager.pri)
 include (../../app-lib/add_custom_manager.pri)
+#这里做的事情，可以拷贝到custom manager里面完成。
+add_version(1,0,0,0)
+add_deploy()
+
+
+#添加其他library
 include (../../app-lib/add_library_OpenCV.pri)
+

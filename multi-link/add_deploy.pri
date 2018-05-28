@@ -181,6 +181,13 @@ defineReplace(get_add_deploy_library_on_android) {
     !isEmpty(3): error("get_add_deploy_library_on_windows(libname, librealname) requires at most two argument")
     isEmpty(2): librealname = $${libname}
 
+    LIB_ANDROID_PATH = $${LIB_LIB_PWD}/lib$${librealname}.so
+    equals(QMAKE_HOST.os, Windows) {
+        LIB_ANDROID_PATH~=s,/,\\,g
+    }
+    message(Android target $${ANDROID_TARGET_ARCH})
+    message($${TARGET} deploy library $${LIB_ANDROID_PATH})
+
     command =
     command += $${LIB_ANDROID_PATH}
     #message($$command)
@@ -260,7 +267,6 @@ defineTest(add_deploy_library) {
         message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
         error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
     }
-    message(Deploy $${TARGET} to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
     isEmpty(LIB_SDK_ROOT){
         message($${TARGET} $${CONFIG_FILE})
         message(LIB_SDK_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
@@ -298,16 +304,15 @@ defineTest(add_deploy_library) {
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
     contains(QSYS_PRIVATE, Win32|Windows||Win64) {
         #发布windows版本
-        QMAKE_POST_LINK += $$get_add_deploy_library_on_windows($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_library_on_windows($${libname}, $${librealname})
     } else: contains(QSYS_PRIVATE, macOS) {
         #发布苹果版本，iOS版本也是这个？
-        QMAKE_POST_LINK += $$get_add_deploy_library_on_mac($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_library_on_mac($${libname}, $${librealname})
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
-        #在add_library里做的。
-        #ANDROID_EXTRA_LIBS += $$get_add_deploy_library_on_android($${libname})
+        ANDROID_EXTRA_LIBS += $$get_add_deploy_library_on_android($${libname}, $${librealname})
     } else {
         #发布linux、e-linux，这个是一样的。
-        QMAKE_POST_LINK += $$get_add_deploy_library_on_linux($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_library_on_linux($${libname}, $${librealname})
     }
 
     export(QMAKE_POST_LINK)

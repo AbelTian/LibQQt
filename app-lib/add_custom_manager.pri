@@ -11,7 +11,7 @@
 
 #添加依赖library
 #add_library(xx)
-#add_include(xx)
+#add_header(xx)
 #add_defines(xx)
 
 #先发布App

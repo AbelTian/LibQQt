@@ -411,8 +411,8 @@ win32 {
 ##################################################################
 defineReplace(get_qqt_header){
     path = $$1
-    !isEmpty(2) : error("qqt_header(path) requires one arguments.")
-    isEmpty(1) : error("qqt_header(path) requires one arguments.")
+    !isEmpty(2) : error("get_qqt_header(path) requires one arguments.")
+    isEmpty(1) : error("get_qqt_header(path) requires one arguments.")
 
     #basic
     command += $${path}
