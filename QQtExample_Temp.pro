@@ -8,8 +8,7 @@
 ##-----------------------------------------------------------------
 TEMPLATE = subdirs
 
-SUBDIRS = \
-    examples/QQtOpenSceneGraphExample
+SUBDIRS =
 
 #need vlcQt libvlc library
 #SUBDIRS += test/qqtliveplayer
@@ -27,3 +26,6 @@ SUBDIRS = \
 
 #这是一对，用于测试Multi-link对其他的lib的链接能力
 #SUBDIRS += test/QQtMultiLinkTest
+
+#need winSDK
+#SUBDIRS += examples/QQtOpenSceneGraphExample
