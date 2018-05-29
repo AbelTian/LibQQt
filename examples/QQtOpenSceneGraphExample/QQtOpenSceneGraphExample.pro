@@ -43,6 +43,7 @@ add_version(1,0,0,0)
 add_deploy()
 add_dependent_library_QQt()
 mingw{
+    #Qt is static, but osg is dynamic
     #add_defines(OSG_LIBRARY_STATIC)
     add_defines(__MINGW32__)
 }

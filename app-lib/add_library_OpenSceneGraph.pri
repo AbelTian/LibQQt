@@ -8,9 +8,7 @@
 #初始化设置
 #######################################################################################
 LIBRARYVER =
-DEBUG =
-#这个地方，mingw比较特殊必须发布release版本，其他平台不清楚。
-mingw:DEBUG=
+DEBUG = d
 contains(BUILD, Release) {
     DEBUG=
 }
