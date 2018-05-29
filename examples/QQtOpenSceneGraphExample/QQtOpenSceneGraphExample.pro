@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-05-27T22:58:29
+# Project created by QtCreator 2018-05-29T18:07:40
 #
 #-------------------------------------------------
 
@@ -8,8 +8,10 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = QQtOpenCVExample
+TARGET = QQtOpenSceneGraphExample
 TEMPLATE = app
+
+CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -33,25 +35,16 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-CONFIG += mobility
-MOBILITY = 
-
-############################################
-#添加所有提供函数的pri 很有美感
-############################################
 include (../../multi-link/add_base_manager.pri)
-include (../../app-lib/add_library_OpenCV.pri)
-#这里做的事情，可以拷贝custom manager到app目录里再custom manager里面完成。
-include (../../app-lib/add_custom_manager.pri)
+include (../../app-lib/add_library_OpenSceneGraph.pri)
 
-############################################
-#对产品线的控制结构Multi-link下命令 开启产品线
-############################################
+system(touch mainwindow.cpp)
 add_version(1,0,0,0)
 add_deploy()
-add_deploy_config($$PWD/AppRoot)
 add_dependent_library_QQt()
-
-#添加其他library
-#app 发布library OpenCV 只有app才会发布
-add_dependent_library_OpenCV()
+mingw{
+    #add_defines(OSG_LIBRARY_STATIC)
+    add_defines(__MINGW32__)
+}
+add_dependent_library_OpenSceneGraph()
+add_deploy_config($${PWD}/AppRoot)

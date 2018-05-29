@@ -8,11 +8,11 @@
 ##-----------------------------------------------------------------
 TEMPLATE = subdirs
 
-SUBDIRS =
+SUBDIRS = \
+    examples/QQtOpenSceneGraphExample
 
 #need vlcQt libvlc library
-#
-SUBDIRS += test/qqtliveplayer
+#SUBDIRS += test/qqtliveplayer
 #need ffmpeg library
 #SUBDIRS += test/qqtffmpegplayer
 
@@ -23,8 +23,7 @@ SUBDIRS += test/qqtliveplayer
 #lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
 
 #need OpenCV
-#
-SUBDIRS += examples/QQtOpenCVExample
+#SUBDIRS += examples/QQtOpenCVExample
 
 #这是一对，用于测试Multi-link对其他的lib的链接能力
-SUBDIRS += test/QQtMultiLinkTest
+#SUBDIRS += test/QQtMultiLinkTest

@@ -42,4 +42,4 @@ add_deploy()
 add_dependent_library_QQt()
 #添加其他library
 #libVLCQt从sdk到build和deploy
-add_dependence_VLC()
+add_dependent_library_VLC()

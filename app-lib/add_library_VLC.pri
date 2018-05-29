@@ -73,7 +73,7 @@ defineTest(add_deploy_library_VLC) {
     return (1)
 }
 
-defineTest(add_dependence_VLC) {
+defineTest(add_dependent_library_VLC) {
     add_link_library_VLC()
     add_deploy_library_VLC()
     return (1)

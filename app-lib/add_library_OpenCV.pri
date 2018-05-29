@@ -105,7 +105,7 @@ defineTest(add_deploy_library_OpenCV) {
     return (1)
 }
 
-defineTest(add_dependence_OpenCV) {
+defineTest(add_dependent_library_OpenCV) {
     add_link_library_OpenCV()
     add_deploy_library_OpenCV()
     return (1)
