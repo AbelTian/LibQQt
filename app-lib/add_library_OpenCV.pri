@@ -4,30 +4,22 @@
 #这个比较common，允许拷贝到用户工程中更改。
 #----------------------------------------------------------------
 
-#添加依赖library
+#######################################################################################
+#初始化设置
+#######################################################################################
 OPENCVVER = 231
 DEBUG = d
 contains(BUILD, Release) {
     DEBUG=
 }
 
-add_library(OpenCV, opencv_calib3d$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_contrib$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_core$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_features2d$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_flann$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_gpu$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_highgui$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_imgproc$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_legacy$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_ml$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_objdetect$${OPENCVVER}$${DEBUG})
-add_library(OpenCV, opencv_video$${OPENCVVER}$${DEBUG})
 
-#添加头文件 （如果头文件目录扩展了，就改这个函数）
-defineReplace(get_opencv_header){
+#######################################################################################
+#定义内部函数
+#######################################################################################
+defineReplace(get_add_header_OpenCV){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_opencv_header(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_header_OpenCV(path) requires one arguments.")
 
     command =
     #basic
@@ -50,24 +42,50 @@ defineReplace(get_opencv_header){
     return ($$command)
 }
 
-defineTest(add_opencv_header){
+defineTest(add_header_OpenCV){
     #包含OpenCV头文件的过程
     header_path = $$get_add_header(OpenCV)
-    INCLUDEPATH += $$get_opencv_header($$header_path)
+    INCLUDEPATH += $$get_add_header_OpenCV($$header_path)
     export(INCLUDEPATH)
     return (1)
 }
 
-add_opencv_header()
+defineTest(add_library_OpenCV){
+    #链接Library
+    add_library(OpenCV, opencv_calib3d$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_contrib$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_core$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_features2d$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_flann$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_gpu$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_highgui$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_imgproc$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_legacy$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_ml$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_objdetect$${OPENCVVER}$${DEBUG})
+    add_library(OpenCV, opencv_video$${OPENCVVER}$${DEBUG})
+    return (1)
+}
 
-#这样包含也很好，简洁明了
-#add_header(OpenCV, opencv)
-#add_header(OpenCV, opencv2)
-#add_header(OpenCV, opencv2/core)
-#...
+#######################################################################################
+#定义外部函数
+#######################################################################################
+#链接OpenCV的WorkFlow
+defineTest(add_link_library_OpenCV){
+    #链接Library
+    add_library_OpenCV()
+    #添加头文件 （如果头文件目录扩展了，就改这个函数）
+    add_header_OpenCV()
+    #这样包含也很好，简洁明了
+    #add_header(OpenCV, opencv)
+    #add_header(OpenCV, opencv2)
+    #add_header(OpenCV, opencv2/core)
+    #...
 
-#添加宏定义
-#add_defines(xx)
+    #添加宏定义
+    #add_defines(xx)
+    return (1)
+}
 
 #发布依赖library
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
@@ -84,4 +102,11 @@ defineTest(add_deploy_library_OpenCV) {
     add_deploy_library(OpenCV, libopencv_ml$${OPENCVVER}$${DEBUG})
     add_deploy_library(OpenCV, libopencv_objdetect$${OPENCVVER}$${DEBUG})
     add_deploy_library(OpenCV, libopencv_video$${OPENCVVER}$${DEBUG})
+    return (1)
+}
+
+defineTest(add_dependence_OpenCV) {
+    add_link_library_OpenCV()
+    add_deploy_library_OpenCV()
+    return (1)
 }

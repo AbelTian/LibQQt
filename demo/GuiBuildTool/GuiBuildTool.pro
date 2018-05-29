@@ -86,7 +86,7 @@ add_deploy()
 
 #后发布依赖
 #libQQt从sdk到build和deploy
-add_deploy_library(QQt)
+add_dependent_library_QQt()
 
 #-------------------------------------------------
 ##project environ

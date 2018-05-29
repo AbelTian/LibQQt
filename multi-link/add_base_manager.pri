@@ -115,9 +115,13 @@ contains(TEMPLATE, app) {
 }
 
 #################################################################
-##此处代码完成包含(链接)libQQt
-##这里是对QQt的lib的链接支持。
+##此处代码完成包含(链接+发布)libQQt的函数
+##这里是对QQt的lib的支持。
+##这个支持是有条件的：如果用户移动了Multi-link技术文件夹，那么不再自动加入支持，用户需要手动include(add_library_QQt.pri)，和使用其他的lib一样。
+##这个支持有个特点，因为LibQQt是开源的，所以这个pri依赖了qqt_header.pri，所以这个pri不能移动，一旦移动就会失去效果。
 #################################################################
-!equals(TARGET, QQt) {
-    include ($${PWD}/add_library_QQt.pri)
+!equals(TARGET, QQt):
+    exists($${PWD}/../app-lib/add_library_QQt.pri):
+    exists($${PWD}/../src/core/qqtcore.cpp) {
+    include ($${PWD}/../app-lib/add_library_QQt.pri)
 }

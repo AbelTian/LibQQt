@@ -3,7 +3,7 @@
 
 QQtBasedLibTest::QQtBasedLibTest()
 {
-    //pline() << res ( "xxx.png" );
+    pline() << res ( "xxx.png" );
 }
 
 

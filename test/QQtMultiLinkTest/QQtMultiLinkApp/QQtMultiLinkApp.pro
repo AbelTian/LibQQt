@@ -47,7 +47,7 @@ add_deploy()
 
 #后发布依赖
 #libQQt从sdk到build和deploy
-add_deploy_library(QQt)
+add_dependent_library_QQt()
 
 #发布配置文件 把AppRoot里的配置项目拷贝到运行目录和发布目录
 add_deploy_config($${PWD}/AppRoot)
@@ -60,7 +60,10 @@ add_language($${PWD}/$${TARGET}.pro, $${PWD}/AppRoot/lang, de_DE)
 #添加语言 zh_CN en_US
 add_zh_CN_en_US($${PWD}/$${TARGET}.pro, $${PWD}/AppRoot/lang)
 
-
+add_header(QQtBasedLibTest)
+add_library(QQtBasedLibTest)
+add_deploy_library(QQtBasedLibTest)
+mingw:add_defines(QQTBASEDLIBTEST_STATIC_LIBRARY)
 
 message($$QMAKE_PRE_LINK)
 message($$QMAKE_POST_LINK)

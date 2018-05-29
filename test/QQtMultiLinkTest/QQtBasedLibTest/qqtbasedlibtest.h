@@ -3,8 +3,8 @@
 
 #include "qqtbasedlibtest_global.h"
 
-//#include <qqtframe.h>
-//#include <qqtcore.h>
+#include <qqtframe.h>
+#include <qqtcore.h>
 
 class QQTBASEDLIBTESTSHARED_EXPORT QQtBasedLibTest
 {

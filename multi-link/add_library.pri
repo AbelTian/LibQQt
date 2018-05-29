@@ -75,7 +75,7 @@ defineTest(add_library) {
     isEmpty(2): librealname = $${libname}
 
     command = $$get_add_library($${libname}, $${librealname})
-    #message ($$command)
+    #message (LIBS += $$command)
     LIBS += $${command}
 
     export(LIBS)
@@ -94,7 +94,7 @@ defineTest(add_header) {
     !isEmpty(3): error("add_header(incname, increalname) requires at most two argument")
 
     command = $$get_add_header($${incname}, $${increalname})
-    #message ($$command)
+    #message (INCLUDEPATH += $$command)
     INCLUDEPATH += $${command}
 
     export(INCLUDEPATH)

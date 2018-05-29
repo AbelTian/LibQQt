@@ -36,15 +36,22 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
+############################################
+#添加所有提供函数的pri 很有美感
+############################################
 include (../../multi-link/add_base_manager.pri)
-include (../../app-lib/add_custom_manager.pri)
+include (../../app-lib/add_library_OpenCV.pri)
 #这里做的事情，可以拷贝custom manager到app目录里再custom manager里面完成。
+include (../../app-lib/add_custom_manager.pri)
+
+############################################
+#对产品线的控制结构Multi-link下命令 开启产品线
+############################################
 add_version(1,0,0,0)
 add_deploy()
 add_deploy_config($$PWD/AppRoot)
-add_deploy_library_QQt()
+add_dependent_library_QQt()
 
 #添加其他library
-include (../../app-lib/add_library_OpenCV.pri)
 #app 发布library OpenCV 只有app才会发布
-add_deploy_library_OpenCV()
+add_dependence_OpenCV()

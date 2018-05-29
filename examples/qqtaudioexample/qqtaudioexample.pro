@@ -61,7 +61,7 @@ add_deploy()
 
 #后发布依赖
 #libQQt从sdk到build和deploy
-add_deploy_library(QQt)
+add_dependent_library_QQt()
 
 #发布配置文件 把AppRoot里的配置项目拷贝到运行目录和发布目录
 add_deploy_config($${PWD}/AppRoot)

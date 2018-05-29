@@ -163,8 +163,5 @@ SUBDIRS += test/QQtWidgetClickHelperTest
 #
 SUBDIRS += test/QQtWidgetClickSoundHelperTest
 
-#这是一对，用于测试Multi-link对其他的lib的链接能力
-SUBDIRS += test/QQtMultiLinkTest
-
 #在subdirs里面添加一次add_base_manager.pri是否可以影响全部子工程
 SUBDIRS += test/SubDirBaseManagerTest

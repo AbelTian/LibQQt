@@ -189,7 +189,7 @@ defineTest(add_deploy_library) {
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
         ANDROID_EXTRA_LIBS += $$get_add_deploy_library_on_android($${libname}, $${librealname})
     } else {
-        #发布linux、e-linux，这个是一样的。
+        ##发布linux、e-linux，这个是一样的。GG
         QMAKE_POST_LINK += $$get_add_deploy_library_on_linux($${libname}, $${librealname})
     }
 
@@ -340,6 +340,6 @@ defineTest(add_deploy_libraries) {
 
     export(QMAKE_POST_LINK)
 
-    message("$${TARGET} has deployed librarys under $${libname}.")
+    message("$${TARGET} has deployed all libraries under $${libname}.")
     return (1)
 }
