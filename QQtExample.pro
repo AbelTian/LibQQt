@@ -30,6 +30,12 @@ SUBDIRS =
 #lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
 #lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
 
+#need OpenCV
+#SUBDIRS += examples/QQtOpenCVExample
+
+#need QZXing, default closed.
+#SUBDIRS += examples/qrcodeexample
+
 #-----------------------------------------------------------------
 #Q3级别 V2 第二版、第二代
 #QQt installed to Qt library or
@@ -41,14 +47,14 @@ SUBDIRS =
 #QQt提供QQtApplication帮助App管理Application句柄。
 #SUBDIRS += examples/qqtframe2
 #必看
-#SUBDIRS += examples/exquisite
+#
+SUBDIRS += examples/exquisite
 #SUBDIRS += examples/tabwidgetexamples
-#need QZXing, default closed.
-#SUBDIRS += examples/qrcodeexample
 
 #SUBDIRS += examples/qqtchartexample
 #
-#SUBDIRS += examples/console_app
+#
+SUBDIRS += examples/console_app
 #-----------------------------------------------------------------
 #need webaccessmanager - WebSupport
 #need QSsl
@@ -61,10 +67,12 @@ SUBDIRS =
 #-----------------------------------------------------------------
 #some test project
 #SUBDIRS += test/gumbo_query_test
-#SUBDIRS += test/customqvariant
+#
+SUBDIRS += test/customqvariant
 #SUBDIRS += test/framelesshelperwidget
 #SUBDIRS += test/treeviewtest
-#SUBDIRS += test/bytearraytest
+#
+SUBDIRS += test/bytearraytest
 #!contains(QSYS_PRIVATE, iOS|iOSSimulator){
 #    SUBDIRS += test/cmdwidget
 #}
@@ -80,18 +88,25 @@ SUBDIRS =
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += test/qqtbtfileserver
 
 #0000
-#SUBDIRS += test/svgtest
-#SUBDIRS += test/qqtdicttest
+#
+SUBDIRS += test/svgtest
+#
+SUBDIRS += test/qqtdicttest
 #必开
-#SUBDIRS += test/qqtdicttest2
+#
+SUBDIRS += test/qqtdicttest2
 #必开
-#SUBDIRS += test/giftest
+#
+SUBDIRS += test/giftest
 
 #必开 这两个例子是关于QQtAudio的最好展示
-#SUBDIRS += examples/qqtaudioexample
+#
+SUBDIRS += examples/qqtaudioexample
 #111111
-#greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
-#mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
+#
+greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
+#
+mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
 #网络创建工具
 #SUBDIRS += demo/QQtClientCreator
@@ -111,18 +126,20 @@ SUBDIRS =
 #和QQt脱离开的Multi-link技术
 #默认链接QQt，但是可以容易的脱开。
 #-----------------------------------------------------------------
-#SUBDIRS += test/openglwidgettest
-#SUBDIRS += test/osdtest
+#
+SUBDIRS += test/openglwidgettest
+#
+SUBDIRS += test/osdtest
 #SUBDIRS += test/inputtest
 #SUBDIRS += demo/SysInfoNotify
 
-#SUBDIRS += test/QQtWidgetClickHelperTest
-#SUBDIRS += test/QQtWidgetClickSoundHelperTest
+#
+SUBDIRS += test/QQtWidgetClickHelperTest
+#
+SUBDIRS += test/QQtWidgetClickSoundHelperTest
 
 #这是一对，用于测试Multi-link对其他的lib的链接能力
 #SUBDIRS += test/QQtMultiLinkTest
 
-#在subdirs里面添加一次add_base_manager.pri是否可以影响全部子工程
+#在subdirs里面添加一次add_base_manager.pri是否可以影响全部子工程？不会
 #SUBDIRS += test/SubDirBaseManagerTest
-
-SUBDIRS += examples/QQtOpenCVExample

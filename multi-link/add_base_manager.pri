@@ -28,6 +28,9 @@ include($${PWD}/add_multi_link_technology.pri)
 #app发布所需要的函数
 include ($${PWD}/add_deploy.pri)
 
+#app发布library所需要的函数
+include ($${PWD}/add_deploy_library.pri)
+
 #app发布配置项需要的函数
 include ($${PWD}/add_deploy_config.pri)
 

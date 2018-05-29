@@ -47,7 +47,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QQTTreeWidget" name="treeView">
+   <widget class="QQtTreeWidget" name="treeView">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -90,7 +90,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QQTTreeWidget</class>
+   <class>QQtTreeWidget</class>
    <extends>QTreeView</extends>
    <header location="global">qqttreewidget.h</header>
   </customwidget>

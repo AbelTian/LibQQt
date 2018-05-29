@@ -28,5 +28,10 @@ add_library(QQt)
 
 #以上代码只完成了链接libQQt 包含libQQt头文件 包含libQQt宏文件(在宏文件控制下Library的头文件才有精确的意义)
 #没有发布libQQt
-#App在开发中，调用发布App以后 必然需要调用app_deploy_library(QQt)发布QQt到运行时。强大的：从sdk发布到build和deploy位置。
+#App在开发中，调用发布App以后 必然需要调用add_deploy_library(QQt)发布QQt到运行时。强大的：从sdk发布到build和deploy位置。
 #调试，正常；发布运行，正常。
+#:) 方便函数
+defineTest(add_deploy_library_QQt){
+    add_deploy_library(QQt)
+    return (1)
+}
