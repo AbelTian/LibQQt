@@ -16,7 +16,23 @@ THIS_PRI_PWD = $${PWD}
 defineReplace(get_add_deploy_on_mac) {
     command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
     command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
-    command += $$COPY_DIR $${APP_BUILD_PWD}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app
+    command += $$COPY_DIR $${APP_BUILD_PWD}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
+
+    #这里或许需要加macdeployqt? build pwd
+    command += macdeployqt $${APP_BUILD_PWD}/$${TARGET}.app -verbose=1 $$CMD_SEP
+    lessThan(QT_MAJOR_VERSION, 5){
+        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} $$CMD_SEP
+    }
+
+    #deploy pwd
+    command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1
+    lessThan(QT_MAJOR_VERSION, 5){
+        command += $$CMD_SEP
+        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
+    }
+
     #message($$command)
     return ($$command)
 }
@@ -40,8 +56,8 @@ defineReplace(get_add_deploy_on_windows) {
         } else {
             #过去you'yi'dua有一段时间，这里必须发布release版本，mingw的才能通过，现在debug的才能通过
             #必须release。编译dll可以，链接不成功。静态编译后，app必须发布release。
-            #注意：链接库较多时候，windeployqt发布不全。我在后边用add_deploy_library_Qt()修复，需要用户手动调用。
-            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
+            #注意：链接库较多时候，windeployqt发布不全。dll用这些库，app不用，windeployqt不发布。在add_deploy_library里修复。
+            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
         }
     } else: equals(BUILD, Release) {
         command += $$CMD_SEP

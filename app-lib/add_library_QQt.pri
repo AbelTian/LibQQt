@@ -59,7 +59,7 @@ defineTest(add_link_library_QQt){
 #调试，正常；发布运行，正常。
 #:) 方便函数
 defineTest(add_deploy_library_QQt){
-    add_deploy_library(QQt)
+    add_deploy_library_Qt(QQt)
     return (1)
 }
 

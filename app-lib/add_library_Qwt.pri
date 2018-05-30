@@ -66,7 +66,7 @@ defineTest(add_link_library_Qwt){
 #发布依赖library
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
 defineTest(add_deploy_library_Qwt) {
-    add_deploy_library(Qwt, Qwt$${LIBRARYVER}$${DEBUG})
+    add_deploy_library_Qt(Qwt, Qwt$${LIBRARYVER}$${DEBUG})
     return (1)
 }
 
