@@ -32,4 +32,5 @@ SUBDIRS += examples/QQtOpenCVExample
 #SUBDIRS += examples/QQtOpenSceneGraphExample
 
 #need Qwt
-#SUBDIRS += test/QQtQwtTest
+#
+SUBDIRS += test/QQtQwtTest

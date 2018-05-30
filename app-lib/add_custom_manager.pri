@@ -26,6 +26,9 @@
 ################################################################
 #对产品线的控制结构Multi-link下命令 开启产品线
 ################################################################
+#add version 调用时机 在lib里有个约束，必须在add_sdk之前调用，其他时候没有约束。
 add_version(1,0,0,0)
 add_deploy()
-add_dependent_library_QQt()
+contains(TEMPLATE, app):add_dependent_library_QQt()
+else:contains(TEMPLATE, lib):add_link_library_QQt()
+else:add_link_library_QQt()
