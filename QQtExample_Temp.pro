@@ -21,16 +21,22 @@ SUBDIRS =
 #lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
 #lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
 
-#need OpenCV
+#用于测试Multi-link对其他的lib的链接能力
+#SUBDIRS += test/QQtMultiLinkTest
+
+########################################################################################
+#支持添加开源的依赖项目
+#这些工程用来测试添加依赖的成功与否
+#所有的依赖添加pri都位于QQt/app-lib里，暂时除了QQt的不能移动，其他的pri都可以移动。
+########################################################################################
+#need OpenCV SDK
 #
 SUBDIRS += examples/QQtOpenCVExample
 
-#这是一对，用于测试Multi-link对其他的lib的链接能力
-#SUBDIRS += test/QQtMultiLinkTest
-
-#need winSDK
+#need OSG SDK
+#need win SDK
 #SUBDIRS += examples/QQtOpenSceneGraphExample
 
-#need Qwt
+#need Qwt SDK
 #
 SUBDIRS += test/QQtQwtTest
