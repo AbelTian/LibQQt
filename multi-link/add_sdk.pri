@@ -58,6 +58,7 @@ defineReplace(get_add_sdk_dir_struct) {
         !contains(QSYS_PRIVATE, macOS) {
             command += $$MK_DIR $$LIB_INC_DIR $$CMD_SEP
         }
+        command += $$MK_DIR $$LIB_BIN_DIR $$CMD_SEP
         command += $$MK_DIR $$LIB_LIB_DIR $$CMD_SEP
         command += $$MK_DIR $$LIB_CMAKE_DIR $$CMD_SEP
         command += $$MK_DIR $$LIB_PRI_PATH
@@ -72,7 +73,9 @@ defineReplace(get_add_windows_sdk) {
     #copy header
     command += $${COPY_DIR} $${LIB_SRC_PWD}\\*.h* $${LIB_INC_DIR} $$CMD_SEP
     #should be *.dll *.lib
-    command += $${COPY_DIR} $${LIB_BUILD_PWD}\\* $${LIB_LIB_DIR}
+    command += $${COPY_DIR} $${LIB_BUILD_PWD}\\* $${LIB_LIB_DIR} $$CMD_SEP
+    #move *.dll
+    command += $${MOVE} $${LIB_LIB_DIR}\\*.dll $${LIB_BIN_DIR}
 
     return ($$command)
 }
@@ -249,6 +252,7 @@ defineReplace(get_add_sdk_private){
 
     #qqt defined these dir struct, used from qt library
     LIB_INC_DIR = include/$${libname}
+    LIB_BIN_DIR = bin
     LIB_LIB_DIR = lib
     LIB_CMAKE_DIR=lib/cmake/$${libname}
     LIB_PRI_PATH=mkspecs/modules
@@ -264,6 +268,7 @@ defineReplace(get_add_sdk_private){
         LIB_SDK_PWD~=s,/,\\,g
 
         LIB_INC_DIR~=s,/,\\,g
+        LIB_BIN_DIR = bin
         LIB_LIB_DIR = lib
         LIB_CMAKE_DIR~=s,/,\\,g
         LIB_PRI_PATH~=s,/,\\,g

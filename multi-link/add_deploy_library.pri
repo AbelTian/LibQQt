@@ -76,12 +76,15 @@ defineReplace(get_add_deploy_library_on_windows) {
 
     command =
     command += $$RM $${APP_BUILD_PWD}\\$${librealname}.* $$CMD_SEP
-    #拷贝sdk到build
+    #build的地方调试需要.lib等其他文件
     command += $$COPY_DIR $${LIB_LIB_PWD}\\$${librealname}.* $${APP_BUILD_PWD} $$CMD_SEP
+    #拷贝sdk到build
+    command += $$COPY_DIR $${LIB_BIN_PWD}\\$${librealname}.* $${APP_BUILD_PWD} $$CMD_SEP
 
     command += $$RM $${APP_DEPLOY_PWD}\\$${librealname}.* $$CMD_SEP
+    #deploy的地方不需要.lib等文件
     #拷贝sdk到deploy
-    command += $$COPY_DIR $${LIB_LIB_PWD}\\$${librealname}.* $${APP_DEPLOY_PWD}
+    command += $$COPY_DIR $${LIB_BIN_PWD}\\$${librealname}.* $${APP_DEPLOY_PWD}
 
     #message($$command)
 
@@ -174,8 +177,12 @@ defineTest(add_deploy_library) {
 
     LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
+    LIB_BIN_PWD = $${LIB_SDK_PWD}/bin
     LIB_LIB_PWD = $${LIB_SDK_PWD}/lib
     equals(QMAKE_HOST.os, Windows) {
+        LIB_STD_DIR~=s,/,\\,g
+        LIB_SDK_PWD~=s,/,\\,g
+        LIB_BIN_PWD~=s,/,\\,g
         LIB_LIB_PWD~=s,/,\\,g
     }
 
@@ -234,11 +241,14 @@ defineReplace(get_add_deploy_libraries_on_windows) {
     isEmpty(1)|!isEmpty(2): error("get_add_deploy_libraries_on_windows(libname) requires one argument")
 
     command =
-    #拷贝sdk到build
+    #build 需要.lib .exp等文件
     command += $$COPY_DIR $${LIB_LIB_PWD}\\* $${APP_BUILD_PWD} $$CMD_SEP
+    #拷贝sdk到build
+    command += $$COPY_DIR $${LIB_BIN_PWD}\\* $${APP_BUILD_PWD} $$CMD_SEP
 
+    #deploy不需要.lib .exp等文件
     #拷贝sdk到deploy
-    command += $$COPY_DIR $${LIB_LIB_PWD}\\* $${APP_DEPLOY_PWD}
+    command += $$COPY_DIR $${LIB_BIN_PWD}\\* $${APP_DEPLOY_PWD}
 
     #message($$command)
 
@@ -319,8 +329,12 @@ defineTest(add_deploy_libraries) {
 
     LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
+    LIB_BIN_PWD = $${LIB_SDK_PWD}/bin
     LIB_LIB_PWD = $${LIB_SDK_PWD}/lib
     equals(QMAKE_HOST.os, Windows) {
+        LIB_STD_DIR~=s,/,\\,g
+        LIB_SDK_PWD~=s,/,\\,g
+        LIB_BIN_PWD~=s,/,\\,g
         LIB_LIB_PWD~=s,/,\\,g
     }
 

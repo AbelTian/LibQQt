@@ -22,7 +22,8 @@ SUBDIRS =
 #lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
 
 #need OpenCV
-#SUBDIRS += examples/QQtOpenCVExample
+#
+SUBDIRS += examples/QQtOpenCVExample
 
 #这是一对，用于测试Multi-link对其他的lib的链接能力
 #SUBDIRS += test/QQtMultiLinkTest

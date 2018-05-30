@@ -10,7 +10,7 @@ contains(QMAKE_HOST.os,Windows) {
     COPY = copy /y
     COPY_DIR = xcopy /s /q /y /i /r /h
     MK_DIR = mkdir
-    RM = del
+    RM = del /q
     CD = cd /d
     RM_DIR = rd /s /q
     #PATH_SEP=\\

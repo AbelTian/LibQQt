@@ -12,9 +12,9 @@ MainWindow::MainWindow ( QWidget* parent ) :
     // read an image
     cv::Mat image = cv::imread ( "./tt.png", 1 );
     // create image window named "My Image"
-    cv::namedWindow ( "My Image" );
+    cv::namedWindow ( "OpenCV Image" );
     // show the image on window
-    cv::imshow ( "My Image", image );
+    cv::imshow ( "OpenCV Image", image );
 }
 
 MainWindow::~MainWindow()

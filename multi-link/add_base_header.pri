@@ -1,11 +1,13 @@
 #---------------------------------------------------------------------------------
 #add_base_header.pri
 #应用程序和Library的基础header。
+#包含app工程、lib工程通用的宏(定义)、配置(定义)、依赖、[头文件]、编译参数、[平台]编译设置
 #---------------------------------------------------------------------------------
 #################################################################
 ##definition and configration
 ##need QSYS
-##################################################################in theory, this should not be limited to 4.8.0, no limit is good.
+#################################################################
+#in theory, this should not be limited to 4.8.0, no limit is good.
 ##Qt version
 QT += core sql network gui xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -102,17 +104,18 @@ win32 {
 #link Lib static library in some occation on windows
 #when link Lib    static library, if no this macro, headers can't be linked on windows.
 #在这里添加了LIB_STATIC_LIBRARY 用户可以使用 还有LIB_LIBRARY
-contains(QSYS_PRIVATE, Win32|Windows|Win64 || iOS|iOSSimulator) {
-    #Qt is static by mingw32 building
-    mingw|ios{
-        #on my computer, Qt library are all static library?
-        DEFINES += LIB_STATIC_LIBRARY
-        message(Build $${TARGET} LIB_STATIC_LIBRARY is defined. build and link)
-    }
+#contains(QSYS_PRIVATE, Win32|Windows|Win64 || iOS|iOSSimulator)
+#header里不再使用平台进行判定，而是使用工程当中定义的CONFIG static[lib] 和 dll进行判定。
+#理论上mingw编译的Qt library不应该是静态的啊...
+#Qt is static by mingw32 building
+contains(CONFIG, static*){
+    #on my computer, Qt library are all static library?
+    DEFINES += LIB_STATIC_LIBRARY
+    message(Build $${TARGET} LIB_STATIC_LIBRARY is defined. build and link)
+}
 
-    #link and build all need this macro
-    contains(DEFINES, LIB_STATIC_LIBRARY) {
-    }
+#link and build all need this macro
+contains(DEFINES, LIB_STATIC_LIBRARY) {
 }
 
 ################################################################

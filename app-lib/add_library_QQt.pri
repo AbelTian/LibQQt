@@ -3,11 +3,11 @@
 ##link QQt
 ################################################################
 #简介
-#add link library 连接过程 用于源代码编写的时候。包括头文件和添加库
+#add link library 链接过程 用于源代码编写的时候。包括头文件和添加库
 #add deploy library 编译过程 用于源代码编译的时候。发布库
 #add dependent library 包括以上两个过程
 #一般app才会使用add dependent library, lib使用add link library。
-#到这里用户必须明白，连接概念到不了app，lib里才有链接概念。
+#到这里用户必须明白，链接概念到不了app，lib里才有链接概念。
 #依赖概念才会在app里出现。
 #这是重点。
 

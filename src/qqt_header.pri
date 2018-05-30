@@ -75,23 +75,21 @@ msvc {
 ##-----------------------------------------------
 #link QQt static library in some occation on windows
 #when link QQt    static library, if no this macro, headers can't be linked on windows.
-contains(QSYS_PRIVATE, Win32|Windows|Win64 || iOS|iOSSimulator) {
-    #Qt is static by mingw32 building
-    mingw|ios{
-        #on my computer, Qt library are all static library?
-        DEFINES += QQT_STATIC_LIBRARY
-        message(Build $${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
-    }
+#Qt is static by mingw32 building ?
+contains(CONFIG, static*){
+    #on my computer, Qt library are all static library?
+    DEFINES += QQT_STATIC_LIBRARY
+    message(Build $${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
+}
 
-    #link and build all need this macro
-    contains(DEFINES, QQT_STATIC_LIBRARY) {
-        DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
-        DEFINES += QZXING_STATIC_LIBRARY
-        DEFINES += QT_QTSOAP_STATIC_LIBRARY
-        DEFINES += BUILD_QDEVICEWATCHER_STATIC
-        DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
-        DEFINES += QT_GUMBO_STATIC_LIBRARY
-    }
+#link and build all need this macro
+contains(DEFINES, QQT_STATIC_LIBRARY) {
+    DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
+    DEFINES += QZXING_STATIC_LIBRARY
+    DEFINES += QT_QTSOAP_STATIC_LIBRARY
+    DEFINES += BUILD_QDEVICEWATCHER_STATIC
+    DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
+    DEFINES += QT_GUMBO_STATIC_LIBRARY
 }
 
 ################################################################

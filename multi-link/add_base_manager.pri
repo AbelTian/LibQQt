@@ -2,6 +2,10 @@
 #add_base_manager.pri
 #应用程序和Library的基础管理器，统一使用这个管理器。
 #---------------------------------------------------------------------------------
+#简介
+#在这个管理器里，App和Lib工程其实是区分开的。
+#尤其动态编译 配置开关、宏定义 是在这里处理的，但是静态编译 配置开关在这里、宏定义在base_header里。这里需要加强理解。
+#这是重点。
 
 ################################################################################
 #包含这个pri依赖的pri
@@ -57,13 +61,16 @@ include ($${PWD}/add_base_header.pri)
 ##definition and configration
 ##need QSYS
 #################################################################
-contains(TEMPLATE, app) {
+#这个编译，build pane比较简洁
+CONFIG += silent
+
+contains(TEMPLATE, .*app) {
     #add base manager对App的处理很少，App通过函数基本上能解决所有的事情
     #macOS下必须开开bundle
     contains(QSYS_PRIVATE, macOS){
         CONFIG += app_bundle
     }
-} else: contains(TEMPLATE, lib) {
+} else: contains(TEMPLATE, .*lib) {
     ##base manager 对lib的处理很重要
     ##区分了在不同目标下Qt library的不同形态，其实就是要求lib工程和Qt library保持一样的状态。
     ##尤其在windows平台下，还提供了LIB_STATIC_LIBRARY 和 LIB_LIBRARY两个宏的支持
@@ -78,9 +85,12 @@ contains(TEMPLATE, app) {
         mingw {
             #on my computer , Qt library are all static library?
             #create static lib (important, only occured at builder pro)
-            CONFIG += staticlib
+            #CONFIG += staticlib
             #在add_base_header里设置
             #DEFINES += LIB_STATIC_LIBRARY
+            #在我电脑上编译别的lib mingw下是dll格式的。
+            CONFIG += dll
+            DEFINES += LIB_LIBRARY
         } else {
             #create dynamic lib (important, only occured at builder pro)
             CONFIG += dll

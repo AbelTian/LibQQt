@@ -38,7 +38,8 @@ defineReplace(get_add_deploy_on_windows) {
         msvc{
             command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
         } else {
-            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
+            #过去you'yi'dua有一段时间，这里必须发布release版本，mingw的才能通过，现在debug的才能通过
+            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
         }
     } else: equals(BUILD, Release) {
         command += $$CMD_SEP
