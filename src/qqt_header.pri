@@ -76,7 +76,7 @@ msvc {
 #link QQt static library in some occation on windows
 #when link QQt    static library, if no this macro, headers can't be linked on windows.
 #Qt is static by mingw32 building ?
-mingw|ios{
+ios{
     #on my computer, Qt library are all static library?
     DEFINES += QQT_STATIC_LIBRARY
     message(Build $${TARGET} QQT_STATIC_LIBRARY is defined. build and link)

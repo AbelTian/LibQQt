@@ -82,12 +82,12 @@ contains(TEMPLATE, app) {
         mingw {
             #on my computer , Qt library are all static library?
             #create static lib (important, only occured at builder pro)
-            CONFIG += staticlib
+            #CONFIG += staticlib
             #在add_base_header里设置
             #DEFINES += LIB_STATIC_LIBRARY
             #在我电脑上编译别的lib mingw下是dll格式的。
-            #CONFIG += dll
-            #DEFINES += LIB_LIBRARY
+            CONFIG += dll
+            DEFINES += LIB_LIBRARY
             #mingw编译为静态有原因：动态库可以编译成功，但是无法链接成功。
             #message(Build $${TARGET} LIB_LIBRARY is defined. build)
         } else {
