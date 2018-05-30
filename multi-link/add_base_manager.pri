@@ -53,10 +53,6 @@ include ($${PWD}/add_language.pri)
 ####################################################################################
 #base manager 都做了以下这些事情
 ####################################################################################
-#公共的基础header.pri
-#包含基本的Qt工程设置 qqt_header.pri里的设置更详细
-include ($${PWD}/add_base_header.pri)
-
 #################################################################
 ##definition and configration
 ##need QSYS
@@ -64,17 +60,18 @@ include ($${PWD}/add_base_header.pri)
 #这个编译，build pane比较简洁
 CONFIG += silent
 
-contains(TEMPLATE, .*app) {
+contains(TEMPLATE, app) {
     #add base manager对App的处理很少，App通过函数基本上能解决所有的事情
     #macOS下必须开开bundle
     contains(QSYS_PRIVATE, macOS){
         CONFIG += app_bundle
     }
-} else: contains(TEMPLATE, .*lib) {
+} else: contains(TEMPLATE, lib) {
     ##base manager 对lib的处理很重要
     ##区分了在不同目标下Qt library的不同形态，其实就是要求lib工程和Qt library保持一样的状态。
     ##尤其在windows平台下，还提供了LIB_STATIC_LIBRARY 和 LIB_LIBRARY两个宏的支持
     ##帮助用户区分lib的状态。
+    ##注意：在app下，永远没有dll或者static字样，只有lib有
 
     ##win platform: some target, special lib lib_bundle staticlib
     ##only deal dynamic is ok, static all in headers dealing.
@@ -85,17 +82,20 @@ contains(TEMPLATE, .*app) {
         mingw {
             #on my computer , Qt library are all static library?
             #create static lib (important, only occured at builder pro)
-            #CONFIG += staticlib
+            CONFIG += staticlib
             #在add_base_header里设置
             #DEFINES += LIB_STATIC_LIBRARY
             #在我电脑上编译别的lib mingw下是dll格式的。
-            CONFIG += dll
-            DEFINES += LIB_LIBRARY
+            #CONFIG += dll
+            #DEFINES += LIB_LIBRARY
+            #mingw编译为静态有原因：动态库可以编译成功，但是无法链接成功。
+            #message(Build $${TARGET} LIB_LIBRARY is defined. build)
         } else {
             #create dynamic lib (important, only occured at builder pro)
             CONFIG += dll
             #no other one deal this, define it here, right here.
             DEFINES += LIB_LIBRARY
+            message(Build $${TARGET} LIB_LIBRARY is defined. build)
         }
     #*nux platform: no macro
     } else {
@@ -125,6 +125,12 @@ contains(TEMPLATE, .*app) {
 }
 
 #################################################################
+#公共的基础header.pri，这个的作用在于不需要区分app和lib的设置都在这里面。
+#包含基本的编译设置 qqt_header.pri里的设置更详细
+#################################################################
+include ($${PWD}/add_base_header.pri)
+
+#################################################################
 ##此处代码完成包含(链接+发布)libQQt的函数
 ##这里是对QQt的lib的支持。
 ##这个支持是有条件的：如果用户移动了Multi-link技术文件夹，那么不再自动加入支持，用户需要手动include(add_library_QQt.pri)，和使用其他的lib一样。
@@ -135,3 +141,8 @@ contains(TEMPLATE, .*app) {
     exists($${PWD}/../src/core/qqtcore.cpp) {
     include ($${PWD}/../app-lib/add_library_QQt.pri)
 }
+
+#message($$TARGET config $$CONFIG)
+#message($$TARGET define $$DEFINES)
+#message($$TARGET pre link $$QMAKE_PRE_LINK)
+#message($$TARGET post link $$QMAKE_POST_LINK)

@@ -202,7 +202,7 @@ defineTest(add_deploy_library) {
 
     export(QMAKE_POST_LINK)
 
-    message("$${TARGET} has deployed lib $${librealname}.")
+    message("$${TARGET} has deployed library $${librealname}.")
     return (1)
 }
 

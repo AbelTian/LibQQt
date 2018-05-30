@@ -40,8 +40,7 @@ include (../multi-link/add_base_manager.pri)
 #根据multi-link提供的动态编译 静态编译设定进行编译，添加我自己的QQt的宏定义。
 contains(DEFINES, LIB_LIBRARY) {
     DEFINES += QQT_LIBRARY
-} else:contains(DEFINES, LIB_STATIC_LIBRARY) {
-    DEFINES += QQT_STATIC_LIBRARY
+    message(Build $${TARGET} QQT_LIBRARY is defined. build)
 }
 
 #################################################################

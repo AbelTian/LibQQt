@@ -39,7 +39,9 @@ defineReplace(get_add_deploy_on_windows) {
             command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
         } else {
             #过去you'yi'dua有一段时间，这里必须发布release版本，mingw的才能通过，现在debug的才能通过
-            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --debug -verbose=1
+            #必须release。编译dll可以，链接不成功。静态编译后，app必须发布release。
+            #注意：链接库较多时候，windeployqt发布不全。我在后边用add_deploy_library_Qt()修复，需要用户手动调用。
+            command += windeployqt $${APP_DEPLOY_PWD}\\$${TARGET}.exe --release -verbose=1
         }
     } else: equals(BUILD, Release) {
         command += $$CMD_SEP

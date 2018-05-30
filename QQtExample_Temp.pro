@@ -30,3 +30,6 @@ SUBDIRS += examples/QQtOpenCVExample
 
 #need winSDK
 #SUBDIRS += examples/QQtOpenSceneGraphExample
+
+#need Qwt
+#SUBDIRS += test/QQtQwtTest

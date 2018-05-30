@@ -108,7 +108,7 @@ win32 {
 #header里不再使用平台进行判定，而是使用工程当中定义的CONFIG static[lib] 和 dll进行判定。
 #理论上mingw编译的Qt library不应该是静态的啊...
 #Qt is static by mingw32 building
-contains(CONFIG, static*){
+mingw|ios{
     #on my computer, Qt library are all static library?
     DEFINES += LIB_STATIC_LIBRARY
     message(Build $${TARGET} LIB_STATIC_LIBRARY is defined. build and link)
