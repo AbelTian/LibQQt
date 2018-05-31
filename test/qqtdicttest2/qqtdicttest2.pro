@@ -38,6 +38,8 @@ MOBILITY =
 
 system(touch widget.cpp)
 include(../../multi-link/add_base_manager.pri)
+include (../../app-lib/add_custom_manager.pri)
+
 #这个的设置有特点，要先设置
 add_version (1,0,0,0)
 
@@ -47,4 +49,4 @@ add_deploy()
 
 #后发布依赖
 #libQQt从sdk到build和deploy
-add_dependent_library_QQt()
+add_dependent_manager_QQt()

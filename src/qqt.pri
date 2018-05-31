@@ -32,10 +32,13 @@
 TARGET = QQt
 TEMPLATE = lib
 
+CONFIG += debug_and_release
+CONFIG += build_all
+
 #################################################################
 #包含基础管理者
 #################################################################
-include (../multi-link/add_base_manager.pri)
+include ($${PWD}/../multi-link/add_base_manager.pri)
 
 #根据multi-link提供的动态编译 静态编译设定进行编译，添加我自己的QQt的宏定义。
 contains(DEFINES, LIB_LIBRARY) {
@@ -77,7 +80,7 @@ include ($$PWD/qqt_source.pri)
 #目标
 #源代码目录
 #编译在相对编译目录
-add_sdk($$TARGET, $$PWD, src/$$DESTDIR)
+add_sdk($$TARGET, $$PWD, $$DESTDIR)
 
 #################################################################
 #其他设置
@@ -102,15 +105,8 @@ win32 {
 ################################################
 ##project resource
 ################################################
-#DISTFILES += \
-#    linux_cp_files.sh \
-#    linux_cur_path.sh \
-#    linux_cd_path.sh \
-#    linux_read_ini.sh \
-#    linux_write_ini.sh \
-#    win_read_ini.bat
 RESOURCES += \
-    qqt.qrc
+    $${PWD}/qqt.qrc
 
 #################################################################
 ##QQt Lib工程持续编译

@@ -42,8 +42,7 @@ THIS_PRI_PWD = $${PWD}
 #################################################################
 defineTest(add_dependent_manager_QQt){
     !equals(TARGET_PRIVATE, QQt):
-        exists($${THIS_PRI_PWD}/../app-lib/add_library_QQt.pri):
-        exists($${THIS_PRI_PWD}/../src/core/qqtcore.cpp) {
+        exists($${THIS_PRI_PWD}/../app-lib/add_library_QQt.pri) {
         include ($${THIS_PRI_PWD}/../app-lib/add_library_QQt.pri)
         contains(TEMPLATE, app):add_dependent_library_QQt()
         else:contains(TEMPLATE, lib):add_link_library_QQt()

@@ -48,6 +48,8 @@ system("touch main.cpp")
 
 #include manager
 include(../../multi-link/add_base_manager.pri)
+include (../../app-lib/add_custom_manager.pri)
+
 
 #-------------------------------------------------
 #user app may use these these settings prefertly
@@ -91,7 +93,7 @@ add_deploy()
 
 #后发布依赖
 #libQQt从sdk到build和deploy
-add_dependent_library_QQt()
+add_dependent_manager_QQt()
 
 #-------------------------------------------------
 ##project environ

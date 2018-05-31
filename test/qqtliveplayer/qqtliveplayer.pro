@@ -26,6 +26,8 @@ FORMS    += $$PWD/qqtwindow.ui
 #添加所有提供函数的pri 很有美感
 ############################################
 include(../../multi-link/add_base_manager.pri)
+include (../../app-lib/add_custom_manager.pri)
+
 include(../../app-lib/add_library_VLC.pri)
 
 ############################################
@@ -39,7 +41,7 @@ add_deploy()
 
 #后发布依赖
 #libQQt从sdk到build和deploy
-add_dependent_library_QQt()
+add_dependent_manager_QQt()
 #添加其他library
 #libVLCQt从sdk到build和deploy
 add_dependent_library_VLC()
