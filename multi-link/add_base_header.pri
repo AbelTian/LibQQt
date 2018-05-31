@@ -139,6 +139,14 @@ defineTest(add_build_dir_struct){
     RCC_DIR =       $${BUILD_DIR}obj/qrc.cpp
     DESTDIR =       $${BUILD_DIR}bin
 
+    equals(QMAKE_HOST.os, Windows) {
+        OBJECTS_DIR~=s,/,\\,g
+        MOC_DIR~=s,/,\\,g
+        UI_DIR~=s,/,\\,g
+        RCC_DIR~=s,/,\\,g
+        DESTDIR~=s,/,\\,g
+    }
+
     export(OBJECTS_DIR)
     export(MOC_DIR)
     export(UI_DIR)

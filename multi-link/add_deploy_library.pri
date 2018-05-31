@@ -76,13 +76,13 @@ defineReplace(get_add_deploy_library_on_windows) {
     isEmpty(2): librealname = $${libname}
 
     command =
-    command += $$RM $${APP_BUILD_PWD}\\$${librealname}.* $$CMD_SEP
+    command += $$RM $${APP_BUILD_PWD}\\*$${librealname}.* $$CMD_SEP
     #build的地方调试需要.lib等其他文件
     command += $$COPY_DIR $${LIB_LIB_PWD}\\*$${librealname}.* $${APP_BUILD_PWD} $$CMD_SEP
     #拷贝sdk到build
     command += $$COPY_DIR $${LIB_BIN_PWD}\\$${librealname}.* $${APP_BUILD_PWD} $$CMD_SEP
 
-    command += $$RM $${APP_DEPLOY_PWD}\\$${librealname}.* $$CMD_SEP
+    command += $$RM $${APP_DEPLOY_PWD}\\*$${librealname}.* $$CMD_SEP
     #deploy的地方不需要.lib等文件
     #拷贝sdk到deploy
     command += $$COPY_DIR $${LIB_BIN_PWD}\\$${librealname}.* $${APP_DEPLOY_PWD}
@@ -105,10 +105,10 @@ defineReplace(get_add_deploy_library_on_linux) {
 
     command =
 
-    command += $$RM $${APP_BUILD_PWD}/lib$${libname}.so* $$CMD_SEP
+    command += $$RM $${APP_BUILD_PWD}/lib$${librealname}.so* $$CMD_SEP
     command += $$COPY_DIR $${LIB_LIB_PWD}/lib$${librealname}.so* $${APP_BUILD_PWD} $$CMD_SEP
 
-    command += $$RM $${APP_DEPLOY_PWD}/lib$${libname}.so* $$CMD_SEP
+    command += $$RM $${APP_DEPLOY_PWD}/lib$${librealname}.so* $$CMD_SEP
     command += $$COPY_DIR $${LIB_LIB_PWD}/lib$${librealname}.so* $${APP_DEPLOY_PWD}
     #message($$command)
 
@@ -432,13 +432,13 @@ defineReplace(get_add_deploy_library_Qt_on_windows) {
     isEmpty(2): librealname = $${libname}
 
     command =
-    command += $$RM $${APP_BUILD_PWD}\\$${librealname}.* $$CMD_SEP
+    command += $$RM $${APP_BUILD_PWD}\\*$${librealname}.* $$CMD_SEP
     #build的地方调试需要.lib等其他文件
     command += $$COPY_DIR $${LIB_LIB_PWD}\\*$${librealname}.* $${APP_BUILD_PWD} $$CMD_SEP
     #拷贝sdk到build
     command += $$COPY_DIR $${LIB_BIN_PWD}\\$${librealname}.* $${APP_BUILD_PWD} $$CMD_SEP
 
-    command += $$RM $${APP_DEPLOY_PWD}\\$${librealname}.* $$CMD_SEP
+    command += $$RM $${APP_DEPLOY_PWD}\\*$${librealname}.* $$CMD_SEP
     #deploy的地方不需要.lib等文件
     #拷贝sdk到deploy
     command += $$COPY_DIR $${LIB_BIN_PWD}\\$${librealname}.* $${APP_DEPLOY_PWD} $$CMD_SEP
