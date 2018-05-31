@@ -1,6 +1,9 @@
 #---------------------------------------------------------------------------------
 #add_base_manager.pri
 #应用程序和Library的基础管理器，统一使用这个管理器。
+#base header包揽所有的app和lib的通用设置
+#base manager包揽所有app和lib启动的函数
+#V2.0
 #---------------------------------------------------------------------------------
 #简介
 #在这个管理器里，App和Lib工程其实是区分开的。
@@ -42,6 +45,7 @@ include ($${PWD}/add_deploy_config.pri)
 include ($${PWD}/add_library.pri)
 
 #lib发布sdk所需要的函数
+#注释：提供修改Target名字的函数
 include ($${PWD}/add_sdk.pri)
 
 #program version
@@ -56,6 +60,7 @@ include ($${PWD}/add_language.pri)
 #################################################################
 #定义外部函数
 #################################################################
+#基本的，添加依赖
 defineTest(add_dependent_library) {
     libname = $$1
     librealname = $$2
@@ -68,22 +73,25 @@ defineTest(add_dependent_library) {
 
     return (1)
 }
-#################################################################
-##definition and configration
-##need QSYS
-#################################################################
-#这个编译，build pane比较简洁
-#CONFIG += silent
-#CONFIG += debug_and_release
-#CONFIG += build_all
 
-contains(TEMPLATE, app) {
+#开启app工程
+defineTest(add_app_project) {
     #add base manager对App的处理很少，App通过函数基本上能解决所有的事情
     #macOS下必须开开bundle
     contains(QSYS_PRIVATE, macOS){
         CONFIG += app_bundle
     }
-} else: contains(TEMPLATE, lib) {
+
+    #直到现在，还没有碰到需要静态链接的场合。
+    #如果需要，用户可以自行设定。
+    export(CONFIG)
+    export(DEFINES)
+
+    return (1)
+}
+
+#开启lib工程
+defineTest(add_lib_project) {
     ##base manager 对lib的处理很重要
     ##区分了在不同目标下Qt library的不同形态，其实就是要求lib工程和Qt library保持一样的状态。
     ##尤其在windows平台下，还提供了LIB_STATIC_LIBRARY 和 LIB_LIBRARY两个宏的支持
@@ -139,25 +147,106 @@ contains(TEMPLATE, app) {
     #lib 必须创建prl
     #create sdk need
     CONFIG += create_prl
+
+    #debug版本和release版本的所有的不同。
+    #Lib的TARGET，在两个版本上有区别，通过TARGET = add_target($$TARGET)可以解决。
+    #App的TARGET，在两个版本上，名字没有区别。
+
+    export(CONFIG)
+    export(DEFINES)
+
+    return (1)
+}
+
+#获取target的确切的名字
+#区分debug和release用的。
+#输入，target_name 为空，则默认为TARGET
+#输出，target_name?x
+#这个变量用来保存原生的target name
+TARGET_PRIVATE = $$TARGET
+defineTest(add_target){
+    #isEmpty(1):error(add_target(target_name) need one argument)
+
+    target_name = $$1
+    isEmpty(1):target_name = $$TARGET
+
+    TARGET_PRIVATE = $$target_name
+    export(TARGET_PRIVATE)
+
+    ret = $$add_sdk_name($${target_name})
+
+    TARGET = $$ret
+    export(TARGET)
+
+    return (1)
+}
+
+#设置模板名字 这个随意 只要TEMPLATE调用了就行了
+TEMPLATE_PRIVATE = $$TEMPLATE
+defineTest(add_template){
+    #isEmpty(1):error(add_template(template_name) need one argument)
+
+    template_name = $$1
+    isEmpty(1):template_name = $$TEMPLATE
+
+    TEMPLATE_PRIVATE = $$template_name
+    export(TEMPLATE_PRIVATE)
+
+    return(1)
+}
+
+#这个的调用 随意
+defineTest(add_header){
+    #isEmpty(1):error(add_header(header_name) need one argument)
+
+    header_name = $$1
+    isEmpty(1):header_name = $$PWD
+
+    HEADERS += $$header_name
+    export(HEADERS)
+
+    return(1)
+}
+
+#这个的调用 随意
+defineTest(add_source){
+    isEmpty(1):error(add_source(source_name) need one argument)
+
+    source_name = $$1
+
+    SOURCES += $$source_name
+    export(SOURCES)
+
+    return(1)
+}
+
+#################################################################
+##definition and configration
+##need QSYS
+#################################################################
+#这个编译，build pane比较简洁
+#CONFIG += silent
+#CONFIG += debug_and_release
+#CONFIG += build_all
+
+#修饰TARGET LIB必要 APP可选 only once
+add_target($$TARGET)
+
+contains(TEMPLATE, app) {
+    #启动app工程 APP必要
+    add_app_project()
+} else: contains(TEMPLATE, lib) {
+    #启动lib工程 LIB必要
+    add_lib_project()
 }
 
 #################################################################
 #公共的基础header.pri，这个的作用在于不需要区分app和lib的设置都在这里面。
 #包含基本的编译设置 qqt_header.pri里的设置更详细
+#这个header在所有的函数包含完以后，添加，因为这个header其实也依赖Multi-link技术。
 #################################################################
 include ($${PWD}/add_base_header.pri)
 
-#################################################################
-##此处代码完成包含(链接+发布)libQQt的函数
-##这里是对QQt的lib的支持。
-##这个支持是有条件的：如果用户移动了Multi-link技术文件夹，那么不再自动加入支持，用户需要手动include(add_library_QQt.pri)，和使用其他的lib一样。
-##这个支持有个特点，因为LibQQt是开源的，所以这个pri依赖了qqt_header.pri，所以这个pri不能移动，一旦移动就会失去效果。
-#################################################################
-!equals(TARGET, QQt):
-    exists($${PWD}/../app-lib/add_library_QQt.pri):
-    exists($${PWD}/../src/core/qqtcore.cpp) {
-    include ($${PWD}/../app-lib/add_library_QQt.pri)
-}
 
 #message($$TARGET config $$CONFIG)
 #message($$TARGET define $$DEFINES)

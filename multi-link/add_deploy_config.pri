@@ -60,7 +60,7 @@ defineTest(add_deploy_config) {
     #set app deploy pwd
     #APP_DEPLOY_PWD is here.
     #lib project会发布配置文件吗？
-    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QSYS_STD_DIR}
+    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET_PRIVATE}/$${QSYS_STD_DIR}
     #不仅仅发布目标为Windows的时候，才需要改变路径
     #开发机为Windows就必须改变。
     #contains(QKIT_PRIVATE, WIN32||WIN64) {

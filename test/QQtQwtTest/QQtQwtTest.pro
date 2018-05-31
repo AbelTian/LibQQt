@@ -36,12 +36,20 @@ FORMS += \
 system(touch main.cpp)
 include (../../multi-link/add_base_manager.pri)
 include (../../app-lib/add_custom_manager.pri)
-include (../../app-lib/add_library_Qwt.pri)
 
+#add version 调用时机 在lib里有个约束，必须在add_sdk之前调用，其他时候没有约束。
+add_version(1,0,0,0)
+add_deploy()
+
+#app链接library lib也会链接
 #app发布library 只有app才会发布
-add_dependent_library_Qwt()
 
+add_dependent_manager_QQt()
+add_dependent_manager_Qwt()
+
+#打印状态
 message($$TARGET config $$CONFIG)
 message($$TARGET define $$DEFINES)
 message($$TARGET pre link $$QMAKE_PRE_LINK)
 message($$TARGET post link $$QMAKE_POST_LINK)
+message($$LIBS)

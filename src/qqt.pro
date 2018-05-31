@@ -43,11 +43,15 @@ contains(DEFINES, LIB_LIBRARY) {
     message(Build $${TARGET} QQT_LIBRARY is defined. build)
 }
 
+#static library宏的管理，一律放在头文件.pri
+
 #################################################################
 ##project version
 #################################################################
 #这个的设置有特点，要先设置
 add_version(2,4,0,0)
+
+#自定义宏
 DEFINES += QQT_VERSION=$$APP_VERSION
 
 #user can use app_version.pri to modify app version once, once is all. DEFINES += APP_VERSION=0.0.0 is very good.
@@ -117,8 +121,8 @@ RESOURCES += \
 #依赖touch命令 :|
 #QQt持续编译配置开关
 #QQt用户请注意，在这里我开启了持续编译，以保证用户对QQt本身的修改生效
-CONFIG += continued_build
-contains(CONFIG, continued_build){
+CONFIG += continue_build
+contains(CONFIG, continue_build){
     system("touch $${PWD}/frame/qqtapplication.cpp")
 }
 

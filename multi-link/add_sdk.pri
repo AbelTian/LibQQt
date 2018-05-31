@@ -251,7 +251,7 @@ defineReplace(get_add_sdk_private){
     libname_lower = $$lower($${libname})
 
     #qqt defined these dir struct, used from qt library
-    LIB_INC_DIR = include/$${libname}
+    LIB_INC_DIR = include/$${TARGET_PRIVATE}
     LIB_BIN_DIR = bin
     LIB_LIB_DIR = lib
     LIB_CMAKE_DIR=lib/cmake/$${libname}
@@ -306,7 +306,7 @@ defineTest(add_sdk){
     isEmpty(1):libname = $$TARGET
     libname_lower = $$lower($${libname})
     #LIB std dir is not same to app std dir
-    LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
+    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
 
     #create platform sdk need this
     #源代码目录
@@ -368,7 +368,7 @@ defineTest(add_sdk_from_subdirs){
     isEmpty(1):libname = $$TARGET
     libname_lower = $$lower($${libname})
     #LIB std dir is not same to app std dir
-    LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
+    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
 
     #create platform sdk need this
     #源代码目录
@@ -449,7 +449,7 @@ defineTest(del_sdk){
     isEmpty(1):libname = $$TARGET
     libname_lower = $$lower($${libname})
     #LIB std dir is not same to app std dir
-    LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
+    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
 
     #create platform sdk need this
     #源代码目录
@@ -493,3 +493,20 @@ defineTest(del_sdk){
 
     return (1)
 }
+
+#获取sdk name
+defineReplace(add_sdk_name){
+    #isEmpty(1):error(add_sdk_name(target_name) need one argument)
+
+    target_name = $$1
+    isEmpty(1):target_name = $$TARGET
+
+    ret = $${target_name}
+    contains(BUILD, Debug) {
+        mac:ret = $${ret}_debug
+        win32:ret = $${ret}d
+    }
+
+    return ($$ret)
+}
+
