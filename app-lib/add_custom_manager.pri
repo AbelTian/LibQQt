@@ -62,6 +62,17 @@ defineTest(add_dependent_manager_Qwt){
     return (1)
 }
 
+defineTest(add_dependent_manager_QwtPlot3d){
+    !equals(TARGET_PRIVATE, QwtPlot3d):
+        exists($${THIS_PRI_PWD}/../app-lib/add_library_QwtPlot3d.pri){
+        include ($${THIS_PRI_PWD}/../app-lib/add_library_QwtPlot3d.pri)
+        contains(TEMPLATE, app):add_dependent_library_QwtPlot3d()
+        else:contains(TEMPLATE, lib):add_link_library_QwtPlot3d()
+        else:add_link_library_QwtPlot3d()
+    }
+    return (1)
+}
+
 defineTest(add_dependent_manager_OpenCV){
     !equals(TARGET_PRIVATE, OpenCV):
         exists($${THIS_PRI_PWD}/../app-lib/add_library_OpenCV.pri){

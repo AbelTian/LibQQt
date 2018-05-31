@@ -102,3 +102,5 @@ add_deploy_config($${PWD}/AppRoot)
 #default
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
+message ($${TARGET} Qt $${QT})
+message ($${TARGET} Libs $${LIBS})

@@ -233,7 +233,7 @@ defineTest(add_source){
 #CONFIG += build_all
 
 #修饰TARGET LIB必要 APP可选 only once
-add_target($$TARGET)
+add_target($${TARGET})
 
 contains(TEMPLATE, app) {
     #启动app工程 APP必要

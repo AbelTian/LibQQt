@@ -510,3 +510,75 @@ defineReplace(add_sdk_name){
     return ($$ret)
 }
 
+#发布没有后缀名的头文件
+#类名
+#头文件 不设置 为空 则为类名小写。
+#保存位置 相对路径 不写则为根目录。
+defineTest(add_sdk_header){
+    isEmpty(1):error(add_sdk_header(classname, headername, headerdir) need at last one argument)
+
+    classname = $$1
+    headername = $$2
+    headerdir = $$3
+
+    isEmpty(2):headername = $$lower($${classname}).h
+
+    #LIB std dir is not same to app std dir
+    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
+
+    #create platform sdk need this
+    #源代码目录
+    LIB_SRC_PWD=$$2
+    isEmpty(2):LIB_SRC_PWD=$${PWD}
+
+    #编译目标位置
+    LIB_DST_DIR=$$DESTDIR
+    !isEmpty(3):LIB_DST_DIR = $$3
+
+    #need use qqt subdir proj
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
+    !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+
+    #sdk path
+    LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
+    #message(QQt sdk install here:$${LIB_SDK_PWD})
+
+    LIB_INC_DIR = include/$${TARGET_PRIVATE}
+
+    !isEmpty(3):headerdir=$${headerdir}/
+    HEADER_FILE = $${headerdir}$${classname}
+
+    #这里不仅仅目标为windows的时候，才会转换，
+    #开发Host为Windows的时候，都要转换。
+    #contains(QSYS_PRIVATE, Win32|Windows||Win64) {
+    equals(QMAKE_HOST.os, Windows) {
+        APP_BUILD_ROOT~=s,/,\\,g
+        LIB_SDK_ROOT~=s,/,\\,g
+        APP_DEPLOY_ROOT~=s,/,\\,g
+
+        QSYS_STD_DIR~=s,/,\\,g
+        LIB_STD_DIR~=s,/,\\,g
+        LIB_DST_DIR~=s,/,\\,g
+        LIB_BUILD_PWD~=s,/,\\,g
+        LIB_SDK_PWD~=s,/,\\,g
+
+        LIB_INC_DIR~=s,/,\\,g
+        HEADER_FILE~=s,/,\\,g
+    }
+
+    command =
+    command += $$CD $${LIB_SDK_PWD} $$CMD_SEP
+    command += $$CD $${LIB_INC_DIR} $$CMD_SEP
+    contains(QMAKE_HOST.os, Windows){
+        command += $${THIS_PRI_PWD}/win_write_header.bat $${headername} $${HEADER_FILE}
+    } else {
+        command += chmod +x $${THIS_PRI_PWD}/linux_write_header.sh $$CMD_SEP
+        command += $${THIS_PRI_PWD}/linux_write_header.sh $${headername} $${HEADER_FILE}
+    }
+
+    !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK+=$$CMD_SEP
+    QMAKE_POST_LINK += $$command
+    export(QMAKE_POST_LINK)
+
+    return(1)
+}

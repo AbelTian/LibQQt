@@ -55,7 +55,6 @@ defineTest(add_deploy_config) {
         message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
         error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
     }
-    message($${TARGET} deployes config to $$APP_DEPLOY_ROOT/$${TARGET}/$$QSYS_STD_DIR)
 
     #set app deploy pwd
     #APP_DEPLOY_PWD is here.
@@ -67,6 +66,7 @@ defineTest(add_deploy_config) {
     equals(QMAKE_HOST.os, Windows) {
         APP_DEPLOY_PWD~=s,/,\\,g
     }
+    message($${TARGET} deployes config to $$APP_DEPLOY_PWD)
 
     #如果 TARGET 没有配置 APP_CONFIG_PWD 那么返回，不拷贝任何配置
     #qmake 或逻辑为 | 或者 ||

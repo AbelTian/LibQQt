@@ -37,5 +37,5 @@ SUBDIRS =
 #SUBDIRS += examples/QQtOpenSceneGraphExample
 
 #need Qwt SDK
-#
-SUBDIRS += test/QQtQwtTest
+#SUBDIRS += test/QQtQwtTest
+SUBDIRS += test/QQtQwtPlot3DTest
