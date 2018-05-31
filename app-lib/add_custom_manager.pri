@@ -94,3 +94,26 @@ defineTest(add_dependent_manager_OpenSceneGraph){
     }
     return (1)
 }
+
+#这个是模板
+defineTest(add_dependent_manager_Template){
+    !equals(TARGET_PRIVATE, Template):
+        exists($${THIS_PRI_PWD}/../app-lib/add_library_Template.pri){
+        include ($${THIS_PRI_PWD}/../app-lib/add_library_Template.pri)
+        contains(TEMPLATE, app):add_dependent_library_Template()
+        else:contains(TEMPLATE, lib):add_link_library_Template()
+        else:add_link_library_Template()
+    }
+    return (1)
+}
+
+defineTest(add_dependent_manager_GoogleTest){
+    !equals(TARGET_PRIVATE, GoogleTest):
+        exists($${THIS_PRI_PWD}/../app-lib/add_library_GoogleTest.pri){
+        include ($${THIS_PRI_PWD}/../app-lib/add_library_GoogleTest.pri)
+        contains(TEMPLATE, app):add_dependent_library_GoogleTest()
+        else:contains(TEMPLATE, lib):add_link_library_GoogleTest()
+        else:add_link_library_GoogleTest()
+    }
+    return (1)
+}

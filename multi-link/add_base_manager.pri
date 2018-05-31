@@ -182,7 +182,7 @@ defineTest(add_target){
     return (1)
 }
 
-#设置模板名字 这个随意 只要TEMPLATE调用了就行了
+#设置模板名字
 TEMPLATE_PRIVATE = $$TEMPLATE
 defineTest(add_template){
     #isEmpty(1):error(add_template(template_name) need one argument)
@@ -196,9 +196,9 @@ defineTest(add_template){
     return(1)
 }
 
-#这个的调用 随意
-defineTest(add_header){
-    #isEmpty(1):error(add_header(header_name) need one argument)
+#添加头文件
+defineTest(add_headers){
+    #isEmpty(1):error(add_headers(header_name) need one argument)
 
     header_name = $$1
     isEmpty(1):header_name = $$PWD
@@ -209,9 +209,9 @@ defineTest(add_header){
     return(1)
 }
 
-#这个的调用 随意
-defineTest(add_source){
-    isEmpty(1):error(add_source(source_name) need one argument)
+#添加源文件
+defineTest(add_sources){
+    isEmpty(1):error(add_sources(source_name) need one argument)
 
     source_name = $$1
 
