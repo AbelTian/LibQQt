@@ -30,7 +30,8 @@ defineReplace(get_add_deploy_library_on_mac) {
     #这里是以防万一lib不存在 但是不能退出？如果是subdirs包含Library的工程，就不能退出。
     isEmpty(libmajorver){
         libmajorver=0
-        message($$TARGET link $$libname, unexisted lib.)
+        message($$TARGET link $$libname"," unexisted lib.)
+        return ("echo unexisted lib $$libname .")
     }
     command =
     command += $$MK_DIR $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&

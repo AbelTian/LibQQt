@@ -33,6 +33,29 @@ defineReplace(get_add_library) {
     return ($${LINK})
 }
 
+#忽略mac bundle的add_library
+defineReplace(get_add_library_no_bundle) {
+    libname = $$1
+    librealname = $$2
+    isEmpty(1): error("get_add_library_no_bundle(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_library_no_bundle(libname, librealname) requires at most two argument")
+    isEmpty(2): librealname = $${libname}
+
+    CUR_LIB_PWD = $${LIB_SDK_ROOT}/$${libname}/$${QSYS_STD_DIR}/lib
+    equals(QMAKE_HOST.os, Windows) {
+        CUR_LIB_PWD~=s,/,\\,g
+    }
+    message(link $${librealname} from $$CUR_LIB_PWD)
+
+    LINK =
+    #注意：macOS下使用-L -l...也就是链接.dylib .a
+    LINK += -L$${CUR_LIB_PWD}
+    #win can't with the blank! error: -l QQt
+    LINK += -l$${librealname}
+
+    return ($${LINK})
+}
+
 #获取头文件路径
 defineReplace(get_add_header) {
     incname = $$1
@@ -75,6 +98,25 @@ defineTest(add_library) {
     isEmpty(2): librealname = $${libname}
 
     command = $$get_add_library($${libname}, $${librealname})
+    #message (LIBS += $$command)
+    LIBS += $${command}
+
+    export(LIBS)
+
+    return (1)
+}
+
+#从LIB_SDK_ROOT按照标准路径QSYS_STD_DIR链接
+#[libname/5.9.2/macOS/Debug/lib/librealname.dylib/.a]
+#这个跨平台的，但是一般只有Mac下才需要。可是用这个跨平台没问题。
+defineTest(add_library_no_bundle) {
+    libname = $$1
+    librealname = $$2
+    isEmpty(1): error("add_library_no_bundle(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("add_library_no_bundle(libname, librealname) requires at most two argument")
+    isEmpty(2): librealname = $${libname}
+
+    command = $$get_add_library_no_bundle($${libname}, $${librealname})
     #message (LIBS += $$command)
     LIBS += $${command}
 

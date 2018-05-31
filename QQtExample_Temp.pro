@@ -13,8 +13,7 @@ SUBDIRS =
 #need vlcQt libvlc library
 #SUBDIRS += test/qqtliveplayer
 #need ffmpeg library
-#
-SUBDIRS += test/qqtffmpegplayer
+#SUBDIRS += test/qqtffmpegplayer
 
 #need webkit webkitwidgets - WebSupport
 #webengine
