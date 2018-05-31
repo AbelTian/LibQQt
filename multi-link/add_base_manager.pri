@@ -54,6 +54,21 @@ include ($${PWD}/add_language.pri)
 #base manager 都做了以下这些事情
 ####################################################################################
 #################################################################
+#定义外部函数
+#################################################################
+defineTest(add_dependent_library) {
+    libname = $$1
+    librealname = $$2
+    isEmpty(1): error("add_library(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("add_library(libname, librealname) requires at most two argument")
+    isEmpty(2): librealname = $${libname}
+
+    add_link_library($${libname}, $${librealname})
+    add_deploy_library($${libname}, $${librealname})
+
+    return (1)
+}
+#################################################################
 ##definition and configration
 ##need QSYS
 #################################################################

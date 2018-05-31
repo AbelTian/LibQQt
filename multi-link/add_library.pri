@@ -129,3 +129,16 @@ defineTest(add_defines) {
 
     return (1)
 }
+
+defineTest(add_link_library) {
+    libname = $$1
+    librealname = $$2
+    isEmpty(1): error("add_library(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("add_library(libname, librealname) requires at most two argument")
+    isEmpty(2): librealname = $${libname}
+
+    add_header($${libname})
+    add_library($${libname}, $${librealname})
+
+    return (1)
+}
