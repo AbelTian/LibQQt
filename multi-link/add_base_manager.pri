@@ -73,7 +73,9 @@ defineTest(add_dependent_library) {
 ##need QSYS
 #################################################################
 #这个编译，build pane比较简洁
-CONFIG += silent
+#CONFIG += silent
+#CONFIG += debug_and_release
+#CONFIG += build_all
 
 contains(TEMPLATE, app) {
     #add base manager对App的处理很少，App通过函数基本上能解决所有的事情
@@ -104,7 +106,7 @@ contains(TEMPLATE, app) {
             CONFIG += dll
             DEFINES += LIB_LIBRARY
             #mingw编译为静态有原因：动态库可以编译成功，但是无法链接成功。
-            #message(Build $${TARGET} LIB_LIBRARY is defined. build)
+            message(Build $${TARGET} LIB_LIBRARY is defined. build)
         } else {
             #create dynamic lib (important, only occured at builder pro)
             CONFIG += dll

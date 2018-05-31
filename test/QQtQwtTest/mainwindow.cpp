@@ -1,8 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
-
-
 #include <qqttcpclient.h>
 
 MainWindow::MainWindow ( QWidget* parent ) :
@@ -10,19 +7,14 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui ( new Ui::MainWindow )
 {
     ui->setupUi ( this );
-    return;
-    //setupRealtimeDataDemo ( ui->qwtPlot );
     QQtTcpClient t;
+    setupRealtimeDataDemo ( ui->qwtPlot );
 }
-
-
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-
 
 void MainWindow::setupRealtimeDataDemo ( QwtPlot* qwtplot )
 {
@@ -111,8 +103,8 @@ void MainWindow::updatedataSlot()
     }
 
     curve->setSamples ( xdata, ydata );
-    //curve->attach ( ui->qwtPlot );
-    //ui->qwtPlot->replot();
+    curve->attach ( ui->qwtPlot );
+    ui->qwtPlot->replot();
 
     static double lastFpsKey;
     static int frameCount;

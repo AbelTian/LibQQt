@@ -206,7 +206,7 @@ defineReplace(get_add_sdk_work_flow){
         command += $$get_add_mac_sdk_fix_building_framework() $$CMD_SEP
         #command += echo $$libname fix framework success. $$CMD_SEP
     }
-    command += $$RM_DIR $${LIB_SDK_PWD} $$CMD_SEP
+    #command += $$RM_DIR $${LIB_SDK_PWD} $$CMD_SEP
     command += $$MK_DIR $${LIB_SDK_PWD} $$CMD_SEP
     command += $$CD $${LIB_SDK_PWD} $$CMD_SEP
     command += $$get_add_sdk_dir_struct() $$CMD_SEP
@@ -435,5 +435,61 @@ defineTest(add_sdk_to_Qt){
     #LIB_BUILD_PWD
     LIB_SDK_PWD=$$[QT_INSTALL_DATA]
     message(QQt sdk install here:$${LIB_SDK_PWD})
+    return (1)
+}
+
+defineTest(del_sdk){
+    #isEmpty(1):error(del_sdk(libname, libsrcdir, libdstdir) need at last one argument)
+
+    contains(QSYS_PRIVATE, macOS) {
+        #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
+    }
+
+    libname = $$1
+    isEmpty(1):libname = $$TARGET
+    libname_lower = $$lower($${libname})
+    #LIB std dir is not same to app std dir
+    LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
+
+    #create platform sdk need this
+    #源代码目录
+    LIB_SRC_PWD=$$2
+    isEmpty(2):LIB_SRC_PWD=$${PWD}
+
+    #编译目标位置
+    LIB_DST_DIR=$$DESTDIR
+    !isEmpty(3):LIB_DST_DIR = $$3
+
+    #need use qqt subdir proj
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
+    !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+
+    #sdk path
+    LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
+    #message(QQt sdk install here:$${LIB_SDK_PWD})
+
+    #这里不仅仅目标为windows的时候，才会转换，
+    #开发Host为Windows的时候，都要转换。
+    #contains(QSYS_PRIVATE, Win32|Windows||Win64) {
+    equals(QMAKE_HOST.os, Windows) {
+        APP_BUILD_ROOT~=s,/,\\,g
+        LIB_SDK_ROOT~=s,/,\\,g
+        APP_DEPLOY_ROOT~=s,/,\\,g
+
+        QSYS_STD_DIR~=s,/,\\,g
+        LIB_STD_DIR~=s,/,\\,g
+        LIB_DST_DIR~=s,/,\\,g
+        LIB_BUILD_PWD~=s,/,\\,g
+        LIB_SDK_PWD~=s,/,\\,g
+    }
+
+    command += $$RM_DIR $${LIB_SDK_PWD}
+    #message($$command)
+
+    !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
+    QMAKE_POST_LINK += $$command
+
+    export(QMAKE_POST_LINK)
+
     return (1)
 }

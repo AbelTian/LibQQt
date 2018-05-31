@@ -179,6 +179,9 @@ App和Lib的目标，一直从Build位置，持续发布到Deploy位置和SDK位
 
 ####多链接技术创造的生产线  
 Multi-link会一直处于App/Lib生产线的控制器地位。   
+Multi-link允许用户自行添加任何依赖项，我把一些常用的依赖项添加用pri放在了app-lib里，
+而这些依赖项的SDK我保存在了百度网盘，以方便用户取用，用户只需要下载下来解压到自己的LIB_SDK_ROOT里。  
+网盘地址:....    
 我计划在LibQQt 3.0的时机将Multi-link合并到master分支进行正式发布。   
 ![Multi-link技术的能力](screenshot/13.png "这是Multi-link技术的能力")  
 
