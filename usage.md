@@ -142,7 +142,7 @@ Visual Studio使用设置：
 
 还修改了Windows下的app_configure.pri的磁盘保存位置，到用户主目录/.qmake/app_configure.pri，这块完全使用类Unix风格。  
 
-# v2.5 Multi-link技术完成  
+# v3.0 Multi-link技术完成  
 
 在完成的Multi-link技术里，新的QSYS环境变量和Qt Kit的关系  
 QKIT不再使用，而仅仅使用QSYS。  
@@ -167,7 +167,7 @@ QKIT不再使用，而仅仅使用QSYS。
 
 ![使用场景](screenshot/11.png "这是Multi-link技术的使用方式截图")  
 
-####Multi-link技术能够达到的管理能力，如下图。  
+####Multi-link技术能够达到的管理能力   
 App和Lib的源代码，一直处于编写之中。  
 App和Lib的目标，一直从Build位置，持续发布到Deploy位置和SDK位置。  
 用户再也不必为了管理生成目标、发布目标和链接而劳费手劲。  
@@ -176,6 +176,11 @@ App和Lib的目标，一直从Build位置，持续发布到Deploy位置和SDK位
 基于qmake。  
 
 ![Multi-link技术的能力](screenshot/12.png "这是Multi-link技术的能力")  
+
+####多链接技术创造的生产线  
+Multi-link会一直处于App/Lib生产线的控制器地位。   
+我计划在LibQQt 3.0的时机将Multi-link合并到master分支进行正式发布。   
+![Multi-link技术的能力](screenshot/13.png "这是Multi-link技术的能力")  
 
 [返回](.)   
 
