@@ -34,6 +34,11 @@ FORMS += \
         mainwindow.ui
 
 system(touch main.cpp)
+
+#基本上，用户包含这三个就足够。
+#要添加library支持，按照模板添加一个pri文件，在add_dependent_manager.pri里按照模板添加一个函数。
+#自定义的不想加到内置里的，就用add_custom_manager.pri
+#add_custom_manager也不想用的，就加到自己pro文件里好了。
 include (../../multi-link/add_base_manager.pri)
 include (../../app-lib/add_dependent_manager.pri)
 include (../../app-lib/add_custom_manager.pri)
