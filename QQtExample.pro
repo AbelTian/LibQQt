@@ -18,23 +18,6 @@ SUBDIRS =
 #SUBDIRS += examples/qqtframe
 
 #SUBDIRS += examples/animationframe
-#
-#need vlcQt libvlc library
-#SUBDIRS += test/qqtliveplayer
-#need ffmpeg library
-#SUBDIRS += test/qqtffmpegplayer
-
-#need webkit webkitwidgets - WebSupport
-#webengine
-#ignored
-#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
-#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
-
-#need OpenCV
-#SUBDIRS += examples/QQtOpenCVExample
-
-#need QZXing, default closed.
-#SUBDIRS += examples/qrcodeexample
 
 #-----------------------------------------------------------------
 #Q3级别 V2 第二版、第二代
@@ -139,8 +122,12 @@ SUBDIRS += test/QQtWidgetClickHelperTest
 #
 SUBDIRS += test/QQtWidgetClickSoundHelperTest
 
-#这是一对，用于测试Multi-link对其他的lib的链接能力
-#SUBDIRS += test/QQtMultiLinkTest
 
-#在subdirs里面添加一次add_base_manager.pri是否可以影响全部子工程？不会
-#SUBDIRS += test/SubDirBaseManagerTest
+#need webkit webkitwidgets - WebSupport
+#webengine
+#ignored
+#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
+#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
+
+#need QZXing, default closed.
+#SUBDIRS += examples/qrcodeexample

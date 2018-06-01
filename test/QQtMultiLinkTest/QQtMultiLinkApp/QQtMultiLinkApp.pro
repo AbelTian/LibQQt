@@ -37,6 +37,7 @@ FORMS += \
 system(touch main.cpp)
 
 include (../../../multi-link/add_base_manager.pri)
+include (../../../app-lib/add_dependent_manager.pri)
 
 #这个的设置有特点，要先设置
 add_version (1,0,0,0)

@@ -22,7 +22,12 @@ SUBDIRS =
 #lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
 
 #用于测试Multi-link对其他的lib的链接能力
+#zh这个测试过程过于复杂。
+#废弃
 #SUBDIRS += test/QQtMultiLinkTest
+
+#在subdirs里面添加一次add_base_manager.pri是否可以影响全部子工程？不会
+#SUBDIRS += test/SubDirBaseManagerTest
 
 ########################################################################################
 #支持添加开源的依赖项目
@@ -37,7 +42,11 @@ SUBDIRS =
 #SUBDIRS += examples/QQtOpenSceneGraphExample
 
 #need Qwt SDK
-#SUBDIRS += test/QQtQwtTest
 #
-SUBDIRS += test/QQtQwtPlot3DTest
+SUBDIRS += test/QQtQwtTest
+
+#need QwtPlot3D sdk
+#SUBDIRS += test/QQtQwtPlot3DTest
+
+#need log4cpp sdk
 #SUBDIRS += test/qqtlog4cpptest

@@ -21,7 +21,7 @@ HEADERS  += $$PWD/qqtapp.h $$PWD/qqtwindow.h \
 FORMS    += $$PWD/qqtwindow.ui
 
 include(../../multi-link/add_base_manager.pri)
-include (../../app-lib/add_custom_manager.pri)
+include (../../app-lib/add_dependent_manager.pri)
 
 include(../../app-lib/add_library_FFmpeg.pri)
 

@@ -48,7 +48,7 @@ msvc{
     include($${PWD}\\..\\..\\src\\app_base_manager.pri)
 }else{
     include(../../multi-link/add_base_manager.pri)
-include (../../app-lib/add_custom_manager.pri)
+include (../../app-lib/add_dependent_manager.pri)
 
 }
 #-------------------------------------------------
