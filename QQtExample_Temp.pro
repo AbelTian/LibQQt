@@ -38,4 +38,6 @@ SUBDIRS =
 
 #need Qwt SDK
 #SUBDIRS += test/QQtQwtTest
+#
 SUBDIRS += test/QQtQwtPlot3DTest
+#SUBDIRS += test/qqtlog4cpptest

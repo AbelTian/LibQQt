@@ -155,7 +155,7 @@ defineTest(add_build_dir_struct){
 
     return (1)
 }
-add_build_dir_struct($${BUILD})
+add_build_dir_struct()
 
 ################################################################
 ##Lib Functions Macro

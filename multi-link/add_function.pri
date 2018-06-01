@@ -23,7 +23,7 @@ contains(QMAKE_HOST.os,Windows) {
     MK_DIR = mkdir -p
     RM = rm -f
     CD = cd
-    LN = ln -sf
+    LN = ln -sfnv
     RM_DIR = rm -rf
     #PATH_SEP=/
 } else {

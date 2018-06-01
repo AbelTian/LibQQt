@@ -11,35 +11,77 @@ THIS_PRI_PWD = $${PWD}
 #在build path修复app (macOS专有)
 #copy lib
 #fix bundle路径链接
-defineReplace(get_add_mac_sdk_fix_building_framework) {
+#不修复，直接拷贝，所有的快捷方式会丢失，变成实体
 
-    #need QQT_BUILD_PWD
-    create_command = $$get_add_mac_sdk()
+#直接在framework内部强制修复
+defineReplace(get_add_mac_sdk_fix_building_framework_2) {
+
+    APP_DEST_DIR=$${DESTDIR}
+    isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
+
+    libname = $$TARGET_PRIVATE
+    librealname = $$TARGET
+    libtempname = $${libname}_Temp
+    liblowername = $$lower($${librealname})
+
+    command =
+    command += chmod +x $${THIS_PRI_PWD}/linux_cur_path.sh &&
+    command += . $${THIS_PRI_PWD}/linux_cur_path.sh &&
+    #copy temp
+    command += $$COPY_DIR $${APP_DEST_DIR}/$${libname}.framework $${APP_DEST_DIR}/$${libtempname}.framework &&
+    #进去原先的
+    command += cd $${APP_DEST_DIR}/$${libname}.framework &&
+
+    #修复framework里的快捷方式 从libtempname里拷贝资源修复原先的
+    #need APP_BUILD_PWD
+    create_command = $$get_add_mac_sdk($${libtempname}, $${librealname})
+    command += $${create_command} &&
+
+    command += chmod +x $${THIS_PRI_PWD}/linux_cd_path.sh &&
+    command += . $${THIS_PRI_PWD}/linux_cd_path.sh &&
+
+    #remove 临时的 framework
+    command += $$RM_DIR $${APP_DEST_DIR}/$${libtempname}.framework
+
+    #message($$command)
+    return ($${command})
+}
+
+#拷贝temp进行修复。
+defineReplace(get_add_mac_sdk_fix_building_framework) {
 
     APP_DEST_DIR=$${DESTDIR}
     isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
 
     libname = $$TARGET
-    libname_temp = $${libname}_Temp
-    libname_lower = $$lower($${libname})
+    librealname = $$TARGET
+    libtempname = $${libname}_temp
+    liblowername = $$lower($${librealname})
 
     command =
     command += chmod +x $${THIS_PRI_PWD}/linux_cur_path.sh &&
     command += . $${THIS_PRI_PWD}/linux_cur_path.sh &&
+
     #create temp
-    command += $$MK_DIR $${APP_DEST_DIR}/$${libname_temp}.framework &&
+    command += $$MK_DIR $${APP_DEST_DIR}/$${libtempname}.framework &&
     #进去
-    command += cd $${APP_DEST_DIR}/$${libname_temp}.framework &&
+    command += cd $${APP_DEST_DIR}/$${libtempname}.framework &&
+
     #修复framework里的快捷方式
+    #need APP_BUILD_PWD
+    create_command = $$get_add_mac_sdk($${libname}, $${librealname})
     command += $${create_command} &&
+
     command += chmod +x $${THIS_PRI_PWD}/linux_cd_path.sh &&
     command += . $${THIS_PRI_PWD}/linux_cd_path.sh &&
+
     #拷贝prl到新的里
-    command += $$COPY $${APP_DEST_DIR}/$${libname}.framework/$${libname}.prl $${APP_DEST_DIR}/$${libname_temp}.framework/$${libname}.prl $$CMD_SEP
+    command += $$COPY $${APP_DEST_DIR}/$${libname}.framework/$${librealname}.prl $${APP_DEST_DIR}/$${libtempname}.framework/$${librealname}.prl $$CMD_SEP
+
     #del 原先的
     command += $$RM_DIR $${APP_DEST_DIR}/$${libname}.framework &&
     #rename 临时的 framework 到原先的
-    command += $$MOVE $${APP_DEST_DIR}/$${libname_temp}.framework $${APP_DEST_DIR}/$${libname}.framework
+    command += $$MOVE $${APP_DEST_DIR}/$${libtempname}.framework $${APP_DEST_DIR}/$${libname}.framework
 
     #message($$command)
     return ($${command})
@@ -93,14 +135,23 @@ defineReplace(get_add_linux_sdk) {
 
 #理论上，只要用户设置了Version，就能读到Version Major
 #add_version里面有初始化版本号，所以，用户什么都不设置，将会是0版本号。
+#从libname.framework拷贝到当前新建的framework 内部为librealname
 defineReplace(get_add_mac_sdk){
     #need cd framework root
     #LIB_BUILD_PWD libname libmajorver
-    libname = $$TARGET
+
+    libname = $$1
+    librealname = $$2
+    #isEmpty(1): error("get_add_mac_sdk(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_mac_sdk(libname, librealname) requires at most two argument")
+
+    isEmpty(1):libname = $$TARGET_PRIVATE
+    isEmpty(2): librealname = $${libname}
     libmajorver = $$VER_MAJ
     isEmpty(libmajorver){
         error(Have you modifyed add_version.pri, please dont modify it.)
     }
+
     #这里的isEmpty没有用。
     #isEmpty(libmajorver):libmajorver = $$system(readlink $${LIB_BUILD_PWD}/$${libname}.framework/Versions/Current)
     #message($${LIB_BUILD_PWD}/$${libname}.framework/Versions/Current $$TARGET major version $$libmajorver)
@@ -109,16 +160,16 @@ defineReplace(get_add_mac_sdk){
     LIB_BUNDLE_CUR_DIR   = Versions/Current
     LIB_BUNDLE_INC_DIR   = $${LIB_BUNDLE_VER_DIR}/Headers
     LIB_BUNDLE_RES_DIR   = $${LIB_BUNDLE_VER_DIR}/Resources
-    LIB_BUNDLE_EXE_FILE  = $${LIB_BUNDLE_VER_DIR}/$${libname}
+    LIB_BUNDLE_EXE_FILE  = $${LIB_BUNDLE_VER_DIR}/$${librealname}
 
     LIB_BUNDLE_CUR_INC_DIR   = $${LIB_BUNDLE_CUR_DIR}/Headers
     LIB_BUNDLE_CUR_RES_DIR   = $${LIB_BUNDLE_CUR_DIR}/Resources
-    LIB_BUNDLE_CUR_EXE_FILE  = $${LIB_BUNDLE_CUR_DIR}/$${libname}
+    LIB_BUNDLE_CUR_EXE_FILE  = $${LIB_BUNDLE_CUR_DIR}/$${librealname}
 
     LIB_BUNDLE_CUR_LINK  = Current
     LIB_BUNDLE_INC_LINK  = Headers
     LIB_BUNDLE_RES_LINK  = Resources
-    LIB_BUNDLE_EXE_LINK  = $${libname}
+    LIB_BUNDLE_EXE_LINK  = $${librealname}
 
     command =
     command += $$MK_DIR $$LIB_BUNDLE_VER_DIR $$CMD_SEP
@@ -152,40 +203,40 @@ defineReplace(get_add_Qt_lib_pri){
 
     command =
     command += $$get_empty_file($${LIB_PRI_FILEPATH}) $$CMD_SEP
-    command += echo "QT.$${libname_lower}.VERSION = $${APP_VERSION}" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-    command += echo "QT.$${libname_lower}.name = $${libname}"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-    command += echo "QT.$${libname_lower}.module = $${libname}"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+    command += echo "QT.$${liblowername}.VERSION = $${APP_VERSION}" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+    command += echo "QT.$${liblowername}.name = $${libname}"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+    command += echo "QT.$${liblowername}.module = $${libname}"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     contains(QSYS_PRIVATE, Win32|Windows|Win64) {
-        command += echo "QT.$${libname_lower}.libs = \$$QT_MODULE_LIB_BASE"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-        command += echo "QT.$${libname_lower}.bins = \$$QT_MODULE_BIN_BASE"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.libs = \$$QT_MODULE_LIB_BASE"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.bins = \$$QT_MODULE_BIN_BASE"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     } else {
-        command += echo "QT.$${libname_lower}.libs = '\$$QT_MODULE_LIB_BASE'"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-        command += echo "QT.$${libname_lower}.bins = '\$$QT_MODULE_BIN_BASE'"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.libs = '\$$QT_MODULE_LIB_BASE'"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.bins = '\$$QT_MODULE_BIN_BASE'"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     }
     contains(QSYS_PRIVATE, Win32|Windows|Win64) {
-        command += echo "QT.$${libname_lower}.includes = \$$QT_MODULE_INCLUDE_BASE \$$QT_MODULE_INCLUDE_BASE/$${libname}" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-        command += echo "QT.$${libname_lower}.frameworks = " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-        command += echo "QT.$${libname_lower}.module_config = v2 " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.includes = \$$QT_MODULE_INCLUDE_BASE \$$QT_MODULE_INCLUDE_BASE/$${libname}" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.frameworks = " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.module_config = v2 " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     }else:equals(QSYS_PRIVATE, macOS) {
-        command += echo "QT.$${libname_lower}.includes = '\$$QT_MODULE_LIB_BASE/$${libname}.framework/Headers'"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-        command += echo "QT.$${libname_lower}.frameworks = '\$$QT_MODULE_LIB_BASE'" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-        command += echo "QT.$${libname_lower}.module_config = v2 lib_bundle" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.includes = '\$$QT_MODULE_LIB_BASE/$${libname}.framework/Headers'"  >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.frameworks = '\$$QT_MODULE_LIB_BASE'" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.module_config = v2 lib_bundle" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     } else {
-        command += echo "QT.$${libname_lower}.includes = '\$$QT_MODULE_INCLUDE_BASE \$$QT_MODULE_INCLUDE_BASE/$${libname}'" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-        command += echo "QT.$${libname_lower}.frameworks = " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-        command += echo "QT.$${libname_lower}.module_config = v2 " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.includes = '\$$QT_MODULE_INCLUDE_BASE \$$QT_MODULE_INCLUDE_BASE/$${libname}'" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.frameworks = " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.module_config = v2 " >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     }
     greaterThan(QT_MAJOR_VERSION, 4):{
-        command += echo "QT.$${libname_lower}.depends = core sql network gui xml widgets" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.depends = core sql network gui xml widgets" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     } else {
-        command += echo "QT.$${libname_lower}.depends = core sql network gui xml" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+        command += echo "QT.$${liblowername}.depends = core sql network gui xml" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     }
-    command += echo "QT.$${libname_lower}.uses =" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-    command += echo "QT.$${libname_lower}.DEFINES = LIB_LIBRARY" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-    command += echo "QT.$${libname_lower}.enabled_features =" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-    command += echo "QT.$${libname_lower}.disabled_features =" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+    command += echo "QT.$${liblowername}.uses =" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+    command += echo "QT.$${liblowername}.DEFINES = LIB_LIBRARY" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+    command += echo "QT.$${liblowername}.enabled_features =" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
+    command += echo "QT.$${liblowername}.disabled_features =" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
     command += echo "QT_CONFIG +=" >> $${LIB_PRI_FILEPATH} $$CMD_SEP
-    command += echo "QT_MODULES += $${libname_lower}" >> $${LIB_PRI_FILEPATH}
+    command += echo "QT_MODULES += $${liblowername}" >> $${LIB_PRI_FILEPATH}
     return ($$command)
 }
 
@@ -197,8 +248,13 @@ defineReplace(get_add_Qt_lib_pri){
 defineReplace(get_add_sdk_work_flow){
     #need cd sdk root
 
-    libname = $$TARGET
-    libname_lower = $$lower($${libname})
+    libname = $$1
+    librealname = $$2
+    #isEmpty(1): error("get_add_mac_sdk(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_mac_sdk(libname, librealname) requires at most two argument")
+    isEmpty(1):libname = $$TARGET_PRIVATE
+    isEmpty(2): librealname = $${libname}
+    liblowername = $$lower($${librealname})
 
     command =
     contains(QSYS_PRIVATE, macOS) {
@@ -223,10 +279,10 @@ defineReplace(get_add_sdk_work_flow){
             #message(create lib mac bundle framework)
             command += $$MK_DIR lib/$${libname}.framework $$CMD_SEP
             command += $$CD lib/$${libname}.framework $$CMD_SEP
-            command += $$get_add_mac_sdk() $$CMD_SEP
+            command += $$get_add_mac_sdk($${librealname}, $${librealname}) $$CMD_SEP
             command += $$CD ../../ $$CMD_SEP
             #create prl
-            command += $$COPY $${LIB_BUILD_PWD}/$${libname}.framework/$${libname}.prl lib/$${libname}.framework/$${libname}.prl $$CMD_SEP
+            command += $$COPY $${LIB_BUILD_PWD}/$${librealname}.framework/$${librealname}.prl lib/$${libname}.framework/$${librealname}.prl $$CMD_SEP
         } else {
             #Android在linux开发机下也会走这里，Android目标，Lib可以发布Win和Linux两种格式的SDK。
             #message(create lib linux struct library)
@@ -247,8 +303,14 @@ defineReplace(get_add_sdk_work_flow){
 ##初始化SDK发布过程需要的变量
 ################################################
 defineReplace(get_add_sdk_private){
-    libname = $$TARGET
-    libname_lower = $$lower($${libname})
+
+    libname = $$1
+    librealname = $$2
+    #isEmpty(1): error("get_add_mac_sdk(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_mac_sdk(libname, librealname) requires at most two argument")
+    isEmpty(1):libname = $$TARGET_PRIVATE
+    isEmpty(2): librealname = $${libname}
+    liblowername = $$lower($${librealname})
 
     #qqt defined these dir struct, used from qt library
     LIB_INC_DIR = include/$${TARGET_PRIVATE}
@@ -256,7 +318,7 @@ defineReplace(get_add_sdk_private){
     LIB_LIB_DIR = lib
     LIB_CMAKE_DIR=lib/cmake/$${libname}
     LIB_PRI_PATH=mkspecs/modules
-    LIB_PRI_FILEPATH=$${LIB_PRI_PATH}/qt_lib_$${libname_lower}.pri
+    LIB_PRI_FILEPATH=$${LIB_PRI_PATH}/qt_lib_$${liblowername}.pri
 
     #不仅仅发布目标为Windows的时候需要改变，
     #开发Host是Windows的时候都要改变。路径问题是两种操作系统固有的痛。
@@ -284,7 +346,7 @@ defineReplace(get_add_sdk_private){
     #create library struct
     #create platform sdk
     #create mkspec module pri
-    command = $$get_add_sdk_work_flow()
+    command = $$get_add_sdk_work_flow($${libname}, $${librealname})
 
     #message ($$command)
     return ($${command})
@@ -302,9 +364,11 @@ defineTest(add_sdk){
         #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
     }
 
-    libname = $$1
-    isEmpty(1):libname = $$TARGET
-    libname_lower = $$lower($${libname})
+    libname = $$TARGET_PRIVATE
+    librealname = $$1
+    isEmpty(1):librealname = $$TARGET
+    liblowername = $$lower($${librealname})
+
     #LIB std dir is not same to app std dir
     LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
 
@@ -340,7 +404,7 @@ defineTest(add_sdk){
         LIB_SDK_PWD~=s,/,\\,g
     }
 
-    command += $$get_add_sdk_private()
+    command += $$get_add_sdk_private($${libname}, $${librealname})
     #message($$command)
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
@@ -364,9 +428,11 @@ defineTest(add_sdk_from_subdirs){
         #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
     }
 
-    libname=$$1
-    isEmpty(1):libname = $$TARGET
-    libname_lower = $$lower($${libname})
+    libname = $$TARGET_PRIVATE
+    librealname = $$1
+    isEmpty(1):librealname = $$TARGET
+    liblowername = $$lower($${librealname})
+
     #LIB std dir is not same to app std dir
     LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
 
@@ -417,7 +483,7 @@ defineTest(add_sdk_from_subdirs){
         LIB_SDK_PWD~=s,/,\\,g
     }
 
-    command += $$get_add_sdk_private()
+    command += $$get_add_sdk_private($${libname}, $${librealname})
     #message($$command)
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
@@ -447,7 +513,7 @@ defineTest(del_sdk){
 
     libname = $$1
     isEmpty(1):libname = $$TARGET
-    libname_lower = $$lower($${libname})
+    liblowername = $$lower($${libname})
     #LIB std dir is not same to app std dir
     LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
 
@@ -543,7 +609,12 @@ defineTest(add_sdk_header){
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
     #message(QQt sdk install here:$${LIB_SDK_PWD})
 
-    LIB_INC_DIR = include/$${TARGET_PRIVATE}
+    LIB_INC_DIR =
+    contains(QMAKE_HOST.os, Darwin){
+        LIB_INC_DIR = lib/$${TARGET_PRIVATE}.framework/Headers
+    } else {
+        LIB_INC_DIR = include/$${TARGET_PRIVATE}
+    }
 
     !isEmpty(3):headerdir=$${headerdir}/
     HEADER_FILE = $${headerdir}$${classname}
@@ -569,6 +640,7 @@ defineTest(add_sdk_header){
     command =
     command += $$CD $${LIB_SDK_PWD} $$CMD_SEP
     command += $$CD $${LIB_INC_DIR} $$CMD_SEP
+
     contains(QMAKE_HOST.os, Windows){
         command += $${THIS_PRI_PWD}/win_write_header.bat $${headername} $${HEADER_FILE}
     } else {

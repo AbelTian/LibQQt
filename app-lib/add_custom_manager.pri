@@ -117,3 +117,14 @@ defineTest(add_dependent_manager_GoogleTest){
     }
     return (1)
 }
+
+defineTest(add_dependent_manager_log4cpp){
+    !equals(TARGET_PRIVATE, log4cpp):
+        exists($${THIS_PRI_PWD}/../app-lib/add_library_log4cpp.pri){
+        include ($${THIS_PRI_PWD}/../app-lib/add_library_log4cpp.pri)
+        contains(TEMPLATE, app):add_dependent_library_log4cpp()
+        else:contains(TEMPLATE, lib):add_link_library_log4cpp()
+        else:add_link_library_log4cpp()
+    }
+    return (1)
+}
