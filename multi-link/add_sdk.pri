@@ -275,7 +275,8 @@ defineReplace(get_add_sdk_work_flow){
         command += $$get_add_windows_sdk() $$CMD_SEP
         command += $$COPY $${LIB_BUILD_PWD}\\*.prl lib $$CMD_SEP
     } else {
-        contains(QSYS_PRIVATE, macOS) {
+        #macOS lib_bundle make sdk
+        contains(QSYS_PRIVATE, macOS):contains(CONFIG, lib_bundle) {
             #message(create lib mac bundle framework)
             command += $$MK_DIR lib/$${libname}.framework $$CMD_SEP
             command += $$CD lib/$${libname}.framework $$CMD_SEP
@@ -286,6 +287,7 @@ defineReplace(get_add_sdk_work_flow){
         } else {
             #Android在linux开发机下也会走这里，Android目标，Lib可以发布Win和Linux两种格式的SDK。
             #message(create lib linux struct library)
+            #macOS no bundle 也会走这里。
             command += $$get_add_linux_sdk() $$CMD_SEP
             command += $$COPY $${LIB_BUILD_PWD}/*.prl lib $$CMD_SEP
         }
@@ -497,10 +499,60 @@ defineTest(add_sdk_from_subdirs){
 #if you want to use QQt with QT += QQt please open this feature
 #unimplete: CONFIG += add_sdk_to_Qt
 defineTest(add_sdk_to_Qt){
-    libname=QQt
-    #LIB_BUILD_PWD
-    LIB_SDK_PWD=$$[QT_INSTALL_DATA]
-    message(QQt sdk install here:$${LIB_SDK_PWD})
+    #isEmpty(1):error(add_sdk_to_Qt(libname, libsrcdir, libdstdir) need at last one argument)
+
+    contains(QSYS_PRIVATE, macOS) {
+        #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
+    }
+
+    libname = $$TARGET_PRIVATE
+    librealname = $$1
+    isEmpty(1):librealname = $$TARGET
+    liblowername = $$lower($${librealname})
+
+    #LIB std dir is not same to app std dir
+    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
+
+    #create platform sdk need this
+    #源代码目录
+    LIB_SRC_PWD=$$2
+    isEmpty(2):LIB_SRC_PWD=$${PWD}
+
+    #编译目标位置
+    LIB_DST_DIR=$$DESTDIR
+    !isEmpty(3):LIB_DST_DIR = $$3
+
+    #need use qqt subdir proj
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
+    !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+
+    #sdk path
+    LIB_SDK_PWD = $$[QT_INSTALL_DATA]
+    #message(QQt sdk install here:$${LIB_SDK_PWD})
+
+    #这里不仅仅目标为windows的时候，才会转换，
+    #开发Host为Windows的时候，都要转换。
+    #contains(QSYS_PRIVATE, Win32|Windows||Win64) {
+    equals(QMAKE_HOST.os, Windows) {
+        APP_BUILD_ROOT~=s,/,\\,g
+        LIB_SDK_ROOT~=s,/,\\,g
+        APP_DEPLOY_ROOT~=s,/,\\,g
+
+        QSYS_STD_DIR~=s,/,\\,g
+        LIB_STD_DIR~=s,/,\\,g
+        LIB_DST_DIR~=s,/,\\,g
+        LIB_BUILD_PWD~=s,/,\\,g
+        LIB_SDK_PWD~=s,/,\\,g
+    }
+
+    command += $$get_add_sdk_private($${libname}, $${librealname})
+    #message($$command)
+
+    !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
+    QMAKE_POST_LINK += $$command
+
+    export(QMAKE_POST_LINK)
+
     return (1)
 }
 
@@ -533,6 +585,7 @@ defineTest(del_sdk){
     #sdk path
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
     #message(QQt sdk install here:$${LIB_SDK_PWD})
+    LIB_SDK_ALL = $${LIB_SDK_PWD}/*
 
     #这里不仅仅目标为windows的时候，才会转换，
     #开发Host为Windows的时候，都要转换。
@@ -547,9 +600,10 @@ defineTest(del_sdk){
         LIB_DST_DIR~=s,/,\\,g
         LIB_BUILD_PWD~=s,/,\\,g
         LIB_SDK_PWD~=s,/,\\,g
+        LIB_SDK_ALL~=s,/,\\,g
     }
 
-    command += $$RM_DIR $${LIB_SDK_PWD}
+    command += $$RM_DIR $${LIB_SDK_ALL}
     #message($$command)
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
@@ -609,11 +663,11 @@ defineTest(add_sdk_header){
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
     #message(QQt sdk install here:$${LIB_SDK_PWD})
 
-    LIB_INC_DIR =
+    LIB_INC_DIR = include/$${TARGET_PRIVATE}
     contains(QMAKE_HOST.os, Darwin){
-        LIB_INC_DIR = lib/$${TARGET_PRIVATE}.framework/Headers
-    } else {
-        LIB_INC_DIR = include/$${TARGET_PRIVATE}
+        contains(CONFIG, lib_bundle) {
+            LIB_INC_DIR = lib/$${TARGET_PRIVATE}.framework/Headers
+        }
     }
 
     !isEmpty(3):headerdir=$${headerdir}/
