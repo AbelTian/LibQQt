@@ -1,0 +1,5 @@
+Lua
+第四代、第五代，在Windows上编译失败。QtLua依赖的函数比较老。
+
+LevelDB
+Windows下编译失败

@@ -112,6 +112,17 @@ defineTest(add_dependent_manager_log4cpp){
     return (1)
 }
 
+defineTest(add_dependent_manager_FMOD){
+    !equals(TARGET_PRIVATE, FMOD):
+        exists($${THIS_PRI_PWD}/../app-lib/add_library_FMOD.pri){
+        include ($${THIS_PRI_PWD}/../app-lib/add_library_FMOD.pri)
+        contains(TEMPLATE, app):add_dependent_library_FMOD()
+        else:contains(TEMPLATE, lib):add_link_library_FMOD()
+        else:add_link_library_FMOD()
+    }
+    return (1)
+}
+
 #################################################################
 #这是一个强大的函数
 #调用这一个函数就可以调用上边实现的函数

@@ -222,6 +222,7 @@ defineTest(has_deployed_library) {
 ###############################################################
 #app的发布librarys命令函数
 ###############################################################
+#发布所有的library
 defineReplace(get_add_deploy_libraries_on_mac) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
