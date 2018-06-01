@@ -47,7 +47,7 @@
 
 1. include(.../multi-link/add_base_manager.pri)  
     - 这里是多链接技术一切的开始。  
-2. 提供函数
+2. 提供函数 （这里只展示一部分）
     -  add_sdk() (lib工程用)  
     -  add_version()  
     - ﻿add_deploy()  
@@ -59,5 +59,6 @@
     - ﻿add_defines()  
     - ﻿add_language()  
     - ﻿add_zh_CN_en_US()  
-3. 彻底的脱离了libQQt，可是依然将其自动链接在内，有Multi-link帮助，用户可以任意的在app和lib之间设计链接关系了。  
+3. 彻底的脱离了libQQt，但是提供对libQQt的链接支持，和对其他Library的链接支持一模一样。  
+4. 有Multi-link帮助，用户可以任意的在app和lib之间设计链接关系了。  
 4. QQt提供的强大功能，并没有因为Multi-link的升级而改变，依然强大。  

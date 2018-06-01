@@ -155,7 +155,11 @@ defineTest(add_build_dir_struct){
 
     return (1)
 }
-add_build_dir_struct()
+
+#经过验证，在windows下debug和release中间目标的确不同。
+#在macOS里，设置相同的编译目录，竟然一样，可是生成目标大小也一样...理论上应该不一样，可能是release覆盖了debug的中间目标。
+#所以，这个地方，编译目录，无论如何debug和release要分开
+add_build_dir_struct($${BUILD})
 
 ################################################################
 ##Lib Functions Macro
