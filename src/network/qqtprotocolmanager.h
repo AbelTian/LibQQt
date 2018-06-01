@@ -78,6 +78,10 @@ public:
         return true;
     }
 
+signals:
+    //内部每次协议句柄列表发生变动都会发射这个信号。
+    void remanentProtocolChanged ( int num );
+
     /**
      * 以下和用户无关
      */

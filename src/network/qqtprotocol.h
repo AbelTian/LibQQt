@@ -73,6 +73,14 @@ signals:
      * @param message
      */
     void notifyToProtocolManager ( const QQtProtocol* self, const QQtMessage* message );
+
+signals:
+    //句柄被使用和废弃不用都会发射状态改变信号。
+    //status
+    //0 detach
+    //1 attach
+    void statusChanged ( int status );
+
     /*
      * 以下函数，与用户无关。
      */
@@ -80,10 +88,17 @@ signals:
      * 如果Socket和这个Protocol关联，就会设置关联。
      */
 public:
-    void detach() { mIsDetached = true; }
-    void attach() { mIsDetached = false; }
-    bool detached() { return mIsDetached; }
-private:
+    virtual void detach() {
+        mIsDetached = true;
+        statusChanged ( 0 );
+    }
+    virtual void attach() {
+        mIsDetached = false;
+        statusChanged ( 1 );
+    }
+    virtual bool detached() { return mIsDetached; }
+
+protected:
     bool mIsDetached;
 };
 
