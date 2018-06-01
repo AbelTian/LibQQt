@@ -10,6 +10,6 @@
 #比较方便
 CONFIG += debug_and_release
 CONFIG += build_all
-CONFIG += silent
+#CONFIG += silent
 
 include(src/qqt.pri)

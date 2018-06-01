@@ -51,7 +51,7 @@ message(Build $${TARGET} on $${QMAKE_HOST.os} \(Operating System=$${QMAKE_HOST.o
 isEmpty(QSYS_PRIVATE) : message(Build $${TARGET} Qt Kit page FileSystem Name is decided by env variable QSYS. Please set it. )
 
 isEmpty(QSYS_PRIVATE) {
-    message(1. you should change qt default build directory to your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name})
+    message(1. you should change qt default build directory to your-pc-build-station/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}/%{Qt:Version})
     message(2. env variable QSYS is required! pleace check app_platform.pri)
     error(error occured! please check build output panel.)
 }

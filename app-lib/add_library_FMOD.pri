@@ -26,9 +26,6 @@ defineReplace(get_add_header_FMOD){
     #basic
     command += $${path}
     #这里添加$${path}下的子文件夹
-    command += $${path}/fsbank/inc
-    command += $${path}/studio/inc
-    command += $${path}/lowlevel/inc
 
     return ($$command)
 }
@@ -51,22 +48,9 @@ defineTest(add_header_FMOD){
 #这个地方add_library_no_bundle代表包括macOS下，都不使用bundle，只是动态库或者静态库。
 defineTest(add_library_FMOD){
     #链接Library
-    add_library_at_subdir(FMOD, fsbank$${LIBRARYVER}$${DEBUG}, fsbank/lib)
-    add_library_at_subdir(FMOD, fsbank64$${LIBRARYVER}$${DEBUG}, fsbank/lib)
-    add_library_at_subdir(FMOD, fsbvorbis$${LIBRARYVER}$${DEBUG}, fsbank/lib)
-    add_library_at_subdir(FMOD, fsbvorbis64$${LIBRARYVER}$${DEBUG}, fsbank/lib)
-
-    add_library_at_subdir(FMOD, fmod$${LIBRARYVER}$${DEBUG}, lowlevel/lib)
-    add_library_at_subdir(FMOD, fmod64$${LIBRARYVER}$${DEBUG}, lowlevel/lib)
-    add_library_at_subdir(FMOD, fmodL$${LIBRARYVER}$${DEBUG}, lowlevel/lib)
-    add_library_at_subdir(FMOD, fmodL64$${LIBRARYVER}$${DEBUG}, lowlevel/lib)
+    add_library(FMOD, fmod$${LIBRARYVER}$${DEBUG})
+    add_library(FMOD, fmodL$${LIBRARYVER}$${DEBUG})
     #添加这个SDK下的其他的library
-
-    add_library_at_subdir(FMOD, fmodstudio$${LIBRARYVER}$${DEBUG}, studio/lib)
-    add_library_at_subdir(FMOD, fmodstudio64$${LIBRARYVER}$${DEBUG}, studio/lib)
-    add_library_at_subdir(FMOD, fmodstudioL$${LIBRARYVER}$${DEBUG}, studio/lib)
-    add_library_at_subdir(FMOD, fmodstudioL64$${LIBRARYVER}$${DEBUG}, studio/lib)
-
     return (1)
 }
 
@@ -89,7 +73,8 @@ defineTest(add_link_library_FMOD){
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
 #_Qt 代表这个lib是基于Qt的 依赖Qt
 defineTest(add_deploy_library_FMOD) {
-    add_deploy_library(FMOD, FMOD$${LIBRARYVER}$${DEBUG})
+    add_deploy_library(FMOD, fmod$${LIBRARYVER}$${DEBUG})
+    add_deploy_library(FMOD, fmodL$${LIBRARYVER}$${DEBUG})
     return (1)
 }
 

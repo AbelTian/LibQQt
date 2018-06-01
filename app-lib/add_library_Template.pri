@@ -18,6 +18,7 @@ contains(BUILD, Release) {
 #######################################################################################
 #定义内部函数
 #######################################################################################
+#修改
 defineReplace(get_add_header_Template){
     path = $$1
     isEmpty(1)|!isEmpty(2) : error("get_add_header_Template(path) requires one arguments.")
@@ -46,6 +47,7 @@ defineTest(add_header_Template){
 }
 
 #这个地方add_library_no_bundle代表包括macOS下，都不使用bundle，只是动态库或者静态库。
+#修改
 defineTest(add_library_Template){
     #链接Library
     add_library(Template, Template$${LIBRARYVER}$${DEBUG})
@@ -58,6 +60,7 @@ defineTest(add_library_Template){
 #定义外部函数
 #######################################################################################
 #链接Template的WorkFlow
+#留意
 defineTest(add_link_library_Template){
     #链接Library
     add_library_Template()
@@ -72,6 +75,7 @@ defineTest(add_link_library_Template){
 #发布依赖library
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
 #_Qt 代表这个lib是基于Qt的 依赖Qt
+#留意
 defineTest(add_deploy_library_Template) {
     add_deploy_library_Qt(Template, Template$${LIBRARYVER}$${DEBUG})
     return (1)

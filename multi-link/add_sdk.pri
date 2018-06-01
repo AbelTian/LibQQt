@@ -497,7 +497,6 @@ defineTest(add_sdk_from_subdirs){
 }
 
 #if you want to use QQt with QT += QQt please open this feature
-#unimplete: CONFIG += add_sdk_to_Qt
 defineTest(add_sdk_to_Qt){
     #isEmpty(1):error(add_sdk_to_Qt(libname, libsrcdir, libdstdir) need at last one argument)
 
@@ -615,6 +614,7 @@ defineTest(del_sdk){
 }
 
 #获取sdk name
+#修饰TARGET _d _debug
 defineReplace(add_sdk_name){
     #isEmpty(1):error(add_sdk_name(target_name) need one argument)
 

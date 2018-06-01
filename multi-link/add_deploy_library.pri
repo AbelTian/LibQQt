@@ -2,6 +2,9 @@
 #add_deploy_library.pri
 #提供app发布library函数，只是app工程使用
 #-------------------------------------------------------------
+#add_deploy_library
+#add_deploy_libraries
+#add_deploy_library_Qt
 
 ################################################################################
 #内部用函数

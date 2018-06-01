@@ -3,7 +3,7 @@
 #only link QQt, this pri file.
 
 #this link need Qt Creator set default build directory, replace
-#%{JS: Util.asciify("/your/local/path/to/build/root/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}")}
+#%{JS: Util.asciify("/your/local/path/to/build/root/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}/%{Qt:Version}")}
 
 #auto link QQt when build source
 #auto copy QQt when deploy app

@@ -1,9 +1,11 @@
 #include "mainwindow.h"
-#include <QApplication>
+#include <QQtApplication>
 
-int main(int argc, char *argv[])
+int main ( int argc, char* argv[] )
 {
-    QApplication a(argc, argv);
+    QQtApplication a ( argc, argv );
+    a.setWriteLogSystem ( true );
+
     MainWindow w;
     w.show();
 
