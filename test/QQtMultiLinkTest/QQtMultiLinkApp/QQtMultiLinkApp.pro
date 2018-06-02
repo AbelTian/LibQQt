@@ -64,7 +64,7 @@ add_zh_CN_en_US($${PWD}/$${TARGET}.pro, $${PWD}/AppRoot/lang)
 add_header(QQtBasedLibTest)
 add_library(QQtBasedLibTest)
 add_deploy_library(QQtBasedLibTest)
-mingw:add_defines(QQTBASEDLIBTEST_STATIC_LIBRARY)
+mingw:add_define(QQTBASEDLIBTEST_STATIC_LIBRARY)
 
 message($$QMAKE_PRE_LINK)
 message($$QMAKE_POST_LINK)

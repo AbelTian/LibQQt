@@ -65,7 +65,7 @@ defineTest(add_link_library_log4cpp){
     add_header_log4cpp()
 
     #添加宏定义
-    #add_defines(xx)
+    #add_define(xx)
     return (1)
 }
 

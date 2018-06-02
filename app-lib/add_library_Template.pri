@@ -68,7 +68,7 @@ defineTest(add_link_library_Template){
     add_header_Template()
 
     #添加宏定义
-    #add_defines(xx)
+    #add_define(xx)
     return (1)
 }
 

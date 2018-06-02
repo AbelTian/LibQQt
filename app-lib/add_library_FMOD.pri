@@ -65,7 +65,7 @@ defineTest(add_link_library_FMOD){
     add_header_FMOD()
 
     #添加宏定义
-    #add_defines(xx)
+    #add_define(xx)
     return (1)
 }
 

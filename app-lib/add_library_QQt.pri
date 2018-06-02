@@ -29,7 +29,7 @@ contains(BUILD, Release) {
 ##################################################################
 ##defines and configures
 ##################################################################
-defineTest(add_defines_QQt){
+defineTest(add_define_QQt){
     ##Qt version
     QT += core sql network gui xml
     greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -520,7 +520,7 @@ defineTest(add_link_library_QQt){
     #包含QQt的头文件
     add_header_QQt()
     #包含QQt的宏定义
-    add_defines_QQt()
+    add_define_QQt()
     #链接（lib)
     add_library_QQt()
     return (1)

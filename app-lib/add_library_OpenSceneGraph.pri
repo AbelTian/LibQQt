@@ -95,7 +95,7 @@ defineTest(add_link_library_OpenSceneGraph) {
     #...
 
     #添加宏定义
-    #add_defines(xx)
+    #add_define(xx)
     return (1)
 }
 

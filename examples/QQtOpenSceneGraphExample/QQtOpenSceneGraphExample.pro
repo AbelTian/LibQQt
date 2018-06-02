@@ -44,8 +44,8 @@ add_deploy()
 add_dependent_manager_QQt()
 mingw{
     #Qt is static, but osg is dynamic
-    #add_defines(OSG_LIBRARY_STATIC)
-    add_defines(__MINGW32__)
+    #add_define(OSG_LIBRARY_STATIC)
+    add_define(__MINGW32__)
 }
 add_dependent_library_OpenSceneGraph()
 add_deploy_config($${PWD}/AppRoot)

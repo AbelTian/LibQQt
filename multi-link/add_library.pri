@@ -2,6 +2,12 @@
 #add_library.pri
 #提供app链接library函数，app lib工程通用
 #-------------------------------------------------------------
+#add_library
+#add_library_no_bundle
+#add_header
+#add_define
+#add_link_library
+#add_local_header
 
 ################################################################################
 #内部用函数
@@ -176,9 +182,9 @@ defineTest(add_local_header) {
     return (1)
 }
 
-defineTest(add_defines) {
+defineTest(add_define) {
     defname = $$1
-    isEmpty(1)|!isEmpty(2): error("add_defines(defname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("add_define(defname) requires one argument")
 
     command = $${defname}
     #message ($$command)

@@ -73,7 +73,7 @@ defineTest(add_link_library_GoogleTest){
     add_header_GoogleTest()
 
     #添加宏定义
-    #add_defines(xx)
+    #add_define(xx)
     return (1)
 }
 
