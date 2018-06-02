@@ -142,12 +142,13 @@ defineReplace(get_add_mac_sdk){
 
     libname = $$1
     librealname = $$2
-    #isEmpty(1): error("get_add_mac_sdk(libname, librealname) requires at last one argument")
-    !isEmpty(3): error("get_add_mac_sdk(libname, librealname) requires at most two argument")
+    libmajorver = $$3
+    #isEmpty(1): error("get_add_mac_sdk(libname, librealname, libmajorver) requires at last one argument")
+    !isEmpty(4): error("get_add_mac_sdk(libname, librealname, libmajorver) requires at most three argument")
 
     isEmpty(1):libname = $$TARGET_PRIVATE
-    isEmpty(2): librealname = $${libname}
-    libmajorver = $$VER_MAJ
+    isEmpty(2):librealname = $${libname}
+    isEmpty(3):libmajorver = $$VER_MAJ
     isEmpty(libmajorver){
         error(Have you modifyed add_version.pri, please dont modify it.)
     }

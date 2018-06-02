@@ -85,7 +85,7 @@ defineTest(add_link_library_FFmpeg) {
 #发布依赖library的函数
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
 defineTest(add_deploy_library_FFmpeg) {
-    add_deploy_libraries(FFmpeg)
+    add_deploy_libraryes(FFmpeg)
     return (1)
 }
 

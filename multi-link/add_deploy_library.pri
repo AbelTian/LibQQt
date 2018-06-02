@@ -3,14 +3,14 @@
 #提供app发布library函数，只是app工程使用
 #-------------------------------------------------------------
 #add_deploy_library
-#add_deploy_libraries
+#add_deploy_libraryes
 #add_deploy_library_Qt
 
 ################################################################################
 #内部用函数
 #获取命令
 ################################################################################
-THIS_PRI_PWD = $${PWD}
+ADD_DEPLOY_LIBRARY_PRI_PWD = $${PWD}
 
 ###############################################################
 #app的发布library命令函数
@@ -29,39 +29,63 @@ defineReplace(get_add_deploy_library_on_mac) {
 
     #这里有个bug，用户删除了SDK以后，App qmake阶段读取这个SDK，结果读到这个位置，为0...bug，其实不应该为0，应该为用户设置的SDK版本号。
     #解决方法一：忽略第一遍编译。也就是什么SDK都没有的时候，编译一遍，lib生成了SDK，可是不管他，再qmake后编译一遍。能解决。
-    libmajorver = $$system(readlink $${LIB_LIB_PWD}/$${librealname}.framework/Versions/Current)
+    libmajorver = $$system(readlink $${LIB_LIB_PWD}/$${libname}.framework/Versions/Current)
     #这里是以防万一lib不存在 但是不能退出？如果是subdirs包含Library的工程，就不能退出。
     isEmpty(libmajorver){
         libmajorver=0
-        message($$TARGET link $$libname"," unexisted lib.)
+        message($$TARGET deploy $$libname"," unexisted lib.)
         return ("echo unexisted lib $$libname .")
     }
     command =
     command += $$MK_DIR $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
+
     #拷贝sdk到build
-    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    command += $$COPY_DIR $${LIB_LIB_PWD}/$${libname}.framework $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    #一条代码总是拷贝实例
+    #command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cur_path.sh $$CMD_SEP
+    #command += . $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cur_path.sh $$CMD_SEP
+    #command += $$CD $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks $$CMD_SEP
+    #command += $$MK_DIR $${libname}.framework $$CMD_SEP
+    #command += $$CD $${libname}.framework $$CMD_SEP
+    #command += $$get_add_mac_sdk($${libname}, $${librealname}, $${libmajorver}) $$CMD_SEP
+    #command += $$CD .. $$CMD_SEP
+    #command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cd_path.sh $$CMD_SEP
+    #command += . $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cd_path.sh $$CMD_SEP
+
     #更改app bundle链接Lib的位置。
-    command += install_name_tool -change $${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
-         @rpath/$${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
+    command += install_name_tool -change $${libname}.framework/Versions/$${libmajorver}/$${libname} \
+         @rpath/$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
          $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     command += macdeployqt $${APP_BUILD_PWD}/$${TARGET}.app -verbose=1 &&
     lessThan(QT_MAJOR_VERSION, 5){
-        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh &&
-        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
+        command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh &&
+        command += $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     }
 
     command += $$MK_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
+
     #拷贝sdk到deploy
-    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    command += $$COPY_DIR $${LIB_LIB_PWD}/$${libname}.framework $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    #一条代码总是拷贝实例
+    #command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cur_path.sh $$CMD_SEP
+    #command += . $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cur_path.sh $$CMD_SEP
+    #command += $$CD $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks $$CMD_SEP
+    #command += $$MK_DIR $${libname}.framework $$CMD_SEP
+    #command += $$CD $${libname}.framework $$CMD_SEP
+    #command += $$get_add_mac_sdk($${libname}, $${librealname}, $${libmajorver}) $$CMD_SEP
+    #command += $$CD .. $$CMD_SEP
+    #command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cd_path.sh $$CMD_SEP
+    #command += . $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cd_path.sh $$CMD_SEP
+
     #更改app bundle链接Lib的位置。
-    command += install_name_tool -change $${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
-         @rpath/$${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
+    command += install_name_tool -change $${libname}.framework/Versions/$${libmajorver}/$${libname} \
+         @rpath/$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
          $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1
     lessThan(QT_MAJOR_VERSION, 5){
         command += &&
-        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh &&
-        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
+        command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh &&
+        command += $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
     }
 
     #message($$command)
@@ -226,11 +250,11 @@ defineTest(has_deployed_library) {
 #app的发布librarys命令函数
 ###############################################################
 #发布所有的library
-defineReplace(get_add_deploy_libraries_on_mac) {
+defineReplace(get_add_deploy_libraryes_on_mac) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_libraries_on_mac(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_libraryes_on_mac(libname) requires one argument")
 
     command =
 
@@ -241,11 +265,11 @@ defineReplace(get_add_deploy_libraries_on_mac) {
     return ($$command)
 }
 
-defineReplace(get_add_deploy_libraries_on_windows) {
+defineReplace(get_add_deploy_libraryes_on_windows) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_libraries_on_windows(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_libraryes_on_windows(libname) requires one argument")
 
     command =
     #build 需要.lib .exp等文件
@@ -262,11 +286,11 @@ defineReplace(get_add_deploy_libraries_on_windows) {
     return ($$command)
 }
 
-defineReplace(get_add_deploy_libraries_on_linux) {
+defineReplace(get_add_deploy_libraryes_on_linux) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_libraries_on_linux(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_libraryes_on_linux(libname) requires one argument")
 
     command =
 
@@ -278,11 +302,11 @@ defineReplace(get_add_deploy_libraries_on_linux) {
 }
 
 #这个?
-defineReplace(get_add_deploy_libraries_on_android) {
+defineReplace(get_add_deploy_libraryes_on_android) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("get_add_deploy_libraries_on_android(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("get_add_deploy_libraryes_on_android(libname) requires one argument")
 
     LIB_ANDROID_PATH = $${LIB_LIB_PWD}/lib$${libname}.so
     equals(QMAKE_HOST.os, Windows) {
@@ -300,7 +324,7 @@ defineReplace(get_add_deploy_libraries_on_android) {
 ################################################################################
 #外部用函数
 ################################################################################
-defineTest(add_deploy_libraries) {
+defineTest(add_deploy_libraryes) {
     #APP_DEPLOY_PWD
     #APP_DEST_PWD
 
@@ -332,7 +356,7 @@ defineTest(add_deploy_libraries) {
     }
 
     libname = $$1
-    isEmpty(1)|!isEmpty(2): error("add_deploy_libraries(libname) requires one argument")
+    isEmpty(1)|!isEmpty(2): error("add_deploy_libraryes(libname) requires one argument")
 
     LIB_STD_DIR = $${libname}/$${QSYS_STD_DIR}
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
@@ -348,15 +372,15 @@ defineTest(add_deploy_libraries) {
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
     contains(QSYS_PRIVATE, Win32|Windows||Win64) {
         #发布windows版本
-        QMAKE_POST_LINK += $$get_add_deploy_libraries_on_windows($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_libraryes_on_windows($${libname})
     } else: contains(QSYS_PRIVATE, macOS) {
         #发布苹果版本，iOS版本也是这个？
-        QMAKE_POST_LINK += $$get_add_deploy_libraries_on_mac($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_libraryes_on_mac($${libname})
     } else: contains(QSYS_PRIVATE, Android||AndroidX86) {
-        ANDROID_EXTRA_LIBS += $$get_add_deploy_libraries_on_android($${libname})
+        ANDROID_EXTRA_LIBS += $$get_add_deploy_libraryes_on_android($${libname})
     } else {
         #发布linux、e-linux，这个是一样的。
-        QMAKE_POST_LINK += $$get_add_deploy_libraries_on_linux($${libname})
+        QMAKE_POST_LINK += $$get_add_deploy_libraryes_on_linux($${libname})
     }
 
     export(QMAKE_POST_LINK)
@@ -387,38 +411,62 @@ defineReplace(get_add_deploy_library_Qt_on_mac) {
 
     #这里有个bug，用户删除了SDK以后，App qmake阶段读取这个SDK，结果读到这个位置，为0...bug，其实不应该为0，应该为用户设置的SDK版本号。
     #解决方法一：忽略第一遍编译。也就是什么SDK都没有的时候，编译一遍，lib生成了SDK，可是不管他，再qmake后编译一遍。能解决。
-    libmajorver = $$system(readlink $${LIB_LIB_PWD}/$${librealname}.framework/Versions/Current)
+    libmajorver = $$system(readlink $${LIB_LIB_PWD}/$${libname}.framework/Versions/Current)
     #这里是以防万一lib不存在 但是不能退出？如果是subdirs包含Library的工程，就不能退出。
     isEmpty(libmajorver){
         libmajorver=0
-        message($$TARGET link $$libname',' unexisted lib.)
+        message($$TARGET deploy Qt based lib $$libname',' unexisted lib.)
     }
     command =
     command += $$MK_DIR $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
+
     #拷贝sdk到build
-    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    command += $$COPY_DIR $${LIB_LIB_PWD}/$${libname}.framework $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    #一条代码总是拷贝实例
+    #command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cur_path.sh $$CMD_SEP
+    #command += . $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cur_path.sh $$CMD_SEP
+    #command += $$CD $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks $$CMD_SEP
+    #command += $$MK_DIR $${libname}.framework $$CMD_SEP
+    #command += $$CD $${libname}.framework $$CMD_SEP
+    #command += $$get_add_mac_sdk($${libname}, $${librealname}, $${libmajorver}) $$CMD_SEP
+    #command += $$CD .. $$CMD_SEP
+    #command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cd_path.sh $$CMD_SEP
+    #command += . $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cd_path.sh $$CMD_SEP
+
     #更改app bundle链接Lib的位置。
-    command += install_name_tool -change $${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
-         @rpath/$${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
+    command += install_name_tool -change $${libname}.framework/Versions/$${libmajorver}/$${libname} \
+         @rpath/$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
          $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     command += macdeployqt $${APP_BUILD_PWD}/$${TARGET}.app -verbose=1 &&
     lessThan(QT_MAJOR_VERSION, 5){
-        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh &&
-        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
+        command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh &&
+        command += $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     }
 
     command += $$MK_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
+
     #拷贝sdk到deploy
-    command += $$COPY_DIR $${LIB_LIB_PWD}/$${librealname}.framework $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    command += $$COPY_DIR $${LIB_LIB_PWD}/$${libname}.framework $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
+    #一条代码总是拷贝实例
+    #command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cur_path.sh $$CMD_SEP
+    #command += . $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cur_path.sh $$CMD_SEP
+    #command += $$CD $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks $$CMD_SEP
+    #command += $$MK_DIR $${libname}.framework $$CMD_SEP
+    #command += $$CD $${libname}.framework $$CMD_SEP
+    #command += $$get_add_mac_sdk($${libname}, $${librealname}, $${libmajorver}) $$CMD_SEP
+    #command += $$CD .. $$CMD_SEP
+    #command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cd_path.sh $$CMD_SEP
+    #command += . $${ADD_DEPLOY_LIBRARY_PRI_PWD}/linux_cd_path.sh $$CMD_SEP
+
     #更改app bundle链接Lib的位置。
-    command += install_name_tool -change $${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
-         @rpath/$${librealname}.framework/Versions/$${libmajorver}/$${librealname} \
+    command += install_name_tool -change $${libname}.framework/Versions/$${libmajorver}/$${libname} \
+         @rpath/$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
          $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1
     lessThan(QT_MAJOR_VERSION, 5){
         command += &&
-        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh &&
-        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
+        command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh &&
+        command += $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
     }
 
     #message($$command)

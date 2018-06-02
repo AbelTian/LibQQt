@@ -19,11 +19,11 @@ contains(QMAKE_HOST.os,Windows) {
     CMD_SEP = &&
     MOVE = mv
     COPY = cp -f
-    COPY_DIR = cp -favpL
+    COPY_DIR = cp -R -L -f -apc
     MK_DIR = mkdir -p
     RM = rm -f
     CD = cd
-    LN = ln -sfnv
+    LN = ln -sfn
     RM_DIR = rm -rf
     #PATH_SEP=/
 } else {

@@ -17,6 +17,7 @@
 #2.4
 LIBRARYVER =
 DEBUG = d
+contains(QMAKE_HOST.os, Darwin):DEBUG=_debug
 contains(BUILD, Release) {
     DEBUG=
 }

@@ -24,7 +24,7 @@ defineReplace(get_add_library) {
     LINK =
     contains(DEFINES, __DARWIN__) {
         LINK += -F$${CUR_LIB_PWD}
-        LINK += -framework $${librealname}
+        LINK += -framework $${libname}
     } else {
         LINK += -L$${CUR_LIB_PWD}
         #win can't with the blank! error: -l QQt
@@ -32,6 +32,7 @@ defineReplace(get_add_library) {
     }
     return ($${LINK})
 }
+
 ################################################################################
 #公开给外部用函数
 #执行命令
@@ -120,7 +121,7 @@ defineReplace(get_add_header) {
 
     INCLUDE =
     contains(DEFINES, __DARWIN__) {
-        CUR_INC_PWD = $${LIB_SDK_ROOT}/$${incname}/$${QSYS_STD_DIR}/$${incname}.framework/Headers
+        CUR_INC_PWD = $${LIB_SDK_ROOT}/$${incname}/$${QSYS_STD_DIR}/lib/$${incname}.framework/Headers
         !isEmpty(2):CUR_INC_PWD=$${CUR_INC_PWD}/$${increalname}
         INCLUDE += $${CUR_INC_PWD}
     } else {

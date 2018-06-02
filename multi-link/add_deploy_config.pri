@@ -78,7 +78,7 @@ defineTest(add_deploy_config) {
     ##4.8 qmake arm32 return() 函数无效
     ##qmake 与逻辑为 :
     !isEmpty(APP_CONFIG_PWD):!isEmpty(APP_DEPLOY_PWD) {
-        message("$${TARGET} has deploied some config files")
+        message("$${TARGET} has deployed some config files")
     }
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
