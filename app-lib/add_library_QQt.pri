@@ -506,8 +506,8 @@ defineTest(add_include_path_QQt){
 
 defineTest(add_library_QQt){
     #链接QQt
-    add_library_path(QQt, , use, use)
-    add_library(QQt$${LIBRARYVER}$${DEBUG})
+    add_library_path(QQt, , "bundle", use)
+    add_library(QQt, QQt$${LIBRARYVER}$${DEBUG}, "bundle")
 }
 
 #######################################################################################
@@ -533,7 +533,7 @@ defineTest(add_link_library_QQt){
 #调试，正常；发布运行，正常。
 #:) 方便函数
 defineTest(add_deploy_library_QQt){
-    add_deploy_library(QQt, QQt$${DEBUG}, , use, use, use)
+    add_deploy_library(QQt, QQt$${LIBRARYVER}$${DEBUG}, , "bundle", "qtversion", "deployqt")
     return (1)
 }
 

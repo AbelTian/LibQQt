@@ -8,7 +8,7 @@
 #初始化设置
 #######################################################################################
 #1.0.0
-LIBRARYVER =
+LIBRARYVER = .5
 DEBUG =
 contains(BUILD, Release) {
     DEBUG=
@@ -26,6 +26,7 @@ defineReplace(get_add_include_path_log4cpp){
     #basic
     command += $${path}
     #这里添加$${path}下的子文件夹
+    command += $${path}/..
     command += $${path}/threading
 
     return ($$command)
@@ -47,10 +48,9 @@ defineTest(add_include_path_log4cpp){
 }
 
 defineTest(add_library_log4cpp){
-    #链接Library
-    add_library_no_bundle(log4cpp, log4cpp$${LIBRARYVER}$${DEBUG})
-    #添加这个SDK下的其他的library
-    
+    add_library_path(log4cpp, , "", "")
+    add_library(log4cpp, log4cpp$${LIBRARYVER}$${DEBUG})
+
     return (1)
 }
 

@@ -82,19 +82,21 @@ defineTest(add_library_path) {
 #直接输入lib的名字即可 libxxx.so 则输入xxx。
 defineReplace(get_add_library) {
     libname = $$1
-    libusebundle = $$2
+    librealname = $$2
+    libusebundle = $$3
     isEmpty(1): error("get_add_library(libname, libusebundle) requires at last one argument")
-    !isEmpty(3): error("get_add_library(libname, libusebundle) requires at most two argument")
-    !isEmpty(2): libusebundle = lib_use_bundle
+    !isEmpty(4): error("get_add_library(libname, libusebundle) requires at most two argument")
+    isEmpty(2):librealname=$${libname}
+    !isEmpty(3): libusebundle = lib_use_bundle
 
-    message(link $${libname})
+    #message(link $${libname} from ...)
 
     LINK =
     contains(DEFINES, __DARWIN__):equals(libusebundle, lib_use_bundle) {
         LINK += -framework $${libname}
     } else {
         #win can't with the blank! error: -l QQt
-        LINK += -l$${libname}
+        LINK += -l$${librealname}
     }
     return ($${LINK})
 }
@@ -105,11 +107,14 @@ defineReplace(get_add_library) {
 ################################################################################
 defineTest(add_library) {
     libname = $$1
-    libusebundle = $$2
-    isEmpty(1): error("add_library(libname, libusebundle) requires at last one argument")
-    !isEmpty(3): error("add_library(libname, libusebundle) requires at most two argument")
+    librealname = $$2
+    libusebundle = $$3
+    isEmpty(1): error("get_add_library(libname, libusebundle) requires at last one argument")
+    !isEmpty(4): error("get_add_library(libname, libusebundle) requires at most two argument")
+    isEmpty(2):librealname=$${libname}
+    !isEmpty(3): libusebundle = lib_use_bundle
 
-    command = $$get_add_library($${libname}, $${libusebundle})
+    command = $$get_add_library($${libname}, $${librealname}, $${libusebundle})
     #message (LIBS += $$command)
     LIBS += $${command}
 

@@ -59,20 +59,20 @@ defineReplace(get_add_deploy_library_on_mac) {
     command =
 
     !isEmpty(libusebundle) {
-        contains(TEMPLATE, app_bundle) {
+        contains(CONFIG, app_bundle) {
             command += $$MK_DIR $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
         }
     }
 
     #拷贝sdk到build
     isEmpty(libusebundle) {
-        contains(TEMPLATE, app_bundle) {
+        contains(CONFIG, app_bundle) {
             command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
         } else {
             command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_BUILD_PWD} &&
         }
     } else {
-        contains(TEMPLATE, app_bundle) {
+        contains(CONFIG, app_bundle) {
             command += $$COPY_DIR $${LIB_LIB_PWD}/$${libname}.framework $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks &&
         } else {
             command += $$COPY_DIR $${LIB_LIB_PWD}/$${libname}.framework $${APP_BUILD_PWD} &&
@@ -91,17 +91,17 @@ defineReplace(get_add_deploy_library_on_mac) {
 
     #更改app bundle链接Lib的位置。
     isEmpty(libusebundle) {
-        contains(TEMPLATE, app_bundle) {
-            command += install_name_tool -change $${libname}.dylib \
+        contains(CONFIG, app_bundle) {
+            command += install_name_tool -change $${LIB_LIB_PWD}/$${librealname}.dylib \
                  @rpath/$${librealname}.dylib \
                  $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
         } else {
-            command += install_name_tool -change $${libname}.dylib \
+            command += install_name_tool -change $${LIB_LIB_PWD}/$${librealname}.dylib \
                  @rpath/$${librealname}.dylib \
                  $${APP_BUILD_PWD}/$${TARGET} &&
         }
     } else {
-        contains(TEMPLATE, app_bundle) {
+        contains(CONFIG, app_bundle) {
             command += install_name_tool -change $${libname}.framework/Versions/$${libmajorver}/$${libname} \
                  @rpath/$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
                  $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
@@ -120,20 +120,20 @@ defineReplace(get_add_deploy_library_on_mac) {
     #}
 
     !isEmpty(libusebundle) {
-        contains(TEMPLATE, app_bundle) {
+        contains(CONFIG, app_bundle) {
             command += $$MK_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
         }
     }
 
     #拷贝sdk到build
     isEmpty(libusebundle) {
-        contains(TEMPLATE, app_bundle) {
+        contains(CONFIG, app_bundle) {
             command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
         } else {
             command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_DEPLOY_PWD} &&
         }
     } else {
-        contains(TEMPLATE, app_bundle) {
+        contains(CONFIG, app_bundle) {
             command += $$COPY_DIR $${LIB_LIB_PWD}/$${libname}.framework $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks &&
         } else {
             command += $$COPY_DIR $${LIB_LIB_PWD}/$${libname}.framework $${APP_DEPLOY_PWD} &&
@@ -152,17 +152,17 @@ defineReplace(get_add_deploy_library_on_mac) {
 
     #更改app bundle链接Lib的位置。
     isEmpty(libusebundle) {
-        contains(TEMPLATE, app_bundle) {
-            command += install_name_tool -change $${libname}.dylib \
+        contains(CONFIG, app_bundle) {
+            command += install_name_tool -change $${LIB_LIB_PWD}/$${librealname}.dylib \
                  @rpath/$${librealname}.dylib \
                  $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
         } else {
-            command += install_name_tool -change $${libname}.dylib \
+            command += install_name_tool -change $${LIB_LIB_PWD}/$${librealname}.dylib \
                  @rpath/$${librealname}.dylib \
                  $${APP_DEPLOY_PWD}/$${TARGET} &&
         }
     } else {
-        contains(TEMPLATE, app_bundle) {
+        contains(CONFIG, app_bundle) {
             command += install_name_tool -change $${libname}.framework/Versions/$${libmajorver}/$${libname} \
                  @rpath/$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
                  $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&

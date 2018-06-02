@@ -43,11 +43,11 @@ SUBDIRS =
 #SUBDIRS += examples/QQtOpenSceneGraphExample
 
 #need Qwt SDK
-#
-SUBDIRS += test/QQtQwtTest
+#SUBDIRS += test/QQtQwtTest
 
 #need QwtPlot3D sdk
 #SUBDIRS += test/QQtQwtPlot3DTest
 
 #need log4cpp sdk
-#SUBDIRS += test/qqtlog4cpptest
+#
+SUBDIRS += test/qqtlog4cpptest
