@@ -69,19 +69,19 @@ defineTest(add_dependent_library) {
     libname = $$1
     librealname = $$2
     libsubname = $$3
-    libtemplate = $$4
-    libqtpath = $$5
+    libusebundle = $$4
+    libuseqtversion = $$5
     libdeployqt = $$6
-    isEmpty(1): error("add_dependent_library(libname, librealname, libsubname, libtemplate, libqtpath, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("add_dependent_library(libname, librealname, libsubname, libtemplate, libqtpath, libdeployqt) requires at most six argument")
+    isEmpty(1): error("add_dependent_library(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
+    !isEmpty(6): error("add_dependent_library(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
-    !isEmpty(4): libtemplate = lib_bundle
-    !isEmpty(5): libqtpath = lib_use_qt_version
+    !isEmpty(4): libusebundle = lib_use_bundle
+    !isEmpty(5): libuseqtversion = lib_use_qt_version
     !isEmpty(6): libdeployqt = lib_deploy_qt
 
-    add_link_library($${libname}, $${librealname}, $${libtemplate}, $${libqtpath})
-    add_deploy_library($${libname}, $${librealname}, $${libsubname}, $${libtemplate}, $${libqtpath}, $${libdeployqt})
+    add_link_library($${libname}, $${librealname}, $${libusebundle}, $${libuseqtversion})
+    add_deploy_library($${libname}, $${librealname}, $${libsubname}, $${libusebundle}, $${libuseqtversion}, $${libdeployqt})
 
     return (1)
 }

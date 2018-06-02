@@ -25,13 +25,13 @@
 defineReplace(get_add_library_path) {
     libname = $$1
     librealname = $$2
-    libtemplate = $$3
-    libqtpath = $$4
-    isEmpty(1): error("get_add_library_path(libname, librealname, libtemplate, libqtpath) requires at least one argument")
-    !isEmpty(5): error("get_add_library_path(libname, librealname, libtemplate, libqtpath) requires at most four argument")
+    libusebundle = $$3
+    libuseqtversion = $$4
+    isEmpty(1): error("get_add_library_path(libname, librealname, libusebundle, libuseqtversion) requires at least one argument")
+    !isEmpty(5): error("get_add_library_path(libname, librealname, libusebundle, libuseqtversion) requires at most four argument")
     isEmpty(2): librealname =
-    !isEmpty(3): libtemplate = lib_bundle
-    !isEmpty(4): libqtpath = lib_use_qt_version
+    !isEmpty(3): libusebundle = lib_use_bundle
+    !isEmpty(4): libuseqtversion = lib_use_qt_version
 
     CUR_LIB_PWD =
     isEmpty(4):CUR_LIB_PWD = $${LIB_SDK_ROOT}/$${libname}/$${QSYS_STD_DIR}/lib
@@ -43,7 +43,7 @@ defineReplace(get_add_library_path) {
     message(add library path $$CUR_LIB_PWD)
 
     LINK =
-    contains(DEFINES, __DARWIN__):equals(libtemplate, lib_bundle) {
+    contains(DEFINES, __DARWIN__):equals(libusebundle, lib_use_bundle) {
         LINK += -F$${CUR_LIB_PWD}
     } else {
         LINK += -L$${CUR_LIB_PWD}
@@ -59,15 +59,15 @@ defineReplace(get_add_library_path) {
 defineTest(add_library_path) {
     libname = $$1
     librealname = $$2
-    libtemplate = $$3
-    libqtpath = $$4
-    isEmpty(1): error("add_library_path(libname, librealname, libtemplate, libqtpath) requires at least one argument")
-    !isEmpty(5): error("add_library_path(libname, librealname, libtemplate, libqtpath) requires at most four argument")
+    libusebundle = $$3
+    libuseqtversion = $$4
+    isEmpty(1): error("add_library_path(libname, librealname, libusebundle, libuseqtversion) requires at least one argument")
+    !isEmpty(5): error("add_library_path(libname, librealname, libusebundle, libuseqtversion) requires at most four argument")
     isEmpty(2): librealname =
-    !isEmpty(3): libtemplate = lib_bundle
-    !isEmpty(4): libqtpath = lib_use_qt_version
+    !isEmpty(3): libusebundle = lib_use_bundle
+    !isEmpty(4): libuseqtversion = lib_use_qt_version
 
-    command = $$get_add_library_path($${libname}, $${librealname}, $${libtemplate}, $${libqtpath})
+    command = $$get_add_library_path($${libname}, $${librealname}, $${libusebundle}, $${libuseqtversion})
     #message (LIBS += $$command)
     LIBS += $${command}
     export(LIBS)
@@ -82,15 +82,15 @@ defineTest(add_library_path) {
 #直接输入lib的名字即可 libxxx.so 则输入xxx。
 defineReplace(get_add_library) {
     libname = $$1
-    libtemplate = $$2
-    isEmpty(1): error("get_add_library(libname, libtemplate) requires at last one argument")
-    !isEmpty(3): error("get_add_library(libname, libtemplate) requires at most two argument")
-    !isEmpty(2): libtemplate = lib_bundle
+    libusebundle = $$2
+    isEmpty(1): error("get_add_library(libname, libusebundle) requires at last one argument")
+    !isEmpty(3): error("get_add_library(libname, libusebundle) requires at most two argument")
+    !isEmpty(2): libusebundle = lib_use_bundle
 
     message(link $${libname})
 
     LINK =
-    contains(DEFINES, __DARWIN__):equals(libtemplate, lib_bundle) {
+    contains(DEFINES, __DARWIN__):equals(libusebundle, lib_use_bundle) {
         LINK += -framework $${libname}
     } else {
         #win can't with the blank! error: -l QQt
@@ -105,11 +105,11 @@ defineReplace(get_add_library) {
 ################################################################################
 defineTest(add_library) {
     libname = $$1
-    libtemplate = $$2
-    isEmpty(1): error("add_library(libname, libtemplate) requires at last one argument")
-    !isEmpty(3): error("add_library(libname, libtemplate) requires at most two argument")
+    libusebundle = $$2
+    isEmpty(1): error("add_library(libname, libusebundle) requires at last one argument")
+    !isEmpty(3): error("add_library(libname, libusebundle) requires at most two argument")
 
-    command = $$get_add_library($${libname}, $${libtemplate})
+    command = $$get_add_library($${libname}, $${libusebundle})
     #message (LIBS += $$command)
     LIBS += $${command}
 
@@ -134,17 +134,17 @@ defineReplace(get_add_include_path) {
     libname = $$1
     librealname = $$2
     libsubname = $$3
-    libtemplate = $$4
-    libqtpath = $$5
-    isEmpty(1): error("get_add_include_path(libname, librealname, libsubname, libtemplate) requires at last one argument")
-    !isEmpty(6): error("get_add_include_path(libname, librealname, libsubname, libtemplate) requires at most five argument")
+    libusebundle = $$4
+    libuseqtversion = $$5
+    isEmpty(1): error("get_add_include_path(libname, librealname, libsubname, libusebundle) requires at last one argument")
+    !isEmpty(6): error("get_add_include_path(libname, librealname, libsubname, libusebundle) requires at most five argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
-    !isEmpty(4): libtemplate = lib_bundle
-    !isEmpty(5): libqtpath = lib_use_qt_version
+    !isEmpty(4): libusebundle = lib_use_bundle
+    !isEmpty(5): libuseqtversion = lib_use_qt_version
 
     INCLUDE =
-    contains(DEFINES, __DARWIN__):equals(libtemplate, lib_bundle) {
+    contains(DEFINES, __DARWIN__):equals(libusebundle, lib_use_bundle) {
         CUR_INC_PWD =
         isEmpty(5):CUR_INC_PWD = $${LIB_SDK_ROOT}/$${libname}/$${QSYS_NOQT_STD_DIR}/lib/$${librealname}.framework/Headers
         else:CUR_INC_PWD = $${LIB_SDK_ROOT}/$${libname}/$${QSYS_STD_DIR}/lib/$${librealname}.framework/Headers
@@ -178,16 +178,16 @@ defineTest(add_include_path) {
     libname = $$1
     librealname = $$2
     libsubname = $$3
-    libtemplate = $$4
-    libqtpath = $$5
-    isEmpty(1): error("get_add_include_path(libname, librealname, libsubname, libtemplate) requires at last one argument")
-    !isEmpty(6): error("get_add_include_path(libname, librealname, libsubname, libtemplate) requires at most five argument")
+    libusebundle = $$4
+    libuseqtversion = $$5
+    isEmpty(1): error("get_add_include_path(libname, librealname, libsubname, libusebundle) requires at last one argument")
+    !isEmpty(6): error("get_add_include_path(libname, librealname, libsubname, libusebundle) requires at most five argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
-    !isEmpty(4): libtemplate = lib_bundle
-    !isEmpty(5): libqtpath = lib_use_qt_version
+    !isEmpty(4): libusebundle = lib_use_bundle
+    !isEmpty(5): libuseqtversion = lib_use_qt_version
 
-    command = $$get_add_include_path($$libname, $$librealname, $$libsubname, $$libtemplate, $${libqtpath})
+    command = $$get_add_include_path($$libname, $$librealname, $$libsubname, $$libusebundle, $${libuseqtversion})
     #message (INCLUDEPATH += $$command)
     INCLUDEPATH += $${command}
     export(INCLUDEPATH)
@@ -202,16 +202,16 @@ defineTest(add_include_path) {
 defineTest(add_link_library) {
     libname = $$1
     librealname = $$2
-    libtemplate = $$3
-    libqtpath = $$4
-    isEmpty(1): error("add_link_library(libname, librealname, libtemplate, libqtpath) requires at least one argument")
-    !isEmpty(5): error("add_link_library(libname, librealname, libtemplate, libqtpath) requires at most four argument")
+    libusebundle = $$3
+    libuseqtversion = $$4
+    isEmpty(1): error("add_link_library(libname, librealname, libusebundle, libuseqtversion) requires at least one argument")
+    !isEmpty(5): error("add_link_library(libname, librealname, libusebundle, libuseqtversion) requires at most four argument")
     isEmpty(2): librealname =
-    !isEmpty(3): libtemplate = lib_bundle
-    !isEmpty(4): libqtpath = lib_use_qt_version
+    !isEmpty(3): libusebundle = lib_use_bundle
+    !isEmpty(4): libuseqtversion = lib_use_qt_version
 
-    add_include_path($${libname}, $$librealname, , $$libtemplate, $$libqtpath)
-    add_library_path($${libname}, $$librealname, $$libtemplate, $$libqtpath)
+    add_include_path($${libname}, $$librealname, , $$libusebundle, $$libuseqtversion)
+    add_library_path($${libname}, $$librealname, $$libusebundle, $$libuseqtversion)
     add_library($${librealname})
 
     return (1)
