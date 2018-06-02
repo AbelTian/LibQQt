@@ -19,7 +19,7 @@ unix {
 #######################################################################################
 #4.0
 LIBRARYVER =
-DEBUG = d
+DEBUG =
 #这个地方，mingw比较特殊必须发布release版本，其他平台不清楚。
 mingw:DEBUG=
 contains(BUILD, Release) {
