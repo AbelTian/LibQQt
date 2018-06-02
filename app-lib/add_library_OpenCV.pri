@@ -17,9 +17,9 @@ contains(BUILD, Release) {
 #######################################################################################
 #定义内部函数
 #######################################################################################
-defineReplace(get_add_header_OpenCV){
+defineReplace(get_add_include_path_OpenCV){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_add_header_OpenCV(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_include_path_OpenCV(path) requires one arguments.")
 
     command =
     #basic
@@ -42,10 +42,10 @@ defineReplace(get_add_header_OpenCV){
     return ($$command)
 }
 
-defineTest(add_header_OpenCV){
+defineTest(add_include_path_OpenCV){
     #包含OpenCV头文件的过程
-    header_path = $$get_add_header(OpenCV)
-    INCLUDEPATH += $$get_add_header_OpenCV($$header_path)
+    header_path = $$get_add_include_path(OpenCV)
+    INCLUDEPATH += $$get_add_include_path_OpenCV($$header_path)
     export(INCLUDEPATH)
     return (1)
 }
@@ -75,15 +75,15 @@ defineTest(add_link_library_OpenCV){
     #链接Library
     add_library_OpenCV()
     #添加头文件 （如果头文件目录扩展了，就改这个函数）
-    add_header_OpenCV()
+    add_include_path_OpenCV()
     #这样包含也很好，简洁明了
-    #add_header(OpenCV, opencv)
-    #add_header(OpenCV, opencv2)
-    #add_header(OpenCV, opencv2/core)
+    #add_include_path(OpenCV, opencv)
+    #add_include_path(OpenCV, opencv2)
+    #add_include_path(OpenCV, opencv2/core)
     #...
 
     #添加宏定义
-    #add_define(xx)
+    #add_defines(xx)
     return (1)
 }
 

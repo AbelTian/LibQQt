@@ -14,8 +14,8 @@ THIS_PRI_PWD = $${PWD}
 
 #添加依赖library
 #add_library(xx)
-#add_header(xx)
-#add_define(xx)
+#add_include_path(xx)
+#add_defines(xx)
 
 #先发布App
 #app从build到deploy

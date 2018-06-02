@@ -19,9 +19,9 @@ contains(BUILD, Release) {
 #######################################################################################
 #定义内部函数
 #######################################################################################
-defineReplace(get_add_header_VLC){
+defineReplace(get_add_include_path_VLC){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_add_header_VLC(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_include_path_VLC(path) requires one arguments.")
 
     command =
     #basic
@@ -32,10 +32,10 @@ defineReplace(get_add_header_VLC){
     return ($$command)
 }
 
-defineTest(add_header_VLC){
+defineTest(add_include_path_VLC){
     #包含VLC头文件的过程
-    header_path = $$get_add_header(VLC)
-    INCLUDEPATH += $$get_add_header_VLC($$header_path)
+    header_path = $$get_add_include_path(VLC)
+    INCLUDEPATH += $$get_add_include_path_VLC($$header_path)
     export(INCLUDEPATH)
     return (1)
 }
@@ -56,14 +56,14 @@ defineTest(add_link_library_VLC) {
     add_library_VLC()
 
     #添加头文件 （如果头文件目录扩展了，就改这个函数）
-    add_header_VLC()
+    add_include_path_VLC()
     #这样包含也很好，简洁明了
-    #add_header(VLC, VLCQtCore)
-    #add_header(VLC, VLCQtWidgets)
+    #add_include_path(VLC, VLCQtCore)
+    #add_include_path(VLC, VLCQtWidgets)
     #...
 
     #添加宏定义
-    #add_define(xx)
+    #add_defines(xx)
     return (1)
 }
 

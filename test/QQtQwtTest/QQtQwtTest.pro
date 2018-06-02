@@ -51,7 +51,7 @@ add_deploy()
 #app链接library lib也会链接
 #app发布library 只有app才会发布
 
-add_dependent_manager_QQt()
+add_dependent_manager(QQt)
 add_dependent_manager_Qwt()
 
 #打印状态

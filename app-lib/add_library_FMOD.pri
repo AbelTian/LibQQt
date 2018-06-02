@@ -18,9 +18,9 @@ contains(BUILD, Release) {
 #######################################################################################
 #定义内部函数
 #######################################################################################
-defineReplace(get_add_header_FMOD){
+defineReplace(get_add_include_path_FMOD){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_add_header_FMOD(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_include_path_FMOD(path) requires one arguments.")
 
     command =
     #basic
@@ -30,16 +30,16 @@ defineReplace(get_add_header_FMOD){
     return ($$command)
 }
 
-defineTest(add_header_FMOD){
+defineTest(add_include_path_FMOD){
     #包含FMOD头文件的过程
-    header_path = $$get_add_header(FMOD)
-    INCLUDEPATH += $$get_add_header_FMOD($$header_path)
+    header_path = $$get_add_include_path(FMOD)
+    INCLUDEPATH += $$get_add_include_path_FMOD($$header_path)
     export(INCLUDEPATH)
     
     #不用上边这种，这样包含也很好，简洁明了
-    #add_header(FMOD)
-    #add_header(FMOD, FMOD)
-    #add_header(FMOD, FMOD/core)
+    #add_include_path(FMOD)
+    #add_include_path(FMOD, FMOD)
+    #add_include_path(FMOD, FMOD/core)
     #...
 
     return (1)
@@ -62,10 +62,10 @@ defineTest(add_link_library_FMOD){
     #链接Library
     add_library_FMOD()
     #添加头文件 （如果头文件目录扩展了，就改这个函数）
-    add_header_FMOD()
+    add_include_path_FMOD()
 
     #添加宏定义
-    #add_define(xx)
+    #add_defines(xx)
     return (1)
 }
 

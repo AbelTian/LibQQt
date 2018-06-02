@@ -53,10 +53,10 @@
     - ﻿add_deploy()  
     - ﻿add_deploy_library()   
     - ﻿add_deploy_config()  
-    - ﻿add_header()  
-    - ﻿add_local_header()  
+    - ﻿add_include_path()  
+    - ﻿add_headers()  
     - ﻿add_library()  
-    - ﻿add_define()  
+    - ﻿add_defines()  
     - ﻿add_language()  
     - ﻿add_zh_CN_en_US()  
 3. 彻底的脱离了libQQt，但是提供对libQQt的链接支持，和对其他Library的链接支持一模一样。  

@@ -24,5 +24,5 @@ defineReplace(lib_header){
 }
 
 #= INCLUDEPATH += $$lib_header($$PWD)
-add_local_header( $$lib_header($$PWD) )
+add_headers( $$lib_header($$PWD) )
 message($$INCLUDEPATH)

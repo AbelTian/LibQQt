@@ -616,8 +616,8 @@ defineTest(del_sdk){
 
 #获取sdk name
 #修饰TARGET _d _debug
-defineReplace(add_sdk_name){
-    #isEmpty(1):error(add_sdk_name(target_name) need one argument)
+defineReplace(add_target_name){
+    #isEmpty(1):error(add_target_name(target_name) need one argument)
 
     target_name = $$1
     isEmpty(1):target_name = $$TARGET

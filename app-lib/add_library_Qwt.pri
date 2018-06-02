@@ -18,9 +18,9 @@ contains(BUILD, Release) {
 #######################################################################################
 #定义内部函数
 #######################################################################################
-defineReplace(get_add_header_Qwt){
+defineReplace(get_add_include_path_Qwt){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_add_header_Qwt(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_include_path_Qwt(path) requires one arguments.")
 
     command =
     #basic
@@ -29,10 +29,10 @@ defineReplace(get_add_header_Qwt){
     return ($$command)
 }
 
-defineTest(add_header_Qwt){
+defineTest(add_include_path_Qwt){
     #包含Qwt头文件的过程
-    header_path = $$get_add_header(Qwt)
-    INCLUDEPATH += $$get_add_header_Qwt($$header_path)
+    header_path = $$get_add_include_path(Qwt)
+    INCLUDEPATH += $$get_add_include_path_Qwt($$header_path)
     export(INCLUDEPATH)
     return (1)
 }
@@ -51,15 +51,15 @@ defineTest(add_link_library_Qwt){
     #链接Library
     add_library_Qwt()
     #添加头文件 （如果头文件目录扩展了，就改这个函数）
-    add_header_Qwt()
+    add_include_path_Qwt()
     #这样包含也很好，简洁明了
-    #add_header(Qwt, opencv)
-    #add_header(Qwt, opencv2)
-    #add_header(Qwt, opencv2/core)
+    #add_include_path(Qwt, opencv)
+    #add_include_path(Qwt, opencv2)
+    #add_include_path(Qwt, opencv2/core)
     #...
 
     #添加宏定义
-    #add_define(xx)
+    #add_defines(xx)
     return (1)
 }
 

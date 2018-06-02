@@ -18,9 +18,9 @@ contains(BUILD, Release) {
 #######################################################################################
 #定义内部函数
 #######################################################################################
-defineReplace(get_add_header_log4cpp){
+defineReplace(get_add_include_path_log4cpp){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_add_header_log4cpp(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_include_path_log4cpp(path) requires one arguments.")
 
     command =
     #basic
@@ -31,16 +31,16 @@ defineReplace(get_add_header_log4cpp){
     return ($$command)
 }
 
-defineTest(add_header_log4cpp){
+defineTest(add_include_path_log4cpp){
     #包含log4cpp头文件的过程
-    header_path = $$get_add_header(log4cpp)
-    INCLUDEPATH += $$get_add_header_log4cpp($$header_path)
+    header_path = $$get_add_include_path(log4cpp)
+    INCLUDEPATH += $$get_add_include_path_log4cpp($$header_path)
     export(INCLUDEPATH)
     
     #不用上边这种，这样包含也很好，简洁明了
-    #add_header(log4cpp)
-    #add_header(log4cpp, log4cpp)
-    #add_header(log4cpp, log4cpp/core)
+    #add_include_path(log4cpp)
+    #add_include_path(log4cpp, log4cpp)
+    #add_include_path(log4cpp, log4cpp/core)
     #...
 
     return (1)
@@ -62,10 +62,10 @@ defineTest(add_link_library_log4cpp){
     #链接Library
     add_library_log4cpp()
     #添加头文件 （如果头文件目录扩展了，就改这个函数）
-    add_header_log4cpp()
+    add_include_path_log4cpp()
 
     #添加宏定义
-    #add_define(xx)
+    #add_defines(xx)
     return (1)
 }
 

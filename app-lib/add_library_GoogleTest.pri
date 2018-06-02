@@ -18,9 +18,9 @@ contains(BUILD, Release) {
 #######################################################################################
 #定义内部函数
 #######################################################################################
-defineReplace(get_add_header_GoogleTest){
+defineReplace(get_add_include_path_GoogleTest){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_add_header_GoogleTest(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_include_path_GoogleTest(path) requires one arguments.")
 
     command =
     #basic
@@ -36,16 +36,16 @@ defineReplace(get_add_header_GoogleTest){
     return ($$command)
 }
 
-defineTest(add_header_GoogleTest){
+defineTest(add_include_path_GoogleTest){
     #包含GoogleTest头文件的过程
-    header_path = $$get_add_header(GoogleTest)
-    INCLUDEPATH += $$get_add_header_GoogleTest($$header_path)
+    header_path = $$get_add_include_path(GoogleTest)
+    INCLUDEPATH += $$get_add_include_path_GoogleTest($$header_path)
     export(INCLUDEPATH)
     
     #不用上边这种，这样包含也很好，简洁明了
-    #add_header(GoogleTest)
-    #add_header(GoogleTest, GoogleTest)
-    #add_header(GoogleTest, GoogleTest/core)
+    #add_include_path(GoogleTest)
+    #add_include_path(GoogleTest, GoogleTest)
+    #add_include_path(GoogleTest, GoogleTest/core)
     #...
 
     return (1)
@@ -70,10 +70,10 @@ defineTest(add_link_library_GoogleTest){
     #链接Library
     add_library_GoogleTest()
     #添加头文件 （如果头文件目录扩展了，就改这个函数）
-    add_header_GoogleTest()
+    add_include_path_GoogleTest()
 
     #添加宏定义
-    #add_define(xx)
+    #add_defines(xx)
     return (1)
 }
 

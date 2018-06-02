@@ -10,6 +10,7 @@
 #1.0.0
 LIBRARYVER =
 DEBUG = d
+contains(QMAKE_HOST.os, Darwin):DEBUG=_debug
 contains(BUILD, Release) {
     DEBUG=
 }
@@ -19,9 +20,9 @@ contains(BUILD, Release) {
 #定义内部函数
 #######################################################################################
 #修改
-defineReplace(get_add_header_Template){
+defineReplace(get_add_include_path_Template){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_add_header_Template(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_include_path_Template(path) requires one arguments.")
 
     command =
     #basic
@@ -31,16 +32,16 @@ defineReplace(get_add_header_Template){
     return ($$command)
 }
 
-defineTest(add_header_Template){
+defineTest(add_include_path_Template){
     #包含Template头文件的过程
-    header_path = $$get_add_header(Template)
-    INCLUDEPATH += $$get_add_header_Template($$header_path)
+    header_path = $$get_add_include_path(Template)
+    INCLUDEPATH += $$get_add_include_path_Template($$header_path)
     export(INCLUDEPATH)
     
     #不用上边这种，这样包含也很好，简洁明了
-    #add_header(Template)
-    #add_header(Template, Template)
-    #add_header(Template, Template/core)
+    #add_include_path(Template)
+    #add_include_path(Template, Template)
+    #add_include_path(Template, Template/core)
     #...
 
     return (1)
@@ -65,10 +66,10 @@ defineTest(add_link_library_Template){
     #链接Library
     add_library_Template()
     #添加头文件 （如果头文件目录扩展了，就改这个函数）
-    add_header_Template()
+    add_include_path_Template()
 
     #添加宏定义
-    #add_define(xx)
+    #add_defines(xx)
     return (1)
 }
 

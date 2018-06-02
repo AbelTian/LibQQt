@@ -12,6 +12,7 @@
 #尤其动态编译 配置开关、宏定义 是在这里处理的，但是静态编译 配置开关在这里、宏定义在base_header里。这里需要加强理解。
 #这是重点。
 
+ADD_BASE_MANAGER_PRI_PWD = $${PWD}
 ################################################################################
 #包含这个pri依赖的pri
 #设置目标平台 QSYS
@@ -67,13 +68,38 @@ include ($${PWD}/add_language.pri)
 defineTest(add_dependent_library) {
     libname = $$1
     librealname = $$2
-    isEmpty(1): error("add_library(libname, librealname) requires at last one argument")
-    !isEmpty(3): error("add_library(libname, librealname) requires at most two argument")
-    isEmpty(2): librealname = $${libname}
+    libsubname = $$3
+    libtemplate = $$4
+    libqtpath = $$5
+    libdeployqt = $$6
+    isEmpty(1): error("add_dependent_library(libname, librealname, libsubname, libtemplate, libqtpath, libdeployqt) requires at least one argument")
+    !isEmpty(6): error("add_dependent_library(libname, librealname, libsubname, libtemplate, libqtpath, libdeployqt) requires at most six argument")
+    isEmpty(2): librealname = $$libname
+    isEmpty(3): libsubname =
+    !isEmpty(4): libtemplate = lib_bundle
+    !isEmpty(5): libqtpath = lib_use_qt_version
+    !isEmpty(6): libdeployqt = lib_deploy_qt
 
-    add_link_library($${libname}, $${librealname})
-    add_deploy_library($${libname}, $${librealname})
+    add_link_library($${libname}, $${librealname}, $${libtemplate}, $${libqtpath})
+    add_deploy_library($${libname}, $${librealname}, $${libsubname}, $${libtemplate}, $${libqtpath}, $${libdeployqt})
 
+    return (1)
+}
+
+#################################################################
+#这是一个强大的函数
+#调用这一个函数就可以调用add_library_XXX.pri里实现的函数
+#################################################################
+defineTest(add_dependent_manager){
+    libname = $$1
+    isEmpty(1):libname = QQt
+    !equals(TARGET_PRIVATE, $${libname}):
+        exists($${ADD_BASE_MANAGER_PRI_PWD}/../app-lib/add_library_$${libname}.pri){
+        include ($${ADD_BASE_MANAGER_PRI_PWD}/../app-lib/add_library_$${libname}.pri)
+        contains(TEMPLATE, app):add_dependent_library_$${libname}()
+        else:contains(TEMPLATE, lib):add_link_library_$${libname}()
+        else:add_link_library_$${libname}()
+    }
     return (1)
 }
 
@@ -176,7 +202,7 @@ defineTest(add_target){
     TARGET_PRIVATE = $$target_name
     export(TARGET_PRIVATE)
 
-    ret = $$add_sdk_name($${target_name})
+    ret = $$add_target_name($${target_name})
 
     TARGET = $$ret
     export(TARGET)
@@ -198,19 +224,6 @@ defineTest(add_template){
     return(1)
 }
 
-#添加头文件
-defineTest(add_headers){
-    #isEmpty(1):error(add_headers(header_name) need one argument)
-
-    header_name = $$1
-    isEmpty(1):header_name = $$PWD
-
-    HEADERS += $$header_name
-    export(HEADERS)
-
-    return(1)
-}
-
 #添加源文件
 defineTest(add_sources){
     isEmpty(1):error(add_sources(source_name) need one argument)
@@ -221,6 +234,33 @@ defineTest(add_sources){
     export(SOURCES)
 
     return(1)
+}
+
+#添加头文件
+defineTest(add_headers) {
+    headername = $$1
+    isEmpty(1)|!isEmpty(2): error("add_headers(headername) requires one argument")
+
+    command = $${headername}
+    #message ($$command)
+
+    HEADERS += $${command}
+    export(HEADERS)
+
+    return (1)
+}
+
+defineTest(add_defines) {
+    defname = $$1
+    isEmpty(1)|!isEmpty(2): error("add_defines(defname) requires one argument")
+
+    command = $${defname}
+    #message ($$command)
+
+    DEFINES += $${command}
+    export(DEFINES)
+
+    return (1)
 }
 
 #################################################################

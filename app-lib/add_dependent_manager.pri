@@ -127,9 +127,3 @@ defineTest(add_dependent_manager_FMOD){
 #这是一个强大的函数
 #调用这一个函数就可以调用上边实现的函数
 #################################################################
-defineTest(add_dependent_manager){
-    libname = $$1
-    isEmpty(1):libname = QQt
-    add_dependent_manager_$${libname}()
-    return (1)
-}
