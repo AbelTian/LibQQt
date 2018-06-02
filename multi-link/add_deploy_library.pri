@@ -36,7 +36,7 @@ defineReplace(get_add_deploy_library_on_mac) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("get_add_deploy_library_on_mac(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("get_add_deploy_library_on_mac(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("get_add_deploy_library_on_mac(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -179,7 +179,7 @@ defineReplace(get_add_deploy_library_on_mac) {
     #    command += chmod +x $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh &&
     #    command += $${ADD_DEPLOY_LIBRARY_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
     #}
-    command += echo app deploy library $$librealname progressed.
+    command += echo . #app deploy library $$librealname progressed.
 
     #message($$command)
 
@@ -197,7 +197,7 @@ defineReplace(get_add_deploy_library_on_windows) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("get_add_deploy_library_on_windows(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("get_add_deploy_library_on_windows(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("get_add_deploy_library_on_windows(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -218,7 +218,7 @@ defineReplace(get_add_deploy_library_on_windows) {
 
     !isEmpty(libdeployqt) {
         #经过调试发现，如果DLL引用了Qt库，App却没有引用，windeployqt不会发布那些库，在这里发布。
-        command += windeployqt $${APP_BUILD_PWD}\\$${librealname}.dll $${DEPLOYTYPE} -verbose=1 $$CMD_SEP
+        #command += windeployqt $${APP_BUILD_PWD}\\$${librealname}.dll $${DEPLOYTYPE} -verbose=1 $$CMD_SEP
     }
 
     command += $$RM $${APP_DEPLOY_PWD}\\*$${librealname}.* $$CMD_SEP
@@ -231,7 +231,7 @@ defineReplace(get_add_deploy_library_on_windows) {
         command += windeployqt $${APP_DEPLOY_PWD}\\$${librealname}.dll $${DEPLOYTYPE} -verbose=1 $$CMD_SEP
     }
 
-    command += echo app deploy library $$librealname progressed.
+    command += echo . #app deploy library $$librealname progressed.
 
     #message($$command)
 
@@ -248,7 +248,7 @@ defineReplace(get_add_deploy_library_on_linux) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("get_add_deploy_library_on_linux(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("get_add_deploy_library_on_linux(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("get_add_deploy_library_on_linux(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -277,7 +277,7 @@ defineReplace(get_add_deploy_library_on_android) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("get_add_deploy_library_on_linux(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("get_add_deploy_library_on_linux(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("get_add_deploy_library_on_linux(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -315,7 +315,7 @@ defineReplace(get_add_deploy_libraryes_on_mac) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("get_add_deploy_libraryes_on_mac(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("get_add_deploy_libraryes_on_mac(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("get_add_deploy_libraryes_on_mac(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -341,7 +341,7 @@ defineReplace(get_add_deploy_libraryes_on_windows) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("get_add_deploy_libraryes_on_windows(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("get_add_deploy_libraryes_on_windows(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("get_add_deploy_libraryes_on_windows(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -373,7 +373,7 @@ defineReplace(get_add_deploy_libraryes_on_linux) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("get_add_deploy_libraryes_on_linux(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("get_add_deploy_libraryes_on_linux(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("get_add_deploy_libraryes_on_linux(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -400,7 +400,7 @@ defineReplace(get_add_deploy_libraryes_on_android) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("get_add_deploy_libraryes_on_android(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("get_add_deploy_libraryes_on_android(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("get_add_deploy_libraryes_on_android(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -437,7 +437,7 @@ defineTest(add_deploy_libraryes) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("add_deploy_library(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("add_deploy_library(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("add_deploy_library(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname =
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -463,7 +463,7 @@ defineTest(add_deploy_libraryes) {
 
     #set app deploy pwd
     #APP_DEPLOY_PWD is here.
-    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QSYS_STD_DIR}
+    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET_PRIVATE}/$${QSYS_STD_DIR}
     #不仅仅发布目标为Windows的时候，才需要改变路径
     #开发机为Windows就必须改变。
     #contains(QKIT_PRIVATE, WIN32||WIN64) {
@@ -516,7 +516,7 @@ defineTest(add_deploy_library) {
     libuseqtversion = $$5
     libdeployqt = $$6
     isEmpty(1): error("add_deploy_library(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at least one argument")
-    !isEmpty(6): error("add_deploy_library(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
+    !isEmpty(7): error("add_deploy_library(libname, librealname, libsubname, libusebundle, libuseqtversion, libdeployqt) requires at most six argument")
     isEmpty(2): librealname = $$libname
     isEmpty(3): libsubname =
     !isEmpty(4): libusebundle = lib_use_bundle
@@ -542,8 +542,7 @@ defineTest(add_deploy_library) {
 
     #set app deploy pwd
     #APP_DEPLOY_PWD is here.
-    APP_DEPLOY_PWD =
-    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET}/$${QSYS_STD_DIR}
+    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET_PRIVATE}/$${QSYS_STD_DIR}
     #不仅仅发布目标为Windows的时候，才需要改变路径
     #开发机为Windows就必须改变。
     #contains(QKIT_PRIVATE, WIN32||WIN64) {

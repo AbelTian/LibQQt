@@ -34,7 +34,7 @@ defineReplace(get_add_include_path_Template){
 
 defineTest(add_include_path_Template){
     #包含Template头文件的过程
-    header_path = $$get_add_include_path(Template)
+    header_path = $$get_add_include_path(Template, , , "bundle", "qtversionpath")
     INCLUDEPATH += $$get_add_include_path_Template($$header_path)
     export(INCLUDEPATH)
     
@@ -50,10 +50,11 @@ defineTest(add_include_path_Template){
 #这个地方add_library_no_bundle代表包括macOS下，都不使用bundle，只是动态库或者静态库。
 #修改
 defineTest(add_library_Template){
-    #链接Library
-    add_library(Template, Template$${LIBRARYVER}$${DEBUG})
-    #添加这个SDK下的其他的library
-    
+    #添加Library路径
+    add_library_path(Template, , "bundle", "qtversionpath")
+    #添加这个SDK里的library
+    add_library(Template$${LIBRARYVER}$${DEBUG})
+
     return (1)
 }
 
@@ -78,7 +79,8 @@ defineTest(add_link_library_Template){
 #_Qt 代表这个lib是基于Qt的 依赖Qt
 #留意
 defineTest(add_deploy_library_Template) {
-    add_deploy_library_Qt(Template, Template$${LIBRARYVER}$${DEBUG})
+    add_deploy_library(Template, Template$${LIBRARYVER}$${DEBUG}, , "bundle", "qtversionpath", "deployqt")
+    #add_deploy_libraryes(Template, , , "bundle", "qtversionpath")
     return (1)
 }
 

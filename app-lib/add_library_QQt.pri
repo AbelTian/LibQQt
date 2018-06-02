@@ -497,7 +497,7 @@ defineReplace(get_add_include_path_QQt){
 #用户包含QQt头文件，就不必加相对路径了，方便了很多
 defineTest(add_include_path_QQt){
     #包含QQt头文件的过程
-    header_path = $$get_add_include_path(QQt)
+    header_path = $$get_add_include_path(QQt, , , "bundle", "qtversionpath")
     INCLUDEPATH += $$get_add_include_path_QQt($$header_path)
     export(INCLUDEPATH)
     return (1)
@@ -506,7 +506,8 @@ defineTest(add_include_path_QQt){
 
 defineTest(add_library_QQt){
     #链接QQt
-    add_library(QQt, QQt$${DEBUG})
+    add_library_path(QQt, , use, use)
+    add_library(QQt$${LIBRARYVER}$${DEBUG})
 }
 
 #######################################################################################
@@ -532,7 +533,7 @@ defineTest(add_link_library_QQt){
 #调试，正常；发布运行，正常。
 #:) 方便函数
 defineTest(add_deploy_library_QQt){
-    add_deploy_library_Qt(QQt, QQt$${DEBUG})
+    add_deploy_library(QQt, QQt$${DEBUG}, , use, use, use)
     return (1)
 }
 

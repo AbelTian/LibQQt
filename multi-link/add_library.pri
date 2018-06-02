@@ -34,8 +34,8 @@ defineReplace(get_add_library_path) {
     !isEmpty(4): libuseqtversion = lib_use_qt_version
 
     CUR_LIB_PWD =
-    isEmpty(4):CUR_LIB_PWD = $${LIB_SDK_ROOT}/$${libname}/$${QSYS_STD_DIR}/lib
-    else:CUR_LIB_PWD = $${LIB_SDK_ROOT}/$${libname}/$${QSYS_NOQT_STD_DIR}/lib
+    isEmpty(4):CUR_LIB_PWD = $${LIB_SDK_ROOT}/$${libname}/$${QSYS_NOQT_STD_DIR}/lib
+    else:CUR_LIB_PWD = $${LIB_SDK_ROOT}/$${libname}/$${QSYS_STD_DIR}/lib
     !isEmpty(2):CUR_LIB_PWD=$${CUR_LIB_PWD}/$${librealname}
     equals(QMAKE_HOST.os, Windows) {
         CUR_LIB_PWD~=s,/,\\,g
@@ -191,6 +191,26 @@ defineTest(add_include_path) {
     #message (INCLUDEPATH += $$command)
     INCLUDEPATH += $${command}
     export(INCLUDEPATH)
+    return (1)
+}
+
+defineTest(add_library_normal) {
+    libname = $$1
+    librealname = $$2
+    libsubname = $$3
+    libusebundle = $$4
+    libuseqtversion = $$5
+    isEmpty(1): error("add_library_normal(libname, librealname, libsubname, libusebundle, libuseqtversion) requires at least one argument")
+    !isEmpty(6): error("add_library_normal(libname, librealname, libsubname, libusebundle, libuseqtversion) requires at most four argument")
+    isEmpty(2): librealname = $$libname
+    isEmpty(3): libsubname =
+    !isEmpty(3): libusebundle = lib_use_bundle
+    !isEmpty(4): libuseqtversion = lib_use_qt_version
+
+    add_library_path($$libname, $$libsubname, $$libusebundle, $$libuseqtversion)
+    add_library($${librealname})
+    export(LIBS)
+
     return (1)
 }
 

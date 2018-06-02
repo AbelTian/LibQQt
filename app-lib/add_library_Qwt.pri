@@ -31,7 +31,7 @@ defineReplace(get_add_include_path_Qwt){
 
 defineTest(add_include_path_Qwt){
     #包含Qwt头文件的过程
-    header_path = $$get_add_include_path(Qwt)
+    header_path = $$get_add_include_path(Qwt, , , "use bundle", "use qt version path")
     INCLUDEPATH += $$get_add_include_path_Qwt($$header_path)
     export(INCLUDEPATH)
     return (1)
@@ -39,7 +39,8 @@ defineTest(add_include_path_Qwt){
 
 defineTest(add_library_Qwt){
     #链接Library
-    add_library(Qwt, Qwt$${LIBRARYVER}$${DEBUG})
+    add_library_path(Qwt, , "use bundle", "use qt version path")
+    add_library(Qwt$${LIBRARYVER}$${DEBUG})
     return (1)
 }
 
@@ -66,7 +67,7 @@ defineTest(add_link_library_Qwt){
 #发布依赖library
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
 defineTest(add_deploy_library_Qwt) {
-    add_deploy_library_Qt(Qwt, Qwt$${LIBRARYVER}$${DEBUG})
+    add_deploy_library(Qwt, Qwt$${DEBUG}, , "use bundle", "use qt version path", "use deploy qt")
     return (1)
 }
 

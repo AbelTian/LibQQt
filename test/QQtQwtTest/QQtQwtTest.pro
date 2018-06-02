@@ -40,7 +40,6 @@ system(touch main.cpp)
 #自定义的不想加到内置里的，就用add_custom_manager.pri
 #add_custom_manager也不想用的，就加到自己pro文件里好了。
 include (../../multi-link/add_base_manager.pri)
-include (../../app-lib/add_dependent_manager.pri)
 include (../../app-lib/add_custom_manager.pri)
 
 
@@ -52,7 +51,7 @@ add_deploy()
 #app发布library 只有app才会发布
 
 add_dependent_manager(QQt)
-add_dependent_manager_Qwt()
+add_dependent_manager(Qwt)
 
 #打印状态
 message($$TARGET config $$CONFIG)

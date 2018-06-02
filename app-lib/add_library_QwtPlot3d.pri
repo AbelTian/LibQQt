@@ -31,15 +31,17 @@ defineReplace(get_add_include_path_QwtPlot3d){
 
 defineTest(add_include_path_QwtPlot3d){
     #包含QwtPlot3d头文件的过程
-    header_path = $$get_add_include_path(QwtPlot3d)
+    header_path = $$get_add_include_path(QwtPlot3d, , , "bundle", "qtversionpath")
     INCLUDEPATH += $$get_add_include_path_QwtPlot3d($$header_path)
     export(INCLUDEPATH)
     return (1)
 }
 
 defineTest(add_library_QwtPlot3d){
-    #链接Library
-    add_library(QwtPlot3d, QwtPlot3d$${LIBRARYVER}$${DEBUG})
+    #添加Library路径
+    add_library_path(QwtPlot3d, , "bundle", "qtversionpath")
+    #添加这个SDK里的library
+    add_library(QwtPlot3d$${LIBRARYVER}$${DEBUG})
     return (1)
 }
 
@@ -66,7 +68,7 @@ defineTest(add_link_library_QwtPlot3d){
 #发布依赖library
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
 defineTest(add_deploy_library_QwtPlot3d) {
-    add_deploy_library_Qt(QwtPlot3d, QwtPlot3d$${LIBRARYVER}$${DEBUG})
+    add_deploy_library(QwtPlot3d, QwtPlot3d$${LIBRARYVER}$${DEBUG}, , "bundle", "qtversionpath", "deployqt")
     return (1)
 }
 

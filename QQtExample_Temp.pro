@@ -35,15 +35,16 @@ SUBDIRS =
 #所有的依赖添加pri都位于QQt/app-lib里，暂时除了QQt的不能移动，其他的pri都可以移动。
 ########################################################################################
 #need OpenCV SDK
-#SUBDIRS += examples/QQtOpenCVExample
+#
+SUBDIRS += examples/QQtOpenCVExample
 
 #need OSG SDK
 #need win SDK
+#string is not a type?
 #SUBDIRS += examples/QQtOpenSceneGraphExample
 
 #need Qwt SDK
-#
-SUBDIRS += test/QQtQwtTest
+#SUBDIRS += test/QQtQwtTest
 
 #need QwtPlot3D sdk
 #SUBDIRS += test/QQtQwtPlot3DTest

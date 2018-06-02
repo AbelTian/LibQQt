@@ -51,19 +51,20 @@ defineTest(add_include_path_OpenCV){
 }
 
 defineTest(add_library_OpenCV){
+    add_library_path(OpenCV)
     #链接Library
-    add_library(OpenCV, opencv_calib3d$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_contrib$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_core$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_features2d$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_flann$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_gpu$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_highgui$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_imgproc$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_legacy$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_ml$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_objdetect$${LIBRARYVER}$${DEBUG})
-    add_library(OpenCV, opencv_video$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_calib3d$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_contrib$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_core$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_features2d$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_flann$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_gpu$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_highgui$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_imgproc$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_legacy$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_ml$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_objdetect$${LIBRARYVER}$${DEBUG})
+    add_library(opencv_video$${LIBRARYVER}$${DEBUG})
     return (1)
 }
 
