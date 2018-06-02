@@ -6,7 +6,7 @@
 ##依赖add_version.pri
 ##please don't modify this pri
 ################################################
-THIS_PRI_PWD = $${PWD}
+ADD_SDK_PRI_PWD = $${PWD}
 
 #在build path修复app (macOS专有)
 #copy lib
@@ -25,8 +25,8 @@ defineReplace(get_add_mac_sdk_fix_building_framework_2) {
     liblowername = $$lower($${librealname})
 
     command =
-    command += chmod +x $${THIS_PRI_PWD}/linux_cur_path.sh &&
-    command += . $${THIS_PRI_PWD}/linux_cur_path.sh &&
+    command += chmod +x $${ADD_SDK_PRI_PWD}/linux_cur_path.sh &&
+    command += . $${ADD_SDK_PRI_PWD}/linux_cur_path.sh &&
     #copy temp
     command += $$COPY_DIR $${APP_DEST_DIR}/$${libname}.framework $${APP_DEST_DIR}/$${libtempname}.framework &&
     #进去原先的
@@ -37,8 +37,8 @@ defineReplace(get_add_mac_sdk_fix_building_framework_2) {
     create_command = $$get_add_mac_sdk($${libtempname}, $${librealname})
     command += $${create_command} &&
 
-    command += chmod +x $${THIS_PRI_PWD}/linux_cd_path.sh &&
-    command += . $${THIS_PRI_PWD}/linux_cd_path.sh &&
+    command += chmod +x $${ADD_SDK_PRI_PWD}/linux_cd_path.sh &&
+    command += . $${ADD_SDK_PRI_PWD}/linux_cd_path.sh &&
 
     #remove 临时的 framework
     command += $$RM_DIR $${APP_DEST_DIR}/$${libtempname}.framework
@@ -59,8 +59,8 @@ defineReplace(get_add_mac_sdk_fix_building_framework) {
     liblowername = $$lower($${librealname})
 
     command =
-    command += chmod +x $${THIS_PRI_PWD}/linux_cur_path.sh &&
-    command += . $${THIS_PRI_PWD}/linux_cur_path.sh &&
+    command += chmod +x $${ADD_SDK_PRI_PWD}/linux_cur_path.sh &&
+    command += . $${ADD_SDK_PRI_PWD}/linux_cur_path.sh &&
 
     #create temp
     command += $$MK_DIR $${APP_DEST_DIR}/$${libtempname}.framework &&
@@ -72,8 +72,8 @@ defineReplace(get_add_mac_sdk_fix_building_framework) {
     create_command = $$get_add_mac_sdk($${libname}, $${librealname})
     command += $${create_command} &&
 
-    command += chmod +x $${THIS_PRI_PWD}/linux_cd_path.sh &&
-    command += . $${THIS_PRI_PWD}/linux_cd_path.sh &&
+    command += chmod +x $${ADD_SDK_PRI_PWD}/linux_cd_path.sh &&
+    command += . $${ADD_SDK_PRI_PWD}/linux_cd_path.sh &&
 
     #拷贝prl到新的里
     command += $$COPY $${APP_DEST_DIR}/$${libname}.framework/$${librealname}.prl $${APP_DEST_DIR}/$${libtempname}.framework/$${librealname}.prl $$CMD_SEP
@@ -190,8 +190,8 @@ defineReplace(get_add_mac_sdk){
     command += $$LN $$LIB_BUNDLE_CUR_EXE_FILE $${LIB_BUNDLE_EXE_LINK}
     lessThan(QT_MAJOR_VERSION, 5){
         command += $$CMD_SEP
-        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
-        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${LIB_BUNDLE_VER_DIR}/$${libname}
+        command += chmod +x $${ADD_SDK_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+        command += $${ADD_SDK_PRI_PWD}/mac_deploy_qt4.sh $${LIB_BUNDLE_VER_DIR}/$${libname}
     }
     return ($$command)
 }
@@ -697,10 +697,10 @@ defineTest(add_sdk_header){
     command += $$CD $${LIB_INC_DIR} $$CMD_SEP
 
     contains(QMAKE_HOST.os, Windows){
-        command += $${THIS_PRI_PWD}/win_write_header.bat $${headername} $${HEADER_FILE}
+        command += $${ADD_SDK_PRI_PWD}/win_write_header.bat $${headername} $${HEADER_FILE}
     } else {
-        command += chmod +x $${THIS_PRI_PWD}/linux_write_header.sh $$CMD_SEP
-        command += $${THIS_PRI_PWD}/linux_write_header.sh $${headername} $${HEADER_FILE}
+        command += chmod +x $${ADD_SDK_PRI_PWD}/linux_write_header.sh $$CMD_SEP
+        command += $${ADD_SDK_PRI_PWD}/linux_write_header.sh $${headername} $${HEADER_FILE}
     }
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK+=$$CMD_SEP

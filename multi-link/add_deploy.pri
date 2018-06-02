@@ -8,7 +8,7 @@
 #内部用函数
 #获取命令
 ################################################################################
-THIS_PRI_PWD = $${PWD}
+ADD_DEPLOY_PRI_PWD = $${PWD}
 
 ##########################################
 #app的发布函数命令
@@ -21,16 +21,16 @@ defineReplace(get_add_deploy_on_mac) {
     #这里或许需要加macdeployqt? build pwd
     command += macdeployqt $${APP_BUILD_PWD}/$${TARGET}.app -verbose=1 $$CMD_SEP
     lessThan(QT_MAJOR_VERSION, 5){
-        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
-        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} $$CMD_SEP
+        command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+        command += $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} $$CMD_SEP
     }
 
     #deploy pwd
     command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1
     lessThan(QT_MAJOR_VERSION, 5){
         command += $$CMD_SEP
-        command += chmod +x $${THIS_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
-        command += $${THIS_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
+        command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+        command += $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
     }
 
     #message($$command)
