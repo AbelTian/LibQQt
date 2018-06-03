@@ -1,4 +1,4 @@
-#ifndef FFMPEGPLAYER_H
+﻿#ifndef FFMPEGPLAYER_H
 #define FFMPEGPLAYER_H
 
 #define MAX_AUDIO_FRAME_SIZE  192000
@@ -7,8 +7,7 @@
 #define MAX_VIDEO_SIZE (25 * 256 * 1024)
 #define FLUSH_DATA "FLUSH"
 
-extern "C"
-{
+extern "C" {
 # include <libavcodec/avcodec.h>
 # include <libavformat/avformat.h>
 # include <libswscale/swscale.h>
@@ -19,35 +18,38 @@ extern "C"
 
 #include<QThread>
 
-typedef struct PacketQueue {
-    AVPacketList *first_pkt, *last_pkt;
+typedef struct PacketQueue
+{
+    AVPacketList* first_pkt, *last_pkt;
     int nb_packets;
     int size;
-    SDL_mutex *mutex;
-    SDL_cond *cond;
+    SDL_mutex* mutex;
+    SDL_cond* cond;
 } PacketQueue;
 
-typedef struct{
+typedef struct
+{
     SwrContext* swr_ctx ;//
-    AVFrame *wanted_frame;//
+    AVFrame* wanted_frame;//
     uint8_t* audio_pkt_data;
     int audio_pkt_size; //
-    AVFrame *frame; //
+    AVFrame* frame; //
     AVFormatContext* afct; //
-    AVCodecContext *acct;//
+    AVCodecContext* acct;//
 
     unsigned int audio_buf_size; //
     unsigned int audio_buf_index; //
 
     PacketQueue audioq; //
     AVPacket pkt; //
-}mediaState;
+} mediaState;
 
-enum playerStatus{
-     playing,
-     pausing,
-     buffering,
-     stopping
+enum playerStatus
+{
+    playing,
+    pausing,
+    buffering,
+    stopping
 };
 
 
@@ -56,8 +58,8 @@ class FFmpegPlayer : public QThread
 {
     Q_OBJECT
 public:
-    explicit FFmpegPlayer(QObject *parent = 0);
-    void setMedia(const QString);
+    explicit FFmpegPlayer ( QObject* parent = 0 );
+    void setMedia ( const QString );
     void stop();
     void pause();
     void play();

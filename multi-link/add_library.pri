@@ -105,6 +105,11 @@ defineReplace(get_add_library) {
     LINK += -L$${CUR_LIB_PWD}
     #win can't with the blank! error: -l QQt
     LINK += -l$${librealname}
+
+    libfixname =
+    contains(DEFINES, __DARWIN__):libfixname=lib$${librealname}.dylib
+    contains(DEFINES, __WIN__):libfixname=lib$${librealname}.dylib
+
     message(link $${librealname} from $$CUR_LIB_PWD)
 
     return ($${LINK})
@@ -135,6 +140,7 @@ defineReplace(get_add_include_bundle) {
 
     INCLUDE =
     INCLUDE += $${CUR_INC_PWD}
+    message (include $${CUR_INC_PWD})
 
     return ($${INCLUDE})
 }
@@ -158,6 +164,7 @@ defineReplace(get_add_include) {
 
     INCLUDE =
     INCLUDE += $${CUR_INC_PWD}
+    message (include $${CUR_INC_PWD})
 
     return ($${INCLUDE})
 }

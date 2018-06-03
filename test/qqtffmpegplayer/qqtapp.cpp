@@ -1,4 +1,4 @@
-#include "qqtapp.h"
+﻿#include "qqtapp.h"
 #include "qqt-qt.h"
 #include "qqtgui.h"
 #include "qqtcore.h"
@@ -14,62 +14,62 @@
 /*
  * 转移到Lan协议当中去。
  */
-void QQTLanServer(QObject* parent = 0)
+void QQTLanServer ( QObject* parent = 0 )
 {
-    static QQtTcpServer* s = new QQtTcpServer(parent);
-    s->listen(QHostAddress::Any, 8000);
+    static QQtTcpServer* s = new QQtTcpServer ( parent );
+    s->listen ( QHostAddress::Any, 8000 );
 
-    s->installedProtocol();
+    //s->installedProtocol();
 }
 
-QQTApp::QQTApp(int& argc, char** argv) : QApplication(argc, argv)
+QQTApp::QQTApp ( int& argc, char** argv ) : QApplication ( argc, argv )
 {
 #ifndef __QT5__
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+    QTextCodec::setCodecForTr ( QTextCodec::codecForName ( "UTF-8" ) );
+    QTextCodec::setCodecForCStrings ( QTextCodec::codecForName ( "UTF-8" ) );
 #endif
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
+    QTextCodec::setCodecForLocale ( QTextCodec::codecForName ( "UTF-8" ) );
 
-    QApplication::setOrganizationName("QQt");
-    QApplication::setOrganizationDomain("qqtffmpeg.com");  // 专为Mac OS X 准备的
-    QApplication::setApplicationName("qqtffmpeg");
-    QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH);
-    QSettings::setPath(QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH);
+    QApplication::setOrganizationName ( "QQt" );
+    QApplication::setOrganizationDomain ( "qqtffmpeg.com" ); // 专为Mac OS X 准备的
+    QApplication::setApplicationName ( "qqtffmpeg" );
+    QSettings::setPath ( QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH );
+    QSettings::setPath ( QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH );
 
-    system("rm -f /tmp/LCK..ttyS*");
+    system ( "rm -f /tmp/LCK..ttyS*" );
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     /*
      * 打印失真与否与此处无关
      */
-    QApplication::setGraphicsSystem("raster");
+    QApplication::setGraphicsSystem ( "raster" );
 #endif
 
 #ifdef __EMBEDDED_LINUX__
     //QApplication::setOverrideCursor(Qt::ArrowCursor);
-    QWSServer::setCursorVisible(false);
+    QWSServer::setCursorVisible ( false );
 #endif
 
 #ifdef __EMBEDDED_LINUX__
     QFontDatabase db;
 
 #if 0
-    int heitiFontID = db.addApplicationFont("/usr/lib/fonts/heiti.ttf");
-    QString heiti = db.applicationFontFamilies(heitiFontID).at(0);
+    int heitiFontID = db.addApplicationFont ( "/usr/lib/fonts/heiti.ttf" );
+    QString heiti = db.applicationFontFamilies ( heitiFontID ).at ( 0 );
     pline() << heiti;
 #else
-    int wenquanyiFontID = db.addApplicationFont("/usr/lib/fonts/wenquanyi.ttf");
-    QString wenquanyi = db.applicationFontFamilies(wenquanyiFontID).at(0);
+    int wenquanyiFontID = db.addApplicationFont ( "/usr/lib/fonts/wenquanyi.ttf" );
+    QString wenquanyi = db.applicationFontFamilies ( wenquanyiFontID ).at ( 0 );
     pline() << wenquanyi;
 #endif
 
-    QFont font(wenquanyi, 11);
-    QApplication::setFont(font);
+    QFont font ( wenquanyi, 11 );
+    QApplication::setFont ( font );
 #endif
 
     pline() << qApp->applicationDirPath();
 
-    language = new QTranslator(this);
+    language = new QTranslator ( this );
     setLanguage();
 
 #if 0
@@ -77,7 +77,7 @@ QQTApp::QQTApp(int& argc, char** argv) : QApplication(argc, argv)
      * 打开方法数据库
      */
     managerDB = newDatabaseConn();
-    setDatabaseName(managerDB, DB_MANAGER);
+    setDatabaseName ( managerDB, DB_MANAGER );
 #endif
 
 #if 1
@@ -87,11 +87,11 @@ QQTApp::QQTApp(int& argc, char** argv) : QApplication(argc, argv)
      * 可以实现橙色一行选中
      * 肯定也能实现表头透明和QQT效果。
      */
-    QFile styleFile("./skin/default.qss");
-    styleFile.open(QIODevice::ReadOnly);
-    QString styleString(styleFile.readAll());;
+    QFile styleFile ( "./skin/default.qss" );
+    styleFile.open ( QIODevice::ReadOnly );
+    QString styleString ( styleFile.readAll() );;
     styleFile.close();
-    setStyleSheet(styleString);
+    setStyleSheet ( styleString );
     /*
      * 设置所有默认颜色
      */
@@ -99,18 +99,20 @@ QQTApp::QQTApp(int& argc, char** argv) : QApplication(argc, argv)
 #endif
 
 #ifdef __EMBEDDED_LINUX__
-    QQtInput::Instance()->Init("min", "control", "QQT", 14, 14);
+    QQtInput::Instance()->Init ( "min", "control", "QQT", 14, 14 );
 #endif
 
-    qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+    qsrand ( QTime ( 0, 0, 0 ).secsTo ( QTime::currentTime() ) );
 
-    QObject::connect(QQtPluginWatcher::Instance(), SIGNAL(storageChanged(int)),
-                     this, SLOT(slotUPanAutoRun(int)));
+#if 0
+    QObject::connect ( QQtPluginWatcher::Instance(), SIGNAL ( storageChanged ( int ) ),
+                       this, SLOT ( slotUPanAutoRun ( int ) ) );
+#endif
     //QQtTcpClient
     //QQTCloudClientInstance(this);
 #ifdef __EMBEDDED_LINUX__
     //QQTEthManager
-    QQtEthenetManager::Instance(this);
+    QQtEthenetManager::Instance ( this );
 #endif
     //QQtTcpServer
     //QQTPeerPort
@@ -130,25 +132,27 @@ void QQTApp::setLanguage()
      */
     QSettings setting;
     QString qm;
-    qm = setting.value("Language").toInt() ? "./lang/en_US.qm" : "./lang/zh_CN.qm";
+    qm = setting.value ( "Language" ).toInt() ? "./lang/en_US.qm" : "./lang/zh_CN.qm";
 
-    language->load(qm);
+    language->load ( qm );
     pline() << "currentLanguage" << qm;
-    installTranslator(language);
+    installTranslator ( language );
 }
 
-void QQTApp::slotUPanAutoRun(int status)
+void QQTApp::slotUPanAutoRun ( int status )
 {
-    if (QQtPluginWatcher::E_ADD == status)
+#if 0
+    if ( QQtPluginWatcher::E_ADD == status )
     {
         QString mP = QQtPluginWatcher::Instance()->upanMountPath();
-        QString app = QString("%1/autorun.sh").arg(mP);
-        QFile file(app);
-        if (file.exists())
-            if (QDialog::Rejected == QQtMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
+        QString app = QString ( "%1/autorun.sh" ).arg ( mP );
+        QFile file ( app );
+        if ( file.exists() )
+            if ( QDialog::Rejected == QQtMsgBox::question ( 0, tr ( "Some app want to run in u disk!accepted?" ) ) )
                 return;
-        QProcess* p = new QProcess(this);
-        p->setWorkingDirectory(mP);
-        p->start(app);
+        QProcess* p = new QProcess ( this );
+        p->setWorkingDirectory ( mP );
+        p->start ( app );
     }
+#endif
 }

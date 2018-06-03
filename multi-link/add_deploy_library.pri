@@ -57,12 +57,12 @@ defineReplace(get_add_deploy_library_on_mac) {
 
     #更改app bundle链接Lib的位置。
     contains(CONFIG, app_bundle) {
-        command += install_name_tool -change $${LIB_LIB_PWD}/$${librealname}.dylib \
-             @rpath/$${librealname}.dylib \
+        command += install_name_tool -change @loader_path/lib$${librealname}.dylib \
+             @rpath/lib$${librealname}.dylib \
              $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     } else {
-        command += install_name_tool -change $${LIB_LIB_PWD}/$${librealname}.dylib \
-             @executable_path/$${librealname}.dylib \
+        command += install_name_tool -change @loader_path/lib$${librealname}.dylib \
+             @executable_path/lib$${librealname}.dylib \
              $${APP_BUILD_PWD}/$${TARGET} &&
     }
 
@@ -90,12 +90,12 @@ defineReplace(get_add_deploy_library_on_mac) {
 
     #更改app bundle链接Lib的位置。
     contains(CONFIG, app_bundle) {
-        command += install_name_tool -change $${LIB_LIB_PWD}/$${librealname}.dylib \
-             @rpath/$${librealname}.dylib \
+        command += install_name_tool -change @loader_path/lib$${librealname}.dylib \
+             @rpath/lib$${librealname}.dylib \
              $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
     } else {
-        command += install_name_tool -change $${LIB_LIB_PWD}/$${librealname}.dylib \
-             @executable_path/$${librealname}.dylib \
+        command += install_name_tool -change @loader_path/lib$${librealname}.dylib \
+             @executable_path/lib$${librealname}.dylib \
              $${APP_DEPLOY_PWD}/$${TARGET} &&
     }
 
@@ -304,8 +304,13 @@ defineReplace(get_add_deploy_libraryes_on_mac) {
 
     command =
 
-    command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_BUILD_PWD} $$CMD_SEP
-    command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_DEPLOY_PWD} $$CMD_SEP
+    contains(CONFIG, app_bundle) {
+        command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_BUILD_PWD}/$${TARGET}.app/Contents/Frameworks $$CMD_SEP
+        command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/Frameworks $$CMD_SEP
+    } else {
+        command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_BUILD_PWD} $$CMD_SEP
+        command += $$COPY_DIR $${LIB_LIB_PWD}/* $${APP_DEPLOY_PWD} $$CMD_SEP
+    }
     command += echo . #app deploy library $$librealname progressed.
     #message($$command)
 
@@ -429,7 +434,7 @@ defineTest(add_deploy_library) {
 
     export(QMAKE_POST_LINK)
 
-    message("$${TARGET} has deployed library $${librealname}.")
+    message("$${TARGET} has deployed library $${librealname} ")
     return (1)
 }
 
@@ -489,7 +494,8 @@ defineTest(add_deploy_library_bundle) {
 
     export(QMAKE_POST_LINK)
 
-    message("$${TARGET} has deployed library $${librealname}.")
+    contains(QSYS_PRIVATE, macOS):postfix = .framework
+    message("$${TARGET} has deployed library $${librealname}$$postfix")
     return (1)
 }
 
@@ -549,7 +555,7 @@ defineTest(add_deploy_libraryes) {
 
     export(QMAKE_POST_LINK)
 
-    message("$${TARGET} has deployed all libraries under $${libgroupname}.")
+    message("$${TARGET} has deployed all libraries under $${libgroupname}")
     return (1)
 }
 

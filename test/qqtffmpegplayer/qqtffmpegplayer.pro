@@ -22,6 +22,9 @@ FORMS    += $$PWD/qqtwindow.ui
 
 include(../../multi-link/add_base_manager.pri)
 
+system(touch main.cpp)
+# no use touch(main.cpp)
+
 #这个的设置有特点，要先设置
 add_version (1,0,0,0)
 
@@ -33,3 +36,4 @@ add_deploy()
 #libQQt从sdk到build和deploy
 add_dependent_manager(QQt)
 add_dependent_manager(FFmpeg)
+add_dependent_manager(SDL)
