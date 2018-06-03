@@ -123,7 +123,7 @@ defineReplace(get_add_include_bundle) {
 
     CUR_INC_PWD =
     contains(DEFINES, __DARWIN__) {
-        CUR_INC_PWD = $${LIB_SDK_ROOT}/$${libgroupname}/$${QSYS_STD_DIR}/$${libname}.framework/Headers
+        CUR_INC_PWD = $${LIB_SDK_ROOT}/$${libgroupname}/$${QSYS_STD_DIR}/lib/$${libname}.framework/Headers
         !isEmpty(libincsubpath):CUR_INC_PWD=$${CUR_INC_PWD}/$${libincsubpath}
     } else {
         CUR_INC_PWD = $${LIB_SDK_ROOT}/$${libgroupname}/$${QSYS_STD_DIR}/include/$${libname}

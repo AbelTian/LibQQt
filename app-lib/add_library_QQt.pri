@@ -497,7 +497,7 @@ defineReplace(get_add_include_QQt){
 #用户包含QQt头文件，就不必加相对路径了，方便了很多
 defineTest(add_include_QQt){
     #包含QQt头文件的过程
-    header_path = $$get_add_include(QQt)
+    header_path = $$get_add_include_bundle(QQt)
     INCLUDEPATH += $$get_add_include_QQt($$header_path)
     export(INCLUDEPATH)
     return (1)
