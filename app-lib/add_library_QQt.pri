@@ -507,7 +507,7 @@ defineTest(add_include_path_QQt){
 defineTest(add_library_QQt){
     #链接QQt
     add_library_path(QQt, , "bundle", use)
-    add_library(QQt, QQt$${LIBRARYVER}$${DEBUG}, "bundle")
+    add_library(QQt, QQt$${LIBRARYVER}$${DEBUG}, , "bundle")
 }
 
 #######################################################################################

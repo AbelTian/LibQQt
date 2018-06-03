@@ -10,11 +10,6 @@ TEMPLATE = subdirs
 
 SUBDIRS =
 
-#need vlcQt libvlc library
-#SUBDIRS += test/qqtliveplayer
-#need ffmpeg library
-#SUBDIRS += test/qqtffmpegplayer
-
 #need webkit webkitwidgets - WebSupport
 #webengine
 #ignored
@@ -34,6 +29,8 @@ SUBDIRS =
 #这些工程用来测试添加依赖的成功与否
 #所有的依赖添加pri都位于QQt/app-lib里，暂时除了QQt的不能移动，其他的pri都可以移动。
 ########################################################################################
+########################################################################################
+#Windows
 #need OpenCV SDK
 #SUBDIRS += examples/QQtOpenCVExample
 
@@ -48,5 +45,17 @@ SUBDIRS =
 #need QwtPlot3D sdk
 #SUBDIRS += test/QQtQwtPlot3DTest
 
+#need FMOD lowlevel SDK
+#
+SUBDIRS += test/QQtFMODTest
+
+#need vlcQt libvlc library
+#SUBDIRS += test/qqtliveplayer
+
+########################################################################################
+#macOS
 #need log4cpp sdk
 #SUBDIRS += test/qqtlog4cpptest
+
+#need ffmpeg library
+#SUBDIRS += test/qqtffmpegplayer

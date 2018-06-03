@@ -47,6 +47,8 @@ defineTest(add_include_path_FMOD){
 
 #这个地方add_library_no_bundle代表包括macOS下，都不使用bundle，只是动态库或者静态库。
 defineTest(add_library_FMOD){
+    #添加Library路径
+    add_library_path(FMOD)
     #链接Library
     add_library(FMOD, fmod$${LIBRARYVER}$${DEBUG})
     add_library(FMOD, fmodL$${LIBRARYVER}$${DEBUG})

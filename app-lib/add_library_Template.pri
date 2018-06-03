@@ -53,7 +53,7 @@ defineTest(add_library_Template){
     #添加Library路径
     add_library_path(Template, , "bundle", "qtversionpath")
     #添加这个SDK里的library
-    add_library(Template$${LIBRARYVER}$${DEBUG})
+    add_library(Template, Template$${LIBRARYVER}$${DEBUG})
 
     return (1)
 }
