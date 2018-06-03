@@ -13,25 +13,50 @@ ADD_DEPLOY_PRI_PWD = $${PWD}
 ##########################################
 #app的发布函数命令
 ##########################################
-defineReplace(get_add_deploy_on_mac) {
-    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
-    command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
-    command += $$COPY_DIR $${APP_BUILD_PWD}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
+#终端程序，依赖Qt的必须修复Qt组件的rpath引用，或者加入rpath，并且Qt环境要加入路径。
+#实用价值不高，所以在app_base_manager里面，我默认开启了app_bundle.
+defineReplace(get_add_deploy_on_mac) {    
+    #fix app in build pwd
+    contains(CONFIG, app_bundle) {
+        #这里或许需要加macdeployqt? build pwd
+        command += macdeployqt $${APP_BUILD_PWD}/$${TARGET}.app -verbose=1 $$CMD_SEP
+        lessThan(QT_MAJOR_VERSION, 5){
+            command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+            command += $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} $$CMD_SEP
+        }
+    } else {
 
-    #这里或许需要加macdeployqt? build pwd
-    command += macdeployqt $${APP_BUILD_PWD}/$${TARGET}.app -verbose=1 $$CMD_SEP
-    lessThan(QT_MAJOR_VERSION, 5){
-        command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
-        command += $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} $$CMD_SEP
+        #这里或许需要加macdeployqt? build pwd
+        command += macdeployqt $${APP_BUILD_PWD}/$${TARGET} -verbose=1 $$CMD_SEP
+        lessThan(QT_MAJOR_VERSION, 5){
+            command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+            command += $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $${APP_BUILD_PWD}/$${TARGET} $$CMD_SEP
+        }
     }
 
     #deploy pwd
-    command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1
-    lessThan(QT_MAJOR_VERSION, 5){
-        command += $$CMD_SEP
-        command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
-        command += $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET}
+    command += $$MK_DIR $${APP_DEPLOY_PWD} $$CMD_SEP
+    contains(CONFIG, app_bundle) {
+        command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
+        command += $$COPY_DIR $${APP_BUILD_PWD}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
+        #经过了前边的fix 这一步不必要。
+        command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1 $$CMD_SEP
+        lessThan(QT_MAJOR_VERSION, 5){
+            command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+            command += $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} $$CMD_SEP
+        }
+    } else {
+        command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET} $$CMD_SEP
+        command += $$COPY_DIR $${APP_BUILD_PWD}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET} $$CMD_SEP
+
+        command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET} -verbose=1 $$CMD_SEP
+        lessThan(QT_MAJOR_VERSION, 5){
+            command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
+            command += $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $${APP_DEPLOY_PWD}/$${TARGET} $$CMD_SEP
+        }
     }
+    command += echo .
+
 
     #message($$command)
     return ($$command)

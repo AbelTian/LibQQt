@@ -107,7 +107,7 @@ defineReplace(get_add_deploy_library_on_mac) {
                  $${APP_BUILD_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
         } else {
             command += install_name_tool -change $${libname}.framework/Versions/$${libmajorver}/$${libname} \
-                 @executable_path/../../../$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
+                 @executable_path/$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
                  $${APP_BUILD_PWD}/$${TARGET} &&
         }
     }
@@ -168,11 +168,12 @@ defineReplace(get_add_deploy_library_on_mac) {
                  $${APP_DEPLOY_PWD}/$${TARGET}.app/Contents/MacOS/$${TARGET} &&
         } else {
             command += install_name_tool -change $${libname}.framework/Versions/$${libmajorver}/$${libname} \
-                 @executable_path/../../../$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
+                 @executable_path/$${libname}.framework/Versions/$${libmajorver}/$${librealname} \
                  $${APP_DEPLOY_PWD}/$${TARGET} &&
         }
     }
 
+    #需要再对deploy发布qt？add_deploy已经做了。
     #command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1
     #lessThan(QT_MAJOR_VERSION, 5){
     #    command += &&
