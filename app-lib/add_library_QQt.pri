@@ -426,10 +426,10 @@ defineTest(add_defines_QQt){
 ##################################################################
 ##include directories
 ##################################################################
-defineReplace(get_add_include_path_QQt){
+defineReplace(get_add_include_QQt){
     path = $$1
-    !isEmpty(2) : error("get_add_include_path_QQt(path) requires one arguments.")
-    isEmpty(1) : error("get_add_include_path_QQt(path) requires one arguments.")
+    !isEmpty(2) : error("get_add_include_QQt(path) requires one arguments.")
+    isEmpty(1) : error("get_add_include_QQt(path) requires one arguments.")
 
     #basic
     command += $${path}
@@ -495,10 +495,10 @@ defineReplace(get_add_include_path_QQt){
 #把QQt SDK头文件路径加入进来 为搜索头文件而添加
 #其实过去做的自动添加QQt头文件就是这个功能
 #用户包含QQt头文件，就不必加相对路径了，方便了很多
-defineTest(add_include_path_QQt){
+defineTest(add_include_QQt){
     #包含QQt头文件的过程
-    header_path = $$get_add_include_path(QQt, , , "bundle", "qtversionpath")
-    INCLUDEPATH += $$get_add_include_path_QQt($$header_path)
+    header_path = $$get_add_include(QQt)
+    INCLUDEPATH += $$get_add_include_QQt($$header_path)
     export(INCLUDEPATH)
     return (1)
 }
@@ -506,8 +506,7 @@ defineTest(add_include_path_QQt){
 
 defineTest(add_library_QQt){
     #链接QQt
-    add_library_path(QQt, , "bundle", use)
-    add_library(QQt, QQt$${LIBRARYVER}$${DEBUG}, , "bundle")
+    add_library_bundle(QQt)
 }
 
 #######################################################################################
@@ -519,7 +518,7 @@ defineTest(add_link_library_QQt){
     #细心的用户会发现，QQt的头文件包含了两次，一个在源代码目录里，一个在SDK目录里，两个并不冲突。系统只要搜索到一个目录里的就可以使用了。
     #当然，我们确信，SDK目录里的头文件服从于源代码目录里的头文件。
     #包含QQt的头文件
-    add_include_path_QQt()
+    add_include_QQt()
     #包含QQt的宏定义
     add_defines_QQt()
     #链接（lib)
@@ -533,7 +532,7 @@ defineTest(add_link_library_QQt){
 #调试，正常；发布运行，正常。
 #:) 方便函数
 defineTest(add_deploy_library_QQt){
-    add_deploy_library(QQt, QQt$${LIBRARYVER}$${DEBUG}, , "bundle", "qtversion", "deployqt")
+    add_deploy_library_bundle(QQt)
     return (1)
 }
 

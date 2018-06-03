@@ -29,9 +29,9 @@ contains(BUILD, Release) {
 #######################################################################################
 #定义内部函数
 #######################################################################################
-defineReplace(get_add_include_path_FFmpeg){
+defineReplace(get_add_include_FFmpeg){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_add_include_path_FFmpeg(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_include_FFmpeg(path) requires one arguments.")
 
     command =
     #basic
@@ -40,10 +40,10 @@ defineReplace(get_add_include_path_FFmpeg){
     return ($$command)
 }
 
-defineTest(add_include_path_FFmpeg){
+defineTest(add_include_FFmpeg){
     #包含FFmpeg头文件的过程
-    header_path = $$get_add_include_path(FFmpeg)
-    INCLUDEPATH += $$get_add_include_path_FFmpeg($$header_path)
+    header_path = $$get_add_include(FFmpeg)
+    INCLUDEPATH += $$get_add_include_FFmpeg($$header_path)
     export(INCLUDEPATH)
     return (1)
 }
@@ -71,10 +71,10 @@ defineTest(add_link_library_FFmpeg) {
     add_library_FFmpeg()
 
     #添加头文件 （如果头文件目录扩展了，就改这个函数）
-    add_include_path_FFmpeg()
+    add_include_FFmpeg()
     #这样包含也很好，简洁明了
-    #add_include_path(FFmpeg, FFmpegQtCore)
-    #add_include_path(FFmpeg, FFmpegQtWidgets)
+    #add_include(FFmpeg, FFmpegQtCore)
+    #add_include(FFmpeg, FFmpegQtWidgets)
     #...
 
     #添加宏定义

@@ -53,7 +53,7 @@
     - ﻿add_deploy()  
     - ﻿add_deploy_library()   
     - ﻿add_deploy_config()  
-    - ﻿add_include_path()  
+    - ﻿add_include()  
     - ﻿add_headers()  
     - ﻿add_library()  
     - ﻿add_defines()  

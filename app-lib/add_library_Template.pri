@@ -20,9 +20,9 @@ contains(BUILD, Release) {
 #定义内部函数
 #######################################################################################
 #修改
-defineReplace(get_add_include_path_Template){
+defineReplace(get_add_include_Template){
     path = $$1
-    isEmpty(1)|!isEmpty(2) : error("get_add_include_path_Template(path) requires one arguments.")
+    isEmpty(1)|!isEmpty(2) : error("get_add_include_Template(path) requires one arguments.")
 
     command =
     #basic
@@ -32,16 +32,16 @@ defineReplace(get_add_include_path_Template){
     return ($$command)
 }
 
-defineTest(add_include_path_Template){
+defineTest(add_include_Template){
     #包含Template头文件的过程
-    header_path = $$get_add_include_path(Template, , , "bundle", "qtversionpath")
-    INCLUDEPATH += $$get_add_include_path_Template($$header_path)
+    header_path = $$get_add_include(Template, , , "bundle", "qtversionpath")
+    INCLUDEPATH += $$get_add_include_Template($$header_path)
     export(INCLUDEPATH)
     
     #不用上边这种，这样包含也很好，简洁明了
-    #add_include_path(Template)
-    #add_include_path(Template, Template)
-    #add_include_path(Template, Template/core)
+    #add_include(Template)
+    #add_include(Template, Template)
+    #add_include(Template, Template/core)
     #...
 
     return (1)
@@ -67,7 +67,7 @@ defineTest(add_link_library_Template){
     #链接Library
     add_library_Template()
     #添加头文件 （如果头文件目录扩展了，就改这个函数）
-    add_include_path_Template()
+    add_include_Template()
 
     #添加宏定义
     #add_defines(xx)

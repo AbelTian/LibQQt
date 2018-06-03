@@ -1,52 +1,49 @@
-################################################
+#------------------------------------------------------------------------------------------------
 ##add_sdk.pri, making sdk function
+
 ##install to SDK path
 ##把Library按照SDK格式安装到LIB_SDK_ROOT
 ##发布到sdk是为Multi link准备的。
 ##依赖add_version.pri
+
 ##please don't modify this pri
+#------------------------------------------------------------------------------------------------
+
+##SDK格式
+##LibGroupName/Windows/include/libName/***.h
+##                    /bin/libName<ver>[d].dll
+##                    /lib/libName<ver>[d].a .lib
+
+##LibGroupName/Linux/include/libName/***.h
+##                  /bin/
+##                  /lib/libName.so.*
+
+##LibGroupName/macOS/include/libName/***.h
+##                  /bin/
+##                  /lib/libName<ver>.dylib
+##                      /libName[_debug].dylib
+
+##LibGroupName/macOS/include/libName/***.h
+##                  /bin/
+##                  /lib/libName.framework/Headers/***.h
+##                                        /libName[_debug]
+
+#固定SDK结构，操作系统中直接使用这个目录结构。
+#没有SDK SubDir结构！
+
 ################################################
+#add_sdk
+#add_sdk_from_subdirs
+#add_sdk_to_Qt
+#add_sdk_header
+#del_sdk
+
 ADD_SDK_PRI_PWD = $${PWD}
 
 #在build path修复app (macOS专有)
 #copy lib
 #fix bundle路径链接
 #不修复，直接拷贝，所有的快捷方式会丢失，变成实体
-
-#直接在framework内部强制修复
-defineReplace(get_add_mac_sdk_fix_building_framework_2) {
-
-    APP_DEST_DIR=$${DESTDIR}
-    isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
-
-    libname = $$TARGET_PRIVATE
-    librealname = $$TARGET
-    libtempname = $${libname}_Temp
-    liblowername = $$lower($${librealname})
-
-    command =
-    command += chmod +x $${ADD_SDK_PRI_PWD}/linux_cur_path.sh &&
-    command += . $${ADD_SDK_PRI_PWD}/linux_cur_path.sh &&
-    #copy temp
-    command += $$COPY_DIR $${APP_DEST_DIR}/$${libname}.framework $${APP_DEST_DIR}/$${libtempname}.framework &&
-    #进去原先的
-    command += cd $${APP_DEST_DIR}/$${libname}.framework &&
-
-    #修复framework里的快捷方式 从libtempname里拷贝资源修复原先的
-    #need APP_BUILD_PWD
-    create_command = $$get_add_mac_sdk($${libtempname}, $${librealname})
-    command += $${create_command} &&
-
-    command += chmod +x $${ADD_SDK_PRI_PWD}/linux_cd_path.sh &&
-    command += . $${ADD_SDK_PRI_PWD}/linux_cd_path.sh &&
-
-    #remove 临时的 framework
-    command += $$RM_DIR $${APP_DEST_DIR}/$${libtempname}.framework
-
-    #message($$command)
-    return ($${command})
-}
-
 #拷贝temp进行修复。
 defineReplace(get_add_mac_sdk_fix_building_framework) {
 
@@ -56,7 +53,6 @@ defineReplace(get_add_mac_sdk_fix_building_framework) {
     libname = $$TARGET
     librealname = $$TARGET
     libtempname = $${libname}_temp
-    liblowername = $$lower($${librealname})
 
     command =
     command += chmod +x $${ADD_SDK_PRI_PWD}/linux_cur_path.sh &&
@@ -97,7 +93,9 @@ defineReplace(get_add_sdk_dir_struct) {
     #if it's qt library, don't create
     command =
     !equals(LIB_SDK_PWD , $$[QT_INSTALL_DATA]){
-        !contains(QSYS_PRIVATE, macOS) {
+        contains(QSYS_PRIVATE, macOS):contains(TEMPLATE, lib_bundle) {
+            #bundle模式没有include目录
+        } else {
             command += $$MK_DIR $$LIB_INC_DIR $$CMD_SEP
         }
         command += $$MK_DIR $$LIB_BIN_DIR $$CMD_SEP
@@ -146,7 +144,7 @@ defineReplace(get_add_mac_sdk){
     #isEmpty(1): error("get_add_mac_sdk(libname, librealname, libmajorver) requires at last one argument")
     !isEmpty(4): error("get_add_mac_sdk(libname, librealname, libmajorver) requires at most three argument")
 
-    isEmpty(1):libname = $$TARGET_PRIVATE
+    isEmpty(1):libname = $$TARGET_NAME
     isEmpty(2):librealname = $${libname}
     isEmpty(3):libmajorver = $$VER_MAJ
     isEmpty(libmajorver){
@@ -253,7 +251,7 @@ defineReplace(get_add_sdk_work_flow){
     librealname = $$2
     #isEmpty(1): error("get_add_mac_sdk(libname, librealname) requires at last one argument")
     !isEmpty(3): error("get_add_mac_sdk(libname, librealname) requires at most two argument")
-    isEmpty(1):libname = $$TARGET_PRIVATE
+    isEmpty(1):libname = $$TARGET_NAME
     isEmpty(2): librealname = $${libname}
     liblowername = $$lower($${librealname})
 
@@ -288,7 +286,7 @@ defineReplace(get_add_sdk_work_flow){
         } else {
             #Android在linux开发机下也会走这里，Android目标，Lib可以发布Win和Linux两种格式的SDK。
             #message(create lib linux struct library)
-            #macOS no bundle 也会走这里。
+            #macOS no bundle 也会走这里，已经支持非bundle
             command += $$get_add_linux_sdk() $$CMD_SEP
             command += $$COPY $${LIB_BUILD_PWD}/*.prl lib $$CMD_SEP
         }
@@ -311,12 +309,12 @@ defineReplace(get_add_sdk_private){
     librealname = $$2
     #isEmpty(1): error("get_add_mac_sdk(libname, librealname) requires at last one argument")
     !isEmpty(3): error("get_add_mac_sdk(libname, librealname) requires at most two argument")
-    isEmpty(1):libname = $$TARGET_PRIVATE
+    isEmpty(1):libname = $$TARGET_NAME
     isEmpty(2): librealname = $${libname}
     liblowername = $$lower($${librealname})
 
     #qqt defined these dir struct, used from qt library
-    LIB_INC_DIR = include/$${TARGET_PRIVATE}
+    LIB_INC_DIR = include/$${TARGET_NAME}
     LIB_BIN_DIR = bin
     LIB_LIB_DIR = lib
     LIB_CMAKE_DIR=lib/cmake/$${libname}
@@ -359,38 +357,59 @@ defineReplace(get_add_sdk_private){
 ################################################
 ##用户调用的函数
 ################################################
-#依赖 libname libsrcdir libdstdir
+#依赖
+#libgroupname<主目录名>
+#libsrcdir
+#libdstdir
+#librealname<用户自定义名称，一般省略>
 defineTest(add_sdk){
-    #isEmpty(1):error(add_sdk(libname, libsrcdir, libdstdir) need at last one argument)
+    #isEmpty(1):error(add_sdk(libgroupname, libsrcdir, libdstdir, librealname) need at least one argument)
+    #!isEmpty(5): error("add_sdk(libgroupname, libsrcdir, libdstdir, librealname) requires at most four argument")
 
     contains(QSYS_PRIVATE, macOS) {
         #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
     }
 
-    libname = $$TARGET_PRIVATE
-    librealname = $$1
-    isEmpty(1):librealname = $$TARGET
-    liblowername = $$lower($${librealname})
+    #LIB_SDK_ROOT下
 
-    #LIB std dir is not same to app std dir
-    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
+    #主目录名
+    libgroupname = $$TARGET_NAME
+    !isEmpty(1):libgroupname=$$1
 
     #create platform sdk need this
     #源代码目录
-    LIB_SRC_PWD=$$2
-    isEmpty(2):LIB_SRC_PWD=$${PWD}
+    LIB_SRC_PWD=$${PWD}
+    !isEmpty(2):LIB_SRC_PWD=$$2
 
     #编译目标位置
     LIB_DST_DIR=$$DESTDIR
     !isEmpty(3):LIB_DST_DIR = $$3
 
+    #lib名 用户不能改变
+    libname = $$TARGET_NAME
+
+    #经过修饰的lib名
+    librealname = $$TARGET
+    #用户可以指定，但是必须自定义TARGET名字。非标准。这样会影响链接时候的名字，用户需要自定义链接。
+    !isEmpty(4) {
+        librealname = $$4
+        TARGET = $$librealname
+        export(TARGET)
+    }
+
+    #liblowername依赖librealname
+    liblowername = $$lower($${librealname})
+
     #need use qqt subdir proj
-    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libname}/$${QSYS_STD_DIR}
     !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+
+    #LIB std dir is not same to app std dir
+    LIB_STD_DIR = $${libgroupname}/$${QSYS_STD_DIR}
 
     #sdk path
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
-    #message(QQt sdk install here:$${LIB_SDK_PWD})
+    #message($${TARGET_NAME} sdk install here:$${LIB_SDK_PWD})
 
     #这里不仅仅目标为windows的时候，才会转换，
     #开发Host为Windows的时候，都要转换。
@@ -420,10 +439,11 @@ defineTest(add_sdk){
 
 #依赖 libname libsrcdir libdstdir
 #添加一个参数 subdirs列表 包含subdirs层 子文件夹层 说的是build路径比较深的情况
-#TARGET
+#libgroupname 一般为不修饰的target 可以为空
 #PWD
 #DESTDIR
 #sub层列表 从头到尾 如果为空，则等于add_sdk()
+#librealname 建议用户不要设置
 #支持Qt5，不支持Qt4. Qt4 qmake比较落后。
 defineTest(add_sdk_from_subdirs){
     #isEmpty(1):error(add_subdir_sdk(libname, libsrcdir, libdstdir) need at last one argument)
@@ -431,29 +451,45 @@ defineTest(add_sdk_from_subdirs){
         #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
     }
 
-    libname = $$TARGET_PRIVATE
-    librealname = $$1
-    isEmpty(1):librealname = $$TARGET
-    liblowername = $$lower($${librealname})
+    #LIB_SDK_ROOT下
 
-    #LIB std dir is not same to app std dir
-    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
+    #主目录名
+    libgroupname = $$TARGET_NAME
+    !isEmpty(1):libgroupname=$$1
 
     #create platform sdk need this
     #源代码目录
-    LIB_SRC_PWD=$$2
-    isEmpty(2):LIB_SRC_PWD=$${PWD}
+    LIB_SRC_PWD=$${PWD}
+    !isEmpty(2):LIB_SRC_PWD=$$2
 
-    #编译目标相对位置
-    LIB_DST_DIR=$$3
-    isEmpty(3):LIB_DST_DIR = $$DESTDIR
+    #编译目标位置
+    LIB_DST_DIR=$$DESTDIR
+    !isEmpty(3):LIB_DST_DIR = $$3
+
+    #lib名 用户不能改变
+    libname = $$TARGET_NAME
+
+    #经过修饰的lib名
+    librealname = $$TARGET
+    #用户可以指定，但是必须自定义TARGET名字。非标准。这样会影响链接时候的名字，用户需要自定义链接。
+    !isEmpty(5) {
+        librealname = $$5
+        TARGET = $$librealname
+        export(TARGET)
+    }
+
+    #liblowername依赖librealname
+    liblowername = $$lower($${librealname})
+
+    #LIB std dir is not same to app std dir
+    LIB_STD_DIR = $${libgroupname}/$${QSYS_STD_DIR}
 
     #编译目录的完全位置
     LIB_BUILD_PWD=
     isEmpty(4){
         #add sdk level
-        LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
-        !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libname}/$${QSYS_STD_DIR}
+    !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
     } else {
         #sub dir level
         LIB_SUBDIR_LIST=$$4
@@ -505,26 +541,42 @@ defineTest(add_sdk_to_Qt){
         #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
     }
 
-    libname = $$TARGET_PRIVATE
-    librealname = $$1
-    isEmpty(1):librealname = $$TARGET
-    liblowername = $$lower($${librealname})
+    #LIB_SDK_ROOT下
 
-    #LIB std dir is not same to app std dir
-    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
+    #主目录名
+    libgroupname = $$TARGET_NAME
+    !isEmpty(1):libgroupname=$$1
 
     #create platform sdk need this
     #源代码目录
-    LIB_SRC_PWD=$$2
-    isEmpty(2):LIB_SRC_PWD=$${PWD}
+    LIB_SRC_PWD=$${PWD}
+    !isEmpty(2):LIB_SRC_PWD=$$2
 
     #编译目标位置
     LIB_DST_DIR=$$DESTDIR
     !isEmpty(3):LIB_DST_DIR = $$3
 
+    #lib名 用户不能改变
+    libname = $$TARGET_NAME
+
+    #经过修饰的lib名
+    librealname = $$TARGET
+    #用户可以指定，但是必须自定义TARGET名字。非标准。这样会影响链接时候的名字，用户需要自定义链接。
+    !isEmpty(4) {
+        librealname = $$4
+        TARGET = $$librealname
+        export(TARGET)
+    }
+
+    #liblowername依赖librealname
+    liblowername = $$lower($${librealname})
+
     #need use qqt subdir proj
-    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libname}/$${QSYS_STD_DIR}
     !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+
+    #LIB std dir is not same to app std dir
+    LIB_STD_DIR = $${libgroupname}/$${QSYS_STD_DIR}
 
     #sdk path
     LIB_SDK_PWD = $$[QT_INSTALL_DATA]
@@ -563,24 +615,43 @@ defineTest(del_sdk){
         #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
     }
 
-    libname = $$1
-    isEmpty(1):libname = $$TARGET
-    liblowername = $$lower($${libname})
-    #LIB std dir is not same to app std dir
-    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
+    #LIB_SDK_ROOT下
+
+    #主目录名
+    libgroupname = $$TARGET_NAME
+    !isEmpty(1):libgroupname=$$1
 
     #create platform sdk need this
     #源代码目录
-    LIB_SRC_PWD=$$2
-    isEmpty(2):LIB_SRC_PWD=$${PWD}
+    LIB_SRC_PWD=$${PWD}
+    !isEmpty(2):LIB_SRC_PWD=$$2
 
     #编译目标位置
     LIB_DST_DIR=$$DESTDIR
     !isEmpty(3):LIB_DST_DIR = $$3
 
+    #lib名 用户不能改变
+    #约束：用户设置的TARGET，必须和pro的名字一样。
+    libname = $$TARGET_NAME
+
+    #经过修饰的lib名
+    librealname = $$TARGET
+    #用户可以指定，但是必须自定义TARGET名字。非标准。这样会影响链接时候的名字，用户需要自定义链接。
+    !isEmpty(4) {
+        librealname = $$4
+        TARGET = $$librealname
+        export(TARGET)
+    }
+
+    #liblowername依赖librealname
+    liblowername = $$lower($${librealname})
+
     #need use qqt subdir proj
-    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libname}/$${QSYS_STD_DIR}
     !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+
+    #LIB std dir is not same to app std dir
+    LIB_STD_DIR = $${libgroupname}/$${QSYS_STD_DIR}
 
     #sdk path
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
@@ -614,64 +685,39 @@ defineTest(del_sdk){
     return (1)
 }
 
-#获取sdk name
-#修饰TARGET _d _debug
-defineReplace(add_target_name){
-    #isEmpty(1):error(add_target_name(target_name) need one argument)
-
-    target_name = $$1
-    isEmpty(1):target_name = $$TARGET
-
-    ret = $${target_name}
-    contains(BUILD, Debug) {
-        mac:ret = $${ret}_debug
-        win32:ret = $${ret}d
-    }
-
-    return ($$ret)
-}
-
 #发布没有后缀名的头文件
+#sdkroot下，主目录名
+#库名字 没有修饰的库名字
 #类名
-#头文件 不设置 为空 则为类名小写。
 #保存位置 相对路径 不写则为根目录。
+#头文件 不设置 为空 则为类名小写。
 defineTest(add_sdk_header){
-    isEmpty(1):error(add_sdk_header(classname, headername, headerdir) need at last one argument)
+    isEmpty(3):error(add_sdk_header(libgroupname, libname, classname, headerdir, headername) need at least one argument)
 
-    classname = $$1
-    headername = $$2
-    headerdir = $$3
+    libgroupname = $$1
+    libname = $$2
+    classname = $$3
+    headerdir = $$4
+    headername = $$5
 
-    isEmpty(2):headername = $$lower($${classname}).h
+    isEmpty(libname):libname = $$libgroupname
+    isEmpty(headername):headername = $$lower($${classname}).h
 
     #LIB std dir is not same to app std dir
-    LIB_STD_DIR = $${TARGET_PRIVATE}/$${QSYS_STD_DIR}
-
-    #create platform sdk need this
-    #源代码目录
-    LIB_SRC_PWD=$$2
-    isEmpty(2):LIB_SRC_PWD=$${PWD}
-
-    #编译目标位置
-    LIB_DST_DIR=$$DESTDIR
-    !isEmpty(3):LIB_DST_DIR = $$3
-
-    #need use qqt subdir proj
-    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${LIB_STD_DIR}
-    !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
+    LIB_STD_DIR = $${libgroupname}/$${QSYS_STD_DIR}
 
     #sdk path
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
     #message(QQt sdk install here:$${LIB_SDK_PWD})
 
-    LIB_INC_DIR = include/$${TARGET_PRIVATE}
+    LIB_INC_DIR = include/$${libname}
     contains(QMAKE_HOST.os, Darwin){
         contains(CONFIG, lib_bundle) {
-            LIB_INC_DIR = lib/$${TARGET_PRIVATE}.framework/Headers
+            LIB_INC_DIR = lib/$${libname}.framework/Headers
         }
     }
 
-    !isEmpty(3):headerdir=$${headerdir}/
+    !isEmpty(headerdir):headerdir=$${headerdir}/
     HEADER_FILE = $${headerdir}$${classname}
 
     #这里不仅仅目标为windows的时候，才会转换，

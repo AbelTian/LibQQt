@@ -47,3 +47,19 @@ isEmpty(APP_BUILD_ROOT)|isEmpty(LIB_SDK_ROOT)|isEmpty(APP_DEPLOY_ROOT){
 #equals(TEMPLATE, app):message($${TARGET} use sdk root: $$LIB_SDK_ROOT)
 #else:message($${TARGET} deploy sdk root: $$LIB_SDK_ROOT)
 
+isEmpty(APP_BUILD_ROOT){
+    message($${TARGET} $${CONFIG_FILE})
+    message(APP_BUILD_ROOT = /user/set/path is required, please modify app_configure.pri )
+    error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
+}
+#deploy root
+isEmpty(APP_DEPLOY_ROOT){
+    message($${TARGET} $${CONFIG_FILE})
+    message(APP_DEPLOY_ROOT = /user/set/path is required, please modify app_configure.pri )
+    error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
+}
+isEmpty(LIB_SDK_ROOT){
+    message($${TARGET} $${CONFIG_FILE})
+    message(LIB_SDK_ROOT = /user/set/path is required, please modify app_configure.pri )
+    error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
+}

@@ -15,10 +15,11 @@ ADD_DEPLOY_PRI_PWD = $${PWD}
 ##########################################
 #终端程序，依赖Qt的必须修复Qt组件的rpath引用，或者加入rpath，并且Qt环境要加入路径。
 #实用价值不高，所以在app_base_manager里面，我默认开启了app_bundle.
+#如果不发布app，build位置的app也不能运行。单独给build一个fix吗？还是算了吧。
 defineReplace(get_add_deploy_on_mac) {    
     #fix app in build pwd
     contains(CONFIG, app_bundle) {
-        #这里或许需要加macdeployqt? build pwd
+        #这里或许需要加macdeployqt? build pwd 需要
         command += macdeployqt $${APP_BUILD_PWD}/$${TARGET}.app -verbose=1 $$CMD_SEP
         lessThan(QT_MAJOR_VERSION, 5){
             command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
@@ -26,7 +27,7 @@ defineReplace(get_add_deploy_on_mac) {
         }
     } else {
 
-        #这里或许需要加macdeployqt? build pwd
+        #这里或许需要加macdeployqt? build pwd 不需要
         command += macdeployqt $${APP_BUILD_PWD}/$${TARGET} -verbose=1 $$CMD_SEP
         lessThan(QT_MAJOR_VERSION, 5){
             command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
@@ -39,7 +40,8 @@ defineReplace(get_add_deploy_on_mac) {
     contains(CONFIG, app_bundle) {
         command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
         command += $$COPY_DIR $${APP_BUILD_PWD}/$${TARGET}.app $${APP_DEPLOY_PWD}/$${TARGET}.app $$CMD_SEP
-        #经过了前边的fix 这一步不必要。
+
+        #这里或许需要加macdeployqt? deploy pwd 需要
         command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET}.app -verbose=1 $$CMD_SEP
         lessThan(QT_MAJOR_VERSION, 5){
             command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
@@ -49,6 +51,7 @@ defineReplace(get_add_deploy_on_mac) {
         command += $$RM_DIR $${APP_DEPLOY_PWD}/$${TARGET} $$CMD_SEP
         command += $$COPY_DIR $${APP_BUILD_PWD}/$${TARGET} $${APP_DEPLOY_PWD}/$${TARGET} $$CMD_SEP
 
+        #这里或许需要加macdeployqt? deploy pwd 需要
         command += macdeployqt $${APP_DEPLOY_PWD}/$${TARGET} -verbose=1 $$CMD_SEP
         lessThan(QT_MAJOR_VERSION, 5){
             command += chmod +x $${ADD_DEPLOY_PRI_PWD}/mac_deploy_qt4.sh $$CMD_SEP
@@ -121,24 +124,13 @@ defineReplace(get_add_deploy_on_android) {
 #外部用函数
 ################################################################################
 defineTest(add_deploy) {
-    #APP_DEPLOY_PWD
-    #APP_DEST_PWD
-
-    #deploy root
-    isEmpty(APP_DEPLOY_ROOT){
-        message($${TARGET} $${CONFIG_FILE})
-        message(APP_DEPLOY_ROOT = /user/set/path is required, please modify .qmake/app_configure.pri )
-        error(please check $$CONFIG_FILE under add_multi_link_technology.pri)
-    }
-
     #起始位置 编译位置 中间目标位置
-    APP_DEST_PWD=$${DESTDIR}
-    isEmpty(APP_DEST_PWD):APP_DEST_PWD=.
-    APP_BUILD_PWD = $$APP_DEST_PWD
+    APP_BUILD_PWD=$${DESTDIR}
+    isEmpty(APP_BUILD_PWD):APP_BUILD_PWD=.
 
     #set app deploy pwd
     #APP_DEPLOY_PWD is here.
-    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET_PRIVATE}/$${QSYS_STD_DIR}
+    APP_DEPLOY_PWD = $${APP_DEPLOY_ROOT}/$${TARGET_NAME}/$${QSYS_STD_DIR}
     #不仅仅发布目标为Windows的时候，才需要改变路径
     #开发机为Windows就必须改变。
     #contains(QKIT_PRIVATE, WIN32||WIN64) {

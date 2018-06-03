@@ -93,7 +93,7 @@ defineTest(add_dependent_library) {
 defineTest(add_dependent_manager){
     libname = $$1
     isEmpty(1):libname = QQt
-    !equals(TARGET_PRIVATE, $${libname}):
+    !equals(TARGET_NAME, $${libname}):
         exists($${ADD_BASE_MANAGER_PRI_PWD}/../app-lib/add_library_$${libname}.pri){
         include ($${ADD_BASE_MANAGER_PRI_PWD}/../app-lib/add_library_$${libname}.pri)
         contains(TEMPLATE, app):add_dependent_library_$${libname}()
@@ -178,7 +178,7 @@ defineTest(add_lib_project) {
     CONFIG += create_prl
 
     #debug版本和release版本的所有的不同。
-    #Lib的TARGET，在两个版本上有区别，通过TARGET = add_target($$TARGET)可以解决。
+    #Lib的TARGET，在两个版本上有区别，通过TARGET = add_decorate_target($$TARGET)可以解决。
     #App的TARGET，在两个版本上，名字没有区别。
 
     export(CONFIG)
@@ -192,23 +192,54 @@ defineTest(add_lib_project) {
 #输入，target_name 为空，则默认为TARGET
 #输出，target_name?x
 #这个变量用来保存原生的target name
-TARGET_PRIVATE = $$TARGET
-defineTest(add_target){
-    #isEmpty(1):error(add_target(target_name) need one argument)
+TARGET_NAME = $$TARGET
+TARGET_DECORATE_NAME = $$TARGET_NAME
+#获取sdk name
+#修饰TARGET _d _debug
+#保证修饰
+defineReplace(add_decorate_target_name){
+    #isEmpty(1):error(add_decorate_target_name(target_name) need one argument)
 
     target_name = $$1
-    isEmpty(1):target_name = $$TARGET
+    isEmpty(1):target_name = $$TARGET_NAME
 
-    TARGET_PRIVATE = $$target_name
-    export(TARGET_PRIVATE)
+    ret = $${target_name}
+    contains(BUILD, Debug) {
+        mac:ret = $${ret}_debug
+        win32:ret = $${ret}d
+    }
 
-    ret = $$add_target_name($${target_name})
+    return ($$ret)
+}
 
+#保证还原
+defineReplace(add_target_name){
+    return ($$TARGET_NAME)
+}
+
+#修饰
+defineTest(add_decorate_target){
+    #isEmpty(1):error(add_decorate_target(target_name) need one argument)
+    target_name = $$TARGET_NAME
+    !isEmpty(1):target_name = $$1
+
+    ret = $$add_decorate_target_name($${target_name})
+    TARGET_DECORATE_NAME = $$ret
+    export(TARGET_DECORATE_NAME)
     TARGET = $$ret
     export(TARGET)
-
     return (1)
 }
+
+#还原
+defineTest(add_target){
+    TARGET_DECORATE_NAME = $$TARGET_NAME
+    export(TARGET_DECORATE_NAME)
+    TARGET = $$TARGET_NAME
+    export(TARGET)
+    return (1)
+}
+
 
 #设置模板名字
 TEMPLATE_PRIVATE = $$TEMPLATE
@@ -275,7 +306,8 @@ defineTest(add_defines) {
 #CONFIG += build_all
 
 #修饰TARGET LIB必要 APP可选 only once
-add_target($${TARGET})
+#此处提醒用户：你肯定不愿意手动调用。
+add_decorate_target($${TARGET_NAME})
 
 contains(TEMPLATE, app) {
     #启动app工程 APP必要

@@ -42,8 +42,9 @@ CONFIG(debug, debug|profile|release):BUILD=Debug
 CONFIG(profile, debug|profile|release):BUILD=Profile
 CONFIG(release, debug|profile|release):BUILD=Release
 
-QSYS_NOQT_STD_DIR = $${QSYS_PRIVATE}
+QSYS_STD_DIR = $${QSYS_PRIVATE}/$${QT_VERSION}/$${BUILD}
 QSYS_STD_DIR = $${QSYS_PRIVATE}/$${QT_VERSION}
+QSYS_STD_DIR = $${QSYS_PRIVATE}
 
 message(add_platform.pri)
 message(Build $${TARGET} to $${QSYS_PRIVATE} \(QSYS=$${QSYS_PRIVATE} is configed in project build page.\) )

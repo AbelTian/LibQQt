@@ -77,10 +77,10 @@ include ($$PWD/qqt_source.pri)
 #目标
 #源代码目录
 #编译在相对编译目录
-add_sdk($$TARGET, $$PWD, $$DESTDIR)
+add_sdk($$add_target_name(), $$PWD, $$DESTDIR, $$add_decorate_target_name())
 
 #额外做点事情 拷贝头文件 没有后缀的头文件
-add_sdk_header(QQtApplication, , frame)
+add_sdk_header($$add_target_name(), $$add_target_name(), QQtApplication, frame)
 
 #################################################################
 #其他设置
