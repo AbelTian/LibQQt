@@ -54,9 +54,11 @@ SUBDIRS =
 ########################################################################################
 #macOS
 #need log4cpp sdk
+#macOS无故会记忆过去的链接位置，无解。
 #SUBDIRS += test/qqtlog4cpptest
 
 #need ffmpeg library
 #SUBDIRS += test/qqtffmpegplayer
 
-SUBDIRS += test/giftest
+#测试libQQt的链接。
+#SUBDIRS += test/giftest

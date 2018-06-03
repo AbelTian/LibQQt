@@ -36,7 +36,6 @@ FORMS += \
 system(touch main.cpp)
 include (../../multi-link/add_base_manager.pri)
 
-
 #add version 调用时机 在lib里有个约束，必须在add_sdk之前调用，其他时候没有约束。
 add_version(1,0,0,0)
 add_deploy()
