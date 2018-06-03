@@ -56,7 +56,7 @@ equals(QSYS_PRIVATE, macOS) {
 #user can modify any infomation under this annotation
 #-------------------------------------------------
 include(../../multi-link/add_base_manager.pri)
-include (../../app-lib/add_dependent_manager.pri)
+
 
 #include(/Users/abel/Develop/a0-develop/LibQQt/multi-link/add_base_manager.pri)
 

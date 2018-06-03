@@ -34,7 +34,7 @@ FORMS += \
         mainwindow.ui
 
 include (../../multi-link/add_base_manager.pri)
-include (../../app-lib/add_dependent_manager.pri)
+
 include (../../app-lib/add_custom_manager.pri)
 
 add_version(1,0,0,0)
