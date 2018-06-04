@@ -74,6 +74,11 @@ include ($$PWD/qqt_source.pri)
 #所有App都依赖QQt的这个步骤
 #参数比较复杂是因为在SUBDIRS工程里，如果是单独的工程就好多了。
 #################################################################
+#Temp
+CONFIG -= lib_bundle
+CONFIG -= lib_bundle
+CONFIG -= lib_bundle
+
 #目标
 #源代码目录
 #编译在相对编译目录

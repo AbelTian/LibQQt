@@ -358,10 +358,19 @@ defineReplace(get_add_sdk_private){
 ##用户调用的函数
 ################################################
 #依赖
+LIB_SDK_SOURCE_PWD = $$PWD
+LIB_SDK_BUILD_DESTDIR = $$DESTDIR
+defineTest(add_sdk_src_dir){
+    LIB_SDK_SOURCE_PWD = $$1
+    export(LIB_SDK_SOURCE_PWD)
+    return (1)
+}
+
 #libgroupname<主目录名>
-#libsrcdir
-#libdstdir
-#librealname<用户自定义名称，一般省略>
+#libname 这里 libname是内定的 就是用户设置的TARGET 没有修饰的那个 如果想发布成随意的样子....
+#librealname 用户自定义名称，一般省略 = 修饰名是没有问题的。
+#libsrcdir PWD
+#libdstdir DESTDIR
 defineTest(add_sdk){
     #isEmpty(1):error(add_sdk(libgroupname, libsrcdir, libdstdir, librealname) need at least one argument)
     #!isEmpty(5): error("add_sdk(libgroupname, libsrcdir, libdstdir, librealname) requires at most four argument")
