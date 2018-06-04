@@ -46,12 +46,19 @@ ADD_SDK_PRI_PWD = $${PWD}
 #不修复，直接拷贝，所有的快捷方式会丢失，变成实体
 #拷贝temp进行修复。
 defineReplace(get_add_mac_sdk_fix_building_framework) {
-
-    APP_DEST_DIR=$${DESTDIR}
-    isEmpty(APP_DEST_DIR):APP_DEST_DIR=.
-
+    #这里有特点，framework的名字，一定是TARGET。
     libname = $$TARGET
+    #realname也是TARGET
     librealname = $$TARGET
+    #废弃以上代码，当然，它是对的，but，固定的。
+
+    libname = $$1
+    librealname = $$2
+    #isEmpty(1): error("get_add_mac_sdk_fix_building_framework(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_mac_sdk_fix_building_framework(libname, librealname) requires at most two argument")
+    isEmpty(1):libname = $$TARGET_NAME
+    isEmpty(2): librealname = $${libname}
+
     libtempname = $${libname}_temp
 
     command =
@@ -59,9 +66,9 @@ defineReplace(get_add_mac_sdk_fix_building_framework) {
     command += . $${ADD_SDK_PRI_PWD}/linux_cur_path.sh &&
 
     #create temp
-    command += $$MK_DIR $${APP_DEST_DIR}/$${libtempname}.framework &&
+    command += $$MK_DIR $${LIB_BUILD_PWD}/$${libtempname}.framework &&
     #进去
-    command += cd $${APP_DEST_DIR}/$${libtempname}.framework &&
+    command += cd $${LIB_BUILD_PWD}/$${libtempname}.framework &&
 
     #修复framework里的快捷方式
     #need APP_BUILD_PWD
@@ -72,12 +79,12 @@ defineReplace(get_add_mac_sdk_fix_building_framework) {
     command += . $${ADD_SDK_PRI_PWD}/linux_cd_path.sh &&
 
     #拷贝prl到新的里
-    command += $$COPY $${APP_DEST_DIR}/$${libname}.framework/$${librealname}.prl $${APP_DEST_DIR}/$${libtempname}.framework/$${librealname}.prl $$CMD_SEP
+    command += $$COPY $${LIB_BUILD_PWD}/$${libname}.framework/$${librealname}.prl $${LIB_BUILD_PWD}/$${libtempname}.framework/$${librealname}.prl $$CMD_SEP
 
     #del 原先的
-    command += $$RM_DIR $${APP_DEST_DIR}/$${libname}.framework &&
+    command += $$RM_DIR $${LIB_BUILD_PWD}/$${libname}.framework &&
     #rename 临时的 framework 到原先的
-    command += $$MOVE $${APP_DEST_DIR}/$${libtempname}.framework $${APP_DEST_DIR}/$${libname}.framework
+    command += $$MOVE $${LIB_BUILD_PWD}/$${libtempname}.framework $${LIB_BUILD_PWD}/$${libname}.framework
 
     #message($$command)
     return ($${command})
@@ -137,16 +144,14 @@ defineReplace(get_add_linux_sdk) {
 defineReplace(get_add_mac_sdk){
     #need cd framework root
     #LIB_BUILD_PWD libname libmajorver
-
     libname = $$1
     librealname = $$2
-    libmajorver = $$3
-    #isEmpty(1): error("get_add_mac_sdk(libname, librealname, libmajorver) requires at last one argument")
-    !isEmpty(4): error("get_add_mac_sdk(libname, librealname, libmajorver) requires at most three argument")
-
+    #isEmpty(1): error("get_add_mac_sdk(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_mac_sdk(libname, librealname) requires at most two argument")
     isEmpty(1):libname = $$TARGET_NAME
-    isEmpty(2):librealname = $${libname}
-    isEmpty(3):libmajorver = $$VER_MAJ
+    isEmpty(2): librealname = $${libname}
+
+    libmajorver = $$VER_MAJ
     isEmpty(libmajorver){
         error(Have you modifyed add_version.pri, please dont modify it.)
     }
@@ -249,8 +254,8 @@ defineReplace(get_add_sdk_work_flow){
 
     libname = $$1
     librealname = $$2
-    #isEmpty(1): error("get_add_mac_sdk(libname, librealname) requires at last one argument")
-    !isEmpty(3): error("get_add_mac_sdk(libname, librealname) requires at most two argument")
+    #isEmpty(1): error("get_add_sdk_work_flow(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_sdk_work_flow(libname, librealname) requires at most two argument")
     isEmpty(1):libname = $$TARGET_NAME
     isEmpty(2): librealname = $${libname}
     liblowername = $$lower($${librealname})
@@ -258,7 +263,7 @@ defineReplace(get_add_sdk_work_flow){
     command =
     contains(QSYS_PRIVATE, macOS) {
         #在编译路径里，创作一次sdk，完成framework链接等的修复工作
-        command += $$get_add_mac_sdk_fix_building_framework() $$CMD_SEP
+        command += $$get_add_mac_sdk_fix_building_framework($${librealname}, $${librealname}) $$CMD_SEP
         #command += echo $$libname fix framework success. $$CMD_SEP
     }
     #command += $$RM_DIR $${LIB_SDK_PWD} $$CMD_SEP
@@ -304,11 +309,11 @@ defineReplace(get_add_sdk_work_flow){
 ##初始化SDK发布过程需要的变量
 ################################################
 defineReplace(get_add_sdk_private){
-
+    #这个判定逻辑只能用于内部，不能用于最外层。
     libname = $$1
     librealname = $$2
-    #isEmpty(1): error("get_add_mac_sdk(libname, librealname) requires at last one argument")
-    !isEmpty(3): error("get_add_mac_sdk(libname, librealname) requires at most two argument")
+    #isEmpty(1): error("get_add_sdk_private(libname, librealname) requires at last one argument")
+    !isEmpty(3): error("get_add_sdk_private(libname, librealname) requires at most two argument")
     isEmpty(1):libname = $$TARGET_NAME
     isEmpty(2): librealname = $${libname}
     liblowername = $$lower($${librealname})
@@ -357,27 +362,15 @@ defineReplace(get_add_sdk_private){
 ################################################
 ##用户调用的函数
 ################################################
-#依赖
-LIB_SDK_SOURCE_PWD = $$PWD
-LIB_SDK_BUILD_DESTDIR = $$DESTDIR
-defineTest(add_sdk_src_dir){
-    LIB_SDK_SOURCE_PWD = $$1
-    export(LIB_SDK_SOURCE_PWD)
-    return (1)
-}
 
 #libgroupname<主目录名>
-#libname 这里 libname是内定的 就是用户设置的TARGET 没有修饰的那个 如果想发布成随意的样子....
+#libname 这里 libname是内定的 就是用户设置的TARGET 没有修饰的那个 如果想发布成随意的样子就改变这个。这个很重要，建议不要随便改动。
 #librealname 用户自定义名称，一般省略 = 修饰名是没有问题的。
 #libsrcdir PWD
-#libdstdir DESTDIR
+#libdstdir DESTDIR 这两个参数一般不设置，除非你的pri pro所在位置不是准确的源代码目录，除非你的编译中间目标所在在子目录里，如果subdirs工程，用下边那个add_sdk函数
 defineTest(add_sdk){
-    #isEmpty(1):error(add_sdk(libgroupname, libsrcdir, libdstdir, librealname) need at least one argument)
-    #!isEmpty(5): error("add_sdk(libgroupname, libsrcdir, libdstdir, librealname) requires at most four argument")
-
-    contains(QSYS_PRIVATE, macOS) {
-        #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
-    }
+    #isEmpty(1): error("add_sdk(libgroupname, libname, librealname) requires at least one argument")
+    !isEmpty(4): error("add_sdk(libgroupname, libname, librealname) requires at most three argument")
 
     #LIB_SDK_ROOT下
 
@@ -385,23 +378,33 @@ defineTest(add_sdk){
     libgroupname = $$TARGET_NAME
     !isEmpty(1):libgroupname=$$1
 
-    #create platform sdk need this
-    #源代码目录
-    LIB_SRC_PWD=$${PWD}
-    !isEmpty(2):LIB_SRC_PWD=$$2
-
-    #编译目标位置
-    LIB_DST_DIR=$$DESTDIR
-    !isEmpty(3):LIB_DST_DIR = $$3
-
-    #lib名 用户不能改变
+    #这个设置是强力的，直接改变了发布的lib的名字，编译处的目标名字也改变了。强大。
+    #如果用户对TARGET名不满意，用这个参数改变，
+    #关系：
+    #用户最初设置TARGET 完全用户的思想
+    #base manager改为修饰的TARGET。
+    #这里，允许用户重新定义TARGET，完全用户的思想
+    #自动对名字修饰。
+    #不依赖libgroupname
     libname = $$TARGET_NAME
+    !isEmpty(2): libname = $$2
+    !isEmpty(2) {
+        #libname决定target名字，并且直接把TARGET改为_debug/d修饰名。
+        TARGET = $$libname
+        add_decorate_target()
+        #这个位置，需不需要export，存在分歧
+        export(TARGET)
+    }
 
-    #经过修饰的lib名
-    librealname = $$TARGET
-    #用户可以指定，但是必须自定义TARGET名字。非标准。这样会影响链接时候的名字，用户需要自定义链接。
-    !isEmpty(4) {
-        librealname = $$4
+    #建议使用默认值
+    #这个会影响lib名的后缀，_debug d或者用户定的_xxx
+    #如果用户对_debug d等修饰名不满意，那么用这个参数改变。
+    #如果用户对自动修饰的名字不满意，那么用这个参数设定经过修饰的名字，自定义的
+    #通过这个参数，可以强制不修饰目标名 非标准 这样会影响链接时候的名字，用户链接的时候需要注意链接名
+    #依赖libname
+    librealname = $$add_decorate_target_name($$libname)
+    !isEmpty(3): librealname = $$3
+    !isEmpty(3){
         TARGET = $$librealname
         export(TARGET)
     }
@@ -409,8 +412,20 @@ defineTest(add_sdk){
     #liblowername依赖librealname
     liblowername = $$lower($${librealname})
 
-    #need use qqt subdir proj
-    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libname}/$${QSYS_STD_DIR}
+    #create platform sdk need this
+    #源代码目录
+    LIB_SRC_PWD=$${APP_SOURCE_PWD}
+    isEmpty(LIB_SRC_PWD):LIB_SRC_PWD=$$PWD
+
+    #编译目标位置
+    LIB_DST_DIR=$${APP_BUILD_DESTDIR}
+    isEmpty(LIB_DST_DIR):LIB_DST_DIR = $$DESTDIR
+
+    libprojname=$$APP_PROJECT_NAME
+    isEmpty(libprojname):libprojname=$$libname
+
+    #message(lib project name $$libprojname)
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libprojname}/$${QSYS_STD_DIR}
     !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
 
     #LIB std dir is not same to app std dir
@@ -455,10 +470,8 @@ defineTest(add_sdk){
 #librealname 建议用户不要设置
 #支持Qt5，不支持Qt4. Qt4 qmake比较落后。
 defineTest(add_sdk_from_subdirs){
-    #isEmpty(1):error(add_subdir_sdk(libname, libsrcdir, libdstdir) need at last one argument)
-    contains(QSYS_PRIVATE, macOS) {
-        #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
-    }
+    #isEmpty(1): error("add_sdk_from_subdirs(libgroupname, libname, librealname) requires at least one argument")
+    !isEmpty(4): error("add_sdk_from_subdirs(libgroupname, libname, librealname) requires at most three argument")
 
     #LIB_SDK_ROOT下
 
@@ -466,23 +479,33 @@ defineTest(add_sdk_from_subdirs){
     libgroupname = $$TARGET_NAME
     !isEmpty(1):libgroupname=$$1
 
-    #create platform sdk need this
-    #源代码目录
-    LIB_SRC_PWD=$${PWD}
-    !isEmpty(2):LIB_SRC_PWD=$$2
-
-    #编译目标位置
-    LIB_DST_DIR=$$DESTDIR
-    !isEmpty(3):LIB_DST_DIR = $$3
-
-    #lib名 用户不能改变
+    #这个设置是强力的，直接改变了发布的lib的名字，编译处的目标名字也改变了。强大。
+    #如果用户对TARGET名不满意，用这个参数改变，
+    #关系：
+    #用户最初设置TARGET 完全用户的思想
+    #base manager改为修饰的TARGET。
+    #这里，允许用户重新定义TARGET，完全用户的思想
+    #自动对名字修饰。
+    #不依赖libgroupname
     libname = $$TARGET_NAME
+    !isEmpty(2): libname = $$2
+    !isEmpty(2) {
+        #libname决定target名字，并且直接把TARGET改为_debug/d修饰名。
+        TARGET = $$libname
+        add_decorate_target()
+        #这个位置，需不需要export，存在分歧
+        export(TARGET)
+    }
 
-    #经过修饰的lib名
-    librealname = $$TARGET
-    #用户可以指定，但是必须自定义TARGET名字。非标准。这样会影响链接时候的名字，用户需要自定义链接。
-    !isEmpty(5) {
-        librealname = $$5
+    #建议使用默认值
+    #这个会影响lib名的后缀，_debug d或者用户定的_xxx
+    #如果用户对_debug d等修饰名不满意，那么用这个参数改变。
+    #如果用户对自动修饰的名字不满意，那么用这个参数设定经过修饰的名字，自定义的
+    #通过这个参数，可以强制不修饰目标名 非标准 这样会影响链接时候的名字，用户链接的时候需要注意链接名
+    #依赖libname
+    librealname = $$add_decorate_target_name($$libname)
+    !isEmpty(3): librealname = $$3
+    !isEmpty(3){
         TARGET = $$librealname
         export(TARGET)
     }
@@ -490,14 +513,23 @@ defineTest(add_sdk_from_subdirs){
     #liblowername依赖librealname
     liblowername = $$lower($${librealname})
 
-    #LIB std dir is not same to app std dir
-    LIB_STD_DIR = $${libgroupname}/$${QSYS_STD_DIR}
+    #create platform sdk need this
+    #源代码目录
+    LIB_SRC_PWD=$${APP_SOURCE_PWD}
+    isEmpty(LIB_SRC_PWD):LIB_SRC_PWD=$$PWD
+
+    #编译目标位置
+    LIB_DST_DIR=$${APP_BUILD_DESTDIR}
+    isEmpty(LIB_DST_DIR):LIB_DST_DIR = $$DESTDIR
+
+    libprojname=$$APP_PROJECT_NAME
+    isEmpty(libprojname):libprojname=$$libname
 
     #编译目录的完全位置
     LIB_BUILD_PWD=
     isEmpty(4){
         #add sdk level
-    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libname}/$${QSYS_STD_DIR}
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libprojname}/$${QSYS_STD_DIR}
     !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
     } else {
         #sub dir level
@@ -511,6 +543,9 @@ defineTest(add_sdk_from_subdirs){
         LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${TARGET}
         !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
     }
+
+    #LIB std dir is not same to app std dir
+    LIB_STD_DIR = $${libgroupname}/$${QSYS_STD_DIR}
 
     #sdk path
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
@@ -544,11 +579,8 @@ defineTest(add_sdk_from_subdirs){
 
 #if you want to use QQt with QT += QQt please open this feature
 defineTest(add_sdk_to_Qt){
-    #isEmpty(1):error(add_sdk_to_Qt(libname, libsrcdir, libdstdir) need at last one argument)
-
-    contains(QSYS_PRIVATE, macOS) {
-        #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
-    }
+    #isEmpty(1): error("add_sdk_to_Qt(libgroupname, libname, librealname) requires at least one argument")
+    !isEmpty(4): error("add_sdk_to_Qt(libgroupname, libname, librealname) requires at most three argument")
 
     #LIB_SDK_ROOT下
 
@@ -556,23 +588,33 @@ defineTest(add_sdk_to_Qt){
     libgroupname = $$TARGET_NAME
     !isEmpty(1):libgroupname=$$1
 
-    #create platform sdk need this
-    #源代码目录
-    LIB_SRC_PWD=$${PWD}
-    !isEmpty(2):LIB_SRC_PWD=$$2
-
-    #编译目标位置
-    LIB_DST_DIR=$$DESTDIR
-    !isEmpty(3):LIB_DST_DIR = $$3
-
-    #lib名 用户不能改变
+    #这个设置是强力的，直接改变了发布的lib的名字，编译处的目标名字也改变了。强大。
+    #如果用户对TARGET名不满意，用这个参数改变，
+    #关系：
+    #用户最初设置TARGET 完全用户的思想
+    #base manager改为修饰的TARGET。
+    #这里，允许用户重新定义TARGET，完全用户的思想
+    #自动对名字修饰。
+    #不依赖libgroupname
     libname = $$TARGET_NAME
+    !isEmpty(2): libname = $$2
+    !isEmpty(2) {
+        #libname决定target名字，并且直接把TARGET改为_debug/d修饰名。
+        TARGET = $$libname
+        add_decorate_target()
+        #这个位置，需不需要export，存在分歧
+        export(TARGET)
+    }
 
-    #经过修饰的lib名
-    librealname = $$TARGET
-    #用户可以指定，但是必须自定义TARGET名字。非标准。这样会影响链接时候的名字，用户需要自定义链接。
-    !isEmpty(4) {
-        librealname = $$4
+    #建议使用默认值
+    #这个会影响lib名的后缀，_debug d或者用户定的_xxx
+    #如果用户对_debug d等修饰名不满意，那么用这个参数改变。
+    #如果用户对自动修饰的名字不满意，那么用这个参数设定经过修饰的名字，自定义的
+    #通过这个参数，可以强制不修饰目标名 非标准 这样会影响链接时候的名字，用户链接的时候需要注意链接名
+    #依赖libname
+    librealname = $$add_decorate_target_name($$libname)
+    !isEmpty(3): librealname = $$3
+    !isEmpty(3){
         TARGET = $$librealname
         export(TARGET)
     }
@@ -580,11 +622,23 @@ defineTest(add_sdk_to_Qt){
     #liblowername依赖librealname
     liblowername = $$lower($${librealname})
 
+    #create platform sdk need this
+    #源代码目录
+    LIB_SRC_PWD=$${APP_SOURCE_PWD}
+    isEmpty(LIB_SRC_PWD):LIB_SRC_PWD=$$PWD
+
+    #编译目标位置
+    LIB_DST_DIR=$${APP_BUILD_DESTDIR}
+    isEmpty(LIB_DST_DIR):LIB_DST_DIR = $$DESTDIR
+
+    libprojname=$$APP_PROJECT_NAME
+    isEmpty(libprojname):libprojname=$$libname
+
     #need use qqt subdir proj
-    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libname}/$${QSYS_STD_DIR}
+    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libprojname}/$${QSYS_STD_DIR}
     !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
 
-    #LIB std dir is not same to app std dir
+    #在发布到Qt里没用了。。
     LIB_STD_DIR = $${libgroupname}/$${QSYS_STD_DIR}
 
     #sdk path
@@ -618,11 +672,8 @@ defineTest(add_sdk_to_Qt){
 }
 
 defineTest(del_sdk){
-    #isEmpty(1):error(del_sdk(libname, libsrcdir, libdstdir) need at last one argument)
-
-    contains(QSYS_PRIVATE, macOS) {
-        #equals(APP_MAJOR_VERSION, 0):message(add_sdk(libname, libsrcdir, libdstdir) macos app major version is "0," have you setted it?)
-    }
+    #isEmpty(1): error("del_sdk(libgroupname, libname, librealname) requires at least one argument")
+    !isEmpty(4): error("del_sdk(libgroupname, libname, librealname) requires at most three argument")
 
     #LIB_SDK_ROOT下
 
@@ -630,34 +681,16 @@ defineTest(del_sdk){
     libgroupname = $$TARGET_NAME
     !isEmpty(1):libgroupname=$$1
 
-    #create platform sdk need this
-    #源代码目录
-    LIB_SRC_PWD=$${PWD}
-    !isEmpty(2):LIB_SRC_PWD=$$2
-
-    #编译目标位置
-    LIB_DST_DIR=$$DESTDIR
-    !isEmpty(3):LIB_DST_DIR = $$3
-
-    #lib名 用户不能改变
-    #约束：用户设置的TARGET，必须和pro的名字一样。
+    #不依赖libgroupname
     libname = $$TARGET_NAME
+    !isEmpty(2): libname = $$2
 
-    #经过修饰的lib名
-    librealname = $$TARGET
-    #用户可以指定，但是必须自定义TARGET名字。非标准。这样会影响链接时候的名字，用户需要自定义链接。
-    !isEmpty(4) {
-        librealname = $$4
-        TARGET = $$librealname
-        export(TARGET)
-    }
+    #依赖libname
+    librealname = $$add_decorate_target_name($$libname)
+    !isEmpty(3): librealname = $$3
 
     #liblowername依赖librealname
     liblowername = $$lower($${librealname})
-
-    #need use qqt subdir proj
-    LIB_BUILD_PWD=$${APP_BUILD_ROOT}/$${libname}/$${QSYS_STD_DIR}
-    !isEmpty(LIB_DST_DIR):LIB_BUILD_PWD=$${LIB_BUILD_PWD}/$${LIB_DST_DIR}
 
     #LIB std dir is not same to app std dir
     LIB_STD_DIR = $${libgroupname}/$${QSYS_STD_DIR}
@@ -665,25 +698,26 @@ defineTest(del_sdk){
     #sdk path
     LIB_SDK_PWD = $${LIB_SDK_ROOT}/$${LIB_STD_DIR}
     #message(QQt sdk install here:$${LIB_SDK_PWD})
-    LIB_SDK_ALL = $${LIB_SDK_PWD}/*
+
+    LIB_SDK_ALL = $${LIB_SDK_PWD}/*$${libname}.*
+    LIB_SDK_ALL2 = $${LIB_SDK_PWD}/*$${librealname}.*
 
     #这里不仅仅目标为windows的时候，才会转换，
     #开发Host为Windows的时候，都要转换。
     #contains(QSYS_PRIVATE, Win32|Windows||Win64) {
     equals(QMAKE_HOST.os, Windows) {
-        APP_BUILD_ROOT~=s,/,\\,g
         LIB_SDK_ROOT~=s,/,\\,g
-        APP_DEPLOY_ROOT~=s,/,\\,g
 
         QSYS_STD_DIR~=s,/,\\,g
         LIB_STD_DIR~=s,/,\\,g
-        LIB_DST_DIR~=s,/,\\,g
-        LIB_BUILD_PWD~=s,/,\\,g
         LIB_SDK_PWD~=s,/,\\,g
+
         LIB_SDK_ALL~=s,/,\\,g
+        LIB_SDK_ALL2~=s,/,\\,g
     }
 
-    command += $$RM_DIR $${LIB_SDK_ALL}
+    command += $$RM_DIR $${LIB_SDK_ALL} $$CMD_SEP
+    command += $$RM_DIR $${LIB_SDK_ALL2}
     #message($$command)
 
     !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
@@ -695,11 +729,11 @@ defineTest(del_sdk){
 }
 
 #发布没有后缀名的头文件
-#sdkroot下，主目录名
-#库名字 没有修饰的库名字
-#类名
-#保存位置 相对路径 不写则为根目录。
-#头文件 不设置 为空 则为类名小写。
+#sdkroot下，主目录名 lib组
+#库名字 没有修饰的库名字 保存头文件的地方
+#类名 头文件的名称
+#保存位置 相对路径 不写则为头文件根目录。
+#头文件 不设置 为空 则为类名小写。头文件里包含的.h头
 defineTest(add_sdk_header){
     isEmpty(3):error(add_sdk_header(libgroupname, libname, classname, headerdir, headername) need at least one argument)
 
@@ -709,7 +743,10 @@ defineTest(add_sdk_header){
     headerdir = $$4
     headername = $$5
 
-    isEmpty(libname):libname = $$libgroupname
+    #不依赖libgroupname
+    isEmpty(libname):libname = $$TARGET_NAME
+
+    #依赖classname
     isEmpty(headername):headername = $$lower($${classname}).h
 
     #LIB std dir is not same to app std dir

@@ -74,14 +74,18 @@ include ($$PWD/qqt_source.pri)
 #所有App都依赖QQt的这个步骤
 #参数比较复杂是因为在SUBDIRS工程里，如果是单独的工程就好多了。
 #################################################################
+#依赖 不设置使用默认值 没有修饰的TARGET PWD DESTDIR
+add_project_name(QQt)
+add_source_dir($$PWD)
+add_build_dir($$DESTDIR)
 
 #目标
 #源代码目录
 #编译在相对编译目录
-add_sdk($$add_target_name(), $$PWD, $$DESTDIR, $$add_decorate_target_name())
+add_sdk(QQt, $$add_target_name())
 
 #额外做点事情 拷贝头文件 没有后缀的头文件
-add_sdk_header($$add_target_name(), $$add_target_name(), QQtApplication, frame)
+add_sdk_header(QQt, $$add_target_name(), QQtApplication, frame)
 
 #################################################################
 #其他设置
