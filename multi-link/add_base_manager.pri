@@ -66,6 +66,11 @@ include ($${PWD}/add_language.pri)
 #################################################################
 #基本的，添加依赖
 defineTest(add_dependent_library) {
+    libname = $$1
+    isEmpty(libname):libname = Template
+    contains(TEMPLATE, app):add_dependent_library_$${libname}()
+    else:contains(TEMPLATE, lib):add_link_library_$${libname}()
+    else:add_link_library_$${libname}()
     return (1)
 }
 
@@ -75,7 +80,9 @@ defineTest(add_dependent_library) {
 #################################################################
 defineTest(add_dependent_manager){
     libname = $$1
-    isEmpty(libname):libname = Template
+    #这里出现了一个bug，如果输入为空，本来设置为Template的，可是竟然不为空，Template pri也会加入。现在返回就又好了。
+    isEmpty(libname):return(0)
+
     !equals(TARGET_NAME, $${libname}):
         exists($${ADD_BASE_MANAGER_PRI_PWD}/../app-lib/add_library_$${libname}.pri){
         include ($${ADD_BASE_MANAGER_PRI_PWD}/../app-lib/add_library_$${libname}.pri)
@@ -273,6 +280,28 @@ defineTest(add_defines) {
 
     DEFINES += $${command}
     export(DEFINES)
+
+    return (1)
+}
+
+defineTest(add_post_link){
+    command = $$1
+    isEmpty(command):return(0)
+
+    !isEmpty(QMAKE_POST_LINK):QMAKE_POST_LINK += $$CMD_SEP
+    QMAKE_POST_LINK += $$command
+    export(QMAKE_POST_LINK)
+
+    return (1)
+}
+
+defineTest(add_pre_link){
+    command = $$1
+    isEmpty(command):return(0)
+
+    !isEmpty(QMAKE_PRE_LINK):QMAKE_PRE_LINK += $$CMD_SEP
+    QMAKE_PRE_LINK += $$command
+    export(QMAKE_PRE_LINK)
 
     return (1)
 }

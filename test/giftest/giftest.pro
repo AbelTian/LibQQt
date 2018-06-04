@@ -37,8 +37,6 @@ FORMS += \
 #促使编译源代码，qmake pri配置里面的QMAKE_XX_LINK命令就会执行。
 system("touch main.cpp")
 include(../../multi-link/add_base_manager.pri)
-
-
 include(./app_custom_manager.pri)
 
 contains(QSYS_PRIVATE, ANDROID||ANDROIDX86) {
@@ -54,6 +52,7 @@ contains(QSYS_PRIVATE, ANDROID||ANDROIDX86) {
     RESOURCES += \
         giftest.qrc
 }
+
 #这个的设置有特点，要先设置
 add_version (1,0,0,0)
 
@@ -63,6 +62,8 @@ add_deploy()
 
 #后发布依赖
 #libQQt从sdk到build和deploy
+#include (../../app-lib/add_library_QQt.pri)
+#add_dependent_library(QQt)
 add_dependent_manager(QQt)
 
 #发布配置文件 把AppRoot里的配置项目拷贝到运行目录和发布目录
