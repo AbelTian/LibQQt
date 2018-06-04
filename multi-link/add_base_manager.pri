@@ -75,7 +75,7 @@ defineTest(add_dependent_library) {
 #################################################################
 defineTest(add_dependent_manager){
     libname = $$1
-    isEmpty(1):libname = Template
+    isEmpty(libname):libname = Template
     !equals(TARGET_NAME, $${libname}):
         exists($${ADD_BASE_MANAGER_PRI_PWD}/../app-lib/add_library_$${libname}.pri){
         include ($${ADD_BASE_MANAGER_PRI_PWD}/../app-lib/add_library_$${libname}.pri)
@@ -183,8 +183,8 @@ TARGET_DECORATE_NAME = $$TARGET_NAME
 defineReplace(add_decorate_target_name){
     #isEmpty(1):error(add_decorate_target_name(target_name) need one argument)
 
-    target_name = $$1
-    isEmpty(1):target_name = $$TARGET_NAME
+    target_name = $$TARGET_NAME
+    !isEmpty(1):target_name = $$1
 
     ret = $${target_name}
     contains(BUILD, Debug) {
