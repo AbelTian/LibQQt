@@ -21,7 +21,7 @@
 #Suggest Qt 5.9.2/4.8.6/4.8.7
 #please dont use Qt 5.9.1, it is broken with android and ios.
 #please dont modify this pro
-#use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}/%{Qt:Version}
+#use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}
 #in Qt kit page, set kit's File System Name. (Creator Ver.>v3.5)
 #in project build page, def env QSYS
 #in app_configure.pri (auto createed) define QQT_BUILD_ROOT= and QQT_SDK_ROOT= and or APP_DEPLOY_ROOT
@@ -74,10 +74,6 @@ include ($$PWD/qqt_source.pri)
 #所有App都依赖QQt的这个步骤
 #参数比较复杂是因为在SUBDIRS工程里，如果是单独的工程就好多了。
 #################################################################
-#Temp
-CONFIG -= lib_bundle
-CONFIG -= lib_bundle
-CONFIG -= lib_bundle
 
 #目标
 #源代码目录

@@ -434,7 +434,7 @@ defineTest(add_deploy_library) {
 
     export(QMAKE_POST_LINK)
 
-    message("$${TARGET} has deployed library $${librealname} ")
+    message("$${TARGET} has deployed library $${libname} ")
     return (1)
 }
 
@@ -494,8 +494,7 @@ defineTest(add_deploy_library_bundle) {
 
     export(QMAKE_POST_LINK)
 
-    contains(QSYS_PRIVATE, macOS):postfix = .framework
-    message("$${TARGET} has deployed library $${librealname}$$postfix")
+    message("$${TARGET} has deployed library $${libname}")
     return (1)
 }
 

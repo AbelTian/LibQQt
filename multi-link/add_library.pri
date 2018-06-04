@@ -71,13 +71,13 @@ defineReplace(get_add_library_bundle) {
     contains(DEFINES, __DARWIN__) {
         LINK += -F$${CUR_LIB_PWD}
         LINK += -framework $${libname}
-        message(link $${libname}.framework from $$CUR_LIB_PWD)
     } else {
         LINK += -L$${CUR_LIB_PWD}
         #win can't with the blank! error: -l QQt
         LINK += -l$${librealname}
-        message(link $${librealname} from $$CUR_LIB_PWD)
     }
+
+    message(link $${libname} from $$CUR_LIB_PWD)
     return ($${LINK})
 }
 
@@ -106,11 +106,7 @@ defineReplace(get_add_library) {
     #win can't with the blank! error: -l QQt
     LINK += -l$${librealname}
 
-    libfixname =
-    contains(DEFINES, __DARWIN__):libfixname=lib$${librealname}.dylib
-    contains(DEFINES, __WIN__):libfixname=lib$${librealname}.dylib
-
-    message(link $${librealname} from $$CUR_LIB_PWD)
+    message(link $${libname} from $$CUR_LIB_PWD)
 
     return ($${LINK})
 }
