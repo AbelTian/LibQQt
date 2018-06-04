@@ -32,33 +32,40 @@ SUBDIRS =
 ########################################################################################
 #Windows
 #need OpenCV SDK
-#SUBDIRS += examples/QQtOpenCVExample
+#
+SUBDIRS += examples/QQtOpenCVExample
 
 #need OSG SDK
 #need win SDK
 #string is not a type?
-#SUBDIRS += examples/QQtOpenSceneGraphExample
+#
+SUBDIRS += examples/QQtOpenSceneGraphExample
 
 #need Qwt SDK
-#SUBDIRS += test/QQtQwtTest
+#
+SUBDIRS += test/QQtQwtTest
 
 #need QwtPlot3D sdk
-#SUBDIRS += test/QQtQwtPlot3DTest
+#
+SUBDIRS += test/QQtQwtPlot3DTest
 
 #need FMOD lowlevel SDK
-#SUBDIRS += test/QQtFMODTest
+#
+SUBDIRS += test/QQtFMODTest
 
 #need vlcQt libvlc library
-#SUBDIRS += test/qqtliveplayer
+#
+SUBDIRS += test/qqtliveplayer
 
 ########################################################################################
 #macOS
 #need log4cpp sdk
 #macOS无故会记忆过去的链接位置，无解。
-#SUBDIRS += test/qqtlog4cpptest
+#
+SUBDIRS += test/qqtlog4cpptest
 
 #need ffmpeg library
 #SUBDIRS += test/qqtffmpegplayer
 
 #测试libQQt的链接。
-SUBDIRS += test/giftest
+#SUBDIRS += test/giftest

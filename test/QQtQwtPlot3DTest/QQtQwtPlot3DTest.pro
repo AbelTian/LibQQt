@@ -48,4 +48,4 @@ add_deploy()
 #app发布library 只有app才会发布
 
 add_dependent_manager(QQt)
-add_dependent_manager_QwtPlot3d()
+add_dependent_manager(QwtPlot3d)

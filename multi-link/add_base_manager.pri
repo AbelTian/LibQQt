@@ -319,6 +319,13 @@ defineTest(add_pre_link){
 
 #修饰TARGET LIB必要 APP可选 only once
 #此处提醒用户：你肯定不愿意手动调用。
+
+#格式
+#debug版本，_debug d，无论app lib，还是链接的lib，发布的lib，和发布的sdk都是这样的。
+#release版本，没有后缀。
+#用户在链接库的时候，需要分类处理，debug版本和release版本，准备哪种版本，才能链接哪种版本。
+#
+
 add_decorate_target($${TARGET_NAME})
 
 contains(TEMPLATE, app) {
