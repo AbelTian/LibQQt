@@ -9,11 +9,6 @@
 #######################################################################################
 #1.10.05
 LIBRARYVER =
-DEBUG = 
-contains(BUILD, Release) {
-    DEBUG=
-}
-
 
 #######################################################################################
 #定义内部函数
@@ -47,11 +42,9 @@ defineTest(add_include_FMOD){
 
 #这个地方add_library_no_bundle代表包括macOS下，都不使用bundle，只是动态库或者静态库。
 defineTest(add_library_FMOD){
-    #添加Library路径
-    add_library_path(FMOD)
     #链接Library
-    add_library(FMOD, fmod$${LIBRARYVER}$${DEBUG})
-    add_library(FMOD, fmodL$${LIBRARYVER}$${DEBUG})
+    add_library(FMOD, fmod$${LIBRARYVER})
+    add_library(FMOD, fmodL$${LIBRARYVER})
     #添加这个SDK下的其他的library
     return (1)
 }
@@ -73,10 +66,9 @@ defineTest(add_link_library_FMOD){
 
 #发布依赖library
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
-#_Qt 代表这个lib是基于Qt的 依赖Qt
 defineTest(add_deploy_library_FMOD) {
-    add_deploy_library(FMOD, fmod$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(FMOD, fmodL$${LIBRARYVER}$${DEBUG})
+    add_deploy_library(FMOD, fmod$${LIBRARYVER})
+    add_deploy_library(FMOD, fmodL$${LIBRARYVER})
     return (1)
 }
 
