@@ -179,15 +179,21 @@ contains (DEFINES, __PRINTSUPPORT__) {
 ##################Charts Module###############################
 #if you use QQtCharts, open this annotation
 DEFINES += __QQTCHARTS__
-lessThan(QT_MAJOR_VERSION, 5):DEFINES-=__QQTCHARTS__
-contains(QSYS_PRIVATE, Arm32||Mips32||Embedded):DEFINES-=__QQTCHARTS__
-#based on QtCharts, need charts module
 contains(DEFINES, __QQTCHARTS__) {
-    QT += charts
+    #默认打开Qt Charts
+    DEFINES += __QT_CHARTS__
+    #Qt小于5.7没有charts模块
+    #Qt Embedded，没有charts模块
+    #对于这两种情况，默认删除去。如果用户自己编译了Charts，手动添加charts模块。
+    lessThan(QT_VERSION, 5.7):DEFINES-=__QT_CHARTS__
+    contains(QSYS_PRIVATE, Arm32||Mips32||Embedded):DEFINES-=__QT_CHARTS__
+    #based on QtCharts, need charts module
+    contains(DEFINES, __QT_CHARTS__ ): QT += charts
 
     #if you use qcustomplot, open this annotation
     #qcustomplot use QPrinter to export pdf file, QChart haven't use it, I fix it, now compiler ok.
     #in ios qcustomplot can't call savePdf now, no result but a log no printer error.
+    #默认打开customplot
     DEFINES += __CUSTOMPLOT__
 }
 

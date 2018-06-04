@@ -46,8 +46,7 @@ SUBDIRS =
 #SUBDIRS += test/QQtQwtPlot3DTest
 
 #need FMOD lowlevel SDK
-#
-SUBDIRS += test/QQtFMODTest
+#SUBDIRS += test/QQtFMODTest
 
 #need vlcQt libvlc library
 #SUBDIRS += test/qqtliveplayer
@@ -59,7 +58,8 @@ SUBDIRS += test/QQtFMODTest
 #SUBDIRS += test/qqtlog4cpptest
 
 #need ffmpeg library
-#SUBDIRS += test/qqtffmpegplayer
+#
+SUBDIRS += test/qqtffmpegplayer
 
 #测试libQQt的链接。
 #SUBDIRS += test/giftest

@@ -227,12 +227,15 @@ contains (DEFINES, __PRINTSUPPORT__) {
 }
 
 contains(DEFINES, __QQTCHARTS__) {
-    SOURCES += \
-        $$PWD/charts/qqtchart.cpp \
-        $$PWD/charts/qqtchartview.cpp
-    HEADERS += \
-        $$PWD/charts/qqtchart.h \
-        $$PWD/charts/qqtchartview.h
+    contains(DEFINES, __QT_CHARTS__ ){
+        SOURCES += \
+            $$PWD/charts/qqtchart.cpp \
+            $$PWD/charts/qqtchartview.cpp
+        HEADERS += \
+            $$PWD/charts/qqtchart.h \
+            $$PWD/charts/qqtchartview.h
+    }
+    #customplot 在3rdparty.
 }
 
 #network
