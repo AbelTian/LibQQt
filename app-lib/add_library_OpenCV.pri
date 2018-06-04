@@ -8,10 +8,6 @@
 #初始化设置
 #######################################################################################
 LIBRARYVER = 231
-DEBUG = d
-contains(BUILD, Release) {
-    DEBUG=
-}
 
 
 #######################################################################################
@@ -51,20 +47,19 @@ defineTest(add_include_OpenCV){
 }
 
 defineTest(add_library_OpenCV){
-    add_library_path(OpenCV)
     #链接Library
-    add_library(opencv_calib3d$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_contrib$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_core$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_features2d$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_flann$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_gpu$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_highgui$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_imgproc$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_legacy$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_ml$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_objdetect$${LIBRARYVER}$${DEBUG})
-    add_library(opencv_video$${LIBRARYVER}$${DEBUG})
+    add_library(OpenCV, opencv_calib3d$${LIBRARYVER})
+    add_library(OpenCV, opencv_contrib$${LIBRARYVER})
+    add_library(OpenCV, opencv_core$${LIBRARYVER})
+    add_library(OpenCV, opencv_features2d$${LIBRARYVER})
+    add_library(OpenCV, opencv_flann$${LIBRARYVER})
+    add_library(OpenCV, opencv_gpu$${LIBRARYVER})
+    add_library(OpenCV, opencv_highgui$${LIBRARYVER})
+    add_library(OpenCV, opencv_imgproc$${LIBRARYVER})
+    add_library(OpenCV, opencv_legacy$${LIBRARYVER})
+    add_library(OpenCV, opencv_ml$${LIBRARYVER})
+    add_library(OpenCV, opencv_objdetect$${LIBRARYVER})
+    add_library(OpenCV, opencv_video$${LIBRARYVER})
     return (1)
 }
 
@@ -91,18 +86,18 @@ defineTest(add_link_library_OpenCV){
 #发布依赖library
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
 defineTest(add_deploy_library_OpenCV) {
-    add_deploy_library(OpenCV, libopencv_calib3d$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_contrib$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_core$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_features2d$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_flann$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_gpu$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_highgui$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_imgproc$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_legacy$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_ml$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_objdetect$${LIBRARYVER}$${DEBUG})
-    add_deploy_library(OpenCV, libopencv_video$${LIBRARYVER}$${DEBUG})
+    add_deploy_library(OpenCV, libopencv_calib3d$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_contrib$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_core$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_features2d$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_flann$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_gpu$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_highgui$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_imgproc$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_legacy$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_ml$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_objdetect$${LIBRARYVER})
+    add_deploy_library(OpenCV, libopencv_video$${LIBRARYVER})
     return (1)
 }
 

@@ -65,7 +65,9 @@ SUBDIRS += test/qqtliveplayer
 SUBDIRS += test/qqtlog4cpptest
 
 #need ffmpeg library
-#SUBDIRS += test/qqtffmpegplayer
+#
+SUBDIRS += test/qqtffmpegplayer
 
 #测试libQQt的链接。
-#SUBDIRS += test/giftest
+#
+SUBDIRS += test/giftest

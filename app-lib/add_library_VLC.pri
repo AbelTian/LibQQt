@@ -9,12 +9,6 @@
 #######################################################################################
 #1.1.0
 LIBRARYVER =
-DEBUG = d
-#这个地方，mingw比较特殊必须发布release版本，其他平台不清楚。
-mingw:DEBUG=
-contains(BUILD, Release) {
-    DEBUG=
-}
 
 #######################################################################################
 #定义内部函数
@@ -42,8 +36,8 @@ defineTest(add_include_VLC){
 
 defineTest(add_library_VLC) {
     #链接Library
-    add_library(VLC, VLCQtCore$${LIBRARYVER}$${DEBUG})
-    add_library(VLC, VLCQtWidgets$${LIBRARYVER}$${DEBUG})
+    add_library(VLC, VLCQtCore$${LIBRARYVER})
+    add_library(VLC, VLCQtWidgets$${LIBRARYVER})
     return (1)
 }
 

@@ -9,10 +9,6 @@
 #######################################################################################
 #3.4
 LIBRARYVER =
-DEBUG = d
-contains(BUILD, Release) {
-    DEBUG=
-}
 
 #######################################################################################
 #定义内部函数
@@ -49,35 +45,33 @@ defineReplace(get_add_include_OpenSceneGraph){
 
 defineTest(add_include_OpenSceneGraph){
     #包含OpenSceneGraph头文件的过程
-    header_path = $$get_add_include(OpenSceneGraph, , , , "qtversionpath")
+    header_path = $$get_add_include(OpenSceneGraph)
     INCLUDEPATH += $$get_add_include_OpenSceneGraph($$header_path)
     export(INCLUDEPATH)
     return (1)
 }
 
 defineTest(add_library_OpenSceneGraph) {
-    #添加Library路径
-    add_library_path(OpenSceneGraph, , , "qtversionpath")
     #链接Library
-    add_library(OpenThreads$${LIBRARYVER}$${DEBUG})
-    add_library(osg$${LIBRARYVER}$${DEBUG})
-    add_library(osgAnimation$${LIBRARYVER}$${DEBUG})
-    add_library(osgDB$${LIBRARYVER}$${DEBUG})
-    add_library(osgFX$${LIBRARYVER}$${DEBUG})
-    add_library(osgGA$${LIBRARYVER}$${DEBUG})
-    add_library(osgManipulator$${LIBRARYVER}$${DEBUG})
-    add_library(osgParticle$${LIBRARYVER}$${DEBUG})
-    add_library(osgPresentation$${LIBRARYVER}$${DEBUG})
-    add_library(osgQt$${LIBRARYVER}$${DEBUG})
-    add_library(osgShadow$${LIBRARYVER}$${DEBUG})
-    add_library(osgSim$${LIBRARYVER}$${DEBUG})
-    add_library(osgTerrain$${LIBRARYVER}$${DEBUG})
-    add_library(osgText$${LIBRARYVER}$${DEBUG})
-    add_library(osgUI$${LIBRARYVER}$${DEBUG})
-    add_library(osgUtil$${LIBRARYVER}$${DEBUG})
-    add_library(osgViewer$${LIBRARYVER}$${DEBUG})
-    add_library(osgVolume$${LIBRARYVER}$${DEBUG})
-    add_library(osgWidget$${LIBRARYVER}$${DEBUG})
+    add_library(OpenSceneGraph, OpenThreads$${LIBRARYVER})
+    add_library(OpenSceneGraph, osg$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgAnimation$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgDB$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgFX$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgGA$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgManipulator$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgParticle$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgPresentation$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgQt$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgShadow$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgSim$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgTerrain$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgText$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgUI$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgUtil$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgViewer$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgVolume$${LIBRARYVER})
+    add_library(OpenSceneGraph, osgWidget$${LIBRARYVER})
     return (1)
 }
 
@@ -104,8 +98,7 @@ defineTest(add_link_library_OpenSceneGraph) {
 #发布依赖library的函数
 #注意Android也需要这个函数，使用这个函数Android才会发布Library到运行时。上边的只是链接作用。
 defineTest(add_deploy_library_OpenSceneGraph) {
-    add_deploy_libraryes(OpenSceneGraph, , , , "qtversionpath")
-    add_deploy_library(OpenSceneGraph, osgQt$${LIBRARYVER}$${DEBUG}, , , "qtversionpath", "deployqt")
+    add_deploy_libraryes(OpenSceneGraph)
     return (1)
 }
 
