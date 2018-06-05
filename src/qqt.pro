@@ -77,7 +77,7 @@ include ($$PWD/qqt_source.pri)
 #依赖 不设置使用默认值 没有修饰的TARGET PWD DESTDIR
 add_project_name(QQt)
 add_source_dir($$PWD)
-add_build_dir($$DESTDIR)
+add_build_dir(src/$$DESTDIR)
 
 #目标
 #源代码目录
