@@ -33,7 +33,7 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-include (../../multi-link/add_base_manager.pri)
+include (../../multi-link/multi-link/add_base_manager.pri)
 
 include (../../app-lib/add_custom_manager.pri)
 

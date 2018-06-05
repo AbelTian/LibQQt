@@ -25,7 +25,7 @@ FORMS    += $$PWD/qqtwindow.ui
 ############################################
 #添加所有提供函数的pri 很有美感
 ############################################
-include(../../multi-link/add_base_manager.pri)
+include(../../multi-link/multi-link/add_base_manager.pri)
 
 ############################################
 #对产品线的控制结构Multi-link下命令 开启产品线

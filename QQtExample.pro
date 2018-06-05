@@ -26,7 +26,7 @@ SUBDIRS =
 #QQt is build
 #-----------------------------------------------------------------
 #第二种引用LibQQt的方式
-#方法：include(.../LibQQt/multi-link/add_base_manager.pri)
+#方法：include(.../LibQQt/multi-link/multi-link/add_base_manager.pri)
 #QQt提供QQtApplication帮助App管理Application句柄。
 #SUBDIRS += examples/qqtframe2
 #必看

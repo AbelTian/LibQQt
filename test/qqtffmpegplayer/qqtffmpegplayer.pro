@@ -20,7 +20,7 @@ HEADERS  += $$PWD/qqtapp.h $$PWD/qqtwindow.h \
 
 FORMS    += $$PWD/qqtwindow.ui
 
-include(../../multi-link/add_base_manager.pri)
+include(../../multi-link/multi-link/add_base_manager.pri)
 
 system(touch main.cpp)
 # no use touch(main.cpp)

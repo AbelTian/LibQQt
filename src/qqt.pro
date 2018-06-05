@@ -35,7 +35,7 @@ TEMPLATE = lib
 #################################################################
 #包含基础管理者
 #################################################################
-include ($${PWD}/../multi-link/add_base_manager.pri)
+include ($${PWD}/../multi-link/multi-link/add_base_manager.pri)
 
 #根据multi-link提供的动态编译 静态编译设定进行编译，添加我自己的QQt的宏定义。
 contains(DEFINES, LIB_LIBRARY) {

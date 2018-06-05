@@ -41,7 +41,7 @@ MOBILITY =
 
 #促使编译源代码，qmake pri配置里面的QMAKE_XX_LINK命令就会执行。
 system("touch main.cpp")
-include(../../multi-link/add_base_manager.pri)
+include(../../multi-link/multi-link/add_base_manager.pri)
 
 
 

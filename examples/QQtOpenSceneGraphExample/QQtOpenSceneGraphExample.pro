@@ -35,7 +35,7 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-include (../../multi-link/add_base_manager.pri)
+include (../../multi-link/multi-link/add_base_manager.pri)
 include (../../app-lib/add_library_OpenSceneGraph.pri)
 
 system(touch mainwindow.cpp)

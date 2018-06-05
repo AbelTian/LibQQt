@@ -47,7 +47,7 @@ system("touch main.cpp")
 #-------------------------------------------------
 
 #include manager
-include(../../multi-link/add_base_manager.pri)
+include(../../multi-link/multi-link/add_base_manager.pri)
 
 
 

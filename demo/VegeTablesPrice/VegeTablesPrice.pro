@@ -47,7 +47,7 @@ system("touch main.cpp")
 msvc{
     include($${PWD}\\..\\..\\src\\app_base_manager.pri)
 }else{
-    include(../../multi-link/add_base_manager.pri)
+    include(../../multi-link/multi-link/add_base_manager.pri)
 
 
 }

@@ -36,7 +36,7 @@ FORMS += \
 #这句话很重要 启动拷贝很多东西
 system (touch main.cpp)
 
-include (../../multi-link/add_base_manager.pri)
+include (../../multi-link/multi-link/add_base_manager.pri)
 
 #这个的设置有特点，要先设置
 add_version (1,0,0,0)

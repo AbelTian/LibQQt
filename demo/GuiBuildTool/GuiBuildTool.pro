@@ -45,7 +45,7 @@ UI_DIR = obj/ui.h
 RCC_DIR = qrc
 DESTDIR = bin
 
-include(../../multi-link/add_base_manager.pri)
+include(../../multi-link/multi-link/add_base_manager.pri)
 
 
 

@@ -39,7 +39,7 @@ MOBILITY =
 #这句话很重要 启动拷贝很多东西
 system (touch main.cpp)
 
-include (../../multi-link/add_base_manager.pri)
+include (../../multi-link/multi-link/add_base_manager.pri)
 
 contains(QSYS_PRIVATE, Android|AndroidX86) {
     CONFIG += mobility

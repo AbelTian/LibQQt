@@ -36,7 +36,7 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
-include ($${PWD}/../../multi-link/add_base_manager.pri)
+include ($${PWD}/../../multi-link/multi-link/add_base_manager.pri)
 #这个的设置有特点，要先设置
 add_version (1,0,0,0)
 

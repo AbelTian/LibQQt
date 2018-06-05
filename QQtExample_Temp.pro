@@ -61,4 +61,5 @@ SUBDIRS =
 #SUBDIRS += test/qqtffmpegplayer
 
 #测试libQQt的链接。
-#SUBDIRS += test/giftest
+#
+SUBDIRS += test/giftest

@@ -36,7 +36,7 @@ FORMS += \
 
 system("touch main.cpp")
 
-include(../../multi-link/add_base_manager.pri)
+include(../../multi-link/multi-link/add_base_manager.pri)
 
 
 #这个的设置有特点，要先设置

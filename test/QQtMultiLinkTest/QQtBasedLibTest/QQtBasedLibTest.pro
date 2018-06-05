@@ -50,7 +50,7 @@ unix {
 system(touch qqtbasedlibtest.cpp)
 
 #包含基础管理者
-include (../../../multi-link/add_base_manager.pri)
+include (../../../multi-link/multi-link/add_base_manager.pri)
 
 #这个lib的头文件、宏定义，集中在这里，这个是lib用app也用。必要
 include (lib_header.pri)

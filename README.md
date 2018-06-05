@@ -72,7 +72,7 @@ github link: https://github.com/AbelTian/LibQQt
      - 化解C Plus Plus中没有字典类别的尴尬。    
 3. 添加Multi Link工程管理pri组  
      - [Multi Link technology](multi-link/add_multi_link_technology.pri)，既多链接工程管理技术。
-     - [add_base_manager.pri](multi-link/add_base_manager.pri)，app和lib工程的基础管理者。  
+     - [add_base_manager.pri](multi-link/multi-link/add_base_manager.pri)，app和lib工程的基础管理者。  
      - 基于qmake，用户可以轻易的链接LibQQt和添加自定义library。  
      - 工程版本变更可以使用add_version(1,0,0,0)实现了。  
 4. 添加gif support Widgets  

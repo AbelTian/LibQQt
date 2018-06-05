@@ -45,7 +45,7 @@
 千等万等，Multi-link技术终于现出原形了。  
 修复了发布QQt SDK无处安置的问题。  
 
-1. include(.../multi-link/add_base_manager.pri)  
+1. include(.../multi-link/multi-link/add_base_manager.pri)  
     - 这里是多链接技术一切的开始。  
 2. 提供函数 （这里只展示一部分）
     -  add_sdk() (lib工程用)  

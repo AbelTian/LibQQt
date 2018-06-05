@@ -39,7 +39,7 @@ system(touch main.cpp)
 #要添加library支持，按照模板添加一个pri文件， 使用add_dependent_manager(XXX)调用即可。
 #用add_custom_manager.pri保存这些链接函数即可，拷贝到自己目录哦。
 #add_custom_manager也不想用的，就加到自己pro文件里好了。
-include (../../multi-link/add_base_manager.pri)
+include (../../multi-link/multi-link/add_base_manager.pri)
 include (../../app-lib/add_custom_manager.pri)
 
 
