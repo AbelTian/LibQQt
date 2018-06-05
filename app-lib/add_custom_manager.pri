@@ -24,3 +24,20 @@
 #lib从sdk到build和deploy
 #add_deploy_library(xx)
 
+################################################################
+##高级使用方法
+################################################################
+ADD_CUSTOM_MANAGER_PRI_PWD = $${PWD}
+defineTest(add_custom_dependent_manager){
+    libname = $$1
+    isEmpty(libname):return(0)
+
+    !equals(TARGET_NAME, $${libname}):
+        exists($${ADD_CUSTOM_MANAGER_PRI_PWD}/add_library_$${libname}.pri){
+        include ($${ADD_CUSTOM_MANAGER_PRI_PWD}/add_library_$${libname}.pri)
+        contains(TEMPLATE, app):add_dependent_library_$${libname}()
+        else:contains(TEMPLATE, lib):add_link_library_$${libname}()
+        else:add_link_library_$${libname}()
+    }
+    return (1)
+}

@@ -64,6 +64,11 @@ include ($${PWD}/add_language.pri)
 ####################################################################################
 #base manager 都做了以下这些事情
 ####################################################################################
+#工程层级介绍：
+#add_library在基本的链接层
+#add_sdk add_link_library 出现在library层
+#add_dependent_library add_dependent_manager 才出现在app层。当然也可以使用link层，如果用户喜欢，在library层，一般不会用dependent，只用link。
+#工程管理层级上是递进关系。在二进制上他们是互相兼容的，平行关系。
 
 #################################################################
 #定义外部函数
@@ -71,7 +76,7 @@ include ($${PWD}/add_language.pri)
 #基本的，添加依赖
 defineTest(add_dependent_library) {
     libname = $$1
-    isEmpty(libname):libname = Template
+    isEmpty(libname): return (0)
     contains(TEMPLATE, app):add_dependent_library_$${libname}()
     else:contains(TEMPLATE, lib):add_link_library_$${libname}()
     else:add_link_library_$${libname}()

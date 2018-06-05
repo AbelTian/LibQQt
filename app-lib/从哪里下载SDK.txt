@@ -4,7 +4,7 @@
 
 官网
 下载SDK、下载源码编译。
-一般在这里编译源码，Multi-environ Manager会帮上大忙，MeM处理了几乎所有genmake工具等的编译执行难问题。
+一般在这里编译源码，Multi-environ Manager会帮上大忙，mm处理了几乎所有genmake工具等的编译执行难问题。而且能保存，互不冲突！
 
 开源社区
 一般会提供源码、链接、工具。

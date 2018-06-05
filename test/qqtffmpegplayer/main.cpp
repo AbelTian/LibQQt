@@ -1,10 +1,5 @@
-﻿#include "qqtapp.h"
-#include "qqt-qt.h"
-#include "qqtversion.h"
-#include "qqtcore.h"
-#include "qqtgui.h"
+﻿#include <QQtApplication>
 #include "qqtwindow.h"
-#include <QQtApplication>
 
 int main ( int argc, char* argv[] )
 {

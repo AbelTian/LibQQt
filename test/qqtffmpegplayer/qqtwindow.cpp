@@ -1,9 +1,5 @@
 ﻿#include "qqtwindow.h"
 #include "ui_qqtwindow.h"
-#include "qqtobjectmanager.h"
-#include "qqt-qt.h"
-#include "qqtcore.h"
-#include "qqtwidgets.h"
 #include "FFmpegPlayer.h"
 
 QQTWindow::QQTWindow ( QWidget* parent ) :
@@ -27,9 +23,9 @@ QQTWindow::QQTWindow ( QWidget* parent ) :
     setFixedSize ( 1024, 600 );
     moveCenter ( this );
 
-    FFmpegPlayer* player = new FFmpegPlayer ( this );
-    player->setMedia ( "/Users/abel/Downloads/cccc.mp3" );
-    player->play();
+    //FFmpegPlayer* player = new FFmpegPlayer ( this );
+    //player->setMedia ( "/Users/abel/Downloads/cccc.mp3" );
+    //player->play();
 }
 
 QQTWindow::~QQTWindow()
