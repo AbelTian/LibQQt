@@ -1,6 +1,9 @@
 ﻿#include "qqtwindow.h"
 #include "ui_qqtwindow.h"
-#include "FFmpegPlayer.h"
+#include "qqtobjectmanager.h"
+#include "qqtwidgets.h"
+
+//#include "FFmpegPlayer.h"
 
 QQTWindow::QQTWindow ( QWidget* parent ) :
     QStackedWidget ( parent ),
