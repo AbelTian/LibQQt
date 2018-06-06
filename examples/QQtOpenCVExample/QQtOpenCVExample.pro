@@ -49,7 +49,7 @@ include (../../app-lib/add_library_OpenCV.pri)
 #这里做的事情，可以拷贝custom manager到app目录里再custom manager里面完成。
 add_version(1,0,0,0)
 add_deploy()
-add_dependent_manager(QQt)
+add_dependent_manager(QQtBase)
 add_deploy_config($$PWD/AppRoot)
 
 #添加其他library

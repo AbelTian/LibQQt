@@ -86,7 +86,7 @@ add_deploy()
 
 #后发布依赖
 #libQQt从sdk到build和deploy
-add_dependent_manager(QQt)
+add_dependent_manager(QQtBase)
 
 
 #-------------------------------------------------

@@ -39,5 +39,5 @@ include (../../app-lib/add_custom_manager.pri)
 
 add_version(1,0,0,0)
 add_deploy()
-add_dependent_manager(QQt)
+add_dependent_manager(QQtBase)
 add_dependent_manager(FMOD)

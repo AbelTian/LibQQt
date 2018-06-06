@@ -29,7 +29,7 @@
 #################################################################
 ##project name
 #################################################################
-TARGET = QQtCore
+TARGET = QQtBase
 TEMPLATE = lib
 
 #################################################################
@@ -62,7 +62,13 @@ DEFINES += QQT_VERSION=$$APP_VERSION
 #################################################################
 ##project header
 #################################################################
-include ($$PWD/qqt_header.pri)
+#qqt_header.pri不再使用，而是直接修改multi-link里的add_library_QQtBase.pri
+#方便链接者跟随最新的QQt变动，方便编辑者不必重复操作include代码。
+#include ($$PWD/qqt_header.pri)
+
+#使用add_library_XXX.pri导出include和defines
+#对这个pri的调用，使用add_export_manager()
+add_export_manager($$add_target_name())
 
 #################################################################
 ##project source
@@ -78,6 +84,7 @@ include ($$PWD/qqt_source.pri)
 #add_source_dir($$PWD)
 #add_build_dir($$DESTDIR)
 
+#导出include和library
 #目标
 #源代码目录
 #编译在相对编译目录
@@ -91,9 +98,9 @@ add_sdk_header(QQt, $$add_target_name(), QQtApplication, frame)
 #################################################################
 QMAKE_TARGET_FILE = "$${TARGET}"
 QMAKE_TARGET_PRODUCT = "$${TARGET}"
-QMAKE_TARGET_COMPANY = "www.QQt.com"
-QMAKE_TARGET_DESCRIPTION = "QQt Foundation Class"
-QMAKE_TARGET_COPYRIGHT = "Copyright 2017-2022 QQt Co., Ltd. All rights reserved"
+QMAKE_TARGET_COMPANY = "www.$${TARGET}.com"
+QMAKE_TARGET_DESCRIPTION = "$${TARGET} Foundation Class"
+QMAKE_TARGET_COPYRIGHT = "Copyright 2017-2042 $${TARGET} Co., Ltd. All rights reserved"
 
 win32 {
     #common to use upload, this can be ignored.
