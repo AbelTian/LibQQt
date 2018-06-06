@@ -7,6 +7,7 @@
 ##Library工程组和App工程组分开编译，不会引发这个bug。
 ##-----------------------------------------------------------------
 TEMPLATE = subdirs
+CONFIG += ordered
 
 SUBDIRS =
 
@@ -57,13 +58,16 @@ SUBDIRS =
 #macOS无故会记忆过去的链接位置，无解。
 #SUBDIRS += test/qqtlog4cpptest
 
-#need ffmpeg library
-#SUBDIRS += test/qqtffmpegplayer
-
 #测试libQQt的链接。
-#
-SUBDIRS += test/giftest
+#SUBDIRS += test/giftest
 
 ########################################################################################
 #macOS Windows
+#need ffmpeg library
+#SUBDIRS += test/qqtffmpegplayer
+
+
+########################################################################################
+#macOS Windows linux
+
 

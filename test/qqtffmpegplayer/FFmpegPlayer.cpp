@@ -1,12 +1,9 @@
 ﻿#include "FFmpegPlayer.h"
 #include<QDebug>
+#include "qqtcore.h"
+#include "qqt-local.h"
+
 #include<iostream>
-#include "qqt.h"
-#if defined (__WIN32__) || defined (__WIN64__)
-#include<windows.h>
-#else
-#define  nullptr NULL
-#endif
 using namespace std;
 
 bool isquit = false; //

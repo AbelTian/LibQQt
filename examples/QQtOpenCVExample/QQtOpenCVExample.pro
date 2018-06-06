@@ -41,7 +41,7 @@ system(touch main.cpp)
 #添加所有提供函数的pri 很有美感
 ############################################
 include (../../multi-link/multi-link/add_base_manager.pri)
-include (../../app-lib/add_library_OpenCV.pri)
+include (../../multi-link/app-lib/add_library_OpenCV.pri)
 
 ############################################
 #对产品线的控制结构Multi-link下命令 开启产品线
@@ -49,10 +49,10 @@ include (../../app-lib/add_library_OpenCV.pri)
 #这里做的事情，可以拷贝custom manager到app目录里再custom manager里面完成。
 add_version(1,0,0,0)
 add_deploy()
-add_dependent_manager(QQtBase)
 add_deploy_config($$PWD/AppRoot)
 
 #添加其他library
 #app 发布library OpenCV 只有app才会发布
+add_dependent_manager(QQtBase)
 add_dependent_library_OpenCV()
 

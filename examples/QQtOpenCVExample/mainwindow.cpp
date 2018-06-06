@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <opencv.hpp>
 #include <highgui.hpp>
+#include <qqtgiflabel.h>
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -15,6 +16,8 @@ MainWindow::MainWindow ( QWidget* parent ) :
     cv::namedWindow ( "OpenCV Image" );
     // show the image on window
     cv::imshow ( "OpenCV Image", image );
+
+    QQtGifLabel* label = new QQtGifLabel ( this );
 }
 
 MainWindow::~MainWindow()

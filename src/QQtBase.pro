@@ -139,6 +139,7 @@ contains(CONFIG, continue_build){
 ##project environ
 #################################################################
 #default
+message ($${TARGET} QT $${QT})
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
 message ($${TARGET} pre link $${QMAKE_PRE_LINK})

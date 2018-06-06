@@ -12,6 +12,5 @@ int main ( int argc, char* argv[] )
     w.show();
     //moveFull ( &w );
 
-
     return a.exec();
 }
