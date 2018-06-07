@@ -29,7 +29,7 @@
 #################################################################
 ##project name
 #################################################################
-TARGET = QQtBase
+TARGET = QQt
 TEMPLATE = lib
 
 CONFIG += debug_and_release
@@ -64,13 +64,8 @@ DEFINES += QQT_VERSION=$$APP_VERSION
 #################################################################
 ##project header
 #################################################################
-#qqt_header.pri不再使用，而是直接修改multi-link里的add_library_QQtBase.pri
-#方便链接者跟随最新的QQt变动，方便编辑者不必重复操作include代码。
-#include ($$PWD/qqt_header.pri)
-
-#使用add_library_XXX.pri导出include和defines
-#对这个pri的调用，使用add_export_manager()
-add_export_manager($$add_target_name())
+#qqt_header.pri 内部使用函数实现
+include ($$PWD/qqt_header.pri)
 
 #################################################################
 ##project source
@@ -82,7 +77,7 @@ include ($$PWD/qqt_source.pri)
 #所有App都依赖QQt的这个步骤
 #################################################################
 #可选修饰函数
-#add_project_name(QQtCore)
+#add_project_name(QQt)
 #add_source_dir($$PWD)
 #add_build_dir($$DESTDIR)
 

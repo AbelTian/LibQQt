@@ -41,7 +41,7 @@ include (../../app-lib/add_library_OpenSceneGraph.pri)
 system(touch mainwindow.cpp)
 add_version(1,0,0,0)
 add_deploy()
-add_dependent_manager(QQtBase)
+add_dependent_manager(QQt)
 mingw{
     #Qt is static, but osg is dynamic
     #add_defines(OSG_LIBRARY_STATIC)

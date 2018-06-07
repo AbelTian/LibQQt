@@ -19,4 +19,4 @@ CONFIG += ordered
 #注意，这里用include，保证了路径直接在QQt.pro下边
 #如果用SUBDIRS+=，会在子目录src里！
 #但是，这里必须用subdirs，include有个特点，pro或者pri的PWD不是pro的路径，而是调用者的路径。
-SUBDIRS += src/QQtBase.pro
+SUBDIRS += src/QQt.pro

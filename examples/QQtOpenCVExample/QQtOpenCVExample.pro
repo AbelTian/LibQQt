@@ -53,6 +53,6 @@ add_deploy_config($$PWD/AppRoot)
 
 #添加其他library
 #app 发布library OpenCV 只有app才会发布
-add_dependent_manager(QQtBase)
+add_dependent_manager(QQt)
 add_dependent_library_OpenCV()
 

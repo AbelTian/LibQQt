@@ -64,7 +64,7 @@ add_deploy()
 #libQQt从sdk到build和deploy
 #include (../../app-lib/add_library_QQt.pri)
 #add_dependent_library(QQt)
-add_dependent_manager(QQtBase)
+add_dependent_manager(QQt)
 
 #发布配置文件 把AppRoot里的配置项目拷贝到运行目录和发布目录
 add_deploy_config($${PWD}/AppRoot)
