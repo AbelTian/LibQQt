@@ -46,6 +46,8 @@ contains(DEFINES, LIB_LIBRARY) {
 }
 
 #static library宏的管理，一律放在头文件.pri
+#clean_target()
+#clean_sdk()
 
 #################################################################
 ##project version
