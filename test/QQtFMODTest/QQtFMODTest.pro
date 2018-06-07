@@ -37,7 +37,9 @@ include (../../multi-link/multi-link/add_base_manager.pri)
 
 include (../../app-lib/add_custom_manager.pri)
 
+system(touch main.cpp)
 add_version(1,0,0,0)
 add_deploy()
 add_dependent_manager(QQtBase)
 add_dependent_manager(FMOD)
+#add_dependent_manager(Template)
