@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/res">
+        <file alias="9763.wav">AppRoot/res/9763.wav</file>
+    </qresource>
+</RCC>

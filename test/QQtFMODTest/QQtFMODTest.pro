@@ -42,3 +42,7 @@ add_deploy()
 add_dependent_manager(QQt)
 add_dependent_manager(FMOD)
 #add_dependent_manager(Template)
+add_deploy_config($$PWD/AppRoot)
+
+RESOURCES += \
+    QQtFMODTest.qrc

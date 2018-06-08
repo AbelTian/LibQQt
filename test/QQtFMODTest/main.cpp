@@ -1,11 +1,9 @@
 #include "mainwindow.h"
-#include <QQtApplication>
+#include <QApplication>
 
 int main ( int argc, char* argv[] )
 {
-    QQtApplication a ( argc, argv );
-    //开启日志系统，终端打印不能实时输出。
-    a.setWriteLogSystem ( true );
+    QApplication a ( argc, argv );
 
     MainWindow w;
     w.show();
