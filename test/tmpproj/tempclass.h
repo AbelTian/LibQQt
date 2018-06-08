@@ -5,11 +5,11 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
-class QQTSHARED_EXPORT TempClass : public QObject
+class QQTSHARED_EXPORT TemplateClass : public QObject
 {
     Q_OBJECT
 public:
-    explicit TempClass ( QObject* parent = nullptr ) : QObject ( parent ) {
+    explicit TemplateClass ( QObject* parent = nullptr ) : QObject ( parent ) {
 
     }
 

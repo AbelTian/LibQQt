@@ -30,13 +30,11 @@
 #endif
 #endif
 
-#if defined(__WIN32__) || defined(__WIN64__)
+#if defined(__WIN__)
 #include "qqtwin.h"
-#elif defined(__LINUX__) || defined(__LINUX64__) \
-    || defined(__EMBEDDED_LINUX__) \
-    || defined(__ARM_LINUX__) || defined(__MIPS_LINUX__)
+#elif defined(__LINUX__) || defined(__EMBEDDED_LINUX__)
 #include "qqtlinux.h"
-#elif defined (__ANDROID__) || defined (__ANDROIDX86__)
+#elif defined (__ANDROID__)
 #include "qqtandroid.h"
 #elif defined (__DARWIN__)  || defined(__IOS__)
 #include "qqtdarwin.h"
@@ -46,8 +44,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#if defined (__WIN32__) \
-    || defined (__WIN64__)
+#if defined (__WIN__)
 #define SHUT_RD 0
 #define SHUT_WR 1
 #define SHUT_RDWR 2

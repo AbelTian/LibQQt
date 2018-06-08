@@ -16,46 +16,49 @@
 
 class QScrollBar;
 
-class QQtCustomPianoKeyBoard : public QWidget
+#include <qqtcore.h>
+#include <qqt-local.h>
+
+class QQTSHARED_EXPORT QQtCustomPianoKeyBoard : public QWidget
 {
     Q_OBJECT
 public:
-    QQtCustomPianoKeyBoard(QWidget*);
+    QQtCustomPianoKeyBoard ( QWidget* );
     ~QQtCustomPianoKeyBoard();
 
     void scrollToCenter();
-    void emitOutOfRangeNotes(bool);
-    void setRange(int s, int c, int e, bool beQuiet = false);
+    void emitOutOfRangeNotes ( bool );
+    void setRange ( int s, int c, int e, bool beQuiet = false );
 
     virtual QSize sizeHint() const;
 
 signals:
-    void noteOn(int);
-    void noteOff(int);
-    void rangeChanged(int, int, int);
+    void noteOn ( int );
+    void noteOff ( int );
+    void rangeChanged ( int, int, int );
 
 protected:
-    virtual void paintEvent(QPaintEvent* event);
-    virtual void mousePressEvent(QMouseEvent* event);
-    virtual void mouseReleaseEvent(QMouseEvent* event);
-    virtual void mouseMoveEvent(QMouseEvent* event);
+    virtual void paintEvent ( QPaintEvent* event );
+    virtual void mousePressEvent ( QMouseEvent* event );
+    virtual void mouseReleaseEvent ( QMouseEvent* event );
+    virtual void mouseMoveEvent ( QMouseEvent* event );
 
 private slots:
-    void sliderPos(int);
+    void sliderPos ( int );
 
 private:
 
     void calculateSize();
-    int  getNoteRangePosition(int note);
-    int  getNotePosition(int note);
-    bool isBlack(int note);
-    int  getNoteRangeWidth(int note);
-    void noteToRangeRect(int note, QRect& rect);
-    int  getNoteFromMousePos(const QPoint& p, bool ignoreY = false);
-    bool getRangeThumbFromMousePos(const QPoint& p, int** thumb);
-    bool updateRangeThumbPosFromMousePos(const QPoint& p);
+    int  getNoteRangePosition ( int note );
+    int  getNotePosition ( int note );
+    bool isBlack ( int note );
+    int  getNoteRangeWidth ( int note );
+    void noteToRangeRect ( int note, QRect& rect );
+    int  getNoteFromMousePos ( const QPoint& p, bool ignoreY = false );
+    bool getRangeThumbFromMousePos ( const QPoint& p, int** thumb );
+    bool updateRangeThumbPosFromMousePos ( const QPoint& p );
     bool fixRangeMarkers();
-    bool isNoteInRange(int);
+    bool isNoteInRange ( int );
 
     QSize size;
 

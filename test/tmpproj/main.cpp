@@ -1,9 +1,9 @@
 #include "tempwidget.h"
-#include <QApplication>
+#include <QQtApplication>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QQtApplication a(argc, argv);
     TempWidget w;
     w.show();
 

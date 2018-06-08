@@ -8,27 +8,29 @@
 #include <QObject>
 #include <QMargins>
 
+#include <qqtcore.h>
+#include <qqt-local.h>
 
 class QPushButton;
 class QWidget;
 class QQtFramelessHelperPrivate;
 
-class QQtFramelessHelper : public QObject
+class QQTSHARED_EXPORT QQtFramelessHelper : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtFramelessHelper(QWidget* parent);
+    explicit QQtFramelessHelper ( QWidget* parent );
 
-    void setResizeMargins(int margin);
-    void setResizeMargins(const QMargins& margins);
+    void setResizeMargins ( int margin );
+    void setResizeMargins ( const QMargins& margins );
 
-    void setCloseButton(QPushButton* button, bool edgeResize = true);
-    void setMaximizedButton(QPushButton* button, bool edgeResize = true);
-    void setMinimizedButton(QPushButton* button, bool edgeResize = true);
-    void setRestoreButton(QPushButton* button, bool edgeResize = true);
+    void setCloseButton ( QPushButton* button, bool edgeResize = true );
+    void setMaximizedButton ( QPushButton* button, bool edgeResize = true );
+    void setMinimizedButton ( QPushButton* button, bool edgeResize = true );
+    void setRestoreButton ( QPushButton* button, bool edgeResize = true );
 
-    void addEdgeWidget(QWidget* widget);
-    void addDragWidget(QWidget* widget);
+    void addEdgeWidget ( QWidget* widget );
+    void addDragWidget ( QWidget* widget );
 
 private:
     QQtFramelessHelperPrivate* d;

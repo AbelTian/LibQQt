@@ -4,7 +4,10 @@
 #include <qqttabwidget.h>
 #include <qqthorizontaltexttabbar.h>
 
-class QQtHorizontalTextTabWidget : public QQtTabWidget
+#include <qqtcore.h>
+#include <qqt-local.h>
+
+class QQTSHARED_EXPORT QQtHorizontalTextTabWidget : public QQtTabWidget
 {
     Q_OBJECT
 public:

@@ -89,8 +89,8 @@ SUBDIRS += test/bytearraytest
 }
 #
 SUBDIRS += test/coretest
-#
-SUBDIRS += test/tmpproj
+#不要开
+#SUBDIRS += test/tmpproj
 
 #
 #need QtSoap - WebSupport
@@ -163,5 +163,3 @@ SUBDIRS += test/QQtWidgetClickHelperTest
 #
 SUBDIRS += test/QQtWidgetClickSoundHelperTest
 
-#在subdirs里面添加一次add_base_manager.pri是否可以影响全部子工程
-SUBDIRS += test/SubDirBaseManagerTest

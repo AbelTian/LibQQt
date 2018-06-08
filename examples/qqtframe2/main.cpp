@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include <QApplication>
+#include <QQtApplication>
 #include <qqtapplication.h>
 #include <qqtframe.h>
 #include <QSettings>
@@ -9,9 +9,9 @@ class MyApp : public QQtApplication
 {
 public:
     explicit MyApp ( int& argc, char** argv ) : QQtApplication ( argc, argv ) {
-        QApplication::setOrganizationName ( "qqtframe" );
-        QApplication::setOrganizationDomain ( "www.qqtframe.com" ); // 专为Mac OS X 准备的
-        QApplication::setApplicationName ( "QQtFrame" );
+        QQtApplication::setOrganizationName ( "qqtframe" );
+        QQtApplication::setOrganizationDomain ( "www.qqtframe.com" ); // 专为Mac OS X 准备的
+        QQtApplication::setApplicationName ( "QQtFrame" );
     }
 };
 

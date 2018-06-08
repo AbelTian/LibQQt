@@ -6,7 +6,10 @@
 #include <qqtsql.h>
 #include <qqtcore.h>
 
-class QQtSqlQuery : public QSqlQuery
+#include <qqtcore.h>
+#include <qqt-local.h>
+
+class QQTSHARED_EXPORT QQtSqlQuery : public QSqlQuery
 {
 public:
     explicit QQtSqlQuery ( QSqlResult* r );

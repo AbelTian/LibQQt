@@ -1,10 +1,10 @@
 #include "widget.h"
-#include <QApplication>
+#include <QQtApplication>
 #include "qqtdictionary.h"
 
 int main ( int argc, char* argv[] )
 {
-    QApplication a ( argc, argv );
+    QQtApplication a ( argc, argv );
 
     QString tt;
     tt = QString ( "%1" ).sprintf ( "%4d", 13 );//"  13"
