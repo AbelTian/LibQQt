@@ -66,3 +66,5 @@ add_dependent_manager(QQt)
 
 #发布配置文件 把AppRoot里的配置项目拷贝到运行目录和发布目录
 add_deploy_config($${PWD}/AppRoot)
+
+message($$ANDROID_EXTRA_LIBS)

@@ -47,8 +47,7 @@ SUBDIRS =
 #SUBDIRS += test/QQtQwtPlot3DTest
 
 #need FMOD lowlevel SDK
-#
-SUBDIRS += test/QQtFMODTest
+#SUBDIRS += test/QQtFMODTest
 
 #need vlcQt libvlc library
 #SUBDIRS += test/qqtliveplayer
@@ -59,9 +58,6 @@ SUBDIRS += test/QQtFMODTest
 #macOS无故会记忆过去的链接位置，无解。
 #SUBDIRS += test/qqtlog4cpptest
 
-#测试libQQt的链接。
-#SUBDIRS += test/giftest
-
 ########################################################################################
 #macOS Windows
 #need ffmpeg library
@@ -70,5 +66,7 @@ SUBDIRS += test/QQtFMODTest
 
 ########################################################################################
 #macOS Windows linux
-
+#测试libQQt的链接。
+#SUBDIRS += test/giftest
+SUBDIRS += test/voicetest
 
