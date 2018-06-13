@@ -95,6 +95,8 @@ add_deploy()
 #libQQt从sdk到build和deploy
 add_dependent_manager(QQt)
 
+add_deploy_config($$PWD/AppRoot)
+
 #-------------------------------------------------
 ##project environ
 #-------------------------------------------------
