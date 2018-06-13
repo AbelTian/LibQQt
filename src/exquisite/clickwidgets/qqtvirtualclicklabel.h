@@ -1,4 +1,4 @@
-#ifndef QQTVIRTUALCLICKLABEL_H
+﻿#ifndef QQTVIRTUALCLICKLABEL_H
 #define QQTVIRTUALCLICKLABEL_H
 
 #include <qqtlabel.h>
@@ -108,7 +108,10 @@ public:
         if ( event->type() == QEvent::Paint )
             return QQtLabel::eventFilter ( watched, event );
 
-        //+ fix bug
+        //修复鼠标穿透
+        bool atti = testAttribute ( Qt::WA_TransparentForMouseEvents );
+        if ( atti )
+            return QQtLabel::eventFilter ( watched, event );
 
         //处理press
         if ( event->type() == QEvent::MouseButtonPress ) {
