@@ -11,16 +11,6 @@ CONFIG += ordered
 
 SUBDIRS =
 
-#need webkit webkitwidgets - WebSupport
-#webengine
-#ignored
-#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
-#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
-
-########################################################################################
-#macOS Windows linux
-#测试libQQt的链接。
 #SUBDIRS += test/giftest
 #SUBDIRS += test/voicetest
 #SUBDIRS += examples/exquisite
-SUBDIRS += test/treeviewtest
