@@ -23,6 +23,7 @@ public:
         QQtWidget ( parent ) {
         mClickHelper = 0;
         mDefaultClickHelper = 0;
+        installEventFilter ( this );
     }
     virtual ~QQtVirtualClickWidget() {}
 
@@ -83,21 +84,74 @@ protected:
     // QWidget interface
 protected:
     virtual void mousePressEvent ( QMouseEvent* event ) {
-        if ( mClickHelper )
-            mClickHelper->mousePressEvent ( event, this );
+        //if ( mClickHelper )
+        //    mClickHelper->mousePressEvent ( event, this );
         return QQtWidget::mousePressEvent ( event );
     }
 
     virtual void mouseReleaseEvent ( QMouseEvent* event ) {
-        if ( mClickHelper )
-            mClickHelper->mouseReleaseEvent ( event, this );
+        //if ( mClickHelper )
+        //    mClickHelper->mouseReleaseEvent ( event, this );
         return QQtWidget::mouseReleaseEvent ( event );
     }
 
     virtual void mouseDoubleClickEvent ( QMouseEvent* event ) {
-        if ( mClickHelper )
-            mClickHelper->mouseDoubleClickEvent ( event, this );
+        //if ( mClickHelper )
+        //    mClickHelper->mouseDoubleClickEvent ( event, this );
         return QQtWidget::mouseDoubleClickEvent ( event );
+    }
+
+    // QObject interface
+public:
+    virtual bool eventFilter ( QObject* watched, QEvent* event ) override {
+        //过滤掉不是自己的
+        if ( watched != this )
+            return QQtWidget::eventFilter ( watched, event );
+
+        //修复 paint bug
+        /*fix the parent handled bug terminally*/
+        if ( event->type() == QEvent::Paint )
+            return QQtWidget::eventFilter ( watched, event );
+
+        //+ fix bug
+
+        //处理press
+        if ( event->type() == QEvent::MouseButtonPress ) {
+            QMouseEvent* e = ( QMouseEvent* ) event;
+            //pline() << hex << e->button();
+            if ( e->button() == Qt::LeftButton ) {
+                if ( mClickHelper )
+                    mClickHelper->mousePressEvent ( e, this );
+                event->accept();
+                return true;
+            }
+        }
+
+        //处理release
+        if ( event->type() == QEvent::MouseButtonRelease ) {
+            QMouseEvent* e = ( QMouseEvent* ) event;
+            //pline() << hex << e->button();
+            if ( e->button() == Qt::LeftButton ) {
+                if ( mClickHelper )
+                    mClickHelper->mouseReleaseEvent ( e, this );
+                event->accept();
+                return true;
+            }
+        }
+
+        //处理doubleclick
+        if ( event->type() == QEvent::MouseButtonDblClick ) {
+            QMouseEvent* e = ( QMouseEvent* ) event;
+            //pline() << hex << e->button();
+            if ( e->button() == Qt::NoButton ) {
+                if ( mClickHelper )
+                    mClickHelper->mouseDoubleClickEvent ( e, this );
+                event->accept();
+                return true;
+            }
+        }
+
+        return true;
     }
 };
 

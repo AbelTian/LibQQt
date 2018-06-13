@@ -84,8 +84,7 @@ SUBDIRS =
 #必开
 #SUBDIRS += test/qqtdicttest2
 #必开
-#
-SUBDIRS += test/giftest
+#SUBDIRS += test/giftest
 
 #必开 这两个例子是关于QQtAudio的最好展示
 #SUBDIRS += examples/qqtaudioexample
@@ -115,4 +114,4 @@ SUBDIRS += test/giftest
 #SUBDIRS += demo/TouchMonitorServer
 
 SUBDIRS += test/QQtWidgetClickHelperTest
-SUBDIRS += test/QQtWidgetClickSoundHelperTest
+#SUBDIRS += test/QQtWidgetClickSoundHelperTest
