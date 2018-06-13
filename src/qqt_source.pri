@@ -19,7 +19,7 @@ HEADERS += $$PWD/qqt.h \
     $$PWD/qqtversion.h \
     $$PWD/qqt-qt.h
 #platform header
-contains (QSYS_PRIVATE, Win32|Windows||Win64) {
+contains (QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
     #win32 base header
     HEADERS += $$PWD/qqtwin.h
 } else:contains (QSYS_PRIVATE, macOS||iOS||iOSSimulator) {
