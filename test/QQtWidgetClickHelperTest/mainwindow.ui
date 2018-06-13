@@ -59,7 +59,9 @@
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(164, 0, 0);</string>
+              <string notr="true">QWidget#widget_4 {
+	background-color: rgb(164, 0, 0);
+}</string>
              </property>
             </widget>
            </item>

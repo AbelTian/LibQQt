@@ -151,7 +151,7 @@ public:
             }
         }
 
-        return true;
+        return QQtWidget::eventFilter ( watched, event );;
     }
 };
 

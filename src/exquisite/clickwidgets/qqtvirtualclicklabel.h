@@ -146,7 +146,7 @@ public:
             }
         }
 
-        return true;
+        return QQtLabel::eventFilter ( watched, event );;
     }
 };
 
