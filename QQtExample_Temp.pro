@@ -23,3 +23,4 @@ SUBDIRS =
 #SUBDIRS += test/giftest
 #SUBDIRS += test/voicetest
 
+SUBDIRS += test/treeviewtest
