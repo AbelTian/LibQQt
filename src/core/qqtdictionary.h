@@ -1,4 +1,4 @@
-﻿#ifndef QQTDICTIONARY_H
+#ifndef QQTDICTIONARY_H
 #define QQTDICTIONARY_H
 
 #include <QObject>
@@ -80,6 +80,7 @@ public:
     /*保存为value的*/
     QVariant& getValue();
     const QVariant& getValue() const;
+
     QQtDictionary& getChild ( int index );
     QQtDictionary& getChild ( const QString& key );
     /*获取一个个孩子*/
@@ -91,9 +92,16 @@ public:
     /*如果设置Value的时候改变了Type，将会以新的Type为准*/
     void setType ( EDictType type );
 
-    /*插入数据，自动设置type*/
+    //设置value
+    template <typename T>
+    void setValue ( const T& value ) {
+        m_type = DictValue;
+        m_value.setValue<T> ( value );
+    }
     /*自己本身没有孩子，是个叶子，添加值*/
-    void setChild ( const QVariant& value );
+    void setValue ( const QVariant& value );
+
+    /*插入数据，自动设置type*/
     /*自己本身有孩子，添加全部孩子*/
     /*whole value list*/
     void setChild ( const QList<QQtDictionary>& list );
@@ -102,8 +110,8 @@ public:
 
     /*自己本身没有孩子，添加一个个的孩子*/
     /*index = int*/
-    void appendChild ( const QString& value );
-    void appendChild ( const QQtDictionary& dict );
+    void addChild ( const QString& value );
+    void addChild ( const QQtDictionary& dict );
 
     /*自己本身有孩子，添加一个个的孩子*/
     /*index = int, 会在之前之后插入，现更改为会替换存在的index*/
@@ -115,8 +123,9 @@ public:
 
     /*操作数据，改变数据*/
     void modValue ( const QVariant& value );
+    /*没有这个数据会无效*/
     void modChild ( int index, const QQtDictionary& value );
-    void modChild ( QString key, const QQtDictionary& value );
+    void modChild ( const QString& key, const QQtDictionary& value );
 
     /*删除数据*/
     void clear ( );

@@ -369,28 +369,34 @@ contains (DEFINES, __EXQUISITE__) {
     contains (DEFINES, __CLICKWIDGETS__) {
 
         SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickhelper.cpp \
             $$PWD/exquisite/clickwidgets/qqtclickhelper.cpp \
             $$PWD/exquisite/clickwidgets/qqtlongclickhelper.cpp \
             $$PWD/exquisite/clickwidgets/qqtdoubleclickhelper.cpp
         HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickhelper.h \
             $$PWD/exquisite/clickwidgets/qqtclickhelper.h \
             $$PWD/exquisite/clickwidgets/qqtlongclickhelper.h \
             $$PWD/exquisite/clickwidgets/qqtdoubleclickhelper.h
 
         SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickwidget.cpp \
             $$PWD/exquisite/clickwidgets/qqtclickwidget.cpp \
             $$PWD/exquisite/clickwidgets/qqtlongclickwidget.cpp \
             $$PWD/exquisite/clickwidgets/qqtdoubleclickwidget.cpp
         HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickwidget.h \
             $$PWD/exquisite/clickwidgets/qqtclickwidget.h \
             $$PWD/exquisite/clickwidgets/qqtlongclickwidget.h \
             $$PWD/exquisite/clickwidgets/qqtdoubleclickwidget.h
 
         SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclicklabel.cpp \
             $$PWD/exquisite/clickwidgets/qqtclicklabel.cpp \
             $$PWD/exquisite/clickwidgets/qqtlongclicklabel.cpp \
             $$PWD/exquisite/clickwidgets/qqtdoubleclicklabel.cpp
         HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclicklabel.h \
             $$PWD/exquisite/clickwidgets/qqtclicklabel.h \
             $$PWD/exquisite/clickwidgets/qqtlongclicklabel.h \
             $$PWD/exquisite/clickwidgets/qqtdoubleclicklabel.h

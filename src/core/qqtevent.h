@@ -2,7 +2,7 @@
 #define QQTEVENT_H
 
 #include <QEvent>
-
+#include <QMouseEvent>
 #include "qqt-qt.h"
 #include <qqt-local.h>
 
@@ -12,7 +12,7 @@ class QQTSHARED_EXPORT QQtMouseEvent : public QMouseEvent
 public:
     QQtMouseEvent() :
         QMouseEvent ( MouseButtonPress, QPointF(), QPointF(), QPointF(),
-                      Qt::LeftButton, Qt::LeftButton, Qt::NoModifier,  Qt::MouseEventNotSynthesized ) {
+                      Qt::LeftButton, Qt::LeftButton, Qt::NoModifier ) {
 
     }
     virtual ~QQtMouseEvent() {}

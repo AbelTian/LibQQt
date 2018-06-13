@@ -29,7 +29,7 @@ int main ( int argc, char* argv[] )
 
     QQtDictionary d1;
     QQtDictionary d2 ( QVariant ( "CCCC" ) );
-    d1.appendChild ( d2 );
+    d1.addChild ( d2 );
     pline() << d1[0].getValue();
     d1[0] = "ff";
     pline() << d1[0].getValue();
@@ -43,7 +43,7 @@ int main ( int argc, char* argv[] )
     for ( int i = 0; i < 5; i++ )
     {
         QQtDictionary d ( QVariant ( QString::number ( i ) ) );
-        d4.appendChild ( d );
+        d4.addChild ( d );
     }
 
     pline() << d4.count();
@@ -56,20 +56,20 @@ int main ( int argc, char* argv[] )
     QQtDictionary d5;
 
     /*后续有map操作，这一步就没有用了*/
-    d5.appendChild ( "5.7" );
-    d5.appendChild ( "5.8" );
-    d5.appendChild ( "5.9" );
+    d5.addChild ( "5.7" );
+    d5.addChild ( "5.8" );
+    d5.addChild ( "5.9" );
 
     /*后续有map操作，这一步就没有用了*/
-    d5["5.7"].appendChild ( "5.7.2" );
-    d5["5.7"].appendChild ( "5.7.3" );
-    d5["5.7"].appendChild ( "5.7.4" );
+    d5["5.7"].addChild ( "5.7.2" );
+    d5["5.7"].addChild ( "5.7.3" );
+    d5["5.7"].addChild ( "5.7.4" );
 
-    d5["5.7"]["5.7.4"].appendChild ( "xxx.dmg" );
-    d5["5.7"]["5.7.4"][0].appendChild ( "xxx.dmg" );
-    d5["5.7"]["5.7.4"][0].appendChild ( "2017-12-12" );
-    d5["5.7"]["5.7.4"][0].appendChild ( "1.2G" );
-    d5["5.7"]["5.7.4"][0].appendChild ( "Detail" );
+    d5["5.7"]["5.7.4"].addChild ( "xxx.dmg" );
+    d5["5.7"]["5.7.4"][0].addChild ( "xxx.dmg" );
+    d5["5.7"]["5.7.4"][0].addChild ( "2017-12-12" );
+    d5["5.7"]["5.7.4"][0].addChild ( "1.2G" );
+    d5["5.7"]["5.7.4"][0].addChild ( "Detail" );
     d5["5.7"]["5.7.4"][0].insertChild ( 4, "Detail2" );
 
     //pline() << "\n" << d5;
@@ -97,7 +97,7 @@ int main ( int argc, char* argv[] )
 
     /*在这里有list操作，前边"5.7"的map就没有用了*/
     /*但是再过去做过的list类型的操作都会被保留，也就是说中间出现过概念错误，没问题还保留着*/
-    d5["5.7"].appendChild ( "5.7.5" );
+    d5["5.7"].addChild ( "5.7.5" );
 
     for ( int i = 0; i < d5["5.7"].count(); i++ )
     {
@@ -114,7 +114,7 @@ int main ( int argc, char* argv[] )
     //Widget w;
     //w.show();
 
-    //QQtDictionary appendChild函数存在一个问题，在这里测试是否解决。
+    //QQtDictionary addChild函数存在一个问题，在这里测试是否解决。
     //内部实现使用list的append函数，会引用外部的类实例，这导致在free空间的时候，存在很多莫名其妙的二次free，尤其外部实例和QObject关联的时候。
     //现在内部实现使用push_back，这里检测QQtDictionary还有没有二次free这个bug。
     QQtDictionary* n0 = new QQtDictionary ( QVariant ( "This is a value" ) );
@@ -123,8 +123,8 @@ int main ( int argc, char* argv[] )
     pline() << hex << n0->getValue().constData();
 
     QQtDictionary t0;
-    //这里appendChild，t0变成一个list。
-    t0.appendChild ( *n0 );
+    //这里addChild，t0变成一个list。
+    t0.addChild ( *n0 );
 
     //这里更改外部实例的值，显然外部实例的值已经改变了。
     n0->getValue().setValue<QString> ( "This is a changed value" );
@@ -155,9 +155,9 @@ int main ( int argc, char* argv[] )
     pline() << v0;
 
     QQtDictionary v1;
-    v1.appendChild ( "CCCC" );
-    v1.appendChild ( "DDDD" );
-    v1[0].appendChild ( "2-CCCC" );
+    v1.addChild ( "CCCC" );
+    v1.addChild ( "DDDD" );
+    v1[0].addChild ( "2-CCCC" );
     pline() << v1;
     pline() << v1[0];
 

@@ -17,6 +17,13 @@ MainWindow::MainWindow ( QWidget* parent ) :
     connect ( ui->widget, SIGNAL ( longClick() ),
               this, SLOT ( set3Sum() ) );
 
+    connect ( ui->widget_4, SIGNAL ( click() ),
+              this, SLOT ( set31Sum() ) );
+    connect ( ui->widget_4, SIGNAL ( doubleClick() ),
+              this, SLOT ( set32Sum() ) );
+    connect ( ui->widget_4, SIGNAL ( longClick() ),
+              this, SLOT ( set33Sum() ) );
+
     connect ( ui->widget_2, SIGNAL ( click() ),
               this, SLOT ( set4Sum() ) );
     connect ( ui->widget_2, SIGNAL ( longClick() ),
@@ -45,6 +52,21 @@ void MainWindow::set2Sum()
 void MainWindow::set3Sum()
 {
     ui->textBrowser->append ( QString ( "%1 long click" ).arg ( ui->widget->clickHelper()->totalClickNum() ) );;
+}
+
+void MainWindow::set31Sum()
+{
+    ui->textBrowser->append ( QString ( "child %1 click" ).arg ( ui->widget_4->clickHelper()->totalClickNum() ) );;
+}
+
+void MainWindow::set32Sum()
+{
+    ui->textBrowser->append ( QString ( "child %1 double click" ).arg ( ui->widget_4->clickHelper()->totalClickNum() ) );;
+}
+
+void MainWindow::set33Sum()
+{
+    ui->textBrowser->append ( QString ( "child %1 long click" ).arg ( ui->widget_4->clickHelper()->totalClickNum() ) );;
 }
 
 void MainWindow::set4Sum()
