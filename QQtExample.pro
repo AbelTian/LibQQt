@@ -79,8 +79,7 @@ SUBDIRS += test/qqtdicttest
 #
 SUBDIRS += test/qqtdicttest2
 #必开
-#
-SUBDIRS += test/giftest
+#SUBDIRS += test/giftest
 
 #必开 这两个例子是关于QQtAudio的最好展示
 #
@@ -119,15 +118,4 @@ SUBDIRS += test/osdtest
 
 #
 SUBDIRS += test/QQtWidgetClickHelperTest
-#
-SUBDIRS += test/QQtWidgetClickSoundHelperTest
 
-
-#need webkit webkitwidgets - WebSupport
-#webengine
-#ignored
-#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebkittest
-#lessThan(QT_MAJOR_VERSION , 5):SUBDIRS += test/qqtwebclient
-
-#need QZXing, default closed.
-#SUBDIRS += examples/qrcodeexample

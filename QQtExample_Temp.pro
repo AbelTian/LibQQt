@@ -22,5 +22,9 @@ SUBDIRS =
 #测试libQQt的链接。
 #SUBDIRS += test/giftest
 #SUBDIRS += test/voicetest
+<<<<<<< HEAD
 
 SUBDIRS += test/treeviewtest
+=======
+#SUBDIRS += examples/exquisite
+>>>>>>> cf536b03ab3ae16368f46c8e35872447cc41787b

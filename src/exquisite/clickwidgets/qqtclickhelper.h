@@ -1,14 +1,10 @@
 #ifndef QQTCLICKHELPER_H
 #define QQTCLICKHELPER_H
 
+#include <qqtvirtualclickhelper.h>
+
 #include <qqt-local.h>
 #include <qqtcore.h>
-
-#if 0
-#define p2debug() p2line()
-#else
-#define p2debug() QNoDebug()
-#endif
 
 /**
  * QQtClickHelper
@@ -22,7 +18,7 @@
  *
  * 可以统计按键次数
  */
-class QQTSHARED_EXPORT QQtClickHelper : public QObject
+class QQTSHARED_EXPORT QQtClickHelper : public QQtVirtualClickHelper
 {
     Q_OBJECT
 
@@ -55,51 +51,25 @@ signals:
     //调用于userWidget相对应的Event里
     //允许重写
 public:
-    virtual void mousePressEvent ( QMouseEvent* event, QWidget* userWidget = 0 );
-    virtual void mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget = 0 );
-    virtual void mouseDoubleClickEvent ( QMouseEvent* event, QWidget* userWidget = 0 );
+    virtual void mousePressEvent ( QMouseEvent* event, QWidget* userWidget = 0 ) override;
+    virtual void mouseReleaseEvent ( QMouseEvent* event, QWidget* userWidget = 0 ) override;
+    virtual void mouseDoubleClickEvent ( QMouseEvent* event, QWidget* userWidget = 0 ) override;
 
     //optional
 public:
     inline const quint32 clickNum() const { return nClickNum; }
-    inline const quint64 totalClickNum() const { return nTotalClickNum; }
-
     inline const quint32 clickNumWithCancel() const { return nClickNumWithCancel; }
-    inline const quint64 totalClickNumWithCancel() const { return nTotalClickNumWithCancel; }
 
     /**
      * 以下用于内部
      */
-public:
-    typedef enum
-    {
-        QQtNullClick = 0,
-
-        QQtClick,
-        QQtLongClick,
-
-        QQtDoubleClick,
-
-        QQtMaxClick
-    } QQtClickType;
-    Q_ENUMS ( QQtClickType )
-
 protected:
-    //用于记录点击到了什么状态.
-    QQtClickType mClickType;
-
-    //用于记录按钮的位置
-    QPoint mPoint;
-
     //click num
-    virtual void checkClickNumWithCancel();
-    virtual void checkClickNum ( QQtClickType type );
+    virtual void checkClickNumWithCancel() override;
+    virtual void checkClickNum ( QQtClickType type ) override;
 
     quint32 nClickNum;
-    quint64 nTotalClickNum;
-
     quint32 nClickNumWithCancel;
-    quint64 nTotalClickNumWithCancel;
 };
 
 #endif // QQTCLICKHELPER_H

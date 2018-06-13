@@ -36,6 +36,36 @@
             <height>0</height>
            </size>
           </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>191</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QQtDoubleClickWidget" name="widget_4" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QWidget#widget_4 {
+	background-color: rgb(164, 0, 0);
+}</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -90,7 +120,7 @@
      <x>0</x>
      <y>0</y>
      <width>816</width>
-     <height>17</height>
+     <height>39</height>
     </rect>
    </property>
   </widget>

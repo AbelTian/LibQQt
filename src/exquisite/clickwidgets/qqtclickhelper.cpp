@@ -1,14 +1,9 @@
 #include "qqtclickhelper.h"
 
-QQtClickHelper::QQtClickHelper ( QObject* parent ) : QObject ( parent )
+QQtClickHelper::QQtClickHelper ( QObject* parent ) : QQtVirtualClickHelper ( parent )
 {
     nClickNumWithCancel = 0;
-    nTotalClickNumWithCancel = 0;
-
     nClickNum = 0;
-    nTotalClickNum = 0;
-
-    mClickType = QQtNullClick;
 }
 
 QQtClickHelper::~QQtClickHelper()
@@ -77,6 +72,7 @@ void QQtClickHelper::mouseDoubleClickEvent ( QMouseEvent* event, QWidget* userWi
 
 void QQtClickHelper::checkClickNumWithCancel()
 {
+    QQtVirtualClickHelper::checkClickNumWithCancel();
     switch ( mClickType )
     {
         case QQtClick:
@@ -103,6 +99,7 @@ void QQtClickHelper::checkClickNumWithCancel()
 
 void QQtClickHelper::checkClickNum ( QQtClickHelper::QQtClickType type )
 {
+    QQtVirtualClickHelper::checkClickNum ( type );
     switch ( type )
     {
         case QQtClick:

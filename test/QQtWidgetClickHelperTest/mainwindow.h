@@ -19,6 +19,9 @@ public slots:
     void setSum();
     void set2Sum();
     void set3Sum();
+    void set31Sum();
+    void set32Sum();
+    void set33Sum();
 
     void set4Sum();
     void set5Sum();

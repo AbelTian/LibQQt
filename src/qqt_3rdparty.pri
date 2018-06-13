@@ -6,7 +6,7 @@
 #注释：在qqt_header.pri打开 DEFINES += __PLUGINSUPPORT__
 #TODO: macOS runtime crash
 contains (DEFINES, __PLUGINSUPPORT__) {
-    contains(QSYS_PRIVATE, Win32|Windows|Win64) {
+    contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
         contains (DEFINES, QQT_LIBRARY) {
             DEFINES += BUILD_QDEVICEWATCHER_LIB
         } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
@@ -118,7 +118,7 @@ contains (DEFINES, __EXQUISITE__) {
     #qrdecode widget
     #注释：在qqt_header.pri打开 DEFINES += __QRDECODE__
     contains (DEFINES, __QRDECODE__) {
-        contains(QSYS_PRIVATE, Win32|Windows|Win64) {
+        contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
             #ignore: QZXing has no need to export
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QZXING_LIBRARY
@@ -138,7 +138,7 @@ contains (DEFINES, __EXQUISITE__) {
     #mathml widget
     #注释：在qqt_header.pri打开 DEFINES += __MATHWIDGETSUPPORT__
     contains (DEFINES, __MATHWIDGETSUPPORT__) {
-        contains(QSYS_PRIVATE, Win32|Windows|Win64) {
+        contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
             #mathml
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QT_QTMMLWIDGET_LIBRARY
