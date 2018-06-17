@@ -21,7 +21,8 @@
 #Suggest Qt 5.9.2/4.8.6/4.8.7
 #please dont use Qt 5.9.1, it is broken with android and ios.
 #please dont modify this pro
-#use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}
+#use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}
+#Multi-link2.0 wont force user for setting Qt Creator default build directory.
 #in Qt kit page, set kit's File System Name. (Creator Ver.>v3.5)
 #in project build page, def env QSYS
 #in app_configure.pri (auto createed) define QQT_BUILD_ROOT= and QQT_SDK_ROOT= and or APP_DEPLOY_ROOT
