@@ -144,8 +144,9 @@ Visual Studio使用设置：
 
 还修改了Windows下的app_configure.pri的磁盘保存位置，到用户主目录/.qmake/app_configure.pri，这块完全使用类Unix风格。  
 
-# v3.0 Multi-link技术完成  
+# LibQQt v3.0 
 
+Multi-link技术完成。  
 在完成的Multi-link技术里，新的QSYS环境变量和Qt Kit的关系  
 QKIT不再使用，而仅仅使用QSYS。  
 
@@ -188,6 +189,21 @@ SDK难免有不全，难免不能满足任何用户的需求，请用户自行�
 利用Multi-link技术的添加Library模板很容易的。 
 我计划在LibQQt 3.0的时机将Multi-link合并到master分支进行正式发布。   
 ![Multi-link技术的能力](screenshot/13.png "这是Multi-link技术的能力")  
+
+
+####多链接技术的一点设置  
+![Multilink的一点点设置](screenshot/14.png "这是LibQQt使用的Multi-link需要设置的几个路径，编译路径，Sdk路径，发布路径")  
+APP_DEPLOY_ROOT=R:\Develop\d0-product  
+LIB_SDK_ROOT=R:\Develop\d1-sdk  
+APP_BUILD_ROOT=R:\Develop\c0-buildstation  
+Multi-link目录里提供了Multi-linkConfigTool图形配置工具，编译运行就可以设置，非常方便。  
+在工程里包含multi-link/add_base_manager.pri，在project build config设置环境变量QSYS，就可以使用里面的丰富函数。简单吧！  
+*注意：Multi-link 2已经不支持Qt4，如果需要Qt第四代，那么使用multi-link 1.0链接QQt。*  
+![qmake成功](screenshot/15.png "这是LibQQt qmake成功的样子。")  
+![qmake成功](screenshot/16.png "这是Example app qmake成功的样子。")  
+
+Enjoy it!  
+
 
 [返回](.)   
 
