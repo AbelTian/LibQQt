@@ -19,13 +19,13 @@ HEADERS += $$PWD/qqt.h \
     $$PWD/qqtversion.h \
     $$PWD/qqt-qt.h
 #platform header
-contains (QKIT_PRIVATE, WIN32||WIN64) {
+contains (QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
     #win32 base header
     HEADERS += $$PWD/qqtwin.h
-} else:contains (QKIT_PRIVATE, macOS||iOS||iOSSimulator) {
+} else:contains (QSYS_PRIVATE, macOS||iOS||iOSSimulator) {
     #mac base header
     HEADERS += $$PWD/qqtdarwin.h
-} else:contains (QKIT_PRIVATE, ANDROID||ANDROIDX86) {
+} else:contains (QSYS_PRIVATE, Android||AndroidX86) {
     #android base header
     HEADERS += $$PWD/qqtandroid.h
 } else {
@@ -48,7 +48,7 @@ HEADERS += \
 #后台进程支持，这个只有ios不支持，这个支持在源文件pri里处理。
 DEFINES += __PROCESSMODULE__
 #ios has no backend process
-contains(QKIT_PRIVATE, iOS||iOSSimulator) {
+contains(QSYS_PRIVATE, iOS||iOSSimulator) {
     DEFINES -= __PROCESSMODULE__
 }
 
@@ -227,12 +227,15 @@ contains (DEFINES, __PRINTSUPPORT__) {
 }
 
 contains(DEFINES, __QQTCHARTS__) {
-    SOURCES += \
-        $$PWD/charts/qqtchart.cpp \
-        $$PWD/charts/qqtchartview.cpp
-    HEADERS += \
-        $$PWD/charts/qqtchart.h \
-        $$PWD/charts/qqtchartview.h
+    contains(DEFINES, __QT_CHARTS__ ){
+        SOURCES += \
+            $$PWD/charts/qqtchart.cpp \
+            $$PWD/charts/qqtchartview.cpp
+        HEADERS += \
+            $$PWD/charts/qqtchart.h \
+            $$PWD/charts/qqtchartview.h
+    }
+    #customplot 在3rdparty.
 }
 
 #network
@@ -289,6 +292,13 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         HEADERS += $$PWD/network/qqtbluetoothmanager.h
     }
 
+    #nfc iodevice
+    #注释：在qqt_header.pri打开 DEFINES += __NFC__
+    contains (DEFINES, __NFC__) {
+        SOURCES += $$PWD/network/qqtnfcclient.cpp
+        HEADERS += $$PWD/network/qqtnfcclient.h
+    }
+
     contains (DEFINES, __WEBSOCKETSUPPORT__) {
         #websocket client iodevice
         SOURCES += $$PWD/network/qqtwebsocketclient.cpp
@@ -301,7 +311,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #ethnet(+wifi) manager
     #arm mips
     #TODO: +wince +android +ios +macOS? +win? +linux?
-    contains(QKIT_PRIVATE, EMBEDDED||ARM32||MIPS32) {
+    contains(QSYS_PRIVATE, Embedded||Arm32||Mips32) {
         SOURCES += $$PWD/network/qqtethenetmanager.cpp
         HEADERS += $$PWD/network/qqtethenetmanager.h
         SOURCES += $$PWD/frame/qqtwifiwidget.cpp

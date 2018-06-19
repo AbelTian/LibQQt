@@ -26,24 +26,24 @@ void QQtFrameMsgHandler ( QtMsgType type, const char* msg )
 
     switch ( type )
     {
-    case QtDebugMsg:
-        level = QString ( "Debug" );
-        break;
+        case QtDebugMsg:
+            level = QString ( "Debug" );
+            break;
 
-    case QtWarningMsg:
-        level = QString ( "Warning" );
-        break;
+        case QtWarningMsg:
+            level = QString ( "Warning" );
+            break;
 
-    case QtCriticalMsg:
-        level = QString ( "Critical" );
-        break;
+        case QtCriticalMsg:
+            level = QString ( "Critical" );
+            break;
 
-    case QtFatalMsg:
-        level = QString ( "Fatal" );
-        break;
+        case QtFatalMsg:
+            level = QString ( "Fatal" );
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
     QString current_date_time = QDateTime::currentDateTime().toString ( "yyyy-MM-dd hh:mm:ss ddd" );
@@ -76,6 +76,7 @@ void QQtFrameMsgHandler ( QtMsgType type, const char* msg )
     mutex.unlock();
 
     fprintf ( stderr, "%s\n", msg );
+    fflush ( stderr );
 }
 
 void QQt4FrameMsgHandler ( QtMsgType type, const char* msg )

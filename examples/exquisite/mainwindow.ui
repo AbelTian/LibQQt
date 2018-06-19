@@ -146,7 +146,7 @@
      <x>0</x>
      <y>0</y>
      <width>776</width>
-     <height>17</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -162,7 +162,7 @@
   <customwidget>
    <class>QQtCustomProgressBar</class>
    <extends>QWidget</extends>
-   <header location="global">qqtcustomeffectprogressbar.h</header>
+   <header location="global">qqtcustomprogressbar.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

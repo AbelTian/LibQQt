@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include <QApplication>
+#include <QQtApplication>
 #include <QDebug>
 
 typedef struct tagBtnIconTable2
@@ -21,7 +21,7 @@ Q_DECLARE_METATYPE ( TBtnIconTable2 )
 
 int main ( int argc, char* argv[] )
 {
-    QApplication a ( argc, argv );
+    QQtApplication a ( argc, argv );
 
     QVariant vv;
     TBtnIconTable2 icc;

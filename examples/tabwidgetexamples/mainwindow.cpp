@@ -1,7 +1,7 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <qqtslideeffecttabbar.h>
-#include <qqtpictureeffecttabwidget.h>
+#include <qqtslidetabbar.h>
+#include <qqtpicturetabwidget.h>
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -39,13 +39,13 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->w77->addTab ( "xxxx" );
     ui->w77->setFixedHeight ( 28 );
 
-
     ui->tw0->setStyleSheet ( "QTabWidget#tw0 QTabBar::tab { width:72px; height:90px; }" );
     QQtPictureTabBar* tab = ( QQtPictureTabBar* ) ui->tw0->localTabBar();
     tab->setIconStyle ( QQtPictureTabBar::IconStyle_Top_And_BottomText );
     tab->setTabPixmap ( 0, "./skin/default/bt_setting.png", "./skin/default/bt_setting_press.png" );
     tab->setTabPixmap ( 1, "./skin/default/bt_dispel.png", "./skin/default/bt_dispel_press.png" );
     tab->setContentsMargins ( 2, 2, 2, 2 );
+
 
     ui->tw1->setStyleSheet ( "QTabWidget#tw1 QTabBar::tab { width:90px; height:30px; }" );
     QQtPictureTabBar* tab1 = ( QQtPictureTabBar* ) ui->tw1->localTabBar();

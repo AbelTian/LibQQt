@@ -10,12 +10,12 @@ public:
     explicit MainApplication ( int argc, char* argv[] ) :
         QQtApplication ( argc, argv ) {
 
-        QApplication::setApplicationName ( "exquisite" );
-        QApplication::setOrganizationName ( "QQt" );
-        QApplication::setOrganizationDomain ( "www.qqt.com" );
+        QQtApplication::setApplicationName ( "exquisite" );
+        QQtApplication::setOrganizationName ( "QQt" );
+        QQtApplication::setOrganizationDomain ( "www.qqt.com" );
 
 #ifdef __EMBEDDED_LINUX__
-        QString fontfile = QProcessEnvironment::systemEnvironment().value("QTDIR");
+        QString fontfile = QProcessEnvironment::systemEnvironment().value ( "QTDIR" );
         fontfile += "/lib/fonts/wenquanyi.ttf";
         int fontsize = 14;
         //setTextFont(fontfile, fontsize);
@@ -24,9 +24,9 @@ public:
     virtual ~MainApplication() {}
 };
 
-int main(int argc, char* argv[])
+int main ( int argc, char* argv[] )
 {
-    MainApplication a(argc, argv);
+    MainApplication a ( argc, argv );
 
     MainWindow w;
     w.show();

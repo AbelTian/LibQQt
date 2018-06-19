@@ -1,4 +1,4 @@
-#ifndef QQTVIRTUALCLICKWIDGET_H
+﻿#ifndef QQTVIRTUALCLICKWIDGET_H
 #define QQTVIRTUALCLICKWIDGET_H
 
 #include <qqtwidget.h>
@@ -113,7 +113,10 @@ public:
         if ( event->type() == QEvent::Paint )
             return QQtWidget::eventFilter ( watched, event );
 
-        //+ fix bug
+        //修复鼠标穿透
+        bool atti = testAttribute ( Qt::WA_TransparentForMouseEvents );
+        if ( atti )
+            return QQtWidget::eventFilter ( watched, event );
 
         //处理press
         if ( event->type() == QEvent::MouseButtonPress ) {

@@ -30,6 +30,16 @@ QQtProtocol* QQtProtocolManager::createProtocol()
 
 QQtProtocol* QQtProtocolManager::findDetachedInstance()
 {
+    QListIterator<QQtProtocol*> itor0 ( m_protocol_list );
+    int index = 0;
+    while ( itor0.hasNext() )
+    {
+        QQtProtocol* p = itor0.next();
+        if ( p->detached() )
+            index++;
+    }
+    emit remanentProtocolChanged ( index );
+
     QListIterator<QQtProtocol*> itor ( m_protocol_list );
     while ( itor.hasNext() )
     {

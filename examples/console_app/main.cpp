@@ -18,5 +18,5 @@ int main ( int argc, char* argv[] )
     pline() << "你的输入：" << qin.readLine();
 
     return 0;
-    return a.exec();
+    //return a.exec();
 }

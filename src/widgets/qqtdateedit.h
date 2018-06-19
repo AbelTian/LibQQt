@@ -4,7 +4,10 @@
 #include <QDateEdit>
 #include <qqtcore.h>
 
-class QQtDateEdit : public QDateEdit
+#include <qqtcore.h>
+#include <qqt-local.h>
+
+class QQTSHARED_EXPORT QQtDateEdit : public QDateEdit
 {
     Q_OBJECT
 public:

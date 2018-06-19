@@ -5,6 +5,8 @@ Qt Creator
 Default build directory:   
 /xxx/xxx/xxx/xxx/c0-buildstation 这是个你电脑上的绝对路径，根据自己把编译根放在哪里设置  
 /%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name} 这里是个通配，直接拷贝上去  
+这是建议值，在Multi-link2.1里面，这个值不再强制。
+
 ![设置Qt Creator构建套件](screenshot/2.png "这是Qt Creator的设置，设置File System Name")  
 ![设置当前工程的环境变量](screenshot/3.png "这是工程的环境变量设置，注意那几点")  
 ![链接QQt](screenshot/4.png "这是链接QQt的方法，pri都在LibQQt目录里")  
@@ -26,7 +28,7 @@ APP_DEPLOY_ROOT = /Users/abel/Develop/d1-product
 1. 按照文章所说，更改Qt Creator的默认编译路径。只有这样，才能实现多平台目标、中间目标不冲突。  
 2. 参照LibQQt/src/qqt_qkit.pri里的SYSNAME变量，在Qt Creator首选项-设置构建和运行-构建套件Kit页面的每个kit的File System Name。（请使用Qt Creator 3.5以上版本，其被佩戴于Qt5.2.）  
 3. 打开LibQQt工程，根据qmake输出，在用户配置目录/[.]qmake/app_configure.pri里面设置QQT_BUILD_ROOT QQT_SDK_ROOT APP_DEPLOY_ROOT三个路径变量  
-4. 仿照LibQQt的例程，在用户工程.pro里include(.../LibQQt/src/app_base_manager.pri)  
+4. 仿照LibQQt的例程，在用户工程.pro里include(.../LibQQt/multi-link/multi-link/add_base_manager.pri)
     - 如果需要跟随发布配置文件，按照图里的设置APP_CONFIG_PWD  
 5. 在Qt Creator项目-kit-构建设置页面，配置QKIT环境变量（LibQQt也需要，用户App需要），可以build了。  
 
@@ -141,6 +143,66 @@ Visual Studio使用设置：
 - 可以开始使用LibQQt编写自己的App了。  
 
 还修改了Windows下的app_configure.pri的磁盘保存位置，到用户主目录/.qmake/app_configure.pri，这块完全使用类Unix风格。  
+
+# LibQQt v3.0 
+
+Multi-link技术完成。  
+在完成的Multi-link技术里，新的QSYS环境变量和Qt Kit的关系  
+QKIT不再使用，而仅仅使用QSYS。  
+
+| Qt Kit | Kit File System Name | QKIT | QSYS |   
+| ---- | ---- | :---- | :---- |  
+| Windows 32bit | Windows | - | Windows |  
+| Windows 32bit | Win32 | - | Win32 |  
+| Windows 64bit | Win64 | - | Win64 |  
+| Linux 32bit | Linux | - | Linux |  
+| Linux 64bit | Linux64 | - | Linux64 |  
+| macOS clang 64bit | macOS | - | macOS |  
+| Arm 32bit | Arm32 | - | Arm32 |  
+| Mips 32bit | Mips32 | - | Mips32 |  
+| Embedded 32bit | Embedded | - | Embedded |  
+| iOS clang | iOS | - | iOS |  
+| iOS Simulator |﻿iOSSimulator | - | iOSSimulator |  
+| Android armeabi |﻿Android | - |﻿Android |  
+| Android x86 |﻿AndroidX86 | - |﻿AndroidX86 |  
+
+####使用场景截图  
+
+![使用场景](screenshot/11.png "这是Multi-link技术的使用方式截图")  
+
+####Multi-link技术能够达到的管理能力   
+App和Lib的源代码，一直处于编写之中。  
+App和Lib的目标，一直从Build位置，持续发布到Deploy位置和SDK位置。  
+用户再也不必为了管理生成目标、发布目标和链接而劳费手劲。  
+在2008年的时候还没有这个技术，2018年，这个技术终于变成了现实。  
+现在，按照GPL发布，  
+基于qmake。  
+
+![Multi-link技术的能力](screenshot/12.png "这是Multi-link技术的能力")  
+
+####多链接技术创造的生产线  
+Multi-link会一直处于App/Lib生产线的控制器地位。   
+Multi-link允许用户自行添加任何依赖项，我把一些常用的依赖项添加用pri放在了app-lib里，
+而这些依赖项的SDK我保存在了百度网盘，以方便用户取用，用户只需要下载下来解压到自己的LIB_SDK_ROOT里。  
+百度网盘地址链接：https://pan.baidu.com/s/1FPPkTUnk2XBL4rpnZsAGmw 密码：hotz    
+SDK难免有不全，难免不能满足任何用户的需求，请用户自行补齐。 
+利用Multi-link技术的添加Library模板很容易的。 
+我计划在LibQQt 3.0的时机将Multi-link合并到master分支进行正式发布。   
+![Multi-link技术的能力](screenshot/13.png "这是Multi-link技术的能力")  
+
+
+####多链接技术的一点设置  
+![Multilink的一点点设置](screenshot/14.png "这是LibQQt使用的Multi-link需要设置的几个路径，编译路径，Sdk路径，发布路径")  
+APP_DEPLOY_ROOT=R:\Develop\d0-product  
+LIB_SDK_ROOT=R:\Develop\d1-sdk  
+APP_BUILD_ROOT=R:\Develop\c0-buildstation  
+Multi-link目录里提供了Multi-linkConfigTool图形配置工具，编译运行就可以设置，非常方便。  
+在工程里包含multi-link/add_base_manager.pri，在project build config设置环境变量QSYS，就可以使用里面的丰富函数。简单吧！  
+*注意：Multi-link 2已经不支持Qt4，如果需要Qt第四代，那么使用multi-link 1.0链接QQt。*  
+![qmake成功](screenshot/15.png "这是LibQQt qmake成功的样子。")  
+![qmake成功](screenshot/16.png "这是Example app qmake成功的样子。")  
+
+Enjoy it!  
 
 
 [返回](.)   

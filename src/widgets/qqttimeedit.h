@@ -3,8 +3,10 @@
 
 #include <QTimeEdit>
 #include <qqtcore.h>
+#include <qqtcore.h>
+#include <qqt-local.h>
 
-class QQtTimeEdit : public QTimeEdit
+class QQTSHARED_EXPORT QQtTimeEdit : public QTimeEdit
 {
     Q_OBJECT
 public:

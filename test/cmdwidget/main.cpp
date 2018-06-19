@@ -1,9 +1,9 @@
 #include "cmdwidget.h"
-#include <QApplication>
+#include <QQtApplication>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QQtApplication a(argc, argv);
 
     CmdWidget w;
     w.show();

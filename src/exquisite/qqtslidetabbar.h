@@ -12,7 +12,10 @@
 #include <qqtcore.h>
 #include <qqttabbar.h>
 
-class QQtSlideTabBar : public QQtTabBar
+#include <qqtcore.h>
+#include <qqt-local.h>
+
+class QQTSHARED_EXPORT QQtSlideTabBar : public QQtTabBar
 {
     Q_OBJECT
 public:

@@ -19,7 +19,10 @@
  * 7:暂不支持负数刻度值
  */
 
-class QQtRulerSlider : public QSlider
+#include <qqtcore.h>
+#include <qqt-local.h>
+
+class QQTSHARED_EXPORT QQtRulerSlider : public QSlider
 {
     Q_OBJECT
 public:
