@@ -54,9 +54,6 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     pline() << "Qt version:" << QT_VERSION_STR;
     pline() << "LibQQt version:" << STR ( QQT_VERSION );
 
-    /*在linux系统，不自动在当前目录寻找lib，需要命令行设置LD_LIBRARY_PATH，这里添加一下自动查找，不冲突。*/
-    addLibraryPath ( QDir::currentPath() );//[qApp->]
-
 #ifdef __EMBEDDED_LINUX__
     pline() << "QTDIR:" << QProcessEnvironment::systemEnvironment().value ( "QTDIR" );
     pline() << "TSLIB_TSDEVICE:" << QProcessEnvironment::systemEnvironment().value ( "TSLIB_TSDEVICE" );

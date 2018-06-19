@@ -3,8 +3,10 @@
 
 #include <qqttabwidget.h>
 #include <qqtpicturetabbar.h>
+#include "qqtcore.h"
+#include "qqt-local.h"
 
-class QQtPictureTabWidget : public QQtTabWidget
+class QQTSHARED_EXPORT QQtPictureTabWidget : public QQtTabWidget
 {
     Q_OBJECT
 public:

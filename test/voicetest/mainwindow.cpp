@@ -493,7 +493,11 @@ void MainWindow::on_pushButton_7_clicked()
     QQtWavSound ( res ( "9612.wav" ) );
 }
 
+#ifdef __ANDROID__
+#define TMPFILE "/data/data/temp.wav"
+#else
 #define TMPFILE "./temp.wav"
+#endif
 
 void MainWindow::on_pushButton_8_clicked()
 {

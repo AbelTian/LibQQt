@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -186,19 +186,19 @@
   <customwidget>
    <class>QQtSlideTabBar</class>
    <extends>QWidget</extends>
-   <header>qqtslideeffecttabbar.h</header>
+   <header>qqtslidetabbar.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>QQtSlideTabWidget</class>
    <extends>QTabWidget</extends>
-   <header location="global">qqtslideeffecttabwidget.h</header>
+   <header location="global">qqtslidetabwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>QQtPictureTabWidget</class>
    <extends>QTabWidget</extends>
-   <header location="global">qqtpictureeffecttabwidget.h</header>
+   <header location="global">qqtpicturetabwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

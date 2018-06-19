@@ -20,10 +20,6 @@
 
 [一个应用案例](an-example.md)  
 
-## Multi link technology  
-
-[Multi-link 技术](Multi-Link.md)  
-
 ## LibQQt在操作系统中的地位    
 
 [LibQQt的地位](LibQQt's-position.md)  
@@ -32,6 +28,11 @@
 
 [QQt应用程序的开发诀窍](knack.md)  
 
+## LibQQt学者的一些依赖知识    
+
+[去看看软件基础概念](software.md)  
+[去看看Qt入门基础须知](usage-Qt.md)  
+[去看看Qt Creator入门安装须知](usage-QtCreator.md)  
 
 ## 返回  
 

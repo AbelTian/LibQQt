@@ -24,7 +24,7 @@
 
 8. qqt_library.pri qqt的sdk发布工作，app链接QQt工作，要求用户进行BUILD-SDK-DEPLOY ROOT路径指定也发生在这里。它会自动生成一个pri，给用户指定这三个变量。
 
-9. link_qqt_library.pri 包含以上这几个app需要的pri，这个文件现在只能放在library目录里。
+9. qqt_library.pri 包含以上这几个app需要的pri，这个文件现在只能放在library目录里。
 
 10. app_configure.pri app配置文件，这个一般是公共配置文件，里面包含了link_qqt_library.pri。更改意义不大，将来可能会被生成，而不是开始就存在。
 
@@ -39,3 +39,26 @@
     -  初步规划用户要clone到library目录。
 
 相信在Multi Link技术的帮助下，用户开发Library和Application肯定会如虎添翼，节省巨大的工时和精力。（现在仅仅支持LibQQt使用）
+
+# Multi-link技术完成  
+
+千等万等，Multi-link技术终于现出原形了。  
+修复了发布QQt SDK无处安置的问题。  
+
+1. include(.../multi-link/multi-link/add_base_manager.pri)  
+    - 这里是多链接技术一切的开始。  
+2. 提供函数 （这里只展示一部分）
+    -  add_sdk() (lib工程用)  
+    -  add_version()  
+    - ﻿add_deploy()  
+    - ﻿add_deploy_library()   
+    - ﻿add_deploy_config()  
+    - ﻿add_include()  
+    - ﻿add_headers()  
+    - ﻿add_library()  
+    - ﻿add_defines()  
+    - ﻿add_language()  
+    - ﻿add_zh_CN_en_US()  
+3. 彻底的脱离了libQQt，但是提供对libQQt的链接支持，和对其他Library的链接支持一模一样。  
+4. 有Multi-link帮助，用户可以任意的在app和lib之间设计链接关系了。  
+4. QQt提供的强大功能，并没有因为Multi-link的升级而改变，依然强大。  

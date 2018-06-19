@@ -49,7 +49,7 @@ namespace Ui {
 class QQtWiFiWidget;
 }
 
-class QQtWiFiWidget : public QQtTableView
+class QQTSHARED_EXPORT QQtWiFiWidget : public QQtTableView
 {
     Q_OBJECT
 

@@ -28,4 +28,17 @@ FORMS += \
 
 system(touch main.cpp)
 
-include(../../src/app_base_manager.pri)
+include(../../multi-link/multi-link/add_base_manager.pri)
+
+
+
+#这个的设置有特点，要先设置
+add_version (1,0,0,0)
+
+#先发布App
+#app从build到deploy
+add_deploy()
+
+#后发布依赖
+#libQQt从sdk到build和deploy
+add_dependent_manager(QQt)

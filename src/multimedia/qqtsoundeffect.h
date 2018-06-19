@@ -75,7 +75,7 @@ private:
 
 //在使用QQtWavSound等函数之前，调用类的instance函数，+parent 初始化一下实例。
 //=QSound::play()
-QQtWavSoundEffect* QQtWavSound ( QString localFile = "" );
+QQTSHARED_EXPORT QQtWavSoundEffect* QQtWavSound ( QString localFile = "" );
 
 /**
  * @brief The QQtAudioEffect class

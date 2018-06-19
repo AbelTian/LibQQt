@@ -8,7 +8,10 @@
 /**
  * 用于解决QLabel可能存在的问题.
  */
-class QQtLabel : public QLabel
+#include <qqtcore.h>
+#include <qqt-local.h>
+
+class QQTSHARED_EXPORT QQtLabel : public QLabel
 {
     Q_OBJECT
 public:

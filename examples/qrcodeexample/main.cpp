@@ -1,10 +1,10 @@
 #include "mainwindow.h"
-#include <QApplication>
+#include <QQtApplication>
 #include "mainwidget.h"
 
 int main ( int argc, char* argv[] )
 {
-    QApplication a ( argc, argv );
+    QQtApplication a ( argc, argv );
 
     //MainWindow w;
     QQtCustomQrDecodeWidget w;

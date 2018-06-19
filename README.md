@@ -50,9 +50,6 @@ github link: https://github.com/AbelTian/LibQQt
 2. QQtWord，支持doc文档编写，输出pdf格式。
 4. QQtTreeView，添加Qt4内部没有TreeView
     - 包括QQtXmlTreeModel、QQtJsonTreeModel、QQtFileSystemTreeModel、QQtSqlTreeModel
-5. 支持工程的版本变更
-    - 在[qqt_version.pri](src/qqt_version.pri)里面是QQt的版本和源文件内版本宏定义  
-    - 在[app_version.pri](app/app_version.pri)里面是App的版本和源文件内版本宏定义  
 6. QQt通讯套件。
      - 通讯口类   
         - QQtSerialPort 兼容QSerialPort and QextSerialPort
@@ -74,8 +71,10 @@ github link: https://github.com/AbelTian/LibQQt
 2. 添加核心类之[QQtDictionary](src/core/qqtdictionary.h)   
      - 化解C Plus Plus中没有字典类别的尴尬。    
 3. 添加Multi Link工程管理pri组  
-     - [Multi Link technology](src/app_multi_link_technology.pri)，既多链接工程管理技术。
+     - [Multi Link technology](multi-link/add_multi_link_technology.pri)，既多链接工程管理技术。
+     - [add_base_manager.pri](multi-link/multi-link/add_base_manager.pri)，app和lib工程的基础管理者。  
      - 基于qmake，用户可以轻易的链接LibQQt和添加自定义library。  
+     - 工程版本变更可以使用add_version(1,0,0,0)实现了。  
 4. 添加gif support Widgets  
     - 可以方便的设置动态按钮等。  
     - 有[QQtGifWidget](src/exquisite/gifwidgets/qqtgifwidget.h)、QQtGifButton等。   
@@ -94,10 +93,21 @@ github link: https://github.com/AbelTian/LibQQt
 ========================================================================  
 # 多链接发布技术    
 
+[Multiple Link Technology](multi-link.md)   
 LibQQt为方便用户开发App过程方便的发布程序，所以添加了多链接和自动发布功能，基于qmake工程管理器的多链接发布技术。  
 用户只需要做相应的目录设定，甚至包括自己的配置文件的目录设置，LibQQt提供的base manager就会自动将用户的程序，配置发布到指定位置，  
 并且支持其他依赖的链接库。  
 经过发布的App直接点击就可以运行，*大的省去了用户手动发布App的劳烦过程。    
+*Multi-link提供ProductExecTool，可以对产品集中查看、调用运行。*  
+*Multi-link提供AddLibraryTool，方便用户通过准备好的SDK自动生成add_library_xxx.pri的链接环。*  
+*Multi-link提供Multi-linkConfigTool，方便用户配置Multi-link v2必需的三大路径，build/sdk/deploy root。*  
+
+*LibQQt3.0基于Multi-link2.0发布，用户使用LibQQt3.0，代表用户接受其管理工具Multi-link2.0.*  
+
+========================================================================  
+# 版本分割    
+  
+[版本划分图谱](changelog.md)   
 
 
 ========================================================================  
@@ -112,7 +122,7 @@ LibQQt为方便用户开发App过程方便的发布程序，所以添加了多�
 在Windows平台上，  
 *把LibQQt/extra/touch.exe 复制到C:\Windows*   
 *把LibQQt/extra/md5.exe 复制到C:\Windows*   
-
+  
 [走，去看看入门用法](usage.md)  
 [入门了，去看看学习设置工程目录](project.md)  
 发现了一个问题: [new issue link](https://gitee.com/drabel/LibQQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
@@ -122,9 +132,6 @@ LibQQt为方便用户开发App过程方便的发布程序，所以添加了多�
 # 依赖学习知识   
 
 [预习Git入门](usage-git.md)  
-[去看看软件基础概念](software.md)  
-[去看看Qt入门基础须知](usage-Qt.md)  
-[去看看Qt Creator入门安装须知](usage-QtCreator.md)  
 
 
 ========================================================================  

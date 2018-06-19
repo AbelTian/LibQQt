@@ -3,8 +3,10 @@
 
 #include <QDoubleSpinBox>
 #include <qqtcore.h>
+#include <qqtcore.h>
+#include <qqt-local.h>
 
-class QQtDoubleSpinBox : public QDoubleSpinBox
+class QQTSHARED_EXPORT QQtDoubleSpinBox : public QDoubleSpinBox
 {
     Q_OBJECT
 public:

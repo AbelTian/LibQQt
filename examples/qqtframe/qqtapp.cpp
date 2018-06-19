@@ -1,4 +1,4 @@
-#include "qqtapp.h"
+﻿#include "qqtapp.h"
 #include "qqt-qt.h"
 #include "qqtversion.h"
 #include "qqtgui.h"
@@ -19,7 +19,7 @@ void QQTLanServer ( QObject* parent = 0 )
     static QQtTcpServer* s = new QQtTcpServer ( parent );
     s->listen ( QHostAddress::Any, 8000 );
 
-    s->installedProtocol();
+    //s->installedProtocol();
 }
 
 QQTApp::QQTApp ( int& argc, char** argv ) : QApplication ( argc, argv )

@@ -39,7 +39,7 @@ typedef struct QQTSHARED_EXPORT tagWifi
     bool isValid();
 
     /* only mips32 no use const, arm used
-     * 只有MIPS32不使用const，ARM32使用了。
+     * 只有MIPS32不使用const，Arm32使用了。
      */
 #ifdef __MIPS_LINUX__
     tagWifi& operator= ( tagWifi& w );
