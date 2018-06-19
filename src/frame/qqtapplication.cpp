@@ -1,4 +1,4 @@
-﻿#include "qqtapplication.h"
+#include "qqtapplication.h"
 #ifdef __PLUGINSUPPORT__
 #include "qqtpluginwatcher.h"
 #endif
@@ -49,13 +49,13 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QDir::setCurrent ( qApp->applicationDirPath() );
 #endif
 
-    /*在linux系统，不自动在当前目录寻找lib，需要命令行设置LD_LIBRARY_PATH，这里添加一下自动查找，不冲突。*/
-    addLibraryPath ( qApp->applicationDirPath() );//[qApp->]
-
     pline() << "app root:" << qApp->applicationDirPath();
     pline() << "app work root:" << QDir::currentPath();
     pline() << "Qt version:" << QT_VERSION_STR;
     pline() << "LibQQt version:" << STR ( QQT_VERSION );
+
+    /*在linux系统，不自动在当前目录寻找lib，需要命令行设置LD_LIBRARY_PATH，这里添加一下自动查找，不冲突。*/
+    addLibraryPath ( QDir::currentPath() );//[qApp->]
 
 #ifdef __EMBEDDED_LINUX__
     pline() << "QTDIR:" << QProcessEnvironment::systemEnvironment().value ( "QTDIR" );

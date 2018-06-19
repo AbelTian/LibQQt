@@ -36,10 +36,12 @@ contains (QKIT_PRIVATE, WIN32||WIN64) {
 #core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
+    $$PWD/core/qqtevent.cpp \
     $$PWD/core/qqtdictionary.cpp \
     $$PWD/core/qqtobjectmanager.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
+    $$PWD/core/qqtevent.h \
     $$PWD/core/qqtdictionary.h \
     $$PWD/core/qqtobjectmanager.h
 
@@ -322,6 +324,73 @@ contains (DEFINES, __EXQUISITE__) {
     HEADERS += \
         $$PWD/exquisite/qqtframelesshelper.h \
         $$PWD/exquisite/qqtframelesshelperprivate.h
+
+    #can click sound support widgets
+    contains (DEFINES, __CLICKSOUNDWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundhelper.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundhelper.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundhelper.cpp
+        HEADERS += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundhelper.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundhelper.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundhelper.h
+
+        SOURCES += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundwidget.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundwidget.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundwidget.cpp
+        HEADERS += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundwidget.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundwidget.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundwidget.h
+
+        SOURCES += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundlabel.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundlabel.cpp \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundlabel.cpp
+        HEADERS += \
+            $$PWD/exquisite/clicksoundwidgets/qqtclicksoundlabel.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtlongclicksoundlabel.h \
+            $$PWD/exquisite/clicksoundwidgets/qqtdoubleclicksoundlabel.h
+    }
+
+    #can click support widgets
+    contains (DEFINES, __CLICKWIDGETS__) {
+
+        SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickhelper.cpp \
+            $$PWD/exquisite/clickwidgets/qqtclickhelper.cpp \
+            $$PWD/exquisite/clickwidgets/qqtlongclickhelper.cpp \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickhelper.cpp
+        HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickhelper.h \
+            $$PWD/exquisite/clickwidgets/qqtclickhelper.h \
+            $$PWD/exquisite/clickwidgets/qqtlongclickhelper.h \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickhelper.h
+
+        SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickwidget.cpp \
+            $$PWD/exquisite/clickwidgets/qqtclickwidget.cpp \
+            $$PWD/exquisite/clickwidgets/qqtlongclickwidget.cpp \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickwidget.cpp
+        HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickwidget.h \
+            $$PWD/exquisite/clickwidgets/qqtclickwidget.h \
+            $$PWD/exquisite/clickwidgets/qqtlongclickwidget.h \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickwidget.h
+
+        SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclicklabel.cpp \
+            $$PWD/exquisite/clickwidgets/qqtclicklabel.cpp \
+            $$PWD/exquisite/clickwidgets/qqtlongclicklabel.cpp \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclicklabel.cpp
+        HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclicklabel.h \
+            $$PWD/exquisite/clickwidgets/qqtclicklabel.h \
+            $$PWD/exquisite/clickwidgets/qqtlongclicklabel.h \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclicklabel.h
+    }
 
     #dialog
     SOURCES += \

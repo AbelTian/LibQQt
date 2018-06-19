@@ -1,4 +1,4 @@
-﻿#include "qqtdictionary.h"
+#include "qqtdictionary.h"
 
 QQtDictionary::QQtDictionary ()
 {
@@ -43,7 +43,7 @@ void QQtDictionary::setType ( QQtDictionary::EDictType type )
     m_type = type;
 }
 
-void QQtDictionary::setChild ( const QVariant& value )
+void QQtDictionary::setValue ( const QVariant& value )
 {
     m_type = DictValue;
     m_value = value;
@@ -61,12 +61,12 @@ void QQtDictionary::setChild ( const QMap<QString, QQtDictionary>& map )
     m_map = map;
 }
 
-void QQtDictionary::appendChild ( const QString& value )
+void QQtDictionary::addChild ( const QString& value )
 {
-    appendChild ( QQtDictionary ( QVariant ( value ) ) );
+    addChild ( QQtDictionary ( QVariant ( value ) ) );
 }
 
-void QQtDictionary::appendChild ( const QQtDictionary& dict )
+void QQtDictionary::addChild ( const QQtDictionary& dict )
 {
     m_type = DictList;
     //list类
@@ -266,12 +266,18 @@ void QQtDictionary::modValue ( const QVariant& value )
 
 void QQtDictionary::modChild ( int index, const QQtDictionary& value )
 {
+    if ( !m_list.contains ( value ) )
+        return;
+
     m_type = DictList;
     m_list[index] = value;
 }
 
-void QQtDictionary::modChild ( QString key, const QQtDictionary& value )
+void QQtDictionary::modChild ( const QString& key, const QQtDictionary& value )
 {
+    if ( !m_map.contains ( key ) )
+        return;
+
     m_type = DictMap;
     m_map[key] = value;
 }

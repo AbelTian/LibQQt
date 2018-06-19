@@ -1,4 +1,4 @@
-﻿#include "qqtwidget.h"
+#include "qqtwidget.h"
 #include <QStylePainter>
 #include "qqtcore.h"
 
@@ -6,17 +6,13 @@ QQtWidget::QQtWidget ( QWidget* parent ) :
     QWidget ( parent )
 {
     m_style = QQTCENTER;
-
-    m_lcTimer = new QTimer ( this );
-    m_lcTimer->setSingleShot ( true );
-    m_lcTimer->setInterval ( 2200 );
-    connect ( m_lcTimer, SIGNAL ( timeout() ),
-              this, SLOT ( slot_timeout() ) );
 }
 
 QQtWidget::~QQtWidget()
 {
 }
+
+void QQtWidget::setImageStyle ( QQtWidget::ImageStyle style ) { m_style = style; }
 
 void QQtWidget::setPixmap ( const QString& pic )
 {
@@ -196,38 +192,5 @@ void QQtWidget::paintEvent ( QPaintEvent* event )
     }
 
     return QWidget::paintEvent ( event );
-}
-
-
-void QQtWidget::mousePressEvent ( QMouseEvent* event )
-{
-    mlongClickPoint = event->pos();
-    m_lcTimer->start();
-    return QWidget::mousePressEvent ( event );
-}
-
-void QQtWidget::mouseReleaseEvent ( QMouseEvent* event )
-{
-    if ( m_lcTimer->isActive() )
-    {
-        m_lcTimer->stop();
-        emit click();
-        emit clickWithPoint ( event->pos() );
-    }
-
-    return QWidget::mouseReleaseEvent ( event );
-}
-
-void QQtWidget::mouseDoubleClickEvent ( QMouseEvent* event )
-{
-    emit doubleClick();
-    emit doubleClickWithPoint ( event->pos() );
-    return QWidget::mouseDoubleClickEvent ( event );
-}
-
-void QQtWidget::slot_timeout()
-{
-    emit longClick();
-    emit longClickWithPoint ( mlongClickPoint );
 }
 
