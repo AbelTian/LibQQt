@@ -170,7 +170,7 @@ defineTest(add_defines_QQt){
         #Qt Embedded，没有charts模块
         #对于这两种情况，默认删除去。如果用户自己编译了Charts，手动添加charts模块。
         lessThan(QT_VERSION, 5.7):DEFINES-=__QT_CHARTS__
-        contains(QSYS_PRIVATE, Arm32||Mips32||Embedded):DEFINES-=__QT_CHARTS__
+        contains(QSYS_PRIVATE, Arm32|Armhf32 || Mips32 || Embedded):DEFINES-=__QT_CHARTS__
         #based on QtCharts, need charts module
         contains(DEFINES, __QT_CHARTS__ ): QT += charts
 
@@ -256,7 +256,7 @@ defineTest(add_defines_QQt){
         #if you use QNetworkAccessManagerSupport , open this annotation
         DEFINES += __WEBACCESSSUPPORT__
         lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
-        contains(QSYS_PRIVATE, Arm32||Mips32||Embedded):DEFINES -= __WEBACCESSSUPPORT__
+        contains(QSYS_PRIVATE, Arm32|Armhf32 || Mips32 || Embedded):DEFINES -= __WEBACCESSSUPPORT__
         contains (DEFINES, __WEBACCESSSUPPORT__) {
             #QSslError not found, you need recompiler Qt4
         }
@@ -334,7 +334,7 @@ defineTest(add_defines_QQt){
 
         #opengl module
         DEFINES += __OPENGLWIDGETS__
-        contains(QSYS_PRIVATE, Mips32||Arm32||Embedded):DEFINES-=__OPENGLWIDGETS__
+        contains(QSYS_PRIVATE, Arm32|Armhf32 || Mips32 || Embedded):DEFINES-=__OPENGLWIDGETS__
         contains (DEFINES, __OPENGLWIDGETS__) {
             QT += opengl
         }
