@@ -66,6 +66,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/gui/qqttablemodel.cpp \
     $$PWD/gui/qqtdicttreemodel.cpp \
+    $$PWD/gui/qqtdicttablemodel.cpp \
     $$PWD/gui/qqttreemodel.cpp \
     $$PWD/gui/qqtftptreemodel.cpp \
     $$PWD/gui/qqtsqltreemodel.cpp \
@@ -77,6 +78,7 @@ HEADERS += \
     $$PWD/gui/qqttablemodel.h \
     $$PWD/gui/qqttreemodel.h \
     $$PWD/gui/qqtdicttreemodel.h \
+    $$PWD/gui/qqtdicttablemodel.h \
     $$PWD/gui/qqtftptreemodel.h \
     $$PWD/gui/qqtsqltreemodel.h \
     $$PWD/gui/qqtjsontreemodel.h \
