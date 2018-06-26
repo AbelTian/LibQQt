@@ -15,10 +15,10 @@
 Qt是跨平台的library解决方案，虽然存在某些bug和不足，但不能掩盖它的确在跨平台解决方案中独占头席，无出其右。
 
 - 开始一个工程之前，设置Qt Creator的默认编译目录，在设置-构建-概要 里面，基于Qt4的版本没有这个设置，那个建议不要使用。
-  -  %{JS: Util.asciify("/your/local/path/to/build/root/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name}")}
+  -  %{JS: Util.asciify("/your/local/path/to/build/root/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}/%{Qt:Version}/%{CurrentBuild:Name}")}
   -  %{CurrentProject:Name} 代表当前工程的名字
-  -  %{Qt:Version} Qt的版本号
   -  %{CurrentKit:FileSystemName} 目标系统名称，这个在设置Qt Kit的时候，会要求设置，这里也要求设置，设置为和qqt_qkit.pri里面定义的不同的SYSNAME变量的值相同，生成的时候要用，链接的时候要用，发布拷贝库的时候也要用，还是设置成一样的吧。
+  -  %{Qt:Version} Qt的版本号
   -  %{CurrentBuild:Name} Debug还是Release
 
 这样出来的结果是 /..buildstation/QQt/5.9.2/macOS/Debug

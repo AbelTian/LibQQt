@@ -21,7 +21,7 @@
 #Suggest Qt 5.9.2/4.8.6/4.8.7
 #please dont use Qt 5.9.1, it is broken with android and ios.
 #please dont modify this pro
-#use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name} (Only Once)
+#use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}/%{Qt:Version}/%{CurrentBuild:Name} (Only Once)
 #Multi-link2.0 wont force user for setting Qt Creator default build directory.
 #in Qt kit page, set kit's File System Name. (Creator Ver.>v3.5) (Only Once)
 #in project build page, def env QSYS
@@ -38,7 +38,7 @@ CONFIG += build_all
 #################################################################
 #包含基础管理者
 #################################################################
-include ($${PWD}/../multi-link/multi-link/add_base_manager.pri)
+include ($${PWD}/../multi-link/add_base_manager.pri)
 
 #根据multi-link提供的动态编译 静态编译设定进行编译，添加我自己的QQt的宏定义。
 contains(DEFINES, LIB_LIBRARY) {
@@ -144,8 +144,8 @@ message($${TARGET} build rcc dir $$RCC_DIR)
 message($${TARGET} build dst dir $$DESTDIR)
 #default
 message ($${TARGET} QT $${QT})
-message ($${TARGET} pre link $${QMAKE_PRE_LINK})
-message ($${TARGET} post link $${QMAKE_POST_LINK})
+#message ($${TARGET} pre link $${QMAKE_PRE_LINK})
+#message ($${TARGET} post link $${QMAKE_POST_LINK})
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
 
