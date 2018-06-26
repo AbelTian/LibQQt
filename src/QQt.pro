@@ -135,9 +135,17 @@ contains(CONFIG, continue_build){
 #################################################################
 ##project environ
 #################################################################
+#build
+message($${TARGET} build obj dir $$OBJECTS_DIR)
+message($${TARGET} build moc dir $$MOC_DIR)
+message($${TARGET} build uih dir $$UI_DIR)
+message($${TARGET} build rcc dir $$RCC_DIR)
+message($${TARGET} build dst dir $$DESTDIR)
 #default
 message ($${TARGET} QT $${QT})
-message ($${TARGET} config $${CONFIG})
-message ($${TARGET} define $${DEFINES})
 message ($${TARGET} pre link $${QMAKE_PRE_LINK})
 message ($${TARGET} post link $${QMAKE_POST_LINK})
+message ($${TARGET} config $${CONFIG})
+message ($${TARGET} define $${DEFINES})
+
+

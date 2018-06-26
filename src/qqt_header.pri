@@ -48,6 +48,7 @@ defineTest(add_defines_QQt){
         #指定/mp编译选项，编译器将使用并行编译，同时起多个编译进程并行编译不同的cpp
         msvc:MSVC_CCFLAGS += /MP
         #指出：这个FLAG只能用于MSVC
+        #指出：DLL导入错误，是因为环境变量设置错误不是这里引起的。修改设置，重新编译还是错误，build目录clean不干净，手动删除干净。如果还是不行，对源代码进行touch，无法区分import和export的dll，是编译器的错误。
 
         msvc:QMAKE_CFLAGS += $${MSVC_CCFLAGS}
         msvc:QMAKE_CXXFLAGS += $${MSVC_CCFLAGS}
