@@ -28,7 +28,7 @@ public:
     /*
      * 建议：用户在继承类里的函数里直接调用[emit] write(...)
     */
-Q_SIGNALS:
+signals:
     qint64 write ( const QByteArray& );
     /*
      * 以下函数，用户必须继承下去，重写，need override
@@ -81,11 +81,9 @@ signals:
     //1 attach
     void statusChanged ( int status );
 
-    /*
-     * 以下函数，与用户无关。
-     */
     /**
      * 如果Socket和这个Protocol关联，就会设置关联。
+     * 如果用户需要对Protocol初始化和清理，可以从这里override。
      */
 public:
     virtual void detach() {
@@ -100,6 +98,10 @@ public:
 
 protected:
     bool mIsDetached;
+
+    /*
+     * 以下函数，与用户无关。
+     */
 };
 
 #endif // QQTPROTOCOL_H

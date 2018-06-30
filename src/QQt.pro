@@ -137,16 +137,14 @@ contains(CONFIG, continue_build){
 ##project environ
 #################################################################
 #build
-message($${TARGET} build obj dir $$OBJECTS_DIR)
-message($${TARGET} build moc dir $$MOC_DIR)
-message($${TARGET} build uih dir $$UI_DIR)
-message($${TARGET} build rcc dir $$RCC_DIR)
-message($${TARGET} build dst dir $$DESTDIR)
+message($${TARGET} build obj dir $${OUT_PWD} $$OBJECTS_DIR)
+message($${TARGET} build moc dir $${OUT_PWD} $$MOC_DIR)
+message($${TARGET} build uih dir $${OUT_PWD} $$UI_DIR)
+message($${TARGET} build rcc dir $${OUT_PWD} $$RCC_DIR)
+message($${TARGET} build dst dir $${OUT_PWD} $$DESTDIR)
 #default
 message ($${TARGET} QT $${QT})
 #message ($${TARGET} pre link $${QMAKE_PRE_LINK})
 #message ($${TARGET} post link $${QMAKE_POST_LINK})
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
-
-

@@ -299,6 +299,9 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     contains (DEFINES, __NFC__) {
         SOURCES += $$PWD/network/qqtnfcclient.cpp
         HEADERS += $$PWD/network/qqtnfcclient.h
+
+        SOURCES += $$PWD/network/qqtnfcserver.cpp
+        HEADERS += $$PWD/network/qqtnfcserver.h
     }
 
     contains (DEFINES, __WEBSOCKETSUPPORT__) {

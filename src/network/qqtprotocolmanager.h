@@ -64,10 +64,16 @@ public:
      * 注册用户协议类型
      * 模板函数
      * 用于ProtocolManager内部生成用户协议实例。
-     * 这个用户在生成ProtocolManager对象的时候，需要注册一下自己的协议类，需要调用一次。
+     * 这个用户在生成ProtocolManager对象的时候，需要注册一下自己的协议类，需要调用至少一次。
+     *
      * 注意：
-     * registerProtocol<QQtXXXProtocol>(1);
+     * registerProtocol<QQtXXXProtocol>(1); //这样只预备了一个句柄。
      * 可以根据Protocol ObjectName区分Protocol 或者metaObject()->className()
+     *
+     * 用法：
+     * 用户连接remanentProtocolChanged，当发现小于某个约束数目的时候，就调用这个函数进行注册，
+     * 注册用户认为合理的数量即可。
+     * 如果客户端数量存在上限，调用一次这个函数就可以了，不必检测剩余句柄数目。默认一次创建1024个句柄。
      */
     template <typename T>
     bool registerProtocol ( int count = 1024 ) {
@@ -80,6 +86,7 @@ public:
 
 signals:
     //内部每次协议句柄列表发生变动都会发射这个信号。
+    //剩余的可用句柄数目
     void remanentProtocolChanged ( int num );
 
     /**
