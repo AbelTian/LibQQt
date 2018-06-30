@@ -4,7 +4,7 @@
 Qt Creator  
 Default build directory:   
 /xxx/xxx/xxx/xxx/c0-buildstation 这是个你电脑上的绝对路径，根据自己把编译根放在哪里设置  
-/%{CurrentProject:Name}/%{Qt:Version}/%{CurrentKit:FileSystemName}/%{CurrentBuild:Name} 这里是个通配，直接拷贝上去  
+/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}/%{Qt:Version}/%{CurrentBuild:Name} 这里是个通配，直接拷贝上去
 这是建议值，在Multi-link2.1里面，这个值不再强制。
 
 ![设置Qt Creator构建套件](screenshot/2.png "这是Qt Creator的设置，设置File System Name")  
