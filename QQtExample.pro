@@ -119,3 +119,4 @@ SUBDIRS += test/osdtest
 #
 SUBDIRS += test/QQtWidgetClickHelperTest
 
+SUBDIRS += demo/QQtRoseMonitor

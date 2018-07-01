@@ -163,3 +163,4 @@ SUBDIRS += test/QQtWidgetClickHelperTest
 #
 SUBDIRS += test/QQtWidgetClickSoundHelperTest
 
+SUBDIRS += demo/QQtRoseMonitor
