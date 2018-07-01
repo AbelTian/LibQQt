@@ -83,14 +83,14 @@ signals:
 
     /**
      * 如果Socket和这个Protocol关联，就会设置关联。
-     * 如果用户需要对Protocol初始化和清理，可以从这里override。
+     * 表示是否在使用中。
      */
 public:
-    virtual void detach() {
+    inline virtual void detach() {
         mIsDetached = true;
         statusChanged ( 0 );
     }
-    virtual void attach() {
+    inline virtual void attach() {
         mIsDetached = false;
         statusChanged ( 1 );
     }
@@ -99,6 +99,15 @@ public:
 protected:
     bool mIsDetached;
 
+    /**
+     * 用户使用
+     * optional
+     * reset函数 = clear = clean = init函数
+     * 用于对Protocol句柄进行初始化成员变量。
+     * 这个函数会在被安装到客户端句柄的时候使用，会有作用。
+     */
+public:
+    inline virtual void initializer() {}
     /*
      * 以下函数，与用户无关。
      */

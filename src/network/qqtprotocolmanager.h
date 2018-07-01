@@ -88,6 +88,7 @@ signals:
     //内部每次协议句柄列表发生变动都会发射这个信号。
     //剩余的可用句柄数目
     void remanentProtocolChanged ( int num );
+    void remainingProtocolChanged ( int num );
 
     /**
      * 以下和用户无关
@@ -95,12 +96,30 @@ signals:
 public:
     /**
      * @brief createProtocol
+     * 创建一个Protocol句柄，开始使用。
+     *
      * 这个函数给QQtSocketServer用的，不是给用户用的。
      * 用于生成用户协议对象实例。
+     *
      * @param protocolTypeName
      * @return
      */
     QQtProtocol* createProtocol ();
+    /**
+     * 使用完，删除。
+     *
+     * Protocol的deattach和这个功能不同，它表示使用状态切换为不使用。
+     * 而deleteProtocol表示，这个句柄要删除了。
+     * 如果只是deattach，那么这个句柄重新被attach以后，用户把内部的变量都reset了吗？其实如果reset了，不必要删除句柄。
+     * 但是，内部实现的，支持reset，在attach的时候调用。可是没有太多作用，因为，这个句柄在不用了的时候会在这里被delete掉。
+     *
+     * 这个机制会导致初始注册了一些句柄以后，使用使用就变少了，逐渐的就用完了。所以必须频繁根据句柄数量变动进行注册。
+     * 经过考虑，我决定不删除句柄，用户继承QQtProtocol句柄的时候override init函数初始化句柄，可以避免句柄逐渐变少引起的频繁注册。
+     * Protocol的init函数，只需要在必要初始化句柄的时候重写。
+     *
+     * 内部没有对QList加锁，所以不要movetothread里用。
+     */
+    void deleteProtocol ( QQtProtocol* stack );
 protected:
     QQtProtocol* findDetachedInstance();
 private:

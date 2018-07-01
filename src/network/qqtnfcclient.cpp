@@ -21,6 +21,7 @@ void QQtNfcClient::installProtocol ( QQtProtocol* stack )
     connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
               this, SLOT ( slotWriteData ( const QByteArray& ) ) );
     m_protocol->attach();
+    m_protocol->initializer();
 }
 
 void QQtNfcClient::uninstallProtocol ( QQtProtocol* stack )

@@ -28,8 +28,33 @@ QQtProtocol* QQtProtocolManager::createProtocol()
     return p0;
 }
 
+void QQtProtocolManager::deleteProtocol ( QQtProtocol* stack )
+{
+    //决定不删除句柄
+    return;
+
+    if ( m_protocol_list.isEmpty() )
+        return;
+
+    QQtProtocol* p0 = stack;
+
+    if ( !p0 )
+        return;
+
+    disconnect ( p0, SIGNAL ( notifyToProtocolManager ( const QQtProtocol*, const QQtMessage* ) ),
+                 this, SIGNAL ( notifyToBusinessLevel ( const QQtProtocol*, const QQtMessage* ) ) );
+
+    m_protocol_list.removeOne ( p0 );
+    p0->deleteLater();
+
+    return;
+}
+
 QQtProtocol* QQtProtocolManager::findDetachedInstance()
 {
+    //但凡attached就是在使用的。createProtocol,attach.
+    //但凡deattached的都是准备删除的。deattach,deleteProtocol.
+    //初始deattached的呢？不会删除。删除操作发生在deattached阶段。
     QListIterator<QQtProtocol*> itor0 ( m_protocol_list );
     int index = 0;
     while ( itor0.hasNext() )
@@ -39,6 +64,7 @@ QQtProtocol* QQtProtocolManager::findDetachedInstance()
             index++;
     }
     emit remanentProtocolChanged ( index );
+    emit remainingProtocolChanged ( index );
 
     QListIterator<QQtProtocol*> itor ( m_protocol_list );
     while ( itor.hasNext() )

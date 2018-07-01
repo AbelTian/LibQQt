@@ -45,6 +45,7 @@ void QQtBluetoothServer::clientSocketDisConnected()
     clientSocket->uninstallProtocol ( protocol );
     clientSocket->deleteLater();
     m_clientList.removeOne ( clientSocket );
+    m_protocolManager->deleteProtocol ( protocol );
 }
 
 void QQtBluetoothServer::installProtocolManager ( QQtProtocolManager* stackGroup )
