@@ -19,7 +19,7 @@ class QQTSHARED_EXPORT QQtFramelessHelper : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtFramelessHelper ( QWidget* parent );
+    explicit QQtFramelessHelper ( QWidget* parent = 0 );
 
     void setResizeMargins ( int margin );
     void setResizeMargins ( const QMargins& margins );
