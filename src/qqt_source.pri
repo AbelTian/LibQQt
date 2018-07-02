@@ -36,14 +36,17 @@ contains (QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
 #core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
-    $$PWD/core/qqtevent.cpp \
     $$PWD/core/qqtdictionary.cpp \
     $$PWD/core/qqtobjectmanager.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
-    $$PWD/core/qqtevent.h \
     $$PWD/core/qqtdictionary.h \
     $$PWD/core/qqtobjectmanager.h
+
+SOURCES += \
+    $$PWD/core/qqtevent.cpp
+HEADERS += \
+    $$PWD/core/qqtevent.h
 
 #后台进程支持，这个只有ios不支持，这个支持在源文件pri里处理。
 DEFINES += __PROCESSMODULE__
@@ -187,6 +190,10 @@ FORMS += \
     $$PWD/frame/qqtinput.ui \
     $$PWD/frame/qqtmsgbox.ui
 
+SOURCES += \
+    $$PWD/frame/qqtqssmanager.cpp
+HEADERS += \
+    $$PWD/frame/qqtqssmanager.h
 
 #multimedia
 #support Qt5, if Qt4 want to use, you need compile QtMultiMedia for Qt4.
