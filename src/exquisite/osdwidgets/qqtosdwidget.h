@@ -6,6 +6,10 @@
 #include <qqt-local.h>
 #include <qqtcore.h>
 
+/**
+ * QQtOSDWidget
+ * 透明背景的Widget，可以应用于作为透明控件。
+ */
 class QQTSHARED_EXPORT QQtOSDWidget : public QQtWidget
 {
     Q_OBJECT

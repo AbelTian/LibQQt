@@ -91,6 +91,11 @@ HEADERS += \
 
 #widgets
 SOURCES += \
+    $$PWD/widgets/qqttitlebar.cpp
+HEADERS += \
+    $$PWD/widgets/qqttitlebar.h
+
+SOURCES += \
     $$PWD/widgets/qqtspinbox.cpp \
     $$PWD/widgets/qqtdoublespinbox.cpp \
     $$PWD/widgets/qqtdateedit.cpp \
@@ -146,16 +151,9 @@ FORMS += \
 
 #frame
 SOURCES += \
-    $$PWD/frame/qqtsysteminfo.cpp
+    $$PWD/frame/qqtlineeditwithsearch.cpp
 HEADERS += \
-    $$PWD/frame/qqtsysteminfo.h
-
-SOURCES += \
-    $$PWD/frame/qqtlineeditwithsearch.cpp \
-    $$PWD/frame/qqtosdwidget.cpp
-HEADERS += \
-    $$PWD/frame/qqtlineeditwithsearch.h \
-    $$PWD/frame/qqtosdwidget.h
+    $$PWD/frame/qqtlineeditwithsearch.h
 
 SOURCES += \
     $$PWD/frame/qqtmultipagetablewidget.cpp
@@ -531,6 +529,7 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/openglwidgets/qqtopenglwindow.h
     }
 
+    #color widgets
     contains (DEFINES, __COLORWIDGETS__) {
         SOURCES += \
             $$PWD/exquisite/colorwidgets/qqtcolorwidget.cpp \
@@ -539,6 +538,31 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/colorwidgets/qqtcolorwidget.h \
             $$PWD/exquisite/colorwidgets/qqtcolorlabel.h
     }
+
+    #on screen display widgets
+    contains (DEFINES, __OSDWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/osdwidgets/qqtosdwidget.cpp
+        HEADERS += \
+            $$PWD/exquisite/osdwidgets/qqtosdwidget.h
+
+        SOURCES += \
+            $$PWD/exquisite/osdwidgets/qqtosdframe.cpp
+        HEADERS += \
+            $$PWD/exquisite/osdwidgets/qqtosdframe.h
+
+        SOURCES += \
+            $$PWD/exquisite/osdwidgets/qqtosdform.cpp
+        HEADERS += \
+            $$PWD/exquisite/osdwidgets/qqtosdform.h
+    }
+}
+
+contains (DEFINES, __HIGHGRADE__) {
+    SOURCES += \
+        $$PWD/highgrade/qqtsysteminfo.cpp
+    HEADERS += \
+        $$PWD/highgrade/qqtsysteminfo.h
 }
 
 include ($$PWD/qqt_3rdparty.pri)

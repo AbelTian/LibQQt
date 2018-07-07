@@ -31,18 +31,20 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
     QTextCodec::setCodecForLocale ( QTextCodec::codecForName ( "UTF-8" ) );
 
+    /*配置文件名称设定*/
+    //App继承QQtApplication以后，必须设置这三个Value，改变为自己的Value。
     /*嵌入式，应用名称必须指定 配置文件路径$CONF_PATH/organizationName/applicationName.conf[.ini]*/
     QCoreApplication::setOrganizationName ( "QQt" );
     /*专为Mac OS X 准备的，macOS下配置文件: $CONF_PATH/organizationDomain/ApplicationName.ini ... */
     QCoreApplication::setOrganizationDomain ( "www.qqt.com" ); //
     QCoreApplication::setApplicationName ( "QQt" );
 
-    /*设置配置文件所在路径*/
+    /*设置配置文件路径*/
     QSettings::setDefaultFormat ( QSettings::IniFormat );
     QSettings::setPath ( QSettings::IniFormat, QSettings::UserScope, CONFIG_PATH );
     QSettings::setPath ( QSettings::IniFormat, QSettings::SystemScope, CONFIG_PATH );
 
-    /*程序中，需要更改语言的位置，可以通过qqtApp->setLanguage实现。languageChanged信号连接到每个页面的更换语言的函数*/
+    /*程序中，需要更改语言，可以通过qqtApp->setLanguage实现。languageChanged信号连接到每个页面的刷新语言的函数，一般会在这个槽函数里调用ui->retranslateUI()*/
     qqtApp = this;
 
 #ifdef __DARWIN__
@@ -59,12 +61,12 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     pline() << "TSLIB_TSDEVICE:" << QProcessEnvironment::systemEnvironment().value ( "TSLIB_TSDEVICE" );
 #endif
 
-    /*解决，嵌入式板子上，串口关闭后有时无法打开的问题*/
+    /*解决：嵌入式板子上串口关闭后有时无法打开的问题*/
 #ifdef __EMBEDDED_LINUX__
     system ( "rm -f /tmp/LCK..ttyS*" );
 #endif
 
-    /*设置语言翻译器，用户需要自己设置语言，（默认为页面上的词汇，设置后为翻译的中文或者英文）*/
+    /*设置语言翻译器。用户需要自己设置语言，（默认为页面上的词汇，设置后为翻译的中文或者英文或者俄文或者其他语言。）*/
     language = new QTranslator ( this );
 
     /*设置随机数种子*/
@@ -196,7 +198,7 @@ void QQtApplication::slotUPanAutoRun ( int status )
 }
 
 
-void QQtApplication::setTextFont ( QString fontfile, int fontsize )
+bool QQtApplication::setTextFont ( QString fontfile, int fontsize )
 {
     /*这个函数没有任何问题，检测完毕。过去的报错是工作目录不对，无法加载其他数据库*/
     /*此处，改为使用QFontDatabase的经典静态方法调用方式*/
@@ -207,12 +209,19 @@ void QQtApplication::setTextFont ( QString fontfile, int fontsize )
     pline() << "font file:" << fontfile;
     pline() << "font id:" << fontID;
     pline() << "font families:" << QFontDatabase::applicationFontFamilies ( fontID );
-    //如果字体不对，这个地方会崩溃，那么我要加处理吗？
+    //如果字体不对，这个地方会崩溃，那么我要加处理吗？加。
+    if ( fontID < 0 )
+    {
+        pline() << QString ( "%1 is setted failed, unexisted, but ignored." ).arg ( fontfile );
+        return false;
+    }
     QString ziti = QFontDatabase::applicationFontFamilies ( fontID ).at ( 0 );
     pline() << "font name:" << ziti;
 
     QFont font ( ziti, fontsize );
     QApplication::setFont ( font );
+
+    return true;
 }
 
 

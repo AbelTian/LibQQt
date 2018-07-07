@@ -19,7 +19,7 @@ public:
 
     void setLanguage ( QString qmfile = "./lang/zh_CN.qm" );
     //palette
-    void setTextFont ( QString fontfile = "/usr/lib/fonts/heiti.ttf",
+    bool setTextFont ( QString fontfile = "/usr/lib/fonts/heiti.ttf",
                        int fontsize = 11 );
     //这是设置全部控件的，基本的QSS，通用的QSS，全在这个里，特殊不变的也允许放在这里。
     void setQSSStyle ( QString qssfile = "./skin/default.qss" );

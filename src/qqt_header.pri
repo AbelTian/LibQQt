@@ -348,6 +348,9 @@ defineTest(add_defines_QQt){
 
         #click sound widgets
         DEFINES += __CLICKSOUNDWIDGETS__
+
+        #on screen display widget
+        DEFINES += __OSDWIDGETS__
     }
 
     ########################################################################
@@ -359,8 +362,6 @@ defineTest(add_defines_QQt){
     #if you use HighGrade module, open this annotation
     #高级模块，包含不少的高级功能组件，这个模块可以集中开关。
     DEFINES += __HIGHGRADE__
-    #依赖网络模块
-    !contains (DEFINES, __NETWORKSUPPORT__): DEFINES -= __HIGHGRADE__
     contains (DEFINES, __HIGHGRADE__) {
 
     }
@@ -420,7 +421,7 @@ defineTest(add_include_QQt){
     header_path = $$1
     #如果参数1为空，那么是用SDK里的路径 用于链接时包含头文件
     #此处_bundle代表 mac下头文件在bundle里。 留意
-    isEmpty(header_path)header_path=$$PWD
+    isEmpty(header_path):header_path=$$PWD
 
     command =
     #basic
@@ -465,6 +466,7 @@ defineTest(add_include_QQt){
     command += $${header_path}/exquisite/gifwidgets
     command += $${header_path}/exquisite/openglwidgets
     command += $${header_path}/exquisite/colorwidgets
+    command += $${header_path}/exquisite/osdwidgets
     command += $${header_path}/exquisite/mathml
     command += $${header_path}/exquisite/dmmu
 
