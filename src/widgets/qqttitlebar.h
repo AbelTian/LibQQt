@@ -1,4 +1,4 @@
-#ifndef QQTTITLEBAR
+﻿#ifndef QQTTITLEBAR
 #define QQTTITLEBAR
 
 #include <QQtWidget>
@@ -26,6 +26,11 @@ public:
     QToolButton* maximizeButton() { return m_pMaximizeButton; }
     QToolButton* closeButton() { return m_pCloseButton; }
 
+    int layoutSpacing();
+    void setLayoutSpacing ( int spacing );
+    QMargins layoutContentsMargins();
+    void setLayoutContentsMargins ( int left, int top, int right, int bottom );
+    void setLayoutContentsMargins ( const QMargins& margin );
 protected:
 
     // 双击标题栏进行界面的最大化/还原
@@ -52,6 +57,7 @@ private:
     void updateMaximize();
 
 private:
+    QHBoxLayout* m_pLayout;
     //QLabel会有角上遗漏颜色。
     QQtWidget* m_pIconLabel;
     QLabel* m_pTitleLabel;

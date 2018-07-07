@@ -17,13 +17,13 @@ QQtFramelessHelperPrivate::QQtFramelessHelperPrivate ( QWidget* parent )
       isMousePressed ( false ),
       QObject ( parent )
 {
-    margins = QMargins ( 8, 8, 8, 8 );
+    margins = QMargins ( 5, 5, 5, 5 );
     parent->setWindowFlags ( parent->windowFlags() | ( Qt::FramelessWindowHint ) );
     parent->installEventFilter ( this );
 
 
     timer = new QTimer ( this );
-    timer->setInterval ( 400 );
+    timer->setInterval ( 200 );
     connect ( timer, SIGNAL ( timeout() ), this, SLOT ( checkPos() ) );
 
     timer->start();

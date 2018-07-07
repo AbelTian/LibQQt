@@ -1,4 +1,4 @@
-#include <QLabel>
+﻿#include <QLabel>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QEvent>
@@ -24,7 +24,7 @@ QQtTitleBar::QQtTitleBar ( QWidget* parent )
     //int extent = style()->pixelMetric ( QStyle::PM_TitleBarHeight );
     //setFixedHeight ( extent );
 
-    QHBoxLayout* pLayout = new QHBoxLayout ( this );
+    m_pLayout = new QHBoxLayout ( this );
     m_pIconLabel = new QQtWidget ( this );
     m_pTitleLabel = new QLabel ( this );
     QSpacerItem* item = new QSpacerItem ( 20, 20, QSizePolicy::Expanding );
@@ -64,17 +64,17 @@ QQtTitleBar::QQtTitleBar ( QWidget* parent )
     m_pMaximizeButton->setToolTip ( "Maximize" );
     m_pCloseButton->setToolTip ( "Close" );
 
-    pLayout->addWidget ( m_pIconLabel );
-    pLayout->addSpacing ( 5 );
-    pLayout->addWidget ( m_pTitleLabel );
-    pLayout->addSpacerItem ( item );
-    pLayout->addWidget ( m_pMinimizeButton );
-    pLayout->addWidget ( m_pMaximizeButton );
-    pLayout->addWidget ( m_pCloseButton );
-    pLayout->setSpacing ( 0 );
-    pLayout->setContentsMargins ( 8, 1, 8, 1 );
+    m_pLayout->addWidget ( m_pIconLabel );
+    m_pLayout->addSpacing ( 5 );
+    m_pLayout->addWidget ( m_pTitleLabel );
+    m_pLayout->addSpacerItem ( item );
+    m_pLayout->addWidget ( m_pMinimizeButton );
+    m_pLayout->addWidget ( m_pMaximizeButton );
+    m_pLayout->addWidget ( m_pCloseButton );
+    m_pLayout->setSpacing ( 0 );
+    m_pLayout->setContentsMargins ( 5, 1, 5, 1 );
 
-    setLayout ( pLayout );
+    setLayout ( m_pLayout );
 
     connect ( m_pMinimizeButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onClicked() ) );
     connect ( m_pMaximizeButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onClicked() ) );
@@ -94,6 +94,28 @@ void QQtTitleBar::setMinimizeVisible ( bool setting )
 void QQtTitleBar::setMaximizeVisible ( bool setting )
 {
     m_pMaximizeButton->setVisible ( setting );
+}
+
+int QQtTitleBar::layoutSpacing() { return m_pLayout->spacing(); }
+
+void QQtTitleBar::setLayoutSpacing ( int spacing )
+{
+    m_pLayout->setSpacing ( spacing );
+}
+
+QMargins QQtTitleBar::layoutContentsMargins()
+{
+    return m_pLayout->contentsMargins();
+}
+
+void QQtTitleBar::setLayoutContentsMargins ( int left, int top, int right, int bottom )
+{
+    setLayoutContentsMargins ( QMargins ( left, top, right, bottom ) );
+}
+
+void QQtTitleBar::setLayoutContentsMargins ( const QMargins& margin )
+{
+    m_pLayout->setContentsMargins ( margin );
 }
 
 void QQtTitleBar::mouseDoubleClickEvent ( QMouseEvent* event )
@@ -182,6 +204,9 @@ bool QQtTitleBar::eventFilter ( QObject* obj, QEvent* event )
         {
             int extent = m_pTitleLabel->size().height();
             m_pIconLabel->setMinimumSize ( extent, extent );
+            m_pMinimizeButton->setMinimumSize ( extent, extent );
+            m_pMaximizeButton->setMinimumSize ( extent, extent );
+            m_pCloseButton->setMinimumSize ( extent, extent );
             updateMaximize();
             return true;
         }
