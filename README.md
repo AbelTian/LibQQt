@@ -52,6 +52,7 @@ github link: https://github.com/AbelTian/LibQQt
     - 包括QQtXmlTreeModel、QQtJsonTreeModel、QQtFileSystemTreeModel、QQtSqlTreeModel
 6. QQt通讯套件。
      - 通讯口类   
+        - QQtNfcClient、QQtNfcServer 支持近场通讯。  
         - QQtSerialPort 兼容QSerialPort and QextSerialPort
         - [QQtTcpClient](src/network/qqttcpclient.h)、QQtTcpServer、QQtUdpClient
         - QQtBluetoothSocket +QQtBluetoothManager
@@ -78,6 +79,8 @@ github link: https://github.com/AbelTian/LibQQt
 4. 添加gif support Widgets  
     - 可以方便的设置动态按钮等。  
     - 有[QQtGifWidget](src/exquisite/gifwidgets/qqtgifwidget.h)、QQtGifButton等。   
+4. 添加color support widgets  
+    - 单色Widget。  
 5. 升级多媒体音频  
     - 添加内存服务器，处理内存和设备之间的数据交互。  
     - [QQtAudioManager](src/multimedia/qqtaudiomanager.h)、  
@@ -88,7 +91,11 @@ github link: https://github.com/AbelTian/LibQQt
     - QQtWebAccessManager，支持管理Session、Cookies。    
     - 添加GumboQuery爬虫工具。  
     - 支持webservice (QtSoap)  
-
+7. 添加click and click sound widget  
+    - 带按键声，支持长按、双击的widget和label等控件。  
+8. 添加Qt没有的组件QQtTitleBar  
+    - 可以组完全自定义的Form。  
+    - 加上QQtOSDFrame可以组透明Form。    
 
 ========================================================================  
 # 多链接发布技术    
