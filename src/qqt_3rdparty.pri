@@ -9,8 +9,6 @@ contains (DEFINES, __PLUGINSUPPORT__) {
     contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
         contains (DEFINES, QQT_LIBRARY) {
             DEFINES += BUILD_QDEVICEWATCHER_LIB
-        } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-            DEFINES += BUILD_QDEVICEWATCHER_STATIC
         }
         wince*: SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_wince.cpp
         else:  SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_win32.cpp
@@ -35,9 +33,6 @@ contains(DEFINES, __QQTCHARTS__) {
         win32 {
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
-            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                #build static library - qcustomplot
-                DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
             }
         }
         SOURCES += $$PWD/charts/qcustomplot/qcpdocumentobject.cpp \
@@ -52,6 +47,12 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #if you use qextserialport, open the two annotation
     #注释：在qqt_header.pri打开 DEFINES += __QEXTSERIALPORT__
     contains (DEFINES, __QEXTSERIALPORT__) {
+        win32 {
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += QEXTSERIALPORT_LIBRARY
+            }
+        }
+
         #include ( $$PWD/network/qextserialport/qextserialport.pri )
         HEADERS += $$PWD/network/qextserialport/qextserialbase.h \
                   $$PWD/network/qextserialport/qextserialport.h \
@@ -70,8 +71,6 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         win32 {
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QT_QTSOAP_LIBRARY
-            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                DEFINES += QT_QTSOAP_STATIC_LIBRARY
             }
         }
         SOURCES += \
@@ -91,8 +90,6 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         win32 {
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QT_GUMBO_LIBRARY
-            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                DEFINES += QT_GUMBO_STATIC_LIBRARY
             }
         }
         include ($$PWD/network/gumbo/parser/gumbo-parser.pri)
@@ -122,8 +119,6 @@ contains (DEFINES, __EXQUISITE__) {
             #ignore: QZXing has no need to export
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QZXING_LIBRARY
-            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                DEFINES += QZXING_STATIC_LIBRARY
             }
         }
         include ($$PWD/exquisite/qrcode/qrdecode/qrdecode.pri)
@@ -142,8 +137,6 @@ contains (DEFINES, __EXQUISITE__) {
             #mathml
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += QT_QTMMLWIDGET_LIBRARY
-            } else: contains (DEFINES, QQT_STATIC_LIBRARY) {
-                DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
             }
         }
         SOURCES += $$PWD/exquisite/mathml/qtmmlwidget.cpp

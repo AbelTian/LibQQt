@@ -59,7 +59,7 @@ private:
     //不需要额外初始化的地方
     //mingw32 5.3 静态成员不准导出？作为静态类这块编译出现错误
     //error: definition of static data member 'QQtWavSoundEffect::msInstance' of dllimport'd class
-    //这个已经查出来了，在qqt_header.pri有一个WIN64的鸿缺失，导致QQT_STATIC_LIBRARY缺失，引发QQt在QQTSHAREDEXPORT=import下编译，所以引发这个变量重新定义的错误，而报错是在导入的类里面定义了静态成员，也就是说导入类不准许静态成员的定义初始化代码出现，引入类的静态成员在自己的实现文件里出现了定义。变量重定义了。
+    //这个已经查出来了，在qqt_header.pri有一个WIN64的宏缺失，导致QQT_STATIC_LIBRARY缺失，引发QQt在QQTSHAREDEXPORT=import下编译，所以引发这个变量重新定义的错误，而报错是在导入的类里面定义了静态成员，也就是说导入类不准许静态成员的定义初始化代码出现，引入类的静态成员在自己的实现文件里出现了定义。变量重定义了。
     static QQtWavSoundEffect* msInstance;
 
     QQtWavAudioInput mWavInput;

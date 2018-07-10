@@ -41,6 +41,8 @@ CONFIG += build_all
 include ($${PWD}/../multi-link/add_base_manager.pri)
 
 #根据multi-link提供的动态编译 静态编译设定进行编译，添加我自己的QQt的宏定义。
+#如果，用户把LibQQt编译为静态库，那么在链接的时候，需要QQT_STATIC_LIBRARY定义。
+#动态链接，一切默认即可。
 contains(DEFINES, LIB_LIBRARY) {
     DEFINES += QQT_LIBRARY
     message(Build $${TARGET} QQT_LIBRARY is defined. build)
@@ -91,6 +93,7 @@ include ($$PWD/qqt_source.pri)
 add_sdk(QQt, $$add_target_name())
 
 #额外做点事情 拷贝头文件 没有后缀的头文件
+#这个可以通过Multi-link工具实现。
 add_sdk_header(QQt, $$add_target_name(), QQtApplication, frame)
 add_sdk_header(QQt, $$add_target_name(), QQtWidget, widgets)
 

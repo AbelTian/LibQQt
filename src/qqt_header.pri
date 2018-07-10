@@ -84,13 +84,8 @@ defineTest(add_defines_QQt){
     }
 
     #link and build all need this macro
+    #现在Multi-link v2里面，已经有LIB_STATIC_LIBRARY，这个宏多余了，可是由于内部逻辑复杂，更改也不简单，所以留着了。用户静态编译LibQQt，记得定义QQT_STATIC_LIBRARY，build and link。
     contains(DEFINES, QQT_STATIC_LIBRARY) {
-        DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
-        DEFINES += QZXING_STATIC_LIBRARY
-        DEFINES += QT_QTSOAP_STATIC_LIBRARY
-        DEFINES += BUILD_QDEVICEWATCHER_STATIC
-        DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
-        DEFINES += QT_GUMBO_STATIC_LIBRARY
     }
 
     ################################################################
@@ -141,6 +136,13 @@ defineTest(add_defines_QQt){
     contains(QSYS_PRIVATE, iOS||iOSSimulator||macOS) {
         DEFINES -= __PLUGINSUPPORT__
     }
+    contains (DEFINES, __PLUGINSUPPORT__) {
+        contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+            contains (DEFINES, QQT_STATIC_LIBRARY) {
+                DEFINES += BUILD_QDEVICEWATCHER_STATIC
+            }
+        }
+    }
 
     ##################PrintSupport Module###############################
     #if you use printsupport , open this annotation
@@ -180,6 +182,14 @@ defineTest(add_defines_QQt){
         #in ios qcustomplot can't call savePdf now, no result but a log no printer error.
         #默认打开customplot
         DEFINES += __CUSTOMPLOT__
+        contains (DEFINES, __CUSTOMPLOT__) {
+            win32 {
+                contains (DEFINES, QQT_STATIC_LIBRARY) {
+                    #build static library - qcustomplot
+                    DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
+                }
+            }
+        }
     }
 
     ##################QQtLogSystem Module###############################
@@ -250,6 +260,13 @@ defineTest(add_defines_QQt){
         ##################WebService Module###############################
         #if you use Qt Service Support ( QtSoap ), open this annotation
         DEFINES += __WEBSERVICESUPPORT__
+        contains (DEFINES, __WEBSERVICESUPPORT__) {
+            win32 {
+                contains (DEFINES, QQT_STATIC_LIBRARY) {
+                    DEFINES += QT_QTSOAP_STATIC_LIBRARY
+                }
+            }
+        }
 
         #One Ftp Http 单工...
         #Multi 半双工（客户端并发，服务器序列） QNetworkAccessManager
@@ -291,6 +308,11 @@ defineTest(add_defines_QQt){
         contains (DEFINES, __GUMBOSUPPORT__) {
             #Gumbo need std support, c99...
             QMAKE_CFLAGS += -std=c99
+            win32 {
+                contains (DEFINES, QQT_STATIC_LIBRARY) {
+                    DEFINES += QT_GUMBO_STATIC_LIBRARY
+                }
+            }
         }
 
     }
@@ -312,6 +334,12 @@ defineTest(add_defines_QQt){
         contains(DEFINES, __QRDECODE__) {
             #lessThan(QT_MAJOR_VERSION, 5): QT += declarative
             greaterThan(QT_MAJOR_VERSION, 4): QT += quick
+            contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+                #ignore: QZXing has no need to export
+                contains (DEFINES, QQT_STATIC_LIBRARY) {
+                    DEFINES += QZXING_STATIC_LIBRARY
+                }
+            }
         }
 
         #if you use gif widgets, open this annotation
@@ -328,7 +356,13 @@ defineTest(add_defines_QQt){
 
         ##################Mathes Module###############################
         DEFINES += __MATHWIDGETSUPPORT__
-
+        contains (DEFINES, __SVGWIDGETS__) {
+            contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+                contains (DEFINES, QQT_STATIC_LIBRARY) {
+                    DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
+                }
+            }
+        }
         #LOGIC CAMERA PREVIEW
         #depend on dmmu
         DEFINES += __LOGICCAMERAMODULE__

@@ -163,22 +163,22 @@ protected:
     ulong lastErr;
     QextSerialBase::QueryMode _queryMode;
 
-    virtual qint64 readData(char* data, qint64 maxSize) = 0;
-    virtual qint64 writeData(const char* data, qint64 maxSize) = 0;
+    virtual qint64 readData ( char* data, qint64 maxSize ) = 0;
+    virtual qint64 writeData ( const char* data, qint64 maxSize ) = 0;
 
 public:
     QextSerialBase();
-    QextSerialBase(const QString& name);
+    QextSerialBase ( const QString& name );
     virtual ~QextSerialBase();
     virtual void construct();
-    virtual void setPortName(const QString& name);
+    virtual void setPortName ( const QString& name );
     virtual QString portName() const;
 
     /**!
      * Get query mode.
      *  \return query mode.
      */
-    inline QextSerialBase::QueryMode queryMode() const { return _queryMode; };
+    inline QextSerialBase::QueryMode queryMode() const { return _queryMode; }
 
     /*!
      * Set desired serial communication handling style. You may choose from polling
@@ -202,23 +202,23 @@ public:
      *
      * \param mode query mode.
      */
-    virtual void setQueryMode(QueryMode mode);
+    virtual void setQueryMode ( QueryMode mode );
 
 //      virtual void setBlockingRead(bool block) = 0; ///< @todo implement.
 
-    virtual void setBaudRate(BaudRateType) = 0;
+    virtual void setBaudRate ( BaudRateType ) = 0;
     virtual BaudRateType baudRate() const;
-    virtual void setDataBits(DataBitsType) = 0;
+    virtual void setDataBits ( DataBitsType ) = 0;
     virtual DataBitsType dataBits() const;
-    virtual void setParity(ParityType) = 0;
+    virtual void setParity ( ParityType ) = 0;
     virtual ParityType parity() const;
-    virtual void setStopBits(StopBitsType) = 0;
+    virtual void setStopBits ( StopBitsType ) = 0;
     virtual StopBitsType stopBits() const;
-    virtual void setFlowControl(FlowType) = 0;
+    virtual void setFlowControl ( FlowType ) = 0;
     virtual FlowType flowControl() const;
-    virtual void setTimeout(long) = 0;
+    virtual void setTimeout ( long ) = 0;
 
-    virtual bool open(OpenMode mode) = 0;
+    virtual bool open ( OpenMode mode ) = 0;
     virtual bool isSequential() const;
     virtual void close() = 0;
     virtual void flush() = 0;
@@ -227,14 +227,14 @@ public:
     virtual qint64 bytesAvailable() = 0;
     virtual bool atEnd() const;
 
-    virtual void ungetChar(char c) = 0;
-    virtual qint64 readLine(char* data, qint64 maxSize);
+    virtual void ungetChar ( char c ) = 0;
+    virtual qint64 readLine ( char* data, qint64 maxSize );
 
     virtual ulong lastError() const;
-    virtual void translateError(ulong error) = 0;
+    virtual void translateError ( ulong error ) = 0;
 
-    virtual void setDtr(bool set = true) = 0;
-    virtual void setRts(bool set = true) = 0;
+    virtual void setDtr ( bool set = true ) = 0;
+    virtual void setRts ( bool set = true ) = 0;
     virtual ulong lineStatus() = 0;
 
 signals:
@@ -253,7 +253,7 @@ signals:
      *
      *  \see lineStatus().
      */
-    void dsrChanged(bool status);
+    void dsrChanged ( bool status );
 };
 
 #endif

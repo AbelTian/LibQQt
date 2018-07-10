@@ -35,7 +35,7 @@ struct QextPortInfo
  * Windows implementation is based on Zach Gorman's work from
  * <a href="http://www.codeproject.com">The Code Project</a> (http://www.codeproject.com/system/setupdi.asp).
  */
-class QextSerialEnumerator
+class LIBRARY_SHARED_EXPORT QextSerialEnumerator
 {
 private:
 #ifdef _TTY_WIN_
@@ -45,7 +45,7 @@ private:
      *  \param property property name.
      *  \return property value.
      */
-    static QString getRegKeyValue(HKEY key, LPCTSTR property);
+    static QString getRegKeyValue ( HKEY key, LPCTSTR property );
 
     /*!
      * Get specific property from registry.
@@ -56,13 +56,13 @@ private:
      *  \param property registry property. One of defined SPDRP_* constants.
      *  \return property string.
      */
-    static QString getDeviceProperty(HDEVINFO devInfo, PSP_DEVINFO_DATA devData, DWORD property);
+    static QString getDeviceProperty ( HDEVINFO devInfo, PSP_DEVINFO_DATA devData, DWORD property );
 
     /*!
      * Search for serial ports using setupapi.
      *  \param infoList list with result.
      */
-    static void setupAPIScan(QList<QextPortInfo>& infoList);
+    static void setupAPIScan ( QList<QextPortInfo>& infoList );
 #endif /*_TTY_WIN_*/
 
 public:
