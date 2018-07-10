@@ -356,7 +356,7 @@ defineTest(add_defines_QQt){
 
         ##################Mathes Module###############################
         DEFINES += __MATHWIDGETSUPPORT__
-        contains (DEFINES, __SVGWIDGETS__) {
+        contains (DEFINES, __MATHWIDGETSUPPORT__) {
             contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
                 contains (DEFINES, QQT_STATIC_LIBRARY) {
                     DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
