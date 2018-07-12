@@ -279,6 +279,17 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         HEADERS += $$PWD/network/qqtudpserver.h
     }
 
+    #local iodevice
+    contains(DEFINES, __LOCALSOCKET__){
+        #local client iodevice
+        SOURCES += $$PWD/network/qqtlocalclient.cpp
+        HEADERS += $$PWD/network/qqtlocalclient.h
+
+        #local server iodevice
+        SOURCES += $$PWD/network/qqtlocalserver.cpp
+        HEADERS += $$PWD/network/qqtlocalserver.h
+    }
+
     #serialport iodevice
     SOURCES += $$PWD/network/qqtserialport.cpp
     HEADERS += $$PWD/network/qqtserialport.h
@@ -568,6 +579,11 @@ contains (DEFINES, __HIGHGRADE__) {
         $$PWD/highgrade/qqtsharedmemory.cpp
     HEADERS += \
         $$PWD/highgrade/qqtsharedmemory.h
+
+    SOURCES += \
+        $$PWD/highgrade/qqtsingleapplication.cpp
+    HEADERS += \
+        $$PWD/highgrade/qqtsingleapplication.h
 }
 
 include ($$PWD/qqt_3rdparty.pri)

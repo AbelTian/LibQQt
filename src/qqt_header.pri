@@ -257,6 +257,9 @@ defineTest(add_defines_QQt){
         #raw socket, 这个是常用的，不要关，dont close。...
         DEFINES += __TCPUDPSOCKET__
 
+        ##################Local RawSocket Module###############################
+        DEFINES += __LOCALSOCKET__
+
         ##################WebService Module###############################
         #if you use Qt Service Support ( QtSoap ), open this annotation
         DEFINES += __WEBSERVICESUPPORT__
