@@ -162,6 +162,7 @@ void QQtLocalClient::socketErrorOccured ( LocalSocketError e )
     switch ( e )
     {
         case QLocalSocket::PeerClosedError:
+        case QLocalSocket::OperationError:
             break;
 
         case QLocalSocket::ServerNotFoundError:
@@ -224,7 +225,6 @@ void QQtLocalClient::connectToSingelHost()
 
     QString ip = m_serverIP.at ( contype );
     connectToServer ( ip );
-
     pline() << peerName() << serverName() << fullServerName();
 }
 

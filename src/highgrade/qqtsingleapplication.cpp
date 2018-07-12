@@ -1,4 +1,4 @@
-#include <qqtsingleapplication.h>
+﻿#include <qqtsingleapplication.h>
 
 QQtSingleTonLocalClientMessage::QQtSingleTonLocalClientMessage ( QObject* parent )
 {
@@ -92,7 +92,7 @@ void QQtSingleTonLocalClientProtocol::sendCommand2()
 
 quint16 QQtSingleTonLocalClientProtocol::minlength()
 {
-    return 0x0a;
+    return 0x03;
 }
 
 quint16 QQtSingleTonLocalClientProtocol::maxlength()
@@ -254,7 +254,7 @@ void QQtSingleTonLocalServerProtocol::sendCommand2()
 
 quint16 QQtSingleTonLocalServerProtocol::minlength()
 {
-    return 0x0a;
+    return 0x03;
 }
 
 quint16 QQtSingleTonLocalServerProtocol::maxlength()
@@ -326,6 +326,7 @@ QQtSingleApplication::QQtSingleApplication ( int& argc, char** argv ) : QQtAppli
     QQtApplication::setApplicationName ( "QQtSingleTon" );
 
     hasServer = true;
+    bAccepted = false;
 
     //创建客户端句柄
     p0 = 0;
@@ -344,12 +345,51 @@ QQtSingleApplication::QQtSingleApplication ( int& argc, char** argv ) : QQtAppli
               this, SLOT ( slotConnectSuccess() ) );
     connect ( c0, SIGNAL ( signalConnectFail() ),
               this, SLOT ( slotConnectFail() ) );
+
+    connect ( c0, SIGNAL ( stateChanged ( QLocalSocket::LocalSocketState ) ),
+              this, SLOT ( slotSocketStateChanged ( QLocalSocket::LocalSocketState ) ) );
+
     c0->sendConnectToHost();
 }
 
 QQtSingleApplication::~QQtSingleApplication()
 {
+#ifdef Q_OS_WIN
+#else
+    //linux下，如果被接受的app不删除这个server，那么无法启动了吆。
+    if ( bAccepted )
+        QLocalServer::removeServer ( "QQtSingleTon" );
+#endif
+}
 
+void QQtSingleApplication::slotSocketStateChanged ( QLocalSocket::LocalSocketState eSocketState )
+{
+    switch ( eSocketState )
+    {
+        case QLocalSocket::ConnectingState:
+            break;
+
+        case QLocalSocket::ConnectedState:
+            break;
+
+        case QLocalSocket::ClosingState:
+            break;
+
+        case QLocalSocket::UnconnectedState:
+        {
+#ifdef Q_OS_WIN
+#else
+            if ( !hasServer )
+                return;
+            hasServer = false;
+            s0->listen ( "QQtSingleTon" );
+            c0->sendConnectToHost();
+#endif
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 void QQtSingleApplication::slotConnectSuccess()
@@ -358,26 +398,47 @@ void QQtSingleApplication::slotConnectSuccess()
     //如果有Server，说明这个Server不是我创建的。
     pline() << "hasServer:" << hasServer;
     //Windows下LocalServer用的pipe实现的，然后，必须用\n结束报文吗？！！！！
+    if ( !hasServer )
+        bAccepted = true;
+
 #ifdef Q_OS_WIN
     if ( !hasServer )
         return;
     QQtMsgBox::warning ( 0, tr ( "Has an app instance, exit." ) );
-    //quit()和exit(0)都w无法退出。
+    //quit()和exit(0)都无法退出。
     ::exit ( 0 );
 #else
-    if ( hasServer )
-        p0->sendCommand2();
-    else
+    if ( !hasServer )
+        return;
+    QQtMsgBox::warning ( 0, tr ( "Has an app instance, exit." ) );
+    //quit()和exit(0)都无法退出。linux也一样。
+    ::exit ( 0 );
+#if 0
+    //太慢了，主窗口都显示出来了。
+    if ( !hasServer )
         p0->sendCommand1();
+    else
+        p0->sendCommand2();
+#endif
 #endif
 }
 
 void QQtSingleApplication::slotConnectFail()
 {
     pline() << "fail";
+#ifdef Q_OS_WIN
     hasServer = false;
     s0->listen ( "QQtSingleTon" );
     c0->sendConnectToHost();
+#else
+    //refused or notfound
+    if ( c0->error() == QLocalSocket::ConnectionRefusedError )
+    {
+        //这个的错误很严重，被启动的那个App走的时候没有关闭server。在这里关闭。
+        QLocalServer::removeServer ( "QQtSingleTon" );
+    }
+    c0->sendDisConnectFromHost();
+#endif
 }
 
 void QQtSingleApplication::slotAccept()
@@ -388,6 +449,7 @@ void QQtSingleApplication::slotAccept()
 
 void QQtSingleApplication::slotReject()
 {
+    //根据现在的设计，这个函数来不了，来的时候主窗口出来了，所以这个步骤删除了。
     pline() << "can't start, stop now.";
     QQtMsgBox::warning ( 0, tr ( "Has a app instance, exit." ) );
     quit();

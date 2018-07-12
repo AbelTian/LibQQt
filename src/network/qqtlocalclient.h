@@ -27,11 +27,11 @@ public:
     virtual ~QQtLocalClient();
 
     //输入的不是serverIP是serverName。
+    //注意：这里用的是命名的serverName，如果想使用不命名的接口，请用户自行是用setServerName。
     void setServerIPAddress ( QString ip ) {
         if ( m_serverIP.contains ( ip ) )
             return;
         m_serverIP.push_back ( ip );
-        setServerName ( ip );
     }
     QStringList& serverIPAddress() { return m_serverIP; }
     void setServerIPAddress ( QStringList ipList ) { m_serverIP = ipList; }

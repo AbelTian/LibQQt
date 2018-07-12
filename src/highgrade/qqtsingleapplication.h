@@ -1,4 +1,4 @@
-#ifndef QQTSIGNALAPPLICATION_H
+﻿#ifndef QQTSIGNALAPPLICATION_H
 #define QQTSIGNALAPPLICATION_H
 
 #include <QObject>
@@ -6,6 +6,8 @@
 #include <qqt-local.h>
 #include <qqtcore.h>
 #include <qqtmsgbox.h>
+
+#include <qlocalsocket.h>
 
 class QQtSingleTonLocalClientProtocol;
 class QQtLocalClient;
@@ -27,6 +29,7 @@ public:
     virtual ~QQtSingleApplication();
 
 protected slots:
+    void slotSocketStateChanged ( QLocalSocket::LocalSocketState );
     void slotConnectSuccess();
     void slotConnectFail();
     void slotAccept();
@@ -40,6 +43,7 @@ private:
     QQtLocalServer* s0;
 
     bool hasServer;
+    bool bAccepted;
 };
 
 
