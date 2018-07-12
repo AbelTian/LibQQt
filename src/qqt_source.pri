@@ -563,6 +563,11 @@ contains (DEFINES, __HIGHGRADE__) {
         $$PWD/highgrade/qqtsysteminfo.cpp
     HEADERS += \
         $$PWD/highgrade/qqtsysteminfo.h
+
+    SOURCES += \
+        $$PWD/highgrade/qqtsharedmemory.cpp
+    HEADERS += \
+        $$PWD/highgrade/qqtsharedmemory.h
 }
 
 include ($$PWD/qqt_3rdparty.pri)

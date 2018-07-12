@@ -9,6 +9,7 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
+SUBDIRS += test/sharedmemorytest
 SUBDIRS += test/QQtCustomTitleBarMainFormTest
 SUBDIRS += test/QQtOSDFormTest
 #SUBDIRS += demo/QQtRoseMonitor
