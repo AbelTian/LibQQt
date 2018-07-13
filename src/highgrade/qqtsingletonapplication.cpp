@@ -1,4 +1,4 @@
-﻿#include <qqtsingleapplication.h>
+﻿#include <qqtsingletonapplication.h>
 
 QQtSingleTonLocalClientMessage::QQtSingleTonLocalClientMessage ( QObject* parent )
 {
@@ -319,7 +319,7 @@ QQtLocalServer* QQtSingleTonLocalServerInstance ( QQtProtocolManager*& protocolM
     return s0;
 }
 
-QQtSingleApplication::QQtSingleApplication ( int& argc, char** argv ) : QQtApplication ( argc, argv )
+QQtSingleTonApplication::QQtSingleTonApplication ( int& argc, char** argv ) : QQtApplication ( argc, argv )
 {
     QQtApplication::setOrganizationName ( "QQtSingleTon" );
     QQtApplication::setOrganizationDomain ( "www.qqt.singleton.com" ); //
@@ -352,7 +352,7 @@ QQtSingleApplication::QQtSingleApplication ( int& argc, char** argv ) : QQtAppli
     c0->sendConnectToHost();
 }
 
-QQtSingleApplication::~QQtSingleApplication()
+QQtSingleTonApplication::~QQtSingleTonApplication()
 {
 #ifdef Q_OS_WIN
 #else
@@ -362,7 +362,7 @@ QQtSingleApplication::~QQtSingleApplication()
 #endif
 }
 
-void QQtSingleApplication::slotSocketStateChanged ( QLocalSocket::LocalSocketState eSocketState )
+void QQtSingleTonApplication::slotSocketStateChanged ( QLocalSocket::LocalSocketState eSocketState )
 {
     switch ( eSocketState )
     {
@@ -392,7 +392,7 @@ void QQtSingleApplication::slotSocketStateChanged ( QLocalSocket::LocalSocketSta
     }
 }
 
-void QQtSingleApplication::slotConnectSuccess()
+void QQtSingleTonApplication::slotConnectSuccess()
 {
     pline() << "success";
     //如果有Server，说明这个Server不是我创建的。
@@ -423,7 +423,7 @@ void QQtSingleApplication::slotConnectSuccess()
 #endif
 }
 
-void QQtSingleApplication::slotConnectFail()
+void QQtSingleTonApplication::slotConnectFail()
 {
     pline() << "fail";
 #ifdef Q_OS_WIN
@@ -441,13 +441,13 @@ void QQtSingleApplication::slotConnectFail()
 #endif
 }
 
-void QQtSingleApplication::slotAccept()
+void QQtSingleTonApplication::slotAccept()
 {
     //通过了。
     pline() << "can start.";
 }
 
-void QQtSingleApplication::slotReject()
+void QQtSingleTonApplication::slotReject()
 {
     //根据现在的设计，这个函数来不了，来的时候主窗口出来了，所以这个步骤删除了。
     pline() << "can't start, stop now.";

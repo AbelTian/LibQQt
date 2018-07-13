@@ -1,0 +1,4 @@
+#ifndef QQTNAMEDPIPE_H
+#define QQTNAMEDPIPE_H
+
+#endif // QQTNAMEDPIPE_H

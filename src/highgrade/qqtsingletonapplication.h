@@ -1,5 +1,5 @@
-﻿#ifndef QQTSIGNALAPPLICATION_H
-#define QQTSIGNALAPPLICATION_H
+﻿#ifndef QQTSINGLETONAPPLICATION_H
+#define QQTSINGLETONAPPLICATION_H
 
 #include <QObject>
 #include <QQtApplication>
@@ -21,12 +21,12 @@ QQtLocalServer* QQtSingleTonLocalServerInstance ( QQtProtocolManager*& protocol,
  * @brief The QQtSingleApplication class
  * 单实例Application。
  */
-class QQTSHARED_EXPORT QQtSingleApplication : public QQtApplication
+class QQTSHARED_EXPORT QQtSingleTonApplication : public QQtApplication
 {
     Q_OBJECT
 public:
-    explicit QQtSingleApplication ( int& argc, char** argv );
-    virtual ~QQtSingleApplication();
+    explicit QQtSingleTonApplication ( int& argc, char** argv );
+    virtual ~QQtSingleTonApplication();
 
 protected slots:
     void slotSocketStateChanged ( QLocalSocket::LocalSocketState );
@@ -188,4 +188,4 @@ protected:
     virtual bool dispatcher ( const QByteArray& m ) override;
 };
 
-#endif // QQTSIGNALAPPLICATION_H
+#endif // QQTSINGLETONAPPLICATION_H

@@ -397,10 +397,19 @@ defineTest(add_defines_QQt){
     #高级模块，包含不少的高级功能组件，这个模块可以集中开关。
     DEFINES += __HIGHGRADE__
     contains (DEFINES, __HIGHGRADE__) {
-        ##################Local RawSocket Module###############################
-        DEFINES += __LOCALSOCKET__
-        #local socket依赖network support
-        !contains(DEFINES, __NETWORKSUPPORT__):DEFINES-=__LOCALSOCKET__
+        DEFINES += __QQT_COMMUNICATION_SUPPORT__
+        contains(DEFINES, __QQT_COMMUNICATION_SUPPORT__) {
+            ##################Shared Memory Module###############################
+            DEFINES += __SHAREDMEMORY_SUPPORT__
+
+            ##################Message Queue Module###############################
+            DEFINES += __MESSAGEQUEUE_SUPPORT__
+
+            ##################Local RawSocket Module###############################
+            DEFINES += __NAMEDPIPE_SUPPORT__
+            #local socket依赖network support
+            !contains(DEFINES, __NETWORKSUPPORT__):DEFINES-=__NAMEDPIPE_SUPPORT__
+        }
     }
 
     #################################################################
@@ -521,7 +530,7 @@ defineTest(add_include_QQt){
 
     #highgrade module
     command += $${header_path}/highgrade
-
+    command += $${header_path}/highgrade/network
 
     INCLUDEPATH += $$add_host_path($$command)
     export(INCLUDEPATH)

@@ -568,30 +568,52 @@ contains (DEFINES, __HIGHGRADE__) {
 
     #shared memory
     #core module
-    SOURCES += \
-        $$PWD/highgrade/qqtsharedmemory.cpp
-    HEADERS += \
-        $$PWD/highgrade/qqtsharedmemory.h
+    contains(DEFINES, __SHAREDMEMORY_SUPPORT__){
+        SOURCES += \
+            $$PWD/highgrade/qqtsharedmemory.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtsharedmemory.h
+    }
+
+    contains(DEFINES, __MESSAGEQUEUE_SUPPORT__){
+        #local client iodevice
+        SOURCES += $$PWD/highgrade/network/qqtlocalqueueclient.cpp
+        HEADERS += $$PWD/highgrade/network/qqtlocalqueueclient.h
+
+        #local server iodevice
+        SOURCES += $$PWD/highgrade/network/qqtlocalqueueserver.cpp
+        HEADERS += $$PWD/highgrade/network/qqtlocalqueueserver.h
+
+        SOURCES += \
+            $$PWD/highgrade/qqtmessagequeue.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtmessagequeue.h
+    }
 
     #local socket iodevice
     #network module
-    contains(DEFINES, __LOCALSOCKET__){
+    contains(DEFINES, __NAMEDPIPE_SUPPORT__){
         #local client iodevice
-        SOURCES += $$PWD/highgrade/qqtlocalclient.cpp
-        HEADERS += $$PWD/highgrade/qqtlocalclient.h
+        SOURCES += $$PWD/highgrade/network/qqtlocalclient.cpp
+        HEADERS += $$PWD/highgrade/network/qqtlocalclient.h
 
         #local server iodevice
-        SOURCES += $$PWD/highgrade/qqtlocalserver.cpp
-        HEADERS += $$PWD/highgrade/qqtlocalserver.h
+        SOURCES += $$PWD/highgrade/network/qqtlocalserver.cpp
+        HEADERS += $$PWD/highgrade/network/qqtlocalserver.h
+
+        SOURCES += \
+            $$PWD/highgrade/qqtnamedpipe.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtnamedpipe.h
     }
 
     #singleton application
-    contains(DEFINES, __LOCALSOCKET__){
+    contains(DEFINES, __NAMEDPIPE_SUPPORT__){
         #依赖local socket
         SOURCES += \
-            $$PWD/highgrade/qqtsingleapplication.cpp
+            $$PWD/highgrade/qqtsingletonapplication.cpp
         HEADERS += \
-            $$PWD/highgrade/qqtsingleapplication.h
+            $$PWD/highgrade/qqtsingletonapplication.h
     }
 }
 

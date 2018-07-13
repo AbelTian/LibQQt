@@ -99,7 +99,8 @@ github link: https://github.com/AbelTian/LibQQt
 8. HighGrade增加新成员    
     - 线程间、进程间通信组件   
         - QQtSharedMemory，实现可以跨线程的临时变量。  
-        - QQtLocalServer QQtLocalClient 使用QLocalSocket实现跨线程通讯。(**HighGrade**)      
+        - QQtLocalServer QQtLocalClient, QQtNamedPipe使用QLocalSocket实现跨线程通讯。(**HighGrade**)      
+        - QQtLocalQueueServer QQtLocalQueueClient QQtMessageQueue使用QQtLocalQueueSocket实现跨线程通讯。(**HighGrade**)  
    - QQtSingleTonApplication 利用基于QLocalSocket的进程间通信实现。  
 
 ========================================================================  
