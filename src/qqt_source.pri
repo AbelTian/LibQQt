@@ -602,6 +602,10 @@ contains (DEFINES, __HIGHGRADE__) {
         HEADERS += $$PWD/highgrade/network/qqtlocalserver.h
 
         SOURCES += \
+            $$PWD/highgrade/qqtnamedpipeprivate.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtnamedpipeprivate.h
+        SOURCES += \
             $$PWD/highgrade/qqtnamedpipe.cpp
         HEADERS += \
             $$PWD/highgrade/qqtnamedpipe.h

@@ -27,6 +27,7 @@ public:
     virtual ~QQtLocalClient();
 
     //输入的不是serverIP是serverName。
+    //如果连续设置两个不同的，代表依次连接，第二个是备用的。
     //注意：这里用的是命名的serverName，如果想使用不命名的接口，请用户自行是用setServerName。
     void setServerIPAddress ( QString ip ) {
         if ( m_serverIP.contains ( ip ) )

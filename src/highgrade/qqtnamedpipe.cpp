@@ -1,319 +1,154 @@
-#include <qqtnamedpipe.h>
+﻿#include <qqtnamedpipe.h>
+#include <qqtnamedpipeprivate.h>
 
-QQtNamedPipeClientMessage::QQtNamedPipeClientMessage ( QObject* parent )
+QQtNamedPipe::QQtNamedPipe ( const QString& key, QObject* parent )
+    : QObject ( parent ), mKey ( key )
 {
-    mSize = 0x03;//报文定长
-}
+    //创建客户端句柄
+    p0 = 0;
+    c0 = QQtNamedPipeClientInstance ( p0, this );
 
-QQtNamedPipeClientMessage::~QQtNamedPipeClientMessage()
-{
+    //创建服务器句柄
+    pm0 = 0;
+    s0 = QQtNamedPipeServerInstance ( pm0, this );
 
-}
+    connect ( c0, SIGNAL ( signalConnectSucc() ),
+              this, SLOT ( slotConnectSuccess() ) );
+    connect ( c0, SIGNAL ( signalConnectFail() ),
+              this, SLOT ( slotConnectFail() ) );
 
-quint8& QQtNamedPipeClientMessage::size() { return mSize; }
+    connect ( c0, SIGNAL ( stateChanged ( QLocalSocket::LocalSocketState ) ),
+              this, SLOT ( slotSocketStateChanged ( QLocalSocket::LocalSocketState ) ) );
 
-const quint8& QQtNamedPipeClientMessage::size() const { return mSize; }
-
-quint8& QQtNamedPipeClientMessage::cmd() { return mCmd; }
-
-const quint8& QQtNamedPipeClientMessage::cmd() const { return mCmd; }
-
-quint8& QQtNamedPipeClientMessage::data() { return mData; }
-
-const quint8& QQtNamedPipeClientMessage::data() const { return mData; }
-
-void QQtNamedPipeClientMessage::parser ( const QByteArray& l )
-{
-    QByteArray _l = l;
-    _l >> mSize;
-    _l >> mCmd;
-    _l >> mData;
-}
-
-void QQtNamedPipeClientMessage::packer ( QByteArray& l ) const
-{
-    l << mSize;
-    l << mCmd;
-    l << mData;
-}
-
-QDebug& operator << ( QDebug& dbg, const QQtNamedPipeClientMessage& msg )
-{
-    //这里打印一下，报文里面到底有什么信息，
-    //一般到这里的，都是被解析好的message。
-
-    dbg.nospace() << "{" << hex << msg.size() << "}";
-    return dbg.space();
-}
-
-QQtNamedPipeClientProtocol::QQtNamedPipeClientProtocol ( QObject* parent )
-{
+    hasServer = true;
+    bAccepted = false;
 
 }
 
-QQtNamedPipeClientProtocol::~QQtNamedPipeClientProtocol()
+QQtNamedPipe::~QQtNamedPipe()
 {
+#ifdef Q_OS_WIN
+#else
+    //linux下，如果被接受的app不删除这个server，那么无法启动了吆。
+    if ( bAccepted )
+        QLocalServer::removeServer ( "QQtNamedPipeServer" );
+#endif
 
 }
 
-void QQtNamedPipeClientProtocol::recvCommand0x0a ( const QQtNamedPipeClientMessage& msg )
+bool QQtNamedPipe::initializer()
 {
-    //what do you want to do?
-    pline() << "client receive accept:" << msg.cmd();
+    bool ret = create ( );
+    ret = attach();
 }
 
-void QQtNamedPipeClientProtocol::recvCommand0x0b ( const QQtNamedPipeClientMessage& msg )
+void QQtNamedPipe::write ( const QByteArray& bytes )
 {
-    //what do you want to do?
-    pline() << "client receive reject:" << msg.cmd();
+    p0->sendCommand0x0b ( bytes );
+    c0->waitForBytesWritten();
+    pline();
+    //c0->waitForReadyRead();
+    pline();
 }
 
-void QQtNamedPipeClientProtocol::sendCommand0x0a()
+QByteArray QQtNamedPipe::read ( int size )
 {
-    //what do you want to do?
-    QQtNamedPipeClientMessage msg;
-    msg.cmd() = 0x0a;
-    QByteArray l;
-    msg.packer ( l );
-    write ( l );
+    p0->sendCommand0x0a ( size );
+    c0->waitForBytesWritten();
+    pline();
+    //c0->waitForReadyRead();
+    pline();
+    return p0->bytes();
 }
 
-void QQtNamedPipeClientProtocol::sendCommand0x0b()
+bool QQtNamedPipe::create()
 {
-    //what do you want to do?
-    QQtNamedPipeClientMessage msg;
-    msg.cmd() = 0x0b;
-    QByteArray l;
-    msg.packer ( l );
-    write ( l );
-}
+    //准备连接到这个服务器
+    c0->setServerIPAddress ( "QQtNamedPipeServer" );
+    c0->sendConnectToHost();
+    c0->waitForConnected();
+    return true;
 
-quint16 QQtNamedPipeClientProtocol::minlength()
-{
-    return 0x03;
-}
-
-quint16 QQtNamedPipeClientProtocol::maxlength()
-{
-    return 0x07FF;
-}
-
-quint16 QQtNamedPipeClientProtocol::splitter ( const QByteArray& l ) //stream
-{
-    QByteArray s0 = l.left ( 1 );
-    quint8 size = 0;
-    s0 >> size;
-    return size;
-}
-
-bool QQtNamedPipeClientProtocol::dispatcher ( const QByteArray& m ) //message
-{
-    bool ret = true;
-
-    QQtNamedPipeClientMessage qMsg;
-    qMsg.parser ( m );
-    pline() << qMsg;
-
-    //0x0a.
-    switch ( qMsg.cmd() )
+    //这一个server管理所有的pipe了。 第一次返回true，后来返回false，但是可以用。
+    bool  ret = false;
+    if ( !s0->isListening() )
     {
-        case 0x0a://protocol command 1
-            recvCommand0x0a ( qMsg );
-            break;
-
-        case 0x0b://protocol command 2
-            recvCommand0x0b ( qMsg );
-            break;
-
-        default:
-            ret = false;
-            pline() << "receive unknown command:" << hex << qMsg.cmd();
-            break;
+        s0->listen ( "QQtNamedPipeServer" );
+        pline() << "start listen....";
     }
+    return ret;
+}
 
+bool QQtNamedPipe::attach()
+{
+    bool ret = 0;
+    //c0->sendConnectToHost();
+    //c0->waitForConnected();
+    p0->sendCommand0x01 ( mKey );
+    pline();
+    ret = c0->waitForBytesWritten();
+    pline();
+    //ret = c0->waitForReadyRead();
+    pline();
     return ret;
 }
 
 
-QQtLocalClient* QQtNamedPipeClientInstance ( QQtNamedPipeClientProtocol*& protocol, QObject* parent )
+void QQtNamedPipe::slotSocketStateChanged ( QLocalSocket::LocalSocketState eSocketState )
 {
-    static QQtNamedPipeClientProtocol* p0 = NULL;
-    if ( !p0 )
+    switch ( eSocketState )
     {
-        p0 = new QQtNamedPipeClientProtocol ( parent );
-    }
-    protocol = p0;
-
-    static QQtLocalClient* s0 = NULL;
-    if ( !s0 )
-    {
-        s0 = new QQtLocalClient ( parent );
-        s0->installProtocol ( p0 );
-        s0->setServerIPAddress ( "QQtSingleTon" );
-        //现在不连接。
-        //s0->sendConnectToHost();
-    }
-
-    return s0;
-}
-
-
-QQtNamedPipeServerMessage::QQtNamedPipeServerMessage ( QObject* parent )
-{
-    mSize = 0x03;//报文定长
-}
-
-QQtNamedPipeServerMessage::~QQtNamedPipeServerMessage()
-{
-
-}
-
-quint8& QQtNamedPipeServerMessage::size() { return mSize; }
-
-const quint8& QQtNamedPipeServerMessage::size() const { return mSize; }
-
-quint8& QQtNamedPipeServerMessage::cmd() { return mCmd; }
-
-const quint8& QQtNamedPipeServerMessage::cmd() const { return mCmd; }
-
-quint8& QQtNamedPipeServerMessage::data() { return mData; }
-
-const quint8& QQtNamedPipeServerMessage::data() const { return mData; }
-
-void QQtNamedPipeServerMessage::parser ( const QByteArray& l )
-{
-    QByteArray _l = l;
-    _l >> mSize;
-    _l >> mCmd;
-    _l >> mData;
-}
-
-void QQtNamedPipeServerMessage::packer ( QByteArray& l ) const
-{
-    l << mSize;
-    l << mCmd;
-    l << mData;
-}
-
-
-QDebug& operator << ( QDebug& dbg, const QQtNamedPipeServerMessage& msg )
-{
-    //这里打印一下，报文里面到底有什么信息，
-    //一般到这里的，都是被解析好的message。
-
-    dbg.nospace() << "{" << hex << msg.size() << "}";
-    return dbg.space();
-}
-
-
-QQtNamedPipeServerProtocol::QQtNamedPipeServerProtocol ( QObject* parent )
-{
-
-}
-
-QQtNamedPipeServerProtocol::~QQtNamedPipeServerProtocol()
-{
-
-}
-
-void QQtNamedPipeServerProtocol::recvCommand0x0a ( const QQtNamedPipeServerMessage& msg )
-{
-    //what do you want to do?
-    sendCommand0x0a();
-}
-
-void QQtNamedPipeServerProtocol::recvCommand0x0b ( const QQtNamedPipeServerMessage& msg )
-{
-    //what do you want to do?
-    sendCommand0x0b();
-}
-
-void QQtNamedPipeServerProtocol::sendCommand0x0a()
-{
-    //what do you want to do?
-    QQtNamedPipeServerMessage msg;
-    msg.cmd() = 0x0a;
-    QByteArray l;
-    msg.packer ( l );
-    write ( l );
-    pline() << "server send accept:" << msg.cmd();
-}
-
-void QQtNamedPipeServerProtocol::sendCommand0x0b()
-{
-    //what do you want to do?
-    QQtNamedPipeServerMessage msg;
-    msg.cmd() = 0x0b;
-    QByteArray l;
-    msg.packer ( l );
-    write ( l );
-    pline() << "server send reject:" << msg.cmd();
-}
-
-quint16 QQtNamedPipeServerProtocol::minlength()
-{
-    return 0x03;
-}
-
-quint16 QQtNamedPipeServerProtocol::maxlength()
-{
-    return 0x07FF;
-}
-
-quint16 QQtNamedPipeServerProtocol::splitter ( const QByteArray& l ) //stream
-{
-    QByteArray s0 = l.left ( 1 );
-    quint8 size = 0;
-    s0 >> size;
-    return size;
-}
-
-bool QQtNamedPipeServerProtocol::dispatcher ( const QByteArray& m ) //message
-{
-    bool ret = true;
-
-    QQtNamedPipeServerMessage qMsg;
-    qMsg.parser ( m );
-    pline() << qMsg;
-
-    switch ( qMsg.cmd() )
-    {
-        case 0x0a://protocol command 1
-            recvCommand0x0a ( qMsg );
+        case QLocalSocket::ConnectingState:
             break;
 
-        case 0x0b://protocol command 2
-            recvCommand0x0b ( qMsg );
+        case QLocalSocket::ConnectedState:
             break;
 
+        case QLocalSocket::ClosingState:
+            break;
+
+        case QLocalSocket::UnconnectedState:
+        {
+#ifdef Q_OS_WIN
+#else
+            if ( !hasServer )
+                return;
+            hasServer = false;
+            s0->listen ( "QQtNamedPipeServer" );
+            c0->sendConnectToHost();
+#endif
+            break;
+        }
         default:
-            ret = false;
-            pline() << "receive unknown command:" << hex << qMsg.cmd();
             break;
     }
-
-    return ret;
 }
 
-QQtLocalServer* QQtNamedPipeServerInstance ( QQtProtocolManager*& protocolManager, QObject* parent )
+void QQtNamedPipe::slotConnectSuccess()
 {
-    static QQtProtocolManager* pm0 = 0;
-    if ( !pm0 )
-    {
-        pm0 = new QQtProtocolManager ( parent );
-        pm0->registerProtocol<QQtNamedPipeServerProtocol>();
-    }
-    protocolManager = pm0;
+    pline() << "success";
+    //如果有Server，说明这个Server不是我创建的。
+    pline() << "hasServer:" << hasServer;
+    //Windows下LocalServer用的pipe实现的，然后，必须用\n结束报文吗？！！！！
+    if ( !hasServer )
+        bAccepted = true;
+}
 
-    static QQtLocalServer* s0 = NULL;
-    if ( !s0 )
+void QQtNamedPipe::slotConnectFail()
+{
+    pline() << "fail";
+#ifdef Q_OS_WIN
+    hasServer = false;
+    s0->listen ( "QQtNamedPipeServer" );
+    c0->sendConnectToHost();
+#else
+    //refused or notfound
+    if ( c0->error() == QLocalSocket::ConnectionRefusedError )
     {
-        s0 = new QQtLocalServer ( parent );
-        s0->installProtocolManager ( pm0 ) ;
-        //现在不监听。
-        //s0->listen("QQtSingleTon");
+        //这个的错误很严重，被启动的那个App走的时候没有关闭server。在这里关闭。
+        QLocalServer::removeServer ( "QQtNamedPipeServer" );
     }
-
-    return s0;
+    c0->sendDisConnectFromHost();
+#endif
 }
 
