@@ -257,9 +257,6 @@ defineTest(add_defines_QQt){
         #raw socket, 这个是常用的，不要关，dont close。...
         DEFINES += __TCPUDPSOCKET__
 
-        ##################Local RawSocket Module###############################
-        DEFINES += __LOCALSOCKET__
-
         ##################WebService Module###############################
         #if you use Qt Service Support ( QtSoap ), open this annotation
         DEFINES += __WEBSERVICESUPPORT__
@@ -400,7 +397,10 @@ defineTest(add_defines_QQt){
     #高级模块，包含不少的高级功能组件，这个模块可以集中开关。
     DEFINES += __HIGHGRADE__
     contains (DEFINES, __HIGHGRADE__) {
-
+        ##################Local RawSocket Module###############################
+        DEFINES += __LOCALSOCKET__
+        #local socket依赖network support
+        !contains(DEFINES, __NETWORKSUPPORT__):DEFINES-=__LOCALSOCKET__
     }
 
     #################################################################

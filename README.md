@@ -54,9 +54,9 @@ github link: https://github.com/AbelTian/LibQQt
      - 通讯口类   
         - QQtNfcClient、QQtNfcServer 支持近场通讯。  
         - QQtSerialPort 兼容QSerialPort and QextSerialPort
-        - [QQtTcpClient](src/network/qqttcpclient.h)、QQtTcpServer、QQtUdpClient
-        - QQtBluetoothSocket +QQtBluetoothManager
-        - QQtWebAccessManager，支持http、ftp等主流协议，高并发传输。
+        - [QQtTcpClient](src/network/qqttcpclient.h)、QQtTcpServer、QQtUdpClient、QQtUdpServer
+        - QQtBluetoothSocket、QQtBluetoothServer +QQtBluetoothManager
+        - QQtWebAccessManager，支持http、ftp等主流协议，高并发传输，管理cookie和session。
         - [QQtWebSocket](src/network/qqtwebsocketclient.h) 接口
      - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) QQtWebSocketProtocol
      - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)  
@@ -96,6 +96,11 @@ github link: https://github.com/AbelTian/LibQQt
 8. 添加Qt没有的组件QQtTitleBar  
     - 可以组完全自定义的Form。  
     - 加上QQtOSDFrame可以组透明Form。    
+8. HighGrade增加新成员    
+    - 线程间、进程间通信组件   
+        - QQtSharedMemory，实现可以跨线程的临时变量。  
+        - QQtLocalServer QQtLocalClient 使用QLocalSocket实现跨线程通讯。(**HighGrade**)      
+   - QQtSingleTonApplication 利用基于QLocalSocket的进程间通信实现。  
 
 ========================================================================  
 # 多链接发布技术    

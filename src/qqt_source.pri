@@ -279,17 +279,6 @@ contains (DEFINES, __NETWORKSUPPORT__) {
         HEADERS += $$PWD/network/qqtudpserver.h
     }
 
-    #local iodevice
-    contains(DEFINES, __LOCALSOCKET__){
-        #local client iodevice
-        SOURCES += $$PWD/network/qqtlocalclient.cpp
-        HEADERS += $$PWD/network/qqtlocalclient.h
-
-        #local server iodevice
-        SOURCES += $$PWD/network/qqtlocalserver.cpp
-        HEADERS += $$PWD/network/qqtlocalserver.h
-    }
-
     #serialport iodevice
     SOURCES += $$PWD/network/qqtserialport.cpp
     HEADERS += $$PWD/network/qqtserialport.h
@@ -570,20 +559,40 @@ contains (DEFINES, __EXQUISITE__) {
 }
 
 contains (DEFINES, __HIGHGRADE__) {
+    #system infomation
+    #use platform api?
     SOURCES += \
         $$PWD/highgrade/qqtsysteminfo.cpp
     HEADERS += \
         $$PWD/highgrade/qqtsysteminfo.h
 
+    #shared memory
+    #core module
     SOURCES += \
         $$PWD/highgrade/qqtsharedmemory.cpp
     HEADERS += \
         $$PWD/highgrade/qqtsharedmemory.h
 
-    SOURCES += \
-        $$PWD/highgrade/qqtsingleapplication.cpp
-    HEADERS += \
-        $$PWD/highgrade/qqtsingleapplication.h
+    #local socket iodevice
+    #network module
+    contains(DEFINES, __LOCALSOCKET__){
+        #local client iodevice
+        SOURCES += $$PWD/highgrade/qqtlocalclient.cpp
+        HEADERS += $$PWD/highgrade/qqtlocalclient.h
+
+        #local server iodevice
+        SOURCES += $$PWD/highgrade/qqtlocalserver.cpp
+        HEADERS += $$PWD/highgrade/qqtlocalserver.h
+    }
+
+    #singleton application
+    contains(DEFINES, __LOCALSOCKET__){
+        #依赖local socket
+        SOURCES += \
+            $$PWD/highgrade/qqtsingleapplication.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtsingleapplication.h
+    }
 }
 
 include ($$PWD/qqt_3rdparty.pri)

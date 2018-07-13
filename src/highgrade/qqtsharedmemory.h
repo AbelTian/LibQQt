@@ -42,7 +42,8 @@ public:
 
     }
     ~QQtSharedMemory() {}
-
+    
+    //需要重写，改变共享内存块大小。
     virtual void initializer() {
         //user set payload size.
         //这个只需要调用一次，但是调用多次也正常使用。我在这个教程父类里面给的是1024.子类可变可改。这个是最大约束，万万不能超过。
@@ -50,7 +51,8 @@ public:
         //这个每个变量都必须调用！是这个函数保证data()指针有数的。
         attach();
     }
-
+    
+    //需要重写，实现把局部变量打包到共享内存块。（注释部分。）
     //这个函数保证写入共享内存。
     virtual void packer() {
         lock();
@@ -69,6 +71,7 @@ public:
         unlock();
     }
 
+    //需要重写，实现把共享内存块解压到局部变量。（注释部分。）
     //这个函数保证从共享内存读取。
     virtual void parser() {
         lock();
@@ -82,6 +85,8 @@ public:
         unlock();
     }
 
+    /*以下函数提供操作方便。*/
+    
     QByteArray readShortString ( QByteArray& bytes ) {
         quint16 s0;
         QByteArray str;
