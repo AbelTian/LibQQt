@@ -33,6 +33,8 @@
  * 5.variable.parser(); XXXSharedMemory内部定义的成员变量就可以使用了。
  * 6.variable.packer(); XXXSharedMemory内部定义的成员变量就写到共享存储块里面了。
  * 7.只要保证写入的总长度小于等于共享存储块的大小就不会出错。读取的时候总长度随便。
+ *
+ * 约束：共享内存块总长定长，不能变化。内部组成不定长。
  */
 class QQTSHARED_EXPORT QQtSharedMemory : public QSharedMemory
 {
@@ -42,7 +44,7 @@ public:
 
     }
     ~QQtSharedMemory() {}
-    
+
     //需要重写，改变共享内存块大小。
     virtual void initializer() {
         //user set payload size.
@@ -51,7 +53,7 @@ public:
         //这个每个变量都必须调用！是这个函数保证data()指针有数的。
         attach();
     }
-    
+
     //需要重写，实现把局部变量打包到共享内存块。（注释部分。）
     //这个函数保证写入共享内存。
     virtual void packer() {
@@ -86,7 +88,7 @@ public:
     }
 
     /*以下函数提供操作方便。*/
-    
+
     QByteArray readShortString ( QByteArray& bytes ) {
         quint16 s0;
         QByteArray str;

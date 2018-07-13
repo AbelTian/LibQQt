@@ -397,6 +397,7 @@ defineTest(add_defines_QQt){
     #高级模块，包含不少的高级功能组件，这个模块可以集中开关。
     DEFINES += __HIGHGRADE__
     contains (DEFINES, __HIGHGRADE__) {
+        #QQt 线程间 进程间 通讯模块
         DEFINES += __QQT_COMMUNICATION_SUPPORT__
         contains(DEFINES, __QQT_COMMUNICATION_SUPPORT__) {
             ##################Shared Memory Module###############################
