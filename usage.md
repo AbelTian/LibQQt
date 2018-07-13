@@ -198,7 +198,8 @@ LIB_SDK_ROOT=R:\Develop\d1-sdk
 APP_BUILD_ROOT=R:\Develop\c0-buildstation  
 Multi-link目录里提供了Multi-linkConfigTool图形配置工具，编译运行就可以设置，非常方便。  
 在工程里包含multi-link/add_base_manager.pri，在project build config设置环境变量QSYS，就可以使用里面的丰富函数。简单吧！  
-*注意：Multi-link 2已经不支持Qt4，如果需要Qt第四代，那么使用multi-link 1.0链接QQt。*  
+*注意：Multi-link 2 已经不支持Qt4，如果需要Qt第四代，那么使用multi-link 1.0链接QQt。*  
+*注意：Multi-link 2 APP_BUILD_ROOT变成了optional，但是依然需要设置一下，以免还有需要的地方。build root是一切开始的地方。*   
 ![qmake成功](screenshot/15.png "这是LibQQt qmake成功的样子。")  
 ![qmake成功](screenshot/16.png "这是Example app qmake成功的样子。")  
 

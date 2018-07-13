@@ -101,6 +101,7 @@ github link: https://github.com/AbelTian/LibQQt
         - QQtSharedMemory，实现可以跨线程的临时变量。  
         - QQtLocalServer QQtLocalClient, QQtNamedPipe使用QLocalSocket实现跨线程通讯。(**HighGrade**)      
         - QQtLocalQueueServer QQtLocalQueueClient QQtMessageQueue使用QQtLocalQueueSocket实现跨线程通讯。(**HighGrade**)  
+        - 使用方法都类似于QQtSharedMemory。  
    - QQtSingleTonApplication 利用基于QLocalSocket的进程间通信实现。  
 
 ========================================================================  

@@ -9,6 +9,8 @@
 
 /**
  * @brief The QQtLocalServer class
+ * 把Pipe封装成了Socket的模样。
+ * Server管理Pipe的创建和销毁，listen可以调用多次，但是相同的key只有开始的一次可以成功listen。
  */
 class QQTSHARED_EXPORT QQtLocalServer : public QLocalServer
 {
