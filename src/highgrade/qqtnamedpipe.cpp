@@ -73,7 +73,9 @@ bool QQtNamedPipe::create()
     //准备连接到这个服务器
     c0->setServerIPAddress ( "QQtNamedPipeServer" );
     c0->sendConnectToHost();
+    pline();
     ret = c0->waitForConnected();
+    pline();
     return ret;
 
     //这一个server管理所有的pipe了。 第一次返回true，后来返回false，但是可以用。
@@ -90,11 +92,25 @@ bool QQtNamedPipe::attach()
     bool ret = 0;
     //c0->sendConnectToHost();
     //c0->waitForConnected();
+    pline();
+#ifdef Q_OS_WIN
+    //需要睡一会儿，Windows在socket连接的时机会堵塞一下。
+    //c0->waitForConnected();
+    pline();
+    p0->sendCommand0x01 ( mKey );
+    //不知道为什么，Windows刚刚连接成功，打印都来了，这个地方堵死。后来打印又来了。别的世界的打印提前打到这边来了？
+    pline();
+    //ret = c0->waitForBytesWritten();
+    pline();
+    //eLoop->exec();
+#else
     p0->sendCommand0x01 ( mKey );
     pline();
     ret = c0->waitForBytesWritten();
     pline();
     eLoop->exec();
+#endif
+    //无论如何不应该在这里等待。
     //ret = c0->waitForReadyRead();
     pline();
     return ret;
@@ -146,6 +162,7 @@ void QQtNamedPipe::slotConnectFail()
     pline() << "fail";
 #ifdef Q_OS_WIN
     hasServer = false;
+    c0->sendDisConnectFromHost();
     s0->listen ( "QQtNamedPipeServer" );
     c0->sendConnectToHost();
 #else
