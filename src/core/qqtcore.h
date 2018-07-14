@@ -1,4 +1,4 @@
-#ifndef QQTCORE_H
+﻿#ifndef QQTCORE_H
 #define QQTCORE_H
 
 #include <QWidget>
@@ -108,6 +108,7 @@ typedef unsigned char uint8_t;
 
 
 QQTSHARED_EXPORT void QQtSleep ( int millsecond );
+QQTSHARED_EXPORT void QQtSleepWaitingForSignal ( int millsecond, const QObject* obj, const char* signal );
 
 #ifdef __cplusplus
 }
