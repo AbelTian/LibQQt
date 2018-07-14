@@ -51,6 +51,7 @@ signals:
     void signalConnecting();
     void signalConnectSucc();
     void signalConnectFail();//
+    void signalConnectError();//
     void signalDisConnectSucc();//maybe
     void signalDisConnectFail();//
     void signalUpdateProgress ( qint64 value );

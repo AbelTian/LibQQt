@@ -86,12 +86,13 @@ void QQtNamedPipeClient::sendConnectToHost()
 
     if ( state() == ConnectingState )
     {
-        emit signalConnecting();
         return;
     }
 
     if ( state() == ConnectedState )
-        emit signalConnectSucc();
+    {
+        return;
+    }
 
     return;
 }
@@ -130,16 +131,23 @@ void QQtNamedPipeClient::socketStateChanged ( QLocalSocket::LocalSocketState eSo
     switch ( eSocketState )
     {
         case QLocalSocket::ConnectingState:
+        {
+            emit signalConnecting();
             break;
+        }
 
         case QLocalSocket::ConnectedState:
+        {
+            emit signalConnectSucc();
             break;
+        }
 
         case QLocalSocket::ClosingState:
             break;
 
         case QLocalSocket::UnconnectedState:
         {
+            emit signalConnectFail();
             break;
         }
         default:
@@ -176,8 +184,7 @@ void QQtNamedPipeClient::socketErrorOccured ( LocalSocketError e )
             set.sync();
 
             eConType = contype;
-
-            emit signalConnectFail();
+            emit signalConnectError();
         }
         break;
     }
@@ -193,7 +200,6 @@ void QQtNamedPipeClient::socketConnected()
     /*
      * 这个步骤，socket重建，资源重新开始
      */
-    emit signalConnectSucc();
     if ( !m_protocol )
     {
         pline() << "please install protocol for your tcp client.";
@@ -224,7 +230,10 @@ void QQtNamedPipeClient::connectToSingelHost()
     contype = contype % m_serverIP.size();
 
     QString ip = m_serverIP.at ( contype );
-    connectToServer ( ip );
+    //需要保证外部已经断开连接。
+    setServerName ( ip );
+    connectToServer ();
+    //connectToServer(ip);
     pline() << peerName() << serverName() << fullServerName();
 }
 

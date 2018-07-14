@@ -1,6 +1,29 @@
 ﻿#include <qqtnamedpipe.h>
 #include <qqtnamedpipeprivate.h>
 
+//仅仅linux可用。
+void QQtSleepSignal2 ( int millsecond, const QObject* obj, const char* signal )
+{
+    //initilizer
+    QEventLoop eventloop;
+    QObject::connect ( obj, signal, &eventloop, SLOT ( quit() ) );
+
+    QTimer timer;
+    timer.setSingleShot ( true );
+    timer.setInterval ( millsecond );
+    QObject::connect ( &timer, SIGNAL ( timeout() ), &eventloop, SLOT ( quit() ) );
+
+    //process
+    eventloop.exec();
+
+    //clear
+    if ( timer.isActive() )
+        timer.stop();
+
+}
+
+
+
 QQtNamedPipe::QQtNamedPipe ( const QString& key, QObject* parent )
     : QObject ( parent ), mKey ( key )
 {
@@ -31,24 +54,12 @@ QQtNamedPipe::QQtNamedPipe ( const QString& key, QObject* parent )
 
 QQtNamedPipe::~QQtNamedPipe()
 {
-}
-
-bool QQtNamedPipe::initializer()
-{
-    //如果一切工作正常，应该打印的地方都是true。
-    bool ret = false;
-    //检测 或许创建Server
-    ret = hasServer();
-    if ( !ret )
-        ret = create();
-    pline() << "create pipe server:" << ret;
-    //连接
-    ret = attach();
-    pline() << "connect to pipe server:" << ret;
-    //设置key
-    ret = setKey();
-    pline() << "send key to pipe server:" << ret;
-    return ret;
+#ifdef Q_OS_WIN
+#else
+    //linux下，如果被接受的app不删除这个server，那么无法启动了吆。
+    if ( bAccepted )
+        QLocalServer::removeServer ( "QQtNamedPipeServer" );
+#endif
 }
 
 void QQtNamedPipe::write ( const QByteArray& bytes )
@@ -72,12 +83,40 @@ QByteArray QQtNamedPipe::read ( int size )
     return p0->bytes();
 }
 
+bool QQtNamedPipe::initializer()
+{
+    //如果一切工作正常，应该打印的地方都是true。
+    bool ret = false;
+    //检测 或许创建Server
+    ret = hasServer();
+    if ( !ret )
+        ret = create();
+    pline() << "create pipe server:" << ret;
+    //连接
+    ret = attach();
+    pline() << "connect to pipe server:" << ret;
+    //设置key
+    ret = setKey();
+    pline() << "send key to pipe server:" << ret;
+    return ret;
+}
+
+bool QQtNamedPipe::hasServer()
+{
+    //c0 conn fail +c0 refused error
+    c0->setServerIPAddress ( "QQtNamedPipeServer" );
+    c0->sendConnectToHost();
+    c0->waitForConnected();
+    return mHasServer;
+}
+
 bool QQtNamedPipe::create()
 {
     bool  ret = false;
 
     //这个是有原因的，linux下unconnect来的特别慢。
-    c0->sendDisConnectFromHost();
+    //c0->sendDisConnectFromHost();
+
     ret = s0->listen ( "QQtNamedPipeServer" );
 #ifdef Q_OS_WIN
     //给windows缓冲10ms
@@ -106,10 +145,8 @@ bool QQtNamedPipe::attach()
 {
     bool ret = false;
     c0->sendConnectToHost();
-    QQtSleepSignal ( 30000, this, SIGNAL ( signalConnectComeBack() ) );
     //这里应该成功返回，如果失败返回，mHasServer=false,那么，呵呵....
     ret = c0->waitForConnected();
-
     return ret;
 
     pline();
@@ -140,17 +177,10 @@ bool QQtNamedPipe::setKey()
 {
     bool ret = false;
     p0->sendCommand0x01 ( mKey );
-    QQtSleepSignal ( 30000, p0, SIGNAL ( signalSuccessCommand() ) );
+    QQtBlockSignal b1;
+    b1.addsignal ( p0, SIGNAL ( signalSuccessCommand() ) );
+    b1.lock ( 10000 );
     return true;
-}
-
-bool QQtNamedPipe::hasServer()
-{
-    //c0 conn fail +c0 refused error
-    c0->setServerIPAddress ( "QQtNamedPipeServer" );
-    c0->sendConnectToHost();
-    QQtSleepSignal ( 30000, this, SIGNAL ( signalConnectComeBack() ) );
-    return mHasServer;
 }
 
 
@@ -171,11 +201,12 @@ void QQtNamedPipe::slotSocketStateChanged ( QLocalSocket::LocalSocketState eSock
         {
 #ifdef Q_OS_WIN
 #else
+            pline() << "unconnected";
             break;
             //???
-            if ( !hasServer )
+            if ( !mHasServer )
                 return;
-            hasServer = false;
+            mHasServer = false;
             s0->listen ( "QQtNamedPipeServer" );
             c0->sendConnectToHost();
 #endif

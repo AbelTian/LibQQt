@@ -87,5 +87,56 @@ private:
     QEventLoop* eLoop;
 };
 
+//在同一个线程里使用。
+//给QQtBlock加个信号和槽就好了。不必要这个东西吧。
+class QQtBlockSignal : public QQtBlock
+{
+    Q_OBJECT
+public:
+    explicit QQtBlockSignal ( QObject* parent = 0 ) : QQtBlock ( parent ) {
+
+    }
+
+    void addsignal ( const QObject* obj, const char* signal ) {
+
+        QQtSignalObject o0;
+        o0.obj = obj;
+        o0.signal = signal;
+
+        if ( mSignalList.contains ( o0 ) )
+            return;
+        mSignalList.push_back ( o0 );
+
+        connect ( obj, signal, this, SLOT ( slotSignalComing() ) );
+    }
+
+public slots:
+    void slotSignalComing() {
+        unlock();
+    }
+
+private:
+    class QQtSignalObject
+    {
+    public:
+        const QObject* obj;
+        const char* signal;
+
+        QQtSignalObject& operator = ( const QQtSignalObject& other ) {
+            obj = other.obj;
+            signal = other.signal;
+            return *this;
+        }
+
+        bool operator == ( const QQtSignalObject& other ) {
+            if ( obj == other.obj && signal == other.signal )
+                return true;
+            return false;
+        }
+    };
+
+private:
+    QList<QQtSignalObject> mSignalList;
+};
 
 #endif // QQTNAMEDPIPE_H
