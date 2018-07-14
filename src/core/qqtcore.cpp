@@ -81,7 +81,8 @@ QByteArray& operator>> ( QByteArray& l, quint64& r )
 {
     quint8 r0 = 0, r1 = 0, r2 = 0, r3 = 0, r4 = 0, r5 = 0, r6 = 0, r7 = 0;
     l >> r0 >> r1 >> r2 >> r3 >> r4 >> r5 >> r6 >> r7;
-    r = ( (quint64)r0 << 56 ) | ( (quint64)r1 << 48 ) | ( (quint64)r2 << 40 ) | ( (quint64)r3 << 32 ) | ( r4 << 24 ) | ( r5 << 16 ) | ( r6 << 8 ) | r7;
+    r = ( ( quint64 ) r0 << 56 ) | ( ( quint64 ) r1 << 48 ) | ( ( quint64 ) r2 << 40 ) | ( ( quint64 ) r3 << 32 ) |
+        ( r4 << 24 ) | ( r5 << 16 ) | ( r6 << 8 ) | r7;
     return l;
 }
 
@@ -138,3 +139,23 @@ void QQtSleep ( int millsecond )
     }
 }
 
+
+void QQtSleepWaitingForSignal ( int millsecond, const QObject* obj, const char* signal )
+{
+    //initilize
+    QEventLoop eventloop;
+    QObject::connect ( obj, signal, &eventloop, SLOT ( quit() ) );
+
+    QTimer timer;
+    timer.setSingleShot ( true );
+    timer.setInterval ( millsecond );
+    QObject::connect ( &timer, SIGNAL ( timeout() ), &eventloop, SLOT ( quit() ) );
+
+    //process
+    eventloop.exec();
+
+    //clear
+    if ( timer.isActive() )
+        timer.stop();
+
+}
