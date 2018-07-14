@@ -36,6 +36,8 @@ QQtLocalServer* QQtNamedPipeServerInstance ( QQtNamedPipeServerProtocolManager*&
  * key1     pipe1
  * key2     pipe2
  * ...      ...
+ *
+ * 升级：增加一个静态接口，外部创建Server
  */
 class QQTSHARED_EXPORT QQtNamedPipe : public QObject
 {

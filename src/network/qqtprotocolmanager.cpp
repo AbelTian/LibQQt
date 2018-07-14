@@ -63,6 +63,9 @@ QQtProtocol* QQtProtocolManager::findDetachedInstance()
         if ( p->detached() )
             index++;
     }
+    pline() << "total protocol handler:" << m_protocol_list.size();
+    pline() << "remaining protocol handler:" << index;
+    pline() << "using protocol handler:" << m_protocol_list.size() - index;
     emit remanentProtocolChanged ( index );
     emit remainingProtocolChanged ( index );
 

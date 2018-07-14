@@ -11,6 +11,9 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //QQtLocalServer::removeServer ( "QQtNamedPipeServer" );
     static QQtNamedPipe hold ( "mypipe0" );
     hold.initializer();
+
+    static QQtNamedPipe hold2 ( "anotherpipe" );
+    hold2.initializer();
 }
 
 MainWindow::~MainWindow()
@@ -37,7 +40,7 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    QQtNamedPipe a ( "mypipe0" );
+    QQtNamedPipe a ( "anotherpipe" );
     a.initializer();
     QByteArray bytes = "BBBBBBBBBBBBB pipe1 write";
     a.write ( bytes );
@@ -46,7 +49,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    QQtNamedPipe a ( "mypipe0" );
+    QQtNamedPipe a ( "anotherpipe" );
     a.initializer();
     QByteArray bytes = a.read ( 40 );
     pline() << bytes;
