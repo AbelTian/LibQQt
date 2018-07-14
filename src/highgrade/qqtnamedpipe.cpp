@@ -1,7 +1,8 @@
 ﻿#include <qqtnamedpipe.h>
 #include <qqtnamedpipeprivate.h>
 
-//仅仅linux可用。
+//仅仅linux可用？
+//这个还需要修改，修改好移动到core.cpp
 void QQtSleepSignal2 ( int millsecond, const QObject* obj, const char* signal )
 {
     //initilizer
@@ -40,10 +41,6 @@ QQtNamedPipe::QQtNamedPipe ( const QString& key, QObject* parent )
               this, SLOT ( slotConnectSuccess() ) );
     connect ( c0, SIGNAL ( signalConnectFail() ),
               this, SLOT ( slotConnectFail() ) );
-
-    connect ( c0, SIGNAL ( stateChanged ( QLocalSocket::LocalSocketState ) ),
-              this, SLOT ( slotSocketStateChanged ( QLocalSocket::LocalSocketState ) ) );
-
 
     mHasServer = false;
     bAccepted = false;
@@ -118,26 +115,6 @@ bool QQtNamedPipe::create()
     //c0->sendDisConnectFromHost();
 
     ret = s0->listen ( "QQtNamedPipeServer" );
-#ifdef Q_OS_WIN
-    //给windows缓冲10ms
-    QQtSleep ( 10 );
-#endif
-    return ret;
-
-    //准备连接到这个服务器
-    c0->setServerIPAddress ( "QQtNamedPipeServer" );
-    c0->sendConnectToHost();
-    pline();
-    ret = c0->waitForConnected();
-    pline();
-    return ret;
-
-    //这一个server管理所有的pipe了。 第一次返回true，后来返回false，但是可以用。
-    if ( !s0->isListening() )
-    {
-        s0->listen ( "QQtNamedPipeServer" );
-        pline() << "start listen....";
-    }
     return ret;
 }
 
@@ -148,29 +125,6 @@ bool QQtNamedPipe::attach()
     //这里应该成功返回，如果失败返回，mHasServer=false,那么，呵呵....
     ret = c0->waitForConnected();
     return ret;
-
-    pline();
-#ifdef Q_OS_WIN
-    //需要睡一会儿，Windows在socket连接的时机会堵塞一下。
-    //c0->waitForConnected();
-    pline();
-    p0->sendCommand0x01 ( mKey );
-    //不知道为什么，Windows刚刚连接成功，打印都来了，这个地方堵死。后来打印又来了。别的世界的打印提前打到这边来了？
-    pline();
-    //ret = c0->waitForBytesWritten();
-    pline();
-    //eLoop->exec();
-#else
-    p0->sendCommand0x01 ( mKey );
-    pline();
-    ret = c0->waitForBytesWritten();
-    pline();
-    eLoop->exec();
-#endif
-    //无论如何不应该在这里等待。
-    //ret = c0->waitForReadyRead();
-    pline();
-    return ret;
 }
 
 bool QQtNamedPipe::setKey()
@@ -179,43 +133,10 @@ bool QQtNamedPipe::setKey()
     p0->sendCommand0x01 ( mKey );
     QQtBlockSignal b1;
     b1.addsignal ( p0, SIGNAL ( signalSuccessCommand() ) );
-    b1.lock ( 10000 );
+    b1.lock ( 30000 );
     return true;
 }
 
-
-void QQtNamedPipe::slotSocketStateChanged ( QLocalSocket::LocalSocketState eSocketState )
-{
-    switch ( eSocketState )
-    {
-        case QLocalSocket::ConnectingState:
-            break;
-
-        case QLocalSocket::ConnectedState:
-            break;
-
-        case QLocalSocket::ClosingState:
-            break;
-
-        case QLocalSocket::UnconnectedState:
-        {
-#ifdef Q_OS_WIN
-#else
-            pline() << "unconnected";
-            break;
-            //???
-            if ( !mHasServer )
-                return;
-            mHasServer = false;
-            s0->listen ( "QQtNamedPipeServer" );
-            c0->sendConnectToHost();
-#endif
-            break;
-        }
-        default:
-            break;
-    }
-}
 
 void QQtNamedPipe::slotConnectSuccess()
 {
@@ -223,36 +144,20 @@ void QQtNamedPipe::slotConnectSuccess()
     mHasServer = true;
     emit signalConnectComeBack();
     return;
-
-    //如果有Server，说明这个Server不是我创建的。
-    pline() << "hasServer:" << mHasServer;
-    //Windows下LocalServer用的pipe实现的，然后，必须用\n结束报文吗？！！！！
-    if ( !mHasServer )
-        bAccepted = true;
 }
 
 void QQtNamedPipe::slotConnectFail()
 {
     pline() << "connect pipe server fail, has no server";
-    mHasServer = false;
-    emit signalConnectComeBack();
-    //到这里说明，这个server肯定是我创建的。
-    bAccepted = true;
-    return;
-
-#ifdef Q_OS_WIN
-    c0->sendDisConnectFromHost();
-    s0->listen ( "QQtNamedPipeServer" );
-    c0->sendConnectToHost();
-#else
-    mHasServer = true;//??
-    //refused or notfound
     if ( c0->error() == QLocalSocket::ConnectionRefusedError )
     {
         //这个的错误很严重，被启动的那个App走的时候没有关闭server。在这里关闭。
         QLocalServer::removeServer ( "QQtNamedPipeServer" );
     }
-    c0->sendDisConnectFromHost();
-#endif
+    mHasServer = false;
+    emit signalConnectComeBack();
+    //到这里说明，这个server肯定是我创建的。
+    bAccepted = true;
+    return;
 }
 
