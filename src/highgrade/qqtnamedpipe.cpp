@@ -64,7 +64,9 @@ void QQtNamedPipe::write ( const QByteArray& bytes )
     p0->sendCommand0x0b ( bytes );
     c0->waitForBytesWritten();
     pline();
-    eLoop->exec();
+    QQtBlockSignal b1;
+    b1.addsignal ( p0, SIGNAL ( signalSuccessCommand() ) );
+    b1.lock ( 2000 );
     //c0->waitForReadyRead();
     pline();
 }
@@ -74,7 +76,9 @@ QByteArray QQtNamedPipe::read ( int size )
     p0->sendCommand0x0a ( size );
     c0->waitForBytesWritten();
     pline();
-    eLoop->exec();
+    QQtBlockSignal b1;
+    b1.addsignal ( p0, SIGNAL ( signalSuccessCommand() ) );
+    b1.lock ( 2000 );
     //c0->waitForReadyRead();
     pline();
     return p0->bytes();
@@ -82,13 +86,15 @@ QByteArray QQtNamedPipe::read ( int size )
 
 bool QQtNamedPipe::initializer()
 {
-    //如果一切工作正常，应该打印的地方都是true。
     bool ret = false;
     //检测 或许创建Server
     ret = hasServer();
+    pline() << "has server:" << ret;
     if ( !ret )
+    {
         ret = create();
-    pline() << "create pipe server:" << ret;
+        pline() << "create pipe server:" << ret;
+    }
     //连接
     ret = attach();
     pline() << "connect to pipe server:" << ret;
@@ -103,17 +109,15 @@ bool QQtNamedPipe::hasServer()
     //c0 conn fail +c0 refused error
     c0->setServerIPAddress ( "QQtNamedPipeServer" );
     c0->sendConnectToHost();
-    c0->waitForConnected();
-    return mHasServer;
+    bool ret = c0->waitForConnected();
+    //很忠诚的返回值。
+    //pline() << "check server, wait for connected:" << ret;
+    return ret;
 }
 
 bool QQtNamedPipe::create()
 {
     bool  ret = false;
-
-    //这个是有原因的，linux下unconnect来的特别慢。
-    //c0->sendDisConnectFromHost();
-
     ret = s0->listen ( "QQtNamedPipeServer" );
     return ret;
 }
@@ -133,14 +137,13 @@ bool QQtNamedPipe::setKey()
     p0->sendCommand0x01 ( mKey );
     QQtBlockSignal b1;
     b1.addsignal ( p0, SIGNAL ( signalSuccessCommand() ) );
-    b1.lock ( 30000 );
+    b1.lock ( 2000 );
     return true;
 }
 
 
 void QQtNamedPipe::slotConnectSuccess()
 {
-    pline() << "connect pipe server success, has server";
     mHasServer = true;
     emit signalConnectComeBack();
     return;
@@ -148,7 +151,6 @@ void QQtNamedPipe::slotConnectSuccess()
 
 void QQtNamedPipe::slotConnectFail()
 {
-    pline() << "connect pipe server fail, has no server";
     if ( c0->error() == QLocalSocket::ConnectionRefusedError )
     {
         //这个的错误很严重，被启动的那个App走的时候没有关闭server。在这里关闭。
