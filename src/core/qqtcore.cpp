@@ -127,7 +127,7 @@ QByteArray& operator>> ( QByteArray& l, QByteArray& r )
 }
 
 
-
+//不堵塞GUI睡眠。
 void QQtSleep ( int millsecond )
 {
     QElapsedTimer timer;
@@ -139,10 +139,12 @@ void QQtSleep ( int millsecond )
     }
 }
 
-
-void QQtSleepWaitingForSignal ( int millsecond, const QObject* obj, const char* signal )
+//0 不堵塞GUI。
+//1 超时退出
+//2 接收到信号，提前退出。
+void QQtSleepSignal ( int millsecond, const QObject* obj, const char* signal )
 {
-    //initilize
+    //initilizer
     QEventLoop eventloop;
     QObject::connect ( obj, signal, &eventloop, SLOT ( quit() ) );
 
