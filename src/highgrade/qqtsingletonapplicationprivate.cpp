@@ -1,28 +1,28 @@
 ﻿#include <qqtsingletonapplicationprivate.h>
 
-QQtSingleTonLocalClientMessage::QQtSingleTonLocalClientMessage ( QObject* parent )
+QQtSingleTonNamedPipeClientMessage::QQtSingleTonNamedPipeClientMessage ( QObject* parent )
 {
     mSize = 0x03;//报文定长
 }
 
-QQtSingleTonLocalClientMessage::~QQtSingleTonLocalClientMessage()
+QQtSingleTonNamedPipeClientMessage::~QQtSingleTonNamedPipeClientMessage()
 {
 
 }
 
-quint8& QQtSingleTonLocalClientMessage::size() { return mSize; }
+quint8& QQtSingleTonNamedPipeClientMessage::size() { return mSize; }
 
-const quint8& QQtSingleTonLocalClientMessage::size() const { return mSize; }
+const quint8& QQtSingleTonNamedPipeClientMessage::size() const { return mSize; }
 
-quint8& QQtSingleTonLocalClientMessage::cmd() { return mCmd; }
+quint8& QQtSingleTonNamedPipeClientMessage::cmd() { return mCmd; }
 
-const quint8& QQtSingleTonLocalClientMessage::cmd() const { return mCmd; }
+const quint8& QQtSingleTonNamedPipeClientMessage::cmd() const { return mCmd; }
 
-quint8& QQtSingleTonLocalClientMessage::data() { return mData; }
+quint8& QQtSingleTonNamedPipeClientMessage::data() { return mData; }
 
-const quint8& QQtSingleTonLocalClientMessage::data() const { return mData; }
+const quint8& QQtSingleTonNamedPipeClientMessage::data() const { return mData; }
 
-void QQtSingleTonLocalClientMessage::parser ( const QByteArray& l )
+void QQtSingleTonNamedPipeClientMessage::parser ( const QByteArray& l )
 {
     QByteArray _l = l;
     _l >> mSize;
@@ -30,14 +30,14 @@ void QQtSingleTonLocalClientMessage::parser ( const QByteArray& l )
     _l >> mData;
 }
 
-void QQtSingleTonLocalClientMessage::packer ( QByteArray& l ) const
+void QQtSingleTonNamedPipeClientMessage::packer ( QByteArray& l ) const
 {
     l << mSize;
     l << mCmd;
     l << mData;
 }
 
-QDebug& operator << ( QDebug& dbg, const QQtSingleTonLocalClientMessage& msg )
+QDebug& operator << ( QDebug& dbg, const QQtSingleTonNamedPipeClientMessage& msg )
 {
     //这里打印一下，报文里面到底有什么信息，
     //一般到这里的，都是被解析好的message。
@@ -46,61 +46,61 @@ QDebug& operator << ( QDebug& dbg, const QQtSingleTonLocalClientMessage& msg )
     return dbg.space();
 }
 
-QQtSingleTonLocalClientProtocol::QQtSingleTonLocalClientProtocol ( QObject* parent )
+QQtSingleTonNamedPipeClientProtocol::QQtSingleTonNamedPipeClientProtocol ( QObject* parent )
 {
 
 }
 
-QQtSingleTonLocalClientProtocol::~QQtSingleTonLocalClientProtocol()
+QQtSingleTonNamedPipeClientProtocol::~QQtSingleTonNamedPipeClientProtocol()
 {
 
 }
 
-void QQtSingleTonLocalClientProtocol::recvCommand1 ( const QQtSingleTonLocalClientMessage& msg )
+void QQtSingleTonNamedPipeClientProtocol::recvCommand1 ( const QQtSingleTonNamedPipeClientMessage& msg )
 {
     //what do you want to do?
     pline() << "client receive accept:" << msg.cmd();
     emit signalAccept();
 }
 
-void QQtSingleTonLocalClientProtocol::recvCommand2 ( const QQtSingleTonLocalClientMessage& msg )
+void QQtSingleTonNamedPipeClientProtocol::recvCommand2 ( const QQtSingleTonNamedPipeClientMessage& msg )
 {
     //what do you want to do?
     pline() << "client receive reject:" << msg.cmd();
     emit signalReject();
 }
 
-void QQtSingleTonLocalClientProtocol::sendCommand1()
+void QQtSingleTonNamedPipeClientProtocol::sendCommand1()
 {
     //what do you want to do?
-    QQtSingleTonLocalClientMessage msg;
+    QQtSingleTonNamedPipeClientMessage msg;
     msg.cmd() = 0x0a;
     QByteArray l;
     msg.packer ( l );
     write ( l );
 }
 
-void QQtSingleTonLocalClientProtocol::sendCommand2()
+void QQtSingleTonNamedPipeClientProtocol::sendCommand2()
 {
     //what do you want to do?
-    QQtSingleTonLocalClientMessage msg;
+    QQtSingleTonNamedPipeClientMessage msg;
     msg.cmd() = 0x0b;
     QByteArray l;
     msg.packer ( l );
     write ( l );
 }
 
-quint16 QQtSingleTonLocalClientProtocol::minlength()
+quint16 QQtSingleTonNamedPipeClientProtocol::minlength()
 {
     return 0x03;
 }
 
-quint16 QQtSingleTonLocalClientProtocol::maxlength()
+quint16 QQtSingleTonNamedPipeClientProtocol::maxlength()
 {
     return 0x07FF;
 }
 
-quint16 QQtSingleTonLocalClientProtocol::splitter ( const QByteArray& l ) //stream
+quint16 QQtSingleTonNamedPipeClientProtocol::splitter ( const QByteArray& l ) //stream
 {
     QByteArray s0 = l.left ( 1 );
     quint8 size = 0;
@@ -108,11 +108,11 @@ quint16 QQtSingleTonLocalClientProtocol::splitter ( const QByteArray& l ) //stre
     return size;
 }
 
-bool QQtSingleTonLocalClientProtocol::dispatcher ( const QByteArray& m ) //message
+bool QQtSingleTonNamedPipeClientProtocol::dispatcher ( const QByteArray& m ) //message
 {
     bool ret = true;
 
-    QQtSingleTonLocalClientMessage qMsg;
+    QQtSingleTonNamedPipeClientMessage qMsg;
     qMsg.parser ( m );
     pline() << qMsg;
 
@@ -137,19 +137,19 @@ bool QQtSingleTonLocalClientProtocol::dispatcher ( const QByteArray& m ) //messa
 }
 
 
-QQtLocalClient* QQtSingleTonLocalClientInstance ( QQtSingleTonLocalClientProtocol*& protocol, QObject* parent )
+QQtNamedPipeClient* QQtSingleTonNamedPipeClientInstance ( QQtSingleTonNamedPipeClientProtocol*& protocol, QObject* parent )
 {
-    static QQtSingleTonLocalClientProtocol* p0 = NULL;
+    static QQtSingleTonNamedPipeClientProtocol* p0 = NULL;
     if ( !p0 )
     {
-        p0 = new QQtSingleTonLocalClientProtocol ( parent );
+        p0 = new QQtSingleTonNamedPipeClientProtocol ( parent );
     }
     protocol = p0;
 
-    static QQtLocalClient* s0 = NULL;
+    static QQtNamedPipeClient* s0 = NULL;
     if ( !s0 )
     {
-        s0 = new QQtLocalClient ( parent );
+        s0 = new QQtNamedPipeClient ( parent );
         s0->installProtocol ( p0 );
         //现在不设置。
         //s0->setServerIPAddress ( qqtApp->applicationName() );
@@ -161,29 +161,29 @@ QQtLocalClient* QQtSingleTonLocalClientInstance ( QQtSingleTonLocalClientProtoco
 }
 
 
-QQtSingleTonLocalServerMessage::QQtSingleTonLocalServerMessage ( QObject* parent )
+QQtSingleTonNamedPipeServerMessage::QQtSingleTonNamedPipeServerMessage ( QObject* parent )
 {
     mSize = 0x03;//报文定长
 }
 
-QQtSingleTonLocalServerMessage::~QQtSingleTonLocalServerMessage()
+QQtSingleTonNamedPipeServerMessage::~QQtSingleTonNamedPipeServerMessage()
 {
 
 }
 
-quint8& QQtSingleTonLocalServerMessage::size() { return mSize; }
+quint8& QQtSingleTonNamedPipeServerMessage::size() { return mSize; }
 
-const quint8& QQtSingleTonLocalServerMessage::size() const { return mSize; }
+const quint8& QQtSingleTonNamedPipeServerMessage::size() const { return mSize; }
 
-quint8& QQtSingleTonLocalServerMessage::cmd() { return mCmd; }
+quint8& QQtSingleTonNamedPipeServerMessage::cmd() { return mCmd; }
 
-const quint8& QQtSingleTonLocalServerMessage::cmd() const { return mCmd; }
+const quint8& QQtSingleTonNamedPipeServerMessage::cmd() const { return mCmd; }
 
-quint8& QQtSingleTonLocalServerMessage::data() { return mData; }
+quint8& QQtSingleTonNamedPipeServerMessage::data() { return mData; }
 
-const quint8& QQtSingleTonLocalServerMessage::data() const { return mData; }
+const quint8& QQtSingleTonNamedPipeServerMessage::data() const { return mData; }
 
-void QQtSingleTonLocalServerMessage::parser ( const QByteArray& l )
+void QQtSingleTonNamedPipeServerMessage::parser ( const QByteArray& l )
 {
     QByteArray _l = l;
     _l >> mSize;
@@ -191,7 +191,7 @@ void QQtSingleTonLocalServerMessage::parser ( const QByteArray& l )
     _l >> mData;
 }
 
-void QQtSingleTonLocalServerMessage::packer ( QByteArray& l ) const
+void QQtSingleTonNamedPipeServerMessage::packer ( QByteArray& l ) const
 {
     l << mSize;
     l << mCmd;
@@ -199,7 +199,7 @@ void QQtSingleTonLocalServerMessage::packer ( QByteArray& l ) const
 }
 
 
-QDebug& operator << ( QDebug& dbg, const QQtSingleTonLocalServerMessage& msg )
+QDebug& operator << ( QDebug& dbg, const QQtSingleTonNamedPipeServerMessage& msg )
 {
     //这里打印一下，报文里面到底有什么信息，
     //一般到这里的，都是被解析好的message。
@@ -209,32 +209,32 @@ QDebug& operator << ( QDebug& dbg, const QQtSingleTonLocalServerMessage& msg )
 }
 
 
-QQtSingleTonLocalServerProtocol::QQtSingleTonLocalServerProtocol ( QObject* parent )
+QQtSingleTonNamedPipeServerProtocol::QQtSingleTonNamedPipeServerProtocol ( QObject* parent )
 {
 
 }
 
-QQtSingleTonLocalServerProtocol::~QQtSingleTonLocalServerProtocol()
+QQtSingleTonNamedPipeServerProtocol::~QQtSingleTonNamedPipeServerProtocol()
 {
 
 }
 
-void QQtSingleTonLocalServerProtocol::recvCommand1 ( const QQtSingleTonLocalServerMessage& msg )
+void QQtSingleTonNamedPipeServerProtocol::recvCommand1 ( const QQtSingleTonNamedPipeServerMessage& msg )
 {
     //what do you want to do?
     sendCommand1();
 }
 
-void QQtSingleTonLocalServerProtocol::recvCommand2 ( const QQtSingleTonLocalServerMessage& msg )
+void QQtSingleTonNamedPipeServerProtocol::recvCommand2 ( const QQtSingleTonNamedPipeServerMessage& msg )
 {
     //what do you want to do?
     sendCommand2();
 }
 
-void QQtSingleTonLocalServerProtocol::sendCommand1()
+void QQtSingleTonNamedPipeServerProtocol::sendCommand1()
 {
     //what do you want to do?
-    QQtSingleTonLocalServerMessage msg;
+    QQtSingleTonNamedPipeServerMessage msg;
     msg.cmd() = 0x0a;
     QByteArray l;
     msg.packer ( l );
@@ -242,10 +242,10 @@ void QQtSingleTonLocalServerProtocol::sendCommand1()
     pline() << "server send accept:" << msg.cmd();
 }
 
-void QQtSingleTonLocalServerProtocol::sendCommand2()
+void QQtSingleTonNamedPipeServerProtocol::sendCommand2()
 {
     //what do you want to do?
-    QQtSingleTonLocalServerMessage msg;
+    QQtSingleTonNamedPipeServerMessage msg;
     msg.cmd() = 0x0b;
     QByteArray l;
     msg.packer ( l );
@@ -253,17 +253,17 @@ void QQtSingleTonLocalServerProtocol::sendCommand2()
     pline() << "server send reject:" << msg.cmd();
 }
 
-quint16 QQtSingleTonLocalServerProtocol::minlength()
+quint16 QQtSingleTonNamedPipeServerProtocol::minlength()
 {
     return 0x03;
 }
 
-quint16 QQtSingleTonLocalServerProtocol::maxlength()
+quint16 QQtSingleTonNamedPipeServerProtocol::maxlength()
 {
     return 0x07FF;
 }
 
-quint16 QQtSingleTonLocalServerProtocol::splitter ( const QByteArray& l ) //stream
+quint16 QQtSingleTonNamedPipeServerProtocol::splitter ( const QByteArray& l ) //stream
 {
     QByteArray s0 = l.left ( 1 );
     quint8 size = 0;
@@ -271,11 +271,11 @@ quint16 QQtSingleTonLocalServerProtocol::splitter ( const QByteArray& l ) //stre
     return size;
 }
 
-bool QQtSingleTonLocalServerProtocol::dispatcher ( const QByteArray& m ) //message
+bool QQtSingleTonNamedPipeServerProtocol::dispatcher ( const QByteArray& m ) //message
 {
     bool ret = true;
 
-    QQtSingleTonLocalServerMessage qMsg;
+    QQtSingleTonNamedPipeServerMessage qMsg;
     qMsg.parser ( m );
     pline() << qMsg;
 
@@ -298,20 +298,20 @@ bool QQtSingleTonLocalServerProtocol::dispatcher ( const QByteArray& m ) //messa
     return ret;
 }
 
-QQtLocalServer* QQtSingleTonLocalServerInstance ( QQtProtocolManager*& protocolManager, QObject* parent )
+QQtNamedPipeServer* QQtSingleTonNamedPipeServerInstance ( QQtProtocolManager*& protocolManager, QObject* parent )
 {
     static QQtProtocolManager* pm0 = 0;
     if ( !pm0 )
     {
         pm0 = new QQtProtocolManager ( parent );
-        pm0->registerProtocol<QQtSingleTonLocalServerProtocol>();
+        pm0->registerProtocol<QQtSingleTonNamedPipeServerProtocol>();
     }
     protocolManager = pm0;
 
-    static QQtLocalServer* s0 = NULL;
+    static QQtNamedPipeServer* s0 = NULL;
     if ( !s0 )
     {
-        s0 = new QQtLocalServer ( parent );
+        s0 = new QQtNamedPipeServer ( parent );
         s0->installProtocolManager ( pm0 ) ;
         //现在不监听。
         //s0->listen("QQtSingleTon");

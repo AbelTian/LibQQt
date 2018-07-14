@@ -12,8 +12,8 @@ MainWindow::MainWindow ( QWidget* parent ) :
     static QQtNamedPipe hold ( "mypipe0" );
     hold.initializer();
 
-    static QQtNamedPipe hold2 ( "anotherpipe" );
-    hold2.initializer();
+    //static QQtNamedPipe hold2 ( "anotherpipe" );
+    //hold2.initializer();
 }
 
 MainWindow::~MainWindow()

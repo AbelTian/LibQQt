@@ -13,11 +13,11 @@ QQtSingleTonApplication::QQtSingleTonApplication ( int& argc, char** argv ) : QQ
 
     //创建客户端句柄
     p0 = 0;
-    c0 = QQtSingleTonLocalClientInstance ( p0 );
+    c0 = QQtSingleTonNamedPipeClientInstance ( p0 );
 
     //创建服务器句柄
     pm0 = 0;
-    s0 = QQtSingleTonLocalServerInstance ( pm0 );
+    s0 = QQtSingleTonNamedPipeServerInstance ( pm0 );
 
     connect ( p0, SIGNAL ( signalAccept() ),
               this, SLOT ( slotAccept() ) );

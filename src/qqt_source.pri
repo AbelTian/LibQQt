@@ -576,14 +576,7 @@ contains (DEFINES, __HIGHGRADE__) {
     }
 
     contains(DEFINES, __MESSAGEQUEUE_SUPPORT__){
-        #local client iodevice
-        SOURCES += $$PWD/highgrade/network/qqtlocalqueueclient.cpp
-        HEADERS += $$PWD/highgrade/network/qqtlocalqueueclient.h
-
-        #local server iodevice
-        SOURCES += $$PWD/highgrade/network/qqtlocalqueueserver.cpp
-        HEADERS += $$PWD/highgrade/network/qqtlocalqueueserver.h
-
+        #基于tcp socket实现
         SOURCES += \
             $$PWD/highgrade/qqtmessagequeue.cpp
         HEADERS += \
@@ -594,12 +587,12 @@ contains (DEFINES, __HIGHGRADE__) {
     #network module
     contains(DEFINES, __NAMEDPIPE_SUPPORT__){
         #local client iodevice
-        SOURCES += $$PWD/highgrade/network/qqtlocalclient.cpp
-        HEADERS += $$PWD/highgrade/network/qqtlocalclient.h
+        SOURCES += $$PWD/highgrade/network/qqtnamedpipeclient.cpp
+        HEADERS += $$PWD/highgrade/network/qqtnamedpipeclient.h
 
         #local server iodevice
-        SOURCES += $$PWD/highgrade/network/qqtlocalserver.cpp
-        HEADERS += $$PWD/highgrade/network/qqtlocalserver.h
+        SOURCES += $$PWD/highgrade/network/qqtnamedpipeserver.cpp
+        HEADERS += $$PWD/highgrade/network/qqtnamedpipeserver.h
 
         SOURCES += \
             $$PWD/highgrade/qqtnamedpipeprivate.cpp

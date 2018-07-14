@@ -8,14 +8,14 @@
 
 #include <qqtmessage.h>
 #include <qqtprotocol.h>
-#include <qqtlocalclient.h>
+#include <qqtnamedpipeclient.h>
 
-class QQtSingleTonLocalClientMessage : public QQtMessage
+class QQtSingleTonNamedPipeClientMessage : public QQtMessage
 {
     Q_OBJECT
 public:
-    explicit QQtSingleTonLocalClientMessage ( QObject* parent = nullptr );
-    ~QQtSingleTonLocalClientMessage();
+    explicit QQtSingleTonNamedPipeClientMessage ( QObject* parent = nullptr );
+    ~QQtSingleTonNamedPipeClientMessage();
 
     quint8& size();
     const quint8& size() const;
@@ -39,22 +39,22 @@ public:
     virtual void packer ( QByteArray& l ) const override;
 };
 
-QDebug& operator << ( QDebug&, const QQtSingleTonLocalClientMessage& msg );
+QDebug& operator << ( QDebug&, const QQtSingleTonNamedPipeClientMessage& msg );
 
 //业务层总是用这个协议工作，读来到的，写出去的。
-class QQtSingleTonLocalClientProtocol : public QQtProtocol
+class QQtSingleTonNamedPipeClientProtocol : public QQtProtocol
 {
     Q_OBJECT
 public:
-    explicit QQtSingleTonLocalClientProtocol ( QObject* parent = nullptr );
-    ~QQtSingleTonLocalClientProtocol();
+    explicit QQtSingleTonNamedPipeClientProtocol ( QObject* parent = nullptr );
+    ~QQtSingleTonNamedPipeClientProtocol();
 
     //没连接上：创建Server，发送I Create you (0x0a). Server回复，I Accept you (0x0a)。
     //连接上了，发送I Find you (0x0b)。Server回复，存在Server (0x0b)，告诉上层，关闭程序。
 
     //收到外部发来的很多命令，处理一下告诉业务层干点什么。
-    void recvCommand1 ( const QQtSingleTonLocalClientMessage& msg );
-    void recvCommand2 ( const QQtSingleTonLocalClientMessage& msg );
+    void recvCommand1 ( const QQtSingleTonNamedPipeClientMessage& msg );
+    void recvCommand2 ( const QQtSingleTonNamedPipeClientMessage& msg );
     void sendCommand1();
     void sendCommand2();
 
@@ -80,14 +80,14 @@ protected:
 };
 
 #include <qqtprotocolmanager.h>
-#include <qqtlocalserver.h>
+#include <qqtnamedpipeserver.h>
 
-class QQtSingleTonLocalServerMessage : public QQtMessage
+class QQtSingleTonNamedPipeServerMessage : public QQtMessage
 {
     Q_OBJECT
 public:
-    explicit QQtSingleTonLocalServerMessage ( QObject* parent = nullptr );
-    ~QQtSingleTonLocalServerMessage();
+    explicit QQtSingleTonNamedPipeServerMessage ( QObject* parent = nullptr );
+    ~QQtSingleTonNamedPipeServerMessage();
 
     quint8& size();
     const quint8& size() const;
@@ -111,20 +111,20 @@ public:
     virtual void packer ( QByteArray& l ) const override;
 };
 
-QDebug& operator << ( QDebug&, const QQtSingleTonLocalServerMessage& msg );
+QDebug& operator << ( QDebug&, const QQtSingleTonNamedPipeServerMessage& msg );
 
 
 //业务层总是用这个协议工作，读来到的，写出去的。
-class QQtSingleTonLocalServerProtocol : public QQtProtocol
+class QQtSingleTonNamedPipeServerProtocol : public QQtProtocol
 {
     Q_OBJECT
 public:
-    explicit QQtSingleTonLocalServerProtocol ( QObject* parent = nullptr );
-    ~QQtSingleTonLocalServerProtocol();
+    explicit QQtSingleTonNamedPipeServerProtocol ( QObject* parent = nullptr );
+    ~QQtSingleTonNamedPipeServerProtocol();
 
     //收到外部发来的很多命令，处理一下告诉业务层干点什么。
-    void recvCommand1 ( const QQtSingleTonLocalServerMessage& msg );
-    void recvCommand2 ( const QQtSingleTonLocalServerMessage& msg );
+    void recvCommand1 ( const QQtSingleTonNamedPipeServerMessage& msg );
+    void recvCommand2 ( const QQtSingleTonNamedPipeServerMessage& msg );
     void sendCommand1();
     void sendCommand2();
 

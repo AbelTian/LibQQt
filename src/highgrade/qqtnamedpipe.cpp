@@ -12,6 +12,7 @@ QQtNamedPipe::QQtNamedPipe ( const QString& key, QObject* parent )
     pm0 = 0;
     s0 = QQtNamedPipeServerInstance ( pm0, this );
 
+    //用于检测是否存在服务器。
     connect ( c0, SIGNAL ( signalConnectSucc() ),
               this, SLOT ( slotConnectSuccess() ) );
     connect ( c0, SIGNAL ( signalConnectFail() ),
@@ -21,7 +22,7 @@ QQtNamedPipe::QQtNamedPipe ( const QString& key, QObject* parent )
               this, SLOT ( slotSocketStateChanged ( QLocalSocket::LocalSocketState ) ) );
 
 
-    hasServer = true;
+    mHasServer = false;
     bAccepted = false;
 
     eLoop = new QEventLoop ( this );
@@ -30,19 +31,24 @@ QQtNamedPipe::QQtNamedPipe ( const QString& key, QObject* parent )
 
 QQtNamedPipe::~QQtNamedPipe()
 {
-#ifdef Q_OS_WIN
-#else
-    //linux下，如果被接受的app不删除这个server，那么无法启动了吆。
-    if ( bAccepted )
-        QLocalServer::removeServer ( "QQtNamedPipeServer" );
-#endif
-
 }
 
 bool QQtNamedPipe::initializer()
 {
-    bool ret = create ( );
+    //如果一切工作正常，应该打印的地方都是true。
+    bool ret = false;
+    //检测 或许创建Server
+    ret = hasServer();
+    if ( !ret )
+        ret = create();
+    pline() << "create pipe server:" << ret;
+    //连接
     ret = attach();
+    pline() << "connect to pipe server:" << ret;
+    //设置key
+    ret = setKey();
+    pline() << "send key to pipe server:" << ret;
+    return ret;
 }
 
 void QQtNamedPipe::write ( const QByteArray& bytes )
@@ -70,6 +76,15 @@ bool QQtNamedPipe::create()
 {
     bool  ret = false;
 
+    //这个是有原因的，linux下unconnect来的特别慢。
+    c0->sendDisConnectFromHost();
+    ret = s0->listen ( "QQtNamedPipeServer" );
+#ifdef Q_OS_WIN
+    //给windows缓冲10ms
+    QQtSleep ( 10 );
+#endif
+    return ret;
+
     //准备连接到这个服务器
     c0->setServerIPAddress ( "QQtNamedPipeServer" );
     c0->sendConnectToHost();
@@ -89,9 +104,14 @@ bool QQtNamedPipe::create()
 
 bool QQtNamedPipe::attach()
 {
-    bool ret = 0;
-    //c0->sendConnectToHost();
-    //c0->waitForConnected();
+    bool ret = false;
+    c0->sendConnectToHost();
+    QQtSleepSignal ( 30000, this, SIGNAL ( signalConnectComeBack() ) );
+    //这里应该成功返回，如果失败返回，mHasServer=false,那么，呵呵....
+    ret = c0->waitForConnected();
+
+    return ret;
+
     pline();
 #ifdef Q_OS_WIN
     //需要睡一会儿，Windows在socket连接的时机会堵塞一下。
@@ -116,6 +136,23 @@ bool QQtNamedPipe::attach()
     return ret;
 }
 
+bool QQtNamedPipe::setKey()
+{
+    bool ret = false;
+    p0->sendCommand0x01 ( mKey );
+    QQtSleepSignal ( 30000, p0, SIGNAL ( signalSuccessCommand() ) );
+    return true;
+}
+
+bool QQtNamedPipe::hasServer()
+{
+    //c0 conn fail +c0 refused error
+    c0->setServerIPAddress ( "QQtNamedPipeServer" );
+    c0->sendConnectToHost();
+    QQtSleepSignal ( 30000, this, SIGNAL ( signalConnectComeBack() ) );
+    return mHasServer;
+}
+
 
 void QQtNamedPipe::slotSocketStateChanged ( QLocalSocket::LocalSocketState eSocketState )
 {
@@ -134,6 +171,8 @@ void QQtNamedPipe::slotSocketStateChanged ( QLocalSocket::LocalSocketState eSock
         {
 #ifdef Q_OS_WIN
 #else
+            break;
+            //???
             if ( !hasServer )
                 return;
             hasServer = false;
@@ -149,23 +188,33 @@ void QQtNamedPipe::slotSocketStateChanged ( QLocalSocket::LocalSocketState eSock
 
 void QQtNamedPipe::slotConnectSuccess()
 {
-    pline() << "success";
+    pline() << "connect pipe server success, has server";
+    mHasServer = true;
+    emit signalConnectComeBack();
+    return;
+
     //如果有Server，说明这个Server不是我创建的。
-    pline() << "hasServer:" << hasServer;
+    pline() << "hasServer:" << mHasServer;
     //Windows下LocalServer用的pipe实现的，然后，必须用\n结束报文吗？！！！！
-    if ( !hasServer )
+    if ( !mHasServer )
         bAccepted = true;
 }
 
 void QQtNamedPipe::slotConnectFail()
 {
-    pline() << "fail";
+    pline() << "connect pipe server fail, has no server";
+    mHasServer = false;
+    emit signalConnectComeBack();
+    //到这里说明，这个server肯定是我创建的。
+    bAccepted = true;
+    return;
+
 #ifdef Q_OS_WIN
-    hasServer = false;
     c0->sendDisConnectFromHost();
     s0->listen ( "QQtNamedPipeServer" );
     c0->sendConnectToHost();
 #else
+    mHasServer = true;//??
     //refused or notfound
     if ( c0->error() == QLocalSocket::ConnectionRefusedError )
     {

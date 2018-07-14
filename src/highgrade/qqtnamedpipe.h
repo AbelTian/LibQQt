@@ -8,13 +8,13 @@
 #include <qlocalserver.h>
 
 class QQtNamedPipeClientProtocol;
-class QQtLocalClient;
+class QQtNamedPipeClient;
 
 class QQtNamedPipeServerProtocolManager;
-class QQtLocalServer;
+class QQtNamedPipeServer;
 
-QQtLocalClient* QQtNamedPipeClientInstance ( QQtNamedPipeClientProtocol*& protocol, QObject* parent = 0 );
-QQtLocalServer* QQtNamedPipeServerInstance ( QQtNamedPipeServerProtocolManager*& protocol, QObject* parent = 0 );
+QQtNamedPipeClient* QQtNamedPipeClientInstance ( QQtNamedPipeClientProtocol*& protocol, QObject* parent = 0 );
+QQtNamedPipeServer* QQtNamedPipeServerInstance ( QQtNamedPipeServerProtocolManager*& protocol, QObject* parent = 0 );
 
 /**
  * @brief The QQtNamedPipe class
@@ -38,6 +38,12 @@ QQtLocalServer* QQtNamedPipeServerInstance ( QQtNamedPipeServerProtocolManager*&
  * ...      ...
  *
  * 升级：增加一个静态接口，外部创建Server
+ *
+ * 文件用于储存数据，管道不用于储存数据，而是作为一个通信设备的驱动，这个通信设备就是个管道。
+ * QQtNamedPipeServer监控这个管道的读写，提交给业务层数据处理。
+ * QQtNamedPipeClient往这个管道里面读写，读取和写入都允许进行。
+ * QQtNamedPipePrivate实现了一个通信协议，包括read业务、write业务。
+ * QQtNamedPipe使用这个协议，开放给用户接口。（也叫做Wrapper，没有这个wrapper管道读写不好实施呀，数据结构、通信架构都说不清楚。）
  */
 class QQTSHARED_EXPORT QQtNamedPipe : public QObject
 {
@@ -46,10 +52,8 @@ public:
     explicit QQtNamedPipe ( const QString& key, QObject* parent = Q_NULLPTR );
     ~QQtNamedPipe();
 
-    virtual bool initializer();
-
+    virtual bool initializer ( );
     void write ( const QByteArray& bytes );
-
     QByteArray read ( int size );
 
 public slots:
@@ -58,24 +62,26 @@ public slots:
     void slotConnectFail();
 
 signals:
-
+    void signalConnectComeBack();
 public slots:
 
 private:
 
 protected:
+    virtual bool hasServer();
     virtual bool create();
     virtual bool attach();
+    virtual bool setKey();
 private:
     QQtNamedPipeClientProtocol* p0;
-    QQtLocalClient* c0;
+    QQtNamedPipeClient* c0;
 
     QQtNamedPipeServerProtocolManager* pm0;
-    QQtLocalServer* s0;
+    QQtNamedPipeServer* s0;
 
     QString mKey;
 
-    bool hasServer;
+    bool mHasServer;
     bool bAccepted;
 
     QEventLoop* eLoop;

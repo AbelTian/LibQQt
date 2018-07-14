@@ -40,7 +40,7 @@ public:
 QDebug& operator << ( QDebug&, const QQtNamedPipeMessage& msg );
 
 #include <qqtprotocol.h>
-#include <qqtlocalclient.h>
+#include <qqtnamedpipeclient.h>
 
 //业务层总是用这个协议工作，读来到的，写出去的。
 class QQtNamedPipeClientProtocol : public QQtProtocol
@@ -84,7 +84,7 @@ protected:
 };
 
 #include <qqtprotocolmanager.h>
-#include <qqtlocalserver.h>
+#include <qqtnamedpipeserver.h>
 
 //业务层总是用这个协议工作，读来到的，写出去的。
 class QQtNamedPipeServerProtocol : public QQtProtocol

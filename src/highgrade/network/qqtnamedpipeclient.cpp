@@ -1,10 +1,10 @@
-﻿#include "qqtlocalclient.h"
+﻿#include "qqtnamedpipeclient.h"
 
 #include <QLocalSocket>
 #include <QHostInfo>
 #include <QUuid>
 
-QQtLocalClient::QQtLocalClient ( QObject* parent ) :
+QQtNamedPipeClient::QQtNamedPipeClient ( QObject* parent ) :
     QLocalSocket ( parent )
 {
     connect ( this, SIGNAL ( stateChanged ( QLocalSocket::LocalSocketState ) ), this,
@@ -40,11 +40,11 @@ QQtLocalClient::QQtLocalClient ( QObject* parent ) :
     mPeerName = uuid.toString();
 }
 
-QQtLocalClient::~QQtLocalClient()
+QQtNamedPipeClient::~QQtNamedPipeClient()
 {
 }
 
-void QQtLocalClient::installProtocol ( QQtProtocol* stack )
+void QQtNamedPipeClient::installProtocol ( QQtProtocol* stack )
 {
     if ( m_protocol )
         return;
@@ -56,7 +56,7 @@ void QQtLocalClient::installProtocol ( QQtProtocol* stack )
     m_protocol->initializer();
 }
 
-void QQtLocalClient::uninstallProtocol ( QQtProtocol* stack )
+void QQtNamedPipeClient::uninstallProtocol ( QQtProtocol* stack )
 {
     Q_UNUSED ( stack )
 
@@ -69,12 +69,12 @@ void QQtLocalClient::uninstallProtocol ( QQtProtocol* stack )
     m_protocol = NULL;
 }
 
-QQtProtocol* QQtLocalClient::installedProtocol()
+QQtProtocol* QQtNamedPipeClient::installedProtocol()
 {
     return m_protocol;
 }
 
-void QQtLocalClient::sendConnectToHost()
+void QQtNamedPipeClient::sendConnectToHost()
 {
     pline() << isValid() << isOpen() << state();
 
@@ -97,7 +97,7 @@ void QQtLocalClient::sendConnectToHost()
 }
 
 
-int QQtLocalClient::sendDisConnectFromHost()
+int QQtNamedPipeClient::sendDisConnectFromHost()
 {
     pline() << isValid() << isOpen() << state();
 
@@ -119,11 +119,11 @@ int QQtLocalClient::sendDisConnectFromHost()
 }
 
 /**
- * @brief QQtLocalClient::socketStateChanged
+ * @brief QQtNamedPipeClient::socketStateChanged
  * @param eSocketState
  * 状态函数
  */
-void QQtLocalClient::socketStateChanged ( QLocalSocket::LocalSocketState eSocketState )
+void QQtNamedPipeClient::socketStateChanged ( QLocalSocket::LocalSocketState eSocketState )
 {
     pline() << eSocketState;
 
@@ -148,11 +148,11 @@ void QQtLocalClient::socketStateChanged ( QLocalSocket::LocalSocketState eSocket
 }
 
 /**
- * @brief QQtLocalClient::socketErrorOccured
+ * @brief QQtNamedPipeClient::socketErrorOccured
  * @param e
  * 状态函数
  */
-void QQtLocalClient::socketErrorOccured ( LocalSocketError e )
+void QQtNamedPipeClient::socketErrorOccured ( LocalSocketError e )
 {
     /*
      * 在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
@@ -184,10 +184,10 @@ void QQtLocalClient::socketErrorOccured ( LocalSocketError e )
 }
 
 /**
- * @brief QQtLocalClient::socketConnected
+ * @brief QQtNamedPipeClient::socketConnected
  * 功能接口
  */
-void QQtLocalClient::socketConnected()
+void QQtNamedPipeClient::socketConnected()
 {
     pline() << peerName();
     /*
@@ -201,21 +201,21 @@ void QQtLocalClient::socketConnected()
 }
 
 /**
- * @brief QQtLocalClient::socketDisconnect
+ * @brief QQtNamedPipeClient::socketDisconnect
  * 功能接口
  */
-void QQtLocalClient::socketDisconnect()
+void QQtNamedPipeClient::socketDisconnect()
 {
     pline();
 }
 
-void QQtLocalClient::updateProgress ( qint64 bytes )
+void QQtNamedPipeClient::updateProgress ( qint64 bytes )
 {
     Q_UNUSED ( bytes )
     //pline() << bytes;
 }
 
-void QQtLocalClient::connectToSingelHost()
+void QQtNamedPipeClient::connectToSingelHost()
 {
     //int contype = eConType % m_serverIP.size();
 
@@ -229,7 +229,7 @@ void QQtLocalClient::connectToSingelHost()
 }
 
 
-void QQtLocalClient::readyReadData()
+void QQtNamedPipeClient::readyReadData()
 {
     //self, protocol, message
     QByteArray bytes;
@@ -237,12 +237,12 @@ void QQtLocalClient::readyReadData()
     translator ( bytes );
 }
 
-void QQtLocalClient::slotWriteData ( const QByteArray& data )
+void QQtNamedPipeClient::slotWriteData ( const QByteArray& data )
 {
     write ( data );
 }
 
-void QQtLocalClient::translator ( const QByteArray& bytes )
+void QQtNamedPipeClient::translator ( const QByteArray& bytes )
 {
     // queued conn and queued package;
     // direct conn and direct package;

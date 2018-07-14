@@ -9,13 +9,13 @@
 
 #include <qlocalsocket.h>
 
-class QQtSingleTonLocalClientProtocol;
-class QQtLocalClient;
-QQtLocalClient* QQtSingleTonLocalClientInstance ( QQtSingleTonLocalClientProtocol*& protocol, QObject* parent = 0 );
+class QQtSingleTonNamedPipeClientProtocol;
+class QQtNamedPipeClient;
+QQtNamedPipeClient* QQtSingleTonNamedPipeClientInstance ( QQtSingleTonNamedPipeClientProtocol*& protocol, QObject* parent = 0 );
 
 class QQtProtocolManager;
-class QQtLocalServer;
-QQtLocalServer* QQtSingleTonLocalServerInstance ( QQtProtocolManager*& protocol, QObject* parent = 0 );
+class QQtNamedPipeServer;
+QQtNamedPipeServer* QQtSingleTonNamedPipeServerInstance ( QQtProtocolManager*& protocol, QObject* parent = 0 );
 
 /**
  * @brief The QQtSingleApplication class
@@ -45,11 +45,11 @@ protected slots:
     void slotReject();
 
 private:
-    QQtSingleTonLocalClientProtocol* p0;
-    QQtLocalClient* c0;
+    QQtSingleTonNamedPipeClientProtocol* p0;
+    QQtNamedPipeClient* c0;
 
     QQtProtocolManager* pm0;
-    QQtLocalServer* s0;
+    QQtNamedPipeServer* s0;
 
     bool hasServer;
     bool bAccepted;

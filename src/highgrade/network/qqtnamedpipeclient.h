@@ -1,9 +1,9 @@
 ﻿/**************************************************
- * QQtLocalClient
- * 在一个工程当中仅仅存在一个实例，通过调用QQtLocalClient实现。
+ * QQtNamedPipeClient
+ * 在一个工程当中仅仅存在一个实例，通过调用QQtNamedPipeClient实现。
  **************************************************/
-#ifndef QQTLOCALCLIENT_H
-#define QQTLOCALCLIENT_H
+#ifndef QQTNAMEDPIPECLIENT_H
+#define QQTNAMEDPIPECLIENT_H
 
 #include <QLocalSocket>
 #include <QStringList>
@@ -19,12 +19,12 @@
  * 发送，接收，splitter，dispatcher
  * 关闭。
  */
-class QQTSHARED_EXPORT QQtLocalClient : public QLocalSocket
+class QQTSHARED_EXPORT QQtNamedPipeClient : public QLocalSocket
 {
     Q_OBJECT
 public:
-    explicit QQtLocalClient ( QObject* parent = 0 );
-    virtual ~QQtLocalClient();
+    explicit QQtNamedPipeClient ( QObject* parent = 0 );
+    virtual ~QQtNamedPipeClient();
 
     //输入的不是serverIP是serverName。
     //如果连续设置两个不同的，代表依次连接，第二个是备用的。
@@ -91,4 +91,4 @@ private:
 };
 
 
-#endif // QQTLOCALCLIENT_H
+#endif // QQTNAMEDPIPECLIENT_H

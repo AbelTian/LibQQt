@@ -1,6 +1,6 @@
-﻿#include "qqtlocalserver.h"
+﻿#include "qqtnamedpipeserver.h"
 
-QQtLocalServer::QQtLocalServer ( QObject* parent ) :
+QQtNamedPipeServer::QQtNamedPipeServer ( QObject* parent ) :
     QLocalServer ( parent )
 {
     connect ( this, SIGNAL ( newConnection() ),
@@ -9,16 +9,16 @@ QQtLocalServer::QQtLocalServer ( QObject* parent ) :
     m_protocolManager = NULL;
 }
 
-QQtLocalServer::~QQtLocalServer()
+QQtNamedPipeServer::~QQtNamedPipeServer()
 {
     if ( isListening() )
         close();
 }
 
-void QQtLocalServer::clientSocketDisConnected()
+void QQtNamedPipeServer::clientSocketDisConnected()
 {
     QObject* obj = sender();
-    QQtLocalClient* clientSocket = ( QQtLocalClient* ) obj;
+    QQtNamedPipeClient* clientSocket = ( QQtNamedPipeClient* ) obj;
     QQtProtocol* protocol = clientSocket->installedProtocol();
     clientSocket->uninstallProtocol ( protocol );
     clientSocket->deleteLater();
@@ -26,7 +26,7 @@ void QQtLocalServer::clientSocketDisConnected()
     m_protocolManager->deleteProtocol ( protocol );
 }
 
-void QQtLocalServer::comingNewConnection()
+void QQtNamedPipeServer::comingNewConnection()
 {
     while ( hasPendingConnections() )
     {
@@ -38,7 +38,7 @@ void QQtLocalServer::comingNewConnection()
             return;
         }
 
-        QQtLocalClient* clientSocket = new QQtLocalClient ( this );
+        QQtNamedPipeClient* clientSocket = new QQtNamedPipeClient ( this );
         clientSocket->setSocketDescriptor ( comingSocket->socketDescriptor() );
 
         connect ( clientSocket, SIGNAL ( disconnected() ),
@@ -50,7 +50,7 @@ void QQtLocalServer::comingNewConnection()
     }
 }
 
-void QQtLocalServer::installProtocolManager ( QQtProtocolManager* stackGroup )
+void QQtNamedPipeServer::installProtocolManager ( QQtProtocolManager* stackGroup )
 {
     if ( m_protocolManager )
         return;
@@ -58,7 +58,7 @@ void QQtLocalServer::installProtocolManager ( QQtProtocolManager* stackGroup )
     m_protocolManager = stackGroup;
 }
 
-void QQtLocalServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )
+void QQtNamedPipeServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )
 {
     Q_UNUSED ( stackGroup )
 
@@ -68,17 +68,17 @@ void QQtLocalServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )
     m_protocolManager = NULL;
 }
 
-QQtProtocolManager* QQtLocalServer::installedProtocolManager()
+QQtProtocolManager* QQtNamedPipeServer::installedProtocolManager()
 {
     return m_protocolManager;
 }
 
-QQtLocalClient* QQtLocalServer::findClientByProtocolInstance ( QQtProtocol* protocol )
+QQtNamedPipeClient* QQtNamedPipeServer::findClientByProtocolInstance ( QQtProtocol* protocol )
 {
-    QListIterator<QQtLocalClient*> itor ( m_clientList );
+    QListIterator<QQtNamedPipeClient*> itor ( m_clientList );
     while ( itor.hasNext() )
     {
-        QQtLocalClient* client = itor.next();
+        QQtNamedPipeClient* client = itor.next();
         QQtProtocol* cprotocol = client->installedProtocol();
         if ( cprotocol == protocol )
         {
@@ -88,12 +88,12 @@ QQtLocalClient* QQtLocalServer::findClientByProtocolInstance ( QQtProtocol* prot
     return NULL;
 }
 
-QQtLocalClient* QQtLocalServer::findClientByIPAddress ( QString ip )
+QQtNamedPipeClient* QQtNamedPipeServer::findClientByIPAddress ( QString ip )
 {
-    QListIterator<QQtLocalClient*> itor ( m_clientList );
+    QListIterator<QQtNamedPipeClient*> itor ( m_clientList );
     while ( itor.hasNext() )
     {
-        QQtLocalClient* client = itor.next();
+        QQtNamedPipeClient* client = itor.next();
         QString aip = client->peerName();
         if ( aip == ip )
         {

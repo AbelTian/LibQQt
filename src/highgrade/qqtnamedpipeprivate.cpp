@@ -175,7 +175,7 @@ bool QQtNamedPipeClientProtocol::dispatcher ( const QByteArray& m ) //message
 }
 
 
-QQtLocalClient* QQtNamedPipeClientInstance ( QQtNamedPipeClientProtocol*& protocol, QObject* parent )
+QQtNamedPipeClient* QQtNamedPipeClientInstance ( QQtNamedPipeClientProtocol*& protocol, QObject* parent )
 {
     static QQtNamedPipeClientProtocol* p0 = NULL;
     if ( !p0 )
@@ -184,10 +184,10 @@ QQtLocalClient* QQtNamedPipeClientInstance ( QQtNamedPipeClientProtocol*& protoc
     }
     protocol = p0;
 
-    static QQtLocalClient* s0 = NULL;
+    static QQtNamedPipeClient* s0 = NULL;
     if ( !s0 )
     {
-        s0 = new QQtLocalClient ( parent );
+        s0 = new QQtNamedPipeClient ( parent );
         s0->installProtocol ( p0 );
         //现在不设置。
         //s0->setServerIPAddress ( "QQtSingleTon" );
@@ -315,7 +315,7 @@ bool QQtNamedPipeServerProtocol::dispatcher ( const QByteArray& m ) //message
     return ret;
 }
 
-QQtLocalServer* QQtNamedPipeServerInstance ( QQtNamedPipeServerProtocolManager*& protocolManager, QObject* parent )
+QQtNamedPipeServer* QQtNamedPipeServerInstance ( QQtNamedPipeServerProtocolManager*& protocolManager, QObject* parent )
 {
     static QQtNamedPipeServerProtocolManager* pm0 = 0;
     if ( !pm0 )
@@ -325,10 +325,10 @@ QQtLocalServer* QQtNamedPipeServerInstance ( QQtNamedPipeServerProtocolManager*&
     }
     protocolManager = pm0;
 
-    static QQtLocalServer* s0 = NULL;
+    static QQtNamedPipeServer* s0 = NULL;
     if ( !s0 )
     {
-        s0 = new QQtLocalServer ( parent );
+        s0 = new QQtNamedPipeServer ( parent );
         s0->installProtocolManager ( pm0 ) ;
         //现在不监听。
         //s0->listen("QQtSingleTon");
