@@ -69,6 +69,7 @@ QQtNamedPipeClientProtocol::~QQtNamedPipeClientProtocol()
 void QQtNamedPipeClientProtocol::recvCommand0x01 ( const QQtNamedPipeMessage& msg )
 {
     pline() << "client receive set key ack:" << msg.cmd();
+    emit signalSuccessCommand();
 }
 
 void QQtNamedPipeClientProtocol::recvCommand0x0a ( const QQtNamedPipeMessage& msg )
@@ -76,6 +77,7 @@ void QQtNamedPipeClientProtocol::recvCommand0x0a ( const QQtNamedPipeMessage& ms
     //what do you want to do?
     pline() << "client receive read data ack:" << msg.cmd();
     mBytes = msg.data();
+    emit signalSuccessCommand();
 }
 
 void QQtNamedPipeClientProtocol::recvCommand0x0b ( const QQtNamedPipeMessage& msg )
@@ -83,6 +85,7 @@ void QQtNamedPipeClientProtocol::recvCommand0x0b ( const QQtNamedPipeMessage& ms
     //what do you want to do?
     pline() << "client receive write data ack:" << msg.cmd();
     //不处理。
+    emit signalSuccessCommand();
 }
 
 void QQtNamedPipeClientProtocol::sendCommand0x01 ( QString key )

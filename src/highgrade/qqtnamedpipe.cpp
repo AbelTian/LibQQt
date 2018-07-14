@@ -20,9 +20,12 @@ QQtNamedPipe::QQtNamedPipe ( const QString& key, QObject* parent )
     connect ( c0, SIGNAL ( stateChanged ( QLocalSocket::LocalSocketState ) ),
               this, SLOT ( slotSocketStateChanged ( QLocalSocket::LocalSocketState ) ) );
 
+
     hasServer = true;
     bAccepted = false;
 
+    eLoop = new QEventLoop ( this );
+    connect ( p0, SIGNAL ( signalSuccessCommand() ), eLoop, SLOT ( quit() ) );
 }
 
 QQtNamedPipe::~QQtNamedPipe()
@@ -47,6 +50,7 @@ void QQtNamedPipe::write ( const QByteArray& bytes )
     p0->sendCommand0x0b ( bytes );
     c0->waitForBytesWritten();
     pline();
+    eLoop->exec();
     //c0->waitForReadyRead();
     pline();
 }
@@ -56,6 +60,7 @@ QByteArray QQtNamedPipe::read ( int size )
     p0->sendCommand0x0a ( size );
     c0->waitForBytesWritten();
     pline();
+    eLoop->exec();
     //c0->waitForReadyRead();
     pline();
     return p0->bytes();
@@ -63,14 +68,15 @@ QByteArray QQtNamedPipe::read ( int size )
 
 bool QQtNamedPipe::create()
 {
+    bool  ret = false;
+
     //准备连接到这个服务器
     c0->setServerIPAddress ( "QQtNamedPipeServer" );
     c0->sendConnectToHost();
-    c0->waitForConnected();
-    return true;
+    ret = c0->waitForConnected();
+    return ret;
 
     //这一个server管理所有的pipe了。 第一次返回true，后来返回false，但是可以用。
-    bool  ret = false;
     if ( !s0->isListening() )
     {
         s0->listen ( "QQtNamedPipeServer" );
@@ -88,6 +94,7 @@ bool QQtNamedPipe::attach()
     pline();
     ret = c0->waitForBytesWritten();
     pline();
+    eLoop->exec();
     //ret = c0->waitForReadyRead();
     pline();
     return ret;

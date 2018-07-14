@@ -66,6 +66,7 @@ private:
 signals:
     //给业务层发的信号
     void signalSendtoLogicLevelCode();
+    void signalSuccessCommand();
 
 public slots:
 

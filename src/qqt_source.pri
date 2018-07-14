@@ -613,6 +613,10 @@ contains (DEFINES, __HIGHGRADE__) {
 
     #singleton application
     contains(DEFINES, __NAMEDPIPE_SUPPORT__){
+        SOURCES += \
+            $$PWD/highgrade/qqtsingletonapplicationprivate.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtsingletonapplicationprivate.h
         #依赖local socket
         SOURCES += \
             $$PWD/highgrade/qqtsingletonapplication.cpp

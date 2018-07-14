@@ -8,7 +8,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui ( new Ui::MainWindow )
 {
     ui->setupUi ( this );
-    QQtLocalServer::removeServer ( "QQtNamedPipeServer" );
+    //QQtLocalServer::removeServer ( "QQtNamedPipeServer" );
     static QQtNamedPipe hold ( "mypipe0" );
     hold.initializer();
 }

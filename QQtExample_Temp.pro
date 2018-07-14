@@ -9,7 +9,7 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-#SUBDIRS += test/singletonapptest
+SUBDIRS += test/singletonapptest
 SUBDIRS += test/namedpipetest
 #SUBDIRS += demo/QQtClientCreator
 #SUBDIRS += demo/QQtServerCreator

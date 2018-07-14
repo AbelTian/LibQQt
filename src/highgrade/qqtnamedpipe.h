@@ -62,8 +62,8 @@ public slots:
 private:
 
 protected:
-    bool create();
-    bool attach();
+    virtual bool create();
+    virtual bool attach();
 private:
     QQtNamedPipeClientProtocol* p0;
     QQtLocalClient* c0;
@@ -75,6 +75,8 @@ private:
 
     bool hasServer;
     bool bAccepted;
+
+    QEventLoop* eLoop;
 };
 
 
