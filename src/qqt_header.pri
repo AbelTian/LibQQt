@@ -398,6 +398,7 @@ defineTest(add_defines_QQt){
     DEFINES += __HIGHGRADE__
     contains (DEFINES, __HIGHGRADE__) {
         #QQt 线程间 进程间 通讯模块
+        #在LibQQt v4.0-v5.0的时候完成。
         DEFINES += __QQT_COMMUNICATION_SUPPORT__
         contains(DEFINES, __QQT_COMMUNICATION_SUPPORT__) {
             ##################Shared Memory Module###############################
