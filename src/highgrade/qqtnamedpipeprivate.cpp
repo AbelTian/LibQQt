@@ -288,7 +288,7 @@ bool QQtNamedPipeServerProtocol::dispatcher ( const QByteArray& m ) //message
 {
     bool ret = true;
 
-    QQtNamedPipeMessage qMsg;
+    static QQtNamedPipeMessage qMsg;
     qMsg.parser ( m );
     pline() << qMsg;
 
@@ -351,6 +351,7 @@ void QQtNamedPipeServerProtocolManager::slotAcceptNotify ( const QQtProtocol* pr
 {
     QQtNamedPipeMessage* msg = ( QQtNamedPipeMessage* ) message;
     QQtNamedPipeServerProtocol* p0  = ( QQtNamedPipeServerProtocol* ) protocol;
+    pline() << p0->key() << mBytesMap[p0->key()].size() << mBytesMap[p0->key()].left ( 7 );
     switch ( msg->cmd() )
     {
         case 0x0a:
