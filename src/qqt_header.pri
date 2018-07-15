@@ -397,10 +397,10 @@ defineTest(add_defines_QQt){
     #高级模块，包含不少的高级功能组件，这个模块可以集中开关。
     DEFINES += __HIGHGRADE__
     contains (DEFINES, __HIGHGRADE__) {
-        #QQt 线程间 进程间 通讯模块
+        #QQt 线程间 进程间 设备间高级通讯模块
         #在LibQQt v4.0-v5.0的时候完成。
-        DEFINES += __QQT_COMMUNICATION_SUPPORT__
-        contains(DEFINES, __QQT_COMMUNICATION_SUPPORT__) {
+        DEFINES += __COMMUNICATION_SUPPORT__
+        contains(DEFINES, __COMMUNICATION_SUPPORT__) {
             ##################Shared Memory Module###############################
             DEFINES += __SHAREDMEMORY_SUPPORT__
 
@@ -411,6 +411,15 @@ defineTest(add_defines_QQt){
             DEFINES += __NAMEDPIPE_SUPPORT__
             #local socket依赖network support
             !contains(DEFINES, __NETWORKSUPPORT__):DEFINES-=__NAMEDPIPE_SUPPORT__
+
+            ##################DBUS Module###############################
+            DEFINES += __DBUS_SUPPORT__
+
+            ##################MODBUS Module###############################
+            DEFINES += __MODBUS_SUPPORT__
+
+            ##################CANBUS Module###############################
+            DEFINES += __CANBUS_SUPPORT__
         }
     }
 
