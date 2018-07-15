@@ -77,6 +77,9 @@ void QQtNamedPipeClientProtocol::recvCommand0x0a ( const QQtNamedPipeMessage& ms
     //what do you want to do?
     pline() << "client receive read data ack:" << msg.cmd();
     mBytes = msg.data();
+#ifdef Q_OS_WIN
+    pline() << "到底接收到了什么：" << mBytes;
+#endif
     emit signalSuccessCommand();
 }
 
@@ -147,7 +150,7 @@ bool QQtNamedPipeClientProtocol::dispatcher ( const QByteArray& m ) //message
 {
     bool ret = true;
 
-    QQtNamedPipeMessage qMsg;
+    static QQtNamedPipeMessage qMsg;
     qMsg.parser ( m );
     pline() << qMsg;
 
@@ -288,6 +291,7 @@ bool QQtNamedPipeServerProtocol::dispatcher ( const QByteArray& m ) //message
 {
     bool ret = true;
 
+    //在不同线程里，这非常有用。但是并不保险。
     static QQtNamedPipeMessage qMsg;
     qMsg.parser ( m );
     pline() << qMsg;

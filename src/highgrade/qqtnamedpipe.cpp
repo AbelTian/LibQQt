@@ -119,14 +119,17 @@ bool QQtNamedPipe::create()
 {
     //把s0移动到thread里面去。
     bool  ret = false;
+#ifdef Q_OS_WIN
     QQtNamedPipeThread* thread = new QQtNamedPipeThread ( s0 );
     s0->moveToThread ( thread );
     connect ( this, SIGNAL ( signalStartNamedPipeServer ( QQtNamedPipeServer* ) ),
               thread, SLOT ( slotStartNamedPipeServer ( QQtNamedPipeServer* ) ) );
     thread->start ( QThread::HighestPriority );
     emit signalStartNamedPipeServer ( s0 );
-    //在当前线程启动，废弃。
+#else
+    //在当前线程启动。
     //ret = s0->listen ( "QQtNamedPipeServer" );
+#endif
     if ( s0->isListening() )
         ret = true;
     return ret;

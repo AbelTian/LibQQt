@@ -576,6 +576,10 @@ contains (DEFINES, __HIGHGRADE__) {
     }
 
     contains(DEFINES, __MESSAGEQUEUE_SUPPORT__){
+        SOURCES += \
+            $$PWD/highgrade/qqtmessagequeueprivate.cpp
+        HEADERS += \
+            $$PWD/highgrade/qqtmessagequeueprivate.h
         #基于tcp socket实现
         SOURCES += \
             $$PWD/highgrade/qqtmessagequeue.cpp

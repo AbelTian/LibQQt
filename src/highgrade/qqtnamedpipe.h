@@ -44,6 +44,8 @@ QQtNamedPipeServer* QQtNamedPipeServerInstance ( QQtNamedPipeServerProtocolManag
  * QQtNamedPipeClient往这个管道里面读写，读取和写入都允许进行。
  * QQtNamedPipePrivate实现了一个通信协议，包括read业务、write业务。
  * QQtNamedPipe使用这个协议，开放给用户接口。（也叫做Wrapper，没有这个wrapper管道读写不好实施呀，数据结构、通信架构都说不清楚。）
+ *
+ * Windows Timer和QEventLoop堵塞都存在问题，不支持。
  */
 class QQTSHARED_EXPORT QQtNamedPipe : public QObject
 {
