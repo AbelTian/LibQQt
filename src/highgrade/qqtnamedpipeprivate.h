@@ -141,4 +141,21 @@ private:
     QMap<QString, QByteArray> mBytesMap;
 };
 
+class QQtNamedPipeThread : public QThread
+{
+    Q_OBJECT
+public:
+    explicit QQtNamedPipeThread ( QObject* parent = 0 ) : QThread ( parent ) {
+
+    }
+
+public slots:
+    void slotStartNamedPipeServer ( QQtNamedPipeServer* s0 ) {
+        s0->listen ( "QQtNamedPipeServer" );
+        while ( !s0->isListening() ) {
+            QApplication::processEvents ( QEventLoop::AllEvents | QEventLoop::WaitForMoreEvents );
+        }
+    }
+};
+
 #endif //QQTNAMEDPIPEPRIVATE_H

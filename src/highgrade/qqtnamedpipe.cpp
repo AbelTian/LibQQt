@@ -30,11 +30,11 @@ QQtNamedPipe::QQtNamedPipe ( const QString& key, QObject* parent )
 {
     //创建客户端句柄
     p0 = 0;
-    c0 = QQtNamedPipeClientInstance ( p0, this );
+    c0 = QQtNamedPipeClientInstance ( p0 );
 
     //创建服务器句柄
     pm0 = 0;
-    s0 = QQtNamedPipeServerInstance ( pm0, this );
+    s0 = QQtNamedPipeServerInstance ( pm0 );
 
     //用于检测是否存在服务器。
     connect ( c0, SIGNAL ( signalConnectSucc() ),
@@ -117,8 +117,18 @@ bool QQtNamedPipe::hasServer()
 
 bool QQtNamedPipe::create()
 {
+    //把s0移动到thread里面去。
     bool  ret = false;
-    ret = s0->listen ( "QQtNamedPipeServer" );
+    QQtNamedPipeThread* thread = new QQtNamedPipeThread ( s0 );
+    s0->moveToThread ( thread );
+    connect ( this, SIGNAL ( signalStartNamedPipeServer ( QQtNamedPipeServer* ) ),
+              thread, SLOT ( slotStartNamedPipeServer ( QQtNamedPipeServer* ) ) );
+    thread->start ( QThread::HighestPriority );
+    emit signalStartNamedPipeServer ( s0 );
+    //在当前线程启动，废弃。
+    //ret = s0->listen ( "QQtNamedPipeServer" );
+    if ( s0->isListening() )
+        ret = true;
     return ret;
 }
 

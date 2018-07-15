@@ -62,6 +62,7 @@ public slots:
 
 signals:
     void signalConnectComeBack();
+    void signalStartNamedPipeServer ( QQtNamedPipeServer* );
 public slots:
 
 private:
