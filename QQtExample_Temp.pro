@@ -11,13 +11,13 @@ CONFIG += ordered
 
 #SUBDIRS += demo/QQtClientCreator
 #SUBDIRS += demo/QQtServerCreator
-#SUBDIRS += test/sharedmemorytest
-#SUBDIRS += test/QQtCustomTitleBarMainFormTest
 #SUBDIRS += demo/QQtRoseMonitor
 #SUBDIRS += examples/exquisite
 #SUBDIRS += test/voicetest
 #SUBDIRS += test/giftest
+#SUBDIRS += test/QQtCustomTitleBarMainFormTest
 
-
+#高级测试，谨慎使用。
 #SUBDIRS += test/singletonapptest
 #SUBDIRS += test/namedpipetest
+#SUBDIRS += test/sharedmemorytest
