@@ -36,11 +36,17 @@ github link: https://github.com/AbelTian/LibQQt
     - 包括有多种效果的Widget、Dialog
     - 二维码生成器、识别器，校验码生成器
     - 九宫格技术展示图片
-    - Html解析器
+    - 添加gif support Widgets  
+        - 可以方便的设置动态按钮等。  
+        - 有[QQtGifWidget](src/exquisite/gifwidgets/qqtgifwidget.h)、QQtGifButton等。   
+    - 添加color support widgets  
+        - 单色Widget。  
+    - 添加click and click sound widget  
+        - 带按键声，支持长按、双击的widget和label等控件。  
     - 以及未列出的等20余种自定义widget。
-4. 有线和无线网络自动连接管理器  
+4. 有线和无线网络自动连接管理器 (e-linux)  
 6. 解决Qt4.8.7在嵌入式屏幕上QGraphics系统不正常绘画的问题 
-7. QQt输入法
+7. QQt输入法  
     - 重写了UI，适配多种屏幕
 8. Qt对象管理器  
     - 用于管理已经生成的Qt对象实例，objectName是唯一查找索引。  
@@ -64,6 +70,7 @@ github link: https://github.com/AbelTian/LibQQt
 8. 支持多页表格 [QQtMultiPageTableWidget](src/widgets/qqtmultipagetablewidget.h)  
 9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
 5. 支持Qt5.9.2   
+    - 建议桌面使用这个版本，对三大桌面，和IOS Android e-linux支持都很好。  
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
 1. 添加矢量图形widgets  
      - 比如 QQtSvgProgressbar
@@ -76,13 +83,8 @@ github link: https://github.com/AbelTian/LibQQt
      - [add_base_manager.pri](multi-link/multi-link/add_base_manager.pri)，app和lib工程的基础管理者。  
      - 基于qmake，用户可以轻易的链接LibQQt和添加自定义library。  
      - 工程版本变更可以使用add_version(1,0,0,0)实现了。  
-4. 添加gif support Widgets  
-    - 可以方便的设置动态按钮等。  
-    - 有[QQtGifWidget](src/exquisite/gifwidgets/qqtgifwidget.h)、QQtGifButton等。   
-4. 添加color support widgets  
-    - 单色Widget。  
 5. 升级多媒体音频  
-    - 添加内存服务器，处理内存和设备之间的数据交互。  
+    - 添加内存服务器，处理内存和设备之间的数据交互。（这部分的功能完全按照为内存服务的思路设计研发。）  
     - [QQtAudioManager](src/multimedia/qqtaudiomanager.h)、  
     - QQtWavAudioInput、QQtWavAudioOutput、QQtWavAudioManager、  
     - QQtWavSoundEffect  
@@ -91,16 +93,15 @@ github link: https://github.com/AbelTian/LibQQt
     - QQtWebAccessManager，支持管理Session、Cookies。    
     - 添加GumboQuery爬虫工具。  
     - 支持webservice (QtSoap)  
-7. 添加click and click sound widget  
-    - 带按键声，支持长按、双击的widget和label等控件。  
 8. 添加Qt没有的组件QQtTitleBar  
     - 可以组完全自定义的Form。  
     - 加上QQtOSDFrame可以组透明Form。    
-8. HighGrade增加新成员    
+8. **HighGrade** Module 增加新成员    
+    - 难度高，谨慎使用。  
     - 线程间、进程间通信组件   
         - QQtSharedMemory，实现可以跨线程的临时变量。  
-        - QQtLocalServer QQtLocalClient, QQtNamedPipe使用QLocalSocket实现跨线程通讯。(**HighGrade**)      
-        - QQtLocalQueueServer QQtLocalQueueClient QQtMessageQueue使用QQtLocalQueueSocket实现跨线程通讯。(**HighGrade**)  
+        - QQtLocalServer QQtLocalClient, QQtNamedPipe使用QLocalSocket实现跨线程通讯。      
+        - QQtLocalQueueServer QQtLocalQueueClient QQtMessageQueue使用QQtLocalQueueSocket实现跨线程通讯。  
         - 使用方法都类似于QQtSharedMemory。  
    - QQtSingleTonApplication 利用基于QLocalSocket的进程间通信实现。  
 
@@ -120,7 +121,10 @@ LibQQt为方便用户开发App过程方便的发布程序，所以添加了多�
 
 ========================================================================  
 # 版本分割    
-  
+
+R2支持Qt5 Qt4，    
+R3支持Qt5，由于使用Multi-link 2，不支持Qt4。  
+现在R3是master分支。  
 [版本划分图谱](changelog.md)   
 
 
