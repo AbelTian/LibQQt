@@ -37,7 +37,6 @@ QQtNamedPipeServer* QQtNamedPipeServerInstance ( QQtNamedPipeServerProtocolManag
  * key2     pipe2
  * ...      ...
  *
- * 升级：增加一个静态接口，外部创建Server
  *
  * 文件用于储存数据，管道不用于储存数据，而是作为一个通信设备的驱动，这个通信设备就是个管道。
  * QQtNamedPipeServer监控这个管道的读写，提交给业务层数据处理。

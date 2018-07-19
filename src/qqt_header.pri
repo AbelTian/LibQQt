@@ -405,12 +405,18 @@ defineTest(add_defines_QQt){
             DEFINES += __SHAREDMEMORY_SUPPORT__
 
             ##################Message Queue Module###############################
+            #这一块有独立的MQ库。
             DEFINES += __MESSAGEQUEUE_SUPPORT__
 
-            ##################Local RawSocket Module###############################
+            ##################Named Pipe Module###############################
             DEFINES += __NAMEDPIPE_SUPPORT__
             #local socket依赖network support
+            #Qt对这个模块取名为LocalSocket，其实为local named pipe.
             !contains(DEFINES, __NETWORKSUPPORT__):DEFINES-=__NAMEDPIPE_SUPPORT__
+
+            ##################Message Queue (TCP Socket) Module###############################
+            #这个是基于Tcp Socket的，我打算使用TCP Socket实现。允许本地（+回环Socket）、局域网、广域网（服务器）
+            DEFINES += __MQ_SOCKET_SUPPORT__
 
             ##################DBUS Module###############################
             DEFINES += __DBUS_SUPPORT__
