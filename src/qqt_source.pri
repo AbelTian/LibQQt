@@ -427,23 +427,17 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtshadowwidget.h \
         $$PWD/exquisite/qqtflipstackedwidget.h
 
-    #special
+    #校验码生成器
     SOURCES += \
-        $$PWD/exquisite/qqtcustompianokeyboard.cpp \
-        $$PWD/exquisite/qqtcustomverificationcode.cpp \
-        $$PWD/exquisite/qqtrulerslider.cpp
+        $$PWD/exquisite/qqtcustomverificationcode.cpp
     HEADERS += \
-        $$PWD/exquisite/qqtcustompianokeyboard.h \
-        $$PWD/exquisite/qqtcustomverificationcode.h \
-        $$PWD/exquisite/qqtrulerslider.h
+        $$PWD/exquisite/qqtcustomverificationcode.h
 
     #progressbar
     SOURCES += \
-        $$PWD/exquisite/qqtcustomprogressbar.cpp \
-        $$PWD/exquisite/qqtcustomspeedmeter.cpp
+        $$PWD/exquisite/qqtcustomprogressbar.cpp
     HEADERS += \
-        $$PWD/exquisite/qqtcustomprogressbar.h \
-        $$PWD/exquisite/qqtcustomspeedmeter.h
+        $$PWD/exquisite/qqtcustomprogressbar.h
 
     #pushbutton
     SOURCES += \
