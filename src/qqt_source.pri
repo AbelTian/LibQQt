@@ -170,7 +170,6 @@ SOURCES += \
     $$PWD/frame/qqtpassworddialog.cpp \
     $$PWD/frame/qqtframe.cpp \
     $$PWD/frame/qqtdialog.cpp \
-    $$PWD/frame/qqtinput.cpp \
     $$PWD/frame/qqtmsgbox.cpp
 HEADERS += \
     $$PWD/frame/qqtanimation.h \
@@ -180,12 +179,10 @@ HEADERS += \
     $$PWD/frame/qqtpassworddialog.h \
     $$PWD/frame/qqtframe.h \
     $$PWD/frame/qqtdialog.h \
-    $$PWD/frame/qqtinput.h \
     $$PWD/frame/qqtmsgbox.h
 FORMS += \
     $$PWD/frame/qqtprogressdialog.ui \
     $$PWD/frame/qqtpassworddialog.ui \
-    $$PWD/frame/qqtinput.ui \
     $$PWD/frame/qqtmsgbox.ui
 
 SOURCES += \

@@ -47,7 +47,9 @@ github link: https://github.com/AbelTian/LibQQt
 4. 有线和无线网络自动连接管理器 (e-linux)  
 6. 解决Qt4.8.7在嵌入式屏幕上QGraphics系统不正常绘画的问题 
 7. QQt输入法  
-    - 重写了UI，适配多种屏幕
+    - 重写了UI，适配多种屏幕  
+    - 由于版权等一些原因，这个模块在LibQQt 3.0的时候移除。  
+    - 我制作了QQtInput库以提供输入法功能，请用户到我的工程主页，查看QQtInput工程。  
 8. Qt对象管理器  
     - 用于管理已经生成的Qt对象实例，objectName是唯一查找索引。  
     - 含有QQtObjectFactory，用于动态注册、生成来自QObject和QWidget的类。

@@ -14,9 +14,6 @@
 #ifdef __PROCESSMODULE__
 #include <QProcess>
 #endif
-#ifdef __EMBEDDED_LINUX__
-#include <qqtinput.h>
-#endif
 
 QQtApplication* qqtApp = NULL;
 
@@ -89,18 +86,17 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
 #endif
 
-    /*嵌入式板子上，初始化输入法*/
-    /*要求：数据库在CONF_PATH/PinYin.db必须存在，否则会弹出out of memory Error opening database*/
-#ifdef __EMBEDDED_LINUX__
-    QQtInput::Instance()->Init ( "min", "control", "QQT", 14, 14 );
-#endif
-
     /*设置USB热插拔检测，支持U盘，键盘，鼠标检测*/
 #ifdef __PLUGINSUPPORT__
     QObject::connect ( QQtPluginWatcher::Instance(), SIGNAL ( storageChanged ( int ) ),
                        this, SLOT ( slotUPanAutoRun ( int ) ) );
 #endif
 
+    /*输入法*/
+    /*LibQQt 3.0以后，移除QQtInput模块。*/
+    /*LibQQt 3.0以后，如果用户需要使用输入法，请使用Multi-link Technology依赖QQtInput工程。*/
+    /*在App工程pro里添加add_dependent_manager(QQtInput)即可。*/
+    /*我把QQtInput类单独制作成了一个Library，QQtInput library。请参看QQtInput工程。*/
 }
 
 QQtApplication::~QQtApplication()

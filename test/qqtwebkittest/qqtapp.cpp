@@ -2,7 +2,6 @@
 #include "qqt-qt.h"
 #include "qqtgui.h"
 #include "qqtcore.h"
-#include "qqtinput.h"
 #include "qqtmsgbox.h"
 #include "qqtframe.h"
 #include "qqttcpclient.h"
@@ -96,10 +95,6 @@ QQTApp::QQTApp ( int& argc, char** argv ) : QApplication ( argc, argv )
      * 设置所有默认颜色
      */
     //setPalette(QPalette(QColor("#F0F0F0")));
-#endif
-
-#ifdef __EMBEDDED_LINUX__
-    QQtInput::Instance()->Init ( "min", "control", "QQT", 14, 14 );
 #endif
 
     qsrand ( QTime ( 0, 0, 0 ).secsTo ( QTime::currentTime() ) );
