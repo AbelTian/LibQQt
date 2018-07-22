@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -102,10 +102,10 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QQtCustomSpeedMeter" name="w7" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w7" native="true"/>
         </item>
         <item>
-         <widget class="QQtCustomSpeedMeter" name="w8" native="true"/>
+         <widget class="QQtCustomProgressBar" name="w8" native="true"/>
         </item>
        </layout>
       </widget>
@@ -153,12 +153,6 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>QQtCustomSpeedMeter</class>
-   <extends>QWidget</extends>
-   <header location="global">qqtcustomspeedmeter.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>QQtCustomProgressBar</class>
    <extends>QWidget</extends>
