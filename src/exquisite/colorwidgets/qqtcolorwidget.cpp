@@ -2,20 +2,25 @@
 
 QQtColorWidget::QQtColorWidget ( QWidget* parent ) : QWidget ( parent )
 {
-    setStyleSheet ( "QWidget{background-color:#FFFFFF;}" );
 }
 
 void QQtColorWidget::setColor ( const QRgb& rgb )
 {
     mRgb = rgb;
-    QString colorString = QString ( "QWidget{background-color:#%1%2%3;}" )
-                          .arg ( qRed ( rgb ), 2, 16, QChar ( '0' ) )
-                          .arg ( qGreen ( rgb ), 2, 16, QChar ( '0' ) )
-                          .arg ( qBlue ( rgb ), 2, 16, QChar ( '0' ) );
-    setStyleSheet ( colorString );
 }
 
 QRgb QQtColorWidget::getColor()
 {
     return mRgb;
+}
+
+
+void QQtColorWidget::paintEvent ( QPaintEvent* event )
+{
+    QPainter painter ( this );
+    //QPen pen = painter.pen();
+    //pen.setColor ( QColor ( mRgb ) );
+    painter.setPen ( Qt::NoPen );
+    painter.setBrush ( QBrush ( QColor ( mRgb ) ) );
+    painter.drawRect ( rect() );
 }

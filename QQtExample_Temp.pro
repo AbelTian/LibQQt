@@ -9,6 +9,7 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
+SUBDIRS += test/colorwidgettest
 #SUBDIRS += demo/QQtClientCreator
 #SUBDIRS += demo/QQtServerCreator
 #SUBDIRS += demo/QQtRoseMonitor
