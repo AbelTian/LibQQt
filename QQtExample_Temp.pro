@@ -13,7 +13,8 @@ SUBDIRS += test/colorwidgettest
 #SUBDIRS += demo/QQtClientCreator
 #SUBDIRS += demo/QQtServerCreator
 #SUBDIRS += demo/QQtRoseMonitor
-#SUBDIRS += examples/exquisite
+#
+SUBDIRS += examples/exquisite
 #SUBDIRS += test/voicetest
 #SUBDIRS += test/giftest
 #SUBDIRS += test/QQtCustomTitleBarMainFormTest
