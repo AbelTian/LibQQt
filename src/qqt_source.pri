@@ -390,6 +390,17 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/clickwidgets/qqtclicklabel.h \
             $$PWD/exquisite/clickwidgets/qqtlongclicklabel.h \
             $$PWD/exquisite/clickwidgets/qqtdoubleclicklabel.h
+
+        SOURCES += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickdialog.cpp \
+            $$PWD/exquisite/clickwidgets/qqtclickdialog.cpp \
+            $$PWD/exquisite/clickwidgets/qqtlongclickdialog.cpp \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickdialog.cpp
+        HEADERS += \
+            $$PWD/exquisite/clickwidgets/qqtvirtualclickdialog.h \
+            $$PWD/exquisite/clickwidgets/qqtclickdialog.h \
+            $$PWD/exquisite/clickwidgets/qqtlongclickdialog.h \
+            $$PWD/exquisite/clickwidgets/qqtdoubleclickdialog.h
     }
 
     #dialog
@@ -400,11 +411,13 @@ contains (DEFINES, __EXQUISITE__) {
 
     #widget
     SOURCES += \
+        $$PWD/exquisite/qqtmaskwidget.cpp \
         $$PWD/exquisite/qqtfadewidget.cpp \
         $$PWD/exquisite/qqtninepatchwidget.cpp \
         $$PWD/exquisite/qqtshadowwidget.cpp \
         $$PWD/exquisite/qqtflipstackedwidget.cpp
     HEADERS += \
+        $$PWD/exquisite/qqtmaskwidget.h \
         $$PWD/exquisite/qqtninepatchwidget.h \
         $$PWD/exquisite/qqtfadewidget.h \
         $$PWD/exquisite/qqtshadowwidget.h \
