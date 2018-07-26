@@ -1,4 +1,4 @@
-﻿#ifndef QQTWORD_H
+#ifndef QQTWORD_H
 #define QQTWORD_H
 
 #include <QObject>
@@ -19,6 +19,29 @@ enum ESpanFlag
 
 Q_DECLARE_FLAGS ( ESpanFlags, ESpanFlag )
 
+/**
+ * @brief The QQtWord class
+ * 原理介绍
+ * 内部使用GraphicScene实现,可以投影到GraphicView Printer Image等绘图设备.
+ *
+ * 功能支持
+ * 添加文字, 可以跨页
+ * 添加表格, 可以跨页, 支持经过合并单元格的表格.
+ * 添加图片, 太大了会跳页
+ * 添加Widget, 太大了会跳页
+ *
+ * 已经支持的屏幕的分辨率和DPI,帮助用户识别自己的目标画板的大小.
+ * 公式 Rect1 : DPI1 = Rect2 : DPI2
+ * 从Scene(内部)render()到外部画板的时候,需要计算这个rect.
+ * 分类              Rect的像素                    DPI
+ * Scene            2480*3508(A4)                300 300
+ * DWin屏幕(View)    800*600                      136(x) 156(y) 理论值142 138
+ * PC屏幕(View)      1920*1080                    96 96
+ * Printer          9917*14033                   1200
+ *
+ * Scene可以设置纸张类型, 假如设置A3 DPI不变 SceneRect会变.而这个Rect像素大小,请参照PS.
+ *
+ */
 class QQTSHARED_EXPORT QQtWord : public QObject
 {
     Q_OBJECT
@@ -57,7 +80,7 @@ public:
     void setFooterText ( const QString& text, QFont m_font = QFont(),
                          Qt::Alignment align = Qt::AlignHCenter );
     /**
-     * @brief initWordExpress 初始化纸张，第一张空白纸
+     * @brief initWord 初始化纸张，第一张空白纸
      */
     void initWord();
 
