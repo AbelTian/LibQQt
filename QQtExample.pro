@@ -109,9 +109,8 @@ SUBDIRS =
 #SUBDIRS += test/osdtest
 #SUBDIRS += test/inputtest
 #SUBDIRS += demo/SysInfoNotify
-#移除
-#SUBDIRS += demo/TouchMonitor
-#SUBDIRS += demo/TouchMonitorServer
 
-SUBDIRS += test/QQtWidgetClickHelperTest
+#SUBDIRS += test/QQtWidgetClickHelperTest
 #SUBDIRS += test/QQtWidgetClickSoundHelperTest
+
+SUBDIRS += test/QQtWordTest

@@ -41,6 +41,9 @@ Q_DECLARE_FLAGS ( ESpanFlags, ESpanFlag )
  *
  * Scene可以设置纸张类型, 假如设置A3 DPI不变 SceneRect会变.而这个Rect像素大小,请参照PS.
  *
+ * 关于排版的约束
+ * 1. 开始设置好纸张,就不要更换,你肯定不想自己的数据被截断显示,内部不会放缩数据.
+ *
  */
 class QQTSHARED_EXPORT QQtWord : public QObject
 {
@@ -48,15 +51,17 @@ class QQTSHARED_EXPORT QQtWord : public QObject
 public:
     explicit QQtWord ( QObject* parent = 0 );
 
+    /**
+     * @brief initWord 初始化纸张，第一张空白纸
+     */
+    void initWord();
     void addText ( const QString& text, QFont m_font = QFont(),
                    Qt::Alignment align = Qt::AlignHCenter, QPointF point = QPointF ( 0, 0 ) );
-    void addSignoffText ( const QString& text, QFont m_font = QFont() );
     void addTable ( const QTableView* table, QPointF pos = QPointF ( 0, 0 ) );
+    void addSignoffText ( const QString& text, QFont m_font = QFont() );
 
     int pageNum();
     QQtGraphicsScene* getPage ( int num );
-    void exportPdf ( const QString& pdf );
-    void print();
 
     QRectF clientRectF();
     QRectF paperRect();
@@ -79,10 +84,9 @@ public:
                          Qt::Alignment align = Qt::AlignHCenter );
     void setFooterText ( const QString& text, QFont m_font = QFont(),
                          Qt::Alignment align = Qt::AlignHCenter );
-    /**
-     * @brief initWord 初始化纸张，第一张空白纸
-     */
-    void initWord();
+
+    void exportPdf ( const QString& pdf );
+    void print();
 
 protected:
     virtual void adjustdy ( qreal dy0 );

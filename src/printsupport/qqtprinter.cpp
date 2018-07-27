@@ -1,4 +1,4 @@
-﻿#include "qqtprinter.h"
+#include "qqtprinter.h"
 #include "stdlib.h"
 
 QQtPrinter::QQtPrinter ( QPrinter::PrinterMode mode ) :
@@ -9,7 +9,7 @@ QQtPrinter::QQtPrinter ( QPrinter::PrinterMode mode ) :
       MIPS bug: you must use QQtPrinter(QPrinter::HighResolution)
       Other constructer won't work well
      */
-    //QQtPrinter(QPrinter::HighResolution);
+    //QPrinter(QPrinter::HighResolution);
     setFullPage ( true );
     setColorMode ( QPrinter::Color );
     setPaperSize ( QPrinter::A4 );
@@ -21,6 +21,11 @@ void QQtPrinter::setOutputFileName ( const QString& name )
 {
     m_outputname = name;
     QPrinter::setOutputFileName ( m_outputname );
+}
+
+void QQtPrinter::generateToFile ( const QList<QImage>& imgs )
+{
+
 }
 
 void QQtPrinter::print()

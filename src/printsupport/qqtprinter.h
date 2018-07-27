@@ -1,4 +1,4 @@
-﻿#ifndef QQTPRINTER_H
+#ifndef QQTPRINTER_H
 #define QQTPRINTER_H
 
 #include <QPrinter>
@@ -13,7 +13,7 @@ public:
     void setOutputFileName ( const QString& );
 
     //把QImage列表输出到上边的位置。QQtWord会输出这个list。
-    void generateToFile ( const QList<QImage*>& imgs );
+    void generateToFile ( const QList<QImage>& imgs );
 
     //嵌入式系统里打印到打印机
     void print();
