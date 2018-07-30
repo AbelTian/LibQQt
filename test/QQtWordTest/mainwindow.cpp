@@ -11,6 +11,14 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui ( new Ui::MainWindow )
 {
     ui->setupUi ( this );
+
+#ifdef __EMBEDDED_LINUX__
+    showFullScreen();
+    ui->lineEdit->setText ( "/Application/ccc.pdf" );
+#else
+    ui->lineEdit->setText ( "/home/tdr/Develop/ccc.pdf" );
+#endif
+
     ui->tableView->setDB ( DB_MANAGER );
     ui->tableView->setTable ( "User" );
     ui->tableView->query ( "" );
