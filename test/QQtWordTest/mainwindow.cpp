@@ -4,7 +4,7 @@
 #include "qqtframe.h"
 #include "qqtword.h"
 #include "qqtcore.h"
-
+#include "qqtprinter.h"
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -28,14 +28,19 @@ void MainWindow::on_pushButton_clicked()
         return;
 
     QQtWord word;
+    //所有对QQtWord的设置,做在这里.
     word.initWord();
+
+    //work flow
     word.setFooterText ( "Company T", word.headerFont(), Qt::AlignLeft );
     word.setHeaderText ( "Company T Header", word.headerFont(), Qt::AlignLeft );
 
     word.addText ( "Main Page", word.titleFont(), Qt::AlignCenter );
 
-    word.addText ( "  Now, this is first section.", word.mainFont(), Qt::AlignLeft );
-    word.addText ( "  Now, this is second section.", word.mainFont(), Qt::AlignLeft  );
+    word.addText ( "Now, this is first section.", word.mainFont(), Qt::AlignLeft );
+    word.addText ( "Now, this is second section.", word.mainFont(), Qt::AlignLeft  );
+    word.addText ( "Now, this is third section.", word.mainFont(), Qt::AlignLeft  );
+    word.addText ( "Now, this is four section.", word.mainFont(), Qt::AlignLeft  );
 
     word.addText ( "八荣八耻", word.title2Font(), Qt::AlignLeft );
     word.addText ( "以热爱祖国为荣、以危害祖国为耻。" );
@@ -61,10 +66,19 @@ void MainWindow::on_pushButton_clicked()
     tableWidget.query ( "" );
     tableWidget.horizontalHeader()->setSectionResizeMode ( QQtHeaderView::ResizeToContents );
     tableWidget.setFixedWidth ( 523.8 );
-    pline() << word.clientRectF();
+    pline() << word.clientRectF() << word.paperRect();
     word.addTable ( &tableWidget );
 
     word.addSignoffText ( "Reporter: Tianduanrui" );
 
-    word.exportPdf ( ui->lineEdit->text() );
+    QList<QImage> papers;
+    //分辨率可以随意一点.一般用于显示器正常显示,为96.
+    QRectF paperRect = word.getTargetRectF ( 300, 300 );
+    word.exportImage ( papers, paperRect );
+    pline() << papers;
+
+    QQtPrinter printer;
+    pline() << printer.logicalDpiX() << printer.logicalDpiY();
+    printer.setOutputFileName ( ui->lineEdit->text() );
+    printer.generateToPdfFile ( papers, paperRect );
 }
