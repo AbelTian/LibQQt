@@ -14,9 +14,14 @@ LibQQt就处在Application Frameworks的位置，
 LibQQt内富含丰富的Manager组件，管理功能无所不包，Manager需要做的工作，LibQQt将会全部提供。  
 
 在基于LibQQt开发的操作系统中，Qt RunTime将会代替Android Runtime的位置。  
+Qt操作系统分层  
+![Android系统](Qt.jpg)   
+
 
 # LibQQt v2.2.2 包含的管理类型  
 
+- Application  
+    - 用于窗口应用系统初始化管理。  
 - EthnetManager  
     - 用于检测网卡设备状态。  
 - PluginManager  
@@ -24,14 +29,22 @@ LibQQt内富含丰富的Manager组件，管理功能无所不包，Manager需要
 - WebAccessManager  
     - 用于管理Http等用户层网络通信  
 - AudioManager  
-    - WavAudioManager  
-- Application  
-    - 用于窗口应用系统初始化管理。  
+    - 用于输入输出音频。  
+    - WavAudioManager 用于对wav文件输入输出音频。
 - BluetoothManager  
     - 蓝牙设备管理器。  
-- App Deploy and App Deploy Config (pri)  
+- ObjectManager  
+    - 管理对象的注册和取消注册。也能管理对象的生成。  
+
+
+1. qmake，App Deploy and App Deploy Config (pri)  
     - 应用发布管理者、应用配置文件管理者。  
     - 用于将App程序自动发布到指定位置，使App点击即可运行哦！支持macOS、Windows、Linux、Android、e-linux、iOS等。    
 
 管理功能，功能还会持续扩展。欢迎具有专业知识会C++但是没有多少软件知识的技术人员使用。  
-  
+
+# LibQQt v3 包含的管理类型   
+
+除了v2的管理类型，新加了管理类型，也升级了qmake的管理能力。
+- NfcManager
+    - 用于管理NFC设备的探测。    
