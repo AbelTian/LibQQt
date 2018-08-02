@@ -73,11 +73,11 @@ void MainWindow::on_pushButton_clicked()
     tableWidget.setTable ( "User" );
     tableWidget.query ( "" );
     tableWidget.horizontalHeader()->setSectionResizeMode ( QQtHeaderView::ResizeToContents );
-    tableWidget.setFixedWidth ( 523.8 );
+    tableWidget.setFixedWidth ( 1728.82 );
     pline() << word.clientRectF() << word.paperRect();
     word.addTable ( &tableWidget );
 
-    word.addSignoffText ( "Reporter: Tianduanrui" );
+    word.addSignoffText ( "Reporter:_____________" );
 
     QList<QImage> papers;
     //分辨率可以随意一点.一般用于显示器正常显示,为96.
