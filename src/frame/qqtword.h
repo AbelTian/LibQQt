@@ -21,8 +21,6 @@ Q_DECLARE_FLAGS ( ESpanFlags, ESpanFlag )
 
 /**
  * @brief The QQtWord class
- * 原理介绍
- * 内部使用GraphicScene实现,可以投影到GraphicView Printer Image等绘图设备.
  *
  * 功能支持
  * 添加文字, 可以跨页
@@ -30,8 +28,24 @@ Q_DECLARE_FLAGS ( ESpanFlags, ESpanFlag )
  * 添加图片, 太大了会跳页
  * 添加Widget, 太大了会跳页
  * 添加新页面,直接新页面编辑.
+ * 设置纸张类型
+ * 设置纸张方向
  *
- * 已经支持的屏幕的分辨率和DPI,帮助用户识别自己的目标画板的大小.
+ * 原理介绍
+ * 内部使用GraphicScene实现, 使用函数添加内容,自动排版,
+ * 可以投影到GraphicView Printer Image等绘图设备.
+ *
+ * 坐标原理
+ * 根据所见即所得.
+ * 图纸默认为A4, Rect在PS里能找到, DPI固定为300像素每英寸, 尺寸在WPS Word里能找到.
+ * 在A4纸等纸上设计好排版,可以把尺寸直接拿过来用.
+ * 接口单位全部为像素.
+ *
+ * 计算方法:
+ * 在A4纸上用尺子量, 然后转换为英寸.
+ * paperRect(0, 0, w, h) = dpi * 英寸(w, h).
+ *
+ * 已经知道的屏幕的分辨率和DPI,帮助用户识别自己的目标画板的大小.
  * 公式 Rect1 : DPI1 = Rect2 : DPI2
  * 从Scene(内部)render()到外部画板的时候,需要计算这个rect.
  * 分类              Rect的像素                    DPI
@@ -40,8 +54,7 @@ Q_DECLARE_FLAGS ( ESpanFlags, ESpanFlag )
  * PC屏幕(View)      1920*1080                    96 96
  * Printer          9917*14033                   1200
  * Image            1920*1080                    96 96
- *
- * Scene可以设置纸张类型, 假如设置A3 DPI不变 SceneRect会变.而这个Rect像素大小,请参照PS.
+ * 可以设置纸张类型, 假如设置A3 DPI不变 SceneRect会变.而这个Rect像素大小,请参照PS.
  *
  * 关于排版的约束
  * 1. 开始设置好纸张,就不要更换,你肯定不想自己的数据被截断显示,内部不会放缩数据.
