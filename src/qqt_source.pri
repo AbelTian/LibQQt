@@ -318,7 +318,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #ethnet(+wifi) manager
     #arm mips
     #TODO: +wince +android +ios +macOS? +win? +linux?
-    contains(QSYS_PRIVATE, Embedded||Arm32||Mips32) {
+    contains(QSYS_PRIVATE, Arm32|Armhf32 || Mips32 || Embedded) {
         SOURCES += $$PWD/network/qqtethenetmanager.cpp
         HEADERS += $$PWD/network/qqtethenetmanager.h
         SOURCES += $$PWD/frame/qqtwifiwidget.cpp

@@ -118,6 +118,10 @@ defineTest(add_defines_QQt){
         #lambda also need c++11
     }
 
+    #---------------------------------------------------------------------------
+    #LibQQt系列提供独立的QQtMediaExtention库，作为LibQQt的平级功能扩展，支援大规模的、强大的、多样的多媒体功能。
+    #LibQQt依然能够独立提供完成完整的App所需功能。
+    #请查阅我的工程主页LibQQt系列工程。
     ##################MultiMedia Module###############################
     DEFINES += __MULTIMEDIA__
     #on mac qt4 has no multimedia
@@ -193,7 +197,18 @@ defineTest(add_defines_QQt){
     }
 
     ##################QQtLogSystem Module###############################
+    #if you use qqtlogsystem, open the annotation
+    #这个宏开关可以保持开着，在软件里设置是否保存日志即可。
     DEFINES += __QQTLOGSYSTEMSUPPORT__
+
+    #---------------------------------------------------------------------------
+    #LibQQt系列提供独立的QQtInput库，作为LibQQt的平级功能扩展，支援App使用多种输入法。
+    #LibQQt依然能够独立提供完成完整的App所需功能。
+    #请查阅我的工程主页LibQQt系列工程。
+    ##################QQtInput Module###############################
+    #LibQQt R3系列版本不再提供输入法，用户可以到LibQQt工程主页查找QQtInput库，支援输入法能力。
+    #这个功能主要应用于嵌入式，如果希望将LibQQt R3使用于嵌入式领域，请约束Qt版本最小V5. (qmake v3)
+    #DEFINES += __QQTINPUTSUPPORT__
 
     ###########################################################################
     ###QQtSocketClient多组功能组件。
@@ -317,7 +332,10 @@ defineTest(add_defines_QQt){
 
     }
 
-
+    #---------------------------------------------------------------------------
+    #LibQQt系列提供独立的QQtExquisite库，作为LibQQt的平级功能扩展，支援大规模的、多样的精美控件。
+    #LibQQt依然能够独立提供完成完整的App所需功能。
+    #请查阅我的工程主页LibQQt系列工程。
     ##################Exquisite Widgets Module###############################
     #if you use Exquisite widgets, open this annotation
     #精美模块，包含不少的精美组件，这个模块可以集中开关。
@@ -387,6 +405,10 @@ defineTest(add_defines_QQt){
         DEFINES += __OSDWIDGETS__
     }
 
+    #---------------------------------------------------------------------------
+    #LibQQt系列提供独立的QQtHighGrade库，作为LibQQt的平级功能扩展，支援大规模的、多样的高级特性。
+    #LibQQt依然能够独立提供完成完整的App所需功能。
+    #请查阅我的工程主页LibQQt系列工程。
     ########################################################################
     ###这个模块名为高级模块。
     ###如果初中级工程师能使用这个模块完成App，那么必定是高分实现力学员。
