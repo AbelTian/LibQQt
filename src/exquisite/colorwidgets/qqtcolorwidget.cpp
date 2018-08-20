@@ -1,18 +1,20 @@
-﻿#include "qqtcolorwidget.h"
+#include "qqtcolorwidget.h"
+#include <QPainter>
+#include <QPainterPath>
 
 QQtColorWidget::QQtColorWidget ( QWidget* parent ) : QWidget ( parent )
 {
-    setStyleSheet ( "QWidget{background-color:#FFFFFF;}" );
+    mRgb = QRgb ( 0 );
 }
 
 void QQtColorWidget::setColor ( const QRgb& rgb )
 {
     mRgb = rgb;
-    QString colorString = QString ( "QWidget{background-color:#%1%2%3;}" )
-                          .arg ( qRed ( rgb ), 2, 16, QChar ( '0' ) )
-                          .arg ( qGreen ( rgb ), 2, 16, QChar ( '0' ) )
-                          .arg ( qBlue ( rgb ), 2, 16, QChar ( '0' ) );
-    setStyleSheet ( colorString );
+    setAutoFillBackground ( true );
+    QPalette plt = palette();
+    plt.setColor ( QPalette::Background, QColor ( mRgb ) );
+    setPalette ( plt );
+    update();
 }
 
 QRgb QQtColorWidget::getColor()
