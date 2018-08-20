@@ -44,7 +44,10 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     /*程序中，需要更改语言，可以通过qqtApp->setLanguage实现。languageChanged信号连接到每个页面的刷新语言的函数，一般会在这个槽函数里调用ui->retranslateUI()*/
     qqtApp = this;
 
-#ifdef __DARWIN__
+    /*这里是个方便,因为配置文件默认在运行目录.*/
+    /*如果用户的运行程序,希望运行目录在当前执行的目录下,这个代码移除,默认就是在调用目录工作.*/
+    /*在继承类里做这个工作,工作量实在是太大了,所以,我在这里做的.*/
+#if defined (__DARWIN__) || defined (__EMBEDDED_LINUX__)
     QDir::setCurrent ( qApp->applicationDirPath() );
 #endif
 

@@ -1,4 +1,4 @@
-﻿#ifndef QQTTABLEMODEL_H
+#ifndef QQTTABLEMODEL_H
 #define QQTTABLEMODEL_H
 
 #include <QSqlRelationalTableModel>
@@ -12,14 +12,14 @@ class QQTSHARED_EXPORT QQtTableModel :  public QSqlRelationalTableModel
 {
     Q_OBJECT
 public:
-    explicit QQtTableModel(QObject* parent = 0, QSqlDatabase db = QSqlDatabase());
+    explicit QQtTableModel ( QObject* parent = 0, QSqlDatabase db = QSqlDatabase() );
 
-    void query(QString filter);
+    void query ( QString filter = "" );
 
 public:
-    QVariant data(const QModelIndex& item, int role = Qt::DisplayRole) const;
-    bool setData(const QModelIndex& item, const QVariant& value, int role = Qt::EditRole);
-    Qt::ItemFlags flags(const QModelIndex& index) const;
+    QVariant data ( const QModelIndex& item, int role = Qt::DisplayRole ) const;
+    bool setData ( const QModelIndex& item, const QVariant& value, int role = Qt::EditRole );
+    Qt::ItemFlags flags ( const QModelIndex& index ) const;
 signals:
 
 public slots:

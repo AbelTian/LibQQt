@@ -1,26 +1,23 @@
-﻿#include "qqtcolorwidget.h"
+#include "qqtcolorwidget.h"
+#include <QPainter>
+#include <QPainterPath>
 
 QQtColorWidget::QQtColorWidget ( QWidget* parent ) : QWidget ( parent )
 {
+    mRgb = QRgb ( 0 );
 }
 
 void QQtColorWidget::setColor ( const QRgb& rgb )
 {
     mRgb = rgb;
+    setAutoFillBackground ( true );
+    QPalette plt = palette();
+    plt.setColor ( QPalette::Background, QColor ( mRgb ) );
+    setPalette ( plt );
+    update();
 }
 
 QRgb QQtColorWidget::getColor()
 {
     return mRgb;
-}
-
-
-void QQtColorWidget::paintEvent ( QPaintEvent* event )
-{
-    QPainter painter ( this );
-    //QPen pen = painter.pen();
-    //pen.setColor ( QColor ( mRgb ) );
-    painter.setPen ( Qt::NoPen );
-    painter.setBrush ( QBrush ( QColor ( mRgb ) ) );
-    painter.drawRect ( rect() );
 }
