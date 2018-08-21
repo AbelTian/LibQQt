@@ -5,10 +5,9 @@
 #include <qqt-local.h>
 
 /**
-/*
  * QSS美化，和QQtDialog图片背景不能共存.
  * QSS部分影响QQtWidget，比如Size等
-*/
+ */
 class QQTSHARED_EXPORT QQtDialog : public QDialog
 {
     Q_OBJECT

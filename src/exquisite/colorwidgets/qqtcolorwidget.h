@@ -25,10 +25,6 @@ signals:
 public slots:
 private:
     QRgb mRgb;
-
-    // QWidget interface
-protected:
-    virtual void paintEvent ( QPaintEvent* event ) override;
 };
 
 #endif // QQTCOLORWIDGET_H

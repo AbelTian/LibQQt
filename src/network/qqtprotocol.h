@@ -94,7 +94,7 @@ public:
         mIsDetached = false;
         statusChanged ( 1 );
     }
-    virtual bool detached() { return mIsDetached; }
+    inline virtual bool detached() { return mIsDetached; }
 
 protected:
     bool mIsDetached;
@@ -108,9 +108,11 @@ protected:
      */
 public:
     inline virtual void initializer() {}
+
     /*
      * 以下函数，与用户无关。
      */
+    //
 };
 
 #endif // QQTPROTOCOL_H

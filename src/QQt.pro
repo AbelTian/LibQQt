@@ -56,7 +56,7 @@ contains(DEFINES, LIB_LIBRARY) {
 ##project version
 #################################################################
 #这个的设置有特点，要先设置
-add_version(3,0,0,0)
+add_version(3,1,0,0)
 
 #自定义宏
 DEFINES += QQT_VERSION=$$APP_VERSION
