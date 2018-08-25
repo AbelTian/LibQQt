@@ -2,9 +2,11 @@
 
 LibQQt全名QQt Foundation Class。  
 LibQQt为基于Qt开发的App提供中间问题处理层，适配桌面、嵌入式以及Android、IOS的开发。
-LibQQt为用户自动生成Library SDK，主动帮助用户发布App和资源文件。
+LibQQt为用户自动生成Library SDK，主动帮助用户发布App和资源文件。  
 2018年1月，LibQQt代码变更数量已达30万，主要面向初、中、高级软件相关专业、有一定App开发经验的工程师。
 LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。  
+2018年8月，LibQQt代码变更数量已达45万，主要面向嵌入式、桌面平台进行了功能和库扩充，使用多链接技术v2加强了管理能力。
+LibQQt现进行证实发布版本v3.1，欢迎工程师们使用。    
 
 gitee link: https://gitee.com/drabel/LibQQt  
 github link: https://github.com/AbelTian/LibQQt  
@@ -12,13 +14,14 @@ github link: https://github.com/AbelTian/LibQQt
 ========================================================================  
 # 摘要介绍  
 
-*LibQQt包括基础组成、精美组成*
+*LibQQt包括基础组成、精美组成、高级组成*  
 - 基础组成，可以完成专业App所需要的业务功能和图形功能。
-- 精美组成，包括高级业务功能和超级图形功能。（都在src/exquisite文件夹里）  
+- 精美组成，包括高级业务功能和超级图形功能。（都在src/exquisite文件夹里）
+- 高级组成，包括App工程师们不多使用，不太熟悉的、比较艰难的功能。（都在src/highgrade文件夹里）    
 
 *如果用户希望精简LibQQt，qqt_header.pri里面有很多模块开关，开开关关能修剪。*  
 *不建议使用cmake，建议使用qmake。*  
-*自动发布应用程序，自动拷贝应用配置。（请正确配置目录系统）*  
+*自动发布应用程序，自动拷贝应用配置，自动发布依赖库。（请正确配置三个主目录）*  
 
 
 ========================================================================  
@@ -112,14 +115,20 @@ github link: https://github.com/AbelTian/LibQQt
 
 [Multiple Link Technology](multi-link.md)   
 LibQQt为方便用户开发App过程方便的发布程序，所以添加了多链接和自动发布功能，基于qmake工程管理器的多链接发布技术。  
-用户只需要做相应的目录设定，甚至包括自己的配置文件的目录设置，LibQQt提供的base manager就会自动将用户的程序，配置发布到指定位置，  
-并且支持其他依赖的链接库。  
-经过发布的App直接点击就可以运行，*大的省去了用户手动发布App的劳烦过程。    
+用户只需要为多链接技术做相应的目录设定，就可以自动发布应用、自动发布配置项目，自动发布依赖库。  
+
+多链接技术还包括添加设置版本，添加语言，添加程序图标，添加工程常用函数和工程基础配置设定，方便用户不必再进行复杂设置初始化。  
+多链接技术还包括为Lib工程发布SDK。    
+多链接技术提供的add_base_manager.pri，只需要包含这一个pri文件，用户就可以使用多链接技术，很方便。    
+经过发布的App直接点击就可以运行，*大的省去了用户手动发布App的劳烦过程。  
+
 *Multi-link提供ProductExecTool，可以对产品集中查看、调用运行。*  
+*Multi-link提供SdkListTool，方便用户查看已经准备好的SDK在各个平台准备情况的表格。*  
 *Multi-link提供AddLibraryTool，方便用户通过准备好的SDK自动生成add_library_xxx.pri的链接环。*  
+*Multi-link提供AddLibraryTool-Multiple，可以同时对多套SDK进行生成链接环。*  
 *Multi-link提供Multi-linkConfigTool，方便用户配置Multi-link v2必需的三大路径，build/sdk/deploy root。*  
 
-*LibQQt3.0基于Multi-link2.0发布，用户使用LibQQt3.0，代表用户接受其管理工具Multi-link2.0.*  
+*LibQQt3.0基于Multi-link2.0发布，用户使用LibQQt 3，代表用户接受其工程管理工具Multi-link 2.*  
 
 ========================================================================  
 # 版本分割    
