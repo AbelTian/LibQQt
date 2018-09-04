@@ -56,7 +56,8 @@ github link: https://github.com/AbelTian/LibQQt
 8. Qt对象管理器  
     - 用于管理已经生成的Qt对象实例，objectName是唯一查找索引。  
     - 含有QQtObjectFactory，用于动态注册、生成来自QObject和QWidget的类。
-9. 嵌入式视频播放器，模拟端口实时预览器
+9. 嵌入式视频播放器，模拟端口实时预览器  
+    - *已经移动到独立的QQtMediaExtention库，专门提供媒体功能，主要是视频媒体。*
 0. QQt打印机，支持打印pdf
 2. QQtWord，支持doc文档编写，输出pdf格式。
 4. QQtTreeView，添加Qt4内部没有TreeView
@@ -69,9 +70,13 @@ github link: https://github.com/AbelTian/LibQQt
         - QQtBluetoothSocket、QQtBluetoothServer +QQtBluetoothManager
         - QQtWebAccessManager，支持http、ftp等主流协议，高并发传输，管理cookie和session。
         - [QQtWebSocket](src/network/qqtwebsocketclient.h) 接口
-     - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) QQtWebSocketProtocol
+        - 一个句柄代表一个和外部通信的节点。  
      - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)  
+        - 在协议里总是用这个报文的临时句柄，用来解协议包和压协议包。
+     - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) QQtWebSocketProtocol [QQtProtocolManager](src/network/qqtprotocolmanager.h) 
+        - 程序业务代码就是依靠这个协议句柄进行通信工作的。  
 7. 添加应用中常用的form
+    - *全在frame文件夹*
 8. 支持多页表格 [QQtMultiPageTableWidget](src/widgets/qqtmultipagetablewidget.h)  
 9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
 5. 支持Qt5.9.2   
@@ -89,10 +94,9 @@ github link: https://github.com/AbelTian/LibQQt
      - 基于qmake，用户可以轻易的链接LibQQt和添加自定义library。  
      - 工程版本变更可以使用add_version(1,0,0,0)实现了。  
 5. 升级多媒体音频  
-    - 添加内存服务器，处理内存和设备之间的数据交互。（这部分的功能完全按照为内存服务的思路设计研发。）  
+    - 添加内存服务器（一套Input（Reader），Output（Writer）），处理内存和设备之间的数据交互。（这部分的功能完全按照为内存服务的思路设计研发。）  
     - [QQtAudioManager](src/multimedia/qqtaudiomanager.h)、  
-    - QQtWavAudioInput、QQtWavAudioOutput、QQtWavAudioManager、  
-    - QQtWavSoundEffect  
+    - QQtWavAudioManager、QQtWavSoundEffect、QQtWavAudioInput、QQtWavAudioOutput、  
     - 将AudioDevice、wav输入输出文件，当做一个设备进行读写，App处理获取到的声音。  
 6. 添加Http功能支持工具
     - QQtWebAccessManager，支持管理Session、Cookies。    
@@ -100,15 +104,15 @@ github link: https://github.com/AbelTian/LibQQt
     - 支持webservice (QtSoap)  
 8. 添加Qt没有的组件QQtTitleBar  
     - 可以组完全自定义的Form。  
-    - 加上QQtOSDFrame可以组透明Form。    
+    - 加上QQtOSDFrame、QQtOSDForm可以组透明Form。    
 8. **HighGrade** Module 增加新成员    
     - 难度高，谨慎使用。  
     - 线程间、进程间通信组件   
-        - QQtSharedMemory，实现可以跨线程的临时变量。  
-        - QQtLocalServer QQtLocalClient, QQtNamedPipe使用QLocalSocket实现跨线程通讯。      
+        - QQtSharedMemory，实现可以跨线程、进程的变量，却按照临时变量的方式使用。  
+        - QQtLocalServer QQtLocalClient, QQtNamedPipe使用QLocalSocket、PIPE实现跨线程通讯。      
         - QQtLocalQueueServer QQtLocalQueueClient QQtMessageQueue使用QQtLocalQueueSocket实现跨线程通讯。  
         - 使用方法都类似于QQtSharedMemory。  
-   - QQtSingleTonApplication 利用基于QLocalSocket的进程间通信实现。  
+   - QQtSingleTonApplication 单例App，基于QQtApplication，利用基于QLocalSocket的进程间通信实现。  
 
 ========================================================================  
 # 多链接发布技术    
@@ -122,7 +126,7 @@ LibQQt为方便用户开发App过程方便的发布程序，所以添加了多�
 多链接技术提供的add_base_manager.pri，只需要包含这一个pri文件，用户就可以使用多链接技术，很方便。    
 经过发布的App直接点击就可以运行，*大的省去了用户手动发布App的劳烦过程。  
 
-*Multi-link提供ProductExecTool，可以对产品集中查看、调用运行。*  
+*Multi-link提供ProductExecTool，可以对产品集中调用运行、查看运行效果。*  
 *Multi-link提供SdkListTool，方便用户查看已经准备好的SDK在各个平台准备情况的表格。*  
 *Multi-link提供AddLibraryTool，方便用户通过准备好的SDK自动生成add_library_xxx.pri的链接环。*  
 *Multi-link提供AddLibraryTool-Multiple，可以同时对多套SDK进行生成链接环。*  
@@ -133,8 +137,8 @@ LibQQt为方便用户开发App过程方便的发布程序，所以添加了多�
 ========================================================================  
 # 版本分割    
 
-R2支持Qt5 Qt4，    
-R3支持Qt5，由于使用Multi-link 2，不支持Qt4。  
+LibQQt R2支持Qt5 Qt4，    
+LibQQt R3支持Qt5，由于使用Multi-link 2，不支持Qt4。  
 现在R3是master分支。  
 [版本划分图谱](changelog.md)   
 
