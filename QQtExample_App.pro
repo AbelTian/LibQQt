@@ -153,8 +153,7 @@ lessThan(QT_VERSION , 5.8.0):SUBDIRS -= examples/qqtudpexample
 SUBDIRS += test/openglwidgettest
 #
 SUBDIRS += test/osdtest
-#
-SUBDIRS += demo/SysInfoNotify
+#SUBDIRS += demo/SysInfoNotify
 
 #
 SUBDIRS += test/QQtWidgetClickHelperTest

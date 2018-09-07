@@ -563,13 +563,6 @@ contains (DEFINES, __EXQUISITE__) {
 }
 
 contains (DEFINES, __HIGHGRADE__) {
-    #system infomation
-    #use platform api?
-    SOURCES += \
-        $$PWD/highgrade/qqtsysteminfo.cpp
-    HEADERS += \
-        $$PWD/highgrade/qqtsysteminfo.h
-
     #shared memory
     #core module
     contains(DEFINES, __SHAREDMEMORY_SUPPORT__){
