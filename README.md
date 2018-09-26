@@ -1,6 +1,6 @@
-# LibQQt  
+# QQt Foundation Class  
 
-LibQQt全名QQt Foundation Class。  
+QQt Foundation Class简称LibQQt。  
 LibQQt为基于Qt开发的App提供中间问题处理层，适配桌面、嵌入式以及Android、IOS的开发。
 LibQQt为用户自动生成Library SDK，主动帮助用户发布App和资源文件。  
 2018年1月，LibQQt代码变更数量已达30万，主要面向初、中、高级软件相关专业、有一定App开发经验的工程师。
