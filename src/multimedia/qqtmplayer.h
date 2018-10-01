@@ -4,6 +4,11 @@
 #include <QProcess>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtMPlayer class
+ * 使用mplayer为后台播放视频文件。
+ * 在e-linux全屏和窗口内切换的时候有一些条件，有机会给出。
+ */
 class QQTSHARED_EXPORT QQtMPlayer : public QObject
 {
     Q_OBJECT

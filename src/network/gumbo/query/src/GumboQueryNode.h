@@ -18,6 +18,7 @@
 
 #include <gumbo.h>
 #include <string>
+#include <vector>
 #include "GumboQueryLocal.h"
 
 class GumboQuerySelection;
@@ -48,6 +49,8 @@ public:
 
     std::string text();
 
+    std::vector<std::string> textList();
+
     std::string ownText();
 
     size_t startPos();
@@ -62,7 +65,7 @@ public:
 
     GumboQuerySelection find ( std::string aSelector );
 
-private:
+protected:
 
     GumboNode* mpNode;
 };

@@ -94,6 +94,11 @@ std::string GumboQueryNode::text()
     return GumboQueryUtil::nodeText ( mpNode );
 }
 
+std::vector<std::string> GumboQueryNode::textList()
+{
+    return GumboQueryUtil::nodeTextList ( mpNode );
+}
+
 std::string GumboQueryNode::ownText()
 {
     return GumboQueryUtil::nodeOwnText ( mpNode );
@@ -103,14 +108,14 @@ size_t GumboQueryNode::startPos()
 {
     switch ( mpNode->type )
     {
-    case GUMBO_NODE_ELEMENT:
-        return mpNode->v.element.start_pos.offset + mpNode->v.element.original_tag.length;
+        case GUMBO_NODE_ELEMENT:
+            return mpNode->v.element.start_pos.offset + mpNode->v.element.original_tag.length;
 
-    case GUMBO_NODE_TEXT:
-        return mpNode->v.text.start_pos.offset;
+        case GUMBO_NODE_TEXT:
+            return mpNode->v.text.start_pos.offset;
 
-    default:
-        return 0;
+        default:
+            return 0;
     }
 }
 
@@ -118,14 +123,14 @@ size_t GumboQueryNode::endPos()
 {
     switch ( mpNode->type )
     {
-    case GUMBO_NODE_ELEMENT:
-        return mpNode->v.element.end_pos.offset;
+        case GUMBO_NODE_ELEMENT:
+            return mpNode->v.element.end_pos.offset;
 
-    case GUMBO_NODE_TEXT:
-        return mpNode->v.text.original_text.length + startPos();
+        case GUMBO_NODE_TEXT:
+            return mpNode->v.text.original_text.length + startPos();
 
-    default:
-        return 0;
+        default:
+            return 0;
     }
 }
 
@@ -133,14 +138,14 @@ size_t GumboQueryNode::startPosOuter()
 {
     switch ( mpNode->type )
     {
-    case GUMBO_NODE_ELEMENT:
-        return mpNode->v.element.start_pos.offset;
+        case GUMBO_NODE_ELEMENT:
+            return mpNode->v.element.start_pos.offset;
 
-    case GUMBO_NODE_TEXT:
-        return mpNode->v.text.start_pos.offset;
+        case GUMBO_NODE_TEXT:
+            return mpNode->v.text.start_pos.offset;
 
-    default:
-        return 0;
+        default:
+            return 0;
     }
 }
 
@@ -148,14 +153,14 @@ size_t GumboQueryNode::endPosOuter()
 {
     switch ( mpNode->type )
     {
-    case GUMBO_NODE_ELEMENT:
-        return mpNode->v.element.end_pos.offset + mpNode->v.element.original_end_tag.length;
+        case GUMBO_NODE_ELEMENT:
+            return mpNode->v.element.end_pos.offset + mpNode->v.element.original_end_tag.length;
 
-    case GUMBO_NODE_TEXT:
-        return mpNode->v.text.original_text.length + startPos();
+        case GUMBO_NODE_TEXT:
+            return mpNode->v.text.original_text.length + startPos();
 
-    default:
-        return 0;
+        default:
+            return 0;
     }
 }
 

@@ -37,7 +37,7 @@ private:
 
     void reset();
 
-private:
+protected:
 
     GumboOutput* mpOutput;
 };

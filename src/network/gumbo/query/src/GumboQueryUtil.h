@@ -34,11 +34,15 @@ public:
 
     static std::string nodeText ( GumboNode* apNode );
 
+    static std::vector<std::string> nodeTextList ( GumboNode* apNode );
+
     static std::string nodeOwnText ( GumboNode* apNode );
 
 private:
 
     static void writeNodeText ( GumboNode* apNode, std::string& aText );
+
+    static void writeNodeTextList ( GumboNode* apNode, std::vector<std::string>& aTextList );
 
 
 };

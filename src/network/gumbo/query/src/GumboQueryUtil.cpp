@@ -71,6 +71,13 @@ std::string GumboQueryUtil::nodeText ( GumboNode* apNode )
     return text;
 }
 
+std::vector<std::string> GumboQueryUtil::nodeTextList ( GumboNode* apNode )
+{
+    std::vector<std::string> textList;
+    writeNodeTextList ( apNode, textList );
+    return textList;
+}
+
 std::string GumboQueryUtil::nodeOwnText ( GumboNode* apNode )
 {
     std::string text;
@@ -99,25 +106,51 @@ void GumboQueryUtil::writeNodeText ( GumboNode* apNode, std::string& aText )
 {
     switch ( apNode->type )
     {
-    case GUMBO_NODE_TEXT:
-        aText.append ( apNode->v.text.text );
-        break;
+        case GUMBO_NODE_TEXT:
+            aText.append ( apNode->v.text.text );
+            break;
 
-    case GUMBO_NODE_ELEMENT:
-    {
-        GumboVector children = apNode->v.element.children;
-
-        for ( unsigned int i = 0; i < children.length; i++ )
+        case GUMBO_NODE_ELEMENT:
         {
-            GumboNode* child = ( GumboNode* ) children.data[i];
-            writeNodeText ( child, aText );
+            GumboVector children = apNode->v.element.children;
+
+            for ( unsigned int i = 0; i < children.length; i++ )
+            {
+                GumboNode* child = ( GumboNode* ) children.data[i];
+                writeNodeText ( child, aText );
+            }
+
+            break;
         }
 
-        break;
+        default:
+            break;
     }
+}
 
-    default:
-        break;
+void GumboQueryUtil::writeNodeTextList ( GumboNode* apNode, std::vector<std::string>& aTextList )
+{
+    switch ( apNode->type )
+    {
+        case GUMBO_NODE_TEXT:
+            aTextList.push_back ( apNode->v.text.text );
+            break;
+
+        case GUMBO_NODE_ELEMENT:
+        {
+            GumboVector children = apNode->v.element.children;
+
+            for ( unsigned int i = 0; i < children.length; i++ )
+            {
+                GumboNode* child = ( GumboNode* ) children.data[i];
+                writeNodeTextList ( child, aTextList );
+            }
+
+            break;
+        }
+
+        default:
+            break;
     }
 }
 

@@ -43,7 +43,7 @@ public:
 
     size_t nodeNum();
 
-private:
+protected:
 
     std::vector<GumboNode*> mNodes;
 };

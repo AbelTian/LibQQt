@@ -9,7 +9,7 @@
 /*
  * QQtWavSoundEffect = QSoundEffect + QSound +...
  * QQtWavSoundEffect支持从wav获取声音并输出，弥补QSoundEffect（+他的高级点的封装QSound）不能支持选择设备的缺失。
- *
+ * QQtWavSoundEffect默认使用默认输出设备。
  */
 class QQTSHARED_EXPORT QQtWavSoundEffect : public QObject
 {
@@ -79,13 +79,15 @@ QQTSHARED_EXPORT QQtWavSoundEffect* QQtWavSound ( QString localFile = "" );
 
 /**
  * @brief The QQtAudioEffect class
+ * 未实现
+ *
  * QSound、QSoundEffect是不能指定输出设备的。
  * 用于播放音效文件，接受指定输出设备。
+ * 用于播放多种格式的音效文件，接收指定输出设备。
  *
  * 请不要用来播放大文件，会全部读入内存，然后逐渐删除。
  * 尝试用QQt的，需要切掉wav文件的44头。
  * 现在更新为用QQt的，QQtAudioEffect目标支持多种格式的音效文件。
- * 未实现
  *
  * lame是编码器，解码器用mpg123
  */
