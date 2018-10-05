@@ -43,9 +43,7 @@ SUBDIRS += examples/console_app
 #need QSsl
 #need GumoQuery
 #-----------------------------------------------------------------
-#greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/QtSdkManager
 #greaterThan(QT_MAJOR_VERSION , 4):SUBDIRS += demo/VegeTablesPrice
-#SUBDIRS += demo/GuiBuildTool
 #SUBDIRS += demo/LearnCookieTest
 #-----------------------------------------------------------------
 #some test project
@@ -60,8 +58,6 @@ SUBDIRS += test/bytearraytest
 #    SUBDIRS += test/cmdwidget
 #}
 #SUBDIRS += test/coretest
-#SUBDIRS += test/tmpproj
-
 #
 #need QtSoap - WebSupport
 ##SUBDIRS += test/easter
@@ -90,10 +86,6 @@ greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #
 mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
 
-#网络创建工具
-#
-SUBDIRS += demo/QQtClientCreator
-#SUBDIRS += demo/QQtServerCreator
 #这边是个组合项，客户端和服务器一起的。必看
 #SUBDIRS += examples/qqtclientexample
 #SUBDIRS += examples/qqtserverexample

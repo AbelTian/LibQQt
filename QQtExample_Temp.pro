@@ -11,8 +11,6 @@ CONFIG += ordered
 
 #SUBDIRS += test/LinkQQtSourceTest
 #SUBDIRS += test/colorwidgettest
-#SUBDIRS += demo/QQtClientCreator
-#SUBDIRS += demo/QQtServerCreator
 #SUBDIRS += demo/QQtRoseMonitor
 #SUBDIRS += examples/exquisite
 #SUBDIRS += test/voicetest
