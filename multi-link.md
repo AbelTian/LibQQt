@@ -1,6 +1,8 @@
 ﻿Multi Link 技术，这个技术帮助使用者利用qmake这款工程管理工具来进行多个增删link-library。全称Multi-link technology，“多链接”技术，专门解决这些个app链接library出现的手工解决太多困难的问题。
 
-现在的Multi Link和LibQQt绑定在一起，还未分离。在这里介绍现在的样子和将会实现的功能。
+现在的Multi Link和LibQQt绑定在一起，还未分离。在这里介绍现在的样子和将会实现的功能。  
+
+Multi-link Technology Project Link: https://gitee.com/drabel/multi-link
 
 # 文件组成和功能介绍  
 

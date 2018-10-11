@@ -3,12 +3,17 @@
 中文全名 ****QQt应用程序框架中间件****。  
 英文全名 ****QQt Application Framework Middleware****，英文曾用名QQt Foundation Class。  
 英文简称 ****LibQQt****。  
-LibQQt为基于Qt开发的App提供中间问题处理层，适配桌面、嵌入式以及Android、IOS的开发。  
+主库简称 ****LibQQt****。  
+*QQt应用程序框架中间件是应用程序框架层的一系列库集合，持续实现这一层的功能。主库是LibQQt，辅助（平级扩展）库有QQtExquisite、QQtHighGrade、QQtIndustrialControl、QQtInput、QQtInstallFramework、QQtMediaExtention、QQtStyle、QQtTool等，很多流行Qt Wrapper库都在辅助库中。全部使用Multi-link技术实施工程管理。*    
+
+# 主库 LibQQt  
+
+LibQQt为基于Qt开发的App提供中间问题处理层，适配桌面、嵌入式以及Android、iOS的开发。  
 LibQQt为用户自动生成Library SDK，主动帮助用户发布App和资源文件。   
-2018年1月，LibQQt代码变更数量已达30万，主要面向初、中、高级软件相关专业、有一定App开发经验的工程师。  
+2018年1月，LibQQt代码变更数量已达30万，主要面向初、中、高级软件相关专业、有一定App开发经验的工程师。    
 LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。  
-2018年8月，LibQQt代码变更数量已达45万，主要面向嵌入式、桌面平台进行了功能和库扩充，使用多链接技术v2加强了管理能力。
-LibQQt现进行证实发布版本v3.1，欢迎工程师们使用。    
+2018年8月，LibQQt代码变更数量已达45万，主要面向嵌入式、桌面平台进行了功能和库扩充，使用多链接技术v2加强了管理能力。    
+LibQQt现进行正式发布版本v3.1，欢迎工程师们使用。    
 
 gitee link: https://gitee.com/drabel/LibQQt  
 github link: https://github.com/AbelTian/LibQQt  
@@ -26,8 +31,6 @@ github link: https://github.com/AbelTian/LibQQt
 *不建议使用cmake，建议使用qmake。*  
 *自动发布应用程序，自动拷贝应用配置，自动发布依赖库。（请正确配置三个主目录）*  
 
-*QQt应用程序框架中间件是应用程序框架层的一系列库集合，持续实现这一层的功能。主库是LibQQt，辅助（平级扩展）库有QQtExquisite、QQtHighGrade、QQtIndustrialControl、QQtInput、QQtInstallFramework、QQtMediaExtention、QQtStyle、QQtTool等，很多流行Qt Wrapper库都在辅助库中。全部使用Multi-link技术实施工程管理。*    
-
 
 ========================================================================  
 # 详细介绍  
@@ -40,7 +43,6 @@ github link: https://github.com/AbelTian/LibQQt
     - QQtTabWidget，解决QtTab不能竖排横显文字的问题
     - QQt进度条，解决Qt进度条在Dialog中导致系统死机的问题(e-linux)    
 1. 添加精美控件
-    - 包括复杂的圆盘进度条, SpeedMeter    
     - 包括有多种效果的Widget、Dialog
     - 二维码生成器、识别器，校验码生成器
     - 九宫格技术展示图片
