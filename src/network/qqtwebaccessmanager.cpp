@@ -1,4 +1,4 @@
-﻿#include "qqtwebaccessmanager.h"
+#include "qqtwebaccessmanager.h"
 #include "qqtcore.h"
 
 
@@ -418,7 +418,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
     return session;
 }
 
-#ifndef Q_OS_WIN
+#if !defined( Q_OS_WIN ) && !defined( __EMBEDDED_LINUX__ )
 
 QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
                                                               const QByteArray& data )
