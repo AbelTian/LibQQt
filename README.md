@@ -5,6 +5,8 @@
 英文简称 ****LibQQt****。  
 主库简称 ****LibQQt****。  
 *QQt应用程序框架中间件是应用程序框架层的一系列库集合，持续实现这一层的功能。主库是LibQQt，辅助（平级扩展）库有QQtExquisite、QQtHighGrade、QQtIndustrialControl、QQtInput、QQtInstallFramework、QQtMediaExtention、QQtStyle、QQtTool等，很多流行Qt Wrapper库都在辅助库中。全部使用Multi-link技术实施工程管理。*    
+[QQt应用程序框架中间件库列表](project.md)  
+
 
 # 主库 LibQQt  
 
@@ -167,7 +169,7 @@ LibQQt R3支持Qt5，由于使用Multi-link 2，不支持Qt4。
 *把LibQQt/extra/md5.exe 复制到C:\Windows*   
   
 [走，去看看入门用法](usage.md)  
-[入门了，去看看学习设置工程目录](project.md)  
+[入门了，去看看学习设置工程目录](project-manager.md)  
 发现了一个问题: [new issue link](https://gitee.com/drabel/LibQQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0)  
 
 
