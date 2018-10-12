@@ -16,6 +16,7 @@ CONFIG += ordered
 #SUBDIRS += test/voicetest
 #SUBDIRS += test/giftest
 #SUBDIRS += test/QQtCustomTitleBarMainFormTest
+SUBDIRS += test/qqtdicttest3
 
 #高级测试，谨慎使用。
 #SUBDIRS += test/singletonapptest

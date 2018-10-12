@@ -1,5 +1,12 @@
 #include "qqtdictionary.h"
 
+//support json
+#include <QJsonDocument>    //json文档
+#include <QJsonArray>       //json数组 ["", 1, ...]
+#include <QJsonObject>      //json对象 {"":"", ...}
+#include <QJsonValue>       //json值 不准确的
+#include <QJsonParseError>  //错误处理
+
 QQtDictionary::QQtDictionary ()
 {
     m_type = DictMax;
@@ -399,6 +406,85 @@ QQtDictionary& QQtDictionary::operator = ( const QVariant& value )
     m_type = DictValue;
     m_value = value;
     return *this;
+}
+
+void QQtDictionary::fromJson ( const QByteArray& json )
+{
+    QJsonParseError error;
+    QJsonDocument doc = QJsonDocument::fromJson ( json, &error );
+    //pline() << doc;
+    if ( error.error != QJsonParseError::NoError )
+    {
+        pline() << error.errorString();
+        return;
+    }
+    if ( doc.isNull() || doc.isEmpty() )
+    {
+        pline() << "json is " << doc.isNull() << doc.isEmpty();
+        return;
+    }
+
+    QJsonValue root = QJsonValue::fromVariant ( doc.toVariant() );
+    parseJsonValue ( root, *this );
+}
+
+void QQtDictionary::parseJsonValue ( const QJsonValue& value, QQtDictionary& parent )
+{
+    switch ( value.type() )
+    {
+        case QJsonValue::Null:
+            //pline() << "null json value" << value;
+            parent = QJsonValue();
+            break;
+        case QJsonValue::Undefined:
+            pline() << "undefined json value" << value;
+            break;
+        case QJsonValue::Bool:
+            parent = value.toBool();
+            break;
+        case QJsonValue::Double:
+            parent = value.toDouble();
+            break;
+        case QJsonValue::String:
+            parent = value.toString();
+            break;
+        case QJsonValue::Array:
+        {
+            QJsonArray array = value.toArray();
+            if ( array.size() <= 0 )
+            {
+                parent = QQtDictionary ( DictList );
+                break;
+            }
+            for ( int i = 0; i < array.size(); i++ )
+            {
+                //list，按照顺序为parent节点增加孩子。
+                QJsonValueRef value = array[i];
+                parseJsonValue ( value, parent[i] );
+            }
+            break;
+        }
+        case QJsonValue::Object:
+        {
+            QJsonObject obj = value.toObject();
+            if ( obj.size() <= 0 )
+            {
+                parent = QQtDictionary ( DictMap );
+                break;
+            }
+            QJsonObject::Iterator itor ( &obj, 0 );
+            while ( itor != obj.end() )
+            {
+                //MAP，parent节点，给parent节点增加孩子
+                QJsonValueRef value = itor.value();
+                parseJsonValue ( value, parent[itor.key()] );
+                itor++;
+            }
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 bool QQtDictionary::operator == ( const QQtDictionary& other ) const

@@ -153,8 +153,8 @@ public:
 
     /*与其他数据结构兼容*/
     QString toXML();
-    QString toJson();
-    void fromJson ( QString& jsonContent );
+    QString toJson ( );
+    void fromJson ( const QByteArray& json );
     void fromXML ( QString& xmlContent );
 
     //update for new using
@@ -168,6 +168,9 @@ public:
 
     //内部类型转换
     //toValue() toList() toMap(); 不丢失数据方式。
+
+protected:
+    void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
 
 signals:
 
