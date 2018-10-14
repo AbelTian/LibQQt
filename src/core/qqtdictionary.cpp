@@ -408,6 +408,16 @@ QQtDictionary& QQtDictionary::operator = ( const QVariant& value )
     return *this;
 }
 
+QByteArray QQtDictionary::toJson ( QJsonDocument::JsonFormat format )
+{
+    //node -> QJsonValue -> QJsonDocument
+    QJsonValue value;
+    parseDictionaryToJsonValue ( *this, value );
+    QJsonDocument doc = QJsonDocument::fromVariant ( value.toVariant() );
+    QByteArray result = doc.toJson ( format );
+    return result;
+}
+
 void QQtDictionary::fromJson ( const QByteArray& json )
 {
     QJsonParseError error;
@@ -425,6 +435,7 @@ void QQtDictionary::fromJson ( const QByteArray& json )
     }
 
     QJsonValue root = QJsonValue::fromVariant ( doc.toVariant() );
+
     parseJsonValue ( root, *this );
 }
 
@@ -482,6 +493,54 @@ void QQtDictionary::parseJsonValue ( const QJsonValue& value, QQtDictionary& par
             }
             break;
         }
+        default:
+            break;
+    }
+}
+
+void QQtDictionary::parseDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result )
+{
+    switch ( node.getType() )
+    {
+        case DictValue:
+        {
+            //null, bool, double, string
+            pline() << node.getValue().type();
+            if ( node.getValue() == QVariant ( QJsonValue() ) )
+            {
+                result = QJsonValue();
+            }
+            else if ( node.getValue().type() == QVariant::Bool )
+            {
+                result = QJsonValue ( node.getValue().toBool() );
+            }
+            else if ( node.getValue().type() == QVariant::Double )
+            {
+                result = QJsonValue ( node.getValue().toDouble() );
+            }
+            else if ( node.getValue().type() == QVariant::String )
+            {
+                result = QJsonValue ( node.getValue().toString() );
+            }
+            break;
+        }
+        case DictList:
+        {
+            //"name":[a, b, ...]
+            QJsonArray array;
+            for ( int i = 0; i < node.getList().size(); i++ )
+            {
+                QList<QQtDictionary>& l = node.getList();
+                QJsonValue value;
+                parseDictionaryToJsonValue ( l[i], value );
+                array.append ( value );
+            }
+            result = array;
+            break;
+        }
+        case DictMap:
+            break;
+        case DictMax:
         default:
             break;
     }

@@ -153,9 +153,9 @@ public:
 
     /*与其他数据结构兼容*/
     QString toXML();
-    QString toJson ( );
-    void fromJson ( const QByteArray& json );
     void fromXML ( QString& xmlContent );
+    QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact );
+    void fromJson ( const QByteArray& json );
 
     //update for new using
     template <typename T>
@@ -171,7 +171,7 @@ public:
 
 protected:
     void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
-
+    void parseDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result );
 signals:
 
 public slots:
