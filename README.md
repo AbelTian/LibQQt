@@ -185,7 +185,7 @@ LibQQt R3支持Qt5，由于使用Multi-link 2，不支持Qt4。
 [跳转到LibQQt的百科知识页面](wiki/wiki.md "Wiki Page")  
 [阅读我的LibQQt博客进行一系列的学习](http://blog.csdn.net/Dr_Abel)   
 [LibQQt视频图说](http://v.youku.com/v_show/id_XMzUzODQ4MTczMg==.html?spm=a2hzp.8244740.0.0)  
-[学会了使用？那么认识LibQQt吧](doc/knowledge-about-libQQt.md)  
+[看看LibQQt的文档](doc/knowledge-about-libQQt.md)  
 
 
 ========================================================================  
