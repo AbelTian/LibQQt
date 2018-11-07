@@ -3,7 +3,7 @@
 中文全名 ****QQt应用程序框架中间件****。  
 英文全名 ****QQt Application Framework Middleware****，英文曾用名QQt Foundation Class。  
 英文简称 ****LibQQt****。  
-主库简称 ****LibQQt****。  
+主库名称 ****LibQQt****。  
 *QQt应用程序框架中间件是应用程序框架层的一系列库集合，持续实现这一层的功能。主库是LibQQt，辅助（平级扩展）库有QQtExquisite、QQtHighGrade、QQtIndustrialControl、QQtInput、QQtInstallFramework、QQtMediaExtention、QQtStyle、QQtTool等，很多流行Qt Wrapper库都在辅助库中。全部使用Multi-link技术实施工程管理。*    
 [QQt应用程序框架中间件库列表](project.md)  
 
