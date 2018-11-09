@@ -41,9 +41,10 @@ defineTest(add_defines_QQt){
 
         #UTF8编码
         DEFINES += __MSVC_UTF8_SUPPORT__
-        msvc:MSVC_CCFLAGS += /execution-charset:utf-8
+        #msvc:MSVC_CCFLAGS += /execution-charset:utf-8
         msvc:MSVC_CCFLAGS += /source-charset:utf-8
-        #msvc:MSVC_CCFLAGS += /utf-8 #这一个是快捷方式，顶上边两个。
+        #msvc:MSVC_CCFLAGS += /utf-8 #。
+        #/exec... -> /utf-8 -> /source... 这是引发关系顺序
 
         #指定/mp编译选项，编译器将使用并行编译，同时起多个编译进程并行编译不同的cpp
         msvc:MSVC_CCFLAGS += /MP
