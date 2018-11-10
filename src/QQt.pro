@@ -94,8 +94,8 @@ add_sdk(QQt, $$add_target_name())
 
 #额外做点事情 拷贝头文件 没有后缀的头文件
 #这个可以通过Multi-link工具实现。
-add_sdk_header(QQt, $$add_target_name(), QQtApplication, frame)
-add_sdk_header(QQt, $$add_target_name(), QQtWidget, widgets)
+add_sdk_header_no_postfix(QQt, $$add_target_name(), QQtApplication, frame)
+add_sdk_header_no_postfix(QQt, $$add_target_name(), QQtWidget, widgets)
 
 #################################################################
 #其他设置
