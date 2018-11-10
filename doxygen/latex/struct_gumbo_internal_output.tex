@@ -1,0 +1,44 @@
+\hypertarget{struct_gumbo_internal_output}{}\section{Gumbo\+Internal\+Output Struct Reference}
+\label{struct_gumbo_internal_output}\index{Gumbo\+Internal\+Output@{Gumbo\+Internal\+Output}}
+
+
+{\ttfamily \#include $<$gumbo.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}{Gumbo\+Node}} $\ast$ \mbox{\hyperlink{struct_gumbo_internal_output_afe1fd4f60f97ef92ba3e74b56ac524c8}{document}}
+\item 
+\mbox{\hyperlink{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}{Gumbo\+Node}} $\ast$ \mbox{\hyperlink{struct_gumbo_internal_output_a158c3dc79c61a8b4e0d7d95d2d3f4289}{root}}
+\item 
+\mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} \mbox{\hyperlink{struct_gumbo_internal_output_a8e748fc7e9c1fd09df1ff2dde4bfda45}{errors}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The output struct containing the results of the parse. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_gumbo_internal_output_afe1fd4f60f97ef92ba3e74b56ac524c8}\label{struct_gumbo_internal_output_afe1fd4f60f97ef92ba3e74b56ac524c8}} 
+\index{Gumbo\+Internal\+Output@{Gumbo\+Internal\+Output}!document@{document}}
+\index{document@{document}!Gumbo\+Internal\+Output@{Gumbo\+Internal\+Output}}
+\subsubsection{\texorpdfstring{document}{document}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}{Gumbo\+Node}}$\ast$ Gumbo\+Internal\+Output\+::document}
+
+Pointer to the document node. This is a Gumbo\+Node of type N\+O\+D\+E\+\_\+\+D\+O\+C\+U\+M\+E\+NT that contains the entire document as its child. \mbox{\Hypertarget{struct_gumbo_internal_output_a8e748fc7e9c1fd09df1ff2dde4bfda45}\label{struct_gumbo_internal_output_a8e748fc7e9c1fd09df1ff2dde4bfda45}} 
+\index{Gumbo\+Internal\+Output@{Gumbo\+Internal\+Output}!errors@{errors}}
+\index{errors@{errors}!Gumbo\+Internal\+Output@{Gumbo\+Internal\+Output}}
+\subsubsection{\texorpdfstring{errors}{errors}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} Gumbo\+Internal\+Output\+::errors}
+
+A list of errors that occurred during the parse. N\+O\+TE\+: In version 1.\+0 of this library, the A\+PI for errors hasn\textquotesingle{}t been fully fleshed out and may change in the future. For this reason, the Gumbo\+Error header isn\textquotesingle{}t part of the public A\+PI. Contact us if you need errors reported so we can work out something appropriate for your use-\/case. \mbox{\Hypertarget{struct_gumbo_internal_output_a158c3dc79c61a8b4e0d7d95d2d3f4289}\label{struct_gumbo_internal_output_a158c3dc79c61a8b4e0d7d95d2d3f4289}} 
+\index{Gumbo\+Internal\+Output@{Gumbo\+Internal\+Output}!root@{root}}
+\index{root@{root}!Gumbo\+Internal\+Output@{Gumbo\+Internal\+Output}}
+\subsubsection{\texorpdfstring{root}{root}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}{Gumbo\+Node}}$\ast$ Gumbo\+Internal\+Output\+::root}
+
+Pointer to the root node. This the $<$html$>$ tag that forms the root of the document. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/parser/src/\mbox{\hyperlink{gumbo_8h}{gumbo.\+h}}\end{DoxyCompactItemize}

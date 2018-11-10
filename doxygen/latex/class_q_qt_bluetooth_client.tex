@@ -1,0 +1,119 @@
+\hypertarget{class_q_qt_bluetooth_client}{}\section{Q\+Qt\+Bluetooth\+Client Class Reference}
+\label{class_q_qt_bluetooth_client}\index{Q\+Qt\+Bluetooth\+Client@{Q\+Qt\+Bluetooth\+Client}}
+Inheritance diagram for Q\+Qt\+Bluetooth\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_bluetooth_client}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_acacb732471fb5a96ee38f26676ff1cdf}\label{class_q_qt_bluetooth_client_acacb732471fb5a96ee38f26676ff1cdf}} 
+void {\bfseries signal\+Connecting} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a4001331240f8e429e6ca8a55922962cf}\label{class_q_qt_bluetooth_client_a4001331240f8e429e6ca8a55922962cf}} 
+void {\bfseries signal\+Connect\+Succ} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a6e3342b98d344eafb104e6f72b022efd}\label{class_q_qt_bluetooth_client_a6e3342b98d344eafb104e6f72b022efd}} 
+void {\bfseries signal\+Connect\+Fail} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a5c68887915cfe6a23935eda2b59b8596}\label{class_q_qt_bluetooth_client_a5c68887915cfe6a23935eda2b59b8596}} 
+void {\bfseries signal\+Dis\+Connect\+Succ} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_afa8484c57643554b5fafdbad630134c5}\label{class_q_qt_bluetooth_client_afa8484c57643554b5fafdbad630134c5}} 
+void {\bfseries signal\+Dis\+Connect\+Fail} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_aa9503ef22af8aa938a3bab8483231066}\label{class_q_qt_bluetooth_client_aa9503ef22af8aa938a3bab8483231066}} 
+void {\bfseries signal\+Update\+Progress} (qint64 value)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a5b360c45c2f8479e765206fe653b6a89}\label{class_q_qt_bluetooth_client_a5b360c45c2f8479e765206fe653b6a89}} 
+{\bfseries Q\+Qt\+Bluetooth\+Client} (Q\+Object $\ast$parent=Q\+\_\+\+N\+U\+L\+L\+P\+TR)
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a99196a6799070e80e4a07bc4a391f8de}\label{class_q_qt_bluetooth_client_a99196a6799070e80e4a07bc4a391f8de}} 
+{\bfseries Q\+Qt\+Bluetooth\+Client} (Q\+Bluetooth\+Service\+Info\+::\+Protocol socket\+Type, Q\+Object $\ast$parent=Q\+\_\+\+N\+U\+L\+L\+P\+TR)
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a8f3a87c02f21a936f5e4daf8fdba5174}\label{class_q_qt_bluetooth_client_a8f3a87c02f21a936f5e4daf8fdba5174}} 
+void \mbox{\hyperlink{class_q_qt_bluetooth_client_a8f3a87c02f21a936f5e4daf8fdba5174}{set\+Service\+Info}} (const Q\+Bluetooth\+Service\+Info \&serviceinfo)
+\begin{DoxyCompactList}\small\item\em set\+Service\+Info 设置目标蓝牙地址 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_ac2a9753dabc14059fd0b670e166447bb}\label{class_q_qt_bluetooth_client_ac2a9753dabc14059fd0b670e166447bb}} 
+void {\bfseries set\+Service\+Address} (const Q\+Bluetooth\+Address \&address)
+\item 
+void \mbox{\hyperlink{class_q_qt_bluetooth_client_a72a544fcb28b317772038cd622cd3d52}{set\+Service\+Port}} (quint16 p=8888)
+\begin{DoxyCompactList}\small\item\em set\+Service\+Port \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a99f79de496612abe7aa08f5ed285c2c0}\label{class_q_qt_bluetooth_client_a99f79de496612abe7aa08f5ed285c2c0}} 
+void {\bfseries set\+Service\+U\+Uid} (const Q\+Bluetooth\+Uuid \&uuid)
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a1c38f51855c39ab20c137b8e19ba8537}\label{class_q_qt_bluetooth_client_a1c38f51855c39ab20c137b8e19ba8537}} 
+void {\bfseries install\+Protocol} (\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$stack)
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a225095ec6f89d9a81ff5f5e87c068c75}\label{class_q_qt_bluetooth_client_a225095ec6f89d9a81ff5f5e87c068c75}} 
+void {\bfseries uninstall\+Protocol} (\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$stack)
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_ad41e0a81c9939260ea7da95545264822}\label{class_q_qt_bluetooth_client_ad41e0a81c9939260ea7da95545264822}} 
+\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$ {\bfseries installed\+Protocol} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a1ef60b12e53dd6271c8526dafc0f58ae}\label{class_q_qt_bluetooth_client_a1ef60b12e53dd6271c8526dafc0f58ae}} 
+void {\bfseries send\+Connect\+Message} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a65f06c44aab36597deab62c9a99412f2}\label{class_q_qt_bluetooth_client_a65f06c44aab36597deab62c9a99412f2}} 
+int {\bfseries send\+Dis\+Connect\+From\+Host} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a487991e7b8cf27c00d4e68e789d63564}\label{class_q_qt_bluetooth_client_a487991e7b8cf27c00d4e68e789d63564}} 
+void {\bfseries ready\+Read\+Data} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a4f74d5c8730112f3d126041f7ed1d384}\label{class_q_qt_bluetooth_client_a4f74d5c8730112f3d126041f7ed1d384}} 
+void {\bfseries slot\+Write\+Data} (const Q\+Byte\+Array \&bytes)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_bluetooth_client_a5494c96ebf9c8a489000c1d44e059e85}{translator}} (const Q\+Byte\+Array \&bytes)
+\begin{DoxyCompactList}\small\item\em translator 用于拆分和分发数据报 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a72a544fcb28b317772038cd622cd3d52}\label{class_q_qt_bluetooth_client_a72a544fcb28b317772038cd622cd3d52}} 
+\index{Q\+Qt\+Bluetooth\+Client@{Q\+Qt\+Bluetooth\+Client}!set\+Service\+Port@{set\+Service\+Port}}
+\index{set\+Service\+Port@{set\+Service\+Port}!Q\+Qt\+Bluetooth\+Client@{Q\+Qt\+Bluetooth\+Client}}
+\subsubsection{\texorpdfstring{set\+Service\+Port()}{setServicePort()}}
+{\footnotesize\ttfamily void Q\+Qt\+Bluetooth\+Client\+::set\+Service\+Port (\begin{DoxyParamCaption}\item[{quint16}]{p = {\ttfamily 8888} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+Service\+Port 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & 设置目标蓝牙端口 和\+U\+U\+I\+D选择一个就可以 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_bluetooth_client_a5494c96ebf9c8a489000c1d44e059e85}\label{class_q_qt_bluetooth_client_a5494c96ebf9c8a489000c1d44e059e85}} 
+\index{Q\+Qt\+Bluetooth\+Client@{Q\+Qt\+Bluetooth\+Client}!translator@{translator}}
+\index{translator@{translator}!Q\+Qt\+Bluetooth\+Client@{Q\+Qt\+Bluetooth\+Client}}
+\subsubsection{\texorpdfstring{translator()}{translator()}}
+{\footnotesize\ttfamily void Q\+Qt\+Bluetooth\+Client\+::translator (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+translator 用于拆分和分发数据报 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & \\
+\hline
+\end{DoxyParams}
+这个地方的实现，还是有一些复杂， 但是只有流式传输才需要， 而且，每种通讯接口的流式传输都是一样的， 过去，写在protocol里是为了增添传输工具客户端类型方便 现在，这块比较稳定，所以挪动回来。
+
+只能安装一个协议。 如果安装多个，这个地方的static，需要给协议们分配独立的buffer。 一个客户端，和服务器通信，一条流，可以由多个协议进行解析吗？
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtbluetoothclient.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtbluetoothclient.\+cpp\end{DoxyCompactItemize}

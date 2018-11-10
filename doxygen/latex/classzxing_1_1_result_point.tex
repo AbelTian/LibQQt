@@ -1,0 +1,61 @@
+\hypertarget{classzxing_1_1_result_point}{}\section{zxing\+:\+:Result\+Point Class Reference}
+\label{classzxing_1_1_result_point}\index{zxing\+::\+Result\+Point@{zxing\+::\+Result\+Point}}
+Inheritance diagram for zxing\+:\+:Result\+Point\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.153846cm]{classzxing_1_1_result_point}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1_result_point_a847369b564566eb382aecdb328a3759c}\label{classzxing_1_1_result_point_a847369b564566eb382aecdb328a3759c}} 
+{\bfseries Result\+Point} (float x, float y)
+\item 
+\mbox{\Hypertarget{classzxing_1_1_result_point_aeb720f2bd33199476ea70ee1615fdba4}\label{classzxing_1_1_result_point_aeb720f2bd33199476ea70ee1615fdba4}} 
+{\bfseries Result\+Point} (int x, int y)
+\item 
+\mbox{\Hypertarget{classzxing_1_1_result_point_aad1fd762a8b3f8592db88366b2de4340}\label{classzxing_1_1_result_point_aad1fd762a8b3f8592db88366b2de4340}} 
+virtual float {\bfseries getX} () const
+\item 
+\mbox{\Hypertarget{classzxing_1_1_result_point_ac3dc569a581a51ab68cd9c9ab5ec0f30}\label{classzxing_1_1_result_point_ac3dc569a581a51ab68cd9c9ab5ec0f30}} 
+virtual float {\bfseries getY} () const
+\item 
+\mbox{\Hypertarget{classzxing_1_1_result_point_a98f9b79a9e80073438950d02e56e076c}\label{classzxing_1_1_result_point_a98f9b79a9e80073438950d02e56e076c}} 
+bool {\bfseries equals} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ other)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classzxing_1_1_result_point_a7dced99096b9de7128be7d777c008e1f}{order\+Best\+Patterns}} (std\+::vector$<$ \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ $>$ \&patterns)
+\item 
+\mbox{\Hypertarget{classzxing_1_1_result_point_ab6a682331b1da21854e0a0f6cd2917f8}\label{classzxing_1_1_result_point_ab6a682331b1da21854e0a0f6cd2917f8}} 
+static float {\bfseries distance} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ point1, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ point2)
+\item 
+\mbox{\Hypertarget{classzxing_1_1_result_point_a6e904cea3ef70b391bef09ba1e454ec5}\label{classzxing_1_1_result_point_a6e904cea3ef70b391bef09ba1e454ec5}} 
+static float {\bfseries distance} (float x1, float x2, float y1, float y2)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1_result_point_a6a0c3835f8da0d93cdd1725a08a1b535}\label{classzxing_1_1_result_point_a6a0c3835f8da0d93cdd1725a08a1b535}} 
+const float {\bfseries pos\+X\+\_\+}
+\item 
+\mbox{\Hypertarget{classzxing_1_1_result_point_a015022d6b67c2afe8c30f68e887ece4f}\label{classzxing_1_1_result_point_a015022d6b67c2afe8c30f68e887ece4f}} 
+const float {\bfseries pos\+Y\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classzxing_1_1_result_point_a7dced99096b9de7128be7d777c008e1f}\label{classzxing_1_1_result_point_a7dced99096b9de7128be7d777c008e1f}} 
+\index{zxing\+::\+Result\+Point@{zxing\+::\+Result\+Point}!order\+Best\+Patterns@{order\+Best\+Patterns}}
+\index{order\+Best\+Patterns@{order\+Best\+Patterns}!zxing\+::\+Result\+Point@{zxing\+::\+Result\+Point}}
+\subsubsection{\texorpdfstring{order\+Best\+Patterns()}{orderBestPatterns()}}
+{\footnotesize\ttfamily void zxing\+::\+Result\+Point\+::order\+Best\+Patterns (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ $>$ \&}]{patterns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Orders an array of three Result\+Points in an order \mbox{[}A,B,C\mbox{]} such that AB $<$ AC and BC $<$ AC and the angle between BC and BA is less than 180 degrees. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/Result\+Point.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/Result\+Point.\+cpp\end{DoxyCompactItemize}

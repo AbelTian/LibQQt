@@ -1,0 +1,39 @@
+qrencode -\/ QR Code encoder
+
+Copyright (C) 2006-\/2012 Kentaro Fukuchi \href{mailto:kentaro@fukuchi.org}{\tt kentaro@fukuchi.\+org}
+
+This library is free software; you can redistribute it and/or modify it under the terms of the G\+NU Lesser General Public License as published by the Free Software Foundation; either version 2.\+1 of the License, or any later version.
+
+This library is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU Lesser General Public License for more details.
+
+You should have received a copy of the G\+NU Lesser General Public License along with this library; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-\/1301 U\+SA Libqrencode is a library for encoding data in a QR Code symbol, a kind of 2D symbology.\hypertarget{index_encoding}{}\section{Encoding}\label{index_encoding}
+There are two methods to encode data\+: {\bfseries encoding a string/data} or {\bfseries encoding a structured data}.\hypertarget{index_encoding-string}{}\subsection{Encoding a string/data}\label{index_encoding-string}
+You can encode a string by calling Q\+Rcode\+\_\+encode\+String(). The given string is parsed automatically and encoded. If you want to encode data that can be represented as a C string style (N\+UL terminated), you can simply use this way.
+
+If the input data contains Kanji (Shift-\/\+J\+IS) characters and you want to encode them as Kanji in QR Code, you should give Q\+R\+\_\+\+M\+O\+D\+E\+\_\+\+K\+A\+N\+JI as a hint. Otherwise, all of non-\/alphanumeric characters are encoded as 8 bit data. If you want to encode a whole string in 8 bit mode, you can use Q\+Rcode\+\_\+encode\+String8bit() instead.
+
+Please note that a C string can not contain N\+UL characters. If your data contains N\+UL, you must use Q\+Rcode\+\_\+encode\+Data().\hypertarget{index_encoding-input}{}\subsection{Encoding a structured data}\label{index_encoding-input}
+You can construct a structured input data manually. If the structure of the input data is known, you can use this way. At first, create a \+::\+Q\+Rinput object by Q\+Rinput\+\_\+new(). Then add input data to the Q\+Rinput object by Q\+Rinput\+\_\+append(). Finally call Q\+Rcode\+\_\+encode\+Input() to encode the Q\+Rinput data. You can reuse the Q\+Rinput data again to encode it in other symbols with different parameters.\hypertarget{index_result}{}\section{Result}\label{index_result}
+The encoded symbol is resulted as a \mbox{\hyperlink{struct_q_rcode}{Q\+Rcode}} object. It will contain its version number, width of the symbol and an array represents the symbol. See \mbox{\hyperlink{struct_q_rcode}{Q\+Rcode}} for the details. You can free the object by Q\+Rcode\+\_\+free().
+
+Please note that the version of the result may be larger than specified. In such cases, the input data would be too large to be encoded in a symbol of the specified version.\hypertarget{index_structured}{}\section{Structured append}\label{index_structured}
+Libqrencode can generate \char`\"{}\+Structured-\/appended\char`\"{} symbols that enables to split a large data set into mulitple QR codes. A QR code reader concatenates multiple QR code symbols into a string. Just like Q\+Rcode\+\_\+encode\+String(), you can use Q\+Rcode\+\_\+encode\+String\+Structured() to generate structured-\/appended symbols. This functions returns an instance of \+::\+Q\+Rcode\+\_\+\+List. The returned list is a singly-\/linked list of \mbox{\hyperlink{struct_q_rcode}{Q\+Rcode}}\+: you can retrieve each QR code in this way\+:
+
+
+\begin{DoxyCode}
+\mbox{\hyperlink{struct___q_rcode___list}{QRcode\_List}} *qrcodes;
+\mbox{\hyperlink{struct___q_rcode___list}{QRcode\_List}} *entry;
+\mbox{\hyperlink{struct_q_rcode}{QRcode}} *qrcode;
+
+qrcodes = QRcode\_encodeStringStructured(...);
+entry = qrcodes;
+\textcolor{keywordflow}{while}(entry != NULL) \{
+    qrcode = entry->code;
+    \textcolor{comment}{// do something}
+    entry = entry->next;
+\}
+QRcode\_List\_free(entry);
+\end{DoxyCode}
+
+
+Instead of using auto-\/parsing functions, you can construct your own structured input. At first, instantiate an object of \+::\+Q\+Rinput\+\_\+\+Struct by calling Q\+Rinput\+\_\+\+Struct\+\_\+new(). This object can hold multiple \+::\+Q\+Rinput, and one QR code is generated for a \+::\+Q\+Rinput. Q\+Rinput\+\_\+\+Struct\+\_\+append\+Input() appends a \+::\+Q\+Rinput to a \+::\+Q\+Rinput\+\_\+\+Struct object. In order to generate structured-\/appended symbols, it is required to embed headers to each symbol. You can use Q\+Rinput\+\_\+\+Struct\+\_\+insert\+Structured\+Append\+Headers() to insert appropriate headers to each symbol. You should call this function just once before encoding symbols. 

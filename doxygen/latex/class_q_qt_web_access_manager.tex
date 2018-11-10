@@ -1,0 +1,120 @@
+\hypertarget{class_q_qt_web_access_manager}{}\section{Q\+Qt\+Web\+Access\+Manager Class Reference}
+\label{class_q_qt_web_access_manager}\index{Q\+Qt\+Web\+Access\+Manager@{Q\+Qt\+Web\+Access\+Manager}}
+
+
+The \mbox{\hyperlink{class_q_qt_web_access_manager}{Q\+Qt\+Web\+Access\+Manager}} class X\+X\+Protocol One Ftp Http Q\+Web\+Socket(\+Custom Web Protocol) 单工...(全双工通信) Multi 半双工（客户端并发，服务器序列） Q\+Network\+Access\+Manager Multi 全双工 Q\+Network\+Access\+Manager 加密 need ssl Qt team 实现了几种协议的管理，就能进行几种协议的通讯。supported\+Schemes 用户输入的session，还可以被完整返回来，所以不必自己再实现一个链表进行管理，在session当中完整的保存就好了。  
+
+
+
+
+{\ttfamily \#include $<$qqtwebaccessmanager.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Web\+Access\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_web_access_manager}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_ad4712c69fd2cb009924030b28b02afe0}\label{class_q_qt_web_access_manager_ad4712c69fd2cb009924030b28b02afe0}} 
+void {\bfseries update\+Upload\+Progress} (\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$session, qint64 bytes\+Sent, qint64 bytes\+Total)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a3709b5a678b79094faa1817f516b585c}\label{class_q_qt_web_access_manager_a3709b5a678b79094faa1817f516b585c}} 
+void {\bfseries update\+Download\+Progress} (\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$session, qint64 bytes\+Received, qint64 bytes\+Total)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_ab1d6bde2be64103f162476f04e4ad425}\label{class_q_qt_web_access_manager_ab1d6bde2be64103f162476f04e4ad425}} 
+void {\bfseries ready\+Read} (\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$session)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_ab4d2c7905bbe15082726284c344eded3}\label{class_q_qt_web_access_manager_ab4d2c7905bbe15082726284c344eded3}} 
+void {\bfseries reply\+Finished} (\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$session)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a543e9b8730ee15099a2da48e4ece9443}\label{class_q_qt_web_access_manager_a543e9b8730ee15099a2da48e4ece9443}} 
+void {\bfseries reply\+Time\+Out} (\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$session)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a8a20a238854350eadec2b516d02700bc}\label{class_q_qt_web_access_manager_a8a20a238854350eadec2b516d02700bc}} 
+{\bfseries Q\+Qt\+Web\+Access\+Manager} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a9d55201e99232b2f670003d1be25b39b}\label{class_q_qt_web_access_manager_a9d55201e99232b2f670003d1be25b39b}} 
+\mbox{\hyperlink{class_q_qt_web_access_session_manager}{Q\+Qt\+Web\+Access\+Session\+Manager}} $\ast$ {\bfseries get\+Web\+Access\+Session\+Manager} ()
+\item 
+void \mbox{\hyperlink{class_q_qt_web_access_manager_a8f547f06beac2617150ee9efddd9b477}{send\+Get\+Request}} (\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$session)
+\begin{DoxyCompactList}\small\item\em send\+Get\+Request use for custom session; 内部重要函数 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a42136056f1eb8fe0381001f6a59bcfa2}\label{class_q_qt_web_access_manager_a42136056f1eb8fe0381001f6a59bcfa2}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Get\+Request} (Q\+String str\+Url)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a4c8022f41ea942a1aef94797ac06421c}\label{class_q_qt_web_access_manager_a4c8022f41ea942a1aef94797ac06421c}} 
+Q\+List$<$ \mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ $>$ {\bfseries send\+Get\+Requests} (Q\+String\+List \&str\+Urls)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a7a5aeec4b18bf19a662f36f372191d2b}\label{class_q_qt_web_access_manager_a7a5aeec4b18bf19a662f36f372191d2b}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Get\+Request} (const Q\+Network\+Request \&net\+Request)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_ae7550546047f6e5a97906ec35e6e7b51}\label{class_q_qt_web_access_manager_ae7550546047f6e5a97906ec35e6e7b51}} 
+Q\+List$<$ \mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ $>$ {\bfseries send\+Get\+Requests} (const Q\+List$<$ Q\+Network\+Request $>$ \&net\+Requests)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a3e540e79abd9897799364173a66bf070}\label{class_q_qt_web_access_manager_a3e540e79abd9897799364173a66bf070}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Head\+Request} (const Q\+Network\+Request \&request)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_ae8fd09a122868560a1e2bde52508306f}\label{class_q_qt_web_access_manager_ae8fd09a122868560a1e2bde52508306f}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Post\+Request} (const Q\+Network\+Request \&request, Q\+I\+O\+Device $\ast$data)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_af98c24174d654fc2914271337c562124}\label{class_q_qt_web_access_manager_af98c24174d654fc2914271337c562124}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Post\+Request} (const Q\+Network\+Request \&request, const Q\+Byte\+Array \&data)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_ac95febd0b792d7f26704180afdf3b117}\label{class_q_qt_web_access_manager_ac95febd0b792d7f26704180afdf3b117}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Post\+Request} (const Q\+Network\+Request \&request, Q\+Http\+Multi\+Part $\ast$multi\+Part)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a7b97b12b6504c5a662334d89d3e1e5d8}\label{class_q_qt_web_access_manager_a7b97b12b6504c5a662334d89d3e1e5d8}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Put\+Request} (const Q\+Network\+Request \&request, Q\+I\+O\+Device $\ast$data)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a4561670149c4251670ead3a885e754b8}\label{class_q_qt_web_access_manager_a4561670149c4251670ead3a885e754b8}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Put\+Request} (const Q\+Network\+Request \&request, const Q\+Byte\+Array \&data)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_aaf3c744e4baa4f4b7f5702d210ecc79b}\label{class_q_qt_web_access_manager_aaf3c744e4baa4f4b7f5702d210ecc79b}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Put\+Request} (const Q\+Network\+Request \&request, Q\+Http\+Multi\+Part $\ast$multi\+Part)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a8fa2d0e0288f0f738fefe9ce1d0b8035}\label{class_q_qt_web_access_manager_a8fa2d0e0288f0f738fefe9ce1d0b8035}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Delete\+Resource\+Request} (const Q\+Network\+Request \&request)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_abc271c2a13c65e0c04ca640816c2da4c}\label{class_q_qt_web_access_manager_abc271c2a13c65e0c04ca640816c2da4c}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Custom\+Request} (const Q\+Network\+Request \&request, const Q\+Byte\+Array \&verb, Q\+I\+O\+Device $\ast$data=Q\+\_\+\+N\+U\+L\+L\+P\+TR)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a9eb26e92f10180fe710a13d88665f26c}\label{class_q_qt_web_access_manager_a9eb26e92f10180fe710a13d88665f26c}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Custom\+Request} (const Q\+Network\+Request \&request, const Q\+Byte\+Array \&verb, const Q\+Byte\+Array \&data)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_access_manager_aae1337d9479bfd0d1cdd5e4008e46990}\label{class_q_qt_web_access_manager_aae1337d9479bfd0d1cdd5e4008e46990}} 
+\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$ {\bfseries send\+Custom\+Request} (const Q\+Network\+Request \&request, const Q\+Byte\+Array \&verb, Q\+Http\+Multi\+Part $\ast$multi\+Part)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_web_access_manager}{Q\+Qt\+Web\+Access\+Manager}} class X\+X\+Protocol One Ftp Http Q\+Web\+Socket(\+Custom Web Protocol) 单工...(全双工通信) Multi 半双工（客户端并发，服务器序列） Q\+Network\+Access\+Manager Multi 全双工 Q\+Network\+Access\+Manager 加密 need ssl Qt team 实现了几种协议的管理，就能进行几种协议的通讯。supported\+Schemes 用户输入的session，还可以被完整返回来，所以不必自己再实现一个链表进行管理，在session当中完整的保存就好了。 
+
+支持cookie 一个\+Q\+Qt\+Web\+Access\+Manager有一个cookie\+Jar，一个cookie\+Jar可以保存一组组针对网址的cookies。 用户只需要知道cookie的通信过程，就可以使用\+Q\+Qt\+Web\+Access\+Manager的cookie\+Jar了。 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_web_access_manager_a8f547f06beac2617150ee9efddd9b477}\label{class_q_qt_web_access_manager_a8f547f06beac2617150ee9efddd9b477}} 
+\index{Q\+Qt\+Web\+Access\+Manager@{Q\+Qt\+Web\+Access\+Manager}!send\+Get\+Request@{send\+Get\+Request}}
+\index{send\+Get\+Request@{send\+Get\+Request}!Q\+Qt\+Web\+Access\+Manager@{Q\+Qt\+Web\+Access\+Manager}}
+\subsubsection{\texorpdfstring{send\+Get\+Request()}{sendGetRequest()}}
+{\footnotesize\ttfamily void Q\+Qt\+Web\+Access\+Manager\+::send\+Get\+Request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_qt_web_access_session}{Q\+Qt\+Web\+Access\+Session}} $\ast$}]{session }\end{DoxyParamCaption})}
+
+
+
+send\+Get\+Request use for custom session; 内部重要函数 
+
+
+\begin{DoxyParams}{Parameters}
+{\em session} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtwebaccessmanager.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtwebaccessmanager.\+cpp\end{DoxyCompactItemize}

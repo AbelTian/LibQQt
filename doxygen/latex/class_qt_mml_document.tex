@@ -1,0 +1,131 @@
+\hypertarget{class_qt_mml_document}{}\section{Qt\+Mml\+Document Class Reference}
+\label{class_qt_mml_document}\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+
+
+The \mbox{\hyperlink{class_qt_mml_document}{Qt\+Mml\+Document}} class renders mathematical formulas written in Math\+ML 2.\+0.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_qt_mml_document_a38d53f9b6b073434a4e0ee458b9d8eca}{Qt\+Mml\+Document}} ()
+\item 
+\mbox{\hyperlink{class_qt_mml_document_a09f03d96a88be2e42a7a14c633a75e94}{$\sim$\+Qt\+Mml\+Document}} ()
+\item 
+void \mbox{\hyperlink{class_qt_mml_document_add5a21595194288f647e020f36448587}{clear}} ()
+\item 
+bool \mbox{\hyperlink{class_qt_mml_document_a08e287efbea760c51f22fec4a4c5067e}{set\+Content}} (Q\+String text, Q\+String $\ast$error\+Msg=0, int $\ast$error\+Line=0, int $\ast$error\+Column=0)
+\item 
+void \mbox{\hyperlink{class_qt_mml_document_a76b9c85044e6715ff778efd607cc1309}{paint}} (Q\+Painter $\ast$p, const Q\+Point \&pos) const
+\item 
+Q\+Size \mbox{\hyperlink{class_qt_mml_document_a01cd1b6f95f011fa3a9a9292e833528e}{size}} () const
+\item 
+Q\+String \mbox{\hyperlink{class_qt_mml_document_aee262410ce903f2a58c1eac22311266a}{font\+Name}} (\mbox{\hyperlink{class_qt_mml_widget_ac3fde39f7b605557d80bded69f985d2a}{Qt\+Mml\+Widget\+::\+Mml\+Font}} type) const
+\item 
+void \mbox{\hyperlink{class_qt_mml_document_a6e722bc5c964444616ef4d9e640d9350}{set\+Font\+Name}} (\mbox{\hyperlink{class_qt_mml_widget_ac3fde39f7b605557d80bded69f985d2a}{Qt\+Mml\+Widget\+::\+Mml\+Font}} type, const Q\+String \&name)
+\item 
+int \mbox{\hyperlink{class_qt_mml_document_a6988266de54f91cdc03e3d20915828c1}{base\+Font\+Point\+Size}} () const
+\item 
+void \mbox{\hyperlink{class_qt_mml_document_aedb2bedfbc96f3fb41cd04ecf3f327f2}{set\+Base\+Font\+Point\+Size}} (int \mbox{\hyperlink{class_qt_mml_document_a01cd1b6f95f011fa3a9a9292e833528e}{size}})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_qt_mml_document}{Qt\+Mml\+Document}} class renders mathematical formulas written in Math\+ML 2.\+0. 
+
+This class provides a direct A\+PI to the rendering engine used by \mbox{\hyperlink{class_qt_mml_widget}{Qt\+Mml\+Widget}}. It can be used to paint Math\+ML inside other widgets.
+
+All methods work the same as the corresponding methods in \mbox{\hyperlink{class_qt_mml_widget}{Qt\+Mml\+Widget}}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_qt_mml_document_a38d53f9b6b073434a4e0ee458b9d8eca}\label{class_qt_mml_document_a38d53f9b6b073434a4e0ee458b9d8eca}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{Qt\+Mml\+Document()}{QtMmlDocument()}}
+{\footnotesize\ttfamily Qt\+Mml\+Document\+::\+Qt\+Mml\+Document (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructs an empty M\+ML document. \mbox{\Hypertarget{class_qt_mml_document_a09f03d96a88be2e42a7a14c633a75e94}\label{class_qt_mml_document_a09f03d96a88be2e42a7a14c633a75e94}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!````~Qt\+Mml\+Document@{$\sim$\+Qt\+Mml\+Document}}
+\index{````~Qt\+Mml\+Document@{$\sim$\+Qt\+Mml\+Document}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{$\sim$\+Qt\+Mml\+Document()}{~QtMmlDocument()}}
+{\footnotesize\ttfamily Qt\+Mml\+Document\+::$\sim$\+Qt\+Mml\+Document (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destroys the M\+ML document. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_qt_mml_document_a6988266de54f91cdc03e3d20915828c1}\label{class_qt_mml_document_a6988266de54f91cdc03e3d20915828c1}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!base\+Font\+Point\+Size@{base\+Font\+Point\+Size}}
+\index{base\+Font\+Point\+Size@{base\+Font\+Point\+Size}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{base\+Font\+Point\+Size()}{baseFontPointSize()}}
+{\footnotesize\ttfamily int Qt\+Mml\+Document\+::base\+Font\+Point\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the point size of the font used to render expressions whose scriptlevel is 0.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_qt_mml_document_aedb2bedfbc96f3fb41cd04ecf3f327f2}{set\+Base\+Font\+Point\+Size()}} \mbox{\hyperlink{class_qt_mml_document_aee262410ce903f2a58c1eac22311266a}{font\+Name()}} \mbox{\hyperlink{class_qt_mml_document_a6e722bc5c964444616ef4d9e640d9350}{set\+Font\+Name()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_qt_mml_document_add5a21595194288f647e020f36448587}\label{class_qt_mml_document_add5a21595194288f647e020f36448587}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!clear@{clear}}
+\index{clear@{clear}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void Qt\+Mml\+Document\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Clears the contents of this M\+ML document. \mbox{\Hypertarget{class_qt_mml_document_aee262410ce903f2a58c1eac22311266a}\label{class_qt_mml_document_aee262410ce903f2a58c1eac22311266a}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!font\+Name@{font\+Name}}
+\index{font\+Name@{font\+Name}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{font\+Name()}{fontName()}}
+{\footnotesize\ttfamily Q\+String Qt\+Mml\+Document\+::font\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_mml_widget_ac3fde39f7b605557d80bded69f985d2a}{Qt\+Mml\+Widget\+::\+Mml\+Font}}}]{type }\end{DoxyParamCaption}) const}
+
+Returns the name of the font used to render the font {\itshape type}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_qt_mml_document_a6e722bc5c964444616ef4d9e640d9350}{set\+Font\+Name()}} \mbox{\hyperlink{class_qt_mml_document_aedb2bedfbc96f3fb41cd04ecf3f327f2}{set\+Base\+Font\+Point\+Size()}} \mbox{\hyperlink{class_qt_mml_document_a6988266de54f91cdc03e3d20915828c1}{base\+Font\+Point\+Size()}} \mbox{\hyperlink{class_qt_mml_widget_ac3fde39f7b605557d80bded69f985d2a}{Qt\+Mml\+Widget\+::\+Mml\+Font}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_qt_mml_document_a76b9c85044e6715ff778efd607cc1309}\label{class_qt_mml_document_a76b9c85044e6715ff778efd607cc1309}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!paint@{paint}}
+\index{paint@{paint}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{paint()}{paint()}}
+{\footnotesize\ttfamily void Qt\+Mml\+Document\+::paint (\begin{DoxyParamCaption}\item[{Q\+Painter $\ast$}]{p,  }\item[{const Q\+Point \&}]{pos }\end{DoxyParamCaption}) const}
+
+Renders this M\+ML document with the painter {\itshape p} at position {\itshape pos}. \mbox{\Hypertarget{class_qt_mml_document_aedb2bedfbc96f3fb41cd04ecf3f327f2}\label{class_qt_mml_document_aedb2bedfbc96f3fb41cd04ecf3f327f2}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!set\+Base\+Font\+Point\+Size@{set\+Base\+Font\+Point\+Size}}
+\index{set\+Base\+Font\+Point\+Size@{set\+Base\+Font\+Point\+Size}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{set\+Base\+Font\+Point\+Size()}{setBaseFontPointSize()}}
+{\footnotesize\ttfamily void Qt\+Mml\+Document\+::set\+Base\+Font\+Point\+Size (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+Sets the point {\itshape size} of the font used to render expressions whose scriptlevel is 0.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_qt_mml_document_a6988266de54f91cdc03e3d20915828c1}{base\+Font\+Point\+Size()}} \mbox{\hyperlink{class_qt_mml_document_aee262410ce903f2a58c1eac22311266a}{font\+Name()}} \mbox{\hyperlink{class_qt_mml_document_a6e722bc5c964444616ef4d9e640d9350}{set\+Font\+Name()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_qt_mml_document_a08e287efbea760c51f22fec4a4c5067e}\label{class_qt_mml_document_a08e287efbea760c51f22fec4a4c5067e}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!set\+Content@{set\+Content}}
+\index{set\+Content@{set\+Content}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{set\+Content()}{setContent()}}
+{\footnotesize\ttfamily bool Qt\+Mml\+Document\+::set\+Content (\begin{DoxyParamCaption}\item[{Q\+String}]{text,  }\item[{Q\+String $\ast$}]{error\+Msg = {\ttfamily 0},  }\item[{int $\ast$}]{error\+Line = {\ttfamily 0},  }\item[{int $\ast$}]{error\+Column = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Sets the Math\+ML expression to be rendered. The expression is given in the string {\itshape text}. If the expression is successfully parsed, this method returns true; otherwise it returns false. If an error occured {\itshape error\+Msg} is set to a diagnostic message, while {\itshape error\+Line} and {\itshape error\+Column} contain the location of the error. Any of {\itshape error\+Msg}, {\itshape error\+Line} and {\itshape error\+Column} may be 0, in which case they are not set.
+
+{\itshape text} should contain Math\+ML 2.\+0 presentation markup elements enclosed in a $<$math$>$ element. \mbox{\Hypertarget{class_qt_mml_document_a6e722bc5c964444616ef4d9e640d9350}\label{class_qt_mml_document_a6e722bc5c964444616ef4d9e640d9350}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!set\+Font\+Name@{set\+Font\+Name}}
+\index{set\+Font\+Name@{set\+Font\+Name}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{set\+Font\+Name()}{setFontName()}}
+{\footnotesize\ttfamily void Qt\+Mml\+Document\+::set\+Font\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_mml_widget_ac3fde39f7b605557d80bded69f985d2a}{Qt\+Mml\+Widget\+::\+Mml\+Font}}}]{type,  }\item[{const Q\+String \&}]{name }\end{DoxyParamCaption})}
+
+Sets the name of the font used to render the font {\itshape type} to {\itshape name}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_qt_mml_document_aee262410ce903f2a58c1eac22311266a}{font\+Name()}} \mbox{\hyperlink{class_qt_mml_document_aedb2bedfbc96f3fb41cd04ecf3f327f2}{set\+Base\+Font\+Point\+Size()}} \mbox{\hyperlink{class_qt_mml_document_a6988266de54f91cdc03e3d20915828c1}{base\+Font\+Point\+Size()}} \mbox{\hyperlink{class_qt_mml_widget_ac3fde39f7b605557d80bded69f985d2a}{Qt\+Mml\+Widget\+::\+Mml\+Font}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_qt_mml_document_a01cd1b6f95f011fa3a9a9292e833528e}\label{class_qt_mml_document_a01cd1b6f95f011fa3a9a9292e833528e}} 
+\index{Qt\+Mml\+Document@{Qt\+Mml\+Document}!size@{size}}
+\index{size@{size}!Qt\+Mml\+Document@{Qt\+Mml\+Document}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily Q\+Size Qt\+Mml\+Document\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the size of this M\+ML document, as rendered, in pixels. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/mathml/qtmmlwidget.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/mathml/qtmmlwidget.\+cpp\end{DoxyCompactItemize}

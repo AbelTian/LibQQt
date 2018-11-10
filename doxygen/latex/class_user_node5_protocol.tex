@@ -1,0 +1,124 @@
+\hypertarget{class_user_node5_protocol}{}\section{User\+Node5\+Protocol Class Reference}
+\label{class_user_node5_protocol}\index{User\+Node5\+Protocol@{User\+Node5\+Protocol}}
+Inheritance diagram for User\+Node5\+Protocol\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_user_node5_protocol}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_node5_protocol_a5c9f44cea8e04929092202b06b45df4d}\label{class_user_node5_protocol_a5c9f44cea8e04929092202b06b45df4d}} 
+void {\bfseries signal\+Sendto\+Logic\+Level\+Code} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_node5_protocol_a82c44ed3235d35bd29bd882eed5c47a6}\label{class_user_node5_protocol_a82c44ed3235d35bd29bd882eed5c47a6}} 
+{\bfseries User\+Node5\+Protocol} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_user_node5_protocol_afad9c8f9e922a465f1295f47a72c56ae}\label{class_user_node5_protocol_afad9c8f9e922a465f1295f47a72c56ae}} 
+void {\bfseries recv\+Command1} (const \mbox{\hyperlink{class_user_node5_message}{User\+Node5\+Message}} \&msg)
+\item 
+\mbox{\Hypertarget{class_user_node5_protocol_aea81a5649571a2090263a31a71bda83f}\label{class_user_node5_protocol_aea81a5649571a2090263a31a71bda83f}} 
+void {\bfseries recv\+Command2} (const \mbox{\hyperlink{class_user_node5_message}{User\+Node5\+Message}} \&msg)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual quint16 \mbox{\hyperlink{class_user_node5_protocol_a87f07fcef4add8b825ff6135600ca448}{minlength}} () override
+\begin{DoxyCompactList}\small\item\em 最小包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_user_node5_protocol_ad69cf7619d98dc8d3a4f4ee4f3da03b9}{maxlength}} () override
+\begin{DoxyCompactList}\small\item\em 最大包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_user_node5_protocol_a4e92b89d23b04291316291d1d949a075}{splitter}} (const Q\+Byte\+Array \&l) override
+\begin{DoxyCompactList}\small\item\em 语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_user_node5_protocol_a7dabc3495dfe07e18c2f1bb2cd27dea1}{dispatcher}} (const Q\+Byte\+Array \&m) override
+\begin{DoxyCompactList}\small\item\em 语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_user_node5_protocol_a7dabc3495dfe07e18c2f1bb2cd27dea1}\label{class_user_node5_protocol_a7dabc3495dfe07e18c2f1bb2cd27dea1}} 
+\index{User\+Node5\+Protocol@{User\+Node5\+Protocol}!dispatcher@{dispatcher}}
+\index{dispatcher@{dispatcher}!User\+Node5\+Protocol@{User\+Node5\+Protocol}}
+\subsubsection{\texorpdfstring{dispatcher()}{dispatcher()}}
+{\footnotesize\ttfamily virtual bool User\+Node5\+Protocol\+::dispatcher (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 数据包} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 no dispatched(others) 1 dispatched(own) 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a35a69c4b89c8cf7459038f40d75e0dc9}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_user_node5_protocol_ad69cf7619d98dc8d3a4f4ee4f3da03b9}\label{class_user_node5_protocol_ad69cf7619d98dc8d3a4f4ee4f3da03b9}} 
+\index{User\+Node5\+Protocol@{User\+Node5\+Protocol}!maxlength@{maxlength}}
+\index{maxlength@{maxlength}!User\+Node5\+Protocol@{User\+Node5\+Protocol}}
+\subsubsection{\texorpdfstring{maxlength()}{maxlength()}}
+{\footnotesize\ttfamily virtual quint16 User\+Node5\+Protocol\+::maxlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+最大包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_af41bc3116abbbcfc9af45e151a253ff7}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_user_node5_protocol_a87f07fcef4add8b825ff6135600ca448}\label{class_user_node5_protocol_a87f07fcef4add8b825ff6135600ca448}} 
+\index{User\+Node5\+Protocol@{User\+Node5\+Protocol}!minlength@{minlength}}
+\index{minlength@{minlength}!User\+Node5\+Protocol@{User\+Node5\+Protocol}}
+\subsubsection{\texorpdfstring{minlength()}{minlength()}}
+{\footnotesize\ttfamily virtual quint16 User\+Node5\+Protocol\+::minlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+最小包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a2b00f53d3dd0eed817eeecff422891f3}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_user_node5_protocol_a4e92b89d23b04291316291d1d949a075}\label{class_user_node5_protocol_a4e92b89d23b04291316291d1d949a075}} 
+\index{User\+Node5\+Protocol@{User\+Node5\+Protocol}!splitter@{splitter}}
+\index{splitter@{splitter}!User\+Node5\+Protocol@{User\+Node5\+Protocol}}
+\subsubsection{\texorpdfstring{splitter()}{splitter()}}
+{\footnotesize\ttfamily virtual quint16 User\+Node5\+Protocol\+::splitter (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 接收到的数据段} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+按照协议解析到的数据长度 可用，继续接收，丢弃，粘包。 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a00fd0c1ac23379ed3b9b25da9a34f39b}{Q\+Qt\+Protocol}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/examples/qqtnetworkexample/usernode5protocol.\+h\end{DoxyCompactItemize}

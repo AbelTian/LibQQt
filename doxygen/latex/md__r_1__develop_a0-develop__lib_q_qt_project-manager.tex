@@ -1,0 +1,52 @@
+{\itshape Lib\+Q\+Qt工程捅下来以后一定要设置本地目录名为\+Lib\+Q\+Qt(Multi-\/link v1)} ~\newline
+ 既然用了\+Lib\+Q\+Qt关于工程管理的一些概念就必须学会了。 ~\newline
+
+
+ ~\newline
+源代码目录：所有的源代码工程放在这里。这个工程也叫做开发目录、工程目录。 ~\newline
+工具目录：所有的\+Qt、\+Library、\+Tools放在这里。 ~\newline
+编译配置目录：这些地方是给一些编译工具用的，比如pymake的配置文件就在这里。 ~\newline
+编译站目录：工程编译中间目标和最终目标都在这里。发布目标不在这里（是一部分拷贝）。 ~\newline
+产品目录：也叫发布目录，发布目标都在这里。虽然编译站里包括一部分我们的工程目标，但是给客户的是这个目录里的。 ~\newline
+  ~\newline
+这里要提一下，先设置好\+Qt Creator，再打开工程进行工程设置。\+Qt Creator的设置是通用的，工程设置是个别的。 ~\newline
+但是你逐渐会发现，那些工程设置其实也有通用的，但是\+Qt\+Creator、qmake之间还没有那么好的配合，不过已经比cmake好很多了。 ~\newline
+不管怎么说，这块的设置都是配合硬盘上的设置。 ~\newline
+$\ast$如果已经打开了工程，那么需要关闭工程的kit，然后再打开，以使工程的编译目录跟随默认编译目录生效。$\ast$ ~\newline
+  ~\newline
+按说，这些目录在工程管理当中，全部使用qmake管理最好了，但是现实中，这些目录要经过qmake和\+Creator共同管理。 ~\newline
+通过\+Qt Creator的默认编译目录，和具体工程的编译目录，而\+Q\+K\+I\+T必须经过具体工程的环境变量配置部分进行配置。 ~\newline
+在qmake pro文件中进行取用。 ~\newline
+  ~\newline
+ ~\newline
+ 最后注意一下，目录的层次要按照图中的层次安排，才会清晰。 ~\newline
+工程目录和编译目录并排，和工具并排，和发布目录并排。 ~\newline
+工程目录里面，\+Library和\+Application工程并排。 ~\newline
+  ~\newline
+补充一点\+Android开发需要设置的目录 ~\newline
+ ~\newline
+补充一点\+Android开发用环境配置 ~\newline
+如果不使用pymake，每次编译一个android平台的，都要设置一遍，不能出错哦。 ~\newline
+其他操作系统平台类比设置即可。 ~\newline
+ \section*{Multi-\/environ Manager 多环境任意切工具}
+
+上文提到了pymake，其全名为\+Multi-\/environ Manager。 ~\newline
+我有很复杂的发布目标?借助工具是必要的。 ~\newline
+Multi-\/environ Manager是针对多环境、多配置开发的多环境任意切工具。 ~\newline
+Py\+Make可以有效应对\+Multi-\/environ工作场景下的工作任务。 ~\newline
+只需要配置一次，任意切换、可临时使用的多环境工作场景就可以轻松展开。 ~\newline
+这个工具是跨平台、多目标、多类型、近似功能工作活动的绝佳配置。 ~\newline
+附：\href{https://gitee.com/drabel/PyMake}{\tt Py\+Make链接} ~\newline
+附：\href{https://gitee.com/drabel/BuildConfig}{\tt Py\+Make使用的json配置文件链接} ~\newline
+附：\href{https://gitee.com/drabel/BuildShell}{\tt 一些\+Py\+Make的例程} ~\newline
+ \section*{Multi-\/link Technology 多链接技术工具组}
+
+多链接技术是一套工程管理工具，使用qmake语言编写而成，使用qmake函数实现所有的技术功能。 ~\newline
+归根到底多链接技术是一套工具，用于跨工程师、跨电脑、跨操作系统（\+H\+O\+S\+T）、跨平台（目标）管理工程。一条龙跨。 ~\newline
+没有他，什么工程、尤其复杂的多\+App、多库工程都要手动做很多搬运、修改才能用，有了他，把工程拷贝到新主机什么都不搬运、什么都不改就能用。 ~\newline
+过去手动搬运工作，全部省去，过去跨平台困难，全部解决。 ~\newline
+Multi-\/link技术提供了一套qmake函数，一套\+App工具，一套\+Example，\+Lib\+Q\+Qt系列库全部使用\+Multi-\/link技术管理工程，欢迎工程师们使用。 ~\newline
+附：\href{https://gitee.com/drabel/multi-link}{\tt Multi-\/link Technology 链接} ~\newline
+
+
+\href{.}{\tt 返回} 

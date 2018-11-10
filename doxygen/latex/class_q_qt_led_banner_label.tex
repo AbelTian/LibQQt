@@ -1,0 +1,343 @@
+\hypertarget{class_q_qt_led_banner_label}{}\section{Q\+Qt\+Led\+Banner\+Label Class Reference}
+\label{class_q_qt_led_banner_label}\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+
+
+The \mbox{\hyperlink{class_q_qt_led_banner_label}{Q\+Qt\+Led\+Banner\+Label}} class 仿\+L\+E\+D效果的widget.  
+
+
+
+
+{\ttfamily \#include $<$qqtledbannerlabel.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Led\+Banner\+Label\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_led_banner_label}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a8ea55a34d54e6fe09a74c5fd2d83e5dc}\label{class_q_qt_led_banner_label_a8ea55a34d54e6fe09a74c5fd2d83e5dc}} 
+enum \mbox{\hyperlink{class_q_qt_led_banner_label_a8ea55a34d54e6fe09a74c5fd2d83e5dc}{Effect}} \{ {\bfseries sliding} = 1, 
+{\bfseries intermittent} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em The Effect enum 特效枚举 sliding 为跑马灯效果 intermittent 为闪烁效果 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_a5d265f3a217fae856809426bb2bdefd1}{set\+Text\+Color}} (Q\+Color color\+Text)
+\begin{DoxyCompactList}\small\item\em set\+Text\+Color 设置文本颜色 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_aad9c08b92a1b8f3cdead97dea7ebb286}{set\+Background\+Color}} (Q\+Color color\+Background)
+\begin{DoxyCompactList}\small\item\em set\+Background\+Color 设置背景颜色 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_ac3f7a2d1212e45230f624c1cd594819d}{set\+Effect}} (\mbox{\hyperlink{class_q_qt_led_banner_label_a8ea55a34d54e6fe09a74c5fd2d83e5dc}{Effect}} effect)
+\begin{DoxyCompactList}\small\item\em set\+Effect 设置特效类型 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_ad3909e13933db40f461e3be0e89f70ea}{set\+Text}} (Q\+String text)
+\begin{DoxyCompactList}\small\item\em set\+Text 设置文本内容 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_aaea93596237af590cfe6eda708418110}{set\+Timer}} (int timer)
+\begin{DoxyCompactList}\small\item\em set\+Timer 设置定时频率(毫秒) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_a7ef35e83b878580b40468fb816072cdd}{start\+Effect}} (bool start)
+\begin{DoxyCompactList}\small\item\em start\+Effect 开始/关闭 特效 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a6740a2b0cf1130d49c8e47d5e0595537}\label{class_q_qt_led_banner_label_a6740a2b0cf1130d49c8e47d5e0595537}} 
+void {\bfseries time\+Out} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a739c0abd9318c9f9ac0a53538c136f21}\label{class_q_qt_led_banner_label_a739c0abd9318c9f9ac0a53538c136f21}} 
+{\bfseries Q\+Qt\+Led\+Banner\+Label} (Q\+Widget $\ast$parent=0)
+\item 
+Q\+Size \mbox{\hyperlink{class_q_qt_led_banner_label_a80074e5a422888b84715bd77c05bbf74}{minimum\+Size\+Hint}} () const
+\begin{DoxyCompactList}\small\item\em minimum\+Size\+Hint 获取最小显示尺寸 \end{DoxyCompactList}\item 
+Q\+Size \mbox{\hyperlink{class_q_qt_led_banner_label_a44bf9e2fb2eab10091f0789ccedb6ee7}{size\+Hint}} () const
+\begin{DoxyCompactList}\small\item\em size\+Hint 获取尺寸 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_q_qt_led_banner_label_a8ea55a34d54e6fe09a74c5fd2d83e5dc}{Effect}} \mbox{\hyperlink{class_q_qt_led_banner_label_ad7fef5c655cd86259eaed058f8ba49df}{effect}} () const
+\begin{DoxyCompactList}\small\item\em effect 获取特效类型 \end{DoxyCompactList}\item 
+Q\+Color \mbox{\hyperlink{class_q_qt_led_banner_label_addadadbfba0ac9afb1b78df2a5ca4cc7}{color\+Text}} () const
+\begin{DoxyCompactList}\small\item\em color\+Text 获取文字颜色 \end{DoxyCompactList}\item 
+Q\+Color \mbox{\hyperlink{class_q_qt_led_banner_label_a15864eb5288ce5a04d481e81db8c9ccd}{color\+Background}} () const
+\begin{DoxyCompactList}\small\item\em color\+Background 获取背景颜色 \end{DoxyCompactList}\item 
+Q\+String \mbox{\hyperlink{class_q_qt_led_banner_label_a43d0a3391b1a4699d4a4d448e5686157}{text}} () const
+\begin{DoxyCompactList}\small\item\em text 获取文本内容 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_q_qt_led_banner_label_a42395262bc37d0b2d18edae7599dd9c1}{timer\+Interval}} () const
+\begin{DoxyCompactList}\small\item\em timer\+Interval 获取刷新频率 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_q_qt_led_banner_label_a0916aa1382ca0d343546c4af4afa0b89}{is\+Start}} () const
+\begin{DoxyCompactList}\small\item\em is\+Start 获取特效是否开启中 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_af4de174cc8cf737c4f0034fa9277e756}{paint\+Event}} (Q\+Paint\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em paint\+Event 绘制事件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_a38ca55a32878473c59f119fa675d3b02}{timer\+Event}} (Q\+Timer\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em timer\+Event 定时器事件 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a8edd2f6a92646f289fc9e236fa0ee7d4}\label{class_q_qt_led_banner_label_a8edd2f6a92646f289fc9e236fa0ee7d4}} 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_a8edd2f6a92646f289fc9e236fa0ee7d4}{paint\+Border}} ()
+\begin{DoxyCompactList}\small\item\em paint\+Border 绘制边框 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a8cb8924420a4ace28d7754e7b689eb97}\label{class_q_qt_led_banner_label_a8cb8924420a4ace28d7754e7b689eb97}} 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_a8cb8924420a4ace28d7754e7b689eb97}{paint\+Text}} ()
+\begin{DoxyCompactList}\small\item\em paint\+Text 绘制文本 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_abf5b3c8b3393da1446faf5e797ddb84c}\label{class_q_qt_led_banner_label_abf5b3c8b3393da1446faf5e797ddb84c}} 
+void \mbox{\hyperlink{class_q_qt_led_banner_label_abf5b3c8b3393da1446faf5e797ddb84c}{paint\+Grid}} ()
+\begin{DoxyCompactList}\small\item\em paint\+Grid 绘制网格 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a5b73ad64f34a1c682d08f9fe92b69d0f}\label{class_q_qt_led_banner_label_a5b73ad64f34a1c682d08f9fe92b69d0f}} 
+\mbox{\hyperlink{class_q_qt_led_banner_label_a8ea55a34d54e6fe09a74c5fd2d83e5dc}{Effect}} {\bfseries effect}
+\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_ad8c9a6d7a239691f83dc311644b4e3c5}\label{class_q_qt_led_banner_label_ad8c9a6d7a239691f83dc311644b4e3c5}} 
+Q\+Color {\bfseries color\+Text}
+\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a82dea8c769df2faaa1376788424c7e35}\label{class_q_qt_led_banner_label_a82dea8c769df2faaa1376788424c7e35}} 
+Q\+Color {\bfseries color\+Background}
+\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a1f058dd552a548c4eef8e066b146edbe}\label{class_q_qt_led_banner_label_a1f058dd552a548c4eef8e066b146edbe}} 
+Q\+String {\bfseries text}
+\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a85bdb3f2771070e8422599e292ae3592}\label{class_q_qt_led_banner_label_a85bdb3f2771070e8422599e292ae3592}} 
+int {\bfseries timer}
+\item 
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a983d60295321672a349a2b07f20a617c}\label{class_q_qt_led_banner_label_a983d60295321672a349a2b07f20a617c}} 
+bool {\bfseries start}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_led_banner_label}{Q\+Qt\+Led\+Banner\+Label}} class 仿\+L\+E\+D效果的widget. 
+
+T.\+D.\+R (QQ\+:2657635903) 2017年10月22日15\+:31\+:26 M\+OD 作者\+: daodaoliang 时间\+: 2016年8月11日 邮箱\+: \href{mailto:daodaoliang@yeah.net}{\tt daodaoliang@yeah.\+net} 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a15864eb5288ce5a04d481e81db8c9ccd}\label{class_q_qt_led_banner_label_a15864eb5288ce5a04d481e81db8c9ccd}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!color\+Background@{color\+Background}}
+\index{color\+Background@{color\+Background}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{color\+Background()}{colorBackground()}}
+{\footnotesize\ttfamily Q\+Color Q\+Qt\+Led\+Banner\+Label\+::color\+Background (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+color\+Background 获取背景颜色 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_addadadbfba0ac9afb1b78df2a5ca4cc7}\label{class_q_qt_led_banner_label_addadadbfba0ac9afb1b78df2a5ca4cc7}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!color\+Text@{color\+Text}}
+\index{color\+Text@{color\+Text}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{color\+Text()}{colorText()}}
+{\footnotesize\ttfamily Q\+Color Q\+Qt\+Led\+Banner\+Label\+::color\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+color\+Text 获取文字颜色 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_ad7fef5c655cd86259eaed058f8ba49df}\label{class_q_qt_led_banner_label_ad7fef5c655cd86259eaed058f8ba49df}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!effect@{effect}}
+\index{effect@{effect}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{effect()}{effect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_q_qt_led_banner_label_a8ea55a34d54e6fe09a74c5fd2d83e5dc}{Effect}} Q\+Qt\+Led\+Banner\+Label\+::effect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+effect 获取特效类型 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a0916aa1382ca0d343546c4af4afa0b89}\label{class_q_qt_led_banner_label_a0916aa1382ca0d343546c4af4afa0b89}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!is\+Start@{is\+Start}}
+\index{is\+Start@{is\+Start}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{is\+Start()}{isStart()}}
+{\footnotesize\ttfamily bool Q\+Qt\+Led\+Banner\+Label\+::is\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+is\+Start 获取特效是否开启中 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a80074e5a422888b84715bd77c05bbf74}\label{class_q_qt_led_banner_label_a80074e5a422888b84715bd77c05bbf74}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!minimum\+Size\+Hint@{minimum\+Size\+Hint}}
+\index{minimum\+Size\+Hint@{minimum\+Size\+Hint}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{minimum\+Size\+Hint()}{minimumSizeHint()}}
+{\footnotesize\ttfamily Q\+Size Q\+Qt\+Led\+Banner\+Label\+::minimum\+Size\+Hint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+minimum\+Size\+Hint 获取最小显示尺寸 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_af4de174cc8cf737c4f0034fa9277e756}\label{class_q_qt_led_banner_label_af4de174cc8cf737c4f0034fa9277e756}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!paint\+Event@{paint\+Event}}
+\index{paint\+Event@{paint\+Event}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{paint\+Event()}{paintEvent()}}
+{\footnotesize\ttfamily void Q\+Qt\+Led\+Banner\+Label\+::paint\+Event (\begin{DoxyParamCaption}\item[{Q\+Paint\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+paint\+Event 绘制事件 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_aad9c08b92a1b8f3cdead97dea7ebb286}\label{class_q_qt_led_banner_label_aad9c08b92a1b8f3cdead97dea7ebb286}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!set\+Background\+Color@{set\+Background\+Color}}
+\index{set\+Background\+Color@{set\+Background\+Color}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{set\+Background\+Color}{setBackgroundColor}}
+{\footnotesize\ttfamily void Q\+Qt\+Led\+Banner\+Label\+::set\+Background\+Color (\begin{DoxyParamCaption}\item[{Q\+Color}]{color\+Background }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+set\+Background\+Color 设置背景颜色 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color\+Bg} & 颜色 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_ac3f7a2d1212e45230f624c1cd594819d}\label{class_q_qt_led_banner_label_ac3f7a2d1212e45230f624c1cd594819d}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!set\+Effect@{set\+Effect}}
+\index{set\+Effect@{set\+Effect}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{set\+Effect}{setEffect}}
+{\footnotesize\ttfamily void Q\+Qt\+Led\+Banner\+Label\+::set\+Effect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_qt_led_banner_label_a8ea55a34d54e6fe09a74c5fd2d83e5dc}{Effect}}}]{effect }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+set\+Effect 设置特效类型 
+
+
+\begin{DoxyParams}{Parameters}
+{\em effect} & sliding-\/为跑马灯效果 intermittent-\/为闪烁效果 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_ad3909e13933db40f461e3be0e89f70ea}\label{class_q_qt_led_banner_label_ad3909e13933db40f461e3be0e89f70ea}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!set\+Text@{set\+Text}}
+\index{set\+Text@{set\+Text}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{set\+Text}{setText}}
+{\footnotesize\ttfamily void Q\+Qt\+Led\+Banner\+Label\+::set\+Text (\begin{DoxyParamCaption}\item[{Q\+String}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+set\+Text 设置文本内容 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & 文本 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a5d265f3a217fae856809426bb2bdefd1}\label{class_q_qt_led_banner_label_a5d265f3a217fae856809426bb2bdefd1}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!set\+Text\+Color@{set\+Text\+Color}}
+\index{set\+Text\+Color@{set\+Text\+Color}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{set\+Text\+Color}{setTextColor}}
+{\footnotesize\ttfamily void Q\+Qt\+Led\+Banner\+Label\+::set\+Text\+Color (\begin{DoxyParamCaption}\item[{Q\+Color}]{color\+Text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+set\+Text\+Color 设置文本颜色 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color\+Tx} & 颜色 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_aaea93596237af590cfe6eda708418110}\label{class_q_qt_led_banner_label_aaea93596237af590cfe6eda708418110}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!set\+Timer@{set\+Timer}}
+\index{set\+Timer@{set\+Timer}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{set\+Timer}{setTimer}}
+{\footnotesize\ttfamily void Q\+Qt\+Led\+Banner\+Label\+::set\+Timer (\begin{DoxyParamCaption}\item[{int}]{timer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+set\+Timer 设置定时频率(毫秒) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timer} & 频率 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a44bf9e2fb2eab10091f0789ccedb6ee7}\label{class_q_qt_led_banner_label_a44bf9e2fb2eab10091f0789ccedb6ee7}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!size\+Hint@{size\+Hint}}
+\index{size\+Hint@{size\+Hint}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{size\+Hint()}{sizeHint()}}
+{\footnotesize\ttfamily Q\+Size Q\+Qt\+Led\+Banner\+Label\+::size\+Hint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+size\+Hint 获取尺寸 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a7ef35e83b878580b40468fb816072cdd}\label{class_q_qt_led_banner_label_a7ef35e83b878580b40468fb816072cdd}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!start\+Effect@{start\+Effect}}
+\index{start\+Effect@{start\+Effect}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{start\+Effect}{startEffect}}
+{\footnotesize\ttfamily void Q\+Qt\+Led\+Banner\+Label\+::start\+Effect (\begin{DoxyParamCaption}\item[{bool}]{start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+start\+Effect 开始/关闭 特效 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & true-\/开启 false-\/关闭 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a43d0a3391b1a4699d4a4d448e5686157}\label{class_q_qt_led_banner_label_a43d0a3391b1a4699d4a4d448e5686157}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!text@{text}}
+\index{text@{text}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{text()}{text()}}
+{\footnotesize\ttfamily Q\+String Q\+Qt\+Led\+Banner\+Label\+::text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+text 获取文本内容 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a38ca55a32878473c59f119fa675d3b02}\label{class_q_qt_led_banner_label_a38ca55a32878473c59f119fa675d3b02}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!timer\+Event@{timer\+Event}}
+\index{timer\+Event@{timer\+Event}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{timer\+Event()}{timerEvent()}}
+{\footnotesize\ttfamily void Q\+Qt\+Led\+Banner\+Label\+::timer\+Event (\begin{DoxyParamCaption}\item[{Q\+Timer\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+timer\+Event 定时器事件 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_led_banner_label_a42395262bc37d0b2d18edae7599dd9c1}\label{class_q_qt_led_banner_label_a42395262bc37d0b2d18edae7599dd9c1}} 
+\index{Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}!timer\+Interval@{timer\+Interval}}
+\index{timer\+Interval@{timer\+Interval}!Q\+Qt\+Led\+Banner\+Label@{Q\+Qt\+Led\+Banner\+Label}}
+\subsubsection{\texorpdfstring{timer\+Interval()}{timerInterval()}}
+{\footnotesize\ttfamily int Q\+Qt\+Led\+Banner\+Label\+::timer\+Interval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+timer\+Interval 获取刷新频率 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qqtledbannerlabel.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qqtledbannerlabel.\+cpp\end{DoxyCompactItemize}

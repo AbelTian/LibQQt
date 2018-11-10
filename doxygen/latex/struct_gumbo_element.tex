@@ -1,0 +1,84 @@
+\hypertarget{struct_gumbo_element}{}\section{Gumbo\+Element Struct Reference}
+\label{struct_gumbo_element}\index{Gumbo\+Element@{Gumbo\+Element}}
+
+
+{\ttfamily \#include $<$gumbo.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} \mbox{\hyperlink{struct_gumbo_element_ade0a04bb1508bb2419958b582710b89b}{children}}
+\item 
+\mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}} \mbox{\hyperlink{struct_gumbo_element_ac7d72e040dc6c261e5c31d65c0fee52f}{tag}}
+\item 
+\mbox{\hyperlink{gumbo_8h_a5792dfd02513e421fb8f083f08e58cc6}{Gumbo\+Namespace\+Enum}} \mbox{\hyperlink{struct_gumbo_element_a6c01efba44e5efdef53a68d628d6e6fc}{tag\+\_\+namespace}}
+\item 
+\mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} \mbox{\hyperlink{struct_gumbo_element_af1c8a0e4a16b5d76c55c4b2f20fe740c}{original\+\_\+tag}}
+\item 
+\mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} \mbox{\hyperlink{struct_gumbo_element_a3f23be395bd8c824cedc3f01be1c897b}{original\+\_\+end\+\_\+tag}}
+\item 
+\mbox{\hyperlink{struct_gumbo_source_position}{Gumbo\+Source\+Position}} \mbox{\hyperlink{struct_gumbo_element_a9ac8a1a688c2dfa3e8988a6f0a7aa007}{start\+\_\+pos}}
+\item 
+\mbox{\hyperlink{struct_gumbo_source_position}{Gumbo\+Source\+Position}} \mbox{\hyperlink{struct_gumbo_element_af96c28798bcd9c0ac05a93eb4abeffef}{end\+\_\+pos}}
+\item 
+\mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} \mbox{\hyperlink{struct_gumbo_element_aab2e879f3ee064cc075a8ffc83cdcfb2}{attributes}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The struct used to represent all H\+T\+ML elements. This contains information about the tag, attributes, and child nodes. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_gumbo_element_aab2e879f3ee064cc075a8ffc83cdcfb2}\label{struct_gumbo_element_aab2e879f3ee064cc075a8ffc83cdcfb2}} 
+\index{Gumbo\+Element@{Gumbo\+Element}!attributes@{attributes}}
+\index{attributes@{attributes}!Gumbo\+Element@{Gumbo\+Element}}
+\subsubsection{\texorpdfstring{attributes}{attributes}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} Gumbo\+Element\+::attributes}
+
+An array of Gumbo\+Attributes, containing the attributes for this tag in the order that they were parsed. Pointers are owned. \mbox{\Hypertarget{struct_gumbo_element_ade0a04bb1508bb2419958b582710b89b}\label{struct_gumbo_element_ade0a04bb1508bb2419958b582710b89b}} 
+\index{Gumbo\+Element@{Gumbo\+Element}!children@{children}}
+\index{children@{children}!Gumbo\+Element@{Gumbo\+Element}}
+\subsubsection{\texorpdfstring{children}{children}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} Gumbo\+Element\+::children}
+
+An array of Gumbo\+Nodes, containing the children of this element. Pointers are owned. \mbox{\Hypertarget{struct_gumbo_element_af96c28798bcd9c0ac05a93eb4abeffef}\label{struct_gumbo_element_af96c28798bcd9c0ac05a93eb4abeffef}} 
+\index{Gumbo\+Element@{Gumbo\+Element}!end\+\_\+pos@{end\+\_\+pos}}
+\index{end\+\_\+pos@{end\+\_\+pos}!Gumbo\+Element@{Gumbo\+Element}}
+\subsubsection{\texorpdfstring{end\+\_\+pos}{end\_pos}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_gumbo_source_position}{Gumbo\+Source\+Position}} Gumbo\+Element\+::end\+\_\+pos}
+
+The source position for the start of the end tag. \mbox{\Hypertarget{struct_gumbo_element_a3f23be395bd8c824cedc3f01be1c897b}\label{struct_gumbo_element_a3f23be395bd8c824cedc3f01be1c897b}} 
+\index{Gumbo\+Element@{Gumbo\+Element}!original\+\_\+end\+\_\+tag@{original\+\_\+end\+\_\+tag}}
+\index{original\+\_\+end\+\_\+tag@{original\+\_\+end\+\_\+tag}!Gumbo\+Element@{Gumbo\+Element}}
+\subsubsection{\texorpdfstring{original\+\_\+end\+\_\+tag}{original\_end\_tag}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} Gumbo\+Element\+::original\+\_\+end\+\_\+tag}
+
+A \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} pointing to the original end tag text for this element. If the end tag was inserted algorithmically, (for example, closing a self-\/closing tag), this will be a zero-\/length string. \mbox{\Hypertarget{struct_gumbo_element_af1c8a0e4a16b5d76c55c4b2f20fe740c}\label{struct_gumbo_element_af1c8a0e4a16b5d76c55c4b2f20fe740c}} 
+\index{Gumbo\+Element@{Gumbo\+Element}!original\+\_\+tag@{original\+\_\+tag}}
+\index{original\+\_\+tag@{original\+\_\+tag}!Gumbo\+Element@{Gumbo\+Element}}
+\subsubsection{\texorpdfstring{original\+\_\+tag}{original\_tag}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} Gumbo\+Element\+::original\+\_\+tag}
+
+A \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} pointing to the original tag text for this element, pointing directly into the source buffer. If the tag was inserted algorithmically (for example, $<$head$>$ or $<$tbody$>$ insertion), this will be a zero-\/length string. \mbox{\Hypertarget{struct_gumbo_element_a9ac8a1a688c2dfa3e8988a6f0a7aa007}\label{struct_gumbo_element_a9ac8a1a688c2dfa3e8988a6f0a7aa007}} 
+\index{Gumbo\+Element@{Gumbo\+Element}!start\+\_\+pos@{start\+\_\+pos}}
+\index{start\+\_\+pos@{start\+\_\+pos}!Gumbo\+Element@{Gumbo\+Element}}
+\subsubsection{\texorpdfstring{start\+\_\+pos}{start\_pos}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_gumbo_source_position}{Gumbo\+Source\+Position}} Gumbo\+Element\+::start\+\_\+pos}
+
+The source position for the start of the start tag. \mbox{\Hypertarget{struct_gumbo_element_ac7d72e040dc6c261e5c31d65c0fee52f}\label{struct_gumbo_element_ac7d72e040dc6c261e5c31d65c0fee52f}} 
+\index{Gumbo\+Element@{Gumbo\+Element}!tag@{tag}}
+\index{tag@{tag}!Gumbo\+Element@{Gumbo\+Element}}
+\subsubsection{\texorpdfstring{tag}{tag}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}} Gumbo\+Element\+::tag}
+
+The Gumbo\+Tag enum for this element. \mbox{\Hypertarget{struct_gumbo_element_a6c01efba44e5efdef53a68d628d6e6fc}\label{struct_gumbo_element_a6c01efba44e5efdef53a68d628d6e6fc}} 
+\index{Gumbo\+Element@{Gumbo\+Element}!tag\+\_\+namespace@{tag\+\_\+namespace}}
+\index{tag\+\_\+namespace@{tag\+\_\+namespace}!Gumbo\+Element@{Gumbo\+Element}}
+\subsubsection{\texorpdfstring{tag\+\_\+namespace}{tag\_namespace}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a5792dfd02513e421fb8f083f08e58cc6}{Gumbo\+Namespace\+Enum}} Gumbo\+Element\+::tag\+\_\+namespace}
+
+The Gumbo\+Namespace\+Enum for this element. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/parser/src/\mbox{\hyperlink{gumbo_8h}{gumbo.\+h}}\end{DoxyCompactItemize}

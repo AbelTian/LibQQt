@@ -1,0 +1,90 @@
+\hypertarget{classzxing_1_1_bit_source}{}\section{zxing\+:\+:Bit\+Source Class Reference}
+\label{classzxing_1_1_bit_source}\index{zxing\+::\+Bit\+Source@{zxing\+::\+Bit\+Source}}
+
+
+{\ttfamily \#include $<$Bit\+Source.\+h$>$}
+
+Inheritance diagram for zxing\+:\+:Bit\+Source\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classzxing_1_1_bit_source}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classzxing_1_1_bit_source_a65d6281c4c8eb6a069e49cbb4d8ab775}{Bit\+Source}} (\mbox{\hyperlink{classzxing_1_1_array_ref}{Array\+Ref}}$<$ byte $>$ \&bytes)
+\item 
+\mbox{\Hypertarget{classzxing_1_1_bit_source_ae69f0293dfc003087313fb6a8924d399}\label{classzxing_1_1_bit_source_ae69f0293dfc003087313fb6a8924d399}} 
+int {\bfseries get\+Bit\+Offset} ()
+\item 
+\mbox{\Hypertarget{classzxing_1_1_bit_source_ae27073069e7a7d3dfdb4912d30e4d453}\label{classzxing_1_1_bit_source_ae27073069e7a7d3dfdb4912d30e4d453}} 
+int {\bfseries get\+Byte\+Offset} ()
+\item 
+int \mbox{\hyperlink{classzxing_1_1_bit_source_abe5162247749e9d9eeb9afcec8738252}{read\+Bits}} (int num\+Bits)
+\item 
+int \mbox{\hyperlink{classzxing_1_1_bit_source_a9fd3c660b77ad591ceb0da69dd43566d}{available}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This provides an easy abstraction to read bits at a time from a sequence of bytes, where the number of bits read is not often a multiple of 8.
+
+This class is not thread-\/safe.
+
+\begin{DoxyAuthor}{Author}
+\href{mailto:srowen@google.com}{\tt srowen@google.\+com} (Sean Owen) 
+
+\href{mailto:christian.brunschen@gmail.com}{\tt christian.\+brunschen@gmail.\+com} (Christian Brunschen) 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classzxing_1_1_bit_source_a65d6281c4c8eb6a069e49cbb4d8ab775}\label{classzxing_1_1_bit_source_a65d6281c4c8eb6a069e49cbb4d8ab775}} 
+\index{zxing\+::\+Bit\+Source@{zxing\+::\+Bit\+Source}!Bit\+Source@{Bit\+Source}}
+\index{Bit\+Source@{Bit\+Source}!zxing\+::\+Bit\+Source@{zxing\+::\+Bit\+Source}}
+\subsubsection{\texorpdfstring{Bit\+Source()}{BitSource()}}
+{\footnotesize\ttfamily zxing\+::\+Bit\+Source\+::\+Bit\+Source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classzxing_1_1_array_ref}{Array\+Ref}}$<$ byte $>$ \&}]{bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & bytes from which this will read bits. Bits will be read from the first byte first. Bits are read within a byte from most-\/significant to least-\/significant bit. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classzxing_1_1_bit_source_a9fd3c660b77ad591ceb0da69dd43566d}\label{classzxing_1_1_bit_source_a9fd3c660b77ad591ceb0da69dd43566d}} 
+\index{zxing\+::\+Bit\+Source@{zxing\+::\+Bit\+Source}!available@{available}}
+\index{available@{available}!zxing\+::\+Bit\+Source@{zxing\+::\+Bit\+Source}}
+\subsubsection{\texorpdfstring{available()}{available()}}
+{\footnotesize\ttfamily int zxing\+::\+Bit\+Source\+::available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+number of bits that can be read successfully 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classzxing_1_1_bit_source_abe5162247749e9d9eeb9afcec8738252}\label{classzxing_1_1_bit_source_abe5162247749e9d9eeb9afcec8738252}} 
+\index{zxing\+::\+Bit\+Source@{zxing\+::\+Bit\+Source}!read\+Bits@{read\+Bits}}
+\index{read\+Bits@{read\+Bits}!zxing\+::\+Bit\+Source@{zxing\+::\+Bit\+Source}}
+\subsubsection{\texorpdfstring{read\+Bits()}{readBits()}}
+{\footnotesize\ttfamily int zxing\+::\+Bit\+Source\+::read\+Bits (\begin{DoxyParamCaption}\item[{int}]{num\+Bits }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+Bits} & number of bits to read \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int representing the bits read. The bits will appear as the least-\/significant bits of the int 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{classzxing_1_1_illegal_argument_exception}{Illegal\+Argument\+Exception}}} & if num\+Bits isn\textquotesingle{}t in \mbox{[}1,32\mbox{]} \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/common/Bit\+Source.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/common/Bit\+Source.\+cpp\end{DoxyCompactItemize}

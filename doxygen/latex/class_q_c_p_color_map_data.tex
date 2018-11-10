@@ -1,0 +1,319 @@
+\hypertarget{class_q_c_p_color_map_data}{}\section{Q\+C\+P\+Color\+Map\+Data Class Reference}
+\label{class_q_c_p_color_map_data}\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+
+
+Holds the two-\/dimensional data of a \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} plottable.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_q_c_p_color_map_data_aac9d8eb81e18e240d89d56c01933fd23}{Q\+C\+P\+Color\+Map\+Data}} (int key\+Size, int value\+Size, const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&key\+Range, const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&value\+Range)
+\item 
+\mbox{\hyperlink{class_q_c_p_color_map_data_a7f2145d86473263494abb9bf1de20436}{Q\+C\+P\+Color\+Map\+Data}} (const \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} \&other)
+\item 
+\mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} \& \mbox{\hyperlink{class_q_c_p_color_map_data_afdf4dd1b2f5714234fe84709b85c2a8d}{operator=}} (const \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} \&other)
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_abbda4d28de97aedce1e6e6f008a0a1f7}\label{class_q_c_p_color_map_data_abbda4d28de97aedce1e6e6f008a0a1f7}} 
+int {\bfseries key\+Size} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a8510cafea24645bbb62b5e0bfc43209f}\label{class_q_c_p_color_map_data_a8510cafea24645bbb62b5e0bfc43209f}} 
+int {\bfseries value\+Size} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a1e43abd20a77b922b7cecfc69bf4dad7}\label{class_q_c_p_color_map_data_a1e43abd20a77b922b7cecfc69bf4dad7}} 
+\mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} {\bfseries key\+Range} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a818e4e384aa4e5fad69ac603924394d3}\label{class_q_c_p_color_map_data_a818e4e384aa4e5fad69ac603924394d3}} 
+\mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} {\bfseries value\+Range} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_ab7620248272c5ddd9a3f877f07179f6d}\label{class_q_c_p_color_map_data_ab7620248272c5ddd9a3f877f07179f6d}} 
+\mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} {\bfseries data\+Bounds} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a2c33807b008cdb9e1394245c294c0eaf}\label{class_q_c_p_color_map_data_a2c33807b008cdb9e1394245c294c0eaf}} 
+double {\bfseries data} (double key, double value)
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_af51ecd21f347adbf87b4cce4e1f5cbd6}\label{class_q_c_p_color_map_data_af51ecd21f347adbf87b4cce4e1f5cbd6}} 
+double {\bfseries cell} (int key\+Index, int value\+Index)
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}} (int key\+Size, int value\+Size)
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_ac7ef70e383aface34b44dbde49234b6b}{set\+Key\+Size}} (int key\+Size)
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_a0893c9e3914513048b45e3429ffd16f2}{set\+Value\+Size}} (int value\+Size)
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_aad9c1c7c703c1339489fc730517c83d4}{set\+Range}} (const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&key\+Range, const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&value\+Range)
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_a0738c485f3c9df9ea1241b7a8bb6a86e}{set\+Key\+Range}} (const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&key\+Range)
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_ada1b2680ba96a5f4175b6d341cf75d23}{set\+Value\+Range}} (const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&value\+Range)
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_afd2083ccfd6987ec94aa7ef8e91ca39a}{set\+Data}} (double key, double value, double z)
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_a8e75eaf8746596319032a93f3d2d0683}{set\+Cell}} (int key\+Index, int value\+Index, double z)
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_ab235ade8a4d64bd3adb26a99b3dd57ee}{recalculate\+Data\+Bounds}} ()
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_a9910ba830e96955bd5c8e5bef1e77ef3}{clear}} ()
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_a350f783260eb9b5de5c7b5e0d5d3e3c2}{fill}} (double z)
+\item 
+bool \mbox{\hyperlink{class_q_c_p_color_map_data_aea88cc75a76ca571acf29b2ba8ac970d}{is\+Empty}} () const
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_aca5b29e0ca2f299c9060fc6e1f74d0c8}{coord\+To\+Cell}} (double key, double value, int $\ast$key\+Index, int $\ast$value\+Index) const
+\item 
+void \mbox{\hyperlink{class_q_c_p_color_map_data_af1a36385c78ab624cd617065602408b6}{cell\+To\+Coord}} (int key\+Index, int value\+Index, double $\ast$key, double $\ast$value) const
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a354e06462023340fbc03894b22499f6d}\label{class_q_c_p_color_map_data_a354e06462023340fbc03894b22499f6d}} 
+int {\bfseries m\+Key\+Size}
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_ae8ee9093632a59f55eb4fc06579ed256}\label{class_q_c_p_color_map_data_ae8ee9093632a59f55eb4fc06579ed256}} 
+int {\bfseries m\+Value\+Size}
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_aaaafd0d7d0f153dbd152f3daf34254ee}\label{class_q_c_p_color_map_data_aaaafd0d7d0f153dbd152f3daf34254ee}} 
+\mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} {\bfseries m\+Key\+Range}
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a225bb96f10c1a27b51ae59249477dbef}\label{class_q_c_p_color_map_data_a225bb96f10c1a27b51ae59249477dbef}} 
+\mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} {\bfseries m\+Value\+Range}
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a10e91aa89ed05bd177b1f81e07b465b8}\label{class_q_c_p_color_map_data_a10e91aa89ed05bd177b1f81e07b465b8}} 
+bool {\bfseries m\+Is\+Empty}
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_ac1682862022f575191351c9825187d39}\label{class_q_c_p_color_map_data_ac1682862022f575191351c9825187d39}} 
+double $\ast$ {\bfseries m\+Data}
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a1798b3dcc0a27091d196bfd156dcb3f2}\label{class_q_c_p_color_map_data_a1798b3dcc0a27091d196bfd156dcb3f2}} 
+\mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} {\bfseries m\+Data\+Bounds}
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_ad3cc682da2ac14e5acdbc05cf4d3d93b}\label{class_q_c_p_color_map_data_ad3cc682da2ac14e5acdbc05cf4d3d93b}} 
+bool {\bfseries m\+Data\+Modified}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_color_map_data_afa9d9eab63af3e6f20f882c8d7cc9f20}\label{class_q_c_p_color_map_data_afa9d9eab63af3e6f20f882c8d7cc9f20}} 
+class {\bfseries Q\+C\+P\+Color\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Holds the two-\/dimensional data of a \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} plottable. 
+
+This class is a data storage for \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}}. It holds a two-\/dimensional array, which \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} then displays as a 2D image in the plot, where the array values are represented by a color, depending on the value.
+
+The size of the array can be controlled via \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}} (or \mbox{\hyperlink{class_q_c_p_color_map_data_ac7ef70e383aface34b44dbde49234b6b}{set\+Key\+Size}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0893c9e3914513048b45e3429ffd16f2}{set\+Value\+Size}}). Which plot coordinates these cells correspond to can be configured with \mbox{\hyperlink{class_q_c_p_color_map_data_aad9c1c7c703c1339489fc730517c83d4}{set\+Range}} (or \mbox{\hyperlink{class_q_c_p_color_map_data_a0738c485f3c9df9ea1241b7a8bb6a86e}{set\+Key\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_ada1b2680ba96a5f4175b6d341cf75d23}{set\+Value\+Range}}).
+
+The data cells can be accessed in two ways\+: They can be directly addressed by an integer index with \mbox{\hyperlink{class_q_c_p_color_map_data_a8e75eaf8746596319032a93f3d2d0683}{set\+Cell}}. This is the fastest method. Alternatively, they can be addressed by their plot coordinate with \mbox{\hyperlink{class_q_c_p_color_map_data_afd2083ccfd6987ec94aa7ef8e91ca39a}{set\+Data}}. plot coordinate to cell index transformations and vice versa are provided by the functions \mbox{\hyperlink{class_q_c_p_color_map_data_aca5b29e0ca2f299c9060fc6e1f74d0c8}{coord\+To\+Cell}} and \mbox{\hyperlink{class_q_c_p_color_map_data_af1a36385c78ab624cd617065602408b6}{cell\+To\+Coord}}.
+
+This class also buffers the minimum and maximum values that are in the data set, to provide \mbox{\hyperlink{class_q_c_p_color_map_a856608fa3dd1cc290bcd5f29a5575774}{Q\+C\+P\+Color\+Map\+::rescale\+Data\+Range}} with the necessary information quickly. Setting a cell to a value that is greater than the current maximum increases this maximum to the new value. However, setting the cell that currently holds the maximum value to a smaller value doesn\textquotesingle{}t decrease the maximum again, because finding the true new maximum would require going through the entire data array, which might be time consuming. The same holds for the data minimum. This functionality is given by \mbox{\hyperlink{class_q_c_p_color_map_data_ab235ade8a4d64bd3adb26a99b3dd57ee}{recalculate\+Data\+Bounds}}, such that you can decide when it is sensible to find the true current minimum and maximum. The method \mbox{\hyperlink{class_q_c_p_color_map_a856608fa3dd1cc290bcd5f29a5575774}{Q\+C\+P\+Color\+Map\+::rescale\+Data\+Range}} offers a convenience parameter {\itshape recalculate\+Data\+Bounds} which may be set to true to automatically call \mbox{\hyperlink{class_q_c_p_color_map_data_ab235ade8a4d64bd3adb26a99b3dd57ee}{recalculate\+Data\+Bounds}} internally. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_aac9d8eb81e18e240d89d56c01933fd23}\label{class_q_c_p_color_map_data_aac9d8eb81e18e240d89d56c01933fd23}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Color\+Map\+Data()}{QCPColorMapData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Q\+C\+P\+Color\+Map\+Data\+::\+Q\+C\+P\+Color\+Map\+Data (\begin{DoxyParamCaption}\item[{int}]{key\+Size,  }\item[{int}]{value\+Size,  }\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{key\+Range,  }\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{value\+Range }\end{DoxyParamCaption})}
+
+Constructs a new \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} instance. The instance has {\itshape key\+Size} cells in the key direction and {\itshape value\+Size} cells in the value direction. These cells will be displayed by the \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} at the coordinates {\itshape key\+Range} and {\itshape value\+Range}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}}, \mbox{\hyperlink{class_q_c_p_color_map_data_ac7ef70e383aface34b44dbde49234b6b}{set\+Key\+Size}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0893c9e3914513048b45e3429ffd16f2}{set\+Value\+Size}}, \mbox{\hyperlink{class_q_c_p_color_map_data_aad9c1c7c703c1339489fc730517c83d4}{set\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0738c485f3c9df9ea1241b7a8bb6a86e}{set\+Key\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_ada1b2680ba96a5f4175b6d341cf75d23}{set\+Value\+Range}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a7f2145d86473263494abb9bf1de20436}\label{class_q_c_p_color_map_data_a7f2145d86473263494abb9bf1de20436}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Color\+Map\+Data()}{QCPColorMapData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Q\+C\+P\+Color\+Map\+Data\+::\+Q\+C\+P\+Color\+Map\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} \&}]{other }\end{DoxyParamCaption})}
+
+Constructs a new \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} instance copying the data and range of {\itshape other}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_af1a36385c78ab624cd617065602408b6}\label{class_q_c_p_color_map_data_af1a36385c78ab624cd617065602408b6}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!cell\+To\+Coord@{cell\+To\+Coord}}
+\index{cell\+To\+Coord@{cell\+To\+Coord}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{cell\+To\+Coord()}{cellToCoord()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::cell\+To\+Coord (\begin{DoxyParamCaption}\item[{int}]{key\+Index,  }\item[{int}]{value\+Index,  }\item[{double $\ast$}]{key,  }\item[{double $\ast$}]{value }\end{DoxyParamCaption}) const}
+
+Transforms cell indices given by {\itshape key\+Index} and {\itshape value\+Index} to cell indices of this \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} instance. The resulting coordinates are returned via the output parameters {\itshape key} and {\itshape value}.
+
+If you are only interested in a key or value coordinate, you may pass 0 as {\itshape key} or {\itshape value}.
+
+\begin{DoxyNote}{Note}
+The \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} always displays the data at equal key/value intervals, even if the key or value axis is set to a logarithmic scaling. If you want to use \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} with logarithmic axes, you shouldn\textquotesingle{}t use the \mbox{\hyperlink{class_q_c_p_color_map_data_af1a36385c78ab624cd617065602408b6}{Q\+C\+P\+Color\+Map\+Data\+::cell\+To\+Coord}} method as it uses a linear transformation to determine the cell index.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_aca5b29e0ca2f299c9060fc6e1f74d0c8}{coord\+To\+Cell}}, \mbox{\hyperlink{class_q_c_p_axis_a536ef8f624cac59b6b6fdcb495723c57}{Q\+C\+P\+Axis\+::pixel\+To\+Coord}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a9910ba830e96955bd5c8e5bef1e77ef3}\label{class_q_c_p_color_map_data_a9910ba830e96955bd5c8e5bef1e77ef3}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!clear@{clear}}
+\index{clear@{clear}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Frees the internal data memory.
+
+This is equivalent to calling \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size(0, 0)}}. \mbox{\Hypertarget{class_q_c_p_color_map_data_aca5b29e0ca2f299c9060fc6e1f74d0c8}\label{class_q_c_p_color_map_data_aca5b29e0ca2f299c9060fc6e1f74d0c8}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!coord\+To\+Cell@{coord\+To\+Cell}}
+\index{coord\+To\+Cell@{coord\+To\+Cell}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{coord\+To\+Cell()}{coordToCell()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::coord\+To\+Cell (\begin{DoxyParamCaption}\item[{double}]{key,  }\item[{double}]{value,  }\item[{int $\ast$}]{key\+Index,  }\item[{int $\ast$}]{value\+Index }\end{DoxyParamCaption}) const}
+
+Transforms plot coordinates given by {\itshape key} and {\itshape value} to cell indices of this \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} instance. The resulting cell indices are returned via the output parameters {\itshape key\+Index} and {\itshape value\+Index}.
+
+The retrieved key/value cell indices can then be used for example with \mbox{\hyperlink{class_q_c_p_color_map_data_a8e75eaf8746596319032a93f3d2d0683}{set\+Cell}}.
+
+If you are only interested in a key or value index, you may pass 0 as {\itshape value\+Index} or {\itshape key\+Index}.
+
+\begin{DoxyNote}{Note}
+The \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} always displays the data at equal key/value intervals, even if the key or value axis is set to a logarithmic scaling. If you want to use \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} with logarithmic axes, you shouldn\textquotesingle{}t use the \mbox{\hyperlink{class_q_c_p_color_map_data_aca5b29e0ca2f299c9060fc6e1f74d0c8}{Q\+C\+P\+Color\+Map\+Data\+::coord\+To\+Cell}} method as it uses a linear transformation to determine the cell index.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_af1a36385c78ab624cd617065602408b6}{cell\+To\+Coord}}, \mbox{\hyperlink{class_q_c_p_axis_af15d1b3a7f7e9b53d759d3ccff1fe4b4}{Q\+C\+P\+Axis\+::coord\+To\+Pixel}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a350f783260eb9b5de5c7b5e0d5d3e3c2}\label{class_q_c_p_color_map_data_a350f783260eb9b5de5c7b5e0d5d3e3c2}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!fill@{fill}}
+\index{fill@{fill}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{fill()}{fill()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::fill (\begin{DoxyParamCaption}\item[{double}]{z }\end{DoxyParamCaption})}
+
+Sets all cells to the value {\itshape z}. \mbox{\Hypertarget{class_q_c_p_color_map_data_aea88cc75a76ca571acf29b2ba8ac970d}\label{class_q_c_p_color_map_data_aea88cc75a76ca571acf29b2ba8ac970d}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!is\+Empty@{is\+Empty}}
+\index{is\+Empty@{is\+Empty}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{is\+Empty()}{isEmpty()}}
+{\footnotesize\ttfamily bool Q\+C\+P\+Color\+Map\+Data\+::is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns whether this instance carries no data. This is equivalent to having a size where at least one of the dimensions is 0 (see \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}}). \mbox{\Hypertarget{class_q_c_p_color_map_data_afdf4dd1b2f5714234fe84709b85c2a8d}\label{class_q_c_p_color_map_data_afdf4dd1b2f5714234fe84709b85c2a8d}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!operator=@{operator=}}
+\index{operator=@{operator=}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} \& Q\+C\+P\+Color\+Map\+Data\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}} \&}]{other }\end{DoxyParamCaption})}
+
+Overwrites this color map data instance with the data stored in {\itshape other}. \mbox{\Hypertarget{class_q_c_p_color_map_data_ab235ade8a4d64bd3adb26a99b3dd57ee}\label{class_q_c_p_color_map_data_ab235ade8a4d64bd3adb26a99b3dd57ee}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!recalculate\+Data\+Bounds@{recalculate\+Data\+Bounds}}
+\index{recalculate\+Data\+Bounds@{recalculate\+Data\+Bounds}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{recalculate\+Data\+Bounds()}{recalculateDataBounds()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::recalculate\+Data\+Bounds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Goes through the data and updates the buffered minimum and maximum data values.
+
+Calling this method is only advised if you are about to call \mbox{\hyperlink{class_q_c_p_color_map_a856608fa3dd1cc290bcd5f29a5575774}{Q\+C\+P\+Color\+Map\+::rescale\+Data\+Range}} and can not guarantee that the cells holding the maximum or minimum data haven\textquotesingle{}t been overwritten with a smaller or larger value respectively, since the buffered maximum/minimum values have been updated the last time. Why this is the case is explained in the class description (\mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}}).
+
+Note that the method \mbox{\hyperlink{class_q_c_p_color_map_a856608fa3dd1cc290bcd5f29a5575774}{Q\+C\+P\+Color\+Map\+::rescale\+Data\+Range}} provides a parameter {\itshape recalculate\+Data\+Bounds} for convenience. Setting this to true will call this method for you, before doing the rescale. \mbox{\Hypertarget{class_q_c_p_color_map_data_a8e75eaf8746596319032a93f3d2d0683}\label{class_q_c_p_color_map_data_a8e75eaf8746596319032a93f3d2d0683}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!set\+Cell@{set\+Cell}}
+\index{set\+Cell@{set\+Cell}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{set\+Cell()}{setCell()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::set\+Cell (\begin{DoxyParamCaption}\item[{int}]{key\+Index,  }\item[{int}]{value\+Index,  }\item[{double}]{z }\end{DoxyParamCaption})}
+
+Sets the data of the cell with indices {\itshape key\+Index} and {\itshape value\+Index} to {\itshape z}. The indices enumerate the cells starting from zero, up to the map\textquotesingle{}s size-\/1 in the respective dimension (see \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}}).
+
+In the standard plot configuration (horizontal key axis and vertical value axis, both not range-\/reversed), the cell with indices (0, 0) is in the bottom left corner and the cell with indices (key\+Size-\/1, value\+Size-\/1) is in the top right corner of the color map.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_afd2083ccfd6987ec94aa7ef8e91ca39a}{set\+Data}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_afd2083ccfd6987ec94aa7ef8e91ca39a}\label{class_q_c_p_color_map_data_afd2083ccfd6987ec94aa7ef8e91ca39a}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!set\+Data@{set\+Data}}
+\index{set\+Data@{set\+Data}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{set\+Data()}{setData()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::set\+Data (\begin{DoxyParamCaption}\item[{double}]{key,  }\item[{double}]{value,  }\item[{double}]{z }\end{DoxyParamCaption})}
+
+Sets the data of the cell, which lies at the plot coordinates given by {\itshape key} and {\itshape value}, to {\itshape z}.
+
+\begin{DoxyNote}{Note}
+The \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} always displays the data at equal key/value intervals, even if the key or value axis is set to a logarithmic scaling. If you want to use \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} with logarithmic axes, you shouldn\textquotesingle{}t use the \mbox{\hyperlink{class_q_c_p_color_map_data_afd2083ccfd6987ec94aa7ef8e91ca39a}{Q\+C\+P\+Color\+Map\+Data\+::set\+Data}} method as it uses a linear transformation to determine the cell index. Rather directly access the cell index with \mbox{\hyperlink{class_q_c_p_color_map_data_a8e75eaf8746596319032a93f3d2d0683}{Q\+C\+P\+Color\+Map\+Data\+::set\+Cell}}.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_a8e75eaf8746596319032a93f3d2d0683}{set\+Cell}}, \mbox{\hyperlink{class_q_c_p_color_map_data_aad9c1c7c703c1339489fc730517c83d4}{set\+Range}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a0738c485f3c9df9ea1241b7a8bb6a86e}\label{class_q_c_p_color_map_data_a0738c485f3c9df9ea1241b7a8bb6a86e}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!set\+Key\+Range@{set\+Key\+Range}}
+\index{set\+Key\+Range@{set\+Key\+Range}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{set\+Key\+Range()}{setKeyRange()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::set\+Key\+Range (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{key\+Range }\end{DoxyParamCaption})}
+
+Sets the coordinate range the data shall be distributed over in the key dimension. Together with the value range, This defines the rectangular area covered by the color map in plot coordinates.
+
+The outer cells will be centered on the range boundaries given to this function. For example, if the key size (\mbox{\hyperlink{class_q_c_p_color_map_data_ac7ef70e383aface34b44dbde49234b6b}{set\+Key\+Size}}) is 3 and {\itshape key\+Range} is set to {\ttfamily \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range(2, 3)}}} there will be cells centered on the key coordinates 2, 2.\+5 and 3.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_aad9c1c7c703c1339489fc730517c83d4}{set\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_ada1b2680ba96a5f4175b6d341cf75d23}{set\+Value\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_ac7ef70e383aface34b44dbde49234b6b}\label{class_q_c_p_color_map_data_ac7ef70e383aface34b44dbde49234b6b}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!set\+Key\+Size@{set\+Key\+Size}}
+\index{set\+Key\+Size@{set\+Key\+Size}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{set\+Key\+Size()}{setKeySize()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::set\+Key\+Size (\begin{DoxyParamCaption}\item[{int}]{key\+Size }\end{DoxyParamCaption})}
+
+Resizes the data array to have {\itshape key\+Size} cells in the key dimension.
+
+The current data is discarded and the map cells are set to 0, unless the map had already the requested size.
+
+Setting {\itshape key\+Size} to zero frees the internal data array and \mbox{\hyperlink{class_q_c_p_color_map_data_aea88cc75a76ca571acf29b2ba8ac970d}{is\+Empty}} returns true.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_a0738c485f3c9df9ea1241b7a8bb6a86e}{set\+Key\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0893c9e3914513048b45e3429ffd16f2}{set\+Value\+Size}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_aad9c1c7c703c1339489fc730517c83d4}\label{class_q_c_p_color_map_data_aad9c1c7c703c1339489fc730517c83d4}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!set\+Range@{set\+Range}}
+\index{set\+Range@{set\+Range}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{set\+Range()}{setRange()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::set\+Range (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{key\+Range,  }\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{value\+Range }\end{DoxyParamCaption})}
+
+Sets the coordinate ranges the data shall be distributed over. This defines the rectangular area covered by the color map in plot coordinates.
+
+The outer cells will be centered on the range boundaries given to this function. For example, if the key size (\mbox{\hyperlink{class_q_c_p_color_map_data_ac7ef70e383aface34b44dbde49234b6b}{set\+Key\+Size}}) is 3 and {\itshape key\+Range} is set to {\ttfamily \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range(2, 3)}}} there will be cells centered on the key coordinates 2, 2.\+5 and 3.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}\label{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!set\+Size@{set\+Size}}
+\index{set\+Size@{set\+Size}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{set\+Size()}{setSize()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::set\+Size (\begin{DoxyParamCaption}\item[{int}]{key\+Size,  }\item[{int}]{value\+Size }\end{DoxyParamCaption})}
+
+Resizes the data array to have {\itshape key\+Size} cells in the key dimension and {\itshape value\+Size} cells in the value dimension.
+
+The current data is discarded and the map cells are set to 0, unless the map had already the requested size.
+
+Setting at least one of {\itshape key\+Size} or {\itshape value\+Size} to zero frees the internal data array and \mbox{\hyperlink{class_q_c_p_color_map_data_aea88cc75a76ca571acf29b2ba8ac970d}{is\+Empty}} returns true.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_aad9c1c7c703c1339489fc730517c83d4}{set\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_ac7ef70e383aface34b44dbde49234b6b}{set\+Key\+Size}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0893c9e3914513048b45e3429ffd16f2}{set\+Value\+Size}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_ada1b2680ba96a5f4175b6d341cf75d23}\label{class_q_c_p_color_map_data_ada1b2680ba96a5f4175b6d341cf75d23}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!set\+Value\+Range@{set\+Value\+Range}}
+\index{set\+Value\+Range@{set\+Value\+Range}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{set\+Value\+Range()}{setValueRange()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::set\+Value\+Range (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{value\+Range }\end{DoxyParamCaption})}
+
+Sets the coordinate range the data shall be distributed over in the value dimension. Together with the key range, This defines the rectangular area covered by the color map in plot coordinates.
+
+The outer cells will be centered on the range boundaries given to this function. For example, if the value size (\mbox{\hyperlink{class_q_c_p_color_map_data_a0893c9e3914513048b45e3429ffd16f2}{set\+Value\+Size}}) is 3 and {\itshape value\+Range} is set to {\ttfamily \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range(2, 3)}}} there will be cells centered on the value coordinates 2, 2.\+5 and 3.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_aad9c1c7c703c1339489fc730517c83d4}{set\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0738c485f3c9df9ea1241b7a8bb6a86e}{set\+Key\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_color_map_data_a0893c9e3914513048b45e3429ffd16f2}\label{class_q_c_p_color_map_data_a0893c9e3914513048b45e3429ffd16f2}} 
+\index{Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}!set\+Value\+Size@{set\+Value\+Size}}
+\index{set\+Value\+Size@{set\+Value\+Size}!Q\+C\+P\+Color\+Map\+Data@{Q\+C\+P\+Color\+Map\+Data}}
+\subsubsection{\texorpdfstring{set\+Value\+Size()}{setValueSize()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Color\+Map\+Data\+::set\+Value\+Size (\begin{DoxyParamCaption}\item[{int}]{value\+Size }\end{DoxyParamCaption})}
+
+Resizes the data array to have {\itshape value\+Size} cells in the value dimension.
+
+The current data is discarded and the map cells are set to 0, unless the map had already the requested size.
+
+Setting {\itshape value\+Size} to zero frees the internal data array and \mbox{\hyperlink{class_q_c_p_color_map_data_aea88cc75a76ca571acf29b2ba8ac970d}{is\+Empty}} returns true.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_color_map_data_ada1b2680ba96a5f4175b6d341cf75d23}{set\+Value\+Range}}, \mbox{\hyperlink{class_q_c_p_color_map_data_a0d9ff35c299d0478b682bfbcdd9c097e}{set\+Size}}, \mbox{\hyperlink{class_q_c_p_color_map_data_ac7ef70e383aface34b44dbde49234b6b}{set\+Key\+Size}} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8h}{qcustomplot.\+h}}\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8cpp}{qcustomplot.\+cpp}}\end{DoxyCompactItemize}

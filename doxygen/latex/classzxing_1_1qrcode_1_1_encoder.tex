@@ -1,0 +1,111 @@
+\hypertarget{classzxing_1_1qrcode_1_1_encoder}{}\section{zxing\+:\+:qrcode\+:\+:Encoder Class Reference}
+\label{classzxing_1_1qrcode_1_1_encoder}\index{zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a3de62451ddee1a743cd6a501b6c006b5}\label{classzxing_1_1qrcode_1_1_encoder_a3de62451ddee1a743cd6a501b6c006b5}} 
+static \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1qrcode_1_1_q_r_code}{Q\+R\+Code}} $>$ {\bfseries encode} (const std\+::string \&content, \mbox{\hyperlink{classzxing_1_1qrcode_1_1_error_correction_level}{Error\+Correction\+Level}} \&ec\+Level)
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_ab5902d25fe27d24f130bdf4306383792}\label{classzxing_1_1qrcode_1_1_encoder_ab5902d25fe27d24f130bdf4306383792}} 
+static \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1qrcode_1_1_q_r_code}{Q\+R\+Code}} $>$ {\bfseries encode} (const std\+::string \&content, \mbox{\hyperlink{classzxing_1_1qrcode_1_1_error_correction_level}{Error\+Correction\+Level}} \&ec\+Level, const \mbox{\hyperlink{classzxing_1_1_encode_hint}{Encode\+Hint}} $\ast$hints)
+\item 
+static int \mbox{\hyperlink{classzxing_1_1qrcode_1_1_encoder_aba2add9a12cbce53e88816bdfc278e3b}{get\+Alphanumeric\+Code}} (int code)
+\item 
+static \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mode}{Mode}} \mbox{\hyperlink{classzxing_1_1qrcode_1_1_encoder_a48dcb9566662fce557554140f7bc4018}{choose\+Mode}} (const std\+::string \&content, const std\+::string \&encoding=\char`\"{}\char`\"{})
+\item 
+static void \mbox{\hyperlink{classzxing_1_1qrcode_1_1_encoder_acad10e61c5d9a60c2b4b990d7e1c5f4d}{append\+Mode\+Info}} (const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mode}{Mode}} \&mode, \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&bits)
+\item 
+static void \mbox{\hyperlink{classzxing_1_1qrcode_1_1_encoder_a49f0483c907f31535e9e55737b52305f}{append\+Length\+Info}} (int num\+Letters, const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_version}{Version}} \&version, const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mode}{Mode}} \&mode, \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&bits)
+\item 
+static void \mbox{\hyperlink{classzxing_1_1qrcode_1_1_encoder_a433ec7881304bbc5e64ab52417f04ad8}{append\+Bytes}} (const std\+::string \&content, \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mode}{Mode}} \&mode, \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&bits, const std\+::string \&encoding)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_aa23da89acf457013f3c9ea922829ff28}\label{classzxing_1_1qrcode_1_1_encoder_aa23da89acf457013f3c9ea922829ff28}} 
+static const std\+::string {\bfseries D\+E\+F\+A\+U\+L\+T\+\_\+\+B\+Y\+T\+E\+\_\+\+M\+O\+D\+E\+\_\+\+E\+N\+C\+O\+D\+I\+NG} = \char`\"{}I\+SO-\/8859-\/1\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classzxing_1_1qrcode_1_1_encoder_acded0fc88e15822a03865e6c79591770}{terminate\+Bits}} (int num\+Data\+Bytes, \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&bits)
+\item 
+static void \mbox{\hyperlink{classzxing_1_1qrcode_1_1_encoder_a2ca7def3abfac0b589fb2192bb33598d}{get\+Num\+Data\+Bytes\+And\+Num\+E\+C\+Bytes\+For\+Block\+ID}} (int num\+Total\+Bytes, int num\+Data\+Bytes, int num\+R\+S\+Blocks, int block\+ID, std\+::vector$<$ int $>$ \&num\+Data\+Bytes\+In\+Block, std\+::vector$<$ int $>$ \&num\+E\+C\+Bytes\+In\+Block)
+\item 
+static \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} $\ast$ \mbox{\hyperlink{classzxing_1_1qrcode_1_1_encoder_a56e0adac48f552a92621f7510df2412f}{interleave\+With\+E\+C\+Bytes}} (const \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&bits, int num\+Total\+Bytes, int num\+Data\+Bytes, int num\+R\+S\+Blocks)
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a2beab277aa8d23fba54503850f664aac}\label{classzxing_1_1qrcode_1_1_encoder_a2beab277aa8d23fba54503850f664aac}} 
+static \mbox{\hyperlink{classzxing_1_1_array_ref}{Array\+Ref}}$<$ byte $>$ {\bfseries generate\+E\+C\+Bytes} (const std\+::vector$<$ byte $>$ \&data\+Bytes, int num\+Ec\+Bytes\+In\+Block)
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_ae2d7a1f1874273d3bcd0b8b3f49d0e05}\label{classzxing_1_1qrcode_1_1_encoder_ae2d7a1f1874273d3bcd0b8b3f49d0e05}} 
+static void {\bfseries append\+Numeric\+Bytes} (const std\+::string \&content, \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&bits)
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a97885af891389883ab53eef452e4c4bc}\label{classzxing_1_1qrcode_1_1_encoder_a97885af891389883ab53eef452e4c4bc}} 
+static void {\bfseries append\+Alphanumeric\+Bytes} (const std\+::string \&content, \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&bits)
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a2e0137bb5e526ad43a2ad535b2b5bc21}\label{classzxing_1_1qrcode_1_1_encoder_a2e0137bb5e526ad43a2ad535b2b5bc21}} 
+static void {\bfseries append8\+Bit\+Bytes} (const std\+::string \&content, \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&bits, const std\+::string \&encoding)
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a9a26bea95958a57177ed9131fb6d15f3}\label{classzxing_1_1qrcode_1_1_encoder_a9a26bea95958a57177ed9131fb6d15f3}} 
+static void {\bfseries append\+Kanji\+Bytes} (const std\+::string \&content, \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&bits)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a433ec7881304bbc5e64ab52417f04ad8}\label{classzxing_1_1qrcode_1_1_encoder_a433ec7881304bbc5e64ab52417f04ad8}} 
+\index{zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}!append\+Bytes@{append\+Bytes}}
+\index{append\+Bytes@{append\+Bytes}!zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}}
+\subsubsection{\texorpdfstring{append\+Bytes()}{appendBytes()}}
+{\footnotesize\ttfamily void zxing\+::qrcode\+::\+Encoder\+::append\+Bytes (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{content,  }\item[{\mbox{\hyperlink{classzxing_1_1qrcode_1_1_mode}{Mode}} \&}]{mode,  }\item[{\mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&}]{bits,  }\item[{const std\+::string \&}]{encoding }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Append \char`\"{}bytes\char`\"{} in \char`\"{}mode\char`\"{} mode (encoding) into \char`\"{}bits\char`\"{}. On success, store the result in \char`\"{}bits\char`\"{}. \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a49f0483c907f31535e9e55737b52305f}\label{classzxing_1_1qrcode_1_1_encoder_a49f0483c907f31535e9e55737b52305f}} 
+\index{zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}!append\+Length\+Info@{append\+Length\+Info}}
+\index{append\+Length\+Info@{append\+Length\+Info}!zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}}
+\subsubsection{\texorpdfstring{append\+Length\+Info()}{appendLengthInfo()}}
+{\footnotesize\ttfamily void zxing\+::qrcode\+::\+Encoder\+::append\+Length\+Info (\begin{DoxyParamCaption}\item[{int}]{num\+Letters,  }\item[{const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_version}{Version}} \&}]{version,  }\item[{const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mode}{Mode}} \&}]{mode,  }\item[{\mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&}]{bits }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Append length info. On success, store the result in \char`\"{}bits\char`\"{}. \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_acad10e61c5d9a60c2b4b990d7e1c5f4d}\label{classzxing_1_1qrcode_1_1_encoder_acad10e61c5d9a60c2b4b990d7e1c5f4d}} 
+\index{zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}!append\+Mode\+Info@{append\+Mode\+Info}}
+\index{append\+Mode\+Info@{append\+Mode\+Info}!zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}}
+\subsubsection{\texorpdfstring{append\+Mode\+Info()}{appendModeInfo()}}
+{\footnotesize\ttfamily void zxing\+::qrcode\+::\+Encoder\+::append\+Mode\+Info (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mode}{Mode}} \&}]{mode,  }\item[{\mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&}]{bits }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Append mode info. On success, store the result in \char`\"{}bits\char`\"{}. \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a48dcb9566662fce557554140f7bc4018}\label{classzxing_1_1qrcode_1_1_encoder_a48dcb9566662fce557554140f7bc4018}} 
+\index{zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}!choose\+Mode@{choose\+Mode}}
+\index{choose\+Mode@{choose\+Mode}!zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}}
+\subsubsection{\texorpdfstring{choose\+Mode()}{chooseMode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mode}{Mode}} zxing\+::qrcode\+::\+Encoder\+::choose\+Mode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{content,  }\item[{const std\+::string \&}]{encoding = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Choose the best mode by examining the content. Note that \textquotesingle{}encoding\textquotesingle{} is used as a hint; if it is Shift\+\_\+\+J\+IS, and the input is only double-\/byte Kanji, then we return \mbox{\hyperlink{}{Mode\#\+K\+A\+N\+JI}}. \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_aba2add9a12cbce53e88816bdfc278e3b}\label{classzxing_1_1qrcode_1_1_encoder_aba2add9a12cbce53e88816bdfc278e3b}} 
+\index{zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}!get\+Alphanumeric\+Code@{get\+Alphanumeric\+Code}}
+\index{get\+Alphanumeric\+Code@{get\+Alphanumeric\+Code}!zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}}
+\subsubsection{\texorpdfstring{get\+Alphanumeric\+Code()}{getAlphanumericCode()}}
+{\footnotesize\ttfamily int zxing\+::qrcode\+::\+Encoder\+::get\+Alphanumeric\+Code (\begin{DoxyParamCaption}\item[{int}]{code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+the code point of the table used in alphanumeric mode or -\/1 if there is no corresponding code in the table. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a2ca7def3abfac0b589fb2192bb33598d}\label{classzxing_1_1qrcode_1_1_encoder_a2ca7def3abfac0b589fb2192bb33598d}} 
+\index{zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}!get\+Num\+Data\+Bytes\+And\+Num\+E\+C\+Bytes\+For\+Block\+ID@{get\+Num\+Data\+Bytes\+And\+Num\+E\+C\+Bytes\+For\+Block\+ID}}
+\index{get\+Num\+Data\+Bytes\+And\+Num\+E\+C\+Bytes\+For\+Block\+ID@{get\+Num\+Data\+Bytes\+And\+Num\+E\+C\+Bytes\+For\+Block\+ID}!zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}}
+\subsubsection{\texorpdfstring{get\+Num\+Data\+Bytes\+And\+Num\+E\+C\+Bytes\+For\+Block\+I\+D()}{getNumDataBytesAndNumECBytesForBlockID()}}
+{\footnotesize\ttfamily void zxing\+::qrcode\+::\+Encoder\+::get\+Num\+Data\+Bytes\+And\+Num\+E\+C\+Bytes\+For\+Block\+ID (\begin{DoxyParamCaption}\item[{int}]{num\+Total\+Bytes,  }\item[{int}]{num\+Data\+Bytes,  }\item[{int}]{num\+R\+S\+Blocks,  }\item[{int}]{block\+ID,  }\item[{std\+::vector$<$ int $>$ \&}]{num\+Data\+Bytes\+In\+Block,  }\item[{std\+::vector$<$ int $>$ \&}]{num\+E\+C\+Bytes\+In\+Block }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Get number of data bytes and number of error correction bytes for block id \char`\"{}block\+I\+D\char`\"{}. Store the result in \char`\"{}num\+Data\+Bytes\+In\+Block\char`\"{}, and \char`\"{}num\+E\+C\+Bytes\+In\+Block\char`\"{}. See table 12 in 8.\+5.\+1 of J\+I\+S\+X0510\+:2004 (p.\+30) \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_a56e0adac48f552a92621f7510df2412f}\label{classzxing_1_1qrcode_1_1_encoder_a56e0adac48f552a92621f7510df2412f}} 
+\index{zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}!interleave\+With\+E\+C\+Bytes@{interleave\+With\+E\+C\+Bytes}}
+\index{interleave\+With\+E\+C\+Bytes@{interleave\+With\+E\+C\+Bytes}!zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}}
+\subsubsection{\texorpdfstring{interleave\+With\+E\+C\+Bytes()}{interleaveWithECBytes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} $\ast$ zxing\+::qrcode\+::\+Encoder\+::interleave\+With\+E\+C\+Bytes (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&}]{bits,  }\item[{int}]{num\+Total\+Bytes,  }\item[{int}]{num\+Data\+Bytes,  }\item[{int}]{num\+R\+S\+Blocks }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Interleave \char`\"{}bits\char`\"{} with corresponding error correction bytes. On success, store the result in \char`\"{}result\char`\"{}. The interleave rule is complicated. See 8.\+6 of J\+I\+S\+X0510\+:2004 (p.\+37) for details. ????? are we sure? \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_encoder_acded0fc88e15822a03865e6c79591770}\label{classzxing_1_1qrcode_1_1_encoder_acded0fc88e15822a03865e6c79591770}} 
+\index{zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}!terminate\+Bits@{terminate\+Bits}}
+\index{terminate\+Bits@{terminate\+Bits}!zxing\+::qrcode\+::\+Encoder@{zxing\+::qrcode\+::\+Encoder}}
+\subsubsection{\texorpdfstring{terminate\+Bits()}{terminateBits()}}
+{\footnotesize\ttfamily void zxing\+::qrcode\+::\+Encoder\+::terminate\+Bits (\begin{DoxyParamCaption}\item[{int}]{num\+Data\+Bytes,  }\item[{\mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} \&}]{bits }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Terminate bits as described in 8.\+4.\+8 and 8.\+4.\+9 of J\+I\+S\+X0510\+:2004 (p.\+24). 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/qrcode/encoder/Encoder.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/qrcode/encoder/Q\+R\+Encoder.\+cpp\end{DoxyCompactItemize}

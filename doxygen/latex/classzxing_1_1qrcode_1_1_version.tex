@@ -1,0 +1,80 @@
+\hypertarget{classzxing_1_1qrcode_1_1_version}{}\section{zxing\+:\+:qrcode\+:\+:Version Class Reference}
+\label{classzxing_1_1qrcode_1_1_version}\index{zxing\+::qrcode\+::\+Version@{zxing\+::qrcode\+::\+Version}}
+Inheritance diagram for zxing\+:\+:qrcode\+:\+:Version\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classzxing_1_1qrcode_1_1_version}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_a50252be321fb7b25a26b7666ccb9a998}\label{classzxing_1_1qrcode_1_1_version_a50252be321fb7b25a26b7666ccb9a998}} 
+int {\bfseries get\+Version\+Number} () const
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_aec794cfa96973ccec23b7ac1bd12ed47}\label{classzxing_1_1qrcode_1_1_version_aec794cfa96973ccec23b7ac1bd12ed47}} 
+std\+::vector$<$ int $>$ \& {\bfseries get\+Alignment\+Pattern\+Centers} ()
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_ae00f4413dfc99337b9481808e39c60b8}\label{classzxing_1_1qrcode_1_1_version_ae00f4413dfc99337b9481808e39c60b8}} 
+int {\bfseries get\+Total\+Codewords} ()
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_a39b8791a6e462470fcf1e6e1f892d8f8}\label{classzxing_1_1qrcode_1_1_version_a39b8791a6e462470fcf1e6e1f892d8f8}} 
+int {\bfseries get\+Dimension\+For\+Version} ()
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_a19f010159b4884e878d674fa0b9641f6}\label{classzxing_1_1qrcode_1_1_version_a19f010159b4884e878d674fa0b9641f6}} 
+\mbox{\hyperlink{classzxing_1_1qrcode_1_1_e_c_blocks}{E\+C\+Blocks}} \& {\bfseries get\+E\+C\+Blocks\+For\+Level} (const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_error_correction_level}{Error\+Correction\+Level}} \&ec\+Level) const
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_acdd5b4736b7c8137adab2b6be4a00232}\label{classzxing_1_1qrcode_1_1_version_acdd5b4736b7c8137adab2b6be4a00232}} 
+\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} $>$ {\bfseries build\+Function\+Pattern} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_a41a1f541bfb448eab35000af20d84f30}\label{classzxing_1_1qrcode_1_1_version_a41a1f541bfb448eab35000af20d84f30}} 
+static \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1qrcode_1_1_version}{Version}} $>$ {\bfseries get\+Provisional\+Version\+For\+Dimension} (int dimension)
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_ab176eb5a8ce4169b475dd659ed3ed416}\label{classzxing_1_1qrcode_1_1_version_ab176eb5a8ce4169b475dd659ed3ed416}} 
+static \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1qrcode_1_1_version}{Version}} $>$ {\bfseries get\+Version\+For\+Number} (int version\+Number)
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_a5afc0999bfa38a5031da63f1029827d9}\label{classzxing_1_1qrcode_1_1_version_a5afc0999bfa38a5031da63f1029827d9}} 
+static \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1qrcode_1_1_version}{Version}} $>$ {\bfseries decode\+Version\+Information} (unsigned int version\+Bits)
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_a0a083d64bd0bd148c21c8b43c3b1db72}\label{classzxing_1_1qrcode_1_1_version_a0a083d64bd0bd148c21c8b43c3b1db72}} 
+static int {\bfseries build\+Versions} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int {\bfseries V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+E\+C\+O\+D\+E\+\_\+\+I\+N\+FO} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_a7ab210c67a319ff0f06ac7e91a2eade7}\label{classzxing_1_1qrcode_1_1_version_a7ab210c67a319ff0f06ac7e91a2eade7}} 
+static int {\bfseries N\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+E\+C\+O\+D\+E\+\_\+\+I\+N\+F\+OS} = 34
+\item 
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_ad5bbfae5b8164ba937947fb3de366438}\label{classzxing_1_1qrcode_1_1_version_ad5bbfae5b8164ba937947fb3de366438}} 
+static std\+::vector$<$ \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1qrcode_1_1_version}{Version}} $>$ $>$ {\bfseries V\+E\+R\+S\+I\+O\+NS}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_version_a400c02636eb6f59c6777994935be111e}\label{classzxing_1_1qrcode_1_1_version_a400c02636eb6f59c6777994935be111e}} 
+\index{zxing\+::qrcode\+::\+Version@{zxing\+::qrcode\+::\+Version}!V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+E\+C\+O\+D\+E\+\_\+\+I\+N\+FO@{V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+E\+C\+O\+D\+E\+\_\+\+I\+N\+FO}}
+\index{V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+E\+C\+O\+D\+E\+\_\+\+I\+N\+FO@{V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+E\+C\+O\+D\+E\+\_\+\+I\+N\+FO}!zxing\+::qrcode\+::\+Version@{zxing\+::qrcode\+::\+Version}}
+\subsubsection{\texorpdfstring{V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+E\+C\+O\+D\+E\+\_\+\+I\+N\+FO}{VERSION\_DECODE\_INFO}}
+{\footnotesize\ttfamily unsigned int zxing\+::qrcode\+::\+Version\+::\+V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+E\+C\+O\+D\+E\+\_\+\+I\+N\+FO\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{ 0x07C94, 0x085BC, 0x09A99, 0x0A4D3, 0x0BBF6, 0x0C762, 0x0D847, 0x0E60D,
+    0x0F928, 0x10B78, 0x1145D, 0x12A17, 0x13532, 0x149A6, 0x15683, 0x168C9, 0x177EC, 0x18EC4, 0x191E1, 
+      0x1AFAB,
+    0x1B08E, 0x1CC1A, 0x1D33F, 0x1ED75, 0x1F250, 0x209D5, 0x216F0, 0x228BA, 0x2379F, 0x24B0B, 0x2542E, 
+      0x26A64,
+    0x27541, 0x28C69
+                                              \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/qrcode/Version.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/qrcode/Q\+R\+Version.\+cpp\end{DoxyCompactItemize}

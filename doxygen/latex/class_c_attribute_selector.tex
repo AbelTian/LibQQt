@@ -1,0 +1,76 @@
+\hypertarget{class_c_attribute_selector}{}\section{C\+Attribute\+Selector Class Reference}
+\label{class_c_attribute_selector}\index{C\+Attribute\+Selector@{C\+Attribute\+Selector}}
+Inheritance diagram for C\+Attribute\+Selector\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_c_attribute_selector}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44d}{T\+Operator}} \{ \newline
+\mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da75b5c40ea0fbcf014bf900674e56b581}{E\+Exists}}, 
+\mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da7b3bd5911fed89bddae3178158967acf}{E\+Equals}}, 
+\mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da2a6c1502443c79801656539c86fbde73}{E\+Includes}}, 
+\mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44dadf5410ac7e1eedb558c21b2c20b65d0d}{E\+Dash\+Match}}, 
+\newline
+\mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da57a3bd166e2c1da7dd7472ce23636203}{E\+Prefix}}, 
+\mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da496c6a55d2ca0ea273def788f132b091}{E\+Suffix}}, 
+\mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44daa792f945d982ebb1e00ad7d62d21e48f}{E\+Sub\+String}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_c_attribute_selector_a42aba4080b85e73e38a0abc987c2beea}\label{class_c_attribute_selector_a42aba4080b85e73e38a0abc987c2beea}} 
+{\bfseries C\+Attribute\+Selector} (\mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44d}{T\+Operator}} a\+Op, std\+::string a\+Key, std\+::string a\+Value=\char`\"{}\char`\"{})
+\item 
+\mbox{\Hypertarget{class_c_attribute_selector_a566f3cd29efcd57dce144d0073118431}\label{class_c_attribute_selector_a566f3cd29efcd57dce144d0073118431}} 
+virtual bool {\bfseries match} (\mbox{\hyperlink{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}{Gumbo\+Node}} $\ast$ap\+Node)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44d}\label{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44d}} 
+\index{C\+Attribute\+Selector@{C\+Attribute\+Selector}!T\+Operator@{T\+Operator}}
+\index{T\+Operator@{T\+Operator}!C\+Attribute\+Selector@{C\+Attribute\+Selector}}
+\subsubsection{\texorpdfstring{T\+Operator}{TOperator}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44d}{C\+Attribute\+Selector\+::\+T\+Operator}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+Exists@{E\+Exists}!C\+Attribute\+Selector@{C\+Attribute\+Selector}}\index{C\+Attribute\+Selector@{C\+Attribute\+Selector}!E\+Exists@{E\+Exists}}}\mbox{\Hypertarget{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da75b5c40ea0fbcf014bf900674e56b581}\label{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da75b5c40ea0fbcf014bf900674e56b581}} 
+E\+Exists&是否存在 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+Equals@{E\+Equals}!C\+Attribute\+Selector@{C\+Attribute\+Selector}}\index{C\+Attribute\+Selector@{C\+Attribute\+Selector}!E\+Equals@{E\+Equals}}}\mbox{\Hypertarget{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da7b3bd5911fed89bddae3178158967acf}\label{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da7b3bd5911fed89bddae3178158967acf}} 
+E\+Equals&是否相等 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+Includes@{E\+Includes}!C\+Attribute\+Selector@{C\+Attribute\+Selector}}\index{C\+Attribute\+Selector@{C\+Attribute\+Selector}!E\+Includes@{E\+Includes}}}\mbox{\Hypertarget{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da2a6c1502443c79801656539c86fbde73}\label{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da2a6c1502443c79801656539c86fbde73}} 
+E\+Includes&是否包含 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+Dash\+Match@{E\+Dash\+Match}!C\+Attribute\+Selector@{C\+Attribute\+Selector}}\index{C\+Attribute\+Selector@{C\+Attribute\+Selector}!E\+Dash\+Match@{E\+Dash\+Match}}}\mbox{\Hypertarget{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44dadf5410ac7e1eedb558c21b2c20b65d0d}\label{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44dadf5410ac7e1eedb558c21b2c20b65d0d}} 
+E\+Dash\+Match&是否-\/开始 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+Prefix@{E\+Prefix}!C\+Attribute\+Selector@{C\+Attribute\+Selector}}\index{C\+Attribute\+Selector@{C\+Attribute\+Selector}!E\+Prefix@{E\+Prefix}}}\mbox{\Hypertarget{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da57a3bd166e2c1da7dd7472ce23636203}\label{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da57a3bd166e2c1da7dd7472ce23636203}} 
+E\+Prefix&是否前缀 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+Suffix@{E\+Suffix}!C\+Attribute\+Selector@{C\+Attribute\+Selector}}\index{C\+Attribute\+Selector@{C\+Attribute\+Selector}!E\+Suffix@{E\+Suffix}}}\mbox{\Hypertarget{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da496c6a55d2ca0ea273def788f132b091}\label{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44da496c6a55d2ca0ea273def788f132b091}} 
+E\+Suffix&是否后缀 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+Sub\+String@{E\+Sub\+String}!C\+Attribute\+Selector@{C\+Attribute\+Selector}}\index{C\+Attribute\+Selector@{C\+Attribute\+Selector}!E\+Sub\+String@{E\+Sub\+String}}}\mbox{\Hypertarget{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44daa792f945d982ebb1e00ad7d62d21e48f}\label{class_c_attribute_selector_ae0950894fd715af728d5a5c4621bf44daa792f945d982ebb1e00ad7d62d21e48f}} 
+E\+Sub\+String&是否子串 \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/query/src/Gumbo\+Query\+Selector.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/query/src/Gumbo\+Query\+Selector.\+cpp\end{DoxyCompactItemize}

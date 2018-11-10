@@ -1,0 +1,69 @@
+\hypertarget{classzxing_1_1oned_1_1_u_p_c_e_reader}{}\section{zxing\+:\+:oned\+:\+:U\+P\+C\+E\+Reader Class Reference}
+\label{classzxing_1_1oned_1_1_u_p_c_e_reader}\index{zxing\+::oned\+::\+U\+P\+C\+E\+Reader@{zxing\+::oned\+::\+U\+P\+C\+E\+Reader}}
+Inheritance diagram for zxing\+:\+:oned\+:\+:U\+P\+C\+E\+Reader\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classzxing_1_1oned_1_1_u_p_c_e_reader}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1oned_1_1_u_p_c_e_reader_a7ce2e552e361be70a2b2955d30da568b}\label{classzxing_1_1oned_1_1_u_p_c_e_reader_a7ce2e552e361be70a2b2955d30da568b}} 
+int {\bfseries decode\+Middle} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} $>$ row, \mbox{\hyperlink{structzxing_1_1oned_1_1_one_d_reader_1_1_range}{Range}} const \&start\+Range, std\+::string \&result\+String)
+\item 
+\mbox{\Hypertarget{classzxing_1_1oned_1_1_u_p_c_e_reader_abaf027fba7c3469c44e94693333e230f}\label{classzxing_1_1oned_1_1_u_p_c_e_reader_abaf027fba7c3469c44e94693333e230f}} 
+\mbox{\hyperlink{classzxing_1_1_barcode_format}{Barcode\+Format}} {\bfseries get\+Barcode\+Format} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_string}{String}} $>$ \mbox{\hyperlink{classzxing_1_1oned_1_1_u_p_c_e_reader_a3af619d9a00d1102445099bf596a63cc}{convert\+U\+P\+C\+Eto\+U\+P\+CA}} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_string}{String}} $>$ const \&upce)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1oned_1_1_u_p_c_e_reader_a2ce12af3a8ea9b31723a6922715447fa}\label{classzxing_1_1oned_1_1_u_p_c_e_reader_a2ce12af3a8ea9b31723a6922715447fa}} 
+\mbox{\hyperlink{structzxing_1_1oned_1_1_one_d_reader_1_1_range}{Range}} {\bfseries decode\+End} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_array}{Bit\+Array}} $>$ row, int end\+Start)
+\item 
+bool \mbox{\hyperlink{classzxing_1_1oned_1_1_u_p_c_e_reader_abb30f05f10f7f87ab247780eafd5b50a}{check\+Checksum}} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_string}{String}} $>$ const \&s)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classzxing_1_1oned_1_1_u_p_c_e_reader_abb30f05f10f7f87ab247780eafd5b50a}\label{classzxing_1_1oned_1_1_u_p_c_e_reader_abb30f05f10f7f87ab247780eafd5b50a}} 
+\index{zxing\+::oned\+::\+U\+P\+C\+E\+Reader@{zxing\+::oned\+::\+U\+P\+C\+E\+Reader}!check\+Checksum@{check\+Checksum}}
+\index{check\+Checksum@{check\+Checksum}!zxing\+::oned\+::\+U\+P\+C\+E\+Reader@{zxing\+::oned\+::\+U\+P\+C\+E\+Reader}}
+\subsubsection{\texorpdfstring{check\+Checksum()}{checkChecksum()}}
+{\footnotesize\ttfamily bool U\+P\+C\+E\+Reader\+::check\+Checksum (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_string}{String}} $>$ const \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{}{check\+Standard\+U\+P\+C\+E\+A\+N\+Checksum(\+String)}} 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classzxing_1_1oned_1_1_u_p_c_e_a_n_reader_a8dab230e3a380491ddd88447bb583d80}{zxing\+::oned\+::\+U\+P\+C\+E\+A\+N\+Reader}}.
+
+\mbox{\Hypertarget{classzxing_1_1oned_1_1_u_p_c_e_reader_a3af619d9a00d1102445099bf596a63cc}\label{classzxing_1_1oned_1_1_u_p_c_e_reader_a3af619d9a00d1102445099bf596a63cc}} 
+\index{zxing\+::oned\+::\+U\+P\+C\+E\+Reader@{zxing\+::oned\+::\+U\+P\+C\+E\+Reader}!convert\+U\+P\+C\+Eto\+U\+P\+CA@{convert\+U\+P\+C\+Eto\+U\+P\+CA}}
+\index{convert\+U\+P\+C\+Eto\+U\+P\+CA@{convert\+U\+P\+C\+Eto\+U\+P\+CA}!zxing\+::oned\+::\+U\+P\+C\+E\+Reader@{zxing\+::oned\+::\+U\+P\+C\+E\+Reader}}
+\subsubsection{\texorpdfstring{convert\+U\+P\+C\+Eto\+U\+P\+C\+A()}{convertUPCEtoUPCA()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_string}{String}} $>$ U\+P\+C\+E\+Reader\+::convert\+U\+P\+C\+Eto\+U\+P\+CA (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_string}{String}} $>$ const \&}]{upce\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Expands a U\+P\+C-\/E value back into its full, equivalent U\+P\+C-\/A code value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em upce} & U\+P\+C-\/E code as string of digits \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+equivalent U\+P\+C-\/A code as string of digits 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/oned/U\+P\+C\+E\+Reader.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/oned/U\+P\+C\+E\+Reader.\+cpp\end{DoxyCompactItemize}

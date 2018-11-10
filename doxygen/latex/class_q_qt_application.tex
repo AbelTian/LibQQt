@@ -1,0 +1,73 @@
+\hypertarget{class_q_qt_application}{}\section{Q\+Qt\+Application Class Reference}
+\label{class_q_qt_application}\index{Q\+Qt\+Application@{Q\+Qt\+Application}}
+
+
+The \mbox{\hyperlink{class_q_qt_application}{Q\+Qt\+Application}} class 建议多使用./skin 而不是\+://skin Qt qrc命令 在linux下 需要qrc文件有变动才会编译 local图片文件变化不会引发编译 qqtframe里提供skin和res函数，去适配资源位置系统变动的情况。  
+
+
+
+
+{\ttfamily \#include $<$qqtapplication.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Application\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.592592cm]{class_q_qt_application}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_application_a4c06f9acc3e99b2819d007191df6f3da}\label{class_q_qt_application_a4c06f9acc3e99b2819d007191df6f3da}} 
+virtual void {\bfseries slot\+U\+Pan\+Auto\+Run} (int status)
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_q_qt_application_a3411cfda9ee0ce5f155bd3b40a25eb6f}{language\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_application_ae300d15245e74d3f1bfd5611950f0d6a}\label{class_q_qt_application_ae300d15245e74d3f1bfd5611950f0d6a}} 
+{\bfseries Q\+Qt\+Application} (int \&argc, char $\ast$$\ast$argv)
+\item 
+\mbox{\Hypertarget{class_q_qt_application_a36dd4a97cf0e48f89e47f31a83bda8ac}\label{class_q_qt_application_a36dd4a97cf0e48f89e47f31a83bda8ac}} 
+void {\bfseries set\+Language} (Q\+String qmfile=\char`\"{}./lang/zh\+\_\+\+C\+N.\+qm\char`\"{})
+\item 
+\mbox{\Hypertarget{class_q_qt_application_a3bc890d153355d47aaccc204657bc05d}\label{class_q_qt_application_a3bc890d153355d47aaccc204657bc05d}} 
+bool {\bfseries set\+Text\+Font} (Q\+String fontfile=\char`\"{}/usr/lib/fonts/heiti.\+ttf\char`\"{}, int fontsize=11)
+\item 
+\mbox{\Hypertarget{class_q_qt_application_a3af16e38667c0c54f9652ae9f4c769ed}\label{class_q_qt_application_a3af16e38667c0c54f9652ae9f4c769ed}} 
+void {\bfseries set\+Q\+S\+S\+Style} (Q\+String qssfile=\char`\"{}./skin/default.\+qss\char`\"{})
+\item 
+\mbox{\Hypertarget{class_q_qt_application_a7565235920764bde45b596103f1059ee}\label{class_q_qt_application_a7565235920764bde45b596103f1059ee}} 
+void {\bfseries set\+U\+Pan\+Autorun} (bool run=false)
+\item 
+\mbox{\Hypertarget{class_q_qt_application_a2f1c8dd859b57353e11faaf638cf9c2f}\label{class_q_qt_application_a2f1c8dd859b57353e11faaf638cf9c2f}} 
+void {\bfseries set\+Write\+Log\+System} (bool open=true)
+\item 
+\mbox{\Hypertarget{class_q_qt_application_a6223857df1508f62a657c693c39d1552}\label{class_q_qt_application_a6223857df1508f62a657c693c39d1552}} 
+virtual int {\bfseries init\+Instance} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_application_a53a3c187aff4d2eff4ccc6096c19e4f4}\label{class_q_qt_application_a53a3c187aff4d2eff4ccc6096c19e4f4}} 
+virtual int {\bfseries un\+Init\+Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_application}{Q\+Qt\+Application}} class 建议多使用./skin 而不是\+://skin Qt qrc命令 在linux下 需要qrc文件有变动才会编译 local图片文件变化不会引发编译 qqtframe里提供skin和res函数，去适配资源位置系统变动的情况。 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_application_a3411cfda9ee0ce5f155bd3b40a25eb6f}\label{class_q_qt_application_a3411cfda9ee0ce5f155bd3b40a25eb6f}} 
+\index{Q\+Qt\+Application@{Q\+Qt\+Application}!language\+Changed@{language\+Changed}}
+\index{language\+Changed@{language\+Changed}!Q\+Qt\+Application@{Q\+Qt\+Application}}
+\subsubsection{\texorpdfstring{language\+Changed}{languageChanged}}
+{\footnotesize\ttfamily void Q\+Qt\+Application\+::language\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+用户从这里接收语言更改信号，更改所有窗口的语言。 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/frame/qqtapplication.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/frame/qqtapplication.\+cpp\end{DoxyCompactItemize}

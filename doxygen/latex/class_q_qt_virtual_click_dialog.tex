@@ -1,0 +1,95 @@
+\hypertarget{class_q_qt_virtual_click_dialog}{}\section{Q\+Qt\+Virtual\+Click\+Dialog Class Reference}
+\label{class_q_qt_virtual_click_dialog}\index{Q\+Qt\+Virtual\+Click\+Dialog@{Q\+Qt\+Virtual\+Click\+Dialog}}
+
+
+{\ttfamily \#include $<$qqtvirtualclickdialog.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Virtual\+Click\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_q_qt_virtual_click_dialog}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_ab93217aff56d096b6779de7e2f220e0f}\label{class_q_qt_virtual_click_dialog_ab93217aff56d096b6779de7e2f220e0f}} 
+{\bfseries Q\+Qt\+Virtual\+Click\+Dialog} (Q\+Widget $\ast$parent=0)
+\item 
+void \mbox{\hyperlink{class_q_qt_virtual_click_dialog_ade58d6bdc539c61304628a9710c4e8b3}{install\+Click\+Helper}} (\mbox{\hyperlink{class_q_qt_virtual_click_helper}{Q\+Qt\+Virtual\+Click\+Helper}} $\ast$helper)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_a1fb81217557c85d8ce5974571ff49dcd}\label{class_q_qt_virtual_click_dialog_a1fb81217557c85d8ce5974571ff49dcd}} 
+\mbox{\hyperlink{class_q_qt_virtual_click_helper}{Q\+Qt\+Virtual\+Click\+Helper}} $\ast$ {\bfseries click\+Helper} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_a0b88feb5d4eb8189379524105fc62ef4}\label{class_q_qt_virtual_click_dialog_a0b88feb5d4eb8189379524105fc62ef4}} 
+virtual bool {\bfseries event\+Filter} (Q\+Object $\ast$watched, Q\+Event $\ast$event) override
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_virtual_click_dialog_a93e958d50ddc3fb38ca0e4905673cf74}{connect\+Click\+Helper}} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_a7a295dbef71f3edebe61bd7218fcb6fc}\label{class_q_qt_virtual_click_dialog_a7a295dbef71f3edebe61bd7218fcb6fc}} 
+virtual void {\bfseries un\+Connect\+Click\+Helper} ()
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_virtual_click_dialog_a8e8f31f3a7c00970f5b2feb60073eb83}{mouse\+Press\+Event}} (Q\+Mouse\+Event $\ast$event)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_a63a9ec030a1473a569a07c670b352672}\label{class_q_qt_virtual_click_dialog_a63a9ec030a1473a569a07c670b352672}} 
+virtual void {\bfseries mouse\+Release\+Event} (Q\+Mouse\+Event $\ast$event)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_ac5c78562e16d7a92cf0ef89ab51b2d6e}\label{class_q_qt_virtual_click_dialog_ac5c78562e16d7a92cf0ef89ab51b2d6e}} 
+virtual void {\bfseries mouse\+Double\+Click\+Event} (Q\+Mouse\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_q_qt_virtual_click_helper}{Q\+Qt\+Virtual\+Click\+Helper}} $\ast$ \mbox{\hyperlink{class_q_qt_virtual_click_dialog_afdf66e13b821224b34c0a4b68c5c0564}{m\+Click\+Helper}}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_ab0e635fb9e984df11323676a1ce3fd35}\label{class_q_qt_virtual_click_dialog_ab0e635fb9e984df11323676a1ce3fd35}} 
+\mbox{\hyperlink{class_q_qt_virtual_click_helper}{Q\+Qt\+Virtual\+Click\+Helper}} $\ast$ {\bfseries m\+Default\+Click\+Helper}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+内置\+Click\+Helper空指针
+
+\mbox{\hyperlink{class_q_qt_virtual_click_dialog}{Q\+Qt\+Virtual\+Click\+Dialog}} 添加允许\+Click的功能 子类实现具体click信号 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_a93e958d50ddc3fb38ca0e4905673cf74}\label{class_q_qt_virtual_click_dialog_a93e958d50ddc3fb38ca0e4905673cf74}} 
+\index{Q\+Qt\+Virtual\+Click\+Dialog@{Q\+Qt\+Virtual\+Click\+Dialog}!connect\+Click\+Helper@{connect\+Click\+Helper}}
+\index{connect\+Click\+Helper@{connect\+Click\+Helper}!Q\+Qt\+Virtual\+Click\+Dialog@{Q\+Qt\+Virtual\+Click\+Dialog}}
+\subsubsection{\texorpdfstring{connect\+Click\+Helper()}{connectClickHelper()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Virtual\+Click\+Dialog\+::connect\+Click\+Helper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+子类重写这两个函数,实现丰富的click能力 
+
+Reimplemented in \mbox{\hyperlink{class_q_qt_click_dialog_abe0a809f78f668db917f87ddfc50767f}{Q\+Qt\+Click\+Dialog}}, \mbox{\hyperlink{class_q_qt_double_click_dialog_aeb530bd68159ea4833076b450cb5f4ca}{Q\+Qt\+Double\+Click\+Dialog}}, and \mbox{\hyperlink{class_q_qt_long_click_dialog_a7ecc2043f891de0ed8ce71d99f5860ac}{Q\+Qt\+Long\+Click\+Dialog}}.
+
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_ade58d6bdc539c61304628a9710c4e8b3}\label{class_q_qt_virtual_click_dialog_ade58d6bdc539c61304628a9710c4e8b3}} 
+\index{Q\+Qt\+Virtual\+Click\+Dialog@{Q\+Qt\+Virtual\+Click\+Dialog}!install\+Click\+Helper@{install\+Click\+Helper}}
+\index{install\+Click\+Helper@{install\+Click\+Helper}!Q\+Qt\+Virtual\+Click\+Dialog@{Q\+Qt\+Virtual\+Click\+Dialog}}
+\subsubsection{\texorpdfstring{install\+Click\+Helper()}{installClickHelper()}}
+{\footnotesize\ttfamily void Q\+Qt\+Virtual\+Click\+Dialog\+::install\+Click\+Helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_qt_virtual_click_helper}{Q\+Qt\+Virtual\+Click\+Helper}} $\ast$}]{helper }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+提供给\+App用信号 界面层内部直接处理 用户可选使用 子类必然使用 \mbox{\Hypertarget{class_q_qt_virtual_click_dialog_a8e8f31f3a7c00970f5b2feb60073eb83}\label{class_q_qt_virtual_click_dialog_a8e8f31f3a7c00970f5b2feb60073eb83}} 
+\index{Q\+Qt\+Virtual\+Click\+Dialog@{Q\+Qt\+Virtual\+Click\+Dialog}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!Q\+Qt\+Virtual\+Click\+Dialog@{Q\+Qt\+Virtual\+Click\+Dialog}}
+\subsubsection{\texorpdfstring{mouse\+Press\+Event()}{mousePressEvent()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Virtual\+Click\+Dialog\+::mouse\+Press\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+子类不必重写\+Mouse\+Event函数, 这里实现对click\+Helper的响应能力 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_q_qt_virtual_click_dialog_afdf66e13b821224b34c0a4b68c5c0564}\label{class_q_qt_virtual_click_dialog_afdf66e13b821224b34c0a4b68c5c0564}} 
+\index{Q\+Qt\+Virtual\+Click\+Dialog@{Q\+Qt\+Virtual\+Click\+Dialog}!m\+Click\+Helper@{m\+Click\+Helper}}
+\index{m\+Click\+Helper@{m\+Click\+Helper}!Q\+Qt\+Virtual\+Click\+Dialog@{Q\+Qt\+Virtual\+Click\+Dialog}}
+\subsubsection{\texorpdfstring{m\+Click\+Helper}{mClickHelper}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_q_qt_virtual_click_helper}{Q\+Qt\+Virtual\+Click\+Helper}}$\ast$ Q\+Qt\+Virtual\+Click\+Dialog\+::m\+Click\+Helper\hspace{0.3cm}{\ttfamily [protected]}}
+
+如果默认的没有设置 那么会出现空指针. 在构造函数里初始化click\+Helper的时候初始化\+Default\+Click\+Helper 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/clickwidgets/qqtvirtualclickdialog.\+h\end{DoxyCompactItemize}

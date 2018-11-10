@@ -1,0 +1,363 @@
+\hypertarget{class_q_qt_custom_progress_bar}{}\section{Q\+Qt\+Custom\+Progress\+Bar Class Reference}
+\label{class_q_qt_custom_progress_bar}\index{Q\+Qt\+Custom\+Progress\+Bar@{Q\+Qt\+Custom\+Progress\+Bar}}
+
+
+{\ttfamily \#include $<$qqtcustomprogressbar.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Custom\+Progress\+Bar\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_custom_progress_bar}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_af40ff21e192d9ad56bbe78d2bc5507ad}\label{class_q_qt_custom_progress_bar_af40ff21e192d9ad56bbe78d2bc5507ad}} 
+enum {\bfseries Wave\+Direction} \{ {\bfseries Wave\+Direction\+\_\+\+Left} = 0, 
+{\bfseries Wave\+Direction\+\_\+\+Right} = 1, 
+{\bfseries Wave\+Direction\+\_\+\+Left\+\_\+\+Right} = 2, 
+{\bfseries Wave\+Direction\+\_\+\+Right\+\_\+\+Left} = 3
+ \}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a8d3b8cae3bf7a276be31a47451b4bb43}\label{class_q_qt_custom_progress_bar_a8d3b8cae3bf7a276be31a47451b4bb43}} 
+enum {\bfseries Background\+Type} \{ {\bfseries Background\+Type\+\_\+\+Color} = 0, 
+{\bfseries Background\+Type\+\_\+\+Image} = 1
+ \}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_abe03860152744c4ea9aeed264c0cc1e6}\label{class_q_qt_custom_progress_bar_abe03860152744c4ea9aeed264c0cc1e6}} 
+enum {\bfseries Design\+Style} \{ {\bfseries Design\+Style\+\_\+\+Circle} = 0, 
+{\bfseries Design\+Style\+\_\+\+Ellipse} = 1, 
+{\bfseries Design\+Style\+\_\+\+Rectangle} = 2, 
+{\bfseries Design\+Style\+\_\+\+Square} = 3
+ \}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_affd78c4236bda18b1d44f99de5771f43}\label{class_q_qt_custom_progress_bar_affd78c4236bda18b1d44f99de5771f43}} 
+enum {\bfseries Percent\+Style} \{ {\bfseries Percent\+Style\+\_\+\+Arc} = 0, 
+{\bfseries Percent\+Style\+\_\+\+Polo} = 1, 
+{\bfseries Percent\+Style\+\_\+\+Arc\+\_\+\+Polo} = 2, 
+{\bfseries Percent\+Style\+\_\+\+Wave} = 3
+ \}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_af6aa86848a914a45956cc449830a1d5d}\label{class_q_qt_custom_progress_bar_af6aa86848a914a45956cc449830a1d5d}} 
+enum {\bfseries Text\+Style} \{ \newline
+{\bfseries Text\+Style\+\_\+\+None} = 0, 
+{\bfseries Text\+Style\+\_\+\+Middle\+\_\+\+Percent} = 1, 
+{\bfseries Text\+Style\+\_\+\+Percent} = 2, 
+{\bfseries Text\+Style\+\_\+\+Text} = 3, 
+\newline
+{\bfseries Text\+Style\+\_\+\+Percent\+\_\+\+Text} = 4
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aa7a0396bc86988708e5222e918a8fbb2}\label{class_q_qt_custom_progress_bar_aa7a0396bc86988708e5222e918a8fbb2}} 
+void {\bfseries set\+Range} (int min\+Value, int max\+Value)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a7eb4a86ce90da6aec276917668db7803}\label{class_q_qt_custom_progress_bar_a7eb4a86ce90da6aec276917668db7803}} 
+void {\bfseries set\+Min\+Value} (int min\+Value)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aed7e40fa34721502a535a89dc22eccca}\label{class_q_qt_custom_progress_bar_aed7e40fa34721502a535a89dc22eccca}} 
+void {\bfseries set\+Max\+Value} (int max\+Value)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aafc5aa1f23a628539d6636e5544df728}\label{class_q_qt_custom_progress_bar_aafc5aa1f23a628539d6636e5544df728}} 
+void {\bfseries set\+Value} (int value)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ab349ac64a547510b938e7452c6c050af}\label{class_q_qt_custom_progress_bar_ab349ac64a547510b938e7452c6c050af}} 
+void {\bfseries set\+Null\+Position} (int null\+Position)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_afb252300732a574968275827c8314f65}\label{class_q_qt_custom_progress_bar_afb252300732a574968275827c8314f65}} 
+void {\bfseries set\+Line\+Width} (int line\+Width)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a56066715f5d700cebd49c608d435dac2}\label{class_q_qt_custom_progress_bar_a56066715f5d700cebd49c608d435dac2}} 
+void {\bfseries set\+Line\+Cap\+Style} (int line\+Cap\+Style)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ad6e95408f93cae342643e19f20fac569}\label{class_q_qt_custom_progress_bar_ad6e95408f93cae342643e19f20fac569}} 
+void {\bfseries set\+Show\+Percent} (bool show\+Percent)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a29ff33f1ad3d85bb1fd4061aa1e10ae6}\label{class_q_qt_custom_progress_bar_a29ff33f1ad3d85bb1fd4061aa1e10ae6}} 
+void {\bfseries set\+Percent\+Suffix} (Q\+String suffix)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ad5aa9b55c9a3172deef84706349b7e57}\label{class_q_qt_custom_progress_bar_ad5aa9b55c9a3172deef84706349b7e57}} 
+void {\bfseries set\+Show\+Free} (bool show\+Free)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a43870f5a3b7bdd74b459cf59ca75de76}\label{class_q_qt_custom_progress_bar_a43870f5a3b7bdd74b459cf59ca75de76}} 
+void {\bfseries set\+Show\+Small\+Circle} (bool show\+Small\+Circle)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_af0e83073046d1c660707d24582a956be}\label{class_q_qt_custom_progress_bar_af0e83073046d1c660707d24582a956be}} 
+void {\bfseries set\+Clock\+Wise} (bool clock\+Wise)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ab00c8f3e4d255a7b5f836894f71f2dad}\label{class_q_qt_custom_progress_bar_ab00c8f3e4d255a7b5f836894f71f2dad}} 
+void {\bfseries set\+Used\+Color} (const Q\+Color \&used\+Color)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a88b877d1b47749ceb422c618bd8ef1df}\label{class_q_qt_custom_progress_bar_a88b877d1b47749ceb422c618bd8ef1df}} 
+void {\bfseries set\+Free\+Color} (const Q\+Color \&free\+Color)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a0fd95fa46b803858bbbd5f821aa60ab7}\label{class_q_qt_custom_progress_bar_a0fd95fa46b803858bbbd5f821aa60ab7}} 
+void {\bfseries set\+Background\+Color} (const Q\+Color \&background\+Color)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a9a74ab0d358b3b9f29627bab293542d9}\label{class_q_qt_custom_progress_bar_a9a74ab0d358b3b9f29627bab293542d9}} 
+void {\bfseries set\+Background\+Image} (const Q\+String \&background\+Image)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a7992b8ec27eb2a8ab0d335b2658579af}\label{class_q_qt_custom_progress_bar_a7992b8ec27eb2a8ab0d335b2658579af}} 
+void {\bfseries set\+Text} (const Q\+String \&text)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a2ce3b4a4fa0158607ca14e1ce1aff9b2}\label{class_q_qt_custom_progress_bar_a2ce3b4a4fa0158607ca14e1ce1aff9b2}} 
+void {\bfseries set\+Text\+Color} (const Q\+Color \&text\+Color)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a0ff3e4431d8de12b726c1c81a6e12ba0}\label{class_q_qt_custom_progress_bar_a0ff3e4431d8de12b726c1c81a6e12ba0}} 
+void {\bfseries set\+Text\+Font} (Q\+Font font)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a8e0a64c33be433a96a67b3b8f5078743}\label{class_q_qt_custom_progress_bar_a8e0a64c33be433a96a67b3b8f5078743}} 
+void {\bfseries set\+Percent\+Text\+Color} (const Q\+Color \&percent\+Color)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a869d1f670aa014e1ead795462fb35c40}\label{class_q_qt_custom_progress_bar_a869d1f670aa014e1ead795462fb35c40}} 
+void {\bfseries set\+Percent\+Text\+Font} (Q\+Font percent\+Font)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a4817888296216e8570963b2bf595c61e}\label{class_q_qt_custom_progress_bar_a4817888296216e8570963b2bf595c61e}} 
+void {\bfseries set\+Corner\+Radius} (int corner\+Radius)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a6b3d71234cd139b1d94d3b569d64069d}\label{class_q_qt_custom_progress_bar_a6b3d71234cd139b1d94d3b569d64069d}} 
+void {\bfseries set\+Text\+Style} (Text\+Style text\+Style)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a7b9e9ac1da71da33b4dad814e8ae73c6}\label{class_q_qt_custom_progress_bar_a7b9e9ac1da71da33b4dad814e8ae73c6}} 
+void {\bfseries set\+Design\+Style} (Design\+Style design\+Style)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a57d4255d4317f2fa7c6a2a451c4ca8e9}\label{class_q_qt_custom_progress_bar_a57d4255d4317f2fa7c6a2a451c4ca8e9}} 
+void {\bfseries set\+Percent\+Style} (Percent\+Style percent\+Style)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aea97cb1475aac16a799ca297f76de034}\label{class_q_qt_custom_progress_bar_aea97cb1475aac16a799ca297f76de034}} 
+void {\bfseries set\+Background\+Type} (Background\+Type background\+Type)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a7375994be25fd9cf96d1c539e6beac0b}\label{class_q_qt_custom_progress_bar_a7375994be25fd9cf96d1c539e6beac0b}} 
+void {\bfseries set\+Wave\+Direction} (Wave\+Direction direction)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_afad2ea415eb134b45456e201b46391cb}\label{class_q_qt_custom_progress_bar_afad2ea415eb134b45456e201b46391cb}} 
+void {\bfseries set\+Wave\+Density} (int value)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a3001a19f26ce55fcd89932add1347172}\label{class_q_qt_custom_progress_bar_a3001a19f26ce55fcd89932add1347172}} 
+void {\bfseries set\+Wave\+Height} (int value)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_af88b0f0ee8eb22465c91077f0a7f5098}\label{class_q_qt_custom_progress_bar_af88b0f0ee8eb22465c91077f0a7f5098}} 
+void {\bfseries set\+Wave\+Speed} (int speed)
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a843ba8ee7e62521af517acb93fa7487b}\label{class_q_qt_custom_progress_bar_a843ba8ee7e62521af517acb93fa7487b}} 
+void {\bfseries value\+Changed} (int value)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a2c77fca8faaf5da28b59c825dae3bb25}\label{class_q_qt_custom_progress_bar_a2c77fca8faaf5da28b59c825dae3bb25}} 
+void {\bfseries click} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a1208d993365bd0c324cc3bc9fc3d0e40}\label{class_q_qt_custom_progress_bar_a1208d993365bd0c324cc3bc9fc3d0e40}} 
+void {\bfseries double\+Click} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a0ed2ec1d48eed30e7a555ad98d0749c8}\label{class_q_qt_custom_progress_bar_a0ed2ec1d48eed30e7a555ad98d0749c8}} 
+{\bfseries Q\+Qt\+Custom\+Progress\+Bar} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aeb97fd564064e6f32c589968f64ff35b}\label{class_q_qt_custom_progress_bar_aeb97fd564064e6f32c589968f64ff35b}} 
+int {\bfseries get\+Min\+Value} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a2a1b438e0679c849c75569de17c4fa0f}\label{class_q_qt_custom_progress_bar_a2a1b438e0679c849c75569de17c4fa0f}} 
+int {\bfseries get\+Max\+Value} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a69536080922fa60728bd515209b24516}\label{class_q_qt_custom_progress_bar_a69536080922fa60728bd515209b24516}} 
+int {\bfseries get\+Value} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a4d25c17bf255da174de4bdf88b0935fc}\label{class_q_qt_custom_progress_bar_a4d25c17bf255da174de4bdf88b0935fc}} 
+int {\bfseries get\+Null\+Position} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a81edaf786842f8b04dc3ba6a3900906a}\label{class_q_qt_custom_progress_bar_a81edaf786842f8b04dc3ba6a3900906a}} 
+int {\bfseries get\+Line\+Width} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a077a3b5d33c54cef3f33e6214596274d}\label{class_q_qt_custom_progress_bar_a077a3b5d33c54cef3f33e6214596274d}} 
+int {\bfseries get\+Corner\+Raduis} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_abbf5a8716baf9a22edbcc4efba617c54}\label{class_q_qt_custom_progress_bar_abbf5a8716baf9a22edbcc4efba617c54}} 
+int {\bfseries get\+Line\+Cap\+Style} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ab9ad952c38ddd15d5b044bb8c59b9760}\label{class_q_qt_custom_progress_bar_ab9ad952c38ddd15d5b044bb8c59b9760}} 
+bool {\bfseries get\+Show\+Percent} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a78dab16ee66a17f652f4fa5da1c0fccd}\label{class_q_qt_custom_progress_bar_a78dab16ee66a17f652f4fa5da1c0fccd}} 
+bool {\bfseries get\+Show\+Free} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a72bae91e4d14abe33bac84716aab4e66}\label{class_q_qt_custom_progress_bar_a72bae91e4d14abe33bac84716aab4e66}} 
+bool {\bfseries get\+Show\+Small\+Circle} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_adf821c2de9ccf085bd131053dc3435b2}\label{class_q_qt_custom_progress_bar_adf821c2de9ccf085bd131053dc3435b2}} 
+bool {\bfseries get\+Clock\+Wise} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a0779819303163918770142e45acddb1e}\label{class_q_qt_custom_progress_bar_a0779819303163918770142e45acddb1e}} 
+Q\+Color {\bfseries get\+Used\+Color} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a93f78a6443fb53d4247578a57b7388bd}\label{class_q_qt_custom_progress_bar_a93f78a6443fb53d4247578a57b7388bd}} 
+Q\+Color {\bfseries get\+Free\+Color} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_acdba5399970eafdf34715190ffed48fe}\label{class_q_qt_custom_progress_bar_acdba5399970eafdf34715190ffed48fe}} 
+Q\+Color {\bfseries get\+Background\+Color} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a9a82d95a8dd9892b2f7a8c7c05bcf1e6}\label{class_q_qt_custom_progress_bar_a9a82d95a8dd9892b2f7a8c7c05bcf1e6}} 
+Q\+Color {\bfseries get\+Text\+Color} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a2e82c7423ec6b08e3a1c02363effd7ee}\label{class_q_qt_custom_progress_bar_a2e82c7423ec6b08e3a1c02363effd7ee}} 
+Q\+Font {\bfseries get\+Text\+Font} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aa3519af30b6231a0cad7797560c7c713}\label{class_q_qt_custom_progress_bar_aa3519af30b6231a0cad7797560c7c713}} 
+Q\+Color {\bfseries get\+Percent\+Text\+Color} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aca2fb5738ab93ef44d44d0bb20a45ce6}\label{class_q_qt_custom_progress_bar_aca2fb5738ab93ef44d44d0bb20a45ce6}} 
+Q\+Font {\bfseries get\+Percent\+Text\+Font} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_acf4e2fe27b15cc2df6c9ef742e5d6bc1}\label{class_q_qt_custom_progress_bar_acf4e2fe27b15cc2df6c9ef742e5d6bc1}} 
+Q\+String {\bfseries get\+Percent\+Suffix} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a2685fc23bab4bd90da183d54441e8bfd}\label{class_q_qt_custom_progress_bar_a2685fc23bab4bd90da183d54441e8bfd}} 
+Q\+String {\bfseries get\+Text} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a9760419359a92ad8d94a220722b53d6a}\label{class_q_qt_custom_progress_bar_a9760419359a92ad8d94a220722b53d6a}} 
+Text\+Style {\bfseries get\+Text\+Style} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a7331d62347013c8c7066a411dfd1cc27}\label{class_q_qt_custom_progress_bar_a7331d62347013c8c7066a411dfd1cc27}} 
+Design\+Style {\bfseries get\+Desing\+Style} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aa4a2a84ab2543a51f689508f35f74ccc}\label{class_q_qt_custom_progress_bar_aa4a2a84ab2543a51f689508f35f74ccc}} 
+Percent\+Style {\bfseries get\+Percent\+Style} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ab792a0b848d6e1901241a1f0dba1a994}\label{class_q_qt_custom_progress_bar_ab792a0b848d6e1901241a1f0dba1a994}} 
+Background\+Type {\bfseries get\+Background\+Type} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a557b001b398bcd0f73f33c1b04c929d3}\label{class_q_qt_custom_progress_bar_a557b001b398bcd0f73f33c1b04c929d3}} 
+Wave\+Direction {\bfseries get\+Wave\+Direction} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a762cadb037cc68d32a5587c5d4c804c9}\label{class_q_qt_custom_progress_bar_a762cadb037cc68d32a5587c5d4c804c9}} 
+int {\bfseries get\+Wave\+Density} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ae8102b680515956f3e9558b6c125d796}\label{class_q_qt_custom_progress_bar_ae8102b680515956f3e9558b6c125d796}} 
+int {\bfseries get\+Wave\+Height} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ac350ac11234e4d44e371be998201099f}\label{class_q_qt_custom_progress_bar_ac350ac11234e4d44e371be998201099f}} 
+int {\bfseries get\+Wave\+Speed} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a0d5be46389cbc04f000fe2d138e9581b}\label{class_q_qt_custom_progress_bar_a0d5be46389cbc04f000fe2d138e9581b}} 
+virtual Q\+Size {\bfseries size\+Hint} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a4202d755795c168cf91c81987cfd2e77}\label{class_q_qt_custom_progress_bar_a4202d755795c168cf91c81987cfd2e77}} 
+virtual Q\+Size {\bfseries minimum\+Size\+Hint} () const
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ad02542cfbdd6918c3a94e24f6db9cef9}\label{class_q_qt_custom_progress_bar_ad02542cfbdd6918c3a94e24f6db9cef9}} 
+virtual void {\bfseries paint\+Event} (Q\+Paint\+Event $\ast$)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a5d8f8c54558bb882b51b1dab1b349101}\label{class_q_qt_custom_progress_bar_a5d8f8c54558bb882b51b1dab1b349101}} 
+virtual void {\bfseries draw\+Background} (Q\+Painter $\ast$painter, int radius)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a93206e5932bddf2c58299f969cdc020a}\label{class_q_qt_custom_progress_bar_a93206e5932bddf2c58299f969cdc020a}} 
+virtual void {\bfseries draw\+Arc} (Q\+Painter $\ast$painter, int radius)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a47d672a64f6cfa660b2867e8be3487fc}\label{class_q_qt_custom_progress_bar_a47d672a64f6cfa660b2867e8be3487fc}} 
+virtual void {\bfseries draw\+Polo} (Q\+Painter $\ast$painter, int radius)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a0993c00088723a6e8f947e42708df004}\label{class_q_qt_custom_progress_bar_a0993c00088723a6e8f947e42708df004}} 
+virtual void {\bfseries draw\+Wave} (Q\+Painter $\ast$painter, int radius)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a5ba7af80a056dd75c508169a49480ed9}\label{class_q_qt_custom_progress_bar_a5ba7af80a056dd75c508169a49480ed9}} 
+virtual void {\bfseries draw\+Text} (Q\+Painter $\ast$painter, int radius)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a353fbee161e6f6be365d6ce9b468a885}\label{class_q_qt_custom_progress_bar_a353fbee161e6f6be365d6ce9b468a885}} 
+virtual void {\bfseries draw\+Percent\+Text} (Q\+Painter $\ast$painter, int radius)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aaa5525cd01339fa662702a7276619cf4}\label{class_q_qt_custom_progress_bar_aaa5525cd01339fa662702a7276619cf4}} 
+virtual void {\bfseries mouse\+Release\+Event} (Q\+Mouse\+Event $\ast$event) override
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ac96a14a8720b194dd861ef3c1eaa8fb2}\label{class_q_qt_custom_progress_bar_ac96a14a8720b194dd861ef3c1eaa8fb2}} 
+virtual void {\bfseries mouse\+Double\+Click\+Event} (Q\+Mouse\+Event $\ast$event) override
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aaf416e29f0dd7d5ae158c55f546cd9b8}\label{class_q_qt_custom_progress_bar_aaf416e29f0dd7d5ae158c55f546cd9b8}} 
+int {\bfseries min\+Value}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a063fab6c367bd048cd278b28aeadde8b}\label{class_q_qt_custom_progress_bar_a063fab6c367bd048cd278b28aeadde8b}} 
+int {\bfseries max\+Value}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ab0fb0b2b5894bef2248590a4293b0bc6}\label{class_q_qt_custom_progress_bar_ab0fb0b2b5894bef2248590a4293b0bc6}} 
+int {\bfseries value}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a38427e8d77a3a94dace71e69463b5add}\label{class_q_qt_custom_progress_bar_a38427e8d77a3a94dace71e69463b5add}} 
+int {\bfseries null\+Position}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ad81bb338eb790ef6f79e09eeb7fe7fcb}\label{class_q_qt_custom_progress_bar_ad81bb338eb790ef6f79e09eeb7fe7fcb}} 
+int {\bfseries line\+Width}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_aed0b394e5f47b4eb4d8afb99b77f80f7}\label{class_q_qt_custom_progress_bar_aed0b394e5f47b4eb4d8afb99b77f80f7}} 
+int {\bfseries corner\+Radius}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a5fd67f7c4a2375341643a00f642b9c60}\label{class_q_qt_custom_progress_bar_a5fd67f7c4a2375341643a00f642b9c60}} 
+int {\bfseries line\+Cap\+Style}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a6d464fe9eba21ff442d478eb0e30d20b}\label{class_q_qt_custom_progress_bar_a6d464fe9eba21ff442d478eb0e30d20b}} 
+bool {\bfseries show\+Percent}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a7f4103cbb3473f6e6d379abdc921fdc6}\label{class_q_qt_custom_progress_bar_a7f4103cbb3473f6e6d379abdc921fdc6}} 
+bool {\bfseries show\+Free}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ab3d2e1c070c8187b5e786b372a61a416}\label{class_q_qt_custom_progress_bar_ab3d2e1c070c8187b5e786b372a61a416}} 
+bool {\bfseries show\+Small\+Circle}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a611aeffde9e0451854679c9826d9bc77}\label{class_q_qt_custom_progress_bar_a611aeffde9e0451854679c9826d9bc77}} 
+bool {\bfseries clock\+Wise}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a19b5c1e1c2f86cc15a60845bf30541e1}\label{class_q_qt_custom_progress_bar_a19b5c1e1c2f86cc15a60845bf30541e1}} 
+Q\+Color {\bfseries used\+Color}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a8879b343a923a18b3d1a3a44c20f0ceb}\label{class_q_qt_custom_progress_bar_a8879b343a923a18b3d1a3a44c20f0ceb}} 
+Q\+Color {\bfseries free\+Color}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a9050e0a3051b4ac81f88d03430b9d4ba}\label{class_q_qt_custom_progress_bar_a9050e0a3051b4ac81f88d03430b9d4ba}} 
+Q\+Color {\bfseries background\+Color}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a0f0afceda5681a987378fbb813c5e10a}\label{class_q_qt_custom_progress_bar_a0f0afceda5681a987378fbb813c5e10a}} 
+Q\+Color {\bfseries text\+Color}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ac04658018e70daccb6415b9e218d90ce}\label{class_q_qt_custom_progress_bar_ac04658018e70daccb6415b9e218d90ce}} 
+Q\+Font {\bfseries text\+Font}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a245f8c8e8c48843ad9961bb5bb1d7a84}\label{class_q_qt_custom_progress_bar_a245f8c8e8c48843ad9961bb5bb1d7a84}} 
+Q\+Color {\bfseries percent\+Color}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a3ad38b73c52fe1d65a6f8d7829d8f3d9}\label{class_q_qt_custom_progress_bar_a3ad38b73c52fe1d65a6f8d7829d8f3d9}} 
+Q\+Font {\bfseries percent\+Font}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_ae2727868de7a41c77f66605186048ddf}\label{class_q_qt_custom_progress_bar_ae2727868de7a41c77f66605186048ddf}} 
+Q\+String {\bfseries percent\+Suffix}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_acd49758abfc017c3042f36702816491a}\label{class_q_qt_custom_progress_bar_acd49758abfc017c3042f36702816491a}} 
+Q\+String {\bfseries text}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a7c78cf5e083f0a4d4361f84a9766e1e0}\label{class_q_qt_custom_progress_bar_a7c78cf5e083f0a4d4361f84a9766e1e0}} 
+int {\bfseries wave\+Density}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a243c0cce5f44531fab752478e03c5a22}\label{class_q_qt_custom_progress_bar_a243c0cce5f44531fab752478e03c5a22}} 
+int {\bfseries wave\+Height}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_progress_bar_a5e92de9caaa647c4a6c6fbc0329bd2e1}\label{class_q_qt_custom_progress_bar_a5e92de9caaa647c4a6c6fbc0329bd2e1}} 
+int {\bfseries wave\+Speed}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+T.\+D.\+R (QQ\+:2657635903) mod 2017年10月20日19\+:10\+:53 add draw wave mod text style T.\+D.\+R (QQ\+:2657635903) mod 2017年10月24日20\+:22\+:23 T.\+D.\+R (QQ\+:2657635903) mod 2017年10月25日10\+:55\+:28 add design style T.\+D.\+R (QQ\+:2657635903) mod 2017年11月06日18\+:24\+:09 add text style 百分比进度条控件 作者\+:feiyangqingyun(\+Q\+Q\+:517216493) 2017-\/1-\/6 1\+:可设置范围值,支持负数值 2\+:可设置起始点度数 3\+:可设置顺时针逆时针 4\+:可设置进度条宽度 5\+:可设置是否显示百分比 6\+:可设置是否同时显示剩余进度条 7\+:可设置是否显示进度前面的小圆 8\+:可设置当前进度颜色、剩余进度颜色、文字颜色、中间圆颜色 9\+:提供三种样式风格选择 圆弧风格 水池风格 水波纹风格 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qqtcustomprogressbar.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qqtcustomprogressbar.\+cpp\end{DoxyCompactItemize}

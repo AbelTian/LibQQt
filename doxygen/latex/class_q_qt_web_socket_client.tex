@@ -1,0 +1,64 @@
+\hypertarget{class_q_qt_web_socket_client}{}\section{Q\+Qt\+Web\+Socket\+Client Class Reference}
+\label{class_q_qt_web_socket_client}\index{Q\+Qt\+Web\+Socket\+Client@{Q\+Qt\+Web\+Socket\+Client}}
+
+
+The \mbox{\hyperlink{class_q_qt_web_socket_client}{Q\+Qt\+Web\+Socket\+Client}} class Q\+Qt\+Web\+Socket\+Client通过安装\+Q\+Qt\+Protocol来实现和\+Raw\+Socket相似的通信方式。  
+
+
+
+
+{\ttfamily \#include $<$qqtwebsocketclient.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Web\+Socket\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_web_socket_client}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_client_aad40f4b80302a8b0204b5884ba9f815d}\label{class_q_qt_web_socket_client_aad40f4b80302a8b0204b5884ba9f815d}} 
+{\bfseries Q\+Qt\+Web\+Socket\+Client} (Q\+Object $\ast$parent=nullptr, const Q\+String \&origin=Q\+String(), Q\+Web\+Socket\+Protocol\+::\+Version version=Q\+Web\+Socket\+Protocol\+::\+Version\+Latest)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_client_ace8fa2235520ed6ab652fe0668d3dd97}\label{class_q_qt_web_socket_client_ace8fa2235520ed6ab652fe0668d3dd97}} 
+void {\bfseries install\+Protocol} (\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$stack)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_client_a2a1f33a9165d4d529d1017092d170a0d}\label{class_q_qt_web_socket_client_a2a1f33a9165d4d529d1017092d170a0d}} 
+void {\bfseries uninstall\+Protocol} (\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$stack)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_client_a2f222deb8cd5ae4ee680322ef2d76360}\label{class_q_qt_web_socket_client_a2f222deb8cd5ae4ee680322ef2d76360}} 
+\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$ {\bfseries installed\+Protocol} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_web_socket_client_aaf818de5921ddbe7f0acc761dbf5fc2c}{translator}} (const Q\+Byte\+Array \&bytes)
+\begin{DoxyCompactList}\small\item\em translator 用于拆分和分发数据报 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_web_socket_client}{Q\+Qt\+Web\+Socket\+Client}} class Q\+Qt\+Web\+Socket\+Client通过安装\+Q\+Qt\+Protocol来实现和\+Raw\+Socket相似的通信方式。 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_web_socket_client_aaf818de5921ddbe7f0acc761dbf5fc2c}\label{class_q_qt_web_socket_client_aaf818de5921ddbe7f0acc761dbf5fc2c}} 
+\index{Q\+Qt\+Web\+Socket\+Client@{Q\+Qt\+Web\+Socket\+Client}!translator@{translator}}
+\index{translator@{translator}!Q\+Qt\+Web\+Socket\+Client@{Q\+Qt\+Web\+Socket\+Client}}
+\subsubsection{\texorpdfstring{translator()}{translator()}}
+{\footnotesize\ttfamily void Q\+Qt\+Web\+Socket\+Client\+::translator (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+translator 用于拆分和分发数据报 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtwebsocketclient.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtwebsocketclient.\+cpp\end{DoxyCompactItemize}

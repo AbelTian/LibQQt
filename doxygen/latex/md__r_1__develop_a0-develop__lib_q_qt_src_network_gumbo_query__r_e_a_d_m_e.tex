@@ -1,0 +1,46 @@
+A C++ library that provides j\+Query-\/like selectors for Google\textquotesingle{}s Gumbo-\/\+Parser.
+
+Selector engine is an implementation based on \href{https://github.com/andybalholm/cascadia}{\tt cascadia}.
+
+\subsection*{Installation}
+
+2 ways\+:
+
+Through homebrew (Recommended)\+: 
+\begin{DoxyCode}
+$ brew install gumbo-query
+\end{DoxyCode}
+ Through git\+: 
+\begin{DoxyCode}
+$ git clone https://github.com/Falven/gumbo-query
+$ cd gumbo-query/build && cmake .. && make && make test
+$ sudo make install
+\end{DoxyCode}
+ And to generate Doxygen documentation\+: 
+\begin{DoxyCode}
+$ make doc
+\end{DoxyCode}
+
+
+\subsection*{Usage}
+
+
+\begin{DoxyCode}
+\{C++\}
+#include <iostream>
+#include <string>
+#include "Document.h"
+#include "Node.h"
+
+int main(int argc, char * argv[])
+\{
+  std::string page("<h1><a>some link</a></h1>");
+  CDocument doc;
+  doc.parse(page.c\_str());
+
+  CSelection c = doc.find("h1 a");
+  std::cout << c.nodeAt(0).text() << std::endl; // some link
+  return 0;
+\}
+\end{DoxyCode}
+ 

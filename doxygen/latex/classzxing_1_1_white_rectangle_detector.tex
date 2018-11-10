@@ -1,0 +1,44 @@
+\hypertarget{classzxing_1_1_white_rectangle_detector}{}\section{zxing\+:\+:White\+Rectangle\+Detector Class Reference}
+\label{classzxing_1_1_white_rectangle_detector}\index{zxing\+::\+White\+Rectangle\+Detector@{zxing\+::\+White\+Rectangle\+Detector}}
+Inheritance diagram for zxing\+:\+:White\+Rectangle\+Detector\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classzxing_1_1_white_rectangle_detector}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1_white_rectangle_detector_a72dee0f4452e2f2a050d80fb9e25d94e}\label{classzxing_1_1_white_rectangle_detector_a72dee0f4452e2f2a050d80fb9e25d94e}} 
+{\bfseries White\+Rectangle\+Detector} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} $>$ image)
+\item 
+\mbox{\Hypertarget{classzxing_1_1_white_rectangle_detector_a4f87e6c826c4d446dd0dc1d3ae00fd1f}\label{classzxing_1_1_white_rectangle_detector_a4f87e6c826c4d446dd0dc1d3ae00fd1f}} 
+{\bfseries White\+Rectangle\+Detector} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} $>$ image, int init\+Size, int x, int y)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ $>$ \mbox{\hyperlink{classzxing_1_1_white_rectangle_detector_a46bc3a8ea25cea0ebd6e7890cedd8146}{detect}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classzxing_1_1_white_rectangle_detector_a46bc3a8ea25cea0ebd6e7890cedd8146}\label{classzxing_1_1_white_rectangle_detector_a46bc3a8ea25cea0ebd6e7890cedd8146}} 
+\index{zxing\+::\+White\+Rectangle\+Detector@{zxing\+::\+White\+Rectangle\+Detector}!detect@{detect}}
+\index{detect@{detect}!zxing\+::\+White\+Rectangle\+Detector@{zxing\+::\+White\+Rectangle\+Detector}}
+\subsubsection{\texorpdfstring{detect()}{detect()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ $>$ White\+Rectangle\+Detector\+::detect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Detects a candidate barcode-\/like rectangular region within an image. It starts around the center of the image, increases the size of the candidate region until it finds a white rectangular region. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{}{$<$Ref$<$\+Result\+Point$>$ $>$}} describing the corners of the rectangular region. The first and last points are opposed on the diagonal, as are the second and third. The first point will be the topmost point and the last, the bottommost. The second point will be leftmost and the third, the rightmost 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{classzxing_1_1_not_found_exception}{Not\+Found\+Exception}}} & if no Data Matrix Code can be found \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/common/detector/White\+Rectangle\+Detector.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/common/detector/White\+Rectangle\+Detector.\+cpp\end{DoxyCompactItemize}

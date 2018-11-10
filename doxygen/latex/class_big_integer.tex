@@ -1,0 +1,215 @@
+\hypertarget{class_big_integer}{}\section{Big\+Integer Class Reference}
+\label{class_big_integer}\index{Big\+Integer@{Big\+Integer}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_big_integer_ab8bd05c604c2549930bd6f9169c13212}\label{class_big_integer_ab8bd05c604c2549930bd6f9169c13212}} 
+enum {\bfseries Sign} \{ {\bfseries negative} = -\/1, 
+{\bfseries zero} = 0, 
+{\bfseries positive} = 1
+ \}
+\item 
+\mbox{\Hypertarget{class_big_integer_a087f32e1a98d13063afabbbba5ee7777}\label{class_big_integer_a087f32e1a98d13063afabbbba5ee7777}} 
+typedef Big\+Unsigned\+::\+Blk {\bfseries Blk}
+\item 
+\mbox{\Hypertarget{class_big_integer_a9211ee1ab111812c13a85946850abed4}\label{class_big_integer_a9211ee1ab111812c13a85946850abed4}} 
+typedef Big\+Unsigned\+::\+Index {\bfseries Index}
+\item 
+\mbox{\Hypertarget{class_big_integer_abf5f4fc1341fa57ab2247204f75107d0}\label{class_big_integer_abf5f4fc1341fa57ab2247204f75107d0}} 
+typedef Big\+Unsigned\+::\+Cmp\+Res {\bfseries Cmp\+Res}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_big_integer_a77b04c7f78cc5f1c0ff8a6e6d0f70a8c}\label{class_big_integer_a77b04c7f78cc5f1c0ff8a6e6d0f70a8c}} 
+{\bfseries Big\+Integer} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x)
+\item 
+\mbox{\Hypertarget{class_big_integer_affcbb8c78dde021b8dc86f85043f3874}\label{class_big_integer_affcbb8c78dde021b8dc86f85043f3874}} 
+void {\bfseries operator=} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a07a3ffaacf8ec61365f476c54944a94c}\label{class_big_integer_a07a3ffaacf8ec61365f476c54944a94c}} 
+{\bfseries Big\+Integer} (const Blk $\ast$b, Index blen, Sign s)
+\item 
+\mbox{\Hypertarget{class_big_integer_a8f7da854813b9f0e1999a5f70f5951f8}\label{class_big_integer_a8f7da854813b9f0e1999a5f70f5951f8}} 
+{\bfseries Big\+Integer} (const Blk $\ast$b, Index blen)
+\item 
+\mbox{\Hypertarget{class_big_integer_abd4e98ccd5f181fd89d4fb1b26706890}\label{class_big_integer_abd4e98ccd5f181fd89d4fb1b26706890}} 
+{\bfseries Big\+Integer} (const \mbox{\hyperlink{class_big_unsigned}{Big\+Unsigned}} \&x, Sign s)
+\item 
+\mbox{\Hypertarget{class_big_integer_a37ec8eaf922f22f06c2d7c3f0fd6c947}\label{class_big_integer_a37ec8eaf922f22f06c2d7c3f0fd6c947}} 
+{\bfseries Big\+Integer} (const \mbox{\hyperlink{class_big_unsigned}{Big\+Unsigned}} \&x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a4d7fc4b1ef1fa49acefa17b5c4d54a41}\label{class_big_integer_a4d7fc4b1ef1fa49acefa17b5c4d54a41}} 
+{\bfseries Big\+Integer} (unsigned long x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a8204216b947c1f7d55055fbcdce537e5}\label{class_big_integer_a8204216b947c1f7d55055fbcdce537e5}} 
+{\bfseries Big\+Integer} (long x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a84e3afc544182aec037f803a78f7c870}\label{class_big_integer_a84e3afc544182aec037f803a78f7c870}} 
+{\bfseries Big\+Integer} (unsigned int x)
+\item 
+\mbox{\Hypertarget{class_big_integer_aa640cbe9e15ef5336b3fb392a33774e1}\label{class_big_integer_aa640cbe9e15ef5336b3fb392a33774e1}} 
+{\bfseries Big\+Integer} (int x)
+\item 
+\mbox{\Hypertarget{class_big_integer_aca6e7ecd7af7257a62e6e5a7c2c3cf4f}\label{class_big_integer_aca6e7ecd7af7257a62e6e5a7c2c3cf4f}} 
+{\bfseries Big\+Integer} (unsigned short x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a6199db3b49a628bfc191350a528e8f9a}\label{class_big_integer_a6199db3b49a628bfc191350a528e8f9a}} 
+{\bfseries Big\+Integer} (short x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a3db2371da6627f03c512f4aec86ba4ee}\label{class_big_integer_a3db2371da6627f03c512f4aec86ba4ee}} 
+unsigned long {\bfseries to\+Unsigned\+Long} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_a26ccf6204204f23778550550a103c8fb}\label{class_big_integer_a26ccf6204204f23778550550a103c8fb}} 
+long {\bfseries to\+Long} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_ad5c13828d64c56dcfb3d60f6997e2d8e}\label{class_big_integer_ad5c13828d64c56dcfb3d60f6997e2d8e}} 
+unsigned int {\bfseries to\+Unsigned\+Int} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_a5610ec6cd33c76f45264159075338142}\label{class_big_integer_a5610ec6cd33c76f45264159075338142}} 
+int {\bfseries to\+Int} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_a0e6fcde761a22cc25843bf8e5b268756}\label{class_big_integer_a0e6fcde761a22cc25843bf8e5b268756}} 
+unsigned short {\bfseries to\+Unsigned\+Short} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_acecb691ade1273cf99018fb316e460d3}\label{class_big_integer_acecb691ade1273cf99018fb316e460d3}} 
+short {\bfseries to\+Short} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_ac23826926ade0a83fb15fe4db7d4f95b}\label{class_big_integer_ac23826926ade0a83fb15fe4db7d4f95b}} 
+Sign {\bfseries get\+Sign} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_a2b17965bdeee75886f36627187b9f33c}\label{class_big_integer_a2b17965bdeee75886f36627187b9f33c}} 
+const \mbox{\hyperlink{class_big_unsigned}{Big\+Unsigned}} \& {\bfseries get\+Magnitude} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_a31bc02d73a2cd2543eb0766d438be873}\label{class_big_integer_a31bc02d73a2cd2543eb0766d438be873}} 
+Index {\bfseries get\+Length} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_a4b2701e018df181d4a29238e99c8eee5}\label{class_big_integer_a4b2701e018df181d4a29238e99c8eee5}} 
+Index {\bfseries get\+Capacity} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_ad56230d1a06620495ff19207e88c046c}\label{class_big_integer_ad56230d1a06620495ff19207e88c046c}} 
+Blk {\bfseries get\+Block} (Index i) const
+\item 
+\mbox{\Hypertarget{class_big_integer_a1efcae0566d97df771af90ef0c13d5f7}\label{class_big_integer_a1efcae0566d97df771af90ef0c13d5f7}} 
+bool {\bfseries is\+Zero} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_a3ed610978db6c403bc800010c9cece89}\label{class_big_integer_a3ed610978db6c403bc800010c9cece89}} 
+Cmp\+Res {\bfseries compare\+To} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_a5f6f798f6b3008596824052ee2f19912}\label{class_big_integer_a5f6f798f6b3008596824052ee2f19912}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_a6399b87bdf00726b53a1232d2f043ec1}\label{class_big_integer_a6399b87bdf00726b53a1232d2f043ec1}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_abcd85a7e4607d09d4ab8a3bd08bfb531}\label{class_big_integer_abcd85a7e4607d09d4ab8a3bd08bfb531}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_ad18b1c1cc550b1f3efff1ac8a7ffd927}\label{class_big_integer_ad18b1c1cc550b1f3efff1ac8a7ffd927}} 
+bool {\bfseries operator$<$=} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_adaf680c79ab2a7c24b3d54d1b83bffa7}\label{class_big_integer_adaf680c79ab2a7c24b3d54d1b83bffa7}} 
+bool {\bfseries operator$>$=} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_a1584fd7eb09c54e111c4aadea6f15076}\label{class_big_integer_a1584fd7eb09c54e111c4aadea6f15076}} 
+bool {\bfseries operator$>$} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_ae3ec1e41a43f6f602784820104b481ca}\label{class_big_integer_ae3ec1e41a43f6f602784820104b481ca}} 
+void {\bfseries add} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&a, const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&b)
+\item 
+\mbox{\Hypertarget{class_big_integer_aa7b823f26e3d7716bd8922083548f0c2}\label{class_big_integer_aa7b823f26e3d7716bd8922083548f0c2}} 
+void {\bfseries subtract} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&a, const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&b)
+\item 
+\mbox{\Hypertarget{class_big_integer_afebc1ad7629bc89399c4fefb4d1d66e3}\label{class_big_integer_afebc1ad7629bc89399c4fefb4d1d66e3}} 
+void {\bfseries multiply} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&a, const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&b)
+\item 
+\mbox{\Hypertarget{class_big_integer_a3071d9cc845c601673d2e370f1154ec1}\label{class_big_integer_a3071d9cc845c601673d2e370f1154ec1}} 
+void {\bfseries divide\+With\+Remainder} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&b, \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&q)
+\item 
+\mbox{\Hypertarget{class_big_integer_affe8d80e624a6918de405bc4c3ec59ca}\label{class_big_integer_affe8d80e624a6918de405bc4c3ec59ca}} 
+void {\bfseries negate} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&a)
+\item 
+\mbox{\Hypertarget{class_big_integer_a038cafc13c37f9132f162418aaa5485a}\label{class_big_integer_a038cafc13c37f9132f162418aaa5485a}} 
+\mbox{\hyperlink{class_big_integer}{Big\+Integer}} {\bfseries operator+} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_a14c4ecd380521e28d6e8547b656926de}\label{class_big_integer_a14c4ecd380521e28d6e8547b656926de}} 
+\mbox{\hyperlink{class_big_integer}{Big\+Integer}} {\bfseries operator-\/} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_ab14cbe6852656ff22039e2ff22ee536b}\label{class_big_integer_ab14cbe6852656ff22039e2ff22ee536b}} 
+\mbox{\hyperlink{class_big_integer}{Big\+Integer}} {\bfseries operator$\ast$} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_acb21ccdd85200d967474044c8fa6d3af}\label{class_big_integer_acb21ccdd85200d967474044c8fa6d3af}} 
+\mbox{\hyperlink{class_big_integer}{Big\+Integer}} {\bfseries operator/} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_a0b695f48e789da02ab366569994191be}\label{class_big_integer_a0b695f48e789da02ab366569994191be}} 
+\mbox{\hyperlink{class_big_integer}{Big\+Integer}} {\bfseries operator\%} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x) const
+\item 
+\mbox{\Hypertarget{class_big_integer_ac884028762b53da3f61f099aecbae081}\label{class_big_integer_ac884028762b53da3f61f099aecbae081}} 
+\mbox{\hyperlink{class_big_integer}{Big\+Integer}} {\bfseries operator-\/} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_a49e70d67c0a825d9a18a0c2c49e41ff0}\label{class_big_integer_a49e70d67c0a825d9a18a0c2c49e41ff0}} 
+void {\bfseries operator+=} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a7913148b4480c685ee837c6466a47ecb}\label{class_big_integer_a7913148b4480c685ee837c6466a47ecb}} 
+void {\bfseries operator-\/=} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a590e6e9e5aa571e52bb7b0b47604945e}\label{class_big_integer_a590e6e9e5aa571e52bb7b0b47604945e}} 
+void {\bfseries operator$\ast$=} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x)
+\item 
+\mbox{\Hypertarget{class_big_integer_ae6f62780970d982acb14c063b95fe598}\label{class_big_integer_ae6f62780970d982acb14c063b95fe598}} 
+void {\bfseries operator/=} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a0f752a192f2244e7398418374f8aa98a}\label{class_big_integer_a0f752a192f2244e7398418374f8aa98a}} 
+void {\bfseries operator\%=} (const \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&x)
+\item 
+\mbox{\Hypertarget{class_big_integer_a51fff1662d8fec38d0b9c6eb09789686}\label{class_big_integer_a51fff1662d8fec38d0b9c6eb09789686}} 
+void {\bfseries flip\+Sign} ()
+\item 
+\mbox{\Hypertarget{class_big_integer_ac53529384000bd3ac6780099f958387b}\label{class_big_integer_ac53529384000bd3ac6780099f958387b}} 
+void {\bfseries operator++} ()
+\item 
+\mbox{\Hypertarget{class_big_integer_a2ed0f5f50f60b81340f37eb5945f2f93}\label{class_big_integer_a2ed0f5f50f60b81340f37eb5945f2f93}} 
+void {\bfseries operator++} (int)
+\item 
+\mbox{\Hypertarget{class_big_integer_a334141a8b7f2425ab53990f06d4e350f}\label{class_big_integer_a334141a8b7f2425ab53990f06d4e350f}} 
+void {\bfseries operator-\/-\/} ()
+\item 
+\mbox{\Hypertarget{class_big_integer_a50a4fe1e6fbc509d9914c68efd2f58f8}\label{class_big_integer_a50a4fe1e6fbc509d9914c68efd2f58f8}} 
+void {\bfseries operator-\/-\/} (int)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_big_integer_a33d12d768a6a6cc0ac55f1d5d3a3bf85}\label{class_big_integer_a33d12d768a6a6cc0ac55f1d5d3a3bf85}} 
+static const Cmp\+Res {\bfseries less} = Big\+Unsigned\+::less
+\item 
+\mbox{\Hypertarget{class_big_integer_a6af9bee51f320bbfb3138ade782d265f}\label{class_big_integer_a6af9bee51f320bbfb3138ade782d265f}} 
+static const Cmp\+Res {\bfseries equal} = Big\+Unsigned\+::equal
+\item 
+\mbox{\Hypertarget{class_big_integer_a58d296e453689114fe92b551a3a4ad28}\label{class_big_integer_a58d296e453689114fe92b551a3a4ad28}} 
+static const Cmp\+Res {\bfseries greater} = Big\+Unsigned\+::greater
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_big_integer_a2960977fc2ba07a5d455103a88f9581e}\label{class_big_integer_a2960977fc2ba07a5d455103a88f9581e}} 
+{\footnotesize template$<$class X $>$ }\\X {\bfseries convert\+To\+Unsigned\+Primitive} () const
+\item 
+\mbox{\Hypertarget{class_big_integer_a02e00ce8c8f2826c06eab357342efb35}\label{class_big_integer_a02e00ce8c8f2826c06eab357342efb35}} 
+{\footnotesize template$<$class X , class UX $>$ }\\X {\bfseries convert\+To\+Signed\+Primitive} () const
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_big_integer_a7504893ed5d8928d99c03e92c0727ed6}\label{class_big_integer_a7504893ed5d8928d99c03e92c0727ed6}} 
+Sign {\bfseries sign}
+\item 
+\mbox{\Hypertarget{class_big_integer_a892d9475055eb633b56bf1e4c7094352}\label{class_big_integer_a892d9475055eb633b56bf1e4c7094352}} 
+\mbox{\hyperlink{class_big_unsigned}{Big\+Unsigned}} {\bfseries mag}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/bigint/Big\+Integer.\+hh\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/bigint/Big\+Integer.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,85 @@
+\hypertarget{class_q_qt_plugin_watcher}{}\section{Q\+Qt\+Plugin\+Watcher Class Reference}
+\label{class_q_qt_plugin_watcher}\index{Q\+Qt\+Plugin\+Watcher@{Q\+Qt\+Plugin\+Watcher}}
+Inheritance diagram for Q\+Qt\+Plugin\+Watcher\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_plugin_watcher}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_a54bea1e81b64d020f6a40178fb22a81f}\label{class_q_qt_plugin_watcher_a54bea1e81b64d020f6a40178fb22a81f}} 
+enum \{ \newline
+{\bfseries E\+\_\+\+N\+U\+L\+L\+D\+EV}, 
+{\bfseries E\+\_\+\+M\+O\+U\+SE}, 
+{\bfseries E\+\_\+\+K\+E\+Y\+B\+O\+A\+RD}, 
+{\bfseries E\+\_\+\+S\+T\+O\+R\+A\+GE}, 
+\newline
+{\bfseries E\+\_\+\+M\+A\+X\+D\+EV}
+ \}
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_a9cd5a5882a6002c7659cf353a84749a3}\label{class_q_qt_plugin_watcher_a9cd5a5882a6002c7659cf353a84749a3}} 
+enum \{ \newline
+{\bfseries E\+\_\+\+N\+U\+L\+L\+S\+T\+AT}, 
+{\bfseries E\+\_\+\+A\+DD}, 
+{\bfseries E\+\_\+\+RM}, 
+{\bfseries E\+\_\+\+C\+H\+A\+N\+GE}, 
+\newline
+{\bfseries E\+\_\+\+M\+A\+X\+S\+T\+AT}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_a68ea9f1343fdc062bebd0ac8967d625e}\label{class_q_qt_plugin_watcher_a68ea9f1343fdc062bebd0ac8967d625e}} 
+void {\bfseries slot\+Device\+Added} (const Q\+String \&dev)
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_ae3a390974c181bebc21faa8d37ef3a53}\label{class_q_qt_plugin_watcher_ae3a390974c181bebc21faa8d37ef3a53}} 
+void {\bfseries slot\+Device\+Removed} (const Q\+String \&dev)
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_aa6f7782415cdaf6fbf5fa1c13d076afb}\label{class_q_qt_plugin_watcher_aa6f7782415cdaf6fbf5fa1c13d076afb}} 
+void {\bfseries slot\+Device\+Changed} (const Q\+String \&dev)
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_a822b6aa0505119487ac4754af4169875}\label{class_q_qt_plugin_watcher_a822b6aa0505119487ac4754af4169875}} 
+void {\bfseries slot\+Device\+Driver} ()
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_a3064b11fe94c8bc2ae3487171dcbe980}\label{class_q_qt_plugin_watcher_a3064b11fe94c8bc2ae3487171dcbe980}} 
+void {\bfseries storage\+Changed} (int stat)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_adcf1572c74244b89880dec8af088c3c8}\label{class_q_qt_plugin_watcher_adcf1572c74244b89880dec8af088c3c8}} 
+quint32 {\bfseries device\+Type} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_a774219b586b166b711bb85e68b29005e}\label{class_q_qt_plugin_watcher_a774219b586b166b711bb85e68b29005e}} 
+quint32 {\bfseries device\+Stat} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_a54b9267b1a9cabe40685ebb6d106b877}\label{class_q_qt_plugin_watcher_a54b9267b1a9cabe40685ebb6d106b877}} 
+Q\+String {\bfseries upan\+Mount\+Path} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_aeab625154018777042ca6220f2bd7ca3}\label{class_q_qt_plugin_watcher_aeab625154018777042ca6220f2bd7ca3}} 
+Q\+String {\bfseries printer\+File} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_aa59779393184d45e0add891ee895c41e}\label{class_q_qt_plugin_watcher_aa59779393184d45e0add891ee895c41e}} 
+static \mbox{\hyperlink{class_q_qt_plugin_watcher}{Q\+Qt\+Plugin\+Watcher}} $\ast$ {\bfseries Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_plugin_watcher_aafc8a98c6b9da89212156ae1a2f98067}\label{class_q_qt_plugin_watcher_aafc8a98c6b9da89212156ae1a2f98067}} 
+virtual bool {\bfseries event} (Q\+Event $\ast$e)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/pluginsupport/qqtpluginwatcher.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/pluginsupport/qqtpluginwatcher.\+cpp\end{DoxyCompactItemize}

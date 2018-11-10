@@ -1,0 +1,86 @@
+\hypertarget{class_q_qt_virtual_click_label}{}\section{Q\+Qt\+Virtual\+Click\+Label Class Reference}
+\label{class_q_qt_virtual_click_label}\index{Q\+Qt\+Virtual\+Click\+Label@{Q\+Qt\+Virtual\+Click\+Label}}
+
+
+{\ttfamily \#include $<$qqtvirtualclicklabel.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Virtual\+Click\+Label\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.097378cm]{class_q_qt_virtual_click_label}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_ade5c5f064d272304618ac40fc5ad8b5a}\label{class_q_qt_virtual_click_label_ade5c5f064d272304618ac40fc5ad8b5a}} 
+{\bfseries Q\+Qt\+Virtual\+Click\+Label} (Q\+Widget $\ast$parent=0)
+\item 
+void \mbox{\hyperlink{class_q_qt_virtual_click_label_af95dc641c53eda0bbb7d688046f8872d}{install\+Click\+Helper}} (\mbox{\hyperlink{class_q_qt_click_helper}{Q\+Qt\+Click\+Helper}} $\ast$helper)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_ad7ceb361f788ef2d5c2705063c418047}\label{class_q_qt_virtual_click_label_ad7ceb361f788ef2d5c2705063c418047}} 
+\mbox{\hyperlink{class_q_qt_click_helper}{Q\+Qt\+Click\+Helper}} $\ast$ {\bfseries click\+Helper} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_a9431237555ac7c52afb088c89cb7c858}\label{class_q_qt_virtual_click_label_a9431237555ac7c52afb088c89cb7c858}} 
+virtual bool {\bfseries event\+Filter} (Q\+Object $\ast$watched, Q\+Event $\ast$event) override
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_virtual_click_label_a6e008887a4f2d5287e329a53caf8222c}{connect\+Click\+Helper}} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_a41214a3d8a2bbf75420246c428b196ba}\label{class_q_qt_virtual_click_label_a41214a3d8a2bbf75420246c428b196ba}} 
+virtual void {\bfseries un\+Connect\+Click\+Helper} ()
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_virtual_click_label_a86608b546a91196c9d31c46ccd50f3a1}{mouse\+Press\+Event}} (Q\+Mouse\+Event $\ast$event)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_af31024d0a6911d451cfd4db55e71f31b}\label{class_q_qt_virtual_click_label_af31024d0a6911d451cfd4db55e71f31b}} 
+virtual void {\bfseries mouse\+Release\+Event} (Q\+Mouse\+Event $\ast$event)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_aa851d7ea96d829d7a2c0b34cd4d826da}\label{class_q_qt_virtual_click_label_aa851d7ea96d829d7a2c0b34cd4d826da}} 
+virtual void {\bfseries mouse\+Double\+Click\+Event} (Q\+Mouse\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_af91317674d4c410632f652038572049c}\label{class_q_qt_virtual_click_label_af91317674d4c410632f652038572049c}} 
+\mbox{\hyperlink{class_q_qt_click_helper}{Q\+Qt\+Click\+Helper}} $\ast$ {\bfseries m\+Click\+Helper}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_a00045a066d4ee71cceaa7a26d0d5021f}\label{class_q_qt_virtual_click_label_a00045a066d4ee71cceaa7a26d0d5021f}} 
+\mbox{\hyperlink{class_q_qt_click_helper}{Q\+Qt\+Click\+Helper}} $\ast$ {\bfseries m\+Default\+Click\+Helper}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+这个是个\+Virtual Click Class 提供安装\+Click\+Helper的能力 提供\+Mouse\+Event响应
+
+用户使用方法 new Click\+Helper install\+Click\+Helper 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_a6e008887a4f2d5287e329a53caf8222c}\label{class_q_qt_virtual_click_label_a6e008887a4f2d5287e329a53caf8222c}} 
+\index{Q\+Qt\+Virtual\+Click\+Label@{Q\+Qt\+Virtual\+Click\+Label}!connect\+Click\+Helper@{connect\+Click\+Helper}}
+\index{connect\+Click\+Helper@{connect\+Click\+Helper}!Q\+Qt\+Virtual\+Click\+Label@{Q\+Qt\+Virtual\+Click\+Label}}
+\subsubsection{\texorpdfstring{connect\+Click\+Helper()}{connectClickHelper()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Virtual\+Click\+Label\+::connect\+Click\+Helper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+子类重写这两个函数,实现丰富的click能力 
+
+Reimplemented in \mbox{\hyperlink{class_q_qt_click_sound_label_a2153c2a44777f2f3a4f22daee2872915}{Q\+Qt\+Click\+Sound\+Label}}, \mbox{\hyperlink{class_q_qt_click_label_af20a13941a73c08287b01642a9e126a9}{Q\+Qt\+Click\+Label}}, \mbox{\hyperlink{class_q_qt_double_click_sound_label_ad87858f08468acc0bac61228d6f3290c}{Q\+Qt\+Double\+Click\+Sound\+Label}}, \mbox{\hyperlink{class_q_qt_long_click_sound_label_a8aed0ec65ec8c51cdc1cceb7c1b115c2}{Q\+Qt\+Long\+Click\+Sound\+Label}}, \mbox{\hyperlink{class_q_qt_double_click_label_a301dbc204a8cfc64e6714dea1aa0b2d6}{Q\+Qt\+Double\+Click\+Label}}, and \mbox{\hyperlink{class_q_qt_long_click_label_a93794ed4256367fc15e5441a4424c595}{Q\+Qt\+Long\+Click\+Label}}.
+
+\mbox{\Hypertarget{class_q_qt_virtual_click_label_af95dc641c53eda0bbb7d688046f8872d}\label{class_q_qt_virtual_click_label_af95dc641c53eda0bbb7d688046f8872d}} 
+\index{Q\+Qt\+Virtual\+Click\+Label@{Q\+Qt\+Virtual\+Click\+Label}!install\+Click\+Helper@{install\+Click\+Helper}}
+\index{install\+Click\+Helper@{install\+Click\+Helper}!Q\+Qt\+Virtual\+Click\+Label@{Q\+Qt\+Virtual\+Click\+Label}}
+\subsubsection{\texorpdfstring{install\+Click\+Helper()}{installClickHelper()}}
+{\footnotesize\ttfamily void Q\+Qt\+Virtual\+Click\+Label\+::install\+Click\+Helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_qt_click_helper}{Q\+Qt\+Click\+Helper}} $\ast$}]{helper }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+提供给\+App用信号 界面层内部直接处理 用户可选使用 \mbox{\Hypertarget{class_q_qt_virtual_click_label_a86608b546a91196c9d31c46ccd50f3a1}\label{class_q_qt_virtual_click_label_a86608b546a91196c9d31c46ccd50f3a1}} 
+\index{Q\+Qt\+Virtual\+Click\+Label@{Q\+Qt\+Virtual\+Click\+Label}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!Q\+Qt\+Virtual\+Click\+Label@{Q\+Qt\+Virtual\+Click\+Label}}
+\subsubsection{\texorpdfstring{mouse\+Press\+Event()}{mousePressEvent()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Virtual\+Click\+Label\+::mouse\+Press\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+子类不必重写\+Mouse\+Event函数, 这里实现对click\+Helper的响应能力 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/clickwidgets/qqtvirtualclicklabel.\+h\end{DoxyCompactItemize}

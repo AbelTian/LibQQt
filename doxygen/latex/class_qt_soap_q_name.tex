@@ -1,0 +1,115 @@
+\hypertarget{class_qt_soap_q_name}{}\section{Qt\+Soap\+Q\+Name Class Reference}
+\label{class_qt_soap_q_name}\index{Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}}
+
+
+The \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} class provides a wrapper for Q\+Names (names with namespaces).  
+
+
+
+
+{\ttfamily \#include $<$qtsoap.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_qt_soap_q_name_a4a96c28ad8c0ff72a3353048c5414912}{Qt\+Soap\+Q\+Name}} (const Q\+String \&\mbox{\hyperlink{class_qt_soap_q_name_ab788bc414e5709a56e2f8db2403028b7}{name}}=Q\+String\+::null, const Q\+String \&\mbox{\hyperlink{class_qt_soap_q_name_afff764342a9182afa6c67fdf3a193a6b}{uri}}=Q\+String\+::null)
+\item 
+\mbox{\hyperlink{class_qt_soap_q_name_a24085961dcaebe30f08f2069e00b3d4a}{$\sim$\+Qt\+Soap\+Q\+Name}} ()
+\item 
+\mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \& \mbox{\hyperlink{class_qt_soap_q_name_ae0a96da00a45c69fffab0e72a91bda6a}{operator=}} (const Q\+String \&s)
+\item 
+Q\+String \mbox{\hyperlink{class_qt_soap_q_name_ab788bc414e5709a56e2f8db2403028b7}{name}} () const
+\item 
+Q\+String \mbox{\hyperlink{class_qt_soap_q_name_afff764342a9182afa6c67fdf3a193a6b}{uri}} () const
+\end{DoxyCompactItemize}
+\subsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_qt_soap_q_name_a92f65e83e578dc8162316a1c1d8fbcf6}{operator==}} (const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&s1, const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&s2)
+\item 
+bool \mbox{\hyperlink{class_qt_soap_q_name_a324bad744351599e14ab87bab8e574a6}{operator$<$}} (const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&s1, const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&s2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} class provides a wrapper for Q\+Names (names with namespaces). 
+
+This class is used extensively in Qt\+Soap to define and identify header and body elements, including method and argument names.
+
+The \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} consists of a name and a U\+RI. The U\+RI is used as the name\textquotesingle{}s namespace, i.\+e. the name is qualified (hence \textquotesingle{}Q\textquotesingle{}-\/\+Name) by the U\+RI. The \mbox{\hyperlink{class_qt_soap_q_name_ab788bc414e5709a56e2f8db2403028b7}{name()}} and \mbox{\hyperlink{class_qt_soap_q_name_afff764342a9182afa6c67fdf3a193a6b}{uri()}} functions return the Q\+Names\textquotesingle{}s name and U\+RI.
+
+The \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} can be empty. It can also have just a name with no U\+RI. Special handling is often applied to a \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} that has no U\+RI. Typically, if a Q\+Name with no namespace is used in an element in a S\+O\+AP document that already has a default namespace defined, then that namespace will be applied to the Q\+Name.
+
+
+\begin{DoxyCode}
+\mbox{\hyperlink{class_qt_soap_message}{QtSoapMessage}} message;
+
+message.\mbox{\hyperlink{class_qt_soap_message_a792f4e366d4bf4c3ca09ea6f034237b5}{setMethod}}(\mbox{\hyperlink{class_qt_soap_q_name_a4a96c28ad8c0ff72a3353048c5414912}{QtSoapQName}}(\textcolor{stringliteral}{"sendMessage"}, \textcolor{stringliteral}{"http://messenging.example.com/"}));
+message.\mbox{\hyperlink{class_qt_soap_message_a07c31536525e366258d54c75d955de50}{addMethodArgument}}(\mbox{\hyperlink{class_qt_soap_simple_type}{QtSoapSimpleType}}(
+      \mbox{\hyperlink{class_qt_soap_q_name_a4a96c28ad8c0ff72a3353048c5414912}{QtSoapQName}}(\textcolor{stringliteral}{"a"}), 15));
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_qt_soap_q_name_a4a96c28ad8c0ff72a3353048c5414912}\label{class_qt_soap_q_name_a4a96c28ad8c0ff72a3353048c5414912}} 
+\index{Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}!Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}}
+\index{Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}!Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}}
+\subsubsection{\texorpdfstring{Qt\+Soap\+Q\+Name()}{QtSoapQName()}}
+{\footnotesize\ttfamily Qt\+Soap\+Q\+Name\+::\+Qt\+Soap\+Q\+Name (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{name = {\ttfamily QString\+:\+:null},  }\item[{const Q\+String \&}]{uri = {\ttfamily QString\+:\+:null} }\end{DoxyParamCaption})}
+
+Constructs a Q\+Name. Sets the Q\+Name name to {\itshape name} and the U\+RI to {\itshape uri}. \mbox{\Hypertarget{class_qt_soap_q_name_a24085961dcaebe30f08f2069e00b3d4a}\label{class_qt_soap_q_name_a24085961dcaebe30f08f2069e00b3d4a}} 
+\index{Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}!````~Qt\+Soap\+Q\+Name@{$\sim$\+Qt\+Soap\+Q\+Name}}
+\index{````~Qt\+Soap\+Q\+Name@{$\sim$\+Qt\+Soap\+Q\+Name}!Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}}
+\subsubsection{\texorpdfstring{$\sim$\+Qt\+Soap\+Q\+Name()}{~QtSoapQName()}}
+{\footnotesize\ttfamily Qt\+Soap\+Q\+Name\+::$\sim$\+Qt\+Soap\+Q\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructs the \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_qt_soap_q_name_ab788bc414e5709a56e2f8db2403028b7}\label{class_qt_soap_q_name_ab788bc414e5709a56e2f8db2403028b7}} 
+\index{Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}!name@{name}}
+\index{name@{name}!Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}}
+\subsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily Q\+String Qt\+Soap\+Q\+Name\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns Q\+Name\textquotesingle{}s name. \mbox{\Hypertarget{class_qt_soap_q_name_ae0a96da00a45c69fffab0e72a91bda6a}\label{class_qt_soap_q_name_ae0a96da00a45c69fffab0e72a91bda6a}} 
+\index{Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}!operator=@{operator=}}
+\index{operator=@{operator=}!Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \& Qt\+Soap\+Q\+Name\+::operator= (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{s }\end{DoxyParamCaption})}
+
+Sets the Q\+Name\textquotesingle{}s name to {\itshape s}, and sets the U\+RI to an empty string. \mbox{\Hypertarget{class_qt_soap_q_name_afff764342a9182afa6c67fdf3a193a6b}\label{class_qt_soap_q_name_afff764342a9182afa6c67fdf3a193a6b}} 
+\index{Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}!uri@{uri}}
+\index{uri@{uri}!Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}}
+\subsubsection{\texorpdfstring{uri()}{uri()}}
+{\footnotesize\ttfamily Q\+String Qt\+Soap\+Q\+Name\+::uri (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the Q\+Name\textquotesingle{}s U\+RI. 
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_qt_soap_q_name_a324bad744351599e14ab87bab8e574a6}\label{class_qt_soap_q_name_a324bad744351599e14ab87bab8e574a6}} 
+\index{Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&}]{s1,  }\item[{const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&}]{s2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+If {\itshape s2} has a non-\/empty U\+RI, this function returns true if the merge of the U\+RI and the name of {\itshape s1} is lexically less than that of {\itshape s2}; otherwise it returns false.
+
+If {\itshape s2} has an empty U\+RI, this function returns true if the name of {\itshape s1} is lexically less than the name of {\itshape s2}; otherwise it returns false.
+
+The comparison is case-\/insensitive. \mbox{\Hypertarget{class_qt_soap_q_name_a92f65e83e578dc8162316a1c1d8fbcf6}\label{class_qt_soap_q_name_a92f65e83e578dc8162316a1c1d8fbcf6}} 
+\index{Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}!operator==@{operator==}}
+\index{operator==@{operator==}!Qt\+Soap\+Q\+Name@{Qt\+Soap\+Q\+Name}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&}]{s1,  }\item[{const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&}]{s2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+If {\itshape s2} has a non-\/empty U\+RI, this function returns true if the merge of the U\+RI and the name of {\itshape s1} is equal to that of {\itshape s2}; otherwise it returns false.
+
+If {\itshape s2} has an empty U\+RI, this function returns true if the name of {\itshape s1} is equal to the name of {\itshape s2}; otherwise it returns false.
+
+The comparison is case-\/insensitive. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/soap/qtsoap.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/soap/qtsoap.\+cpp\end{DoxyCompactItemize}

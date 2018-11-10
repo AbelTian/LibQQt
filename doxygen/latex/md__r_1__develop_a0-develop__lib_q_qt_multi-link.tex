@@ -1,0 +1,72 @@
+Multi Link 技术，这个技术帮助使用者利用qmake这款工程管理工具来进行多个增删link-\/library。全称\+Multi-\/link technology，“多链接”技术，专门解决这些个app链接library出现的手工解决太多困难的问题。
+
+现在的\+Multi Link和\+Lib\+Q\+Qt绑定在一起，还未分离。在这里介绍现在的样子和将会实现的功能。 ~\newline
+ Multi-\/link Technology Project Link\+: \href{https://gitee.com/drabel/multi-link}{\tt https\+://gitee.\+com/drabel/multi-\/link}
+
+\section*{文件组成和功能介绍}
+
+
+\begin{DoxyEnumerate}
+\item qqt\+\_\+version.\+pri 用于更改\+Library的版本信息。只需要更改这一个地方就可以了
+\item qqt\+\_\+qkit.\+pri 用于支持目标平台信息，读取环境变量\+Q\+K\+I\+T设置\+S\+Y\+S\+N\+A\+M\+E。
+\item qqt\+\_\+function.\+pri 提供丰富的操作函数，分为两类两种，一类获取命令字符串，一类执行命令，一种条件函数，一种求解函数。
+\begin{DoxyItemize}
+\item mkdir system\+\_\+errcode read\+\_\+ini write\+\_\+ini empty\+\_\+file write\+\_\+line copy\+\_\+dir user\+\_\+home user\+\_\+config\+\_\+path
+\item 相应的get函数
+\item 支持windows 和 $\ast$nix。
+\end{DoxyItemize}
+\item qqt\+\_\+header.\+pri 包含qqt的特性开关，在这里决定library的大小和内部函数数目。
+\begin{DoxyItemize}
+\item Q\+Q\+T\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+L\+I\+B\+R\+A\+RY 宏的开关判断也在这里。在linux等posix平台，这种区分动态静态的宏意义不是很大，一般不定义就可以。在windows平台要求很强烈，在\+Q\+Qt中，windows平台，编译静态库，无论编译还是链接，\+Q\+Q\+T\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+L\+I\+B\+R\+A\+R\+Y都是需要的。动态库，编译时需要\+Q\+Q\+T\+\_\+\+L\+I\+B\+R\+A\+R\+Y宏，链接时不需要宏。在qqt.\+pro和link\+\_\+qqt.\+pri当中自动做了适配。
+\end{DoxyItemize}
+\item qqt\+\_\+source.\+pri 包含所有对应qqt的特性的源文件和头文件，\+H\+E\+A\+D\+E\+R\+S+= S\+O\+U\+R\+C\+E\+S+=全在这里。
+\item qqt\+\_\+3rdparty.\+pri 包含所有的第三方源代码。对于\+G\+P\+L，第三方的还是单独拿出来。找问题和开关特性都比较清晰。
+\item qqt\+\_\+install.\+pri 这里负责发布\+Q\+Qt S\+D\+K，所有的函数都在这里，但是发布工作在qqt\+\_\+library.\+pri里，编译\+Q\+Qt时不发生任何发布sdk的问题，只有在app当中pre link的时候才会create sdk，link from sdk。
+\item qqt\+\_\+library.\+pri qqt的sdk发布工作，app链接\+Q\+Qt工作，要求用户进行\+B\+U\+I\+L\+D-\/\+S\+D\+K-\/\+D\+E\+P\+L\+OY R\+O\+O\+T路径指定也发生在这里。它会自动生成一个pri，给用户指定这三个变量。
+\item qqt\+\_\+library.\+pri 包含以上这几个app需要的pri，这个文件现在只能放在library目录里。
+\item app\+\_\+configure.\+pri app配置文件，这个一般是公共配置文件，里面包含了link\+\_\+qqt\+\_\+library.\+pri。更改意义不大，将来可能会被生成，而不是开始就存在。
+\item app\+\_\+deploy.\+pri app发布文件，app发布到指定位置的工作就在这里实现，这个文件将来也可能被生成而不是开始就存在。
+\end{DoxyEnumerate}
+
+\section*{将要实现}
+
+
+\begin{DoxyItemize}
+\item qqt\+\_\+header.\+pri qqt\+\_\+source.\+pri 两个pri将会自动生成lib\+\_\+header.\+pri，lib\+\_\+source.\+pri，用户实现这两个pri，填充和自己的library有关的头文件和源文件，模块开关等信息。
+\item qqt\+\_\+library.\+pri 将会自动生成app\+\_\+configure.\+pri用于用户配置
+\item app\+\_\+deploy.\+pri 将会更名为qqt\+\_\+deploy.\+pri，用来完成支援app发布所需的功能。
+\item qqt\+\_\+install.\+pri 将会负责和sdk发布相关的工作。
+\item 这些pri将会全部转移到\+M\+L\+M\+A技术仓库，用户可以独立将其下载、配置，在一个地方完成多个lib和app工程的部署。
+\begin{DoxyItemize}
+\item 初步规划用户要clone到library目录。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+相信在\+Multi Link技术的帮助下，用户开发\+Library和\+Application肯定会如虎添翼，节省巨大的工时和精力。（现在仅仅支持\+Lib\+Q\+Qt使用）
+
+\section*{Multi-\/link技术完成}
+
+千等万等，\+Multi-\/link技术终于现出原形了。 ~\newline
+修复了发布\+Q\+Qt S\+D\+K无处安置的问题。 ~\newline
+
+\begin{DoxyEnumerate}
+\item include(.../multi-\/link/multi-\/link/add\+\_\+base\+\_\+manager.pri) ~\newline
+ -\/ 这里是多链接技术一切的开始。 ~\newline
+2. 提供函数 （这里只展示一部分）
+\begin{DoxyItemize}
+\item add\+\_\+sdk() (lib工程用) ~\newline
+ -\/ add\+\_\+version() ~\newline
+ -\/ ﻿add\+\_\+deploy() ~\newline
+ -\/ ﻿add\+\_\+deploy\+\_\+library() ~\newline
+ -\/ ﻿add\+\_\+deploy\+\_\+config() ~\newline
+ -\/ ﻿add\+\_\+include() ~\newline
+ -\/ ﻿add\+\_\+headers() ~\newline
+ -\/ ﻿add\+\_\+library() ~\newline
+ -\/ ﻿add\+\_\+defines() ~\newline
+ -\/ ﻿add\+\_\+language() ~\newline
+ -\/ ﻿add\+\_\+zh\+\_\+\+C\+N\+\_\+en\+\_\+\+U\+S() ~\newline
+3. 彻底的脱离了lib\+Q\+Qt，但是提供对lib\+Q\+Qt的链接支持，和对其他\+Library的链接支持一模一样。 ~\newline
+4. 有\+Multi-\/link帮助，用户可以任意的在app和lib之间设计链接关系了。 ~\newline
+4. Q\+Qt提供的强大功能，并没有因为\+Multi-\/link的升级而改变，依然强大。 
+\end{DoxyItemize}
+\end{DoxyEnumerate}

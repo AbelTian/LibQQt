@@ -1,0 +1,215 @@
+中文全名 $\ast$$\ast$$\ast$$\ast$\+Q\+Qt应用程序框架中间件$\ast$$\ast$$\ast$$\ast$。 ~\newline
+英文全名 $\ast$$\ast$$\ast$$\ast$\+Q\+Qt Application Framework Middleware$\ast$$\ast$$\ast$$\ast$，英文曾用名\+Q\+Qt Foundation Class。 ~\newline
+英文简称 $\ast$$\ast$$\ast$$\ast$\+Lib\+Q\+Qt$\ast$$\ast$$\ast$$\ast$。 ~\newline
+主库名称 $\ast$$\ast$$\ast$$\ast$\+Lib\+Q\+Qt$\ast$$\ast$$\ast$$\ast$。 ~\newline
+$\ast$\+Q\+Qt应用程序框架中间件是应用程序框架层的一系列库集合，持续实现这一层的功能。主库是\+Lib\+Q\+Qt，辅助（平级扩展）库有\+Q\+Qt\+Exquisite、\+Q\+Qt\+High\+Grade、\+Q\+Qt\+Industrial\+Control、\+Q\+Qt\+Input、\+Q\+Qt\+Install\+Framework、\+Q\+Qt\+Media\+Extention、\+Q\+Qt\+Style、\+Q\+Qt\+Tool等，很多流行\+Qt Wrapper库都在辅助库中。全部使用\+Multi-\/link技术实施工程管理。$\ast$ ~\newline
+Q\+Qt应用程序框架中间件库列表 ~\newline
+
+
+\section*{主库 Lib\+Q\+Qt}
+
+Lib\+Q\+Qt为基于\+Qt开发的\+App提供中间问题处理层，适配桌面、嵌入式以及\+Android、i\+O\+S的开发。 ~\newline
+Lib\+Q\+Qt为用户自动生成\+Library S\+D\+K，主动帮助用户发布\+App和资源文件。 ~\newline
+2018年1月，\+Lib\+Q\+Qt代码变更数量已达30万，主要面向初、中、高级软件相关专业、有一定\+App开发经验的工程师。 ~\newline
+Lib\+Q\+Qt现进行正式发布版本v2.1.\+6.\+0，欢迎工程师们使用。 ~\newline
+2018年8月，\+Lib\+Q\+Qt代码变更数量已达45万，主要面向嵌入式、桌面平台进行了功能和库扩充，使用多链接技术v2加强了管理能力。 ~\newline
+Lib\+Q\+Qt现进行正式发布版本v3.1，欢迎工程师们使用。 ~\newline
+ gitee link\+: \href{https://gitee.com/drabel/LibQQt}{\tt https\+://gitee.\+com/drabel/\+Lib\+Q\+Qt} ~\newline
+github link\+: \href{https://github.com/AbelTian/LibQQt}{\tt https\+://github.\+com/\+Abel\+Tian/\+Lib\+Q\+Qt} ~\newline
+ 
+
+ \section*{摘要介绍}
+
+{\itshape Lib\+Q\+Qt包括基础组成、精美组成、高级组成} ~\newline
+-\/ 基础组成，可以完成专业\+App所需要的业务功能和图形功能。 ~\newline
+-\/ 精美组成，包括高级业务功能和超级图形功能。（都在src/exquisite文件夹里） ~\newline
+-\/ 高级组成，包括\+App工程师们不多使用，不太熟悉的、比较艰难的功能。（都在src/highgrade文件夹里） ~\newline
+ {\itshape 如果用户希望精简\+Lib\+Q\+Qt，qqt\+\_\+header.\+pri里面有很多模块开关，开开关关能修剪。} ~\newline
+$\ast$不建议使用cmake，建议使用qmake。$\ast$ ~\newline
+$\ast$自动发布应用程序，自动拷贝应用配置，自动发布依赖库。（请正确配置三个主目录）$\ast$ ~\newline
+ 
+
+ \section*{详细介绍}
+
+
+\begin{DoxyEnumerate}
+\item 支持绘制图表
+\begin{DoxyItemize}
+\item \href{src/charts/qqtchartview.h}{\tt Q\+Qt\+Chart} (compatiable with Q\+Chart and \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}}) ~\newline
+2. 支持检测\+U\+S\+B设备热插拔 ~\newline
+3. 自定义了一部分特殊需要的控件，用来解决\+Qt的嵌入式bug。
+\item 包括完全使用图片的checkbox（switchbutton）
+\item Q\+Qt\+Tab\+Widget，解决\+Qt\+Tab不能竖排横显文字的问题
+\item Q\+Qt进度条，解决\+Qt进度条在\+Dialog中导致系统死机的问题(e-\/linux) ~\newline
+1. 添加精美控件
+\item 包括有多种效果的\+Widget、\+Dialog
+\item 二维码生成器、识别器，校验码生成器
+\item 九宫格技术展示图片
+\item 添加gif support Widgets ~\newline
+ -\/ 可以方便的设置动态按钮等。 ~\newline
+ -\/ 有\href{src/exquisite/gifwidgets/qqtgifwidget.h}{\tt Q\+Qt\+Gif\+Widget}、\+Q\+Qt\+Gif\+Button等。 ~\newline
+ -\/ 添加color support widgets ~\newline
+ -\/ 单色\+Widget。 ~\newline
+ -\/ 添加click and click sound widget ~\newline
+ -\/ 带按键声，支持长按、双击的widget和label等控件。 ~\newline
+ -\/ 以及未列出的等20余种自定义widget。
+\end{DoxyItemize}
+\item 有线和无线网络自动连接管理器 (e-\/linux) ~\newline
+6. 解决\+Qt4.8.\+7在嵌入式屏幕上\+Q\+Graphics系统不正常绘画的问题
+\item Q\+Qt输入法 ~\newline
+ -\/ 重写了\+U\+I，适配多种屏幕 ~\newline
+ -\/ 由于版权等一些原因，这个模块在\+Lib\+Q\+Qt 3.\+0的时候移除。 ~\newline
+ -\/ 我制作了\+Q\+Qt\+Input库以提供输入法功能，请用户到我的工程主页，查看\+Q\+Qt\+Input工程。 ~\newline
+8. Qt对象管理器 ~\newline
+ -\/ 用于管理已经生成的\+Qt对象实例，object\+Name是唯一查找索引。 ~\newline
+ -\/ 含有\+Q\+Qt\+Object\+Factory，用于动态注册、生成来自\+Q\+Object和\+Q\+Widget的类。
+\item 嵌入式视频播放器，模拟端口实时预览器 ~\newline
+ -\/ {\itshape 已经移动到独立的\+Q\+Qt\+Media\+Extention库，专门提供媒体功能，主要是视频媒体。} 0. Q\+Qt打印机，支持打印pdf
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Q\+Qt\+Word，支持doc文档编写，输出pdf格式。
+\item Q\+Qt\+Tree\+View，添加\+Qt4内部没有\+Tree\+View
+\begin{DoxyItemize}
+\item 包括\+Q\+Qt\+Xml\+Tree\+Model、\+Q\+Qt\+Json\+Tree\+Model、\+Q\+Qt\+File\+System\+Tree\+Model、\+Q\+Qt\+Sql\+Tree\+Model
+\end{DoxyItemize}
+\item Q\+Qt通讯套件。
+\begin{DoxyItemize}
+\item 通讯口类 ~\newline
+ -\/ Q\+Qt\+Nfc\+Client、\+Q\+Qt\+Nfc\+Server 支持近场通讯。 ~\newline
+ -\/ \mbox{\hyperlink{class_q_qt_serial_port}{Q\+Qt\+Serial\+Port}} 兼容\+Q\+Serial\+Port and \mbox{\hyperlink{class_qext_serial_port}{Qext\+Serial\+Port}}
+\begin{DoxyItemize}
+\item \href{src/network/qqttcpclient.h}{\tt Q\+Qt\+Tcp\+Client}、\+Q\+Qt\+Tcp\+Server、\+Q\+Qt\+Udp\+Client、\+Q\+Qt\+Udp\+Server
+\item Q\+Qt\+Bluetooth\+Socket、\+Q\+Qt\+Bluetooth\+Server +\+Q\+Qt\+Bluetooth\+Manager
+\item Q\+Qt\+Web\+Access\+Manager，支持http、ftp等主流协议，高并发传输，管理cookie和session。
+\item \href{src/network/qqtwebsocketclient.h}{\tt Q\+Qt\+Web\+Socket} 接口
+\item 一个句柄代表一个和外部通信的节点。 ~\newline
+ -\/ 报文虚类（接口类） \href{src/network/qqtmessage.h}{\tt Q\+Qt\+Message} ~\newline
+ -\/ 在协议里总是用这个报文的临时句柄，用来解协议包和压协议包。
+\end{DoxyItemize}
+\item 协议虚类（接口类） \href{src/network/qqtprotocol.h}{\tt Q\+Qt\+Protocol} Q\+Qt\+Web\+Socket\+Protocol \href{src/network/qqtprotocolmanager.h}{\tt Q\+Qt\+Protocol\+Manager}
+\begin{DoxyItemize}
+\item 程序业务代码就是依靠这个协议句柄进行通信工作的。 ~\newline
+7. 添加应用中常用的form
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+{\itshape 全在frame文件夹}
+\begin{DoxyEnumerate}
+\item 支持多页表格 \href{src/widgets/qqtmultipagetablewidget.h}{\tt Q\+Qt\+Multi\+Page\+Table\+Widget} ~\newline
+9. 添加 \href{src/frame/qqtapplication.h}{\tt Q\+Qt\+Application}，支持入门级、通用级、专用级嵌入式\+App所必须的初始化内容
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item 支持\+Qt5.9.\+2 ~\newline
+ -\/ 建议桌面使用这个版本，对三大桌面，和\+I\+OS Android e-\/linux支持都很好。 ~\newline
+0. 跨平台支持mac\+O\+S、i\+O\+S、\+Android、\+Windows、\+Linux、\+M\+I\+P\+S、\+A\+R\+M等。 ~\newline
+1. 添加矢量图形widgets ~\newline
+ -\/ 比如 Q\+Qt\+Svg\+Progressbar
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{class_q_qt_svg_check_box}{Q\+Qt\+Svg\+Check\+Box}}
+\item \href{src/exquisite/svgwidgets/qqtsvgpushbutton.h}{\tt Q\+Qt\+Svg\+Push\+Button} ~\newline
+2. 添加核心类之\href{src/core/qqtdictionary.h}{\tt Q\+Qt\+Dictionary} ~\newline
+ -\/ 化解C Plus Plus中没有字典类别的尴尬。 ~\newline
+3. 添加\+Multi Link工程管理pri组 ~\newline
+ -\/ \href{multi-link/add_multi_link_technology.pri}{\tt Multi Link technology}，既多链接工程管理技术。
+\item \href{multi-link/multi-link/add_base_manager.pri}{\tt add\+\_\+base\+\_\+manager.\+pri}，app和lib工程的基础管理者。 ~\newline
+ -\/ 基于qmake，用户可以轻易的链接\+Lib\+Q\+Qt和添加自定义library。 ~\newline
+ -\/ 工程版本变更可以使用add\+\_\+version(1,0,0,0)实现了。 ~\newline
+5. 升级多媒体音频 ~\newline
+ -\/ 添加内存服务器（一套\+Input（\+Reader），\+Output（\+Writer）），处理内存和设备之间的数据交互。（这部分的功能完全按照为内存服务的思路设计研发。） ~\newline
+ -\/ \href{src/multimedia/qqtaudiomanager.h}{\tt Q\+Qt\+Audio\+Manager}、 ~\newline
+ -\/ Q\+Qt\+Wav\+Audio\+Manager、\+Q\+Qt\+Wav\+Sound\+Effect、\+Q\+Qt\+Wav\+Audio\+Input、\+Q\+Qt\+Wav\+Audio\+Output、 ~\newline
+ -\/ 将\+Audio\+Device、wav输入输出文件，当做一个设备进行读写，\+App处理获取到的声音。 ~\newline
+6. 添加\+Http功能支持工具
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+Q\+Qt\+Web\+Access\+Manager，支持管理\+Session、\+Cookies。 ~\newline
+ -\/ 添加\+Gumbo\+Query爬虫工具。 ~\newline
+ -\/ 支持webservice (Qt\+Soap) ~\newline
+8. 添加\+Qt没有的组件\+Q\+Qt\+Title\+Bar ~\newline
+ -\/ 可以组完全自定义的\+Form。 ~\newline
+ -\/ 加上\+Q\+Qt\+O\+S\+D\+Frame、\+Q\+Qt\+O\+S\+D\+Form可以组透明\+Form。 ~\newline
+8. {\bfseries High\+Grade} Module 增加新成员 ~\newline
+ -\/ 难度高，谨慎使用。 ~\newline
+ -\/ 线程间、进程间通信组件 ~\newline
+ -\/ Q\+Qt\+Shared\+Memory，实现可以跨线程、进程的变量，却按照临时变量的方式使用。 ~\newline
+ -\/ Q\+Qt\+Local\+Server Q\+Qt\+Local\+Client, Q\+Qt\+Named\+Pipe使用\+Q\+Local\+Socket、\+P\+I\+P\+E实现跨线程通讯。 ~\newline
+ -\/ Q\+Qt\+Local\+Queue\+Server Q\+Qt\+Local\+Queue\+Client Q\+Qt\+Message\+Queue使用\+Q\+Qt\+Local\+Queue\+Socket实现跨线程通讯。 ~\newline
+ -\/ 使用方法都类似于\+Q\+Qt\+Shared\+Memory。 ~\newline
+ -\/ \mbox{\hyperlink{class_q_qt_single_ton_application}{Q\+Qt\+Single\+Ton\+Application}} 单例\+App，基于\+Q\+Qt\+Application，利用基于\+Q\+Local\+Socket的进程间通信实现。 ~\newline
+ 
+
+ \section*{多链接发布技术}
+
+Multiple Link Technology ~\newline
+Lib\+Q\+Qt为方便用户开发\+App过程方便的发布程序，所以添加了多链接和自动发布功能，基于qmake工程管理器的多链接发布技术。 ~\newline
+用户只需要为多链接技术做相应的目录设定，就可以自动发布应用、自动发布配置项目，自动发布依赖库。 ~\newline
+ 多链接技术还包括添加设置版本，添加语言，添加程序图标，添加工程常用函数和工程基础配置设定，方便用户不必再进行复杂设置初始化。 ~\newline
+多链接技术还包括为\+Lib工程发布\+S\+D\+K。 ~\newline
+多链接技术提供的add\+\_\+base\+\_\+manager.\+pri，只需要包含这一个pri文件，用户就可以使用多链接技术，很方便。 ~\newline
+经过发布的\+App直接点击就可以运行，$\ast$大的省去了用户手动发布\+App的劳烦过程。 ~\newline
+有了\+Multi-\/link，\+Qt C++软件工程师就好像在编辑一个软件的源程序一样处理多个软件。 ~\newline
+ {\itshape Multi-\/link提供\+Product\+Exec\+Tool，可以对产品集中调用运行、查看运行效果。} ~\newline
+$\ast$\+Multi-\/link提供\+Sdk\+List\+Tool，方便用户查看已经准备好的\+S\+D\+K在各个平台准备情况的表格。$\ast$ ~\newline
+$\ast$\+Multi-\/link提供\+Add\+Library\+Tool，方便用户通过准备好的\+S\+D\+K自动生成add\+\_\+library\+\_\+xxx.pri的链接环。$\ast$ ~\newline
+$\ast$\+Multi-\/link提供\+Add\+Library\+Tool-\/\+Multiple，可以同时对多套\+S\+D\+K进行生成链接环。$\ast$ ~\newline
+$\ast$\+Multi-\/link提供\+Multi-\/link\+Config\+Tool，方便用户配置\+Multi-\/link v2必需的三大路径，build/sdk/deploy root。$\ast$ ~\newline
+ {\itshape Lib\+Q\+Qt3.\+0基于\+Multi-\/link2.0发布，用户使用\+Lib\+Q\+Qt 3，代表用户接受其工程管理工具\+Multi-\/link 2.} ~\newline
+ 
+
+ \section*{版本分割}
+
+Lib\+Q\+Qt R2支持\+Qt5 Qt4， ~\newline
+Lib\+Q\+Qt R3支持\+Qt5，由于使用\+Multi-\/link 2，不支持\+Qt4。 ~\newline
+现在\+R3是master分支。 ~\newline
+版本划分图谱 ~\newline
+ 
+
+ \section*{使用案例}
+
+看入门用例截图 ~\newline
+ 
+
+ \section*{使用方法}
+
+在\+Windows平台上， ~\newline
+$\ast$把\+Lib\+Q\+Qt/extra/touch.exe 复制到C\+:$\ast$ ~\newline
+$\ast$把\+Lib\+Q\+Qt/extra/md5.exe 复制到C\+:$\ast$ ~\newline
+ 走，去看看入门用法 ~\newline
+入门了，去看看学习设置工程目录 ~\newline
+发现了一个问题\+: \href{https://gitee.com/drabel/LibQQt/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0}{\tt new issue link} ~\newline
+ 
+
+ \section*{依赖学习知识}
+
+预习\+Git入门 ~\newline
+ 
+
+ \section*{Lib\+Q\+Qt百科}
+
+跳转到\+Lib\+Q\+Qt的百科知识页面 ~\newline
+\href{http://blog.csdn.net/Dr_Abel}{\tt 阅读我的\+Lib\+Q\+Qt博客进行一系列的学习} ~\newline
+\href{http://v.youku.com/v_show/id_XMzUzODQ4MTczMg==.html?spm=a2hzp.8244740.0.0}{\tt Lib\+Q\+Qt视频图说} ~\newline
+看看\+Lib\+Q\+Qt的文档 ~\newline
+ 
+
+ \section*{联系我}
+
+邮箱\+: \href{mailto:tianduanrui@163.com}{\tt tianduanrui@163.\+com} ~\newline
+QQ\+: 2657635903 ~\newline
+ 
+
+ \section*{用户使用协议}
+
+Lib\+Q\+Qt用户使用协议 ~\newline
+ 
+
+ \section*{收费处}
+
+Lib\+Q\+Qt收费处 ~\newline
+ 
+
+ \section*{项目标识}
+
+ 

@@ -1,0 +1,46 @@
+\hypertarget{class_q_qt_q_s_s_manager}{}\section{Q\+Qt\+Q\+S\+S\+Manager Class Reference}
+\label{class_q_qt_q_s_s_manager}\index{Q\+Qt\+Q\+S\+S\+Manager@{Q\+Qt\+Q\+S\+S\+Manager}}
+
+
+\mbox{\hyperlink{class_q_qt_q_s_s_manager}{Q\+Qt\+Q\+S\+S\+Manager}} 在配置目录里，默认在app运行当前目录。 skin目录  
+
+
+
+
+{\ttfamily \#include $<$qqtqssmanager.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Q\+S\+S\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_q_s_s_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_q_s_s_manager_a15093e1ee36dfc052ad4629006f2ac65}\label{class_q_qt_q_s_s_manager_a15093e1ee36dfc052ad4629006f2ac65}} 
+{\bfseries Q\+Qt\+Q\+S\+S\+Manager} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_q_s_s_manager_a8f27eea4093199cb8c52972f37afa9f7}\label{class_q_qt_q_s_s_manager_a8f27eea4093199cb8c52972f37afa9f7}} 
+Q\+List$<$ Q\+String $>$ {\bfseries style\+List} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_q_s_s_manager_ac754c65a7108a1396f6f8f366cc2bf76}\label{class_q_qt_q_s_s_manager_ac754c65a7108a1396f6f8f366cc2bf76}} 
+void {\bfseries set\+Current\+Style} (Q\+String style\+Name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{class_q_qt_q_s_s_manager}{Q\+Qt\+Q\+S\+S\+Manager}} 在配置目录里，默认在app运行当前目录。 skin目录 
+
+default主题 default.\+qss是必然加载的，\+Q\+Qt\+App的皮肤，公共qss配置，写在这里。 对应的资源在default文件夹里，或者qrc里。
+
+blue主题 其他主题 blue.\+qss代表blue主题，对应资源在blue文件夹里。blue.\+qss这个文件决定主题列表里的主题的名字，qss\+Manager会提供列表。 一个主题包括\mbox{[}主题名\mbox{]}.qss，和\mbox{[}主题名\mbox{]}文件夹组成。
+
+原理 会根据用户设置生成当前主题qss配置文件，current.\+qss，所以不要去碰这个临时文件。 current.\+qss里包含default.\+qss和用户选定的当前主题的qss，是个拼接文件。 会直接对\+Q\+Qt\+Application生效，所以必须使用\+Q\+Qt\+Application。
+
+注意：qss文件里的url路径是相对于app工作目录的相对路径。 注意：资源目录不必要，可以放到qrc里。qss文件必要。 注意：主题列表不包括default，其他的主题qss才是主题，default是主题公共资源。 可能性设计：把资源保存在qrc里或者打包成二进制格式的文件，使用时解压到临时目录，然后再使用\+Q\+S\+S\+Manager加载。 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/frame/qqtqssmanager.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/frame/qqtqssmanager.\+cpp\end{DoxyCompactItemize}

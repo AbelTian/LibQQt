@@ -1,0 +1,23 @@
+有一些同学认为安装\+Qt Creator就是安装\+Qt，不是的。
+
+Qt Creator是一款使用qmake对用户\+Qt工程进行管理的\+I\+D\+E。
+
+qmake是我们常说的generate make工具，理论上它独立于\+Qt，即独立于\+Qt Library。 ~\newline
+qmake理论上独立于\+Qt，但是\+Qt设计者将其依附于\+Qt之中，用于帮助\+Qt Creator区分\+Qt的版本（目标跨平台）。 ~\newline
+qmake跟随\+Qt发布，即跟随\+Qt Library发布，通常我们所说的\+Qt是\+Qt Library。 ~\newline
+Qt版本来源于\+Qt Library版本，qmake的版本独立于\+Qt版本， Qt Creator版本独立于\+Qt版本。 我们一般只关注\+Qt版本和qmake所指向的\+Qt版本，它俩其实是一个概念。
+
+Qt Creator包括对\+Qt Versions的支持，通过查找qmake实现，它支持多版本、多目标的\+Qt。 ~\newline
+它包含对qmake、cmake的使用能力，也就是能管理工程源代码树。 它包含对make的使用能力，也就是能编译。 ~\newline
+它包含对gdb、windbg等调试器的支持，也就是能调试。 ~\newline
+另外， ~\newline
+它包含对astyle、clang-\/format的支持，也就是能保存时格式化代码。 ~\newline
+它包含对源码外编译（shadow build）的支持，也就是对\+Qt Creator设置的默认编译目录，指定了qmake和编译器工作的根位置。这里注意：\+Qt Creator可以根据自身的变量通配目录名，这些变量不是qmake的，它没有把这些变量完全传给qmake的pr\mbox{[}o,i,f\mbox{]}们。（\+Qt5） ~\newline
+ \section*{安装目录}
+
+Qt Creator通常跟随于\+Qt各个版本发布一个版本，用户选择新版本使用就好了，在安装目录\+Tools目录里。按个最新的\+Qt，找\+Tools目录就用它。 ~\newline
+Qt 其他的版本，把安装目录里的\+Qt版本号目录，剪切到这个新版本的\+Qt安装根目录里，并排各版本号目录，\+Qt Versions那里随便选好了，你使用了哪个版本的\+Qt、针对了哪个目标，你自己知道。 ~\newline
+Qt Doc目录，你在里边放哪个版本的\+Qt Doc在\+Qt Creator的help里就会出现哪个让你选，操作操作就知道了，除非版本间区别太大，一般放一个。 ~\newline
+Qt Creator的配置目录，类\+Unix系统，在用户根目录/.config/\+Qt\+Project里，\+Windows下，在用户根目录/\+App\+Data/\+Roaming/\+Qt\+Project里。 ~\newline
+ 以上是对\+Qt Creator这款\+I\+D\+E的介绍。 ~\newline
+ \href{.}{\tt 返回} 
