@@ -1,0 +1,253 @@
+\hypertarget{namespace_q_c_p}{}\section{Q\+CP Namespace Reference}
+\label{namespace_q_c_p}\index{Q\+CP@{Q\+CP}}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Margin\+Side}} \{ \newline
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a9500c8bfcc9e80b9dff0a8e00e867f07}{ms\+Left}} = 0x01, 
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a93c719593bb2b94ed244d52c86d83b65}{ms\+Right}} = 0x02, 
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a5db8fb0d0b0ecf0d611c2602a348e8a0}{ms\+Top}} = 0x04, 
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a5241d8eac2bab9524a38889f576179cc}{ms\+Bottom}} = 0x08, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a43d7361cb0c5244eabdc962021bffebc}{ms\+All}} = 0x\+FF, 
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a80aa4149f16dabd538f8b2e3d42c42d5}{ms\+None}} = 0x00
+ \}
+\item 
+enum \mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0c}{Antialiased\+Element}} \{ \newline
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caefa92e89cd37f8a081fd2075aa1af73f}{ae\+Axes}} = 0x0001, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca4fbb37118d62288af0ca601ff2b07a2f}{ae\+Grid}} = 0x0002, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caaedf83369188a15a69f92bb1d85ca97b}{ae\+Sub\+Grid}} = 0x0004, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca9e0127a6361b5d0596b031a482c5cf97}{ae\+Legend}} = 0x0008, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca1aca7a50c1b95403958733a4acafe773}{ae\+Legend\+Items}} = 0x0010, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca4145e4251b0cf2dbedabeea0a38f84f6}{ae\+Plottables}} = 0x0020, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caf7712a85d6b0c75b24301d2fe9484db3}{ae\+Items}} = 0x0040, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0cae45ed8cd167bffe27d7f40da4bc17e9c}{ae\+Scatters}} = 0x0080, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca9dcf3882cb321bb305f71fdc0f09f63d}{ae\+Error\+Bars}} = 0x0100, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca788810f0aa930137de6ad6cc6d83d354}{ae\+Fills}} = 0x0200, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca261f8ea78cf3c9561726223ffa33dc12}{ae\+Zero\+Line}} = 0x0400, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caa897c232a0ffc8368e7c100ffc59ef31}{ae\+All}} = 0x\+F\+F\+FF, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caa9e90d81896358757d94275aeaa58f6a}{ae\+None}} = 0x0000
+ \}
+\item 
+enum \mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4}{Plotting\+Hint}} \{ \mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4ab7283c5bfc1ba9e597015389880bda42}{ph\+None}} = 0x000, 
+\mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4aa5fd227bc878c56ad2a87ea32c74ee4d}{ph\+Fast\+Polylines}} = 0x001, 
+\mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4aa3090dafa0e0f9a28c579c79d6c2d283}{ph\+Force\+Repaint}} = 0x002, 
+\mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4a8e9cfe5ee0c5cd36dd7accf9739aff65}{ph\+Cache\+Labels}} = 0x004
+ \}
+\item 
+enum \mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037}{Interaction}} \{ \newline
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a2c4432b9aceafb94000be8d1b589ef18}{i\+Range\+Drag}} = 0x001, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037abee1e94353525a636aeaf0ba32b72e14}{i\+Range\+Zoom}} = 0x002, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037aef673112c5067c3cf4cfddb62da7265d}{i\+Multi\+Select}} = 0x004, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a67148c8227b4155eca49135fc274c7ec}{i\+Select\+Plottables}} = 0x008, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037ad6644ac55bef621645326e9dd7469caa}{i\+Select\+Axes}} = 0x010, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a269c9af298e257d1108edec0432b5513}{i\+Select\+Legend}} = 0x020, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037aea2f7c105d674e76d9b187b02ef29260}{i\+Select\+Items}} = 0x040, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037af67a50bc26147a13b551b3a625374949}{i\+Select\+Other}} = 0x080
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespace_q_c_p_a07ab701c05329089f933b9cae2638a63}\label{namespace_q_c_p_a07ab701c05329089f933b9cae2638a63}} 
+bool {\bfseries is\+Invalid\+Data} (double value)
+\item 
+\mbox{\Hypertarget{namespace_q_c_p_a728903e5c3dd17847bee280f4005496f}\label{namespace_q_c_p_a728903e5c3dd17847bee280f4005496f}} 
+bool {\bfseries is\+Invalid\+Data} (double value1, double value2)
+\item 
+\mbox{\Hypertarget{namespace_q_c_p_afbf6e3084c108f2bb4372107945ee82f}\label{namespace_q_c_p_afbf6e3084c108f2bb4372107945ee82f}} 
+void {\bfseries set\+Margin\+Value} (Q\+Margins \&margins, \mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}} side, int value)
+\item 
+\mbox{\Hypertarget{namespace_q_c_p_a23a2679d3495c444acc26acc61e35b5b}\label{namespace_q_c_p_a23a2679d3495c444acc26acc61e35b5b}} 
+int {\bfseries get\+Margin\+Value} (const Q\+Margins \&margins, \mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}} side)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{namespace_q_c_p}{Q\+CP}} Namespace contains general enums and Q\+Flags used throughout the \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} library 
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0c}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0c}} 
+\index{Q\+CP@{Q\+CP}!Antialiased\+Element@{Antialiased\+Element}}
+\index{Antialiased\+Element@{Antialiased\+Element}!Q\+CP@{Q\+CP}}
+\subsubsection{\texorpdfstring{Antialiased\+Element}{AntialiasedElement}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0c}{Q\+C\+P\+::\+Antialiased\+Element}}}
+
+Defines what objects of a plot can be forcibly drawn antialiased/not antialiased. If an object is neither forcibly drawn antialiased nor forcibly drawn not antialiased, it is up to the respective element how it is drawn. Typically it provides a {\itshape set\+Antialiased} function for this.
+
+{\ttfamily Antialiased\+Elements} is a flag of or-\/combined elements of this enum type.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_custom_plot_af6f91e5eab1be85f67c556e98c3745e8}{Q\+Custom\+Plot\+::set\+Antialiased\+Elements}}, \mbox{\hyperlink{class_q_custom_plot_ae10d685b5eabea2999fb8775ca173c24}{Q\+Custom\+Plot\+::set\+Not\+Antialiased\+Elements}} 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Axes@{ae\+Axes}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Axes@{ae\+Axes}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caefa92e89cd37f8a081fd2075aa1af73f}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caefa92e89cd37f8a081fd2075aa1af73f}} 
+ae\+Axes&{\ttfamily 0x0001} Axis base line and tick marks \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Grid@{ae\+Grid}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Grid@{ae\+Grid}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca4fbb37118d62288af0ca601ff2b07a2f}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca4fbb37118d62288af0ca601ff2b07a2f}} 
+ae\+Grid&{\ttfamily 0x0002} Grid lines \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Sub\+Grid@{ae\+Sub\+Grid}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Sub\+Grid@{ae\+Sub\+Grid}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caaedf83369188a15a69f92bb1d85ca97b}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caaedf83369188a15a69f92bb1d85ca97b}} 
+ae\+Sub\+Grid&{\ttfamily 0x0004} Sub grid lines \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Legend@{ae\+Legend}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Legend@{ae\+Legend}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca9e0127a6361b5d0596b031a482c5cf97}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca9e0127a6361b5d0596b031a482c5cf97}} 
+ae\+Legend&{\ttfamily 0x0008} Legend box \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Legend\+Items@{ae\+Legend\+Items}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Legend\+Items@{ae\+Legend\+Items}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca1aca7a50c1b95403958733a4acafe773}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca1aca7a50c1b95403958733a4acafe773}} 
+ae\+Legend\+Items&{\ttfamily 0x0010} Legend items \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Plottables@{ae\+Plottables}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Plottables@{ae\+Plottables}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca4145e4251b0cf2dbedabeea0a38f84f6}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca4145e4251b0cf2dbedabeea0a38f84f6}} 
+ae\+Plottables&{\ttfamily 0x0020} Main lines of plottables (excluding error bars, see element \mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca9dcf3882cb321bb305f71fdc0f09f63d}{ae\+Error\+Bars}}) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Items@{ae\+Items}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Items@{ae\+Items}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caf7712a85d6b0c75b24301d2fe9484db3}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caf7712a85d6b0c75b24301d2fe9484db3}} 
+ae\+Items&{\ttfamily 0x0040} Main lines of items \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Scatters@{ae\+Scatters}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Scatters@{ae\+Scatters}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0cae45ed8cd167bffe27d7f40da4bc17e9c}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0cae45ed8cd167bffe27d7f40da4bc17e9c}} 
+ae\+Scatters&{\ttfamily 0x0080} Scatter symbols of plottables (excluding scatter symbols of type ss\+Pixmap) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Error\+Bars@{ae\+Error\+Bars}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Error\+Bars@{ae\+Error\+Bars}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca9dcf3882cb321bb305f71fdc0f09f63d}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca9dcf3882cb321bb305f71fdc0f09f63d}} 
+ae\+Error\+Bars&{\ttfamily 0x0100} Error bars \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Fills@{ae\+Fills}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Fills@{ae\+Fills}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca788810f0aa930137de6ad6cc6d83d354}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca788810f0aa930137de6ad6cc6d83d354}} 
+ae\+Fills&{\ttfamily 0x0200} Borders of fills (e.\+g. under or between graphs) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+Zero\+Line@{ae\+Zero\+Line}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+Zero\+Line@{ae\+Zero\+Line}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca261f8ea78cf3c9561726223ffa33dc12}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca261f8ea78cf3c9561726223ffa33dc12}} 
+ae\+Zero\+Line&{\ttfamily 0x0400} Zero-\/lines, see \mbox{\hyperlink{class_q_c_p_grid_a209f40fdb252397b418b82d3494d8ea0}{Q\+C\+P\+Grid\+::set\+Zero\+Line\+Pen}} \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+All@{ae\+All}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+All@{ae\+All}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caa897c232a0ffc8368e7c100ffc59ef31}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caa897c232a0ffc8368e7c100ffc59ef31}} 
+ae\+All&{\ttfamily 0x\+F\+F\+FF} All elements \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ae\+None@{ae\+None}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ae\+None@{ae\+None}}}\mbox{\Hypertarget{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caa9e90d81896358757d94275aeaa58f6a}\label{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caa9e90d81896358757d94275aeaa58f6a}} 
+ae\+None&{\ttfamily 0x0000} No elements \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037}\label{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037}} 
+\index{Q\+CP@{Q\+CP}!Interaction@{Interaction}}
+\index{Interaction@{Interaction}!Q\+CP@{Q\+CP}}
+\subsubsection{\texorpdfstring{Interaction}{Interaction}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037}{Q\+C\+P\+::\+Interaction}}}
+
+Defines the mouse interactions possible with \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}}.
+
+{\ttfamily Interactions} is a flag of or-\/combined elements of this enum type.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_custom_plot_a5ee1e2f6ae27419deca53e75907c27e5}{Q\+Custom\+Plot\+::set\+Interactions}} 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i\+Range\+Drag@{i\+Range\+Drag}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!i\+Range\+Drag@{i\+Range\+Drag}}}\mbox{\Hypertarget{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a2c4432b9aceafb94000be8d1b589ef18}\label{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a2c4432b9aceafb94000be8d1b589ef18}} 
+i\+Range\+Drag&{\ttfamily 0x001} Axis ranges are draggable (see \mbox{\hyperlink{class_q_c_p_axis_rect_ae6aef2f7211ba6097c925dcd26008418}{Q\+C\+P\+Axis\+Rect\+::set\+Range\+Drag}}, \mbox{\hyperlink{class_q_c_p_axis_rect_a648cce336bd99daac4a5ca3e5743775d}{Q\+C\+P\+Axis\+Rect\+::set\+Range\+Drag\+Axes}}) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i\+Range\+Zoom@{i\+Range\+Zoom}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!i\+Range\+Zoom@{i\+Range\+Zoom}}}\mbox{\Hypertarget{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037abee1e94353525a636aeaf0ba32b72e14}\label{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037abee1e94353525a636aeaf0ba32b72e14}} 
+i\+Range\+Zoom&{\ttfamily 0x002} Axis ranges are zoomable with the mouse wheel (see \mbox{\hyperlink{class_q_c_p_axis_rect_a7960a9d222f1c31d558b064b60f86a31}{Q\+C\+P\+Axis\+Rect\+::set\+Range\+Zoom}}, \mbox{\hyperlink{class_q_c_p_axis_rect_a9442cca2aa358405f39a64d51eca13d2}{Q\+C\+P\+Axis\+Rect\+::set\+Range\+Zoom\+Axes}}) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i\+Multi\+Select@{i\+Multi\+Select}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!i\+Multi\+Select@{i\+Multi\+Select}}}\mbox{\Hypertarget{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037aef673112c5067c3cf4cfddb62da7265d}\label{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037aef673112c5067c3cf4cfddb62da7265d}} 
+i\+Multi\+Select&{\ttfamily 0x004} The user can select multiple objects by holding the modifier set by \mbox{\hyperlink{class_q_custom_plot_a8fc96e3b5138a06759a2a90c166df516}{Q\+Custom\+Plot\+::set\+Multi\+Select\+Modifier}} while clicking \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i\+Select\+Plottables@{i\+Select\+Plottables}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!i\+Select\+Plottables@{i\+Select\+Plottables}}}\mbox{\Hypertarget{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a67148c8227b4155eca49135fc274c7ec}\label{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a67148c8227b4155eca49135fc274c7ec}} 
+i\+Select\+Plottables&{\ttfamily 0x008} Plottables are selectable (e.\+g. graphs, curves, bars,... see \mbox{\hyperlink{class_q_c_p_abstract_plottable}{Q\+C\+P\+Abstract\+Plottable}}) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i\+Select\+Axes@{i\+Select\+Axes}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!i\+Select\+Axes@{i\+Select\+Axes}}}\mbox{\Hypertarget{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037ad6644ac55bef621645326e9dd7469caa}\label{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037ad6644ac55bef621645326e9dd7469caa}} 
+i\+Select\+Axes&{\ttfamily 0x010} Axes are selectable (or parts of them, see \mbox{\hyperlink{class_q_c_p_axis_a513f9b9e326c505d9bec54880031b085}{Q\+C\+P\+Axis\+::set\+Selectable\+Parts}}) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i\+Select\+Legend@{i\+Select\+Legend}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!i\+Select\+Legend@{i\+Select\+Legend}}}\mbox{\Hypertarget{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a269c9af298e257d1108edec0432b5513}\label{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a269c9af298e257d1108edec0432b5513}} 
+i\+Select\+Legend&{\ttfamily 0x020} Legends are selectable (or their child items, see \mbox{\hyperlink{class_q_c_p_legend_a9ce60aa8bbd89f62ae4fa83ac6c60110}{Q\+C\+P\+Legend\+::set\+Selectable\+Parts}}) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i\+Select\+Items@{i\+Select\+Items}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!i\+Select\+Items@{i\+Select\+Items}}}\mbox{\Hypertarget{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037aea2f7c105d674e76d9b187b02ef29260}\label{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037aea2f7c105d674e76d9b187b02ef29260}} 
+i\+Select\+Items&{\ttfamily 0x040} Items are selectable (Rectangles, Arrows, Textitems, etc. see \mbox{\hyperlink{class_q_c_p_abstract_item}{Q\+C\+P\+Abstract\+Item}}) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i\+Select\+Other@{i\+Select\+Other}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!i\+Select\+Other@{i\+Select\+Other}}}\mbox{\Hypertarget{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037af67a50bc26147a13b551b3a625374949}\label{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037af67a50bc26147a13b551b3a625374949}} 
+i\+Select\+Other&{\ttfamily 0x080} All other objects are selectable (e.\+g. your own derived layerables, the plot title,...) \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}\label{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}} 
+\index{Q\+CP@{Q\+CP}!Margin\+Side@{Margin\+Side}}
+\index{Margin\+Side@{Margin\+Side}!Q\+CP@{Q\+CP}}
+\subsubsection{\texorpdfstring{Margin\+Side}{MarginSide}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}}}
+
+Defines the sides of a rectangular entity to which margins can be applied.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{Q\+C\+P\+Layout\+Element\+::set\+Auto\+Margins}}, \mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{Q\+C\+P\+Axis\+Rect\+::set\+Auto\+Margins}} 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ms\+Left@{ms\+Left}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ms\+Left@{ms\+Left}}}\mbox{\Hypertarget{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a9500c8bfcc9e80b9dff0a8e00e867f07}\label{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a9500c8bfcc9e80b9dff0a8e00e867f07}} 
+ms\+Left&{\ttfamily 0x01} left margin \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ms\+Right@{ms\+Right}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ms\+Right@{ms\+Right}}}\mbox{\Hypertarget{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a93c719593bb2b94ed244d52c86d83b65}\label{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a93c719593bb2b94ed244d52c86d83b65}} 
+ms\+Right&{\ttfamily 0x02} right margin \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ms\+Top@{ms\+Top}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ms\+Top@{ms\+Top}}}\mbox{\Hypertarget{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a5db8fb0d0b0ecf0d611c2602a348e8a0}\label{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a5db8fb0d0b0ecf0d611c2602a348e8a0}} 
+ms\+Top&{\ttfamily 0x04} top margin \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ms\+Bottom@{ms\+Bottom}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ms\+Bottom@{ms\+Bottom}}}\mbox{\Hypertarget{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a5241d8eac2bab9524a38889f576179cc}\label{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a5241d8eac2bab9524a38889f576179cc}} 
+ms\+Bottom&{\ttfamily 0x08} bottom margin \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ms\+All@{ms\+All}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ms\+All@{ms\+All}}}\mbox{\Hypertarget{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a43d7361cb0c5244eabdc962021bffebc}\label{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a43d7361cb0c5244eabdc962021bffebc}} 
+ms\+All&{\ttfamily 0x\+FF} all margins \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ms\+None@{ms\+None}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ms\+None@{ms\+None}}}\mbox{\Hypertarget{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a80aa4149f16dabd538f8b2e3d42c42d5}\label{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a80aa4149f16dabd538f8b2e3d42c42d5}} 
+ms\+None&{\ttfamily 0x00} no margin \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4}\label{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4}} 
+\index{Q\+CP@{Q\+CP}!Plotting\+Hint@{Plotting\+Hint}}
+\index{Plotting\+Hint@{Plotting\+Hint}!Q\+CP@{Q\+CP}}
+\subsubsection{\texorpdfstring{Plotting\+Hint}{PlottingHint}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4}{Q\+C\+P\+::\+Plotting\+Hint}}}
+
+Defines plotting hints that control various aspects of the quality and speed of plotting.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_custom_plot_a94a33cbdadbbac5934843508bcfc210d}{Q\+Custom\+Plot\+::set\+Plotting\+Hints}} 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ph\+None@{ph\+None}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ph\+None@{ph\+None}}}\mbox{\Hypertarget{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4ab7283c5bfc1ba9e597015389880bda42}\label{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4ab7283c5bfc1ba9e597015389880bda42}} 
+ph\+None&{\ttfamily 0x000} No hints are set \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ph\+Fast\+Polylines@{ph\+Fast\+Polylines}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ph\+Fast\+Polylines@{ph\+Fast\+Polylines}}}\mbox{\Hypertarget{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4aa5fd227bc878c56ad2a87ea32c74ee4d}\label{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4aa5fd227bc878c56ad2a87ea32c74ee4d}} 
+ph\+Fast\+Polylines&especially of the line segment joins. (Only relevant for solid line pens.) {\ttfamily 0x001} Graph/\+Curve lines are drawn with a faster method. This reduces the quality \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ph\+Force\+Repaint@{ph\+Force\+Repaint}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ph\+Force\+Repaint@{ph\+Force\+Repaint}}}\mbox{\Hypertarget{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4aa3090dafa0e0f9a28c579c79d6c2d283}\label{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4aa3090dafa0e0f9a28c579c79d6c2d283}} 
+ph\+Force\+Repaint&This is set by default to prevent the plot from freezing on fast consecutive replots (e.\+g. user drags ranges with mouse). {\ttfamily 0x002} causes an immediate repaint() instead of a soft update() when \mbox{\hyperlink{class_q_custom_plot_a606fd384b2a637ce2c24899bcbde77d6}{Q\+Custom\+Plot\+::replot()}} is called with parameter \mbox{\hyperlink{class_q_custom_plot_a45d61392d13042e712a956d27762aa39adfa1f2387617168d9299f4c8ad15b332}{Q\+Custom\+Plot\+::rp\+Hint}}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ph\+Cache\+Labels@{ph\+Cache\+Labels}!Q\+CP@{Q\+CP}}\index{Q\+CP@{Q\+CP}!ph\+Cache\+Labels@{ph\+Cache\+Labels}}}\mbox{\Hypertarget{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4a8e9cfe5ee0c5cd36dd7accf9739aff65}\label{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4a8e9cfe5ee0c5cd36dd7accf9739aff65}} 
+ph\+Cache\+Labels&{\ttfamily 0x004} axis (tick) labels will be cached as pixmaps, increasing replot performance. \\
+\hline
+
+\end{DoxyEnumFields}

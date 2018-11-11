@@ -1,0 +1,131 @@
+\subsection*{项目介绍}
+
+为应用程序和链接库工程开发的，实现链接、发布依赖\+Library，发布\+S\+D\+K，发布应用，发布语言、配置等工程管理功能的多链接技术。 ~\newline
+Multi-\/link技术使用众多的pri进行函数定义，提供给用户丰富的\+App/\+Lib生产线操作函数，省却手动拷贝\+App、\+Lib、依赖令手痛的问题。 ~\newline
+我编写的\+Multi-\/link技术使用内置支持\+Library的方式支持众多的\+Library，方便共享对\+Library的支持，并且方便准确及时地同步到工程中进行使用，基本上编写一次，便不必再修改。 ~\newline
+用户有使用方便的\+Library可以给我发邮件，tianduanrui@163.\+com.把add\+\_\+library\+\_\+\+X\+X\+X.\+pri发给我。我会把它提交到\+Multi-\/link工程里。 ~\newline
+Multi-\/link技术位于全自动化构建技术的最关键的位置，即源代码工程全自动化构建、生产。
+
+\subsection*{功能清单}
+
+
+\begin{DoxyEnumerate}
+\item 跨windows、mac\+O\+S、linux(笔者使用ubuntu kylin x64)三个平台，功能已经全面完成。
+\item 这些功能，就是在qmake阶段设置好所有的用户过去需要手动做的工作，通过\+Q\+M\+A\+K\+E\+\_\+\+P\+O\+S\+T\+\_\+\+L\+I\+N\+K自动完成。
+\item add\+\_\+function.\+pri add\+\_\+project.\+pri里面提供了丰富的基本功能，用户可以用其扩展技术外功能。
+\item add\+\_\+deploy() 发布app到app发布目录 用于app工程。
+\item add\+\_\+sdk() 发布sdk到sdk目录 用于library工程。
+\item add\+\_\+dependent\+\_\+manager() 为工程添加依赖的\+S\+D\+K，它会到\+S\+D\+K目录查找具体的\+S\+D\+K，输入参数，sdk包名，sdk包内子模块名。比如：\+Qt, Widgets.\+这里吆告诉读者，把\+Qt S\+D\+K放到\+S\+D\+K目录里也有效果。通常这一个函数链接库的\+S\+D\+K就够用了，里面包含了add\+\_\+include() 包含头文件路径 add\+\_\+library() 链接库 add\+\_\+defines() 添加library的宏定义 add\+\_\+deploy\+\_\+library() 把库跟随app发布到app发布目录。
+\item add\+\_\+deploy\+\_\+config() 将指定路径的配置文件发布到build路径和product发布路径。
+\item add\+\_\+icons() 为应用程序添加logo，尤其windows和mac\+O\+S下。
+\item add\+\_\+language() 为应用程序添加翻译文件，自动添加翻译文件，用户只需要找到文件翻译下就可以了。
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item add\+\_\+version() 为应用程序添加版本信息。
+\end{DoxyEnumerate}
+
+\subsection*{提供的工具}
+
+经过发布的\+App直接点击就可以运行，$\ast$大的省去了用户手动发布\+App的劳烦过程。 ~\newline
+$\ast$\+Multi-\/link提供\+Product\+Exec\+Tool，可以对产品集中查看、调用运行。$\ast$ ~\newline
+$\ast$\+Multi-\/link提供\+Add\+Library\+Tool，方便用户通过准备好的\+S\+D\+K自动生成add\+\_\+library\+\_\+xxx.pri链接环。$\ast$ ~\newline
+$\ast$\+Multi-\/link提供\+Add\+Library\+Tool-\/\+Multiple，可以同时对多套\+S\+D\+K进行生成链接环。$\ast$ ~\newline
+$\ast$\+Multi-\/link提供\+Multi-\/link\+Config\+Tool，方便用户配置\+Multi-\/link v2必需的三大路径，build/sdk/deploy root。$\ast$ ~\newline
+$\ast$\+Multi-\/link提供\+Sdk\+List\+Tool，方便用户查看已经准备好的\+S\+D\+K在各个平台准备情况的表格。$\ast$ ~\newline
+ \subsection*{软件架构}
+
+\href{Multi-linkFunctionList.xlsx}{\tt 多链接技术的工程结构.\+xlsx} ~\newline
+由于\+Qt第四代编译比较困难，\+Qt4内置的qmake版本2.01a版本太低，对函数的支持不足，对嵌套函数的支持也不足， ~\newline
+所以，\+Multi-\/link2.0不支持\+Qt4。 ~\newline
+Multi-\/link1.\+0绑定\+Q\+Qt，也不会继续开发与\+Q\+Qt脱离的纯粹使用pri的版本，\+Qt4 qmake版本太低，不便于开发。 ~\newline
+ \subsection*{安装教程}
+
+
+\begin{DoxyEnumerate}
+\item 在用户主目录/.qmake/app\+\_\+configure.\+pri里面配置三个变量(\+Only Once) ~\newline
+ -\/ L\+I\+B\+\_\+\+S\+D\+K\+\_\+\+R\+O\+OT = /home/abel/\+Develop/b1-\/sdk
+\begin{DoxyItemize}
+\item A\+P\+P\+\_\+\+B\+U\+I\+L\+D\+\_\+\+R\+O\+OT = /home/abel/\+Develop/c0-\/buildstation
+\item A\+P\+P\+\_\+\+D\+E\+P\+L\+O\+Y\+\_\+\+R\+O\+OT = /home/abel/\+Develop/b0-\/product
+\item 可以编译运行\+Multi-\/link\+Config\+Tool，实现一次图形化的配置，配置好了还会兼容\+Multi-\/link 1.\+0.
+\item 配置一次就可以了，\+Multi-\/link提供的其他工具就都可以用了。 ~\newline
+2. 在project build configure页面配置构建环境变量，\+Q\+S\+YS=Windows等指示平台变量（参见add\+\_\+platform.\+pri）。
+\item 这个是每次每个build都需要配置的，这个有\+Qt Creator的开发历史原因。 ~\newline
+ \subsection*{使用说明}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item 一个可以拷贝multi-\/link到自己工程目录，
+\begin{DoxyItemize}
+\item 一个可以clone multi-\/link到公共位置
+\item 一个可以clone multi-\/link到工程目录作为submodule。这个是推荐方式，我对链接库们的支持容易使用到自己的工程里，我一般使用这个方式。
+\end{DoxyItemize}
+\item include (.../multi-\/link/add\+\_\+base\+\_\+manager.pri) ~\newline
+4. add\+\_\+version() add\+\_\+deploy() add\+\_\+dependent\+\_\+manager(\+Q\+Qt) add\+\_\+dependent\+\_\+manager(\+X\+X\+X\+Lib) ...
+\item 如果希望添加自定义模块，如果希望添加自己使用的其他的app-\/lib没支持的库，
+\begin{DoxyItemize}
+\item 那么从multi-\/link/app-\/lib里拷贝add\+\_\+custom\+\_\+manager.pri到工程目录（optional，\+Multi-\/link 1.\+0）。 ~\newline
+ -\/ 使用\+Add\+Library\+Tool写自定义的add\+\_\+library\+\_\+\+X\+X\+X.\+pri（\+Multi-\/link 2.\+0），然后拷贝这个pri到工程目录，或者到\+Multi-\/link的app-\/lib目录，使用add\+\_\+custom\+\_\+dependent\+\_\+manager(X\+XX)/add\+\_\+dependent\+\_\+manager(X\+XX)调用. ~\newline
+ 详细使用说明 ~\newline
+
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\subsection*{使用截图}
+
+屏幕截图 ~\newline
+
+
+\subsection*{约束}
+
+
+\begin{DoxyEnumerate}
+\item 源代码目录里multi-\/link目录有必要和代码目录平级。不应当把multi-\/link文件夹放到src目录里。 ~\newline
+2. mac\+O\+S下，一切被依赖的\+Library不可以和依赖者\+App或者\+Library共同编译。免于触发first-\/time bug。
+\begin{DoxyItemize}
+\item 已经修复。修改了搬运软件的时机。 ~\newline
+3. mac\+O\+S下，工程的\+C\+O\+N\+F\+I\+G，从+lib\+\_\+bundle变化到-\/lib\+\_\+bundle，需要手动删除工程编译目录里的所有framework。
+\item cp命令的行为，我至今不明确。
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\subsection*{总结}
+
+看起来挺巨大的？工程量的确不小。 ~\newline
+初学者注意看： ~\newline
+1. 第一次使用，拿到\+Multi-\/link技术的仓库，使用\+Multi-\/link.pro编译\+Multi-\/link\+Config\+Tool，配置三个主要路径。
+\begin{DoxyItemize}
+\item 在这台电脑上，\+Multi-\/link Technology（qmake）开始臣服于你。 ~\newline
+2. 顺便配置好\+Qt Creator吧，这两步只需要配置一次，这一步还是optional，配置下比较美观，反正就一次。 ~\newline
+ -\/ 菜单栏-\/工具-\/选项-\/构建和运行
+\begin{DoxyItemize}
+\item 概要，设置你喜欢的，我建议的默认编译路径。
+\item 构建套件，对每个\+Kit设置你喜欢，我建议的\+File system name。\+S\+D\+K路径、\+Deploy路径下面，肯定是使用我的建议的\+File system name。 ~\newline
+ 初学者，可以拿依赖\+Multi-\/link技术的\+L\+I\+B工程和\+A\+P\+P工程。 ~\newline
+1. 用\+Qt Creator打开工程.\+pro。
+\end{DoxyItemize}
+\item 选择几个目标configure project。(.pro.\+user)。这是最开始。
+\item 左侧菜单-\/项目-\/\+Build\&Run-\/\+Build-\/构建设置-\/构建环境-\/详情 ~\newline
+ -\/ 批量编辑，添加\+Q\+S\+YS=Windows/mac\+O\+S/\+Linux64/\+Android/\+Armhf32/i\+O\+S等选一，target\+Name就是上边我建议的\+File system name，在add\+\_\+platform.\+pri里边能找到。 ~\newline
+2. 用\+Qt Creator编译源代码工程
+\item 工程树-\/工程名-\/鼠标右键
+\begin{DoxyItemize}
+\item 执行qmake。 =qmake
+\item 构建。 =make
+\end{DoxyItemize}
+\item 到\+S\+D\+K仓，产品库看看吧，有产品了。
+\begin{DoxyItemize}
+\item S\+D\+K\+List\+Tool，可以帮助查看\+S\+D\+K仓。
+\item Product\+Exec\+Tool，可以帮助运行产品库里的软件。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+用\+Qt Creator编辑源代码工程 ~\newline
+ -\/ 这个没什么可说的，按照常规使用\+Qt Creator编辑源代码的习惯编辑即可。 ~\newline
+ -\/ 切记，使用\+Multi-\/link技术，只要使用其提供的qmake函数，千万不要去手动触碰\+S\+D\+K，甚至\+App。这是\+Multi-\/link技术的初衷。 ~\newline
+
+
+\subsection*{联系我}
+
+邮箱： \href{mailto:tianduarnui@163.com}{\tt tianduarnui@163.\+com} ~\newline
+QQ\+: 2657635903 

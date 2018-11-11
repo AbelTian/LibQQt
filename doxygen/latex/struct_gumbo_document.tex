@@ -1,0 +1,48 @@
+\hypertarget{struct_gumbo_document}{}\section{Gumbo\+Document Struct Reference}
+\label{struct_gumbo_document}\index{Gumbo\+Document@{Gumbo\+Document}}
+
+
+{\ttfamily \#include $<$gumbo.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} \mbox{\hyperlink{struct_gumbo_document_ac4e8d4b3f088d46a0172149c08a0e5d3}{children}}
+\item 
+\mbox{\Hypertarget{struct_gumbo_document_a4a0b3c6f0e732073ec90de99a4bc5180}\label{struct_gumbo_document_a4a0b3c6f0e732073ec90de99a4bc5180}} 
+bool {\bfseries has\+\_\+doctype}
+\item 
+\mbox{\Hypertarget{struct_gumbo_document_ab8ee55b73ff2546cacfeb9ccd116ca08}\label{struct_gumbo_document_ab8ee55b73ff2546cacfeb9ccd116ca08}} 
+const char $\ast$ {\bfseries name}
+\item 
+\mbox{\Hypertarget{struct_gumbo_document_ad5437a289154cd970fa64fbc9c4fbfc8}\label{struct_gumbo_document_ad5437a289154cd970fa64fbc9c4fbfc8}} 
+const char $\ast$ {\bfseries public\+\_\+identifier}
+\item 
+\mbox{\Hypertarget{struct_gumbo_document_af7e13d360910e8d8b1424c3ae40ac582}\label{struct_gumbo_document_af7e13d360910e8d8b1424c3ae40ac582}} 
+const char $\ast$ {\bfseries system\+\_\+identifier}
+\item 
+\mbox{\hyperlink{gumbo_8h_aa0cbbfcc7ab2be48ac329ef7e76ff135}{Gumbo\+Quirks\+Mode\+Enum}} \mbox{\hyperlink{struct_gumbo_document_aa8135059f582a2c8309dcdd66eef7772}{doc\+\_\+type\+\_\+quirks\+\_\+mode}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Information specific to document nodes. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_gumbo_document_ac4e8d4b3f088d46a0172149c08a0e5d3}\label{struct_gumbo_document_ac4e8d4b3f088d46a0172149c08a0e5d3}} 
+\index{Gumbo\+Document@{Gumbo\+Document}!children@{children}}
+\index{children@{children}!Gumbo\+Document@{Gumbo\+Document}}
+\subsubsection{\texorpdfstring{children}{children}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} Gumbo\+Document\+::children}
+
+An array of Gumbo\+Nodes, containing the children of this element. This will normally consist of the $<$html$>$ element and any comment nodes found. Pointers are owned. \mbox{\Hypertarget{struct_gumbo_document_aa8135059f582a2c8309dcdd66eef7772}\label{struct_gumbo_document_aa8135059f582a2c8309dcdd66eef7772}} 
+\index{Gumbo\+Document@{Gumbo\+Document}!doc\+\_\+type\+\_\+quirks\+\_\+mode@{doc\+\_\+type\+\_\+quirks\+\_\+mode}}
+\index{doc\+\_\+type\+\_\+quirks\+\_\+mode@{doc\+\_\+type\+\_\+quirks\+\_\+mode}!Gumbo\+Document@{Gumbo\+Document}}
+\subsubsection{\texorpdfstring{doc\+\_\+type\+\_\+quirks\+\_\+mode}{doc\_type\_quirks\_mode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_aa0cbbfcc7ab2be48ac329ef7e76ff135}{Gumbo\+Quirks\+Mode\+Enum}} Gumbo\+Document\+::doc\+\_\+type\+\_\+quirks\+\_\+mode}
+
+Whether or not the document is in Quirks\+Mode, as determined by the values in the Gumbo\+Token\+Doc\+Type template. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/parser/src/\mbox{\hyperlink{gumbo_8h}{gumbo.\+h}}\end{DoxyCompactItemize}

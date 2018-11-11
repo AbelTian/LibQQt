@@ -1,0 +1,68 @@
+\hypertarget{class_q_c_p_data}{}\section{Q\+C\+P\+Data Class Reference}
+\label{class_q_c_p_data}\index{Q\+C\+P\+Data@{Q\+C\+P\+Data}}
+
+
+Holds the data of one single data point for \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}}.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_q_c_p_data_a1f06d624e36ba0ed72ac36d42aa5c7ee}{Q\+C\+P\+Data}} ()
+\item 
+\mbox{\hyperlink{class_q_c_p_data_aa274181ae8de2a0907ba5464d3c2c103}{Q\+C\+P\+Data}} (double key, double value)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_data_a2f5ba9aca61bb74f88516e148a4cf71b}\label{class_q_c_p_data_a2f5ba9aca61bb74f88516e148a4cf71b}} 
+double {\bfseries key}
+\item 
+\mbox{\Hypertarget{class_q_c_p_data_aefe1ecf8fa2e34ed875b67523e542373}\label{class_q_c_p_data_aefe1ecf8fa2e34ed875b67523e542373}} 
+double {\bfseries value}
+\item 
+\mbox{\Hypertarget{class_q_c_p_data_ae468c3808107c2fd23052481156ab5b5}\label{class_q_c_p_data_ae468c3808107c2fd23052481156ab5b5}} 
+double {\bfseries key\+Error\+Plus}
+\item 
+\mbox{\Hypertarget{class_q_c_p_data_af107d650b8ee5c3b2961ecddcfb1bccb}\label{class_q_c_p_data_af107d650b8ee5c3b2961ecddcfb1bccb}} 
+double {\bfseries key\+Error\+Minus}
+\item 
+\mbox{\Hypertarget{class_q_c_p_data_ad26912552d03485ea20d91dcad16aa8f}\label{class_q_c_p_data_ad26912552d03485ea20d91dcad16aa8f}} 
+double {\bfseries value\+Error\+Plus}
+\item 
+\mbox{\Hypertarget{class_q_c_p_data_a51d8f42bf4d49a1f263531e70cadd6a3}\label{class_q_c_p_data_a51d8f42bf4d49a1f263531e70cadd6a3}} 
+double {\bfseries value\+Error\+Minus}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Holds the data of one single data point for \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}}. 
+
+The container for storing multiple data points is \mbox{\hyperlink{qcustomplot_8h_a84a9c4a4c2216ccfdcb5f3067cda76e3}{Q\+C\+P\+Data\+Map}}.
+
+The stored data is\+: \begin{DoxyItemize}
+\item {\itshape key\+:} coordinate on the key axis of this data point \item {\itshape value\+:} coordinate on the value axis of this data point \item {\itshape key\+Error\+Minus\+:} negative error in the key dimension (for error bars) \item {\itshape key\+Error\+Plus\+:} positive error in the key dimension (for error bars) \item {\itshape value\+Error\+Minus\+:} negative error in the value dimension (for error bars) \item {\itshape value\+Error\+Plus\+:} positive error in the value dimension (for error bars)\end{DoxyItemize}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{qcustomplot_8h_a84a9c4a4c2216ccfdcb5f3067cda76e3}{Q\+C\+P\+Data\+Map}} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_q_c_p_data_a1f06d624e36ba0ed72ac36d42aa5c7ee}\label{class_q_c_p_data_a1f06d624e36ba0ed72ac36d42aa5c7ee}} 
+\index{Q\+C\+P\+Data@{Q\+C\+P\+Data}!Q\+C\+P\+Data@{Q\+C\+P\+Data}}
+\index{Q\+C\+P\+Data@{Q\+C\+P\+Data}!Q\+C\+P\+Data@{Q\+C\+P\+Data}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Data()}{QCPData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Q\+C\+P\+Data\+::\+Q\+C\+P\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructs a data point with key, value and all errors set to zero. \mbox{\Hypertarget{class_q_c_p_data_aa274181ae8de2a0907ba5464d3c2c103}\label{class_q_c_p_data_aa274181ae8de2a0907ba5464d3c2c103}} 
+\index{Q\+C\+P\+Data@{Q\+C\+P\+Data}!Q\+C\+P\+Data@{Q\+C\+P\+Data}}
+\index{Q\+C\+P\+Data@{Q\+C\+P\+Data}!Q\+C\+P\+Data@{Q\+C\+P\+Data}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Data()}{QCPData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Q\+C\+P\+Data\+::\+Q\+C\+P\+Data (\begin{DoxyParamCaption}\item[{double}]{key,  }\item[{double}]{value }\end{DoxyParamCaption})}
+
+Constructs a data point with the specified {\itshape key} and {\itshape value}. All errors are set to zero. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8h}{qcustomplot.\+h}}\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8cpp}{qcustomplot.\+cpp}}\end{DoxyCompactItemize}

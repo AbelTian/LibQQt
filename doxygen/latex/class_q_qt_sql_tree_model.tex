@@ -1,0 +1,95 @@
+\hypertarget{class_q_qt_sql_tree_model}{}\section{Q\+Qt\+Sql\+Tree\+Model Class Reference}
+\label{class_q_qt_sql_tree_model}\index{Q\+Qt\+Sql\+Tree\+Model@{Q\+Qt\+Sql\+Tree\+Model}}
+
+
+The \mbox{\hyperlink{class_q_qt_sql_tree_model}{Q\+Qt\+Sql\+Tree\+Model}} class 按照树的样式来显示数据库  
+
+
+
+
+{\ttfamily \#include $<$qqtsqltreemodel.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Sql\+Tree\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_q_qt_sql_tree_model}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_sql_tree_model_ae63ebffd13f9121d9a29d6e0cfafc125}\label{class_q_qt_sql_tree_model_ae63ebffd13f9121d9a29d6e0cfafc125}} 
+{\bfseries Q\+Qt\+Sql\+Tree\+Model} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_sql_tree_model_a7d1deeb96fa83028c74e2a0926d9cd74}\label{class_q_qt_sql_tree_model_a7d1deeb96fa83028c74e2a0926d9cd74}} 
+Q\+Sql\+Database \& {\bfseries database} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_sql_tree_model_ade8037b52e99562b0620ad9680686a2c}\label{class_q_qt_sql_tree_model_ade8037b52e99562b0620ad9680686a2c}} 
+void {\bfseries set\+Absolute\+File\+Path} (Q\+String dbname)
+\item 
+virtual bool \mbox{\hyperlink{class_q_qt_sql_tree_model_a786e05d313e70e50d7103c28dd7a2554}{query}} (Q\+String condition=\char`\"{}\char`\"{}) override
+\begin{DoxyCompactList}\small\item\em query \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_q_qt_sql_tree_model_ac1e2c11eda3698560b9e794a8d37c9fc}{set\+File\+Path}} (Q\+String dbname) override
+\begin{DoxyCompactList}\small\item\em set\+File\+Path \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_sql_tree_model_a0d42c44fe9c63c6f17b8beb6e57a58e8}\label{class_q_qt_sql_tree_model_a0d42c44fe9c63c6f17b8beb6e57a58e8}} 
+virtual bool {\bfseries parse\+Database} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_sql_tree_model_a1335900f845d45438dd99cda53e63b1c}\label{class_q_qt_sql_tree_model_a1335900f845d45438dd99cda53e63b1c}} 
+virtual bool {\bfseries parse\+Table} (Q\+String table\+Name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_sql_tree_model}{Q\+Qt\+Sql\+Tree\+Model}} class 按照树的样式来显示数据库 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_sql_tree_model_a786e05d313e70e50d7103c28dd7a2554}\label{class_q_qt_sql_tree_model_a786e05d313e70e50d7103c28dd7a2554}} 
+\index{Q\+Qt\+Sql\+Tree\+Model@{Q\+Qt\+Sql\+Tree\+Model}!query@{query}}
+\index{query@{query}!Q\+Qt\+Sql\+Tree\+Model@{Q\+Qt\+Sql\+Tree\+Model}}
+\subsubsection{\texorpdfstring{query()}{query()}}
+{\footnotesize\ttfamily bool Q\+Qt\+Sql\+Tree\+Model\+::query (\begin{DoxyParamCaption}\item[{Q\+String}]{condition = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+query 
+
+
+\begin{DoxyParams}{Parameters}
+{\em condition} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_tree_model_aacd492ce920be939d95d7e1bc2978cb1}{Q\+Qt\+Tree\+Model}}.
+
+\mbox{\Hypertarget{class_q_qt_sql_tree_model_ac1e2c11eda3698560b9e794a8d37c9fc}\label{class_q_qt_sql_tree_model_ac1e2c11eda3698560b9e794a8d37c9fc}} 
+\index{Q\+Qt\+Sql\+Tree\+Model@{Q\+Qt\+Sql\+Tree\+Model}!set\+File\+Path@{set\+File\+Path}}
+\index{set\+File\+Path@{set\+File\+Path}!Q\+Qt\+Sql\+Tree\+Model@{Q\+Qt\+Sql\+Tree\+Model}}
+\subsubsection{\texorpdfstring{set\+File\+Path()}{setFilePath()}}
+{\footnotesize\ttfamily void Q\+Qt\+Sql\+Tree\+Model\+::set\+File\+Path (\begin{DoxyParamCaption}\item[{Q\+String}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+set\+File\+Path 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_tree_model_acfeea0d58fa29b1c34c1491f6a8f0b7c}{Q\+Qt\+Tree\+Model}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/gui/qqtsqltreemodel.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/gui/qqtsqltreemodel.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,377 @@
+\hypertarget{class_qt_soap_message}{}\section{Qt\+Soap\+Message Class Reference}
+\label{class_qt_soap_message}\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+
+
+The \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} class provides easy access to S\+O\+AP messages.  
+
+
+
+
+{\ttfamily \#include $<$qtsoap.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_qt_soap_message_ad27765646a4612b1f644229e9544b744}{Fault\+Code}} \{ \newline
+{\bfseries Version\+Mismatch}, 
+{\bfseries Must\+Understand}, 
+{\bfseries Client}, 
+{\bfseries Server}, 
+\newline
+{\bfseries Other}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_qt_soap_message_ac3bdd2fcf2cf21e519a0b33862c2cf59}{Qt\+Soap\+Message}} ()
+\item 
+\mbox{\hyperlink{class_qt_soap_message_a1e060067d5ddcef2bf25899f70d1713a}{Qt\+Soap\+Message}} (const \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \&copy)
+\item 
+\mbox{\hyperlink{class_qt_soap_message_ac71afb2d55c00f27b793e99380cdcc32}{$\sim$\+Qt\+Soap\+Message}} ()
+\item 
+\mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \& \mbox{\hyperlink{class_qt_soap_message_acfd530c3e58c9443ddf74b36c922754c}{operator=}} (const \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \&copy)
+\item 
+bool \mbox{\hyperlink{class_qt_soap_message_a535e4eaf3d1c0372ec30e02e790b6b58}{set\+Content}} (const Q\+Byte\+Array \&buffer)
+\item 
+bool \mbox{\hyperlink{class_qt_soap_message_a0e22e5782ee668dbcd3218428ea3a062}{set\+Content}} (Q\+Dom\+Document \&d)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_a16c43285b934153623d541f061dd1910}{add\+Body\+Item}} (\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_a61b9c16754a167088a107eb34473683e}{add\+Header\+Item}} (\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$)
+\item 
+const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} \& \mbox{\hyperlink{class_qt_soap_message_a83b058700a430911c883a4cda80299c2}{method}} () const
+\item 
+const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} \& \mbox{\hyperlink{class_qt_soap_message_ac223f69e31d5f9ff251a467149c547d5}{return\+Value}} () const
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_a792f4e366d4bf4c3ca09ea6f034237b5}{set\+Method}} (const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_a83fb2dcd2fa4c2bf3ab8e1bb3d76455a}{set\+Method}} (const Q\+String \&name, const Q\+String \&url=Q\+String\+::null)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_a07c31536525e366258d54c75d955de50}{add\+Method\+Argument}} (\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_a9ad20b534929c505e23902f9534d518f}{add\+Method\+Argument}} (const Q\+String \&uri, const Q\+String \&name, const Q\+String \&value)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_a980ff800439c59294e6c2ab7529b109e}{add\+Method\+Argument}} (const Q\+String \&uri, const Q\+String \&name, bool value, int dummy)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_a7a4d57e36365d255ec8d8fdf833c6507}{add\+Method\+Argument}} (const Q\+String \&uri, const Q\+String \&name, int value)
+\item 
+bool \mbox{\hyperlink{class_qt_soap_message_a7aa7a55d9f593144499f8622e8aa1ce5}{is\+Fault}} () const
+\item 
+\mbox{\hyperlink{class_qt_soap_message_ad27765646a4612b1f644229e9544b744}{Fault\+Code}} \mbox{\hyperlink{class_qt_soap_message_a2f5bbde1c34bddebd81ba112087c78c3}{fault\+Code}} () const
+\item 
+const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} \& \mbox{\hyperlink{class_qt_soap_message_a11b95f781994094c764e457f800a3a21}{fault\+String}} () const
+\item 
+const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} \& \mbox{\hyperlink{class_qt_soap_message_a6263ac6f8823f9e2a00e83ba2bf5c4dd}{fault\+Detail}} () const
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_af8fd208d7b0a07f9b79581562da32b01}{set\+Fault\+Code}} (\mbox{\hyperlink{class_qt_soap_message_ad27765646a4612b1f644229e9544b744}{Fault\+Code}} code)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_ae671efb37455beb8b5ee1247098622b5}{set\+Fault\+String}} (const Q\+String \&fstring)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_af0cd7c0da675f83e91dcc5c29faf7382}{add\+Fault\+Detail}} (\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$detail)
+\item 
+void \mbox{\hyperlink{class_qt_soap_message_aba7b362184f4d75405a237014d46cad6}{clear}} ()
+\item 
+Q\+String \mbox{\hyperlink{class_qt_soap_message_a5c9c6997f2ee1b35bf73a7988ef87213}{to\+Xml\+String}} (int indent=0) const
+\item 
+Q\+String \mbox{\hyperlink{class_qt_soap_message_a3ae2c2925bc7843e32d57dce0c318d41}{error\+String}} () const
+\end{DoxyCompactItemize}
+\subsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_qt_soap_message_a57326237655d076b289452ce9ab3b8de}{Message\+Type}} \{ {\bfseries Fault}, 
+{\bfseries Method\+Request}, 
+{\bfseries Method\+Response}, 
+{\bfseries Other\+Type}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_qt_soap_message_a2aa1fdeea09e733ac5fe103ece393b8a}{is\+Valid\+Soap\+Message}} (const Q\+Dom\+Document \&candidate)
+\item 
+\mbox{\hyperlink{class_qt_soap_struct}{Qt\+Soap\+Struct}} \& \mbox{\hyperlink{class_qt_soap_message_a8c5e1cc13af9a4aebfd6d061525a69f5}{body}} () const
+\item 
+\mbox{\hyperlink{class_qt_soap_struct}{Qt\+Soap\+Struct}} \& \mbox{\hyperlink{class_qt_soap_message_a4c1ec40db5502f9f54cadcafd4cdc772}{header}} () const
+\item 
+\mbox{\Hypertarget{class_qt_soap_message_a7a10d5deccb30e6833870657825442d8}\label{class_qt_soap_message_a7a10d5deccb30e6833870657825442d8}} 
+void {\bfseries init} ()
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_qt_soap_message_abe59dec9580982274aa5d85dca246c29}\label{class_qt_soap_message_abe59dec9580982274aa5d85dca246c29}} 
+class {\bfseries Qt\+Soap\+Http\+Server}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} class provides easy access to S\+O\+AP messages. 
+
+With this class, you can create and inspect any S\+O\+AP message. There are convenience functions available for generating the most common types of S\+O\+AP messages, and any other messages can be constructed manually using \mbox{\hyperlink{class_qt_soap_message_a16c43285b934153623d541f061dd1910}{add\+Body\+Item()}}.
+
+Use \mbox{\hyperlink{class_qt_soap_message_a792f4e366d4bf4c3ca09ea6f034237b5}{set\+Method()}} and \mbox{\hyperlink{class_qt_soap_message_a07c31536525e366258d54c75d955de50}{add\+Method\+Argument()}} to construct a method request. The return value of a method response is available from \mbox{\hyperlink{class_qt_soap_message_ac223f69e31d5f9ff251a467149c547d5}{return\+Value()}}.
+
+Use \mbox{\hyperlink{class_qt_soap_message_af8fd208d7b0a07f9b79581562da32b01}{set\+Fault\+Code()}}, \mbox{\hyperlink{class_qt_soap_message_ae671efb37455beb8b5ee1247098622b5}{set\+Fault\+String()}} and \mbox{\hyperlink{class_qt_soap_message_af0cd7c0da675f83e91dcc5c29faf7382}{add\+Fault\+Detail()}} to construct a Fault message. To inspect a Fault message, use \mbox{\hyperlink{class_qt_soap_message_a2f5bbde1c34bddebd81ba112087c78c3}{fault\+Code()}}, \mbox{\hyperlink{class_qt_soap_message_a11b95f781994094c764e457f800a3a21}{fault\+String()}} and \mbox{\hyperlink{class_qt_soap_message_a6263ac6f8823f9e2a00e83ba2bf5c4dd}{fault\+Detail()}}.
+
+To add items to the body part of the S\+O\+AP message, use \mbox{\hyperlink{class_qt_soap_message_a16c43285b934153623d541f061dd1910}{add\+Body\+Item()}}. To add items to the header, use \mbox{\hyperlink{class_qt_soap_message_a61b9c16754a167088a107eb34473683e}{add\+Header\+Item()}}.
+
+\mbox{\hyperlink{class_qt_soap_message_a5c9c6997f2ee1b35bf73a7988ef87213}{to\+Xml\+String()}} returns a Q\+String X\+ML representation of the S\+O\+AP message. \mbox{\hyperlink{class_qt_soap_message_aba7b362184f4d75405a237014d46cad6}{clear()}} resets all content in the message, creating an empty S\+O\+AP message.
+
+
+\begin{DoxyCode}
+\mbox{\hyperlink{class_qt_soap_message}{QtSoapMessage}} message;
+
+message.\mbox{\hyperlink{class_qt_soap_message_a792f4e366d4bf4c3ca09ea6f034237b5}{setMethod}}(\textcolor{stringliteral}{"getTemperature"}, \textcolor{stringliteral}{"http://weather.example.com/temperature"});
+message.\mbox{\hyperlink{class_qt_soap_message_a07c31536525e366258d54c75d955de50}{addMethodArgument}}(\textcolor{stringliteral}{"city"}, \textcolor{stringliteral}{"Oslo"});
+
+\textcolor{comment}{// Get the SOAP message as an XML string.}
+QString xml = message.\mbox{\hyperlink{class_qt_soap_message_a5c9c6997f2ee1b35bf73a7988ef87213}{toXmlString}}();
+\end{DoxyCode}
+
+
+Qt\+Soap provides a partial implementation of version 1.\+1 of the S\+O\+AP protocol as defined in  \href{http://www.w3.org/TR/SOAP/}{\tt http\+://www.\+w3.\+org/\+T\+R/\+S\+O\+A\+P/}.
+
+Server side S\+O\+AP is not supported.  References to values (id and href attributes) are not supported.  Arrays support a maximum of five dimensions.  Namespaces for types are not checked. Only the type names are used.  The encoding\+Style attribute is ignored. The serialization and encoding rules from section 5 in the S\+O\+AP v1.\+1 specification are assumed regardless of the value of the encoding\+Style attribute.  \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} does not have accessors for attributes, which means for example that actor, must\+Understand and so on are not accessible in headers.  The S\+O\+AP root attribute is not supported. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}}, \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}}, \mbox{\hyperlink{class_qt_soap_http_transport}{Qt\+Soap\+Http\+Transport}} 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_qt_soap_message_ad27765646a4612b1f644229e9544b744}\label{class_qt_soap_message_ad27765646a4612b1f644229e9544b744}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!Fault\+Code@{Fault\+Code}}
+\index{Fault\+Code@{Fault\+Code}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{Fault\+Code}{FaultCode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_qt_soap_message_ad27765646a4612b1f644229e9544b744}{Qt\+Soap\+Message\+::\+Fault\+Code}}}
+
+This enum describes all the supported S\+O\+AP Fault codes\+:
+
+Version\+Mismatch The namespace for the Envelope element was unrecognized by the remote S\+O\+AP server. This usually means that the remote server does not support version 1.\+1 of the S\+O\+AP protocol.
+
+Must\+Understand One of the header items in the S\+O\+AP message with a \char`\"{}\+Must\+Understand\char`\"{} attribute was not recognized by the remote server.
+
+Client An error in the S\+O\+AP message or transport prevents further processing by the remote S\+O\+AP server.
+
+Server An error in the remote S\+O\+AP server prevents it from processing the S\+O\+AP message.
+
+Other \mbox{\Hypertarget{class_qt_soap_message_a57326237655d076b289452ce9ab3b8de}\label{class_qt_soap_message_a57326237655d076b289452ce9ab3b8de}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!Message\+Type@{Message\+Type}}
+\index{Message\+Type@{Message\+Type}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{Message\+Type}{MessageType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_qt_soap_message_a57326237655d076b289452ce9ab3b8de}{Qt\+Soap\+Message\+::\+Message\+Type}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+Fault  Method\+Request  Method\+Response  Other\+Type 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_qt_soap_message_ac3bdd2fcf2cf21e519a0b33862c2cf59}\label{class_qt_soap_message_ac3bdd2fcf2cf21e519a0b33862c2cf59}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{Qt\+Soap\+Message()}{QtSoapMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Qt\+Soap\+Message\+::\+Qt\+Soap\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructs an empty \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}}. The message only contains the Envelope element, with no header and no body. \mbox{\Hypertarget{class_qt_soap_message_a1e060067d5ddcef2bf25899f70d1713a}\label{class_qt_soap_message_a1e060067d5ddcef2bf25899f70d1713a}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{Qt\+Soap\+Message()}{QtSoapMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Qt\+Soap\+Message\+::\+Qt\+Soap\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \&}]{copy }\end{DoxyParamCaption})}
+
+Constructs a copy of {\itshape copy}. \mbox{\Hypertarget{class_qt_soap_message_ac71afb2d55c00f27b793e99380cdcc32}\label{class_qt_soap_message_ac71afb2d55c00f27b793e99380cdcc32}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!````~Qt\+Soap\+Message@{$\sim$\+Qt\+Soap\+Message}}
+\index{````~Qt\+Soap\+Message@{$\sim$\+Qt\+Soap\+Message}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{$\sim$\+Qt\+Soap\+Message()}{~QtSoapMessage()}}
+{\footnotesize\ttfamily Qt\+Soap\+Message\+::$\sim$\+Qt\+Soap\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructs a \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_qt_soap_message_a16c43285b934153623d541f061dd1910}\label{class_qt_soap_message_a16c43285b934153623d541f061dd1910}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!add\+Body\+Item@{add\+Body\+Item}}
+\index{add\+Body\+Item@{add\+Body\+Item}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{add\+Body\+Item()}{addBodyItem()}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::add\+Body\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$}]{item }\end{DoxyParamCaption})}
+
+Adds {\itshape item} to the body in the S\+O\+AP message. The item is added after the last existing item in the body. \mbox{\Hypertarget{class_qt_soap_message_af0cd7c0da675f83e91dcc5c29faf7382}\label{class_qt_soap_message_af0cd7c0da675f83e91dcc5c29faf7382}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!add\+Fault\+Detail@{add\+Fault\+Detail}}
+\index{add\+Fault\+Detail@{add\+Fault\+Detail}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{add\+Fault\+Detail()}{addFaultDetail()}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::add\+Fault\+Detail (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$}]{detail }\end{DoxyParamCaption})}
+
+Adds the \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} {\itshape detail} to the end of the list of faultdetail items in a S\+O\+AP Fault message. \mbox{\Hypertarget{class_qt_soap_message_a61b9c16754a167088a107eb34473683e}\label{class_qt_soap_message_a61b9c16754a167088a107eb34473683e}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!add\+Header\+Item@{add\+Header\+Item}}
+\index{add\+Header\+Item@{add\+Header\+Item}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{add\+Header\+Item()}{addHeaderItem()}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::add\+Header\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$}]{item }\end{DoxyParamCaption})}
+
+Adds {\itshape item} to the header in the S\+O\+AP message. The item is added after the last existing item in the header. \mbox{\Hypertarget{class_qt_soap_message_a07c31536525e366258d54c75d955de50}\label{class_qt_soap_message_a07c31536525e366258d54c75d955de50}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!add\+Method\+Argument@{add\+Method\+Argument}}
+\index{add\+Method\+Argument@{add\+Method\+Argument}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{add\+Method\+Argument()}{addMethodArgument()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::add\+Method\+Argument (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$}]{arg }\end{DoxyParamCaption})}
+
+Adds argument {\itshape arg} to the list of arguments that are passed in a S\+O\+AP method request.
+
+\begin{DoxyWarning}{Warning}
+\mbox{\hyperlink{class_qt_soap_message_a792f4e366d4bf4c3ca09ea6f034237b5}{set\+Method()}} must be called before calling this function. 
+\end{DoxyWarning}
+\mbox{\Hypertarget{class_qt_soap_message_a9ad20b534929c505e23902f9534d518f}\label{class_qt_soap_message_a9ad20b534929c505e23902f9534d518f}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!add\+Method\+Argument@{add\+Method\+Argument}}
+\index{add\+Method\+Argument@{add\+Method\+Argument}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{add\+Method\+Argument()}{addMethodArgument()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::add\+Method\+Argument (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{name,  }\item[{const Q\+String \&}]{uri,  }\item[{const Q\+String \&}]{value }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+Adds an argument called {\itshape name} with a uri of {\itshape uri}. The type of the argument is Qt\+Soap\+Type\+::\+String and its value is {\itshape value}. \mbox{\Hypertarget{class_qt_soap_message_a980ff800439c59294e6c2ab7529b109e}\label{class_qt_soap_message_a980ff800439c59294e6c2ab7529b109e}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!add\+Method\+Argument@{add\+Method\+Argument}}
+\index{add\+Method\+Argument@{add\+Method\+Argument}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{add\+Method\+Argument()}{addMethodArgument()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::add\+Method\+Argument (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{name,  }\item[{const Q\+String \&}]{uri,  }\item[{bool}]{value,  }\item[{int}]{dummy }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+Adds an argument called {\itshape name} with a uri of {\itshape uri}. The type of the argument is Qt\+Soap\+Type\+::\+Boolean and its value is {\itshape value}.
+
+The {\itshape dummy} argument is used to distinguish this function from the overload which takes an int. \mbox{\Hypertarget{class_qt_soap_message_a7a4d57e36365d255ec8d8fdf833c6507}\label{class_qt_soap_message_a7a4d57e36365d255ec8d8fdf833c6507}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!add\+Method\+Argument@{add\+Method\+Argument}}
+\index{add\+Method\+Argument@{add\+Method\+Argument}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{add\+Method\+Argument()}{addMethodArgument()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::add\+Method\+Argument (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{name,  }\item[{const Q\+String \&}]{uri,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+Adds an argument called {\itshape name} with a uri of {\itshape uri}. The type of the argument is Qt\+Soap\+Type\+::\+Integer and its value is {\itshape value}. \mbox{\Hypertarget{class_qt_soap_message_a8c5e1cc13af9a4aebfd6d061525a69f5}\label{class_qt_soap_message_a8c5e1cc13af9a4aebfd6d061525a69f5}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!body@{body}}
+\index{body@{body}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{body()}{body()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_qt_soap_struct}{Qt\+Soap\+Struct}} \& Qt\+Soap\+Message\+::body (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+Returns a reference to the body of the S\+O\+AP message. \mbox{\Hypertarget{class_qt_soap_message_aba7b362184f4d75405a237014d46cad6}\label{class_qt_soap_message_aba7b362184f4d75405a237014d46cad6}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!clear@{clear}}
+\index{clear@{clear}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Clears the content of the S\+O\+AP message. \mbox{\Hypertarget{class_qt_soap_message_a3ae2c2925bc7843e32d57dce0c318d41}\label{class_qt_soap_message_a3ae2c2925bc7843e32d57dce0c318d41}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!error\+String@{error\+String}}
+\index{error\+String@{error\+String}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{error\+String()}{errorString()}}
+{\footnotesize\ttfamily Q\+String Qt\+Soap\+Message\+::error\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns a human readable explanation of the most recent error that occurred in the \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}}. \mbox{\Hypertarget{class_qt_soap_message_a2f5bbde1c34bddebd81ba112087c78c3}\label{class_qt_soap_message_a2f5bbde1c34bddebd81ba112087c78c3}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!fault\+Code@{fault\+Code}}
+\index{fault\+Code@{fault\+Code}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{fault\+Code()}{faultCode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_qt_soap_message_ad27765646a4612b1f644229e9544b744}{Qt\+Soap\+Message\+::\+Fault\+Code}} Qt\+Soap\+Message\+::fault\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the Fault faultcode element of a S\+O\+AP Fault message. \mbox{\Hypertarget{class_qt_soap_message_a6263ac6f8823f9e2a00e83ba2bf5c4dd}\label{class_qt_soap_message_a6263ac6f8823f9e2a00e83ba2bf5c4dd}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!fault\+Detail@{fault\+Detail}}
+\index{fault\+Detail@{fault\+Detail}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{fault\+Detail()}{faultDetail()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} \& Qt\+Soap\+Message\+::fault\+Detail (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the Fault detail element of a S\+O\+AP Fault message. \mbox{\Hypertarget{class_qt_soap_message_a11b95f781994094c764e457f800a3a21}\label{class_qt_soap_message_a11b95f781994094c764e457f800a3a21}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!fault\+String@{fault\+String}}
+\index{fault\+String@{fault\+String}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{fault\+String()}{faultString()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} \& Qt\+Soap\+Message\+::fault\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the Fault faultstring element of a S\+O\+AP Fault message. \mbox{\Hypertarget{class_qt_soap_message_a4c1ec40db5502f9f54cadcafd4cdc772}\label{class_qt_soap_message_a4c1ec40db5502f9f54cadcafd4cdc772}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!header@{header}}
+\index{header@{header}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{header()}{header()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_qt_soap_struct}{Qt\+Soap\+Struct}} \& Qt\+Soap\+Message\+::header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+Returns a reference to the header of the S\+O\+AP message. \mbox{\Hypertarget{class_qt_soap_message_a7aa7a55d9f593144499f8622e8aa1ce5}\label{class_qt_soap_message_a7aa7a55d9f593144499f8622e8aa1ce5}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!is\+Fault@{is\+Fault}}
+\index{is\+Fault@{is\+Fault}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{is\+Fault()}{isFault()}}
+{\footnotesize\ttfamily bool Qt\+Soap\+Message\+::is\+Fault (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns true if the message is a S\+O\+AP Fault message; otherwise returns false. \mbox{\Hypertarget{class_qt_soap_message_a2aa1fdeea09e733ac5fe103ece393b8a}\label{class_qt_soap_message_a2aa1fdeea09e733ac5fe103ece393b8a}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!is\+Valid\+Soap\+Message@{is\+Valid\+Soap\+Message}}
+\index{is\+Valid\+Soap\+Message@{is\+Valid\+Soap\+Message}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{is\+Valid\+Soap\+Message()}{isValidSoapMessage()}}
+{\footnotesize\ttfamily bool Qt\+Soap\+Message\+::is\+Valid\+Soap\+Message (\begin{DoxyParamCaption}\item[{const Q\+Dom\+Document \&}]{candidate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Validates the Q\+Dom\+Document {\itshape candidate} using some simple heuristics. Returns true if the document is a valid S\+O\+AP message; otherwise returns false. \mbox{\Hypertarget{class_qt_soap_message_a83b058700a430911c883a4cda80299c2}\label{class_qt_soap_message_a83b058700a430911c883a4cda80299c2}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!method@{method}}
+\index{method@{method}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{method()}{method()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} \& Qt\+Soap\+Message\+::method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the method of a S\+O\+AP method request or response as a \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}}. \mbox{\Hypertarget{class_qt_soap_message_acfd530c3e58c9443ddf74b36c922754c}\label{class_qt_soap_message_acfd530c3e58c9443ddf74b36c922754c}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!operator=@{operator=}}
+\index{operator=@{operator=}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \& Qt\+Soap\+Message\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \&}]{copy }\end{DoxyParamCaption})}
+
+Makes this message a copy of {\itshape copy}. \mbox{\Hypertarget{class_qt_soap_message_ac223f69e31d5f9ff251a467149c547d5}\label{class_qt_soap_message_ac223f69e31d5f9ff251a467149c547d5}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!return\+Value@{return\+Value}}
+\index{return\+Value@{return\+Value}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{return\+Value()}{returnValue()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} \& Qt\+Soap\+Message\+::return\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the return value of a S\+O\+AP method response as a \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}}. \mbox{\Hypertarget{class_qt_soap_message_a535e4eaf3d1c0372ec30e02e790b6b58}\label{class_qt_soap_message_a535e4eaf3d1c0372ec30e02e790b6b58}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!set\+Content@{set\+Content}}
+\index{set\+Content@{set\+Content}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{set\+Content()}{setContent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Qt\+Soap\+Message\+::set\+Content (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{buffer }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+Parses the X\+ML document in {\itshape buffer}. Imports the document if it validates as a S\+O\+AP message. Any existing message content is replaced.
+
+If the import fails, this message becomes a Fault message.
+
+Returns true if the import succeeds, otherwise false. \mbox{\Hypertarget{class_qt_soap_message_a0e22e5782ee668dbcd3218428ea3a062}\label{class_qt_soap_message_a0e22e5782ee668dbcd3218428ea3a062}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!set\+Content@{set\+Content}}
+\index{set\+Content@{set\+Content}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{set\+Content()}{setContent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Qt\+Soap\+Message\+::set\+Content (\begin{DoxyParamCaption}\item[{Q\+Dom\+Document \&}]{d }\end{DoxyParamCaption})}
+
+Imports the Q\+Dom\+Document {\itshape d} if it validates as a S\+O\+AP message. Any existing message content is replaced.
+
+If the import fails, this message becomes a Fault message.
+
+Returns true if the import succeeds, otherwise false. \mbox{\Hypertarget{class_qt_soap_message_af8fd208d7b0a07f9b79581562da32b01}\label{class_qt_soap_message_af8fd208d7b0a07f9b79581562da32b01}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!set\+Fault\+Code@{set\+Fault\+Code}}
+\index{set\+Fault\+Code@{set\+Fault\+Code}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{set\+Fault\+Code()}{setFaultCode()}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::set\+Fault\+Code (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_soap_message_ad27765646a4612b1f644229e9544b744}{Fault\+Code}}}]{code }\end{DoxyParamCaption})}
+
+Sets the fault code of the S\+O\+AP Fault message to {\itshape code}. \mbox{\Hypertarget{class_qt_soap_message_ae671efb37455beb8b5ee1247098622b5}\label{class_qt_soap_message_ae671efb37455beb8b5ee1247098622b5}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!set\+Fault\+String@{set\+Fault\+String}}
+\index{set\+Fault\+String@{set\+Fault\+String}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{set\+Fault\+String()}{setFaultString()}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::set\+Fault\+String (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{s }\end{DoxyParamCaption})}
+
+Sets the Fault faultstring of the S\+O\+AP Fault message to {\itshape s}. \mbox{\Hypertarget{class_qt_soap_message_a792f4e366d4bf4c3ca09ea6f034237b5}\label{class_qt_soap_message_a792f4e366d4bf4c3ca09ea6f034237b5}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!set\+Method@{set\+Method}}
+\index{set\+Method@{set\+Method}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{set\+Method()}{setMethod()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::set\+Method (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \&}]{meth }\end{DoxyParamCaption})}
+
+Sets the Q\+Name (qualified name) of the method to call in a S\+O\+AP method request to {\itshape meth}.
+
+This function {\itshape must} be called before calling \mbox{\hyperlink{class_qt_soap_message_a07c31536525e366258d54c75d955de50}{add\+Method\+Argument()}}. \mbox{\Hypertarget{class_qt_soap_message_a83fb2dcd2fa4c2bf3ab8e1bb3d76455a}\label{class_qt_soap_message_a83fb2dcd2fa4c2bf3ab8e1bb3d76455a}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!set\+Method@{set\+Method}}
+\index{set\+Method@{set\+Method}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{set\+Method()}{setMethod()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Message\+::set\+Method (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{name,  }\item[{const Q\+String \&}]{uri = {\ttfamily QString\+:\+:null} }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+Sets the method name to {\itshape name} and uri to {\itshape uri}. \mbox{\Hypertarget{class_qt_soap_message_a5c9c6997f2ee1b35bf73a7988ef87213}\label{class_qt_soap_message_a5c9c6997f2ee1b35bf73a7988ef87213}} 
+\index{Qt\+Soap\+Message@{Qt\+Soap\+Message}!to\+Xml\+String@{to\+Xml\+String}}
+\index{to\+Xml\+String@{to\+Xml\+String}!Qt\+Soap\+Message@{Qt\+Soap\+Message}}
+\subsubsection{\texorpdfstring{to\+Xml\+String()}{toXmlString()}}
+{\footnotesize\ttfamily Q\+String Qt\+Soap\+Message\+::to\+Xml\+String (\begin{DoxyParamCaption}\item[{int}]{indent = {\ttfamily 0} }\end{DoxyParamCaption}) const}
+
+Returns the X\+ML representation of the S\+O\+AP message as a Q\+String, optionally indenting using {\itshape indent} spaces. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/soap/qtsoap.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/soap/qtsoap.\+cpp\end{DoxyCompactItemize}

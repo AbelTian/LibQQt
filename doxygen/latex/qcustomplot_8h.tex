@@ -1,0 +1,353 @@
+\hypertarget{qcustomplot_8h}{}\section{R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/qcustomplot.h File Reference}
+\label{qcustomplot_8h}\index{R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/qcustomplot.\+h@{R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/qcustomplot.\+h}}
+{\ttfamily \#include $<$Q\+Object$>$}\newline
+{\ttfamily \#include $<$Q\+Pointer$>$}\newline
+{\ttfamily \#include $<$Q\+Widget$>$}\newline
+{\ttfamily \#include $<$Q\+Painter$>$}\newline
+{\ttfamily \#include $<$Q\+Paint\+Event$>$}\newline
+{\ttfamily \#include $<$Q\+Mouse\+Event$>$}\newline
+{\ttfamily \#include $<$Q\+Pixmap$>$}\newline
+{\ttfamily \#include $<$Q\+Vector$>$}\newline
+{\ttfamily \#include $<$Q\+String$>$}\newline
+{\ttfamily \#include $<$Q\+Date\+Time$>$}\newline
+{\ttfamily \#include $<$Q\+Multi\+Map$>$}\newline
+{\ttfamily \#include $<$Q\+Flags$>$}\newline
+{\ttfamily \#include $<$Q\+Debug$>$}\newline
+{\ttfamily \#include $<$Q\+Vector2D$>$}\newline
+{\ttfamily \#include $<$Q\+Stack$>$}\newline
+{\ttfamily \#include $<$Q\+Cache$>$}\newline
+{\ttfamily \#include $<$Q\+Margins$>$}\newline
+{\ttfamily \#include $<$qmath.\+h$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$Qt\+Global$>$}\newline
+{\ttfamily \#include $<$Qt\+Numeric$>$}\newline
+{\ttfamily \#include $<$Qt\+Print\+Support$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/qglobal.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_q_c_p_scatter_style}{Q\+C\+P\+Scatter\+Style}}
+\begin{DoxyCompactList}\small\item\em Represents the visual appearance of scatter points. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}}
+\begin{DoxyCompactList}\small\item\em Q\+Painter subclass used internally. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_layer}{Q\+C\+P\+Layer}}
+\begin{DoxyCompactList}\small\item\em A layer that may contain objects, to control the rendering order. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_layerable}{Q\+C\+P\+Layerable}}
+\begin{DoxyCompactList}\small\item\em Base class for all drawable objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}}
+\begin{DoxyCompactList}\small\item\em Represents the range an axis is encompassing. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_margin_group}{Q\+C\+P\+Margin\+Group}}
+\begin{DoxyCompactList}\small\item\em A margin group allows synchronization of margin sides if working with multiple layout elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_layout_element}{Q\+C\+P\+Layout\+Element}}
+\begin{DoxyCompactList}\small\item\em The abstract base class for all objects that form the layout system. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_layout}{Q\+C\+P\+Layout}}
+\begin{DoxyCompactList}\small\item\em The abstract base class for layouts. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_layout_grid}{Q\+C\+P\+Layout\+Grid}}
+\begin{DoxyCompactList}\small\item\em A layout that arranges child elements in a grid. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_layout_inset}{Q\+C\+P\+Layout\+Inset}}
+\begin{DoxyCompactList}\small\item\em A layout that places child elements aligned to the border or arbitrarily positioned. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_line_ending}{Q\+C\+P\+Line\+Ending}}
+\begin{DoxyCompactList}\small\item\em Handles the different ending decorations for line-\/like items. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_grid}{Q\+C\+P\+Grid}}
+\begin{DoxyCompactList}\small\item\em Responsible for drawing the grid of a \mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}}
+\begin{DoxyCompactList}\small\item\em Manages a single axis inside a \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_axis_painter_private}{Q\+C\+P\+Axis\+Painter\+Private}}
+\item 
+struct \mbox{\hyperlink{struct_q_c_p_axis_painter_private_1_1_cached_label}{Q\+C\+P\+Axis\+Painter\+Private\+::\+Cached\+Label}}
+\item 
+struct \mbox{\hyperlink{struct_q_c_p_axis_painter_private_1_1_tick_label_data}{Q\+C\+P\+Axis\+Painter\+Private\+::\+Tick\+Label\+Data}}
+\item 
+class \mbox{\hyperlink{class_q_c_p_abstract_plottable}{Q\+C\+P\+Abstract\+Plottable}}
+\begin{DoxyCompactList}\small\item\em The abstract base class for all data representing objects in a plot. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_anchor}{Q\+C\+P\+Item\+Anchor}}
+\begin{DoxyCompactList}\small\item\em An anchor of an item to which positions can be attached to. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_position}{Q\+C\+P\+Item\+Position}}
+\begin{DoxyCompactList}\small\item\em Manages the position of an item. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_abstract_item}{Q\+C\+P\+Abstract\+Item}}
+\begin{DoxyCompactList}\small\item\em The abstract base class for all items in a plot. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}}
+\begin{DoxyCompactList}\small\item\em The central class of the library. This is the Q\+Widget which displays the plot and interacts with the user. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_color_gradient}{Q\+C\+P\+Color\+Gradient}}
+\begin{DoxyCompactList}\small\item\em Defines a color gradient for use with e.\+g. \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_axis_rect}{Q\+C\+P\+Axis\+Rect}}
+\begin{DoxyCompactList}\small\item\em Holds multiple axes and arranges them in a rectangular shape. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_abstract_legend_item}{Q\+C\+P\+Abstract\+Legend\+Item}}
+\begin{DoxyCompactList}\small\item\em The abstract base class for all entries in a \mbox{\hyperlink{class_q_c_p_legend}{Q\+C\+P\+Legend}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_plottable_legend_item}{Q\+C\+P\+Plottable\+Legend\+Item}}
+\begin{DoxyCompactList}\small\item\em A legend item representing a plottable with an icon and the plottable name. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_legend}{Q\+C\+P\+Legend}}
+\begin{DoxyCompactList}\small\item\em Manages a legend inside a \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_plot_title}{Q\+C\+P\+Plot\+Title}}
+\begin{DoxyCompactList}\small\item\em A layout element displaying a plot title text. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_color_scale_axis_rect_private}{Q\+C\+P\+Color\+Scale\+Axis\+Rect\+Private}}
+\item 
+class \mbox{\hyperlink{class_q_c_p_color_scale}{Q\+C\+P\+Color\+Scale}}
+\begin{DoxyCompactList}\small\item\em A color scale for use with color coding data such as \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_data}{Q\+C\+P\+Data}}
+\begin{DoxyCompactList}\small\item\em Holds the data of one single data point for \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}}
+\begin{DoxyCompactList}\small\item\em A plottable representing a graph in a plot. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_curve_data}{Q\+C\+P\+Curve\+Data}}
+\begin{DoxyCompactList}\small\item\em Holds the data of one single data point for \mbox{\hyperlink{class_q_c_p_curve}{Q\+C\+P\+Curve}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_curve}{Q\+C\+P\+Curve}}
+\begin{DoxyCompactList}\small\item\em A plottable representing a parametric curve in a plot. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_bars_group}{Q\+C\+P\+Bars\+Group}}
+\begin{DoxyCompactList}\small\item\em Groups multiple \mbox{\hyperlink{class_q_c_p_bars}{Q\+C\+P\+Bars}} together so they appear side by side. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_bar_data}{Q\+C\+P\+Bar\+Data}}
+\begin{DoxyCompactList}\small\item\em Holds the data of one single data point (one bar) for \mbox{\hyperlink{class_q_c_p_bars}{Q\+C\+P\+Bars}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_bars}{Q\+C\+P\+Bars}}
+\begin{DoxyCompactList}\small\item\em A plottable representing a bar chart in a plot. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_statistical_box}{Q\+C\+P\+Statistical\+Box}}
+\begin{DoxyCompactList}\small\item\em A plottable representing a single statistical box in a plot. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_color_map_data}{Q\+C\+P\+Color\+Map\+Data}}
+\begin{DoxyCompactList}\small\item\em Holds the two-\/dimensional data of a \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} plottable. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}}
+\begin{DoxyCompactList}\small\item\em A plottable representing a two-\/dimensional color map in a plot. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_financial_data}{Q\+C\+P\+Financial\+Data}}
+\begin{DoxyCompactList}\small\item\em Holds the data of one single data point for \mbox{\hyperlink{class_q_c_p_financial}{Q\+C\+P\+Financial}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_financial}{Q\+C\+P\+Financial}}
+\begin{DoxyCompactList}\small\item\em A plottable representing a financial stock chart. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_straight_line}{Q\+C\+P\+Item\+Straight\+Line}}
+\begin{DoxyCompactList}\small\item\em A straight line that spans infinitely in both directions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_line}{Q\+C\+P\+Item\+Line}}
+\begin{DoxyCompactList}\small\item\em A line from one point to another. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_curve}{Q\+C\+P\+Item\+Curve}}
+\begin{DoxyCompactList}\small\item\em A curved line from one point to another. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_rect}{Q\+C\+P\+Item\+Rect}}
+\begin{DoxyCompactList}\small\item\em A rectangle. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_text}{Q\+C\+P\+Item\+Text}}
+\begin{DoxyCompactList}\small\item\em A text label. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_ellipse}{Q\+C\+P\+Item\+Ellipse}}
+\begin{DoxyCompactList}\small\item\em An ellipse. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_pixmap}{Q\+C\+P\+Item\+Pixmap}}
+\begin{DoxyCompactList}\small\item\em An arbitrary pixmap. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_tracer}{Q\+C\+P\+Item\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Item that sticks to \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}} data points. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_q_c_p_item_bracket}{Q\+C\+P\+Item\+Bracket}}
+\begin{DoxyCompactList}\small\item\em A bracket for referencing/highlighting certain parts in the plot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_q_c_p}{Q\+CP}}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Q\+Map$<$ double, \mbox{\hyperlink{class_q_c_p_data}{Q\+C\+P\+Data}} $>$ \mbox{\hyperlink{qcustomplot_8h_a84a9c4a4c2216ccfdcb5f3067cda76e3}{Q\+C\+P\+Data\+Map}}
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_a0fd9a83e0a1783a82f439b0e200b6ae5}\label{qcustomplot_8h_a0fd9a83e0a1783a82f439b0e200b6ae5}} 
+typedef Q\+Map\+Iterator$<$ double, \mbox{\hyperlink{class_q_c_p_data}{Q\+C\+P\+Data}} $>$ {\bfseries Q\+C\+P\+Data\+Map\+Iterator}
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_a4798b07422d0d4c46a8665c23958b0ea}\label{qcustomplot_8h_a4798b07422d0d4c46a8665c23958b0ea}} 
+typedef Q\+Mutable\+Map\+Iterator$<$ double, \mbox{\hyperlink{class_q_c_p_data}{Q\+C\+P\+Data}} $>$ {\bfseries Q\+C\+P\+Data\+Mutable\+Map\+Iterator}
+\item 
+typedef Q\+Map$<$ double, \mbox{\hyperlink{class_q_c_p_curve_data}{Q\+C\+P\+Curve\+Data}} $>$ \mbox{\hyperlink{qcustomplot_8h_a444d37ec9cb2951b3a7fe443c34d1658}{Q\+C\+P\+Curve\+Data\+Map}}
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_aeb3dbc9f09e8ce9957be86dd6e8c803d}\label{qcustomplot_8h_aeb3dbc9f09e8ce9957be86dd6e8c803d}} 
+typedef Q\+Map\+Iterator$<$ double, \mbox{\hyperlink{class_q_c_p_curve_data}{Q\+C\+P\+Curve\+Data}} $>$ {\bfseries Q\+C\+P\+Curve\+Data\+Map\+Iterator}
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_ad85cf567575500cc8877fd65f4c5b9fb}\label{qcustomplot_8h_ad85cf567575500cc8877fd65f4c5b9fb}} 
+typedef Q\+Mutable\+Map\+Iterator$<$ double, \mbox{\hyperlink{class_q_c_p_curve_data}{Q\+C\+P\+Curve\+Data}} $>$ {\bfseries Q\+C\+P\+Curve\+Data\+Mutable\+Map\+Iterator}
+\item 
+typedef Q\+Map$<$ double, \mbox{\hyperlink{class_q_c_p_bar_data}{Q\+C\+P\+Bar\+Data}} $>$ \mbox{\hyperlink{qcustomplot_8h_aa846c77472cae93def9f1609d0c57191}{Q\+C\+P\+Bar\+Data\+Map}}
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_ad8f7e19ade25016f69f2ebedbd130f92}\label{qcustomplot_8h_ad8f7e19ade25016f69f2ebedbd130f92}} 
+typedef Q\+Map\+Iterator$<$ double, \mbox{\hyperlink{class_q_c_p_bar_data}{Q\+C\+P\+Bar\+Data}} $>$ {\bfseries Q\+C\+P\+Bar\+Data\+Map\+Iterator}
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_a5f61a38b8bb85ebfefa76ae0983f1c78}\label{qcustomplot_8h_a5f61a38b8bb85ebfefa76ae0983f1c78}} 
+typedef Q\+Mutable\+Map\+Iterator$<$ double, \mbox{\hyperlink{class_q_c_p_bar_data}{Q\+C\+P\+Bar\+Data}} $>$ {\bfseries Q\+C\+P\+Bar\+Data\+Mutable\+Map\+Iterator}
+\item 
+typedef Q\+Map$<$ double, \mbox{\hyperlink{class_q_c_p_financial_data}{Q\+C\+P\+Financial\+Data}} $>$ \mbox{\hyperlink{qcustomplot_8h_a745c09823fae0974b50beca9bc3b3d7d}{Q\+C\+P\+Financial\+Data\+Map}}
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_ad72fc549e490f52e8cbb03d7891f30c1}\label{qcustomplot_8h_ad72fc549e490f52e8cbb03d7891f30c1}} 
+typedef Q\+Map\+Iterator$<$ double, \mbox{\hyperlink{class_q_c_p_financial_data}{Q\+C\+P\+Financial\+Data}} $>$ {\bfseries Q\+C\+P\+Financial\+Data\+Map\+Iterator}
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_abfbd4d77d8bc14aa8ada56abcafe6711}\label{qcustomplot_8h_abfbd4d77d8bc14aa8ada56abcafe6711}} 
+typedef Q\+Mutable\+Map\+Iterator$<$ double, \mbox{\hyperlink{class_q_c_p_financial_data}{Q\+C\+P\+Financial\+Data}} $>$ {\bfseries Q\+C\+P\+Financial\+Data\+Mutable\+Map\+Iterator}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}} \{ \newline
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a9500c8bfcc9e80b9dff0a8e00e867f07}{Q\+C\+P\+::ms\+Left}} = 0x01, 
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a93c719593bb2b94ed244d52c86d83b65}{Q\+C\+P\+::ms\+Right}} = 0x02, 
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a5db8fb0d0b0ecf0d611c2602a348e8a0}{Q\+C\+P\+::ms\+Top}} = 0x04, 
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a5241d8eac2bab9524a38889f576179cc}{Q\+C\+P\+::ms\+Bottom}} = 0x08, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a43d7361cb0c5244eabdc962021bffebc}{Q\+C\+P\+::ms\+All}} = 0x\+FF, 
+\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54a80aa4149f16dabd538f8b2e3d42c42d5}{Q\+C\+P\+::ms\+None}} = 0x00
+ \}
+\item 
+enum \mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0c}{Q\+C\+P\+::\+Antialiased\+Element}} \{ \newline
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caefa92e89cd37f8a081fd2075aa1af73f}{Q\+C\+P\+::ae\+Axes}} = 0x0001, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca4fbb37118d62288af0ca601ff2b07a2f}{Q\+C\+P\+::ae\+Grid}} = 0x0002, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caaedf83369188a15a69f92bb1d85ca97b}{Q\+C\+P\+::ae\+Sub\+Grid}} = 0x0004, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca9e0127a6361b5d0596b031a482c5cf97}{Q\+C\+P\+::ae\+Legend}} = 0x0008, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca1aca7a50c1b95403958733a4acafe773}{Q\+C\+P\+::ae\+Legend\+Items}} = 0x0010, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca4145e4251b0cf2dbedabeea0a38f84f6}{Q\+C\+P\+::ae\+Plottables}} = 0x0020, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caf7712a85d6b0c75b24301d2fe9484db3}{Q\+C\+P\+::ae\+Items}} = 0x0040, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0cae45ed8cd167bffe27d7f40da4bc17e9c}{Q\+C\+P\+::ae\+Scatters}} = 0x0080, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca9dcf3882cb321bb305f71fdc0f09f63d}{Q\+C\+P\+::ae\+Error\+Bars}} = 0x0100, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca788810f0aa930137de6ad6cc6d83d354}{Q\+C\+P\+::ae\+Fills}} = 0x0200, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0ca261f8ea78cf3c9561726223ffa33dc12}{Q\+C\+P\+::ae\+Zero\+Line}} = 0x0400, 
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caa897c232a0ffc8368e7c100ffc59ef31}{Q\+C\+P\+::ae\+All}} = 0x\+F\+F\+FF, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_ae55dbe315d41fe80f29ba88100843a0caa9e90d81896358757d94275aeaa58f6a}{Q\+C\+P\+::ae\+None}} = 0x0000
+ \}
+\item 
+enum \mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4}{Q\+C\+P\+::\+Plotting\+Hint}} \{ \mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4ab7283c5bfc1ba9e597015389880bda42}{Q\+C\+P\+::ph\+None}} = 0x000, 
+\mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4aa5fd227bc878c56ad2a87ea32c74ee4d}{Q\+C\+P\+::ph\+Fast\+Polylines}} = 0x001, 
+\mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4aa3090dafa0e0f9a28c579c79d6c2d283}{Q\+C\+P\+::ph\+Force\+Repaint}} = 0x002, 
+\mbox{\hyperlink{namespace_q_c_p_a5400e5fcb9528d92002ddb938c1f4ef4a8e9cfe5ee0c5cd36dd7accf9739aff65}{Q\+C\+P\+::ph\+Cache\+Labels}} = 0x004
+ \}
+\item 
+enum \mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037}{Q\+C\+P\+::\+Interaction}} \{ \newline
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a2c4432b9aceafb94000be8d1b589ef18}{Q\+C\+P\+::i\+Range\+Drag}} = 0x001, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037abee1e94353525a636aeaf0ba32b72e14}{Q\+C\+P\+::i\+Range\+Zoom}} = 0x002, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037aef673112c5067c3cf4cfddb62da7265d}{Q\+C\+P\+::i\+Multi\+Select}} = 0x004, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a67148c8227b4155eca49135fc274c7ec}{Q\+C\+P\+::i\+Select\+Plottables}} = 0x008, 
+\newline
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037ad6644ac55bef621645326e9dd7469caa}{Q\+C\+P\+::i\+Select\+Axes}} = 0x010, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037a269c9af298e257d1108edec0432b5513}{Q\+C\+P\+::i\+Select\+Legend}} = 0x020, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037aea2f7c105d674e76d9b187b02ef29260}{Q\+C\+P\+::i\+Select\+Items}} = 0x040, 
+\mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037af67a50bc26147a13b551b3a625374949}{Q\+C\+P\+::i\+Select\+Other}} = 0x080
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespace_q_c_p_a07ab701c05329089f933b9cae2638a63}\label{namespace_q_c_p_a07ab701c05329089f933b9cae2638a63}} 
+bool {\bfseries Q\+C\+P\+::is\+Invalid\+Data} (double value)
+\item 
+\mbox{\Hypertarget{namespace_q_c_p_a728903e5c3dd17847bee280f4005496f}\label{namespace_q_c_p_a728903e5c3dd17847bee280f4005496f}} 
+bool {\bfseries Q\+C\+P\+::is\+Invalid\+Data} (double value1, double value2)
+\item 
+\mbox{\Hypertarget{namespace_q_c_p_afbf6e3084c108f2bb4372107945ee82f}\label{namespace_q_c_p_afbf6e3084c108f2bb4372107945ee82f}} 
+void {\bfseries Q\+C\+P\+::set\+Margin\+Value} (Q\+Margins \&margins, \mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}} side, int value)
+\item 
+\mbox{\Hypertarget{namespace_q_c_p_a23a2679d3495c444acc26acc61e35b5b}\label{namespace_q_c_p_a23a2679d3495c444acc26acc61e35b5b}} 
+int {\bfseries Q\+C\+P\+::get\+Margin\+Value} (const Q\+Margins \&margins, \mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}} side)
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_adb726938bdfce1d1136855b9b3613d2e}\label{qcustomplot_8h_adb726938bdfce1d1136855b9b3613d2e}} 
+{\bfseries Q\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+T\+Y\+P\+E\+I\+N\+FO} (\mbox{\hyperlink{class_q_c_p_scatter_style}{Q\+C\+P\+Scatter\+Style}}, Q\+\_\+\+M\+O\+V\+A\+B\+L\+E\+\_\+\+T\+Y\+PE)
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_aed23afce99cb2c82db7540026f3b7af3}\label{qcustomplot_8h_aed23afce99cb2c82db7540026f3b7af3}} 
+{\bfseries Q\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+T\+Y\+P\+E\+I\+N\+FO} (\mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}}, Q\+\_\+\+M\+O\+V\+A\+B\+L\+E\+\_\+\+T\+Y\+PE)
+\item 
+const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \mbox{\hyperlink{qcustomplot_8h_aede14e69c31568a75bd3e9286603c9e0}{operator+}} (const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&range, double value)
+\item 
+const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \mbox{\hyperlink{qcustomplot_8h_aa7dd8efde53d115b7107826194879069}{operator+}} (double value, const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&range)
+\item 
+const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \mbox{\hyperlink{qcustomplot_8h_a797f82830b516646da8873f82e39e356}{operator-\/}} (const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&range, double value)
+\item 
+const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \mbox{\hyperlink{qcustomplot_8h_a558b1248ff6a9e41fd5b2630555a8acc}{operator$\ast$}} (const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&range, double value)
+\item 
+const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \mbox{\hyperlink{qcustomplot_8h_a5cb2332f6957021f47cc768089f4f090}{operator$\ast$}} (double value, const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&range)
+\item 
+const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \mbox{\hyperlink{qcustomplot_8h_a4b366a3a21974c88e09b0d39d4a24a4b}{operator/}} (const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&range, double value)
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_a1376c7245cffa4c7a6b945a542473907}\label{qcustomplot_8h_a1376c7245cffa4c7a6b945a542473907}} 
+{\bfseries Q\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+T\+Y\+P\+E\+I\+N\+FO} (\mbox{\hyperlink{class_q_c_p_line_ending}{Q\+C\+P\+Line\+Ending}}, Q\+\_\+\+M\+O\+V\+A\+B\+L\+E\+\_\+\+T\+Y\+PE)
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_ae6c02a20d51ce03bc5dfd27c25a1cc6a}\label{qcustomplot_8h_ae6c02a20d51ce03bc5dfd27c25a1cc6a}} 
+{\bfseries Q\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+T\+Y\+P\+E\+I\+N\+FO} (\mbox{\hyperlink{class_q_c_p_data}{Q\+C\+P\+Data}}, Q\+\_\+\+M\+O\+V\+A\+B\+L\+E\+\_\+\+T\+Y\+PE)
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_a274cda11a63dec5b5796c0cf25efd5d7}\label{qcustomplot_8h_a274cda11a63dec5b5796c0cf25efd5d7}} 
+{\bfseries Q\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+T\+Y\+P\+E\+I\+N\+FO} (\mbox{\hyperlink{class_q_c_p_curve_data}{Q\+C\+P\+Curve\+Data}}, Q\+\_\+\+M\+O\+V\+A\+B\+L\+E\+\_\+\+T\+Y\+PE)
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_a620613bd0461892b290f74997828edae}\label{qcustomplot_8h_a620613bd0461892b290f74997828edae}} 
+{\bfseries Q\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+T\+Y\+P\+E\+I\+N\+FO} (\mbox{\hyperlink{class_q_c_p_bar_data}{Q\+C\+P\+Bar\+Data}}, Q\+\_\+\+M\+O\+V\+A\+B\+L\+E\+\_\+\+T\+Y\+PE)
+\item 
+\mbox{\Hypertarget{qcustomplot_8h_a36893db8c9fcdf5f9fcd8545f686d3ad}\label{qcustomplot_8h_a36893db8c9fcdf5f9fcd8545f686d3ad}} 
+{\bfseries Q\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+T\+Y\+P\+E\+I\+N\+FO} (\mbox{\hyperlink{class_q_c_p_financial_data}{Q\+C\+P\+Financial\+Data}}, Q\+\_\+\+M\+O\+V\+A\+B\+L\+E\+\_\+\+T\+Y\+PE)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{qcustomplot_8h_aa846c77472cae93def9f1609d0c57191}\label{qcustomplot_8h_aa846c77472cae93def9f1609d0c57191}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!Q\+C\+P\+Bar\+Data\+Map@{Q\+C\+P\+Bar\+Data\+Map}}
+\index{Q\+C\+P\+Bar\+Data\+Map@{Q\+C\+P\+Bar\+Data\+Map}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Bar\+Data\+Map}{QCPBarDataMap}}
+{\footnotesize\ttfamily \mbox{\hyperlink{qcustomplot_8h_aa846c77472cae93def9f1609d0c57191}{Q\+C\+P\+Bar\+Data\+Map}}}
+
+Container for storing \mbox{\hyperlink{class_q_c_p_bar_data}{Q\+C\+P\+Bar\+Data}} items in a sorted fashion. The key of the map is the key member of the \mbox{\hyperlink{class_q_c_p_bar_data}{Q\+C\+P\+Bar\+Data}} instance.
+
+This is the container in which \mbox{\hyperlink{class_q_c_p_bars}{Q\+C\+P\+Bars}} holds its data. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_bar_data}{Q\+C\+P\+Bar\+Data}}, \mbox{\hyperlink{class_q_c_p_bars_aa3435aab19e0a49e4e7b41bd36a8d96b}{Q\+C\+P\+Bars\+::set\+Data}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{qcustomplot_8h_a444d37ec9cb2951b3a7fe443c34d1658}\label{qcustomplot_8h_a444d37ec9cb2951b3a7fe443c34d1658}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!Q\+C\+P\+Curve\+Data\+Map@{Q\+C\+P\+Curve\+Data\+Map}}
+\index{Q\+C\+P\+Curve\+Data\+Map@{Q\+C\+P\+Curve\+Data\+Map}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Curve\+Data\+Map}{QCPCurveDataMap}}
+{\footnotesize\ttfamily \mbox{\hyperlink{qcustomplot_8h_a444d37ec9cb2951b3a7fe443c34d1658}{Q\+C\+P\+Curve\+Data\+Map}}}
+
+Container for storing \mbox{\hyperlink{class_q_c_p_curve_data}{Q\+C\+P\+Curve\+Data}} items in a sorted fashion. The key of the map is the t member of the \mbox{\hyperlink{class_q_c_p_curve_data}{Q\+C\+P\+Curve\+Data}} instance.
+
+This is the container in which \mbox{\hyperlink{class_q_c_p_curve}{Q\+C\+P\+Curve}} holds its data. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_curve_data}{Q\+C\+P\+Curve\+Data}}, \mbox{\hyperlink{class_q_c_p_curve_a631ac886708460013b30052f49cbc9da}{Q\+C\+P\+Curve\+::set\+Data}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{qcustomplot_8h_a84a9c4a4c2216ccfdcb5f3067cda76e3}\label{qcustomplot_8h_a84a9c4a4c2216ccfdcb5f3067cda76e3}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!Q\+C\+P\+Data\+Map@{Q\+C\+P\+Data\+Map}}
+\index{Q\+C\+P\+Data\+Map@{Q\+C\+P\+Data\+Map}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Data\+Map}{QCPDataMap}}
+{\footnotesize\ttfamily \mbox{\hyperlink{qcustomplot_8h_a84a9c4a4c2216ccfdcb5f3067cda76e3}{Q\+C\+P\+Data\+Map}}}
+
+Container for storing \mbox{\hyperlink{class_q_c_p_data}{Q\+C\+P\+Data}} items in a sorted fashion. The key of the map is the key member of the \mbox{\hyperlink{class_q_c_p_data}{Q\+C\+P\+Data}} instance.
+
+This is the container in which \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}} holds its data. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_data}{Q\+C\+P\+Data}}, \mbox{\hyperlink{class_q_c_p_graph_a1df2fd710545c8ba3b2c99a39a27bf8b}{Q\+C\+P\+Graph\+::set\+Data}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{qcustomplot_8h_a745c09823fae0974b50beca9bc3b3d7d}\label{qcustomplot_8h_a745c09823fae0974b50beca9bc3b3d7d}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!Q\+C\+P\+Financial\+Data\+Map@{Q\+C\+P\+Financial\+Data\+Map}}
+\index{Q\+C\+P\+Financial\+Data\+Map@{Q\+C\+P\+Financial\+Data\+Map}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Financial\+Data\+Map}{QCPFinancialDataMap}}
+{\footnotesize\ttfamily \mbox{\hyperlink{qcustomplot_8h_a745c09823fae0974b50beca9bc3b3d7d}{Q\+C\+P\+Financial\+Data\+Map}}}
+
+Container for storing \mbox{\hyperlink{class_q_c_p_financial_data}{Q\+C\+P\+Financial\+Data}} items in a sorted fashion. The key of the map is the key member of the \mbox{\hyperlink{class_q_c_p_financial_data}{Q\+C\+P\+Financial\+Data}} instance.
+
+This is the container in which \mbox{\hyperlink{class_q_c_p_financial}{Q\+C\+P\+Financial}} holds its data. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_financial}{Q\+C\+P\+Financial}}, \mbox{\hyperlink{class_q_c_p_financial_adf12a86082f1e488df6a4e8603f8fd6d}{Q\+C\+P\+Financial\+::set\+Data}} 
+\end{DoxySeeAlso}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{qcustomplot_8h_a558b1248ff6a9e41fd5b2630555a8acc}\label{qcustomplot_8h_a558b1248ff6a9e41fd5b2630555a8acc}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{range,  }\item[{double}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Multiplies both boundaries of the range by {\itshape value}. \mbox{\Hypertarget{qcustomplot_8h_a5cb2332f6957021f47cc768089f4f090}\label{qcustomplot_8h_a5cb2332f6957021f47cc768089f4f090}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} operator$\ast$ (\begin{DoxyParamCaption}\item[{double}]{value,  }\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Multiplies both boundaries of the range by {\itshape value}. \mbox{\Hypertarget{qcustomplot_8h_aede14e69c31568a75bd3e9286603c9e0}\label{qcustomplot_8h_aede14e69c31568a75bd3e9286603c9e0}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!operator+@{operator+}}
+\index{operator+@{operator+}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{range,  }\item[{double}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adds {\itshape value} to both boundaries of the range. \mbox{\Hypertarget{qcustomplot_8h_aa7dd8efde53d115b7107826194879069}\label{qcustomplot_8h_aa7dd8efde53d115b7107826194879069}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!operator+@{operator+}}
+\index{operator+@{operator+}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} operator+ (\begin{DoxyParamCaption}\item[{double}]{value,  }\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adds {\itshape value} to both boundaries of the range. \mbox{\Hypertarget{qcustomplot_8h_a797f82830b516646da8873f82e39e356}\label{qcustomplot_8h_a797f82830b516646da8873f82e39e356}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{range,  }\item[{double}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Subtracts {\itshape value} from both boundaries of the range. \mbox{\Hypertarget{qcustomplot_8h_a4b366a3a21974c88e09b0d39d4a24a4b}\label{qcustomplot_8h_a4b366a3a21974c88e09b0d39d4a24a4b}} 
+\index{qcustomplot.\+h@{qcustomplot.\+h}!operator/@{operator/}}
+\index{operator/@{operator/}!qcustomplot.\+h@{qcustomplot.\+h}}
+\subsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} operator/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} \&}]{range,  }\item[{double}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Divides both boundaries of the range by {\itshape value}. 

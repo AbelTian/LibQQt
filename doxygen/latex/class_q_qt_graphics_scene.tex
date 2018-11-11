@@ -1,0 +1,94 @@
+\hypertarget{class_q_qt_graphics_scene}{}\section{Q\+Qt\+Graphics\+Scene Class Reference}
+\label{class_q_qt_graphics_scene}\index{Q\+Qt\+Graphics\+Scene@{Q\+Qt\+Graphics\+Scene}}
+Inheritance diagram for Q\+Qt\+Graphics\+Scene\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_graphics_scene}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_ac6dbb4d22279ebb1baf31d1af4a96e10}\label{class_q_qt_graphics_scene_ac6dbb4d22279ebb1baf31d1af4a96e10}} 
+{\bfseries Q\+Qt\+Graphics\+Scene} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a66f2f662ca9a88ede5acdaa914d5c501}\label{class_q_qt_graphics_scene_a66f2f662ca9a88ede5acdaa914d5c501}} 
+{\bfseries Q\+Qt\+Graphics\+Scene} (const Q\+RectF \&scene\+Rect, Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a25dd1361d6eac97445e358f38328fc2f}\label{class_q_qt_graphics_scene_a25dd1361d6eac97445e358f38328fc2f}} 
+{\bfseries Q\+Qt\+Graphics\+Scene} (qreal x, qreal y, qreal width, qreal height, Q\+Object $\ast$parent=0)
+\item 
+void \mbox{\hyperlink{class_q_qt_graphics_scene_a1744444e22949f5207050aaba010a0be}{render}} (Q\+Painter $\ast$painter, const Q\+RectF \&target=Q\+RectF(), const Q\+RectF \&source=Q\+RectF(), Qt\+::\+Aspect\+Ratio\+Mode aspect\+Ratio\+Mode=Qt\+::\+Keep\+Aspect\+Ratio)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_q_qt_graphics_scene_a1744444e22949f5207050aaba010a0be}{Q\+Qt\+Graphics\+Scene\+::render}} 经过测试，失真是由于render放缩\+Q\+Painter和draw\+Items里面的item\+Paint共同导致失真 现在规整理如下，原则：\+Qpainter不允许改变 重写item\+Paint函数 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_ad78214d619df10a6e87a0a0e675d4176}\label{class_q_qt_graphics_scene_ad78214d619df10a6e87a0a0e675d4176}} 
+\mbox{\hyperlink{class_q_qt_graphics_ellipse_item}{Q\+Qt\+Graphics\+Ellipse\+Item}} $\ast$ {\bfseries add\+Ellipse} (const Q\+RectF \&rect, const Q\+Pen \&pen=Q\+Pen(), const Q\+Brush \&brush=Q\+Brush())
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a526c77b62dc368714503296e8182f00b}\label{class_q_qt_graphics_scene_a526c77b62dc368714503296e8182f00b}} 
+\mbox{\hyperlink{class_q_qt_graphics_ellipse_item}{Q\+Qt\+Graphics\+Ellipse\+Item}} $\ast$ {\bfseries add\+Ellipse} (qreal x, qreal y, qreal w, qreal h, const Q\+Pen \&pen=Q\+Pen(), const Q\+Brush \&brush=Q\+Brush())
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a13e2c8a48bee8891f17fd77003aff382}\label{class_q_qt_graphics_scene_a13e2c8a48bee8891f17fd77003aff382}} 
+\mbox{\hyperlink{class_q_qt_graphics_path_item}{Q\+Qt\+Graphics\+Path\+Item}} $\ast$ {\bfseries add\+Path} (const Q\+Painter\+Path \&path, const Q\+Pen \&pen=Q\+Pen(), const Q\+Brush \&brush=Q\+Brush())
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a66099c4edf2b588a2e570e3a17b6667d}\label{class_q_qt_graphics_scene_a66099c4edf2b588a2e570e3a17b6667d}} 
+\mbox{\hyperlink{class_q_qt_graphics_pixmap_item}{Q\+Qt\+Graphics\+Pixmap\+Item}} $\ast$ {\bfseries add\+Pixmap} (const Q\+Pixmap \&pixmap)
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_ae9461c068c9f8090196a1cceb4fc0105}\label{class_q_qt_graphics_scene_ae9461c068c9f8090196a1cceb4fc0105}} 
+\mbox{\hyperlink{class_q_qt_graphics_polygon_item}{Q\+Qt\+Graphics\+Polygon\+Item}} $\ast$ {\bfseries add\+Polygon} (const Q\+PolygonF \&polygon, const Q\+Pen \&pen=Q\+Pen(), const Q\+Brush \&brush=Q\+Brush())
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a40b9db781ce7aa26e345b44f04ac4e4c}\label{class_q_qt_graphics_scene_a40b9db781ce7aa26e345b44f04ac4e4c}} 
+\mbox{\hyperlink{class_q_qt_graphics_text_item}{Q\+Qt\+Graphics\+Text\+Item}} $\ast$ {\bfseries add\+Text} (const Q\+String \&text, const Q\+Font \&font=Q\+Font())
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a932b99b2c8bfae51ef5ee7db8287fb54}\label{class_q_qt_graphics_scene_a932b99b2c8bfae51ef5ee7db8287fb54}} 
+\mbox{\hyperlink{class_q_qt_graphics_simple_text_item}{Q\+Qt\+Graphics\+Simple\+Text\+Item}} $\ast$ {\bfseries add\+Simple\+Text} (const Q\+String \&text, const Q\+Font \&font=Q\+Font())
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a033e4a92cda9223dc579b3001d96136f}\label{class_q_qt_graphics_scene_a033e4a92cda9223dc579b3001d96136f}} 
+\mbox{\hyperlink{class_q_qt_graphics_proxy_widget}{Q\+Qt\+Graphics\+Proxy\+Widget}} $\ast$ {\bfseries add\+Widget} (Q\+Widget $\ast$widget, Qt\+::\+Window\+Flags w\+Flags=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a388011e60e26230e0892b64c7b704eef}\label{class_q_qt_graphics_scene_a388011e60e26230e0892b64c7b704eef}} 
+\mbox{\hyperlink{class_q_qt_graphics_line_item}{Q\+Qt\+Graphics\+Line\+Item}} $\ast$ {\bfseries add\+Line} (const Q\+LineF \&line, const Q\+Pen \&pen=Q\+Pen())
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a5d7b4d57f1b4c1437f686039962fc720}\label{class_q_qt_graphics_scene_a5d7b4d57f1b4c1437f686039962fc720}} 
+\mbox{\hyperlink{class_q_qt_graphics_line_item}{Q\+Qt\+Graphics\+Line\+Item}} $\ast$ {\bfseries add\+Line} (qreal x1, qreal y1, qreal x2, qreal y2, const Q\+Pen \&pen=Q\+Pen())
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a5265501a7d19c1867b62e981b5e74080}\label{class_q_qt_graphics_scene_a5265501a7d19c1867b62e981b5e74080}} 
+\mbox{\hyperlink{class_q_qt_graphics_rect_item}{Q\+Qt\+Graphics\+Rect\+Item}} $\ast$ {\bfseries add\+Rect} (const Q\+RectF \&rect, const Q\+Pen \&pen=Q\+Pen(), const Q\+Brush \&brush=Q\+Brush())
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_aeb8aa189a1840cbc4d5b0b60b066aa8f}\label{class_q_qt_graphics_scene_aeb8aa189a1840cbc4d5b0b60b066aa8f}} 
+\mbox{\hyperlink{class_q_qt_graphics_rect_item}{Q\+Qt\+Graphics\+Rect\+Item}} $\ast$ {\bfseries add\+Rect} (qreal x, qreal y, qreal w, qreal h, const Q\+Pen \&pen=Q\+Pen(), const Q\+Brush \&brush=Q\+Brush())
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a45d2b01a24d559284034cca2d47877a1}\label{class_q_qt_graphics_scene_a45d2b01a24d559284034cca2d47877a1}} 
+void {\bfseries draw\+Items} (Q\+Painter $\ast$painter, int num\+Items, Q\+Graphics\+Item $\ast$items\mbox{[}$\,$\mbox{]}, const Q\+Style\+Option\+Graphics\+Item options\mbox{[}$\,$\mbox{]}, Q\+Widget $\ast$widget=0)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_graphics_scene_a1744444e22949f5207050aaba010a0be}\label{class_q_qt_graphics_scene_a1744444e22949f5207050aaba010a0be}} 
+\index{Q\+Qt\+Graphics\+Scene@{Q\+Qt\+Graphics\+Scene}!render@{render}}
+\index{render@{render}!Q\+Qt\+Graphics\+Scene@{Q\+Qt\+Graphics\+Scene}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Q\+Qt\+Graphics\+Scene\+::render (\begin{DoxyParamCaption}\item[{Q\+Painter $\ast$}]{painter,  }\item[{const Q\+RectF \&}]{target = {\ttfamily QRectF()},  }\item[{const Q\+RectF \&}]{source = {\ttfamily QRectF()},  }\item[{Qt\+::\+Aspect\+Ratio\+Mode}]{aspect\+Ratio\+Mode = {\ttfamily Qt\+:\+:KeepAspectRatio} }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_q_qt_graphics_scene_a1744444e22949f5207050aaba010a0be}{Q\+Qt\+Graphics\+Scene\+::render}} 经过测试，失真是由于render放缩\+Q\+Painter和draw\+Items里面的item\+Paint共同导致失真 现在规整理如下，原则：\+Qpainter不允许改变 重写item\+Paint函数 
+
+
+\begin{DoxyParams}{Parameters}
+{\em painter} & \\
+\hline
+{\em target} & \\
+\hline
+{\em source} & \\
+\hline
+{\em aspect\+Ratio\+Mode} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/widgets/qqtgraphicsscene.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/widgets/qqtgraphicsscene.\+cpp\end{DoxyCompactItemize}

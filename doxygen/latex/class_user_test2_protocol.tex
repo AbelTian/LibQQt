@@ -1,0 +1,124 @@
+\hypertarget{class_user_test2_protocol}{}\section{User\+Test2\+Protocol Class Reference}
+\label{class_user_test2_protocol}\index{User\+Test2\+Protocol@{User\+Test2\+Protocol}}
+Inheritance diagram for User\+Test2\+Protocol\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_user_test2_protocol}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_test2_protocol_aaad64637eb70bb72be258157dc890b0b}\label{class_user_test2_protocol_aaad64637eb70bb72be258157dc890b0b}} 
+void {\bfseries signal\+Sendto\+Logic\+Level\+Code} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_test2_protocol_a99e33de0f1bd09899e99a72ba7b4c839}\label{class_user_test2_protocol_a99e33de0f1bd09899e99a72ba7b4c839}} 
+{\bfseries User\+Test2\+Protocol} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_user_test2_protocol_a9171e7f3bdb3c5575343f76daa2edf6e}\label{class_user_test2_protocol_a9171e7f3bdb3c5575343f76daa2edf6e}} 
+void {\bfseries recv\+Command1} (const \mbox{\hyperlink{class_user_test2_message}{User\+Test2\+Message}} \&msg)
+\item 
+\mbox{\Hypertarget{class_user_test2_protocol_a5f3e5f74ae5f65987ada353d3bee1d07}\label{class_user_test2_protocol_a5f3e5f74ae5f65987ada353d3bee1d07}} 
+void {\bfseries recv\+Command2} (const \mbox{\hyperlink{class_user_test2_message}{User\+Test2\+Message}} \&msg)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual quint16 \mbox{\hyperlink{class_user_test2_protocol_a00f0df8afa902f5c351147f2f473906d}{minlength}} () override
+\begin{DoxyCompactList}\small\item\em 最小包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_user_test2_protocol_ace8c98d761f9660ad1d602c672e16705}{maxlength}} () override
+\begin{DoxyCompactList}\small\item\em 最大包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_user_test2_protocol_a383a85b77478cb1a0857221ef12a3f6a}{splitter}} (const Q\+Byte\+Array \&l) override
+\begin{DoxyCompactList}\small\item\em 语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_user_test2_protocol_af35d95181563f50a532623d6634c7a37}{dispatcher}} (const Q\+Byte\+Array \&m) override
+\begin{DoxyCompactList}\small\item\em 语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_user_test2_protocol_af35d95181563f50a532623d6634c7a37}\label{class_user_test2_protocol_af35d95181563f50a532623d6634c7a37}} 
+\index{User\+Test2\+Protocol@{User\+Test2\+Protocol}!dispatcher@{dispatcher}}
+\index{dispatcher@{dispatcher}!User\+Test2\+Protocol@{User\+Test2\+Protocol}}
+\subsubsection{\texorpdfstring{dispatcher()}{dispatcher()}}
+{\footnotesize\ttfamily virtual bool User\+Test2\+Protocol\+::dispatcher (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 数据包} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 no dispatched(others) 1 dispatched(own) 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a35a69c4b89c8cf7459038f40d75e0dc9}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_user_test2_protocol_ace8c98d761f9660ad1d602c672e16705}\label{class_user_test2_protocol_ace8c98d761f9660ad1d602c672e16705}} 
+\index{User\+Test2\+Protocol@{User\+Test2\+Protocol}!maxlength@{maxlength}}
+\index{maxlength@{maxlength}!User\+Test2\+Protocol@{User\+Test2\+Protocol}}
+\subsubsection{\texorpdfstring{maxlength()}{maxlength()}}
+{\footnotesize\ttfamily virtual quint16 User\+Test2\+Protocol\+::maxlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+最大包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_af41bc3116abbbcfc9af45e151a253ff7}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_user_test2_protocol_a00f0df8afa902f5c351147f2f473906d}\label{class_user_test2_protocol_a00f0df8afa902f5c351147f2f473906d}} 
+\index{User\+Test2\+Protocol@{User\+Test2\+Protocol}!minlength@{minlength}}
+\index{minlength@{minlength}!User\+Test2\+Protocol@{User\+Test2\+Protocol}}
+\subsubsection{\texorpdfstring{minlength()}{minlength()}}
+{\footnotesize\ttfamily virtual quint16 User\+Test2\+Protocol\+::minlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+最小包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a2b00f53d3dd0eed817eeecff422891f3}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_user_test2_protocol_a383a85b77478cb1a0857221ef12a3f6a}\label{class_user_test2_protocol_a383a85b77478cb1a0857221ef12a3f6a}} 
+\index{User\+Test2\+Protocol@{User\+Test2\+Protocol}!splitter@{splitter}}
+\index{splitter@{splitter}!User\+Test2\+Protocol@{User\+Test2\+Protocol}}
+\subsubsection{\texorpdfstring{splitter()}{splitter()}}
+{\footnotesize\ttfamily virtual quint16 User\+Test2\+Protocol\+::splitter (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 接收到的数据段} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+按照协议解析到的数据长度 可用，继续接收，丢弃，粘包。 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a00fd0c1ac23379ed3b9b25da9a34f39b}{Q\+Qt\+Protocol}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/examples/qqtnetworkexample/usertest2protocol.\+h\end{DoxyCompactItemize}

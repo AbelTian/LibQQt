@@ -1,0 +1,84 @@
+\hypertarget{class_q_qt_named_pipe}{}\section{Q\+Qt\+Named\+Pipe Class Reference}
+\label{class_q_qt_named_pipe}\index{Q\+Qt\+Named\+Pipe@{Q\+Qt\+Named\+Pipe}}
+
+
+The \mbox{\hyperlink{class_q_qt_named_pipe}{Q\+Qt\+Named\+Pipe}} class 类似于\+Q\+Shared\+Memory使用方式。只不过底层使用\+Pipe(\+Q\+Local\+Socket)实现。 支持同时使用多个命名管道。  
+
+
+
+
+{\ttfamily \#include $<$qqtnamedpipe.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Named\+Pipe\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_named_pipe}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_adef0cdb3aa9bc64c2ddbb4db4540807a}\label{class_q_qt_named_pipe_adef0cdb3aa9bc64c2ddbb4db4540807a}} 
+void {\bfseries slot\+Connect\+Success} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_a1cc0bb1e7db80271796bd30f7a609f15}\label{class_q_qt_named_pipe_a1cc0bb1e7db80271796bd30f7a609f15}} 
+void {\bfseries slot\+Connect\+Fail} ()
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_ac25735927cc38bafe0fc2f06a44dc37d}\label{class_q_qt_named_pipe_ac25735927cc38bafe0fc2f06a44dc37d}} 
+void {\bfseries signal\+Connect\+Come\+Back} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_a875906677b186a2936098cf132dc7fac}\label{class_q_qt_named_pipe_a875906677b186a2936098cf132dc7fac}} 
+void {\bfseries signal\+Start\+Named\+Pipe\+Server} (\mbox{\hyperlink{class_q_qt_named_pipe_server}{Q\+Qt\+Named\+Pipe\+Server}} $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_ab7be4910b216ebacfabd75c1dde3207e}\label{class_q_qt_named_pipe_ab7be4910b216ebacfabd75c1dde3207e}} 
+{\bfseries Q\+Qt\+Named\+Pipe} (const Q\+String \&key, Q\+Object $\ast$parent=Q\+\_\+\+N\+U\+L\+L\+P\+TR)
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_a20607e519076bf2e83ab9f1b6202b68c}\label{class_q_qt_named_pipe_a20607e519076bf2e83ab9f1b6202b68c}} 
+virtual bool {\bfseries initializer} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_a9a21f0bc0afeee35715bf1e827ec9f1a}\label{class_q_qt_named_pipe_a9a21f0bc0afeee35715bf1e827ec9f1a}} 
+void {\bfseries write} (const Q\+Byte\+Array \&bytes)
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_aa4b8f3a6a5c4ee13e107c465ea170060}\label{class_q_qt_named_pipe_aa4b8f3a6a5c4ee13e107c465ea170060}} 
+Q\+Byte\+Array {\bfseries read} (int size)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_a09ae15f36781af1e6884f27839f95ffa}\label{class_q_qt_named_pipe_a09ae15f36781af1e6884f27839f95ffa}} 
+virtual bool {\bfseries has\+Server} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_a441919fe26ab05753a0097c21f28c1a5}\label{class_q_qt_named_pipe_a441919fe26ab05753a0097c21f28c1a5}} 
+virtual bool {\bfseries create} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_a1975252a572ddac54883a395588afd67}\label{class_q_qt_named_pipe_a1975252a572ddac54883a395588afd67}} 
+virtual bool {\bfseries attach} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_named_pipe_a2dd9e54b685182b53252a4a0a1df1f97}\label{class_q_qt_named_pipe_a2dd9e54b685182b53252a4a0a1df1f97}} 
+virtual bool {\bfseries set\+Key} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_named_pipe}{Q\+Qt\+Named\+Pipe}} class 类似于\+Q\+Shared\+Memory使用方式。只不过底层使用\+Pipe(\+Q\+Local\+Socket)实现。 支持同时使用多个命名管道。 
+
+原理： 按照key区分管道。 initializer里面的create、attach提供对管道的创建和关联。 packer把自己的数据结构打包写进管道。 parser把管道的数据解包到本地变量。
+
+注意：one key，管道里的数据是顺序的，流的，存在数据结构。 注意：每一次写的数据，读取一次就能读出来。这一次的数据读写长度没有限制。 注意：管道里的数据是顺序的，顺序的，顺序的！谁都可以读也可以写。只要key对号。
+
+多路管道的格式： Q\+String Q\+Byte\+Array key1 pipe1 key2 pipe2 ... ...
+
+文件用于储存数据，管道不用于储存数据，而是作为一个通信设备的驱动，这个通信设备就是个管道。 Q\+Qt\+Named\+Pipe\+Server监控这个管道的读写，提交给业务层数据处理。 Q\+Qt\+Named\+Pipe\+Client往这个管道里面读写，读取和写入都允许进行。 Q\+Qt\+Named\+Pipe\+Private实现了一个通信协议，包括read业务、write业务。 Q\+Qt\+Named\+Pipe使用这个协议，开放给用户接口。（也叫做\+Wrapper，没有这个wrapper管道读写不好实施呀，数据结构、通信架构都说不清楚。）
+
+Windows Timer和\+Q\+Event\+Loop堵塞都存在问题，不支持。 理论上，在堵塞的时候q\+App process\+Events接收到读或者写的返回命令，可是\+Windows下接收不到，甚至发送都发送不出去，原因不明。 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/highgrade/qqtnamedpipe.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/highgrade/qqtnamedpipe.\+cpp\end{DoxyCompactItemize}

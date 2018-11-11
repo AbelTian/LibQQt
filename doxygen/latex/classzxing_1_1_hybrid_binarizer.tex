@@ -1,0 +1,39 @@
+\hypertarget{classzxing_1_1_hybrid_binarizer}{}\section{zxing\+:\+:Hybrid\+Binarizer Class Reference}
+\label{classzxing_1_1_hybrid_binarizer}\index{zxing\+::\+Hybrid\+Binarizer@{zxing\+::\+Hybrid\+Binarizer}}
+Inheritance diagram for zxing\+:\+:Hybrid\+Binarizer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classzxing_1_1_hybrid_binarizer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1_hybrid_binarizer_a9e9bc2fbc36feb2010eed59eb8d2e743}\label{classzxing_1_1_hybrid_binarizer_a9e9bc2fbc36feb2010eed59eb8d2e743}} 
+{\bfseries Hybrid\+Binarizer} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_luminance_source}{Luminance\+Source}} $>$ source)
+\item 
+virtual \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} $>$ \mbox{\hyperlink{classzxing_1_1_hybrid_binarizer_a14a970ec0197b7188f64e352e9ea1e33}{get\+Black\+Matrix}} ()
+\item 
+\mbox{\Hypertarget{classzxing_1_1_hybrid_binarizer_a131b6810592c0b9d35dabe37a50a4f8f}\label{classzxing_1_1_hybrid_binarizer_a131b6810592c0b9d35dabe37a50a4f8f}} 
+\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_binarizer}{Binarizer}} $>$ {\bfseries create\+Binarizer} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_luminance_source}{Luminance\+Source}} $>$ source)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classzxing_1_1_hybrid_binarizer_a14a970ec0197b7188f64e352e9ea1e33}\label{classzxing_1_1_hybrid_binarizer_a14a970ec0197b7188f64e352e9ea1e33}} 
+\index{zxing\+::\+Hybrid\+Binarizer@{zxing\+::\+Hybrid\+Binarizer}!get\+Black\+Matrix@{get\+Black\+Matrix}}
+\index{get\+Black\+Matrix@{get\+Black\+Matrix}!zxing\+::\+Hybrid\+Binarizer@{zxing\+::\+Hybrid\+Binarizer}}
+\subsubsection{\texorpdfstring{get\+Black\+Matrix()}{getBlackMatrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} $>$ Hybrid\+Binarizer\+::get\+Black\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Calculates the final \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} once for all requests. This could be called once from the constructor instead, but there are some advantages to doing it lazily, such as making profiling easier, and not doing heavy lifting when callers don\textquotesingle{}t expect it. 
+
+Reimplemented from \mbox{\hyperlink{classzxing_1_1_global_histogram_binarizer}{zxing\+::\+Global\+Histogram\+Binarizer}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/common/Hybrid\+Binarizer.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/common/Hybrid\+Binarizer.\+cpp\end{DoxyCompactItemize}

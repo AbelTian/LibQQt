@@ -1,0 +1,88 @@
+\hypertarget{struct_gumbo_internal_options}{}\section{Gumbo\+Internal\+Options Struct Reference}
+\label{struct_gumbo_internal_options}\index{Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}}
+
+
+{\ttfamily \#include $<$gumbo.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gumbo_8h_aaf78769ab19b5fbe291f7977cae899df}{Gumbo\+Allocator\+Function}} \mbox{\hyperlink{struct_gumbo_internal_options_acac0fe2be11fb72dcdb39d9c417dd31d}{allocator}}
+\item 
+\mbox{\hyperlink{gumbo_8h_a19e07a5e573bf194295141fba654d2ea}{Gumbo\+Deallocator\+Function}} \mbox{\hyperlink{struct_gumbo_internal_options_a02f657a8c26adca403786187741ea00c}{deallocator}}
+\item 
+void $\ast$ \mbox{\hyperlink{struct_gumbo_internal_options_ab0614a8d24cd66f81028402531ba436a}{userdata}}
+\item 
+int \mbox{\hyperlink{struct_gumbo_internal_options_aa355be463e9592c127b2a1ef056f6ebe}{tab\+\_\+stop}}
+\item 
+bool \mbox{\hyperlink{struct_gumbo_internal_options_aa9ab039f1b40708234f78cf3f6e46bd7}{stop\+\_\+on\+\_\+first\+\_\+error}}
+\item 
+int \mbox{\hyperlink{struct_gumbo_internal_options_a3783862d2151c993cbc7b2243ade614d}{max\+\_\+errors}}
+\item 
+\mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}} \mbox{\hyperlink{struct_gumbo_internal_options_a7e7e60aee3ec81b2faee2b504a26321f}{fragment\+\_\+context}}
+\item 
+\mbox{\hyperlink{gumbo_8h_a5792dfd02513e421fb8f083f08e58cc6}{Gumbo\+Namespace\+Enum}} \mbox{\hyperlink{struct_gumbo_internal_options_aacbd6eac053b48200595fea13abec223}{fragment\+\_\+namespace}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Input struct containing configuration options for the parser. These let you specify alternate memory managers, provide different error handling, etc. Use k\+Gumbo\+Default\+Options for sensible defaults, and only set what you need. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_gumbo_internal_options_acac0fe2be11fb72dcdb39d9c417dd31d}\label{struct_gumbo_internal_options_acac0fe2be11fb72dcdb39d9c417dd31d}} 
+\index{Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}!allocator@{allocator}}
+\index{allocator@{allocator}!Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}}
+\subsubsection{\texorpdfstring{allocator}{allocator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_aaf78769ab19b5fbe291f7977cae899df}{Gumbo\+Allocator\+Function}} Gumbo\+Internal\+Options\+::allocator}
+
+A memory allocator function. Default\+: malloc. \mbox{\Hypertarget{struct_gumbo_internal_options_a02f657a8c26adca403786187741ea00c}\label{struct_gumbo_internal_options_a02f657a8c26adca403786187741ea00c}} 
+\index{Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}!deallocator@{deallocator}}
+\index{deallocator@{deallocator}!Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}}
+\subsubsection{\texorpdfstring{deallocator}{deallocator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a19e07a5e573bf194295141fba654d2ea}{Gumbo\+Deallocator\+Function}} Gumbo\+Internal\+Options\+::deallocator}
+
+A memory deallocator function. Default\+: free. \mbox{\Hypertarget{struct_gumbo_internal_options_a7e7e60aee3ec81b2faee2b504a26321f}\label{struct_gumbo_internal_options_a7e7e60aee3ec81b2faee2b504a26321f}} 
+\index{Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}!fragment\+\_\+context@{fragment\+\_\+context}}
+\index{fragment\+\_\+context@{fragment\+\_\+context}!Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}}
+\subsubsection{\texorpdfstring{fragment\+\_\+context}{fragment\_context}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}} Gumbo\+Internal\+Options\+::fragment\+\_\+context}
+
+The fragment context for parsing\+: \href{https://html.spec.whatwg.org/multipage/syntax.html#parsing-html-fragments}{\tt https\+://html.\+spec.\+whatwg.\+org/multipage/syntax.\+html\#parsing-\/html-\/fragments}
+
+If G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+L\+A\+ST is passed here, it is assumed to be \char`\"{}no fragment\char`\"{}, i.\+e. the regular parsing algorithm. Otherwise, pass the tag enum for the intended parent of the parsed fragment. We use just the tag enum rather than a full node because that\textquotesingle{}s enough to set all the parsing context we need, and it provides some additional flexibility for client code to act as if parsing a fragment even when a full H\+T\+ML tree isn\textquotesingle{}t available.
+
+Default\+: G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+L\+A\+ST \mbox{\Hypertarget{struct_gumbo_internal_options_aacbd6eac053b48200595fea13abec223}\label{struct_gumbo_internal_options_aacbd6eac053b48200595fea13abec223}} 
+\index{Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}!fragment\+\_\+namespace@{fragment\+\_\+namespace}}
+\index{fragment\+\_\+namespace@{fragment\+\_\+namespace}!Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}}
+\subsubsection{\texorpdfstring{fragment\+\_\+namespace}{fragment\_namespace}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a5792dfd02513e421fb8f083f08e58cc6}{Gumbo\+Namespace\+Enum}} Gumbo\+Internal\+Options\+::fragment\+\_\+namespace}
+
+The namespace for the fragment context. This lets client code differentiate between, say, parsing a $<$title$>$ tag in S\+VG vs. parsing it in H\+T\+ML. Default\+: G\+U\+M\+B\+O\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+H\+T\+ML \mbox{\Hypertarget{struct_gumbo_internal_options_a3783862d2151c993cbc7b2243ade614d}\label{struct_gumbo_internal_options_a3783862d2151c993cbc7b2243ade614d}} 
+\index{Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}!max\+\_\+errors@{max\+\_\+errors}}
+\index{max\+\_\+errors@{max\+\_\+errors}!Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}}
+\subsubsection{\texorpdfstring{max\+\_\+errors}{max\_errors}}
+{\footnotesize\ttfamily int Gumbo\+Internal\+Options\+::max\+\_\+errors}
+
+The maximum number of errors before the parser stops recording them. This is provided so that if the page is totally borked, we don\textquotesingle{}t completely fill up the errors vector and exhaust memory with useless redundant errors. Set to -\/1 to disable the limit. Default\+: -\/1 \mbox{\Hypertarget{struct_gumbo_internal_options_aa9ab039f1b40708234f78cf3f6e46bd7}\label{struct_gumbo_internal_options_aa9ab039f1b40708234f78cf3f6e46bd7}} 
+\index{Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}!stop\+\_\+on\+\_\+first\+\_\+error@{stop\+\_\+on\+\_\+first\+\_\+error}}
+\index{stop\+\_\+on\+\_\+first\+\_\+error@{stop\+\_\+on\+\_\+first\+\_\+error}!Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}}
+\subsubsection{\texorpdfstring{stop\+\_\+on\+\_\+first\+\_\+error}{stop\_on\_first\_error}}
+{\footnotesize\ttfamily bool Gumbo\+Internal\+Options\+::stop\+\_\+on\+\_\+first\+\_\+error}
+
+Whether or not to stop parsing when the first error is encountered. Default\+: false. \mbox{\Hypertarget{struct_gumbo_internal_options_aa355be463e9592c127b2a1ef056f6ebe}\label{struct_gumbo_internal_options_aa355be463e9592c127b2a1ef056f6ebe}} 
+\index{Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}!tab\+\_\+stop@{tab\+\_\+stop}}
+\index{tab\+\_\+stop@{tab\+\_\+stop}!Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}}
+\subsubsection{\texorpdfstring{tab\+\_\+stop}{tab\_stop}}
+{\footnotesize\ttfamily int Gumbo\+Internal\+Options\+::tab\+\_\+stop}
+
+The tab-\/stop size, for computing positions in source code that uses tabs. Default\+: 8. \mbox{\Hypertarget{struct_gumbo_internal_options_ab0614a8d24cd66f81028402531ba436a}\label{struct_gumbo_internal_options_ab0614a8d24cd66f81028402531ba436a}} 
+\index{Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}!userdata@{userdata}}
+\index{userdata@{userdata}!Gumbo\+Internal\+Options@{Gumbo\+Internal\+Options}}
+\subsubsection{\texorpdfstring{userdata}{userdata}}
+{\footnotesize\ttfamily void$\ast$ Gumbo\+Internal\+Options\+::userdata}
+
+An opaque object that\textquotesingle{}s passed in as the first argument to all callbacks used by this library. Default\+: N\+U\+LL. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/parser/src/\mbox{\hyperlink{gumbo_8h}{gumbo.\+h}}\end{DoxyCompactItemize}

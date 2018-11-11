@@ -1,0 +1,114 @@
+\hypertarget{class_q_q_t_network_message}{}\section{Q\+Q\+T\+Network\+Message Class Reference}
+\label{class_q_q_t_network_message}\index{Q\+Q\+T\+Network\+Message@{Q\+Q\+T\+Network\+Message}}
+Inheritance diagram for Q\+Q\+T\+Network\+Message\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_q_q_t_network_message}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_aa7317826eba7c3362d689052337171bf}\label{class_q_q_t_network_message_aa7317826eba7c3362d689052337171bf}} 
+{\bfseries Q\+Q\+T\+Network\+Message} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_a16c62a869e43afa501e823b38f8ed478}\label{class_q_q_t_network_message_a16c62a869e43afa501e823b38f8ed478}} 
+const quint16 \& {\bfseries head} () const
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_a79f24a019281ddbf04deb26df1573f5c}\label{class_q_q_t_network_message_a79f24a019281ddbf04deb26df1573f5c}} 
+void {\bfseries set\+Head} (quint16 head)
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_aeb5a474f80c4bbd956652c3dbe62f5a5}\label{class_q_q_t_network_message_aeb5a474f80c4bbd956652c3dbe62f5a5}} 
+const quint16 \& {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_ab1d4fb729a6dcbbf34541597f28be86d}\label{class_q_q_t_network_message_ab1d4fb729a6dcbbf34541597f28be86d}} 
+void {\bfseries set\+Size} (quint16 size)
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_adfadf5a57d73386f9c8292a8dc5fb7bf}\label{class_q_q_t_network_message_adfadf5a57d73386f9c8292a8dc5fb7bf}} 
+const quint16 \& {\bfseries cmd} () const
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_a579b9dac5db2ca0ff8c08d9377ad6a4f}\label{class_q_q_t_network_message_a579b9dac5db2ca0ff8c08d9377ad6a4f}} 
+void {\bfseries set\+Cmd} (quint16 cmd)
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_a4e89acb7f9e28b5398333e2e5838fb8f}\label{class_q_q_t_network_message_a4e89acb7f9e28b5398333e2e5838fb8f}} 
+const quint32 \& {\bfseries uid} () const
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_ae80406dd88b7d4e7b753909bee95eddb}\label{class_q_q_t_network_message_ae80406dd88b7d4e7b753909bee95eddb}} 
+void {\bfseries set\+Uid} (quint32 uid)
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_acb8783a355503df66f7030aad6c07814}\label{class_q_q_t_network_message_acb8783a355503df66f7030aad6c07814}} 
+const Q\+Byte\+Array \& {\bfseries data} () const
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_a67ad35bcec9191dfd644bf9b5e2c7cff}\label{class_q_q_t_network_message_a67ad35bcec9191dfd644bf9b5e2c7cff}} 
+void {\bfseries set\+Data} (Q\+Byte\+Array \&data)
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_a24dd34d36f3e64839008b71a62dc824e}\label{class_q_q_t_network_message_a24dd34d36f3e64839008b71a62dc824e}} 
+const quint16 \& {\bfseries sum} () const
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_ae425f962de3fb202f0a801c7b9437cec}\label{class_q_q_t_network_message_ae425f962de3fb202f0a801c7b9437cec}} 
+void {\bfseries set\+Sum} (quint16 sum)
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_a87d2864f5cf89cf007fb9223fa229fc4}\label{class_q_q_t_network_message_a87d2864f5cf89cf007fb9223fa229fc4}} 
+const quint32 \& {\bfseries tail} () const
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_a4b4fe7f8b63a8120c4f39058c3dfabb6}\label{class_q_q_t_network_message_a4b4fe7f8b63a8120c4f39058c3dfabb6}} 
+void {\bfseries set\+Tail} (quint32 tail)
+\item 
+\mbox{\Hypertarget{class_q_q_t_network_message_aa432338e251243b4af3563e4f435f095}\label{class_q_q_t_network_message_aa432338e251243b4af3563e4f435f095}} 
+void {\bfseries translate} ()
+\item 
+void \mbox{\hyperlink{class_q_q_t_network_message_a56a22ccc712447fb573536a9d51b36d6}{parser}} (const Q\+Byte\+Array \&l) override
+\begin{DoxyCompactList}\small\item\em 从流中解析报文 这个函数会更改局部变量 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_q_t_network_message_a9d1d30ef9d14a5a4586e234a00ab19d4}{packer}} (Q\+Byte\+Array \&l) const override
+\begin{DoxyCompactList}\small\item\em 将报文组装为流 这个函数不会更改局部变量 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_q_t_network_message_a9d1d30ef9d14a5a4586e234a00ab19d4}\label{class_q_q_t_network_message_a9d1d30ef9d14a5a4586e234a00ab19d4}} 
+\index{Q\+Q\+T\+Network\+Message@{Q\+Q\+T\+Network\+Message}!packer@{packer}}
+\index{packer@{packer}!Q\+Q\+T\+Network\+Message@{Q\+Q\+T\+Network\+Message}}
+\subsubsection{\texorpdfstring{packer()}{packer()}}
+{\footnotesize\ttfamily void Q\+Q\+T\+Network\+Message\+::packer (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将报文组装为流 这个函数不会更改局部变量 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & \\
+\hline
+{\em m} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_message_af1885c2c3628495808dca66ee8d72e14}{Q\+Qt\+Message}}.
+
+\mbox{\Hypertarget{class_q_q_t_network_message_a56a22ccc712447fb573536a9d51b36d6}\label{class_q_q_t_network_message_a56a22ccc712447fb573536a9d51b36d6}} 
+\index{Q\+Q\+T\+Network\+Message@{Q\+Q\+T\+Network\+Message}!parser@{parser}}
+\index{parser@{parser}!Q\+Q\+T\+Network\+Message@{Q\+Q\+T\+Network\+Message}}
+\subsubsection{\texorpdfstring{parser()}{parser()}}
+{\footnotesize\ttfamily void Q\+Q\+T\+Network\+Message\+::parser (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+从流中解析报文 这个函数会更改局部变量 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & \\
+\hline
+{\em l} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_message_a0bc25669bdd61490b1d8df6d77565f31}{Q\+Qt\+Message}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/examples/qqtnetworkexample/qqtnetworkmessage.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/examples/qqtnetworkexample/qqtnetworkmessage.\+cpp\end{DoxyCompactItemize}

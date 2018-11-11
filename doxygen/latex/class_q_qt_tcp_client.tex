@@ -1,0 +1,117 @@
+\hypertarget{class_q_qt_tcp_client}{}\section{Q\+Qt\+Tcp\+Client Class Reference}
+\label{class_q_qt_tcp_client}\index{Q\+Qt\+Tcp\+Client@{Q\+Qt\+Tcp\+Client}}
+
+
+客户端决定和协议的交互关系;只跟协议打交道； 处理粘包，数少包。 通过安装协议，支持客户通信 打开， 发送，接收，splitter，dispatcher 关闭。  
+
+
+
+
+{\ttfamily \#include $<$qqttcpclient.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Tcp\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_tcp_client}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a51b638a84dff755f0f509c27823dc122}\label{class_q_qt_tcp_client_a51b638a84dff755f0f509c27823dc122}} 
+void {\bfseries signal\+Connecting} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a90fcc358ea5764614328aa676fa06bc4}\label{class_q_qt_tcp_client_a90fcc358ea5764614328aa676fa06bc4}} 
+void {\bfseries signal\+Connect\+Succ} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_af82c9e13bed2cb768e09ee81f0df8c91}\label{class_q_qt_tcp_client_af82c9e13bed2cb768e09ee81f0df8c91}} 
+void {\bfseries signal\+Connect\+Fail} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a562535e3315d2be93741d4bb0d369656}\label{class_q_qt_tcp_client_a562535e3315d2be93741d4bb0d369656}} 
+void {\bfseries signal\+Dis\+Connect\+Succ} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a1dc56db0582fd94f9a1f799b8f13b6ef}\label{class_q_qt_tcp_client_a1dc56db0582fd94f9a1f799b8f13b6ef}} 
+void {\bfseries signal\+Dis\+Connect\+Fail} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_ae65d75e00ae9ba29a392c155a451245e}\label{class_q_qt_tcp_client_ae65d75e00ae9ba29a392c155a451245e}} 
+void {\bfseries signal\+Update\+Progress} (qint64 value)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a4e87cbb9d06298aa527afa01ccf66788}\label{class_q_qt_tcp_client_a4e87cbb9d06298aa527afa01ccf66788}} 
+{\bfseries Q\+Qt\+Tcp\+Client} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a87a7e4344cdcdd5a257b0ca3ceaa917d}\label{class_q_qt_tcp_client_a87a7e4344cdcdd5a257b0ca3ceaa917d}} 
+void {\bfseries set\+Server\+I\+P\+Address} (Q\+String ip)
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a625d01959c81d668e4ef45f2981eae50}\label{class_q_qt_tcp_client_a625d01959c81d668e4ef45f2981eae50}} 
+Q\+String\+List \& {\bfseries server\+I\+P\+Address} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_afd51e9aec0535782366f5e046f1a2d2a}\label{class_q_qt_tcp_client_afd51e9aec0535782366f5e046f1a2d2a}} 
+void {\bfseries set\+Server\+I\+P\+Address} (Q\+String\+List ip\+List)
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_adb84a6d942deff4950f7cdabdc633122}\label{class_q_qt_tcp_client_adb84a6d942deff4950f7cdabdc633122}} 
+void {\bfseries set\+Server\+Port} (quint32 p=7079)
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a56137590b0020913ea2a1207c44f0ecc}\label{class_q_qt_tcp_client_a56137590b0020913ea2a1207c44f0ecc}} 
+void {\bfseries install\+Protocol} (\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$stack)
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a83ddec18ce7857e5103b0db95e565f10}\label{class_q_qt_tcp_client_a83ddec18ce7857e5103b0db95e565f10}} 
+void {\bfseries uninstall\+Protocol} (\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$stack)
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_ab7cfd60e56c4bcbaf66fca6efa54f1f7}\label{class_q_qt_tcp_client_ab7cfd60e56c4bcbaf66fca6efa54f1f7}} 
+\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$ {\bfseries installed\+Protocol} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_ae6ef144677529f48f466c89f3245059f}\label{class_q_qt_tcp_client_ae6ef144677529f48f466c89f3245059f}} 
+void {\bfseries send\+Connect\+To\+Host} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_a397e465de73caec67c6348db93e45cca}\label{class_q_qt_tcp_client_a397e465de73caec67c6348db93e45cca}} 
+int {\bfseries send\+Dis\+Connect\+From\+Host} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_ab3af4e75f50f5ddf28040440141ffab6}\label{class_q_qt_tcp_client_ab3af4e75f50f5ddf28040440141ffab6}} 
+void {\bfseries ready\+Read\+Data} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_af0e36ac8294aaedc498c9a8e1f1d7018}\label{class_q_qt_tcp_client_af0e36ac8294aaedc498c9a8e1f1d7018}} 
+void {\bfseries slot\+Write\+Data} (const Q\+Byte\+Array \&)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_tcp_client_a9989245e722623a226f38d60c7f357cb}{translator}} (const Q\+Byte\+Array \&bytes)
+\begin{DoxyCompactList}\small\item\em translator 用于拆分和分发数据报 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_tcp_client_aa1a4d0d2f9eb65475c7e929a24c936b3}\label{class_q_qt_tcp_client_aa1a4d0d2f9eb65475c7e929a24c936b3}} 
+void {\bfseries connect\+To\+Singel\+Host} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+客户端决定和协议的交互关系;只跟协议打交道； 处理粘包，数少包。 通过安装协议，支持客户通信 打开， 发送，接收，splitter，dispatcher 关闭。 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_tcp_client_a9989245e722623a226f38d60c7f357cb}\label{class_q_qt_tcp_client_a9989245e722623a226f38d60c7f357cb}} 
+\index{Q\+Qt\+Tcp\+Client@{Q\+Qt\+Tcp\+Client}!translator@{translator}}
+\index{translator@{translator}!Q\+Qt\+Tcp\+Client@{Q\+Qt\+Tcp\+Client}}
+\subsubsection{\texorpdfstring{translator()}{translator()}}
+{\footnotesize\ttfamily void Q\+Qt\+Tcp\+Client\+::translator (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+translator 用于拆分和分发数据报 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & \\
+\hline
+\end{DoxyParams}
+这个地方的实现，还是有一些复杂， 但是只有流式传输才需要， 而且，每种通讯接口的流式传输都是一样的， 过去，写在protocol里是为了增添传输工具客户端类型方便 现在，这块比较稳定，所以挪动回来。
+
+只能安装一个协议。 如果安装多个，这个地方的static，需要给协议们分配独立的buffer。 一个客户端，和服务器通信，一条流，可以由多个协议进行解析吗？
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqttcpclient.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqttcpclient.\+cpp\end{DoxyCompactItemize}

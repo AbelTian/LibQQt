@@ -1,0 +1,209 @@
+\hypertarget{class_q_z_xing}{}\section{Q\+Z\+Xing Class Reference}
+\label{class_q_z_xing}\index{Q\+Z\+Xing@{Q\+Z\+Xing}}
+
+
+{\ttfamily \#include $<$Q\+Z\+Xing.\+h$>$}
+
+Inheritance diagram for Q\+Z\+Xing\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_z_xing}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a88e0c36a340bb40ab288b59a0107ff87}\label{class_q_z_xing_a88e0c36a340bb40ab288b59a0107ff87}} 
+enum {\bfseries Decoder\+Format} \{ \newline
+{\bfseries Decoder\+Format\+\_\+\+None} = 0, 
+{\bfseries Decoder\+Format\+\_\+\+Aztec} = 1 $<$$<$ 1, 
+{\bfseries Decoder\+Format\+\_\+\+C\+O\+D\+A\+B\+AR} = 1 $<$$<$ 2, 
+{\bfseries Decoder\+Format\+\_\+\+C\+O\+D\+E\+\_\+39} = 1 $<$$<$ 3, 
+\newline
+{\bfseries Decoder\+Format\+\_\+\+C\+O\+D\+E\+\_\+93} = 1 $<$$<$ 4, 
+{\bfseries Decoder\+Format\+\_\+\+C\+O\+D\+E\+\_\+128} = 1 $<$$<$ 5, 
+{\bfseries Decoder\+Format\+\_\+\+D\+A\+T\+A\+\_\+\+M\+A\+T\+R\+IX} = 1 $<$$<$ 6, 
+{\bfseries Decoder\+Format\+\_\+\+E\+A\+N\+\_\+8} = 1 $<$$<$ 7, 
+\newline
+{\bfseries Decoder\+Format\+\_\+\+E\+A\+N\+\_\+13} = 1 $<$$<$ 8, 
+{\bfseries Decoder\+Format\+\_\+\+I\+TF} = 1 $<$$<$ 9, 
+{\bfseries Decoder\+Format\+\_\+\+M\+A\+X\+I\+C\+O\+DE} = 1 $<$$<$ 10, 
+{\bfseries Decoder\+Format\+\_\+\+P\+D\+F\+\_\+417} = 1 $<$$<$ 11, 
+\newline
+{\bfseries Decoder\+Format\+\_\+\+Q\+R\+\_\+\+C\+O\+DE} = 1 $<$$<$ 12, 
+{\bfseries Decoder\+Format\+\_\+\+R\+S\+S\+\_\+14} = 1 $<$$<$ 13, 
+{\bfseries Decoder\+Format\+\_\+\+R\+S\+S\+\_\+\+E\+X\+P\+A\+N\+D\+ED} = 1 $<$$<$ 14, 
+{\bfseries Decoder\+Format\+\_\+\+U\+P\+C\+\_\+A} = 1 $<$$<$ 15, 
+\newline
+{\bfseries Decoder\+Format\+\_\+\+U\+P\+C\+\_\+E} = 1 $<$$<$ 16, 
+{\bfseries Decoder\+Format\+\_\+\+U\+P\+C\+\_\+\+E\+A\+N\+\_\+\+E\+X\+T\+E\+N\+S\+I\+ON} = 1 $<$$<$ 17, 
+{\bfseries Decoder\+Format\+\_\+\+C\+O\+D\+E\+\_\+128\+\_\+\+G\+S1} = 1 $<$$<$ 18
+ \}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_abb78017442ef7e6cc236f75bc1dc71e2}\label{class_q_z_xing_abb78017442ef7e6cc236f75bc1dc71e2}} 
+typedef unsigned int {\bfseries Decoder\+Format\+Type}
+\end{DoxyCompactItemize}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String \mbox{\hyperlink{class_q_z_xing_a21f75bdef7ecd2100ed170e1b32470a7}{decode\+Image}} (const Q\+Image \&image, int max\+Width=-\/1, int max\+Height=-\/1, bool smooth\+Transformation=false)
+\item 
+Q\+String \mbox{\hyperlink{class_q_z_xing_a8e2119732a304523033fe5fd8505c4e9}{decode\+Image\+From\+File}} (const Q\+String \&image\+File\+Path, int max\+Width=-\/1, int max\+Height=-\/1, bool smooth\+Transformation=false)
+\item 
+Q\+String \mbox{\hyperlink{class_q_z_xing_a6cbd54e03d45b91ff0f33125e4f6caa3}{decode\+Image\+Q\+ML}} (Q\+Object $\ast$item)
+\item 
+Q\+String \mbox{\hyperlink{class_q_z_xing_a4fdb03f94072d9a47cc0d008967da49b}{decode\+Sub\+Image\+Q\+ML}} (Q\+Object $\ast$item, const int offsetX=0, const int offsetY=0, const int width=0, const int height=0)
+\item 
+Q\+String \mbox{\hyperlink{class_q_z_xing_aed399aa817f2090d5ac7c9aed51d1b99}{decode\+Image\+Q\+ML}} (const Q\+Url \&image\+Url)
+\item 
+Q\+String \mbox{\hyperlink{class_q_z_xing_a13ef5bdf62f387df536e4a78088c5700}{decode\+Sub\+Image\+Q\+ML}} (const Q\+Url \&image\+Url, const int offsetX=0, const int offsetY=0, const int width=0, const int height=0)
+\item 
+static Q\+Image \mbox{\hyperlink{class_q_z_xing_af57e44a47644b0d13edf684515301f2d}{encode\+Data}} (const Q\+String \&data)
+\item 
+int \mbox{\hyperlink{class_q_z_xing_ab15359090739e8dc9850d965caca8eca}{get\+Process\+Time\+Of\+Last\+Decoding}} ()
+\item 
+uint \mbox{\hyperlink{class_q_z_xing_a863d1ac83ea9728880d0494a5d8e98e0}{get\+Enabled\+Formats}} () const
+\item 
+void \mbox{\hyperlink{class_q_z_xing_ab8292973f0e6820b763dd5bc0fd3060e}{set\+Decoder}} (const uint \&hint)
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_ad151a4c0ead10bb4241dfcc8c3e18e2c}\label{class_q_z_xing_ad151a4c0ead10bb4241dfcc8c3e18e2c}} 
+void {\bfseries decoding\+Started} ()
+\item 
+\mbox{\Hypertarget{class_q_z_xing_ab03a87890271917ea28d0364c4da2f28}\label{class_q_z_xing_ab03a87890271917ea28d0364c4da2f28}} 
+void {\bfseries decoding\+Finished} (bool succeeded)
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a696bd59635536b3783e5f375202b6aab}\label{class_q_z_xing_a696bd59635536b3783e5f375202b6aab}} 
+void {\bfseries enabled\+Formats\+Changed} ()
+\item 
+\mbox{\Hypertarget{class_q_z_xing_abf25c39a79a371173312bd497eac98a6}\label{class_q_z_xing_abf25c39a79a371173312bd497eac98a6}} 
+void {\bfseries tag\+Found} (Q\+String tag)
+\item 
+\mbox{\Hypertarget{class_q_z_xing_aa6c6053a43a0ab92fa3cdfeb0a4821d9}\label{class_q_z_xing_aa6c6053a43a0ab92fa3cdfeb0a4821d9}} 
+void {\bfseries tag\+Found\+Advanced} (const Q\+String \&tag, const Q\+String \&format, const Q\+String \&char\+Set) const
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a473a901632018b882c3a3e7b0cd3bffe}\label{class_q_z_xing_a473a901632018b882c3a3e7b0cd3bffe}} 
+void {\bfseries tag\+Found\+Advanced} (const Q\+String \&tag, const Q\+String \&format, const Q\+String \&char\+Set, const Q\+RectF \&rect) const
+\item 
+\mbox{\Hypertarget{class_q_z_xing_abed4b445f501ce53960a7b9c15010e8b}\label{class_q_z_xing_abed4b445f501ce53960a7b9c15010e8b}} 
+void {\bfseries error} (Q\+String msg)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a85b600f7187035028dd34a305e65b4f6}\label{class_q_z_xing_a85b600f7187035028dd34a305e65b4f6}} 
+{\bfseries Q\+Z\+Xing} (Q\+Object $\ast$parent=N\+U\+LL)
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a63b9910d33da75663100690a09754c9b}\label{class_q_z_xing_a63b9910d33da75663100690a09754c9b}} 
+{\bfseries Q\+Z\+Xing} (Decoder\+Format decode\+Hints, Q\+Object $\ast$parent=N\+U\+LL)
+\item 
+\mbox{\Hypertarget{class_q_z_xing_ab14fbffee0f97aab0e7eb6d0f2156c1e}\label{class_q_z_xing_ab14fbffee0f97aab0e7eb6d0f2156c1e}} 
+void {\bfseries set\+Try\+Harder} (bool try\+Harder)
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a06343821c76155b266615a2ce28d48ea}\label{class_q_z_xing_a06343821c76155b266615a2ce28d48ea}} 
+bool {\bfseries get\+Try\+Harder} ()
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a830477fc7f3bdbd92ee6283343bf9666}\label{class_q_z_xing_a830477fc7f3bdbd92ee6283343bf9666}} 
+Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE Q\+String {\bfseries founded\+Format} () const
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a051c4202f01e85db73f90e09343da041}\label{class_q_z_xing_a051c4202f01e85db73f90e09343da041}} 
+Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE Q\+String {\bfseries char\+Set} () const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a735c7db98c0e7040fdbec71b12304881}\label{class_q_z_xing_a735c7db98c0e7040fdbec71b12304881}} 
+static Q\+String {\bfseries decoder\+Format\+To\+String} (int fmt)
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a039a55ba6f1e5e416a39b26c407ee777}\label{class_q_z_xing_a039a55ba6f1e5e416a39b26c407ee777}} 
+int {\bfseries processing\+Time}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a68bf4e8976f78f9d58e6497ed91077fb}\label{class_q_z_xing_a68bf4e8976f78f9d58e6497ed91077fb}} 
+uint {\bfseries enabled\+Decoders}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_a56c829ac5c8f3eaced1e14e56d56c324}\label{class_q_z_xing_a56c829ac5c8f3eaced1e14e56d56c324}} 
+bool {\bfseries try\+Harder}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class containing a very very small subset of the Z\+Xing library. Created for ease of use.
+
+Anyone interested in using more technical stuff from the Z\+Xing library is welcomed to add/edit on free will.
+
+Regarding Decoder\+Format, by default all of those are enabled (except Data\+Matrix will is still not supported) 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_z_xing_a21f75bdef7ecd2100ed170e1b32470a7}\label{class_q_z_xing_a21f75bdef7ecd2100ed170e1b32470a7}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!decode\+Image@{decode\+Image}}
+\index{decode\+Image@{decode\+Image}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{decode\+Image}{decodeImage}}
+{\footnotesize\ttfamily Q\+String Q\+Z\+Xing\+::decode\+Image (\begin{DoxyParamCaption}\item[{const Q\+Image \&}]{image,  }\item[{int}]{max\+Width = {\ttfamily -\/1},  }\item[{int}]{max\+Height = {\ttfamily -\/1},  }\item[{bool}]{smooth\+Transformation = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+The decoding function. Will try to decode the given image based on the enabled decoders. If the image width is larger than max\+Width or image height is larger than max\+Height then the image will be scaled down. Either way, in case of scaling, the aspect ratio of the image will be kept.
+
+The smooth\+Transformation flag determines whether the transformation will be smooth or fast. Smooth transformation provides better results but fast transformation is...faster. \mbox{\Hypertarget{class_q_z_xing_a8e2119732a304523033fe5fd8505c4e9}\label{class_q_z_xing_a8e2119732a304523033fe5fd8505c4e9}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!decode\+Image\+From\+File@{decode\+Image\+From\+File}}
+\index{decode\+Image\+From\+File@{decode\+Image\+From\+File}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{decode\+Image\+From\+File}{decodeImageFromFile}}
+{\footnotesize\ttfamily Q\+String Q\+Z\+Xing\+::decode\+Image\+From\+File (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{image\+File\+Path,  }\item[{int}]{max\+Width = {\ttfamily -\/1},  }\item[{int}]{max\+Height = {\ttfamily -\/1},  }\item[{bool}]{smooth\+Transformation = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+The decoding function. Will try to decode the given image based on the enabled decoders. The input image is read from a local image file. \mbox{\Hypertarget{class_q_z_xing_a6cbd54e03d45b91ff0f33125e4f6caa3}\label{class_q_z_xing_a6cbd54e03d45b91ff0f33125e4f6caa3}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!decode\+Image\+Q\+ML@{decode\+Image\+Q\+ML}}
+\index{decode\+Image\+Q\+ML@{decode\+Image\+Q\+ML}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{decode\+Image\+Q\+ML}{decodeImageQML}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Q\+String Q\+Z\+Xing\+::decode\+Image\+Q\+ML (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+The decoding function accessible from Q\+ML. (Suggested for Qt 4.\+x) \mbox{\Hypertarget{class_q_z_xing_aed399aa817f2090d5ac7c9aed51d1b99}\label{class_q_z_xing_aed399aa817f2090d5ac7c9aed51d1b99}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!decode\+Image\+Q\+ML@{decode\+Image\+Q\+ML}}
+\index{decode\+Image\+Q\+ML@{decode\+Image\+Q\+ML}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{decode\+Image\+Q\+ML}{decodeImageQML}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Q\+String Q\+Z\+Xing\+::decode\+Image\+Q\+ML (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{image\+Url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+The decoding function accessible from Q\+ML. (Suggested for Qt 5.\+x) Can be used to decode image from the Camera element preview by providing the following string\+: image\+://camera/preview\+\_\+1 \mbox{\Hypertarget{class_q_z_xing_a4fdb03f94072d9a47cc0d008967da49b}\label{class_q_z_xing_a4fdb03f94072d9a47cc0d008967da49b}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!decode\+Sub\+Image\+Q\+ML@{decode\+Sub\+Image\+Q\+ML}}
+\index{decode\+Sub\+Image\+Q\+ML@{decode\+Sub\+Image\+Q\+ML}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{decode\+Sub\+Image\+Q\+ML}{decodeSubImageQML}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Q\+String Q\+Z\+Xing\+::decode\+Sub\+Image\+Q\+ML (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{item,  }\item[{const int}]{offsetX = {\ttfamily 0},  }\item[{const int}]{offsetY = {\ttfamily 0},  }\item[{const int}]{width = {\ttfamily 0},  }\item[{const int}]{height = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+The decoding function accessible from Q\+ML. Able to set the decoding of a portion of the image. (Suggested for Qt 4.\+x) \mbox{\Hypertarget{class_q_z_xing_a13ef5bdf62f387df536e4a78088c5700}\label{class_q_z_xing_a13ef5bdf62f387df536e4a78088c5700}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!decode\+Sub\+Image\+Q\+ML@{decode\+Sub\+Image\+Q\+ML}}
+\index{decode\+Sub\+Image\+Q\+ML@{decode\+Sub\+Image\+Q\+ML}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{decode\+Sub\+Image\+Q\+ML}{decodeSubImageQML}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Q\+String Q\+Z\+Xing\+::decode\+Sub\+Image\+Q\+ML (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{image\+Url,  }\item[{const int}]{offsetX = {\ttfamily 0},  }\item[{const int}]{offsetY = {\ttfamily 0},  }\item[{const int}]{width = {\ttfamily 0},  }\item[{const int}]{height = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+The decoding function accessible from Q\+ML. Able to set the decoding of a portion of the image. Can be used to decode image from the Camera element preview by providing the following string\+: image\+://camera/preview\+\_\+1 (Suggested for Qt 5.\+x) \mbox{\Hypertarget{class_q_z_xing_af57e44a47644b0d13edf684515301f2d}\label{class_q_z_xing_af57e44a47644b0d13edf684515301f2d}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!encode\+Data@{encode\+Data}}
+\index{encode\+Data@{encode\+Data}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{encode\+Data}{encodeData}}
+{\footnotesize\ttfamily Q\+Image Q\+Z\+Xing\+::encode\+Data (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [slot]}}
+
+The main encoding function. Currently supports only Qr code encoding \mbox{\Hypertarget{class_q_z_xing_a863d1ac83ea9728880d0494a5d8e98e0}\label{class_q_z_xing_a863d1ac83ea9728880d0494a5d8e98e0}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!get\+Enabled\+Formats@{get\+Enabled\+Formats}}
+\index{get\+Enabled\+Formats@{get\+Enabled\+Formats}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{get\+Enabled\+Formats}{getEnabledFormats}}
+{\footnotesize\ttfamily uint Q\+Z\+Xing\+::get\+Enabled\+Formats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [slot]}}
+
+Get the decoders that are enabled at the moment. Returns a uint which is a bitwise OR of Decoder\+Format enumeration values. \mbox{\Hypertarget{class_q_z_xing_ab15359090739e8dc9850d965caca8eca}\label{class_q_z_xing_ab15359090739e8dc9850d965caca8eca}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!get\+Process\+Time\+Of\+Last\+Decoding@{get\+Process\+Time\+Of\+Last\+Decoding}}
+\index{get\+Process\+Time\+Of\+Last\+Decoding@{get\+Process\+Time\+Of\+Last\+Decoding}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{get\+Process\+Time\+Of\+Last\+Decoding}{getProcessTimeOfLastDecoding}}
+{\footnotesize\ttfamily int Q\+Z\+Xing\+::get\+Process\+Time\+Of\+Last\+Decoding (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Get the prossecing time in millisecond of the last decode operation. Added mainly as a statistic measure. Decoding operation fails, the processing time equals to -\/1. \mbox{\Hypertarget{class_q_z_xing_ab8292973f0e6820b763dd5bc0fd3060e}\label{class_q_z_xing_ab8292973f0e6820b763dd5bc0fd3060e}} 
+\index{Q\+Z\+Xing@{Q\+Z\+Xing}!set\+Decoder@{set\+Decoder}}
+\index{set\+Decoder@{set\+Decoder}!Q\+Z\+Xing@{Q\+Z\+Xing}}
+\subsubsection{\texorpdfstring{set\+Decoder}{setDecoder}}
+{\footnotesize\ttfamily void Q\+Z\+Xing\+::set\+Decoder (\begin{DoxyParamCaption}\item[{const uint \&}]{hint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Set the enabled decoders. As argument it is possible to pass conjuction of decoders by using logic OR. e.\+x. set\+Decoder ( Decoder\+Format\+\_\+\+Q\+R\+\_\+\+C\+O\+DE $\vert$ Decoder\+Format\+\_\+\+E\+A\+N\+\_\+13 $\vert$ Decoder\+Format\+\_\+\+C\+O\+D\+E\+\_\+39 ) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/Q\+Z\+Xing.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/qzxing.\+cpp\end{DoxyCompactItemize}

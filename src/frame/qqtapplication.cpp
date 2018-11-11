@@ -41,7 +41,7 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QSettings::setPath ( QSettings::IniFormat, QSettings::UserScope, CONFIG_PATH );
     QSettings::setPath ( QSettings::IniFormat, QSettings::SystemScope, CONFIG_PATH );
 
-    /*程序中，需要更改语言，可以通过qqtApp->setLanguage实现。languageChanged信号连接到每个页面的刷新语言的函数，一般会在这个槽函数里调用ui->retranslateUI()*/
+    /*程序中，需要更改语言，可以通过qqtApp->setLanguage实现。languageChanged信号连接到每个页面的刷新语言的槽函数，一般会在槽函数里调用ui->retranslateUi(this)*/
     qqtApp = this;
 
     /*这里是个方便,因为配置文件默认在运行目录.*/
@@ -51,10 +51,13 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QDir::setCurrent ( qApp->applicationDirPath() );
 #endif
 
-    pline() << "app root:" << qApp->applicationDirPath();
-    pline() << "app work root:" << QDir::currentPath();
+    qDebug() << "GengZhan (TM) QQt应用程序框架中间件";
+    qDebug() << "Copyright (C) 2017-2018 山东耕战智能设备有限公司。保留所有权利。";
+
     pline() << "Qt version:" << QT_VERSION_STR;
     pline() << "LibQQt version:" << STR ( QQT_VERSION );
+    pline() << "App root:" << qApp->applicationDirPath();
+    pline() << "App work root:" << QDir::currentPath();
 
 #ifdef __EMBEDDED_LINUX__
     pline() << "QTDIR:" << QProcessEnvironment::systemEnvironment().value ( "QTDIR" );

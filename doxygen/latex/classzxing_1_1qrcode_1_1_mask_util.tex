@@ -1,0 +1,54 @@
+\hypertarget{classzxing_1_1qrcode_1_1_mask_util}{}\section{zxing\+:\+:qrcode\+:\+:Mask\+Util Class Reference}
+\label{classzxing_1_1qrcode_1_1_mask_util}\index{zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mask_util_aa32c3dfbd0236dc68ef280855a98a6b8}{apply\+Mask\+Penalty\+Rule1}} (const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_byte_matrix}{Byte\+Matrix}} \&matrix)
+\item 
+static int \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mask_util_ae3fc0a63e7e43c0400cace1f98770d7c}{apply\+Mask\+Penalty\+Rule2}} (const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_byte_matrix}{Byte\+Matrix}} \&matrix)
+\item 
+static int \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mask_util_abc9c4ac729e26f9d61d8c1ed856477cf}{apply\+Mask\+Penalty\+Rule3}} (const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_byte_matrix}{Byte\+Matrix}} \&matrix)
+\item 
+static int \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mask_util_a2224bed0a422e85b78c508983ae9db4c}{apply\+Mask\+Penalty\+Rule4}} (const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_byte_matrix}{Byte\+Matrix}} \&matrix)
+\item 
+static bool \mbox{\hyperlink{classzxing_1_1qrcode_1_1_mask_util_ab094f1548f9bbb715c7227893da58009}{get\+Data\+Mask\+Bit}} (int mask\+Pattern, int x, int y)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classzxing_1_1qrcode_1_1_mask_util_aa32c3dfbd0236dc68ef280855a98a6b8}\label{classzxing_1_1qrcode_1_1_mask_util_aa32c3dfbd0236dc68ef280855a98a6b8}} 
+\index{zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}!apply\+Mask\+Penalty\+Rule1@{apply\+Mask\+Penalty\+Rule1}}
+\index{apply\+Mask\+Penalty\+Rule1@{apply\+Mask\+Penalty\+Rule1}!zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}}
+\subsubsection{\texorpdfstring{apply\+Mask\+Penalty\+Rule1()}{applyMaskPenaltyRule1()}}
+{\footnotesize\ttfamily int zxing\+::qrcode\+::\+Mask\+Util\+::apply\+Mask\+Penalty\+Rule1 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_byte_matrix}{Byte\+Matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Apply mask penalty rule 1 and return the penalty. Find repetitive cells with the same color and give penalty to them. Example\+: 00000 or 11111. \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_mask_util_ae3fc0a63e7e43c0400cace1f98770d7c}\label{classzxing_1_1qrcode_1_1_mask_util_ae3fc0a63e7e43c0400cace1f98770d7c}} 
+\index{zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}!apply\+Mask\+Penalty\+Rule2@{apply\+Mask\+Penalty\+Rule2}}
+\index{apply\+Mask\+Penalty\+Rule2@{apply\+Mask\+Penalty\+Rule2}!zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}}
+\subsubsection{\texorpdfstring{apply\+Mask\+Penalty\+Rule2()}{applyMaskPenaltyRule2()}}
+{\footnotesize\ttfamily int zxing\+::qrcode\+::\+Mask\+Util\+::apply\+Mask\+Penalty\+Rule2 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_byte_matrix}{Byte\+Matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Apply mask penalty rule 2 and return the penalty. Find 2x2 blocks with the same color and give penalty to them. This is actually equivalent to the spec\textquotesingle{}s rule, which is to find MxN blocks and give a penalty proportional to (M-\/1)x(N-\/1), because this is the number of 2x2 blocks inside such a block. \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_mask_util_abc9c4ac729e26f9d61d8c1ed856477cf}\label{classzxing_1_1qrcode_1_1_mask_util_abc9c4ac729e26f9d61d8c1ed856477cf}} 
+\index{zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}!apply\+Mask\+Penalty\+Rule3@{apply\+Mask\+Penalty\+Rule3}}
+\index{apply\+Mask\+Penalty\+Rule3@{apply\+Mask\+Penalty\+Rule3}!zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}}
+\subsubsection{\texorpdfstring{apply\+Mask\+Penalty\+Rule3()}{applyMaskPenaltyRule3()}}
+{\footnotesize\ttfamily int zxing\+::qrcode\+::\+Mask\+Util\+::apply\+Mask\+Penalty\+Rule3 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_byte_matrix}{Byte\+Matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Apply mask penalty rule 3 and return the penalty. Find consecutive runs of 1\+:1\+:3\+:1\+:1\+:4 starting with black, or 4\+:1\+:1\+:3\+:1\+:1 starting with white, and give penalty to them. If we find patterns like 000010111010000, we give penalty once. \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_mask_util_a2224bed0a422e85b78c508983ae9db4c}\label{classzxing_1_1qrcode_1_1_mask_util_a2224bed0a422e85b78c508983ae9db4c}} 
+\index{zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}!apply\+Mask\+Penalty\+Rule4@{apply\+Mask\+Penalty\+Rule4}}
+\index{apply\+Mask\+Penalty\+Rule4@{apply\+Mask\+Penalty\+Rule4}!zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}}
+\subsubsection{\texorpdfstring{apply\+Mask\+Penalty\+Rule4()}{applyMaskPenaltyRule4()}}
+{\footnotesize\ttfamily int zxing\+::qrcode\+::\+Mask\+Util\+::apply\+Mask\+Penalty\+Rule4 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classzxing_1_1qrcode_1_1_byte_matrix}{Byte\+Matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Apply mask penalty rule 4 and return the penalty. Calculate the ratio of dark cells and give penalty if the ratio is far from 50\%. It gives 10 penalty for 5\% distance. \mbox{\Hypertarget{classzxing_1_1qrcode_1_1_mask_util_ab094f1548f9bbb715c7227893da58009}\label{classzxing_1_1qrcode_1_1_mask_util_ab094f1548f9bbb715c7227893da58009}} 
+\index{zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}!get\+Data\+Mask\+Bit@{get\+Data\+Mask\+Bit}}
+\index{get\+Data\+Mask\+Bit@{get\+Data\+Mask\+Bit}!zxing\+::qrcode\+::\+Mask\+Util@{zxing\+::qrcode\+::\+Mask\+Util}}
+\subsubsection{\texorpdfstring{get\+Data\+Mask\+Bit()}{getDataMaskBit()}}
+{\footnotesize\ttfamily bool zxing\+::qrcode\+::\+Mask\+Util\+::get\+Data\+Mask\+Bit (\begin{DoxyParamCaption}\item[{int}]{mask\+Pattern,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Return the mask bit for \char`\"{}get\+Mask\+Pattern\char`\"{} at \char`\"{}x\char`\"{} and \char`\"{}y\char`\"{}. See 8.\+8 of J\+I\+S\+X0510\+:2004 for mask pattern conditions. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/qrcode/encoder/Mask\+Util.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/qrcode/encoder/Mask\+Util.\+cpp\end{DoxyCompactItemize}

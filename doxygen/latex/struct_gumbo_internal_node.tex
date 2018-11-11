@@ -1,0 +1,67 @@
+\hypertarget{struct_gumbo_internal_node}{}\section{Gumbo\+Internal\+Node Struct Reference}
+\label{struct_gumbo_internal_node}\index{Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}}
+
+
+{\ttfamily \#include $<$gumbo.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0}{Gumbo\+Node\+Type}} \mbox{\hyperlink{struct_gumbo_internal_node_a8cd3706811e3d9558958dcae9f87eed9}{type}}
+\item 
+\mbox{\hyperlink{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}{Gumbo\+Node}} $\ast$ \mbox{\hyperlink{struct_gumbo_internal_node_ad466c80e05d66ac5f44357591301edc1}{parent}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_gumbo_internal_node_a67a8817baad26cf4787620b8123e6754}{index\+\_\+within\+\_\+parent}}
+\item 
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74b}{Gumbo\+Parse\+Flags}} \mbox{\hyperlink{struct_gumbo_internal_node_a9ed83315056ffcd3b81eaf3db6965d65}{parse\+\_\+flags}}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\mbox{\hyperlink{struct_gumbo_document}{GumboDocument}} {\bfseries document}\\
+\>\mbox{\hyperlink{struct_gumbo_element}{GumboElement}} {\bfseries element}\\
+\>\mbox{\hyperlink{struct_gumbo_text}{GumboText}} {\bfseries text}\\
+\} \mbox{\hyperlink{struct_gumbo_internal_node_af96cda8b23b42df19d16a27a857515a2}{v}}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A supertype for \mbox{\hyperlink{struct_gumbo_element}{Gumbo\+Element}} and \mbox{\hyperlink{struct_gumbo_text}{Gumbo\+Text}}, so that we can include one generic type in lists of children and cast as necessary to subtypes. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_gumbo_internal_node_a67a8817baad26cf4787620b8123e6754}\label{struct_gumbo_internal_node_a67a8817baad26cf4787620b8123e6754}} 
+\index{Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}!index\+\_\+within\+\_\+parent@{index\+\_\+within\+\_\+parent}}
+\index{index\+\_\+within\+\_\+parent@{index\+\_\+within\+\_\+parent}!Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}}
+\subsubsection{\texorpdfstring{index\+\_\+within\+\_\+parent}{index\_within\_parent}}
+{\footnotesize\ttfamily size\+\_\+t Gumbo\+Internal\+Node\+::index\+\_\+within\+\_\+parent}
+
+The index within the parent\textquotesingle{}s children vector of this node. \mbox{\Hypertarget{struct_gumbo_internal_node_ad466c80e05d66ac5f44357591301edc1}\label{struct_gumbo_internal_node_ad466c80e05d66ac5f44357591301edc1}} 
+\index{Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}!parent@{parent}}
+\index{parent@{parent}!Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}}
+\subsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}{Gumbo\+Node}}$\ast$ Gumbo\+Internal\+Node\+::parent}
+
+Pointer back to parent node. Not owned. \mbox{\Hypertarget{struct_gumbo_internal_node_a9ed83315056ffcd3b81eaf3db6965d65}\label{struct_gumbo_internal_node_a9ed83315056ffcd3b81eaf3db6965d65}} 
+\index{Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}!parse\+\_\+flags@{parse\+\_\+flags}}
+\index{parse\+\_\+flags@{parse\+\_\+flags}!Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}}
+\subsubsection{\texorpdfstring{parse\+\_\+flags}{parse\_flags}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74b}{Gumbo\+Parse\+Flags}} Gumbo\+Internal\+Node\+::parse\+\_\+flags}
+
+A bitvector of flags containing information about why this element was inserted into the parse tree, including a variety of special parse situations. \mbox{\Hypertarget{struct_gumbo_internal_node_a8cd3706811e3d9558958dcae9f87eed9}\label{struct_gumbo_internal_node_a8cd3706811e3d9558958dcae9f87eed9}} 
+\index{Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}!type@{type}}
+\index{type@{type}!Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0}{Gumbo\+Node\+Type}} Gumbo\+Internal\+Node\+::type}
+
+The type of node that this is. \mbox{\Hypertarget{struct_gumbo_internal_node_af96cda8b23b42df19d16a27a857515a2}\label{struct_gumbo_internal_node_af96cda8b23b42df19d16a27a857515a2}} 
+\index{Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}!v@{v}}
+\index{v@{v}!Gumbo\+Internal\+Node@{Gumbo\+Internal\+Node}}
+\subsubsection{\texorpdfstring{v}{v}}
+{\footnotesize\ttfamily union \{ ... \}   Gumbo\+Internal\+Node\+::v}
+
+The actual node data. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/parser/src/\mbox{\hyperlink{gumbo_8h}{gumbo.\+h}}\end{DoxyCompactItemize}

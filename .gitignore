@@ -41,5 +41,8 @@ target_wrapper.*
 
 # QtCreator CMake
 CMakeLists.txt.user*
+
+# Common
 .idea
 .DS_Store
+*Temporary*

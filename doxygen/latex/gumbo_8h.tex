@@ -1,0 +1,573 @@
+\hypertarget{gumbo_8h}{}\section{R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/parser/src/gumbo.h File Reference}
+\label{gumbo_8h}\index{R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/parser/src/gumbo.\+h@{R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/gumbo/parser/src/gumbo.\+h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}tag\+\_\+enum.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_source_position}{Gumbo\+Source\+Position}}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_attribute}{Gumbo\+Attribute}}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_document}{Gumbo\+Document}}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_text}{Gumbo\+Text}}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_element}{Gumbo\+Element}}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_internal_node}{Gumbo\+Internal\+Node}}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_internal_options}{Gumbo\+Internal\+Options}}
+\item 
+struct \mbox{\hyperlink{struct_gumbo_internal_output}{Gumbo\+Internal\+Output}}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_gumbo_internal_node}{Gumbo\+Internal\+Node}} \mbox{\hyperlink{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}{Gumbo\+Node}}
+\item 
+typedef void $\ast$($\ast$ \mbox{\hyperlink{gumbo_8h_aaf78769ab19b5fbe291f7977cae899df}{Gumbo\+Allocator\+Function}}) (void $\ast$userdata, size\+\_\+t size)
+\item 
+typedef void($\ast$ \mbox{\hyperlink{gumbo_8h_a19e07a5e573bf194295141fba654d2ea}{Gumbo\+Deallocator\+Function}}) (void $\ast$userdata, void $\ast$ptr)
+\item 
+typedef struct \mbox{\hyperlink{struct_gumbo_internal_options}{Gumbo\+Internal\+Options}} \mbox{\hyperlink{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}{Gumbo\+Options}}
+\item 
+typedef struct \mbox{\hyperlink{struct_gumbo_internal_output}{Gumbo\+Internal\+Output}} \mbox{\hyperlink{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}{Gumbo\+Output}}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}} \{ \newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H\+T\+ML}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H\+E\+AD}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+T\+I\+T\+LE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+A\+SE}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+L\+I\+NK}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+E\+TA}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+T\+Y\+LE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+C\+R\+I\+PT}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+N\+O\+S\+C\+R\+I\+PT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+T\+E\+M\+P\+L\+A\+TE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+O\+DY}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+A\+R\+T\+I\+C\+LE}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+E\+C\+T\+I\+ON}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+N\+AV}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+A\+S\+I\+DE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H1}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H2}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H3}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H4}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H5}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H6}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H\+G\+R\+O\+UP}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+H\+E\+A\+D\+ER}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+F\+O\+O\+T\+ER}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+A\+D\+D\+R\+E\+SS}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+P}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+HR}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+P\+RE}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+L\+O\+C\+K\+Q\+U\+O\+TE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+OL}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+UL}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+LI}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+DL}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+DT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+DD}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+F\+I\+G\+U\+RE}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+F\+I\+G\+C\+A\+P\+T\+I\+ON}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+A\+IN}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+D\+IV}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+A}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+EM}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+T\+R\+O\+NG}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+M\+A\+LL}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+S}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+C\+I\+TE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+Q}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+D\+FN}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+A\+B\+BR}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+D\+A\+TA}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+T\+I\+ME}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+C\+O\+DE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+V\+AR}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+A\+MP}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+K\+BD}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+UB}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+UP}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+I}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+B}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+U}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+A\+RK}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+R\+U\+BY}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+RT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+RP}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+DI}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+DO}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+P\+AN}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+BR}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+W\+BR}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+I\+NS}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+D\+EL}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+I\+M\+A\+GE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+I\+MG}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+I\+F\+R\+A\+ME}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+E\+M\+B\+ED}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+O\+B\+J\+E\+CT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+P\+A\+R\+AM}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+V\+I\+D\+EO}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+A\+U\+D\+IO}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+O\+U\+R\+CE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+T\+R\+A\+CK}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+C\+A\+N\+V\+AS}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+AP}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+A\+R\+EA}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+A\+TH}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+MI}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+MO}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+MN}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+MS}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+T\+E\+XT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+G\+L\+Y\+PH}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+A\+L\+I\+G\+N\+M\+A\+RK}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+A\+N\+N\+O\+T\+A\+T\+I\+O\+N\+\_\+\+X\+ML}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+VG}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+F\+O\+R\+E\+I\+G\+N\+O\+B\+J\+E\+CT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+D\+E\+SC}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+T\+A\+B\+LE}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+C\+A\+P\+T\+I\+ON}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+C\+O\+L\+G\+R\+O\+UP}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+C\+OL}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+T\+B\+O\+DY}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+T\+H\+E\+AD}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+T\+F\+O\+OT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+TR}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+TD}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+TH}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+F\+O\+RM}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+F\+I\+E\+L\+D\+S\+ET}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+L\+E\+G\+E\+ND}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+L\+A\+B\+EL}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+I\+N\+P\+UT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+U\+T\+T\+ON}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+E\+L\+E\+CT}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+D\+A\+T\+A\+L\+I\+ST}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+O\+P\+T\+G\+R\+O\+UP}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+O\+P\+T\+I\+ON}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+T\+E\+X\+T\+A\+R\+EA}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+K\+E\+Y\+G\+EN}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+O\+U\+T\+P\+UT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+P\+R\+O\+G\+R\+E\+SS}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+E\+T\+ER}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+D\+E\+T\+A\+I\+LS}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+U\+M\+M\+A\+RY}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+E\+NU}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+E\+N\+U\+I\+T\+EM}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+A\+P\+P\+L\+ET}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+A\+C\+R\+O\+N\+YM}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+G\+S\+O\+U\+ND}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+D\+IR}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+F\+R\+A\+ME}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+F\+R\+A\+M\+E\+S\+ET}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+N\+O\+F\+R\+A\+M\+ES}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+I\+S\+I\+N\+D\+EX}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+L\+I\+S\+T\+I\+NG}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+X\+MP}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+N\+E\+X\+T\+ID}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+N\+O\+E\+M\+B\+ED}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+P\+L\+A\+I\+N\+T\+E\+XT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+RB}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+T\+R\+I\+KE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+A\+S\+E\+F\+O\+NT}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+IG}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+B\+L\+I\+NK}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+C\+E\+N\+T\+ER}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+F\+O\+NT}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+A\+R\+Q\+U\+EE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+M\+U\+L\+T\+I\+C\+OL}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+N\+O\+BR}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+S\+P\+A\+C\+ER}, 
+\newline
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+TT}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+R\+TC}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+U\+N\+K\+N\+O\+WN}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+L\+A\+ST}
+ \}
+\item 
+enum \mbox{\hyperlink{gumbo_8h_a030699170924efadb11b8e43a8681852}{Gumbo\+Attribute\+Namespace\+Enum}} \{ {\bfseries G\+U\+M\+B\+O\+\_\+\+A\+T\+T\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+N\+O\+NE}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+A\+T\+T\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+X\+L\+I\+NK}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+A\+T\+T\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+X\+ML}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+A\+T\+T\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+X\+M\+L\+NS}
+ \}
+\item 
+enum \mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0}{Gumbo\+Node\+Type}} \{ \newline
+\mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a34d99fd84894e81da94be99d7d169119}{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+D\+O\+C\+U\+M\+E\+NT}}, 
+\mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0ac8229cb0a1c50040cf33a37886367032}{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+E\+L\+E\+M\+E\+NT}}, 
+\mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a34bb32963a5c7b496c332235694ec29d}{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+XT}}, 
+\mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a1b113ed18638a82264020253f4ab3339}{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+D\+A\+TA}}, 
+\newline
+\mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0aa5dec1a464a7b15949928f4c09626a05}{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+O\+M\+M\+E\+NT}}, 
+\mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a4076182d6a1eac3b650992ecf18b33a6}{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+W\+H\+I\+T\+E\+S\+P\+A\+CE}}, 
+\mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0abfb19f332b24d2d051042fafbdd0d7aa}{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+ \}
+\item 
+enum \mbox{\hyperlink{gumbo_8h_aa0cbbfcc7ab2be48ac329ef7e76ff135}{Gumbo\+Quirks\+Mode\+Enum}} \{ {\bfseries G\+U\+M\+B\+O\+\_\+\+D\+O\+C\+T\+Y\+P\+E\+\_\+\+N\+O\+\_\+\+Q\+U\+I\+R\+KS}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+D\+O\+C\+T\+Y\+P\+E\+\_\+\+Q\+U\+I\+R\+KS}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+D\+O\+C\+T\+Y\+P\+E\+\_\+\+L\+I\+M\+I\+T\+E\+D\+\_\+\+Q\+U\+I\+R\+KS}
+ \}
+\item 
+enum \mbox{\hyperlink{gumbo_8h_a5792dfd02513e421fb8f083f08e58cc6}{Gumbo\+Namespace\+Enum}} \{ {\bfseries G\+U\+M\+B\+O\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+H\+T\+ML}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+S\+VG}, 
+{\bfseries G\+U\+M\+B\+O\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+M\+A\+T\+H\+ML}
+ \}
+\item 
+enum \mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74b}{Gumbo\+Parse\+Flags}} \{ \newline
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba65032b83de057f59ef88c192bfc6257e}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+N\+O\+R\+M\+AL}} = 0, 
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74babc5578ef89b8ddd8b992f239bd332408}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+P\+A\+R\+S\+ER}} = 1 $<$$<$ 0, 
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba8935aa552a7b6cec029ad3f20a54e22b}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+E\+N\+D\+\_\+\+T\+AG}} = 1 $<$$<$ 1, 
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74bad755e610f243d4aa7531316e884f3a75}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+ED}} = 1 $<$$<$ 3, 
+\newline
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba865b2f369584e25c67f4816c25b766ff}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+C\+O\+N\+V\+E\+R\+T\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+E\+N\+D\+\_\+\+T\+AG}} = 1 $<$$<$ 4, 
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74baadeea09dc8e7c65af3d47e8e8fb535ac}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+S\+I\+N\+D\+EX}} = 1 $<$$<$ 5, 
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74bae3c62bd3ec86284783013a2e78affb5a}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+M\+A\+GE}} = 1 $<$$<$ 6, 
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74baa1509526292f41998349376b86eab730}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+R\+E\+C\+O\+N\+S\+T\+R\+U\+C\+T\+E\+D\+\_\+\+F\+O\+R\+M\+A\+T\+T\+I\+N\+G\+\_\+\+E\+L\+E\+M\+E\+NT}} = 1 $<$$<$ 7, 
+\newline
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba03d2650d8f17abefd9dd4b633b03e217}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+C\+L\+O\+N\+ED}} = 1 $<$$<$ 8, 
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74babbd528bcd8e702fc5bab604e6988ae51}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+M\+O\+V\+ED}} = 1 $<$$<$ 9, 
+\mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba9afa0bd01c4480d76a0ca80b668f338b}{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+O\+S\+T\+E\+R\+\_\+\+P\+A\+R\+E\+N\+T\+ED}} = 1 $<$$<$ 10
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{gumbo_8h_a862d4125ffb2f9d7c48c9a43033179d6}{gumbo\+\_\+string\+\_\+equals}} (const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$str1, const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$str2)
+\item 
+bool \mbox{\hyperlink{gumbo_8h_a70da4c83d0782f30c3e50bce9912a6d3}{gumbo\+\_\+string\+\_\+equals\+\_\+ignore\+\_\+case}} (const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$str1, const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$str2)
+\item 
+int \mbox{\hyperlink{gumbo_8h_a413172766f337e395c8becd814271dac}{gumbo\+\_\+vector\+\_\+index\+\_\+of}} (\mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} $\ast$vector, const void $\ast$element)
+\item 
+const char $\ast$ \mbox{\hyperlink{gumbo_8h_a7ffea8f4c7b9615be4c6497173ad78af}{gumbo\+\_\+normalized\+\_\+tagname}} (\mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}} tag)
+\item 
+void \mbox{\hyperlink{gumbo_8h_aaa2160c796d9b32b773b7346f7db1347}{gumbo\+\_\+tag\+\_\+from\+\_\+original\+\_\+text}} (\mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$text)
+\item 
+const char $\ast$ \mbox{\hyperlink{gumbo_8h_ac6addb5568175eafdcc6bc7513830e5e}{gumbo\+\_\+normalize\+\_\+svg\+\_\+tagname}} (const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$tagname)
+\item 
+\mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}} \mbox{\hyperlink{gumbo_8h_a854e836c65501ec3c61bdf911b09c4ca}{gumbo\+\_\+tag\+\_\+enum}} (const char $\ast$tagname)
+\item 
+\mbox{\Hypertarget{gumbo_8h_a7620f7758bd7925c9164b1f47a4148fe}\label{gumbo_8h_a7620f7758bd7925c9164b1f47a4148fe}} 
+\mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}} {\bfseries gumbo\+\_\+tagn\+\_\+enum} (const char $\ast$tagname, unsigned int length)
+\item 
+\mbox{\hyperlink{struct_gumbo_attribute}{Gumbo\+Attribute}} $\ast$ \mbox{\hyperlink{gumbo_8h_a48dbd27d9ef0b42ef841b74c5d8bea8c}{gumbo\+\_\+get\+\_\+attribute}} (const \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} $\ast$attrs, const char $\ast$name)
+\item 
+\mbox{\hyperlink{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}{Gumbo\+Output}} $\ast$ \mbox{\hyperlink{gumbo_8h_acc6867266c808111d0c38b790f5a01fa}{gumbo\+\_\+parse}} (const char $\ast$buffer)
+\item 
+\mbox{\hyperlink{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}{Gumbo\+Output}} $\ast$ \mbox{\hyperlink{gumbo_8h_a11c4fcbf67a6e1fbbce99069055d5c7e}{gumbo\+\_\+parse\+\_\+with\+\_\+options}} (const \mbox{\hyperlink{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}{Gumbo\+Options}} $\ast$options, const char $\ast$buffer, size\+\_\+t buffer\+\_\+length)
+\item 
+void \mbox{\hyperlink{gumbo_8h_a7f6a797c7baac81a623faf3a32819414}{gumbo\+\_\+destroy\+\_\+output}} (const \mbox{\hyperlink{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}{Gumbo\+Options}} $\ast$options, \mbox{\hyperlink{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}{Gumbo\+Output}} $\ast$output)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{struct_gumbo_source_position}{Gumbo\+Source\+Position}} \mbox{\hyperlink{gumbo_8h_aa3a3ce54b9e3f5723ee45653dcfa6329}{k\+Gumbo\+Empty\+Source\+Position}}
+\item 
+const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} \mbox{\hyperlink{gumbo_8h_a95e8899e79913ca9531f4a01ab5ebea0}{k\+Gumbo\+Empty\+String}}
+\item 
+const \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} \mbox{\hyperlink{gumbo_8h_a963252540153b222f587d92db33d7fb5}{k\+Gumbo\+Empty\+Vector}}
+\item 
+const \mbox{\hyperlink{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}{Gumbo\+Options}} \mbox{\hyperlink{gumbo_8h_ad836fc987f5d9c1d885d453c01382255}{k\+Gumbo\+Default\+Options}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{gumbo_8h_aaf78769ab19b5fbe291f7977cae899df}\label{gumbo_8h_aaf78769ab19b5fbe291f7977cae899df}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Allocator\+Function@{Gumbo\+Allocator\+Function}}
+\index{Gumbo\+Allocator\+Function@{Gumbo\+Allocator\+Function}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Allocator\+Function}{GumboAllocatorFunction}}
+{\footnotesize\ttfamily typedef void$\ast$($\ast$ Gumbo\+Allocator\+Function) (void $\ast$userdata, size\+\_\+t size)}
+
+The type for an allocator function. Takes the \textquotesingle{}userdata\textquotesingle{} member of the Gumbo\+Parser struct as its first argument. Semantics should be the same as malloc, i.\+e. return a block of size\+\_\+t bytes on success or N\+U\+LL on failure. Allocating a block of 0 bytes behaves as per malloc. \mbox{\Hypertarget{gumbo_8h_a19e07a5e573bf194295141fba654d2ea}\label{gumbo_8h_a19e07a5e573bf194295141fba654d2ea}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Deallocator\+Function@{Gumbo\+Deallocator\+Function}}
+\index{Gumbo\+Deallocator\+Function@{Gumbo\+Deallocator\+Function}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Deallocator\+Function}{GumboDeallocatorFunction}}
+{\footnotesize\ttfamily typedef void($\ast$ Gumbo\+Deallocator\+Function) (void $\ast$userdata, void $\ast$ptr)}
+
+The type for a deallocator function. Takes the \textquotesingle{}userdata\textquotesingle{} member of the Gumbo\+Parser struct as its first argument. \mbox{\Hypertarget{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}\label{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Node@{Gumbo\+Node}}
+\index{Gumbo\+Node@{Gumbo\+Node}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Node}{GumboNode}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_gumbo_internal_node}{Gumbo\+Internal\+Node}} \mbox{\hyperlink{gumbo_8h_a5f67d8397fda8fb7c90cc27f14ac4e7d}{Gumbo\+Node}}}
+
+Forward declaration of Gumbo\+Node so it can be used recursively in \mbox{\hyperlink{struct_gumbo_internal_node_ad466c80e05d66ac5f44357591301edc1}{Gumbo\+Node.\+parent}}. \mbox{\Hypertarget{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}\label{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Options@{Gumbo\+Options}}
+\index{Gumbo\+Options@{Gumbo\+Options}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Options}{GumboOptions}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_gumbo_internal_options}{Gumbo\+Internal\+Options}}  \mbox{\hyperlink{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}{Gumbo\+Options}}}
+
+Input struct containing configuration options for the parser. These let you specify alternate memory managers, provide different error handling, etc. Use k\+Gumbo\+Default\+Options for sensible defaults, and only set what you need. \mbox{\Hypertarget{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}\label{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Output@{Gumbo\+Output}}
+\index{Gumbo\+Output@{Gumbo\+Output}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Output}{GumboOutput}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_gumbo_internal_output}{Gumbo\+Internal\+Output}}  \mbox{\hyperlink{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}{Gumbo\+Output}}}
+
+The output struct containing the results of the parse. 
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{gumbo_8h_a030699170924efadb11b8e43a8681852}\label{gumbo_8h_a030699170924efadb11b8e43a8681852}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Attribute\+Namespace\+Enum@{Gumbo\+Attribute\+Namespace\+Enum}}
+\index{Gumbo\+Attribute\+Namespace\+Enum@{Gumbo\+Attribute\+Namespace\+Enum}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Attribute\+Namespace\+Enum}{GumboAttributeNamespaceEnum}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gumbo_8h_a030699170924efadb11b8e43a8681852}{Gumbo\+Attribute\+Namespace\+Enum}}}
+
+Attribute namespaces. H\+T\+ML includes special handling for X\+Link, X\+ML, and X\+M\+L\+NS namespaces on attributes. Everything else goes in the generic \char`\"{}\+N\+O\+N\+E\char`\"{} namespace. \mbox{\Hypertarget{gumbo_8h_a5792dfd02513e421fb8f083f08e58cc6}\label{gumbo_8h_a5792dfd02513e421fb8f083f08e58cc6}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Namespace\+Enum@{Gumbo\+Namespace\+Enum}}
+\index{Gumbo\+Namespace\+Enum@{Gumbo\+Namespace\+Enum}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Namespace\+Enum}{GumboNamespaceEnum}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gumbo_8h_a5792dfd02513e421fb8f083f08e58cc6}{Gumbo\+Namespace\+Enum}}}
+
+Namespaces. Unlike in X(\+H\+T)ML, namespaces in H\+T\+M\+L5 are not denoted by a prefix. Rather, anything inside an $<$svg$>$ tag is in the S\+VG namespace, anything inside the $<$math$>$ tag is in the Math\+ML namespace, and anything else is inside the H\+T\+ML namespace. No other namespaces are supported, so this can be an enum only. \mbox{\Hypertarget{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0}\label{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Node\+Type@{Gumbo\+Node\+Type}}
+\index{Gumbo\+Node\+Type@{Gumbo\+Node\+Type}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Node\+Type}{GumboNodeType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0}{Gumbo\+Node\+Type}}}
+
+Enum denoting the type of node. This determines the type of the node.\+v union. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+D\+O\+C\+U\+M\+E\+NT@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+D\+O\+C\+U\+M\+E\+NT}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+D\+O\+C\+U\+M\+E\+NT@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+D\+O\+C\+U\+M\+E\+NT}}}\mbox{\Hypertarget{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a34d99fd84894e81da94be99d7d169119}\label{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a34d99fd84894e81da94be99d7d169119}} 
+G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+D\+O\+C\+U\+M\+E\+NT&Document node. v will be a \mbox{\hyperlink{struct_gumbo_document}{Gumbo\+Document}}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+E\+L\+E\+M\+E\+NT@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+E\+L\+E\+M\+E\+NT}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+E\+L\+E\+M\+E\+NT@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+E\+L\+E\+M\+E\+NT}}}\mbox{\Hypertarget{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0ac8229cb0a1c50040cf33a37886367032}\label{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0ac8229cb0a1c50040cf33a37886367032}} 
+G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+E\+L\+E\+M\+E\+NT&Element node. v will be a \mbox{\hyperlink{struct_gumbo_element}{Gumbo\+Element}}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+XT@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+XT}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+XT@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+XT}}}\mbox{\Hypertarget{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a34bb32963a5c7b496c332235694ec29d}\label{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a34bb32963a5c7b496c332235694ec29d}} 
+G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+XT&Text node. v will be a \mbox{\hyperlink{struct_gumbo_text}{Gumbo\+Text}}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+D\+A\+TA@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+D\+A\+TA}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+D\+A\+TA@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+D\+A\+TA}}}\mbox{\Hypertarget{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a1b113ed18638a82264020253f4ab3339}\label{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a1b113ed18638a82264020253f4ab3339}} 
+G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+D\+A\+TA&C\+D\+A\+TA node. v will be a \mbox{\hyperlink{struct_gumbo_text}{Gumbo\+Text}}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+O\+M\+M\+E\+NT@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+O\+M\+M\+E\+NT}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+O\+M\+M\+E\+NT@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+O\+M\+M\+E\+NT}}}\mbox{\Hypertarget{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0aa5dec1a464a7b15949928f4c09626a05}\label{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0aa5dec1a464a7b15949928f4c09626a05}} 
+G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+C\+O\+M\+M\+E\+NT&Comment node. v will be a \mbox{\hyperlink{struct_gumbo_text}{Gumbo\+Text}}, excluding comment delimiters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+W\+H\+I\+T\+E\+S\+P\+A\+CE@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+W\+H\+I\+T\+E\+S\+P\+A\+CE}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+W\+H\+I\+T\+E\+S\+P\+A\+CE@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+W\+H\+I\+T\+E\+S\+P\+A\+CE}}}\mbox{\Hypertarget{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a4076182d6a1eac3b650992ecf18b33a6}\label{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0a4076182d6a1eac3b650992ecf18b33a6}} 
+G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+W\+H\+I\+T\+E\+S\+P\+A\+CE&Text node, where all contents is whitespace. v will be a \mbox{\hyperlink{struct_gumbo_text}{Gumbo\+Text}}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}}\mbox{\Hypertarget{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0abfb19f332b24d2d051042fafbdd0d7aa}\label{gumbo_8h_a74e7c5d1cb8189fcfad8443ce4c44ee0abfb19f332b24d2d051042fafbdd0d7aa}} 
+G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE&Template node. This is separate from G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+E\+L\+E\+M\+E\+NT because many client libraries will want to ignore the contents of template nodes, as the spec suggests. Recursing on G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+E\+L\+E\+M\+E\+NT will do the right thing here, while clients that want to include template contents should also check for G\+U\+M\+B\+O\+\_\+\+N\+O\+D\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE. v will be a \mbox{\hyperlink{struct_gumbo_element}{Gumbo\+Element}}. \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74b}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74b}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Parse\+Flags@{Gumbo\+Parse\+Flags}}
+\index{Gumbo\+Parse\+Flags@{Gumbo\+Parse\+Flags}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Parse\+Flags}{GumboParseFlags}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74b}{Gumbo\+Parse\+Flags}}}
+
+Parse flags. We track the reasons for parser insertion of nodes and store them in a bitvector in the node itself. This lets client code optimize out nodes that are implied by the H\+T\+ML structure of the document, or flag constructs that may not be allowed by a style guide, or track the prevalence of incorrect or tricky H\+T\+ML code. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+N\+O\+R\+M\+AL@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+N\+O\+R\+M\+AL}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+N\+O\+R\+M\+AL@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+N\+O\+R\+M\+AL}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba65032b83de057f59ef88c192bfc6257e}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba65032b83de057f59ef88c192bfc6257e}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+N\+O\+R\+M\+AL&A normal node -\/ both start and end tags appear in the source, nothing has been reparented. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+P\+A\+R\+S\+ER@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+P\+A\+R\+S\+ER}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+P\+A\+R\+S\+ER@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+P\+A\+R\+S\+ER}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74babc5578ef89b8ddd8b992f239bd332408}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74babc5578ef89b8ddd8b992f239bd332408}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+P\+A\+R\+S\+ER&A node inserted by the parser to fulfill some implicit insertion rule. This is usually set in addition to some other flag giving a more specific insertion reason; it\textquotesingle{}s a generic catch-\/all term meaning \char`\"{}\+The start tag for
+this node did not appear in the document source\char`\"{}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+E\+N\+D\+\_\+\+T\+AG@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+E\+N\+D\+\_\+\+T\+AG}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+E\+N\+D\+\_\+\+T\+AG@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+E\+N\+D\+\_\+\+T\+AG}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba8935aa552a7b6cec029ad3f20a54e22b}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba8935aa552a7b6cec029ad3f20a54e22b}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+E\+N\+D\+\_\+\+T\+AG&A flag indicating that the end tag for this node did not appear in the document source. Note that in some cases, you can still have parser-\/inserted nodes with an explicit end tag\+: for example, \char`\"{}\+Text$<$/html$>$\char`\"{} has G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+E\+D\+\_\+\+B\+Y\+\_\+\+P\+A\+R\+S\+ER set on the $<$html$>$ node, but G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+E\+D\+\_\+\+E\+N\+D\+\_\+\+T\+A\+G\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+LY is unset, as the $<$/html$>$ tag actually exists. This flag will be set only if the end tag is completely missing; in some cases, the end tag may be misplaced (eg. a $<$/body$>$ tag with text afterwards), which will leave this flag unset and require clients to inspect the parse errors for that case. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+ED@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+ED}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+ED@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+ED}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74bad755e610f243d4aa7531316e884f3a75}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74bad755e610f243d4aa7531316e884f3a75}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+I\+M\+P\+L\+I\+ED&A flag for nodes that are inserted because their presence is implied by other tags, eg. $<$html$>$, $<$head$>$, $<$body$>$, $<$tbody$>$, etc. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+C\+O\+N\+V\+E\+R\+T\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+E\+N\+D\+\_\+\+T\+AG@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+C\+O\+N\+V\+E\+R\+T\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+E\+N\+D\+\_\+\+T\+AG}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+C\+O\+N\+V\+E\+R\+T\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+E\+N\+D\+\_\+\+T\+AG@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+C\+O\+N\+V\+E\+R\+T\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+E\+N\+D\+\_\+\+T\+AG}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba865b2f369584e25c67f4816c25b766ff}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba865b2f369584e25c67f4816c25b766ff}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+C\+O\+N\+V\+E\+R\+T\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+E\+N\+D\+\_\+\+T\+AG&A flag for nodes that are converted from their end tag equivalents. For example, 
+
+when no paragraph is open implies that the parser should create a 
+
+tag and immediately close it, while  means the same thing as ~\newline
+. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+S\+I\+N\+D\+EX@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+S\+I\+N\+D\+EX}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+S\+I\+N\+D\+EX@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+S\+I\+N\+D\+EX}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74baadeea09dc8e7c65af3d47e8e8fb535ac}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74baadeea09dc8e7c65af3d47e8e8fb535ac}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+S\+I\+N\+D\+EX&A flag for nodes that are converted from the parse of an $<$isindex$>$ tag. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+M\+A\+GE@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+M\+A\+GE}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+M\+A\+GE@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+M\+A\+GE}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74bae3c62bd3ec86284783013a2e78affb5a}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74bae3c62bd3ec86284783013a2e78affb5a}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+R\+O\+M\+\_\+\+I\+M\+A\+GE&A flag for $<$image$>$ tags that are rewritten as . \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+R\+E\+C\+O\+N\+S\+T\+R\+U\+C\+T\+E\+D\+\_\+\+F\+O\+R\+M\+A\+T\+T\+I\+N\+G\+\_\+\+E\+L\+E\+M\+E\+NT@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+R\+E\+C\+O\+N\+S\+T\+R\+U\+C\+T\+E\+D\+\_\+\+F\+O\+R\+M\+A\+T\+T\+I\+N\+G\+\_\+\+E\+L\+E\+M\+E\+NT}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+R\+E\+C\+O\+N\+S\+T\+R\+U\+C\+T\+E\+D\+\_\+\+F\+O\+R\+M\+A\+T\+T\+I\+N\+G\+\_\+\+E\+L\+E\+M\+E\+NT@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+R\+E\+C\+O\+N\+S\+T\+R\+U\+C\+T\+E\+D\+\_\+\+F\+O\+R\+M\+A\+T\+T\+I\+N\+G\+\_\+\+E\+L\+E\+M\+E\+NT}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74baa1509526292f41998349376b86eab730}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74baa1509526292f41998349376b86eab730}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+R\+E\+C\+O\+N\+S\+T\+R\+U\+C\+T\+E\+D\+\_\+\+F\+O\+R\+M\+A\+T\+T\+I\+N\+G\+\_\+\+E\+L\+E\+M\+E\+NT&A flag for nodes that are cloned as a result of the reconstruction of active formatting elements. This is set only on the clone; the initial portion of the formatting run is a N\+O\+R\+M\+AL node with an I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+E\+N\+D\+\_\+\+T\+AG. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+C\+L\+O\+N\+ED@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+C\+L\+O\+N\+ED}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+C\+L\+O\+N\+ED@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+C\+L\+O\+N\+ED}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba03d2650d8f17abefd9dd4b633b03e217}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba03d2650d8f17abefd9dd4b633b03e217}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+C\+L\+O\+N\+ED&A flag for nodes that are cloned by the adoption agency algorithm. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+M\+O\+V\+ED@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+M\+O\+V\+ED}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+M\+O\+V\+ED@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+M\+O\+V\+ED}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74babbd528bcd8e702fc5bab604e6988ae51}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74babbd528bcd8e702fc5bab604e6988ae51}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+A\+D\+O\+P\+T\+I\+O\+N\+\_\+\+A\+G\+E\+N\+C\+Y\+\_\+\+M\+O\+V\+ED&A flag for nodes that are moved by the adoption agency algorithm. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+O\+S\+T\+E\+R\+\_\+\+P\+A\+R\+E\+N\+T\+ED@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+O\+S\+T\+E\+R\+\_\+\+P\+A\+R\+E\+N\+T\+ED}!gumbo.\+h@{gumbo.\+h}}\index{gumbo.\+h@{gumbo.\+h}!G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+O\+S\+T\+E\+R\+\_\+\+P\+A\+R\+E\+N\+T\+ED@{G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+O\+S\+T\+E\+R\+\_\+\+P\+A\+R\+E\+N\+T\+ED}}}\mbox{\Hypertarget{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba9afa0bd01c4480d76a0ca80b668f338b}\label{gumbo_8h_a74ff2c74a4bf7777efb2b9a29315e74ba9afa0bd01c4480d76a0ca80b668f338b}} 
+G\+U\+M\+B\+O\+\_\+\+I\+N\+S\+E\+R\+T\+I\+O\+N\+\_\+\+F\+O\+S\+T\+E\+R\+\_\+\+P\+A\+R\+E\+N\+T\+ED&A flag for nodes that have been foster-\/parented out of a table (or should\textquotesingle{}ve been foster-\/parented, if verbatim mode is set). \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{gumbo_8h_aa0cbbfcc7ab2be48ac329ef7e76ff135}\label{gumbo_8h_aa0cbbfcc7ab2be48ac329ef7e76ff135}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Quirks\+Mode\+Enum@{Gumbo\+Quirks\+Mode\+Enum}}
+\index{Gumbo\+Quirks\+Mode\+Enum@{Gumbo\+Quirks\+Mode\+Enum}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Quirks\+Mode\+Enum}{GumboQuirksModeEnum}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gumbo_8h_aa0cbbfcc7ab2be48ac329ef7e76ff135}{Gumbo\+Quirks\+Mode\+Enum}}}
+
+\href{http://www.whatwg.org/specs/web-apps/current-work/complete/dom.html#quirks-mode}{\tt http\+://www.\+whatwg.\+org/specs/web-\/apps/current-\/work/complete/dom.\+html\#quirks-\/mode} \mbox{\Hypertarget{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}\label{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}} 
+\index{gumbo.\+h@{gumbo.\+h}!Gumbo\+Tag@{Gumbo\+Tag}}
+\index{Gumbo\+Tag@{Gumbo\+Tag}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{Gumbo\+Tag}{GumboTag}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}}}
+
+An enum for all the tags defined in the H\+T\+M\+L5 standard. These correspond to the tag names themselves. Enum constants exist only for tags which appear in the spec itself (or for tags with special handling in the S\+VG and Math\+ML namespaces); any other tags appear as G\+U\+M\+B\+O\+\_\+\+T\+A\+G\+\_\+\+U\+N\+K\+N\+O\+WN and the actual tag name can be obtained through original\+\_\+tag.
+
+This is mostly for A\+PI convenience, so that clients of this library don\textquotesingle{}t need to perform a strcasecmp to find the normalized tag name. It also has efficiency benefits, by letting the parser work with enums instead of strings. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{gumbo_8h_a7f6a797c7baac81a623faf3a32819414}\label{gumbo_8h_a7f6a797c7baac81a623faf3a32819414}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+destroy\+\_\+output@{gumbo\+\_\+destroy\+\_\+output}}
+\index{gumbo\+\_\+destroy\+\_\+output@{gumbo\+\_\+destroy\+\_\+output}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+destroy\+\_\+output()}{gumbo\_destroy\_output()}}
+{\footnotesize\ttfamily void gumbo\+\_\+destroy\+\_\+output (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}{Gumbo\+Options}} $\ast$}]{options,  }\item[{\mbox{\hyperlink{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}{Gumbo\+Output}} $\ast$}]{output }\end{DoxyParamCaption})}
+
+Release the memory used for the parse tree \& parse errors. \mbox{\Hypertarget{gumbo_8h_a48dbd27d9ef0b42ef841b74c5d8bea8c}\label{gumbo_8h_a48dbd27d9ef0b42ef841b74c5d8bea8c}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+get\+\_\+attribute@{gumbo\+\_\+get\+\_\+attribute}}
+\index{gumbo\+\_\+get\+\_\+attribute@{gumbo\+\_\+get\+\_\+attribute}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+get\+\_\+attribute()}{gumbo\_get\_attribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_gumbo_attribute}{Gumbo\+Attribute}}$\ast$ gumbo\+\_\+get\+\_\+attribute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} $\ast$}]{attrs,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+Given a vector of Gumbo\+Attributes, look up the one with the specified name and return it, or N\+U\+LL if no such attribute exists. This uses a case-\/insensitive match, as H\+T\+ML is case-\/insensitive. \mbox{\Hypertarget{gumbo_8h_ac6addb5568175eafdcc6bc7513830e5e}\label{gumbo_8h_ac6addb5568175eafdcc6bc7513830e5e}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+normalize\+\_\+svg\+\_\+tagname@{gumbo\+\_\+normalize\+\_\+svg\+\_\+tagname}}
+\index{gumbo\+\_\+normalize\+\_\+svg\+\_\+tagname@{gumbo\+\_\+normalize\+\_\+svg\+\_\+tagname}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+normalize\+\_\+svg\+\_\+tagname()}{gumbo\_normalize\_svg\_tagname()}}
+{\footnotesize\ttfamily const char$\ast$ gumbo\+\_\+normalize\+\_\+svg\+\_\+tagname (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$}]{tagname }\end{DoxyParamCaption})}
+
+Fixes the case of S\+VG elements that are not all lowercase. \href{http://www.whatwg.org/specs/web-apps/current-work/multipage/tree-construction.html#parsing-main-inforeign}{\tt http\+://www.\+whatwg.\+org/specs/web-\/apps/current-\/work/multipage/tree-\/construction.\+html\#parsing-\/main-\/inforeign} This is not done at parse time because there\textquotesingle{}s no place to store a mutated tag name. tag\+\_\+name is an enum (which will be T\+A\+G\+\_\+\+U\+N\+K\+N\+O\+WN for most S\+VG tags without special handling), while original\+\_\+tag\+\_\+name is a pointer into the original buffer. Instead, we provide this helper function that clients can use to rename S\+VG tags as appropriate. Returns the case-\/normalized S\+VG tagname if a replacement is found, or N\+U\+LL if no normalization is called for. The return value is static data and owned by the library. \mbox{\Hypertarget{gumbo_8h_a7ffea8f4c7b9615be4c6497173ad78af}\label{gumbo_8h_a7ffea8f4c7b9615be4c6497173ad78af}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+normalized\+\_\+tagname@{gumbo\+\_\+normalized\+\_\+tagname}}
+\index{gumbo\+\_\+normalized\+\_\+tagname@{gumbo\+\_\+normalized\+\_\+tagname}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+normalized\+\_\+tagname()}{gumbo\_normalized\_tagname()}}
+{\footnotesize\ttfamily const char$\ast$ gumbo\+\_\+normalized\+\_\+tagname (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}}}]{tag }\end{DoxyParamCaption})}
+
+Returns the normalized (usually all-\/lowercased, except for foreign content) tag name for an Gumbo\+Tag enum. Return value is static data owned by the library. \mbox{\Hypertarget{gumbo_8h_acc6867266c808111d0c38b790f5a01fa}\label{gumbo_8h_acc6867266c808111d0c38b790f5a01fa}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+parse@{gumbo\+\_\+parse}}
+\index{gumbo\+\_\+parse@{gumbo\+\_\+parse}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+parse()}{gumbo\_parse()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}{Gumbo\+Output}}$\ast$ gumbo\+\_\+parse (\begin{DoxyParamCaption}\item[{const char $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+Parses a buffer of U\+T\+F8 text into an Gumbo\+Node parse tree. The buffer must live at least as long as the parse tree, as some fields (eg. original\+\_\+text) point directly into the original buffer.
+
+This doesn\textquotesingle{}t support buffers longer than 4 gigabytes. \mbox{\Hypertarget{gumbo_8h_a11c4fcbf67a6e1fbbce99069055d5c7e}\label{gumbo_8h_a11c4fcbf67a6e1fbbce99069055d5c7e}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+parse\+\_\+with\+\_\+options@{gumbo\+\_\+parse\+\_\+with\+\_\+options}}
+\index{gumbo\+\_\+parse\+\_\+with\+\_\+options@{gumbo\+\_\+parse\+\_\+with\+\_\+options}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+parse\+\_\+with\+\_\+options()}{gumbo\_parse\_with\_options()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_ac09b34c35171e94412a6ceb04dce4c12}{Gumbo\+Output}}$\ast$ gumbo\+\_\+parse\+\_\+with\+\_\+options (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}{Gumbo\+Options}} $\ast$}]{options,  }\item[{const char $\ast$}]{buffer,  }\item[{size\+\_\+t}]{buffer\+\_\+length }\end{DoxyParamCaption})}
+
+Extended version of gumbo\+\_\+parse that takes an explicit options structure, buffer, and length. \mbox{\Hypertarget{gumbo_8h_a862d4125ffb2f9d7c48c9a43033179d6}\label{gumbo_8h_a862d4125ffb2f9d7c48c9a43033179d6}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+string\+\_\+equals@{gumbo\+\_\+string\+\_\+equals}}
+\index{gumbo\+\_\+string\+\_\+equals@{gumbo\+\_\+string\+\_\+equals}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+string\+\_\+equals()}{gumbo\_string\_equals()}}
+{\footnotesize\ttfamily bool gumbo\+\_\+string\+\_\+equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$}]{str1,  }\item[{const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$}]{str2 }\end{DoxyParamCaption})}
+
+Compares two Gumbo\+String\+Pieces, and returns true if they\textquotesingle{}re equal or false otherwise. \mbox{\Hypertarget{gumbo_8h_a70da4c83d0782f30c3e50bce9912a6d3}\label{gumbo_8h_a70da4c83d0782f30c3e50bce9912a6d3}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+string\+\_\+equals\+\_\+ignore\+\_\+case@{gumbo\+\_\+string\+\_\+equals\+\_\+ignore\+\_\+case}}
+\index{gumbo\+\_\+string\+\_\+equals\+\_\+ignore\+\_\+case@{gumbo\+\_\+string\+\_\+equals\+\_\+ignore\+\_\+case}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+string\+\_\+equals\+\_\+ignore\+\_\+case()}{gumbo\_string\_equals\_ignore\_case()}}
+{\footnotesize\ttfamily bool gumbo\+\_\+string\+\_\+equals\+\_\+ignore\+\_\+case (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$}]{str1,  }\item[{const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$}]{str2 }\end{DoxyParamCaption})}
+
+Compares two Gumbo\+String\+Pieces ignoring case, and returns true if they\textquotesingle{}re equal or false otherwise. \mbox{\Hypertarget{gumbo_8h_a854e836c65501ec3c61bdf911b09c4ca}\label{gumbo_8h_a854e836c65501ec3c61bdf911b09c4ca}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+tag\+\_\+enum@{gumbo\+\_\+tag\+\_\+enum}}
+\index{gumbo\+\_\+tag\+\_\+enum@{gumbo\+\_\+tag\+\_\+enum}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+tag\+\_\+enum()}{gumbo\_tag\_enum()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gumbo_8h_a5a3aa6f4b039f85875d638088e676a0f}{Gumbo\+Tag}} gumbo\+\_\+tag\+\_\+enum (\begin{DoxyParamCaption}\item[{const char $\ast$}]{tagname }\end{DoxyParamCaption})}
+
+Converts a tag name string (which may be in upper or mixed case) to a tag enum. The {\ttfamily tag} version expects {\ttfamily tagname} to be N\+U\+L\+L-\/terminated \mbox{\Hypertarget{gumbo_8h_aaa2160c796d9b32b773b7346f7db1347}\label{gumbo_8h_aaa2160c796d9b32b773b7346f7db1347}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+tag\+\_\+from\+\_\+original\+\_\+text@{gumbo\+\_\+tag\+\_\+from\+\_\+original\+\_\+text}}
+\index{gumbo\+\_\+tag\+\_\+from\+\_\+original\+\_\+text@{gumbo\+\_\+tag\+\_\+from\+\_\+original\+\_\+text}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+tag\+\_\+from\+\_\+original\+\_\+text()}{gumbo\_tag\_from\_original\_text()}}
+{\footnotesize\ttfamily void gumbo\+\_\+tag\+\_\+from\+\_\+original\+\_\+text (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} $\ast$}]{text }\end{DoxyParamCaption})}
+
+Extracts the tag name from the original\+\_\+text field of an element or token by stripping off $<$/$>$ characters and attributes and adjusting the passed-\/in \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} appropriately. The tag name is in the original case and shares a buffer with the original text, to simplify memory management. Behavior is undefined if a string-\/piece that doesn\textquotesingle{}t represent an H\+T\+ML tag ($<$tagname$>$ or $<$/tagname$>$) is passed in. If the string piece is completely empty (N\+U\+LL data pointer), then this function will exit successfully as a no-\/op. \mbox{\Hypertarget{gumbo_8h_a413172766f337e395c8becd814271dac}\label{gumbo_8h_a413172766f337e395c8becd814271dac}} 
+\index{gumbo.\+h@{gumbo.\+h}!gumbo\+\_\+vector\+\_\+index\+\_\+of@{gumbo\+\_\+vector\+\_\+index\+\_\+of}}
+\index{gumbo\+\_\+vector\+\_\+index\+\_\+of@{gumbo\+\_\+vector\+\_\+index\+\_\+of}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{gumbo\+\_\+vector\+\_\+index\+\_\+of()}{gumbo\_vector\_index\_of()}}
+{\footnotesize\ttfamily int gumbo\+\_\+vector\+\_\+index\+\_\+of (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} $\ast$}]{vector,  }\item[{const void $\ast$}]{element }\end{DoxyParamCaption})}
+
+Returns the first index at which an element appears in this vector (testing by pointer equality), or -\/1 if it never does. 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{gumbo_8h_ad836fc987f5d9c1d885d453c01382255}\label{gumbo_8h_ad836fc987f5d9c1d885d453c01382255}} 
+\index{gumbo.\+h@{gumbo.\+h}!k\+Gumbo\+Default\+Options@{k\+Gumbo\+Default\+Options}}
+\index{k\+Gumbo\+Default\+Options@{k\+Gumbo\+Default\+Options}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{k\+Gumbo\+Default\+Options}{kGumboDefaultOptions}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{gumbo_8h_a915ce96b9f456217a2258dcb29e03d3a}{Gumbo\+Options}} k\+Gumbo\+Default\+Options}
+
+Default options struct; use this with gumbo\+\_\+parse\+\_\+with\+\_\+options. \mbox{\Hypertarget{gumbo_8h_aa3a3ce54b9e3f5723ee45653dcfa6329}\label{gumbo_8h_aa3a3ce54b9e3f5723ee45653dcfa6329}} 
+\index{gumbo.\+h@{gumbo.\+h}!k\+Gumbo\+Empty\+Source\+Position@{k\+Gumbo\+Empty\+Source\+Position}}
+\index{k\+Gumbo\+Empty\+Source\+Position@{k\+Gumbo\+Empty\+Source\+Position}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{k\+Gumbo\+Empty\+Source\+Position}{kGumboEmptySourcePosition}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{struct_gumbo_source_position}{Gumbo\+Source\+Position}} k\+Gumbo\+Empty\+Source\+Position}
+
+A Source\+Position used for elements that have no source position, i.\+e. parser-\/inserted elements. \mbox{\Hypertarget{gumbo_8h_a95e8899e79913ca9531f4a01ab5ebea0}\label{gumbo_8h_a95e8899e79913ca9531f4a01ab5ebea0}} 
+\index{gumbo.\+h@{gumbo.\+h}!k\+Gumbo\+Empty\+String@{k\+Gumbo\+Empty\+String}}
+\index{k\+Gumbo\+Empty\+String@{k\+Gumbo\+Empty\+String}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{k\+Gumbo\+Empty\+String}{kGumboEmptyString}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{struct_gumbo_string_piece}{Gumbo\+String\+Piece}} k\+Gumbo\+Empty\+String}
+
+A constant to represent a 0-\/length null string. \mbox{\Hypertarget{gumbo_8h_a963252540153b222f587d92db33d7fb5}\label{gumbo_8h_a963252540153b222f587d92db33d7fb5}} 
+\index{gumbo.\+h@{gumbo.\+h}!k\+Gumbo\+Empty\+Vector@{k\+Gumbo\+Empty\+Vector}}
+\index{k\+Gumbo\+Empty\+Vector@{k\+Gumbo\+Empty\+Vector}!gumbo.\+h@{gumbo.\+h}}
+\subsubsection{\texorpdfstring{k\+Gumbo\+Empty\+Vector}{kGumboEmptyVector}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}} k\+Gumbo\+Empty\+Vector}
+
+An empty (0-\/length, 0-\/capacity) \mbox{\hyperlink{struct_gumbo_vector}{Gumbo\+Vector}}. 

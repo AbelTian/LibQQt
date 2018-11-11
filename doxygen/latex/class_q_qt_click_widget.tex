@@ -1,0 +1,66 @@
+\hypertarget{class_q_qt_click_widget}{}\section{Q\+Qt\+Click\+Widget Class Reference}
+\label{class_q_qt_click_widget}\index{Q\+Qt\+Click\+Widget@{Q\+Qt\+Click\+Widget}}
+
+
+{\ttfamily \#include $<$qqtclickwidget.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Click\+Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_q_qt_click_widget}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_q_qt_click_widget_ac78fecd3913ed3e6dbe9df7acd3a02fe}{click}} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_click_widget_a9a818fd673ddaf82ed5366d5733ab2dc}\label{class_q_qt_click_widget_a9a818fd673ddaf82ed5366d5733ab2dc}} 
+void {\bfseries click\+With\+Point} (Q\+Point point)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_click_widget_a7c030f6ff1bc49557df603f6510a21f7}\label{class_q_qt_click_widget_a7c030f6ff1bc49557df603f6510a21f7}} 
+{\bfseries Q\+Qt\+Click\+Widget} (Q\+Widget $\ast$parent=0)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_click_widget_ad70931a1404abafddd82679cd3b7c414}{connect\+Click\+Helper}} () override
+\item 
+\mbox{\Hypertarget{class_q_qt_click_widget_a104a3a6d6e463a6684087a28817f4e48}\label{class_q_qt_click_widget_a104a3a6d6e463a6684087a28817f4e48}} 
+virtual void {\bfseries un\+Connect\+Click\+Helper} () override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+内置\+Click\+Helper
+
+添加了click支持的\+Q\+Qt\+Widget 这个\+Widget表示了如何使用\+Q\+Qt\+Widget\+Click\+Helper和它的子类
+
+注意\+Q\+Qt\+Click\+Widget不建议继承, 如果用户添加了新的click\+Helper,那么从\+Q\+Qt\+Widget继承,仿照这几个\+Click\+Widget新写一个\+Widget xxx\+Click\+Helper和xxx\+Click\+Widget是配对出现的. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_click_widget_ac78fecd3913ed3e6dbe9df7acd3a02fe}\label{class_q_qt_click_widget_ac78fecd3913ed3e6dbe9df7acd3a02fe}} 
+\index{Q\+Qt\+Click\+Widget@{Q\+Qt\+Click\+Widget}!click@{click}}
+\index{click@{click}!Q\+Qt\+Click\+Widget@{Q\+Qt\+Click\+Widget}}
+\subsubsection{\texorpdfstring{click}{click}}
+{\footnotesize\ttfamily void Q\+Qt\+Click\+Widget\+::click (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+提供给\+App用信号 界面层内部直接处理 \mbox{\Hypertarget{class_q_qt_click_widget_ad70931a1404abafddd82679cd3b7c414}\label{class_q_qt_click_widget_ad70931a1404abafddd82679cd3b7c414}} 
+\index{Q\+Qt\+Click\+Widget@{Q\+Qt\+Click\+Widget}!connect\+Click\+Helper@{connect\+Click\+Helper}}
+\index{connect\+Click\+Helper@{connect\+Click\+Helper}!Q\+Qt\+Click\+Widget@{Q\+Qt\+Click\+Widget}}
+\subsubsection{\texorpdfstring{connect\+Click\+Helper()}{connectClickHelper()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Click\+Widget\+::connect\+Click\+Helper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+子类重写这两个函数,实现丰富的click能力 
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_virtual_click_widget_a2e9874c5ec5aba763426dcacb012d7a7}{Q\+Qt\+Virtual\+Click\+Widget}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/clickwidgets/qqtclickwidget.\+h\end{DoxyCompactItemize}

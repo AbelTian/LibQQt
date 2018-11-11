@@ -1,0 +1,86 @@
+\hypertarget{class_q_z_xing_filter}{}\section{Q\+Z\+Xing\+Filter Class Reference}
+\label{class_q_z_xing_filter}\index{Q\+Z\+Xing\+Filter@{Q\+Z\+Xing\+Filter}}
+
+
+Video filter is the filter that has to be registered in C++, instantiated and attached in Q\+ML.  
+
+
+
+
+{\ttfamily \#include $<$Q\+Z\+Xing\+Filter.\+h$>$}
+
+Inheritance diagram for Q\+Z\+Xing\+Filter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_z_xing_filter}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_af7cf503201b661c6f363531b41c5a46e}\label{class_q_z_xing_filter_af7cf503201b661c6f363531b41c5a46e}} 
+void {\bfseries is\+Decoding\+Changed} ()
+\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_a36baff95b549dfba062f734e2f085d6c}\label{class_q_z_xing_filter_a36baff95b549dfba062f734e2f085d6c}} 
+void {\bfseries decoding\+Finished} (bool succeeded, int decode\+Time)
+\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_a20fcece9b053df2e9b9ce9baaba06683}\label{class_q_z_xing_filter_a20fcece9b053df2e9b9ce9baaba06683}} 
+void {\bfseries decoding\+Started} ()
+\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_a97fc4b960832be7c430baffad53876e1}\label{class_q_z_xing_filter_a97fc4b960832be7c430baffad53876e1}} 
+void {\bfseries capture\+Rect\+Changed} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_q_z_xing_filter_a544277b8424ac9f41506ec7aa3e22395}{Q\+Z\+Xing\+Filter}} (Q\+Object $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em Methods. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_ab521b894ab12bcdf03008d14611b78fe}\label{class_q_z_xing_filter_ab521b894ab12bcdf03008d14611b78fe}} 
+bool {\bfseries is\+Decoding} ()
+\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_a5611cb75622ee914dc872a66df16fcae}\label{class_q_z_xing_filter_a5611cb75622ee914dc872a66df16fcae}} 
+\mbox{\hyperlink{class_q_z_xing}{Q\+Z\+Xing}} $\ast$ {\bfseries get\+Decoder} ()
+\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_a910871b3db3f32a9cc5da90e62c10981}\label{class_q_z_xing_filter_a910871b3db3f32a9cc5da90e62c10981}} 
+Q\+Video\+Filter\+Runnable $\ast$ {\bfseries create\+Filter\+Runnable} ()
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_aa48e582a7444c776a49dac60845feaac}\label{class_q_z_xing_filter_aa48e582a7444c776a49dac60845feaac}} 
+bool {\bfseries decoding}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_a27f032211d1d4eea1affed0e7618436d}\label{class_q_z_xing_filter_a27f032211d1d4eea1affed0e7618436d}} 
+\mbox{\hyperlink{class_q_z_xing}{Q\+Z\+Xing}} \mbox{\hyperlink{class_q_z_xing_filter_a27f032211d1d4eea1affed0e7618436d}{decoder}}
+\begin{DoxyCompactList}\small\item\em Attributes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_a3322e9a2b3bc15fb460f095f45ed49ff}\label{class_q_z_xing_filter_a3322e9a2b3bc15fb460f095f45ed49ff}} 
+Q\+RectF {\bfseries capture\+Rect}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_z_xing_filter_a090ad605c3b75647b52060342ec02c23}\label{class_q_z_xing_filter_a090ad605c3b75647b52060342ec02c23}} 
+class {\bfseries Q\+Z\+Xing\+Filter\+Runnable}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Video filter is the filter that has to be registered in C++, instantiated and attached in Q\+ML. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_q_z_xing_filter_a544277b8424ac9f41506ec7aa3e22395}\label{class_q_z_xing_filter_a544277b8424ac9f41506ec7aa3e22395}} 
+\index{Q\+Z\+Xing\+Filter@{Q\+Z\+Xing\+Filter}!Q\+Z\+Xing\+Filter@{Q\+Z\+Xing\+Filter}}
+\index{Q\+Z\+Xing\+Filter@{Q\+Z\+Xing\+Filter}!Q\+Z\+Xing\+Filter@{Q\+Z\+Xing\+Filter}}
+\subsubsection{\texorpdfstring{Q\+Z\+Xing\+Filter()}{QZXingFilter()}}
+{\footnotesize\ttfamily Q\+Z\+Xing\+Filter\+::\+Q\+Z\+Xing\+Filter (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Methods. 
+
+Connecting signals to handlers that will send signals to Q\+ML 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/Q\+Z\+Xing\+Filter.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/Q\+Z\+Xing\+Filter.\+cpp\end{DoxyCompactItemize}

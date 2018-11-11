@@ -1,0 +1,86 @@
+\hypertarget{class_user_test8_message}{}\section{User\+Test8\+Message Class Reference}
+\label{class_user_test8_message}\index{User\+Test8\+Message@{User\+Test8\+Message}}
+Inheritance diagram for User\+Test8\+Message\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_user_test8_message}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_test8_message_aa847b20333aae86dd7aef2e0b51627a4}\label{class_user_test8_message_aa847b20333aae86dd7aef2e0b51627a4}} 
+{\bfseries User\+Test8\+Message} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_user_test8_message_ad404d49fc0d98f979531f4962e612174}\label{class_user_test8_message_ad404d49fc0d98f979531f4962e612174}} 
+quint8 \& {\bfseries size} ()
+\item 
+\mbox{\Hypertarget{class_user_test8_message_ae6a6cd17c70b82e0da39c72344f2fd21}\label{class_user_test8_message_ae6a6cd17c70b82e0da39c72344f2fd21}} 
+const quint8 \& {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{class_user_test8_message_a23c07f8c5dd86496492a029fc137b3ec}\label{class_user_test8_message_a23c07f8c5dd86496492a029fc137b3ec}} 
+quint8 \& {\bfseries cmd} ()
+\item 
+\mbox{\Hypertarget{class_user_test8_message_a1616bedf61e343a1e3a87e333355f243}\label{class_user_test8_message_a1616bedf61e343a1e3a87e333355f243}} 
+const quint8 \& {\bfseries cmd} () const
+\item 
+\mbox{\Hypertarget{class_user_test8_message_a59e44af016a2e7bcfcd72a11d485c9e1}\label{class_user_test8_message_a59e44af016a2e7bcfcd72a11d485c9e1}} 
+quint8 \& {\bfseries data} ()
+\item 
+\mbox{\Hypertarget{class_user_test8_message_a921868b204f60d4ccec29cd41225607c}\label{class_user_test8_message_a921868b204f60d4ccec29cd41225607c}} 
+const quint8 \& {\bfseries data} () const
+\item 
+virtual void \mbox{\hyperlink{class_user_test8_message_a5dbafc420f4b46bbaafc67541df709c4}{parser}} (const Q\+Byte\+Array \&l) override
+\begin{DoxyCompactList}\small\item\em 从流中解析报文 这个函数会更改局部变量 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_user_test8_message_adb7a902be87629d32761d5bd23a23d05}{packer}} (Q\+Byte\+Array \&l) const override
+\begin{DoxyCompactList}\small\item\em 将报文组装为流 这个函数不会更改局部变量 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_user_test8_message_adb7a902be87629d32761d5bd23a23d05}\label{class_user_test8_message_adb7a902be87629d32761d5bd23a23d05}} 
+\index{User\+Test8\+Message@{User\+Test8\+Message}!packer@{packer}}
+\index{packer@{packer}!User\+Test8\+Message@{User\+Test8\+Message}}
+\subsubsection{\texorpdfstring{packer()}{packer()}}
+{\footnotesize\ttfamily virtual void User\+Test8\+Message\+::packer (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将报文组装为流 这个函数不会更改局部变量 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & \\
+\hline
+{\em m} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_message_af1885c2c3628495808dca66ee8d72e14}{Q\+Qt\+Message}}.
+
+\mbox{\Hypertarget{class_user_test8_message_a5dbafc420f4b46bbaafc67541df709c4}\label{class_user_test8_message_a5dbafc420f4b46bbaafc67541df709c4}} 
+\index{User\+Test8\+Message@{User\+Test8\+Message}!parser@{parser}}
+\index{parser@{parser}!User\+Test8\+Message@{User\+Test8\+Message}}
+\subsubsection{\texorpdfstring{parser()}{parser()}}
+{\footnotesize\ttfamily virtual void User\+Test8\+Message\+::parser (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+从流中解析报文 这个函数会更改局部变量 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & \\
+\hline
+{\em l} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_message_a0bc25669bdd61490b1d8df6d77565f31}{Q\+Qt\+Message}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/examples/qqtnetworkexample/usertest8protocol.\+h\end{DoxyCompactItemize}

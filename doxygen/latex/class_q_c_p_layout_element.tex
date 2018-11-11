@@ -1,0 +1,429 @@
+\hypertarget{class_q_c_p_layout_element}{}\section{Q\+C\+P\+Layout\+Element Class Reference}
+\label{class_q_c_p_layout_element}\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+
+
+The abstract base class for all objects that form the layout system.  
+
+
+Inheritance diagram for Q\+C\+P\+Layout\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.376884cm]{class_q_c_p_layout_element}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374d}{Update\+Phase}} \{ \mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374dad6119882eba136357c2f627992e527d3}{up\+Preparation}}, 
+\mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374da288cb59a92280e47261a341f2813e676}{up\+Margins}}, 
+\mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374da5d1ccf5d79967c232c3c511796860045}{up\+Layout}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_q_c_p_layout_element_a8947f0ada17e672aaba3d424cbbb67e3}{Q\+C\+P\+Layout\+Element}} (\mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} $\ast$parent\+Plot=0)
+\item 
+\mbox{\hyperlink{class_q_c_p_layout}{Q\+C\+P\+Layout}} $\ast$ \mbox{\hyperlink{class_q_c_p_layout_element_a4efdcbde9d28f410e5ef166c9d691deb}{layout}} () const
+\item 
+Q\+Rect \mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a2a32a12a6161c9dffbadeb9cc585510c}\label{class_q_c_p_layout_element_a2a32a12a6161c9dffbadeb9cc585510c}} 
+Q\+Rect {\bfseries outer\+Rect} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_af4ac9450aa2d60863bf3a8ea0c940c9d}\label{class_q_c_p_layout_element_af4ac9450aa2d60863bf3a8ea0c940c9d}} 
+Q\+Margins {\bfseries margins} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a5eae30e28f28d73fd1c56409c011393e}\label{class_q_c_p_layout_element_a5eae30e28f28d73fd1c56409c011393e}} 
+Q\+Margins {\bfseries minimum\+Margins} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a2585bc8c5cc70ee712909751a2fc8909}\label{class_q_c_p_layout_element_a2585bc8c5cc70ee712909751a2fc8909}} 
+Q\+C\+P\+::\+Margin\+Sides {\bfseries auto\+Margins} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a60d4295468a2b57fe91f6f68e20c3993}\label{class_q_c_p_layout_element_a60d4295468a2b57fe91f6f68e20c3993}} 
+Q\+Size {\bfseries minimum\+Size} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_afb9503858d4aa0f3b9f1794b084fb40a}\label{class_q_c_p_layout_element_afb9503858d4aa0f3b9f1794b084fb40a}} 
+Q\+Size {\bfseries maximum\+Size} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a8af6bcf81e12fe1d6f44490f34522b90}\label{class_q_c_p_layout_element_a8af6bcf81e12fe1d6f44490f34522b90}} 
+\mbox{\hyperlink{class_q_c_p_margin_group}{Q\+C\+P\+Margin\+Group}} $\ast$ {\bfseries margin\+Group} (\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}} side) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_ac8d1139a81a1625860647e307ae2b733}\label{class_q_c_p_layout_element_ac8d1139a81a1625860647e307ae2b733}} 
+Q\+Hash$<$ \mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}}, \mbox{\hyperlink{class_q_c_p_margin_group}{Q\+C\+P\+Margin\+Group}} $\ast$ $>$ {\bfseries margin\+Groups} () const
+\item 
+void \mbox{\hyperlink{class_q_c_p_layout_element_a38975ea13e36de8e53391ce41d94bc0f}{set\+Outer\+Rect}} (const Q\+Rect \&\mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}})
+\item 
+void \mbox{\hyperlink{class_q_c_p_layout_element_a8f450b1f3f992ad576fce2c63d8b79cf}{set\+Margins}} (const Q\+Margins \&margins)
+\item 
+void \mbox{\hyperlink{class_q_c_p_layout_element_a0a8a17abc16b7923159fcc7608f94673}{set\+Minimum\+Margins}} (const Q\+Margins \&margins)
+\item 
+void \mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}} (Q\+C\+P\+::\+Margin\+Sides sides)
+\item 
+void \mbox{\hyperlink{class_q_c_p_layout_element_a5dd29a3c8bc88440c97c06b67be7886b}{set\+Minimum\+Size}} (const Q\+Size \&size)
+\item 
+void \mbox{\hyperlink{class_q_c_p_layout_element_a8e0447614a0bf92de9a7304588c6b96e}{set\+Minimum\+Size}} (int width, int height)
+\item 
+void \mbox{\hyperlink{class_q_c_p_layout_element_a74eb5280a737ab44833d506db65efd95}{set\+Maximum\+Size}} (const Q\+Size \&size)
+\item 
+void \mbox{\hyperlink{class_q_c_p_layout_element_a03e0e9c48f230217c529b0819f832d84}{set\+Maximum\+Size}} (int width, int height)
+\item 
+void \mbox{\hyperlink{class_q_c_p_layout_element_a516e56f76b6bc100e8e71d329866847d}{set\+Margin\+Group}} (Q\+C\+P\+::\+Margin\+Sides sides, \mbox{\hyperlink{class_q_c_p_margin_group}{Q\+C\+P\+Margin\+Group}} $\ast$group)
+\item 
+virtual void \mbox{\hyperlink{class_q_c_p_layout_element_a929c2ec62e0e0e1d8418eaa802e2af9b}{update}} (\mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374d}{Update\+Phase}} phase)
+\item 
+virtual Q\+Size \mbox{\hyperlink{class_q_c_p_layout_element_ab3fdb5c9a5189bb2dac10d4d25329cd8}{minimum\+Size\+Hint}} () const
+\item 
+virtual Q\+Size \mbox{\hyperlink{class_q_c_p_layout_element_ab5ce2ba22b36d9a3b70a1be562c326e5}{maximum\+Size\+Hint}} () const
+\item 
+virtual Q\+List$<$ \mbox{\hyperlink{class_q_c_p_layout_element}{Q\+C\+P\+Layout\+Element}} $\ast$ $>$ \mbox{\hyperlink{class_q_c_p_layout_element_a76dec8cb31e498994a944d7647a43309}{elements}} (bool recursive) const
+\item 
+virtual double \mbox{\hyperlink{class_q_c_p_layout_element_a0b96ae0d7bcfa6e38188fcb1e73e143f}{select\+Test}} (const Q\+PointF \&pos, bool only\+Selectable, Q\+Variant $\ast$details=0) const
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a005c9f0fe84bc1591a2cf2c46fd477b4}\label{class_q_c_p_layout_element_a005c9f0fe84bc1591a2cf2c46fd477b4}} 
+virtual int {\bfseries calculate\+Auto\+Margin} (\mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}} side)
+\item 
+virtual void \mbox{\hyperlink{class_q_c_p_layout_element_a2d82ea21fe0ee628f177bd824bc51a71}{mouse\+Press\+Event}} (Q\+Mouse\+Event $\ast$event)
+\item 
+virtual void \mbox{\hyperlink{class_q_c_p_layout_element_a14f4acf58cdb8dd2c6c571479c4c4a40}{mouse\+Move\+Event}} (Q\+Mouse\+Event $\ast$event)
+\item 
+virtual void \mbox{\hyperlink{class_q_c_p_layout_element_ae526ac828cce1e5bb94eaa85776d7404}{mouse\+Release\+Event}} (Q\+Mouse\+Event $\ast$event)
+\item 
+virtual void \mbox{\hyperlink{class_q_c_p_layout_element_aa8fef6486cb6ceb7c82cbdd50bc32ee9}{mouse\+Double\+Click\+Event}} (Q\+Mouse\+Event $\ast$event)
+\item 
+virtual void \mbox{\hyperlink{class_q_c_p_layout_element_a300521d2fd18a893c1b85f6be11ce2bf}{wheel\+Event}} (Q\+Wheel\+Event $\ast$event)
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_aeb35a17f57baa24b4c2d7614316e4dc0}\label{class_q_c_p_layout_element_aeb35a17f57baa24b4c2d7614316e4dc0}} 
+virtual void {\bfseries apply\+Default\+Antialiasing\+Hint} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a547bcc1e6e2be5645ca781efe0834653}\label{class_q_c_p_layout_element_a547bcc1e6e2be5645ca781efe0834653}} 
+virtual void {\bfseries draw} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter)
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a1478899e80e8244b411e96ec3b2e5ce2}\label{class_q_c_p_layout_element_a1478899e80e8244b411e96ec3b2e5ce2}} 
+virtual void {\bfseries parent\+Plot\+Initialized} (\mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} $\ast$parent\+Plot)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_ae7c75c25549608bd688bdb65d4c38066}\label{class_q_c_p_layout_element_ae7c75c25549608bd688bdb65d4c38066}} 
+\mbox{\hyperlink{class_q_c_p_layout}{Q\+C\+P\+Layout}} $\ast$ {\bfseries m\+Parent\+Layout}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_affef747c81632de33f08483b7fd10d01}\label{class_q_c_p_layout_element_affef747c81632de33f08483b7fd10d01}} 
+Q\+Size {\bfseries m\+Minimum\+Size}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a64a387973fd4addac842028c89088998}\label{class_q_c_p_layout_element_a64a387973fd4addac842028c89088998}} 
+Q\+Size {\bfseries m\+Maximum\+Size}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_ad8896f05550389f7b9e92c9e6cdf6e01}\label{class_q_c_p_layout_element_ad8896f05550389f7b9e92c9e6cdf6e01}} 
+Q\+Rect {\bfseries m\+Rect}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a07bb4973379e75cb0fa5b032c1d24afd}\label{class_q_c_p_layout_element_a07bb4973379e75cb0fa5b032c1d24afd}} 
+Q\+Rect {\bfseries m\+Outer\+Rect}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_ac2a32b99ee527ca5dfff9da03628fe94}\label{class_q_c_p_layout_element_ac2a32b99ee527ca5dfff9da03628fe94}} 
+Q\+Margins {\bfseries m\+Margins}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a5ba71f25d1af4bb092b28df618538e63}\label{class_q_c_p_layout_element_a5ba71f25d1af4bb092b28df618538e63}} 
+Q\+Margins {\bfseries m\+Minimum\+Margins}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_af61c70354d1275778d68206b2a1b2d36}\label{class_q_c_p_layout_element_af61c70354d1275778d68206b2a1b2d36}} 
+Q\+C\+P\+::\+Margin\+Sides {\bfseries m\+Auto\+Margins}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_aeafbbc1130e02eee663c5326761fc963}\label{class_q_c_p_layout_element_aeafbbc1130e02eee663c5326761fc963}} 
+Q\+Hash$<$ \mbox{\hyperlink{namespace_q_c_p_a7e487e3e2ccb62ab7771065bab7cae54}{Q\+C\+P\+::\+Margin\+Side}}, \mbox{\hyperlink{class_q_c_p_margin_group}{Q\+C\+P\+Margin\+Group}} $\ast$ $>$ {\bfseries m\+Margin\+Groups}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a1cdf9df76adcfae45261690aa0ca2198}\label{class_q_c_p_layout_element_a1cdf9df76adcfae45261690aa0ca2198}} 
+class {\bfseries Q\+Custom\+Plot}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_a588aac0a0d721f6c5f10126d8596a20f}\label{class_q_c_p_layout_element_a588aac0a0d721f6c5f10126d8596a20f}} 
+class {\bfseries Q\+C\+P\+Layout}
+\item 
+\mbox{\Hypertarget{class_q_c_p_layout_element_ad077a686e85ab6fa03dcb2fd37fc499a}\label{class_q_c_p_layout_element_ad077a686e85ab6fa03dcb2fd37fc499a}} 
+class {\bfseries Q\+C\+P\+Margin\+Group}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The abstract base class for all objects that form the layout system. 
+
+This is an abstract base class. As such, it can\textquotesingle{}t be instantiated directly, rather use one of its subclasses.
+
+A Layout element is a rectangular object which can be placed in layouts. It has an outer rect (Q\+C\+P\+Layout\+Element\+::outer\+Rect) and an inner rect (\mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{Q\+C\+P\+Layout\+Element\+::rect}}). The difference between outer and inner rect is called its margin. The margin can either be set to automatic or manual (\mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}}) on a per-\/side basis. If a side is set to manual, that margin can be set explicitly with \mbox{\hyperlink{class_q_c_p_layout_element_a8f450b1f3f992ad576fce2c63d8b79cf}{set\+Margins}} and will stay fixed at that value. If it\textquotesingle{}s set to automatic, the layout element subclass will control the value itself (via calculate\+Auto\+Margin).
+
+Layout elements can be placed in layouts (base class \mbox{\hyperlink{class_q_c_p_layout}{Q\+C\+P\+Layout}}) like \mbox{\hyperlink{class_q_c_p_layout_grid}{Q\+C\+P\+Layout\+Grid}}. The top level layout is reachable via \mbox{\hyperlink{class_q_custom_plot_af1a1f1f571237deb7c2bd34a5e9f018f}{Q\+Custom\+Plot\+::plot\+Layout}}, and is a \mbox{\hyperlink{class_q_c_p_layout_grid}{Q\+C\+P\+Layout\+Grid}}. Since \mbox{\hyperlink{class_q_c_p_layout}{Q\+C\+P\+Layout}} itself derives from \mbox{\hyperlink{class_q_c_p_layout_element}{Q\+C\+P\+Layout\+Element}}, layouts can be nested.
+
+Thus in \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} one can divide layout elements into two categories\+: The ones that are invisible by themselves, because they don\textquotesingle{}t draw anything. Their only purpose is to manage the position and size of other layout elements. This category of layout elements usually use \mbox{\hyperlink{class_q_c_p_layout}{Q\+C\+P\+Layout}} as base class. Then there is the category of layout elements which actually draw something. For example, \mbox{\hyperlink{class_q_c_p_axis_rect}{Q\+C\+P\+Axis\+Rect}}, \mbox{\hyperlink{class_q_c_p_legend}{Q\+C\+P\+Legend}} and \mbox{\hyperlink{class_q_c_p_plot_title}{Q\+C\+P\+Plot\+Title}} are of this category. This does not necessarily mean that the latter category can\textquotesingle{}t have child layout elements. \mbox{\hyperlink{class_q_c_p_legend}{Q\+C\+P\+Legend}} for instance, actually derives from \mbox{\hyperlink{class_q_c_p_layout_grid}{Q\+C\+P\+Layout\+Grid}} and the individual legend items are child layout elements in the grid layout. 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374d}\label{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374d}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!Update\+Phase@{Update\+Phase}}
+\index{Update\+Phase@{Update\+Phase}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{Update\+Phase}{UpdatePhase}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374d}{Q\+C\+P\+Layout\+Element\+::\+Update\+Phase}}}
+
+Defines the phases of the update process, that happens just before a replot. At each phase, \mbox{\hyperlink{class_q_c_p_layout_element_a929c2ec62e0e0e1d8418eaa802e2af9b}{update}} is called with the according Update\+Phase value. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{up\+Preparation@{up\+Preparation}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!up\+Preparation@{up\+Preparation}}}\mbox{\Hypertarget{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374dad6119882eba136357c2f627992e527d3}\label{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374dad6119882eba136357c2f627992e527d3}} 
+up\+Preparation&Phase used for any type of preparation that needs to be done before margin calculation and layout. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{up\+Margins@{up\+Margins}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!up\+Margins@{up\+Margins}}}\mbox{\Hypertarget{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374da288cb59a92280e47261a341f2813e676}\label{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374da288cb59a92280e47261a341f2813e676}} 
+up\+Margins&Phase in which the margins are calculated and set. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{up\+Layout@{up\+Layout}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!up\+Layout@{up\+Layout}}}\mbox{\Hypertarget{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374da5d1ccf5d79967c232c3c511796860045}\label{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374da5d1ccf5d79967c232c3c511796860045}} 
+up\+Layout&Final phase in which the layout system places the rects of the elements. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_q_c_p_layout_element_a8947f0ada17e672aaba3d424cbbb67e3}\label{class_q_c_p_layout_element_a8947f0ada17e672aaba3d424cbbb67e3}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Layout\+Element()}{QCPLayoutElement()}}
+{\footnotesize\ttfamily Q\+C\+P\+Layout\+Element\+::\+Q\+C\+P\+Layout\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} $\ast$}]{parent\+Plot = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Creates an instance of \mbox{\hyperlink{class_q_c_p_layout_element}{Q\+C\+P\+Layout\+Element}} and sets default values. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_c_p_layout_element_a76dec8cb31e498994a944d7647a43309}\label{class_q_c_p_layout_element_a76dec8cb31e498994a944d7647a43309}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!elements@{elements}}
+\index{elements@{elements}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{elements()}{elements()}}
+{\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{class_q_c_p_layout_element}{Q\+C\+P\+Layout\+Element}} $\ast$ $>$ Q\+C\+P\+Layout\+Element\+::elements (\begin{DoxyParamCaption}\item[{bool}]{recursive }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns a list of all child elements in this layout element. If {\itshape recursive} is true, all sub-\/child elements are included in the list, too.
+
+\begin{DoxyWarning}{Warning}
+There may be entries with value 0 in the returned list. (For example, \mbox{\hyperlink{class_q_c_p_layout_grid}{Q\+C\+P\+Layout\+Grid}} may have empty cells which yield 0 at the respective index.) 
+\end{DoxyWarning}
+
+
+Reimplemented in \mbox{\hyperlink{class_q_c_p_axis_rect_a40c0b3b17eb317ff4d393b7cb9b082a2}{Q\+C\+P\+Axis\+Rect}}, \mbox{\hyperlink{class_q_c_p_layout_grid_a20a745d013de4c89cf5de8004a5a36f7}{Q\+C\+P\+Layout\+Grid}}, and \mbox{\hyperlink{class_q_c_p_layout_adc9ebc73fc215f9cc22796712a251ff4}{Q\+C\+P\+Layout}}.
+
+\mbox{\Hypertarget{class_q_c_p_layout_element_a4efdcbde9d28f410e5ef166c9d691deb}\label{class_q_c_p_layout_element_a4efdcbde9d28f410e5ef166c9d691deb}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!layout@{layout}}
+\index{layout@{layout}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{layout()}{layout()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_q_c_p_layout}{Q\+C\+P\+Layout}} $\ast$ Q\+C\+P\+Layout\+Element\+::layout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the parent layout of this layout element. \mbox{\Hypertarget{class_q_c_p_layout_element_ab5ce2ba22b36d9a3b70a1be562c326e5}\label{class_q_c_p_layout_element_ab5ce2ba22b36d9a3b70a1be562c326e5}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!maximum\+Size\+Hint@{maximum\+Size\+Hint}}
+\index{maximum\+Size\+Hint@{maximum\+Size\+Hint}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{maximum\+Size\+Hint()}{maximumSizeHint()}}
+{\footnotesize\ttfamily Q\+Size Q\+C\+P\+Layout\+Element\+::maximum\+Size\+Hint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns the maximum size this layout element (the inner \mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}}) may be expanded to.
+
+if a maximum size (\mbox{\hyperlink{class_q_c_p_layout_element_a74eb5280a737ab44833d506db65efd95}{set\+Maximum\+Size}}) was not set manually, parent layouts consult this function to determine the maximum allowed size of this layout element. (A manual maximum size is considered set if it is smaller than Qt\textquotesingle{}s Q\+W\+I\+D\+G\+E\+T\+S\+I\+Z\+E\+\_\+\+M\+AX.) 
+
+Reimplemented in \mbox{\hyperlink{class_q_c_p_plot_title_ae24c395b5d3be64b42dcb9e27ed023c4}{Q\+C\+P\+Plot\+Title}}, and \mbox{\hyperlink{class_q_c_p_layout_grid_a3720d1b79931b2bdec3f2158a5f0181c}{Q\+C\+P\+Layout\+Grid}}.
+
+\mbox{\Hypertarget{class_q_c_p_layout_element_ab3fdb5c9a5189bb2dac10d4d25329cd8}\label{class_q_c_p_layout_element_ab3fdb5c9a5189bb2dac10d4d25329cd8}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!minimum\+Size\+Hint@{minimum\+Size\+Hint}}
+\index{minimum\+Size\+Hint@{minimum\+Size\+Hint}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{minimum\+Size\+Hint()}{minimumSizeHint()}}
+{\footnotesize\ttfamily Q\+Size Q\+C\+P\+Layout\+Element\+::minimum\+Size\+Hint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns the minimum size this layout element (the inner \mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}}) may be compressed to.
+
+if a minimum size (\mbox{\hyperlink{class_q_c_p_layout_element_a5dd29a3c8bc88440c97c06b67be7886b}{set\+Minimum\+Size}}) was not set manually, parent layouts consult this function to determine the minimum allowed size of this layout element. (A manual minimum size is considered set if it is non-\/zero.) 
+
+Reimplemented in \mbox{\hyperlink{class_q_c_p_plot_title_aeed5454134516655723bf2d0499dea24}{Q\+C\+P\+Plot\+Title}}, \mbox{\hyperlink{class_q_c_p_plottable_legend_item_a3adf8154c7e61538656d80464e5695dd}{Q\+C\+P\+Plottable\+Legend\+Item}}, and \mbox{\hyperlink{class_q_c_p_layout_grid_a9ef4b0d626708a1ada2cfea3a5973b80}{Q\+C\+P\+Layout\+Grid}}.
+
+\mbox{\Hypertarget{class_q_c_p_layout_element_aa8fef6486cb6ceb7c82cbdd50bc32ee9}\label{class_q_c_p_layout_element_aa8fef6486cb6ceb7c82cbdd50bc32ee9}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!mouse\+Double\+Click\+Event@{mouse\+Double\+Click\+Event}}
+\index{mouse\+Double\+Click\+Event@{mouse\+Double\+Click\+Event}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{mouse\+Double\+Click\+Event()}{mouseDoubleClickEvent()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::mouse\+Double\+Click\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+This event is called, if the mouse is double-\/clicked inside the outer rect of this layout element. \mbox{\Hypertarget{class_q_c_p_layout_element_a14f4acf58cdb8dd2c6c571479c4c4a40}\label{class_q_c_p_layout_element_a14f4acf58cdb8dd2c6c571479c4c4a40}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!mouse\+Move\+Event@{mouse\+Move\+Event}}
+\index{mouse\+Move\+Event@{mouse\+Move\+Event}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{mouse\+Move\+Event()}{mouseMoveEvent()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::mouse\+Move\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+This event is called, if the mouse is moved inside the outer rect of this layout element. 
+
+Reimplemented in \mbox{\hyperlink{class_q_c_p_color_scale_a3aca469d531ce7b5882de73590aa0de6}{Q\+C\+P\+Color\+Scale}}, and \mbox{\hyperlink{class_q_c_p_axis_rect_a4baf3d5dd69166788f6ceda0ea182c6e}{Q\+C\+P\+Axis\+Rect}}.
+
+\mbox{\Hypertarget{class_q_c_p_layout_element_a2d82ea21fe0ee628f177bd824bc51a71}\label{class_q_c_p_layout_element_a2d82ea21fe0ee628f177bd824bc51a71}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{mouse\+Press\+Event()}{mousePressEvent()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::mouse\+Press\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+This event is called, if the mouse was pressed while being inside the outer rect of this layout element. 
+
+Reimplemented in \mbox{\hyperlink{class_q_c_p_color_scale_a5df6ad81b2ad045878d276c2d5be7120}{Q\+C\+P\+Color\+Scale}}, and \mbox{\hyperlink{class_q_c_p_axis_rect_a77501dbeccdac7256f7979b05077c04e}{Q\+C\+P\+Axis\+Rect}}.
+
+\mbox{\Hypertarget{class_q_c_p_layout_element_ae526ac828cce1e5bb94eaa85776d7404}\label{class_q_c_p_layout_element_ae526ac828cce1e5bb94eaa85776d7404}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!mouse\+Release\+Event@{mouse\+Release\+Event}}
+\index{mouse\+Release\+Event@{mouse\+Release\+Event}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{mouse\+Release\+Event()}{mouseReleaseEvent()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::mouse\+Release\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+This event is called, if the mouse was previously pressed inside the outer rect of this layout element and is now released. 
+
+Reimplemented in \mbox{\hyperlink{class_q_c_p_color_scale_a0916613d20901950fc6d00c6f99fe0a1}{Q\+C\+P\+Color\+Scale}}, and \mbox{\hyperlink{class_q_c_p_axis_rect_adf6c99780cea55ab39459a6eaad3a94a}{Q\+C\+P\+Axis\+Rect}}.
+
+\mbox{\Hypertarget{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}\label{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!rect@{rect}}
+\index{rect@{rect}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{rect()}{rect()}}
+{\footnotesize\ttfamily Q\+Rect Q\+C\+P\+Layout\+Element\+::rect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the inner rect of this layout element. The inner rect is the outer rect (\mbox{\hyperlink{class_q_c_p_layout_element_a38975ea13e36de8e53391ce41d94bc0f}{set\+Outer\+Rect}}) shrinked by the margins (\mbox{\hyperlink{class_q_c_p_layout_element_a8f450b1f3f992ad576fce2c63d8b79cf}{set\+Margins}}, \mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}}).
+
+In some cases, the area between outer and inner rect is left blank. In other cases the margin area is used to display peripheral graphics while the main content is in the inner rect. This is where automatic margin calculation becomes interesting because it allows the layout element to adapt the margins to the peripheral graphics it wants to draw. For example, \mbox{\hyperlink{class_q_c_p_axis_rect}{Q\+C\+P\+Axis\+Rect}} draws the axis labels and tick labels in the margin area, thus needs to adjust the margins (if \mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}} is enabled) according to the space required by the labels of the axes. \mbox{\Hypertarget{class_q_c_p_layout_element_a0b96ae0d7bcfa6e38188fcb1e73e143f}\label{class_q_c_p_layout_element_a0b96ae0d7bcfa6e38188fcb1e73e143f}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!select\+Test@{select\+Test}}
+\index{select\+Test@{select\+Test}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{select\+Test()}{selectTest()}}
+{\footnotesize\ttfamily double Q\+C\+P\+Layout\+Element\+::select\+Test (\begin{DoxyParamCaption}\item[{const Q\+PointF \&}]{pos,  }\item[{bool}]{only\+Selectable,  }\item[{Q\+Variant $\ast$}]{details = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Layout elements are sensitive to events inside their outer rect. If {\itshape pos} is within the outer rect, this method returns a value corresponding to 0.\+99 times the parent plot\textquotesingle{}s selection tolerance. However, layout elements are not selectable by default. So if {\itshape only\+Selectable} is true, -\/1.\+0 is returned.
+
+See \mbox{\hyperlink{class_q_c_p_layerable_a04db8351fefd44cfdb77958e75c6288e}{Q\+C\+P\+Layerable\+::select\+Test}} for a general explanation of this virtual method.
+
+\mbox{\hyperlink{class_q_c_p_layout_element}{Q\+C\+P\+Layout\+Element}} subclasses may reimplement this method to provide more specific selection test behaviour. 
+
+Reimplemented from \mbox{\hyperlink{class_q_c_p_layerable_a04db8351fefd44cfdb77958e75c6288e}{Q\+C\+P\+Layerable}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_q_c_p_plot_title_aae4bcb2401e6947ea0abd3c960488d35}{Q\+C\+P\+Plot\+Title}}, \mbox{\hyperlink{class_q_c_p_legend_acd7be544c81324e391cfa6be9c413c01}{Q\+C\+P\+Legend}}, \mbox{\hyperlink{class_q_c_p_abstract_legend_item_ac834bf9003c491e5064a31e2a7de418d}{Q\+C\+P\+Abstract\+Legend\+Item}}, and \mbox{\hyperlink{class_q_c_p_layout_inset_afcd56d5d1b8853838cdc535f1904f68a}{Q\+C\+P\+Layout\+Inset}}.
+
+\mbox{\Hypertarget{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}\label{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!set\+Auto\+Margins@{set\+Auto\+Margins}}
+\index{set\+Auto\+Margins@{set\+Auto\+Margins}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{set\+Auto\+Margins()}{setAutoMargins()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::set\+Auto\+Margins (\begin{DoxyParamCaption}\item[{Q\+C\+P\+::\+Margin\+Sides}]{sides }\end{DoxyParamCaption})}
+
+Sets on which sides the margin shall be calculated automatically. If a side is calculated automatically, a minimum margin value may be provided with \mbox{\hyperlink{class_q_c_p_layout_element_a0a8a17abc16b7923159fcc7608f94673}{set\+Minimum\+Margins}}. If a side is set to be controlled manually, the value may be specified with \mbox{\hyperlink{class_q_c_p_layout_element_a8f450b1f3f992ad576fce2c63d8b79cf}{set\+Margins}}.
+
+Margin sides that are under automatic control may participate in a \mbox{\hyperlink{class_q_c_p_margin_group}{Q\+C\+P\+Margin\+Group}} (see \mbox{\hyperlink{class_q_c_p_layout_element_a516e56f76b6bc100e8e71d329866847d}{set\+Margin\+Group}}), to synchronize (align) it with other layout elements in the plot.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_layout_element_a0a8a17abc16b7923159fcc7608f94673}{set\+Minimum\+Margins}}, \mbox{\hyperlink{class_q_c_p_layout_element_a8f450b1f3f992ad576fce2c63d8b79cf}{set\+Margins}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_layout_element_a516e56f76b6bc100e8e71d329866847d}\label{class_q_c_p_layout_element_a516e56f76b6bc100e8e71d329866847d}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!set\+Margin\+Group@{set\+Margin\+Group}}
+\index{set\+Margin\+Group@{set\+Margin\+Group}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{set\+Margin\+Group()}{setMarginGroup()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::set\+Margin\+Group (\begin{DoxyParamCaption}\item[{Q\+C\+P\+::\+Margin\+Sides}]{sides,  }\item[{\mbox{\hyperlink{class_q_c_p_margin_group}{Q\+C\+P\+Margin\+Group}} $\ast$}]{group }\end{DoxyParamCaption})}
+
+Sets the margin {\itshape group} of the specified margin {\itshape sides}.
+
+Margin groups allow synchronizing specified margins across layout elements, see the documentation of \mbox{\hyperlink{class_q_c_p_margin_group}{Q\+C\+P\+Margin\+Group}}.
+
+To unset the margin group of {\itshape sides}, set {\itshape group} to 0.
+
+Note that margin groups only work for margin sides that are set to automatic (\mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}}). \mbox{\Hypertarget{class_q_c_p_layout_element_a8f450b1f3f992ad576fce2c63d8b79cf}\label{class_q_c_p_layout_element_a8f450b1f3f992ad576fce2c63d8b79cf}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!set\+Margins@{set\+Margins}}
+\index{set\+Margins@{set\+Margins}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{set\+Margins()}{setMargins()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::set\+Margins (\begin{DoxyParamCaption}\item[{const Q\+Margins \&}]{margins }\end{DoxyParamCaption})}
+
+Sets the margins of this layout element. If \mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}} is disabled for some or all sides, this function is used to manually set the margin on those sides. Sides that are still set to be handled automatically are ignored and may have any value in {\itshape margins}.
+
+The margin is the distance between the outer rect (controlled by the parent layout via \mbox{\hyperlink{class_q_c_p_layout_element_a38975ea13e36de8e53391ce41d94bc0f}{set\+Outer\+Rect}}) and the inner \mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}} (which usually contains the main content of this layout element).
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_layout_element_a74eb5280a737ab44833d506db65efd95}\label{class_q_c_p_layout_element_a74eb5280a737ab44833d506db65efd95}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!set\+Maximum\+Size@{set\+Maximum\+Size}}
+\index{set\+Maximum\+Size@{set\+Maximum\+Size}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{set\+Maximum\+Size()}{setMaximumSize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::set\+Maximum\+Size (\begin{DoxyParamCaption}\item[{const Q\+Size \&}]{size }\end{DoxyParamCaption})}
+
+Sets the maximum size for the inner \mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}} of this layout element. A parent layout tries to respect the {\itshape size} here by changing row/column sizes in the layout accordingly. \mbox{\Hypertarget{class_q_c_p_layout_element_a03e0e9c48f230217c529b0819f832d84}\label{class_q_c_p_layout_element_a03e0e9c48f230217c529b0819f832d84}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!set\+Maximum\+Size@{set\+Maximum\+Size}}
+\index{set\+Maximum\+Size@{set\+Maximum\+Size}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{set\+Maximum\+Size()}{setMaximumSize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::set\+Maximum\+Size (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+Sets the maximum size for the inner \mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}} of this layout element. \mbox{\Hypertarget{class_q_c_p_layout_element_a0a8a17abc16b7923159fcc7608f94673}\label{class_q_c_p_layout_element_a0a8a17abc16b7923159fcc7608f94673}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!set\+Minimum\+Margins@{set\+Minimum\+Margins}}
+\index{set\+Minimum\+Margins@{set\+Minimum\+Margins}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{set\+Minimum\+Margins()}{setMinimumMargins()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::set\+Minimum\+Margins (\begin{DoxyParamCaption}\item[{const Q\+Margins \&}]{margins }\end{DoxyParamCaption})}
+
+If \mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}} is enabled on some or all margins, this function is used to provide minimum values for those margins.
+
+The minimum values are not enforced on margin sides that were set to be under manual control via \mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_layout_element_accfda49994e3e6d51ed14504abf9d27d}{set\+Auto\+Margins}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_layout_element_a5dd29a3c8bc88440c97c06b67be7886b}\label{class_q_c_p_layout_element_a5dd29a3c8bc88440c97c06b67be7886b}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!set\+Minimum\+Size@{set\+Minimum\+Size}}
+\index{set\+Minimum\+Size@{set\+Minimum\+Size}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{set\+Minimum\+Size()}{setMinimumSize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::set\+Minimum\+Size (\begin{DoxyParamCaption}\item[{const Q\+Size \&}]{size }\end{DoxyParamCaption})}
+
+Sets the minimum size for the inner \mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}} of this layout element. A parent layout tries to respect the {\itshape size} here by changing row/column sizes in the layout accordingly.
+
+If the parent layout size is not sufficient to satisfy all minimum size constraints of its child layout elements, the layout may set a size that is actually smaller than {\itshape size}. \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} propagates the layout\textquotesingle{}s size constraints to the outside by setting its own minimum Q\+Widget size accordingly, so violations of {\itshape size} should be exceptions. \mbox{\Hypertarget{class_q_c_p_layout_element_a8e0447614a0bf92de9a7304588c6b96e}\label{class_q_c_p_layout_element_a8e0447614a0bf92de9a7304588c6b96e}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!set\+Minimum\+Size@{set\+Minimum\+Size}}
+\index{set\+Minimum\+Size@{set\+Minimum\+Size}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{set\+Minimum\+Size()}{setMinimumSize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::set\+Minimum\+Size (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+Sets the minimum size for the inner \mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}} of this layout element. \mbox{\Hypertarget{class_q_c_p_layout_element_a38975ea13e36de8e53391ce41d94bc0f}\label{class_q_c_p_layout_element_a38975ea13e36de8e53391ce41d94bc0f}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!set\+Outer\+Rect@{set\+Outer\+Rect}}
+\index{set\+Outer\+Rect@{set\+Outer\+Rect}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{set\+Outer\+Rect()}{setOuterRect()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::set\+Outer\+Rect (\begin{DoxyParamCaption}\item[{const Q\+Rect \&}]{rect }\end{DoxyParamCaption})}
+
+Sets the outer rect of this layout element. If the layout element is inside a layout, the layout sets the position and size of this layout element using this function.
+
+Calling this function externally has no effect, since the layout will overwrite any changes to the outer rect upon the next replot.
+
+The layout element will adapt its inner \mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}} by applying the margins inward to the outer rect.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_layout_element_a208effccfe2cca4a0eaf9393e60f2dd4}{rect}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_layout_element_a929c2ec62e0e0e1d8418eaa802e2af9b}\label{class_q_c_p_layout_element_a929c2ec62e0e0e1d8418eaa802e2af9b}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!update@{update}}
+\index{update@{update}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374d}{Update\+Phase}}}]{phase }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Updates the layout element and sub-\/elements. This function is automatically called before every replot by the parent layout element. It is called multiple times, once for every \mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374d}{Update\+Phase}}. The phases are run through in the order of the enum values. For details about what happens at the different phases, see the documentation of \mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374d}{Update\+Phase}}.
+
+Layout elements that have child elements should call the \mbox{\hyperlink{class_q_c_p_layout_element_a929c2ec62e0e0e1d8418eaa802e2af9b}{update}} method of their child elements, and pass the current {\itshape phase} unchanged.
+
+The default implementation executes the automatic margin mechanism in the \mbox{\hyperlink{class_q_c_p_layout_element_a0d83360e05735735aaf6d7983c56374da288cb59a92280e47261a341f2813e676}{up\+Margins}} phase. Subclasses should make sure to call the base class implementation. 
+
+Reimplemented in \mbox{\hyperlink{class_q_c_p_color_scale_ab8f6991ac88243fc582b44b183670334}{Q\+C\+P\+Color\+Scale}}, \mbox{\hyperlink{class_q_c_p_axis_rect_a255080a017df9083a60a321ef2ba9ed8}{Q\+C\+P\+Axis\+Rect}}, and \mbox{\hyperlink{class_q_c_p_layout_a34ab477e820537ded7bade4399c482fd}{Q\+C\+P\+Layout}}.
+
+\mbox{\Hypertarget{class_q_c_p_layout_element_a300521d2fd18a893c1b85f6be11ce2bf}\label{class_q_c_p_layout_element_a300521d2fd18a893c1b85f6be11ce2bf}} 
+\index{Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}!wheel\+Event@{wheel\+Event}}
+\index{wheel\+Event@{wheel\+Event}!Q\+C\+P\+Layout\+Element@{Q\+C\+P\+Layout\+Element}}
+\subsubsection{\texorpdfstring{wheel\+Event()}{wheelEvent()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Layout\+Element\+::wheel\+Event (\begin{DoxyParamCaption}\item[{Q\+Wheel\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+This event is called, if the mouse wheel is scrolled while the cursor is inside the rect of this layout element. 
+
+Reimplemented in \mbox{\hyperlink{class_q_c_p_color_scale_ab398e14c01240f3dc855884fe9e1ee8c}{Q\+C\+P\+Color\+Scale}}, and \mbox{\hyperlink{class_q_c_p_axis_rect_a5acf41fc30aa68ea263246ecfad85c31}{Q\+C\+P\+Axis\+Rect}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8h}{qcustomplot.\+h}}\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8cpp}{qcustomplot.\+cpp}}\end{DoxyCompactItemize}

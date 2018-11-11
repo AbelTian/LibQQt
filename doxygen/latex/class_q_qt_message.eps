@@ -1,0 +1,346 @@
+%!PS-Adobe-2.0 EPSF-2.0
+%%Title: ClassName
+%%Creator: Doxygen
+%%CreationDate: Time
+%%For: 
+%Magnification: 1.00
+%%Orientation: Portrait
+%%BoundingBox: 0 0 500 1501.976285
+%%Pages: 0
+%%BeginSetup
+%%EndSetup
+%%EndComments
+
+% ----- variables -----
+
+/boxwidth 0 def
+/boxheight 40 def
+/fontheight 24 def
+/marginwidth 10 def
+/distx 20 def
+/disty 40 def
+/boundaspect 0.332895 def  % aspect ratio of the BoundingBox (width/height)
+/boundx 500 def
+/boundy boundx boundaspect div def
+/xspacing 0 def
+/yspacing 0 def
+/rows 38 def
+/cols 2 def
+/scalefactor 0 def
+/boxfont /Times-Roman findfont fontheight scalefont def
+
+% ----- procedures -----
+
+/dotted { [1 4] 0 setdash } def
+/dashed { [5] 0 setdash } def
+/solid  { [] 0 setdash } def
+
+/max % result = MAX(arg1,arg2)
+{
+  /a exch def
+  /b exch def
+  a b gt {a} {b} ifelse
+} def
+
+/xoffset % result = MAX(0,(scalefactor-(boxwidth*cols+distx*(cols-1)))/2)
+{
+  0 scalefactor boxwidth cols mul distx cols 1 sub mul add sub 2 div max
+} def
+
+/cw % boxwidth = MAX(boxwidth, stringwidth(arg1))
+{
+  /str exch def
+  /boxwidth boxwidth str stringwidth pop max def
+} def
+
+/box % draws a box with text `arg1' at grid pos (arg2,arg3)
+{ gsave
+  2 setlinewidth
+  newpath
+  exch xspacing mul xoffset add
+  exch yspacing mul
+  moveto
+  boxwidth 0 rlineto 
+  0 boxheight rlineto 
+  boxwidth neg 0 rlineto 
+  0 boxheight neg rlineto 
+  closepath
+  dup stringwidth pop neg boxwidth add 2 div
+  boxheight fontheight 2 div sub 2 div
+  rmoveto show stroke
+  grestore
+} def  
+
+/mark
+{ newpath
+  exch xspacing mul xoffset add boxwidth add
+  exch yspacing mul
+  moveto
+  0 boxheight 4 div rlineto
+  boxheight neg 4 div boxheight neg 4 div rlineto
+  closepath
+  eofill
+  stroke
+} def
+
+/arrow
+{ newpath
+  moveto
+  3 -8 rlineto
+  -6 0 rlineto
+  3 8 rlineto
+  closepath
+  eofill
+  stroke
+} def
+
+/out % draws an output connector for the block at (arg1,arg2)
+{
+  newpath
+  exch xspacing mul xoffset add boxwidth 2 div add
+  exch yspacing mul boxheight add
+  /y exch def
+  /x exch def
+  x y moveto
+  0 disty 2 div rlineto 
+  stroke
+  1 eq { x y disty 2 div add arrow } if
+} def
+
+/in % draws an input connector for the block at (arg1,arg2)
+{
+  newpath
+  exch xspacing mul xoffset add boxwidth 2 div add
+  exch yspacing mul disty 2 div sub
+  /y exch def
+  /x exch def
+  x y moveto
+  0 disty 2 div rlineto
+  stroke
+  1 eq { x y disty 2 div add arrow } if
+} def
+
+/hedge
+{
+  exch xspacing mul xoffset add boxwidth 2 div add
+  exch yspacing mul boxheight 2 div sub
+  /y exch def
+  /x exch def
+  newpath
+  x y moveto
+  boxwidth 2 div distx add 0 rlineto
+  stroke
+  1 eq
+  { newpath x boxwidth 2 div distx add add y moveto
+    -8 3 rlineto
+    0 -6 rlineto
+    8 3 rlineto
+    closepath
+    eofill
+    stroke
+  } if
+} def
+
+/vedge
+{
+  /ye exch def
+  /ys exch def
+  /xs exch def
+  newpath
+  xs xspacing mul xoffset add boxwidth 2 div add dup
+  ys yspacing mul boxheight 2 div sub
+  moveto
+  ye yspacing mul boxheight 2 div sub
+  lineto
+  stroke
+} def
+
+/conn % connections the blocks from col `arg1' to `arg2' of row `arg3'
+{
+  /ys exch def
+  /xe exch def
+  /xs exch def
+  newpath
+  xs xspacing mul xoffset add boxwidth 2 div add
+  ys yspacing mul disty 2 div sub
+  moveto
+  xspacing xe xs sub mul 0
+  rlineto
+  stroke
+} def
+
+% ----- main ------
+
+boxfont setfont
+1 boundaspect scale
+(QQtMessage) cw
+(QObject) cw
+(CedianUdpMessage) cw
+(FiletransferMessage) cw
+(KongzhiqiUdpMessage) cw
+(QQtClient2Message) cw
+(QQtClient2Message) cw
+(QQtClientMessage) cw
+(QQtLanMessage) cw
+(QQtNamedPipeMessage) cw
+(QQTNetworkMessage) cw
+(QQTSerialMessage) cw
+(QQtServerMessage) cw
+(QQtSingleTonNamedPipeClientMessage) cw
+(QQtSingleTonNamedPipeServerMessage) cw
+(QQtUserMessage1) cw
+(QQtUserMessage2) cw
+(QQtUserMessage3) cw
+(UserNode0Message) cw
+(UserNode1Message) cw
+(UserNode2Message) cw
+(UserNode3Message) cw
+(UserNode4Message) cw
+(UserNode5Message) cw
+(UserNode6Message) cw
+(UserNode7Message) cw
+(UserNode8Message) cw
+(UserNode9Message) cw
+(UserTest0Message) cw
+(UserTest1Message) cw
+(UserTest2Message) cw
+(UserTest3Message) cw
+(UserTest4Message) cw
+(UserTest5Message) cw
+(UserTest6Message) cw
+(UserTest7Message) cw
+(UserTest8Message) cw
+(UserTest9Message) cw
+/boxwidth boxwidth marginwidth 2 mul add def
+/xspacing boxwidth distx add def
+/yspacing boxheight disty add def
+/scalefactor 
+  boxwidth cols mul distx cols 1 sub mul add
+  boxheight rows mul disty rows 1 sub mul add boundaspect mul 
+  max def
+boundx scalefactor div boundy scalefactor div scale
+
+% ----- classes -----
+
+ (QQtMessage) 0.000000 36.000000 box
+ (QObject) 0.000000 37.000000 box
+ (CedianUdpMessage) 1.000000 35.000000 box
+ (FiletransferMessage) 1.000000 34.000000 box
+ (KongzhiqiUdpMessage) 1.000000 33.000000 box
+ (QQtClient2Message) 1.000000 32.000000 box
+ (QQtClient2Message) 1.000000 31.000000 box
+ (QQtClientMessage) 1.000000 30.000000 box
+ (QQtLanMessage) 1.000000 29.000000 box
+ (QQtNamedPipeMessage) 1.000000 28.000000 box
+ (QQTNetworkMessage) 1.000000 27.000000 box
+ (QQTSerialMessage) 1.000000 26.000000 box
+1.000000 26.000000 mark
+ (QQtServerMessage) 1.000000 25.000000 box
+ (QQtSingleTonNamedPipeClientMessage) 1.000000 24.000000 box
+ (QQtSingleTonNamedPipeServerMessage) 1.000000 23.000000 box
+ (QQtUserMessage1) 1.000000 22.000000 box
+ (QQtUserMessage2) 1.000000 21.000000 box
+ (QQtUserMessage3) 1.000000 20.000000 box
+ (UserNode0Message) 1.000000 19.000000 box
+ (UserNode1Message) 1.000000 18.000000 box
+ (UserNode2Message) 1.000000 17.000000 box
+ (UserNode3Message) 1.000000 16.000000 box
+ (UserNode4Message) 1.000000 15.000000 box
+ (UserNode5Message) 1.000000 14.000000 box
+ (UserNode6Message) 1.000000 13.000000 box
+ (UserNode7Message) 1.000000 12.000000 box
+ (UserNode8Message) 1.000000 11.000000 box
+ (UserNode9Message) 1.000000 10.000000 box
+ (UserTest0Message) 1.000000 9.000000 box
+ (UserTest1Message) 1.000000 8.000000 box
+ (UserTest2Message) 1.000000 7.000000 box
+ (UserTest3Message) 1.000000 6.000000 box
+ (UserTest4Message) 1.000000 5.000000 box
+ (UserTest5Message) 1.000000 4.000000 box
+ (UserTest6Message) 1.000000 3.000000 box
+ (UserTest7Message) 1.000000 2.000000 box
+ (UserTest8Message) 1.000000 1.000000 box
+ (UserTest9Message) 1.000000 0.000000 box
+
+% ----- relations -----
+
+solid
+0 0.000000 36.000000 out
+solid
+1 0.000000 37.000000 in
+solid
+1 0.000000 35.250000 out
+solid
+0 0.000000 35.500000 hedge
+solid
+0 0.000000 34.500000 hedge
+solid
+0 0.000000 33.500000 hedge
+solid
+0 0.000000 32.500000 hedge
+solid
+0 0.000000 31.500000 hedge
+solid
+0 0.000000 30.500000 hedge
+solid
+0 0.000000 29.500000 hedge
+solid
+0 0.000000 28.500000 hedge
+solid
+0 0.000000 27.500000 hedge
+solid
+0 0.000000 26.500000 hedge
+solid
+0 0.000000 25.500000 hedge
+solid
+0 0.000000 24.500000 hedge
+solid
+0 0.000000 23.500000 hedge
+solid
+0 0.000000 22.500000 hedge
+solid
+0 0.000000 21.500000 hedge
+solid
+0 0.000000 20.500000 hedge
+solid
+0 0.000000 19.500000 hedge
+solid
+0 0.000000 18.500000 hedge
+solid
+0 0.000000 17.500000 hedge
+solid
+0 0.000000 16.500000 hedge
+solid
+0 0.000000 15.500000 hedge
+solid
+0 0.000000 14.500000 hedge
+solid
+0 0.000000 13.500000 hedge
+solid
+0 0.000000 12.500000 hedge
+solid
+0 0.000000 11.500000 hedge
+solid
+0 0.000000 10.500000 hedge
+solid
+0 0.000000 9.500000 hedge
+solid
+0 0.000000 8.500000 hedge
+solid
+0 0.000000 7.500000 hedge
+solid
+0 0.000000 6.500000 hedge
+solid
+0 0.000000 5.500000 hedge
+solid
+0 0.000000 4.500000 hedge
+solid
+0 0.000000 3.500000 hedge
+solid
+0 0.000000 2.500000 hedge
+solid
+0 0.000000 1.500000 hedge
+solid
+0 0.000000 0.500000 hedge
+solid
+0.000000 36.000000 0.500000 vedge

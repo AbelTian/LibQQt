@@ -1,0 +1,77 @@
+\hypertarget{classzxing_1_1datamatrix_1_1_detector}{}\section{zxing\+:\+:datamatrix\+:\+:Detector Class Reference}
+\label{classzxing_1_1datamatrix_1_1_detector}\index{zxing\+::datamatrix\+::\+Detector@{zxing\+::datamatrix\+::\+Detector}}
+Inheritance diagram for zxing\+:\+:datamatrix\+:\+:Detector\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classzxing_1_1datamatrix_1_1_detector}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a926b89981e9d45ab22ab913db40cd41b}\label{classzxing_1_1datamatrix_1_1_detector_a926b89981e9d45ab22ab913db40cd41b}} 
+\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} $>$ {\bfseries get\+Image} ()
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a7f9ae270b02b5417e29c86ef6a64dd90}\label{classzxing_1_1datamatrix_1_1_detector_a7f9ae270b02b5417e29c86ef6a64dd90}} 
+{\bfseries Detector} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} $>$ image)
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_aa0233f955fca1cf228c948c5ad347e51}\label{classzxing_1_1datamatrix_1_1_detector_aa0233f955fca1cf228c948c5ad347e51}} 
+virtual \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_perspective_transform}{Perspective\+Transform}} $>$ {\bfseries create\+Transform} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ top\+Left, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ top\+Right, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ bottom\+Left, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ bottom\+Right, int dimensionX, int dimensionY)
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a6e9b6f9018641f11dbc6c55f026c0618}\label{classzxing_1_1datamatrix_1_1_detector_a6e9b6f9018641f11dbc6c55f026c0618}} 
+\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_detector_result}{Detector\+Result}} $>$ {\bfseries detect} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a593d544a7a20f31798fd7fe6e5a1ce8e}\label{classzxing_1_1datamatrix_1_1_detector_a593d544a7a20f31798fd7fe6e5a1ce8e}} 
+\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} $>$ {\bfseries sample\+Grid} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_bit_matrix}{Bit\+Matrix}} $>$ image, int dimensionX, int dimensionY, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_perspective_transform}{Perspective\+Transform}} $>$ transform)
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a390090d299fbee0958b2bd0bca2f9b6f}\label{classzxing_1_1datamatrix_1_1_detector_a390090d299fbee0958b2bd0bca2f9b6f}} 
+void {\bfseries insertion\+Sort} (std\+::vector$<$ \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1datamatrix_1_1_result_points_and_transitions}{Result\+Points\+And\+Transitions}} $>$ $>$ \&vector)
+\item 
+\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ \mbox{\hyperlink{classzxing_1_1datamatrix_1_1_detector_afbf5fea4c097a6bce2c3a5606daf6d0f}{correct\+Top\+Right\+Rectangular}} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ bottom\+Left, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ bottom\+Right, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ top\+Left, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ top\+Right, int dimension\+Top, int dimension\+Right)
+\item 
+\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ \mbox{\hyperlink{classzxing_1_1datamatrix_1_1_detector_a978bb9582b4d69f75c88b94c57985405}{correct\+Top\+Right}} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ bottom\+Left, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ bottom\+Right, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ top\+Left, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ top\+Right, int dimension)
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_aeb390075ffb17f572feee5c45eee58ef}\label{classzxing_1_1datamatrix_1_1_detector_aeb390075ffb17f572feee5c45eee58ef}} 
+bool {\bfseries is\+Valid} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ p)
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a89a2f15305d2d78fdebd2719eec70733}\label{classzxing_1_1datamatrix_1_1_detector_a89a2f15305d2d78fdebd2719eec70733}} 
+int {\bfseries distance} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ a, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ b)
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a2213163cf32896905037608f0ad56938}\label{classzxing_1_1datamatrix_1_1_detector_a2213163cf32896905037608f0ad56938}} 
+\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1datamatrix_1_1_result_points_and_transitions}{Result\+Points\+And\+Transitions}} $>$ {\bfseries transitions\+Between} (\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ from, \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ to)
+\item 
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a8a2319146c27022e6d15448b678e3f71}\label{classzxing_1_1datamatrix_1_1_detector_a8a2319146c27022e6d15448b678e3f71}} 
+int {\bfseries min} (int a, int b)
+\item 
+int \mbox{\hyperlink{classzxing_1_1datamatrix_1_1_detector_a420331020a84da886b96d1184962bfd7}{round}} (float d)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a978bb9582b4d69f75c88b94c57985405}\label{classzxing_1_1datamatrix_1_1_detector_a978bb9582b4d69f75c88b94c57985405}} 
+\index{zxing\+::datamatrix\+::\+Detector@{zxing\+::datamatrix\+::\+Detector}!correct\+Top\+Right@{correct\+Top\+Right}}
+\index{correct\+Top\+Right@{correct\+Top\+Right}!zxing\+::datamatrix\+::\+Detector@{zxing\+::datamatrix\+::\+Detector}}
+\subsubsection{\texorpdfstring{correct\+Top\+Right()}{correctTopRight()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ Detector\+::correct\+Top\+Right (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$}]{bottom\+Left,  }\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$}]{bottom\+Right,  }\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$}]{top\+Left,  }\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$}]{top\+Right,  }\item[{int}]{dimension }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Calculates the position of the white top right module using the output of the rectangle detector for a square matrix \mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_afbf5fea4c097a6bce2c3a5606daf6d0f}\label{classzxing_1_1datamatrix_1_1_detector_afbf5fea4c097a6bce2c3a5606daf6d0f}} 
+\index{zxing\+::datamatrix\+::\+Detector@{zxing\+::datamatrix\+::\+Detector}!correct\+Top\+Right\+Rectangular@{correct\+Top\+Right\+Rectangular}}
+\index{correct\+Top\+Right\+Rectangular@{correct\+Top\+Right\+Rectangular}!zxing\+::datamatrix\+::\+Detector@{zxing\+::datamatrix\+::\+Detector}}
+\subsubsection{\texorpdfstring{correct\+Top\+Right\+Rectangular()}{correctTopRightRectangular()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$ Detector\+::correct\+Top\+Right\+Rectangular (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$}]{bottom\+Left,  }\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$}]{bottom\+Right,  }\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$}]{top\+Left,  }\item[{\mbox{\hyperlink{classzxing_1_1_ref}{Ref}}$<$ \mbox{\hyperlink{classzxing_1_1_result_point}{Result\+Point}} $>$}]{top\+Right,  }\item[{int}]{dimension\+Top,  }\item[{int}]{dimension\+Right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Calculates the position of the white top right module using the output of the rectangle detector for a rectangular matrix \mbox{\Hypertarget{classzxing_1_1datamatrix_1_1_detector_a420331020a84da886b96d1184962bfd7}\label{classzxing_1_1datamatrix_1_1_detector_a420331020a84da886b96d1184962bfd7}} 
+\index{zxing\+::datamatrix\+::\+Detector@{zxing\+::datamatrix\+::\+Detector}!round@{round}}
+\index{round@{round}!zxing\+::datamatrix\+::\+Detector@{zxing\+::datamatrix\+::\+Detector}}
+\subsubsection{\texorpdfstring{round()}{round()}}
+{\footnotesize\ttfamily int zxing\+::datamatrix\+::\+Detector\+::round (\begin{DoxyParamCaption}\item[{float}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Ends up being a bit faster than \mbox{\hyperlink{classzxing_1_1datamatrix_1_1_detector_a420331020a84da886b96d1184962bfd7}{round()}}. This merely rounds its argument to the nearest int, where x.\+5 rounds up. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/datamatrix/detector/Detector.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/zxing/zxing/datamatrix/detector/Data\+Matrix\+Detector.\+cpp\end{DoxyCompactItemize}

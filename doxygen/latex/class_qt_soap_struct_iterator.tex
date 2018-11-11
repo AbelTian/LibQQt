@@ -1,0 +1,107 @@
+\hypertarget{class_qt_soap_struct_iterator}{}\section{Qt\+Soap\+Struct\+Iterator Class Reference}
+\label{class_qt_soap_struct_iterator}\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+
+
+The \mbox{\hyperlink{class_qt_soap_struct_iterator}{Qt\+Soap\+Struct\+Iterator}} class provides an iterator for traversing the items in a \mbox{\hyperlink{class_qt_soap_struct}{Qt\+Soap\+Struct}}.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_qt_soap_struct_iterator_a801780ea61cb7a277f17437f5b8b16aa}{Qt\+Soap\+Struct\+Iterator}} (\mbox{\hyperlink{class_qt_soap_struct}{Qt\+Soap\+Struct}} \&)
+\item 
+\mbox{\hyperlink{class_qt_soap_struct_iterator_a44a363fd50c46e5a1e6a21587c02340a}{$\sim$\+Qt\+Soap\+Struct\+Iterator}} ()
+\item 
+\mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} \mbox{\hyperlink{class_qt_soap_struct_iterator_a1e269b0e5ce56fcbb25e407e342f30f2}{key}} () const
+\item 
+\mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$ \mbox{\hyperlink{class_qt_soap_struct_iterator_a74bd8ec5fbf9f4eb5c38ded597ba07bf}{data}} ()
+\item 
+const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$ \mbox{\hyperlink{class_qt_soap_struct_iterator_a4701e1dc8095c8615f05aae9295101ec}{current}} () const
+\item 
+void \mbox{\hyperlink{class_qt_soap_struct_iterator_aa169a9d28d1c58b5139be4f329df39a9}{operator++}} ()
+\item 
+bool \mbox{\hyperlink{class_qt_soap_struct_iterator_ac72c400c7bcc4d6c527aed67aa675e67}{operator!=}} (const \mbox{\hyperlink{class_qt_soap_struct_iterator}{Qt\+Soap\+Struct\+Iterator}} \&j) const
+\item 
+bool \mbox{\hyperlink{class_qt_soap_struct_iterator_a5f2c47b1341f50f7fcf104545833d052}{operator==}} (const \mbox{\hyperlink{class_qt_soap_struct_iterator}{Qt\+Soap\+Struct\+Iterator}} \&j) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_qt_soap_struct_iterator}{Qt\+Soap\+Struct\+Iterator}} class provides an iterator for traversing the items in a \mbox{\hyperlink{class_qt_soap_struct}{Qt\+Soap\+Struct}}. 
+
+The iterator is created by passing a \mbox{\hyperlink{class_qt_soap_struct}{Qt\+Soap\+Struct}} to the constructor. It it not defined which item the iterator initially will point to. Neither is the order in which the items are processed.
+
+\mbox{\hyperlink{class_qt_soap_struct_iterator_a1e269b0e5ce56fcbb25e407e342f30f2}{key()}} returns the name of the current item. \mbox{\hyperlink{class_qt_soap_struct_iterator_a74bd8ec5fbf9f4eb5c38ded597ba07bf}{data()}} and \mbox{\hyperlink{class_qt_soap_struct_iterator_a4701e1dc8095c8615f05aae9295101ec}{current()}} return a pointer to the current item, or 0 if there is none. \mbox{\hyperlink{class_qt_soap_struct_iterator_aa169a9d28d1c58b5139be4f329df39a9}{operator++()}} navigates to the next item in the struct.
+
+
+\begin{DoxyCode}
+\textcolor{keywordflow}{for} (\mbox{\hyperlink{class_qt_soap_struct_iterator}{QtSoapStructIterator}} it(myStruct); it.current(); ++it) \{
+\mbox{\hyperlink{class_qt_soap_type}{QtSoapType}} *item = it.data();
+\textcolor{comment}{// process item}
+\}
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_qt_soap_array_iterator}{Qt\+Soap\+Array\+Iterator}} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_qt_soap_struct_iterator_a801780ea61cb7a277f17437f5b8b16aa}\label{class_qt_soap_struct_iterator_a801780ea61cb7a277f17437f5b8b16aa}} 
+\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}!Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}!Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+\subsubsection{\texorpdfstring{Qt\+Soap\+Struct\+Iterator()}{QtSoapStructIterator()}}
+{\footnotesize\ttfamily Qt\+Soap\+Struct\+Iterator\+::\+Qt\+Soap\+Struct\+Iterator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_soap_struct}{Qt\+Soap\+Struct}} \&}]{s }\end{DoxyParamCaption})}
+
+Constructs a \mbox{\hyperlink{class_qt_soap_struct_iterator}{Qt\+Soap\+Struct\+Iterator}} and initializes it to point to the first element in the struct {\itshape s}. \mbox{\Hypertarget{class_qt_soap_struct_iterator_a44a363fd50c46e5a1e6a21587c02340a}\label{class_qt_soap_struct_iterator_a44a363fd50c46e5a1e6a21587c02340a}} 
+\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}!````~Qt\+Soap\+Struct\+Iterator@{$\sim$\+Qt\+Soap\+Struct\+Iterator}}
+\index{````~Qt\+Soap\+Struct\+Iterator@{$\sim$\+Qt\+Soap\+Struct\+Iterator}!Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+\subsubsection{\texorpdfstring{$\sim$\+Qt\+Soap\+Struct\+Iterator()}{~QtSoapStructIterator()}}
+{\footnotesize\ttfamily Qt\+Soap\+Struct\+Iterator\+::$\sim$\+Qt\+Soap\+Struct\+Iterator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructs the \mbox{\hyperlink{class_qt_soap_struct_iterator}{Qt\+Soap\+Struct\+Iterator}}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_qt_soap_struct_iterator_a4701e1dc8095c8615f05aae9295101ec}\label{class_qt_soap_struct_iterator_a4701e1dc8095c8615f05aae9295101ec}} 
+\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}!current@{current}}
+\index{current@{current}!Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+\subsubsection{\texorpdfstring{current()}{current()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$ Qt\+Soap\+Struct\+Iterator\+::current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns a pointer to the current item, or 0 if there is none. \mbox{\Hypertarget{class_qt_soap_struct_iterator_a74bd8ec5fbf9f4eb5c38ded597ba07bf}\label{class_qt_soap_struct_iterator_a74bd8ec5fbf9f4eb5c38ded597ba07bf}} 
+\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}!data@{data}}
+\index{data@{data}!Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+\subsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} $\ast$ Qt\+Soap\+Struct\+Iterator\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns a pointer to the current item, or 0 if there is none. \mbox{\Hypertarget{class_qt_soap_struct_iterator_a1e269b0e5ce56fcbb25e407e342f30f2}\label{class_qt_soap_struct_iterator_a1e269b0e5ce56fcbb25e407e342f30f2}} 
+\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}!key@{key}}
+\index{key@{key}!Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+\subsubsection{\texorpdfstring{key()}{key()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_qt_soap_q_name}{Qt\+Soap\+Q\+Name}} Qt\+Soap\+Struct\+Iterator\+::key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the Q\+Name (qualified name) of the current item. \mbox{\Hypertarget{class_qt_soap_struct_iterator_ac72c400c7bcc4d6c527aed67aa675e67}\label{class_qt_soap_struct_iterator_ac72c400c7bcc4d6c527aed67aa675e67}} 
+\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool Qt\+Soap\+Struct\+Iterator\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_qt_soap_struct_iterator}{Qt\+Soap\+Struct\+Iterator}} \&}]{j }\end{DoxyParamCaption}) const}
+
+Returns true if this iterator\textquotesingle{}s position is not equal to that of {\itshape j}; otherwise returns false. \mbox{\Hypertarget{class_qt_soap_struct_iterator_aa169a9d28d1c58b5139be4f329df39a9}\label{class_qt_soap_struct_iterator_aa169a9d28d1c58b5139be4f329df39a9}} 
+\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}}
+{\footnotesize\ttfamily void Qt\+Soap\+Struct\+Iterator\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Moves the iterator to the next item in the struct. \mbox{\Hypertarget{class_qt_soap_struct_iterator_a5f2c47b1341f50f7fcf104545833d052}\label{class_qt_soap_struct_iterator_a5f2c47b1341f50f7fcf104545833d052}} 
+\index{Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}!operator==@{operator==}}
+\index{operator==@{operator==}!Qt\+Soap\+Struct\+Iterator@{Qt\+Soap\+Struct\+Iterator}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Qt\+Soap\+Struct\+Iterator\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_qt_soap_struct_iterator}{Qt\+Soap\+Struct\+Iterator}} \&}]{j }\end{DoxyParamCaption}) const}
+
+Returns true if this iterator\textquotesingle{}s position is equal to that of {\itshape j}; otherwise returns false. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/soap/qtsoap.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/soap/qtsoap.\+cpp\end{DoxyCompactItemize}

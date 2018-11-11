@@ -1,0 +1,56 @@
+\hypertarget{class_q_qt_single_ton_application}{}\section{Q\+Qt\+Single\+Ton\+Application Class Reference}
+\label{class_q_qt_single_ton_application}\index{Q\+Qt\+Single\+Ton\+Application@{Q\+Qt\+Single\+Ton\+Application}}
+
+
+The Q\+Qt\+Single\+Application class 单实例\+Application。  
+
+
+
+
+{\ttfamily \#include $<$qqtsingletonapplication.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Single\+Ton\+Application\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_q_qt_single_ton_application}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_single_ton_application_a25f01b4067564d83c978d3cb3a4b1df0}\label{class_q_qt_single_ton_application_a25f01b4067564d83c978d3cb3a4b1df0}} 
+{\bfseries Q\+Qt\+Single\+Ton\+Application} (int \&argc, char $\ast$$\ast$argv)
+\item 
+\mbox{\Hypertarget{class_q_qt_single_ton_application_aed2d6d1576f239d22795a57362e67e30}\label{class_q_qt_single_ton_application_aed2d6d1576f239d22795a57362e67e30}} 
+void {\bfseries start\+Single\+Ton\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_single_ton_application_af784bf49fb809170ad8de85528346ecc}\label{class_q_qt_single_ton_application_af784bf49fb809170ad8de85528346ecc}} 
+void {\bfseries slot\+Socket\+State\+Changed} (Q\+Local\+Socket\+::\+Local\+Socket\+State)
+\item 
+\mbox{\Hypertarget{class_q_qt_single_ton_application_a9c772d890a655693523530deffc8d48e}\label{class_q_qt_single_ton_application_a9c772d890a655693523530deffc8d48e}} 
+void {\bfseries slot\+Connect\+Success} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_single_ton_application_a9a48d25dd5a3a404f6016346605f5791}\label{class_q_qt_single_ton_application_a9a48d25dd5a3a404f6016346605f5791}} 
+void {\bfseries slot\+Connect\+Fail} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_single_ton_application_aa6cf6691a415a9b5f90a6d9e2ef2a506}\label{class_q_qt_single_ton_application_aa6cf6691a415a9b5f90a6d9e2ef2a506}} 
+void {\bfseries slot\+Accept} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_single_ton_application_af604328c53637805e49679718e830130}\label{class_q_qt_single_ton_application_af604328c53637805e49679718e830130}} 
+void {\bfseries slot\+Reject} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The Q\+Qt\+Single\+Application class 单实例\+Application。 
+
+使用方法： 继承下去，显式调用 Q\+Qt\+Application\+::set\+Organization\+Name ( \char`\"{}\+App\+Name\char`\"{} ); Q\+Qt\+Application\+::set\+Organization\+Domain ( \char`\"{}www.\+appname.\+com\char`\"{} ); // Q\+Qt\+Application\+::set\+Application\+Name ( \char`\"{}\+App\+Name\char`\"{} ); //必要。 start\+Single\+Ton\+Instance(); 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/highgrade/qqtsingletonapplication.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/highgrade/qqtsingletonapplication.\+cpp\end{DoxyCompactItemize}

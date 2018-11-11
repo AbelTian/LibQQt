@@ -1,0 +1,74 @@
+\hypertarget{class_q_z_xing_filter_runnable}{}\section{Q\+Z\+Xing\+Filter\+Runnable Class Reference}
+\label{class_q_z_xing_filter_runnable}\index{Q\+Z\+Xing\+Filter\+Runnable@{Q\+Z\+Xing\+Filter\+Runnable}}
+
+
+A new Runnable is created everytime the filter gets a new frame.  
+
+
+
+
+{\ttfamily \#include $<$Q\+Z\+Xing\+Filter.\+h$>$}
+
+Inheritance diagram for Q\+Z\+Xing\+Filter\+Runnable\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_z_xing_filter_runnable}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_q_z_xing_filter_runnable_ae8ed468a251cc2daa6b251346c6c33e5}{Q\+Z\+Xing\+Filter\+Runnable}} (\mbox{\hyperlink{class_q_z_xing_filter}{Q\+Z\+Xing\+Filter}} $\ast$filter)
+\item 
+Q\+Video\+Frame \mbox{\hyperlink{class_q_z_xing_filter_runnable_a30cc32aa9a434b5d2ebfe3fcda4ad8cb}{run}} (Q\+Video\+Frame $\ast$input, const Q\+Video\+Surface\+Format \&surface\+Format, Run\+Flags flags)
+\begin{DoxyCompactList}\small\item\em This method is called whenever we get a new frame. It runs in the UI thread. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_z_xing_filter_runnable_a319ed1ef7b808ee6098e013c4f3387eb}{process\+Video\+Frame\+Probed}} (\mbox{\hyperlink{struct_simple_video_frame}{Simple\+Video\+Frame}} \&video\+Frame, const Q\+Rect \&capture\+Rect)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A new Runnable is created everytime the filter gets a new frame. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_q_z_xing_filter_runnable_ae8ed468a251cc2daa6b251346c6c33e5}\label{class_q_z_xing_filter_runnable_ae8ed468a251cc2daa6b251346c6c33e5}} 
+\index{Q\+Z\+Xing\+Filter\+Runnable@{Q\+Z\+Xing\+Filter\+Runnable}!Q\+Z\+Xing\+Filter\+Runnable@{Q\+Z\+Xing\+Filter\+Runnable}}
+\index{Q\+Z\+Xing\+Filter\+Runnable@{Q\+Z\+Xing\+Filter\+Runnable}!Q\+Z\+Xing\+Filter\+Runnable@{Q\+Z\+Xing\+Filter\+Runnable}}
+\subsubsection{\texorpdfstring{Q\+Z\+Xing\+Filter\+Runnable()}{QZXingFilterRunnable()}}
+{\footnotesize\ttfamily Q\+Z\+Xing\+Filter\+Runnable\+::\+Q\+Z\+Xing\+Filter\+Runnable (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_z_xing_filter}{Q\+Z\+Xing\+Filter}} $\ast$}]{filter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\hyperlink{class_q_z_xing_filter_runnable}{Q\+Z\+Xing\+Filter\+Runnable}} 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_z_xing_filter_runnable_a319ed1ef7b808ee6098e013c4f3387eb}\label{class_q_z_xing_filter_runnable_a319ed1ef7b808ee6098e013c4f3387eb}} 
+\index{Q\+Z\+Xing\+Filter\+Runnable@{Q\+Z\+Xing\+Filter\+Runnable}!process\+Video\+Frame\+Probed@{process\+Video\+Frame\+Probed}}
+\index{process\+Video\+Frame\+Probed@{process\+Video\+Frame\+Probed}!Q\+Z\+Xing\+Filter\+Runnable@{Q\+Z\+Xing\+Filter\+Runnable}}
+\subsubsection{\texorpdfstring{process\+Video\+Frame\+Probed()}{processVideoFrameProbed()}}
+{\footnotesize\ttfamily void Q\+Z\+Xing\+Filter\+Runnable\+::process\+Video\+Frame\+Probed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_simple_video_frame}{Simple\+Video\+Frame}} \&}]{video\+Frame,  }\item[{const Q\+Rect \&}]{capture\+Rect }\end{DoxyParamCaption})}
+
+Create Q\+Image from Q\+Video\+Frame.
+
+This is a forced \char`\"{}conversion\char`\"{}, colors end up swapped.
+
+This is a forced \char`\"{}conversion\char`\"{}, colors end up swapped.
+
+nv12 format, encountered on mac\+OS
+
+T\+O\+DO\+: Handle (create Q\+Images from) Y\+UV formats. \mbox{\Hypertarget{class_q_z_xing_filter_runnable_a30cc32aa9a434b5d2ebfe3fcda4ad8cb}\label{class_q_z_xing_filter_runnable_a30cc32aa9a434b5d2ebfe3fcda4ad8cb}} 
+\index{Q\+Z\+Xing\+Filter\+Runnable@{Q\+Z\+Xing\+Filter\+Runnable}!run@{run}}
+\index{run@{run}!Q\+Z\+Xing\+Filter\+Runnable@{Q\+Z\+Xing\+Filter\+Runnable}}
+\subsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily Q\+Video\+Frame Q\+Z\+Xing\+Filter\+Runnable\+::run (\begin{DoxyParamCaption}\item[{Q\+Video\+Frame $\ast$}]{input,  }\item[{const Q\+Video\+Surface\+Format \&}]{surface\+Format,  }\item[{Run\+Flags}]{flags }\end{DoxyParamCaption})}
+
+
+
+This method is called whenever we get a new frame. It runs in the UI thread. 
+
+We dont want to decode every single frame we get, as this would be very costly These checks are attempt on having only 1 frame being processed at a time. ~\newline
+~\newline
+ Copy the data we need to the filter. T\+O\+DO\+: Depending on the system / platform, this copy hangs up the UI for some seconds. Fix this. ~\newline
+ All processing that has to happen in another thread, as we are now in the UI thread. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/Q\+Z\+Xing\+Filter.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrdecode/Q\+Z\+Xing\+Filter.\+cpp\end{DoxyCompactItemize}

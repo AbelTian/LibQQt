@@ -1,0 +1,461 @@
+\hypertarget{class_q_qt_custom_qr_encode_widget}{}\section{Q\+Qt\+Custom\+Qr\+Encode\+Widget Class Reference}
+\label{class_q_qt_custom_qr_encode_widget}\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+
+
+The \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget}{Q\+Qt\+Custom\+Qr\+Encode\+Widget}} class 二维码生成组件  
+
+
+
+
+{\ttfamily \#include $<$qqtcustomqrencodewidget.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Custom\+Qr\+Encode\+Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_custom_qr_encode_widget}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a57caf10e5dda4bb3f138018d083071e6}\label{class_q_qt_custom_qr_encode_widget_a57caf10e5dda4bb3f138018d083071e6}} 
+enum \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a57caf10e5dda4bb3f138018d083071e6}{Q\+R\+\_\+\+M\+O\+DE}} \{ \newline
+{\bfseries M\+O\+D\+E\+\_\+\+N\+UL} = Q\+R\+\_\+\+M\+O\+D\+E\+\_\+\+N\+UL, 
+{\bfseries M\+O\+D\+E\+\_\+\+N\+UM} = Q\+R\+\_\+\+M\+O\+D\+E\+\_\+\+N\+UM, 
+{\bfseries M\+O\+D\+E\+\_\+\+AN} = Q\+R\+\_\+\+M\+O\+D\+E\+\_\+\+AN, 
+{\bfseries M\+O\+D\+E\+\_\+8} = Q\+R\+\_\+\+M\+O\+D\+E\+\_\+8, 
+\newline
+{\bfseries M\+O\+D\+E\+\_\+\+K\+A\+N\+JI} = Q\+R\+\_\+\+M\+O\+D\+E\+\_\+\+K\+A\+N\+JI, 
+{\bfseries M\+O\+D\+E\+\_\+\+S\+T\+R\+U\+C\+T\+U\+RE} = Q\+R\+\_\+\+M\+O\+D\+E\+\_\+\+S\+T\+R\+U\+C\+T\+U\+RE, 
+{\bfseries M\+O\+D\+E\+\_\+\+E\+CI} = Q\+R\+\_\+\+M\+O\+D\+E\+\_\+\+E\+CI, 
+{\bfseries M\+O\+D\+E\+\_\+\+F\+N\+C1\+F\+I\+R\+ST} = Q\+R\+\_\+\+M\+O\+D\+E\+\_\+\+F\+N\+C1\+F\+I\+R\+ST, 
+\newline
+{\bfseries M\+O\+D\+E\+\_\+\+F\+N\+C1\+S\+E\+C\+O\+ND} = Q\+R\+\_\+\+M\+O\+D\+E\+\_\+\+F\+N\+C1\+S\+E\+C\+O\+ND
+ \}
+\begin{DoxyCompactList}\small\item\em The Q\+R\+\_\+\+M\+O\+DE enum 设置二维码的编码模式 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a6107aaf68178d54d1274f0afc2ec310b}\label{class_q_qt_custom_qr_encode_widget_a6107aaf68178d54d1274f0afc2ec310b}} 
+enum \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a6107aaf68178d54d1274f0afc2ec310b}{Q\+R\+\_\+\+L\+E\+V\+EL}} \{ {\bfseries L\+E\+V\+E\+L\+\_\+L} = Q\+R\+\_\+\+E\+C\+L\+E\+V\+E\+L\+\_\+L, 
+{\bfseries L\+E\+V\+E\+L\+\_\+M} = Q\+R\+\_\+\+E\+C\+L\+E\+V\+E\+L\+\_\+M, 
+{\bfseries L\+E\+V\+E\+L\+\_\+Q} = Q\+R\+\_\+\+E\+C\+L\+E\+V\+E\+L\+\_\+Q, 
+{\bfseries L\+E\+V\+E\+L\+\_\+H} = Q\+R\+\_\+\+E\+C\+L\+E\+V\+E\+L\+\_\+H
+ \}
+\begin{DoxyCompactList}\small\item\em The Q\+R\+\_\+\+L\+E\+V\+EL enum 设置二维码编码的识别质量的级别 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a1ec59e91671d29d9280be29634028c64}\label{class_q_qt_custom_qr_encode_widget_a1ec59e91671d29d9280be29634028c64}} 
+void {\bfseries qr\+Data\+Changed} (const Q\+String \&qrdata)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_afcc3dacb41cc123a14d0d13da5b9724d}\label{class_q_qt_custom_qr_encode_widget_afcc3dacb41cc123a14d0d13da5b9724d}} 
+void {\bfseries qr\+Logo\+Changed} (const Q\+String \&qrlogo)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a6ba3fe1212b9c7f3018f1e2fbbbf23c9}\label{class_q_qt_custom_qr_encode_widget_a6ba3fe1212b9c7f3018f1e2fbbbf23c9}} 
+void {\bfseries qr\+Size\+Changed} (const Q\+Size \&qrsize)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a930a2c3a6886e8d65265bbecfc821700}\label{class_q_qt_custom_qr_encode_widget_a930a2c3a6886e8d65265bbecfc821700}} 
+void {\bfseries qr\+Mode\+Changed} (\mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a57caf10e5dda4bb3f138018d083071e6}{Q\+R\+\_\+\+M\+O\+DE}} qrmodel)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_af3b87ec588f3d015bbe8396e40ef1bad}\label{class_q_qt_custom_qr_encode_widget_af3b87ec588f3d015bbe8396e40ef1bad}} 
+void {\bfseries qr\+Level\+Changed} (\mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a6107aaf68178d54d1274f0afc2ec310b}{Q\+R\+\_\+\+L\+E\+V\+EL}} qrlevel)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_ad23117a1dd7af1cbdccd5a9c378827cd}\label{class_q_qt_custom_qr_encode_widget_ad23117a1dd7af1cbdccd5a9c378827cd}} 
+void {\bfseries qr\+Casesen\+Changed} (bool qrcasesen)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_ac77e173ca1622953e2ba9fc73fa5442e}\label{class_q_qt_custom_qr_encode_widget_ac77e173ca1622953e2ba9fc73fa5442e}} 
+void {\bfseries qr\+Margin\+Changed} (int qrmargin)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_ad8779d8e9eb7ca8e00abd8a0bd806082}\label{class_q_qt_custom_qr_encode_widget_ad8779d8e9eb7ca8e00abd8a0bd806082}} 
+void {\bfseries qr\+Percent\+Changed} (qreal qrpercent)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a8b7f8b30fc3e924043183c207ef243e9}\label{class_q_qt_custom_qr_encode_widget_a8b7f8b30fc3e924043183c207ef243e9}} 
+void {\bfseries qr\+Foreground\+Changed} (const Q\+Color \&qrfg)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_abbc75a082d0bc0023dfdade78f1f83db}\label{class_q_qt_custom_qr_encode_widget_abbc75a082d0bc0023dfdade78f1f83db}} 
+void {\bfseries qr\+Background\+Changed} (const Q\+Color \&qrbg)
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a647f32f90c1b97872a3635c15a84da95}\label{class_q_qt_custom_qr_encode_widget_a647f32f90c1b97872a3635c15a84da95}} 
+void {\bfseries qr\+Save\+File\+Changed} (const Q\+String \&qrfilepath)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a9904175d853d9ac740ef49fb047345b5}\label{class_q_qt_custom_qr_encode_widget_a9904175d853d9ac740ef49fb047345b5}} 
+{\bfseries Q\+Qt\+Custom\+Qr\+Encode\+Widget} (Q\+Widget $\ast$parent=0)
+\item 
+Q\+String \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a6ee24cde3d6e5ac059bac73354b8322e}{get\+Qr\+Data}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+Data 获取原始数据 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a83c26a62794769a7955c1921129754f9}{set\+Qr\+Data}} (const Q\+String \&value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+Data 设置原始数据 \end{DoxyCompactList}\item 
+Q\+String \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a8b59eabe5796207d04e592cff249152f}{get\+Qr\+Logo}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+Logo 获取中间图标数据 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a1f536fe7c84f80ba7947e07f752bb8bb}{set\+Qr\+Logo}} (const Q\+String \&value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+Logo 设置中间图标 \end{DoxyCompactList}\item 
+Q\+Size \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a7631297b67f4c7d0ca59f33aa8a6fa2b}{get\+Qr\+Size}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+Size 获取二维码尺寸 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a21b4fbb761bf2493e80abdba42a1b6ea}{set\+Qr\+Size}} (const Q\+Size \&value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+Size 设置二维码尺寸 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a57caf10e5dda4bb3f138018d083071e6}{Q\+R\+\_\+\+M\+O\+DE}} \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_aa80fd16bb5813883ba4fcf8a0ef555f3}{get\+Qr\+Mode}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+Mode 获取二维码模式 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a1a12dcfa99e06cca23b233c69b144427}{set\+Qr\+Mode}} (const \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a57caf10e5dda4bb3f138018d083071e6}{Q\+R\+\_\+\+M\+O\+DE}} \&value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+Mode 设置二维码模式 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a6107aaf68178d54d1274f0afc2ec310b}{Q\+R\+\_\+\+L\+E\+V\+EL}} \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a1de7f57bb6519b51dc68916c8f229532}{get\+Qr\+Level}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+Level 获取等级 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_afca08e7e77a3951096eae234f53dd400}{set\+Qr\+Level}} (const \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a6107aaf68178d54d1274f0afc2ec310b}{Q\+R\+\_\+\+L\+E\+V\+EL}} \&value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+Level 设置等级 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_aa6e31742be912e623219b699dc541cab}\label{class_q_qt_custom_qr_encode_widget_aa6e31742be912e623219b699dc541cab}} 
+bool {\bfseries get\+Qr\+Casesen} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_ad48268714ff316ae80e1da15584aa775}\label{class_q_qt_custom_qr_encode_widget_ad48268714ff316ae80e1da15584aa775}} 
+void {\bfseries set\+Qr\+Casesen} (bool value)
+\item 
+int \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_af3e13e62da7268b70b8031a364987d0f}{get\+Qr\+Margin}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+Margin 获取边框 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a6dd530a988c36e52e9dbb81467ef026a}{set\+Qr\+Margin}} (int value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+Margin 设置边框 \end{DoxyCompactList}\item 
+qreal \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a4258c5464c9dea89ed3102f3241fedc5}{get\+Qr\+Percent}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+Percent 获取\+Percent \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_adeba985299fc5f71c6c41ac0fa9abeb3}{set\+Qr\+Percent}} (const qreal \&value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+Percent 设置\+Percent \end{DoxyCompactList}\item 
+Q\+Color \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_afd01ff570a95925461638e32da50114a}{get\+Qr\+Foreground}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+Foreground 获取前景色 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a8cabaac803e1229f8672afa308922075}{set\+Qr\+Foreground}} (const Q\+Color \&value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+Foreground 设置前景色 \end{DoxyCompactList}\item 
+Q\+Color \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a4149d5d7ba204a36a7e5f1db66229261}{get\+Qr\+Background}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+Background 获取背景色 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a48a191027c5c5e1b759bb3131fe00eaa}{set\+Qr\+Background}} (const Q\+Color \&value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+Background设置背景色 \end{DoxyCompactList}\item 
+Q\+String \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_ae7b17229f55a99641af7e9f033a5b320}{get\+Qr\+File\+Path}} () const
+\begin{DoxyCompactList}\small\item\em get\+Qr\+File\+Path 获取文件路径 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a5ef5ead46d7cd7eafd2b47c0c5dcc02c}{set\+Qr\+File\+Path}} (const Q\+String \&value)
+\begin{DoxyCompactList}\small\item\em set\+Qr\+File\+Path 保存为文件 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_aca83a39caeffa59cbf554505d50a0988}{paint\+Event}} (Q\+Paint\+Event $\ast$e)
+\begin{DoxyCompactList}\small\item\em paint\+Event 绘制事件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a2412b40b089c2e93704986130597b09d}{resize\+Event}} (Q\+Resize\+Event $\ast$e)
+\begin{DoxyCompactList}\small\item\em resize\+Event 尺寸改变事件 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget}{Q\+Qt\+Custom\+Qr\+Encode\+Widget}} class 二维码生成组件 
+
+T.\+D.\+R (QQ\+:2657635903) 2017年10月22日15\+:31\+:26 M\+OD 作者\+: daodaoliang 时间\+: 2016年8月15日 邮箱\+: \href{mailto:daodaoliang@yeah.net}{\tt daodaoliang@yeah.\+net} 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a4149d5d7ba204a36a7e5f1db66229261}\label{class_q_qt_custom_qr_encode_widget_a4149d5d7ba204a36a7e5f1db66229261}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+Background@{get\+Qr\+Background}}
+\index{get\+Qr\+Background@{get\+Qr\+Background}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+Background()}{getQrBackground()}}
+{\footnotesize\ttfamily Q\+Color Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+Background (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+Background 获取背景色 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a6ee24cde3d6e5ac059bac73354b8322e}\label{class_q_qt_custom_qr_encode_widget_a6ee24cde3d6e5ac059bac73354b8322e}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+Data@{get\+Qr\+Data}}
+\index{get\+Qr\+Data@{get\+Qr\+Data}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+Data()}{getQrData()}}
+{\footnotesize\ttfamily Q\+String Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+Data 获取原始数据 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_ae7b17229f55a99641af7e9f033a5b320}\label{class_q_qt_custom_qr_encode_widget_ae7b17229f55a99641af7e9f033a5b320}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+File\+Path@{get\+Qr\+File\+Path}}
+\index{get\+Qr\+File\+Path@{get\+Qr\+File\+Path}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+File\+Path()}{getQrFilePath()}}
+{\footnotesize\ttfamily Q\+String Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+File\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+File\+Path 获取文件路径 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_afd01ff570a95925461638e32da50114a}\label{class_q_qt_custom_qr_encode_widget_afd01ff570a95925461638e32da50114a}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+Foreground@{get\+Qr\+Foreground}}
+\index{get\+Qr\+Foreground@{get\+Qr\+Foreground}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+Foreground()}{getQrForeground()}}
+{\footnotesize\ttfamily Q\+Color Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+Foreground (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+Foreground 获取前景色 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a1de7f57bb6519b51dc68916c8f229532}\label{class_q_qt_custom_qr_encode_widget_a1de7f57bb6519b51dc68916c8f229532}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+Level@{get\+Qr\+Level}}
+\index{get\+Qr\+Level@{get\+Qr\+Level}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+Level()}{getQrLevel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a6107aaf68178d54d1274f0afc2ec310b}{Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::\+Q\+R\+\_\+\+L\+E\+V\+EL}} Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+Level 获取等级 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a8b59eabe5796207d04e592cff249152f}\label{class_q_qt_custom_qr_encode_widget_a8b59eabe5796207d04e592cff249152f}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+Logo@{get\+Qr\+Logo}}
+\index{get\+Qr\+Logo@{get\+Qr\+Logo}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+Logo()}{getQrLogo()}}
+{\footnotesize\ttfamily Q\+String Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+Logo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+Logo 获取中间图标数据 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_af3e13e62da7268b70b8031a364987d0f}\label{class_q_qt_custom_qr_encode_widget_af3e13e62da7268b70b8031a364987d0f}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+Margin@{get\+Qr\+Margin}}
+\index{get\+Qr\+Margin@{get\+Qr\+Margin}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+Margin()}{getQrMargin()}}
+{\footnotesize\ttfamily int Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+Margin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+Margin 获取边框 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_aa80fd16bb5813883ba4fcf8a0ef555f3}\label{class_q_qt_custom_qr_encode_widget_aa80fd16bb5813883ba4fcf8a0ef555f3}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+Mode@{get\+Qr\+Mode}}
+\index{get\+Qr\+Mode@{get\+Qr\+Mode}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+Mode()}{getQrMode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a57caf10e5dda4bb3f138018d083071e6}{Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::\+Q\+R\+\_\+\+M\+O\+DE}} Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+Mode 获取二维码模式 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a4258c5464c9dea89ed3102f3241fedc5}\label{class_q_qt_custom_qr_encode_widget_a4258c5464c9dea89ed3102f3241fedc5}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+Percent@{get\+Qr\+Percent}}
+\index{get\+Qr\+Percent@{get\+Qr\+Percent}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+Percent()}{getQrPercent()}}
+{\footnotesize\ttfamily qreal Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+Percent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+Percent 获取\+Percent 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a7631297b67f4c7d0ca59f33aa8a6fa2b}\label{class_q_qt_custom_qr_encode_widget_a7631297b67f4c7d0ca59f33aa8a6fa2b}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!get\+Qr\+Size@{get\+Qr\+Size}}
+\index{get\+Qr\+Size@{get\+Qr\+Size}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{get\+Qr\+Size()}{getQrSize()}}
+{\footnotesize\ttfamily Q\+Size Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::get\+Qr\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get\+Qr\+Size 获取二维码尺寸 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_aca83a39caeffa59cbf554505d50a0988}\label{class_q_qt_custom_qr_encode_widget_aca83a39caeffa59cbf554505d50a0988}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!paint\+Event@{paint\+Event}}
+\index{paint\+Event@{paint\+Event}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{paint\+Event()}{paintEvent()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::paint\+Event (\begin{DoxyParamCaption}\item[{Q\+Paint\+Event $\ast$}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+paint\+Event 绘制事件 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a2412b40b089c2e93704986130597b09d}\label{class_q_qt_custom_qr_encode_widget_a2412b40b089c2e93704986130597b09d}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!resize\+Event@{resize\+Event}}
+\index{resize\+Event@{resize\+Event}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{resize\+Event()}{resizeEvent()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::resize\+Event (\begin{DoxyParamCaption}\item[{Q\+Resize\+Event $\ast$}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+resize\+Event 尺寸改变事件 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a48a191027c5c5e1b759bb3131fe00eaa}\label{class_q_qt_custom_qr_encode_widget_a48a191027c5c5e1b759bb3131fe00eaa}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+Background@{set\+Qr\+Background}}
+\index{set\+Qr\+Background@{set\+Qr\+Background}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+Background()}{setQrBackground()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+Background (\begin{DoxyParamCaption}\item[{const Q\+Color \&}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+Background设置背景色 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a83c26a62794769a7955c1921129754f9}\label{class_q_qt_custom_qr_encode_widget_a83c26a62794769a7955c1921129754f9}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+Data@{set\+Qr\+Data}}
+\index{set\+Qr\+Data@{set\+Qr\+Data}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+Data()}{setQrData()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+Data (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+Data 设置原始数据 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a5ef5ead46d7cd7eafd2b47c0c5dcc02c}\label{class_q_qt_custom_qr_encode_widget_a5ef5ead46d7cd7eafd2b47c0c5dcc02c}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+File\+Path@{set\+Qr\+File\+Path}}
+\index{set\+Qr\+File\+Path@{set\+Qr\+File\+Path}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+File\+Path()}{setQrFilePath()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+File\+Path (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+File\+Path 保存为文件 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a8cabaac803e1229f8672afa308922075}\label{class_q_qt_custom_qr_encode_widget_a8cabaac803e1229f8672afa308922075}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+Foreground@{set\+Qr\+Foreground}}
+\index{set\+Qr\+Foreground@{set\+Qr\+Foreground}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+Foreground()}{setQrForeground()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+Foreground (\begin{DoxyParamCaption}\item[{const Q\+Color \&}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+Foreground 设置前景色 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_afca08e7e77a3951096eae234f53dd400}\label{class_q_qt_custom_qr_encode_widget_afca08e7e77a3951096eae234f53dd400}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+Level@{set\+Qr\+Level}}
+\index{set\+Qr\+Level@{set\+Qr\+Level}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+Level()}{setQrLevel()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+Level (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a6107aaf68178d54d1274f0afc2ec310b}{Q\+R\+\_\+\+L\+E\+V\+EL}} \&}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+Level 设置等级 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a1f536fe7c84f80ba7947e07f752bb8bb}\label{class_q_qt_custom_qr_encode_widget_a1f536fe7c84f80ba7947e07f752bb8bb}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+Logo@{set\+Qr\+Logo}}
+\index{set\+Qr\+Logo@{set\+Qr\+Logo}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+Logo()}{setQrLogo()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+Logo (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+Logo 设置中间图标 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a6dd530a988c36e52e9dbb81467ef026a}\label{class_q_qt_custom_qr_encode_widget_a6dd530a988c36e52e9dbb81467ef026a}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+Margin@{set\+Qr\+Margin}}
+\index{set\+Qr\+Margin@{set\+Qr\+Margin}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+Margin()}{setQrMargin()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+Margin (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+Margin 设置边框 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a1a12dcfa99e06cca23b233c69b144427}\label{class_q_qt_custom_qr_encode_widget_a1a12dcfa99e06cca23b233c69b144427}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+Mode@{set\+Qr\+Mode}}
+\index{set\+Qr\+Mode@{set\+Qr\+Mode}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+Mode()}{setQrMode()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+Mode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_qt_custom_qr_encode_widget_a57caf10e5dda4bb3f138018d083071e6}{Q\+R\+\_\+\+M\+O\+DE}} \&}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+Mode 设置二维码模式 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_adeba985299fc5f71c6c41ac0fa9abeb3}\label{class_q_qt_custom_qr_encode_widget_adeba985299fc5f71c6c41ac0fa9abeb3}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+Percent@{set\+Qr\+Percent}}
+\index{set\+Qr\+Percent@{set\+Qr\+Percent}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+Percent()}{setQrPercent()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+Percent (\begin{DoxyParamCaption}\item[{const qreal \&}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+Percent 设置\+Percent 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_custom_qr_encode_widget_a21b4fbb761bf2493e80abdba42a1b6ea}\label{class_q_qt_custom_qr_encode_widget_a21b4fbb761bf2493e80abdba42a1b6ea}} 
+\index{Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}!set\+Qr\+Size@{set\+Qr\+Size}}
+\index{set\+Qr\+Size@{set\+Qr\+Size}!Q\+Qt\+Custom\+Qr\+Encode\+Widget@{Q\+Qt\+Custom\+Qr\+Encode\+Widget}}
+\subsubsection{\texorpdfstring{set\+Qr\+Size()}{setQrSize()}}
+{\footnotesize\ttfamily void Q\+Qt\+Custom\+Qr\+Encode\+Widget\+::set\+Qr\+Size (\begin{DoxyParamCaption}\item[{const Q\+Size \&}]{value }\end{DoxyParamCaption})}
+
+
+
+set\+Qr\+Size 设置二维码尺寸 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qqtcustomqrencodewidget.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qqtcustomqrencodewidget.\+cpp\end{DoxyCompactItemize}

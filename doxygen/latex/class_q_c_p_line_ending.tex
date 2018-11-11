@@ -1,0 +1,220 @@
+\hypertarget{class_q_c_p_line_ending}{}\section{Q\+C\+P\+Line\+Ending Class Reference}
+\label{class_q_c_p_line_ending}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+
+
+Handles the different ending decorations for line-\/like items.  
+
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Ending\+Style}} \{ \newline
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5aca12d500f50cd6871766801bac30fb03}{es\+None}}, 
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a3d7dcea2f100671727c3417142154f8f}{es\+Flat\+Arrow}}, 
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ab9964d0d03f812d1e79de15edbeb2cbf}{es\+Spike\+Arrow}}, 
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a61f78ee8f375fb21cb9d250687bbcbd2}{es\+Line\+Arrow}}, 
+\newline
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ae5a3414916817258bcc6dddd605e8f5c}{es\+Disc}}, 
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ae1836502fa43d8990bb62b2d493a140a}{es\+Square}}, 
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a378fe5a8b768411b0bc1765210fe7200}{es\+Diamond}}, 
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a2cf543bbca332df26d89bf779f50469f}{es\+Bar}}, 
+\newline
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a126c390f0c359fcd8df1fc5e38d26d5b}{es\+Half\+Bar}}, 
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a2b2cc96e757ca9bcd91fb70221ed43ab}{es\+Skewed\+Bar}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_q_c_p_line_ending_af2eaf8123b000d97fbd11929c669f61b}{Q\+C\+P\+Line\+Ending}} ()
+\item 
+\mbox{\hyperlink{class_q_c_p_line_ending_abb2abc7542f0c7a3c081d878248896a4}{Q\+C\+P\+Line\+Ending}} (\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Ending\+Style}} style, double width=8, double length=10, bool inverted=false)
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_a07e75aaac6c61322bf51af237c5778e3}\label{class_q_c_p_line_ending_a07e75aaac6c61322bf51af237c5778e3}} 
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Ending\+Style}} {\bfseries style} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_ae6f1fb83c210da6ace35d629993287f3}\label{class_q_c_p_line_ending_ae6f1fb83c210da6ace35d629993287f3}} 
+double {\bfseries width} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_aee9050a13fe115bd1b6794f9ad14cd72}\label{class_q_c_p_line_ending_aee9050a13fe115bd1b6794f9ad14cd72}} 
+double {\bfseries length} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_a15a68706d298a0c9f94556f6b4db15ff}\label{class_q_c_p_line_ending_a15a68706d298a0c9f94556f6b4db15ff}} 
+bool {\bfseries inverted} () const
+\item 
+void \mbox{\hyperlink{class_q_c_p_line_ending_a56953b9cb8ed1bed0f025c3935f16910}{set\+Style}} (\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Ending\+Style}} style)
+\item 
+void \mbox{\hyperlink{class_q_c_p_line_ending_a26dc020ea985a72cc25881ce2115e34e}{set\+Width}} (double width)
+\item 
+void \mbox{\hyperlink{class_q_c_p_line_ending_ae36fa01763751cd64b7f56c3507e935a}{set\+Length}} (double length)
+\item 
+void \mbox{\hyperlink{class_q_c_p_line_ending_a580e4e2360b35ebb8d68f3494aa2335d}{set\+Inverted}} (bool inverted)
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_a14fe390ddd590864ac66a60ed5278df5}\label{class_q_c_p_line_ending_a14fe390ddd590864ac66a60ed5278df5}} 
+double {\bfseries bounding\+Distance} () const
+\item 
+double \mbox{\hyperlink{class_q_c_p_line_ending_acacd24d386d459b282d3c57f16a5405d}{real\+Length}} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_a13321409a5570be5d58d99b67bc73cd5}\label{class_q_c_p_line_ending_a13321409a5570be5d58d99b67bc73cd5}} 
+void {\bfseries draw} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter, const Q\+Vector2D \&pos, const Q\+Vector2D \&dir) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_a851ac38f3aeabb0d31ada41198ae1480}\label{class_q_c_p_line_ending_a851ac38f3aeabb0d31ada41198ae1480}} 
+void {\bfseries draw} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter, const Q\+Vector2D \&pos, double angle) const
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_a4696fc9117b60f1ca7690fcd2ba56611}\label{class_q_c_p_line_ending_a4696fc9117b60f1ca7690fcd2ba56611}} 
+\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Ending\+Style}} {\bfseries m\+Style}
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_aca89d21341133c20dc6825c33a5eac48}\label{class_q_c_p_line_ending_aca89d21341133c20dc6825c33a5eac48}} 
+double {\bfseries m\+Width}
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_ae8e1e2566b96c05736cd92662dba8af8}\label{class_q_c_p_line_ending_ae8e1e2566b96c05736cd92662dba8af8}} 
+double {\bfseries m\+Length}
+\item 
+\mbox{\Hypertarget{class_q_c_p_line_ending_a91306fe771d54c955e0af21af14349d5}\label{class_q_c_p_line_ending_a91306fe771d54c955e0af21af14349d5}} 
+bool {\bfseries m\+Inverted}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handles the different ending decorations for line-\/like items. 
+
+ For every ending a line-\/like item has, an instance of this class exists. For example, \mbox{\hyperlink{class_q_c_p_item_line}{Q\+C\+P\+Item\+Line}} has two endings which can be set with \mbox{\hyperlink{class_q_c_p_item_line_aebf3d687114d584e0459db6759e2c3c3}{Q\+C\+P\+Item\+Line\+::set\+Head}} and \mbox{\hyperlink{class_q_c_p_item_line_ac264222c3297a7efe33df9345c811a5f}{Q\+C\+P\+Item\+Line\+::set\+Tail}}.
+
+The styles themselves are defined via the enum \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Q\+C\+P\+Line\+Ending\+::\+Ending\+Style}}. Most decorations can be modified regarding width and length, see \mbox{\hyperlink{class_q_c_p_line_ending_a26dc020ea985a72cc25881ce2115e34e}{set\+Width}} and \mbox{\hyperlink{class_q_c_p_line_ending_ae36fa01763751cd64b7f56c3507e935a}{set\+Length}}. The direction of the ending decoration (e.\+g. direction an arrow is pointing) is controlled by the line-\/like item. For example, when both endings of a \mbox{\hyperlink{class_q_c_p_item_line}{Q\+C\+P\+Item\+Line}} are set to be arrows, they will point to opposite directions, e.\+g. \char`\"{}outward\char`\"{}. This can be changed by \mbox{\hyperlink{class_q_c_p_line_ending_a580e4e2360b35ebb8d68f3494aa2335d}{set\+Inverted}}, which would make the respective arrow point inward.
+
+Note that due to the overloaded \mbox{\hyperlink{class_q_c_p_line_ending}{Q\+C\+P\+Line\+Ending}} constructor, you may directly specify a \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Q\+C\+P\+Line\+Ending\+::\+Ending\+Style}} where actually a \mbox{\hyperlink{class_q_c_p_line_ending}{Q\+C\+P\+Line\+Ending}} is expected, e.\+g. 
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}} 
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!Ending\+Style@{Ending\+Style}}
+\index{Ending\+Style@{Ending\+Style}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\subsubsection{\texorpdfstring{Ending\+Style}{EndingStyle}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Q\+C\+P\+Line\+Ending\+::\+Ending\+Style}}}
+
+Defines the type of ending decoration for line-\/like items, e.\+g. an arrow.
+
+
+
+The width and length of these decorations can be controlled with the functions \mbox{\hyperlink{class_q_c_p_line_ending_a26dc020ea985a72cc25881ce2115e34e}{set\+Width}} and \mbox{\hyperlink{class_q_c_p_line_ending_ae36fa01763751cd64b7f56c3507e935a}{set\+Length}}. Some decorations like \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ae5a3414916817258bcc6dddd605e8f5c}{es\+Disc}}, \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ae1836502fa43d8990bb62b2d493a140a}{es\+Square}}, \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a378fe5a8b768411b0bc1765210fe7200}{es\+Diamond}} and \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a2cf543bbca332df26d89bf779f50469f}{es\+Bar}} only support a width, the length property is ignored.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_item_line_aebf3d687114d584e0459db6759e2c3c3}{Q\+C\+P\+Item\+Line\+::set\+Head}}, \mbox{\hyperlink{class_q_c_p_item_line_ac264222c3297a7efe33df9345c811a5f}{Q\+C\+P\+Item\+Line\+::set\+Tail}}, \mbox{\hyperlink{class_q_c_p_item_curve_a08a30d9cdd63995deea3d9e20430676f}{Q\+C\+P\+Item\+Curve\+::set\+Head}}, \mbox{\hyperlink{class_q_c_p_item_curve_ac3488d8b1a6489c845dc5bff3ef71124}{Q\+C\+P\+Item\+Curve\+::set\+Tail}}, \mbox{\hyperlink{class_q_c_p_axis_a08af1c72db9ae4dc8cb8a973d44405ab}{Q\+C\+P\+Axis\+::set\+Lower\+Ending}}, \mbox{\hyperlink{class_q_c_p_axis_a69119b892fc306f651763596685aa377}{Q\+C\+P\+Axis\+::set\+Upper\+Ending}} 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+None@{es\+None}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+None@{es\+None}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5aca12d500f50cd6871766801bac30fb03}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5aca12d500f50cd6871766801bac30fb03}} 
+es\+None&No ending decoration. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+Flat\+Arrow@{es\+Flat\+Arrow}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+Flat\+Arrow@{es\+Flat\+Arrow}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a3d7dcea2f100671727c3417142154f8f}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a3d7dcea2f100671727c3417142154f8f}} 
+es\+Flat\+Arrow&A filled arrow head with a straight/flat back (a triangle) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+Spike\+Arrow@{es\+Spike\+Arrow}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+Spike\+Arrow@{es\+Spike\+Arrow}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ab9964d0d03f812d1e79de15edbeb2cbf}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ab9964d0d03f812d1e79de15edbeb2cbf}} 
+es\+Spike\+Arrow&A filled arrow head with an indented back. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+Line\+Arrow@{es\+Line\+Arrow}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+Line\+Arrow@{es\+Line\+Arrow}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a61f78ee8f375fb21cb9d250687bbcbd2}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a61f78ee8f375fb21cb9d250687bbcbd2}} 
+es\+Line\+Arrow&A non-\/filled arrow head with open back. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+Disc@{es\+Disc}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+Disc@{es\+Disc}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ae5a3414916817258bcc6dddd605e8f5c}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ae5a3414916817258bcc6dddd605e8f5c}} 
+es\+Disc&A filled circle. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+Square@{es\+Square}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+Square@{es\+Square}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ae1836502fa43d8990bb62b2d493a140a}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ae1836502fa43d8990bb62b2d493a140a}} 
+es\+Square&A filled square. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+Diamond@{es\+Diamond}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+Diamond@{es\+Diamond}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a378fe5a8b768411b0bc1765210fe7200}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a378fe5a8b768411b0bc1765210fe7200}} 
+es\+Diamond&A filled diamond (45° rotated square) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+Bar@{es\+Bar}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+Bar@{es\+Bar}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a2cf543bbca332df26d89bf779f50469f}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a2cf543bbca332df26d89bf779f50469f}} 
+es\+Bar&A bar perpendicular to the line. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+Half\+Bar@{es\+Half\+Bar}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+Half\+Bar@{es\+Half\+Bar}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a126c390f0c359fcd8df1fc5e38d26d5b}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a126c390f0c359fcd8df1fc5e38d26d5b}} 
+es\+Half\+Bar&A bar perpendicular to the line, pointing out to only one side (to which side can be changed with \mbox{\hyperlink{class_q_c_p_line_ending_a580e4e2360b35ebb8d68f3494aa2335d}{set\+Inverted}}) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{es\+Skewed\+Bar@{es\+Skewed\+Bar}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!es\+Skewed\+Bar@{es\+Skewed\+Bar}}}\mbox{\Hypertarget{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a2b2cc96e757ca9bcd91fb70221ed43ab}\label{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a2b2cc96e757ca9bcd91fb70221ed43ab}} 
+es\+Skewed\+Bar&A bar that is skewed (skew controllable via \mbox{\hyperlink{class_q_c_p_line_ending_ae36fa01763751cd64b7f56c3507e935a}{set\+Length}}) \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_q_c_p_line_ending_af2eaf8123b000d97fbd11929c669f61b}\label{class_q_c_p_line_ending_af2eaf8123b000d97fbd11929c669f61b}} 
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Line\+Ending()}{QCPLineEnding()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Q\+C\+P\+Line\+Ending\+::\+Q\+C\+P\+Line\+Ending (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_q_c_p_line_ending}{Q\+C\+P\+Line\+Ending}} instance with default values (style \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5aca12d500f50cd6871766801bac30fb03}{es\+None}}). \mbox{\Hypertarget{class_q_c_p_line_ending_abb2abc7542f0c7a3c081d878248896a4}\label{class_q_c_p_line_ending_abb2abc7542f0c7a3c081d878248896a4}} 
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Line\+Ending()}{QCPLineEnding()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Q\+C\+P\+Line\+Ending\+::\+Q\+C\+P\+Line\+Ending (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Q\+C\+P\+Line\+Ending\+::\+Ending\+Style}}}]{style,  }\item[{double}]{width = {\ttfamily 8},  }\item[{double}]{length = {\ttfamily 10},  }\item[{bool}]{inverted = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_q_c_p_line_ending}{Q\+C\+P\+Line\+Ending}} instance with the specified values. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_c_p_line_ending_acacd24d386d459b282d3c57f16a5405d}\label{class_q_c_p_line_ending_acacd24d386d459b282d3c57f16a5405d}} 
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!real\+Length@{real\+Length}}
+\index{real\+Length@{real\+Length}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\subsubsection{\texorpdfstring{real\+Length()}{realLength()}}
+{\footnotesize\ttfamily double Q\+C\+P\+Line\+Ending\+::real\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Starting from the origin of this line ending (which is style specific), returns the length covered by the line ending symbol, in backward direction.
+
+For example, the \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5ab9964d0d03f812d1e79de15edbeb2cbf}{es\+Spike\+Arrow}} has a shorter real length than a \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a3d7dcea2f100671727c3417142154f8f}{es\+Flat\+Arrow}}, even if both have the same \mbox{\hyperlink{class_q_c_p_line_ending_ae36fa01763751cd64b7f56c3507e935a}{set\+Length}} value, because the spike arrow has an inward curved back, which reduces the length along its center axis (the drawing origin for arrows is at the tip).
+
+This function is used for precise, style specific placement of line endings, for example in Q\+C\+P\+Axes. \mbox{\Hypertarget{class_q_c_p_line_ending_a580e4e2360b35ebb8d68f3494aa2335d}\label{class_q_c_p_line_ending_a580e4e2360b35ebb8d68f3494aa2335d}} 
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!set\+Inverted@{set\+Inverted}}
+\index{set\+Inverted@{set\+Inverted}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\subsubsection{\texorpdfstring{set\+Inverted()}{setInverted()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Line\+Ending\+::set\+Inverted (\begin{DoxyParamCaption}\item[{bool}]{inverted }\end{DoxyParamCaption})}
+
+Sets whether the ending decoration shall be inverted. For example, an arrow decoration will point inward when {\itshape inverted} is set to true.
+
+Note that also the {\itshape width} direction is inverted. For symmetrical ending styles like arrows or discs, this doesn\textquotesingle{}t make a difference. However, asymmetric styles like \mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5a126c390f0c359fcd8df1fc5e38d26d5b}{es\+Half\+Bar}} are affected by it, which can be used to control to which side the half bar points to. \mbox{\Hypertarget{class_q_c_p_line_ending_ae36fa01763751cd64b7f56c3507e935a}\label{class_q_c_p_line_ending_ae36fa01763751cd64b7f56c3507e935a}} 
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!set\+Length@{set\+Length}}
+\index{set\+Length@{set\+Length}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\subsubsection{\texorpdfstring{set\+Length()}{setLength()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Line\+Ending\+::set\+Length (\begin{DoxyParamCaption}\item[{double}]{length }\end{DoxyParamCaption})}
+
+Sets the length of the ending decoration, if the style supports it. On arrows, for example, the length defines the size in pointing direction.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_line_ending_a26dc020ea985a72cc25881ce2115e34e}{set\+Width}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_line_ending_a56953b9cb8ed1bed0f025c3935f16910}\label{class_q_c_p_line_ending_a56953b9cb8ed1bed0f025c3935f16910}} 
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!set\+Style@{set\+Style}}
+\index{set\+Style@{set\+Style}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\subsubsection{\texorpdfstring{set\+Style()}{setStyle()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Line\+Ending\+::set\+Style (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_c_p_line_ending_a5ef16e6876b4b74959c7261d8d4c2cd5}{Q\+C\+P\+Line\+Ending\+::\+Ending\+Style}}}]{style }\end{DoxyParamCaption})}
+
+Sets the style of the ending decoration. \mbox{\Hypertarget{class_q_c_p_line_ending_a26dc020ea985a72cc25881ce2115e34e}\label{class_q_c_p_line_ending_a26dc020ea985a72cc25881ce2115e34e}} 
+\index{Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}!set\+Width@{set\+Width}}
+\index{set\+Width@{set\+Width}!Q\+C\+P\+Line\+Ending@{Q\+C\+P\+Line\+Ending}}
+\subsubsection{\texorpdfstring{set\+Width()}{setWidth()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Line\+Ending\+::set\+Width (\begin{DoxyParamCaption}\item[{double}]{width }\end{DoxyParamCaption})}
+
+Sets the width of the ending decoration, if the style supports it. On arrows, for example, the width defines the size perpendicular to the arrow\textquotesingle{}s pointing direction.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_line_ending_ae36fa01763751cd64b7f56c3507e935a}{set\+Length}} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8h}{qcustomplot.\+h}}\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8cpp}{qcustomplot.\+cpp}}\end{DoxyCompactItemize}

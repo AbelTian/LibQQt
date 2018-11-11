@@ -1,0 +1,126 @@
+\hypertarget{class_q_qt_protocol_manager}{}\section{Q\+Qt\+Protocol\+Manager Class Reference}
+\label{class_q_qt_protocol_manager}\index{Q\+Qt\+Protocol\+Manager@{Q\+Qt\+Protocol\+Manager}}
+
+
+The \mbox{\hyperlink{class_q_qt_protocol_manager}{Q\+Qt\+Protocol\+Manager}} class very good ideology and impliment 用于管理多个\+Protocol实例 用户实现的协议注册到这里，当协议当中有消息需要告知业务层，从这里告知。  
+
+
+
+
+{\ttfamily \#include $<$qqtprotocolmanager.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Protocol\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_q_qt_protocol_manager}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_q_qt_protocol_manager_aac4faf21da374d2371f3ecc25324c5ed}{notify\+To\+Business\+Level}} (const \mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$protocol, const \mbox{\hyperlink{class_q_qt_message}{Q\+Qt\+Message}} $\ast$message)
+\begin{DoxyCompactList}\small\item\em notify\+To\+User 这个信号是给用户的，用户可以接收下来，转换为自己的协议使用。注释：如果必要。 用户使用这个\+Protocol\+Manager，\+Protocol需要提交给用户处理的命令，提交到这里，在这里提交给用户。 Protocol\+Manager -\/$>$ Business\+Level \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_protocol_manager_a5df5b4446ea8265671812ab8d7d7252f}\label{class_q_qt_protocol_manager_a5df5b4446ea8265671812ab8d7d7252f}} 
+void {\bfseries remanent\+Protocol\+Changed} (int num)
+\item 
+\mbox{\Hypertarget{class_q_qt_protocol_manager_ac5c8d1d4f008a425e91e62fd5986d80a}\label{class_q_qt_protocol_manager_ac5c8d1d4f008a425e91e62fd5986d80a}} 
+void {\bfseries remaining\+Protocol\+Changed} (int num)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_protocol_manager_a8dda4189f004e2013de7a51039319efa}\label{class_q_qt_protocol_manager_a8dda4189f004e2013de7a51039319efa}} 
+{\bfseries Q\+Qt\+Protocol\+Manager} (Q\+Object $\ast$parent=0)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{class_q_qt_protocol_manager_a82e23b25b4991b6b04969bab7645cb1a}{register\+Protocol}} (int count=1024)
+\item 
+\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$ \mbox{\hyperlink{class_q_qt_protocol_manager_ad9338cb29423bcb27e028b2fcc172111}{create\+Protocol}} ()
+\begin{DoxyCompactList}\small\item\em create\+Protocol 创建一个\+Protocol句柄，开始使用。 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_q_qt_protocol_manager_a144c24a9597d4fd2618b20f3389497f1}{delete\+Protocol}} (\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$stack)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_protocol_manager_ad613f34535b4b40b189d11c40d354143}\label{class_q_qt_protocol_manager_ad613f34535b4b40b189d11c40d354143}} 
+\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$ {\bfseries find\+Detached\+Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_protocol_manager}{Q\+Qt\+Protocol\+Manager}} class very good ideology and impliment 用于管理多个\+Protocol实例 用户实现的协议注册到这里，当协议当中有消息需要告知业务层，从这里告知。 
+
+注释： 讲解notify过程， Q\+Qt\+Socket\+Server，管理\+Q\+Qt\+Socket\+Client句柄 Q\+Qt\+Protocol\+Manager，管理\+Q\+Qt\+Protocol句柄 cli -\/$>$ proto, dispatcher, recv\+Func, notify\+To\+Protocol\+Manager, proto\+Manager -\/$>$ business\+Level, 完全信号传递。
+
+关于识别\+Protocl， 用户的客户端可以发个人信息上来，\+Protocol保存在句柄内部。
+
+定位： 只可以安装同一种类型的句柄。 可以通过多次注册改变内部的句柄数量。
+
+模型： 业 PM S 业 务 $\vert$ $\vert$ 务 层 P -\/ C \+:\+: C -\/ P 层 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_protocol_manager_ad9338cb29423bcb27e028b2fcc172111}\label{class_q_qt_protocol_manager_ad9338cb29423bcb27e028b2fcc172111}} 
+\index{Q\+Qt\+Protocol\+Manager@{Q\+Qt\+Protocol\+Manager}!create\+Protocol@{create\+Protocol}}
+\index{create\+Protocol@{create\+Protocol}!Q\+Qt\+Protocol\+Manager@{Q\+Qt\+Protocol\+Manager}}
+\subsubsection{\texorpdfstring{create\+Protocol()}{createProtocol()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$ Q\+Qt\+Protocol\+Manager\+::create\+Protocol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+create\+Protocol 创建一个\+Protocol句柄，开始使用。 
+
+以下和用户无关 这个函数给\+Q\+Qt\+Socket\+Server用的，不是给用户用的。 用于生成用户协议对象实例。
+
+
+\begin{DoxyParams}{Parameters}
+{\em protocol\+Type\+Name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_q_qt_protocol_manager_a144c24a9597d4fd2618b20f3389497f1}\label{class_q_qt_protocol_manager_a144c24a9597d4fd2618b20f3389497f1}} 
+\index{Q\+Qt\+Protocol\+Manager@{Q\+Qt\+Protocol\+Manager}!delete\+Protocol@{delete\+Protocol}}
+\index{delete\+Protocol@{delete\+Protocol}!Q\+Qt\+Protocol\+Manager@{Q\+Qt\+Protocol\+Manager}}
+\subsubsection{\texorpdfstring{delete\+Protocol()}{deleteProtocol()}}
+{\footnotesize\ttfamily void Q\+Qt\+Protocol\+Manager\+::delete\+Protocol (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$}]{stack }\end{DoxyParamCaption})}
+
+使用完，删除。
+
+Protocol的deattach和这个功能不同，它表示使用状态切换为不使用。 而delete\+Protocol表示，这个句柄要删除了。 如果只是deattach，那么这个句柄重新被attach以后，用户把内部的变量都reset了吗？其实如果reset了，不必要删除句柄。 但是，内部实现的，支持reset，在attach的时候调用。可是没有太多作用，因为，这个句柄在不用了的时候会在这里被delete掉。
+
+这个机制会导致初始注册了一些句柄以后，使用使用就变少了，逐渐的就用完了。所以必须频繁根据句柄数量变动进行注册。 经过考虑，我决定不删除句柄，用户继承\+Q\+Qt\+Protocol句柄的时候override init函数初始化句柄，可以避免句柄逐渐变少引起的频繁注册。 Protocol的init函数，只需要在必要初始化句柄的时候重写。
+
+内部没有对\+Q\+List加锁，所以不要movetothread里用。 \mbox{\Hypertarget{class_q_qt_protocol_manager_aac4faf21da374d2371f3ecc25324c5ed}\label{class_q_qt_protocol_manager_aac4faf21da374d2371f3ecc25324c5ed}} 
+\index{Q\+Qt\+Protocol\+Manager@{Q\+Qt\+Protocol\+Manager}!notify\+To\+Business\+Level@{notify\+To\+Business\+Level}}
+\index{notify\+To\+Business\+Level@{notify\+To\+Business\+Level}!Q\+Qt\+Protocol\+Manager@{Q\+Qt\+Protocol\+Manager}}
+\subsubsection{\texorpdfstring{notify\+To\+Business\+Level}{notifyToBusinessLevel}}
+{\footnotesize\ttfamily void Q\+Qt\+Protocol\+Manager\+::notify\+To\+Business\+Level (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$}]{protocol,  }\item[{const \mbox{\hyperlink{class_q_qt_message}{Q\+Qt\+Message}} $\ast$}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+notify\+To\+User 这个信号是给用户的，用户可以接收下来，转换为自己的协议使用。注释：如果必要。 用户使用这个\+Protocol\+Manager，\+Protocol需要提交给用户处理的命令，提交到这里，在这里提交给用户。 Protocol\+Manager -\/$>$ Business\+Level 
+
+
+\begin{DoxyParams}{Parameters}
+{\em protocol} & \\
+\hline
+{\em message} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_protocol_manager_a82e23b25b4991b6b04969bab7645cb1a}\label{class_q_qt_protocol_manager_a82e23b25b4991b6b04969bab7645cb1a}} 
+\index{Q\+Qt\+Protocol\+Manager@{Q\+Qt\+Protocol\+Manager}!register\+Protocol@{register\+Protocol}}
+\index{register\+Protocol@{register\+Protocol}!Q\+Qt\+Protocol\+Manager@{Q\+Qt\+Protocol\+Manager}}
+\subsubsection{\texorpdfstring{register\+Protocol()}{registerProtocol()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool Q\+Qt\+Protocol\+Manager\+::register\+Protocol (\begin{DoxyParamCaption}\item[{int}]{count = {\ttfamily 1024} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+注册用户协议类型 模板函数 用于\+Protocol\+Manager内部生成用户协议实例。 这个用户在生成\+Protocol\+Manager对象的时候，需要注册一下自己的协议类，需要调用至少一次。
+
+注意： register\+Protocol$<$\+Q\+Qt\+X\+X\+X\+Protocol$>$(1); //这样只预备了一个句柄。 可以根据\+Protocol Object\+Name区分\+Protocol 或者meta\+Object()-\/$>$class\+Name()
+
+用法： 用户连接remanent\+Protocol\+Changed，当发现小于某个约束数目的时候，就调用这个函数进行注册， 注册用户认为合理的数量即可。 如果客户端数量存在上限，调用一次这个函数就可以了，不必检测剩余句柄数目。默认一次创建1024个句柄。 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtprotocolmanager.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtprotocolmanager.\+cpp\end{DoxyCompactItemize}

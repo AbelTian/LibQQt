@@ -1,0 +1,99 @@
+\hypertarget{class_q_qt_dialog}{}\section{Q\+Qt\+Dialog Class Reference}
+\label{class_q_qt_dialog}\index{Q\+Qt\+Dialog@{Q\+Qt\+Dialog}}
+
+
+{\ttfamily \#include $<$qqtdialog.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.047619cm]{class_q_qt_dialog}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_q_qt_dialog_a00b7022121843af66df90371b9317412}{Image\+Style}} \{ \newline
+\mbox{\hyperlink{class_q_qt_dialog_a00b7022121843af66df90371b9317412ae861c4431ada9691dad3eb7bdd101e18}{Q\+Q\+T\+C\+E\+N\+T\+ER}}, 
+\mbox{\hyperlink{class_q_qt_dialog_a00b7022121843af66df90371b9317412a9a4ea72f0126e0d8ae1d218187c61d19}{Q\+Q\+T\+T\+I\+L\+E\+D\+W\+I\+D\+TH}}, 
+{\bfseries Q\+Q\+T\+T\+I\+L\+E\+D\+H\+E\+I\+G\+HT}, 
+{\bfseries Q\+Q\+T\+T\+I\+L\+ED}, 
+\newline
+\mbox{\hyperlink{class_q_qt_dialog_a00b7022121843af66df90371b9317412a97f7df5dae9533703745de33ea35efb6}{Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+TH}}, 
+{\bfseries Q\+Q\+T\+Z\+O\+O\+M\+H\+E\+I\+G\+HT}, 
+{\bfseries Q\+Q\+T\+Z\+O\+OM}, 
+\mbox{\hyperlink{class_q_qt_dialog_a00b7022121843af66df90371b9317412ae0e28380d32c14e40028c6b5c76f2361}{Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+T\+H\+\_\+\+K\+E\+E\+P\+A\+S\+P\+E\+C\+T\+R\+A\+T\+IO}}, 
+\newline
+{\bfseries Q\+Q\+T\+Z\+O\+O\+M\+H\+E\+I\+G\+H\+T\+\_\+\+K\+E\+E\+P\+A\+S\+P\+E\+C\+T\+R\+A\+T\+IO}, 
+{\bfseries Q\+Q\+T\+Z\+O\+O\+M\+\_\+\+K\+E\+E\+P\+A\+S\+P\+E\+C\+T\+R\+A\+T\+IO}, 
+{\bfseries Q\+Q\+T\+I\+M\+A\+G\+E\+S\+T\+Y\+L\+E\+M\+AX}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_dialog_a5e0de83916d7f093b3f341659473a53b}\label{class_q_qt_dialog_a5e0de83916d7f093b3f341659473a53b}} 
+{\bfseries Q\+Qt\+Dialog} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_dialog_a5a05dc162c599b20f183a56517b2b280}\label{class_q_qt_dialog_a5a05dc162c599b20f183a56517b2b280}} 
+void {\bfseries set\+Image\+Style} (\mbox{\hyperlink{class_q_qt_dialog_a00b7022121843af66df90371b9317412}{Image\+Style}} style=\mbox{\hyperlink{class_q_qt_dialog_a00b7022121843af66df90371b9317412ae861c4431ada9691dad3eb7bdd101e18}{Q\+Q\+T\+C\+E\+N\+T\+ER}})
+\item 
+\mbox{\Hypertarget{class_q_qt_dialog_af168b1be3c0bd5684f3347807989129f}\label{class_q_qt_dialog_af168b1be3c0bd5684f3347807989129f}} 
+void {\bfseries set\+Pixmap} (const Q\+String \&pic=Q\+String())
+\item 
+\mbox{\Hypertarget{class_q_qt_dialog_adc48d665b0ba2577e120453e95dd1e98}\label{class_q_qt_dialog_adc48d665b0ba2577e120453e95dd1e98}} 
+void {\bfseries set\+Pixmap} (const Q\+Pixmap \&pixmap)
+\item 
+\mbox{\Hypertarget{class_q_qt_dialog_af6a79cfd128314fa5361c2162056a8f2}\label{class_q_qt_dialog_af6a79cfd128314fa5361c2162056a8f2}} 
+void {\bfseries set\+Pixmap} (const Q\+Image \&image)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_q_qt_dialog_a9d4b5c8f382b9861516ac9ec22017719}{paint\+Event}} (Q\+Paint\+Event $\ast$) override
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Q\+S\+S美化，和\+Q\+Qt\+Dialog图片背景不能共存. Q\+S\+S部分影响\+Q\+Qt\+Widget，比如\+Size等 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_q_qt_dialog_a00b7022121843af66df90371b9317412}\label{class_q_qt_dialog_a00b7022121843af66df90371b9317412}} 
+\index{Q\+Qt\+Dialog@{Q\+Qt\+Dialog}!Image\+Style@{Image\+Style}}
+\index{Image\+Style@{Image\+Style}!Q\+Qt\+Dialog@{Q\+Qt\+Dialog}}
+\subsubsection{\texorpdfstring{Image\+Style}{ImageStyle}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_q_qt_dialog_a00b7022121843af66df90371b9317412}{Q\+Qt\+Dialog\+::\+Image\+Style}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Q\+Q\+T\+C\+E\+N\+T\+ER@{Q\+Q\+T\+C\+E\+N\+T\+ER}!Q\+Qt\+Dialog@{Q\+Qt\+Dialog}}\index{Q\+Qt\+Dialog@{Q\+Qt\+Dialog}!Q\+Q\+T\+C\+E\+N\+T\+ER@{Q\+Q\+T\+C\+E\+N\+T\+ER}}}\mbox{\Hypertarget{class_q_qt_dialog_a00b7022121843af66df90371b9317412ae861c4431ada9691dad3eb7bdd101e18}\label{class_q_qt_dialog_a00b7022121843af66df90371b9317412ae861c4431ada9691dad3eb7bdd101e18}} 
+Q\+Q\+T\+C\+E\+N\+T\+ER&整个居中,全面缩放显示 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Q\+Q\+T\+T\+I\+L\+E\+D\+W\+I\+D\+TH@{Q\+Q\+T\+T\+I\+L\+E\+D\+W\+I\+D\+TH}!Q\+Qt\+Dialog@{Q\+Qt\+Dialog}}\index{Q\+Qt\+Dialog@{Q\+Qt\+Dialog}!Q\+Q\+T\+T\+I\+L\+E\+D\+W\+I\+D\+TH@{Q\+Q\+T\+T\+I\+L\+E\+D\+W\+I\+D\+TH}}}\mbox{\Hypertarget{class_q_qt_dialog_a00b7022121843af66df90371b9317412a9a4ea72f0126e0d8ae1d218187c61d19}\label{class_q_qt_dialog_a00b7022121843af66df90371b9317412a9a4ea72f0126e0d8ae1d218187c61d19}} 
+Q\+Q\+T\+T\+I\+L\+E\+D\+W\+I\+D\+TH&切 从左上 会产生label的效果，左右按照rect长，但是不缩放形状 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+TH@{Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+TH}!Q\+Qt\+Dialog@{Q\+Qt\+Dialog}}\index{Q\+Qt\+Dialog@{Q\+Qt\+Dialog}!Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+TH@{Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+TH}}}\mbox{\Hypertarget{class_q_qt_dialog_a00b7022121843af66df90371b9317412a97f7df5dae9533703745de33ea35efb6}\label{class_q_qt_dialog_a00b7022121843af66df90371b9317412a97f7df5dae9533703745de33ea35efb6}} 
+Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+TH&缩放 忽略长宽比 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+T\+H\+\_\+\+K\+E\+E\+P\+A\+S\+P\+E\+C\+T\+R\+A\+T\+IO@{Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+T\+H\+\_\+\+K\+E\+E\+P\+A\+S\+P\+E\+C\+T\+R\+A\+T\+IO}!Q\+Qt\+Dialog@{Q\+Qt\+Dialog}}\index{Q\+Qt\+Dialog@{Q\+Qt\+Dialog}!Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+T\+H\+\_\+\+K\+E\+E\+P\+A\+S\+P\+E\+C\+T\+R\+A\+T\+IO@{Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+T\+H\+\_\+\+K\+E\+E\+P\+A\+S\+P\+E\+C\+T\+R\+A\+T\+IO}}}\mbox{\Hypertarget{class_q_qt_dialog_a00b7022121843af66df90371b9317412ae0e28380d32c14e40028c6b5c76f2361}\label{class_q_qt_dialog_a00b7022121843af66df90371b9317412ae0e28380d32c14e40028c6b5c76f2361}} 
+Q\+Q\+T\+Z\+O\+O\+M\+W\+I\+D\+T\+H\+\_\+\+K\+E\+E\+P\+A\+S\+P\+E\+C\+T\+R\+A\+T\+IO&缩放 保持长宽比 \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_dialog_a9d4b5c8f382b9861516ac9ec22017719}\label{class_q_qt_dialog_a9d4b5c8f382b9861516ac9ec22017719}} 
+\index{Q\+Qt\+Dialog@{Q\+Qt\+Dialog}!paint\+Event@{paint\+Event}}
+\index{paint\+Event@{paint\+Event}!Q\+Qt\+Dialog@{Q\+Qt\+Dialog}}
+\subsubsection{\texorpdfstring{paint\+Event()}{paintEvent()}}
+{\footnotesize\ttfamily void Q\+Qt\+Dialog\+::paint\+Event (\begin{DoxyParamCaption}\item[{Q\+Paint\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+要达到居中的目标，\+Q\+Image需要做的size判断很繁复，这里使用\+Q\+Icon做一些中间转换的后续转换，可以很容易的达到绘制合理大小的pixmap的目的。 source\+: pixmap file image Q\+Image 输入、输出两侧是pixmap 借助(+\+Q\+Icon) Q\+Icon 输入、输出两侧也是pixmap dest\+: 所需要的、合理大小的pixmap
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/frame/qqtdialog.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/frame/qqtdialog.\+cpp\end{DoxyCompactItemize}

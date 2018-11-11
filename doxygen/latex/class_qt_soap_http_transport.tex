@@ -1,0 +1,181 @@
+\hypertarget{class_qt_soap_http_transport}{}\section{Qt\+Soap\+Http\+Transport Class Reference}
+\label{class_qt_soap_http_transport}\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+
+
+The \mbox{\hyperlink{class_qt_soap_http_transport}{Qt\+Soap\+Http\+Transport}} class provides a mechanism for transporting S\+O\+AP messages to and from other hosts using the H\+T\+TP protocol.  
+
+
+Inheritance diagram for Qt\+Soap\+Http\+Transport\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_qt_soap_http_transport}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_qt_soap_http_transport_a51f909d36a83ee62e0b3dccff3e340cf}{response\+Ready}} ()
+\item 
+void \mbox{\hyperlink{class_qt_soap_http_transport_a1d472301bc5c3ec56f204d22c3197c63}{response\+Ready}} (const \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \&response)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_qt_soap_http_transport_a74fc050fd6d7914dfe444af3faf16334}{Qt\+Soap\+Http\+Transport}} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\hyperlink{class_qt_soap_http_transport_a1884800f50975eabf79f5ef2b4c2dc03}{$\sim$\+Qt\+Soap\+Http\+Transport}} ()
+\item 
+void \mbox{\hyperlink{class_qt_soap_http_transport_a7dfb69fe0e076407cda0093ee99c4988}{set\+Host}} (const Q\+String \&host, bool use\+Secure\+H\+T\+TP=false, int port=0)
+\item 
+void \mbox{\hyperlink{class_qt_soap_http_transport_afb8d7fa9d30b5ec0dc2857818c5c1b0a}{set\+Host}} (const Q\+String \&host, int port)
+\item 
+void \mbox{\hyperlink{class_qt_soap_http_transport_af370cf7ff31756ebdc2bb48b2ecb3663}{set\+Action}} (const Q\+String \&action)
+\item 
+void \mbox{\hyperlink{class_qt_soap_http_transport_a6b49c608e9eb6af98b7258c8a59c5005}{submit\+Request}} (\mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \&request, const Q\+String \&path)
+\item 
+const \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \& \mbox{\hyperlink{class_qt_soap_http_transport_a85f606ff295d200c387e85a710692c59}{get\+Response}} () const
+\item 
+Q\+Network\+Access\+Manager $\ast$ \mbox{\hyperlink{class_qt_soap_http_transport_af3c8834f62181744fb6089cd50e1b184}{network\+Access\+Manager}} ()
+\item 
+Q\+Network\+Reply $\ast$ \mbox{\hyperlink{class_qt_soap_http_transport_a2cf74b91f101f37583e4013ee812ed20}{network\+Reply}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_qt_soap_http_transport}{Qt\+Soap\+Http\+Transport}} class provides a mechanism for transporting S\+O\+AP messages to and from other hosts using the H\+T\+TP protocol. 
+
+Use this class to submit S\+O\+AP messages to a web service. Set the hostname of the S\+O\+AP server with \mbox{\hyperlink{class_qt_soap_http_transport_a7dfb69fe0e076407cda0093ee99c4988}{set\+Host()}}. Some servers also require the S\+O\+A\+P\+Action header to be set, and you can do this with \mbox{\hyperlink{class_qt_soap_http_transport_af370cf7ff31756ebdc2bb48b2ecb3663}{set\+Action()}}. Next, submit the request with \mbox{\hyperlink{class_qt_soap_http_transport_a6b49c608e9eb6af98b7258c8a59c5005}{submit\+Request()}}, passing the message to submit together with the path that you want to submit the message to. The \mbox{\hyperlink{class_qt_soap_http_transport_a51f909d36a83ee62e0b3dccff3e340cf}{response\+Ready()}} signal is emitted when a response has been received. Call \mbox{\hyperlink{class_qt_soap_http_transport_a85f606ff295d200c387e85a710692c59}{get\+Response()}} to get the reponse from the service.
+
+\mbox{\hyperlink{class_qt_soap_http_transport}{Qt\+Soap\+Http\+Transport}} usage example\+: If a S\+O\+AP weather service was running on the host weather.\+example.\+com, the following code might be used to find the temperature in any given city\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} WeatherFetcher::findTemperature(\textcolor{keyword}{const} QString &city)
+\{
+    \mbox{\hyperlink{class_qt_soap_message}{QtSoapMessage}} message;
+    message.\mbox{\hyperlink{class_qt_soap_message_a792f4e366d4bf4c3ca09ea6f034237b5}{setMethod}}(\textcolor{stringliteral}{"getTemperature"}, \textcolor{stringliteral}{"http://weather.example.com/temperature"});
+    message.setMethodArgument(\textcolor{stringliteral}{"city"}, \textcolor{stringliteral}{""}, city);
+
+    \textcolor{comment}{// transport is a private member of WeatherFetcher, of type QtSoapHttpTransport}
+    transport.setHost(\textcolor{stringliteral}{"www.example.com"});
+    connect(&transport, SIGNAL(\mbox{\hyperlink{class_qt_soap_http_transport_a51f909d36a83ee62e0b3dccff3e340cf}{responseReady}}()), SLOT(readResponse()));
+
+    transport.submitRequest(message, \textcolor{stringliteral}{"/weatherfetcher/fetch.asp"});
+\}
+\end{DoxyCode}
+
+
+This is an example implementation of the read\+Response() slot in the Weather\+Fetcher class\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} WeatherFetcher::readResponse()
+\{
+    \textcolor{keyword}{const} \mbox{\hyperlink{class_qt_soap_message}{QtSoapMessage}} &response = transport.getResponse();
+    \textcolor{keywordflow}{if} (response.\mbox{\hyperlink{class_qt_soap_message_a7aa7a55d9f593144499f8622e8aa1ce5}{isFault}}()) \{
+        cout << response.\mbox{\hyperlink{class_qt_soap_message_a11b95f781994094c764e457f800a3a21}{faultString}}().\mbox{\hyperlink{class_qt_soap_type_a253d268332ea0b2ebba6ee52522fa685}{toString}}().toLatin1().constData() << endl;
+        \textcolor{keywordflow}{return};
+    \}
+
+    \textcolor{keyword}{const} \mbox{\hyperlink{class_qt_soap_type}{QtSoapType}} &returnValue = response.\mbox{\hyperlink{class_qt_soap_message_ac223f69e31d5f9ff251a467149c547d5}{returnValue}}();
+    \textcolor{keywordflow}{if} (returnValue[\textcolor{stringliteral}{"temperature"}].isValid()) \{
+    cout << \textcolor{stringliteral}{"The current temperature is "}
+         << returnValue[\textcolor{stringliteral}{"temperature"}].\mbox{\hyperlink{class_qt_soap_type_a253d268332ea0b2ebba6ee52522fa685}{toString}}().toLatin1().constData()
+         << \textcolor{stringliteral}{" degrees Celcius."} << endl;
+\}
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}}, \mbox{\hyperlink{class_qt_soap_type}{Qt\+Soap\+Type}} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_qt_soap_http_transport_a74fc050fd6d7914dfe444af3faf16334}\label{class_qt_soap_http_transport_a74fc050fd6d7914dfe444af3faf16334}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{Qt\+Soap\+Http\+Transport()}{QtSoapHttpTransport()}}
+{\footnotesize\ttfamily Qt\+Soap\+Http\+Transport\+::\+Qt\+Soap\+Http\+Transport (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Constructs a \mbox{\hyperlink{class_qt_soap_http_transport}{Qt\+Soap\+Http\+Transport}} object. Passes {\itshape parent} to Q\+Object\textquotesingle{}s constructor. \mbox{\Hypertarget{class_qt_soap_http_transport_a1884800f50975eabf79f5ef2b4c2dc03}\label{class_qt_soap_http_transport_a1884800f50975eabf79f5ef2b4c2dc03}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!````~Qt\+Soap\+Http\+Transport@{$\sim$\+Qt\+Soap\+Http\+Transport}}
+\index{````~Qt\+Soap\+Http\+Transport@{$\sim$\+Qt\+Soap\+Http\+Transport}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{$\sim$\+Qt\+Soap\+Http\+Transport()}{~QtSoapHttpTransport()}}
+{\footnotesize\ttfamily Qt\+Soap\+Http\+Transport\+::$\sim$\+Qt\+Soap\+Http\+Transport (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructs a \mbox{\hyperlink{class_qt_soap_http_transport}{Qt\+Soap\+Http\+Transport}}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_qt_soap_http_transport_a85f606ff295d200c387e85a710692c59}\label{class_qt_soap_http_transport_a85f606ff295d200c387e85a710692c59}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!get\+Response@{get\+Response}}
+\index{get\+Response@{get\+Response}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{get\+Response()}{getResponse()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \& Qt\+Soap\+Http\+Transport\+::get\+Response (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the most recently received response S\+O\+AP message. This message could be a Fault message, so it is wise to check using \mbox{\hyperlink{class_qt_soap_message_a7aa7a55d9f593144499f8622e8aa1ce5}{Qt\+Soap\+Message\+::is\+Fault()}} before processing the response. \mbox{\Hypertarget{class_qt_soap_http_transport_af3c8834f62181744fb6089cd50e1b184}\label{class_qt_soap_http_transport_af3c8834f62181744fb6089cd50e1b184}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!network\+Access\+Manager@{network\+Access\+Manager}}
+\index{network\+Access\+Manager@{network\+Access\+Manager}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{network\+Access\+Manager()}{networkAccessManager()}}
+{\footnotesize\ttfamily Q\+Network\+Access\+Manager $\ast$ Qt\+Soap\+Http\+Transport\+::network\+Access\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns a pointer to the Q\+Network\+Access\+Manager object used by this transport. This is useful if the application needs to connect to its signals, or set or read its cookie jar, etc. \mbox{\Hypertarget{class_qt_soap_http_transport_a2cf74b91f101f37583e4013ee812ed20}\label{class_qt_soap_http_transport_a2cf74b91f101f37583e4013ee812ed20}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!network\+Reply@{network\+Reply}}
+\index{network\+Reply@{network\+Reply}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{network\+Reply()}{networkReply()}}
+{\footnotesize\ttfamily Q\+Network\+Reply $\ast$ Qt\+Soap\+Http\+Transport\+::network\+Reply (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns a pointer to the Q\+Network\+Reply object of the current (or last) request, or 0 if no such object is currently available.
+
+This is useful if the application needs to access the raw header data etc. \mbox{\Hypertarget{class_qt_soap_http_transport_a51f909d36a83ee62e0b3dccff3e340cf}\label{class_qt_soap_http_transport_a51f909d36a83ee62e0b3dccff3e340cf}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!response\+Ready@{response\+Ready}}
+\index{response\+Ready@{response\+Ready}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{response\+Ready}{responseReady}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Http\+Transport\+::response\+Ready (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+This signal is emitted when a S\+O\+AP response is received from a remote peer.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_qt_soap_http_transport_a85f606ff295d200c387e85a710692c59}{get\+Response()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_qt_soap_http_transport_a1d472301bc5c3ec56f204d22c3197c63}\label{class_qt_soap_http_transport_a1d472301bc5c3ec56f204d22c3197c63}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!response\+Ready@{response\+Ready}}
+\index{response\+Ready@{response\+Ready}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{response\+Ready}{responseReady}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Http\+Transport\+::response\+Ready (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \&}]{response }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+This signal is emitted when a S\+O\+AP response is received from a remote peer. The received response is available in {\itshape response}. This signal is emitted in tandem with the argument-\/less \mbox{\hyperlink{class_qt_soap_http_transport_a51f909d36a83ee62e0b3dccff3e340cf}{response\+Ready()}} signal.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_qt_soap_http_transport_a51f909d36a83ee62e0b3dccff3e340cf}{response\+Ready()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_qt_soap_http_transport_af370cf7ff31756ebdc2bb48b2ecb3663}\label{class_qt_soap_http_transport_af370cf7ff31756ebdc2bb48b2ecb3663}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!set\+Action@{set\+Action}}
+\index{set\+Action@{set\+Action}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{set\+Action()}{setAction()}}
+{\footnotesize\ttfamily void Qt\+Soap\+Http\+Transport\+::set\+Action (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{action }\end{DoxyParamCaption})}
+
+Sets the H\+T\+TP header S\+O\+A\+P\+Action to {\itshape action}. \mbox{\Hypertarget{class_qt_soap_http_transport_a7dfb69fe0e076407cda0093ee99c4988}\label{class_qt_soap_http_transport_a7dfb69fe0e076407cda0093ee99c4988}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!set\+Host@{set\+Host}}
+\index{set\+Host@{set\+Host}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{set\+Host()}{setHost()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Http\+Transport\+::set\+Host (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{host,  }\item[{bool}]{use\+Secure\+H\+T\+TP = {\ttfamily false},  }\item[{int}]{port = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Sets the {\itshape host} this transport should connect to. The transport mode will be H\+T\+TP, unless {\itshape use\+Secure\+H\+T\+TP} is set, in which case it will be H\+T\+T\+PS. This transport will connect to the well-\/known ports by default (80 for H\+T\+TP, 443 for H\+T\+T\+PS), unless a different, non-\/zero port is specified in {\itshape port}. \mbox{\Hypertarget{class_qt_soap_http_transport_afb8d7fa9d30b5ec0dc2857818c5c1b0a}\label{class_qt_soap_http_transport_afb8d7fa9d30b5ec0dc2857818c5c1b0a}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!set\+Host@{set\+Host}}
+\index{set\+Host@{set\+Host}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{set\+Host()}{setHost()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Qt\+Soap\+Http\+Transport\+::set\+Host (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{host,  }\item[{int}]{port }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_qt_soap_http_transport_a6b49c608e9eb6af98b7258c8a59c5005}\label{class_qt_soap_http_transport_a6b49c608e9eb6af98b7258c8a59c5005}} 
+\index{Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}!submit\+Request@{submit\+Request}}
+\index{submit\+Request@{submit\+Request}!Qt\+Soap\+Http\+Transport@{Qt\+Soap\+Http\+Transport}}
+\subsubsection{\texorpdfstring{submit\+Request()}{submitRequest()}}
+{\footnotesize\ttfamily void Qt\+Soap\+Http\+Transport\+::submit\+Request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_soap_message}{Qt\+Soap\+Message}} \&}]{request,  }\item[{const Q\+String \&}]{path }\end{DoxyParamCaption})}
+
+Submits the S\+O\+AP message {\itshape request} to the path {\itshape path} on the H\+T\+TP server set using \mbox{\hyperlink{class_qt_soap_http_transport_a7dfb69fe0e076407cda0093ee99c4988}{set\+Host()}}. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/soap/qtsoap.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/soap/qtsoap.\+cpp\end{DoxyCompactItemize}

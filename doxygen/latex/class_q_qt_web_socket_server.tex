@@ -1,0 +1,56 @@
+\hypertarget{class_q_qt_web_socket_server}{}\section{Q\+Qt\+Web\+Socket\+Server Class Reference}
+\label{class_q_qt_web_socket_server}\index{Q\+Qt\+Web\+Socket\+Server@{Q\+Qt\+Web\+Socket\+Server}}
+
+
+The \mbox{\hyperlink{class_q_qt_web_socket_server}{Q\+Qt\+Web\+Socket\+Server}} class please handle\+Connection.  
+
+
+
+
+{\ttfamily \#include $<$qqtwebsocketserver.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Web\+Socket\+Server\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_web_socket_server}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_server_a1e30072fd8b7840ce05113b388b52b8a}\label{class_q_qt_web_socket_server_a1e30072fd8b7840ce05113b388b52b8a}} 
+void {\bfseries client\+Socket\+Dis\+Connected} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_server_a0391df0c964c0d264d536e7ae264fb32}\label{class_q_qt_web_socket_server_a0391df0c964c0d264d536e7ae264fb32}} 
+{\bfseries Q\+Qt\+Web\+Socket\+Server} (const Q\+String \&server\+Name, Ssl\+Mode secure\+Mode, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_server_a0d2e4f86f7b1cf2313f58ba5808126ea}\label{class_q_qt_web_socket_server_a0d2e4f86f7b1cf2313f58ba5808126ea}} 
+void {\bfseries install\+Protocol\+Manager} (\mbox{\hyperlink{class_q_qt_protocol_manager}{Q\+Qt\+Protocol\+Manager}} $\ast$stack\+Group)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_server_a564df88d2914ae93a5bb6ecc49660790}\label{class_q_qt_web_socket_server_a564df88d2914ae93a5bb6ecc49660790}} 
+void {\bfseries uninstall\+Protocol\+Manager} (\mbox{\hyperlink{class_q_qt_protocol_manager}{Q\+Qt\+Protocol\+Manager}} $\ast$stack\+Group)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_server_afef44a31a32ba2fa57be3bd77121ac9d}\label{class_q_qt_web_socket_server_afef44a31a32ba2fa57be3bd77121ac9d}} 
+\mbox{\hyperlink{class_q_qt_protocol_manager}{Q\+Qt\+Protocol\+Manager}} $\ast$ {\bfseries installed\+Protocol\+Manager} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_server_a5570f6e6c5163622dfb85e12063f4e8e}\label{class_q_qt_web_socket_server_a5570f6e6c5163622dfb85e12063f4e8e}} 
+\mbox{\hyperlink{class_q_qt_web_socket_client}{Q\+Qt\+Web\+Socket\+Client}} $\ast$ {\bfseries find\+Client\+By\+Protocol\+Instance} (\mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$protocol)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_server_ae2e2fa2005890802200425bb5275b1f9}\label{class_q_qt_web_socket_server_ae2e2fa2005890802200425bb5275b1f9}} 
+\mbox{\hyperlink{class_q_qt_web_socket_client}{Q\+Qt\+Web\+Socket\+Client}} $\ast$ {\bfseries find\+Client\+By\+I\+P\+Address} (Q\+String ip, quint16 port)
+\item 
+\mbox{\Hypertarget{class_q_qt_web_socket_server_a4112b576c4258c4360c6a0a44ef31a70}\label{class_q_qt_web_socket_server_a4112b576c4258c4360c6a0a44ef31a70}} 
+Q\+List$<$ \mbox{\hyperlink{class_q_qt_web_socket_client}{Q\+Qt\+Web\+Socket\+Client}} $\ast$ $>$ \& {\bfseries client\+List} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_web_socket_server}{Q\+Qt\+Web\+Socket\+Server}} class please handle\+Connection. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtwebsocketserver.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtwebsocketserver.\+cpp\end{DoxyCompactItemize}

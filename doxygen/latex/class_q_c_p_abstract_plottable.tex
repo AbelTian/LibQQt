@@ -1,0 +1,542 @@
+\hypertarget{class_q_c_p_abstract_plottable}{}\section{Q\+C\+P\+Abstract\+Plottable Class Reference}
+\label{class_q_c_p_abstract_plottable}\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+
+
+The abstract base class for all data representing objects in a plot.  
+
+
+Inheritance diagram for Q\+C\+P\+Abstract\+Plottable\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.629108cm]{class_q_c_p_abstract_plottable}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a3af66432b1dca93b28e00e78a8c7c1d9}{selection\+Changed}} (bool selected)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a0059caa3f3581f3959660fef8cbb71c4}{selectable\+Changed}} (bool selectable)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_af78a036e40db6f53a31abadc5323715a}{Q\+C\+P\+Abstract\+Plottable}} (\mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$key\+Axis, \mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$value\+Axis)
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a52c226eefcb1920240eeabae574d28c0}\label{class_q_c_p_abstract_plottable_a52c226eefcb1920240eeabae574d28c0}} 
+Q\+String {\bfseries name} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a022717896dc57b638a7b5a7be7212ba9}\label{class_q_c_p_abstract_plottable_a022717896dc57b638a7b5a7be7212ba9}} 
+bool {\bfseries antialiased\+Fill} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a795370db6b1309de0ab60b633efb5ec2}\label{class_q_c_p_abstract_plottable_a795370db6b1309de0ab60b633efb5ec2}} 
+bool {\bfseries antialiased\+Scatters} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_add06e122d84deb9f451ace9bb8ad9c96}\label{class_q_c_p_abstract_plottable_add06e122d84deb9f451ace9bb8ad9c96}} 
+bool {\bfseries antialiased\+Error\+Bars} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_ad5972efc31344e5a7a78ab4f8864b2d3}\label{class_q_c_p_abstract_plottable_ad5972efc31344e5a7a78ab4f8864b2d3}} 
+Q\+Pen {\bfseries pen} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_aafdfd0946b18364321ffce01cc6045a0}\label{class_q_c_p_abstract_plottable_aafdfd0946b18364321ffce01cc6045a0}} 
+Q\+Pen {\bfseries selected\+Pen} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a893b4896dfd92b68b05b2600b80f5826}\label{class_q_c_p_abstract_plottable_a893b4896dfd92b68b05b2600b80f5826}} 
+Q\+Brush {\bfseries brush} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_afe5f3f74b09e89713ba39da04079a337}\label{class_q_c_p_abstract_plottable_afe5f3f74b09e89713ba39da04079a337}} 
+Q\+Brush {\bfseries selected\+Brush} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a2cdd6f0dd5e9a979037f86b4000d9cfe}\label{class_q_c_p_abstract_plottable_a2cdd6f0dd5e9a979037f86b4000d9cfe}} 
+\mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$ {\bfseries key\+Axis} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_af47809a644a68ffd955fb30b01fb4f2f}\label{class_q_c_p_abstract_plottable_af47809a644a68ffd955fb30b01fb4f2f}} 
+\mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$ {\bfseries value\+Axis} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_adf896b8a213fea74440c7bc969cf6e4c}\label{class_q_c_p_abstract_plottable_adf896b8a213fea74440c7bc969cf6e4c}} 
+bool {\bfseries selectable} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a0b3b514474fe93354fc74cfc144184b4}\label{class_q_c_p_abstract_plottable_a0b3b514474fe93354fc74cfc144184b4}} 
+bool {\bfseries selected} () const
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_ab79c7ba76bc7fa89a4b3580e12149f1f}{set\+Name}} (const Q\+String \&name)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a089d6b5577120239b55c39ed27c39536}{set\+Antialiased\+Fill}} (bool enabled)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a2f03f067ede2ed4da6f7d0e4777a3f02}{set\+Antialiased\+Scatters}} (bool enabled)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a757beb744b96cf1855cca5ab9d3ecf52}{set\+Antialiased\+Error\+Bars}} (bool enabled)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_ab74b09ae4c0e7e13142fe4b5bf46cac7}{set\+Pen}} (const Q\+Pen \&pen)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a6911603cad23ab0469b108224517516f}{set\+Selected\+Pen}} (const Q\+Pen \&pen)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a7a4b92144dca6453a1f0f210e27edc74}{set\+Brush}} (const Q\+Brush \&brush)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_ae8c816874089f7a44001e8618e81a9dc}{set\+Selected\+Brush}} (const Q\+Brush \&brush)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a8524fa2994c63c0913ebd9bb2ffa3920}{set\+Key\+Axis}} (\mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$axis)
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a71626a07367e241ec62ad2c34baf21cb}{set\+Value\+Axis}} (\mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$axis)
+\item 
+Q\+\_\+\+S\+L\+OT void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a22c69299eb5569e0f6bf084877a37dc4}{set\+Selectable}} (bool selectable)
+\item 
+Q\+\_\+\+S\+L\+OT void \mbox{\hyperlink{class_q_c_p_abstract_plottable_afbd5428c2952f59d952e11ab5cd79176}{set\+Selected}} (bool selected)
+\item 
+virtual void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a86e5b8fd4b6ff4f4084e7ea4c573fc53}{clear\+Data}} ()=0
+\item 
+virtual double \mbox{\hyperlink{class_q_c_p_abstract_plottable_a38efe9641d972992a3d44204bc80ec1d}{select\+Test}} (const Q\+PointF \&pos, bool only\+Selectable, Q\+Variant $\ast$details=0) const =0
+\item 
+virtual bool \mbox{\hyperlink{class_q_c_p_abstract_plottable_a70f8cabfd808f7d5204b9f18c45c13f5}{add\+To\+Legend}} ()
+\item 
+virtual bool \mbox{\hyperlink{class_q_c_p_abstract_plottable_ac95fb2604d9106d0852ad9ceb326fe8c}{remove\+From\+Legend}} () const
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_a1491c4a606bccd2d09e65e11b79eb882}{rescale\+Axes}} (bool only\+Enlarge=false) const
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_ae96b83c961e257da116c6acf9c7da308}{rescale\+Key\+Axis}} (bool only\+Enlarge=false) const
+\item 
+void \mbox{\hyperlink{class_q_c_p_abstract_plottable_aa1e408bb2d13999150c3f7f8a8579ca9}{rescale\+Value\+Axis}} (bool only\+Enlarge=false) const
+\end{DoxyCompactItemize}
+\subsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8}{Sign\+Domain}} \{ \mbox{\hyperlink{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a0fc9a70796ef60ad18ddd18056e6dc63}{sd\+Negative}}, 
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a082b98cfb91a7363a3b5cd17b0c1cd60}{sd\+Both}}, 
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a02951859f243a4d24e779cfbb5471030}{sd\+Positive}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_aafb817dbea97d2798967f3371a701413}\label{class_q_c_p_abstract_plottable_aafb817dbea97d2798967f3371a701413}} 
+virtual Q\+Rect {\bfseries clip\+Rect} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_acbab5e30dcd04fd302b4a5902ac2c482}\label{class_q_c_p_abstract_plottable_acbab5e30dcd04fd302b4a5902ac2c482}} 
+virtual void {\bfseries draw} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter)=0
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_afb5e4718c232a16d0fb06b00e172be9e}\label{class_q_c_p_abstract_plottable_afb5e4718c232a16d0fb06b00e172be9e}} 
+virtual \mbox{\hyperlink{namespace_q_c_p_a2ad6bb6281c7c2d593d4277b44c2b037}{Q\+C\+P\+::\+Interaction}} {\bfseries selection\+Category} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a59a80773c5cefc05a0646ac8e1149ed5}\label{class_q_c_p_abstract_plottable_a59a80773c5cefc05a0646ac8e1149ed5}} 
+void {\bfseries apply\+Default\+Antialiasing\+Hint} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a16aaad02456aa23a759efd1ac90c79bf}\label{class_q_c_p_abstract_plottable_a16aaad02456aa23a759efd1ac90c79bf}} 
+virtual void {\bfseries select\+Event} (Q\+Mouse\+Event $\ast$event, bool additive, const Q\+Variant \&details, bool $\ast$selection\+State\+Changed)
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a6fa0d0f95560ea8b01ee13f296dab2b1}\label{class_q_c_p_abstract_plottable_a6fa0d0f95560ea8b01ee13f296dab2b1}} 
+virtual void {\bfseries deselect\+Event} (bool $\ast$selection\+State\+Changed)
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a9a450783fd9ed539e589999fd390cdf7}\label{class_q_c_p_abstract_plottable_a9a450783fd9ed539e589999fd390cdf7}} 
+virtual void {\bfseries draw\+Legend\+Icon} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter, const Q\+RectF \&rect) const =0
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a345d702b2e7e12c8cfdddff65ba85e8c}\label{class_q_c_p_abstract_plottable_a345d702b2e7e12c8cfdddff65ba85e8c}} 
+virtual \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} {\bfseries get\+Key\+Range} (bool \&found\+Range, \mbox{\hyperlink{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8}{Sign\+Domain}} in\+Sign\+Domain=\mbox{\hyperlink{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a082b98cfb91a7363a3b5cd17b0c1cd60}{sd\+Both}}) const =0
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_aa3331b415b5939fe4df60b78831b2799}\label{class_q_c_p_abstract_plottable_aa3331b415b5939fe4df60b78831b2799}} 
+virtual \mbox{\hyperlink{class_q_c_p_range}{Q\+C\+P\+Range}} {\bfseries get\+Value\+Range} (bool \&found\+Range, \mbox{\hyperlink{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8}{Sign\+Domain}} in\+Sign\+Domain=\mbox{\hyperlink{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a082b98cfb91a7363a3b5cd17b0c1cd60}{sd\+Both}}) const =0
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a7ad84a36472441cf1f555c5683d0da93}\label{class_q_c_p_abstract_plottable_a7ad84a36472441cf1f555c5683d0da93}} 
+void {\bfseries coords\+To\+Pixels} (double key, double value, double \&x, double \&y) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a5acb50ae984eef09a7ab92315d2ad708}\label{class_q_c_p_abstract_plottable_a5acb50ae984eef09a7ab92315d2ad708}} 
+const Q\+PointF {\bfseries coords\+To\+Pixels} (double key, double value) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a3903c1120ab5c27e7fa46b597ef267bd}\label{class_q_c_p_abstract_plottable_a3903c1120ab5c27e7fa46b597ef267bd}} 
+void {\bfseries pixels\+To\+Coords} (double x, double y, double \&key, double \&value) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a28d32c0062b9450847851ffdee1c5f69}\label{class_q_c_p_abstract_plottable_a28d32c0062b9450847851ffdee1c5f69}} 
+void {\bfseries pixels\+To\+Coords} (const Q\+PointF \&pixel\+Pos, double \&key, double \&value) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_abd790a3b229239f49067f136633a4b98}\label{class_q_c_p_abstract_plottable_abd790a3b229239f49067f136633a4b98}} 
+Q\+Pen {\bfseries main\+Pen} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_ac9147022a662e92b46c39e7cb821b0af}\label{class_q_c_p_abstract_plottable_ac9147022a662e92b46c39e7cb821b0af}} 
+Q\+Brush {\bfseries main\+Brush} () const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a8d06a59ea23324cce6330ebf2262c0ed}\label{class_q_c_p_abstract_plottable_a8d06a59ea23324cce6330ebf2262c0ed}} 
+void {\bfseries apply\+Fill\+Antialiasing\+Hint} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_ac95f26b15a1e5d9c7bd2c0a46d760fc9}\label{class_q_c_p_abstract_plottable_ac95f26b15a1e5d9c7bd2c0a46d760fc9}} 
+void {\bfseries apply\+Scatters\+Antialiasing\+Hint} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a0889abc8dbfd357053f40bfafff8bf7d}\label{class_q_c_p_abstract_plottable_a0889abc8dbfd357053f40bfafff8bf7d}} 
+void {\bfseries apply\+Error\+Bars\+Antialiasing\+Hint} (\mbox{\hyperlink{class_q_c_p_painter}{Q\+C\+P\+Painter}} $\ast$painter) const
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_af7e992b638c8aa688abceac579bb90d7}\label{class_q_c_p_abstract_plottable_af7e992b638c8aa688abceac579bb90d7}} 
+double {\bfseries dist\+Sqr\+To\+Line} (const Q\+PointF \&start, const Q\+PointF \&end, const Q\+PointF \&point) const
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_ac29ffef424e2488675930de18cde612a}\label{class_q_c_p_abstract_plottable_ac29ffef424e2488675930de18cde612a}} 
+Q\+String {\bfseries m\+Name}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a152ac765bedf927fb240545d11d453ea}\label{class_q_c_p_abstract_plottable_a152ac765bedf927fb240545d11d453ea}} 
+bool {\bfseries m\+Antialiased\+Fill}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_aa115755e525a8e3a86dc683f9cab755b}\label{class_q_c_p_abstract_plottable_aa115755e525a8e3a86dc683f9cab755b}} 
+bool {\bfseries m\+Antialiased\+Scatters}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_ad48660b2bd301576e92fb033d8f455ea}\label{class_q_c_p_abstract_plottable_ad48660b2bd301576e92fb033d8f455ea}} 
+bool {\bfseries m\+Antialiased\+Error\+Bars}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a67bc0622fd1b9fa14e54c14922dcec66}\label{class_q_c_p_abstract_plottable_a67bc0622fd1b9fa14e54c14922dcec66}} 
+Q\+Pen {\bfseries m\+Pen}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a10619472f5d5e10e9519a599f1cf5576}\label{class_q_c_p_abstract_plottable_a10619472f5d5e10e9519a599f1cf5576}} 
+Q\+Pen {\bfseries m\+Selected\+Pen}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a33f00674c0161c13315ab9da0895418e}\label{class_q_c_p_abstract_plottable_a33f00674c0161c13315ab9da0895418e}} 
+Q\+Brush {\bfseries m\+Brush}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_aea3c0da30c7a8be23ad5f2d9bca36762}\label{class_q_c_p_abstract_plottable_aea3c0da30c7a8be23ad5f2d9bca36762}} 
+Q\+Brush {\bfseries m\+Selected\+Brush}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a426f42e254d0f8ce5436a868c61a6827}\label{class_q_c_p_abstract_plottable_a426f42e254d0f8ce5436a868c61a6827}} 
+Q\+Pointer$<$ \mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $>$ {\bfseries m\+Key\+Axis}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a2901452ca4aea911a1827717934a4bda}\label{class_q_c_p_abstract_plottable_a2901452ca4aea911a1827717934a4bda}} 
+Q\+Pointer$<$ \mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $>$ {\bfseries m\+Value\+Axis}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_aceee52342c8e75727abcbd164986fdcb}\label{class_q_c_p_abstract_plottable_aceee52342c8e75727abcbd164986fdcb}} 
+bool {\bfseries m\+Selectable}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a43f68a0603e9bcd016bdfa6d9d5c41c9}\label{class_q_c_p_abstract_plottable_a43f68a0603e9bcd016bdfa6d9d5c41c9}} 
+bool {\bfseries m\+Selected}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a1cdf9df76adcfae45261690aa0ca2198}\label{class_q_c_p_abstract_plottable_a1cdf9df76adcfae45261690aa0ca2198}} 
+class {\bfseries Q\+Custom\+Plot}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_af123edeca169ec7a31958a1d714e1a8a}\label{class_q_c_p_abstract_plottable_af123edeca169ec7a31958a1d714e1a8a}} 
+class {\bfseries Q\+C\+P\+Axis}
+\item 
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a104c78e91302afd6842a903e472f552f}\label{class_q_c_p_abstract_plottable_a104c78e91302afd6842a903e472f552f}} 
+class {\bfseries Q\+C\+P\+Plottable\+Legend\+Item}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The abstract base class for all data representing objects in a plot. 
+
+It defines a very basic interface like name, pen, brush, visibility etc. Since this class is abstract, it can\textquotesingle{}t be instantiated. Use one of the subclasses or create a subclass yourself to create new ways of displaying data (see \char`\"{}\+Creating own plottables\char`\"{} below).
+
+All further specifics are in the subclasses, for example\+: \begin{DoxyItemize}
+\item A normal graph with possibly a line, scatter points and error bars\+: \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}} (typically created with \mbox{\hyperlink{class_q_custom_plot_a6fb2873d35a8a8089842d81a70a54167}{Q\+Custom\+Plot\+::add\+Graph}}) \item A parametric curve\+: \mbox{\hyperlink{class_q_c_p_curve}{Q\+C\+P\+Curve}} \item A bar chart\+: \mbox{\hyperlink{class_q_c_p_bars}{Q\+C\+P\+Bars}} \item A statistical box plot\+: \mbox{\hyperlink{class_q_c_p_statistical_box}{Q\+C\+P\+Statistical\+Box}} \item A color encoded two-\/dimensional map\+: \mbox{\hyperlink{class_q_c_p_color_map}{Q\+C\+P\+Color\+Map}} \item An O\+H\+L\+C/\+Candlestick chart\+: \mbox{\hyperlink{class_q_c_p_financial}{Q\+C\+P\+Financial}}\end{DoxyItemize}
+\hypertarget{class_q_c_p_abstract_plottable_plottables-subclassing}{}\subsection{Creating own plottables}\label{class_q_c_p_abstract_plottable_plottables-subclassing}
+To create an own plottable, you implement a subclass of \mbox{\hyperlink{class_q_c_p_abstract_plottable}{Q\+C\+P\+Abstract\+Plottable}}. These are the pure virtual functions, you must implement\+: \begin{DoxyItemize}
+\item \mbox{\hyperlink{class_q_c_p_abstract_plottable_a86e5b8fd4b6ff4f4084e7ea4c573fc53}{clear\+Data}} \item \mbox{\hyperlink{class_q_c_p_abstract_plottable_a38efe9641d972992a3d44204bc80ec1d}{select\+Test}} \item draw \item draw\+Legend\+Icon \item get\+Key\+Range \item get\+Value\+Range\end{DoxyItemize}
+See the documentation of those functions for what they need to do.
+
+For drawing your plot, you can use the coords\+To\+Pixels functions to translate a point in plot coordinates to pixel coordinates. This function is quite convenient, because it takes the orientation of the key and value axes into account for you (x and y are swapped when the key axis is vertical and the value axis horizontal). If you are worried about performance (i.\+e. you need to translate many points in a loop like \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}}), you can directly use \mbox{\hyperlink{class_q_c_p_axis_af15d1b3a7f7e9b53d759d3ccff1fe4b4}{Q\+C\+P\+Axis\+::coord\+To\+Pixel}}. However, you must then take care about the orientation of the axis yourself.
+
+Here are some important members you inherit from \mbox{\hyperlink{class_q_c_p_abstract_plottable}{Q\+C\+P\+Abstract\+Plottable}}\+: \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} $\ast${\bfseries m\+Parent\+Plot}  &A pointer to the parent \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} instance. The parent plot is inferred from the axes that are passed in the constructor. \\\cline{1-2}
+Q\+String {\bfseries m\+Name}  &The name of the plottable. \\\cline{1-2}
+Q\+Pen {\bfseries m\+Pen}  &The generic pen of the plottable. You should use this pen for the most prominent data representing lines in the plottable (e.\+g \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}} uses this pen for its graph lines and scatters) \\\cline{1-2}
+Q\+Pen {\bfseries m\+Selected\+Pen}  &The generic pen that should be used when the plottable is selected (hint\+: main\+Pen gives you the right pen, depending on selection state). \\\cline{1-2}
+Q\+Brush {\bfseries m\+Brush}  &The generic brush of the plottable. You should use this brush for the most prominent fillable structures in the plottable (e.\+g. \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}} uses this brush to control filling under the graph) \\\cline{1-2}
+Q\+Brush {\bfseries m\+Selected\+Brush}  &The generic brush that should be used when the plottable is selected (hint\+: main\+Brush gives you the right brush, depending on selection state). \\\cline{1-2}
+Q\+Pointer$<$\+Q\+C\+P\+Axis$>${\bfseries m\+Key\+Axis}, {\bfseries m\+Value\+Axis}  &The key and value axes this plottable is attached to. Call their \mbox{\hyperlink{class_q_c_p_axis_af15d1b3a7f7e9b53d759d3ccff1fe4b4}{Q\+C\+P\+Axis\+::coord\+To\+Pixel}} functions to translate coordinates to pixels in either the key or value dimension. Make sure to check whether the pointer is null before using it. If one of the axes is null, don\textquotesingle{}t draw the plottable. \\\cline{1-2}
+bool {\bfseries m\+Selected}  &indicates whether the plottable is selected or not.  \\\cline{1-2}
+\end{longtabu}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8}\label{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!Sign\+Domain@{Sign\+Domain}}
+\index{Sign\+Domain@{Sign\+Domain}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{Sign\+Domain}{SignDomain}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8}{Q\+C\+P\+Abstract\+Plottable\+::\+Sign\+Domain}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+Represents negative and positive sign domain for passing to get\+Key\+Range and get\+Value\+Range. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{sd\+Negative@{sd\+Negative}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!sd\+Negative@{sd\+Negative}}}\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a0fc9a70796ef60ad18ddd18056e6dc63}\label{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a0fc9a70796ef60ad18ddd18056e6dc63}} 
+sd\+Negative&The negative sign domain, i.\+e. numbers smaller than zero. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{sd\+Both@{sd\+Both}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!sd\+Both@{sd\+Both}}}\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a082b98cfb91a7363a3b5cd17b0c1cd60}\label{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a082b98cfb91a7363a3b5cd17b0c1cd60}} 
+sd\+Both&Both sign domains, including zero, i.\+e. all (rational) numbers. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{sd\+Positive@{sd\+Positive}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!sd\+Positive@{sd\+Positive}}}\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a02951859f243a4d24e779cfbb5471030}\label{class_q_c_p_abstract_plottable_a661743478a1d3c09d28ec2711d7653d8a02951859f243a4d24e779cfbb5471030}} 
+sd\+Positive&The positive sign domain, i.\+e. numbers greater than zero. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_af78a036e40db6f53a31abadc5323715a}\label{class_q_c_p_abstract_plottable_af78a036e40db6f53a31abadc5323715a}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{Q\+C\+P\+Abstract\+Plottable()}{QCPAbstractPlottable()}}
+{\footnotesize\ttfamily Q\+C\+P\+Abstract\+Plottable\+::\+Q\+C\+P\+Abstract\+Plottable (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$}]{key\+Axis,  }\item[{\mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$}]{value\+Axis }\end{DoxyParamCaption})}
+
+Constructs an abstract plottable which uses {\itshape key\+Axis} as its key axis (\char`\"{}x\char`\"{}) and {\itshape value\+Axis} as its value axis (\char`\"{}y\char`\"{}). {\itshape key\+Axis} and {\itshape value\+Axis} must reside in the same \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} instance and have perpendicular orientations. If either of these restrictions is violated, a corresponding message is printed to the debug output (q\+Debug), the construction is not aborted, though.
+
+Since \mbox{\hyperlink{class_q_c_p_abstract_plottable}{Q\+C\+P\+Abstract\+Plottable}} is an abstract class that defines the basic interface to plottables, it can\textquotesingle{}t be directly instantiated.
+
+You probably want one of the subclasses like \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}} or \mbox{\hyperlink{class_q_c_p_curve}{Q\+C\+P\+Curve}} instead. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a70f8cabfd808f7d5204b9f18c45c13f5}\label{class_q_c_p_abstract_plottable_a70f8cabfd808f7d5204b9f18c45c13f5}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!add\+To\+Legend@{add\+To\+Legend}}
+\index{add\+To\+Legend@{add\+To\+Legend}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{add\+To\+Legend()}{addToLegend()}}
+{\footnotesize\ttfamily bool Q\+C\+P\+Abstract\+Plottable\+::add\+To\+Legend (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Adds this plottable to the legend of the parent \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} (\mbox{\hyperlink{class_q_custom_plot_a4eadcd237dc6a09938b68b16877fa6af}{Q\+Custom\+Plot\+::legend}}).
+
+Normally, a \mbox{\hyperlink{class_q_c_p_plottable_legend_item}{Q\+C\+P\+Plottable\+Legend\+Item}} is created and inserted into the legend. If the plottable needs a more specialized representation in the legend, this function will take this into account and instead create the specialized subclass of \mbox{\hyperlink{class_q_c_p_abstract_legend_item}{Q\+C\+P\+Abstract\+Legend\+Item}}.
+
+Returns true on success, i.\+e. when the legend exists and a legend item associated with this plottable isn\textquotesingle{}t already in the legend.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_ac95fb2604d9106d0852ad9ceb326fe8c}{remove\+From\+Legend}}, \mbox{\hyperlink{class_q_c_p_legend_a3ab274de52d2951faea45a6d975e6b3f}{Q\+C\+P\+Legend\+::add\+Item}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a86e5b8fd4b6ff4f4084e7ea4c573fc53}\label{class_q_c_p_abstract_plottable_a86e5b8fd4b6ff4f4084e7ea4c573fc53}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!clear\+Data@{clear\+Data}}
+\index{clear\+Data@{clear\+Data}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{clear\+Data()}{clearData()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::clear\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Clears all data in the plottable. 
+
+Implemented in \mbox{\hyperlink{class_q_c_p_financial_a11fd49928c33e55e27b7319c6927864a}{Q\+C\+P\+Financial}}, \mbox{\hyperlink{class_q_c_p_color_map_a0545dce5383766885912331705a8e099}{Q\+C\+P\+Color\+Map}}, \mbox{\hyperlink{class_q_c_p_statistical_box_a19112994449df0c20287858436cc68e3}{Q\+C\+P\+Statistical\+Box}}, \mbox{\hyperlink{class_q_c_p_bars_a11dbbd707132f07f862dff13c5789c2b}{Q\+C\+P\+Bars}}, \mbox{\hyperlink{class_q_c_p_curve_ae0462c61dbfbac07db0736ec64110241}{Q\+C\+P\+Curve}}, and \mbox{\hyperlink{class_q_c_p_graph_ad4e94a4e44e5e76fbec81a72a977157d}{Q\+C\+P\+Graph}}.
+
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_ac95fb2604d9106d0852ad9ceb326fe8c}\label{class_q_c_p_abstract_plottable_ac95fb2604d9106d0852ad9ceb326fe8c}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!remove\+From\+Legend@{remove\+From\+Legend}}
+\index{remove\+From\+Legend@{remove\+From\+Legend}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{remove\+From\+Legend()}{removeFromLegend()}}
+{\footnotesize\ttfamily bool Q\+C\+P\+Abstract\+Plottable\+::remove\+From\+Legend (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Removes the plottable from the legend of the parent \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}}. This means the \mbox{\hyperlink{class_q_c_p_abstract_legend_item}{Q\+C\+P\+Abstract\+Legend\+Item}} (usually a \mbox{\hyperlink{class_q_c_p_plottable_legend_item}{Q\+C\+P\+Plottable\+Legend\+Item}}) that is associated with this plottable is removed.
+
+Returns true on success, i.\+e. if the legend exists and a legend item associated with this plottable was found and removed.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_a70f8cabfd808f7d5204b9f18c45c13f5}{add\+To\+Legend}}, \mbox{\hyperlink{class_q_c_p_legend_ac91595c3eaa746fe6321d2eb952c63bb}{Q\+C\+P\+Legend\+::remove\+Item}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a1491c4a606bccd2d09e65e11b79eb882}\label{class_q_c_p_abstract_plottable_a1491c4a606bccd2d09e65e11b79eb882}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!rescale\+Axes@{rescale\+Axes}}
+\index{rescale\+Axes@{rescale\+Axes}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{rescale\+Axes()}{rescaleAxes()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::rescale\+Axes (\begin{DoxyParamCaption}\item[{bool}]{only\+Enlarge = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+Rescales the key and value axes associated with this plottable to contain all displayed data, so the whole plottable is visible. If the scaling of an axis is logarithmic, rescale\+Axes will make sure not to rescale to an illegal range i.\+e. a range containing different signs and/or zero. Instead it will stay in the current sign domain and ignore all parts of the plottable that lie outside of that domain.
+
+{\itshape only\+Enlarge} makes sure the ranges are only expanded, never reduced. So it\textquotesingle{}s possible to show multiple plottables in their entirety by multiple calls to rescale\+Axes where the first call has {\itshape only\+Enlarge} set to false (the default), and all subsequent set to true.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_ae96b83c961e257da116c6acf9c7da308}{rescale\+Key\+Axis}}, \mbox{\hyperlink{class_q_c_p_abstract_plottable_aa1e408bb2d13999150c3f7f8a8579ca9}{rescale\+Value\+Axis}}, \mbox{\hyperlink{class_q_custom_plot_ad86528f2cee6c7e446dea4a6e8839935}{Q\+Custom\+Plot\+::rescale\+Axes}}, \mbox{\hyperlink{class_q_c_p_axis_a499345f02ebce4b23d8ccec96e58daa9}{Q\+C\+P\+Axis\+::rescale}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_ae96b83c961e257da116c6acf9c7da308}\label{class_q_c_p_abstract_plottable_ae96b83c961e257da116c6acf9c7da308}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!rescale\+Key\+Axis@{rescale\+Key\+Axis}}
+\index{rescale\+Key\+Axis@{rescale\+Key\+Axis}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{rescale\+Key\+Axis()}{rescaleKeyAxis()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::rescale\+Key\+Axis (\begin{DoxyParamCaption}\item[{bool}]{only\+Enlarge = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+Rescales the key axis of the plottable so the whole plottable is visible.
+
+See \mbox{\hyperlink{class_q_c_p_abstract_plottable_a1491c4a606bccd2d09e65e11b79eb882}{rescale\+Axes}} for detailed behaviour. \mbox{\Hypertarget{class_q_c_p_abstract_plottable_aa1e408bb2d13999150c3f7f8a8579ca9}\label{class_q_c_p_abstract_plottable_aa1e408bb2d13999150c3f7f8a8579ca9}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!rescale\+Value\+Axis@{rescale\+Value\+Axis}}
+\index{rescale\+Value\+Axis@{rescale\+Value\+Axis}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{rescale\+Value\+Axis()}{rescaleValueAxis()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::rescale\+Value\+Axis (\begin{DoxyParamCaption}\item[{bool}]{only\+Enlarge = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+Rescales the value axis of the plottable so the whole plottable is visible.
+
+Returns true if the axis was actually scaled. This might not be the case if this plottable has an invalid range, e.\+g. because it has no data points.
+
+See \mbox{\hyperlink{class_q_c_p_abstract_plottable_a1491c4a606bccd2d09e65e11b79eb882}{rescale\+Axes}} for detailed behaviour. \mbox{\Hypertarget{class_q_c_p_abstract_plottable_a0059caa3f3581f3959660fef8cbb71c4}\label{class_q_c_p_abstract_plottable_a0059caa3f3581f3959660fef8cbb71c4}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!selectable\+Changed@{selectable\+Changed}}
+\index{selectable\+Changed@{selectable\+Changed}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{selectable\+Changed}{selectableChanged}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::selectable\+Changed (\begin{DoxyParamCaption}\item[{bool}]{selectable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+This signal is emitted when the selectability of this plottable has changed.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_a22c69299eb5569e0f6bf084877a37dc4}{set\+Selectable}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a3af66432b1dca93b28e00e78a8c7c1d9}\label{class_q_c_p_abstract_plottable_a3af66432b1dca93b28e00e78a8c7c1d9}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!selection\+Changed@{selection\+Changed}}
+\index{selection\+Changed@{selection\+Changed}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{selection\+Changed}{selectionChanged}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::selection\+Changed (\begin{DoxyParamCaption}\item[{bool}]{selected }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+This signal is emitted when the selection state of this plottable has changed, either by user interaction or by a direct call to \mbox{\hyperlink{class_q_c_p_abstract_plottable_afbd5428c2952f59d952e11ab5cd79176}{set\+Selected}}. \mbox{\Hypertarget{class_q_c_p_abstract_plottable_a38efe9641d972992a3d44204bc80ec1d}\label{class_q_c_p_abstract_plottable_a38efe9641d972992a3d44204bc80ec1d}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!select\+Test@{select\+Test}}
+\index{select\+Test@{select\+Test}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{select\+Test()}{selectTest()}}
+{\footnotesize\ttfamily virtual double Q\+C\+P\+Abstract\+Plottable\+::select\+Test (\begin{DoxyParamCaption}\item[{const Q\+PointF \&}]{pos,  }\item[{bool}]{only\+Selectable,  }\item[{Q\+Variant $\ast$}]{details = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+This function is used to decide whether a click hits a layerable object or not.
+
+{\itshape pos} is a point in pixel coordinates on the \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} surface. This function returns the shortest pixel distance of this point to the object. If the object is either invisible or the distance couldn\textquotesingle{}t be determined, -\/1.\+0 is returned. Further, if {\itshape only\+Selectable} is true and the object is not selectable, -\/1.\+0 is returned, too.
+
+If the object is represented not by single lines but by an area like a \mbox{\hyperlink{class_q_c_p_item_text}{Q\+C\+P\+Item\+Text}} or the bars of a \mbox{\hyperlink{class_q_c_p_bars}{Q\+C\+P\+Bars}} plottable, a click inside the area should also be considered a hit. In these cases this function thus returns a constant value greater zero but still below the parent plot\textquotesingle{}s selection tolerance. (typically the selection\+Tolerance multiplied by 0.\+99).
+
+Providing a constant value for area objects allows selecting line objects even when they are obscured by such area objects, by clicking close to the lines (i.\+e. closer than 0.\+99$\ast$selection\+Tolerance).
+
+The actual setting of the selection state is not done by this function. This is handled by the parent \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} when the mouse\+Release\+Event occurs, and the finally selected object is notified via the select\+Event/deselect\+Event methods.
+
+{\itshape details} is an optional output parameter. Every layerable subclass may place any information in {\itshape details}. This information will be passed to select\+Event when the parent \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} decides on the basis of this select\+Test call, that the object was successfully selected. The subsequent call to select\+Event will carry the {\itshape details}. This is useful for multi-\/part objects (like \mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}}). This way, a possibly complex calculation to decide which part was clicked is only done once in \mbox{\hyperlink{class_q_c_p_abstract_plottable_a38efe9641d972992a3d44204bc80ec1d}{select\+Test}}. The result (i.\+e. the actually clicked part) can then be placed in {\itshape details}. So in the subsequent select\+Event, the decision which part was selected doesn\textquotesingle{}t have to be done a second time for a single selection operation.
+
+You may pass 0 as {\itshape details} to indicate that you are not interested in those selection details.
+
+\begin{DoxySeeAlso}{See also}
+select\+Event, deselect\+Event, \mbox{\hyperlink{class_q_custom_plot_a5ee1e2f6ae27419deca53e75907c27e5}{Q\+Custom\+Plot\+::set\+Interactions}} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_c_p_layerable_a04db8351fefd44cfdb77958e75c6288e}{Q\+C\+P\+Layerable}}.
+
+
+
+Implemented in \mbox{\hyperlink{class_q_c_p_financial_a77bffad8f3fcbcccbef03ead1c538e3a}{Q\+C\+P\+Financial}}, \mbox{\hyperlink{class_q_c_p_color_map_aba91ea58b489031157ecb777fe79e309}{Q\+C\+P\+Color\+Map}}, \mbox{\hyperlink{class_q_c_p_statistical_box_a0153ac16326b94450afbca208e3f9961}{Q\+C\+P\+Statistical\+Box}}, \mbox{\hyperlink{class_q_c_p_bars_a62d66cc8eedca6bedfc1f6513164d418}{Q\+C\+P\+Bars}}, \mbox{\hyperlink{class_q_c_p_curve_a87a9fb34a2a48dcae4c1245ada235e7d}{Q\+C\+P\+Curve}}, and \mbox{\hyperlink{class_q_c_p_graph_a36011c34aca4f7a477de25961e2f6c13}{Q\+C\+P\+Graph}}.
+
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a757beb744b96cf1855cca5ab9d3ecf52}\label{class_q_c_p_abstract_plottable_a757beb744b96cf1855cca5ab9d3ecf52}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Antialiased\+Error\+Bars@{set\+Antialiased\+Error\+Bars}}
+\index{set\+Antialiased\+Error\+Bars@{set\+Antialiased\+Error\+Bars}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Antialiased\+Error\+Bars()}{setAntialiasedErrorBars()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Antialiased\+Error\+Bars (\begin{DoxyParamCaption}\item[{bool}]{enabled }\end{DoxyParamCaption})}
+
+Sets whether the error bars of this plottable are drawn antialiased or not.
+
+Note that this setting may be overridden by \mbox{\hyperlink{class_q_custom_plot_af6f91e5eab1be85f67c556e98c3745e8}{Q\+Custom\+Plot\+::set\+Antialiased\+Elements}} and \mbox{\hyperlink{class_q_custom_plot_ae10d685b5eabea2999fb8775ca173c24}{Q\+Custom\+Plot\+::set\+Not\+Antialiased\+Elements}}. \mbox{\Hypertarget{class_q_c_p_abstract_plottable_a089d6b5577120239b55c39ed27c39536}\label{class_q_c_p_abstract_plottable_a089d6b5577120239b55c39ed27c39536}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Antialiased\+Fill@{set\+Antialiased\+Fill}}
+\index{set\+Antialiased\+Fill@{set\+Antialiased\+Fill}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Antialiased\+Fill()}{setAntialiasedFill()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Antialiased\+Fill (\begin{DoxyParamCaption}\item[{bool}]{enabled }\end{DoxyParamCaption})}
+
+Sets whether fills of this plottable are drawn antialiased or not.
+
+Note that this setting may be overridden by \mbox{\hyperlink{class_q_custom_plot_af6f91e5eab1be85f67c556e98c3745e8}{Q\+Custom\+Plot\+::set\+Antialiased\+Elements}} and \mbox{\hyperlink{class_q_custom_plot_ae10d685b5eabea2999fb8775ca173c24}{Q\+Custom\+Plot\+::set\+Not\+Antialiased\+Elements}}. \mbox{\Hypertarget{class_q_c_p_abstract_plottable_a2f03f067ede2ed4da6f7d0e4777a3f02}\label{class_q_c_p_abstract_plottable_a2f03f067ede2ed4da6f7d0e4777a3f02}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Antialiased\+Scatters@{set\+Antialiased\+Scatters}}
+\index{set\+Antialiased\+Scatters@{set\+Antialiased\+Scatters}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Antialiased\+Scatters()}{setAntialiasedScatters()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Antialiased\+Scatters (\begin{DoxyParamCaption}\item[{bool}]{enabled }\end{DoxyParamCaption})}
+
+Sets whether the scatter symbols of this plottable are drawn antialiased or not.
+
+Note that this setting may be overridden by \mbox{\hyperlink{class_q_custom_plot_af6f91e5eab1be85f67c556e98c3745e8}{Q\+Custom\+Plot\+::set\+Antialiased\+Elements}} and \mbox{\hyperlink{class_q_custom_plot_ae10d685b5eabea2999fb8775ca173c24}{Q\+Custom\+Plot\+::set\+Not\+Antialiased\+Elements}}. \mbox{\Hypertarget{class_q_c_p_abstract_plottable_a7a4b92144dca6453a1f0f210e27edc74}\label{class_q_c_p_abstract_plottable_a7a4b92144dca6453a1f0f210e27edc74}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Brush@{set\+Brush}}
+\index{set\+Brush@{set\+Brush}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Brush()}{setBrush()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Brush (\begin{DoxyParamCaption}\item[{const Q\+Brush \&}]{brush }\end{DoxyParamCaption})}
+
+The brush is used to draw basic fills of the plottable representation in the plot. The Fill can be a color, gradient or texture, see the usage of Q\+Brush.
+
+For example, the \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}} subclass draws the fill under the graph with this brush, when it\textquotesingle{}s not set to Qt\+::\+No\+Brush.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_ab74b09ae4c0e7e13142fe4b5bf46cac7}{set\+Pen}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a8524fa2994c63c0913ebd9bb2ffa3920}\label{class_q_c_p_abstract_plottable_a8524fa2994c63c0913ebd9bb2ffa3920}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Key\+Axis@{set\+Key\+Axis}}
+\index{set\+Key\+Axis@{set\+Key\+Axis}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Key\+Axis()}{setKeyAxis()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Key\+Axis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$}]{axis }\end{DoxyParamCaption})}
+
+The key axis of a plottable can be set to any axis of a \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}}, as long as it is orthogonal to the plottable\textquotesingle{}s value axis. This function performs no checks to make sure this is the case. The typical mathematical choice is to use the x-\/axis (\mbox{\hyperlink{class_q_custom_plot_a9a79cd0158a4c7f30cbc702f0fd800e4}{Q\+Custom\+Plot\+::x\+Axis}}) as key axis and the y-\/axis (\mbox{\hyperlink{class_q_custom_plot_af6fea5679725b152c14facd920b19367}{Q\+Custom\+Plot\+::y\+Axis}}) as value axis.
+
+Normally, the key and value axes are set in the constructor of the plottable (or \mbox{\hyperlink{class_q_custom_plot_a6fb2873d35a8a8089842d81a70a54167}{Q\+Custom\+Plot\+::add\+Graph}} when working with Q\+C\+P\+Graphs through the dedicated graph interface).
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_a71626a07367e241ec62ad2c34baf21cb}{set\+Value\+Axis}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_ab79c7ba76bc7fa89a4b3580e12149f1f}\label{class_q_c_p_abstract_plottable_ab79c7ba76bc7fa89a4b3580e12149f1f}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Name@{set\+Name}}
+\index{set\+Name@{set\+Name}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Name()}{setName()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Name (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{name }\end{DoxyParamCaption})}
+
+The name is the textual representation of this plottable as it is displayed in the legend (\mbox{\hyperlink{class_q_c_p_legend}{Q\+C\+P\+Legend}}). It may contain any U\+T\+F-\/8 characters, including newlines. \mbox{\Hypertarget{class_q_c_p_abstract_plottable_ab74b09ae4c0e7e13142fe4b5bf46cac7}\label{class_q_c_p_abstract_plottable_ab74b09ae4c0e7e13142fe4b5bf46cac7}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Pen@{set\+Pen}}
+\index{set\+Pen@{set\+Pen}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Pen()}{setPen()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Pen (\begin{DoxyParamCaption}\item[{const Q\+Pen \&}]{pen }\end{DoxyParamCaption})}
+
+The pen is used to draw basic lines that make up the plottable representation in the plot.
+
+For example, the \mbox{\hyperlink{class_q_c_p_graph}{Q\+C\+P\+Graph}} subclass draws its graph lines with this pen.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_a7a4b92144dca6453a1f0f210e27edc74}{set\+Brush}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a22c69299eb5569e0f6bf084877a37dc4}\label{class_q_c_p_abstract_plottable_a22c69299eb5569e0f6bf084877a37dc4}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Selectable@{set\+Selectable}}
+\index{set\+Selectable@{set\+Selectable}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Selectable()}{setSelectable()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Selectable (\begin{DoxyParamCaption}\item[{bool}]{selectable }\end{DoxyParamCaption})}
+
+Sets whether the user can (de-\/)select this plottable by clicking on the \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}} surface. (When \mbox{\hyperlink{class_q_custom_plot_a5ee1e2f6ae27419deca53e75907c27e5}{Q\+Custom\+Plot\+::set\+Interactions}} contains i\+Select\+Plottables.)
+
+However, even when {\itshape selectable} was set to false, it is possible to set the selection manually, by calling \mbox{\hyperlink{class_q_c_p_abstract_plottable_afbd5428c2952f59d952e11ab5cd79176}{set\+Selected}} directly.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_afbd5428c2952f59d952e11ab5cd79176}{set\+Selected}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_afbd5428c2952f59d952e11ab5cd79176}\label{class_q_c_p_abstract_plottable_afbd5428c2952f59d952e11ab5cd79176}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Selected@{set\+Selected}}
+\index{set\+Selected@{set\+Selected}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Selected()}{setSelected()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Selected (\begin{DoxyParamCaption}\item[{bool}]{selected }\end{DoxyParamCaption})}
+
+Sets whether this plottable is selected or not. When selected, it uses a different pen and brush to draw its lines and fills, see \mbox{\hyperlink{class_q_c_p_abstract_plottable_a6911603cad23ab0469b108224517516f}{set\+Selected\+Pen}} and \mbox{\hyperlink{class_q_c_p_abstract_plottable_ae8c816874089f7a44001e8618e81a9dc}{set\+Selected\+Brush}}.
+
+The entire selection mechanism for plottables is handled automatically when \mbox{\hyperlink{class_q_custom_plot_a5ee1e2f6ae27419deca53e75907c27e5}{Q\+Custom\+Plot\+::set\+Interactions}} contains i\+Select\+Plottables. You only need to call this function when you wish to change the selection state manually.
+
+This function can change the selection state even when \mbox{\hyperlink{class_q_c_p_abstract_plottable_a22c69299eb5569e0f6bf084877a37dc4}{set\+Selectable}} was set to false.
+
+emits the \mbox{\hyperlink{class_q_c_p_abstract_plottable_a3af66432b1dca93b28e00e78a8c7c1d9}{selection\+Changed}} signal when {\itshape selected} is different from the previous selection state.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_a22c69299eb5569e0f6bf084877a37dc4}{set\+Selectable}}, \mbox{\hyperlink{class_q_c_p_abstract_plottable_a38efe9641d972992a3d44204bc80ec1d}{select\+Test}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_ae8c816874089f7a44001e8618e81a9dc}\label{class_q_c_p_abstract_plottable_ae8c816874089f7a44001e8618e81a9dc}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Selected\+Brush@{set\+Selected\+Brush}}
+\index{set\+Selected\+Brush@{set\+Selected\+Brush}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Selected\+Brush()}{setSelectedBrush()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Selected\+Brush (\begin{DoxyParamCaption}\item[{const Q\+Brush \&}]{brush }\end{DoxyParamCaption})}
+
+When the plottable is selected, this brush is used to draw fills instead of the normal brush set via \mbox{\hyperlink{class_q_c_p_abstract_plottable_a7a4b92144dca6453a1f0f210e27edc74}{set\+Brush}}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_afbd5428c2952f59d952e11ab5cd79176}{set\+Selected}}, \mbox{\hyperlink{class_q_c_p_abstract_plottable_a22c69299eb5569e0f6bf084877a37dc4}{set\+Selectable}}, \mbox{\hyperlink{class_q_c_p_abstract_plottable_a6911603cad23ab0469b108224517516f}{set\+Selected\+Pen}}, \mbox{\hyperlink{class_q_c_p_abstract_plottable_a38efe9641d972992a3d44204bc80ec1d}{select\+Test}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a6911603cad23ab0469b108224517516f}\label{class_q_c_p_abstract_plottable_a6911603cad23ab0469b108224517516f}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Selected\+Pen@{set\+Selected\+Pen}}
+\index{set\+Selected\+Pen@{set\+Selected\+Pen}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Selected\+Pen()}{setSelectedPen()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Selected\+Pen (\begin{DoxyParamCaption}\item[{const Q\+Pen \&}]{pen }\end{DoxyParamCaption})}
+
+When the plottable is selected, this pen is used to draw basic lines instead of the normal pen set via \mbox{\hyperlink{class_q_c_p_abstract_plottable_ab74b09ae4c0e7e13142fe4b5bf46cac7}{set\+Pen}}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_afbd5428c2952f59d952e11ab5cd79176}{set\+Selected}}, \mbox{\hyperlink{class_q_c_p_abstract_plottable_a22c69299eb5569e0f6bf084877a37dc4}{set\+Selectable}}, \mbox{\hyperlink{class_q_c_p_abstract_plottable_ae8c816874089f7a44001e8618e81a9dc}{set\+Selected\+Brush}}, \mbox{\hyperlink{class_q_c_p_abstract_plottable_a38efe9641d972992a3d44204bc80ec1d}{select\+Test}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_q_c_p_abstract_plottable_a71626a07367e241ec62ad2c34baf21cb}\label{class_q_c_p_abstract_plottable_a71626a07367e241ec62ad2c34baf21cb}} 
+\index{Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}!set\+Value\+Axis@{set\+Value\+Axis}}
+\index{set\+Value\+Axis@{set\+Value\+Axis}!Q\+C\+P\+Abstract\+Plottable@{Q\+C\+P\+Abstract\+Plottable}}
+\subsubsection{\texorpdfstring{set\+Value\+Axis()}{setValueAxis()}}
+{\footnotesize\ttfamily void Q\+C\+P\+Abstract\+Plottable\+::set\+Value\+Axis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_q_c_p_axis}{Q\+C\+P\+Axis}} $\ast$}]{axis }\end{DoxyParamCaption})}
+
+The value axis of a plottable can be set to any axis of a \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}}, as long as it is orthogonal to the plottable\textquotesingle{}s key axis. This function performs no checks to make sure this is the case. The typical mathematical choice is to use the x-\/axis (\mbox{\hyperlink{class_q_custom_plot_a9a79cd0158a4c7f30cbc702f0fd800e4}{Q\+Custom\+Plot\+::x\+Axis}}) as key axis and the y-\/axis (\mbox{\hyperlink{class_q_custom_plot_af6fea5679725b152c14facd920b19367}{Q\+Custom\+Plot\+::y\+Axis}}) as value axis.
+
+Normally, the key and value axes are set in the constructor of the plottable (or \mbox{\hyperlink{class_q_custom_plot_a6fb2873d35a8a8089842d81a70a54167}{Q\+Custom\+Plot\+::add\+Graph}} when working with Q\+C\+P\+Graphs through the dedicated graph interface).
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_q_c_p_abstract_plottable_a8524fa2994c63c0913ebd9bb2ffa3920}{set\+Key\+Axis}} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8h}{qcustomplot.\+h}}\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/charts/qcustomplot/\mbox{\hyperlink{qcustomplot_8cpp}{qcustomplot.\+cpp}}\end{DoxyCompactItemize}

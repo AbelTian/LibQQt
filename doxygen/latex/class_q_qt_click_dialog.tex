@@ -1,0 +1,66 @@
+\hypertarget{class_q_qt_click_dialog}{}\section{Q\+Qt\+Click\+Dialog Class Reference}
+\label{class_q_qt_click_dialog}\index{Q\+Qt\+Click\+Dialog@{Q\+Qt\+Click\+Dialog}}
+
+
+{\ttfamily \#include $<$qqtclickdialog.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Click\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_q_qt_click_dialog}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_q_qt_click_dialog_a70d4dac14db4e322ed334888163f5035}{click}} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_click_dialog_ac5b9a7cd0b415790a3a353fbd7c369f4}\label{class_q_qt_click_dialog_ac5b9a7cd0b415790a3a353fbd7c369f4}} 
+void {\bfseries click\+With\+Point} (Q\+Point point)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_click_dialog_aaaf587320675239e7bbaff10ae202891}\label{class_q_qt_click_dialog_aaaf587320675239e7bbaff10ae202891}} 
+{\bfseries Q\+Qt\+Click\+Dialog} (Q\+Widget $\ast$parent=0)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_click_dialog_abe0a809f78f668db917f87ddfc50767f}{connect\+Click\+Helper}} () override
+\item 
+\mbox{\Hypertarget{class_q_qt_click_dialog_a7c8074d400e7c78329559dd10297db21}\label{class_q_qt_click_dialog_a7c8074d400e7c78329559dd10297db21}} 
+virtual void {\bfseries un\+Connect\+Click\+Helper} () override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+内置\+Click\+Helper
+
+添加了click支持的\+Q\+Qt\+Dialog 这个\+Dialog表示了如何使用\+Q\+Qt\+Click\+Helper和它的子类
+
+注意\+Q\+Qt\+Click\+Dialog不建议继承, 如果用户添加了新的click\+Helper,那么从\+Q\+Qt\+Dialog继承,仿照这几个\+Click\+Dialog新写一个\+Dialog xxx\+Click\+Helper和xxx\+Click\+Dialog是配对出现的. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_click_dialog_a70d4dac14db4e322ed334888163f5035}\label{class_q_qt_click_dialog_a70d4dac14db4e322ed334888163f5035}} 
+\index{Q\+Qt\+Click\+Dialog@{Q\+Qt\+Click\+Dialog}!click@{click}}
+\index{click@{click}!Q\+Qt\+Click\+Dialog@{Q\+Qt\+Click\+Dialog}}
+\subsubsection{\texorpdfstring{click}{click}}
+{\footnotesize\ttfamily void Q\+Qt\+Click\+Dialog\+::click (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+提供给\+App用信号 界面层内部直接处理 \mbox{\Hypertarget{class_q_qt_click_dialog_abe0a809f78f668db917f87ddfc50767f}\label{class_q_qt_click_dialog_abe0a809f78f668db917f87ddfc50767f}} 
+\index{Q\+Qt\+Click\+Dialog@{Q\+Qt\+Click\+Dialog}!connect\+Click\+Helper@{connect\+Click\+Helper}}
+\index{connect\+Click\+Helper@{connect\+Click\+Helper}!Q\+Qt\+Click\+Dialog@{Q\+Qt\+Click\+Dialog}}
+\subsubsection{\texorpdfstring{connect\+Click\+Helper()}{connectClickHelper()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Click\+Dialog\+::connect\+Click\+Helper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+子类重写这两个函数,实现丰富的click能力 
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_virtual_click_dialog_a93e958d50ddc3fb38ca0e4905673cf74}{Q\+Qt\+Virtual\+Click\+Dialog}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/clickwidgets/qqtclickdialog.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+\hypertarget{class_q_qt_virtual_click_helper}{}\section{Q\+Qt\+Virtual\+Click\+Helper Class Reference}
+\label{class_q_qt_virtual_click_helper}\index{Q\+Qt\+Virtual\+Click\+Helper@{Q\+Qt\+Virtual\+Click\+Helper}}
+
+
+{\ttfamily \#include $<$qqtvirtualclickhelper.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Virtual\+Click\+Helper\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=6.000000cm]{class_q_qt_virtual_click_helper}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_q_qt_virtual_click_helper_ace6c0c9b072e51f2cb3ff1316404b764}{Q\+Qt\+Click\+Type}} \{ \newline
+{\bfseries Q\+Qt\+Null\+Click} = 0, 
+{\bfseries Q\+Qt\+Click}, 
+{\bfseries Q\+Qt\+Long\+Click}, 
+{\bfseries Q\+Qt\+Double\+Click}, 
+\newline
+{\bfseries Q\+Qt\+Max\+Click}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_a2f6d38e44008741482f16bb21b7e7250}\label{class_q_qt_virtual_click_helper_a2f6d38e44008741482f16bb21b7e7250}} 
+{\bfseries Q\+Qt\+Virtual\+Click\+Helper} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_a995f2928e1f44cdd67a63d6f3f644fa3}\label{class_q_qt_virtual_click_helper_a995f2928e1f44cdd67a63d6f3f644fa3}} 
+virtual void {\bfseries mouse\+Press\+Event} (Q\+Mouse\+Event $\ast$event, Q\+Widget $\ast$user\+Widget=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_a022f23479fc6098249017c55461f24ab}\label{class_q_qt_virtual_click_helper_a022f23479fc6098249017c55461f24ab}} 
+virtual void {\bfseries mouse\+Release\+Event} (Q\+Mouse\+Event $\ast$event, Q\+Widget $\ast$user\+Widget=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_af0a2d37a125788acbb0ea2b4ac11e51b}\label{class_q_qt_virtual_click_helper_af0a2d37a125788acbb0ea2b4ac11e51b}} 
+virtual void {\bfseries mouse\+Double\+Click\+Event} (Q\+Mouse\+Event $\ast$event, Q\+Widget $\ast$user\+Widget=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_a4dfa1069b0578747b6401455ca7c9036}\label{class_q_qt_virtual_click_helper_a4dfa1069b0578747b6401455ca7c9036}} 
+const quint64 {\bfseries total\+Click\+Num} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_a3c86752f34262d91b3522489850b9b44}\label{class_q_qt_virtual_click_helper_a3c86752f34262d91b3522489850b9b44}} 
+const quint64 {\bfseries total\+Click\+Num\+With\+Cancel} () const
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_a97a9607ca2f620d217009c63fda507f5}\label{class_q_qt_virtual_click_helper_a97a9607ca2f620d217009c63fda507f5}} 
+virtual void {\bfseries check\+Click\+Num\+With\+Cancel} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_aeb9ed0deb4ef8119fdc15516a94af52a}\label{class_q_qt_virtual_click_helper_aeb9ed0deb4ef8119fdc15516a94af52a}} 
+virtual void {\bfseries check\+Click\+Num} (\mbox{\hyperlink{class_q_qt_virtual_click_helper_ace6c0c9b072e51f2cb3ff1316404b764}{Q\+Qt\+Click\+Type}} type)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_ac2b4f2aef56b010245f3817b22a35050}\label{class_q_qt_virtual_click_helper_ac2b4f2aef56b010245f3817b22a35050}} 
+\mbox{\hyperlink{class_q_qt_virtual_click_helper_ace6c0c9b072e51f2cb3ff1316404b764}{Q\+Qt\+Click\+Type}} {\bfseries m\+Click\+Type}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_a38cbbaa7cb39983a6c168b82fba748ce}\label{class_q_qt_virtual_click_helper_a38cbbaa7cb39983a6c168b82fba748ce}} 
+Q\+Point {\bfseries m\+Point}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_ac42baebe0a09b3060fa3a909fc762f8e}\label{class_q_qt_virtual_click_helper_ac42baebe0a09b3060fa3a909fc762f8e}} 
+quint64 {\bfseries n\+Total\+Click\+Num}
+\item 
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_ad090d0c33ac38f1f058660d87f49e574}\label{class_q_qt_virtual_click_helper_ad090d0c33ac38f1f058660d87f49e574}} 
+quint64 {\bfseries n\+Total\+Click\+Num\+With\+Cancel}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{class_q_qt_virtual_click_helper}{Q\+Qt\+Virtual\+Click\+Helper}} 实现click的虚类
+
+这个\+Helper是给\+Widget响应按钮事件用的 主要用于为\+Q\+Qt\+Widget系列添加按钮信号识别帮助
+
+支持
+
+可以统计按键次数 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_q_qt_virtual_click_helper_ace6c0c9b072e51f2cb3ff1316404b764}\label{class_q_qt_virtual_click_helper_ace6c0c9b072e51f2cb3ff1316404b764}} 
+\index{Q\+Qt\+Virtual\+Click\+Helper@{Q\+Qt\+Virtual\+Click\+Helper}!Q\+Qt\+Click\+Type@{Q\+Qt\+Click\+Type}}
+\index{Q\+Qt\+Click\+Type@{Q\+Qt\+Click\+Type}!Q\+Qt\+Virtual\+Click\+Helper@{Q\+Qt\+Virtual\+Click\+Helper}}
+\subsubsection{\texorpdfstring{Q\+Qt\+Click\+Type}{QQtClickType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_q_qt_virtual_click_helper_ace6c0c9b072e51f2cb3ff1316404b764}{Q\+Qt\+Virtual\+Click\+Helper\+::\+Q\+Qt\+Click\+Type}}}
+
+以下用于内部 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/clickwidgets/qqtvirtualclickhelper.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/clickwidgets/qqtvirtualclickhelper.\+cpp\end{DoxyCompactItemize}

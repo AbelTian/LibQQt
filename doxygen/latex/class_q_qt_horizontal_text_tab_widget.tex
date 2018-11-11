@@ -1,0 +1,68 @@
+\hypertarget{class_q_qt_horizontal_text_tab_widget}{}\section{Q\+Qt\+Horizontal\+Text\+Tab\+Widget Class Reference}
+\label{class_q_qt_horizontal_text_tab_widget}\index{Q\+Qt\+Horizontal\+Text\+Tab\+Widget@{Q\+Qt\+Horizontal\+Text\+Tab\+Widget}}
+Inheritance diagram for Q\+Qt\+Horizontal\+Text\+Tab\+Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_q_qt_horizontal_text_tab_widget}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_horizontal_text_tab_widget_ae0bcf968af3922fa19fd1836661a14eb}\label{class_q_qt_horizontal_text_tab_widget_ae0bcf968af3922fa19fd1836661a14eb}} 
+{\bfseries Q\+Qt\+Horizontal\+Text\+Tab\+Widget} (Q\+Widget $\ast$parent=nullptr)
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_horizontal_text_tab_widget_a788d91acd924a0eceafcb0fa95c91ffe}{set\+Object\+Name}} (const Q\+String \&name) override
+\begin{DoxyCompactList}\small\item\em set\+Object\+Name 为了设置tabbar的objectname，内部的设置不清晰。 子类必须override一次，否则会找不到自己的tabbar override 不支持c++ 多继承中的其中一个父类里的函数? 似乎不支持父类中不带virtual的函数 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_q_qt_tab_bar}{Q\+Qt\+Tab\+Bar}} $\ast$ \mbox{\hyperlink{class_q_qt_horizontal_text_tab_widget_a212f673045037d360d73d534ebf7ced1}{local\+Tab\+Bar}} () const override
+\begin{DoxyCompactList}\small\item\em set\+Tool\+Tip\+Duration bug? unset cause compiler error... 5.\+8.\+5 no set\+Tool\+Tip\+Duration so cl err $>$5.\+8.\+5 no need this override \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_horizontal_text_tab_widget_a212f673045037d360d73d534ebf7ced1}\label{class_q_qt_horizontal_text_tab_widget_a212f673045037d360d73d534ebf7ced1}} 
+\index{Q\+Qt\+Horizontal\+Text\+Tab\+Widget@{Q\+Qt\+Horizontal\+Text\+Tab\+Widget}!local\+Tab\+Bar@{local\+Tab\+Bar}}
+\index{local\+Tab\+Bar@{local\+Tab\+Bar}!Q\+Qt\+Horizontal\+Text\+Tab\+Widget@{Q\+Qt\+Horizontal\+Text\+Tab\+Widget}}
+\subsubsection{\texorpdfstring{local\+Tab\+Bar()}{localTabBar()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_q_qt_tab_bar}{Q\+Qt\+Tab\+Bar}}$\ast$ Q\+Qt\+Horizontal\+Text\+Tab\+Widget\+::local\+Tab\+Bar (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+set\+Tool\+Tip\+Duration bug? unset cause compiler error... 5.\+8.\+5 no set\+Tool\+Tip\+Duration so cl err $>$5.\+8.\+5 no need this override 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msec} & local\+Tab\+Bar 在set\+Tab\+Bar以后，系统tab\+Bar和这个\+Bar不一样。 返回本地设置的tabbar，给子类用的，\+Q\+Qt\+Tab\+Widget返回系统tab\+Bar，不可用！ 用于eventfilter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_tab_widget_a53183c40775ba6e7142f429edfd75d9c}{Q\+Qt\+Tab\+Widget}}.
+
+\mbox{\Hypertarget{class_q_qt_horizontal_text_tab_widget_a788d91acd924a0eceafcb0fa95c91ffe}\label{class_q_qt_horizontal_text_tab_widget_a788d91acd924a0eceafcb0fa95c91ffe}} 
+\index{Q\+Qt\+Horizontal\+Text\+Tab\+Widget@{Q\+Qt\+Horizontal\+Text\+Tab\+Widget}!set\+Object\+Name@{set\+Object\+Name}}
+\index{set\+Object\+Name@{set\+Object\+Name}!Q\+Qt\+Horizontal\+Text\+Tab\+Widget@{Q\+Qt\+Horizontal\+Text\+Tab\+Widget}}
+\subsubsection{\texorpdfstring{set\+Object\+Name()}{setObjectName()}}
+{\footnotesize\ttfamily void Q\+Qt\+Horizontal\+Text\+Tab\+Widget\+::set\+Object\+Name (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+set\+Object\+Name 为了设置tabbar的objectname，内部的设置不清晰。 子类必须override一次，否则会找不到自己的tabbar override 不支持c++ 多继承中的其中一个父类里的函数? 似乎不支持父类中不带virtual的函数 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_tab_widget_a45cec441f1ceb658d628a23c110359f3}{Q\+Qt\+Tab\+Widget}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qqthorizontaltexttabwidget.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qqthorizontaltexttabwidget.\+cpp\end{DoxyCompactItemize}

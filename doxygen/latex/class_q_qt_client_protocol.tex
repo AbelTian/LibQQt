@@ -1,0 +1,127 @@
+\hypertarget{class_q_qt_client_protocol}{}\section{Q\+Qt\+Client\+Protocol Class Reference}
+\label{class_q_qt_client_protocol}\index{Q\+Qt\+Client\+Protocol@{Q\+Qt\+Client\+Protocol}}
+Inheritance diagram for Q\+Qt\+Client\+Protocol\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_q_qt_client_protocol}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_client_protocol_ae3f94e5c5b406213e87e76ffab76c256}\label{class_q_qt_client_protocol_ae3f94e5c5b406213e87e76ffab76c256}} 
+void {\bfseries signal\+Server\+Say} (Q\+String h0)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_client_protocol_adbbd794afdb169be6280a460dbcf2624}\label{class_q_qt_client_protocol_adbbd794afdb169be6280a460dbcf2624}} 
+{\bfseries Q\+Qt\+Client\+Protocol} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_q_qt_client_protocol_a296a94000b2001be199f1bb87db15db0}\label{class_q_qt_client_protocol_a296a94000b2001be199f1bb87db15db0}} 
+void {\bfseries recv\+Command1} (const \mbox{\hyperlink{class_q_qt_client_message}{Q\+Qt\+Client\+Message}} \&msg)
+\item 
+\mbox{\Hypertarget{class_q_qt_client_protocol_a190e6ee13bb6ae284c7e46e0ea08dd3a}\label{class_q_qt_client_protocol_a190e6ee13bb6ae284c7e46e0ea08dd3a}} 
+void {\bfseries recv\+Command2} (const \mbox{\hyperlink{class_q_qt_client_message}{Q\+Qt\+Client\+Message}} \&msg)
+\item 
+\mbox{\Hypertarget{class_q_qt_client_protocol_a26327d88893a383f2a9d0fb4623e9a84}\label{class_q_qt_client_protocol_a26327d88893a383f2a9d0fb4623e9a84}} 
+void {\bfseries send\+A1\+Command} (Q\+String data)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual quint16 \mbox{\hyperlink{class_q_qt_client_protocol_ad6e417b3d0494dc0cd29606d39c54e09}{minlength}} () override
+\begin{DoxyCompactList}\small\item\em 最小包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_q_qt_client_protocol_aef8469f25fb684299845abc64d9b1107}{maxlength}} () override
+\begin{DoxyCompactList}\small\item\em 最大包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_q_qt_client_protocol_a47ee18513a0294465dcb584d84288b5d}{splitter}} (const Q\+Byte\+Array \&l) override
+\begin{DoxyCompactList}\small\item\em 语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_q_qt_client_protocol_aeab102179a7d75ddb33e62be03e419e0}{dispatcher}} (const Q\+Byte\+Array \&m) override
+\begin{DoxyCompactList}\small\item\em 语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_client_protocol_aeab102179a7d75ddb33e62be03e419e0}\label{class_q_qt_client_protocol_aeab102179a7d75ddb33e62be03e419e0}} 
+\index{Q\+Qt\+Client\+Protocol@{Q\+Qt\+Client\+Protocol}!dispatcher@{dispatcher}}
+\index{dispatcher@{dispatcher}!Q\+Qt\+Client\+Protocol@{Q\+Qt\+Client\+Protocol}}
+\subsubsection{\texorpdfstring{dispatcher()}{dispatcher()}}
+{\footnotesize\ttfamily virtual bool Q\+Qt\+Client\+Protocol\+::dispatcher (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 数据包} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 no dispatched(others) 1 dispatched(own) 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a35a69c4b89c8cf7459038f40d75e0dc9}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_q_qt_client_protocol_aef8469f25fb684299845abc64d9b1107}\label{class_q_qt_client_protocol_aef8469f25fb684299845abc64d9b1107}} 
+\index{Q\+Qt\+Client\+Protocol@{Q\+Qt\+Client\+Protocol}!maxlength@{maxlength}}
+\index{maxlength@{maxlength}!Q\+Qt\+Client\+Protocol@{Q\+Qt\+Client\+Protocol}}
+\subsubsection{\texorpdfstring{maxlength()}{maxlength()}}
+{\footnotesize\ttfamily virtual quint16 Q\+Qt\+Client\+Protocol\+::maxlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+最大包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_af41bc3116abbbcfc9af45e151a253ff7}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_q_qt_client_protocol_ad6e417b3d0494dc0cd29606d39c54e09}\label{class_q_qt_client_protocol_ad6e417b3d0494dc0cd29606d39c54e09}} 
+\index{Q\+Qt\+Client\+Protocol@{Q\+Qt\+Client\+Protocol}!minlength@{minlength}}
+\index{minlength@{minlength}!Q\+Qt\+Client\+Protocol@{Q\+Qt\+Client\+Protocol}}
+\subsubsection{\texorpdfstring{minlength()}{minlength()}}
+{\footnotesize\ttfamily virtual quint16 Q\+Qt\+Client\+Protocol\+::minlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+最小包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a2b00f53d3dd0eed817eeecff422891f3}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_q_qt_client_protocol_a47ee18513a0294465dcb584d84288b5d}\label{class_q_qt_client_protocol_a47ee18513a0294465dcb584d84288b5d}} 
+\index{Q\+Qt\+Client\+Protocol@{Q\+Qt\+Client\+Protocol}!splitter@{splitter}}
+\index{splitter@{splitter}!Q\+Qt\+Client\+Protocol@{Q\+Qt\+Client\+Protocol}}
+\subsubsection{\texorpdfstring{splitter()}{splitter()}}
+{\footnotesize\ttfamily virtual quint16 Q\+Qt\+Client\+Protocol\+::splitter (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 接收到的数据段} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+按照协议解析到的数据长度 可用，继续接收，丢弃，粘包。 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a00fd0c1ac23379ed3b9b25da9a34f39b}{Q\+Qt\+Protocol}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/examples/qqtclientexample/qqtclientprotocol.\+h\end{DoxyCompactItemize}

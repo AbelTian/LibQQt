@@ -1,0 +1,40 @@
+\hypertarget{struct_q_rcode}{}\section{Q\+Rcode Struct Reference}
+\label{struct_q_rcode}\index{Q\+Rcode@{Q\+Rcode}}
+
+
+{\ttfamily \#include $<$qrencode.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_q_rcode_aa84ee8368a0cb437726e4eb4497784c0}\label{struct_q_rcode_aa84ee8368a0cb437726e4eb4497784c0}} 
+int \mbox{\hyperlink{struct_q_rcode_aa84ee8368a0cb437726e4eb4497784c0}{version}}
+\begin{DoxyCompactList}\small\item\em version of the symbol \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_q_rcode_a70faea92be5450849d2252f286fc4cb2}\label{struct_q_rcode_a70faea92be5450849d2252f286fc4cb2}} 
+int \mbox{\hyperlink{struct_q_rcode_a70faea92be5450849d2252f286fc4cb2}{width}}
+\begin{DoxyCompactList}\small\item\em width of the symbol \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_q_rcode_ae6f826314cfb99f4926c4c5734997c35}\label{struct_q_rcode_ae6f826314cfb99f4926c4c5734997c35}} 
+unsigned char $\ast$ \mbox{\hyperlink{struct_q_rcode_ae6f826314cfb99f4926c4c5734997c35}{data}}
+\begin{DoxyCompactList}\small\item\em symbol data \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{struct_q_rcode}{Q\+Rcode}} class. Symbol data is represented as an array contains width$\ast$width uchars. Each uchar represents a module (dot). If the less significant bit of the uchar is 1, the corresponding module is black. The other bits are meaningless for usual applications, but here its specification is described.
+
+
+\begin{DoxyPre}
+MSB 76543210 LSB
+    |||||||{\ttfamily - 1=black/0=white
+    ||||||}-- data and ecc code area
+    |||||{\ttfamily --- format information
+    ||||}---- version information
+    |||{\ttfamily ----- timing pattern
+    ||}------ alignment pattern
+    |{\ttfamily ------- finder pattern and separator
+}-------- non-data modules (format, timing, etc.)
+\end{DoxyPre}
+ 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/exquisite/qrcode/qrencode/qrencode.\+h\end{DoxyCompactItemize}

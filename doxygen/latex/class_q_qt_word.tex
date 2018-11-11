@@ -1,0 +1,141 @@
+\hypertarget{class_q_qt_word}{}\section{Q\+Qt\+Word Class Reference}
+\label{class_q_qt_word}\index{Q\+Qt\+Word@{Q\+Qt\+Word}}
+
+
+The \mbox{\hyperlink{class_q_qt_word}{Q\+Qt\+Word}} class.  
+
+
+
+
+{\ttfamily \#include $<$qqtword.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Word\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_word}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a18039e5a412cb17fbd23137df5c8a724}\label{class_q_qt_word_a18039e5a412cb17fbd23137df5c8a724}} 
+{\bfseries Q\+Qt\+Word} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a09e1f556f5d7dbb6dd2e242a2961ae2c}\label{class_q_qt_word_a09e1f556f5d7dbb6dd2e242a2961ae2c}} 
+void \mbox{\hyperlink{class_q_qt_word_a09e1f556f5d7dbb6dd2e242a2961ae2c}{init\+Word}} ()
+\begin{DoxyCompactList}\small\item\em init\+Word 初始化纸张，第一张空白纸 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_word_a9410fd6a9a0bffbd6e9151266cabce05}\label{class_q_qt_word_a9410fd6a9a0bffbd6e9151266cabce05}} 
+void \mbox{\hyperlink{class_q_qt_word_a9410fd6a9a0bffbd6e9151266cabce05}{add\+Text}} (const Q\+String \&text, Q\+Font m\+\_\+font=Q\+Font(), Qt\+::\+Alignment align=Qt\+::\+Align\+H\+Center, Q\+PointF point=Q\+PointF(0, 0))
+\begin{DoxyCompactList}\small\item\em add\+Text 标准功能 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_word_ac37d7691b8893d1223be096593bd6833}\label{class_q_qt_word_ac37d7691b8893d1223be096593bd6833}} 
+void {\bfseries add\+Table} (const Q\+Table\+View $\ast$table, Q\+PointF pos=Q\+PointF(0, 0))
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a13a0a946124c71624fa772187d62b70b}\label{class_q_qt_word_a13a0a946124c71624fa772187d62b70b}} 
+void {\bfseries add\+Signoff\+Text} (const Q\+String \&text, Q\+Font m\+\_\+font=Q\+Font())
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a7d93336c310628078eec0bf838688c89}\label{class_q_qt_word_a7d93336c310628078eec0bf838688c89}} 
+int {\bfseries page\+Num} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a20b8959a7cebdef9b2d1de77ebb6ef5e}\label{class_q_qt_word_a20b8959a7cebdef9b2d1de77ebb6ef5e}} 
+\mbox{\hyperlink{class_q_qt_graphics_scene}{Q\+Qt\+Graphics\+Scene}} $\ast$ {\bfseries get\+Page} (int num)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_aba55c23328e49d6f6c9f33a33392837f}\label{class_q_qt_word_aba55c23328e49d6f6c9f33a33392837f}} 
+Q\+RectF {\bfseries client\+RectF} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a632c7b13c981d6a991df99f1630ddc65}\label{class_q_qt_word_a632c7b13c981d6a991df99f1630ddc65}} 
+Q\+RectF {\bfseries paper\+Rect} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a9e333f342f14507269672df2a024f6a6}\label{class_q_qt_word_a9e333f342f14507269672df2a024f6a6}} 
+void {\bfseries set\+Margin} (qreal left=375.\+5898, qreal right=375.\+5898, qreal top=299.\+9994, qreal botoom=299.\+9994)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_ada2b65ed81c9cf425f58f24f52d998f6}\label{class_q_qt_word_ada2b65ed81c9cf425f58f24f52d998f6}} 
+void {\bfseries set\+Line\+Spacing} (qreal main\+Spacing=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a1e423e3a5a53d20c6e9eaf36b0f2a0c5}\label{class_q_qt_word_a1e423e3a5a53d20c6e9eaf36b0f2a0c5}} 
+void {\bfseries set\+Header\+Height} (qreal size=195.\+32)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_ac805940b023b707dda2d39174c5672fa}\label{class_q_qt_word_ac805940b023b707dda2d39174c5672fa}} 
+void {\bfseries set\+Footer\+Height} (qreal size=195.\+32)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a3e01b1cc266ff351610618d6d9ce837a}\label{class_q_qt_word_a3e01b1cc266ff351610618d6d9ce837a}} 
+Q\+Font {\bfseries font} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a9c0d7fec6a505e550b10608cb687234e}\label{class_q_qt_word_a9c0d7fec6a505e550b10608cb687234e}} 
+void {\bfseries set\+Font} (Q\+Font m\+\_\+font=Q\+Font())
+\item 
+\mbox{\Hypertarget{class_q_qt_word_acb5d7820719973d3928275d94466c361}\label{class_q_qt_word_acb5d7820719973d3928275d94466c361}} 
+void {\bfseries set\+Header\+Font} (Q\+Font font=Q\+Font())
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a1406ec3c24c2d35d7ea625c89a74e855}\label{class_q_qt_word_a1406ec3c24c2d35d7ea625c89a74e855}} 
+void {\bfseries set\+Header\+Line} (bool show=false)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_ae65d7ce638d7a2cd58fbce7adcfe54af}\label{class_q_qt_word_ae65d7ce638d7a2cd58fbce7adcfe54af}} 
+void {\bfseries set\+Header\+Text} (const Q\+String \&text, Q\+Font m\+\_\+font=Q\+Font(), Qt\+::\+Alignment align=Qt\+::\+Align\+H\+Center)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a63fa95fbc3e2ffaa40515048b9ca0a83}\label{class_q_qt_word_a63fa95fbc3e2ffaa40515048b9ca0a83}} 
+void {\bfseries set\+Footer\+Font} (Q\+Font font=Q\+Font())
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a32e4b27c356ae2a241b044ca672d34bd}\label{class_q_qt_word_a32e4b27c356ae2a241b044ca672d34bd}} 
+void {\bfseries set\+Footer\+Line} (bool show=false)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a2d9deb374f7648617c0d90af0ce16f0e}\label{class_q_qt_word_a2d9deb374f7648617c0d90af0ce16f0e}} 
+void {\bfseries set\+Footer\+Text} (const Q\+String \&text, Q\+Font m\+\_\+font=Q\+Font(), Qt\+::\+Alignment align=Qt\+::\+Align\+H\+Center)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a02130ca6cfa6675c60cde8134af8f7b9}\label{class_q_qt_word_a02130ca6cfa6675c60cde8134af8f7b9}} 
+Q\+Font \mbox{\hyperlink{class_q_qt_word_a02130ca6cfa6675c60cde8134af8f7b9}{main\+Font}} ()
+\begin{DoxyCompactList}\small\item\em main\+Font 获取默认的固定格式 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_word_a9a8f8d1087b636a745dcfe75989829b1}\label{class_q_qt_word_a9a8f8d1087b636a745dcfe75989829b1}} 
+Q\+Font {\bfseries title\+Font} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a51405ec0dc6ebf8d1a322953e10b4e3b}\label{class_q_qt_word_a51405ec0dc6ebf8d1a322953e10b4e3b}} 
+Q\+Font {\bfseries title2\+Font} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_word_aa40d6efb6fd37d8e9ed8827b834c7ce6}\label{class_q_qt_word_aa40d6efb6fd37d8e9ed8827b834c7ce6}} 
+Q\+Font {\bfseries header\+Font} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_word_aec29996fc37ae81fd3feee12284142d5}\label{class_q_qt_word_aec29996fc37ae81fd3feee12284142d5}} 
+Q\+RectF \mbox{\hyperlink{class_q_qt_word_aec29996fc37ae81fd3feee12284142d5}{get\+Target\+RectF}} (qreal target\+D\+P\+IX, qreal target\+D\+P\+IY)
+\begin{DoxyCompactList}\small\item\em export\+Images 将\+Word导出为多个图纸. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_word_a7f9b45594351de8fd5c3698509192cc7}\label{class_q_qt_word_a7f9b45594351de8fd5c3698509192cc7}} 
+void {\bfseries export\+Image} (Q\+List$<$ Q\+Image $>$ \&target\+Papers, Q\+RectF target\+Rect=Q\+RectF())
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a6572e8ac3de1162e56422b252320d398}\label{class_q_qt_word_a6572e8ac3de1162e56422b252320d398}} 
+virtual void {\bfseries adjustdy} (qreal dy0)
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a8e6709d01e1a038cd40fc730ed13ceb3}\label{class_q_qt_word_a8e6709d01e1a038cd40fc730ed13ceb3}} 
+virtual void {\bfseries create\+Frame} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a4ef7332758334890f0fe14d34261c07a}\label{class_q_qt_word_a4ef7332758334890f0fe14d34261c07a}} 
+virtual void {\bfseries paint\+Page\+Header} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_word_a15ecec3665706f32c366826ef588142f}\label{class_q_qt_word_a15ecec3665706f32c366826ef588142f}} 
+virtual void {\bfseries paint\+Page\+Footer} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_word}{Q\+Qt\+Word}} class. 
+
+功能支持 添加文字, 可以跨页 添加表格, 可以跨页, 支持经过合并单元格的表格. 添加图片, 太大了会跳页 添加\+Widget, 太大了会跳页 添加新页面,直接新页面编辑. 设置纸张类型 设置纸张方向
+
+原理介绍 内部使用\+Graphic\+Scene实现, 使用函数添加内容,自动排版, 可以投影到\+Graphic\+View Printer Image等绘图设备.
+
+坐标原理 根据所见即所得. 图纸默认为\+A4, Rect在\+P\+S里能找到, D\+P\+I固定为300像素每英寸, 尺寸在\+W\+PS Word里能找到. 在\+A4纸等纸上设计好排版,可以把尺寸直接拿过来用. 接口单位全部为像素.
+
+计算方法\+: 在\+A4纸上用尺子量, 然后转换为英寸. paper\+Rect(0, 0, w, h) = dpi $\ast$ 英寸(w, h).
+
+已经知道的屏幕的分辨率和\+D\+PI,帮助用户识别自己的目标画板的大小. 公式 Rect1 \+: D\+P\+I1 = Rect2 \+: D\+P\+I2 从\+Scene(内部)render()到外部画板的时候,需要计算这个rect. 分类 Rect的像素 D\+PI Scene 2480$\ast$3508(A4) 300 300 D\+Win屏幕(\+View) 800$\ast$600 136(x) 156(y) 理论值142 138 P\+C屏幕(\+View) 1920$\ast$1080 96 96 Printer 9917$\ast$14033 1200 Image 1920$\ast$1080 96 96 可以设置纸张类型, 假如设置\+A3 D\+P\+I不变 Scene\+Rect会变.\+而这个\+Rect像素大小,请参照\+PS.
+
+关于排版的约束
+\begin{DoxyEnumerate}
+\item 开始设置好纸张,就不要更换,你肯定不想自己的数据被截断显示,内部不会放缩数据.
+\item 内部\+Scene使用默认的分辨率300, rect根据纸的类型而变化. 
+\end{DoxyEnumerate}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/frame/qqtword.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/frame/qqtword.\+cpp\end{DoxyCompactItemize}

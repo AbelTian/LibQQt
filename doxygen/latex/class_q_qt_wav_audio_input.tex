@@ -1,0 +1,83 @@
+\hypertarget{class_q_qt_wav_audio_input}{}\section{Q\+Qt\+Wav\+Audio\+Input Class Reference}
+\label{class_q_qt_wav_audio_input}\index{Q\+Qt\+Wav\+Audio\+Input@{Q\+Qt\+Wav\+Audio\+Input}}
+
+
+The \mbox{\hyperlink{class_q_qt_wav_audio_input}{Q\+Qt\+Wav\+Audio\+Input}} class Q\+Qt\+Wav\+Audio\+Input具备\+Q\+Audio\+Input的能力，可以把wav文件的音频帧，通过ready\+Read输出。 每次/10ms一帧，通过\+Q\+I\+O\+Device ready\+Read发射给用户。 升级目标：\+Q\+Qt\+Audio\+Input里支持的设备比较广泛，文件类型比较多。  
+
+
+
+
+{\ttfamily \#include $<$qqtwavaudiomanager.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Wav\+Audio\+Input\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_q_qt_wav_audio_input}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_a57bf9666b4ef414f444f4c71860e8932}\label{class_q_qt_wav_audio_input_a57bf9666b4ef414f444f4c71860e8932}} 
+{\bfseries Q\+Qt\+Wav\+Audio\+Input} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_a11ac936b4db0932d58e106e0d5a03d14}\label{class_q_qt_wav_audio_input_a11ac936b4db0932d58e106e0d5a03d14}} 
+Q\+I\+O\+Device $\ast$ {\bfseries set\+Source\+File} (const Q\+String \&local\+File)
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_adc643e5f6f6ea4709b5772ed850cef87}\label{class_q_qt_wav_audio_input_adc643e5f6f6ea4709b5772ed850cef87}} 
+Q\+String {\bfseries source\+File} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_aa3cc2e99384f792380719db50f6fe24a}\label{class_q_qt_wav_audio_input_aa3cc2e99384f792380719db50f6fe24a}} 
+Q\+I\+O\+Device $\ast$ {\bfseries device} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_ab969eaa0e3c548b3b6b257712ce02baf}\label{class_q_qt_wav_audio_input_ab969eaa0e3c548b3b6b257712ce02baf}} 
+int {\bfseries timer\+Interval} () const
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_aa64d5a89549a5edb1b93f20391710627}\label{class_q_qt_wav_audio_input_aa64d5a89549a5edb1b93f20391710627}} 
+void {\bfseries set\+Timer\+Interval} (int mill\+Second=20)
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_a5ea1d4793d2b2577ed1c6a3746e36c7b}\label{class_q_qt_wav_audio_input_a5ea1d4793d2b2577ed1c6a3746e36c7b}} 
+void {\bfseries start} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_a2f8b32ae5f647313ae379c5db655a2d7}\label{class_q_qt_wav_audio_input_a2f8b32ae5f647313ae379c5db655a2d7}} 
+void {\bfseries stop} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_a8b3e5cff42178a0d68af73bede2f3eea}\label{class_q_qt_wav_audio_input_a8b3e5cff42178a0d68af73bede2f3eea}} 
+const Q\+Audio\+Format \& {\bfseries format} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_a93cb308096589fe185cc6c83fdf6272a}\label{class_q_qt_wav_audio_input_a93cb308096589fe185cc6c83fdf6272a}} 
+int {\bfseries file\+Total\+Size} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_a169b0b78547b4d927db8a13554179be8}\label{class_q_qt_wav_audio_input_a169b0b78547b4d927db8a13554179be8}} 
+int {\bfseries file\+Header\+Size} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_aac9dbb88ad60c53bb59391f763cac8cb}\label{class_q_qt_wav_audio_input_aac9dbb88ad60c53bb59391f763cac8cb}} 
+int {\bfseries file\+Data\+Size} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_aaae2e966e79231aa5199101c8b7b30e8}\label{class_q_qt_wav_audio_input_aaae2e966e79231aa5199101c8b7b30e8}} 
+int {\bfseries file\+Tail\+Size} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_aab3d5ae09ef1f74f73d555716835bc4f}\label{class_q_qt_wav_audio_input_aab3d5ae09ef1f74f73d555716835bc4f}} 
+bool {\bfseries anlysis\+Wav\+File\+Header\+\_\+C} (Q\+String local\+File)
+\item 
+\mbox{\Hypertarget{class_q_qt_wav_audio_input_a543a98b9ca655f1bcb565af36ca56d03}\label{class_q_qt_wav_audio_input_a543a98b9ca655f1bcb565af36ca56d03}} 
+bool {\bfseries anlysis\+Wav\+File\+Header} (Q\+String file\+Name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_wav_audio_input}{Q\+Qt\+Wav\+Audio\+Input}} class Q\+Qt\+Wav\+Audio\+Input具备\+Q\+Audio\+Input的能力，可以把wav文件的音频帧，通过ready\+Read输出。 每次/10ms一帧，通过\+Q\+I\+O\+Device ready\+Read发射给用户。 升级目标：\+Q\+Qt\+Audio\+Input里支持的设备比较广泛，文件类型比较多。 
+
+原理，设置\+Sourcefile，返回\+Q\+I\+O\+Device，进行读取。一次加载，逐渐读取。
+
+不要使用大文件。 Qt 中有一个 Q\+Buffer 类，可以将 Q\+Byte\+Array 包装成一个 Q\+I\+O\+Device。\+Q\+Mem\+I\+O\+Device = Q\+Buffer 如果来的是个\+Q\+Byte\+Array，那么，用\+Q\+Buffer封装， 在 open 函数中调用 Q\+I\+O\+Device\+::open(mode) 要解析wav，用自定义程序，还是用开源\+Library（libsndfile）？自定义程序 要播放wav，是用wav的音频格式来设定输出设备，还是用个输出设备支持的音频格式，wav里选取进行使用？使用wav的。
+
+尝试用\+Q\+Audio\+Decoder，解码器不支持x-\/wav，default\+Service\+Provider\+::request\+Service()\+: no service found for -\/ \char`\"{}org.\+qt-\/project.\+qt.\+audiodecode\char`\"{} 为什么\+Q\+Sound\+Effect支持那么多wav格式？(\char`\"{}audio/x-\/wav\char`\"{}, \char`\"{}audio/wav\char`\"{}, \char`\"{}audio/wave\char`\"{}, \char`\"{}audio/x-\/pn-\/wav\char`\"{}) Q\+Audio\+Decoder保存了一个提交，\#5643241 Q\+Wav\+Audio\+Effect保存了一个提交，\#5f43622 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/multimedia/qqtwavaudiomanager.\+h\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/multimedia/qqtwavaudiomanager.\+cpp\end{DoxyCompactItemize}

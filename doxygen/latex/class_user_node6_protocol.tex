@@ -1,0 +1,124 @@
+\hypertarget{class_user_node6_protocol}{}\section{User\+Node6\+Protocol Class Reference}
+\label{class_user_node6_protocol}\index{User\+Node6\+Protocol@{User\+Node6\+Protocol}}
+Inheritance diagram for User\+Node6\+Protocol\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_user_node6_protocol}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_node6_protocol_afe51563c56cde02b89bea31390eaaf0a}\label{class_user_node6_protocol_afe51563c56cde02b89bea31390eaaf0a}} 
+void {\bfseries signal\+Sendto\+Logic\+Level\+Code} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_node6_protocol_a9885875d975222ea7cc6a7035c9f4251}\label{class_user_node6_protocol_a9885875d975222ea7cc6a7035c9f4251}} 
+{\bfseries User\+Node6\+Protocol} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_user_node6_protocol_a4b3cd85aa3c5a89ce3eef93080dcb3c6}\label{class_user_node6_protocol_a4b3cd85aa3c5a89ce3eef93080dcb3c6}} 
+void {\bfseries recv\+Command1} (const \mbox{\hyperlink{class_user_node6_message}{User\+Node6\+Message}} \&msg)
+\item 
+\mbox{\Hypertarget{class_user_node6_protocol_a846f78d36faf73e0348f0c82cb7b0bfd}\label{class_user_node6_protocol_a846f78d36faf73e0348f0c82cb7b0bfd}} 
+void {\bfseries recv\+Command2} (const \mbox{\hyperlink{class_user_node6_message}{User\+Node6\+Message}} \&msg)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual quint16 \mbox{\hyperlink{class_user_node6_protocol_acec32f9dbc13eefa0d51f62eda4f9581}{minlength}} () override
+\begin{DoxyCompactList}\small\item\em 最小包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_user_node6_protocol_aa4d6a7d01f74b99c730a2cf5e41b0954}{maxlength}} () override
+\begin{DoxyCompactList}\small\item\em 最大包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_user_node6_protocol_a1f03c2a595c4838d1075000aa51c8c3d}{splitter}} (const Q\+Byte\+Array \&l) override
+\begin{DoxyCompactList}\small\item\em 语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_user_node6_protocol_aa9e69750085bc3dbcd7e97b3e4ced90d}{dispatcher}} (const Q\+Byte\+Array \&m) override
+\begin{DoxyCompactList}\small\item\em 语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_user_node6_protocol_aa9e69750085bc3dbcd7e97b3e4ced90d}\label{class_user_node6_protocol_aa9e69750085bc3dbcd7e97b3e4ced90d}} 
+\index{User\+Node6\+Protocol@{User\+Node6\+Protocol}!dispatcher@{dispatcher}}
+\index{dispatcher@{dispatcher}!User\+Node6\+Protocol@{User\+Node6\+Protocol}}
+\subsubsection{\texorpdfstring{dispatcher()}{dispatcher()}}
+{\footnotesize\ttfamily virtual bool User\+Node6\+Protocol\+::dispatcher (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 数据包} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 no dispatched(others) 1 dispatched(own) 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a35a69c4b89c8cf7459038f40d75e0dc9}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_user_node6_protocol_aa4d6a7d01f74b99c730a2cf5e41b0954}\label{class_user_node6_protocol_aa4d6a7d01f74b99c730a2cf5e41b0954}} 
+\index{User\+Node6\+Protocol@{User\+Node6\+Protocol}!maxlength@{maxlength}}
+\index{maxlength@{maxlength}!User\+Node6\+Protocol@{User\+Node6\+Protocol}}
+\subsubsection{\texorpdfstring{maxlength()}{maxlength()}}
+{\footnotesize\ttfamily virtual quint16 User\+Node6\+Protocol\+::maxlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+最大包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_af41bc3116abbbcfc9af45e151a253ff7}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_user_node6_protocol_acec32f9dbc13eefa0d51f62eda4f9581}\label{class_user_node6_protocol_acec32f9dbc13eefa0d51f62eda4f9581}} 
+\index{User\+Node6\+Protocol@{User\+Node6\+Protocol}!minlength@{minlength}}
+\index{minlength@{minlength}!User\+Node6\+Protocol@{User\+Node6\+Protocol}}
+\subsubsection{\texorpdfstring{minlength()}{minlength()}}
+{\footnotesize\ttfamily virtual quint16 User\+Node6\+Protocol\+::minlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+最小包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a2b00f53d3dd0eed817eeecff422891f3}{Q\+Qt\+Protocol}}.
+
+\mbox{\Hypertarget{class_user_node6_protocol_a1f03c2a595c4838d1075000aa51c8c3d}\label{class_user_node6_protocol_a1f03c2a595c4838d1075000aa51c8c3d}} 
+\index{User\+Node6\+Protocol@{User\+Node6\+Protocol}!splitter@{splitter}}
+\index{splitter@{splitter}!User\+Node6\+Protocol@{User\+Node6\+Protocol}}
+\subsubsection{\texorpdfstring{splitter()}{splitter()}}
+{\footnotesize\ttfamily virtual quint16 User\+Node6\+Protocol\+::splitter (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 接收到的数据段} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+按照协议解析到的数据长度 可用，继续接收，丢弃，粘包。 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_protocol_a00fd0c1ac23379ed3b9b25da9a34f39b}{Q\+Qt\+Protocol}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/examples/qqtnetworkexample/usernode6protocol.\+h\end{DoxyCompactItemize}

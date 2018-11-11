@@ -1,0 +1,178 @@
+\hypertarget{class_q_qt_protocol}{}\section{Q\+Qt\+Protocol Class Reference}
+\label{class_q_qt_protocol}\index{Q\+Qt\+Protocol@{Q\+Qt\+Protocol}}
+
+
+The \mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} class very good ideology and impliment.  
+
+
+
+
+{\ttfamily \#include $<$qqtprotocol.\+h$>$}
+
+Inheritance diagram for Q\+Qt\+Protocol\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{class_q_qt_protocol}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_protocol_ac1c3f7a556fff1a4e3bf4991044feea9}\label{class_q_qt_protocol_ac1c3f7a556fff1a4e3bf4991044feea9}} 
+qint64 {\bfseries write} (const Q\+Byte\+Array \&)
+\item 
+void \mbox{\hyperlink{class_q_qt_protocol_a95af0a9e22be37f68d953449e2c8e21d}{notify\+To\+Protocol\+Manager}} (const \mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$self, const \mbox{\hyperlink{class_q_qt_message}{Q\+Qt\+Message}} $\ast$message)
+\begin{DoxyCompactList}\small\item\em notify\+To\+Protocol\+Manager 为服务器功能的\+Protocol\+Manager添加的，用户，必要时调用。 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_q_qt_protocol_aeb2a225e9d78439ea987fe9c1db667ce}\label{class_q_qt_protocol_aeb2a225e9d78439ea987fe9c1db667ce}} 
+void {\bfseries status\+Changed} (int status)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_protocol_a9e4b2132fb2b1c6a37964696e25cecf5}\label{class_q_qt_protocol_a9e4b2132fb2b1c6a37964696e25cecf5}} 
+Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE {\bfseries Q\+Qt\+Protocol} (Q\+Object $\ast$parent=0)
+\item 
+virtual quint16 \mbox{\hyperlink{class_q_qt_protocol_a2b00f53d3dd0eed817eeecff422891f3}{minlength}} ()
+\begin{DoxyCompactList}\small\item\em 最小包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_q_qt_protocol_af41bc3116abbbcfc9af45e151a253ff7}{maxlength}} ()
+\begin{DoxyCompactList}\small\item\em 最大包长 \end{DoxyCompactList}\item 
+virtual quint16 \mbox{\hyperlink{class_q_qt_protocol_a00fd0c1ac23379ed3b9b25da9a34f39b}{splitter}} (const Q\+Byte\+Array \&)
+\begin{DoxyCompactList}\small\item\em 语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_q_qt_protocol_a35a69c4b89c8cf7459038f40d75e0dc9}{dispatcher}} (const Q\+Byte\+Array \&)
+\begin{DoxyCompactList}\small\item\em 语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_q_qt_protocol_a80b4de63c9a5bab33c22b7c47bd22c00}{detach}} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_protocol_a6531140a493fb35d4efd815dc9f89ce8}\label{class_q_qt_protocol_a6531140a493fb35d4efd815dc9f89ce8}} 
+virtual void {\bfseries attach} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_protocol_a7da29cf18ebb2b8924eab0bc73c46b57}\label{class_q_qt_protocol_a7da29cf18ebb2b8924eab0bc73c46b57}} 
+virtual bool {\bfseries detached} ()
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_protocol_ad4caa7aadbb04320acc7d653956f51cb}{initializer}} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_protocol_a75d40f91c31b9a2d9f56dee92b9e3c35}\label{class_q_qt_protocol_a75d40f91c31b9a2d9f56dee92b9e3c35}} 
+bool {\bfseries m\+Is\+Detached}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} class very good ideology and impliment. 
+
+特点 C-\/P Client\+Socket Protocol 1\+:1的关系 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_protocol_a80b4de63c9a5bab33c22b7c47bd22c00}\label{class_q_qt_protocol_a80b4de63c9a5bab33c22b7c47bd22c00}} 
+\index{Q\+Qt\+Protocol@{Q\+Qt\+Protocol}!detach@{detach}}
+\index{detach@{detach}!Q\+Qt\+Protocol@{Q\+Qt\+Protocol}}
+\subsubsection{\texorpdfstring{detach()}{detach()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Protocol\+::detach (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+如果\+Socket和这个\+Protocol关联，就会设置关联。 表示是否在使用中。 \mbox{\Hypertarget{class_q_qt_protocol_a35a69c4b89c8cf7459038f40d75e0dc9}\label{class_q_qt_protocol_a35a69c4b89c8cf7459038f40d75e0dc9}} 
+\index{Q\+Qt\+Protocol@{Q\+Qt\+Protocol}!dispatcher@{dispatcher}}
+\index{dispatcher@{dispatcher}!Q\+Qt\+Protocol@{Q\+Qt\+Protocol}}
+\subsubsection{\texorpdfstring{dispatcher()}{dispatcher()}}
+{\footnotesize\ttfamily virtual bool Q\+Qt\+Protocol\+::dispatcher (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+语义解析器 分发报文 /.../quint16 size/.../\+Q\+Byte\+Array data/.../ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 数据包} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 no dispatched(others) 1 dispatched(own) 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_q_q_t_cloud_protocol_ae76f5efc67e9ac54a98e934266ecca0a}{Q\+Q\+T\+Cloud\+Protocol}}, \mbox{\hyperlink{class_q_qt_client_protocol_aeab102179a7d75ddb33e62be03e419e0}{Q\+Qt\+Client\+Protocol}}, \mbox{\hyperlink{class_q_qt_server_protocol_a5649fe79c03f11076a4c3014c8013c25}{Q\+Qt\+Server\+Protocol}}, \mbox{\hyperlink{class_q_qt_single_ton_named_pipe_server_protocol_a1ed56992ebd187b077037731ceb64318}{Q\+Qt\+Single\+Ton\+Named\+Pipe\+Server\+Protocol}}, \mbox{\hyperlink{class_q_qt_named_pipe_server_protocol_ad401c03b0ef1424181fc7e8d15ddfde9}{Q\+Qt\+Named\+Pipe\+Server\+Protocol}}, \mbox{\hyperlink{class_q_qt_server2_protocol_a166c5cf2d57448db3147f245bc591c79}{Q\+Qt\+Server2\+Protocol}}, \mbox{\hyperlink{class_q_q_t_user_serial_protocol_ac851e9026524ef8081f7980480d83237}{Q\+Q\+T\+User\+Serial\+Protocol}}, \mbox{\hyperlink{class_q_qt_client2_protocol_a4856c771cfc078135a824f5c9d6027b4}{Q\+Qt\+Client2\+Protocol}}, \mbox{\hyperlink{class_q_qt_user_protocol2_a8852acc1ebaf727d8df4d5aef10aa692}{Q\+Qt\+User\+Protocol2}}, \mbox{\hyperlink{class_q_qt_user_protocol1_a104f22ea8bd917f70735f602d0da9c37}{Q\+Qt\+User\+Protocol1}}, \mbox{\hyperlink{class_q_qt_user_protocol3_aaf19f0833843777be35132163043fdae}{Q\+Qt\+User\+Protocol3}}, \mbox{\hyperlink{class_user_node0_protocol_a2e52dc03ed50b7db734e25b228f821b5}{User\+Node0\+Protocol}}, \mbox{\hyperlink{class_user_node1_protocol_a65d9f8f66171892e61f93ff78fd4b331}{User\+Node1\+Protocol}}, \mbox{\hyperlink{class_user_node2_protocol_acba30f215b45c57d2cc89d3aecdae064}{User\+Node2\+Protocol}}, \mbox{\hyperlink{class_user_node3_protocol_ae2cdd23391ce7355c4af60f98c12c49b}{User\+Node3\+Protocol}}, \mbox{\hyperlink{class_user_node4_protocol_a4f28216042a1e831b8759926f9b6ac7a}{User\+Node4\+Protocol}}, \mbox{\hyperlink{class_user_node5_protocol_a7dabc3495dfe07e18c2f1bb2cd27dea1}{User\+Node5\+Protocol}}, \mbox{\hyperlink{class_user_node6_protocol_aa9e69750085bc3dbcd7e97b3e4ced90d}{User\+Node6\+Protocol}}, \mbox{\hyperlink{class_user_node7_protocol_adc52eb93c96eacb0e29d9af75f768380}{User\+Node7\+Protocol}}, \mbox{\hyperlink{class_user_node8_protocol_afeab57dd909eeadf9531d70889b83310}{User\+Node8\+Protocol}}, \mbox{\hyperlink{class_user_node9_protocol_ac051744c60732dd396c3d135ceec4508}{User\+Node9\+Protocol}}, \mbox{\hyperlink{class_user_test0_protocol_a0d621efef7942762ed7ac7187962c92a}{User\+Test0\+Protocol}}, \mbox{\hyperlink{class_user_test1_protocol_a8689570da19a61d1c5c8b4c8970c0851}{User\+Test1\+Protocol}}, \mbox{\hyperlink{class_user_test2_protocol_af35d95181563f50a532623d6634c7a37}{User\+Test2\+Protocol}}, \mbox{\hyperlink{class_user_test3_protocol_a58f74a6afbee43ffb6b0c0b8b14c2dbc}{User\+Test3\+Protocol}}, \mbox{\hyperlink{class_user_test4_protocol_abe4cc53430dfa8c30c15bd0ba94c94b2}{User\+Test4\+Protocol}}, \mbox{\hyperlink{class_user_test5_protocol_aceda8201395278798ed1a24947c7a514}{User\+Test5\+Protocol}}, \mbox{\hyperlink{class_user_test6_protocol_a628f7c67f9dcbcec326c3289302a9868}{User\+Test6\+Protocol}}, \mbox{\hyperlink{class_user_test7_protocol_a5ed3c0a46b0dc290b3731f52a45654e0}{User\+Test7\+Protocol}}, \mbox{\hyperlink{class_user_test8_protocol_a008eb4af8499545f3895600cc5c95710}{User\+Test8\+Protocol}}, \mbox{\hyperlink{class_user_test9_protocol_a0c3c92b88bce2ea35a8b3e7da7b4044f}{User\+Test9\+Protocol}}, \mbox{\hyperlink{class_q_qt_named_pipe_client_protocol_a8aca95f5a834ba308097681bf04ea741}{Q\+Qt\+Named\+Pipe\+Client\+Protocol}}, \mbox{\hyperlink{class_q_qt_single_ton_named_pipe_client_protocol_a34cdea5f2034d0e18995ff1c9753e0b7}{Q\+Qt\+Single\+Ton\+Named\+Pipe\+Client\+Protocol}}, \mbox{\hyperlink{class_q_q_t_lan_protocol_ac2fc1658a5c00670974f4e845226c419}{Q\+Q\+T\+Lan\+Protocol}}, and \mbox{\hyperlink{class_cedian_udp_protocol_ad9dfd948a1a10f445d75ccc869b3bc52}{Cedian\+Udp\+Protocol}}.
+
+\mbox{\Hypertarget{class_q_qt_protocol_ad4caa7aadbb04320acc7d653956f51cb}\label{class_q_qt_protocol_ad4caa7aadbb04320acc7d653956f51cb}} 
+\index{Q\+Qt\+Protocol@{Q\+Qt\+Protocol}!initializer@{initializer}}
+\index{initializer@{initializer}!Q\+Qt\+Protocol@{Q\+Qt\+Protocol}}
+\subsubsection{\texorpdfstring{initializer()}{initializer()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Protocol\+::initializer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+用户使用 optional reset函数 = clear = clean = init函数 用于对\+Protocol句柄进行初始化成员变量。 这个函数会在被安装到客户端句柄的时候使用，会有作用。 \mbox{\Hypertarget{class_q_qt_protocol_af41bc3116abbbcfc9af45e151a253ff7}\label{class_q_qt_protocol_af41bc3116abbbcfc9af45e151a253ff7}} 
+\index{Q\+Qt\+Protocol@{Q\+Qt\+Protocol}!maxlength@{maxlength}}
+\index{maxlength@{maxlength}!Q\+Qt\+Protocol@{Q\+Qt\+Protocol}}
+\subsubsection{\texorpdfstring{maxlength()}{maxlength()}}
+{\footnotesize\ttfamily virtual quint16 Q\+Qt\+Protocol\+::maxlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+最大包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_q_q_t_cloud_protocol_a3d0c9c59e983a8e8f315c3ad174154fa}{Q\+Q\+T\+Cloud\+Protocol}}, \mbox{\hyperlink{class_q_qt_server_protocol_ac4822c4cab54e3c909683857f7e60e16}{Q\+Qt\+Server\+Protocol}}, \mbox{\hyperlink{class_q_qt_client_protocol_aef8469f25fb684299845abc64d9b1107}{Q\+Qt\+Client\+Protocol}}, \mbox{\hyperlink{class_q_qt_single_ton_named_pipe_server_protocol_a27bbc0907d5f063c2505c047e2e92b47}{Q\+Qt\+Single\+Ton\+Named\+Pipe\+Server\+Protocol}}, \mbox{\hyperlink{class_q_qt_named_pipe_server_protocol_a1ed70a94ce8e3a85af4ffe874b731eec}{Q\+Qt\+Named\+Pipe\+Server\+Protocol}}, \mbox{\hyperlink{class_q_q_t_user_serial_protocol_ad564c1976be71019499ea1de4fd51a12}{Q\+Q\+T\+User\+Serial\+Protocol}}, \mbox{\hyperlink{class_q_qt_server2_protocol_a94d79a2cd8b22b353711fafe4dd8359b}{Q\+Qt\+Server2\+Protocol}}, \mbox{\hyperlink{class_q_qt_client2_protocol_a4b8afc8d5785c9f7605df38e06a39008}{Q\+Qt\+Client2\+Protocol}}, \mbox{\hyperlink{class_q_qt_user_protocol2_a7084a23f3bbb82fecf15986a318bd61f}{Q\+Qt\+User\+Protocol2}}, \mbox{\hyperlink{class_q_qt_user_protocol1_ab66c2cd59e9f2a79d3bc3e2197b51870}{Q\+Qt\+User\+Protocol1}}, \mbox{\hyperlink{class_q_qt_user_protocol3_ac23445025360c20fb0e67809a1a092c7}{Q\+Qt\+User\+Protocol3}}, \mbox{\hyperlink{class_user_node0_protocol_a97b6c29520fc6df873e0062ff337103b}{User\+Node0\+Protocol}}, \mbox{\hyperlink{class_user_node1_protocol_aa84ed8cf50ee57a76a91c6472c669d89}{User\+Node1\+Protocol}}, \mbox{\hyperlink{class_user_node2_protocol_a79735a944102084e4b2da6c8cd6f598f}{User\+Node2\+Protocol}}, \mbox{\hyperlink{class_user_node3_protocol_a44ee62880791a5b3d9d2fe40ad2b6c6f}{User\+Node3\+Protocol}}, \mbox{\hyperlink{class_user_node4_protocol_aec1bcb2d4f141b0e253f067fd968713f}{User\+Node4\+Protocol}}, \mbox{\hyperlink{class_user_node5_protocol_ad69cf7619d98dc8d3a4f4ee4f3da03b9}{User\+Node5\+Protocol}}, \mbox{\hyperlink{class_user_node6_protocol_aa4d6a7d01f74b99c730a2cf5e41b0954}{User\+Node6\+Protocol}}, \mbox{\hyperlink{class_user_node7_protocol_af5dce447ca462ae8815101e33b6476b6}{User\+Node7\+Protocol}}, \mbox{\hyperlink{class_user_node8_protocol_aa9161b377e99c0548911c0522ab71898}{User\+Node8\+Protocol}}, \mbox{\hyperlink{class_user_node9_protocol_aab13ff1d10583bf493cf62cecdbf8bf9}{User\+Node9\+Protocol}}, \mbox{\hyperlink{class_user_test0_protocol_a29ba76e4eef2b17fbfac01534fc660a2}{User\+Test0\+Protocol}}, \mbox{\hyperlink{class_user_test1_protocol_ad22de22fb36be08a6c9e3c42d95e4aca}{User\+Test1\+Protocol}}, \mbox{\hyperlink{class_user_test2_protocol_ace8c98d761f9660ad1d602c672e16705}{User\+Test2\+Protocol}}, \mbox{\hyperlink{class_user_test3_protocol_a45b85efa9aa17955df65396760930b8b}{User\+Test3\+Protocol}}, \mbox{\hyperlink{class_user_test4_protocol_ad85ffaadace1a7ed1847796724cb27e6}{User\+Test4\+Protocol}}, \mbox{\hyperlink{class_user_test5_protocol_a70e5c3d6fea36a9b85ac260d1642880e}{User\+Test5\+Protocol}}, \mbox{\hyperlink{class_user_test6_protocol_a1e28f9e5f3b346b890574ecb179629e7}{User\+Test6\+Protocol}}, \mbox{\hyperlink{class_user_test7_protocol_a67a1a31d8896e45be9cbfa83b1282656}{User\+Test7\+Protocol}}, \mbox{\hyperlink{class_user_test8_protocol_a4358fee213c86498f67992fc620c290e}{User\+Test8\+Protocol}}, \mbox{\hyperlink{class_user_test9_protocol_a77d2d555e492aaf2e8cc98b2b16dedd7}{User\+Test9\+Protocol}}, \mbox{\hyperlink{class_q_qt_named_pipe_client_protocol_a79ee5699908d79e62fcb52519ddf79fe}{Q\+Qt\+Named\+Pipe\+Client\+Protocol}}, \mbox{\hyperlink{class_q_qt_single_ton_named_pipe_client_protocol_a22f3540009470dac721de651e9b48adb}{Q\+Qt\+Single\+Ton\+Named\+Pipe\+Client\+Protocol}}, and \mbox{\hyperlink{class_q_q_t_lan_protocol_a05999312ac6df3ce5790d889f2bdc826}{Q\+Q\+T\+Lan\+Protocol}}.
+
+\mbox{\Hypertarget{class_q_qt_protocol_a2b00f53d3dd0eed817eeecff422891f3}\label{class_q_qt_protocol_a2b00f53d3dd0eed817eeecff422891f3}} 
+\index{Q\+Qt\+Protocol@{Q\+Qt\+Protocol}!minlength@{minlength}}
+\index{minlength@{minlength}!Q\+Qt\+Protocol@{Q\+Qt\+Protocol}}
+\subsubsection{\texorpdfstring{minlength()}{minlength()}}
+{\footnotesize\ttfamily virtual quint16 Q\+Qt\+Protocol\+::minlength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+最小包长 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_q_q_t_cloud_protocol_a138211e39906229a3e5c6c623d04cac9}{Q\+Q\+T\+Cloud\+Protocol}}, \mbox{\hyperlink{class_q_qt_server_protocol_aedf7e04e6c47c20e0e76f9e99a60a524}{Q\+Qt\+Server\+Protocol}}, \mbox{\hyperlink{class_q_qt_client_protocol_ad6e417b3d0494dc0cd29606d39c54e09}{Q\+Qt\+Client\+Protocol}}, \mbox{\hyperlink{class_q_qt_single_ton_named_pipe_server_protocol_aca626338e7dd9796714c49be811bb624}{Q\+Qt\+Single\+Ton\+Named\+Pipe\+Server\+Protocol}}, \mbox{\hyperlink{class_q_q_t_user_serial_protocol_a7dcd4e05381634dd45504571243ea853}{Q\+Q\+T\+User\+Serial\+Protocol}}, \mbox{\hyperlink{class_q_qt_named_pipe_server_protocol_ad45fdcc8ed9b558d267995d9d44b1f01}{Q\+Qt\+Named\+Pipe\+Server\+Protocol}}, \mbox{\hyperlink{class_q_qt_server2_protocol_a2282032c0edf8f9d93471125de77a980}{Q\+Qt\+Server2\+Protocol}}, \mbox{\hyperlink{class_q_qt_client2_protocol_abf17d8d38925c2e9ab9bac4f6bf00223}{Q\+Qt\+Client2\+Protocol}}, \mbox{\hyperlink{class_q_qt_user_protocol2_a2dafc33ffca68e757710f118093b02e9}{Q\+Qt\+User\+Protocol2}}, \mbox{\hyperlink{class_q_qt_user_protocol1_a7e59f61f8f516fae3d73a71db2931af3}{Q\+Qt\+User\+Protocol1}}, \mbox{\hyperlink{class_q_qt_user_protocol3_a210181f706de160bb3e4e3f0b8753ce6}{Q\+Qt\+User\+Protocol3}}, \mbox{\hyperlink{class_user_node0_protocol_a70125c71f69baed9ac977efd92591227}{User\+Node0\+Protocol}}, \mbox{\hyperlink{class_user_node1_protocol_a7baf2b30d60e548703181aee9063e3ef}{User\+Node1\+Protocol}}, \mbox{\hyperlink{class_user_node2_protocol_a33e438499c773f7c51f62537a98bb48a}{User\+Node2\+Protocol}}, \mbox{\hyperlink{class_user_node3_protocol_aa84ec21113d3ba81c978d3737cfeb861}{User\+Node3\+Protocol}}, \mbox{\hyperlink{class_user_node4_protocol_aea49d45bea054294a8cc318151b80795}{User\+Node4\+Protocol}}, \mbox{\hyperlink{class_user_node5_protocol_a87f07fcef4add8b825ff6135600ca448}{User\+Node5\+Protocol}}, \mbox{\hyperlink{class_user_node6_protocol_acec32f9dbc13eefa0d51f62eda4f9581}{User\+Node6\+Protocol}}, \mbox{\hyperlink{class_user_node7_protocol_abc693444bdac5a88d82065846ef9452d}{User\+Node7\+Protocol}}, \mbox{\hyperlink{class_user_node8_protocol_a3dc285f4225042610baaea92366f4afd}{User\+Node8\+Protocol}}, \mbox{\hyperlink{class_user_node9_protocol_a52cf6005d9ef8a27f5a38a5cc4e5b7d8}{User\+Node9\+Protocol}}, \mbox{\hyperlink{class_user_test0_protocol_acc05bdd36b7c126ee95eaf3c8ce7099a}{User\+Test0\+Protocol}}, \mbox{\hyperlink{class_user_test1_protocol_adb1008e781985acbb52a57b086f25871}{User\+Test1\+Protocol}}, \mbox{\hyperlink{class_user_test2_protocol_a00f0df8afa902f5c351147f2f473906d}{User\+Test2\+Protocol}}, \mbox{\hyperlink{class_user_test3_protocol_adfd874c620f9488b27543cfa2957ee4f}{User\+Test3\+Protocol}}, \mbox{\hyperlink{class_user_test4_protocol_af34d5bf64c211abe33f8c47af07832bd}{User\+Test4\+Protocol}}, \mbox{\hyperlink{class_user_test5_protocol_aba9c0f712e5f84bbd893ba3c67766850}{User\+Test5\+Protocol}}, \mbox{\hyperlink{class_user_test6_protocol_aa70097712ded2d3947ad7fdcd116b6e3}{User\+Test6\+Protocol}}, \mbox{\hyperlink{class_user_test7_protocol_a891a44bf8ae811b4c02cc6707dea72bf}{User\+Test7\+Protocol}}, \mbox{\hyperlink{class_user_test8_protocol_a8c0fe537872e834829e9507dc1bf3898}{User\+Test8\+Protocol}}, \mbox{\hyperlink{class_user_test9_protocol_a5f7538789e71e0111abe20cf99d93ca2}{User\+Test9\+Protocol}}, \mbox{\hyperlink{class_q_qt_named_pipe_client_protocol_a2575aa4579cdf49b29c3a830e83d90a1}{Q\+Qt\+Named\+Pipe\+Client\+Protocol}}, \mbox{\hyperlink{class_q_qt_single_ton_named_pipe_client_protocol_a77883d9ccc219b37ae080cc91be70c09}{Q\+Qt\+Single\+Ton\+Named\+Pipe\+Client\+Protocol}}, \mbox{\hyperlink{class_q_q_t_lan_protocol_aa554a0956cf9790958b6959211d8cea3}{Q\+Q\+T\+Lan\+Protocol}}, and \mbox{\hyperlink{class_q_qt_sub_protocol_test_a42b8ca064326139d26bc20e76f356a6a}{Q\+Qt\+Sub\+Protocol\+Test}}.
+
+\mbox{\Hypertarget{class_q_qt_protocol_a95af0a9e22be37f68d953449e2c8e21d}\label{class_q_qt_protocol_a95af0a9e22be37f68d953449e2c8e21d}} 
+\index{Q\+Qt\+Protocol@{Q\+Qt\+Protocol}!notify\+To\+Protocol\+Manager@{notify\+To\+Protocol\+Manager}}
+\index{notify\+To\+Protocol\+Manager@{notify\+To\+Protocol\+Manager}!Q\+Qt\+Protocol@{Q\+Qt\+Protocol}}
+\subsubsection{\texorpdfstring{notify\+To\+Protocol\+Manager}{notifyToProtocolManager}}
+{\footnotesize\ttfamily void Q\+Qt\+Protocol\+::notify\+To\+Protocol\+Manager (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_q_qt_protocol}{Q\+Qt\+Protocol}} $\ast$}]{self,  }\item[{const \mbox{\hyperlink{class_q_qt_message}{Q\+Qt\+Message}} $\ast$}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+notify\+To\+Protocol\+Manager 为服务器功能的\+Protocol\+Manager添加的，用户，必要时调用。 
+
+用户继承下去的协议里，在dispatcher的recv函数里，如果必要把收到的信息传递给上层， 那么通过emit notify\+To\+Protocol\+Manager，传递给\+Protocol\+Manager Business\+Level对这些接收到的信息感兴趣， 那么通过连接\+Protocol\+Manager的notify\+To\+Business\+Level对拿到的信息进行处理，会包括协议句柄，使用户方便写回客户。 当然，用户不必管理这个信号和\+P\+M的信号的连接，\+P\+M内部自动管理了。 
+\begin{DoxyParams}{Parameters}
+{\em self} & \\
+\hline
+{\em message} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_q_qt_protocol_a00fd0c1ac23379ed3b9b25da9a34f39b}\label{class_q_qt_protocol_a00fd0c1ac23379ed3b9b25da9a34f39b}} 
+\index{Q\+Qt\+Protocol@{Q\+Qt\+Protocol}!splitter@{splitter}}
+\index{splitter@{splitter}!Q\+Qt\+Protocol@{Q\+Qt\+Protocol}}
+\subsubsection{\texorpdfstring{splitter()}{splitter()}}
+{\footnotesize\ttfamily virtual quint16 Q\+Qt\+Protocol\+::splitter (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+语法解析器 从流中解析报文长度 /.../quint16 size/.../.../... 
+
+
+\begin{DoxyParams}{Parameters}
+{\em 接收到的数据段} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+按照协议解析到的数据长度 可用，继续接收，丢弃，粘包。 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_q_q_t_cloud_protocol_a7aed50bf23eca6f119ed998dffc37cf4}{Q\+Q\+T\+Cloud\+Protocol}}, \mbox{\hyperlink{class_q_qt_server_protocol_ad32e1371ad050b5db9ce135b8fc5d96e}{Q\+Qt\+Server\+Protocol}}, \mbox{\hyperlink{class_q_qt_client_protocol_a47ee18513a0294465dcb584d84288b5d}{Q\+Qt\+Client\+Protocol}}, \mbox{\hyperlink{class_q_qt_single_ton_named_pipe_server_protocol_a2025dc5018186ca2e3fb1d919adaaa3e}{Q\+Qt\+Single\+Ton\+Named\+Pipe\+Server\+Protocol}}, \mbox{\hyperlink{class_q_qt_named_pipe_server_protocol_ae5cf336bee9a7062e099a8eb7ef7d069}{Q\+Qt\+Named\+Pipe\+Server\+Protocol}}, \mbox{\hyperlink{class_q_q_t_user_serial_protocol_abcadcc53d378823ad87a0d736169fd3e}{Q\+Q\+T\+User\+Serial\+Protocol}}, \mbox{\hyperlink{class_q_qt_server2_protocol_a764cdc712de1104ae9400633eabd2f17}{Q\+Qt\+Server2\+Protocol}}, \mbox{\hyperlink{class_q_qt_client2_protocol_ad5c123b096a1b1bc13bf1f1db22df4e2}{Q\+Qt\+Client2\+Protocol}}, \mbox{\hyperlink{class_q_qt_user_protocol2_a58e1ba58e6c0eca4fa4c17b6d987aa50}{Q\+Qt\+User\+Protocol2}}, \mbox{\hyperlink{class_q_qt_user_protocol1_acbe588598a606864be1b8efc83f92baf}{Q\+Qt\+User\+Protocol1}}, \mbox{\hyperlink{class_q_qt_user_protocol3_a783d99ec4be1296f1d83bec932934de9}{Q\+Qt\+User\+Protocol3}}, \mbox{\hyperlink{class_user_node0_protocol_a37557b8ee540a09b33591f203555e69c}{User\+Node0\+Protocol}}, \mbox{\hyperlink{class_user_node1_protocol_a10c088835708f2e7f9f96b6c9a3711cf}{User\+Node1\+Protocol}}, \mbox{\hyperlink{class_user_node2_protocol_acc3d5dace667ef971078b7f605b9be6a}{User\+Node2\+Protocol}}, \mbox{\hyperlink{class_user_node3_protocol_acedafcac18c2a02b5886c0b385740163}{User\+Node3\+Protocol}}, \mbox{\hyperlink{class_user_node4_protocol_a700906b1138f7c2aa655aac6d4cfcd28}{User\+Node4\+Protocol}}, \mbox{\hyperlink{class_user_node5_protocol_a4e92b89d23b04291316291d1d949a075}{User\+Node5\+Protocol}}, \mbox{\hyperlink{class_user_node6_protocol_a1f03c2a595c4838d1075000aa51c8c3d}{User\+Node6\+Protocol}}, \mbox{\hyperlink{class_user_node7_protocol_a4ce7d1a1d6684e05fafb0b52b7d117d7}{User\+Node7\+Protocol}}, \mbox{\hyperlink{class_user_node8_protocol_a518106d72486f6d041836e6a59e5ccd5}{User\+Node8\+Protocol}}, \mbox{\hyperlink{class_user_node9_protocol_a7f4994e5a7c931a6581cf30f55f4c34f}{User\+Node9\+Protocol}}, \mbox{\hyperlink{class_user_test0_protocol_ace8b232173e7e37761c739efed42d2e4}{User\+Test0\+Protocol}}, \mbox{\hyperlink{class_user_test1_protocol_a393a4b16b21b40211541047cebb1ccfc}{User\+Test1\+Protocol}}, \mbox{\hyperlink{class_user_test2_protocol_a383a85b77478cb1a0857221ef12a3f6a}{User\+Test2\+Protocol}}, \mbox{\hyperlink{class_user_test3_protocol_a5a7991a0479a865e1aa406d3ac4e6ca2}{User\+Test3\+Protocol}}, \mbox{\hyperlink{class_user_test4_protocol_a3e909f7178da7a2a8f520f9a5e9d381d}{User\+Test4\+Protocol}}, \mbox{\hyperlink{class_user_test5_protocol_a142f40a8a2c8f98457046df8c8809379}{User\+Test5\+Protocol}}, \mbox{\hyperlink{class_user_test6_protocol_ac5ffc3b2d15b5d6d40148f589fae62cf}{User\+Test6\+Protocol}}, \mbox{\hyperlink{class_user_test7_protocol_aa213a9855a1aac4dd4946fe16a4ef52f}{User\+Test7\+Protocol}}, \mbox{\hyperlink{class_user_test8_protocol_abb32ee37a76f7ee7b0a28b65b3abb592}{User\+Test8\+Protocol}}, \mbox{\hyperlink{class_user_test9_protocol_ad2ecaec0fb0aa49ded69f3de5d994d3a}{User\+Test9\+Protocol}}, \mbox{\hyperlink{class_q_qt_named_pipe_client_protocol_a909aa772837f6ee556d59fb7fbdb3f37}{Q\+Qt\+Named\+Pipe\+Client\+Protocol}}, \mbox{\hyperlink{class_q_qt_single_ton_named_pipe_client_protocol_a55378f2a22af0d424022c8d2383d88f5}{Q\+Qt\+Single\+Ton\+Named\+Pipe\+Client\+Protocol}}, \mbox{\hyperlink{class_q_q_t_lan_protocol_ad7cfd8f888490a3453f7868cc38d914b}{Q\+Q\+T\+Lan\+Protocol}}, and \mbox{\hyperlink{class_q_qt_sub_protocol_test_aaf24e5745a46de9a5d6dd4ba06a5603c}{Q\+Qt\+Sub\+Protocol\+Test}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/src/network/qqtprotocol.\+h\end{DoxyCompactItemize}

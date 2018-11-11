@@ -1,0 +1,74 @@
+\hypertarget{class_q_qt_lan_message}{}\section{Q\+Qt\+Lan\+Message Class Reference}
+\label{class_q_qt_lan_message}\index{Q\+Qt\+Lan\+Message@{Q\+Qt\+Lan\+Message}}
+Inheritance diagram for Q\+Qt\+Lan\+Message\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_q_qt_lan_message}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_q_qt_lan_message_a7ec4d86c0d9f7c6b399bf4125c1946d3}\label{class_q_qt_lan_message_a7ec4d86c0d9f7c6b399bf4125c1946d3}} 
+{\bfseries Q\+Qt\+Lan\+Message} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_q_qt_lan_message_a31be2633275d38bcc74264cb318a3c52}\label{class_q_qt_lan_message_a31be2633275d38bcc74264cb318a3c52}} 
+quint8 \& {\bfseries size} ()
+\item 
+\mbox{\Hypertarget{class_q_qt_lan_message_aca8966f2006fa5f8e71f47cefc3e1538}\label{class_q_qt_lan_message_aca8966f2006fa5f8e71f47cefc3e1538}} 
+const quint8 \& {\bfseries size} () const
+\item 
+virtual void \mbox{\hyperlink{class_q_qt_lan_message_a778629e75eb24a48b54988b25bd32250}{parser}} (const Q\+Byte\+Array \&l) override
+\begin{DoxyCompactList}\small\item\em 从流中解析报文 这个函数会更改局部变量 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_q_qt_lan_message_ad06aa6cee4485251e1c9ae53e35a2cdc}{packer}} (Q\+Byte\+Array \&l) const override
+\begin{DoxyCompactList}\small\item\em 将报文组装为流 这个函数不会更改局部变量 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_q_qt_lan_message_ad06aa6cee4485251e1c9ae53e35a2cdc}\label{class_q_qt_lan_message_ad06aa6cee4485251e1c9ae53e35a2cdc}} 
+\index{Q\+Qt\+Lan\+Message@{Q\+Qt\+Lan\+Message}!packer@{packer}}
+\index{packer@{packer}!Q\+Qt\+Lan\+Message@{Q\+Qt\+Lan\+Message}}
+\subsubsection{\texorpdfstring{packer()}{packer()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Lan\+Message\+::packer (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将报文组装为流 这个函数不会更改局部变量 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & \\
+\hline
+{\em m} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_message_af1885c2c3628495808dca66ee8d72e14}{Q\+Qt\+Message}}.
+
+\mbox{\Hypertarget{class_q_qt_lan_message_a778629e75eb24a48b54988b25bd32250}\label{class_q_qt_lan_message_a778629e75eb24a48b54988b25bd32250}} 
+\index{Q\+Qt\+Lan\+Message@{Q\+Qt\+Lan\+Message}!parser@{parser}}
+\index{parser@{parser}!Q\+Qt\+Lan\+Message@{Q\+Qt\+Lan\+Message}}
+\subsubsection{\texorpdfstring{parser()}{parser()}}
+{\footnotesize\ttfamily virtual void Q\+Qt\+Lan\+Message\+::parser (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+从流中解析报文 这个函数会更改局部变量 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & \\
+\hline
+{\em l} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_q_qt_message_a0bc25669bdd61490b1d8df6d77565f31}{Q\+Qt\+Message}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+R\+:/\+Develop/a0-\/develop/\+Lib\+Q\+Qt/examples/qqtnetworkexample/qqtlanprotocol.\+h\end{DoxyCompactItemize}

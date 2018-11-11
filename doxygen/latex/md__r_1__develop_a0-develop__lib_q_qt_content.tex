@@ -1,0 +1,94 @@
+
+\begin{DoxyEnumerate}
+\item 支持绘制图表
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{class_q_qt_chart}{Q\+Qt\+Chart}} (compatiable with Q\+Chart and \mbox{\hyperlink{class_q_custom_plot}{Q\+Custom\+Plot}}) ~\newline
+2. 支持检测\+U\+S\+B设备热插拔 ~\newline
+3. 自定义了一部分特殊需要的控件，用来解决\+Qt的嵌入式bug。
+\item 包括完全使用图片的checkbox（switchbutton）
+\item Q\+Qt\+Tab\+Widget，解决\+Qt\+Tab不能竖排横显文字的问题
+\item Q\+Qt进度条，解决\+Qt进度条在\+Dialog中导致系统死机的问题
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item 添加精美控件
+\begin{DoxyItemize}
+\item 包括复杂的圆盘进度条, Speed\+Meter ~\newline
+ -\/ 包括有多种效果的\+Widget、\+Dialog
+\item 二维码生成器、识别器，校验码生成器
+\item 九宫格技术展示图片
+\item Html解析器
+\item 以及未列出的等20余种自定义widget。
+\end{DoxyItemize}
+\item 有线和无线网络自动连接管理类 ~\newline
+6. 解决\+Qt4.8.\+7在嵌入式屏幕上\+Q\+Graphics系统不正常绘画的问题
+\item Q\+Qt输入法
+\begin{DoxyItemize}
+\item 重写了\+U\+I，适配多种屏幕
+\end{DoxyItemize}
+\item Qt对象工厂，允许注册、生成、查找和删除所有来自\+Q\+Object以及\+Q\+Widget的类。
+\item 嵌入式视频播放器，模拟端口实时预览器 0. Q\+Qt打印机，支持打印pdf
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Q\+Qt\+Word，支持doc文档编写，输出pdf格式。
+\item Q\+Qt\+Tree\+View，添加\+Qt4内部没有\+Tree\+View
+\begin{DoxyItemize}
+\item 包括\+Q\+Qt\+Xml\+Tree\+Model、\+Q\+Qt\+Json\+Tree\+Model、\+Q\+Qt\+File\+System\+Tree\+Model、\+Q\+Qt\+Sql\+Tree\+Model
+\end{DoxyItemize}
+\item 支持工程的版本变更
+\begin{DoxyItemize}
+\item 在qqt\+\_\+version.\+pri里面是\+Q\+Qt的版本和源文件内版本宏定义 ~\newline
+ -\/ 在app\+\_\+version.\+pri里面是\+App的版本和源文件内版本宏定义 ~\newline
+6. Q\+Qt通讯套件。
+\begin{DoxyItemize}
+\item 通讯口类 ~\newline
+ -\/ \mbox{\hyperlink{class_q_qt_serial_port}{Q\+Qt\+Serial\+Port}} 兼容\+Q\+Serial\+Port and \mbox{\hyperlink{class_qext_serial_port}{Qext\+Serial\+Port}}
+\begin{DoxyItemize}
+\item \href{src/network/qqttcpclient.h}{\tt Q\+Qt\+Tcp\+Client}、\+Q\+Qt\+Tcp\+Server、\+Q\+Qt\+Udp\+Client
+\item Q\+Qt\+Bluetooth\+Socket +\+Q\+Qt\+Bluetooth\+Manager
+\item Q\+Qt\+Web\+Access\+Manager，支持http、ftp等主流协议，高并发传输。
+\item Q\+Qt\+Web\+Socket接口
+\end{DoxyItemize}
+\item 协议虚类（接口类） \href{src/network/qqtprotocol.h}{\tt Q\+Qt\+Protocol} Q\+Qt\+Web\+Socket\+Protocol
+\item 报文虚类（接口类） \href{src/network/qqtmessage.h}{\tt Q\+Qt\+Message}
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item 添加应用中常用的form
+\item 支持多页\+Table\+Widget
+\item 添加 \href{src/frame/qqtapplication.h}{\tt Q\+Qt\+Application}，支持入门级、通用级、专用级嵌入式\+App所必须的初始化内容
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item 支持\+Qt5.9.\+2 ~\newline
+0. 跨平台支持mac\+O\+S、i\+O\+S、\+Android、\+Windows、\+Linux、\+M\+I\+P\+S、\+A\+R\+M等。 ~\newline
+1. 添加矢量图形widgets ~\newline
+ -\/ 比如 Q\+Qt\+Svg\+Progressbar
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{class_q_qt_svg_check_box}{Q\+Qt\+Svg\+Check\+Box}}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item 添加核心类之\href{src/core/qqtdictionary.h}{\tt Q\+Qt\+Dictionary} ~\newline
+ -\/ 化解C Plus Plus中没有字典类别的尴尬。 ~\newline
+3. 添加\+Multi Link工程管理pri组 ~\newline
+ -\/ Multi Link technology，既多链接工程管理技术。
+\begin{DoxyItemize}
+\item 基于qmake，用户可以轻易的链接\+Lib\+Q\+Qt和添加自定义library。 ~\newline
+4. 添加gif support Widgets ~\newline
+ -\/ 可以方便的设置动态按钮等。 ~\newline
+ -\/ 有\+Q\+Qt\+Gif\+Widget、\+Q\+Qt\+Gif\+Button等。 ~\newline
+5. 升级多媒体音频 ~\newline
+ -\/ 添加内存服务器，处理内存和设备之间的数据交互。 ~\newline
+ -\/ Q\+Qt\+Audio\+Manager、 ~\newline
+ -\/ Q\+Qt\+Wav\+Audio\+Input、\+Q\+Qt\+Wav\+Audio\+Output、\+Q\+Qt\+Wav\+Audio\+Manager、 ~\newline
+ -\/ \mbox{\hyperlink{class_q_qt_wav_sound_effect}{Q\+Qt\+Wav\+Sound\+Effect}} ~\newline
+ -\/ 将\+Audio\+Device、wav输入输出文件，当做一个设备进行读写，\+App处理获取到的声音。 ~\newline
+6. 添加\+Http功能支持工具
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+Q\+Qt\+Web\+Access\+Manager，支持管理\+Session、\+Cookies。 ~\newline
+ -\/ 添加\+Gumbo\+Query爬虫工具。 ~\newline
+ -\/ 支持webservice (Qt\+Soap) ~\newline
+
+
+\href{.}{\tt 返回} 
