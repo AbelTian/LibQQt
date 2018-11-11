@@ -11,7 +11,7 @@
 #include <QSettings>
 #include <QTranslator>
 #include <QFontDatabase>
-#ifdef __PROCESSMODULE__
+#ifdef __PROCESSSUPPORT__
 #include <QProcess>
 #endif
 
@@ -182,7 +182,7 @@ void QQtApplication::slotUPanAutoRun ( int status )
             return;
         }
 
-#ifdef __PROCESSMODULE__
+#ifdef __PROCESSSUPPORT__
         QProcess* p = new QProcess ( this );
         p->setWorkingDirectory ( mP );
         p->start ( app );

@@ -1,9 +1,8 @@
-#ifndef QQTWORD_H
+﻿#ifndef QQTWORD_H
 #define QQTWORD_H
 
 #include <QObject>
 #include "qqt-qt.h"
-#include "qqtprinter.h"
 #include "qqtgraphicsscene.h"
 #include "qqt-local.h"
 
@@ -136,7 +135,7 @@ public:
     //imageRect dpi2 96
     //printerPaperRect dpi3 1200
     //确定比值相同. dpi 像素每英寸 像素 / 像素每英寸 = 英寸 如果是A4纸,那么一定是固定值咯.
-    void exportImage ( QList<QImage>& targetPapers , QRectF targetRect = QRectF() );
+    void exportImage ( QList<QImage>& targetPapers, QRectF targetRect = QRectF() );
 
 protected:
     virtual void adjustdy ( qreal dy0 );

@@ -45,11 +45,6 @@
 #include <QMouseEvent>
 #include <QUuid>
 
-//来自qqt_header.pri
-#ifdef __PRINTSUPPORT__
-#include <QPrinter>
-#endif
-
 #include <QTextFormat>
 #include <QTextTable>
 #include <QTextEdit>
@@ -96,7 +91,12 @@
 #include <QTimeLine>
 
 //来自qqt_header.pri
-#ifdef __PROCESSMODULE__
+#ifdef __PRINTSUPPORT__
+#include <QPrinter>
+#endif
+
+//来自qqt_header.pri
+#ifdef __PROCESSSUPPORT__
 #include <QProcess>
 #endif
 

@@ -2,6 +2,8 @@
 #define QQTMPLAYER_H
 
 #include <QProcess>
+
+#include "qqtcore.h"
 #include <qqt-local.h>
 
 /**

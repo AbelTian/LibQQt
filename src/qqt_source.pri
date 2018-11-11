@@ -48,11 +48,13 @@ SOURCES += \
 HEADERS += \
     $$PWD/core/qqtevent.h
 
-#后台进程支持，这个只有ios不支持，这个支持在源文件pri里处理。
-DEFINES += __PROCESSMODULE__
+#后台进程支持。
+#这个只有ios不支持，在源文件pri里处理。
+#可以添加QQtProcess适配，正常平台使用QProcess继承下来，iOS下使用fork封装。
+DEFINES += __PROCESSSUPPORT__
 #ios has no backend process
 contains(QSYS_PRIVATE, iOS||iOSSimulator) {
-    DEFINES -= __PROCESSMODULE__
+    DEFINES -= __PROCESSSUPPORT__
 }
 
 #sql
@@ -196,7 +198,7 @@ HEADERS += \
 #TODO: video +wince +android +ios +macOS +win +linux
 contains (DEFINES, __MULTIMEDIA__) {
     #mplayer
-    contains (DEFINES, __PROCESSMODULE__){
+    contains (DEFINES, __PROCESSSUPPORT__){
         SOURCES += $$PWD/multimedia/qqtmplayer.cpp
         HEADERS += $$PWD/multimedia/qqtmplayer.h
     }
