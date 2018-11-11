@@ -13,7 +13,7 @@
 #define QextBaseType Win_QextSerialPort
 #endif
 
-class LIBRARY_SHARED_EXPORT QextSerialPort: public QextBaseType
+class LIBRARYSHARED_EXPORT QextSerialPort: public QextBaseType
 {
     Q_OBJECT
 

@@ -222,13 +222,13 @@ defineTest(add_defines_QQt){
     contains (DEFINES, __NETWORKSUPPORT__) {
         ##################SerialPort Module##################################
         #if you use qextserialport, open the annotation
-        #suggest: Qt5 use factory-packed, Qt4 use forming Qt5, extra use this.
+        #suggest: Qt5 using factory-packed, Qt4 using from Qt5, extra using this.
         #DEFINES += __QEXTSERIALPORT__
         #if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
         lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
         #to ios, use qextserialport
-        #android qt5 support serialport default?
         contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
+        #android qt5 has QtSerialport?
         contains (DEFINES, __QEXTSERIALPORT__) {
             CONFIG += thread
             unix:DEFINES += _TTY_POSIX_
@@ -238,8 +238,8 @@ defineTest(add_defines_QQt){
             #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
         } else {
             #message ( __QSERIALPORT__ Defined in $${TARGET})
-            greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
             lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
+            else:QT += serialport
             unix {
                 DEFINES += _TTY_POSIX_
             } else {
