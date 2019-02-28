@@ -4,7 +4,6 @@
 #include <qqtcore.h>
 #include <qsound.h>
 #include <qsoundeffect.h>
-#include <qqtsoundeffect.h>
 #include <qqtframe.h>
 
 MainWindow::MainWindow ( QWidget* parent ) :
@@ -14,9 +13,6 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->setupUi ( this );
 
     connect ( &manager, SIGNAL ( readyRead() ), this, SLOT ( readyRead() ) );
-
-    connect ( &wavRecManager, SIGNAL ( readyRead() ), this, SLOT ( wavRecReadyRead() ) );
-    connect ( &wavFileManager, SIGNAL ( readyRead() ), this, SLOT ( wavFileReadyRead() ) );
 
     QList<QAudioDeviceInfo> ladInfo;
     ladInfo = QAudioDeviceInfo::availableDevices ( QAudio::AudioInput );
@@ -79,13 +75,6 @@ MainWindow::MainWindow ( QWidget* parent ) :
 //    ui->inputListWidget->setCurrentRow ( 0 );
 //    ui->outputListWidget->setCurrentRow ( 0 );
 //    ui->inputListWidget->setFocus();
-
-    ui->inHS->setRange ( 0, 100 );
-    ui->inHS->setValue ( 100 );
-
-    ui->outHS->setRange ( 0, 100 );
-    ui->outHS->setValue ( 100 );
-
     //pline() << QSoundEffect::supportedMimeTypes();
 
     QSoundEffect e;
@@ -107,20 +96,9 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //QSound::play ( res ( "9733.wav" ) );
 
     //响
-    QQtWavSoundEffect e1;
-    //e1.play ( res ( "9733.wav" ) );
-
-    //响
     //QApplication::beep();
 
-    //建议初始化
-    QQtWavSoundEffect::Instance ( this );
-
-    //可以多次循环调用。
-    QQtWavSound ( res ( "9733.wav" ) );
-
     //QQtSleep ( 3000 );
-
 }
 
 MainWindow::~MainWindow()
@@ -378,54 +356,10 @@ void MainWindow::readyRead()
     manager.write ( bytes );
 }
 
-void MainWindow::wavRecReadyRead()
-{
-    QByteArray bytes = wavRecManager.readAll();
-    //pline() << "recording:" << bytes.size();
-    wavFileManager.write ( bytes );
-}
-
-void MainWindow::wavFileReadyRead()
-{
-    QByteArray bytes = wavFileManager.readAll();
-    //pline() << "playing:" << bytes.size();
-    wavRecManager.write ( bytes );
-}
-
 void MainWindow::on_pushButton_3_clicked()
 {
     manager.stopInput();
     manager.stopOutput();
-}
-
-/*bug:Qt 设置音量会报错退出*/
-void MainWindow::on_inHS_valueChanged ( int value )
-{
-    return;
-
-    if ( !manager.inputDevice() )
-        return;
-
-    qreal linearVolume;
-//    qreal linearVolume = QAudio::convertVolume ( value / qreal ( 100.0 ),
-//                                                 QAudio::LogarithmicVolumeScale,
-//                                                 QAudio::LinearVolumeScale );
-
-//    pline() << "输入音量" << value << linearVolume << qRound ( linearVolume * 100 ) ;
-    manager.inputManager()->setVolume ( qRound ( linearVolume * 100 ) );
-}
-
-/*bug:Qt 设置音量会报错退出*/
-void MainWindow::on_outHS_valueChanged ( int value )
-{
-    return;
-
-    if ( !manager.outputDevice() )
-        return;
-
-    qreal vol = qreal ( value ) / 100;
-    pline() << "输出音量" << vol ;
-    manager.outputManager()->setVolume ( vol );
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -449,113 +383,4 @@ void MainWindow::on_pushButton_4_clicked()
 
     manager.startDefaultInput();
     manager.startDefaultOutput();
-}
-
-void MainWindow::on_pushButton_5_clicked()
-{
-    QString name = QQtAudioManager::defaultOutputDevice().deviceName();
-
-    if ( ui->outputListWidget->currentIndex().isValid() )
-        name = ui->outputListWidget->currentIndex().data().toString();
-
-    QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
-
-    QQtWavSoundEffect::Instance()->useCustomOutputDevice ( devOut );
-    QQtWavSound()->setLoops ( 3 );
-    QQtWavSound ( res ( "9733.wav" ) );
-}
-
-void MainWindow::on_pushButton_6_clicked()
-{
-    QString name = QQtAudioManager::defaultOutputDevice().deviceName();
-
-    if ( ui->outputListWidget->currentIndex().isValid() )
-        name = ui->outputListWidget->currentIndex().data().toString();
-
-    QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
-
-    QQtWavSoundEffect::Instance()->useCustomOutputDevice ( devOut );
-    QQtWavSound ( res ( "9763.wav" ) );
-    //QSound::play ( res("9763.wav"));
-}
-
-void MainWindow::on_pushButton_7_clicked()
-{
-    QString name = QQtAudioManager::defaultOutputDevice().deviceName();
-
-    if ( ui->outputListWidget->currentIndex().isValid() )
-        name = ui->outputListWidget->currentIndex().data().toString();
-
-    QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
-
-    QQtWavSoundEffect::Instance()->useCustomOutputDevice ( devOut );
-    QQtWavSound()->setLoops ( 1 );
-    QQtWavSound ( res ( "9612.wav" ) );
-}
-
-#ifdef __ANDROID__
-#define TMPFILE "/data/data/temp.wav"
-#else
-#define TMPFILE "./temp.wav"
-#endif
-
-void MainWindow::on_pushButton_8_clicked()
-{
-    //不需要停止录音？需要
-    //android 不支持./temp.wav....
-
-    //record
-    QAudioDeviceInfo input = QQtAudioManager::defaultInputDevice();
-    wavRecManager.inputDeviceInfo() = input;
-    wavRecManager.inputAudioFormat() = input.preferredFormat();
-
-    //save wav file
-    wavFileManager.outputAudioFormat() = wavRecManager.inputAudioFormat();
-    wavFileManager.setOutputSourceFile ( TMPFILE );
-
-    pline() << "record:" << wavRecManager.inputDeviceInfo().deviceName() << wavRecManager.inputAudioFormat();
-    pline() << "save:" << wavFileManager.outputSourceFile() << wavFileManager.outputAudioFormat();
-
-    //内部存在自动关停。对wav写自动关停，会导致文件被重写。这个函数是录音重新开始，所以可以自动关停。
-    wavFileManager.startOutput();
-    wavRecManager.startInput();
-}
-
-void MainWindow::on_pushButton_9_clicked()
-{
-    //不需要停止放音？需要
-
-    //read wav file
-    wavFileManager.setInputSourceFile ( TMPFILE );
-
-    //play record
-    wavRecManager.outputAudioFormat() = wavFileManager.inputAudioFormat();
-    wavRecManager.outputDeviceInfo() = QQtAudioManager::defaultOutputDevice();
-
-    pline() << "file:" << wavFileManager.inputSourceFile() << wavFileManager.inputAudioFormat();
-    pline() << "play:" << wavRecManager.outputDeviceInfo().deviceName() << wavRecManager.outputAudioFormat();
-
-    //内部存在自动关停。
-    wavRecManager.startOutput();
-    wavFileManager.startInput();
-}
-
-void MainWindow::on_pushButton_10_clicked()
-{
-    wavRecManager.stopInput();
-    wavFileManager.stopOutput();
-}
-
-void MainWindow::on_pushButton_11_clicked()
-{
-    wavFileManager.stopInput();
-    wavRecManager.stopOutput();
-}
-
-void MainWindow::on_pushButton_12_clicked()
-{
-    //android support 16bit but 24bit
-    QQtWavSoundEffect* e0 = QQtWavSound();
-    e0->setTimerInterval ( 100 );
-    QQtWavSound ( res ( "9767.wav" ) );
 }

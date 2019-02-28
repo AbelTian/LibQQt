@@ -4,7 +4,7 @@
 #include <qqt-local.h>
 #include <qqtcore.h>
 #include <qqtclickhelper.h>
-#include <qqtsoundeffect.h>
+#include <QSound>
 
 /**
  * QQtClickSoundHelper
@@ -37,7 +37,7 @@ public slots:
         if ( clickSoundFile.isEmpty() )
             return;
 
-        QQtWavSound ( clickSoundFile );
+        QSound::play ( clickSoundFile );
     }
 
 private:

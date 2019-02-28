@@ -194,8 +194,9 @@ HEADERS += \
 
 #multimedia
 #support Qt5, if Qt4 want to use, you need compile QtMultiMedia for Qt4.
-#audio success. video arm mips
-#TODO: video +wince +android +ios +macOS +win +linux
+#audio success, video arm mips
+#TODO: audio mediaextention +wav +mp3 +ogg ...
+#TODO: video mediaextention +FFmpeg ... +wince +android +ios +macOS +win +linux
 contains (DEFINES, __MULTIMEDIA__) {
     #mplayer
     contains (DEFINES, __PROCESSSUPPORT__){
@@ -204,19 +205,8 @@ contains (DEFINES, __MULTIMEDIA__) {
     }
 
     #audio
-    SOURCES += \
-        $$PWD/multimedia/qqtwavaudiomanager.cpp \
-        $$PWD/multimedia/qqtaudiomanager.cpp
-    HEADERS += \
-        $$PWD/multimedia/qqtwavaudiomanager.h \
-        $$PWD/multimedia/qqtaudiomanager.h
-
-    #audio effect
-    #using QSound (QSoundEffect optional)
-    SOURCES += \
-        $$PWD/multimedia/qqtsoundeffect.cpp
-    HEADERS += \
-        $$PWD/multimedia/qqtsoundeffect.h
+    SOURCES += $$PWD/multimedia/qqtaudiomanager.cpp
+    HEADERS += $$PWD/multimedia/qqtaudiomanager.h
 }
 
 

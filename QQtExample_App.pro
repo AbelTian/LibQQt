@@ -108,10 +108,7 @@ SUBDIRS += test/qqtdicttest2
 #
 SUBDIRS += test/giftest
 
-#必开 这两个例子是关于QQtAudio的最好展示
-#
-SUBDIRS += examples/qqtaudioexample
-#111111
+#必开 这个例子是关于LibQQt MultiMedia的最好展示
 #
 greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
 #

@@ -4,7 +4,7 @@
 #include <qqt-local.h>
 #include <qqtcore.h>
 #include <qqtdoubleclickhelper.h>
-#include <qqtsoundeffect.h>
+#include <QSound>
 
 /**
  * QQtDoubleClickSoundHelper
@@ -45,19 +45,19 @@ public slots:
         if ( clickSoundFile.isEmpty() )
             return;
 
-        QQtWavSound ( clickSoundFile );
+        QSound::play ( clickSoundFile );
     }
     void slotLongClick() {
         if ( longClickSoundFile.isEmpty() )
             return;
 
-        QQtWavSound ( longClickSoundFile );
+        QSound::play ( longClickSoundFile );
     }
     void slotDoubleClick() {
         if ( doubleClickSoundFile.isEmpty() )
             return;
 
-        QQtWavSound ( doubleClickSoundFile );
+        QSound::play ( doubleClickSoundFile );
     }
 
 private:
