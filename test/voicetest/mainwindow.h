@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <qqtaudiomanager.h>
-#include <qqtwavaudiomanager.h>
 
 namespace Ui {
 class MainWindow;
