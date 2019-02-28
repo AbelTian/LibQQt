@@ -107,8 +107,7 @@ github link: https://github.com/AbelTian/LibQQt
 5. 升级多媒体音频  
     - 添加内存服务器（一套Input（Reader），Output（Writer）），处理内存和设备之间的数据交互。（这部分的功能完全按照为内存服务的思路设计研发。）  
     - [QQtAudioManager](src/multimedia/qqtaudiomanager.h)、  
-    - QQtWavAudioManager、QQtWavSoundEffect、QQtWavAudioInput、QQtWavAudioOutput、  
-    - 将AudioDevice、wav输入输出文件，当做一个设备进行读写，App处理获取到的声音。  
+    - 将 AudioInputDevice 和 AudioOutputDevice 当做一个设备进行读写，App处理获取到的声音。
 6. 添加Http功能支持工具
     - QQtWebAccessManager，支持管理Session、Cookies。    
     - 添加GumboQuery爬虫工具。  
