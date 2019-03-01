@@ -577,9 +577,21 @@ defineTest(add_include_QQt){
     return (1)
 }
 
+defineTest(add_static_defines_QQt){
+    #如果链接静态库，那么开启。编译也开启。
+    DEFINES += QQT_STATIC_LIBRARY
+
+    #如果用户更改编译类型，链接时必须更改链接类型。
+    add_defines_QQt()
+
+    export(DEFINES)
+    return (1)
+}
+
 ##################################################################
 ##header work flow
 ##################################################################
 #添加源代码里的头文件路径 为搜索头文件而添加
 add_include_QQt()
-add_defines_QQt()
+contains(DEFINES, LIB_LIBRARY):add_defines_QQt()
+else:contains(DEFINES, LIB_STATIC_LIBRARY):add_static_defines_QQt()
