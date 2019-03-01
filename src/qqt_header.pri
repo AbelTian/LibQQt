@@ -7,6 +7,85 @@
 ##this is QQt feature pri you can modify QQt feature at this pri in QQt project
 #---------------------------------------------------------------
 
+##################################################################
+##include directories
+##################################################################
+#把QQt 源代码头文件路径加入进来 为搜索头文件而添加
+defineTest(add_include_QQt){
+    #不为空，肯定是源码里的路径。 用于导出头文件
+    #header_path = $$1
+    #如果参数1为空，那么是用SDK里的路径 用于链接时包含头文件
+    #此处_bundle代表 mac下头文件在bundle里。 留意
+    header_path=$$PWD
+
+    command =
+    #basic
+    command += $${header_path}
+    #这里添加$${path}下的子文件夹
+    #...
+    command += $${header_path}/core
+    command += $${header_path}/gui
+    command += $${header_path}/widgets
+    command += $${header_path}/multimedia
+    command += $${header_path}/sql
+    command += $${header_path}/frame
+    command += $${header_path}/printsupport
+
+    #charts
+    command += $${header_path}/charts
+    command += $${header_path}/charts/qcustomplot
+
+    #network
+    command += $${header_path}/network
+    command += $${header_path}/network/qextserialport
+
+    ##soap (web service)
+    command += $${header_path}/network/soap
+
+    ##gumbo library
+    command += $${header_path}/network/gumbo/query/src
+    command += $${header_path}/network/gumbo/parser/src
+    win32{
+        command += $${header_path}/network/gumbo/parser/visualc/include
+    }
+
+    #plugin support
+    command += $${header_path}/pluginsupport
+    command += $${header_path}/pluginsupport/devicewatcher
+
+    #exquisite widgets
+    command += $${header_path}/exquisite
+    command += $${header_path}/exquisite/clicksoundwidgets
+    command += $${header_path}/exquisite/clickwidgets
+    command += $${header_path}/exquisite/svgwidgets
+    command += $${header_path}/exquisite/gifwidgets
+    command += $${header_path}/exquisite/openglwidgets
+    command += $${header_path}/exquisite/colorwidgets
+    command += $${header_path}/exquisite/osdwidgets
+    command += $${header_path}/exquisite/mathml
+    command += $${header_path}/exquisite/dmmu
+
+    ##qr code library
+    command += $${header_path}/exquisite/qrcode/qrencode
+    command += $${header_path}/exquisite/qrcode/qrdecode
+    command += $${header_path}/exquisite/qrcode/qrdecode/zxing
+    win32-g++{
+        command += $${header_path}/exquisite/qrcode/qrdecode/zxing/win32/zxing
+    }
+    win32-msvc*{
+        command += $${header_path}/exquisite/qrcode/qrdecode/zxing/win32/zxing \
+                    $${header_path}/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
+    }
+
+    #highgrade module
+    command += $${header_path}/highgrade
+    command += $${header_path}/highgrade/network
+
+    INCLUDEPATH += $$add_host_path($$command)
+    export(INCLUDEPATH)
+    return (1)
+}
+
 #################################################################
 ##definition and configration
 ##need QSYS
@@ -495,85 +574,6 @@ defineTest(add_defines_QQt){
     export(LIBS)
     export(QT)
 
-    return (1)
-}
-
-##################################################################
-##include directories
-##################################################################
-#把QQt 源代码头文件路径加入进来 为搜索头文件而添加
-defineTest(add_include_QQt){
-    #不为空，肯定是源码里的路径。 用于导出头文件
-    #header_path = $$1
-    #如果参数1为空，那么是用SDK里的路径 用于链接时包含头文件
-    #此处_bundle代表 mac下头文件在bundle里。 留意
-    header_path=$$PWD
-
-    command =
-    #basic
-    command += $${header_path}
-    #这里添加$${path}下的子文件夹
-    #...
-    command += $${header_path}/core
-    command += $${header_path}/gui
-    command += $${header_path}/widgets
-    command += $${header_path}/multimedia
-    command += $${header_path}/sql
-    command += $${header_path}/frame
-    command += $${header_path}/printsupport
-
-    #charts
-    command += $${header_path}/charts
-    command += $${header_path}/charts/qcustomplot
-
-    #network
-    command += $${header_path}/network
-    command += $${header_path}/network/qextserialport
-
-    ##soap (web service)
-    command += $${header_path}/network/soap
-
-    ##gumbo library
-    command += $${header_path}/network/gumbo/query/src
-    command += $${header_path}/network/gumbo/parser/src
-    win32{
-        command += $${header_path}/network/gumbo/parser/visualc/include
-    }
-
-    #plugin support
-    command += $${header_path}/pluginsupport
-    command += $${header_path}/pluginsupport/devicewatcher
-
-    #exquisite widgets
-    command += $${header_path}/exquisite
-    command += $${header_path}/exquisite/clicksoundwidgets
-    command += $${header_path}/exquisite/clickwidgets
-    command += $${header_path}/exquisite/svgwidgets
-    command += $${header_path}/exquisite/gifwidgets
-    command += $${header_path}/exquisite/openglwidgets
-    command += $${header_path}/exquisite/colorwidgets
-    command += $${header_path}/exquisite/osdwidgets
-    command += $${header_path}/exquisite/mathml
-    command += $${header_path}/exquisite/dmmu
-
-    ##qr code library
-    command += $${header_path}/exquisite/qrcode/qrencode
-    command += $${header_path}/exquisite/qrcode/qrdecode
-    command += $${header_path}/exquisite/qrcode/qrdecode/zxing
-    win32-g++{
-        command += $${header_path}/exquisite/qrcode/qrdecode/zxing/win32/zxing
-    }
-    win32-msvc*{
-        command += $${header_path}/exquisite/qrcode/qrdecode/zxing/win32/zxing \
-                    $${header_path}/exquisite/qrcode/qrdecode/zxing/win32/zxing/msvc
-    }
-
-    #highgrade module
-    command += $${header_path}/highgrade
-    command += $${header_path}/highgrade/network
-
-    INCLUDEPATH += $$add_host_path($$command)
-    export(INCLUDEPATH)
     return (1)
 }
 
