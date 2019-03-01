@@ -12,8 +12,8 @@
 #include "win_qextserialport.h"
 #define QextBaseType Win_QextSerialPort
 #endif
-
-class LIBRARYSHARED_EXPORT QextSerialPort: public QextBaseType
+#include <qqt-local.h>
+class QQTSHARED_EXPORT QextSerialPort: public QextBaseType
 {
     Q_OBJECT
 

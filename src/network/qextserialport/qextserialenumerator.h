@@ -35,7 +35,8 @@ struct QextPortInfo
  * Windows implementation is based on Zach Gorman's work from
  * <a href="http://www.codeproject.com">The Code Project</a> (http://www.codeproject.com/system/setupdi.asp).
  */
-class LIBRARYSHARED_EXPORT QextSerialEnumerator
+#include <qqt-local.h>
+class QQTSHARED_EXPORT QextSerialEnumerator
 {
 private:
 #ifdef _TTY_WIN_
