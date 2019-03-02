@@ -141,11 +141,11 @@ contains(CONFIG, continue_build){
 ##project environ
 #################################################################
 #build
-message($${TARGET} build obj dir $${OUT_PWD} $$OBJECTS_DIR)
-message($${TARGET} build moc dir $${OUT_PWD} $$MOC_DIR)
-message($${TARGET} build uih dir $${OUT_PWD} $$UI_DIR)
-message($${TARGET} build rcc dir $${OUT_PWD} $$RCC_DIR)
-message($${TARGET} build dst dir $${OUT_PWD} $$DESTDIR)
+message($${TARGET} build obj dir $$add_host_path($${OUT_PWD}) $$OBJECTS_DIR)
+message($${TARGET} build moc dir $$add_host_path($${OUT_PWD}) $$MOC_DIR)
+message($${TARGET} build uih dir $$add_host_path($${OUT_PWD}) $$UI_DIR)
+message($${TARGET} build rcc dir $$add_host_path($${OUT_PWD}) $$RCC_DIR)
+message($${TARGET} build dst dir $$add_host_path($${OUT_PWD}) $$DESTDIR)
 #default
 message ($${TARGET} QT $${QT})
 #message ($${TARGET} pre link $${QMAKE_PRE_LINK})
