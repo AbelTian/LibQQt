@@ -202,6 +202,10 @@ contains (DEFINES, __MULTIMEDIA__) {
     contains (DEFINES, __PROCESSSUPPORT__){
         SOURCES += $$PWD/multimedia/qqtmplayer.cpp
         HEADERS += $$PWD/multimedia/qqtmplayer.h
+
+        SOURCES += $$PWD/multimedia/qqtmplayerwidget.cpp
+        HEADERS += $$PWD/multimedia/qqtmplayerwidget.h
+        FORMS += $$PWD/multimedia/qqtmplayerwidget.ui
     }
 
     #audio

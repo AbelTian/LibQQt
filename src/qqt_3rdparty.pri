@@ -142,20 +142,26 @@ contains (DEFINES, __EXQUISITE__) {
         SOURCES += $$PWD/exquisite/mathml/qtmmlwidget.cpp
         HEADERS += $$PWD/exquisite/mathml/qtmmlwidget.h
     }
+}
 
+#multimedia
+contains (DEFINES, __MULTIMEDIA__) {
     contains (DEFINES, __LOGICCAMERAMODULE__) {
         #dmmu support
         #arm mips
         #TODO: +wince +android +ios +macOS +win +linux
         equals(QSYS_PRIVATE, Embedded) {
-            SOURCES += $$PWD/exquisite/dmmu/dmmu.c
-            HEADERS += $$PWD/exquisite/dmmu/dmmu.h \
-                        $$PWD/exquisite/dmmu/jz_cim.h \
-                        $$PWD/exquisite/dmmu/graphics.h \
-                        $$PWD/exquisite/dmmu/hal.h
-            SOURCES += $$PWD/exquisite/qqtpreviewwidget.cpp
-            HEADERS += $$PWD/exquisite/qqtpreviewwidget.h
-            FORMS += $$PWD/exquisite/qqtpreviewwidget.ui
+            SOURCES += $$PWD/multimedia/dmmu/dmmu.c
+            HEADERS += $$PWD/multimedia/dmmu/dmmu.h \
+                        $$PWD/multimedia/dmmu/jz_cim.h \
+                        $$PWD/multimedia/dmmu/graphics.h \
+                        $$PWD/multimedia/dmmu/hal.h
+            SOURCES += $$PWD/multimedia/qqtlogicpreviewwidget.cpp
+            HEADERS += $$PWD/multimedia/qqtlogicpreviewwidget.h
+            FORMS += $$PWD/multimedia/qqtlogicpreviewwidget.ui
         }
     }
 }
+
+
+

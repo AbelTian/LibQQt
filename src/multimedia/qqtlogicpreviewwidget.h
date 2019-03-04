@@ -1,6 +1,6 @@
 ﻿
-#ifndef QPREVIEWUI_H
-#define QPREVIEWUI_H
+#ifndef QLOGICPREVIEWUI_H
+#define QLOGICPREVIEWUI_H
 
 #include "qqt-qt.h"
 #include "qqtlinux.h"
@@ -21,21 +21,26 @@ extern "C" {
 #endif  /* __cplusplus */
 
 namespace Ui {
-class QQtPreviewWidget;
+class QQtLogicPreviewWidget;
 }
 
-class QQTSHARED_EXPORT QQtPreviewWidget : public QWidget
+/**
+ * @brief The QQtLogicPreviewWidget class
+ * QQt模拟摄像头预览控件
+ * 省略dmmu的Qt Wrapper类
+ */
+class QQTSHARED_EXPORT QQtLogicPreviewWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit QQtPreviewWidget ( QWidget* parent = 0 );
-    ~QQtPreviewWidget();
+    explicit QQtLogicPreviewWidget ( QWidget* parent = 0 );
+    ~QQtLogicPreviewWidget();
     int play();
     int close();
 
 private:
-    Ui::QQtPreviewWidget* ui;
+    Ui::QQtLogicPreviewWidget* ui;
 
     struct sensor_info sinfo;
     int pre_bpp;
@@ -70,4 +75,4 @@ protected:
     void mousePressEvent ( QMouseEvent* e );
 };
 
-#endif // QPREVIEWUI_H
+#endif // QLOGICPREVIEWUI_H

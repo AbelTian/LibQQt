@@ -26,10 +26,13 @@ defineTest(add_include_QQt){
     command += $${header_path}/core
     command += $${header_path}/gui
     command += $${header_path}/widgets
-    command += $${header_path}/multimedia
     command += $${header_path}/sql
     command += $${header_path}/frame
     command += $${header_path}/printsupport
+
+    #multimedia
+    command += $${header_path}/multimedia
+    command += $${header_path}/multimedia/dmmu
 
     #charts
     command += $${header_path}/charts
@@ -63,7 +66,6 @@ defineTest(add_include_QQt){
     command += $${header_path}/exquisite/colorwidgets
     command += $${header_path}/exquisite/osdwidgets
     command += $${header_path}/exquisite/mathml
-    command += $${header_path}/exquisite/dmmu
 
     ##qr code library
     command += $${header_path}/exquisite/qrcode/qrencode
@@ -210,6 +212,10 @@ defineTest(add_defines_QQt){
     }
     contains (DEFINES, __MULTIMEDIA__) {
         QT += multimedia
+
+        #LOGIC CAMERA PREVIEW
+        #depend on dmmu
+        DEFINES += __LOGICCAMERAMODULE__
     }
 
     ##################PluginSupport Module###############################
@@ -461,9 +467,6 @@ defineTest(add_defines_QQt){
                 }
             }
         }
-        #LOGIC CAMERA PREVIEW
-        #depend on dmmu
-        DEFINES += __LOGICCAMERAMODULE__
 
         #opengl module
         DEFINES += __OPENGLWIDGETS__
