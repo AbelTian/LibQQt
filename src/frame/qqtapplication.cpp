@@ -160,6 +160,13 @@ void QQtApplication::setWriteLogSystem ( bool open )
 #endif
 }
 
+void QQtApplication::setHighDpiScaling ( bool open )
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5,6,0)
+    setAttribute ( Qt::AA_EnableHighDpiScaling, open );
+#endif
+}
+
 void QQtApplication::slotUPanAutoRun ( int status )
 {
     if ( !bUPanAutoRun )
