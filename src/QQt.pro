@@ -40,15 +40,24 @@ CONFIG += build_all
 #################################################################
 include ($${PWD}/../multi-link/add_base_manager.pri)
 
-#根据multi-link提供的动态编译 静态编译设定进行编译，添加我自己的QQt的宏定义。
-#如果，用户把LibQQt编译为静态库，那么在链接的时候，需要QQT_STATIC_LIBRARY定义。
-#动态链接，一切默认即可。
+#根据 Multi-link 提供的动态编译、静态编译设定进行编译。
+#Multi-link提供了添加用户库自有编译控制宏的函数。
+#Multi-link提供了自动引用 LibQQt 的函数，包括帮助补充链接控制宏。
+
+#如果，用户把 LibQQt 编译为静态库，那么在链接的时候，需要 QQT_STATIC_LIBRARY 定义。
+#add_static_library_project()
+#如果，用户动态编译 LibQQt，可以替代以下代码。
+#add_dynamic_library_project()
+
+#动态链接，添加我自己的QQt的宏定义。
 contains(DEFINES, LIB_LIBRARY) {
     DEFINES += QQT_LIBRARY
     message(Build $${TARGET} QQT_LIBRARY is defined. build)
+} else:contains(DEFINES, LIB_STATIC_LIBRARY) {
+    DEFINES += QQT_STATIC_LIBRARY
+    message(Build $${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
 }
 
-#static library宏的管理，一律放在头文件.pri
 #clean_target()
 #clean_sdk()
 
@@ -58,10 +67,10 @@ contains(DEFINES, LIB_LIBRARY) {
 #这个的设置有特点，要先设置
 add_version(3,1,1,0)
 
-#自定义宏
+#自定义宏 冗余定义
 DEFINES += QQT_VERSION=$$APP_VERSION
 
-#user can use app_version.pri to modify app version once, once is all. DEFINES += APP_VERSION=0.0.0 is very good.
+#user can use app_version.pri to modify app version once, once is all.
 #unix:VERSION = $${QQT_VERSION}
 #bug?:open this macro, TARGET will suffixed with major version.
 #win32:VERSION = $${QQT_VERSION4}
@@ -148,7 +157,7 @@ message($${TARGET} build rcc dir $$add_host_path($${OUT_PWD}) $$RCC_DIR)
 message($${TARGET} build dst dir $$add_host_path($${OUT_PWD}) $$DESTDIR)
 #default
 message ($${TARGET} QT $${QT})
-#message ($${TARGET} pre link $${QMAKE_PRE_LINK})
-#message ($${TARGET} post link $${QMAKE_POST_LINK})
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} define $${DEFINES})
+#message ($${TARGET} pre link $${QMAKE_PRE_LINK})
+#message ($${TARGET} post link $${QMAKE_POST_LINK})
