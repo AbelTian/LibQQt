@@ -159,14 +159,15 @@ defineTest(add_defines_QQt){
     #link QQt static library in some occation on windows
     #when link QQt    static library, if no this macro, headers can't be linked on windows.
     #Qt is static by mingw32 building ?
-    ios{
-        #on my computer, Qt library are all static library?
-        DEFINES += QQT_STATIC_LIBRARY
-        message(Build $${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
-    }
-
-    #link and build all need this macro
-    #现在Multi-link v2里面，已经有LIB_STATIC_LIBRARY，这个宏多余了，可是由于内部逻辑复杂，更改也不简单，所以留着了。用户静态编译LibQQt，记得定义QQT_STATIC_LIBRARY，build and link。
+    #ios{
+    #    #on my computer, Qt library are all static library?
+    #    DEFINES += QQT_STATIC_LIBRARY
+    #    message(Build $${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
+    #}
+    #
+    ##link and build all need this macro
+    ##现在Multi-link v2里面，已经有LIB_STATIC_LIBRARY，这个宏多余了，可是由于内部逻辑复杂，更改也不简单，所以留着了。用户静态编译LibQQt，记得定义QQT_STATIC_LIBRARY，build and link。
+    ##这个宏并不多余，是链接库的必要自有宏。
     contains(DEFINES, QQT_STATIC_LIBRARY) {
     }
 
