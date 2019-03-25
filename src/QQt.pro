@@ -22,10 +22,11 @@
 #please dont use Qt 5.9.1, it is broken with android and ios.
 #please dont modify this pro
 #use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}/%{Qt:Version}/%{CurrentBuild:Name} (Only Once)
-#Multi-link2.0 wont force user for setting Qt Creator default build directory.
+#Multi-link v2 wont force user for setting Qt Creator default build directory.
 #in Qt kit page, set kit's File System Name. (Creator Ver.>v3.5) (Only Once)
 #in project build page, def env QSYS
 #in app_configure.pri (auto createed) define QQT_BUILD_ROOT= and QQT_SDK_ROOT= and APP_DEPLOY_ROOT. (Only Once)
+#target MSVC, user must define QSYS=MSVC in project build page!
 
 #################################################################
 ##project name
@@ -35,6 +36,7 @@ TEMPLATE = lib
 
 CONFIG += debug_and_release
 CONFIG += build_all
+
 #################################################################
 #包含基础管理者
 #################################################################
@@ -48,6 +50,10 @@ include ($${PWD}/../multi-link/add_base_manager.pri)
 #add_static_library_project()
 #如果，用户动态编译 LibQQt，为用户提供 build_QQt 配置和 QQT_LIBRARY 宏。
 #add_dynamic_library_project()
+
+#以上函数提供的链接库自有 CONFIG。
+#build_QQt / build_static_QQt build_link_QQt
+#link_QQt / link_static_QQt build_link_QQt
 
 #Multi-link 提供以上函数替代以下代码。我喜欢使用以下代码。
 #动态链接，添加我自己的QQt的宏定义。
