@@ -44,19 +44,20 @@ include ($${PWD}/../multi-link/add_base_manager.pri)
 #Multi-link提供了添加用户库自有编译控制宏的函数。
 #Multi-link提供了自动引用 LibQQt 的函数，包括帮助补充链接控制宏。
 
-#如果，用户把 LibQQt 编译为静态库，那么在链接的时候，需要 QQT_STATIC_LIBRARY 定义。
+#如果，用户把 LibQQt 编译为静态库，为用户提供 build_link_QQt 配置和 QQT_STATIC_LIBRARY 宏。Multi-link也为使用者提供链接QQt用的静态配置和宏。
 #add_static_library_project()
-#如果，用户动态编译 LibQQt，可以替代以下代码。
-#add_dynamic_library_project()
+#如果，用户动态编译 LibQQt，为用户提供 build_QQt 配置和 QQT_LIBRARY 宏。
+add_dynamic_library_project()
 
+#Multi-link 提供以上函数替代以下代码。
 #动态链接，添加我自己的QQt的宏定义。
-contains(DEFINES, LIB_LIBRARY) {
-    DEFINES += QQT_LIBRARY
-    message(Build $${TARGET} QQT_LIBRARY is defined. build)
-} else:contains(DEFINES, LIB_STATIC_LIBRARY) {
-    DEFINES += QQT_STATIC_LIBRARY
-    message(Build $${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
-}
+#contains(DEFINES, LIB_LIBRARY) {
+#    DEFINES += QQT_LIBRARY
+#    message(Build $${TARGET} QQT_LIBRARY is defined. build)
+#} else:contains(DEFINES, LIB_STATIC_LIBRARY) {
+#    DEFINES += QQT_STATIC_LIBRARY
+#    message(Build $${TARGET} QQT_STATIC_LIBRARY is defined. build and link)
+#}
 
 #clean_target()
 #clean_sdk()
