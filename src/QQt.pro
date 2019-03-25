@@ -54,6 +54,11 @@ include ($${PWD}/../multi-link/add_base_manager.pri)
 #以上函数提供的链接库自有 CONFIG。
 #build_QQt / build_static_QQt build_link_QQt
 #link_QQt / link_static_QQt build_link_QQt
+contains(CONFIG, dll) {
+    CONFIG += build_QQt
+} else:contains(CONFIG, static) {
+    CONFIG += build_static_QQt build_link_QQt
+}
 
 #Multi-link 提供以上函数替代以下代码。我喜欢使用以下代码。
 #动态链接，添加我自己的QQt的宏定义。
