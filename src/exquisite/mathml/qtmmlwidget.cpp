@@ -3043,23 +3043,23 @@ QString MmlDocument::fontName ( QtMmlWidget::MmlFont type ) const
 {
     switch ( type )
     {
-    case QtMmlWidget::NormalFont:
-        return m_normal_font_name;
+        case QtMmlWidget::NormalFont:
+            return m_normal_font_name;
 
-    case QtMmlWidget::FrakturFont:
-        return m_fraktur_font_name;
+        case QtMmlWidget::FrakturFont:
+            return m_fraktur_font_name;
 
-    case QtMmlWidget::SansSerifFont:
-        return m_sans_serif_font_name;
+        case QtMmlWidget::SansSerifFont:
+            return m_sans_serif_font_name;
 
-    case QtMmlWidget::ScriptFont:
-        return m_script_font_name;
+        case QtMmlWidget::ScriptFont:
+            return m_script_font_name;
 
-    case QtMmlWidget::MonospaceFont:
-        return m_monospace_font_name;
+        case QtMmlWidget::MonospaceFont:
+            return m_monospace_font_name;
 
-    case QtMmlWidget::DoublestruckFont:
-        return m_doublestruck_font_name;
+        case QtMmlWidget::DoublestruckFont:
+            return m_doublestruck_font_name;
     };
 
     return QString::null;
@@ -3069,29 +3069,29 @@ void MmlDocument::setFontName ( QtMmlWidget::MmlFont type, const QString& name )
 {
     switch ( type )
     {
-    case QtMmlWidget::NormalFont:
-        m_normal_font_name = name;
-        break;
+        case QtMmlWidget::NormalFont:
+            m_normal_font_name = name;
+            break;
 
-    case QtMmlWidget::FrakturFont:
-        m_fraktur_font_name = name;
-        break;
+        case QtMmlWidget::FrakturFont:
+            m_fraktur_font_name = name;
+            break;
 
-    case QtMmlWidget::SansSerifFont:
-        m_sans_serif_font_name = name;
-        break;
+        case QtMmlWidget::SansSerifFont:
+            m_sans_serif_font_name = name;
+            break;
 
-    case QtMmlWidget::ScriptFont:
-        m_script_font_name = name;
-        break;
+        case QtMmlWidget::ScriptFont:
+            m_script_font_name = name;
+            break;
 
-    case QtMmlWidget::MonospaceFont:
-        m_monospace_font_name = name;
-        break;
+        case QtMmlWidget::MonospaceFont:
+            m_monospace_font_name = name;
+            break;
 
-    case QtMmlWidget::DoublestruckFont:
-        m_doublestruck_font_name = name;
-        break;
+        case QtMmlWidget::DoublestruckFont:
+            m_doublestruck_font_name = name;
+            break;
     };
 }
 
@@ -3101,43 +3101,43 @@ Mml::NodeType domToMmlNodeType ( const QDomNode& dom_node )
 
     switch ( dom_node.nodeType() )
     {
-    case QDomNode::ElementNode:
-    {
-        QString tag = dom_node.nodeName();
-        const NodeSpec* spec = mmlFindNodeSpec ( tag );
+        case QDomNode::ElementNode:
+        {
+            QString tag = dom_node.nodeName();
+            const NodeSpec* spec = mmlFindNodeSpec ( tag );
 
-        // treat urecognised tags as mrow
-        if ( spec == 0 )
-            mml_type = Mml::UnknownNode;
-        else
-            mml_type = spec->type;
+            // treat urecognised tags as mrow
+            if ( spec == 0 )
+                mml_type = Mml::UnknownNode;
+            else
+                mml_type = spec->type;
 
-        break;
-    }
+            break;
+        }
 
-    case QDomNode::TextNode:
-        mml_type = Mml::TextNode;
-        break;
+        case QDomNode::TextNode:
+            mml_type = Mml::TextNode;
+            break;
 
-    case QDomNode::DocumentNode:
-        mml_type = Mml::MrowNode;
-        break;
+        case QDomNode::DocumentNode:
+            mml_type = Mml::MrowNode;
+            break;
 
-    case QDomNode::EntityReferenceNode:
+        case QDomNode::EntityReferenceNode:
 //      qWarning("EntityReferenceNode: name=\"" + dom_node.nodeName() + "\" value=\"" + dom_node.nodeValue() + "\"");
-        break;
+            break;
 
-    case QDomNode::AttributeNode:
-    case QDomNode::CDATASectionNode:
-    case QDomNode::EntityNode:
-    case QDomNode::ProcessingInstructionNode:
-    case QDomNode::CommentNode:
-    case QDomNode::DocumentTypeNode:
-    case QDomNode::DocumentFragmentNode:
-    case QDomNode::NotationNode:
-    case QDomNode::BaseNode:
-    case QDomNode::CharacterDataNode:
-        break;
+        case QDomNode::AttributeNode:
+        case QDomNode::CDATASectionNode:
+        case QDomNode::EntityNode:
+        case QDomNode::ProcessingInstructionNode:
+        case QDomNode::CommentNode:
+        case QDomNode::DocumentTypeNode:
+        case QDomNode::DocumentFragmentNode:
+        case QDomNode::NotationNode:
+        case QDomNode::BaseNode:
+        case QDomNode::CharacterDataNode:
+            break;
     }
 
     return mml_type;
@@ -3327,113 +3327,113 @@ MmlNode* MmlDocument::createNode ( NodeType type,
 
     switch ( type )
     {
-    case MiNode:
-        mml_node = new MmlMiNode ( this, mml_attr );
-        break;
+        case MiNode:
+            mml_node = new MmlMiNode ( this, mml_attr );
+            break;
 
-    case MnNode:
-        mml_node = new MmlMnNode ( this, mml_attr );
-        break;
+        case MnNode:
+            mml_node = new MmlMnNode ( this, mml_attr );
+            break;
 
-    case MfracNode:
-        mml_node = new MmlMfracNode ( this, mml_attr );
-        break;
+        case MfracNode:
+            mml_node = new MmlMfracNode ( this, mml_attr );
+            break;
 
-    case MrowNode:
-        mml_node = new MmlMrowNode ( this, mml_attr );
-        break;
+        case MrowNode:
+            mml_node = new MmlMrowNode ( this, mml_attr );
+            break;
 
-    case MsqrtNode:
-        mml_node = new MmlMsqrtNode ( this, mml_attr );
-        break;
+        case MsqrtNode:
+            mml_node = new MmlMsqrtNode ( this, mml_attr );
+            break;
 
-    case MrootNode:
-        mml_node = new MmlMrootNode ( this, mml_attr );
-        break;
+        case MrootNode:
+            mml_node = new MmlMrootNode ( this, mml_attr );
+            break;
 
-    case MsupNode:
-        mml_node = new MmlMsupNode ( this, mml_attr );
-        break;
+        case MsupNode:
+            mml_node = new MmlMsupNode ( this, mml_attr );
+            break;
 
-    case MsubNode:
-        mml_node = new MmlMsubNode ( this, mml_attr );
-        break;
+        case MsubNode:
+            mml_node = new MmlMsubNode ( this, mml_attr );
+            break;
 
-    case MsubsupNode:
-        mml_node = new MmlMsubsupNode ( this, mml_attr );
-        break;
+        case MsubsupNode:
+            mml_node = new MmlMsubsupNode ( this, mml_attr );
+            break;
 
-    case MoNode:
-        mml_node = new MmlMoNode ( this, mml_attr );
-        break;
+        case MoNode:
+            mml_node = new MmlMoNode ( this, mml_attr );
+            break;
 
-    case MstyleNode:
-        mml_node = new MmlMstyleNode ( this, mml_attr );
-        break;
+        case MstyleNode:
+            mml_node = new MmlMstyleNode ( this, mml_attr );
+            break;
 
-    case TextNode:
-        mml_node = new MmlTextNode ( mml_value, this );
-        break;
+        case TextNode:
+            mml_node = new MmlTextNode ( mml_value, this );
+            break;
 
-    case MphantomNode:
-        mml_node = new MmlMphantomNode ( this, mml_attr );
-        break;
+        case MphantomNode:
+            mml_node = new MmlMphantomNode ( this, mml_attr );
+            break;
 
-    case MfencedNode:
-        mml_node = new MmlMfencedNode ( this, mml_attr );
-        break;
+        case MfencedNode:
+            mml_node = new MmlMfencedNode ( this, mml_attr );
+            break;
 
-    case MtableNode:
-        mml_node = new MmlMtableNode ( this, mml_attr );
-        break;
+        case MtableNode:
+            mml_node = new MmlMtableNode ( this, mml_attr );
+            break;
 
-    case MtrNode:
-        mml_node = new MmlMtrNode ( this, mml_attr );
-        break;
+        case MtrNode:
+            mml_node = new MmlMtrNode ( this, mml_attr );
+            break;
 
-    case MtdNode:
-        mml_node = new MmlMtdNode ( this, mml_attr );
-        break;
+        case MtdNode:
+            mml_node = new MmlMtdNode ( this, mml_attr );
+            break;
 
-    case MoverNode:
-        mml_node = new MmlMoverNode ( this, mml_attr );
-        break;
+        case MoverNode:
+            mml_node = new MmlMoverNode ( this, mml_attr );
+            break;
 
-    case MunderNode:
-        mml_node = new MmlMunderNode ( this, mml_attr );
-        break;
+        case MunderNode:
+            mml_node = new MmlMunderNode ( this, mml_attr );
+            break;
 
-    case MunderoverNode:
-        mml_node = new MmlMunderoverNode ( this, mml_attr );
-        break;
+        case MunderoverNode:
+            mml_node = new MmlMunderoverNode ( this, mml_attr );
+            break;
 
-    case MalignMarkNode:
-        mml_node = new MmlMalignMarkNode ( this );
-        break;
+        case MalignMarkNode:
+            mml_node = new MmlMalignMarkNode ( this );
+            break;
 
-    case MerrorNode:
-        mml_node = new MmlMerrorNode ( this, mml_attr );
-        break;
+        case MerrorNode:
+            mml_node = new MmlMerrorNode ( this, mml_attr );
+            break;
 
-    case MtextNode:
-        mml_node = new MmlMtextNode ( this, mml_attr );
-        break;
+        case MtextNode:
+            mml_node = new MmlMtextNode ( this, mml_attr );
+            break;
 
-    case MpaddedNode:
-        mml_node = new MmlMpaddedNode ( this, mml_attr );
-        break;
+        case MpaddedNode:
+            mml_node = new MmlMpaddedNode ( this, mml_attr );
+            break;
 
-    case MspaceNode:
-        mml_node = new MmlMspaceNode ( this, mml_attr );
-        break;
+        case MspaceNode:
+            mml_node = new MmlMspaceNode ( this, mml_attr );
+            break;
 
-    case UnknownNode:
-        mml_node = new MmlUnknownNode ( this, mml_attr );
-        break;
+        case UnknownNode:
+            mml_node = new MmlUnknownNode ( this, mml_attr );
+            break;
 
-    case NoNode:
-        mml_node = 0;
-        break;
+        case NoNode:
+            mml_node = 0;
+            break;
     }
 
     return mml_node;
@@ -3502,97 +3502,21 @@ MmlNode* MmlDocument::domToMml ( const QDomNode& dom_node, bool* ok, QString* er
 
     switch ( spec->child_spec )
     {
-    case NodeSpec::ChildIgnore:
-        break;
+        case NodeSpec::ChildIgnore:
+            break;
 
-    case NodeSpec::ImplicitMrow:
+        case NodeSpec::ImplicitMrow:
 
-        if ( child_cnt > 0 )
-        {
-            mml_child = createImplicitMrowNode ( dom_node, ok, errorMsg );
-
-            if ( !*ok )
+            if ( child_cnt > 0 )
             {
-                delete mml_node;
-                return 0;
-            }
+                mml_child = createImplicitMrowNode ( dom_node, ok, errorMsg );
 
-            if ( !insertChild ( mml_node, mml_child, errorMsg ) )
-            {
-                delete mml_node;
-                delete mml_child;
-                *ok = false;
-                return 0;
-            }
-        }
-
-        break;
-
-    default:
-
-        // exact ammount of children specified - check...
-        if ( spec->child_spec != child_cnt )
-        {
-            if ( errorMsg != 0 )
-                *errorMsg = QString ( "element " )
-                            + spec->tag
-                            + " requires exactly "
-                            + QString::number ( spec->child_spec )
-                            + " arguments, got "
-                            + QString::number ( child_cnt );
-
-            delete mml_node;
-            *ok = false;
-            return 0;
-        }
-
-    // ...and continue just as in ChildAny
-
-    case NodeSpec::ChildAny:
-
-        if ( mml_type == MfencedNode )
-            insertOperator ( mml_node, mml_node->explicitAttribute ( "open", "(" ) );
-
-        for ( int i = 0; i < child_cnt; ++i )
-        {
-            QDomNode dom_child = dom_child_list.item ( i );
-
-            MmlNode* mml_child = domToMml ( dom_child, ok, errorMsg );
-
-            if ( !*ok )
-            {
-                delete mml_node;
-                return 0;
-            }
-
-            if ( mml_type == MtableNode && mml_child->nodeType() != MtrNode )
-            {
-                MmlNode* mtr_node = createNode ( MtrNode, MmlAttributeMap(), QString::null, 0 );
-                insertChild ( mml_node, mtr_node, 0 );
-
-                if ( !insertChild ( mtr_node, mml_child, errorMsg ) )
+                if ( !*ok )
                 {
                     delete mml_node;
-                    delete mml_child;
-                    *ok = false;
                     return 0;
                 }
-            }
-            else if ( mml_type == MtrNode && mml_child->nodeType() != MtdNode )
-            {
-                MmlNode* mtd_node = createNode ( MtdNode, MmlAttributeMap(), QString::null, 0 );
-                insertChild ( mml_node, mtd_node, 0 );
 
-                if ( !insertChild ( mtd_node, mml_child, errorMsg ) )
-                {
-                    delete mml_node;
-                    delete mml_child;
-                    *ok = false;
-                    return 0;
-                }
-            }
-            else
-            {
                 if ( !insertChild ( mml_node, mml_child, errorMsg ) )
                 {
                     delete mml_node;
@@ -3602,23 +3526,99 @@ MmlNode* MmlDocument::domToMml ( const QDomNode& dom_node, bool* ok, QString* er
                 }
             }
 
-            if ( i < child_cnt - 1 && mml_type == MfencedNode && !separator_list.isEmpty() )
+            break;
+
+        default:
+
+            // exact ammount of children specified - check...
+            if ( spec->child_spec != child_cnt )
             {
-                QChar separator;
+                if ( errorMsg != 0 )
+                    *errorMsg = QString ( "element " )
+                                + spec->tag
+                                + " requires exactly "
+                                + QString::number ( spec->child_spec )
+                                + " arguments, got "
+                                + QString::number ( child_cnt );
 
-                if ( i >= ( int ) separator_list.length() )
-                    separator = separator_list.at ( separator_list.length() - 1 );
-                else
-                    separator = separator_list[i];
-
-                insertOperator ( mml_node, QString ( separator ) );
+                delete mml_node;
+                *ok = false;
+                return 0;
             }
-        }
 
-        if ( mml_type == MfencedNode )
-            insertOperator ( mml_node, mml_node->explicitAttribute ( "close", ")" ) );
+        // ...and continue just as in ChildAny
 
-        break;
+        case NodeSpec::ChildAny:
+
+            if ( mml_type == MfencedNode )
+                insertOperator ( mml_node, mml_node->explicitAttribute ( "open", "(" ) );
+
+            for ( int i = 0; i < child_cnt; ++i )
+            {
+                QDomNode dom_child = dom_child_list.item ( i );
+
+                MmlNode* mml_child = domToMml ( dom_child, ok, errorMsg );
+
+                if ( !*ok )
+                {
+                    delete mml_node;
+                    return 0;
+                }
+
+                if ( mml_type == MtableNode && mml_child->nodeType() != MtrNode )
+                {
+                    MmlNode* mtr_node = createNode ( MtrNode, MmlAttributeMap(), QString::null, 0 );
+                    insertChild ( mml_node, mtr_node, 0 );
+
+                    if ( !insertChild ( mtr_node, mml_child, errorMsg ) )
+                    {
+                        delete mml_node;
+                        delete mml_child;
+                        *ok = false;
+                        return 0;
+                    }
+                }
+                else if ( mml_type == MtrNode && mml_child->nodeType() != MtdNode )
+                {
+                    MmlNode* mtd_node = createNode ( MtdNode, MmlAttributeMap(), QString::null, 0 );
+                    insertChild ( mml_node, mtd_node, 0 );
+
+                    if ( !insertChild ( mtd_node, mml_child, errorMsg ) )
+                    {
+                        delete mml_node;
+                        delete mml_child;
+                        *ok = false;
+                        return 0;
+                    }
+                }
+                else
+                {
+                    if ( !insertChild ( mml_node, mml_child, errorMsg ) )
+                    {
+                        delete mml_node;
+                        delete mml_child;
+                        *ok = false;
+                        return 0;
+                    }
+                }
+
+                if ( i < child_cnt - 1 && mml_type == MfencedNode && !separator_list.isEmpty() )
+                {
+                    QChar separator;
+
+                    if ( i >= ( int ) separator_list.length() )
+                        separator = separator_list.at ( separator_list.length() - 1 );
+                    else
+                        separator = separator_list[i];
+
+                    insertOperator ( mml_node, QString ( separator ) );
+                }
+            }
+
+            if ( mml_type == MfencedNode )
+                insertOperator ( mml_node, mml_node->explicitAttribute ( "close", ")" ) );
+
+            break;
     }
 
     *ok = true;
@@ -3740,7 +3740,7 @@ QString MmlNode::toStr() const
 
     return QString ( "%1 %2 mr=%3 pr=%4 dr=%5 ro=(%7, %8) str=%9" )
            .arg ( spec->type_str )
-           .arg ( ( unsigned long ) this, 0, 16 )
+           .arg ( ( quintptr ) this, 0, 16 )
            .arg ( rectToStr ( myRect() ) )
            .arg ( rectToStr ( parentRect() ) )
            .arg ( rectToStr ( deviceRect() ) )
@@ -4613,20 +4613,20 @@ void MmlMoNode::stretch()
 
     switch ( m_oper_spec->stretch_dir )
     {
-    case OperSpec::VStretch:
-        stretchTo ( QRect ( pr.left(), pmr.top(), pr.width(), pmr.height() ) );
-        break;
+        case OperSpec::VStretch:
+            stretchTo ( QRect ( pr.left(), pmr.top(), pr.width(), pmr.height() ) );
+            break;
 
-    case OperSpec::HStretch:
-        stretchTo ( QRect ( pmr.left(), pr.top(), pmr.width(), pr.height() ) );
-        break;
+        case OperSpec::HStretch:
+            stretchTo ( QRect ( pmr.left(), pr.top(), pmr.width(), pr.height() ) );
+            break;
 
-    case OperSpec::HVStretch:
-        stretchTo ( pmr );
-        break;
+        case OperSpec::HVStretch:
+            stretchTo ( pmr );
+            break;
 
-    case OperSpec::NoStretch:
-        break;
+        case OperSpec::NoStretch:
+            break;
     }
 }
 
@@ -5139,37 +5139,37 @@ void MmlMtdNode::setMyRect ( const QRect& rect )
 
     switch ( columnalign() )
     {
-    case ColAlignLeft:
-        child_rel_origin.setX ( 0 );
-        break;
+        case ColAlignLeft:
+            child_rel_origin.setX ( 0 );
+            break;
 
-    case ColAlignCenter:
-        child_rel_origin.setX ( mr.left() + ( mr.width() - cmr.width() ) / 2 );
-        break;
+        case ColAlignCenter:
+            child_rel_origin.setX ( mr.left() + ( mr.width() - cmr.width() ) / 2 );
+            break;
 
-    case ColAlignRight:
-        child_rel_origin.setX ( mr.right() - cmr.width() );
-        break;
+        case ColAlignRight:
+            child_rel_origin.setX ( mr.right() - cmr.width() );
+            break;
     }
 
     switch ( rowalign() )
     {
-    case RowAlignTop:
-        child_rel_origin.setY ( mr.top() - cmr.top() );
-        break;
+        case RowAlignTop:
+            child_rel_origin.setY ( mr.top() - cmr.top() );
+            break;
 
-    case RowAlignCenter:
-    case RowAlignBaseline:
-        child_rel_origin.setY ( mr.top() - cmr.top() + ( mr.height() - cmr.height() ) / 2 );
-        break;
+        case RowAlignCenter:
+        case RowAlignBaseline:
+            child_rel_origin.setY ( mr.top() - cmr.top() + ( mr.height() - cmr.height() ) / 2 );
+            break;
 
-    case RowAlignBottom:
-        child_rel_origin.setY ( mr.bottom() - cmr.bottom() );
-        break;
+        case RowAlignBottom:
+            child_rel_origin.setY ( mr.bottom() - cmr.bottom() );
+            break;
 
-    case RowAlignAxis:
-        child_rel_origin.setY ( 0 );
-        break;
+        case RowAlignAxis:
+            child_rel_origin.setY ( 0 );
+            break;
     }
 
     child->setRelOrigin ( child_rel_origin );
@@ -6243,14 +6243,14 @@ const OperSpec*& OperSpecSearchResult::getForm ( Mml::FormType f )
 {
     switch ( f )
     {
-    case Mml::PrefixForm:
-        return prefix_form;
+        case Mml::PrefixForm:
+            return prefix_form;
 
-    case Mml::InfixForm:
-        return infix_form;
+        case Mml::InfixForm:
+            return infix_form;
 
-    case Mml::PostfixForm:
-        return postfix_form;
+        case Mml::PostfixForm:
+            return postfix_form;
     }
 
     return postfix_form; // just to avoid warning
