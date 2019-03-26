@@ -19,13 +19,13 @@ HEADERS += $$PWD/qqt.h \
     $$PWD/qqtversion.h \
     $$PWD/qqt-qt.h
 #platform header
-contains (QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+contains (DEFINES, __WIN__) {
     #win32 base header
     HEADERS += $$PWD/qqtwin.h
-} else:contains (QSYS_PRIVATE, macOS||iOS||iOSSimulator) {
+} else:contains (DEFINES, __DARWIN__) {
     #mac base header
     HEADERS += $$PWD/qqtdarwin.h
-} else:contains (QSYS_PRIVATE, Android||AndroidX86) {
+} else:contains (DEFINES, __ANDROID__) {
     #android base header
     HEADERS += $$PWD/qqtandroid.h
 } else {
@@ -48,12 +48,13 @@ SOURCES += \
 HEADERS += \
     $$PWD/core/qqtevent.h
 
+##################Process Module###############################
 #后台进程支持。
-#这个只有ios不支持，在源文件pri里处理。
+#ios\winRT 不支持。
 #可以添加QQtProcess适配，正常平台使用QProcess继承下来，iOS下使用fork封装。
 DEFINES += __PROCESSSUPPORT__
 #ios has no backend process
-contains(QSYS_PRIVATE, iOS||iOSSimulator) {
+contains(DEFINES, __IOS__ || __WINRT__) {
     DEFINES -= __PROCESSSUPPORT__
 }
 

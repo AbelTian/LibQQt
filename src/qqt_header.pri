@@ -320,8 +320,11 @@ defineTest(add_defines_QQt){
         #if you use qextserialport, open the annotation
         #suggest: Qt5 using factory-packed, Qt4 using from Qt5, extra using this.
         #DEFINES += __QEXTSERIALPORT__
+
         #if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
         lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
+        #to winRT, ues qextserialport
+        contains (DEFINES, __WINRT__): DEFINES += __QEXTSERIALPORT__
         #to ios, use qextserialport
         contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
         #android qt5 has QtSerialport?
