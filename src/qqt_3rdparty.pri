@@ -6,10 +6,8 @@
 #注释：在qqt_header.pri打开 DEFINES += __PLUGINSUPPORT__
 #TODO: macOS runtime crash
 contains (DEFINES, __PLUGINSUPPORT__) {
-    contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
-        contains (DEFINES, QQT_LIBRARY) {
-            DEFINES += BUILD_QDEVICEWATCHER_LIB
-        }
+    #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+    win32{
         wince*: SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_wince.cpp
         else:  SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_win32.cpp
     }else:contains(QSYS_PRIVATE, macOS) {
@@ -30,11 +28,6 @@ contains(DEFINES, __QQTCHARTS__) {
     #注释：在qqt_header.pri打开 DEFINES += __CUSTOMPLOT__
     contains (DEFINES, __CUSTOMPLOT__) {
         #message (qcustomplot is used in $${TARGET})
-        win32 {
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
-            }
-        }
         SOURCES += $$PWD/charts/qcustomplot/qcpdocumentobject.cpp \
                     $$PWD/charts/qcustomplot/qcustomplot.cpp
         HEADERS += $$PWD/charts/qcustomplot/qcpdocumentobject.h \
@@ -47,12 +40,6 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     #if you use qextserialport, open the two annotation
     #注释：在qqt_header.pri打开 DEFINES += __QEXTSERIALPORT__
     contains (DEFINES, __QEXTSERIALPORT__) {
-        win32 {
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += QEXTSERIALPORT_LIBRARY
-            }
-        }
-
         #include ( $$PWD/network/qextserialport/qextserialport.pri )
         HEADERS += $$PWD/network/qextserialport/qextserialbase.h \
                   $$PWD/network/qextserialport/qextserialport.h \
@@ -68,11 +55,6 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 
     #Qt soap, webservice
     contains(DEFINES, __WEBSERVICESUPPORT__) {
-        win32 {
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += QT_QTSOAP_LIBRARY
-            }
-        }
         SOURCES += \
             $$PWD/network/soap/qtsoap.cpp
         HEADERS += \
@@ -84,14 +66,9 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     contains (DEFINES, __GUMBOSUPPORT__) {
         #mingw 如果以前编译过mingw，然后编译+MSVC支持的版本，这个模块可能符号未导出。
         #这个问题，我也不知道原因，通过手动修改(touch)一下gumbo.h可以解决。
-        #如果还是不对，那么需要为 gumbo parser 添加 gumbolocal.h。
-        #如果有用户需要导出 gumbo parser的函数，那么必须加gumbolocal.h控制
+        #如果还是不对，那么需要为 gumbo parser 添加 gumbo_global.h。
+        #如果有用户需要导出 gumbo parser的函数，那么必须加gumbo_global.h控制
         #gumbo query默认已经导出。
-        win32 {
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += QT_GUMBO_LIBRARY
-            }
-        }
         include ($$PWD/network/gumbo/parser/gumbo-parser.pri)
         include ($$PWD/network/gumbo/query/gumbo-query.pri)
     }
@@ -115,12 +92,6 @@ contains (DEFINES, __EXQUISITE__) {
     #qrdecode widget
     #注释：在qqt_header.pri打开 DEFINES += __QRDECODE__
     contains (DEFINES, __QRDECODE__) {
-        contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
-            #ignore: QZXing has no need to export
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += QZXING_LIBRARY
-            }
-        }
         include ($$PWD/exquisite/qrcode/qrdecode/qrdecode.pri)
 
         HEADERS += \
@@ -133,12 +104,6 @@ contains (DEFINES, __EXQUISITE__) {
     #mathml widget
     #注释：在qqt_header.pri打开 DEFINES += __MATHWIDGETSUPPORT__
     contains (DEFINES, __MATHWIDGETSUPPORT__) {
-        contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
-            #mathml
-            contains (DEFINES, QQT_LIBRARY) {
-                DEFINES += QT_QTMMLWIDGET_LIBRARY
-            }
-        }
         SOURCES += $$PWD/exquisite/mathml/qtmmlwidget.cpp
         HEADERS += $$PWD/exquisite/mathml/qtmmlwidget.h
     }

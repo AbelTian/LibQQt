@@ -168,7 +168,12 @@ defineTest(add_defines_QQt){
     ##link and build all need this macro
     ##现在Multi-link v2里面，已经有LIB_STATIC_LIBRARY，这个宏多余了，可是由于内部逻辑复杂，更改也不简单，所以留着了。用户静态编译LibQQt，记得定义QQT_STATIC_LIBRARY，build and link。
     ##这个宏并不多余，是链接库的必要自有宏。
-    contains(DEFINES, QQT_STATIC_LIBRARY) {
+    contains (DEFINES, QQT_LIBRARY) {
+        #build QQt
+    } else : contains(DEFINES, QQT_STATIC_LIBRARY) {
+        #build and link static QQt
+    } else {
+        #link QQt
     }
 
     ################################################################
@@ -228,10 +233,13 @@ defineTest(add_defines_QQt){
         DEFINES -= __PLUGINSUPPORT__
     }
     contains (DEFINES, __PLUGINSUPPORT__) {
-        contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
-            contains (DEFINES, QQT_STATIC_LIBRARY) {
+        #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+        win32 {
+            contains (DEFINES, QQT_LIBRARY) {
+                DEFINES += BUILD_QDEVICEWATCHER_LIB
+            } else:contains (DEFINES, QQT_STATIC_LIBRARY) {
                 DEFINES += BUILD_QDEVICEWATCHER_STATIC
-            }
+            } else { }
         }
     }
 
@@ -275,10 +283,12 @@ defineTest(add_defines_QQt){
         DEFINES += __CUSTOMPLOT__
         contains (DEFINES, __CUSTOMPLOT__) {
             win32 {
-                contains (DEFINES, QQT_STATIC_LIBRARY) {
+                contains (DEFINES, QQT_LIBRARY) {
+                    DEFINES += QCUSTOMPLOT_COMPILE_LIBRARY
+                } else:contains (DEFINES, QQT_STATIC_LIBRARY) {
                     #build static library - qcustomplot
                     DEFINES += QCUSTOMPLOT_STATIC_LIBRARY
-                }
+                } else { }
             }
         }
     }
@@ -364,9 +374,11 @@ defineTest(add_defines_QQt){
         DEFINES += __WEBSERVICESUPPORT__
         contains (DEFINES, __WEBSERVICESUPPORT__) {
             win32 {
-                contains (DEFINES, QQT_STATIC_LIBRARY) {
+                contains (DEFINES, QQT_LIBRARY) {
+                    DEFINES += QT_QTSOAP_LIBRARY
+                } else:contains (DEFINES, QQT_STATIC_LIBRARY) {
                     DEFINES += QT_QTSOAP_STATIC_LIBRARY
-                }
+                } else { }
             }
         }
 
@@ -411,9 +423,11 @@ defineTest(add_defines_QQt){
             #Gumbo need std support, c99...
             QMAKE_CFLAGS += -std=c99
             win32 {
-                contains (DEFINES, QQT_STATIC_LIBRARY) {
+                contains (DEFINES, QQT_LIBRARY) {
+                    DEFINES += QT_GUMBO_LIBRARY
+                } else:contains (DEFINES, QQT_STATIC_LIBRARY) {
                     DEFINES += QT_GUMBO_STATIC_LIBRARY
-                }
+                } else { }
             }
         }
 
@@ -439,11 +453,14 @@ defineTest(add_defines_QQt){
         contains(DEFINES, __QRDECODE__) {
             #lessThan(QT_MAJOR_VERSION, 5): QT += declarative
             greaterThan(QT_MAJOR_VERSION, 4): QT += quick
-            contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+            #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+            win32 {
                 #ignore: QZXing has no need to export
-                contains (DEFINES, QQT_STATIC_LIBRARY) {
+                contains (DEFINES, QQT_LIBRARY) {
+                    DEFINES += QZXING_LIBRARY
+                } else:contains (DEFINES, QQT_STATIC_LIBRARY) {
                     DEFINES += QZXING_STATIC_LIBRARY
-                }
+                } else { }
             }
         }
 
@@ -462,10 +479,13 @@ defineTest(add_defines_QQt){
         ##################Mathes Module###############################
         DEFINES += __MATHWIDGETSUPPORT__
         contains (DEFINES, __MATHWIDGETSUPPORT__) {
-            contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
-                contains (DEFINES, QQT_STATIC_LIBRARY) {
+            #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+            win32 {
+                contains (DEFINES, QQT_LIBRARY) {
+                    DEFINES += QT_QTMMLWIDGET_LIBRARY
+                } else:contains (DEFINES, QQT_STATIC_LIBRARY) {
                     DEFINES += QT_QTMMLWIDGET_STATIC_LIBRARY
-                }
+                } else { }
             }
         }
 
