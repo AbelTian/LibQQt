@@ -13,7 +13,7 @@
 #include <QtGlobal>
 #endif
 
-//来自qqt_qkit.pri
+//来自qqt_platform.pri
 #if defined __EMBEDDED_LINUX__
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 #include <QWSInputMethod>

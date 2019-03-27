@@ -93,6 +93,9 @@ DEFINES += QQT_VERSION=$$APP_VERSION
 #qqt_header.pri 内部使用函数实现
 include ($$PWD/qqt_header.pri)
 
+#开启预编译 待测试
+add_pch($$PWD/qqt-qt.h)
+
 #################################################################
 ##project source
 #################################################################
