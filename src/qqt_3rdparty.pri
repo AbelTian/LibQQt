@@ -6,7 +6,7 @@
 #注释：在qqt_header.pri打开 DEFINES += __PLUGINSUPPORT__
 #TODO: macOS runtime crash
 contains (DEFINES, __PLUGINSUPPORT__) {
-    #MinGW64 doesn't support contains(||) and contains(||)
+    #MinGW64 doesn't support contains(||) and contains(|) 任何层pro、pri都不支持。
     #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
     win32{
         wince*: SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_wince.cpp

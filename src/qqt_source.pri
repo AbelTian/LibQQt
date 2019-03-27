@@ -48,17 +48,6 @@ SOURCES += \
 HEADERS += \
     $$PWD/core/qqtevent.h
 
-##################Process Module###############################
-#后台进程支持。
-#ios\winRT 不支持。
-#可以添加QQtProcess适配，正常平台使用QProcess继承下来，iOS下使用fork封装。
-DEFINES += __PROCESSSUPPORT__
-#ios has no backend process
-#ios doesn't support contains(||)
-contains(DEFINES, __IOS__|__WINRT__) {
-    DEFINES -= __PROCESSSUPPORT__
-}
-
 #sql
 SOURCES += \
     $$PWD/sql/qqtsql.cpp
@@ -314,9 +303,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     }
 
     #ethnet(+wifi) manager
-    #arm mips
-    #TODO: +wince +android +ios +macOS? +win? +linux?
-    contains(QSYS_PRIVATE, Arm32|Armhf32 || Mips32 || Embedded) {
+    contains(DEFINES, QQT_ETHENET_MANAGER) {
         SOURCES += $$PWD/network/qqtethenetmanager.cpp
         HEADERS += $$PWD/network/qqtethenetmanager.h
         SOURCES += $$PWD/frame/qqtwifiwidget.cpp
