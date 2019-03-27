@@ -54,7 +54,8 @@ HEADERS += \
 #可以添加QQtProcess适配，正常平台使用QProcess继承下来，iOS下使用fork封装。
 DEFINES += __PROCESSSUPPORT__
 #ios has no backend process
-contains(DEFINES, __IOS__ || __WINRT__) {
+#ios doesn't support contains(||)
+contains(DEFINES, __IOS__|__WINRT__) {
     DEFINES -= __PROCESSSUPPORT__
 }
 

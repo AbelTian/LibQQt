@@ -27,7 +27,7 @@ extern "C" {
 #include <netinet/tcp.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#if defined (__DARWIN__)
+#if defined (__DESKTOP_DARWIN__)
 #include <net/route.h>
 #endif
 #include <sys/socket.h>
