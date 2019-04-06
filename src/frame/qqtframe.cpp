@@ -70,7 +70,7 @@ void QQtFrameMsgHandler ( QtMsgType type, const char* msg )
     else
         logfile.open ( QFile::Append | QFile::WriteOnly );
 
-    logfile.write ( message.toLocal8Bit() );
+    logfile.write ( message.toLocal8Bit() + "\n" );
     logfile.close();
 
     mutex.unlock();
