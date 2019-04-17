@@ -14,7 +14,11 @@
 class QPushButton;
 class QWidget;
 class QQtFramelessHelperPrivate;
-
+/**
+ * @brief The QQtFramelessHelper class
+ * del 几个button的代理
+ * 移动时和QQtTitleBar冲突。
+ */
 class QQTSHARED_EXPORT QQtFramelessHelper : public QObject
 {
     Q_OBJECT

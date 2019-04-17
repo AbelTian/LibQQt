@@ -9,6 +9,12 @@ class QToolButton;
 #include <qqtcore.h>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtTitleBar class
+ * 包含最小、最大、关闭按钮
+ * 包含icon，title
+ * 如果需要添加自定义按钮，那么自行获取layout() insert便可。
+ */
 class QQTSHARED_EXPORT QQtTitleBar : public QQtWidget
 {
     Q_OBJECT
