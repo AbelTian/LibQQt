@@ -213,3 +213,8 @@ QQ: 2657635903
 
 ![logo](screenshot/logo.png "Logo")    
 
+
+# 版权信息   
+
+Copyright © 2017 Tianduanrui. All rights reserved.    
+Assigned by Dezhou.    

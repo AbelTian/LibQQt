@@ -51,8 +51,9 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QDir::setCurrent ( qApp->applicationDirPath() );
 #endif
 
-    qDebug() << "耕战 (TM) QQt应用程序框架软件";
-    qDebug() << "Copyright (C) 2017-2018 山东耕战智能设备有限公司。保留所有权利。";
+    qDebug() << tr ( "QQt Application Framework Software [LibQQt]" );
+    qDebug() << tr ( "Copyright © 2017 Tianduanrui. All rights reserved." );
+    qDebug() << tr ( "Assigned by Dezhou." );
 
     pline() << "Qt version:" << QT_VERSION_STR;
     pline() << "LibQQt version:" << STR ( QQT_VERSION );
