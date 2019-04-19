@@ -6,15 +6,16 @@
 |QQtExquisite|[工程链接](https://gitee.com/drabel/QQtExquisite)|Commercial，GPL Series|
 |QQtHighGrade|[工程链接](https://gitee.com/drabel/QQtHighGrade)|Commercial，GPL Series|
 |QQtInput|[工程链接](https://gitee.com/drabel/QQtInput)|Commercial，GPL Series|
-|QQtMediaExtention|[工程链接](https://gitee.com/drabel/QQtMediaExtention)|Commercial，GPL Series|
 |QQtRuntimeExtention|[工程链接](https://gitee.com/drabel/QQtRuntimeExtention)|Commercial，GPL Series|
+|QQtInstallFramework|[工程链接](https://gitee.com/drabel/QQtInstallFramework)|Commercial，GPL Series|
 |QQtTool|[工程链接](https://gitee.com/drabel/QQtTool)|Commercial，GPL Series|
-|QQtDeviceSupport|[工程链接](https://gitee.com/drabel/QQtDeviceSupport)|Commercial|
+|QQtMediaExtention|[工程链接](https://gitee.com/drabel/QQtMediaExtention)|Commercial|
+|QQtSupport|[工程链接](https://gitee.com/drabel/QQtSupport)|Commercial|
 |QQtExquisitePlugin|[工程链接](https://gitee.com/drabel/QQtExquisitePlugin)|Commercial|
 |QQtIndustrialControl|[工程链接](https://gitee.com/drabel/QQtIndustrialControl)|Commercial|
-|QQtInstallFramework|[工程链接](https://gitee.com/drabel/QQtInstallFramework)|Commercial|
 |QQtProtect|[工程链接](https://gitee.com/drabel/QQtProtect)|Commercial|
 |QQtStyle|[工程链接](https://gitee.com/drabel/QQtStyle)|Commercial|
+|QQtMobileOS|[工程链接](https://gitee.com/drabel/QQtMobileOS)|Commercial|
 |QQtSystemLibrary|[工程链接](https://gitee.com/drabel/QQtSystemLibrary)|Commercial|
 |QQtSystemCXXLibrary|[工程链接](https://gitee.com/drabel/QQtSystemCXXLibrary)|Commercial|
 |QQtSystemDeviceLibrary|[工程链接](https://gitee.com/drabel/QQtSystemDeviceLibrary)|Commercial|
