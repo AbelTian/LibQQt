@@ -165,7 +165,7 @@ void QQtApplication::setHighDpiScaling ( bool open )
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5,6,0)
     setAttribute ( Qt::AA_EnableHighDpiScaling, open );
-    //setAttribute ( Qt::AA_UseHighDpiPixmaps, open );
+    setAttribute ( Qt::AA_UseHighDpiPixmaps, open );
 #endif
 }
 

@@ -27,6 +27,7 @@ public:
         /*
          * 依赖iconSize，layoutSpacing设置图片位置
          */
+        //default
         IconStyle_Left_And_RightText,
         IconStyle_Right_And_LeftText,
         IconStyle_MiddleText,
