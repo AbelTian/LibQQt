@@ -52,7 +52,7 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
 
     qDebug() << tr ( "QQt Application Framework Software [LibQQt]" );
-    qDebug() << tr ( "Copyright © 2017 Tianduanrui. All rights reserved." );
+    qDebug() << tr ( "Copyright (C) 2017 Tianduanrui. All rights reserved." );
     qDebug() << tr ( "Assigned by Dezhou." );
 
     pline() << "Qt version:" << QT_VERSION_STR;
