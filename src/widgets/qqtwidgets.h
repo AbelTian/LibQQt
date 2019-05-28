@@ -50,7 +50,6 @@ typedef struct QQTSHARED_EXPORT tagBtnIconTable
     QString& operator [] ( int index );
 } TBtnIconTable;
 
-
 QQTSHARED_EXPORT void moveCenter ( QWidget* w );
 QQTSHARED_EXPORT void moveRight ( QWidget* w );
 QQTSHARED_EXPORT void moveFull ( QWidget* w );

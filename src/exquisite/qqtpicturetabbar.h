@@ -8,6 +8,7 @@
 #include "qqtwidgets.h"
 #include "qqttabbar.h"
 #include "qqt-local.h"
+#include "qqtdictionary.h"
 
 class QQTSHARED_EXPORT QQtPictureTabBar : public QQtTabBar
 {
@@ -86,8 +87,7 @@ protected:
 public slots:
 
 private:
-    QList<TBtnIconTable> imgList;
-    QList<TBtnIconTable> iconList;
+    QQtDictionary dict1;
     IconStyle iconStyle;
     QFont textFont;
     QColor textColor;

@@ -58,11 +58,11 @@ void QQtPictureTabBar::setSelectedTextColor ( QColor selectedTextColor )
 
 void QQtPictureTabBar::tabPixmap ( int index, QImage& img, QImage& imgSel )
 {
-    if ( index < 0 || index + 1 > count() || index + 1 > imgList.size() )
+    if ( index < 0 || index + 1 > count() || index + 1 > dict1["image"].size() )
         return;
 
-    img = QImage ( imgList[index][BTN_NORMAL] );
-    imgSel = QImage ( imgList[index][BTN_PRESS] );
+    img = QImage ( dict1["image"][index][BTN_NORMAL].getValue().toString() );
+    imgSel = QImage ( dict1["image"][index][BTN_PRESS].getValue().toString() );
 
     return ;
 }
@@ -72,20 +72,20 @@ void QQtPictureTabBar::setTabPixmap ( int index, const QString& img, const QStri
     if ( index < 0 || index + 1 > count() )
         return;
 
-    TBtnIconTable table;
-    table[BTN_NORMAL] = img;
-    table[BTN_PRESS] = imgSel;
 
-    imgList.insert ( index, table );
+    dict1["image"][index][BTN_NORMAL] = img;
+    dict1["image"][index][BTN_PRESS] = imgSel;
 }
 
 void QQtPictureTabBar::tabIcon ( int index, QImage& icon, QImage& iconSel )
 {
-    if ( index < 0 || index + 1 > count() || index + 1 > imgList.size() )
+    if ( index < 0 || index + 1 > count() || index + 1 > dict1["icon"].size() )
         return;
 
-    icon = QImage ( iconList[index][BTN_NORMAL] );
-    iconSel = QImage ( iconList[index][BTN_PRESS] );
+    icon = QImage ( dict1["icon"][index][BTN_NORMAL].getValue().toString() );
+    iconSel = QImage ( dict1["icon"][index][BTN_PRESS].getValue().toString() );
+    //pline() << icon;
+    //pline() << iconSel;
 
     return ;
 }
@@ -95,11 +95,13 @@ void QQtPictureTabBar::setTabIcon ( int index, const QString& icon, const QStrin
     if ( index < 0 || index + 1 > count() )
         return;
 
-    TBtnIconTable table;
-    table[BTN_NORMAL] = icon;
-    table[BTN_PRESS] = iconSel;
 
-    iconList.insert ( index, table );
+    dict1["icon"][index][BTN_NORMAL] = icon;
+    dict1["icon"][index][BTN_PRESS] = iconSel;
+
+    //pline() << dict1["icon"][index][BTN_NORMAL];
+    //pline() << dict1["icon"][index][BTN_PRESS];
+
 }
 
 void QQtPictureTabBar::setBackgroundColor ( QColor backgroundColor )
@@ -154,20 +156,20 @@ void QQtPictureTabBar::drawPicture ( QPainter* p )
     {
         QRect tRect0 = tabRect ( index );
 
-        if ( imgList.size() > index )
+        if ( dict1["image"].size() > index )
         {
             p->save();
             int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
 #if 1
             //tabRect = rect()?
-            p->drawPixmap ( tRect0, QIcon ( imgList[index][sel] ).pixmap ( tRect0.size(), QIcon::Normal, QIcon::On ) );
+            p->drawPixmap ( tRect0, QIcon ( dict1["image"][index][sel].getValue().toString() ).pixmap ( tRect0.size(), QIcon::Normal, QIcon::On ) );
 #endif
 
             /*
              * 失真不明显，使用以下方法
              */
 #if 0
-            QImage image ( iconList[index][sel] );
+            QImage image ( dict1["image"][index][sel].getValue().toString() );
             p.drawItemPixmap ( tabRectValue, Qt::AlignLeft | Qt::AlignTop, QPixmap::fromImage ( image.scaled ( tabRectValue.size(),
                                Qt::KeepAspectRatio ) ) );
 #endif
@@ -176,7 +178,7 @@ void QQtPictureTabBar::drawPicture ( QPainter* p )
             //为什么不用这个呢?因为上边那个QIcon直接缩放到了完整的符合Icon大小的图.直接居中.
             //这个不需要,多次一举.
 #if 0
-            p->drawItemPixmap ( tRect0, Qt::AlignCenter, QIcon ( imgList[index][sel] ).pixmap ( tRect0.size(), QIcon::Normal,
+            p->drawItemPixmap ( tRect0, Qt::AlignCenter, QIcon ( dict1["image"][index][sel].getValue().toString() ).pixmap ( tRect0.size(), QIcon::Normal,
                                 QIcon::On )  );
 #endif
             p->restore();
@@ -252,17 +254,17 @@ void QQtPictureTabBar::drawIcon ( QPainter* p )
         int sel = BTN_NORMAL;
         sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
 
-        //pline() << iconList.size() << index << iconList[index][sel];
+        //pline() << dict1["icon"].size() << index << dict1["icon"][index][sel].getValue().toString();
 
-        if ( iconList.size() > index )
+        if ( dict1["icon"].size() > index )
         {
             p->save();
             //tabRect = rect()?
-            p->drawPixmap ( tRect0, QIcon ( iconList[index][sel] ).pixmap ( tRect0.size(), mode, QIcon::On ) );
+            p->drawPixmap ( tRect0, QIcon ( dict1["icon"][index][sel].getValue().toString() ).pixmap ( tRect0.size(), mode, QIcon::On ) );
             /*
              * 失真不明显，使用以下方法
              */
-            //QImage image(iconList[index][sel]);
+            //QImage image(dict1["icon"][index][sel].getValue().toString());
             //p.drawItemPixmap(tabRectValue, Qt::AlignLeft |Qt::AlignTop, QPixmap::fromImage(image.scaled(tabRectValue.size(), Qt::KeepAspectRatio)));
             p->restore();
         }
