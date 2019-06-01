@@ -6,59 +6,59 @@ QSqlDatabase newDatabaseConnection()
 {
     QUuid uuid = QUuid::createUuid();
     //qDebug() << uuid.toString();
-    return QSqlDatabase::addDatabase(DB_TYPE, uuid.toString());
+    return QSqlDatabase::addDatabase ( DB_TYPE, uuid.toString() );
 }
 
 
 //opened
 //useDatabase
-void setDatabaseName(QSqlDatabase& db, QString dbName)
+void setDatabaseName ( QSqlDatabase& dbinst, QString dbName )
 {
-    if (db.isOpen())
-        db.close();
+    if ( dbinst.isOpen() )
+        dbinst.close();
 
-    db.setDatabaseName(QString("%1/%2").arg(DB_PATH).arg(dbName));
+    dbinst.setDatabaseName ( QString ( "%1" ).arg ( dbName ) );
 
-    if (!db.open())
+    if ( !dbinst.open() )
     {
-        QMessageBox::warning(0, QObject::tr("QSQLITE %1 Error").arg(db.databaseName()),
-                             db.lastError().text());
+        QMessageBox::warning ( 0, QObject::tr ( "QSQLITE %1 Error" ).arg ( dbinst.databaseName() ),
+                               dbinst.lastError().text() );
         return;
     }
 }
 
 
-void openDatabase(QSqlDatabase& db)
+void openDatabase ( QSqlDatabase& dbinst )
 {
-    if (db.isOpen())
+    if ( dbinst.isOpen() )
         return;
 
-    if (!db.open())
+    if ( !dbinst.open() )
     {
-        QMessageBox::warning(0, QObject::tr("QSQLITE %1 Error").arg(db.databaseName()),
-                             db.lastError().text());
+        QMessageBox::warning ( 0, QObject::tr ( "QSQLITE %1 Error" ).arg ( dbinst.databaseName() ),
+                               dbinst.lastError().text() );
         return;
     }
 }
 
 
-void closeDatabase(QSqlDatabase& db)
+void closeDatabase ( QSqlDatabase& dbinst )
 {
-    db.close();
+    dbinst.close();
 }
 
-void useDatabase(QSqlDatabase& db, QString dbName)
+void useDatabase ( QSqlDatabase& dbinst, QString dbName )
 {
-    setDatabaseName(db, dbName);
+    setDatabaseName ( dbinst, dbName );
 }
 
-void deleteDatabaseConnection(QString connectionName)
+void deleteDatabaseConnection ( QString connectionName )
 {
-    QSqlDatabase::removeDatabase(connectionName);
+    QSqlDatabase::removeDatabase ( connectionName );
 }
 
-void deleteDatabaseConnection(QSqlDatabase &db)
+void deleteDatabaseConnection ( QSqlDatabase& dbinst )
 {
-    QString connectionName = db.connectionName();
-    deleteDatabaseConnection(connectionName);
+    QString connectionName = dbinst.connectionName();
+    deleteDatabaseConnection ( connectionName );
 }

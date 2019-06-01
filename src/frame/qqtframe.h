@@ -24,43 +24,6 @@ extern "C" {
 
 enum
 {
-    Lib_Id = 0,
-    Lib_Name,
-    Lib_Creater,
-    Lib_CreateTime,
-    Lib_Comment,
-};
-
-enum
-{
-    Method_Id = 0,
-    Method_Name,
-    Method_Type,
-    Method_Vessel,
-};
-
-enum
-{
-    Stage_Id = 0,
-    Stage_Index,
-    Stage_Vessel,
-    Stage_Timeramp,
-    Stage_Presspsi,
-    Stage_Tempture,
-    Stage_Hold,
-    Stage_MethodId,
-};
-
-enum
-{
-    Type_Standard = 0,
-    Type_Temprature,
-    Type_Stressure,
-    Type_Extract,
-};
-
-enum
-{
     Login_Request,
     Login_Success,
 };
@@ -72,19 +35,6 @@ enum
     Event_TypeName,
 };
 
-
-typedef enum tagSampleEnum
-{
-    ESampleId,
-    ESampleMingcheng,
-    ESampleBianhao,
-    ESampleYangpinliang,
-    ESampleYangpindanwei,
-    ESampleJieguo,
-    ESampleJieguodanwei,
-    ESampleCeshiren,
-    ESampleCeshishijian,
-} ESampleColomn;
 
 enum
 {
@@ -114,36 +64,41 @@ enum
 };
 
 
-#define CONFIG_ROOT "."
-#define CONFIG_PATH "./conf"
-#define LOG_PATH "./log"
-#define AV_PATH "./res"
-#define SKIN_PATH "./skin"
+#define CONFIG_ROOT     QString(".")
+#define CONFIG_PATH     QString(CONFIG_ROOT + "/conf")
+#define LOG_PATH        QString(CONFIG_ROOT + "/log")
+#define AV_PATH         QString(CONFIG_ROOT + "/res")
+#define SKIN_PATH       QString(CONFIG_ROOT + "/skin")
+#define FONT_PATH       QString(CONFIG_ROOT + "/font")
+#define DB_PATH         QString(CONFIG_ROOT + "/db")
+#define LANG_PATH       QString(CONFIG_ROOT + "/lang")
 
 #if defined (__ANDROIDX86__)
-#define qrc(file) QString("%1/%2").arg("assets:/").arg(file)
-#define res(file) QString("%1/%2").arg("assets:/res").arg(file)
-#define skin(file) QString("%1/%2").arg("assets:/skin").arg(file)
+#define qrc(file)   QString("%1/%2").arg("assets:/").arg(file)
+#define res(file)   QString("%1/%2").arg("assets:/res").arg(file)
+#define skin(file)  QString("%1/%2").arg("assets:/skin").arg(file)
+#define font(file)  QString("%1/%2").arg("assets:/font").arg(file)
+#define db(file)    QString("%1/%2").arg("assets:/db").arg(file)
+#define lang(file)  QString("%1/%2").arg("assets:/lang").arg(file)
 #elif defined (__ANDROID__)
-#define qrc(file) QString("%1/%2").arg("://").arg(file)
-#define res(file) QString("%1/%2").arg("://res").arg(file)
-#define skin(file) QString("%1/%2").arg("://skin").arg(file)
+#define qrc(file)   QString("%1/%2").arg("://").arg(file)
+#define res(file)   QString("%1/%2").arg("://res").arg(file)
+#define skin(file)  QString("%1/%2").arg("://skin").arg(file)
+#define font(file)  QString("%1/%2").arg("://font").arg(file)
+#define db(file)    QString("%1/%2").arg("://db").arg(file)
+#define lang(file)  QString("%1/%2").arg("://lang").arg(file)
 #else
-#define qrc(file)  QDir().absoluteFilePath(QString("%1/%2").arg(CONFIG_ROOT).arg(file))
-#define res(file)  QDir().absoluteFilePath(QString("%1/%2").arg(AV_PATH).arg(file))
-#define skin(file) QDir().absoluteFilePath(QString("%1/%2").arg(SKIN_PATH).arg(file))
+#define qrc(file)   QDir().absoluteFilePath(QString("%1/%2").arg(CONFIG_ROOT).arg(file))
+#define res(file)   QDir().absoluteFilePath(QString("%1/%2").arg(AV_PATH).arg(file))
+#define skin(file)  QDir().absoluteFilePath(QString("%1/%2").arg(SKIN_PATH).arg(file))
+#define font(file)  QDir().absoluteFilePath(QString("%1/%2").arg(FONT_PATH).arg(file))
+#define db(file)    QDir().absoluteFilePath(QString("%1/%2").arg(DB_PATH).arg(file))
+#define lang(file)  QDir().absoluteFilePath(QString("%1/%2").arg(LANG_PATH).arg(file))
 #endif
-
-
-#define TABLE_LIBRARY "Library"
-#define TABLE_METHOD "Method"
-#define TABLE_STAGE "Stage"
-#define TABLE_EVTYPE "Type"
 
 extern QString gUserName;
 extern QString gPassword;
 extern int gAuthority;
-
 
 #ifdef __cplusplus
 }
