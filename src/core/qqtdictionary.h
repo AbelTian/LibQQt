@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QList>
-#include <QMap>
+#include <qqtorderedmap.h>
 #include <qqtcore.h>
 #include <qqt-local.h>
 
@@ -12,13 +12,13 @@
  * 遍历时
  */
 class QQtDictionary;
-typedef QMap<QString, QQtDictionary> QQtDictionaryMap;
-typedef QMapIterator<QString, QQtDictionary> QQtDictionaryMapIterator;
-typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMutableMapIterator;
+typedef QQtOrderedMap<QString, QQtDictionary> QQtDictionaryMap;
+typedef QQtOrderedMap<QString, QQtDictionary>::Iterator QQtDictionaryMapIterator;
+typedef QQtOrderedMap<QString, QQtDictionary>::ConstIterator QQtDictionaryMapConstIterator;
 
 typedef QList<QQtDictionary> QQtDictionaryList;
-typedef QListIterator<QQtDictionary> QQtDictionaryListIterator;
-typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
+typedef QList<QQtDictionary>::Iterator QQtDictionaryListIterator;
+typedef QList<QQtDictionary>::ConstIterator QQtDictionaryListConstIterator;
 
 /**
  * @brief The QQtDictionary class
@@ -30,8 +30,8 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
  * 接受嵌套访问 操作方式 dict["cccc"][0]["eeeee"]
  * 通过重载函数来实现类型的变化，不建议使用中更改类型。
  * 比json和xml的数据结构要庞大。toJson toXML fromJson fromXML
- * QVariant 不能直接获取到真实数据，改变必须使用临时变量。
- * 而且，接口设计也不够灵活，存入和取出都不太方便。
+ * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
+ * QQtDictionary封装了QVariant，实现直接操作真实数据。提供大量操作符。存取数据方便快捷，类型多样。
  */
 class QQTSHARED_EXPORT QQtDictionary
 {
@@ -72,7 +72,7 @@ public:
     /*获取全部数据*/
     /*获取当前字典的全部数据*/
     /*保存为[key]=[value]的*/
-    QMap<QString, QQtDictionary>& getMap() const;
+    QQtOrderedMap<QString, QQtDictionary>& getMap() const;
     /*保存为index=[value]*/
     QList<QQtDictionary>& getList() const ;
 
@@ -106,7 +106,7 @@ public:
     /*whole value list*/
     void setChild ( const QList<QQtDictionary>& list );
     /*whole value map*/
-    void setChild ( const QMap<QString, QQtDictionary>& map );
+    void setChild ( const QQtOrderedMap<QString, QQtDictionary>& map );
 
     /*自己本身没有孩子，添加一个个的孩子*/
     /*index = int*/
@@ -145,7 +145,7 @@ public:
     QQtDictionary& operator [] ( const QString& key );
     const QQtDictionary operator[] ( const QString& key ) const;
 
-    QQtDictionary& operator = ( const QMap<QString, QQtDictionary>& map );
+    QQtDictionary& operator = ( const QQtOrderedMap<QString, QQtDictionary>& map );
     QQtDictionary& operator = ( const QList<QQtDictionary>& list );
     QQtDictionary& operator = ( const QQtDictionary& other );
     QQtDictionary& operator = ( const QVariant& value );
@@ -189,7 +189,7 @@ private:
     QList<QQtDictionary> m_list; //[index]
     /*不是叶子映射，是个子字典，是个叶子，是个叶子的值组合*/
     /*映射保存在这里，QStirng可以升级为QVariant*/
-    QMap<QString, QQtDictionary> m_map;
+    QQtOrderedMap<QString, QQtDictionary> m_map;
     /*是个列表和子字典，这是错误的，不可能的*/
 };
 
