@@ -62,7 +62,7 @@ void QQtDictionary::setChild ( const QList<QQtDictionary>& list )
     m_list = list;
 }
 
-void QQtDictionary::setChild ( const QQtOrderedMap<QString, QQtDictionary>& map )
+void QQtDictionary::setChild ( const QMap<QString, QQtDictionary>& map )
 {
     m_type = DictMap;
     m_map = map;
@@ -359,7 +359,7 @@ QQtDictionary& QQtDictionary::operator [] ( const QString& key )
     return m_map.operator [] ( key );
 }
 
-QQtDictionary& QQtDictionary::operator = ( const QQtOrderedMap<QString, QQtDictionary>& map )
+QQtDictionary& QQtDictionary::operator = ( const QMap<QString, QQtDictionary>& map )
 {
     m_type = DictMap;
     m_map = map;
@@ -543,9 +543,9 @@ void QQtDictionary::parseDictionaryToJsonValue ( const QQtDictionary& node, QJso
         {
             //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
             QJsonObject object;
-            for ( QQtOrderedMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
             {
-                //QQtOrderedMap<QString, QQtDictionary>& m = node.getMap();
+                //QMap<QString, QQtDictionary>& m = node.getMap();
                 const QString& key = itor.key();
                 const QQtDictionary& srcvalue = itor.value();
                 QJsonValue value;
@@ -572,9 +572,9 @@ bool QQtDictionary::operator == ( const QQtDictionary& other ) const
     return false;
 }
 
-QQtOrderedMap<QString, QQtDictionary>& QQtDictionary::getMap() const
+QMap<QString, QQtDictionary>& QQtDictionary::getMap() const
 {
-    return ( QQtOrderedMap<QString, QQtDictionary>& ) m_map;
+    return ( QMap<QString, QQtDictionary>& ) m_map;
 }
 
 QList<QQtDictionary>& QQtDictionary::getList() const

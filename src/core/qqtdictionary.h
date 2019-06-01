@@ -12,9 +12,9 @@
  * 遍历时
  */
 class QQtDictionary;
-typedef QQtOrderedMap<QString, QQtDictionary> QQtDictionaryMap;
-typedef QQtOrderedMap<QString, QQtDictionary>::Iterator QQtDictionaryMapIterator;
-typedef QQtOrderedMap<QString, QQtDictionary>::ConstIterator QQtDictionaryMapConstIterator;
+typedef QMap<QString, QQtDictionary> QQtDictionaryMap;
+typedef QMap<QString, QQtDictionary>::Iterator QQtDictionaryMapIterator;
+typedef QMap<QString, QQtDictionary>::ConstIterator QQtDictionaryMapConstIterator;
 
 typedef QList<QQtDictionary> QQtDictionaryList;
 typedef QList<QQtDictionary>::Iterator QQtDictionaryListIterator;
@@ -72,7 +72,7 @@ public:
     /*获取全部数据*/
     /*获取当前字典的全部数据*/
     /*保存为[key]=[value]的*/
-    QQtOrderedMap<QString, QQtDictionary>& getMap() const;
+    QMap<QString, QQtDictionary>& getMap() const;
     /*保存为index=[value]*/
     QList<QQtDictionary>& getList() const ;
 
@@ -106,7 +106,7 @@ public:
     /*whole value list*/
     void setChild ( const QList<QQtDictionary>& list );
     /*whole value map*/
-    void setChild ( const QQtOrderedMap<QString, QQtDictionary>& map );
+    void setChild ( const QMap<QString, QQtDictionary>& map );
 
     /*自己本身没有孩子，添加一个个的孩子*/
     /*index = int*/
@@ -145,7 +145,7 @@ public:
     QQtDictionary& operator [] ( const QString& key );
     const QQtDictionary operator[] ( const QString& key ) const;
 
-    QQtDictionary& operator = ( const QQtOrderedMap<QString, QQtDictionary>& map );
+    QQtDictionary& operator = ( const QMap<QString, QQtDictionary>& map );
     QQtDictionary& operator = ( const QList<QQtDictionary>& list );
     QQtDictionary& operator = ( const QQtDictionary& other );
     QQtDictionary& operator = ( const QVariant& value );
@@ -189,7 +189,7 @@ private:
     QList<QQtDictionary> m_list; //[index]
     /*不是叶子映射，是个子字典，是个叶子，是个叶子的值组合*/
     /*映射保存在这里，QStirng可以升级为QVariant*/
-    QQtOrderedMap<QString, QQtDictionary> m_map;
+    QMap<QString, QQtDictionary> m_map;
     /*是个列表和子字典，这是错误的，不可能的*/
 };
 
