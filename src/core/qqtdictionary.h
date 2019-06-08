@@ -13,12 +13,12 @@
  */
 class QQtDictionary;
 typedef QMap<QString, QQtDictionary> QQtDictionaryMap;
-typedef QMap<QString, QQtDictionary>::Iterator QQtDictionaryMapIterator;
-typedef QMap<QString, QQtDictionary>::ConstIterator QQtDictionaryMapConstIterator;
+typedef QMapIterator<QString, QQtDictionary> QQtDictionaryMapIterator;
+typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMapConstIterator;
 
 typedef QList<QQtDictionary> QQtDictionaryList;
-typedef QList<QQtDictionary>::Iterator QQtDictionaryListIterator;
-typedef QList<QQtDictionary>::ConstIterator QQtDictionaryListConstIterator;
+typedef QListIterator<QQtDictionary> QQtDictionaryListIterator;
+typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
 
 /**
  * @brief The QQtDictionary class

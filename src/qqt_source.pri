@@ -204,6 +204,13 @@ contains (DEFINES, __MULTIMEDIA__) {
     #audio
     SOURCES += $$PWD/multimedia/qqtaudiomanager.cpp
     HEADERS += $$PWD/multimedia/qqtaudiomanager.h
+
+    #video
+    SOURCES += $$PWD/multimedia/qqtcamera.cpp
+    HEADERS += $$PWD/multimedia/qqtcamera.h
+    SOURCES += $$PWD/multimedia/qqtvideomanager.cpp
+    HEADERS += $$PWD/multimedia/qqtvideomanager.h
+
 }
 
 
