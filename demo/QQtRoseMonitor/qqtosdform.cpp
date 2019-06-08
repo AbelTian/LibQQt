@@ -38,7 +38,7 @@ QQtOsdForm::QQtOsdForm ( QWidget* parent ) :
     //setWindowFlag ( Qt::WindowSystemMenuHint, true );
     //setAttribute ( Qt::WA_DeleteOnClose, true );
 
-    setPixmap ( qrc ( "rose.png" ) );
+    setPixmap ( conf_qrc ( "rose.png" ) );
 }
 
 QQtOsdForm::~QQtOsdForm()

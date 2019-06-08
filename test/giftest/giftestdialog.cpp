@@ -32,9 +32,9 @@ GifTestDialog::GifTestDialog ( QWidget* parent ) :
     pline() << res ( "../waiting.gif" );
     pline() << QDir ( "." ).relativeFilePath ( "skin/yun.png" );
     pline() << QDir ( res ( "../waiting.gif" ) ).absolutePath();
-    ui->labelGif->setGifFile (  skin ( "waiting.gif" ) );
-    ui->widgetGif->setGifFile ( skin ( "waiting.gif" ) );
-    ui->widgetQQt->setPixmap ( skin ( "yun.png" ) );
+    ui->labelGif->setGifFile (  conf_skin ( "waiting.gif" ) );
+    ui->widgetGif->setGifFile ( conf_skin ( "waiting.gif" ) );
+    ui->widgetQQt->setPixmap ( conf_skin ( "yun.png" ) );
 
     pline() << QMovie::supportedFormats();
 }
