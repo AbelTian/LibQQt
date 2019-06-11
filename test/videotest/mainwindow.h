@@ -21,6 +21,7 @@ public slots:
     void slotImageComing2 ( QImage );
     void slotCapture ( QImage );
 
+    void slotTestProbe ( const QVideoFrame& frame );
 private slots:
     void on_pushButton_clicked();
 

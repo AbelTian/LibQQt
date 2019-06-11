@@ -24,16 +24,11 @@
        <attribute name="title">
         <string>Camera Information</string>
        </attribute>
-       <widget class="QListWidget" name="listWidget">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>20</y>
-          <width>141</width>
-          <height>161</height>
-         </rect>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QTextBrowser" name="textBrowser"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -51,45 +46,47 @@
         </item>
         <item row="0" column="2" rowspan="2">
          <widget class="QWidget" name="widget" native="true">
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>110</y>
-             <width>91</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Stop</string>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="pushButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>50</y>
-             <width>91</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Preview</string>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="pushButton_3">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>160</y>
-             <width>91</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Capture</string>
-           </property>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Stop</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Capture</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
