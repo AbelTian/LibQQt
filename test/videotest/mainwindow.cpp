@@ -10,6 +10,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     input = new QQtVideoInput ( this );
     pline() << input->defaultCamera();
     pline() << input ->availableCameras();
+    return;
 
     pline() << input->viewFinderSettings().pixelFormat();
     pline() << input->camera()->supportedViewfinderPixelFormats();

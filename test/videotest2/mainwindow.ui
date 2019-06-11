@@ -16,10 +16,10 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QQtWidget" name="qqtwidget"/>
+     <widget class="QQtWidget" name="qqtwidget" native="true"/>
     </item>
     <item row="0" column="1">
-     <widget class="QQtWidget" name="qqtwidget_2"/>
+     <widget class="QQtWidget" name="qqtwidget_2" native="true"/>
     </item>
     <item row="1" column="0" colspan="2">
      <widget class="QWidget" name="widget_2" native="true">
@@ -32,10 +32,10 @@
       <widget class="QPushButton" name="pushButton">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>71</width>
-         <height>16</height>
+         <x>0</x>
+         <y>0</y>
+         <width>81</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="text">
@@ -46,9 +46,9 @@
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>10</y>
-         <width>80</width>
-         <height>16</height>
+         <y>0</y>
+         <width>81</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="text">
@@ -59,10 +59,16 @@
        <property name="geometry">
         <rect>
          <x>200</x>
-         <y>10</y>
-         <width>80</width>
-         <height>16</height>
+         <y>0</y>
+         <width>81</width>
+         <height>31</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <property name="text">
         <string>Capture</string>

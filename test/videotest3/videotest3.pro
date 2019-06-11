@@ -45,7 +45,7 @@ add_version(1,0,0,0)
 add_deploy()
 add_deploy_config($${PWD}/AppRoot)
 add_dependent_manager(QQt)
-add_dependent_manager(QQtMediaExtention)
+#add_dependent_manager(QQtMediaExtention)
 system(touch main.cpp)
 
 #-------------------------------------------------

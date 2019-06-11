@@ -17,19 +17,37 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Camera Information</string>
+       </attribute>
+       <widget class="QListWidget" name="listWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>141</width>
+          <height>161</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Preview</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="1" column="1">
-         <widget class="QQtWidget" name="qqtwidget_2"/>
+         <widget class="QQtWidget" name="qqtwidget_2" native="true"/>
         </item>
         <item row="0" column="1">
-         <widget class="QQtWidget" name="qqtwidget_3"/>
+         <widget class="QQtWidget" name="qqtwidget_3" native="true"/>
         </item>
         <item row="0" column="0" rowspan="2">
-         <widget class="QQtWidget" name="qqtwidget"/>
+         <widget class="QQtWidget" name="qqtwidget" native="true"/>
         </item>
         <item row="0" column="2" rowspan="2">
          <widget class="QWidget" name="widget" native="true">
@@ -75,11 +93,6 @@
          </widget>
         </item>
        </layout>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Tab 2</string>
-       </attribute>
       </widget>
      </widget>
     </item>

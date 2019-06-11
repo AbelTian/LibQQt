@@ -7,6 +7,7 @@
 #include <QAbstractVideoSurface>
 #include <QVideoSurfaceFormat>
 #include <QCameraViewfinderSettings>
+#include <QVideoProbe>
 #include <QTimer>
 #include <QMutex>
 #include <QMutexLocker>
@@ -22,12 +23,13 @@
  * | 使用方式           | Parent                   | Property Class        | Childen           | 备注
  * ---------------------------------------------------------------------------------------------------------------------
  * | setViewfinder     | QAbstractVideoSurface    | QQtCameraVideoSurface |                   | 视频，快，Buffer
+ * |                   |                          |                       | QQtVideoProbe     | 视频，快，Buffer，+Android支持
  * ---------------------------------------------------------------------------------------------------------------------
  * | setViewfinder     | QMediaBindableInterface  | QGraphicsVideoItem    |                   | QGraphicsItem 系统专用
  * |                   |                          | QVideoWidget          | QCameraViewfinder | 视频，快，属于输出位置上的
  * ---------------------------------------------------------------------------------------------------------------------
  * | setMetaObject     | QMediaBindableInterface  | QCameraImageCapture   |                   | 截图，慢，默认保存文件
- * |                   |                          | QMediaRecoder         | QAudioRecoder     | 录像，快，保存文件，音视频
+ * |                   |                          | QMediaRecorder        | QAudioRecorder    | 录像，快，保存文件，音视频
  * ---------------------------------------------------------------------------------------------------------------------
  */
 
@@ -42,7 +44,6 @@
  * @brief The QQtVideoSurface class
  * 从metaObject获取视频数据，帧。
  * Buffer，快速。
- * 还有一个Android平台的，QVideoProbe
  */
 class QQTSHARED_EXPORT QQtCameraVideoSurface : public QAbstractVideoSurface
 {
@@ -58,6 +59,26 @@ signals:
 public:
     virtual QList<QVideoFrame::PixelFormat> supportedPixelFormats ( QAbstractVideoBuffer::HandleType handleType ) const override;
     virtual bool present ( const QVideoFrame& frame ) override;
+};
+
+class QQTSHARED_EXPORT QQtVideoProbe : public QQtCameraVideoSurface
+{
+    Q_OBJECT
+public:
+    QQtVideoProbe ( QObject* parent = 0 );
+    virtual ~QQtVideoProbe();
+
+    void setMediaObject ( QMediaObject* mediaObject );
+    QMediaObject* mediaObject() const;
+
+    /**
+     * 以下与用户无关。
+     */
+private slots:
+    void slotVideoFrame ( const QVideoFrame& frame );
+private:
+    QMediaObject* m_mediaObject;
+    QVideoProbe* m_AndroidProber;
 };
 
 /**
@@ -140,7 +161,7 @@ private:
     //经过调试，QCamera句柄，一个进程只能存在一个。
     QQtCamera* mCamera;
     QCameraInfo mCamInfo;
-    QQtCameraVideoSurface* mSurface;
+    QQtVideoProbe* mSurface;
     QQtCameraExposure* mExposure;
     QQtCameraFocus* mFocus;
     QQtCameraImageProcessing* mImageProcessing;

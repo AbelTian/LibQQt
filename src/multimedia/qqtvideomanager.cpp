@@ -13,7 +13,7 @@ QQtCameraVideoSurface::~QQtCameraVideoSurface()
 
 QList<QVideoFrame::PixelFormat> QQtCameraVideoSurface::supportedPixelFormats ( QAbstractVideoBuffer::HandleType handleType ) const
 {
-#ifdef __ANDROID__
+#ifdef Q_OS_ANDROID
     //Android NV21
     return QList<QVideoFrame::PixelFormat>()
            << QVideoFrame::Format_NV21;
@@ -63,12 +63,52 @@ bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
     return true;
 }
 
+QQtVideoProbe::QQtVideoProbe ( QObject* parent ) : QQtCameraVideoSurface ( parent )
+{
+    m_mediaObject = 0;
+    m_AndroidProber = 0;
+}
+
+QQtVideoProbe::~QQtVideoProbe()
+{
+}
+
+void QQtVideoProbe::setMediaObject ( QMediaObject* mediaObject )
+{
+    Q_ASSERT ( mediaObject );
+#ifdef Q_OS_ANDROID
+    if ( m_AndroidProber )
+    {
+        //m_AndroidProber->setSource ( nullptr );
+        disconnect ( m_AndroidProber, SIGNAL ( videoFrameProbed ( const QVideoFrame& ) ),
+                     this, SLOT ( slotVideoFrame ( const QVideoFrame& ) ) );
+        m_AndroidProber->deleteLater();
+    }
+
+    m_mediaObject = mediaObject;
+    m_AndroidProber = new QVideoProbe ( this );
+    connect ( m_AndroidProber, SIGNAL ( videoFrameProbed ( const QVideoFrame& ) ),
+              this, SLOT ( slotVideoFrame ( const QVideoFrame& ) ) );
+    m_AndroidProber->setSource ( m_mediaObject );
+#endif
+}
+
+QMediaObject* QQtVideoProbe::mediaObject() const
+{
+    return m_mediaObject;
+}
+
+void QQtVideoProbe::slotVideoFrame ( const QVideoFrame& frame )
+{
+    present ( frame );
+}
+
 QQtVideoInput::QQtVideoInput ( QObject* parent ) : QObject ( parent )
 {
     /**
      * 设置视频截图工具
      */
-    mSurface  = new QQtCameraVideoSurface ( this );
+    mSurface  = new QQtVideoProbe ( this );
     connect ( mSurface, SIGNAL ( readyRead ( QImage ) ), this, SIGNAL ( readyRead ( QImage ) ) );
     connect ( mSurface, SIGNAL ( readyRead ( QImage ) ), this, SLOT ( slotImageCaptured ( QImage ) ) );
 
@@ -80,7 +120,12 @@ QQtVideoInput::QQtVideoInput ( QObject* parent ) : QObject ( parent )
     //QQtCamera 默认就是使用默认照相机，所以，这里不必设置了。
     mCamInfo = defaultCamera();
     mCamera->setCameraInfo ( mCamInfo );
+
+#ifdef Q_OS_ANDROID
+    mSurface->setMediaObject ( mCamera->camera() );
+#else
     mCamera->setViewfinder ( mSurface );
+#endif
 
     //
     mExposure = new QQtCameraExposure ( this );
@@ -185,14 +230,18 @@ void QQtVideoInput::start()
     if ( !mCamera->isCaptureModeSupported ( QCamera::CaptureVideo ) )
     {
         pline() << mCamInfo.deviceName();
-        pline() << mCamera << "Camera cannot capture video";
+        //pline() << mCamera << "Camera cannot capture video";
     }
     //播放图像 = QCamera::CaptureStillImage
     //播放图像 = QCamera::CaptureViewfinder
     mCamera->setCaptureMode ( QCamera::CaptureVideo );
 
     //设置输出
+#ifdef Q_OS_ANDROID
+    mSurface->setMediaObject ( mCamera->camera() );
+#else
     mCamera->setViewfinder ( mSurface );
+#endif
 
     //设置ViewfinderSettings
     //启动后设置...
