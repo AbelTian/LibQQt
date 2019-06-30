@@ -1,9 +1,9 @@
-# Multi-environ Building Technology   
+# Multi-environ Technology   
 
-为了方便用户在命令行里工作，我开发了多环境管理器PyMake，
+为了方便用户在命令行里工作，我开发了多环境管理器Multi-environ Manager（即PyMake），
 在此为LibQQt提供多环境编译支持，具备方便的同时编译能力。  
 
-## 安装PyMake  
+# 安装PyMake  
 
 如果电脑上没有PyMake，需要先安装，
 PyMake可以帮助用户在命令行里做各种工作，不仅仅限于此处编译，所以，请自行事先安装。  
@@ -95,7 +95,24 @@ set ENVARRAY=mingw32 ...需要编译几个环境的就添加几个环境，用�
 pymake type here qqt.build.all to qqt.build.all
 # 开始
 qqt.build.all.bat
-# 如果一切正常，会开启多个编译命令行。实现同时多环境编译。 这个脚本可以多次使用。
+# 如果一切正常，会开启多个编译命令行。实现同时多环境编译。 这个脚本可以多次使用。我测试的开启52个编译环境命令行，正常编译。这取决于你的电脑的能力。
 
-# 如果需要其他功能支持，在<user-set-root>/<user-set-config.json>里command组下，添加自己的命令即可。PyMake提供ccvp直接执行。
-```
+# 如果不希望导出这个命令，那么执行以下命令，
+pymake system ccvp here qqt.build.all 
+# 如果一切正常，现象同上。
+
+# 如果仅仅编译一个环境的目标，那么执行以下命令，
+# 切换到LibQQt源代码目录，编译mingw32环境的目标
+pymake use mingw32 ccvp here build.qmake QQt
+
+# 如果需要其他功能支持，在<user-set-root>/<user-set-config.json>里command组下，添加自己的命令即可。PyMake提供多种模式的ccvp直接执行。
+```  
+
+# 编译截图  
+
+![](a0.png)
+![](a1.png)
+![](b0.png)
+![](b1.png)
+![](b2.png)
+![](c0.png)
