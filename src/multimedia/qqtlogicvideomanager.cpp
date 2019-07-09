@@ -1,8 +1,8 @@
 ﻿#include "qqtlogicvideomanager.h"
 
-QQtLogicPreviewWidget::QQtLogicPreviewWidget ( QWidget* parent ) :
+QQtLogicVideoManager::QQtLogicVideoManager ( QWidget* parent ) :
     QWidget ( parent ),
-    ui ( new Ui::QQtLogicPreviewWidget )
+    ui ( new Ui::QQtLogicVideoManager )
 {
     ui->setupUi ( this );
 
@@ -32,12 +32,12 @@ QQtLogicPreviewWidget::QQtLogicPreviewWidget ( QWidget* parent ) :
     connect ( timer, SIGNAL ( timeout() ), this, SLOT ( update() ) );
 }
 
-QQtLogicPreviewWidget::~QQtLogicPreviewWidget()
+QQtLogicVideoManager::~QQtLogicVideoManager()
 {
     delete ui;
 }
 
-int QQtLogicPreviewWidget::play()
+int QQtLogicVideoManager::play()
 {
     /*
      * 这块代码放在哪里
@@ -152,7 +152,7 @@ int QQtLogicPreviewWidget::play()
     return fd;
 }
 
-int QQtLogicPreviewWidget::close()
+int QQtLogicVideoManager::close()
 {
     bool ret = false;
 
@@ -189,7 +189,7 @@ int QQtLogicPreviewWidget::close()
 }
 
 
-int QQtLogicPreviewWidget::convert_yuv_to_rgb_pixel ( int y, int u, int v )
+int QQtLogicVideoManager::convert_yuv_to_rgb_pixel ( int y, int u, int v )
 {
     unsigned int pixel32 = 0;
     unsigned char* pixel = ( unsigned char* ) &pixel32;
@@ -206,8 +206,8 @@ int QQtLogicPreviewWidget::convert_yuv_to_rgb_pixel ( int y, int u, int v )
     return pixel32;
 }
 
-int QQtLogicPreviewWidget::convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width,
-                                                       unsigned int height )
+int QQtLogicVideoManager::convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width,
+                                                      unsigned int height )
 {
     unsigned int in, out = 0;
     unsigned int pixel_16;
@@ -246,7 +246,7 @@ int QQtLogicPreviewWidget::convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsig
 }
 
 
-void QQtLogicPreviewWidget::paintEvent ( QPaintEvent* )
+void QQtLogicVideoManager::paintEvent ( QPaintEvent* )
 {
     if ( fd <= 0 )
         return;
@@ -286,7 +286,7 @@ void QQtLogicPreviewWidget::paintEvent ( QPaintEvent* )
 }
 
 
-void QQtLogicPreviewWidget::mousePressEvent ( QMouseEvent* e )
+void QQtLogicVideoManager::mousePressEvent ( QMouseEvent* e )
 {
     static bool bGInit = false;
 

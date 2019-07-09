@@ -61,6 +61,13 @@ public:
     virtual bool present ( const QVideoFrame& frame ) override;
 };
 
+/**
+ * @brief The QQtVideoProbe class
+ * 这是个数字摄像机管理器，这个类是为Android等需要Probe的数字录像设备准备的。
+ * 我在VideoManager内部使用这个类来兼容桌面和Android系统，
+ * 但是我发现，无论如何Probe在Android上都不能正常执行，所以现在暂时不支持Android。
+ * Qt5.9.2，何时支持，待定。
+ */
 class QQTSHARED_EXPORT QQtVideoProbe : public QQtCameraVideoSurface
 {
     Q_OBJECT

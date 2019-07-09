@@ -33,6 +33,7 @@ defineTest(add_include_QQt){
     #multimedia
     command += $${header_path}/multimedia
     command += $${header_path}/multimedia/dmmu
+    command += $${header_path}/multimedia/libqwav
 
     #charts
     command += $${header_path}/charts
@@ -218,6 +219,22 @@ defineTest(add_defines_QQt){
     }
     contains (DEFINES, __MULTIMEDIA__) {
         QT += multimedia
+
+        #AUDIO MODULE
+        #depend on libqwav
+        DEFINES += __QQTAUDIOSUPPORT__
+        contains(DEFINES, __QQTAUDIOSUPPORT__) {
+            win32 {
+                contains (DEFINES, QQT_LIBRARY) {
+                    DEFINES += LIBQWAV_LIBRARY
+                } else:contains (DEFINES, QQT_STATIC_LIBRARY) {
+                    DEFINES += LIBQWAV_STATIC_LIBRARY
+                } else { }
+            }
+        }
+
+        #VIDEO MODULE
+        DEFINES += __QQTVIDEOSUPPORT__
 
         #LOGIC CAMERA PREVIEW
         #depend on dmmu

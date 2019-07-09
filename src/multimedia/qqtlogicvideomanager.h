@@ -22,22 +22,22 @@ extern "C" {
 
 
 /**
- * @brief The QQtLogicPreviewWidget class
+ * @brief The QQtLogicVideoManager class
  * QQt模拟摄像头预览控件
  * 省略dmmu的Qt Wrapper类
  */
-class QQTSHARED_EXPORT QQtLogicPreviewWidget : public QWidget
+class QQTSHARED_EXPORT QQtLogicVideoManager : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit QQtLogicPreviewWidget ( QWidget* parent = 0 );
-    ~QQtLogicPreviewWidget();
+    explicit QQtLogicVideoManager ( QWidget* parent = 0 );
+    ~QQtLogicVideoManager();
     int play();
     int close();
 
 private:
-    Ui::QQtLogicPreviewWidget* ui;
+    Ui::QQtLogicVideoManager* ui;
 
     struct sensor_info sinfo;
     int pre_bpp;
