@@ -18,7 +18,7 @@
 #################################################################
 ##Usage
 #################################################################
-#Suggest Qt 5.9.2/4.8.6/4.8.7
+#Suggest Qt 5.8/5.9.2/4.8.6/4.8.7
 #please dont use Qt 5.9.1, it is broken with android and ios.
 #please dont modify this pro
 #use LibQQt you need change Qt Creator default build directory: your-pc-build-station/%{CurrentProject:Name}/%{CurrentKit:FileSystemName}/%{Qt:Version}/%{CurrentBuild:Name} (Only Once)
