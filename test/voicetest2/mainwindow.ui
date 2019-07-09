@@ -22,7 +22,7 @@
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>Tab 1</string>
+        <string>AudioManager</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
@@ -124,7 +124,7 @@ and play (default device)</string>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>Tab 2</string>
+        <string>WavAudioManager</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="0" column="0">

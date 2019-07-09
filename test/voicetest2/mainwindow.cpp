@@ -505,9 +505,28 @@ void MainWindow::on_pushButton_8_clicked()
     //android 不支持./temp.wav....
 
     //record
-    QAudioDeviceInfo input = QQtAudioManager::defaultInputDevice();
+    QString name = QQtAudioManager::defaultInputDevice().deviceName();
+    if ( ui->inputListWidget->currentIndex().isValid() )
+        name = ui->inputListWidget->currentIndex().data().toString();
+    QAudioDeviceInfo input = findInputAudioDeviceInfoByName ( name );
+
+
+    QAudioFormat outFmt = input.preferredFormat();
+    int outBit = outFmt.sampleSize(), outChn = outFmt.channelCount(), outRate = outFmt.sampleRate();
+    if ( ui->inBit->currentIndex().isValid() )
+        outBit = ui->inBit->currentIndex().data().toInt();
+    if ( ui->inChn->currentIndex().isValid() )
+        outChn = ui->inChn->currentIndex().data().toInt();
+    if ( ui->intRate->currentIndex().isValid() )
+        outRate = ui->intRate->currentIndex().data().toInt();
+
+    outFmt.setChannelCount ( outChn );
+    outFmt.setSampleSize ( outBit );
+    outFmt.setSampleRate ( outRate );
+    outFmt.setCodec ( "audio/pcm" );
+
     wavRecManager.inputDeviceInfo() = input;
-    wavRecManager.inputAudioFormat() = input.preferredFormat();
+    wavRecManager.inputAudioFormat() = outFmt;
 
     //save wav file
     wavFileManager.outputAudioFormat() = wavRecManager.inputAudioFormat();
@@ -529,8 +548,26 @@ void MainWindow::on_pushButton_9_clicked()
     wavFileManager.setInputSourceFile ( TMPFILE );
 
     //play record
-    wavRecManager.outputAudioFormat() = wavFileManager.inputAudioFormat();
-    wavRecManager.outputDeviceInfo() = QQtAudioManager::defaultOutputDevice();
+    QString name = QQtAudioManager::defaultOutputDevice().deviceName();
+    if ( ui->outputListWidget->currentIndex().isValid() )
+        name = ui->outputListWidget->currentIndex().data().toString();
+    QAudioDeviceInfo devOut = findOutputAudioDeviceInfoByName ( name );
+
+    QAudioFormat outFmt = devOut.preferredFormat();
+    int outBit = outFmt.sampleSize(), outChn = outFmt.channelCount(), outRate = outFmt.sampleRate();
+    if ( ui->outBit->currentIndex().isValid() )
+        outBit = ui->outBit->currentIndex().data().toInt();
+    if ( ui->outChn->currentIndex().isValid() )
+        outChn = ui->outChn->currentIndex().data().toInt();
+    if ( ui->outRate->currentIndex().isValid() )
+        outRate = ui->outRate->currentIndex().data().toInt();
+    outFmt.setChannelCount ( outChn );
+    outFmt.setSampleSize ( outBit );
+    outFmt.setSampleRate ( outRate );
+    outFmt.setCodec ( "audio/pcm" );
+
+    wavRecManager.outputAudioFormat() = outFmt;
+    wavRecManager.outputDeviceInfo() = devOut;
 
     pline() << "file:" << wavFileManager.inputSourceFile() << wavFileManager.inputAudioFormat();
     pline() << "play:" << wavRecManager.outputDeviceInfo().deviceName() << wavRecManager.outputAudioFormat();
