@@ -109,10 +109,11 @@ SUBDIRS += test/qqtdicttest2
 SUBDIRS += test/giftest
 
 #必开 这个例子是关于LibQQt MultiMedia的最好展示
-#
-greaterThan(QT_VERSION, 4.6.0):SUBDIRS += test/voicetest
-#
-mac:lessThan(QT_MAJOR_VERSION , 5):SUBDIRS -= test/voicetest
+SUBDIRS += test/voicetest
+SUBDIRS += test/voicetest2
+SUBDIRS += test/videotest
+SUBDIRS += test/videotest2
+SUBDIRS += test/videotest3
 #
 SUBDIRS += examples/qqtclientexample
 #
