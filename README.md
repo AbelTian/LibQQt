@@ -90,7 +90,7 @@ github link: https://github.com/AbelTian/LibQQt
     - *全在frame文件夹*
 8. 支持多页表格 [QQtMultiPageTableWidget](src/widgets/qqtmultipagetablewidget.h)  
 9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
-5. 支持Qt5.9.2   
+5. 支持Qt5.8,Qt5.9.2   
     - 建议桌面使用这个版本，对三大桌面，和IOS Android e-linux支持都很好。  
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
 1. 添加矢量图形widgets  
@@ -108,9 +108,13 @@ github link: https://github.com/AbelTian/LibQQt
     - 添加内存服务器（一套Input（Reader），Output（Writer）），处理内存和设备之间的数据交互。（这部分的功能完全按照为内存服务的思路设计研发。）  
     - [QQtAudioManager](src/multimedia/qqtaudiomanager.h)、  
     - 将 AudioInputDevice 和 AudioOutputDevice 当做一个设备进行读写，App处理获取到的声音。
+    - 增加QQtWavAudioManager、QQtWavSoundEffect、QQtWavSound，
+    - 像操作一个设备一样读、写wav文件。
+    - 增加QQtVideoManager、QQtLogicVideoManager，
+    - 支持桌面摄像头采集画面，支持模拟摄像头采集画面。
 6. 添加Http功能支持工具
     - QQtWebAccessManager，支持管理Session、Cookies。    
-    - 添加GumboQuery爬虫工具。  
+    - 添加GumboQuery爬虫工具，爬取网页信息。  
     - 支持webservice (QtSoap)  
 8. 添加Qt没有的组件QQtTitleBar  
     - 可以组完全自定义的Form。  
@@ -194,7 +198,7 @@ LibQQt R3支持Qt5，由于使用Multi-link 2，不支持Qt4。
 
 邮箱: tianduanrui@163.com  
 QQ: 2657635903  
-
+LibQQt技术分享和交流群: 560584206
 
 ========================================================================  
 # 用户使用协议  
