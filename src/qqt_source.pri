@@ -36,10 +36,12 @@ contains (DEFINES, __WIN__) {
 #core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
+    $$PWD/core/qqtorderedmap.cpp \
     $$PWD/core/qqtdictionary.cpp \
     $$PWD/core/qqtobjectmanager.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
+    $$PWD/core/qqtorderedmap.h \
     $$PWD/core/qqtdictionary.h \
     $$PWD/core/qqtobjectmanager.h
 
@@ -200,8 +202,27 @@ contains (DEFINES, __MULTIMEDIA__) {
     }
 
     #audio
-    SOURCES += $$PWD/multimedia/qqtaudiomanager.cpp
-    HEADERS += $$PWD/multimedia/qqtaudiomanager.h
+    contains (DEFINES, __QQTAUDIOSUPPORT__){
+        SOURCES += $$PWD/multimedia/qqtaudiomanager.cpp
+        HEADERS += $$PWD/multimedia/qqtaudiomanager.h
+
+        #wav audio
+        SOURCES += $$PWD/multimedia/libqwav/libqwav.cpp
+        HEADERS += $$PWD/multimedia/libqwav/libqwav.h
+        HEADERS += $$PWD/multimedia/libqwav/libqwav_global.h
+        SOURCES += $$PWD/multimedia/qqtwavaudiomanager.cpp
+        HEADERS += $$PWD/multimedia/qqtwavaudiomanager.h
+        SOURCES += $$PWD/multimedia/qqtwavsoundeffect.cpp
+        HEADERS += $$PWD/multimedia/qqtwavsoundeffect.h
+    }
+
+    #video
+    contains (DEFINES, __QQTVIDEOSUPPORT__){
+        SOURCES += $$PWD/multimedia/qqtcamera.cpp
+        HEADERS += $$PWD/multimedia/qqtcamera.h
+        SOURCES += $$PWD/multimedia/qqtvideomanager.cpp
+        HEADERS += $$PWD/multimedia/qqtvideomanager.h
+    }
 }
 
 

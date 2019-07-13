@@ -122,6 +122,11 @@ contains (DEFINES, __MULTIMEDIA__) {
                         $$PWD/multimedia/dmmu/jz_cim.h \
                         $$PWD/multimedia/dmmu/graphics.h \
                         $$PWD/multimedia/dmmu/hal.h
+
+            #logic video manager
+            SOURCES += $$PWD/multimedia/qqtlogicvideomanager.cpp
+            HEADERS += $$PWD/multimedia/qqtlogicvideomanager.h
+
             SOURCES += $$PWD/multimedia/qqtlogicpreviewwidget.cpp
             HEADERS += $$PWD/multimedia/qqtlogicpreviewwidget.h
             FORMS += $$PWD/multimedia/qqtlogicpreviewwidget.ui

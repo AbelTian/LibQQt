@@ -55,16 +55,9 @@ enum
 };
 
 #define DB_TYPE "QSQLITE"
-#define DB_PATH "./db"
-
 #define DB_PINYIN "PinYin.db"
 #define DB_MANAGER "Manager.db"
 #define DB_EVENT "SysEvent.db"
-#define DB_METHOD_PATH "Method"
-#define DB_DATA_PATH "Data"
-#define DB_QQT "System.db"
-#define DB_USER "User.db"
-#define DB_DATA "Data.db"
 
 #define TABLE_USERINFO "User"
 #define TABLE_AUTHORITY "Authority"
@@ -81,14 +74,14 @@ typedef QSqlDatabase QQtSqlDatabaseConnection;
 QQTSHARED_EXPORT QSqlDatabase newDatabaseConnection();
 
 /*已经将数据库打开，不必重复打开*/
-QQTSHARED_EXPORT void setDatabaseName(QSqlDatabase& db, QString dbName);
+QQTSHARED_EXPORT void setDatabaseName ( QSqlDatabase& dbinst, QString dbName );
 //=setDatabaseName
-QQTSHARED_EXPORT void useDatabase(QSqlDatabase& db, QString dbName);
+QQTSHARED_EXPORT void useDatabase ( QSqlDatabase& dbinst, QString dbName );
 
-QQTSHARED_EXPORT void openDatabase(QSqlDatabase& db);
-QQTSHARED_EXPORT void closeDatabase(QSqlDatabase& db);
+QQTSHARED_EXPORT void openDatabase ( QSqlDatabase& dbinst );
+QQTSHARED_EXPORT void closeDatabase ( QSqlDatabase& dbinst );
 
-QQTSHARED_EXPORT void deleteDatabaseConnection(QString connectionName);
-QQTSHARED_EXPORT void deleteDatabaseConnection(QSqlDatabase& db);
+QQTSHARED_EXPORT void deleteDatabaseConnection ( QString connectionName );
+QQTSHARED_EXPORT void deleteDatabaseConnection ( QSqlDatabase& dbinst );
 
 #endif // QQTSQLDEFINE_H

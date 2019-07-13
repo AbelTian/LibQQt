@@ -13,29 +13,29 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui ( new Ui::MainWindow )
 {
     ui->setupUi ( this );
-    QString svg = QString ( qrc ( "aa.svg" ) );
+    QString svg = QString ( conf_qrc ( "aa.svg" ) );
     ui->w->setSvgFile ( svg );
 
-    ui->b0->iconTable() [BTN_NORMAL] = qrc ( "bt_stir.svg" );
-    ui->b0->iconTable() [BTN_HOVER] = qrc ( "bt_stir.svg" );
-    ui->b0->iconTable() [BTN_PRESS] = qrc ( "bt_stir_press.svg" );
+    ui->b0->iconTable() [BTN_NORMAL] = conf_qrc ( "bt_stir.svg" );
+    ui->b0->iconTable() [BTN_HOVER] = conf_qrc ( "bt_stir.svg" );
+    ui->b0->iconTable() [BTN_PRESS] = conf_qrc ( "bt_stir_press.svg" );
     ui->b0->renderToVariable();
 
-    ui->c0->iconTable() [BTN_NORMAL] = qrc ( "bt_stir.svg" );
-    ui->c0->iconTable() [BTN_HOVER] = qrc ( "bt_stir.svg" );
-    ui->c0->iconTable() [BTN_PRESS] = qrc ( "bt_stir_press.svg" );
+    ui->c0->iconTable() [BTN_NORMAL] = conf_qrc ( "bt_stir.svg" );
+    ui->c0->iconTable() [BTN_HOVER] = conf_qrc ( "bt_stir.svg" );
+    ui->c0->iconTable() [BTN_PRESS] = conf_qrc ( "bt_stir_press.svg" );
     ui->c0->renderToVariable();
-    ui->r0->iconTable() [BTN_NORMAL] = qrc ( "bt_stir.svg" );
-    ui->r0->iconTable() [BTN_HOVER] = qrc ( "bt_stir.svg" );
-    ui->r0->iconTable() [BTN_PRESS] = qrc ( "bt_stir_press.svg" );
+    ui->r0->iconTable() [BTN_NORMAL] = conf_qrc ( "bt_stir.svg" );
+    ui->r0->iconTable() [BTN_HOVER] = conf_qrc ( "bt_stir.svg" );
+    ui->r0->iconTable() [BTN_PRESS] = conf_qrc ( "bt_stir_press.svg" );
     ui->r0->renderToVariable();
-    ui->r1->iconTable() [BTN_NORMAL] = qrc ( "bt_stir.svg" );
-    ui->r1->iconTable() [BTN_HOVER] = qrc ( "bt_stir.svg" );
-    ui->r1->iconTable() [BTN_PRESS] = qrc ( "bt_stir_press.svg" );
+    ui->r1->iconTable() [BTN_NORMAL] = conf_qrc ( "bt_stir.svg" );
+    ui->r1->iconTable() [BTN_HOVER] = conf_qrc ( "bt_stir.svg" );
+    ui->r1->iconTable() [BTN_PRESS] = conf_qrc ( "bt_stir_press.svg" );
     ui->r1->renderToVariable();
 
-    ui->p0->setSvgFile ( qrc ( "bk_progress_background.svg" ),
-                         qrc ( "bk_progress_trunk.svg" ) );
+    ui->p0->setSvgFile ( conf_qrc ( "bk_progress_background.svg" ),
+                         conf_qrc ( "bk_progress_trunk.svg" ) );
     ui->p0->setRange ( 0, 100 );
     ui->p0->setValue ( 60 );
 

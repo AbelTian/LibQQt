@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QList>
-#include <QMap>
+#include <qqtorderedmap.h>
 #include <qqtcore.h>
 #include <qqt-local.h>
 
@@ -14,11 +14,11 @@
 class QQtDictionary;
 typedef QMap<QString, QQtDictionary> QQtDictionaryMap;
 typedef QMapIterator<QString, QQtDictionary> QQtDictionaryMapIterator;
-typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMutableMapIterator;
+typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMapConstIterator;
 
 typedef QList<QQtDictionary> QQtDictionaryList;
 typedef QListIterator<QQtDictionary> QQtDictionaryListIterator;
-typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
+typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
 
 /**
  * @brief The QQtDictionary class
@@ -30,8 +30,8 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
  * 接受嵌套访问 操作方式 dict["cccc"][0]["eeeee"]
  * 通过重载函数来实现类型的变化，不建议使用中更改类型。
  * 比json和xml的数据结构要庞大。toJson toXML fromJson fromXML
- * QVariant 不能直接获取到真实数据，改变必须使用临时变量。
- * 而且，接口设计也不够灵活，存入和取出都不太方便。
+ * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
+ * QQtDictionary封装了QVariant，实现直接操作真实数据。提供大量操作符。存取数据方便快捷，类型多样。
  */
 class QQTSHARED_EXPORT QQtDictionary
 {

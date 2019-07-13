@@ -52,7 +52,7 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
 #endif
 
     qDebug() << tr ( "QQt Application Framework Software [LibQQt]" );
-    qDebug() << tr ( "Copyright © 2017 Tianduanrui. All rights reserved." );
+    qDebug() << tr ( "Copyright (C) 2017 Tianduanrui. All rights reserved." );
     qDebug() << tr ( "Assigned by Dezhou." );
 
     pline() << "Qt version:" << QT_VERSION_STR;
@@ -165,7 +165,7 @@ void QQtApplication::setHighDpiScaling ( bool open )
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5,6,0)
     setAttribute ( Qt::AA_EnableHighDpiScaling, open );
-    //setAttribute ( Qt::AA_UseHighDpiPixmaps, open );
+    setAttribute ( Qt::AA_UseHighDpiPixmaps, open );
 #endif
 }
 
@@ -214,7 +214,7 @@ bool QQtApplication::setTextFont ( QString fontfile, int fontsize )
     /*这个函数没有任何问题，检测完毕。过去的报错是工作目录不对，无法加载其他数据库*/
     /*此处，改为使用QFontDatabase的经典静态方法调用方式*/
     //ignored
-    QFontDatabase db;
+    QFontDatabase fontdb0;
 
     int fontID = QFontDatabase::addApplicationFont ( fontfile );
     pline() << "font file:" << fontfile;
@@ -229,8 +229,8 @@ bool QQtApplication::setTextFont ( QString fontfile, int fontsize )
     QString ziti = QFontDatabase::applicationFontFamilies ( fontID ).at ( 0 );
     pline() << "font name:" << ziti;
 
-    QFont font ( ziti, fontsize );
-    QApplication::setFont ( font );
+    QFont font1 ( ziti, fontsize );
+    QApplication::setFont ( font1 );
 
     return true;
 }

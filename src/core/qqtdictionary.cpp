@@ -533,13 +533,28 @@ void QQtDictionary::parseDictionaryToJsonValue ( const QQtDictionary& node, QJso
                 QList<QQtDictionary>& l = node.getList();
                 QJsonValue value;
                 parseDictionaryToJsonValue ( l[i], value );
-                array.append ( value );
+                //array.append ( value );
+                array.push_back ( value );
             }
             result = array;
             break;
         }
         case DictMap:
+        {
+            //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
+            QJsonObject object;
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& key = itor.key();
+                const QQtDictionary& srcvalue = itor.value();
+                QJsonValue value;
+                parseDictionaryToJsonValue ( srcvalue, value );
+                object.insert ( key, value );
+            }
+            result = object;
             break;
+        }
         case DictMax:
         default:
             break;

@@ -89,11 +89,11 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //e.play();
 
     //响
-    e.setSource ( QUrl::fromLocalFile ( res ( "9733.wav" ) ) );
+    e.setSource ( QUrl::fromLocalFile ( conf_res ( "9733.wav" ) ) );
     //e.play();
 
     //响
-    //QSound::play ( res ( "9733.wav" ) );
+    //QSound::play ( conf_res ( "9733.wav" ) );
 
     //响
     //QApplication::beep();

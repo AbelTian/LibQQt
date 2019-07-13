@@ -8,6 +8,7 @@
 #include "qqtwidgets.h"
 #include "qqttabbar.h"
 #include "qqt-local.h"
+#include "qqtdictionary.h"
 
 class QQTSHARED_EXPORT QQtPictureTabBar : public QQtTabBar
 {
@@ -27,6 +28,7 @@ public:
         /*
          * 依赖iconSize，layoutSpacing设置图片位置
          */
+        //default
         IconStyle_Left_And_RightText,
         IconStyle_Right_And_LeftText,
         IconStyle_MiddleText,
@@ -85,8 +87,7 @@ protected:
 public slots:
 
 private:
-    QList<TBtnIconTable> imgList;
-    QList<TBtnIconTable> iconList;
+    QQtDictionary dict1;
     IconStyle iconStyle;
     QFont textFont;
     QColor textColor;
