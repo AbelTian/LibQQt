@@ -1,4 +1,4 @@
-#ifndef QQTWEBWORKCLIENT_H
+﻿#ifndef QQTWEBWORKCLIENT_H
 #define QQTWEBWORKCLIENT_H
 
 #include <QNetworkAccessManager>
@@ -243,13 +243,16 @@ public:
 
     //win没有这几个函数
     //arm下5.5.1没有
+    //macOS5.7.1没有，这个函数是新加的。
 
     //linux macOS下有.
-#if !defined( Q_OS_WIN ) && !defined( __EMBEDDED_LINUX__ )
+#if defined( __DARWIN__ ) || defined( __LINUX__ )
+#if QT_VERSION > QT_VERSION_CHECK(5,7,1)
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
                                              const QByteArray& data );
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
                                              QHttpMultiPart* multiPart );
+#endif
 #endif
 
 signals:

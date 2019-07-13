@@ -1,4 +1,4 @@
-#include "qqtwebaccessmanager.h"
+﻿#include "qqtwebaccessmanager.h"
 #include "qqtcore.h"
 
 
@@ -418,7 +418,8 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
     return session;
 }
 
-#if !defined( Q_OS_WIN ) && !defined( __EMBEDDED_LINUX__ )
+#if defined( __DARWIN__ ) || defined( __LINUX__ )
+#if QT_VERSION > QT_VERSION_CHECK(5,7,1)
 
 QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
                                                               const QByteArray& data )
@@ -487,6 +488,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
 
     return session;
 }
+#endif
 #endif
 
 void QQtWebAccessManager::finished ( QNetworkReply* reply )
