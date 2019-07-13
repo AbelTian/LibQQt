@@ -1,7 +1,6 @@
 #include "qqtprogressdialog.h"
 #include "ui_qqtprogressdialog.h"
 #include "qqtcore.h"
-#include "qqtobjectmanager.h"
 
 QQtProgressDialog::QQtProgressDialog ( QWidget* parent ) :
     QQtDialog ( parent ),
@@ -32,9 +31,6 @@ QQtProgressDialog::QQtProgressDialog ( QWidget* parent ) :
     ui->widgetBar->setPixMap ( "./skin/default/bk_progress_background.png",
                                "./skin/default/bk_progress_chunk.png" );
 #endif
-
-    QQtObjectManager::registerObject ( this );
-    QQtObjectManager::registerObject ( ui->btnCancel );
 }
 
 QQtProgressDialog::~QQtProgressDialog()

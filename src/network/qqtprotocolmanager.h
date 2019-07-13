@@ -4,7 +4,6 @@
 #include <QObject>
 #include "qqtmessage.h"
 #include "qqtprotocol.h"
-#include <qqtobjectmanager.h>
 
 #include "qqtcore.h"
 #include <qqt-local.h>

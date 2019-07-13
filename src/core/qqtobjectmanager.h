@@ -148,7 +148,7 @@ public:
      * @param w
      */
     static void registerObject ( const QObject* const& w ) {
-        if ( !containers().contains ( w ) )
+        if ( containers().contains ( w ) )
             return;
         containers().push_back ( w );
     }

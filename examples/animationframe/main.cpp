@@ -5,9 +5,12 @@
 #include "qqtgui.h"
 #include "qqtwindow.h"
 
-int main(int argc, char* argv[])
+#include "qqtapplication.h"
+
+int main ( int argc, char* argv[] )
 {
-    QQTApp a(argc, argv);
+    QQtApplication::setHighDpiScaling();
+    QQtApplication a ( argc, argv );
 
     QQTWindow w;
     w.show();
