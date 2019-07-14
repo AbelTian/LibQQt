@@ -38,6 +38,17 @@ public:
     //>=5.6.0，建议5.7.1以后开始使用。
     static void setHighDpiScaling ( bool open = true );
 
+    //设置工作目录
+    void setWorkRoot ( const QString workroot );
+
+    //获取工作目录 总是跟随用户设置改变
+    const QString getWorkRoot();
+
+    //QQtApplication把启动目录强制切换到了应用程序所在目录，如果用户需要更改回去，那么自己切换到这个目录即可。
+    //获取启动时目录 $(pwd)或者%CD%
+    //这个值是固定不变的。
+    const QString getStartingWorkRoot();
+
     //这两个函数和MFC架构里的那两个函数一样的功能，但是Qt提供了main函数里的更好的窗口启动方法，所以，这里不实现。
     virtual int initInstance() { return 0; }
     virtual int unInitInstance() { return 0; }
@@ -56,6 +67,9 @@ private:
 
 private:
     QTranslator* language;
+
+private:
+    QString startWorkRoot;
 };
 
 extern QQtApplication* qqtApp;
