@@ -13,7 +13,7 @@
  *
  * 支持
  * click
- * longClick
+ * 不支持longClick
  * 不支持DoubleClick, doubleClick会导致click延时
  *
  * 可以统计按键次数

@@ -30,15 +30,12 @@ public:
     //发回界面层
     //这些信号不区分Widget,谁发过来都发出去,不论Widget
 signals:
-    void click();
     void longClick();
 
 signals:
-    void clickWithPoint ( QPoint point );
     void longClickWithPoint ( QPoint point );
 
 signals:
-    void clickWithPointF ( QPointF point );
     void longClickWithPointF ( QPointF point );
 
 #if 0
