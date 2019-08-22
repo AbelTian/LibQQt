@@ -18,7 +18,7 @@ public:
     virtual ~QQtPushButton();
 
     /*
-     * QQtPushButton [] = 不能正常运算 所以采用这种形式。
+     * Qt4，板子上，QQtPushButton [] = 不能正常运算 所以采用这种形式。
      */
     inline TBtnIconTable& iconTable() { return m_pixmap; }
     inline EBtnStatus btnStatus() const { return state; }

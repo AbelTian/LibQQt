@@ -4,6 +4,9 @@
 #include <QListView>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtListView class
+ */
 class QQTSHARED_EXPORT QQtListView : public QListView
 {
     Q_OBJECT

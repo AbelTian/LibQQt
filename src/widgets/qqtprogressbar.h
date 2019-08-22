@@ -1,8 +1,4 @@
-﻿/*
- * 原装QtProgressBar，在板子上Dialog里paint的时候发生异常，所以重写。
- * 行为约束：图片的大小和Bar的宽度必须相等，不容易失真
- */
-#ifndef QQTPROGRESSBAR_H
+﻿#ifndef QQTPROGRESSBAR_H
 #define QQTPROGRESSBAR_H
 
 #include <qqtwidget.h>
@@ -14,6 +10,11 @@ namespace Ui {
 class QQtProgressBar;
 }
 
+/**
+ * @brief The QQtProgressBar class
+ * 原装QtProgressBar，在板子上Dialog里paint的时候发生异常，所以重写。
+ * 行为约束：图片的大小和Bar的宽度必须相等，不容易失真
+ */
 class QQTSHARED_EXPORT QQtProgressBar : public QWidget
 {
     Q_OBJECT

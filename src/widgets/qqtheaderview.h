@@ -5,7 +5,7 @@
 #include <qqt-local.h>
 /**
  * @brief The QQtHeaderView class
- * Qt4.8.7 不能HeaderView背景全部透明，重写
+ * Qt4.8.7 HeaderView背景全部透明
  */
 class QQTSHARED_EXPORT QQtHeaderView : public QHeaderView
 {
