@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = testbodymover
+TARGET = testbodyresizer
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -48,7 +48,7 @@ HEADERS += \
 SOURCES += \
     mainwidget.cpp
 
-CONFIG += use_source
+#CONFIG += use_source
 use_source {
     add_file(qqtbodyresizer.h)
     add_file(qqtbodyresizer.cpp)

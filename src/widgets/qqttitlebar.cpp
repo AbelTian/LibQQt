@@ -163,7 +163,7 @@ void QQtTitleBar::mouseMoveEvent ( QMouseEvent* event )
 #ifdef Q_OS_WIN
 #else
     QWidget* win = window();
-    if ( !win->isMaximized() )
+    if ( bMousePressed && !win->isMaximized() )
     {
         QPoint movePoint = event->globalPos() - pressedPoint;
         QPoint widgetPos = win->pos();

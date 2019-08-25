@@ -25,6 +25,9 @@ public:
         Bottom,
     };
 
+    QMargins& margins();
+    const QMargins& margins() const;
+
 public:
     virtual void mousePressEvent ( QMouseEvent* event, QWidget* target = 0 );
     virtual void mouseReleaseEvent ( QMouseEvent* event, QWidget* target = 0 );
@@ -39,7 +42,7 @@ private:
     bool bMousePressed;
     QPoint pressedPoint;
 
-    QMargins margins;
+    QMargins m_margins;
     MoveDirection direction;
 };
 

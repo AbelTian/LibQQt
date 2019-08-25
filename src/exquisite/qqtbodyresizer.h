@@ -2,9 +2,9 @@
 #define QQTBODYRESIZER_H
 
 #include <QObject>
+#include <QMargins>
 
-//#include "qqt-local.h"
-#define QQTSHARED_EXPORT
+#include "qqt-local.h"
 
 /**
  * @brief The QQtBodyResizer class
@@ -33,6 +33,8 @@ class QQTSHARED_EXPORT QQtBodyResizer : public QObject
 public:
     QQtBodyResizer ( QObject* parent = 0 );
     ~QQtBodyResizer();
+
+    QMargins& margins();
 
     // QObject interface
 public:

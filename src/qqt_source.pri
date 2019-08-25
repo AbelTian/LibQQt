@@ -341,18 +341,18 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
-    SOURCES += \
-        $$PWD/exquisite/qqtframelesshelper.cpp \
-        $$PWD/exquisite/qqtframelesshelperprivate.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtframelesshelper.h \
-        $$PWD/exquisite/qqtframelesshelperprivate.h
     HEADERS += \
         $$PWD/exquisite/qqtbodymover.h \
         $$PWD/exquisite/qqtbodymover_p.h
     SOURCES += \
         $$PWD/exquisite/qqtbodymover.cpp \
         $$PWD/exquisite/qqtbodymover_p.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtbodyresizer.h \
+        $$PWD/exquisite/qqtbodyresizer_p.h
+    SOURCES += \
+        $$PWD/exquisite/qqtbodyresizer.cpp \
+        $$PWD/exquisite/qqtbodyresizer_p.cpp
 
     #can click sound support widgets
     contains (DEFINES, __CLICKSOUNDWIDGETS__) {

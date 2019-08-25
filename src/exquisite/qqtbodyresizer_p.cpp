@@ -14,11 +14,21 @@ QQtBodyResizerPrivate::QQtBodyResizerPrivate ( QQtBodyResizer* q ) :
     q_ptr ( q )
 {
     bMousePressed = false;
-    margins = QMargins ( 10, 10, 10, 10 );
+    m_margins = QMargins ( 10, 10, 10, 10 );
 }
 
 QQtBodyResizerPrivate::~QQtBodyResizerPrivate()
 {
+}
+
+QMargins& QQtBodyResizerPrivate::margins()
+{
+    return m_margins;
+}
+
+const QMargins& QQtBodyResizerPrivate::margins() const
+{
+    return m_margins;
 }
 
 void QQtBodyResizerPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target )
@@ -196,8 +206,8 @@ void QQtBodyResizerPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target
 
         pressedPoint = event->globalPos();
 
-        if ( width > ( margins.left() + margins.right() ) &&
-             height > ( margins.top() + margins.bottom() ) )
+        if ( width > ( m_margins.left() + m_margins.right() ) &&
+             height > ( m_margins.top() + m_margins.bottom() ) )
         {
             //target->move ( x, y );
             //target->resize ( width, height );
@@ -213,9 +223,9 @@ void QQtBodyResizerPrivate::checkDirection ( QMouseEvent* event, QWidget* target
 {
     QRect rectMustIn = target->geometry();//target->frameGeometry();
 #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
-    QRect rectMustNotIn = rectMustIn.marginsRemoved ( margins );
+    QRect rectMustNotIn = rectMustIn.marginsRemoved ( m_margins );
 #else
-    QRect rectMustNotIn = rectMustIn.adjusted ( margins.left(), margins.top(), margins.right(), margins.bottom() );
+    QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
 #endif
     QPoint cursorPos = event->globalPos();//QCursor::pos();
 
