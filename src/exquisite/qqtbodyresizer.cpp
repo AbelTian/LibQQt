@@ -32,7 +32,7 @@ bool QQtBodyResizer::eventFilter ( QObject* watched, QEvent* event )
         return QObject::eventFilter ( watched, event );
 
     //修复鼠标穿透。如果鼠标穿透，那么不发生作用。
-    bool atti = ( ( QWidget* ) watched )->testAttribute ( Qt::WA_TransparentForMouseEvents );
+    bool atti = ( qobject_cast<QWidget*> ( watched ) )->testAttribute ( Qt::WA_TransparentForMouseEvents );
     if ( atti )
         return QObject::eventFilter ( watched, event );
 
@@ -43,19 +43,19 @@ bool QQtBodyResizer::eventFilter ( QObject* watched, QEvent* event )
         case QEvent::MouseButtonPress:
         {
             QMouseEvent* e = ( QMouseEvent* ) event;
-            d->mousePressEvent ( e, ( QWidget* ) watched );
+            d->mousePressEvent ( e, qobject_cast<QWidget*> ( watched ) );
             return false;
         }
         case QEvent::MouseButtonRelease:
         {
             QMouseEvent* e = ( QMouseEvent* ) event;
-            d->mouseReleaseEvent ( e, ( QWidget* ) watched );
+            d->mouseReleaseEvent ( e, qobject_cast<QWidget*> ( watched ) );
             return false;
         }
         case QEvent::MouseMove:
         {
             QMouseEvent* e = ( QMouseEvent* ) event;
-            d->mouseMoveEvent ( e, ( QWidget* ) watched );
+            d->mouseMoveEvent ( e, qobject_cast<QWidget*> ( watched ) );
             return false;
         }
         default:

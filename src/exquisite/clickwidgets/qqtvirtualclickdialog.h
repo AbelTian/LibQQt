@@ -123,7 +123,7 @@ public:
                 if ( mClickHelper )
                     mClickHelper->mousePressEvent ( e, this );
                 event->accept();
-                return true;
+                return false;
             }
         }
 
@@ -135,7 +135,7 @@ public:
                 if ( mClickHelper )
                     mClickHelper->mouseReleaseEvent ( e, this );
                 event->accept();
-                return true;
+                return false;
             }
         }
 
@@ -147,7 +147,7 @@ public:
                 if ( mClickHelper )
                     mClickHelper->mouseDoubleClickEvent ( e, this );
                 event->accept();
-                return true;
+                return false;
             }
         }
 

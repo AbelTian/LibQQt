@@ -17,7 +17,10 @@
  * 这个Helper是给Widget响应按钮事件用的
  * 主要用于为QQtWidget系列添加按钮信号识别帮助
  *
- * 支持
+ * 支持widget->installEventFilter(thisClassInst);
+ * 所有的子类ClickHelper也都支持的，用户可以为自己的Widget手动安装。
+ * 可以安装多个eventFilter，互相不会冲突。
+ * 同一个helper也可以为多个widget同时安装，互相不会冲突。
  *
  * 可以统计按键次数
  */
@@ -81,6 +84,10 @@ protected:
 
     quint64 nTotalClickNum;
     quint64 nTotalClickNumWithCancel;
+
+    // QObject interface
+public:
+    virtual bool eventFilter ( QObject* watched, QEvent* event ) override;
 };
 
 #endif // QQTVIRTUALCLICKHELPER_H
