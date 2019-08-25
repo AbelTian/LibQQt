@@ -1,7 +1,12 @@
 #include <mainwidget.h>
 
+#include <qqtcore.h>
+
 #include <qqtbodyresizer.h>
 #include <qqtbodymover.h>
+#include <qqtdoubleclickhelper.h>
+
+QQtDoubleClickHelper* helper3;
 
 MainWidget::MainWidget ( QWidget* parent ) : QWidget ( parent )
 {
@@ -10,13 +15,35 @@ MainWidget::MainWidget ( QWidget* parent ) : QWidget ( parent )
 
     setWindowFlags ( windowFlags() | ( Qt::FramelessWindowHint ) );
 
+    QQtBodyResizer* helper = new QQtBodyResizer ( this );
+    this->installEventFilter ( helper );
+
     //顺便测试一下bodyMover
     QQtBodyMover* helper2 = new QQtBodyMover ( this );
     this->installEventFilter ( helper2 );
 
-    QQtBodyResizer* helper = new QQtBodyResizer ( this );
-    this->installEventFilter ( helper );
-
+    //顺便测试一下mouseClicker
+    helper3 = new QQtDoubleClickHelper ( this );
+    this->installEventFilter ( helper3 );
+    //this->removeEventFilter(helper3);
+    connect ( helper3, SIGNAL ( clickWithPoint ( QPoint ) ), this, SLOT ( clickWithPoint ( QPoint ) ) );
+    connect ( helper3, SIGNAL ( longClickWithPoint ( QPoint ) ), this, SLOT ( longClickWithPoint ( QPoint ) ) );
+    connect ( helper3, SIGNAL ( doubleClickWithPoint ( QPoint ) ), this, SLOT ( doubleClickWithPoint ( QPoint ) ) );
 }
 
 MainWidget::~MainWidget() {}
+
+void MainWidget::clickWithPoint ( QPoint point )
+{
+    pline() << "click" << point << helper3->clickNum() << helper3->clickNumWithCancel();
+}
+
+void MainWidget::longClickWithPoint ( QPoint point )
+{
+    pline() << "long click" << point << helper3->longClickNum() << helper3->longClickNumWithCancel();
+}
+
+void MainWidget::doubleClickWithPoint ( QPoint point )
+{
+    pline() << "double click" << point << helper3->doubleClickNum() << helper3->doubleClickNumWithCancel();
+}
