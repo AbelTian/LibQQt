@@ -347,6 +347,12 @@ contains (DEFINES, __EXQUISITE__) {
     HEADERS += \
         $$PWD/exquisite/qqtframelesshelper.h \
         $$PWD/exquisite/qqtframelesshelperprivate.h
+    HEADERS += \
+        $$PWD/exquisite/qqtbodymover.h \
+        $$PWD/exquisite/qqtbodymover_p.h
+    SOURCES += \
+        $$PWD/exquisite/qqtbodymover.cpp \
+        $$PWD/exquisite/qqtbodymover_p.cpp
 
     #can click sound support widgets
     contains (DEFINES, __CLICKSOUNDWIDGETS__) {
