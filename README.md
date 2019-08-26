@@ -50,13 +50,18 @@ github link: https://github.com/AbelTian/LibQQt
     - 包括有多种效果的Widget、Dialog
     - 二维码生成器、识别器，校验码生成器
     - 九宫格技术展示图片
+    - 添加osd widgets
+    - 添加svg support widgets
     - 添加gif support Widgets  
         - 可以方便的设置动态按钮等。  
         - 有[QQtGifWidget](src/exquisite/gifwidgets/qqtgifwidget.h)、QQtGifButton等。   
     - 添加color support widgets  
         - 单色Widget。  
     - 添加click and click sound widget  
-        - 带按键声，支持长按、双击的widget和label等控件。  
+        - 带按键声，支持长按、双击的widget、label和dialog等控件。  
+    - 添加bodymover、bodyresizer、clickhelper、mouselocker
+        - qqtwindowattribute、qqtwidgeteffect等窗口属性、特效功能提供者。
+        - 帮助用户通过installEventFilter实现关于窗口和鼠标的完善的功能。
     - 以及未列出的等20余种自定义widget。
 4. 有线和无线网络自动连接管理器 (e-linux)  
 6. 解决Qt4.8.7在嵌入式屏幕上QGraphics系统不正常绘画的问题 
@@ -90,7 +95,7 @@ github link: https://github.com/AbelTian/LibQQt
     - *全在frame文件夹*
 8. 支持多页表格 [QQtMultiPageTableWidget](src/widgets/qqtmultipagetablewidget.h)  
 9. 添加 [QQtApplication](src/frame/qqtapplication.h)，支持入门级、通用级、专用级嵌入式App所必须的初始化内容
-5. 支持Qt5.8,Qt5.9.2   
+5. 支持Qt5.8、Qt5.9.2、Qt5.10   
     - 建议桌面使用这个版本，对三大桌面，和IOS Android e-linux支持都很好。  
 0. 跨平台支持macOS、iOS、Android、Windows、Linux、MIPS、ARM等。  
 1. 添加矢量图形widgets  
@@ -99,19 +104,19 @@ github link: https://github.com/AbelTian/LibQQt
      - [QQtSvgPushButton](src/exquisite/svgwidgets/qqtsvgpushbutton.h)  
 2. 添加核心类之[QQtDictionary](src/core/qqtdictionary.h)   
      - 化解C Plus Plus中没有字典类别的尴尬。    
-3. 添加Multi Link工程管理pri组  
-     - [Multi Link technology](multi-link/add_multi_link_technology.pri)，既多链接工程管理技术。
+3. 添加Multi-link工程管理pri组  
+     - [Multi-link technology](multi-link/add_multi_link_technology.pri)，既多链接工程管理技术。
      - [add_base_manager.pri](multi-link/multi-link/add_base_manager.pri)，app和lib工程的基础管理者。  
      - 基于qmake，用户可以轻易的链接LibQQt和添加自定义library。  
      - 工程版本变更可以使用add_version(1,0,0,0)实现了。  
 5. 升级多媒体音频  
     - 添加内存服务器（一套Input（Reader），Output（Writer）），处理内存和设备之间的数据交互。（这部分的功能完全按照为内存服务的思路设计研发。）  
     - [QQtAudioManager](src/multimedia/qqtaudiomanager.h)、  
-    - 将 AudioInputDevice 和 AudioOutputDevice 当做一个设备进行读写，App处理获取到的声音。
+        - 将 AudioInputDevice 和 AudioOutputDevice 当做一个设备进行读写，App处理获取到的声音。
     - 增加QQtWavAudioManager、QQtWavSoundEffect、QQtWavSound，
-    - 像操作一个设备一样读、写wav文件。
+        - 像操作一个设备一样读、写wav文件，其实是两个wav文件。
     - 增加QQtVideoManager、QQtLogicVideoManager，
-    - 支持桌面摄像头采集画面，支持模拟摄像头采集画面。
+        - 支持桌面摄像头采集画面，支持模拟摄像头采集画面。
 6. 添加Http功能支持工具
     - QQtWebAccessManager，支持管理Session、Cookies。    
     - 添加GumboQuery爬虫工具，爬取网页信息。  
@@ -126,7 +131,7 @@ github link: https://github.com/AbelTian/LibQQt
         - QQtLocalServer QQtLocalClient, QQtNamedPipe使用QLocalSocket、PIPE实现跨线程通讯。      
         - QQtLocalQueueServer QQtLocalQueueClient QQtMessageQueue使用QQtLocalQueueSocket实现跨线程通讯。  
         - 使用方法都类似于QQtSharedMemory。  
-   - QQtSingleTonApplication 单例App，基于QQtApplication，利用基于QLocalSocket的进程间通信实现。  
+   - QQtSingletonApplication 单例App，基于QQtApplication，使用QLocalSocket的进程间通信实现。  
 
 
 ========================================================================  
