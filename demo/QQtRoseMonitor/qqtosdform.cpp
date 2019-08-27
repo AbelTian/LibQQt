@@ -2,7 +2,7 @@
 #include "ui_qqtosdform.h"
 #include <QPainter>
 #include <QBitmap>
-#include <qqtframelesshelper.h>
+#include <qqtbodymover.h>
 #include <QMouseEvent>
 #include <qqtcore.h>
 #include <qqtframe.h>
@@ -13,9 +13,11 @@ QQtOsdForm::QQtOsdForm ( QWidget* parent ) :
 {
     ui->setupUi ( this );
     //setStyleSheet ( "QQtOsdForm{ background-color: rgb(222, 222, 222, 0);}" );
-    //setWindowFlag ( Qt::FramelessWindowHint, true );
+    setWindowFlag ( Qt::FramelessWindowHint, true );
+
     setWindowFlag ( Qt::WindowStaysOnTopHint, true );
     //setWindowFlag ( Qt::Tool, true );
+
     setAttribute ( Qt::WA_TranslucentBackground, true );
     //setAttribute ( Qt::WA_TransparentForMouseEvents, true );
     setAttribute ( Qt::WA_OpaquePaintEvent, true );
@@ -31,6 +33,9 @@ QQtOsdForm::QQtOsdForm ( QWidget* parent ) :
 //    frameless->setMaximizedButton ( ui->pushButtonMax );
 //    frameless->setRestoreButton ( ui->pushButtonRestore );
 //    frameless->setMinimizedButton ( ui->pushButtonMin, false );
+
+    QQtBodyMover* frameless = new QQtBodyMover ( this );
+    this->installEventFilter ( frameless );
 
     //setWindowFlag ( Qt::FramelessWindowHint, true );
     //setWindowFlag ( Qt::CustomizeWindowHint, true );

@@ -1,6 +1,6 @@
 #include "mainform.h"
 #include "ui_mainform.h"
-#include "qqtframelesshelper.h"
+#include "qqtbodymover.h"
 
 MainForm::MainForm ( QWidget* parent ) :
     QQtWidget ( parent ),
@@ -10,8 +10,8 @@ MainForm::MainForm ( QWidget* parent ) :
     setAttribute ( Qt::WA_TranslucentBackground, true );
 
     //如果需要鼠标可以移动窗体。
-    //QQtFramelessHelper* h = new QQtFramelessHelper ( this );
-    //h->addDragWidget ( this );
+    QQtBodyMover* h = new QQtBodyMover ( this );
+    installEventFilter(h);
 
     //这是使用QQtTitleBar的标准过程，请参见mainform.ui。
     setWindowIcon ( QIcon ( "logo.ico" ) );

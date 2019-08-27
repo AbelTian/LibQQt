@@ -7,7 +7,6 @@ namespace Ui {
 class FramelessForm;
 }
 
-//测试framelesshelper，即将废弃。
 class FramelessForm : public QWidget
 {
     Q_OBJECT

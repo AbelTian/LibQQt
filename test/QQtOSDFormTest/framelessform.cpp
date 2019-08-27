@@ -1,14 +1,15 @@
 #include "framelessform.h"
 #include "ui_framelessform.h"
-#include <qqtframelesshelper.h>
+#include <qqtbodymover.h>
 
 FramelessForm::FramelessForm ( QWidget* parent ) :
     QWidget ( parent ),
     ui ( new Ui::FramelessForm )
 {
     ui->setupUi ( this );
-    QQtFramelessHelper* h = new QQtFramelessHelper ( this );
-    h->addDragWidget ( this );
+    setWindowFlag(Qt::FramelessWindowHint, true);
+    QQtBodyMover* h = new QQtBodyMover ( this );
+    installEventFilter(h);
 }
 
 FramelessForm::~FramelessForm()

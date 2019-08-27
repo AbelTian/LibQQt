@@ -2,7 +2,7 @@
 #include <QQtApplication>
 #include <qqtosdform.h>
 #include <qqtwidgets.h>
-#include <qqtframelesshelper.h>
+#include <qqtbodymover.h>
 
 int main ( int argc, char* argv[] )
 {
@@ -11,8 +11,10 @@ int main ( int argc, char* argv[] )
     QQtWidget w;
     w.setWindowTitle ( "QQtRoseMonitor" );
     w.setWindowFlag ( Qt::WindowStaysOnTopHint, true );
-    //w.setWindowFlag ( Qt::FramelessWindowHint, true );
-    //w.setAttribute ( Qt::WA_TranslucentBackground, true );
+    w.setWindowFlag ( Qt::FramelessWindowHint, true );
+    w.setAttribute ( Qt::WA_TranslucentBackground, true );
+    QQtBodyMover* frameless = new QQtBodyMover ( &w );
+    w.installEventFilter ( frameless );
     QPalette pal = w.palette();
     pal.setColor ( QPalette::Background, QColor ( 0, 0, 0 ) );
     //w.setPalette ( pal );

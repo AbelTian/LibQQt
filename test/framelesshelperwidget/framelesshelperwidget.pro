@@ -42,7 +42,15 @@ system("touch main.cpp")
 #-------------------------------------------------
 include(../../multi-link/multi-link/add_base_manager.pri)
 
-
+CONFIG += use_source
+use_source {
+HEADERS += \
+    qqtframelesshelper.h \
+    qqtframelesshelperprivate.h
+SOURCES += \
+    qqtframelesshelper.cpp \
+    qqtframelesshelperprivate.cpp
+}
 
 #-------------------------------------------------
 #user app may use these these settings prefertly
