@@ -3,7 +3,7 @@
 
 int main ( int argc, char* argv[] )
 {
-    //QQtApplication::setHighDpiScaling();
+    QQtApplication::setHighDpiScaling();
     QQtApplication a ( argc, argv );
     MainWindow w;
     w.show();

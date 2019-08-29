@@ -57,3 +57,59 @@ void setFullScreen ( QWidget* widget, bool open, QRect normalGeometry )
     }
     pline() << widget->windowFlags();
 }
+
+
+void setStayOnBottom ( QWidget* widget, bool open )
+{
+    Q_ASSERT ( widget );
+    pline() << widget->windowFlags();
+    if ( open )
+    {
+        widget->setWindowFlag ( Qt::WindowStaysOnBottomHint, true );
+    }
+    else
+    {
+        widget->setWindowFlag ( Qt::WindowStaysOnBottomHint, false );
+    }
+    pline() << widget->windowFlags();
+
+}
+
+void setStayOnTop ( QWidget* widget, bool open )
+{
+    Q_ASSERT ( widget );
+    pline() << widget->windowFlags();
+    if ( open )
+    {
+        widget->setWindowFlag ( Qt::WindowStaysOnTopHint, true );
+    }
+    else
+    {
+        widget->setWindowFlag ( Qt::WindowStaysOnTopHint, false );
+    }
+    pline() << widget->windowFlags();
+}
+
+void setTranslucentBackground ( QWidget* widget, bool open )
+{
+    Q_ASSERT ( widget );
+
+    pline() << widget->testAttribute ( Qt::WA_TranslucentBackground );
+    if ( open )
+        widget->setAttribute ( Qt::WA_TranslucentBackground, true );
+    else
+        widget->setAttribute ( Qt::WA_TranslucentBackground, false );
+    pline() << widget->testAttribute ( Qt::WA_TranslucentBackground );
+}
+
+void setTransparentForMouseEvents ( QWidget* widget, bool open )
+{
+    Q_ASSERT ( widget );
+
+    pline() << widget->testAttribute ( Qt::WA_TransparentForMouseEvents );
+    if ( open )
+        widget->setAttribute ( Qt::WA_TransparentForMouseEvents, true );
+    else
+        widget->setAttribute ( Qt::WA_TransparentForMouseEvents, false );
+    pline() << widget->testAttribute ( Qt::WA_TransparentForMouseEvents );
+}
