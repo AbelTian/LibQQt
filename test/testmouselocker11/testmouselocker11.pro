@@ -88,6 +88,8 @@ win32:!cross_compile {
     SOURCES += \
         qqtmouselocker_mac.cpp
 } else:linux:!cross_compile {
+    LIBS += -lX11
+    QT += x11extras
     HEADERS += \
         qqtmouselocker_x11.h
     SOURCES += \

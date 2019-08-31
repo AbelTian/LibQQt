@@ -47,13 +47,15 @@ void QQtMouseLockerImpl::focusInEvent ( QFocusEvent* event, QWidget* target )
         p0 = w.mapToGlobal ( p0 );
         p1 = w.mapToGlobal ( p1 );
 
-        QRect r0 = QRect ( p0, p1 );
-        mainWinRect.left = ( LONG ) r0.left();
-        mainWinRect.right = ( LONG ) r0.right();
-        mainWinRect.top = ( LONG ) r0.top();
-        mainWinRect.bottom = ( LONG ) r0.bottom();
+        qreal ratio = w.devicePixelRatioF();
 
-        qr0 = r0;
+        QRect r0 = QRect ( p0, p1 );
+        mainWinRect.left = ( LONG ) r0.left() * ratio;
+        mainWinRect.right = ( LONG ) r0.right() * ratio;
+        mainWinRect.top = ( LONG ) r0.top() * ratio;
+        mainWinRect.bottom = ( LONG ) r0.bottom() * ratio;
+
+        qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ), QPoint ( r0.right() * ratio, r0.bottom() * ratio ) );
     }
 #endif
 
@@ -68,7 +70,6 @@ void QQtMouseLockerImpl::focusInEvent ( QFocusEvent* event, QWidget* target )
              && r0.top !=  mainWinRect.top
              && r0.bottom != mainWinRect.bottom )
         {
-            //BUG, NEED MOD!
             ClipCursor ( NULL );
             ClipCursor ( &mainWinRect ); //这是Windows API
 #if 1
@@ -120,13 +121,15 @@ void QQtMouseLockerImpl::focusOutEvent ( QFocusEvent* event, QWidget* target )
         p0 = w.mapToGlobal ( p0 );
         p1 = w.mapToGlobal ( p1 );
 
-        QRect r0 = QRect ( p0, p1 );
-        mainWinRect.left = ( LONG ) r0.left();
-        mainWinRect.right = ( LONG ) r0.right();
-        mainWinRect.top = ( LONG ) r0.top();
-        mainWinRect.bottom = ( LONG ) r0.bottom();
+        qreal ratio = w.devicePixelRatioF();
 
-        qr0 = r0;
+        QRect r0 = QRect ( p0, p1 );
+        mainWinRect.left = ( LONG ) r0.left() * ratio;
+        mainWinRect.right = ( LONG ) r0.right() * ratio;
+        mainWinRect.top = ( LONG ) r0.top() * ratio;
+        mainWinRect.bottom = ( LONG ) r0.bottom() * ratio;
+
+        qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ), QPoint ( r0.right() * ratio, r0.bottom() * ratio ) );
     }
 #endif
 
