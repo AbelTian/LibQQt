@@ -72,7 +72,7 @@ QQtTitleBar::QQtTitleBar ( QWidget* parent )
     m_pLayout->addWidget ( m_pMaximizeButton );
     m_pLayout->addWidget ( m_pCloseButton );
     m_pLayout->setSpacing ( 0 );
-    m_pLayout->setContentsMargins ( 5, 1, 5, 1 );
+    m_pLayout->setContentsMargins ( 0, 0, 0, 0 );
 
     setLayout ( m_pLayout );
 
