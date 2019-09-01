@@ -32,3 +32,25 @@ void setFadeEffect ( QWidget* widget, quint32 millseconds, qreal startOpacity, q
     show_animation_->start();
     widget->show();
 }
+
+void setHighlightTextEffect ( QWidget* widget )
+{
+    Q_ASSERT ( widget );
+
+    static QGraphicsDropShadowEffect* shadow_effect = new QGraphicsDropShadowEffect;
+    shadow_effect->setOffset ( 0, 0 );
+    shadow_effect->setColor ( Qt::gray );
+    shadow_effect->setBlurRadius ( 20 );
+    widget->setGraphicsEffect ( shadow_effect );
+}
+
+void setFadeTextEffect ( QWidget* widget, QColor color )
+{
+    Q_ASSERT ( widget );
+
+    static QGraphicsColorizeEffect* m_effect = new QGraphicsColorizeEffect;
+    m_effect->setColor ( color ); //( QColor ( 122, 193, 66 ) );
+    m_effect->setStrength ( 0 );
+    m_effect->setEnabled ( true );
+    widget->setGraphicsEffect ( m_effect );
+}

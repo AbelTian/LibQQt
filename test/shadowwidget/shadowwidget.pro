@@ -35,6 +35,41 @@ FORMS += \
 
 include($${PWD}/../../multi-link/add_base_manager.pri)
 
+add_file(customshadoweffect.h)
+add_file(customshadoweffect.cpp)
+SOURCES += \
+    customshadoweffect.cpp
+HEADERS += \
+    customshadoweffect.h
+
+add_file(testshadowwidget.h)
+add_file(testshadowwidget.cpp)
+SOURCES += \
+    testshadowwidget.cpp
+HEADERS += \
+    testshadowwidget.h
+
+add_file(testshadowwidget2.h)
+add_file(testshadowwidget2.cpp)
+SOURCES += \
+    testshadowwidget2.cpp
+HEADERS += \
+    testshadowwidget2.h
+
+add_file(testshadowwidget3.h)
+add_file(testshadowwidget3.cpp)
+SOURCES += \
+    testshadowwidget3.cpp
+HEADERS += \
+    testshadowwidget3.h
+
+SOURCES += \
+    mainform.cpp
+HEADERS += \
+    mainform.h
+FORMS += \
+    mainform.ui
+
 #-------------------------------------------------
 #用户工程配置
 #-------------------------------------------------

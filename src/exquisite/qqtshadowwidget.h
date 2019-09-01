@@ -19,10 +19,13 @@
 #include <QGraphicsDropShadowEffect>
 #include "qqt-local.h"
 
+#include <qqtwidget.h>
+#include <qqtwidgets.h>
+
 /**
  * @brief The QQtShadowWidget class 带阴影的widget基类
  */
-class QQTSHARED_EXPORT QQtShadowWidget : public QWidget
+class QQTSHARED_EXPORT QQtShadowWidget : public QQtWidget
 {
     Q_OBJECT
 public:
@@ -49,6 +52,11 @@ private:
      * @brief drawShadowPlanB 阴影绘制方案B
      */
     void drawShadowPlanB();
+
+    /**
+     * @brief drawShadowPlanC 阴影绘制方案C
+     */
+    void drawShadowPlanC ();
 
 private:
 };
