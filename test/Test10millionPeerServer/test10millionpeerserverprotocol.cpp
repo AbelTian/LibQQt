@@ -75,16 +75,17 @@ void Test10millionPeerServerProtocol::sendCommand1()
     QByteArray l;
     msg.packer ( l );
     write ( l );
+    pline() << msg;
 }
 
 quint16 Test10millionPeerServerProtocol::minlength()
 {
-    return 0x0a;
+    return 0x01;
 }
 
 quint16 Test10millionPeerServerProtocol::maxlength()
 {
-    return 0x07FF;
+    return 0x05;
 }
 
 quint16 Test10millionPeerServerProtocol::splitter ( const QByteArray& l ) //stream
