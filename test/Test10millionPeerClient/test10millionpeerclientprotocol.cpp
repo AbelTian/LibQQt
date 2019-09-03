@@ -35,10 +35,13 @@ QQtTcpClient* Test10millionPeerClientInstance ( Test10millionPeerClientProtocol*
         Test10millionPeerClientProtocol* p1 = new Test10millionPeerClientProtocol ( parent );
         QQtTcpClient* s1 = new QQtTcpClient ( parent );
         s1->installProtocol ( p1 );
+        QObject::connect(s1, SIGNAL(signalConnectSucc()),
+                p1, SLOT(slotConnected()));
+
         s1->setServerIPAddress ( "192.168.3.103" );
+        s1->setServerPort(8001);
         s1->sendConnectToHost();
-        s1->waitForConnected();
-        p1->sendCommand1();
+
         QQtApplication::processEvents();
     }
 
@@ -92,14 +95,19 @@ void Test10millionPeerClientProtocol::sendCommand2()
     write ( l );
 }
 
+void Test10millionPeerClientProtocol::slotConnected()
+{
+    sendCommand1();
+}
+
 quint16 Test10millionPeerClientProtocol::minlength()
 {
-    return 0x0a;
+    return 0x01;
 }
 
 quint16 Test10millionPeerClientProtocol::maxlength()
 {
-    return 0x07FF;
+    return 0x05;
 }
 
 quint16 Test10millionPeerClientProtocol::splitter ( const QByteArray& l ) //stream

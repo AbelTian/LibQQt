@@ -69,6 +69,7 @@ signals:
     void signalSendtoLogicLevelCode();
 
 public slots:
+    void slotConnected();
 
     // QQtProtocol interface
 protected:

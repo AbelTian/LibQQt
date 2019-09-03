@@ -53,6 +53,8 @@ system(touch main.cpp)
 #-------------------------------------------------
 #用户工程配置
 #-------------------------------------------------
+CONFIG += console
+
 equals(QSYS_PRIVATE, macOS) {
     CONFIG += app_bundle
 }
