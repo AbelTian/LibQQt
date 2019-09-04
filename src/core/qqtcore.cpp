@@ -127,6 +127,22 @@ QByteArray& operator>> ( QByteArray& l, QByteArray& r )
 }
 
 
+bool operator< ( QByteArray& l, QByteArray& r )
+{
+    int cc = qstrcmp ( l, r );
+    if ( cc == 0 || cc > 0 )
+        return false;
+    return true;
+}
+
+bool operator== ( QByteArray& l, QByteArray& r )
+{
+    int cc = qstrcmp ( l, r );
+    if ( cc == 0 )
+        return true;
+    return false;
+}
+
 //不堵塞GUI睡眠。
 void QQtSleep ( int millsecond )
 {
@@ -152,6 +168,7 @@ void QQtSleepSignal ( int millsecond, const QObject* obj, const char* signal )
     timer.setSingleShot ( true );
     timer.setInterval ( millsecond );
     QObject::connect ( &timer, SIGNAL ( timeout() ), &eventloop, SLOT ( quit() ) );
+    timer.start();
 
     //process
     eventloop.exec();

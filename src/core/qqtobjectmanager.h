@@ -21,9 +21,6 @@
  * QQtWidgetFactory,
  */
 
-QQTSHARED_EXPORT bool operator< (  QByteArray& l,  QByteArray& r );
-QQTSHARED_EXPORT bool operator== (  QByteArray& l,  QByteArray& r );
-
 template <class ObjectType>
 class QQTSHARED_EXPORT __QQtObjectFactory__
 {

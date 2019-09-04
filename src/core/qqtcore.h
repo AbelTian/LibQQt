@@ -135,6 +135,8 @@ QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, qint64& r );
 
 QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, QByteArray& r );
 
+QQTSHARED_EXPORT bool operator< (  QByteArray& l,  QByteArray& r );
+QQTSHARED_EXPORT bool operator== (  QByteArray& l,  QByteArray& r );
 
 /**
  * @brief The QQtBlock class
