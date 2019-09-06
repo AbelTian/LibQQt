@@ -1,5 +1,4 @@
-﻿
-#ifndef QQTLOGICVIDEOMANAGER_H
+﻿#ifndef QQTLOGICVIDEOMANAGER_H
 #define QQTLOGICVIDEOMANAGER_H
 
 #include "qqt-qt.h"
@@ -23,22 +22,37 @@ extern "C" {
 
 /**
  * @brief The QQtLogicVideoManager class
- * QQt模拟摄像头预览控件
- * 省略dmmu的Qt Wrapper类
+ * 模拟摄像头管理器
  */
-class QQTSHARED_EXPORT QQtLogicVideoManager : public QWidget
+class QQTSHARED_EXPORT QQtLogicVideoManager : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit QQtLogicVideoManager ( QWidget* parent = 0 );
+    explicit QQtLogicVideoManager ( QObject* parent = 0 );
     ~QQtLogicVideoManager();
-    int play();
-    int close();
+
+    //用户进程只需要调用一次
+    static void init_dmmu();
+    static void deinit_dmmu();
+
+    //开启某个确定的模拟摄像头
+    bool open ( const QString& devName = "/dev/cim" );
+    bool close();
+
+signals:
+    //获取图像
+    void readyRead ( const QImage& image );
+
+protected:
+    //yuv转rgb
+    virtual int convert_yuv_to_rgb_pixel ( int y, int u, int v );
+    virtual int convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width, unsigned int height );
+
+protected slots:
+    void slotSendImageToClient();
 
 private:
-    Ui::QQtLogicVideoManager* ui;
-
     struct sensor_info sinfo;
     int pre_bpp;
     int rate;         /* default to 15fps  */
@@ -57,19 +71,6 @@ private:
     uchar* p;
     QImage* frame;
     QTimer* timer;
-
-    bool bFullScreen;
-    QWidget* m_parent;
-    QRect geome;
-    Qt::WindowFlags flags;
-
-    int convert_yuv_to_rgb_pixel ( int y, int u, int v );
-    int convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width, unsigned int height );
-
-    // QWidget interface
-protected:
-    void paintEvent ( QPaintEvent* );
-    void mousePressEvent ( QMouseEvent* e );
 };
 
 #endif // QQTLOGICVIDEOMANAGER_H

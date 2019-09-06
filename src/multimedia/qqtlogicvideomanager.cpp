@@ -1,11 +1,8 @@
 ﻿#include "qqtlogicvideomanager.h"
 
-QQtLogicVideoManager::QQtLogicVideoManager ( QWidget* parent ) :
-    QWidget ( parent ),
-    ui ( new Ui::QQtLogicVideoManager )
+QQtLogicVideoManager::QQtLogicVideoManager ( QObject* parent ) :
+    QObject ( parent )
 {
-    ui->setupUi ( this );
-
     memset ( &sinfo, 0, sizeof ( struct sensor_info ) );
     pre_bpp = 16;
     rate = 15;        /* default to 15fps  */
@@ -24,12 +21,12 @@ QQtLogicVideoManager::QQtLogicVideoManager ( QWidget* parent ) :
     tlb_base_phys = 0;
     format = HAL_PIXEL_FORMAT_YCbCr_422_I;
 
-    bFullScreen = false;
-    m_parent = parent;
+    pp = 0;
+    frame = 0;
 
     timer = new QTimer ( this );
     timer->setSingleShot ( false );
-    connect ( timer, SIGNAL ( timeout() ), this, SLOT ( update() ) );
+    connect ( timer, SIGNAL ( timeout() ), this, SLOT ( slotSendImageToClient() ) );
 }
 
 QQtLogicVideoManager::~QQtLogicVideoManager()
@@ -37,15 +34,23 @@ QQtLogicVideoManager::~QQtLogicVideoManager()
     delete ui;
 }
 
-int QQtLogicVideoManager::play()
+void QQtLogicVideoManager::init_dmmu()
 {
-    /*
-     * 这块代码放在哪里
-     */
     dmmu_init();
     dmmu_get_page_table_base_phys ( &tlb_base_phys );
+}
 
-    fd = ::open ( "/dev/cim", O_RDWR ); //av
+void QQtLogicVideoManager::deinit_dmmu()
+{
+    dmmu_deinit();
+}
+
+bool QQtLogicVideoManager::open ( const QString& devName )
+{
+    //待测试
+    close();
+
+    fd = ::open ( devName.toLocal8Bit().constData(), O_RDWR ); //av
 
     if ( fd < 0 )
     {
@@ -76,6 +81,7 @@ int QQtLogicVideoManager::play()
 
     if ( pre_buf.common->data == NULL )
     {
+        ::close ( fd );
         printf ( "==<%s L%d: null pointer!\n", __func__, __LINE__ );
         return false;
     }
@@ -149,12 +155,12 @@ int QQtLogicVideoManager::play()
     frame = new QImage ( pp, pre_size.w, pre_size.h, QImage::Format_RGB888 );
     timer->start ( 100 );
 
-    return fd;
+    return true;
 }
 
-int QQtLogicVideoManager::close()
+bool QQtLogicVideoManager::close()
 {
-    bool ret = false;
+    timer->stop();
 
     if ( fd <= 0 )
         printf ( "fd < 0\n" );
@@ -164,9 +170,6 @@ int QQtLogicVideoManager::close()
     ::close ( fd );
     fd = 0;
 
-    dmmu_unmap_user_memory ( & ( pre_buf.dmmu_info ) );
-    dmmu_deinit();
-
     memset ( pre_buf.yuvMeta, 0, pre_buf.nr * sizeof ( CameraYUVMeta ) );
     pre_buf.size = 0;
     pre_buf.nr = 0;
@@ -175,17 +178,19 @@ int QQtLogicVideoManager::close()
 
     if ( ( pre_buf.common != NULL ) && ( pre_buf.common->data != NULL ) )
     {
+        dmmu_unmap_user_memory ( & ( pre_buf.dmmu_info ) );
         free ( pre_buf.common->data );
         pre_buf.common->data = NULL;
     }
 
     phys = 0;
 
-    timer->stop();
-    free ( pp );
-    delete frame;
+    if ( pp )
+        free ( pp );
+    if ( frame )
+        delete frame;
 
-    return ret;
+    return true;
 }
 
 
@@ -245,14 +250,10 @@ int QQtLogicVideoManager::convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsign
     return 0;
 }
 
-
-void QQtLogicVideoManager::paintEvent ( QPaintEvent* )
+void QQtLogicVideoManager::slotSendImageToClient()
 {
     if ( fd <= 0 )
         return;
-
-    QStylePainter painter ( this );
-
     /*
      * 此处采集视频为多线程采集 上边的log证明 数据已经被修改
      */
@@ -263,80 +264,9 @@ void QQtLogicVideoManager::paintEvent ( QPaintEvent* )
      * 不具备优化能力，yuv缺少alpha。
      */
     convert_yuv_to_rgb_buffer ( p, pp, pre_size.w, pre_size.h );
+
+    //no need. frame已经初始化好了，用的pp的地址
     //frame->loadFromData((uchar *)pp, w * h * 3 * sizeof(char));
-    /*
-     * 采集的图像左边上边有黑边 更换摄像头或许回有所改善 待调试
-     */
-    QRect srcRect ( 2, 6, pre_size.w, pre_size.h );
-    QRect dstRect = rect();
-    painter.scale ( 1.01, 1.02 );
-    /*
-     * 缩放OK
-     */
-    painter.drawImage ( dstRect, *frame, srcRect );
-    //painter.drawPixmap(dstRect,QPixmap::fromImage(*frame,Qt::AutoColor),srcRect);;
-    /*
-     * 裁切OK
-     */
-    //painter.drawItemPixmap(srcRect, Qt::AlignCenter, QPixmap::fromImage(*frame,Qt::AutoColor));
-    /*
-     * 30ms 屏幕有闪烁
-     */
-    //update();
-}
 
-
-void QQtLogicVideoManager::mousePressEvent ( QMouseEvent* e )
-{
-    static bool bGInit = false;
-
-    if ( !bGInit && !bFullScreen )
-    {
-        flags = windowFlags();
-        flags |= Qt::FramelessWindowHint;
-        geome = geometry();
-        bGInit = true;
-    }
-
-#ifdef __EMBEDDED_LINUX__
-
-    //pline() << e->pos() << e->globalPos();
-    if ( e->pos().x() < 0 || e->pos().y() < 0 ||
-         e->pos().x() > geome.width() || e->pos().y() > geome.height() )
-    {
-        //在mips板上，全屏返回的时候，点击其他位置，会多响应一次，在此处过滤。
-        pline() << "warning!";
-        Q_UNUSED ( e );
-        return;
-    }
-
-#endif
-
-    setAttribute ( Qt::WA_TranslucentBackground, true );
-    setAttribute ( Qt::WA_NoMousePropagation, true );
-    setAttribute ( Qt::WA_OpaquePaintEvent, true );
-
-    if ( bFullScreen )
-    {
-        flags ^= Qt::Window;
-        flags |= Qt::Widget;
-        setParent ( m_parent, flags );
-        setGeometry ( geome );
-        show();
-        bFullScreen = false;
-    }
-    else
-    {
-        int QQT_SCRN_WIDTH = QApplication::desktop()->availableGeometry().width();
-        int QQT_SCRN_HEIGHT = QApplication::desktop()->availableGeometry().height();
-        flags ^= Qt::Widget;
-        flags |= Qt::Window;
-        setParent ( 0, flags );
-        setGeometry ( 0, 0, QQT_SCRN_WIDTH, QQT_SCRN_HEIGHT );
-        show();
-        bFullScreen = true;
-    }
-
-    pline() << flags;
-    QWidget::mousePressEvent ( e );
+    emit readyRead ( *frame );
 }
