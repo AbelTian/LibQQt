@@ -7,7 +7,6 @@
 #include <QAbstractVideoSurface>
 #include <QVideoSurfaceFormat>
 #include <QCameraViewfinderSettings>
-#include <QVideoProbe>
 #include <QTimer>
 #include <QMutex>
 #include <QMutexLocker>
@@ -23,7 +22,6 @@
  * | 使用方式           | Parent                   | Property Class        | Childen           | 备注
  * ---------------------------------------------------------------------------------------------------------------------
  * | setViewfinder     | QAbstractVideoSurface    | QQtCameraVideoSurface |                   | 视频，快，Buffer
- * |                   |                          |                       | QQtVideoProbe     | 视频，快，Buffer，+Android支持
  * ---------------------------------------------------------------------------------------------------------------------
  * | setViewfinder     | QMediaBindableInterface  | QGraphicsVideoItem    |                   | QGraphicsItem 系统专用
  * |                   |                          | QVideoWidget          | QCameraViewfinder | 视频，快，属于输出位置上的
@@ -59,33 +57,6 @@ signals:
 public:
     virtual QList<QVideoFrame::PixelFormat> supportedPixelFormats ( QAbstractVideoBuffer::HandleType handleType ) const override;
     virtual bool present ( const QVideoFrame& frame ) override;
-};
-
-/**
- * @brief The QQtVideoProbe class
- * 这是个数字摄像机管理器，这个类是为Android等需要Probe的数字录像设备准备的。
- * 我在VideoManager内部使用这个类来兼容桌面和Android系统，
- * 但是我发现，无论如何Probe在Android上都不能正常执行，所以现在暂时不支持Android。
- * Qt5.9.2，何时支持，待定。
- */
-class QQTSHARED_EXPORT QQtVideoProbe : public QQtCameraVideoSurface
-{
-    Q_OBJECT
-public:
-    QQtVideoProbe ( QObject* parent = 0 );
-    virtual ~QQtVideoProbe();
-
-    void setMediaObject ( QMediaObject* mediaObject );
-    QMediaObject* mediaObject() const;
-
-    /**
-     * 以下与用户无关。
-     */
-private slots:
-    void slotVideoFrame ( const QVideoFrame& frame );
-private:
-    QMediaObject* m_mediaObject;
-    QVideoProbe* m_AndroidProber;
 };
 
 /**
@@ -168,7 +139,7 @@ private:
     //经过调试，QCamera句柄，一个进程只能存在一个。
     QQtCamera* mCamera;
     QCameraInfo mCamInfo;
-    QQtVideoProbe* mSurface;
+    QQtCameraVideoSurface* mSurface;
     QQtCameraExposure* mExposure;
     QQtCameraFocus* mFocus;
     QQtCameraImageProcessing* mImageProcessing;
