@@ -34,6 +34,13 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
+add_file(libv4l2capture.h)
+add_file(libv4l2capture.cpp)
+SOURCES += \
+    libv4l2capture.cpp
+HEADERS += \
+    libv4l2capture.h
+
 add_file(qqtv4l2videomanager.h)
 add_file(qqtv4l2videomanager.cpp)
 SOURCES += \
