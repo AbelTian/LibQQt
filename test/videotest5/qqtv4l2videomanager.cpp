@@ -1,19 +1,22 @@
 #include <qqtv4l2videomanager.h>
 
+#include <linux/videodev2.h>
 
 QQtV4L2VideoManager::QQtV4L2VideoManager ( QObject* parent ) : QObject ( parent )
 {
     handler = 0;
+    pp = 0;
+    frame = 0;
 
     mDevName = "/dev/video0";
     mSize = QSize ( 720, 480 );
-    mFormat = 0; //NV21? YUV? RGB?
-    mRate = 30;
+    mFormat = V4L2_PIX_FMT_NV21; //NV21? YUV? RGB?
+    mRate = 10;
 
-    timer = new QTimer(this);
-    timer->setSingleShot(false);
-    timer->setInterval(200);
-    connect(timer, SIGNAL(timeout()), this, SLOT(slotGetCapture()));
+    timer = new QTimer ( this );
+    timer->setSingleShot ( false );
+    timer->setInterval ( 100 );
+    connect ( timer, SIGNAL ( timeout() ), this, SLOT ( slotGetCapture() ) );
 }
 
 QQtV4L2VideoManager::~QQtV4L2VideoManager() {}
@@ -40,14 +43,16 @@ void QQtV4L2VideoManager::setVideoRate ( int rate )
 
 void QQtV4L2VideoManager::startCapture()
 {
-    if(handler)
-        capture_close(handler);
+    if ( handler )
+        capture_close ( handler );
+
     struct cap_param param;
     param.dev_name = mDevName.toLocal8Bit().data();
     param.width = mSize.width();
     param.height = mSize.height();
     param.rate = mRate;
-    handler = capture_open(param);
+    param.pixfmt = mFormat;
+    handler = capture_open ( param );
 
     pp = ( unsigned char* ) malloc ( param.width * param.height * 3 * sizeof ( char ) );
     frame = new QImage ( pp, param.width, param.height, QImage::Format_RGB888 );
@@ -56,11 +61,17 @@ void QQtV4L2VideoManager::startCapture()
 
 void QQtV4L2VideoManager::stopCapture()
 {
-    if(handler)
-        capture_close(handler);
+    timer->stop();
+
+    if ( handler )
+        capture_close ( handler );
+    if ( pp )
+        free ( pp );
+    if ( frame )
+        delete frame;
 }
 
-int QQtV4L2VideoManager::convert_yuv_to_rgb_pixel(int y, int u, int v)
+int QQtV4L2VideoManager::convert_yuv_to_rgb_pixel ( int y, int u, int v )
 {
     unsigned int pixel32 = 0;
     unsigned char* pixel = ( unsigned char* ) &pixel32;
@@ -77,7 +88,7 @@ int QQtV4L2VideoManager::convert_yuv_to_rgb_pixel(int y, int u, int v)
     return pixel32;
 }
 
-int QQtV4L2VideoManager::convert_yuv_to_rgb_buffer(unsigned char *yuv, unsigned char *rgb, unsigned int width, unsigned int height)
+int QQtV4L2VideoManager::convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width, unsigned int height )
 {
     unsigned int in, out = 0;
     unsigned int pixel_16;
@@ -88,10 +99,10 @@ int QQtV4L2VideoManager::convert_yuv_to_rgb_buffer(unsigned char *yuv, unsigned 
     for ( in = 0; in < width * height * 2; in += 4 )
     {
         pixel_16 =
-                yuv[in + 3] << 24 |
-                               yuv[in + 2] << 16 |
-                                              yuv[in + 1] <<  8 |
-                                                              yuv[in + 0];
+            yuv[in + 3] << 24 |
+            yuv[in + 2] << 16 |
+            yuv[in + 1] <<  8 |
+            yuv[in + 0];
         y0 = ( pixel_16 & 0x000000ff );
         u  = ( pixel_16 & 0x0000ff00 ) >>  8;
         y1 = ( pixel_16 & 0x00ff0000 ) >> 16;
@@ -118,7 +129,7 @@ int QQtV4L2VideoManager::convert_yuv_to_rgb_buffer(unsigned char *yuv, unsigned 
 void QQtV4L2VideoManager::slotGetCapture()
 {
     int len = 0;
-    capture_get_data(handler, (void**)&p, &len);
-    convert_yuv_to_rgb_buffer(p, pp, mSize.width(), mSize.height());
+    capture_get_data ( handler, ( void** ) &p, &len );
+    convert_yuv_to_rgb_buffer ( p, pp, mSize.width(), mSize.height() );
     emit readyRead ( *frame );
 }

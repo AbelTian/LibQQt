@@ -74,7 +74,7 @@ static int init_mmap ( struct cap_handle* handle )
         return -1;
     }
 
-    handle->buffers = (buffer_t*)calloc ( req.count, sizeof ( struct buffer_t ) );
+    handle->buffers = ( buffer_t* ) calloc ( req.count, sizeof ( struct buffer_t ) );
     if ( !handle->buffers )
     {
         printf ( "--- Calloc memory failed\n" );
@@ -250,7 +250,7 @@ static int init_device ( struct cap_handle* handle )
 struct cap_handle* capture_open ( struct cap_param param )
 {
     int ret;
-    struct cap_handle* handle = (struct cap_handle*)malloc ( sizeof ( struct cap_handle ) );
+    struct cap_handle* handle = ( struct cap_handle* ) malloc ( sizeof ( struct cap_handle ) );
     if ( !handle )
     {
         printf ( "--- malloc capture handle failed\n" );
