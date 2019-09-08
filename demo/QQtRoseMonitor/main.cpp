@@ -29,7 +29,7 @@ int main ( int argc, char* argv[] )
     w.setMinimumSize ( 420, 720 );
     w.setGeometry ( 0, 0, 420, 720 );
     moveCenter ( &w );
-    w.setPixmap ( conf_qrc ( "rose.png" ) );
+    w.setPixmap ( conf_root ( "rose.png" ) );
     w.show();
 
 #if 0

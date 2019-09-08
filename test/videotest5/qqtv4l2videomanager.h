@@ -10,6 +10,7 @@
 #include <libv4l2capture.h>
 #include <QImage>
 
+
 /**
  * @brief The QQtV4L2VideoManager class
  * 单个视频设备采集器
@@ -27,6 +28,8 @@ public:
     void setPixmapFormat ( quint32 format );
     void setVideoRate ( int rate );
 
+    void  check_support_fmt ( void );
+
 public slots:
     void startCapture();
     void stopCapture();
@@ -37,7 +40,7 @@ signals:
 protected:
     int convert_yuv_to_rgb_pixel ( int y, int u, int v );
     int convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width,
-                                                          unsigned int height );
+                                    unsigned int height );
 
 private slots:
     void slotGetCapture();

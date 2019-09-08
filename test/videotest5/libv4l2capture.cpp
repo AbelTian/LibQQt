@@ -14,26 +14,6 @@
 #include <unistd.h>
 #include <string.h>
 
-struct buffer_t
-{
-    void* start;
-    size_t length;
-};
-
-struct cap_handle
-{
-    int fd;
-    int image_size;
-    struct buffer_t* buffers;
-    unsigned int nbuffers;
-    struct cap_param params;
-    int quit;
-    unsigned long image_counter;
-    // v4l2 buffer get/put
-    struct v4l2_buffer v4lbuf;
-    int v4lbuf_put;     // 0/1
-};
-
 static int xioctl ( int fd, int request, void* arg )
 {
     int r;
