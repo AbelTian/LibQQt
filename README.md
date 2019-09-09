@@ -4,13 +4,19 @@
 英文全名 ****QQt Application Framework Software****。  
 英文简称 ****LibQQt****。  
 主库名称 ****LibQQt****。  
-*QQt应用程序框架软件是应用程序框架层的一系列库集合，持续实现这一层的功能。主库是LibQQt，辅助（平级扩展）库有QQtExquisite、QQtHighGrade、QQtIndustrialControl、QQtInput、QQtInstallFramework、QQtMediaExtention、QQtStyle、QQtTool等，很多流行Qt Wrapper库都在辅助库中。全部使用Multi-link技术实施工程管理。*    
+
+*QQt应用程序框架软件是应用程序框架层的一系列库集合，持续实现这一层的功能，主库是LibQQt，辅助（平级扩展）库有QQtExquisite、QQtHighGrade、QQtIndustrialControl、QQtInput、QQtInstallFramework、QQtMediaExtention、QQtStyle、QQtTool等，很多流行Qt Wrapper库都在辅助库中。
+QQt应用程序框架软件全部使用Multi-link技术实施工程管理。*  
+
+*QQt应用程序框架软件广泛支持各个操作系统，包括Windows、macOS、Linux桌面，包括Android（含Simulator）、iOS（含Simulator）、e-Linux等嵌入式桌面。
+QQt应用程序框架软件广泛支持各种编译器，在Windows平台，支持MSVC、MSVC64、MINGW32、MINGW64等，在类Unix平台，支持GCC、CLANG等，还支持Android、iOS、ARM32、ARMHF32、MIPS32等多种嵌入式编译器等。*        
+
 [QQt应用程序框架软件库列表](project.md)  
 
 
 # 主库 LibQQt  
 
-LibQQt为应用程序提供丰富的组件、处理Qt存在的问题、适配多个平台开发等功能，能够适配桌面、嵌入式以及Android、iOS的开发，提供统一接口，极大提升了用户开发应用程序的能力。  
+LibQQt为应用程序提供丰富的组件、处理Qt存在的问题、适配多个平台开发等功能，能够适配桌面、嵌入式桌面的开发，提供统一接口，极大提升了用户开发应用程序的能力。  
 LibQQt为用户自动生成Library SDK，主动帮助用户发布App和资源文件。   
 2018年1月，LibQQt代码变更数量已达30万，主要面向初、中、高级软件相关专业、有一定App开发经验的工程师。    
 LibQQt现进行正式发布版本v2.1.6.0，欢迎工程师们使用。  
