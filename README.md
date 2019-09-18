@@ -68,6 +68,10 @@ github link: https://github.com/AbelTian/LibQQt
     - 添加bodymover、bodyresizer、clickhelper、mouselocker
         - qqtwindowattribute、qqtwidgeteffect等窗口属性、特效功能提供者。
         - 帮助用户通过installEventFilter实现关于窗口和鼠标的完善的功能。
+    - 添加不规则控件
+        - qqtirregularwidget、qqtirregularpushbutton等，帮助用户在窗口中添加不规则图形控件。
+        - 可以在图象区域/不规则区域响应鼠标消息。
+        - 只需要设置一张图片即可，透明部分不响应鼠标消息。
     - 以及未列出的等20余种自定义widget。
 4. 有线和无线网络自动连接管理器 (e-linux)  
 6. 解决Qt4.8.7在嵌入式屏幕上QGraphics系统不正常绘画的问题 
