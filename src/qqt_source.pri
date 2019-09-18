@@ -341,18 +341,39 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
+    #窗体移动
     HEADERS += \
         $$PWD/exquisite/qqtbodymover.h \
         $$PWD/exquisite/qqtbodymover_p.h
     SOURCES += \
         $$PWD/exquisite/qqtbodymover.cpp \
         $$PWD/exquisite/qqtbodymover_p.cpp
+
+    #窗体大小。一般用于无边框窗体
     HEADERS += \
         $$PWD/exquisite/qqtbodyresizer.h \
         $$PWD/exquisite/qqtbodyresizer_p.h
     SOURCES += \
         $$PWD/exquisite/qqtbodyresizer.cpp \
         $$PWD/exquisite/qqtbodyresizer_p.cpp
+
+    #不规则形状的控件
+    contains (DEFINES, __IRREGULARWIDGETS__) {
+        SOURCES += \
+            $$PWD/exquisite/irregularwidgets/qqtirregularwidget.cpp
+        HEADERS += \
+            $$PWD/exquisite/irregularwidgets/qqtirregularwidget.h
+
+        SOURCES += \
+            $$PWD/exquisite/irregularwidgets/qqtirregularlabel.cpp
+        HEADERS += \
+            $$PWD/exquisite/irregularwidgets/qqtirregularlabel.h
+
+        SOURCES += \
+            $$PWD/exquisite/irregularwidgets/qqtirregularpushbutton.cpp
+        HEADERS += \
+            $$PWD/exquisite/irregularwidgets/qqtirregularpushbutton.h
+    }
 
     #can click sound support widgets
     contains (DEFINES, __CLICKSOUNDWIDGETS__) {

@@ -55,17 +55,22 @@ public:
     explicit QQtWidget ( QWidget* parent = 0 );
     virtual ~QQtWidget();
 
+    ImageStyle imageStyle();
     void setImageStyle ( ImageStyle style = QQTCENTER );
-    void setPixmap ( const QString& pic = QString() );
-    void setPixmap ( const QPixmap& pixmap );
+
     void setPixmap ( const QImage& image );
+    void setPixmap ( const QString& pic );
+    void setPixmap ( const QPixmap& pixmap );
+
+    QImage image();
+    void setImage ( const QImage& image );
 
     // QWidget interface
 protected:
     void paintEvent ( QPaintEvent* ) override;
 
 private:
-    quint32 m_style;
+    ImageStyle m_style;
     /*pixmap是必要的。绘图用pixmap。*/
     /*内部没有使用QPixmap存储，因为如果缩放widget，pixmap就没办法了，img有*/
     /*内部对QIcon的使用删除了，icon不是必要的。*/

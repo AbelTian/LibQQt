@@ -166,7 +166,8 @@ void QQtApplication::setHighDpiScaling ( bool open )
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5,6,0)
     setAttribute ( Qt::AA_EnableHighDpiScaling, open );
-    setAttribute ( Qt::AA_UseHighDpiPixmaps, open );
+    //这个设置好像没什么用，如果打开了，图片会被窗口吃掉一部分才开始缩小。如果不开就正常了。奇怪的图形坐标系。好像是个Qt BUG，所以关闭。应该识别为放大了的，可是没识别，上边那个好像就把图片放大了。
+    //setAttribute ( Qt::AA_UseHighDpiPixmaps, open );
 #endif
 }
 
