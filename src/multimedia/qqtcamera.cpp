@@ -356,7 +356,9 @@ void QQtCameraImageProcessing::setManualWhiteBalance ( qreal colorTemperature )
 qreal QQtCameraImageProcessing::brightness() const
 {
 #if !defined ( __ARM_LINUX__ ) && !defined ( __MIPS__LINUX__ )
+#if QT_VESION > QT_VERSION_CHECK(5,7,0)
     return mImageProcessing->brightness();
+#endif
 #endif
 }
 
