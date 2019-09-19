@@ -285,8 +285,10 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     }
 
     #serialport iodevice
-    SOURCES += $$PWD/network/qqtserialport.cpp
-    HEADERS += $$PWD/network/qqtserialport.h
+    contains(DEFINES, __QQTSERIALPORT__){
+        SOURCES += $$PWD/network/qqtserialport.cpp
+        HEADERS += $$PWD/network/qqtserialport.h
+    }
 
     #bluetooth iodevice
     #注释：在qqt_header.pri打开 DEFINES += __BLUETOOTH__

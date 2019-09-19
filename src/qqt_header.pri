@@ -247,9 +247,10 @@ defineTest(add_defines_QQt){
     #plugin notifer, and plugin device managament.
     #if you use DeviceWatcher , open this annotation
     DEFINES += __PLUGINSUPPORT__
-    contains(QSYS_PRIVATE, iOS||iOSSimulator||macOS) {
+    contains(QSYS_PRIVATE, iOS||iOSSimulator||macOS||WinRT) {
         DEFINES -= __PLUGINSUPPORT__
     }
+
     contains (DEFINES, __PLUGINSUPPORT__) {
         #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
         win32 {
@@ -284,7 +285,8 @@ defineTest(add_defines_QQt){
     }
     #Qt 5.9.2, android support this feature
     #Qt 5.9.2, ios can't use printsupport
-    contains(QSYS_PRIVATE, iOS||iOSSimulator) {
+    #Qt 5.12.2, winrt has no QPrinter.
+    contains(QSYS_PRIVATE, iOS||iOSSimulator||WinRT) {
         DEFINES -= __PRINTSUPPORT__
     }
     contains (DEFINES, __PRINTSUPPORT__) {
@@ -353,11 +355,22 @@ defineTest(add_defines_QQt){
 
         #if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
         lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
-        #to winRT, ues qextserialport
-        contains (DEFINES, __WINRT__): DEFINES += __QEXTSERIALPORT__
+
         #to ios, use qextserialport
         contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
-        #android qt5 has QtSerialport?
+
+        #android qt5 has QtSerialport
+        #contains (DEFINES, __ANDROID__): DEFINES += __QSERIALPORT__
+        #Win32 Win64 MSVC MSVC64, macOS, Linux64, Embedded, use QSerialPort
+        else: DEFINES += __QSERIALPORT__
+
+        #to winRT, can't use any serialport
+        contains (DEFINES, __WINRT__): DEFINES -= __QEXTSERIALPORT__ __QSERIALPORT__
+
+        #__QEXTSERIALPORT__ __QSERIALPORT__ qextserialport Qt4 多数平台
+        #__QEXTSERIALPORT__ qextserialport Qt5 偶尔
+        #__QSERIALPORT__ qtserialport Qt5 多数平台
+        #一个都没有 WinRT
         contains (DEFINES, __QEXTSERIALPORT__) {
             CONFIG += thread
             unix:DEFINES += _TTY_POSIX_
@@ -365,7 +378,8 @@ defineTest(add_defines_QQt){
             #Qt4 is not a very good Cross Qt version, Qt5 suggest.
             win32:LIBS += -lsetupapi -ladvapi32
             #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
-        } else {
+            DEFINES += __QQTSERIALPORT__
+        } else: contains (DEFINES, __QSERIALPORT__) {
             #message ( __QSERIALPORT__ Defined in $${TARGET})
             lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
             else:QT += serialport
@@ -374,6 +388,7 @@ defineTest(add_defines_QQt){
             } else {
                 DEFINES += _TTY_WIN_
             }
+            DEFINES += __QQTSERIALPORT__
         }
 
         ##################Bluetooth Module###############################
@@ -611,7 +626,7 @@ defineTest(add_defines_QQt){
 
     win32 {
         LIBS += -luser32
-        contains (DEFINES, __OPENGLWIDGETS__) {
+        contains (DEFINES, __OPENGLWIDGETS__):!contains(QSYS_PRIVATE, WinRT) {
             LIBS += -lopengl32 -lglu32
         }
     }else: unix {

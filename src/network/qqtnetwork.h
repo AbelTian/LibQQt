@@ -12,7 +12,9 @@
 #include <qqtudpclient.h>
 #include <qqtudpserver.h>
 
+#ifdef __QQTSERIALPORT__
 #include <qqtserialport.h>
+#endif
 
 #ifdef __BLUETOOTH__
 #include <qqtbluetoothclient.h>

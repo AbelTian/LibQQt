@@ -127,7 +127,7 @@ void QQtTitleBar::mouseDoubleClickEvent ( QMouseEvent* event )
 
 void QQtTitleBar::mousePressEvent ( QMouseEvent* event )
 {
-#ifdef Q_OS_WIN
+#ifdef __DESKTOP_WIN__
     if ( ReleaseCapture() )
     {
         QWidget* pWindow = this->window();
@@ -150,7 +150,7 @@ void QQtTitleBar::mousePressEvent ( QMouseEvent* event )
 
 void QQtTitleBar::mouseReleaseEvent ( QMouseEvent* event )
 {
-#ifdef Q_OS_WIN
+#ifdef __DESKTOP_WIN__
 #else
     bMousePressed = false;
     event->ignore();
@@ -160,7 +160,7 @@ void QQtTitleBar::mouseReleaseEvent ( QMouseEvent* event )
 
 void QQtTitleBar::mouseMoveEvent ( QMouseEvent* event )
 {
-#ifdef Q_OS_WIN
+#ifdef __DESKTOP_WIN__
 #else
     QWidget* win = window();
     if ( bMousePressed && !win->isMaximized() )

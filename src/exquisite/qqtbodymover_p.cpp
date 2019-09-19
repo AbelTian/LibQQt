@@ -50,7 +50,7 @@ void QQtBodyMoverPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target 
         return;
     }
 
-#ifdef Q_OS_WIN
+#ifdef __DESKTOP_WIN__
     if ( ReleaseCapture() )
     {
         QWidget* pWindow = target->window();
@@ -75,7 +75,7 @@ void QQtBodyMoverPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target 
 void QQtBodyMoverPrivate::mouseReleaseEvent ( QMouseEvent* event, QWidget* target )
 {
     Q_ASSERT ( target );
-#ifdef Q_OS_WIN
+#ifdef __DESKTOP_WIN__
 #else
     bMousePressed = false;
     event->accept();
@@ -85,7 +85,7 @@ void QQtBodyMoverPrivate::mouseReleaseEvent ( QMouseEvent* event, QWidget* targe
 void QQtBodyMoverPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
 {
     Q_ASSERT ( target );
-#ifdef Q_OS_WIN
+#ifdef __DESKTOP_WIN__
 #else
     QWidget* win = target->window();
     if ( bMousePressed && !win->isMaximized() )
