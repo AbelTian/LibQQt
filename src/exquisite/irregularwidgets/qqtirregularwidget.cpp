@@ -1,4 +1,4 @@
-#include <qqtirregularwidget.h>
+﻿#include <qqtirregularwidget.h>
 
 #include <QStylePainter>
 
@@ -13,7 +13,7 @@ QQtIrregularWidget::~QQtIrregularWidget() {}
 void QQtIrregularWidget::resizeEvent ( QResizeEvent* event )
 {
     if ( image().isNull() )
-        return QWidget::resizeEvent ( event );
+        return QQtWidget::resizeEvent ( event );
 
     switch ( imageStyle() )
     {
@@ -24,8 +24,9 @@ void QQtIrregularWidget::resizeEvent ( QResizeEvent* event )
             QWidget widget;
             widget.resize ( size() );
             QStylePainter painter ( &widget );
-            painter.drawItemPixmap ( widget.rect(), Qt::AlignCenter, QIcon ( QPixmap::fromImage ( image() ) ).pixmap ( widget.size(),
-                                     QIcon::Normal, QIcon::On ) );
+            painter.drawItemPixmap ( widget.rect(), Qt::AlignCenter,
+                                     QIcon ( QPixmap::fromImage ( image() ) ).pixmap ( widget.size(),
+                                                                                       QIcon::Normal, QIcon::On ) );
             setMask ( widget.mask() );
 #endif
 #if 1

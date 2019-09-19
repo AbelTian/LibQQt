@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>547</width>
-    <height>415</height>
+    <width>640</width>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -28,6 +28,9 @@
         <item>
          <widget class="QWidget" name="widget_9" native="true">
           <layout class="QGridLayout" name="gridLayout_2">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <item row="0" column="1">
             <widget class="QWidget" name="widget_10" native="true">
              <property name="minimumSize">
@@ -132,6 +135,9 @@
         <item>
          <widget class="QWidget" name="widget_8" native="true">
           <layout class="QGridLayout" name="gridLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <item row="0" column="1">
             <widget class="QWidget" name="widget_5" native="true">
              <property name="minimumSize">
@@ -287,48 +293,271 @@
        <attribute name="title">
         <string>button mask</string>
        </attribute>
-       <widget class="QQtIrregularPushbutton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>50</y>
-          <width>101</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QQtIrregularWidget" name="widget_22" native="true">
-        <property name="geometry">
-         <rect>
-          <x>200</x>
-          <y>50</y>
-          <width>111</width>
-          <height>71</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QQtIrregularWidget" name="widget_23" native="true">
-        <property name="geometry">
-         <rect>
-          <x>130</x>
-          <y>50</y>
-          <width>101</width>
-          <height>71</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QQtIrregularWidget" name="widget_24" native="true">
+       <widget class="QWidget" name="widget_26" native="true">
         <property name="geometry">
          <rect>
           <x>40</x>
-          <y>50</y>
-          <width>91</width>
-          <height>71</height>
+          <y>40</y>
+          <width>381</width>
+          <height>141</height>
          </rect>
         </property>
+        <widget class="QQtIrregularPushbutton" name="pushButton">
+         <property name="geometry">
+          <rect>
+           <x>260</x>
+           <y>30</y>
+           <width>101</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QQtIrregularWidget" name="widget_24" native="true">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>91</width>
+           <height>71</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QQtIrregularWidget" name="widget_22" native="true">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>30</y>
+           <width>111</width>
+           <height>71</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QQtIrregularWidget" name="widget_23" native="true">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>30</y>
+           <width>101</width>
+           <height>71</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_8">
+       <attribute name="title">
+        <string>label mask</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0" rowspan="2">
+           <widget class="QListWidget" name="listWidget">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>120</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QFrame" name="frame_4">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QFrame" name="frame_3">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <item>
+              <widget class="QQtIrregularLabel" name="label_7">
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_9">
+       <attribute name="title">
+        <string>页</string>
+       </attribute>
+       <widget class="QWidget" name="widget_25" native="true">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>170</y>
+          <width>111</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="4" column="2">
+          <widget class="QFrame" name="frame_2">
+           <property name="minimumSize">
+            <size>
+             <width>12</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(249, 68, 10);</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QWidget" name="widget_28" native="true">
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(251, 12, 8);</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1" colspan="3">
+          <widget class="QFrame" name="frame">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>12</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(249, 49, 9);</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QWidget" name="widget_27" native="true">
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(251, 12, 8);</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="3">
+          <widget class="QQtIrregularLabel" name="label">
+           <property name="text">
+            <string>Label mask</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QQtIrregularLabel" name="label_5">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QQtIrregularLabel" name="label_3">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="3">
+          <widget class="QWidget" name="widget_29" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>12</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(251, 12, 8);</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </widget>
      </widget>
@@ -340,8 +569,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>547</width>
-     <height>17</height>
+     <width>640</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -373,6 +602,11 @@
    <class>QQtIrregularPushbutton</class>
    <extends>QPushButton</extends>
    <header>qqtirregularpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QQtIrregularLabel</class>
+   <extends>QLabel</extends>
+   <header>qqtirregularlabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

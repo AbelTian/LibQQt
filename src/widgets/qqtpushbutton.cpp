@@ -104,12 +104,18 @@ void QQtPushButton::mouseReleaseEvent ( QMouseEvent* e )
 void QQtPushButton::enterEvent ( QEvent* e )
 {
     state = BTN_HOVER;
+#ifdef __DESKTOP_DARWIN__
+    update();
+#endif
     QPushButton::enterEvent ( e );
 }
 
 void QQtPushButton::leaveEvent ( QEvent* e )
 {
     state = BTN_NORMAL;
+#ifdef __DESKTOP_DARWIN__
+    update();
+#endif
     QPushButton::leaveEvent ( e );
 }
 

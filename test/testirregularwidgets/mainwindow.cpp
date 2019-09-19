@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <qqtirregularwidget.h>
@@ -73,10 +73,14 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->widget_20->setImageStyle ( QQtWidget::QQTTILEDHEIGHT );
     ui->widget_20->installEventFilter ( clicker );
 
+    //ui->widget_26->setParent ( 0 );
+    //ui->widget_26->show();
+
     ui->pushButton->iconTable().initNormal ( conf_root ( "close_0.png" ), conf_root ( "close_01.png" ) );
     ui->pushButton->iconTable().initCheck ( conf_root ( "close_0.png" ), conf_root ( "close_01.png" ) );
     ui->pushButton->iconTable().initOther ( conf_root ( "close_01.png" ), conf_root ( "close_01.png" ) );
     connect ( ui->pushButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( clicked2() ) );
+    ui->pushButton->installEventFilter ( this );
 
     ui->widget_22->setPixmap ( conf_root ( "second_0.png" ) );
     ui->widget_22->setImageStyle ( QQtWidget::QQTZOOM );
@@ -88,6 +92,74 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->widget_24->setImageStyle ( QQtWidget::QQTZOOM );
     ui->widget_24->installEventFilter ( clicker );
 
+
+    ui->widget_25->setParent ( 0 );
+    ui->widget_25->show();
+
+    ui->label_6->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    ui->label->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    ui->label->installEventFilter ( clicker );
+
+    ui->label_4->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    ui->label_4->setAlignment ( Qt::AlignRight );
+    ui->label_5->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    ui->label_5->setAlignment ( Qt::AlignRight );
+    ui->label_5->installEventFilter ( clicker );
+
+    ui->label_2->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    ui->label_2->setAlignment ( Qt::AlignLeft );
+    ui->label_3->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    ui->label_3->setAlignment ( Qt::AlignLeft );
+    ui->label_3->installEventFilter ( clicker );
+
+    ui->label_8->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    ui->label_7->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    ui->label_7->installEventFilter ( clicker );
+    ui->label_7->installEventFilter ( this );
+
+    QStringList items;
+    items << "Qt::AlignLeft"
+          << "Qt::AlignRight"
+          << "Qt::AlignHCenter"
+          << "Qt::AlignJustify"
+          << "Qt::AlignAbsolute"
+          << "Qt::AlignHorizontal_Mask"
+          << "Qt::AlignTop"
+          << "Qt::AlignBottom"
+          << "Qt::AlignVCenter"
+          << "Qt::AlignBaseline"
+          << "Qt::AlignVertical_Mask"
+          << "Qt::AlignCenter"
+          << "Qt::AlignRight|Qt::AlignTop"
+          << "Qt::AlignRight|Qt::AlignBottom"
+          << "Qt::AlignRight|Qt::AlignVCenter"
+          << "Qt::AlignRight|Qt::AlignBaseline"
+          << "Qt::AlignRight|Qt::AlignVertical_Mask"
+          << "Qt::AlignHCenter|Qt::AlignTop"
+          << "Qt::AlignHCenter|Qt::AlignBottom"
+          << "Qt::AlignHCenter|Qt::AlignVCenter"
+          << "Qt::AlignHCenter|Qt::AlignBaseline"
+          << "Qt::AlignHCenter|Qt::AlignVertical_Mask"
+          << "Qt::AlignJustify|Qt::AlignTop"
+          << "Qt::AlignJustify|Qt::AlignBottom"
+          << "Qt::AlignJustify|Qt::AlignVCenter"
+          << "Qt::AlignJustify|Qt::AlignBaseline"
+          << "Qt::AlignJustify|Qt::AlignVertical_Mask"
+          << "Qt::AlignAbsolute|Qt::AlignTop"
+          << "Qt::AlignAbsolute|Qt::AlignBottom"
+          << "Qt::AlignAbsolute|Qt::AlignVCenter"
+          << "Qt::AlignAbsolute|Qt::AlignBaseline"
+          << "Qt::AlignAbsolute|Qt::AlignVertical_Mask"
+          << "Qt::AlignHorizontal_Mask|Qt::AlignTop"
+          << "Qt::AlignHorizontal_Mask|Qt::AlignBottom"
+          << "Qt::AlignHorizontal_Mask|Qt::AlignVCenter"
+          << "Qt::AlignHorizontal_Mask|Qt::AlignBaseline"
+          << "Qt::AlignHorizontal_Mask|Qt::AlignVertical_Mask"
+          ;
+
+    ui->listWidget->addItems ( items );
+    connect ( ui->listWidget, SIGNAL ( currentItemChanged ( QListWidgetItem*, QListWidgetItem* ) ),
+              this, SLOT ( currentItemChanged ( QListWidgetItem*, QListWidgetItem* ) ) );
 }
 
 MainWindow::~MainWindow()
@@ -103,4 +175,177 @@ void MainWindow::clicked1 ( QPoint point )
 void MainWindow::clicked2()
 {
     pline();
+}
+
+void MainWindow::currentItemChanged ( QListWidgetItem* current, QListWidgetItem* previous )
+{
+    if ( !current )
+        return;
+    Qt::Alignment flag;
+    if ( current->text() == "Qt::AlignLeft" )
+    {
+        flag = Qt::AlignLeft;
+    }
+    else if ( current->text() == "Qt::AlignRight" )
+    {
+        flag = Qt::AlignRight;
+    }
+    else if ( current->text() == "Qt::AlignHCenter" )
+    {
+        flag = Qt::AlignHCenter;
+    }
+    else if ( current->text() == "Qt::AlignJustify" )
+    {
+        flag = Qt::AlignJustify;
+    }
+    else if ( current->text() == "Qt::AlignAbsolute" )
+    {
+        flag = Qt::AlignAbsolute;
+    }
+    else if ( current->text() == "Qt::AlignHorizontal_Mask" )
+    {
+        flag = Qt::AlignHorizontal_Mask;
+    }
+    else if ( current->text() == "Qt::AlignTop" )
+    {
+        flag = Qt::AlignTop;
+    }
+    else if ( current->text() == "Qt::AlignBottom" )
+    {
+        flag = Qt::AlignBottom;
+    }
+    else if ( current->text() == "Qt::AlignVCenter" )
+    {
+        flag = Qt::AlignVCenter;
+    }
+    else if ( current->text() == "Qt::AlignBaseline" )
+    {
+        flag = Qt::AlignBaseline;
+    }
+    else if ( current->text() == "Qt::AlignVertical_Mask" )
+    {
+        flag = Qt::AlignVertical_Mask;
+    }
+    else if ( current->text() == "Qt::AlignCenter" )
+    {
+        flag = Qt::AlignCenter;
+    }
+    else if ( current->text() == "Qt::AlignRight" )
+    {
+        flag = Qt::AlignRight;
+    }
+    else if ( current->text() == "Qt::AlignRight|Qt::AlignTop" )
+    {
+        flag = Qt::AlignRight | Qt::AlignTop;
+    }
+    else if ( current->text() == "Qt::AlignRight|Qt::AlignBottom" )
+    {
+        flag = Qt::AlignRight | Qt::AlignBottom;
+    }
+    else if ( current->text() == "Qt::AlignRight|Qt::AlignVCenter" )
+    {
+        flag = Qt::AlignRight | Qt::AlignVCenter;
+    }
+    else if ( current->text() == "Qt::AlignRight|Qt::AlignBaseline" )
+    {
+        flag = Qt::AlignRight | Qt::AlignBaseline;
+    }
+    else if ( current->text() == "Qt::AlignRight|Qt::AlignVertical_Mask" )
+    {
+        flag = Qt::AlignRight | Qt::AlignVertical_Mask;
+    }
+    else if ( current->text() == "Qt::AlignHCenter|Qt::AlignTop" )
+    {
+        flag = Qt::AlignHCenter | Qt::AlignTop;
+    }
+    else if ( current->text() == "Qt::AlignHCenter|Qt::AlignBottom" )
+    {
+        flag = Qt::AlignHCenter | Qt::AlignBottom;
+    }
+    else if ( current->text() == "Qt::AlignHCenter|Qt::AlignVCenter" )
+    {
+        flag = Qt::AlignHCenter | Qt::AlignVCenter;
+    }
+    else if ( current->text() == "Qt::AlignHCenter|Qt::AlignBaseline" )
+    {
+        flag = Qt::AlignHCenter | Qt::AlignBaseline;
+    }
+    else if ( current->text() == "Qt::AlignHCenter|Qt::AlignVertical_Mask" )
+    {
+        flag = Qt::AlignHCenter | Qt::AlignVertical_Mask;
+    }
+    else if ( current->text() == "Qt::AlignJustify|Qt::AlignTop" )
+    {
+        flag = Qt::AlignJustify | Qt::AlignTop;
+    }
+    else if ( current->text() == "Qt::AlignJustify|Qt::AlignBottom" )
+    {
+        flag = Qt::AlignJustify | Qt::AlignBottom;
+    }
+    else if ( current->text() == "Qt::AlignJustify|Qt::AlignVCenter" )
+    {
+        flag = Qt::AlignJustify | Qt::AlignVCenter;
+    }
+    else if ( current->text() == "Qt::AlignJustify|Qt::AlignBaseline" )
+    {
+        flag = Qt::AlignJustify | Qt::AlignBaseline;
+    }
+    else if ( current->text() == "Qt::AlignJustify|Qt::AlignVertical_Mask" )
+    {
+        flag = Qt::AlignJustify | Qt::AlignVertical_Mask;
+    }
+    else if ( current->text() == "Qt::AlignAbsolute|Qt::AlignTop" )
+    {
+        flag = Qt::AlignAbsolute | Qt::AlignTop;
+    }
+    else if ( current->text() == "Qt::AlignAbsolute|Qt::AlignBottom" )
+    {
+        flag = Qt::AlignAbsolute | Qt::AlignBottom;
+    }
+    else if ( current->text() == "Qt::AlignAbsolute|Qt::AlignVCenter" )
+    {
+        flag = Qt::AlignAbsolute | Qt::AlignVCenter;
+    }
+    else if ( current->text() == "Qt::AlignAbsolute|Qt::AlignBaseline" )
+    {
+        flag = Qt::AlignAbsolute | Qt::AlignBaseline;
+    }
+    else if ( current->text() == "Qt::AlignAbsolute|Qt::AlignVertical_Mask" )
+    {
+        flag = Qt::AlignAbsolute | Qt::AlignVertical_Mask;
+    }
+    else if ( current->text() == "Qt::AlignHorizontal_Mask|Qt::AlignTop" )
+    {
+        flag = Qt::AlignHorizontal_Mask | Qt::AlignTop;
+    }
+    else if ( current->text() == "Qt::AlignHorizontal_Mask|Qt::AlignBottom" )
+    {
+        flag = Qt::AlignHorizontal_Mask | Qt::AlignBottom;
+    }
+    else if ( current->text() == "Qt::AlignHorizontal_Mask|Qt::AlignVCenter" )
+    {
+        flag = Qt::AlignHorizontal_Mask | Qt::AlignVCenter;
+    }
+    else if ( current->text() == "Qt::AlignHorizontal_Mask|Qt::AlignBaseline" )
+    {
+        flag = Qt::AlignHorizontal_Mask | Qt::AlignBaseline;
+    }
+    else if ( current->text() == "Qt::AlignHorizontal_Mask|Qt::AlignVertical_Mask" )
+    {
+        flag = Qt::AlignHorizontal_Mask | Qt::AlignVertical_Mask;
+    }
+    ui->label_7->setAlignment ( flag );
+    ui->label_8->setAlignment ( flag );
+}
+
+
+bool MainWindow::eventFilter ( QObject* watched, QEvent* event )
+{
+    if ( event->type() == QEvent::Paint )
+        return QMainWindow::eventFilter ( watched, event );
+    pline() << watched << event->type();
+    //不管用
+    if ( event->type() == QEvent::Enter )
+        ui->pushButton->updateGeometry();
+    return QMainWindow::eventFilter ( watched, event );
 }
