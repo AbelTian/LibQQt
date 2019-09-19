@@ -122,7 +122,7 @@ void QQtIrregularLabel::makeMaskWidget ( void )
     setMask ( QPixmap::fromImage ( resultImage
                                  ).mask() );
 
-#if 1
+#if 0
     static QQtWidget widget0;
     widget0.resize ( pixmap()->size() );
     widget0.setPixmap ( *pixmap() );
