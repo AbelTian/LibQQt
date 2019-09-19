@@ -247,7 +247,12 @@ defineTest(add_defines_QQt){
     #plugin notifer, and plugin device managament.
     #if you use DeviceWatcher , open this annotation
     DEFINES += __PLUGINSUPPORT__
-    contains(QSYS_PRIVATE, iOS||iOSSimulator||macOS||WinRT) {
+    contains(QSYS_PRIVATE, iOS||iOSSimulator||macOS) {
+        DEFINES -= __PLUGINSUPPORT__
+    }
+
+    #winrt
+    contains(DEFINES, __WINRT__) {
         DEFINES -= __PLUGINSUPPORT__
     }
 
@@ -285,10 +290,15 @@ defineTest(add_defines_QQt){
     }
     #Qt 5.9.2, android support this feature
     #Qt 5.9.2, ios can't use printsupport
-    #Qt 5.12.2, winrt has no QPrinter.
-    contains(QSYS_PRIVATE, iOS||iOSSimulator||WinRT) {
+    contains(QSYS_PRIVATE, iOS||iOSSimulator) {
         DEFINES -= __PRINTSUPPORT__
     }
+
+    #Qt 5.12.2, winrt has no QPrinter.
+    contains(DEFINES, __WINRT__) {
+        DEFINES -= __PRINTSUPPORT__
+    }
+
     contains (DEFINES, __PRINTSUPPORT__) {
         #qtHaveModule(printsupport) : message(qqt use module printsupport)
         greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
@@ -626,7 +636,7 @@ defineTest(add_defines_QQt){
 
     win32 {
         LIBS += -luser32
-        contains (DEFINES, __OPENGLWIDGETS__):!contains(QSYS_PRIVATE, WinRT) {
+        contains (DEFINES, __OPENGLWIDGETS__):!contains(DEFINES, __WINRT__) {
             LIBS += -lopengl32 -lglu32
         }
     }else: unix {
