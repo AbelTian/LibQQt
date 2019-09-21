@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -268,24 +268,30 @@
        <attribute name="title">
         <string>Other mask</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QQtIrregularWidget" name="widget_15" native="true"/>
-        </item>
-        <item row="0" column="1">
-         <widget class="QQtIrregularWidget" name="widget_16" native="true"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QQtIrregularWidget" name="widget_17" native="true"/>
-        </item>
-        <item row="1" column="1">
-         <widget class="QQtIrregularWidget" name="widget_18" native="true"/>
-        </item>
-        <item row="2" column="0">
-         <widget class="QQtIrregularWidget" name="widget_19" native="true"/>
-        </item>
-        <item row="2" column="1">
-         <widget class="QQtIrregularWidget" name="widget_20" native="true"/>
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <item>
+         <widget class="QWidget" name="widget_30" native="true">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QQtIrregularWidget" name="widget_15" native="true"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QQtIrregularWidget" name="widget_16" native="true"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QQtIrregularWidget" name="widget_17" native="true"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QQtIrregularWidget" name="widget_18" native="true"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QQtIrregularWidget" name="widget_19" native="true"/>
+           </item>
+           <item row="2" column="1">
+            <widget class="QQtIrregularWidget" name="widget_20" native="true"/>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -558,6 +564,19 @@
           </widget>
          </item>
         </layout>
+       </widget>
+       <widget class="QQtIrregularLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>80</y>
+          <width>81</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
        </widget>
       </widget>
      </widget>

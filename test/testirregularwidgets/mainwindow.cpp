@@ -49,6 +49,9 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
 
     //other
+    //ui->widget_30->setParent ( 0 );
+    //ui->widget_30->show();
+
     ui->widget_15->setPixmap ( conf_root ( "a1.png" ) );
     ui->widget_15->setImageStyle ( QQtWidget::QQTZOOMWIDTH );
     ui->widget_15->installEventFilter ( clicker );
@@ -160,6 +163,10 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->listWidget->addItems ( items );
     connect ( ui->listWidget, SIGNAL ( currentItemChanged ( QListWidgetItem*, QListWidgetItem* ) ),
               this, SLOT ( currentItemChanged ( QListWidgetItem*, QListWidgetItem* ) ) );
+
+    //ui->label_9->setAlignment ( Qt::AlignCenter );
+    ui->label_9->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    ui->label_9->installEventFilter ( clicker );
 }
 
 MainWindow::~MainWindow()

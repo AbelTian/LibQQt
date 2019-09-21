@@ -9,6 +9,12 @@
 
 #include "qqtwidgets.h"
 
+/**
+ * @brief The QQtPushButton class
+ * 原装Button在嵌入式板子上无法处理掉Hover问题。
+ * QSS里设置也可以，把HOVER设置为和NORMAL一样，只是QSS代码量过大。
+ * 原装Pushbutton需要设置setFlat以防止出现default button框。
+ */
 class QQTSHARED_EXPORT QQtPushButton : public QPushButton
 {
     Q_OBJECT

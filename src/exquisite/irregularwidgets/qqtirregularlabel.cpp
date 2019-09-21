@@ -53,9 +53,9 @@ void QQtIrregularLabel::makeMaskWidget ( void )
     {
         x0 = ( resultImage.width() - normalImage.width() ) / 2;
         y0 = ( resultImage.height() - normalImage.height() ) / 2;
-        //不会出现下边的代码
-        x0 = x0 < 0 ? 0 : x0;
-        y0 = y0 < 0 ? 0 : y0;
+        //不会出现下边的代码 不能出现下边的代码
+        //x0 = x0 < 0 ? 0 : x0;
+        //y0 = y0 < 0 ? 0 : y0;
     }
 
     if ( alignment().testFlag ( Qt::AlignLeft ) )

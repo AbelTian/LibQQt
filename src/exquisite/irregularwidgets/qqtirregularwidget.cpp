@@ -77,10 +77,32 @@ void QQtIrregularWidget::resizeEvent ( QResizeEvent* event )
                 pixmap = QPixmap::fromImage ( image() );
 #endif
 
-#if 1
+#if 0
+            //本控件不再使用QIcon
             //偶尔会有重影，所以resize的频率不要太高，尤其在缩小的时候。
             pixmap = QIcon ( QPixmap::fromImage ( image() ) ).pixmap ( resultImage.size(),
                                                                        QIcon::Normal, QIcon::On );
+#endif
+
+#if 1
+            int w0, h0;
+            w0 = resultImage.width() - pixmap.width();
+            h0 = resultImage.height() - pixmap.height();
+
+            if ( w0 < 0 && h0 < 0 )
+                pixmap = QPixmap::fromImage ( image()
+                                              .scaled ( resultImage.width(), resultImage.height(), Qt::KeepAspectRatio )
+                                            );
+            else if ( w0 < 0 )
+                pixmap = QPixmap::fromImage ( image()
+                                              .scaled ( resultImage.width(), image().height(), Qt::KeepAspectRatio )
+                                            );
+            else if ( h0 < 0 )
+                pixmap = QPixmap::fromImage ( image()
+                                              .scaled ( image().width(), resultImage.height(), Qt::KeepAspectRatio )
+                                            );
+            else
+                pixmap = QPixmap::fromImage ( image() );
 #endif
 
             //QQtWidget里面，StylePainter自动居中绘制，这里，手动居中绘制。
