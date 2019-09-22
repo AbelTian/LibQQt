@@ -221,6 +221,8 @@ void QQtBodyResizerPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target
 
 void QQtBodyResizerPrivate::checkDirection ( QMouseEvent* event, QWidget* target )
 {
+#if 0
+    //geometry 与 globalPos 对比 root窗口
     QRect rectMustIn = target->geometry();//target->frameGeometry();
 #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
     QRect rectMustNotIn = rectMustIn.marginsRemoved ( m_margins );
@@ -228,6 +230,36 @@ void QQtBodyResizerPrivate::checkDirection ( QMouseEvent* event, QWidget* target
     QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
 #endif
     QPoint cursorPos = event->globalPos();//QCursor::pos();
+#endif
+
+#if 0
+    //rect() 与 pos() 对比 子窗口
+    QRect rectMustIn = target->rect();//target->frameGeometry();
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+    QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
+#else
+    QRect rectMustNotIn = rectMustIn.marginsRemoved ( m_margins );
+#endif
+    QPoint cursorPos = event->pos();//QCursor::pos();
+#endif
+
+    //但是，上边的不严谨，只能用于小小的领域，必须是root窗口才行，子窗口不行。
+    //以下代码对此进行纠正。
+    //应用于子窗口和root窗口的通用代码
+
+#if 1
+    //maptoGlobal(rect()) 与 globalPos 对比
+    QRect rectMustIn = QRect ( target->mapToGlobal ( target->rect().topLeft() ), target->mapToGlobal ( target->rect().bottomRight() ) );
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+    QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
+#else
+    QRect rectMustNotIn = rectMustIn.marginsRemoved ( m_margins );
+#endif
+    QPoint cursorPos = event->globalPos();
+    //经过测试，这种方法，在子窗口、root窗口，得到的数据完全正常。
+    //pline() << target->geometry() << rectMustIn
+    //        << rectMustIn.contains ( event->globalPos() ) << rectMustNotIn.contains ( event->globalPos() );
+#endif
 
     if ( target->isMaximized() ||
          !target->isActiveWindow() ||
