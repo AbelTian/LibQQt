@@ -33,6 +33,30 @@ void QQtBodyMoverPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target 
 {
     Q_ASSERT ( target );
 
+    //以下代码用来过滤边缘的margin。
+#if 1
+    //maptoGlobal(rect()) 与 globalPos 对比
+    QRect rectMustIn = QRect ( target->mapToGlobal ( target->rect().topLeft() ), target->mapToGlobal ( target->rect().bottomRight() ) );
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+    QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
+#else
+    QRect rectMustNotIn = rectMustIn.marginsRemoved ( m_margins );
+#endif
+    QPoint cursorPos = event->globalPos();
+    //经过测试，这种方法，在子窗口、root窗口，得到的数据完全正常。
+    //pline() << target->geometry() << rectMustIn
+    //        << rectMustIn.contains ( event->globalPos() ) << rectMustNotIn.contains ( event->globalPos() );
+#endif
+
+    if ( target->isMaximized() ||
+         !target->isActiveWindow() ||
+         !rectMustIn.contains ( cursorPos ) ||
+         !rectMustNotIn.contains ( cursorPos ) )
+    {
+        event->ignore();
+        return;
+    }
+
 #ifdef __DESKTOP_WIN__
     if ( ReleaseCapture() )
     {
