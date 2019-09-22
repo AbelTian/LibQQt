@@ -16,7 +16,7 @@ public:
     QMargins& margins();
     const QMargins& margins() const;
 
-public:
+protected:
     virtual void mousePressEvent ( QMouseEvent* event, QWidget* target = 0 );
     virtual void mouseReleaseEvent ( QMouseEvent* event, QWidget* target = 0 );
     virtual void mouseMoveEvent ( QMouseEvent* event, QWidget* target = 0 );

@@ -343,7 +343,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
-    #窗体移动
+    #窗体整体移动 对父、子窗体均可使用，跨平台特征好
     HEADERS += \
         $$PWD/exquisite/qqtbodymover.h \
         $$PWD/exquisite/qqtbodymover_p.h
@@ -351,13 +351,21 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtbodymover.cpp \
         $$PWD/exquisite/qqtbodymover_p.cpp
 
-    #窗体大小。一般用于无边框窗体
+    #窗体大小。一般用于无边框窗体。父、子窗体均可使用
     HEADERS += \
         $$PWD/exquisite/qqtbodyresizer.h \
         $$PWD/exquisite/qqtbodyresizer_p.h
     SOURCES += \
         $$PWD/exquisite/qqtbodyresizer.cpp \
         $$PWD/exquisite/qqtbodyresizer_p.cpp
+
+    #子窗体在父窗体里移动 只应用于子窗体，不能应用于主窗体
+    add_file($$PWD/exquisite/qqtchildbodymover.h)
+    add_file($$PWD/exquisite/qqtchildbodymover.cpp)
+    HEADERS += \
+        $$PWD/exquisite/qqtchildbodymover.h
+    SOURCES += \
+        $$PWD/exquisite/qqtchildbodymover.cpp
 
     #不规则形状的控件
     contains (DEFINES, __IRREGULARWIDGETS__) {
