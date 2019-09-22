@@ -24,7 +24,8 @@
  * 支持所有QWidget及其子类，不支持QMainWindow。
  * 支持windows、macOS、Linux、e-linux等操作系统。
  *
- * 无论应用于主窗口、子窗口都会导致窗口整体移动，
+ * 应用于子窗口，会导致窗口整体移动。
+ * 应用于主窗口，能够正常移动，Windows下还会有titlebar的作用。
  * 在Windows、macOS、Linux等系统下表现一致。
  */
 class QQtBodyMoverPrivate;
