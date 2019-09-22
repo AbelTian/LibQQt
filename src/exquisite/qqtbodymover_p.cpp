@@ -33,23 +33,6 @@ void QQtBodyMoverPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target 
 {
     Q_ASSERT ( target );
 
-    QRect rectMustIn = target->geometry();//target->frameGeometry();
-#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
-    QRect rectMustNotIn = rectMustIn.marginsRemoved ( m_margins );
-#else
-    QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
-#endif
-    QPoint cursorPos = event->globalPos();//QCursor::pos();
-
-    if ( target->isMaximized() ||
-         !target->isActiveWindow() ||
-         !rectMustIn.contains ( cursorPos ) ||
-         !rectMustNotIn.contains ( cursorPos ) )
-    {
-        event->ignore();
-        return;
-    }
-
 #ifdef __DESKTOP_WIN__
     if ( ReleaseCapture() )
     {
