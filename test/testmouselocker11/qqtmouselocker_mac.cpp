@@ -10,6 +10,11 @@
 #include <CoreGraphics/CoreGraphics.h>
 #include <CoreGraphics/CGDisplayConfiguration.h>
 
+//新方法，开启一个线程，
+//while使用系统API实时检测鼠标位置，一单移动到rect以外，立即setPOS在边缘
+//这个while可是很快吆。
+//比mouseEvent快，比Timer快。
+
 QQtMouseLockerImpl::QQtMouseLockerImpl() {}
 
 void QQtMouseLockerImpl::focusInEvent ( QFocusEvent* event, QWidget* target )
@@ -39,8 +44,8 @@ void QQtMouseLockerImpl::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
     QWidget& w = *target;
 
     QPoint p0, p1;
-    p0 = w.geometry().topLeft();
-    p1 = w.geometry().bottomRight();
+    p0 = w.rect().topLeft();
+    p1 = w.rect().bottomRight();
     p0 = w.mapToGlobal ( p0 );
     p1 = w.mapToGlobal ( p1 );
     QRect s = QRect ( p0, p1 );
@@ -51,14 +56,14 @@ void QQtMouseLockerImpl::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
     int x1 = x, y1 = y;
     //带上=也没有用，还是抖动。
     if ( x <= s.left() )
-        x1 = s.left(), y1 = y;
+        x1 = s.left();
     if ( y <= s.top() )
-        x1 = x, y1 = s.top();
+        y1 = s.top();
     if ( x >= s.right() )
-        x1 = s.right(), y1 = y;
+        x1 = s.right();
     if ( y >= s.bottom() )
-        x1 = x, y1 = s.bottom();
-    pline() << x1 << y1;
+        y1 = s.bottom();
+    pline() << x1 << y1 << s.top() << s.bottom() << s.left() << s.right();
 
 #if 0
     //抖动，只有按下才会锁定。
@@ -69,7 +74,7 @@ void QQtMouseLockerImpl::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
     CGPoint mouseWarpLocation = CGPointMake ( x1, y1 );
     CGWarpMouseCursorPosition ( mouseWarpLocation );
     CGAssociateMouseAndMouseCursorPosition ( true );
-#elif 1
+#elif 0
     //还是抖动。只有按下才会锁定。
     CGEventSourceRef evsrc = CGEventSourceCreate ( kCGEventSourceStateCombinedSessionState );
     CGEventSourceSetLocalEventsSuppressionInterval ( evsrc, 0.0 );
