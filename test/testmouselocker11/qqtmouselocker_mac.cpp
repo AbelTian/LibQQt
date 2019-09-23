@@ -10,10 +10,26 @@
 #include <CoreGraphics/CoreGraphics.h>
 #include <CoreGraphics/CGDisplayConfiguration.h>
 
+
 //新方法，开启一个线程，
 //while使用系统API实时检测鼠标位置，一单移动到rect以外，立即setPOS在边缘
 //这个while可是很快吆。
 //比mouseEvent快，比Timer快。
+
+//三个平台上，行为应当表现一致
+
+//1. 在activeWindow，马上clipcursor；
+//2. installEvent，start，保持clipcursor，stop，停止clipcursor。removeEventFilter以前必须调用关闭！
+
+//我感觉，调用形式可能要变？
+
+//允许多个窗口公用
+//允许开启多个句柄
+
+//start/stop 帮助开启和关闭eventFilter。
+//跟着rect改变clipcursor的范围
+
+//选中的style1 style2 Qt、四角。
 
 QQtMouseLockerImpl::QQtMouseLockerImpl() {}
 
@@ -86,4 +102,12 @@ void QQtMouseLockerImpl::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
 #endif
 
     event->accept();
+}
+
+QQtLockMouseThreadHelper::QQtLockMouseThreadHelper ( QObject* parent ) : QThread ( parent ) {}
+
+QQtLockMouseThreadHelper::~QQtLockMouseThreadHelper() {}
+
+void QQtLockMouseThreadHelper::run()
+{
 }

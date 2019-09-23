@@ -1,4 +1,4 @@
-#include "qqtmouselocker_win.h"
+﻿#include "qqtmouselocker_win.h"
 
 #include <QEvent>
 #include <QMouseEvent>
@@ -33,17 +33,17 @@ void QQtMouseLockerImpl::focusInEvent ( QFocusEvent* event, QWidget* target )
     QRect qr0;
 
     //client rect
-    mainWinRect.left = ( LONG ) w.geometry().left();
-    mainWinRect.right = ( LONG ) w.geometry().right();
-    mainWinRect.top = ( LONG ) w.geometry().top();
-    mainWinRect.bottom = ( LONG ) w.geometry().bottom();
-    qr0 = w.geometry();
+    mainWinRect.left = ( LONG ) w.rect().left();
+    mainWinRect.right = ( LONG ) w.rect().right();
+    mainWinRect.top = ( LONG ) w.rect().top();
+    mainWinRect.bottom = ( LONG ) w.rect().bottom();
+    qr0 = w.rect();
 
 #if 1
     {
         QPoint p0, p1;
-        p0 = w.geometry().topLeft();
-        p1 = w.geometry().bottomRight();
+        p0 = w.rect().topLeft();
+        p1 = w.rect().bottomRight();
         p0 = w.mapToGlobal ( p0 );
         p1 = w.mapToGlobal ( p1 );
 
@@ -74,10 +74,11 @@ void QQtMouseLockerImpl::focusInEvent ( QFocusEvent* event, QWidget* target )
             ClipCursor ( &mainWinRect ); //这是Windows API
 #if 1
             pline() << "focus in-----------------------";
-            pline() << "client:" << w.geometry();
+            pline() << "client:" << w.rect();
             pline() << "to screen:" << qr0;
             pline() << "old:" << r0.left << r0.top << r0.right - r0.left << r0.bottom - r0.top;
-            pline() << "new:" << mainWinRect.left << mainWinRect.top << mainWinRect.right - mainWinRect.left << mainWinRect.bottom - mainWinRect.top;
+            pline() << "new:" << mainWinRect.left << mainWinRect.top << mainWinRect.right - mainWinRect.left << mainWinRect.bottom -
+                    mainWinRect.top;
 #endif
         }
     }
@@ -107,17 +108,17 @@ void QQtMouseLockerImpl::focusOutEvent ( QFocusEvent* event, QWidget* target )
     QRect qr0;
 
     //client rect
-    mainWinRect.left = ( LONG ) w.geometry().left();
-    mainWinRect.right = ( LONG ) w.geometry().right();
-    mainWinRect.top = ( LONG ) w.geometry().top();
-    mainWinRect.bottom = ( LONG ) w.geometry().bottom();
-    qr0 = w.geometry();
+    mainWinRect.left = ( LONG ) w.rect().left();
+    mainWinRect.right = ( LONG ) w.rect().right();
+    mainWinRect.top = ( LONG ) w.rect().top();
+    mainWinRect.bottom = ( LONG ) w.rect().bottom();
+    qr0 = w.rect();
 
 #if 1
     {
         QPoint p0, p1;
-        p0 = w.geometry().topLeft();
-        p1 = w.geometry().bottomRight();
+        p0 = w.rect().topLeft();
+        p1 = w.rect().bottomRight();
         p0 = w.mapToGlobal ( p0 );
         p1 = w.mapToGlobal ( p1 );
 
@@ -147,7 +148,7 @@ void QQtMouseLockerImpl::focusOutEvent ( QFocusEvent* event, QWidget* target )
             ClipCursor ( NULL );
 #if 1
             pline() << "focus out-----------------------";
-            pline() << "client:" << w.geometry();
+            pline() << "client:" << w.rect();
             pline() << "to screen:" << qr0;
             pline() << "old:" << r0.left << r0.top << r0.right - r0.left << r0.bottom - r0.top;
             GetClipCursor ( &r0 );
@@ -181,17 +182,17 @@ void QQtMouseLockerImpl::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
     QRect qr0;
 
     //client rect
-    mainWinRect.left = ( LONG ) w.geometry().left();
-    mainWinRect.right = ( LONG ) w.geometry().right();
-    mainWinRect.top = ( LONG ) w.geometry().top();
-    mainWinRect.bottom = ( LONG ) w.geometry().bottom();
-    qr0 = w.geometry();
+    mainWinRect.left = ( LONG ) w.rect().left();
+    mainWinRect.right = ( LONG ) w.rect().right();
+    mainWinRect.top = ( LONG ) w.rect().top();
+    mainWinRect.bottom = ( LONG ) w.rect().bottom();
+    qr0 = w.rect();
 
 #if 1
     {
         QPoint p0, p1;
-        p0 = w.geometry().topLeft();
-        p1 = w.geometry().bottomRight();
+        p0 = w.rect().topLeft();
+        p1 = w.rect().bottomRight();
         p0 = w.mapToGlobal ( p0 );
         p1 = w.mapToGlobal ( p1 );
 
@@ -222,10 +223,11 @@ void QQtMouseLockerImpl::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
             ClipCursor ( &mainWinRect ); //这是Windows API
 #if 1
             pline() << "mouse move-----------------------";
-            pline() << "client:" << w.geometry();
+            pline() << "client:" << w.rect();
             pline() << "to screen:" << qr0;
             pline() << "old:" << r0.left << r0.top << r0.right - r0.left << r0.bottom - r0.top;
-            pline() << "new:" << mainWinRect.left << mainWinRect.top << mainWinRect.right - mainWinRect.left << mainWinRect.bottom - mainWinRect.top;
+            pline() << "new:" << mainWinRect.left << mainWinRect.top << mainWinRect.right - mainWinRect.left << mainWinRect.bottom -
+                    mainWinRect.top;
 #endif
         }
     }

@@ -4,6 +4,21 @@
 #include <QMouseEvent>
 #include <QWidget>
 
+#include <QThread>
+
+
+class QQtLockMouseThreadHelper : public QThread
+{
+    Q_OBJECT
+public:
+    QQtLockMouseThreadHelper ( QObject* parent = 0 );
+    virtual ~QQtLockMouseThreadHelper();
+
+    // QThread interface
+protected:
+    virtual void run() override;
+};
+
 class QQtMouseLockerImpl
 {
 public:

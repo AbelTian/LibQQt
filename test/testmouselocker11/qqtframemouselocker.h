@@ -1,4 +1,4 @@
-#ifndef QQTFRAMEMOUSELOCKER_H
+﻿#ifndef QQTFRAMEMOUSELOCKER_H
 #define QQTFRAMEMOUSELOCKER_H
 
 #include <QObject>
@@ -27,6 +27,9 @@ class QQtFrameMouseLocker : public QObject
 public:
     QQtFrameMouseLocker ( QObject* parent = 0 );
     virtual ~QQtFrameMouseLocker();
+
+    void attachClipCursor ( QWidget* targetWidget ) {}
+    void detachClipCursor ( QWidget* targetWidget ) {}
 
     // QObject interface
 public:

@@ -1,4 +1,4 @@
-#include "qqtmouselocker.h"
+﻿#include "qqtmouselocker.h"
 #include "qqtmouselocker_p.h"
 
 QQtMouseLocker::QQtMouseLocker ( QObject* parent ) : QObject ( parent )
@@ -45,20 +45,20 @@ bool QQtMouseLocker::eventFilter ( QObject* watched, QEvent* event )
         {
             QFocusEvent* e = ( QFocusEvent* ) event;
             d->focusInEvent ( e, ( QWidget* ) watched );
-            return true;
+            return false;
         }
         case QEvent::FocusOut:
         {
             QFocusEvent* e = ( QFocusEvent* ) event;
             d->focusOutEvent ( e, ( QWidget* ) watched );
-            return true;
+            return false;
         }
 #endif
         case QEvent::MouseMove:
         {
             QMouseEvent* e = ( QMouseEvent* ) event;
             d->mouseMoveEvent ( e, ( QWidget* ) watched );
-            return true;
+            return false;
         }
         default:
             break;
