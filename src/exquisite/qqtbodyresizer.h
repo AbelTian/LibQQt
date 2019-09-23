@@ -22,8 +22,6 @@
  * 鼠标在窗口边缘的时候，截获鼠标消息，使窗口伸缩。
  * 支持所有QWidget及其子类，不支持QMainWindow。
  * 支持windows、macOS、Linux、e-linux等操作系统。
- *
- * 有很严重的抖动，而且必须慢慢的改变大小。
  */
 class QQtBodyResizerPrivate;
 class QQTSHARED_EXPORT QQtBodyResizer : public QObject
