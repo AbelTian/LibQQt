@@ -32,7 +32,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //可选
     //helper->startCapture();
     //可选
-    ui->widget->setMouseTracking ( true );
+    ui->widget->setMouseTracking ( false );
     //ui->widget_2->setMouseTracking ( true );
 
     //this->installEventFilter ( this );
@@ -41,7 +41,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
 MainWindow::~MainWindow()
 {
     //以下二选1，必选
-    helper->stopCapture();
+    //helper->stopCapture();
     //无论如何要保证MouseLocker优先于ui被释放。
     //delete helper;
     //这个不行的

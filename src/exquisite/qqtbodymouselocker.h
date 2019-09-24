@@ -58,8 +58,9 @@ public:
     void startCapture();
     void stopCapture();
 
-    //这里添加、移除需要锁定的窗口。[和内部的自动过程有很多重复，无所谓了。]
+    //这里添加需要锁定的窗口。[可以重复添加] 等于installEventFilter
     void addWindow ( QWidget* target );
+    //移除锁定的窗口
     void removeWindow ( QWidget* target );
 
     // QObject interface
@@ -70,5 +71,9 @@ private:
     QQtBodyMouseLockerPrivate* d_ptr;
     Q_DECLARE_PRIVATE ( QQtBodyMouseLocker )
 };
+
+//如果用户感兴趣
+QQTSHARED_EXPORT void QQtClipCursor ( const QRect globalRect );
+QQTSHARED_EXPORT QRect QQtGetClipCursor ( );
 
 #endif // QQTBODYMOUSELOCKER_H

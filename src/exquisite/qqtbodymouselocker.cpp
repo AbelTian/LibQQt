@@ -27,14 +27,15 @@ void QQtBodyMouseLocker::stopCapture()
 
 void QQtBodyMouseLocker::addWindow ( QWidget* target )
 {
+    Q_ASSERT ( target );
     Q_D ( QQtBodyMouseLocker ) ;
     d->addWindow ( target );
 }
 
 void QQtBodyMouseLocker::removeWindow ( QWidget* target )
 {
-    Q_D ( QQtBodyMouseLocker ) ;
-    d->removeWindow ( target );
+    Q_ASSERT ( target );
+    target->removeEventFilter ( this );
 }
 
 bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
@@ -53,8 +54,24 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
     //if ( atti )
     //    return QObject::eventFilter ( watched, event );
 
-    //static int i = 0;
-    //pline() << i++ << event->type() << watched->objectName();
+    static int i = 0;
+    pline() << i++ << event->type() << watched->objectName();
+
+    QWidget* target = qobject_cast<QWidget*> ( watched );
+    QWidget& w = *target;
+
+    QPoint p0, p1;
+    p0 = w.rect().topLeft();
+    p1 = w.rect().bottomRight();
+    p0 = w.mapToGlobal ( p0 );
+    p1 = w.mapToGlobal ( p1 );
+    QRect r0 = QRect ( p0, p1 );
+
+    qreal ratio = 1; w.devicePixelRatioF();
+    QRect qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ),
+                        QPoint ( r0.right() * ratio, r0.bottom() * ratio ) );
+
+    QRect globalRect = qr0;
 
     Q_D ( QQtBodyMouseLocker ) ;
 
@@ -139,17 +156,17 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
             return false;
         }
 #endif
-#if 1
-        //用于解决mousetracking时获取鼠标
-        //这一个还是有用的，用户设置了多个窗口锁定鼠标的时候，有这个才能实时响应鼠标划过动作进行捕获。在tracking为true的时候。
-        //这个在点击之后，其实有一个鼠标的闪烁，加了press？activate?以后就没有了。原因是Thread在运行着，这个导致target改变，thread太快了，target没来得及改变，鼠标光标就被thread移动过去了，可是没有锁定，因为这里面setTargetWidget才是决定锁定的函数。
-        case QEvent::MouseMove:
+        case QEvent::MouseButtonRelease:
         {
-            QMouseEvent* e = ( QMouseEvent* ) event;
-            d->mouseMoveEvent ( e, qobject_cast<QWidget*> ( watched ) );
+            addWindow ( target );
             return false;
         }
-#endif
+        case QEvent::WindowDeactivate:
+        {
+            //如果不是活动窗口，就失效。----很重要。
+            d->addRect ( QRect ( 0, 0, 0, 0 ) );
+            return false;
+        }
         default:
             break;
     }
@@ -158,4 +175,14 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
 
     return QObject::eventFilter ( watched, event );
 
+}
+
+void QQtClipCursor ( const QRect globalRect )
+{
+    QQtBodyMouseMouseLockerThreadHelper::instance()->setTargetGlobalRect ( globalRect );
+}
+
+QRect QQtGetClipCursor()
+{
+    return QQtBodyMouseMouseLockerThreadHelper::instance()->getTargetGlobalRect();
 }

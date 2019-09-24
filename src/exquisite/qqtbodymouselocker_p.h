@@ -8,14 +8,25 @@
 class QQtBodyMouseMouseLockerThreadHelper : public QThread
 {
     Q_OBJECT
-public:
-    QQtBodyMouseMouseLockerThreadHelper ( QObject* parent = 0 );
-    virtual ~QQtBodyMouseMouseLockerThreadHelper();
 
-    void setTargetWidget ( QWidget* target );
+public:
+    //建议初始化
+    static QQtBodyMouseMouseLockerThreadHelper* instance ( QObject* parent = 0 ) {
+        static QQtBodyMouseMouseLockerThreadHelper* helper = 0;
+        if ( !helper )
+            helper = new QQtBodyMouseMouseLockerThreadHelper ( parent );
+        return helper;
+    }
+
+    void setTargetGlobalRect ( QRect globalRect );
+    QRect getTargetGlobalRect ();
 
     void startCapture();
     void stopCapture();
+
+private:
+    QQtBodyMouseMouseLockerThreadHelper ( QObject* parent = 0 );
+    virtual ~QQtBodyMouseMouseLockerThreadHelper();
 
     // QThread interface
 protected:
@@ -23,7 +34,7 @@ protected:
 
 private:
     QMutex tex;
-    QWidget* target;
+    QRect mGlobalRect;
     bool workflag;
 };
 
@@ -34,16 +45,16 @@ public:
     QQtBodyMouseLockerPrivate ( QQtBodyMouseLocker* q );
     virtual ~QQtBodyMouseLockerPrivate();
 
+    //允许定义区域 QRect(0,0,0,0)为关闭。 = ClipCursor
+    void addRect ( const QRect globalRect );
+    QRect getRect();
+
+    //允许按照窗口进行定义
+    void addWindow ( QWidget* target );
+
+    //允许手动开关
     void startCapture();
     void stopCapture();
-
-    void addWindow ( QWidget* target );
-    void removeWindow ( QWidget* target );
-
-protected:
-    virtual void focusInEvent ( QFocusEvent* event, QWidget* target = 0 );
-    virtual void focusOutEvent ( QFocusEvent* event, QWidget* target = 0 );
-    virtual void mouseMoveEvent ( QMouseEvent* event, QWidget* target = 0 );
 
 private:
     QQtBodyMouseLocker* q_ptr;
