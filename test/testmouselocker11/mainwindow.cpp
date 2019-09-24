@@ -33,7 +33,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //可选
     //helper->startCapture();
     //可选
-    ui->widget->setMouseTracking ( false );
+    ui->widget->setMouseTracking ( true );
     //ui->widget_2->setMouseTracking ( true );
 
     ui->widget->installEventFilter ( this );

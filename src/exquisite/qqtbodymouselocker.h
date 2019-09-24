@@ -63,8 +63,11 @@ public:
     void addClipCursor ( const QRect globalRect );
     //获取锁定区域
     QRect getClipCursor();
-    //根据target窗口求出目标锁定区域，去除margin用。如果没有这个margin，锁定状态下根本无法放大。
+
+    //根据target窗口求出目标锁定区域，去除margin用。如果没有这个margin，锁定状态下根本无法放大。Scaled.
     QRect getContentRect ( QWidget* target );
+    //根据target窗口求出target的区域。Scaled.
+    QRect getSourceRect ( QWidget* target );
 
     // QObject interface
 protected:

@@ -1,4 +1,4 @@
-﻿#include "qqtbodymouselocker_p.h"
+﻿#include <qqtbodymouselocker_unix.h>
 #include "qqtbodymouselocker.h"
 
 #include <QWidget>
@@ -148,4 +148,35 @@ QRect QQtBodyMouseLockerPrivate::getTargetRect ( QWidget* target )
 #endif
 
     return rectMustNotIn;
+}
+
+QRect QQtBodyMouseLockerPrivate::getSourceRect ( QWidget* target )
+{
+    QWidget& w = *target;
+    QPoint p0, p1;
+    p0 = w.rect().topLeft();
+    p1 = w.rect().bottomRight();
+    p0 = w.mapToGlobal ( p0 );
+    p1 = w.mapToGlobal ( p1 );
+    QRect r0 = QRect ( p0, p1 );
+
+    qreal ratio = 1; w.devicePixelRatioF();
+    QRect qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ), QPoint ( r0.right() * ratio, r0.bottom() * ratio ) );
+    return qr0;
+}
+
+void QQtClipCursor ( const QRect globalRect )
+{
+    QQtBodyMouseMouseLockerThreadHelper::instance()->setTargetGlobalRect ( globalRect );
+}
+
+QRect QQtGetClipCursor()
+{
+    return QQtBodyMouseMouseLockerThreadHelper::instance()->getTargetGlobalRect();
+}
+
+void QQtClipCursorToWindow ( QWidget* target )
+{
+    QRect globalRect = QQtBodyMouseLockerPrivate::getTargetRect ( target );
+    QQtClipCursor ( globalRect );
 }

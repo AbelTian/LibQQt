@@ -9,6 +9,9 @@ class QQtMouseLockerImpl
 public:
     explicit QQtMouseLockerImpl();
 
+    void lockWindow ( QWidget* target ) {}
+    void unlockWindow ( QWidget* target ) {}
+
 public:
     virtual void focusInEvent ( QFocusEvent* event, QWidget* target = 0 );
     virtual void focusOutEvent ( QFocusEvent* event, QWidget* target = 0 );

@@ -372,8 +372,19 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtbodymouselocker_p.h \
         $$PWD/exquisite/qqtbodymouselocker.h
     SOURCES += \
-        $$PWD/exquisite/qqtbodymouselocker_p.cpp \
+        #$$PWD/exquisite/qqtbodymouselocker_p.cpp \
         $$PWD/exquisite/qqtbodymouselocker.cpp
+    contains(QSYS_PRIVATE, Win32|Win64|Windows){
+        HEADERS += \
+            $$PWD/exquisite/qqtbodymouselocker_win.h
+        SOURCES += \
+            $$PWD/exquisite/qqtbodymouselocker_win.cpp
+    } else {
+        HEADERS += \
+            $$PWD/exquisite/qqtbodymouselocker_unix.h
+        SOURCES += \
+            $$PWD/exquisite/qqtbodymouselocker_unix.cpp
+    }
 
     #不规则形状的控件
     contains (DEFINES, __IRREGULARWIDGETS__) {

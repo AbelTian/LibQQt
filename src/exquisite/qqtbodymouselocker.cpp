@@ -50,13 +50,19 @@ void QQtBodyMouseLocker::addClipCursor ( const QRect globalRect )
 QRect QQtBodyMouseLocker::getClipCursor()
 {
     Q_D ( QQtBodyMouseLocker ) ;
-    d->getRect();
+    return d->getRect();
 }
 
 QRect QQtBodyMouseLocker::getContentRect ( QWidget* target )
 {
     Q_D ( QQtBodyMouseLocker ) ;
-    d->getTargetRect ( target );
+    return d->getTargetRect ( target );
+}
+
+QRect QQtBodyMouseLocker::getSourceRect ( QWidget* target )
+{
+    Q_D ( QQtBodyMouseLocker ) ;
+    return d->getSourceRect ( target );
 }
 
 bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
@@ -74,8 +80,6 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
     //bool atti = ( ( QWidget* ) watched )->testAttribute ( Qt::WA_TransparentForMouseEvents );
     //if ( atti )
     //    return QObject::eventFilter ( watched, event );
-
-    //鼠标mustin 和 mustnotin需要判断一下。
 
     //static int i = 0;
     //pline() << i++ << event->type() << watched->objectName();
@@ -101,15 +105,33 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
         case QEvent::MouseButtonRelease:
         {
             //鼠标点击的时候使用
+            QMouseEvent* e = ( QMouseEvent* ) event;
             QWidget* target = qobject_cast<QWidget*> ( watched );
-            QRect rectMustIn = QRect ( target->mapToGlobal ( target->rect().topLeft() ),
-                                       target->mapToGlobal ( target->rect().bottomRight() ) );
-            QRect rectMustNotIn = d->getTargetRect ( target );
+            QWidget& w = *target;
+
+            if ( !target->isActiveWindow() )
+            {
+                event->ignore();
+                return false;
+            }
+
+            QRect rectMustIn = QRect ( w.mapToGlobal ( w.rect().topLeft() ), w.mapToGlobal ( w.rect().bottomRight() ) );
+            QMargins m_margins = w.contentsMargins();
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+            QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
+#else
+            QRect rectMustNotIn = rectMustIn.marginsRemoved ( m_margins );
+#endif
             QPoint cursorPos = QCursor::pos();
-            //在content里面才能响应
+
+            //在content里面才能响应 [比较的时候不放大坐标]
             if ( rectMustIn.contains ( cursorPos ) && rectMustNotIn.contains ( cursorPos ) )
-                if ( rectMustNotIn != d->getRect()  )
+            {
+                //设置的时候放大。Windows/Unix不一样。
+                if ( d->getTargetRect ( target ) != d->getRect()  )
                     addWindow ( target );
+            }
+            //pline() << rectMustIn << rectMustNotIn << d->getRect() << cursorPos << e->globalPos();
             event->accept();
             return false;
         }
@@ -127,20 +149,4 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
 
     return QObject::eventFilter ( watched, event );
 
-}
-
-void QQtClipCursor ( const QRect globalRect )
-{
-    QQtBodyMouseMouseLockerThreadHelper::instance()->setTargetGlobalRect ( globalRect );
-}
-
-QRect QQtGetClipCursor()
-{
-    return QQtBodyMouseMouseLockerThreadHelper::instance()->getTargetGlobalRect();
-}
-
-void QQtClipCursorToWindow ( QWidget* target )
-{
-    QRect globalRect = QQtBodyMouseLockerPrivate::getTargetRect ( target );
-    QQtClipCursor ( globalRect );
 }
