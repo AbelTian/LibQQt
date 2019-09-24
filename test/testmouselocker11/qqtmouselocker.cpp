@@ -11,6 +11,18 @@ QQtMouseLocker::~QQtMouseLocker()
     delete d_ptr;
 }
 
+void QQtMouseLocker::lockWindow ( QWidget* target )
+{
+    Q_D ( QQtMouseLocker ) ;
+    d->lockWindow ( target );
+}
+
+void QQtMouseLocker::unlockWindow ( QWidget* target )
+{
+    Q_D ( QQtMouseLocker ) ;
+    d->unlockWindow ( target );
+}
+
 bool QQtMouseLocker::eventFilter ( QObject* watched, QEvent* event )
 {
     //过滤掉不是QWidget

@@ -1,15 +1,25 @@
-#include "qqtmouselocker_p.h"
+﻿#include "qqtmouselocker_p.h"
 #include "qqtmouselocker.h"
 
 QQtMouseLockerPrivate::QQtMouseLockerPrivate ( QQtMouseLocker* q )
 {
     q_ptr = q;
-    i_ptr = new QQtMouseLockerImpl();
+    i_ptr = new QQtMouseLockerImpl ( );
 }
 
 QQtMouseLockerPrivate::~QQtMouseLockerPrivate()
 {
     delete i_ptr;
+}
+
+void QQtMouseLockerPrivate::lockWindow ( QWidget* target )
+{
+    i_ptr->lockWindow ( target );
+}
+
+void QQtMouseLockerPrivate::unlockWindow ( QWidget* target )
+{
+    i_ptr->unlockWindow ( target );
 }
 
 void QQtMouseLockerPrivate::focusInEvent ( QFocusEvent* event, QWidget* target )

@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -18,6 +18,10 @@ public:
 private:
     Ui::MainWindow* ui;
 
+
+    // QObject interface
+public:
+    virtual bool eventFilter ( QObject* watched, QEvent* event ) override;
 };
 
 #endif // MAINWINDOW_H

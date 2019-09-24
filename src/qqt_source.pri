@@ -367,6 +367,14 @@ contains (DEFINES, __EXQUISITE__) {
     SOURCES += \
         $$PWD/exquisite/qqtchildbodymover.cpp
 
+    #在窗体里锁定鼠标
+    HEADERS += \
+        $$PWD/exquisite/qqtbodymouselocker_p.h \
+        $$PWD/exquisite/qqtbodymouselocker.h
+    SOURCES += \
+        $$PWD/exquisite/qqtbodymouselocker_p.cpp \
+        $$PWD/exquisite/qqtbodymouselocker.cpp
+
     #不规则形状的控件
     contains (DEFINES, __IRREGULARWIDGETS__) {
         SOURCES += \

@@ -1,4 +1,4 @@
-#ifndef QQTMOUSELOCKER_P_H
+﻿#ifndef QQTMOUSELOCKER_P_H
 #define QQTMOUSELOCKER_P_H
 
 #include <QtCore/qglobal.h>
@@ -20,7 +20,10 @@ class QQtMouseLockerPrivate
 {
 public:
     QQtMouseLockerPrivate ( QQtMouseLocker* q );
-    ~QQtMouseLockerPrivate();
+    virtual ~QQtMouseLockerPrivate();
+
+    void lockWindow ( QWidget* target );
+    void unlockWindow ( QWidget* target );
 
 public:
     virtual void focusInEvent ( QFocusEvent* event, QWidget* target = 0 );

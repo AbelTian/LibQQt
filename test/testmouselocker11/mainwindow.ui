@@ -55,9 +55,6 @@
       <height>151</height>
      </rect>
     </property>
-    <property name="mouseTracking">
-     <bool>true</bool>
-    </property>
     <property name="focusPolicy">
      <enum>Qt::WheelFocus</enum>
     </property>
@@ -73,9 +70,6 @@
       <width>141</width>
       <height>151</height>
      </rect>
-    </property>
-    <property name="mouseTracking">
-     <bool>true</bool>
     </property>
     <property name="focusPolicy">
      <enum>Qt::WheelFocus</enum>

@@ -1,4 +1,4 @@
-#ifndef QQTMOUSELOCKER_H
+﻿#ifndef QQTMOUSELOCKER_H
 #define QQTMOUSELOCKER_H
 
 #include <QObject>
@@ -12,10 +12,11 @@
  *
  * 使用方法：
  * QWidget* w;//需要锁定鼠标的窗口。
- * w->setMouseTracking(True);//必要
+ * //w->setMouseTracking(True);//不必要
  * //w->setFocusPolicy(Qt::StrongFocus);//不必要设置Focus。
- * QQtFrameMouseLocker* helper = new QQtFrameMouseLocker(parent) ;
- * w->installEventFilter(helper);//一步设置即可。
+ * QQtMouseLocker* helper = new QQtMouseLocker(parent) ;
+ * helper->lockWindow(w);//一步设置即可。
+ * helper->unlockWindow(w);//如果不使用了
  * 允许使用这一个句柄为多个窗口安装，各自独立工作，互不干扰。
  *
  * 工作原理：
@@ -30,10 +31,16 @@ class QQTSHARED_EXPORT QQtMouseLocker : public QObject
 
 public:
     QQtMouseLocker ( QObject* parent = 0 );
-    ~QQtMouseLocker();
+    virtual ~QQtMouseLocker();
+
+    //这里是开关锁定作用的接口。
+    void lockWindow ( QWidget* target );
+    void unlockWindow ( QWidget* target );
+
+    //用户不可以installEventFilter。
 
     // QObject interface
-public:
+protected:
     virtual bool eventFilter ( QObject* watched, QEvent* event ) override;
 
 private:

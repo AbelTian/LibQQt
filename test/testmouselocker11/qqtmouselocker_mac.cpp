@@ -29,9 +29,123 @@
 //start/stop 帮助开启和关闭eventFilter。
 //跟着rect改变clipcursor的范围
 
+//抓获鼠标
+//只要这个窗口变成active就会抓获
+
+//可以实时增加或者删除window
+//addwindow
+//removewindow
+
+//startcapture
+//stopcapture
+
 //选中的style1 style2 Qt、四角。
 
-QQtMouseLockerImpl::QQtMouseLockerImpl() {}
+QQtLockMouseThreadHelper::QQtLockMouseThreadHelper ( QObject* parent ) : QThread ( parent )
+{
+    workflag = false;
+}
+
+QQtLockMouseThreadHelper::~QQtLockMouseThreadHelper()
+{
+    stopThread();
+}
+
+void QQtLockMouseThreadHelper::setTargetWidget ( QWidget* target )
+{
+    tex.lock();
+    this->target = target;
+    tex.unlock();
+}
+
+void QQtLockMouseThreadHelper::startThread()
+{
+    tex.lock();
+    workflag = true;
+    tex.unlock();
+    start();
+}
+
+void QQtLockMouseThreadHelper::stopThread()
+{
+    tex.lock();
+    workflag = false;
+    tex.unlock();
+    quit();
+    wait();
+}
+
+void QQtLockMouseThreadHelper::run()
+{
+    while ( 1 )
+    {
+        tex.lock();
+        bool lworkflag = workflag;
+        tex.unlock();
+        if ( !lworkflag )
+            return;
+
+        QWidget* target;
+        tex.lock();
+        target = this->target;
+        tex.unlock();
+
+        if ( !target )
+            continue;
+
+        //这个引用需要加锁。用户必须保证，手动，优先于UI释放本locker。
+        if ( !target->isActiveWindow() )
+            continue;
+
+        QWidget& w = *target;
+
+        QPoint p0, p1;
+        p0 = w.rect().topLeft();
+        p1 = w.rect().bottomRight();
+        p0 = w.mapToGlobal ( p0 );
+        p1 = w.mapToGlobal ( p1 );
+        QRect s = QRect ( p0, p1 );
+
+        int x = QCursor::pos().x();
+        int y = QCursor::pos().y();
+
+        int x1 = x, y1 = y;
+        if ( x <= s.left() )
+            x1 = s.left();
+        if ( y <= s.top() )
+            y1 = s.top();
+        if ( x >= s.right() )
+            x1 = s.right();
+        if ( y >= s.bottom() )
+            y1 = s.bottom();
+
+        QCursor::setPos ( x1, y1 );
+        usleep ( 5 );
+    }
+}
+
+QQtMouseLockerImpl::QQtMouseLockerImpl ( )
+{
+    helper = new QQtLockMouseThreadHelper;
+}
+
+QQtMouseLockerImpl::~QQtMouseLockerImpl()
+{
+    delete helper;
+}
+
+void QQtMouseLockerImpl::lockWindow ( QWidget* target )
+{
+    //这里需要一个列表
+    helper->setTargetWidget ( target );
+    helper->startThread();
+}
+
+void QQtMouseLockerImpl::unlockWindow ( QWidget* target )
+{
+    //helper->setTargetWidget ( 0 );
+    //helper->stopThread();
+}
 
 void QQtMouseLockerImpl::focusInEvent ( QFocusEvent* event, QWidget* target )
 {
@@ -56,6 +170,9 @@ void QQtMouseLockerImpl::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
         event->ignore();
         return;
     }
+
+    helper->setTargetWidget ( target );
+    return;
 
     QWidget& w = *target;
 
@@ -102,12 +219,4 @@ void QQtMouseLockerImpl::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
 #endif
 
     event->accept();
-}
-
-QQtLockMouseThreadHelper::QQtLockMouseThreadHelper ( QObject* parent ) : QThread ( parent ) {}
-
-QQtLockMouseThreadHelper::~QQtLockMouseThreadHelper() {}
-
-void QQtLockMouseThreadHelper::run()
-{
 }
