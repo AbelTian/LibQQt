@@ -131,7 +131,7 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
                 if ( d->getTargetRect ( target ) != d->getRect()  )
                     addWindow ( target );
             }
-            //pline() << rectMustIn << rectMustNotIn << d->getRect() << cursorPos << e->globalPos();
+            //pline() << rectMustIn << rectMustNotIn << d->getTargetRect ( target ) << d->getRect() << ( d->getTargetRect ( target ) != d->getRect() ) << cursorPos << e->globalPos();
             event->accept();
             return false;
         }

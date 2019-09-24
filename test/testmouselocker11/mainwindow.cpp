@@ -99,8 +99,8 @@ bool MainWindow::eventFilter ( QObject* watched, QEvent* event )
                 helper->removeWindow ( ui->widget ); //helper->addWindow ( ui->widget );
             else
                 helper->addWindow ( ui->widget );
-            event->accept();
             pline() << qr0 << qr1 << mousePos;
+            event->accept();
             return true;
 
         }

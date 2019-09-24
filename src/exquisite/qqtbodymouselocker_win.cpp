@@ -27,7 +27,7 @@ void QQtBodyMouseLockerPrivate::addRect ( const QRect globalRect )
     mainWinRect.top = ( LONG ) globalRect.top();
     mainWinRect.bottom = ( LONG ) globalRect.bottom();
 
-    pline() << globalRect;
+    //pline() << globalRect;
     if ( globalRect == QRect ( 0, 0, 0, 0 ) )
     {
         ClipCursor ( NULL );
@@ -46,7 +46,7 @@ QRect QQtBodyMouseLockerPrivate::getRect()
         qr0 = QRect ( QPoint ( r0.left, r0.top ), QPoint ( r0.right, r0.bottom ) );
     }
     bool ret = GetClipCursor ( &r0 );
-    pline() << qr0 << ret;
+    //pline() << qr0 << ret;
     return qr0;
 }
 
