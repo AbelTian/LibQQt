@@ -26,7 +26,7 @@
  * 允许使用这一个句柄为多个窗口安装，各自独立工作，互不干扰。
  * setMouseTracking(true) 鼠标划过就能捕获
  * setMouseTracking(false) 鼠标点击才能捕获
- * 无论mouseTracking如何，在窗口从非active到active的时候，最近一次捕获鼠标的窗口，会立即捕获鼠标。
+ * 在窗口从非active到active的时候，不会立即捕获鼠标。
  *
  * 功能约束：
  * 用户必须手动停止capture，内部也有帮助停止，但是还是要依赖手动停止，
@@ -53,6 +53,7 @@ public:
     QQtBodyMouseLocker ( QObject* parent = 0 );
     virtual ~QQtBodyMouseLocker();
 
+public:
     //这里开启、停止锁定功能。默认已经开启。
     void startCapture();
     void stopCapture();

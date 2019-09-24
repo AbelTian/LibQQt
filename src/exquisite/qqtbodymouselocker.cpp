@@ -97,7 +97,7 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
             return false;
         }
 #endif
-#if 1
+#if 0
         //用于解决启动时获取鼠标
         //用于解决窗口从unactive到active状态切换的时候获取鼠标
         case QEvent::WindowActivate:
@@ -112,7 +112,7 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
             return false;
         }
 #endif
-#if 1
+#if 0
         //窗口不活动以后关闭捕获鼠标 省电
         case QEvent::WindowDeactivate:
         {
@@ -128,9 +128,9 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
             return false;
         }
 #endif
-#if 1
+#if 0
         //点击窗口时捕获鼠标
-        //这一个还是有用的，用户设置了多个窗口锁定鼠标的时候，有这个才能实时响应鼠标点击动作进行捕获。在tracking为false的时候。
+        //这一个还是有用的，用户设置了多个窗口锁定鼠标的时候，有这个才能实时响应鼠标点击动作进行捕获。尤其在tracking为false的时候。
         case QEvent::MouseButtonPress:
         {
             QWidget* target = qobject_cast<QWidget*> ( watched );

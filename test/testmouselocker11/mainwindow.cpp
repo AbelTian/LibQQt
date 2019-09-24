@@ -35,7 +35,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->widget->setMouseTracking ( true );
     //ui->widget_2->setMouseTracking ( true );
 
-    this->installEventFilter ( this );
+    //this->installEventFilter ( this );
 }
 
 MainWindow::~MainWindow()
