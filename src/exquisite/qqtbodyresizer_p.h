@@ -10,7 +10,7 @@ class QQtBodyResizerPrivate
 {
 public:
     explicit QQtBodyResizerPrivate ( QQtBodyResizer* q );
-    ~QQtBodyResizerPrivate();
+    virtual ~QQtBodyResizerPrivate();
 
     enum MoveDirection
     {

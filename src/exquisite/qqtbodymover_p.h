@@ -11,7 +11,7 @@ class QQtBodyMoverPrivate
 {
 public:
     QQtBodyMoverPrivate ( QQtBodyMover* q );
-    ~QQtBodyMoverPrivate();
+    virtual ~QQtBodyMoverPrivate();
 
 protected:
     virtual void mousePressEvent ( QMouseEvent* event, QWidget* target = 0 );

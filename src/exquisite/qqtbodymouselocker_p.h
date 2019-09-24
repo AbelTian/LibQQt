@@ -4,6 +4,7 @@
 #include <QtCore/qglobal.h>
 #include <QMouseEvent>
 #include <QThread>
+#include <QMutex>
 
 class QQtBodyMouseMouseLockerThreadHelper : public QThread
 {
