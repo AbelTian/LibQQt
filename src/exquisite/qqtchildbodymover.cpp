@@ -1,27 +1,23 @@
-#include <qqtchildbodymover.h>
+﻿#include <qqtchildbodymover.h>
 
 QQtChildBodyMover::QQtChildBodyMover ( QObject* parent ) : QObject ( parent )
 {
     bMousePressed = false;
-    m_margins = QMargins ( 10, 10, 10, 10 );
-
 }
 
 QQtChildBodyMover::~QQtChildBodyMover() {}
-
-QMargins& QQtChildBodyMover::margins()
-{
-    return m_margins;
-}
 
 void QQtChildBodyMover::mousePressEvent ( QMouseEvent* event, QWidget* target )
 {
     Q_ASSERT ( target );
 
+    QMargins m_margins = target->contentsMargins();
+
     //以下代码用来过滤边缘的margin。
 #if 1
     //maptoGlobal(rect()) 与 globalPos 对比
-    QRect rectMustIn = QRect ( target->mapToGlobal ( target->rect().topLeft() ), target->mapToGlobal ( target->rect().bottomRight() ) );
+    QRect rectMustIn = QRect ( target->mapToGlobal ( target->rect().topLeft() ),
+                               target->mapToGlobal ( target->rect().bottomRight() ) );
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
 #else

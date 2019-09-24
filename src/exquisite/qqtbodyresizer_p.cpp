@@ -14,21 +14,10 @@ QQtBodyResizerPrivate::QQtBodyResizerPrivate ( QQtBodyResizer* q ) :
     q_ptr ( q )
 {
     bMousePressed = false;
-    m_margins = QMargins ( 10, 10, 10, 10 );
 }
 
 QQtBodyResizerPrivate::~QQtBodyResizerPrivate()
 {
-}
-
-QMargins& QQtBodyResizerPrivate::margins()
-{
-    return m_margins;
-}
-
-const QMargins& QQtBodyResizerPrivate::margins() const
-{
-    return m_margins;
 }
 
 void QQtBodyResizerPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target )
@@ -206,6 +195,8 @@ void QQtBodyResizerPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target
 
         pressedPoint = event->globalPos();
 
+        QMargins m_margins = target->contentsMargins();
+
         if ( width > ( m_margins.left() + m_margins.right() ) &&
              height > ( m_margins.top() + m_margins.bottom() ) )
         {
@@ -221,6 +212,10 @@ void QQtBodyResizerPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target
 
 void QQtBodyResizerPrivate::checkDirection ( QMouseEvent* event, QWidget* target )
 {
+    Q_ASSERT ( target );
+
+    QMargins m_margins = target->contentsMargins();
+
 #if 0
     //geometry 与 globalPos 对比 root窗口
     QRect rectMustIn = target->geometry();//target->frameGeometry();
@@ -249,7 +244,8 @@ void QQtBodyResizerPrivate::checkDirection ( QMouseEvent* event, QWidget* target
 
 #if 1
     //maptoGlobal(rect()) 与 globalPos 对比
-    QRect rectMustIn = QRect ( target->mapToGlobal ( target->rect().topLeft() ), target->mapToGlobal ( target->rect().bottomRight() ) );
+    QRect rectMustIn = QRect ( target->mapToGlobal ( target->rect().topLeft() ),
+                               target->mapToGlobal ( target->rect().bottomRight() ) );
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
 #else

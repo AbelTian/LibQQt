@@ -5,6 +5,7 @@
 #include <qqtframemouselocker.h>
 #include <qqtbodymouselocker.h>
 #include <qqtcore.h>
+#include <qqtbodyresizer.h>
 
 QQtBodyMouseLocker* helper;
 MainWindow::MainWindow ( QWidget* parent ) :
@@ -35,7 +36,14 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->widget->setMouseTracking ( false );
     //ui->widget_2->setMouseTracking ( true );
 
-    //this->installEventFilter ( this );
+    ui->widget->installEventFilter ( this );
+
+    //与BodyMouseLocker冲突，在locker的时候，请不要resizer。
+    QQtBodyResizer* helper0 = new QQtBodyResizer ( this );
+    ui->widget->installEventFilter ( helper0 );
+
+    pline() << ui->widget->contentsMargins();
+    ui->widget->setContentsMargins ( 20, 20, 20, 20 );
 }
 
 MainWindow::~MainWindow()
@@ -59,24 +67,42 @@ bool MainWindow::eventFilter ( QObject* watched, QEvent* event )
         return QObject::eventFilter ( watched, event );
     switch ( event->type() )
     {
-        case QEvent::MouseButtonPress:
+        case QEvent::WindowActivate:
         {
-            QRect r0 = frameGeometry();
-            QRect r1 = geometry();
-            pline() << r0 << r1;
+            //原来答案在这里，用户如果希望窗口在activate的时候，目标窗口捕获鼠标，可是还要过滤掉标题栏，在这里实现！
             QMouseEvent* e = ( QMouseEvent* ) event;
-            if ( r0.contains ( e->globalPos() ) && !r1.contains ( e->globalPos() ) )
-                helper->stopCapture();
-            return false;
-        }
-        case QEvent::MouseButtonRelease:
-        {
-            QRect r0 = frameGeometry();
-            QRect r1 = geometry();
-            QMouseEvent* e = ( QMouseEvent* ) event;
-            if ( r0.contains ( e->globalPos() ) && !r1.contains ( e->globalPos() ) )
-                helper->stopCapture();
-            return false;
+            //QRect r0 = frameGeometry();
+            //QRect r1 = geometry();
+            //if ( r0.contains ( e->globalPos() ) && !r1.contains ( e->globalPos() ) )
+            //    helper->stopCapture();
+
+            QWidget& w = *this;
+            QRect frameR0 = frameGeometry();
+            QPoint p0, p1;
+            p0 = frameR0.topLeft();
+            p1 = frameR0.bottomRight();
+            //p0 = w.mapToGlobal ( p0 );
+            //p1 = w.mapToGlobal ( p1 );
+
+            QPoint mousePos = QCursor::pos();
+
+            qreal ratio = 1; w.devicePixelRatioF();
+            QRect r0 = QRect ( p0, p1 );
+            QRect qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ),
+                                QPoint ( r0.right() * ratio, r0.bottom() * ratio ) );
+
+            QRect r1 = rect();
+            QRect qr1 = QRect ( w.mapToGlobal ( r1.topLeft() ), w.mapToGlobal ( r1.bottomRight() ) );
+            r1 = geometry();
+
+            if ( qr0.contains ( mousePos ) && !qr1.contains ( mousePos ) )
+                helper->removeWindow ( ui->widget ); //helper->addWindow ( ui->widget );
+            else
+                helper->addWindow ( ui->widget );
+            event->accept();
+            pline() << qr0 << qr1 << mousePos;
+            return true;
+
         }
     }
     return QMainWindow::eventFilter ( watched, event );

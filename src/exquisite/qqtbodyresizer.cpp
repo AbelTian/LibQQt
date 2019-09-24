@@ -1,4 +1,4 @@
-#include "qqtbodyresizer.h"
+﻿#include "qqtbodyresizer.h"
 #include "qqtbodyresizer_p.h"
 
 #include <QWidget>
@@ -12,12 +12,6 @@ QQtBodyResizer::QQtBodyResizer ( QObject* parent ) : QObject ( parent )
 QQtBodyResizer::~QQtBodyResizer()
 {
     delete d_ptr;
-}
-
-QMargins& QQtBodyResizer::margins()
-{
-    Q_D ( QQtBodyResizer );
-    return d->margins();
 }
 
 bool QQtBodyResizer::eventFilter ( QObject* watched, QEvent* event )
@@ -63,5 +57,4 @@ bool QQtBodyResizer::eventFilter ( QObject* watched, QEvent* event )
     }
 
     return QObject::eventFilter ( watched, event );
-
 }

@@ -28,6 +28,7 @@ void QQtBodyMouseLocker::stopCapture()
 void QQtBodyMouseLocker::addWindow ( QWidget* target )
 {
     Q_ASSERT ( target );
+
     Q_D ( QQtBodyMouseLocker ) ;
     d->addWindow ( target );
 }
@@ -35,7 +36,27 @@ void QQtBodyMouseLocker::addWindow ( QWidget* target )
 void QQtBodyMouseLocker::removeWindow ( QWidget* target )
 {
     Q_ASSERT ( target );
-    target->removeEventFilter ( this );
+
+    Q_D ( QQtBodyMouseLocker ) ;
+    d->addRect ( QRect ( 0, 0, 0, 0 ) );
+}
+
+void QQtBodyMouseLocker::addClipCursor ( const QRect globalRect )
+{
+    Q_D ( QQtBodyMouseLocker ) ;
+    d->addRect ( globalRect );
+}
+
+QRect QQtBodyMouseLocker::getClipCursor()
+{
+    Q_D ( QQtBodyMouseLocker ) ;
+    d->getRect();
+}
+
+QRect QQtBodyMouseLocker::getContentRect ( QWidget* target )
+{
+    Q_D ( QQtBodyMouseLocker ) ;
+    d->getTargetRect ( target );
 }
 
 bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
@@ -54,124 +75,55 @@ bool QQtBodyMouseLocker::eventFilter ( QObject* watched, QEvent* event )
     //if ( atti )
     //    return QObject::eventFilter ( watched, event );
 
-    static int i = 0;
-    pline() << i++ << event->type() << watched->objectName();
+    //鼠标mustin 和 mustnotin需要判断一下。
 
-    QWidget* target = qobject_cast<QWidget*> ( watched );
-    QWidget& w = *target;
-
-    QPoint p0, p1;
-    p0 = w.rect().topLeft();
-    p1 = w.rect().bottomRight();
-    p0 = w.mapToGlobal ( p0 );
-    p1 = w.mapToGlobal ( p1 );
-    QRect r0 = QRect ( p0, p1 );
-
-    qreal ratio = 1; w.devicePixelRatioF();
-    QRect qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ),
-                        QPoint ( r0.right() * ratio, r0.bottom() * ratio ) );
-
-    QRect globalRect = qr0;
+    //static int i = 0;
+    //pline() << i++ << event->type() << watched->objectName();
 
     Q_D ( QQtBodyMouseLocker ) ;
 
     switch ( event->type() )
     {
-#if 0
-        //这两个有个bug，
-        //FocusIn有bug，当从外部接触内部标题栏，FocusIN激发，鼠标摁住移动窗口只能在一个小范围移动。必须重新摁一次才能整体移动。
-        //我的处理办法是，屏蔽掉这两个，已经满足要求，不必要这两个函数。
+        //用户自行添加，过滤标题栏
+        //case QEvent::WindowActivate:
 
-        //FocusIN激发的时候，摁住标题栏移动窗口时是否应当夺取鼠标？否定。
-        //此处，禁止按照游戏窗口剥夺的思路，如果用户需要，那么自行添加功能。
+        //用户自行添加，如果需要
+        //case QEvent::ContentsRectChange:
+        //case QEvent::UpdateLater:
+        //case QEvent::UpdateRequest:
 
-        //激发时，如果是activeWindows，如果鼠标在frameGeometry外边，就截获。
-        //                          如果在titleBar里面，press，必须move完成，release后，截获。
-        case QEvent::FocusIn:
-        {
-            QFocusEvent* e = ( QFocusEvent* ) event;
-            d->focusInEvent ( e, ( QWidget* ) watched );
-            return false;
-        }
-        case QEvent::FocusOut:
-        {
-            QFocusEvent* e = ( QFocusEvent* ) event;
-            d->focusOutEvent ( e, ( QWidget* ) watched );
-            return false;
-        }
-#endif
-#if 0
-        //这一个就足够了?不论用polish还是windowactivate，都会是后添加的widget的消息起作用。哎呀。切换时有鼠标跳跃。
-        case QEvent::Polish:
-        {
-            QWidget* target = qobject_cast<QWidget*> ( watched );
-            //if ( target->isActiveWindow() )
-            addWindow ( target );
-            //pline() << target->isActiveWindow();
-            //pline() << target->objectName();
-            //经过测试，WindowsActivate比Press先发生
-            //pline() << watched->objectName() << event->type();
-            return false;
-        }
-#endif
-#if 0
-        //用于解决启动时获取鼠标
-        //用于解决窗口从unactive到active状态切换的时候获取鼠标
-        case QEvent::WindowActivate:
-        {
-            QWidget* target = qobject_cast<QWidget*> ( watched );
-            //if ( target->isActiveWindow() )
-            addWindow ( target );
-            //pline() << target->isActiveWindow();
-            //pline() << target->objectName();
-            //经过测试，WindowsActivate比Press先发生
-            //pline() << watched->objectName() << event->type();
-            return false;
-        }
-#endif
-#if 0
-        //窗口不活动以后关闭捕获鼠标 省电
-        case QEvent::WindowDeactivate:
-        {
-            //stopCapture();
-            //QWidget* target = qobject_cast<QWidget*> ( watched );
-            //if ( target->isActiveWindow() )
-            //addWindow ( target );
-            //pline() << target->isActiveWindow();
-            //pline() << target->objectName();
-            //经过测试，WindowsActivate比Press先发生
-            //pline() << watched->objectName() << event->type();
-            //startCapture();
-            return false;
-        }
-#endif
-#if 0
-        //点击窗口时捕获鼠标
-        //这一个还是有用的，用户设置了多个窗口锁定鼠标的时候，有这个才能实时响应鼠标点击动作进行捕获。尤其在tracking为false的时候。
+        //用户自行添加，如果需要
+        //case QEvent::Move:
+        //case QEvent::Resize:
+
         case QEvent::MouseButtonPress:
-        {
-            QWidget* target = qobject_cast<QWidget*> ( watched );
-            addWindow ( target );
-            //pline() << watched->objectName() << event->type();
-            return false;
-        }
-#endif
+        case QEvent::MouseMove:
         case QEvent::MouseButtonRelease:
         {
-            addWindow ( target );
+            //鼠标点击的时候使用
+            QWidget* target = qobject_cast<QWidget*> ( watched );
+            QRect rectMustIn = QRect ( target->mapToGlobal ( target->rect().topLeft() ),
+                                       target->mapToGlobal ( target->rect().bottomRight() ) );
+            QRect rectMustNotIn = d->getTargetRect ( target );
+            QPoint cursorPos = QCursor::pos();
+            //在content里面才能响应
+            if ( rectMustIn.contains ( cursorPos ) && rectMustNotIn.contains ( cursorPos ) )
+                if ( rectMustNotIn != d->getRect()  )
+                    addWindow ( target );
+            event->accept();
             return false;
         }
+
         case QEvent::WindowDeactivate:
         {
             //如果不是活动窗口，就失效。----很重要。
             d->addRect ( QRect ( 0, 0, 0, 0 ) );
+            event->accept();
             return false;
         }
         default:
             break;
     }
-
-    //pline() << event->type() << watched->objectName();
 
     return QObject::eventFilter ( watched, event );
 
@@ -185,4 +137,10 @@ void QQtClipCursor ( const QRect globalRect )
 QRect QQtGetClipCursor()
 {
     return QQtBodyMouseMouseLockerThreadHelper::instance()->getTargetGlobalRect();
+}
+
+void QQtClipCursorToWindow ( QWidget* target )
+{
+    QRect globalRect = QQtBodyMouseLockerPrivate::getTargetRect ( target );
+    QQtClipCursor ( globalRect );
 }

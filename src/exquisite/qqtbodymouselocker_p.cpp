@@ -115,6 +115,15 @@ void QQtBodyMouseLockerPrivate::stopCapture()
 
 void QQtBodyMouseLockerPrivate::addWindow ( QWidget* target )
 {
+    //把margin过滤掉，
+    QRect rectMustNotIn = getTargetRect ( target );
+
+    //设置需要锁定的rect
+    helper->setTargetGlobalRect ( rectMustNotIn );
+}
+
+QRect QQtBodyMouseLockerPrivate::getTargetRect ( QWidget* target )
+{
     Q_ASSERT ( target );
 
     QWidget& w = *target;
@@ -130,7 +139,13 @@ void QQtBodyMouseLockerPrivate::addWindow ( QWidget* target )
     QRect qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ),
                         QPoint ( r0.right() * ratio, r0.bottom() * ratio ) );
 
+    QMargins m_margins = w.contentsMargins();
     QRect rectMustIn = qr0;
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+    QRect rectMustNotIn = rectMustIn.adjusted ( m_margins.left(), m_margins.top(), m_margins.right(), m_margins.bottom() );
+#else
+    QRect rectMustNotIn = rectMustIn.marginsRemoved ( m_margins );
+#endif
 
-    helper->setTargetGlobalRect ( rectMustIn );
+    return rectMustNotIn;
 }

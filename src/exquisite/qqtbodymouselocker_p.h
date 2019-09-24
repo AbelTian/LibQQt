@@ -45,12 +45,15 @@ public:
     QQtBodyMouseLockerPrivate ( QQtBodyMouseLocker* q );
     virtual ~QQtBodyMouseLockerPrivate();
 
-    //允许定义区域 QRect(0,0,0,0)为关闭。 = ClipCursor
+    //允许设置需要锁定的区域 QRect(0,0,0,0)为关闭。 = ClipCursor 输入全局坐标即可。
     void addRect ( const QRect globalRect );
     QRect getRect();
 
     //允许按照窗口进行定义
     void addWindow ( QWidget* target );
+
+    //根据target窗口求出目标锁定区域，去除margin用。如果没有这个margin，锁定状态下根本无法放大。
+    static QRect getTargetRect ( QWidget* target );
 
     //允许手动开关
     void startCapture();

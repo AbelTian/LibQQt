@@ -1,4 +1,4 @@
-#ifndef QQTBODYMOVER_H
+﻿#ifndef QQTBODYMOVER_H
 #define QQTBODYMOVER_H
 
 #include <QObject>
@@ -18,6 +18,7 @@
  * QQtBodyMover* helper = new QQtBodyMover(parent) ;
  * w->installEventFilter(helper);//一步设置即可。
  * 允许使用这一个句柄为多个窗口安装，各自独立工作，互不干扰。
+ * 允许用户设置适当的margins
  *
  * 工作原理：
  * 在鼠标move的时候，截获鼠标消息，使窗口移动。
@@ -27,6 +28,7 @@
  * 应用于子窗口，会导致窗口整体移动。
  * 应用于主窗口，能够正常移动，Windows下还会有titlebar的作用。
  * 在Windows、macOS、Linux等系统下表现一致。
+ *
  */
 class QQtBodyMoverPrivate;
 class QQTSHARED_EXPORT QQtBodyMover : public QObject
@@ -36,8 +38,6 @@ class QQTSHARED_EXPORT QQtBodyMover : public QObject
 public:
     QQtBodyMover ( QObject* parent = 0 );
     ~QQtBodyMover();
-
-    QMargins& margins();
 
     // QObject interface
 public:

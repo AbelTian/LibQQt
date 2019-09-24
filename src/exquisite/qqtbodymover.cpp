@@ -1,4 +1,4 @@
-#include "qqtbodymover.h"
+﻿#include "qqtbodymover.h"
 #include "qqtbodymover_p.h"
 
 #include <QWidget>
@@ -12,12 +12,6 @@ QQtBodyMover::QQtBodyMover ( QObject* parent ) : QObject ( parent )
 QQtBodyMover::~QQtBodyMover()
 {
     delete d_ptr;
-}
-
-QMargins& QQtBodyMover::margins()
-{
-    Q_D ( QQtBodyMover );
-    return d->margins();
 }
 
 bool QQtBodyMover::eventFilter ( QObject* watched, QEvent* event )

@@ -1,4 +1,4 @@
-#ifndef QQTBODYMOVER_P_H
+﻿#ifndef QQTBODYMOVER_P_H
 #define QQTBODYMOVER_P_H
 
 #include <QtCore/qglobal.h>
@@ -13,9 +13,6 @@ public:
     QQtBodyMoverPrivate ( QQtBodyMover* q );
     ~QQtBodyMoverPrivate();
 
-    QMargins& margins();
-    const QMargins& margins() const;
-
 protected:
     virtual void mousePressEvent ( QMouseEvent* event, QWidget* target = 0 );
     virtual void mouseReleaseEvent ( QMouseEvent* event, QWidget* target = 0 );
@@ -27,8 +24,6 @@ private:
 
     bool bMousePressed;
     QPoint pressedPoint;
-
-    QMargins m_margins;
 };
 
 #endif //QQTBODYMOVER_P_H
