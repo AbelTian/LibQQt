@@ -1,4 +1,4 @@
-#include <mainwidget.h>
+﻿#include <mainwidget.h>
 
 #include <qqtcore.h>
 
@@ -12,6 +12,8 @@ MainWidget::MainWidget ( QWidget* parent ) : QWidget ( parent )
 {
     //用户设置 - UI中
     setMouseTracking ( true );//必要
+
+    setContentsMargins ( 10, 10, 10, 10 );
 
     setWindowFlags ( windowFlags() | ( Qt::FramelessWindowHint ) );
 
