@@ -564,6 +564,8 @@ defineTest(add_defines_QQt){
 
         #opengl module [widgets,gui]
         DEFINES += __OPENGLWIDGETS__
+        #since Qt5.4
+        lessThan(QT_VERSION, 5.4):DEFINES-=__OPENGLWIDGETS__
         #ARMHF32, MIPS32 不支持
         contains(QSYS_PRIVATE, Arm32|Armhf32|Mips32|Embedded):DEFINES-=__OPENGLWIDGETS__
         contains (DEFINES, __OPENGLWIDGETS__) {

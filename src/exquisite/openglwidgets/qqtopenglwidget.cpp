@@ -2,20 +2,18 @@
 
 QQtOpenGLWidget::QQtOpenGLWidget ( QWidget* parent ) : QOpenGLWidget ( parent )
 {
-    pmGLFunctions = new QOpenGLFunctions ( this->context() );
-    pmGLFunctions->initializeOpenGLFunctions();
-    pline() << "Qt OpenGL Function GL feature:" << hex << pmGLFunctions->openGLFeatures();
+    initializeOpenGLFunctions();
+    pline() << "Qt OpenGL Function GL feature:" << hex << openGLFeatures();
 }
 
 QQtOpenGLWidget::~QQtOpenGLWidget()
 {
-    delete pmGLFunctions;
 }
 
 
 void QQtOpenGLWidget::initializeGL()
 {
-    glFuncs()->glBlendColor ( 0, 0, 0, 0 );
+    glBlendColor ( 0, 0, 0, 0 );
 #if 0
     //设置清除时颜色
     glClearColor ( 0.0, 0.0, 0.0, 0 );
@@ -51,7 +49,7 @@ void QQtOpenGLWidget::paintGL()
     glColor3f ( 1.0, 1.0, 1.0 );
     glRectd ( 2.0, 2.0, 0.0, 0.0 );
 #endif
-    glFuncs()->glClearDepthf ( 0 );
+    glClearDepthf ( 0 );
 
     paintOverlayGL();
 }

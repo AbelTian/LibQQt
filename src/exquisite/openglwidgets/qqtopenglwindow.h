@@ -1,7 +1,8 @@
 ﻿#ifndef QQTOPENGLWINDOW_H
 #define QQTOPENGLWINDOW_H
 
-#include <QOpenGLWidget>
+#include <QOpenGLWindow>
+#include <QOpenGLFunctions>
 
 #include "qqtcore.h"
 #include "qqt-local.h"
@@ -15,19 +16,30 @@
  * 建议用户继承下去，方便添加子OpenGL窗口，也可以闲置，仅仅作为OpenGL Widget的parent存在。
  * 好比在MainWindow下添加centralWidget。
  */
-class QQTSHARED_EXPORT QQtOpenGLWindow : public QOpenGLWidget
+class QQTSHARED_EXPORT QQtOpenGLWindow : public QOpenGLWindow, protected QOpenGLFunctions
 {
     Q_OBJECT
 public:
-    explicit QQtOpenGLWindow ( QWidget* parent = nullptr ) : QOpenGLWidget ( parent ) {
-
-    }
-    ~QQtOpenGLWindow() {
-
-    }
+    explicit QQtOpenGLWindow ( QWidget* parent = nullptr );
+    ~QQtOpenGLWindow();
 signals:
 
 public slots:
+
+    // QOpenGLWindow interface
+protected:
+    //背景
+    virtual void initializeGL() override;
+    virtual void resizeGL ( int w, int h ) override;
+    virtual void paintGL() override;
+    virtual void paintUnderGL() override;
+    virtual void paintOverGL() override;
+
+    //漂浮物
+    virtual void initializeOverlayGL();
+    virtual void resizeOverlayGL ( int w, int h );
+    virtual void paintOverlayGL();
+
 };
 
 #endif // QQTOPENGLWINDOW_H
