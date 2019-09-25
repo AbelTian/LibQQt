@@ -79,7 +79,7 @@ void QQtBodyMouseMouseLockerThreadHelper::run()
         if ( y >= s.bottom() )
             y1 = s.bottom();
 
-        if ( x1 != x && y1 != y )
+        if ( x1 != x || y1 != y )
             QCursor::setPos ( x1, y1 );
     }
 }
@@ -162,7 +162,8 @@ QRect QQtBodyMouseLockerPrivate::getSourceRect ( QWidget* target )
     QRect r0 = QRect ( p0, p1 );
 
     qreal ratio = 1; //w.devicePixelRatioF(); 这个在Unix系统里没有用。
-    QRect qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ), QPoint ( r0.right() * ratio, r0.bottom() * ratio ) );
+    QRect qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ), QPoint ( r0.right() * ratio,
+                                                                                 r0.bottom() * ratio ) );
     return qr0;
 }
 

@@ -25,7 +25,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //bug: 如何使窗口刚刚启动的时候，就获取到鼠标？WindowActivate
 
     helper = new QQtBodyMouseLocker ( this );
-    //ui->widget->installEventFilter ( helper );
+    ui->widget->installEventFilter ( helper );
     //ui->widget_2->installEventFilter ( helper );
     //helper->addWindow ( ui->widget );
     //helper->addWindow ( ui->widget_2 );
@@ -103,6 +103,15 @@ bool MainWindow::eventFilter ( QObject* watched, QEvent* event )
             event->accept();
             return true;
 
+        }
+        //可选
+        case QEvent::WindowDeactivate:
+        {
+            //如果不是活动窗口，就失效。----很重要。
+            helper->addClipCursor ( QRect ( 0, 0, 0, 0 ) );
+            event->accept();
+            pline() << "deactivate";
+            return true;
         }
     }
     return QMainWindow::eventFilter ( watched, event );
