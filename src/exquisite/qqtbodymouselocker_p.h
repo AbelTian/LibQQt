@@ -3,6 +3,8 @@
 
 #if defined (__DESKTOP_WIN__)
 #include <qqtbodymouselocker_win.h>
+#elif defined (__DESKTOP_LINUX__)
+#include <qqtbodymouselocker_x11.h>
 #else
 #include <qqtbodymouselocker_unix.h>
 #endif

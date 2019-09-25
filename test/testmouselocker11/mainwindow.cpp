@@ -25,7 +25,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //bug: 如何使窗口刚刚启动的时候，就获取到鼠标？WindowActivate
 
     helper = new QQtBodyMouseLocker ( this );
-    ui->widget->installEventFilter ( helper );
+    //ui->widget->installEventFilter ( helper );
     //ui->widget_2->installEventFilter ( helper );
     //helper->addWindow ( ui->widget );
     //helper->addWindow ( ui->widget_2 );

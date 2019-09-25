@@ -79,7 +79,8 @@ void QQtBodyMouseMouseLockerThreadHelper::run()
         if ( y >= s.bottom() )
             y1 = s.bottom();
 
-        QCursor::setPos ( x1, y1 );
+        if ( x1 != x && y1 != y )
+            QCursor::setPos ( x1, y1 );
     }
 }
 

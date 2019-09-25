@@ -374,11 +374,18 @@ contains (DEFINES, __EXQUISITE__) {
     SOURCES += \
         #$$PWD/exquisite/qqtbodymouselocker_p.cpp \
         $$PWD/exquisite/qqtbodymouselocker.cpp
-    contains(QSYS_PRIVATE, Win32|Win64|Windows){
+    contains(DEFINES, __DESKTOP_WIN__){
         HEADERS += \
             $$PWD/exquisite/qqtbodymouselocker_win.h
         SOURCES += \
             $$PWD/exquisite/qqtbodymouselocker_win.cpp
+    } else:contains(DEFINES, __DESKTOP_LINUX__) {
+        add_file($$PWD/exquisite/qqtbodymouselocker_x11.h)
+        add_file($$PWD/exquisite/qqtbodymouselocker_x11.cpp)
+        HEADERS += \
+            $$PWD/exquisite/qqtbodymouselocker_x11.h
+        SOURCES += \
+            $$PWD/exquisite/qqtbodymouselocker_x11.cpp
     } else {
         HEADERS += \
             $$PWD/exquisite/qqtbodymouselocker_unix.h
