@@ -314,7 +314,7 @@ defineTest(add_defines_QQt){
         #Qt Embedded，没有charts模块
         #对于这两种情况，默认删除去。如果用户自己编译了Charts，手动添加charts模块。
         lessThan(QT_VERSION, 5.7):DEFINES-=__QT_CHARTS__
-        contains(QSYS_PRIVATE, Arm32|Armhf32 || Mips32 || Embedded):DEFINES-=__QT_CHARTS__
+        contains(QSYS_PRIVATE, Arm32|Armhf32|Mips32|Embedded):DEFINES-=__QT_CHARTS__
         #based on QtCharts, need charts module
         contains(DEFINES, __QT_CHARTS__ ): QT += charts
 
@@ -446,7 +446,7 @@ defineTest(add_defines_QQt){
         #if you use QNetworkAccessManagerSupport , open this annotation
         DEFINES += __WEBACCESSSUPPORT__
         lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __WEBACCESSSUPPORT__
-        contains(DEFINES, __EMBEDDED_LINUX__):DEFINES -= __WEBACCESSSUPPORT__
+        contains(QSYS_PRIVATE, Arm32|Armhf32|Mips32|Embedded):DEFINES-=__WEBACCESSSUPPORT__
         contains (DEFINES, __WEBACCESSSUPPORT__) {
             #QSslError not found, you need recompiler Qt4
         }
@@ -463,7 +463,7 @@ defineTest(add_defines_QQt){
         #Qt4 QSslError not found, you need recompiler Qt4
         DEFINES += __SSLSUPPORT__
         #ARMHF32 MIPS32 不支持
-        contains(DEFINES, __EMBEDDED_LINUX__):DEFINES -= __SSLSUPPORT__
+        contains(QSYS_PRIVATE, Arm32|Armhf32|Mips32|Embedded):DEFINES-=__SSLSUPPORT__
         contains (DEFINES, __SSLSUPPORT__) {
         }
 
@@ -500,7 +500,7 @@ defineTest(add_defines_QQt){
         DEFINES -= QQT_ETHENET_MANAGER
         #arm mips
         #TODO: +wince +android +ios +macOS? +win? +linux?
-        contains(QSYS_PRIVATE, Arm32|Armhf32 || Mips32 || Embedded) {
+        contains(QSYS_PRIVATE, Arm32|Armhf32|Mips32|Embedded) {
             DEFINES += QQT_ETHENET_MANAGER
         }
     }
@@ -565,7 +565,7 @@ defineTest(add_defines_QQt){
         #opengl module [widgets,gui]
         DEFINES += __OPENGLWIDGETS__
         #ARMHF32, MIPS32 不支持
-        contains(DEFINES, __EMBEDDED_LINUX__):DEFINES -= __OPENGLWIDGETS__
+        contains(QSYS_PRIVATE, Arm32|Armhf32|Mips32|Embedded):DEFINES-=__OPENGLWIDGETS__
         contains (DEFINES, __OPENGLWIDGETS__) {
         }
 
@@ -574,7 +574,7 @@ defineTest(add_defines_QQt){
         #WinRT, Android, iOS
         #ARMHF32, MIPS32 不支持
         DEFINES += __GLWIDGETS__
-        contains(DEFINES, __EMBEDDED_LINUX__):DEFINES -= __GLWIDGETS__
+        contains(QSYS_PRIVATE, Arm32|Armhf32|Mips32|Embedded):DEFINES-=__GLWIDGETS__
         #内部没有提供任何关于opengl库的代码。
         DEFINES -= __GLWIDGETS__
         contains (DEFINES, __GLWIDGETS__) {
