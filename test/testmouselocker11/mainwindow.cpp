@@ -86,7 +86,7 @@ bool MainWindow::eventFilter ( QObject* watched, QEvent* event )
 
             QPoint mousePos = QCursor::pos();
 
-            qreal ratio = 1; w.devicePixelRatioF();
+            qreal ratio = 1; //w.devicePixelRatioF();
             QRect r0 = QRect ( p0, p1 );
             QRect qr0 = QRect ( QPoint ( r0.left() * ratio, r0.top() * ratio ),
                                 QPoint ( r0.right() * ratio, r0.bottom() * ratio ) );

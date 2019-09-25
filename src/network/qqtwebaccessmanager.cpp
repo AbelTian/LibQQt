@@ -15,8 +15,10 @@ QQtWebAccessManager::QQtWebAccessManager ( QObject* parent ) : QNetworkAccessMan
     connect ( this, SIGNAL ( proxyAuthenticationRequired ( QNetworkProxy, QAuthenticator* ) ),
               this, SLOT ( proxyAuthenticationRequired ( QNetworkProxy, QAuthenticator* ) ) );
 
+#ifdef __SSLSUPPORT__
     connect ( this,  SIGNAL ( sslErrors ( QNetworkReply*, QList<QSslError> ) ),
               this, SLOT ( sslErrors ( QNetworkReply*, QList<QSslError> ) ) );
+#endif
 
     connect ( this, SIGNAL ( networkAccessibleChanged ( QNetworkAccessManager::NetworkAccessibility ) ),
               this, SLOT ( networkAccessibleChanged ( QNetworkAccessManager::NetworkAccessibility ) ) );
@@ -66,6 +68,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( QString strUrl )
     netRequest.setHeader ( QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded" );
     netRequest.setUrl ( QUrl ( strUrl ) ); //地址信息
 
+#ifdef __SSLSUPPORT__
     if ( strUrl.toLower().startsWith ( "https" ) ) //https请求，需ssl支持(下载openssl拷贝libeay32.dll和ssleay32.dll文件至Qt bin目录或程序运行目录)
     {
         QSslConfiguration sslConfig;
@@ -73,6 +76,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendGetRequest ( QString strUrl )
         sslConfig.setProtocol ( QSsl::TlsV1_1 );
         netRequest.setSslConfiguration ( sslConfig );
     }
+#endif
 
     QQtWebAccessSession* session = sendGetRequest ( netRequest );
 
@@ -385,7 +389,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendDeleteResourceRequest ( const QNet
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
-                                                              QIODevice* data )
+        QIODevice* data )
 {
     QQtWebAccessSession* session = manager->newWebAccessSession();
     session->webAccessRequest() = request;
@@ -422,7 +426,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
 #if QT_VERSION > QT_VERSION_CHECK(5,7,1)
 
 QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
-                                                              const QByteArray& data )
+        const QByteArray& data )
 {
     QQtWebAccessSession* session = manager->newWebAccessSession();
     session->webAccessRequest() = request;
@@ -456,7 +460,7 @@ QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequ
 }
 
 QQtWebAccessSession* QQtWebAccessManager::sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
-                                                              QHttpMultiPart* multiPart )
+        QHttpMultiPart* multiPart )
 {
     QQtWebAccessSession* session = manager->newWebAccessSession();
     session->webAccessRequest() = request;
@@ -518,10 +522,12 @@ void QQtWebAccessManager::proxyAuthenticationRequired ( QNetworkProxy p, QAuthen
     //pline() << p.hostName() << a;
 }
 
+#ifdef __SSLSUPPORT__
 void QQtWebAccessManager::sslErrors ( QNetworkReply* r, QList<QSslError> e )
 {
     //pline() << r << e.size();
 }
+#endif
 
 void QQtWebAccessManager::networkAccessibleChanged ( QNetworkAccessManager::NetworkAccessibility a )
 {

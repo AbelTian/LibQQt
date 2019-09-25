@@ -7,7 +7,9 @@
 
 //import this struct will not build fail
 #include <QNetworkProxy>
+#ifdef __SSLSUPPORT__
 #include <QSslError>
+#endif
 #include <QStringList>
 #include <QUuid>
 
@@ -239,7 +241,7 @@ public:
     QQtWebAccessSession* sendPutRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart );
     QQtWebAccessSession* sendDeleteResourceRequest ( const QNetworkRequest& request );
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
-                                             QIODevice* data = Q_NULLPTR );
+            QIODevice* data = Q_NULLPTR );
 
     //win没有这几个函数
     //arm下5.5.1没有
@@ -249,9 +251,9 @@ public:
 #if defined( __DARWIN__ ) || defined( __LINUX__ )
 #if QT_VERSION > QT_VERSION_CHECK(5,7,1)
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
-                                             const QByteArray& data );
+            const QByteArray& data );
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
-                                             QHttpMultiPart* multiPart );
+            QHttpMultiPart* multiPart );
 #endif
 #endif
 
@@ -270,7 +272,9 @@ private slots:
     void finished ( QNetworkReply* reply );
     void authenticationRequired ( QNetworkReply*, QAuthenticator* );
     void proxyAuthenticationRequired ( QNetworkProxy, QAuthenticator* );
+#ifdef __SSLSUPPORT__
     void sslErrors ( QNetworkReply*, QList<QSslError> );
+#endif
     void networkAccessibleChanged ( QNetworkAccessManager::NetworkAccessibility );
     void networkSessionConnected();
 

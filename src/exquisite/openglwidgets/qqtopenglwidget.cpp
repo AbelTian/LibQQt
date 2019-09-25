@@ -1,8 +1,9 @@
 ﻿#include "qqtopenglwidget.h"
 
-QQtOpenGLWidget::QQtOpenGLWidget ( QWidget* parent ) : QGLWidget ( parent )
+QQtOpenGLWidget::QQtOpenGLWidget ( QWidget* parent ) : QOpenGLWidget ( parent )
 {
-    pmGLFunctions = new QGLFunctions ( this->context() );
+    pmGLFunctions = new QOpenGLFunctions ( this->context() );
+    pmGLFunctions->initializeOpenGLFunctions();
     pline() << "Qt OpenGL Function GL feature:" << hex << pmGLFunctions->openGLFeatures();
 }
 
@@ -19,6 +20,8 @@ void QQtOpenGLWidget::initializeGL()
     //设置清除时颜色
     glClearColor ( 0.0, 0.0, 0.0, 0 );
 #endif
+
+    initializeOverlayGL();
 }
 
 void QQtOpenGLWidget::resizeGL ( int w, int h )
@@ -35,6 +38,8 @@ void QQtOpenGLWidget::resizeGL ( int w, int h )
     glLoadIdentity();
     gluLookAt ( 0.0, 0.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0 );
 #endif
+
+    resizeOverlayGL ( w, h );
 }
 
 void QQtOpenGLWidget::paintGL()
@@ -48,6 +53,7 @@ void QQtOpenGLWidget::paintGL()
 #endif
     glFuncs()->glClearDepthf ( 0 );
 
+    paintOverlayGL();
 }
 
 void QQtOpenGLWidget::initializeOverlayGL()
@@ -59,18 +65,5 @@ void QQtOpenGLWidget::resizeOverlayGL ( int w, int h )
 }
 
 void QQtOpenGLWidget::paintOverlayGL()
-{
-}
-
-
-void QQtOpenGLWidget::mousePressEvent ( QMouseEvent* event )
-{
-}
-
-void QQtOpenGLWidget::mouseReleaseEvent ( QMouseEvent* event )
-{
-}
-
-void QQtOpenGLWidget::mouseDoubleClickEvent ( QMouseEvent* event )
 {
 }

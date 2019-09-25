@@ -107,6 +107,9 @@ win32:!cross_compile {
 #-------------------------------------------------
 #用户工程配置
 #-------------------------------------------------
+#嵌入式上不支持这个东西
+QT-=opengl
+
 equals(QSYS_PRIVATE, macOS) {
     CONFIG += app_bundle
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
@@ -122,6 +125,7 @@ contains(QSYS_PRIVATE, Android|AndroidX86) {
     ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
 }
 
+message ($${TARGET} Qt $${QT})
 message ($${TARGET} config $${CONFIG})
 message ($${TARGET} DEFINE $${DEFINES})
 message ($${TARGET} prelink $${QMAKE_PRE_LINK})
