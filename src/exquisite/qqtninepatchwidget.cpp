@@ -133,6 +133,49 @@ QQtNinePatchWidget::QQtNinePatchWidget ( QWidget* parent ) : QWidget ( parent )
     mCorner = QSize ( 0, 0 );
 }
 
+QQtNinePatchWidget::~QQtNinePatchWidget() {}
+
+void QQtNinePatchWidget::setImage ( const QImage& image )
+{
+    mImg = image;
+    update();
+}
+
+void QQtNinePatchWidget::setImage ( const QString& filename )
+{
+    mImg.load ( filename );
+    update();
+}
+
+void QQtNinePatchWidget::setImage ( const QPixmap& pixmap )
+{
+    mImg = pixmap.toImage();
+    update();
+}
+
+QImage& QQtNinePatchWidget::image()
+{
+    return mImg;
+}
+
+void QQtNinePatchWidget::setCornerSize ( QSize size )
+{
+    mCorner = size;
+    update();
+}
+
+void QQtNinePatchWidget::setCornerHeight ( int height )
+{
+    mCorner.setHeight ( height );
+    update();
+}
+
+void QQtNinePatchWidget::setCornerWidth ( int width )
+{
+    mCorner.setWidth ( width );
+    update();
+}
+
 
 void QQtNinePatchWidget::paintEvent ( QPaintEvent* event )
 {

@@ -21,36 +21,16 @@ class QQTSHARED_EXPORT QQtNinePatchWidget : public QWidget
     Q_OBJECT
 public:
     explicit QQtNinePatchWidget ( QWidget* parent = nullptr );
-    virtual ~QQtNinePatchWidget() {}
+    virtual ~QQtNinePatchWidget();
 
-    void setImage ( const QImage& image ) {
-        mImg = image;
-        update();
-    }
-    void setImage ( const QString& filename ) {
-        mImg.load ( filename );
-        update();
-    }
-    void setImage ( const QPixmap& pixmap ) {
-        mImg = pixmap.toImage();
-        update();
-    }
-    QImage& image() {
-        return mImg;
-    }
+    void setImage ( const QImage& image );
+    void setImage ( const QString& filename );
+    void setImage ( const QPixmap& pixmap );
+    QImage& image();
 
-    void setCornerSize ( QSize size ) {
-        mCorner = size;
-        update();
-    }
-    void setCornerHeight ( int height ) {
-        mCorner.setHeight ( height );
-        update();
-    }
-    void setCornerWidth ( int width ) {
-        mCorner.setWidth ( width );
-        update();
-    }
+    void setCornerSize ( QSize size );
+    void setCornerHeight ( int height );
+    void setCornerWidth ( int width );
 protected:
 
 signals:
