@@ -3,7 +3,6 @@
 
 QQtOpenGLWindow::QQtOpenGLWindow ( QWidget* parent ) : QOpenGLWidget ( parent )
 {
-    initializeOpenGLFunctions();
 }
 
 QQtOpenGLWindow::~QQtOpenGLWindow()
@@ -13,6 +12,10 @@ QQtOpenGLWindow::~QQtOpenGLWindow()
 
 void QQtOpenGLWindow::initializeGL()
 {
+    initializeOpenGLFunctions();
+    pline() << "Qt OpenGL Function GL feature:" << hex << openGLFeatures();
+
+
     initializeUnderGL();
     initializeOverGL();
 }

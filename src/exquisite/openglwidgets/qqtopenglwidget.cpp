@@ -2,8 +2,6 @@
 
 QQtOpenGLWidget::QQtOpenGLWidget ( QWidget* parent ) : QOpenGLWidget ( parent )
 {
-    initializeOpenGLFunctions();
-    pline() << "Qt OpenGL Function GL feature:" << hex << openGLFeatures();
 }
 
 QQtOpenGLWidget::~QQtOpenGLWidget()
@@ -13,6 +11,9 @@ QQtOpenGLWidget::~QQtOpenGLWidget()
 
 void QQtOpenGLWidget::initializeGL()
 {
+    initializeOpenGLFunctions();
+    pline() << "Qt OpenGL Function GL feature:" << hex << openGLFeatures();
+
     glBlendColor ( 0, 0, 0, 0 );
 #if 0
     //设置清除时颜色
