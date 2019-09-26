@@ -16,7 +16,7 @@
  * 建议用户继承下去，方便添加子OpenGL窗口，也可以闲置，仅仅作为OpenGL Widget的parent存在。
  * 好比在MainWindow下添加centralWidget。
  */
-class QQTSHARED_EXPORT QQtOpenGLWindow : public QOpenGLWindow, protected QOpenGLFunctions
+class QQTSHARED_EXPORT QQtOpenGLWindow : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
 public:
@@ -26,19 +26,22 @@ signals:
 
 public slots:
 
-    // QOpenGLWindow interface
+    // QOpenGLWidget interface
 protected:
-    //背景
+    //主要
     virtual void initializeGL() override;
     virtual void resizeGL ( int w, int h ) override;
     virtual void paintGL() override;
-    virtual void paintUnderGL() override;
-    virtual void paintOverGL() override;
+
+    //背景
+    virtual void initializeUnderGL();
+    virtual void resizeUnderGL ( int w, int h );
+    virtual void paintUnderGL();
 
     //漂浮物
-    virtual void initializeOverlayGL();
-    virtual void resizeOverlayGL ( int w, int h );
-    virtual void paintOverlayGL();
+    virtual void initializeOverGL();
+    virtual void resizeOverGL ( int w, int h );
+    virtual void paintOverGL();
 
 };
 

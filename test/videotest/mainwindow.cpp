@@ -1,5 +1,7 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+//#include <QVideoProbe>
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -7,15 +9,15 @@ MainWindow::MainWindow ( QWidget* parent ) :
 {
     ui->setupUi ( this );
 
-    QVideoProbe* prob = new QVideoProbe ( this );
+    //QVideoProbe* prob = new QVideoProbe ( this );
     QCamera* camera = new QCamera ( QCameraInfo::defaultCamera() );
     camera->setCaptureMode ( QCamera::CaptureVideo );
-    prob->setSource ( camera );
-    connect ( prob, SIGNAL ( videoFrameProbed ( const QVideoFrame& ) ),
-              this, SLOT ( slotTestProbe ( const QVideoFrame& ) ) );
+    //prob->setSource ( camera );
+    //connect ( prob, SIGNAL ( videoFrameProbed ( const QVideoFrame& ) ),
+    //          this, SLOT ( slotTestProbe ( const QVideoFrame& ) ) );
     connect ( ui->pushButton_3, SIGNAL ( released() ), camera, SLOT ( start() ) );
 
-    return;
+    //return;
 
     input = new QQtVideoInput ( this );
     pline() << input->defaultCamera();

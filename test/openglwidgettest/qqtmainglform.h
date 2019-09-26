@@ -1,4 +1,4 @@
-#ifndef QQTMAINGLFORM_H
+﻿#ifndef QQTMAINGLFORM_H
 #define QQTMAINGLFORM_H
 
 #include <qqtopenglwindow.h>

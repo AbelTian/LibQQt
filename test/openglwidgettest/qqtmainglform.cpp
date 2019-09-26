@@ -1,4 +1,4 @@
-#include "qqtmainglform.h"
+﻿#include "qqtmainglform.h"
 #include "ui_qqtmainglform.h"
 
 QQtMainGLForm::QQtMainGLForm ( QWidget* parent ) :
