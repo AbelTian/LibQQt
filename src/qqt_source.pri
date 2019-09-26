@@ -393,6 +393,22 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/qqtbodymouselocker_unix.cpp
     }
 
+    #在窗体里摁动鼠标滚轮缩放
+    add_file($$PWD/exquisite/qqtbodymousewheelscalingeffect.cpp)
+    add_file($$PWD/exquisite/qqtbodymousewheelscalingeffect.h)
+    SOURCES += \
+        $$PWD/exquisite/qqtbodymousewheelscalingeffect.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtbodymousewheelscalingeffect.h
+
+    #窗体被选中时的效果
+    add_file($$PWD/exquisite/qqtbodyselectedstyle.cpp)
+    add_file($$PWD/exquisite/qqtbodyselectedstyle.h)
+    SOURCES += \
+        $$PWD/exquisite/qqtbodyselectedstyle.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtbodyselectedstyle.h
+
     #不规则形状的控件
     contains (DEFINES, __IRREGULARWIDGETS__) {
         SOURCES += \

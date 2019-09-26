@@ -56,8 +56,8 @@ void QQtChildBodyMover::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
 {
     Q_ASSERT ( target );
 
-    QWidget* win = target->window();
-    if ( bMousePressed && !win->isMaximized() )
+    //QWidget* win = target->window();
+    if ( bMousePressed && !target->isMaximized() )
     {
         QPoint p1 = event->globalPos();
         QPoint pxy = p1 - pressedPoint;

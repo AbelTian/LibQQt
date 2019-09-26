@@ -47,17 +47,17 @@ void QQtBodyResizerPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target
 {
     Q_ASSERT ( target );
 
-    QWidget* win = target->window();
+    //QWidget* win = target->window();
 
 
     //如果鼠标没有press，遭遇到窗体边缘，变换鼠标样式。
-    if ( !bMousePressed && !win->isMaximized() )
+    if ( !bMousePressed && !target->isMaximized() )
     {
         checkDirection ( event, target );
     }
 
     //如果鼠标pressed，那么移动。
-    if ( bMousePressed && !win->isMaximized() )
+    if ( bMousePressed && !target->isMaximized() )
     {
         QRect oldGeometry = target->geometry();
         QPoint widgetPos = oldGeometry.topLeft();

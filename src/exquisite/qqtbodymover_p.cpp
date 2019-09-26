@@ -85,13 +85,13 @@ void QQtBodyMoverPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
     Q_ASSERT ( target );
 #ifdef __DESKTOP_WIN__
 #else
-    QWidget* win = target->window();
-    if ( bMousePressed && !win->isMaximized() )
+    //QWidget* win = target->window();
+    if ( bMousePressed && !target->isMaximized() )
     {
         QPoint movePoint = event->globalPos() - pressedPoint;
-        QPoint widgetPos = win->pos();
+        QPoint widgetPos = target->pos();
         pressedPoint = event->globalPos();
-        win->move ( widgetPos.x() + movePoint.x(), widgetPos.y() + movePoint.y() );
+        target->move ( widgetPos.x() + movePoint.x(), widgetPos.y() + movePoint.y() );
     }
     event->accept();
 #endif
