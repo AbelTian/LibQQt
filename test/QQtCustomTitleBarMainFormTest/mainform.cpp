@@ -14,6 +14,9 @@ MainForm::MainForm ( QWidget* parent ) :
     QQtBodyMover* h = new QQtBodyMover ( this );
     //此处不能安装给主窗体，在UNIX系统下，会和QQtTitleBar的鼠标移动共同作用，产生并和移动现象。
     ui->widget_2->installEventFilter ( h );
+    ui->widget_3->installEventFilter ( h );
+    ui->widget_4->installEventFilter ( h );
+    ui->widget_5->installEventFilter ( h );
 
     //这是使用QQtTitleBar的标准过程，请参见mainform.ui。
     setWindowIcon ( QIcon ( "logo.ico" ) );

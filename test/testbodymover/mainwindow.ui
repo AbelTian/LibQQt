@@ -43,43 +43,44 @@
      <string>Open</string>
     </property>
    </widget>
-   <widget class="QWidget" name="widget" native="true">
+   <widget class="QWidget" name="widget_4" native="true">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>220</x>
       <y>100</y>
-      <width>141</width>
-      <height>151</height>
+      <width>201</width>
+      <height>121</height>
      </rect>
     </property>
-    <property name="mouseTracking">
-     <bool>true</bool>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::WheelFocus</enum>
-    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 0, 0);</string>
+     <string notr="true">background-color: rgb(252, 88, 9);</string>
     </property>
    </widget>
-   <widget class="QWidget" name="widget_2" native="true">
+   <widget class="QWidget" name="widget_3" native="true">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>20</x>
       <y>100</y>
-      <width>141</width>
-      <height>151</height>
+      <width>191</width>
+      <height>121</height>
      </rect>
     </property>
-    <property name="mouseTracking">
-     <bool>true</bool>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::WheelFocus</enum>
-    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(85, 255, 0);</string>
+     <string notr="true">background-color: rgb(128, 255, 11);</string>
     </property>
+    <widget class="QWidget" name="widget_5" native="true">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>20</y>
+       <width>120</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(23, 0, 255);</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -88,7 +89,7 @@
      <x>0</x>
      <y>0</y>
      <width>633</width>
-     <height>28</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

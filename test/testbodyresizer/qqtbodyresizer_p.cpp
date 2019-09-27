@@ -48,7 +48,7 @@ void QQtBodyResizerPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target
 {
     Q_ASSERT ( target );
 
-    QWidget* win = target->window();
+    QWidget* win = target;
 
 
     //如果鼠标没有press，遭遇到窗体边缘，变换鼠标样式。

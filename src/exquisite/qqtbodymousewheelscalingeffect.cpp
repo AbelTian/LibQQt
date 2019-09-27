@@ -113,7 +113,7 @@ bool QQtBodyMouseWheelScalingEffect::eventFilter ( QObject* watched, QEvent* eve
                 y1 = w.geometry().top() - dx1 * ( scaling - 1 ) * aspio2;
                 y2 = y1 + ( x2 - x1 ) * aspio2;
                 //p2line() << dx1 << dx2 << scaling << aspio2;
-                p2line() << w.geometry() << QPoint ( x1, y1 ) << QPoint ( x2, y2 ) << QRect ( QPoint ( x1, y1 ), QPoint ( x2, y2 ) );
+                //p2line() << w.geometry() << QPoint ( x1, y1 ) << QPoint ( x2, y2 ) << QRect ( QPoint ( x1, y1 ), QPoint ( x2, y2 ) );
                 w.setGeometry ( QRect ( QPoint ( x1, y1 ), QPoint ( x2, y2 ) ) );
             }
 

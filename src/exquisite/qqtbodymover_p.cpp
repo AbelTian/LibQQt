@@ -39,8 +39,10 @@ void QQtBodyMoverPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target 
     //        << rectMustIn.contains ( event->globalPos() ) << rectMustNotIn.contains ( event->globalPos() );
 #endif
 
-    if ( target->isMaximized() ||
-         !target->isActiveWindow() ||
+    QWidget* win = target->window();
+
+    if ( win->isMaximized() ||
+         !win->isActiveWindow() ||
          !rectMustIn.contains ( cursorPos ) ||
          !rectMustNotIn.contains ( cursorPos ) )
     {
@@ -52,7 +54,7 @@ void QQtBodyMoverPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target 
     if ( ReleaseCapture() )
     {
         QWidget* pWindow = target->window();
-        if ( pWindow->isTopLevel() )
+        if ( 1 )
         {
             //SC_MOVE 移动命令
             //HTCAPTION 捕获鼠标命令，否则，会跑到标题栏上去。
@@ -85,13 +87,13 @@ void QQtBodyMoverPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
     Q_ASSERT ( target );
 #ifdef __DESKTOP_WIN__
 #else
-    //QWidget* win = target->window();
-    if ( bMousePressed && !target->isMaximized() )
+    QWidget* win = target->window();
+    if ( bMousePressed && !win->isMaximized() )
     {
         QPoint movePoint = event->globalPos() - pressedPoint;
-        QPoint widgetPos = target->pos();
+        QPoint widgetPos = win->pos();
         pressedPoint = event->globalPos();
-        target->move ( widgetPos.x() + movePoint.x(), widgetPos.y() + movePoint.y() );
+        win->move ( widgetPos.x() + movePoint.x(), widgetPos.y() + movePoint.y() );
     }
     event->accept();
 #endif

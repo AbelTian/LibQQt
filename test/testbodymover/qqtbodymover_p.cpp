@@ -25,7 +25,7 @@ void QQtBodyMoverPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target 
 #ifdef Q_OS_WIN
     if ( ReleaseCapture() )
     {
-        QWidget* pWindow = target->window();
+        QWidget* pWindow = target;
         if ( pWindow->isTopLevel() )
         {
             //SC_MOVE 移动命令
@@ -59,7 +59,7 @@ void QQtBodyMoverPrivate::mouseMoveEvent ( QMouseEvent* event, QWidget* target )
     Q_ASSERT ( target );
 #ifdef Q_OS_WIN
 #else
-    QWidget* win = target->window();
+    QWidget* win = target;
     if ( bMousePressed && !win->isMaximized() )
     {
         QPoint movePoint = event->globalPos() - pressedPoint;
