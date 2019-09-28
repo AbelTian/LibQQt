@@ -9,6 +9,7 @@
 #include <qqtbodyselectedstyle.h>
 
 #include <qqtbodymousewheelscalingeffect.h>
+QQtBodySelectedStyle* s0 ;
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -24,9 +25,10 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->widget->setFocusPolicy ( Qt::StrongFocus );
     ui->widget->installEventFilter ( new QQtChildBodyMover ( this ) );
     ui->widget->installEventFilter ( new QQtBodyResizer ( this ) );
-    QQtBodySelectedStyle* s0 = new QQtBodySelectedStyle ( this );
+    s0 = new QQtBodySelectedStyle ( this );
     ui->widget->installEventFilter ( s0 );
-    s0->setSelectedStyle ( QQtBodySelectedStyle::SelectedStyle_DottedLine );
+    //s0->setSelectedStyle ( QQtBodySelectedStyle::SelectedStyle_DottedLine );
+    ui->radioButton_3->setChecked ( true );
     //ui->widget->setImageStyle ( QQtWidget::QQTZOOM_KEEPASPECTRATIO );
     ui->widget->installEventFilter ( new QQtBodyMouseWheelScalingEffect ( this ) );
 }
@@ -34,4 +36,19 @@ MainWindow::MainWindow ( QWidget* parent ) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_radioButton_toggled ( bool checked )
+{
+    s0->setSelectedStyle ( QQtBodySelectedStyle::SelectedStyle_QtDesigner );
+}
+
+void MainWindow::on_radioButton_2_toggled ( bool checked )
+{
+    s0->setSelectedStyle ( QQtBodySelectedStyle::SelectedStyle_QRCodeScaner );
+}
+
+void MainWindow::on_radioButton_3_toggled ( bool checked )
+{
+    s0->setSelectedStyle ( QQtBodySelectedStyle::SelectedStyle_DottedLine );
 }
