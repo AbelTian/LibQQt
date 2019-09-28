@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QQtApplication>
 
 #include <testshadowwidget.h>
@@ -21,7 +21,7 @@ int main ( int argc, char* argv[] )
     w.show();
 #endif
 
-#if 0
+#if 1
     //shadow 实现。需要美化下效果。
     TestShadowWidget2 w;
     w.show();
@@ -33,7 +33,7 @@ int main ( int argc, char* argv[] )
     w.show();
 #endif
 
-#if 1
+#if 0
     //shadow 管用
     QQtShadowWidget* w = new QQtShadowWidget();
     //w->setWindowFlag ( Qt::FramelessWindowHint, true );
