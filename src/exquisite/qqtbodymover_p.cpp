@@ -39,6 +39,7 @@ void QQtBodyMoverPrivate::mousePressEvent ( QMouseEvent* event, QWidget* target 
     //        << rectMustIn.contains ( event->globalPos() ) << rectMustNotIn.contains ( event->globalPos() );
 #endif
 
+    //这里必须用target->window()，这代表root窗口。
     QWidget* win = target->window();
 
     if ( win->isMaximized() ||
