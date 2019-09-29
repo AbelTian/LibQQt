@@ -23,6 +23,17 @@ void QQtIrregularLabel::makeMaskWidget ( void )
     if ( normalImage.isNull() )
         return; //return QQtLabel::resizeEvent ( event );
 
+    if ( hasScaledContents() )
+    {
+        //zoom
+        setMask ( QPixmap::fromImage ( normalImage
+                                       .scaled ( rect().width(), rect().height(), Qt::IgnoreAspectRatio )
+                                     ).mask() );
+
+        return;
+
+    }
+
     //label的特点，
     //图片无论如何不会缩放的 !!!
     //图片无论如何不会变形的

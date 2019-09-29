@@ -116,9 +116,12 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->label_3->installEventFilter ( clicker );
 
     ui->label_8->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
+    //ui->label_8->setScaledContents ( true );
+    //ui->label_8->setAutoFillBackground ( true );
     ui->label_7->setPixmap ( QPixmap ( conf_root ( "a1.png" ) ) );
     ui->label_7->installEventFilter ( clicker );
     ui->label_7->installEventFilter ( this );
+    //ui->label_7->setScaledContents ( true );
 
     QStringList items;
     items << "Qt::AlignLeft"
