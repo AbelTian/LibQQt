@@ -21,7 +21,7 @@ class QQTSHARED_EXPORT QQtTitleBar : public QQtWidget
 
 public:
     explicit QQtTitleBar ( QWidget* parent = 0 );
-    ~QQtTitleBar();
+    virtual ~QQtTitleBar();
 
     void setMinimizeVisible ( bool setting );
     void setMaximizeVisible ( bool setting );
@@ -55,12 +55,12 @@ protected:
 private slots:
 
     // 进行最小化、最大化/还原、关闭操作
-    void onClicked();
+    virtual void onClicked();
 
 private:
 
     // 最大化/还原
-    void updateMaximize();
+    virtual void updateMaximize();
 
 private:
     QHBoxLayout* m_pLayout;
