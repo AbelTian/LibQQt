@@ -86,8 +86,11 @@ void QQtIrregularWidget::resizeEvent ( QResizeEvent* event )
 
 #if 1
             int w0, h0;
-            w0 = resultImage.width() - pixmap.width();
-            h0 = resultImage.height() - pixmap.height();
+            //bug?
+            //w0 = resultImage.width() - pixmap.width();
+            //h0 = resultImage.height() - pixmap.height();
+            w0 = resultImage.width() - image().width();
+            h0 = resultImage.height() - image().height();
 
             if ( w0 < 0 && h0 < 0 )
                 pixmap = QPixmap::fromImage ( image()
