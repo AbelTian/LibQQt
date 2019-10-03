@@ -7,6 +7,10 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtSlideTabWidget class
+ * 使用滑动效果tabbar的tabwidget。
+ */
 class QQTSHARED_EXPORT QQtSlideTabWidget : public QQtTabWidget
 {
     Q_OBJECT

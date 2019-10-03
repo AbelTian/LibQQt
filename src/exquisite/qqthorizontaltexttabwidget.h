@@ -7,6 +7,11 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtHorizontalTextTabWidget class
+ * 使用自定义tabbar，
+ * tabbar竖向的时候，文字是横向的。
+ */
 class QQTSHARED_EXPORT QQtHorizontalTextTabWidget : public QQtTabWidget
 {
     Q_OBJECT

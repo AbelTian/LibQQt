@@ -5,6 +5,10 @@
 
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtBodyMouseWheelScalingEffect class
+ * 用鼠标滚轮放大缩小控件
+ */
 class QQTSHARED_EXPORT QQtBodyMouseWheelScalingEffect : public QObject
 {
     Q_OBJECT

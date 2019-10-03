@@ -10,6 +10,12 @@
 #include "qqt-local.h"
 #include "qqtdictionary.h"
 
+/**
+ * @brief The QQtPictureTabBar class
+ * 使用图片的tabbar，支持竖向和横向。
+ * 图片和文字，支持多种排布格式。
+ * 竖向tabbar的文字是横向的。
+ */
 class QQTSHARED_EXPORT QQtPictureTabBar : public QQtTabBar
 {
     Q_OBJECT

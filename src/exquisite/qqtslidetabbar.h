@@ -15,6 +15,10 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtSlideTabBar class
+ * 带有滑动选择效果的tabbar
+ */
 class QQTSHARED_EXPORT QQtSlideTabBar : public QQtTabBar
 {
     Q_OBJECT
