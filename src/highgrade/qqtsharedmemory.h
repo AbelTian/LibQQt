@@ -1,4 +1,4 @@
-#ifndef QQTSHAREDMEMORY_H
+﻿#ifndef QQTSHAREDMEMORY_H
 #define QQTSHAREDMEMORY_H
 
 #include <QSharedMemory>
@@ -43,7 +43,7 @@ public:
     explicit QQtSharedMemory ( const QString& key, QObject* parent = Q_NULLPTR ) : QSharedMemory ( key, parent ) {
 
     }
-    ~QQtSharedMemory() {}
+    virtual ~QQtSharedMemory() {}
 
     //需要重写，改变共享内存块大小。
     virtual void initializer() {

@@ -14,15 +14,15 @@ class QQTSHARED_EXPORT QQtProgressDialog : public QQtDialog
     Q_OBJECT
 
 public:
-    explicit QQtProgressDialog(QWidget* parent = 0);
-    ~QQtProgressDialog();
+    explicit QQtProgressDialog ( QWidget* parent = 0 );
+    virtual ~QQtProgressDialog();
 
     void initAll();
-    void setRange(int min, int max);
-    void setContent(QString content);
+    void setRange ( int min, int max );
+    void setContent ( QString content );
 
 public slots:
-    void setValue(int value);
+    void setValue ( int value );
 
 private:
     Ui::QQtProgressDialog* ui;

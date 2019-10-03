@@ -1,4 +1,4 @@
-#ifndef QQTLONGCLICKSOUNDHELPER_H
+﻿#ifndef QQTLONGCLICKSOUNDHELPER_H
 #define QQTLONGCLICKSOUNDHELPER_H
 
 #include <qqt-local.h>
@@ -8,11 +8,10 @@
 
 /**
  * QQtLongClickSoundHelper
- *
  * 为Widget提供按键声音支持.
  *
  * 支持
- * click
+ * click、longclick
  *
  */
 class QQTSHARED_EXPORT QQtLongClickSoundHelper : public QQtLongClickHelper

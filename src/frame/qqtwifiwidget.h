@@ -55,7 +55,7 @@ class QQTSHARED_EXPORT QQtWiFiWidget : public QQtTableView
 
 public:
     explicit QQtWiFiWidget ( QWidget* parent = 0 );
-    ~QQtWiFiWidget();
+    virtual ~QQtWiFiWidget();
 
 private slots:
     void clickWIFI();

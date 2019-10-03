@@ -21,7 +21,7 @@ public:
     static QQtWavSoundEffect* Instance ( QObject* parent = nullptr );
 
     explicit QQtWavSoundEffect ( QObject* parent = nullptr );
-    ~QQtWavSoundEffect() {
+    virtual ~QQtWavSoundEffect() {
         stop();
     }
 

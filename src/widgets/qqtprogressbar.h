@@ -21,7 +21,7 @@ class QQTSHARED_EXPORT QQtProgressBar : public QWidget
 
 public:
     explicit QQtProgressBar ( QWidget* parent = 0 );
-    ~QQtProgressBar();
+    virtual ~QQtProgressBar();
 
     void setPixMap ( QString back, QString trunk );
 public slots:

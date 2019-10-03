@@ -15,7 +15,7 @@ class QQTSHARED_EXPORT QQtTcpServer : public QTcpServer
     Q_OBJECT
 public:
     explicit QQtTcpServer ( QObject* parent = 0 );
-    ~QQtTcpServer();
+    virtual ~QQtTcpServer();
 
     void installProtocolManager ( QQtProtocolManager* stackGroup );
     void uninstallProtocolManager ( QQtProtocolManager* stackGroup );

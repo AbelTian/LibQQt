@@ -35,7 +35,7 @@ class QQTSHARED_EXPORT QQtLogicPreviewWidget : public QWidget
 
 public:
     explicit QQtLogicPreviewWidget ( QWidget* parent = 0 );
-    ~QQtLogicPreviewWidget();
+    virtual ~QQtLogicPreviewWidget();
     int play();
     int close();
 

@@ -30,7 +30,7 @@ class QQTSHARED_EXPORT QQtLogicVideoManager : public QObject
 
 public:
     explicit QQtLogicVideoManager ( QObject* parent = 0 );
-    ~QQtLogicVideoManager();
+    virtual ~QQtLogicVideoManager();
 
     //用户进程只需要调用一次
     static void init_dmmu();
@@ -47,7 +47,8 @@ signals:
 protected:
     //yuv转rgb
     virtual int convert_yuv_to_rgb_pixel ( int y, int u, int v );
-    virtual int convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width, unsigned int height );
+    virtual int convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width,
+                                            unsigned int height );
 
 protected slots:
     void slotSendImageToClient();

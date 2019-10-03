@@ -11,7 +11,7 @@ class QQtNamedPipeMessage : public QQtMessage
     Q_OBJECT
 public:
     explicit QQtNamedPipeMessage ( QObject* parent = nullptr );
-    ~QQtNamedPipeMessage();
+    virtual ~QQtNamedPipeMessage();
 
     quint16& size();
     const quint16& size() const;
@@ -48,7 +48,7 @@ class QQtNamedPipeClientProtocol : public QQtProtocol
     Q_OBJECT
 public:
     explicit QQtNamedPipeClientProtocol ( QObject* parent = nullptr );
-    ~QQtNamedPipeClientProtocol();
+    virtual ~QQtNamedPipeClientProtocol();
 
     //收到外部发来的很多命令，处理一下告诉业务层干点什么。
     void recvCommand0x01 ( const QQtNamedPipeMessage& msg );
@@ -92,7 +92,7 @@ class QQtNamedPipeServerProtocol : public QQtProtocol
     Q_OBJECT
 public:
     explicit QQtNamedPipeServerProtocol ( QObject* parent = nullptr );
-    ~QQtNamedPipeServerProtocol();
+    virtual ~QQtNamedPipeServerProtocol();
 
     //收到外部发来的很多命令，处理一下告诉业务层干点什么。
     void recvCommand0x01 ( const QQtNamedPipeMessage& msg );

@@ -31,8 +31,8 @@ class QQTSHARED_EXPORT QQtCustomQrDecodeWidget : public QWidget
     Q_OBJECT
 
 public:
-    QQtCustomQrDecodeWidget(QWidget* parent = 0);
-    ~QQtCustomQrDecodeWidget();
+    QQtCustomQrDecodeWidget ( QWidget* parent = 0 );
+    virtual ~QQtCustomQrDecodeWidget();
 
 protected:
     QPoint m_startPoint;
@@ -43,17 +43,17 @@ protected:
     QString m_strScanResult;
 
 protected:
-    void mousePressEvent(QMouseEvent* e);
-    void mouseMoveEvent(QMouseEvent* e);
-    void mouseReleaseEvent(QMouseEvent*);
+    void mousePressEvent ( QMouseEvent* e );
+    void mouseMoveEvent ( QMouseEvent* e );
+    void mouseReleaseEvent ( QMouseEvent* );
 
-    void paintEvent(QPaintEvent* e);
-    void timerEvent(QTimerEvent* event);
+    void paintEvent ( QPaintEvent* e );
+    void timerEvent ( QTimerEvent* event );
 
 private:
     QMenu* mainMenu;
 private slots:
-    void SltActionTriggered(QAction* action);
+    void SltActionTriggered ( QAction* action );
 
 private:
     void ScanRecord();

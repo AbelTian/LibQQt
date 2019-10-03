@@ -15,7 +15,7 @@ class QQTSHARED_EXPORT QQtTabWidget : public QTabWidget
 
 public:
     explicit QQtTabWidget ( QWidget* parent = 0 );
-    ~QQtTabWidget();
+    virtual ~QQtTabWidget();
     /**
      * @brief setObjectName
      * 为了设置tabbar的objectname，内部的设置不清晰。

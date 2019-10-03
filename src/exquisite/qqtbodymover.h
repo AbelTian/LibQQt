@@ -37,7 +37,7 @@ class QQTSHARED_EXPORT QQtBodyMover : public QObject
 
 public:
     QQtBodyMover ( QObject* parent = 0 );
-    ~QQtBodyMover();
+    virtual ~QQtBodyMover();
 
     // QObject interface
 public:

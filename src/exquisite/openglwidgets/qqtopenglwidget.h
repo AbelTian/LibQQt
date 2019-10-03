@@ -24,7 +24,7 @@ class QQTSHARED_EXPORT QQtOpenGLWidget : public QOpenGLWidget, protected QOpenGL
     Q_OBJECT
 public:
     explicit QQtOpenGLWidget ( QWidget* parent = nullptr );
-    ~QQtOpenGLWidget();
+    virtual ~QQtOpenGLWidget();
 
 signals:
 

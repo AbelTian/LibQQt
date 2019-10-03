@@ -1,4 +1,4 @@
-#ifndef QQTOSDFRAME_H
+﻿#ifndef QQTOSDFRAME_H
 #define QQTOSDFRAME_H
 
 #include <qqtwidget.h>
@@ -20,7 +20,7 @@ class QQTSHARED_EXPORT QQtOSDFrame : public QQtWidget
 public:
     explicit QQtOSDFrame ( QWidget* parent = nullptr );
 
-    ~QQtOSDFrame();
+    virtual ~QQtOSDFrame();
 
 signals:
 

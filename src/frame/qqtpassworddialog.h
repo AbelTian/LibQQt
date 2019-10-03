@@ -14,7 +14,7 @@ class QQTSHARED_EXPORT QQtPasswordDialog : public QQtDialog
 
 public:
     explicit QQtPasswordDialog ( QWidget* parent = 0 );
-    ~QQtPasswordDialog();
+    virtual ~QQtPasswordDialog();
 
     void setWifiName ( QString name );
     QString wifiPwd();

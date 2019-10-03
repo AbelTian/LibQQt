@@ -1,4 +1,4 @@
-#ifndef QQTDOUBLECLICKSOUNDHELPER_H
+﻿#ifndef QQTDOUBLECLICKSOUNDHELPER_H
 #define QQTDOUBLECLICKSOUNDHELPER_H
 
 #include <qqt-local.h>
@@ -8,11 +8,10 @@
 
 /**
  * QQtDoubleClickSoundHelper
- *
  * 为Widget提供按键声音支持.
  *
  * 支持
- * click
+ * click、longclick、doubleclick
  *
  */
 class QQTSHARED_EXPORT QQtDoubleClickSoundHelper : public QQtDoubleClickHelper

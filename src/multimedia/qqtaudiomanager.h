@@ -59,7 +59,7 @@ class QQTSHARED_EXPORT QQtAudioManager : public QObject
     Q_OBJECT
 public:
     explicit QQtAudioManager ( QObject* parent = nullptr );
-    ~QQtAudioManager();
+    virtual ~QQtAudioManager();
 
 
     /**

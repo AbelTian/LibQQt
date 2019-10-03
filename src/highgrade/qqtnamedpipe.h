@@ -52,7 +52,7 @@ class QQTSHARED_EXPORT QQtNamedPipe : public QObject
     Q_OBJECT
 public:
     explicit QQtNamedPipe ( const QString& key, QObject* parent = Q_NULLPTR );
-    ~QQtNamedPipe();
+    virtual ~QQtNamedPipe();
 
     virtual bool initializer ( );
     void write ( const QByteArray& bytes );

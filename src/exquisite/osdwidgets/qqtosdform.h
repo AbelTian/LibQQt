@@ -1,4 +1,4 @@
-#ifndef QQTOSDFORM_H
+﻿#ifndef QQTOSDFORM_H
 #define QQTOSDFORM_H
 
 #include <qqtwidget.h>
@@ -28,7 +28,7 @@ public:
         //在QQtOSDFrame里面实现用户的需求。
     }
 
-    ~QQtOSDForm() {}
+    virtual ~QQtOSDForm() {}
 
 signals:
 

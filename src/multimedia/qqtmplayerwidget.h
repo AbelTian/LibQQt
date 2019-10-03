@@ -1,4 +1,4 @@
-#ifndef QQTMPLAYERWIDGET_H
+﻿#ifndef QQTMPLAYERWIDGET_H
 #define QQTMPLAYERWIDGET_H
 
 #include <QWidget>
@@ -15,7 +15,7 @@ class QQtMPlayerWidget : public QWidget
 
 public:
     explicit QQtMPlayerWidget ( QWidget* parent = 0 );
-    ~QQtMPlayerWidget();
+    virtual ~QQtMPlayerWidget();
 
     void setSourceFile ( const QString& filename );
 

@@ -77,7 +77,7 @@ class QQTSHARED_EXPORT QQtSerialPort : public QSerialPort
     Q_OBJECT
 public:
     explicit QQtSerialPort ( QObject* parent = 0 );
-    ~QQtSerialPort();
+    virtual ~QQtSerialPort();
 
     void installProtocol ( QQtProtocol* stack );
     void uninstallProtocol ( QQtProtocol* stack );

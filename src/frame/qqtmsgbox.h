@@ -18,7 +18,7 @@ class QQTSHARED_EXPORT QQtMsgBox : public QQtDialog
 
 public:
     explicit QQtMsgBox ( QWidget* parent = 0 );
-    ~QQtMsgBox();
+    virtual ~QQtMsgBox();
 
     void warning ( QString content );
     void question ( QString content );

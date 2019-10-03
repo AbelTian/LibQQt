@@ -15,7 +15,7 @@ class QQtSingleTonNamedPipeClientMessage : public QQtMessage
     Q_OBJECT
 public:
     explicit QQtSingleTonNamedPipeClientMessage ( QObject* parent = nullptr );
-    ~QQtSingleTonNamedPipeClientMessage();
+    virtual ~QQtSingleTonNamedPipeClientMessage();
 
     quint8& size();
     const quint8& size() const;
@@ -47,7 +47,7 @@ class QQtSingleTonNamedPipeClientProtocol : public QQtProtocol
     Q_OBJECT
 public:
     explicit QQtSingleTonNamedPipeClientProtocol ( QObject* parent = nullptr );
-    ~QQtSingleTonNamedPipeClientProtocol();
+    virtual ~QQtSingleTonNamedPipeClientProtocol();
 
     //没连接上：创建Server，发送I Create you (0x0a). Server回复，I Accept you (0x0a)。
     //连接上了，发送I Find you (0x0b)。Server回复，存在Server (0x0b)，告诉上层，关闭程序。
@@ -87,7 +87,7 @@ class QQtSingleTonNamedPipeServerMessage : public QQtMessage
     Q_OBJECT
 public:
     explicit QQtSingleTonNamedPipeServerMessage ( QObject* parent = nullptr );
-    ~QQtSingleTonNamedPipeServerMessage();
+    virtual ~QQtSingleTonNamedPipeServerMessage();
 
     quint8& size();
     const quint8& size() const;
@@ -120,7 +120,7 @@ class QQtSingleTonNamedPipeServerProtocol : public QQtProtocol
     Q_OBJECT
 public:
     explicit QQtSingleTonNamedPipeServerProtocol ( QObject* parent = nullptr );
-    ~QQtSingleTonNamedPipeServerProtocol();
+    virtual ~QQtSingleTonNamedPipeServerProtocol();
 
     //收到外部发来的很多命令，处理一下告诉业务层干点什么。
     void recvCommand1 ( const QQtSingleTonNamedPipeServerMessage& msg );

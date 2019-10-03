@@ -148,7 +148,7 @@ class QQTSHARED_EXPORT QQtWavAudioManager : public QObject
 public:
     explicit QQtWavAudioManager ( QObject* parent = nullptr );
 
-    ~QQtWavAudioManager();
+    virtual ~QQtWavAudioManager();
 
     /**
      * 选择输入、输出Wav媒体

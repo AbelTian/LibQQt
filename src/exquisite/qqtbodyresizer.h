@@ -32,7 +32,7 @@ class QQTSHARED_EXPORT QQtBodyResizer : public QObject
 
 public:
     QQtBodyResizer ( QObject* parent = 0 );
-    ~QQtBodyResizer();
+    virtual ~QQtBodyResizer();
 
     // QObject interface
 public:

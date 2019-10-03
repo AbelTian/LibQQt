@@ -28,7 +28,7 @@ class QQTSHARED_EXPORT QQtMultiPageTableWidget : public QWidget
 
 public:
     explicit QQtMultiPageTableWidget ( QWidget* parent = 0 );
-    ~QQtMultiPageTableWidget();
+    virtual ~QQtMultiPageTableWidget();
 
     void setDB ( QString db );
     void setTable ( QString table );

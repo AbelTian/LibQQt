@@ -17,7 +17,7 @@ class QQTSHARED_EXPORT QQtNamedPipeServer : public QLocalServer
     Q_OBJECT
 public:
     explicit QQtNamedPipeServer ( QObject* parent = 0 );
-    ~QQtNamedPipeServer();
+    virtual ~QQtNamedPipeServer();
 
     void installProtocolManager ( QQtProtocolManager* stackGroup );
     void uninstallProtocolManager ( QQtProtocolManager* stackGroup );

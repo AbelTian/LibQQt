@@ -15,7 +15,7 @@ class QQTSHARED_EXPORT QQtOSDWidget : public QQtWidget
     Q_OBJECT
 public:
     explicit QQtOSDWidget ( QWidget* parent = nullptr );
-    ~QQtOSDWidget() {}
+    virtual ~QQtOSDWidget() {}
 
 signals:
 

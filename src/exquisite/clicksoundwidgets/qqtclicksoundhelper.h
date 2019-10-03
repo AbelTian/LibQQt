@@ -1,4 +1,4 @@
-#ifndef QQTCLICKSOUNDHELPER_H
+﻿#ifndef QQTCLICKSOUNDHELPER_H
 #define QQTCLICKSOUNDHELPER_H
 
 #include <qqt-local.h>
@@ -8,7 +8,6 @@
 
 /**
  * QQtClickSoundHelper
- *
  * 为Widget提供按键声音支持.
  *
  * 支持
