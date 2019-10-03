@@ -7,7 +7,10 @@
 
 /**
  * @brief The QQtBodySelectedStyle class
- * 窗体选中效果
+ * 窗体选中效果。
+ *
+ * 选中效果的绘制无论如何都会绘制在QQtWidget里面图片的下方
+ * 在QQtExquisite里面提供了QQtSelectedStyle类，针对QQtMultiPageWidget设置选中效果。
  */
 class QQTSHARED_EXPORT QQtBodySelectedStyle : public QObject
 {

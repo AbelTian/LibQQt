@@ -55,21 +55,39 @@ void QQtShadowWidget::drawShadowPlanB()
 
 void QQtShadowWidget::drawShadowPlanC ()
 {
-    QPainterPath path;
-    path.setFillRule ( Qt::WindingFill );
-    path.addRect ( 10, 10, this->width() - 20, this->height() - 20 );
     QPainter painter ( this );
     painter.setRenderHint ( QPainter::Antialiasing, true );
-    painter.fillPath ( path, QBrush ( Qt::white ) );
 
+    //QPainterPath path;
+    //path.setFillRule ( Qt::WindingFill );
+    //path.addRoundRect ( 10, 10, this->width() - 20, this->height() - 20, 3 );
+    //painter.setRenderHint ( QPainter::Antialiasing, true );
+    //pline() << painter.background().color();
+    //painter.fillPath ( path, painter.background().color() );
+
+    //50这里没用
     QColor color ( 0, 0, 0, 50 );
-    for ( int i = 0; i < 10; i++ )
+    //40代表了横跨幅
+    int j = 40;
+    for ( int i = 0; i < j; i++ )
     {
         QPainterPath path;
         path.setFillRule ( Qt::WindingFill );
-        path.addRect ( 10 - i, 10 - i, this->width() - ( 10 - i ) * 2, this->height() - ( 10 - i ) * 2 );
-        color.setAlpha ( 150 - qSqrt ( i ) * 50 );
-        painter.setPen ( color );
-        painter.drawPath ( path );
+        //10就是margin。xxx
+        //画的圈子越来越大
+        path.addRoundRect ( j - i, j - i, this->width() - ( j - i ) * 2, this->height() - ( j - i ) * 2, 3 );
+        //颜色越来越浅。 初始数字越小，效果越好，越精细。
+        qreal alpha = 10 - ( qreal ) i * 1 / ( j / 30 ); //150 - qSqrt ( i ) * 50 ;
+        //无论如何不能过滤，都是细线。
+        //if ( ( ( int ) ( alpha / 10 ) % 2  ) == 1 )
+        //    continue;
+        if ( alpha >= 0 )
+        {
+            color.setAlpha ( alpha );
+            //pline() << alpha;
+            painter.setPen ( color );
+            painter.drawPath ( path );
+        }
     }
+
 }
