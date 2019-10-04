@@ -352,7 +352,7 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtbodymover_p.cpp
 
     #主窗体整体移动 对父、子窗体均可使用
-    #add_object_class(QQtRootBodyMover, $$PWD/exquisite)
+    #add_object_class(QQtRootBodyMover, $${PWD}/exquisite)
     HEADERS += \
         $$PWD/exquisite/qqtrootbodymover.h
     SOURCES += \
@@ -424,7 +424,6 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtpicturetabwidget.cpp \
         $$PWD/exquisite/qqtslidetabbar.cpp \
         $$PWD/exquisite/qqtslidetabwidget.cpp
-
     HEADERS += \
         $$PWD/exquisite/qqtslidetabbar.h \
         $$PWD/exquisite/qqtslidetabwidget.h \
