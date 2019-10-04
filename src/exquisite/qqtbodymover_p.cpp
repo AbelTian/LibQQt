@@ -1,4 +1,4 @@
-﻿#include "qqtbodymover_p.h"
+#include "qqtbodymover_p.h"
 #include "qqtbodymover.h"
 
 #include <QWidget>

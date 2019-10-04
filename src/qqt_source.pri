@@ -343,7 +343,7 @@ contains (DEFINES, __NETWORKSUPPORT__) {
 
 contains (DEFINES, __EXQUISITE__) {
     #exquisite
-    #窗体整体移动 对父、子窗体均可使用，跨平台特征好
+    #主窗体整体移动 对父、子窗体均可使用
     HEADERS += \
         $$PWD/exquisite/qqtbodymover.h \
         $$PWD/exquisite/qqtbodymover_p.h
@@ -351,13 +351,12 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtbodymover.cpp \
         $$PWD/exquisite/qqtbodymover_p.cpp
 
-    #窗体大小。一般用于无边框窗体。父、子窗体均可使用
+    #主窗体整体移动 对父、子窗体均可使用
+    #add_object_class(QQtRootBodyMover, $$PWD/exquisite)
     HEADERS += \
-        $$PWD/exquisite/qqtbodyresizer.h \
-        $$PWD/exquisite/qqtbodyresizer_p.h
+        $$PWD/exquisite/qqtrootbodymover.h
     SOURCES += \
-        $$PWD/exquisite/qqtbodyresizer.cpp \
-        $$PWD/exquisite/qqtbodyresizer_p.cpp
+        $$PWD/exquisite/qqtrootbodymover.cpp
 
     #子窗体在父窗体里移动 只应用于子窗体，不能应用于主窗体
     add_file($$PWD/exquisite/qqtchildbodymover.h)
@@ -366,6 +365,14 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtchildbodymover.h
     SOURCES += \
         $$PWD/exquisite/qqtchildbodymover.cpp
+
+    #窗体大小。一般用于无边框窗体。父、子窗体均可使用
+    HEADERS += \
+        $$PWD/exquisite/qqtbodyresizer.h \
+        $$PWD/exquisite/qqtbodyresizer_p.h
+    SOURCES += \
+        $$PWD/exquisite/qqtbodyresizer.cpp \
+        $$PWD/exquisite/qqtbodyresizer_p.cpp
 
     #在窗体里锁定鼠标
     HEADERS += \
@@ -408,6 +415,23 @@ contains (DEFINES, __EXQUISITE__) {
         $$PWD/exquisite/qqtbodyselectedstyle.cpp
     HEADERS += \
         $$PWD/exquisite/qqtbodyselectedstyle.h
+
+    #tabwidget
+    SOURCES += \
+        $$PWD/exquisite/qqthorizontaltexttabbar.cpp \
+        $$PWD/exquisite/qqthorizontaltexttabwidget.cpp \
+        $$PWD/exquisite/qqtpicturetabbar.cpp \
+        $$PWD/exquisite/qqtpicturetabwidget.cpp \
+        $$PWD/exquisite/qqtslidetabbar.cpp \
+        $$PWD/exquisite/qqtslidetabwidget.cpp
+
+    HEADERS += \
+        $$PWD/exquisite/qqtslidetabbar.h \
+        $$PWD/exquisite/qqtslidetabwidget.h \
+        $$PWD/exquisite/qqtpicturetabwidget.h \
+        $$PWD/exquisite/qqtpicturetabbar.h \
+        $$PWD/exquisite/qqthorizontaltexttabwidget.h \
+        $$PWD/exquisite/qqthorizontaltexttabbar.h
 
     #不规则形状的控件
     contains (DEFINES, __IRREGULARWIDGETS__) {
@@ -504,71 +528,6 @@ contains (DEFINES, __EXQUISITE__) {
             $$PWD/exquisite/clickwidgets/qqtlongclickdialog.h \
             $$PWD/exquisite/clickwidgets/qqtdoubleclickdialog.h
     }
-
-    #dialog
-    SOURCES += \
-        $$PWD/exquisite/qqtpopupdialog.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtpopupdialog.h
-
-    #widget
-    SOURCES += \
-        $$PWD/exquisite/qqtmaskwidget.cpp \
-        $$PWD/exquisite/qqtfadewidget.cpp \
-        $$PWD/exquisite/qqtninepatchwidget.cpp \
-        $$PWD/exquisite/qqtshadowwidget.cpp \
-        $$PWD/exquisite/qqtflipstackedwidget.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtmaskwidget.h \
-        $$PWD/exquisite/qqtninepatchwidget.h \
-        $$PWD/exquisite/qqtfadewidget.h \
-        $$PWD/exquisite/qqtshadowwidget.h \
-        $$PWD/exquisite/qqtflipstackedwidget.h
-
-    #校验码生成器
-    SOURCES += \
-        $$PWD/exquisite/qqtcustomverificationcode.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtcustomverificationcode.h
-
-    #progressbar
-    SOURCES += \
-        $$PWD/exquisite/qqtcustomprogressbar.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtcustomprogressbar.h
-
-    #pushbutton
-    SOURCES += \
-        $$PWD/exquisite/qqtripplepushbutton.cpp
-    HEADERS += \
-        $$PWD/exquisite/qqtripplepushbutton.h
-
-    #label
-    SOURCES += \
-        $$PWD/exquisite/qqtledbannerlabel.cpp \
-        $$PWD/exquisite/qqtmarqueelabel.cpp
-
-    HEADERS += \
-        $$PWD/exquisite/qqtmarqueelabel.h \
-        $$PWD/exquisite/qqtledbannerlabel.h
-
-    #tabwidget
-    SOURCES += \
-        $$PWD/exquisite/qqthorizontaltexttabbar.cpp \
-        $$PWD/exquisite/qqthorizontaltexttabwidget.cpp \
-        $$PWD/exquisite/qqtpicturetabbar.cpp \
-        $$PWD/exquisite/qqtpicturetabwidget.cpp \
-        $$PWD/exquisite/qqtslidetabbar.cpp \
-        $$PWD/exquisite/qqtslidetabwidget.cpp
-
-    HEADERS += \
-        $$PWD/exquisite/qqtslidetabbar.h \
-        $$PWD/exquisite/qqtslidetabwidget.h \
-        $$PWD/exquisite/qqtpicturetabwidget.h \
-        $$PWD/exquisite/qqtpicturetabbar.h \
-        $$PWD/exquisite/qqthorizontaltexttabwidget.h \
-        $$PWD/exquisite/qqthorizontaltexttabbar.h
-
 
     #svg widgets
     contains (DEFINES, __SVGWIDGETS__) {

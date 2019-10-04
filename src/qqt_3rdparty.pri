@@ -108,6 +108,52 @@ contains (DEFINES, __EXQUISITE__) {
         SOURCES += $$PWD/exquisite/mathml/qtmmlwidget.cpp
         HEADERS += $$PWD/exquisite/mathml/qtmmlwidget.h
     }
+
+    #dialog
+    SOURCES += \
+        $$PWD/exquisite/qqtpopupdialog.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtpopupdialog.h
+
+    #widget
+    SOURCES += \
+        $$PWD/exquisite/qqtmaskwidget.cpp \
+        $$PWD/exquisite/qqtfadewidget.cpp \
+        $$PWD/exquisite/qqtninepatchwidget.cpp \
+        $$PWD/exquisite/qqtshadowwidget.cpp \
+        $$PWD/exquisite/qqtflipstackedwidget.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtmaskwidget.h \
+        $$PWD/exquisite/qqtninepatchwidget.h \
+        $$PWD/exquisite/qqtfadewidget.h \
+        $$PWD/exquisite/qqtshadowwidget.h \
+        $$PWD/exquisite/qqtflipstackedwidget.h
+
+    #校验码生成器
+    SOURCES += \
+        $$PWD/exquisite/qqtcustomverificationcode.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtcustomverificationcode.h
+
+    #progressbar
+    SOURCES += \
+        $$PWD/exquisite/qqtcustomprogressbar.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtcustomprogressbar.h
+
+    #pushbutton
+    SOURCES += \
+        $$PWD/exquisite/qqtripplepushbutton.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtripplepushbutton.h
+
+    #label
+    SOURCES += \
+        $$PWD/exquisite/qqtledbannerlabel.cpp \
+        $$PWD/exquisite/qqtmarqueelabel.cpp
+    HEADERS += \
+        $$PWD/exquisite/qqtmarqueelabel.h \
+        $$PWD/exquisite/qqtledbannerlabel.h
 }
 
 #multimedia

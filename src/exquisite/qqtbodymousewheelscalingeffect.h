@@ -1,8 +1,9 @@
-﻿#ifndef QQTBODYMOUSEWHEELSCALINGEFFECT_H
+#ifndef QQTBODYMOUSEWHEELSCALINGEFFECT_H
 #define QQTBODYMOUSEWHEELSCALINGEFFECT_H
 
 #include <QObject>
-
+#include <QWheelEvent>
+#include <QWidget>
 #include <qqt-local.h>
 
 /**
@@ -15,6 +16,9 @@ class QQTSHARED_EXPORT QQtBodyMouseWheelScalingEffect : public QObject
 public:
     QQtBodyMouseWheelScalingEffect ( QObject* parent = 0 );
     virtual ~QQtBodyMouseWheelScalingEffect();
+
+protected:
+    virtual void wheelEvent ( QWheelEvent* event, QWidget* target = 0 );
 
     // QObject interface
 public:
