@@ -28,6 +28,10 @@
  * 应用于主窗口，能够正常移动，Windows下还会有titlebar的作用。
  * 在Windows、macOS、Linux等系统下表现一致。
  *
+ * 此处存在强烈分歧，所以增加这个类，
+ * QQtBodyMover的默认行为和QQtRootBodyMover的一样，
+ * QQtChildBodyMover的默认行为是自身移动，
+ * 我期望QQtBodyMover的默认行为和QQtChildBodyMover的行为保持一致，但是，存在分歧，所以增加了这个类来进行识别。
  */
 class QQTSHARED_EXPORT QQtRootBodyMover : public QObject
 {
