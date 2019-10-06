@@ -10,6 +10,7 @@
 |QQtTool|[工程链接](https://gitee.com/drabel/QQtTool)|Commercial，GPL Series|
 |QQtInput|[工程链接](https://gitee.com/drabel/QQtInput)|Commercial，GPL Series|
 |QQtMediaExtention|[工程链接](https://gitee.com/drabel/QQtMediaExtention)|Commercial|
+|QQtGameEngine|[工程链接](https://gitee.com/drabel/QQtGameEngine)|Commercial|
 |QQtSupport|[工程链接](https://gitee.com/drabel/QQtSupport)|Commercial|
 |QQtExquisitePlugin|[工程链接](https://gitee.com/drabel/QQtExquisitePlugin)|Commercial|
 |QQtIndustrialControl|[工程链接](https://gitee.com/drabel/QQtIndustrialControl)|Commercial|
