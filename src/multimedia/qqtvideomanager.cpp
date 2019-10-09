@@ -12,12 +12,33 @@
 
 QQtCameraVideoSurface::QQtCameraVideoSurface ( QObject* parent ) : QAbstractVideoSurface ( parent )
 {
-
+    mHorizontal = true;
+    mVertical = false;
 }
 
 QQtCameraVideoSurface::~QQtCameraVideoSurface()
 {
 
+}
+
+void QQtCameraVideoSurface::setHorizontalMirror ( bool horizontal )
+{
+    mHorizontal = horizontal;
+}
+
+bool QQtCameraVideoSurface::horizontalMirror()
+{
+    return mHorizontal;
+}
+
+void QQtCameraVideoSurface::setVerticalMirror ( bool vertical )
+{
+    mVertical = vertical;
+}
+
+bool QQtCameraVideoSurface::verticalMirror()
+{
+    return mVertical;
 }
 
 QList<QVideoFrame::PixelFormat> QQtCameraVideoSurface::supportedPixelFormats ( QAbstractVideoBuffer::HandleType
@@ -98,8 +119,9 @@ bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
     //Windows，现在的图像保存能成功，直接显示，程序会异常退出。使用QImage的mirrored函数进行了水平翻转，可以正常显示。
     //水平翻转是为了不崩溃，正常显示图像。必选。
     //垂直翻转是为了上下显示正常。
-    //这个的反转原因还需要调查一下，到底跟着谁反转。
+    //这个的反转原因还需要调查一下，到底跟着谁反转。苹果下怎么设置都可以。
     QImage image;
+#if 0
     switch ( cloneFrame.pixelFormat() )
     {
         case QVideoFrame::Format_YUYV:
@@ -110,6 +132,8 @@ bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
             image = _image.mirrored ( true, true );
             break;
     }
+#endif
+    image = _image.mirrored ( mHorizontal, mVertical );
 
     p3line() << num++ << image.size() << image.bytesPerLine() << image.format();
 
@@ -196,6 +220,18 @@ QList<QCameraViewfinderSettings> QQtVideoInput::supportedViewFinderSettings ( co
     return camera.supportedViewfinderSettings();
 }
 
+void QQtVideoInput::setViewMirror ( bool horizontal, bool vertical )
+{
+    mSurface->setHorizontalMirror ( horizontal );
+    mSurface->setVerticalMirror ( vertical );
+}
+
+void QQtVideoInput::viewMirror ( bool& horizontal, bool& vertical )
+{
+    horizontal = mSurface->horizontalMirror();
+    vertical = mSurface->verticalMirror();
+}
+
 QQtCamera* QQtVideoInput::camera() const
 {
     return mCamera;
@@ -250,14 +286,6 @@ void QQtVideoInput::start()
 
     //设置ViewfinderSettings
     //启动后设置...
-    for ( int i = 0; i < mCamera->supportedViewfinderSettings().size(); i++ )
-    {
-        QCameraViewfinderSettings& set = mCamera->supportedViewfinderSettings() [i];
-        //p3line() << mCamera->supportedViewfinderFrameRateRanges();
-        p3line() << mCamera->supportedViewfinderResolutions ( set );
-        p3line() << mCamera->supportedViewfinderPixelFormats ( set );
-    }
-
 
     //启动
     mCamera->start();

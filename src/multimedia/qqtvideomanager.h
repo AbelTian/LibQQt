@@ -50,13 +50,27 @@ public:
     QQtCameraVideoSurface ( QObject* parent = 0 );
     virtual ~QQtCameraVideoSurface();
 
+    //默认：true，false。
+    //经过测试
+    //Windows下，webcam：true, true；不设置第一个为true，会崩溃。
+    //macOS下，iSight：true, false; 第一个设置true，和Photo Booth一样。
+    void setHorizontalMirror ( bool horizontal = true );
+    bool horizontalMirror();
+    void setVerticalMirror ( bool vertical = false );
+    bool verticalMirror();
+
 signals:
     void readyRead ( QImage );
 
     // QAbstractVideoSurface interface
 public:
-    virtual QList<QVideoFrame::PixelFormat> supportedPixelFormats ( QAbstractVideoBuffer::HandleType handleType ) const override;
+    virtual QList<QVideoFrame::PixelFormat> supportedPixelFormats ( QAbstractVideoBuffer::HandleType handleType ) const
+    override;
     virtual bool present ( const QVideoFrame& frame ) override;
+
+private:
+    bool mHorizontal;
+    bool mVertical;
 };
 
 /**
@@ -89,6 +103,10 @@ public:
     void setViewfinderSettings ( const QCameraViewfinderSettings& settings = QCameraViewfinderSettings() );
     //获取照相机支持的设置。默认查询defaultCamera的。
     static QList<QCameraViewfinderSettings> supportedViewFinderSettings ( const QCameraInfo& camInfo = defaultCamera() );
+
+    //在不同的平台上有一定的使用限制。
+    void setViewMirror ( bool horizontal = true, bool vertical = false );
+    void viewMirror ( bool& horizontal, bool& vertical );
 
     /**
      * 控制输入设备
