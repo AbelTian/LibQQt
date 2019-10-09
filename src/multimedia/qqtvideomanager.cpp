@@ -1,6 +1,13 @@
 #include <qqtvideomanager.h>
 #include <qqtcore.h>
 
+#define LOCAL_DEBUG
+#ifdef LOCAL_DEBUG
+#define p3line() p2line()
+#else
+#define p3line() QNoDebug()
+#endif
+
 QQtCameraVideoSurface::QQtCameraVideoSurface ( QObject* parent ) : QAbstractVideoSurface ( parent )
 {
 
@@ -11,7 +18,8 @@ QQtCameraVideoSurface::~QQtCameraVideoSurface()
 
 }
 
-QList<QVideoFrame::PixelFormat> QQtCameraVideoSurface::supportedPixelFormats ( QAbstractVideoBuffer::HandleType handleType ) const
+QList<QVideoFrame::PixelFormat> QQtCameraVideoSurface::supportedPixelFormats ( QAbstractVideoBuffer::HandleType
+                                                                               handleType ) const
 {
     //桌面
     return QList<QVideoFrame::PixelFormat>()
@@ -21,10 +29,20 @@ QList<QVideoFrame::PixelFormat> QQtCameraVideoSurface::supportedPixelFormats ( Q
 
 bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
 {
+    static int num = 0;
+    p3line() << num++ << frame.isValid() << frame.isReadable() << frame.isWritable();
+    p3line() << num++ << frame.bytesPerLine() << frame.size() << frame.startTime() << frame.endTime() << frame.mapMode();
+
     if ( !frame.isValid() )
         return false;
 
     QVideoFrame cloneFrame ( frame );
+    p3line() << num++ << cloneFrame.isValid() << cloneFrame.isReadable() << cloneFrame.isWritable();
+    p3line() << num++ << cloneFrame.bytesPerLine() << cloneFrame.size()
+             << cloneFrame.startTime() << cloneFrame.endTime()
+             << cloneFrame.mapMode() << ( int ) cloneFrame.pixelFormat()
+             << QVideoFrame::imageFormatFromPixelFormat ( cloneFrame.pixelFormat() );
+
     /**
      * frame 可读
      */
@@ -35,18 +53,22 @@ bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
      * 处理frame
      */
 
-    //Android下的视频格式是怎么回事？需要转换吗？
+    //Android下的视频格式是怎么回事？NV21 需要转换吗？需要专门的转换函数。但凡QImage里面不支持的，都需要从pixelFormat手动转换过来。
 
     const QImage _image ( cloneFrame.bits(),
                           cloneFrame.width(),
                           cloneFrame.height(),
                           QVideoFrame::imageFormatFromPixelFormat ( cloneFrame.pixelFormat() ) );
 
+    p3line() << num++ << _image.size() << _image.bytesPerLine() << _image.format();
+
     //需要对水平方向反转。
     //Windows，现在的图像保存能成功，直接显示，程序会异常退出。使用QImage的mirrored函数进行了水平翻转，可以正常显示。
     //水平翻转是为了不崩溃，正常显示图像。必选。
     //垂直翻转是为了上下显示正常。
     const QImage image = _image.mirrored ( true, true );
+
+    p3line() << num++ << image.size() << image.bytesPerLine() << image.format();
 
     /**
      * frame 不可读
@@ -178,8 +200,8 @@ void QQtVideoInput::start()
     //Windows 打印不支持，但是其实支持。
     if ( !mCamera->isCaptureModeSupported ( QCamera::CaptureVideo ) )
     {
-        pline() << mCamInfo.deviceName();
-        //pline() << mCamera << "Camera cannot capture video";
+        p3line() << mCamInfo.deviceName();
+        //p3line() << mCamera << "Camera cannot capture video";
     }
     //播放图像 = QCamera::CaptureStillImage
     //播放图像 = QCamera::CaptureViewfinder
@@ -190,11 +212,19 @@ void QQtVideoInput::start()
 
     //设置ViewfinderSettings
     //启动后设置...
+    for ( int i = 0; i < mCamera->supportedViewfinderSettings().size(); i++ )
+    {
+        QCameraViewfinderSettings& set = mCamera->supportedViewfinderSettings() [i];
+        //p3line() << mCamera->supportedViewfinderFrameRateRanges();
+        p3line() << mCamera->supportedViewfinderResolutions ( set );
+        p3line() << mCamera->supportedViewfinderPixelFormats ( set );
+    }
+
 
     //启动
     mCamera->start();
-    pline() << mCamInfo.deviceName();
-    pline() << mCamera << "Camera start to capture video";
+    p3line() << mCamInfo.deviceName();
+    p3line() << mCamera << "Camera start to capture video";
 
     //设置自动对焦
     if ( mAutoSearchFlag )

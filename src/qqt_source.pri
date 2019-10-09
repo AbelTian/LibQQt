@@ -218,6 +218,11 @@ contains (DEFINES, __MULTIMEDIA__) {
 
     #video
     contains (DEFINES, __QQTVIDEOSUPPORT__){
+        add_file($$PWD/multimedia/qqtimageconverter.cpp)
+        add_file($$PWD/multimedia/qqtimageconverter.h)
+        SOURCES += $$PWD/multimedia/qqtimageconverter.cpp
+        HEADERS += $$PWD/multimedia/qqtimageconverter.h
+
         SOURCES += $$PWD/multimedia/qqtcamera.cpp
         HEADERS += $$PWD/multimedia/qqtcamera.h
         SOURCES += $$PWD/multimedia/qqtvideomanager.cpp
