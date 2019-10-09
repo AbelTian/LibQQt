@@ -1,7 +1,25 @@
 #ifndef QQTIMAGECONVERTER_H
 #define QQTIMAGECONVERTER_H
+#include <QImage>
+#include <QVideoFrame>
 
 #include <qqt-local.h>
+/**
+ * @brief The QQtImageConverter class
+ */
+class QQTSHARED_EXPORT QQtImageConverter
+{
+public:
+    explicit QQtImageConverter ();
+    virtual ~QQtImageConverter ();
+
+    QImage YUYVTORGB888 ( const QVideoFrame& frame );
+    QImage UYVYTORGB888 ( const QVideoFrame& frame );
+
+private:
+    uchar* pp;
+    QImage* mImage;
+};
 
 /**
  * @brief qqt_convert_uyvy_to_rgb888_buffer

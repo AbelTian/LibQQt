@@ -103,3 +103,48 @@ int qqt_convert_yuyv_to_rgb888_buffer ( unsigned char* yuv, unsigned char* rgb, 
 
     return 0;
 }
+
+QQtImageConverter::QQtImageConverter ()
+{
+    pp = 0;
+    mImage = 0;
+}
+
+QQtImageConverter::~QQtImageConverter()
+{
+    if ( pp )
+        free ( pp );
+    if ( mImage )
+        delete mImage;
+}
+
+QImage QQtImageConverter::YUYVTORGB888 ( const QVideoFrame& frame )
+{
+    if ( !mImage || mImage->isNull()
+         || ( mImage->width() != frame.width() || mImage->height() != frame.height() ) )
+    {
+        int w = frame.width();
+        int h = frame.height();
+        pp = ( uchar* ) malloc ( w * h * 3 * sizeof ( char ) );
+        mImage = new QImage ( pp, w, h, QImage::Format_RGB888 );
+    }
+    qqt_convert_yuyv_to_rgb888_buffer ( ( unsigned char* ) frame.bits(), ( unsigned char* ) pp,
+                                        ( unsigned int ) frame.width(), ( unsigned int ) frame.height() );
+    return *mImage;
+}
+
+QImage QQtImageConverter::UYVYTORGB888 ( const QVideoFrame& frame )
+{
+    if ( !mImage || mImage->isNull()
+         || ( mImage->width() != frame.width() || mImage->height() != frame.height() ) )
+    {
+        int w = frame.width();
+        int h = frame.height();
+        pp = ( uchar* ) malloc ( w * h * 3 * sizeof ( char ) );
+        mImage = new QImage ( pp, w, h, QImage::Format_RGB888 );
+    }
+    qqt_convert_uyvy_to_rgb888_buffer ( ( unsigned char* ) frame.bits(),
+                                        ( unsigned int ) frame.width(), ( unsigned int ) frame.height(),
+                                        ( unsigned char* ) pp );
+    return *mImage;
+}

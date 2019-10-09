@@ -1,7 +1,9 @@
 #include <qqtvideomanager.h>
 #include <qqtcore.h>
 
-#define LOCAL_DEBUG
+#include <qqtimageconverter.h>
+
+//#define LOCAL_DEBUG
 #ifdef LOCAL_DEBUG
 #define p3line() p2line()
 #else
@@ -23,6 +25,9 @@ QList<QVideoFrame::PixelFormat> QQtCameraVideoSurface::supportedPixelFormats ( Q
 {
     //桌面
     return QList<QVideoFrame::PixelFormat>()
+           << QVideoFrame::Format_YUYV
+           << QVideoFrame::Format_UYVY
+           //RGB系列都支持
            << QVideoFrame::Format_RGB24
            << QVideoFrame::Format_RGB32;
 }
@@ -30,6 +35,7 @@ QList<QVideoFrame::PixelFormat> QQtCameraVideoSurface::supportedPixelFormats ( Q
 bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
 {
     static int num = 0;
+
     p3line() << num++ << frame.isValid() << frame.isReadable() << frame.isWritable();
     p3line() << num++ << frame.bytesPerLine() << frame.size() << frame.startTime() << frame.endTime() << frame.mapMode();
 
@@ -37,6 +43,7 @@ bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
         return false;
 
     QVideoFrame cloneFrame ( frame );
+
     p3line() << num++ << cloneFrame.isValid() << cloneFrame.isReadable() << cloneFrame.isWritable();
     p3line() << num++ << cloneFrame.bytesPerLine() << cloneFrame.size()
              << cloneFrame.startTime() << cloneFrame.endTime()
@@ -53,12 +60,37 @@ bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
      * 处理frame
      */
 
-    //Android下的视频格式是怎么回事？NV21 需要转换吗？需要专门的转换函数。但凡QImage里面不支持的，都需要从pixelFormat手动转换过来。
+    //Android下的视频格式是怎么回事？需要转换吗？
+    //需要专门的转换函数。但凡QImage里面不支持的，都需要从pixelFormat手动转换过来。
+    QImage _image;
+    switch ( cloneFrame.pixelFormat() )
+    {
+        case QVideoFrame::Format_UYVY:
+        {
+            static QQtImageConverter icv;
+            _image = icv.UYVYTORGB888 ( cloneFrame );
+        }
+        break;
+        case QVideoFrame::Format_YUYV:
+        {
+            static QQtImageConverter icv;
+            _image = icv.YUYVTORGB888 ( cloneFrame );
+        }
+        break;
+        default:
+        {
+            _image = QImage ( cloneFrame.bits(),
+                              cloneFrame.width(),
+                              cloneFrame.height(),
+                              QVideoFrame::imageFormatFromPixelFormat ( cloneFrame.pixelFormat() ) );
+        }
+        break;
+    }
 
-    const QImage _image ( cloneFrame.bits(),
-                          cloneFrame.width(),
-                          cloneFrame.height(),
-                          QVideoFrame::imageFormatFromPixelFormat ( cloneFrame.pixelFormat() ) );
+    /**
+     * frame 不可读
+     */
+    cloneFrame.unmap();
 
     p3line() << num++ << _image.size() << _image.bytesPerLine() << _image.format();
 
@@ -66,14 +98,20 @@ bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
     //Windows，现在的图像保存能成功，直接显示，程序会异常退出。使用QImage的mirrored函数进行了水平翻转，可以正常显示。
     //水平翻转是为了不崩溃，正常显示图像。必选。
     //垂直翻转是为了上下显示正常。
-    const QImage image = _image.mirrored ( true, true );
+    //这个的反转原因还需要调查一下，到底跟着谁反转。
+    QImage image;
+    switch ( cloneFrame.pixelFormat() )
+    {
+        case QVideoFrame::Format_YUYV:
+        case QVideoFrame::Format_UYVY:
+            image = _image.mirrored ( true, false );
+            break;
+        default:
+            image = _image.mirrored ( true, true );
+            break;
+    }
 
     p3line() << num++ << image.size() << image.bytesPerLine() << image.format();
-
-    /**
-     * frame 不可读
-     */
-    cloneFrame.unmap();
 
     emit readyRead ( image );
     return true;
