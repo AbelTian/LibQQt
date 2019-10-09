@@ -85,3 +85,11 @@ void MainWindow::on_pushButton_8_clicked()
 {
     manager->inputManager()->setViewMirror ( false, true );
 }
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    if ( manager->inputManager()->mirrorEnabled() )
+        manager->inputManager()->setMirrorEnable ( false );
+    else
+        manager->inputManager()->setMirrorEnable ( true );
+}

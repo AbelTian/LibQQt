@@ -59,18 +59,23 @@ public:
     void setVerticalMirror ( bool vertical = false );
     bool verticalMirror();
 
+    //default: false
+    void setMirrorEnable ( bool enable = true );
+    bool mirrorEnabled();
+
 signals:
     void readyRead ( QImage );
 
     // QAbstractVideoSurface interface
 public:
-    virtual QList<QVideoFrame::PixelFormat> supportedPixelFormats ( QAbstractVideoBuffer::HandleType handleType ) const
-    override;
+    virtual QList<QVideoFrame::PixelFormat> supportedPixelFormats (
+        QAbstractVideoBuffer::HandleType handleType ) const override;
     virtual bool present ( const QVideoFrame& frame ) override;
 
 private:
     bool mHorizontal;
     bool mVertical;
+    bool mMirrorEnable;
 };
 
 /**
@@ -107,6 +112,9 @@ public:
     //在不同的平台上有一定的使用限制。
     void setViewMirror ( bool horizontal = true, bool vertical = false );
     void viewMirror ( bool& horizontal, bool& vertical );
+    //default:false
+    void setMirrorEnable ( bool enable = true );
+    bool mirrorEnabled();
 
     /**
      * 控制输入设备

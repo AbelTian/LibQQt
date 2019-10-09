@@ -14,6 +14,7 @@ QQtCameraVideoSurface::QQtCameraVideoSurface ( QObject* parent ) : QAbstractVide
 {
     mHorizontal = true;
     mVertical = false;
+    mMirrorEnable = false;
 }
 
 QQtCameraVideoSurface::~QQtCameraVideoSurface()
@@ -39,6 +40,16 @@ void QQtCameraVideoSurface::setVerticalMirror ( bool vertical )
 bool QQtCameraVideoSurface::verticalMirror()
 {
     return mVertical;
+}
+
+void QQtCameraVideoSurface::setMirrorEnable ( bool enable )
+{
+    mMirrorEnable = enable;
+}
+
+bool QQtCameraVideoSurface::mirrorEnabled()
+{
+    return mMirrorEnable;
 }
 
 QList<QVideoFrame::PixelFormat> QQtCameraVideoSurface::supportedPixelFormats ( QAbstractVideoBuffer::HandleType
@@ -115,13 +126,13 @@ bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
 
     p3line() << num++ << _image.size() << _image.bytesPerLine() << _image.format();
 
+    QImage image;
+#if 1
     //需要对水平方向反转。
     //Windows，现在的图像保存能成功，直接显示，程序会异常退出。使用QImage的mirrored函数进行了水平翻转，可以正常显示。
     //水平翻转是为了不崩溃，正常显示图像。必选。
     //垂直翻转是为了上下显示正常。
     //这个的反转原因还需要调查一下，到底跟着谁反转。苹果下怎么设置都可以。
-    QImage image;
-#if 0
     switch ( cloneFrame.pixelFormat() )
     {
         case QVideoFrame::Format_YUYV:
@@ -133,7 +144,8 @@ bool QQtCameraVideoSurface::present ( const QVideoFrame& frame )
             break;
     }
 #endif
-    image = _image.mirrored ( mHorizontal, mVertical );
+    if ( mMirrorEnable )
+        image = _image.mirrored ( mHorizontal, mVertical );
 
     p3line() << num++ << image.size() << image.bytesPerLine() << image.format();
 
@@ -230,6 +242,16 @@ void QQtVideoInput::viewMirror ( bool& horizontal, bool& vertical )
 {
     horizontal = mSurface->horizontalMirror();
     vertical = mSurface->verticalMirror();
+}
+
+void QQtVideoInput::setMirrorEnable ( bool enable )
+{
+    mSurface->setMirrorEnable ( enable );
+}
+
+bool QQtVideoInput::mirrorEnabled()
+{
+    return mSurface->mirrorEnabled();
 }
 
 QQtCamera* QQtVideoInput::camera() const
