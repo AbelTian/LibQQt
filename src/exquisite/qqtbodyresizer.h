@@ -1,7 +1,8 @@
-﻿#ifndef QQTBODYRESIZER_H
+#ifndef QQTBODYRESIZER_H
 #define QQTBODYRESIZER_H
 
 #include <QObject>
+#include <QEvent>
 #include <QMargins>
 
 #include "qqt-local.h"

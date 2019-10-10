@@ -2,6 +2,7 @@
 #define QQTBODYSELECTEDSTYLE_H
 
 #include <QObject>
+#include <QEvent>
 
 #include <qqt-local.h>
 
