@@ -1,4 +1,4 @@
-﻿#include <qqtbodyselectedstyle.h>
+#include <qqtbodyselectedstyle.h>
 
 #include <QEvent>
 #include <QPainter>
@@ -54,6 +54,14 @@ bool QQtBodySelectedStyle::eventFilter ( QObject* watched, QEvent* event )
         {
             QWidget* target = qobject_cast<QWidget*> ( watched );
             QPainter painter ( target );
+
+            int w = 10;
+            //如果显示有问题，可以注释掉此处的缩放。
+            //只在macOS里发现了右侧和下侧裁切掉了的现象。
+            //painter.scale ( ( target->rect().width() - painter.pen().width() ) / target->rect().width(),
+            //              ( target->rect().height() - painter.pen().width() ) / target->rect().height() );
+            //painter.scale ( 0.999, 0.999 );
+
             painter.save();
 
             switch ( hasStyle )
@@ -61,18 +69,30 @@ bool QQtBodySelectedStyle::eventFilter ( QObject* watched, QEvent* event )
                 case SelectedStyle_QtDesigner:
                 {
                     painter.setPen ( Qt::black );
-                    painter.drawRect ( target->rect() );
-                    int w = 7;
+                    QRect srcRect = target->rect();
+                    QRect tarRect = QRect ( srcRect.left() + w / 2, srcRect.top() + w / 2, srcRect.width() - w, srcRect.height() - w );
+                    painter.drawRect ( tarRect );
+                    //left top
                     painter.drawRect ( 0, 0, w, w );
+                    //right top
                     painter.drawRect ( target->size().width() - w, 0, w, w );
+                    //left bottom
                     painter.drawRect ( 0, target->size().height() - w, w, w );
+                    //right bottom
                     painter.drawRect ( target->size().width() - w, target->size().height() - w, w, w );
+                    //left
+                    painter.drawRect ( 0, target->size().height() / 2 - w / 2, w, w );
+                    //right
+                    painter.drawRect ( target->size().width() - w, target->size().height() / 2 - w / 2, w, w );
+                    //top
+                    painter.drawRect ( target->size().width() / 2 - w / 2, 0, w, w );
+                    //bottom
+                    painter.drawRect ( target->size().width() / 2 - w / 2, target->size().height() - w, w, w );
                 }
                 break;
                 case SelectedStyle_QRCodeScaner:
                 {
                     painter.setPen ( Qt::black );
-                    int w = 7;
                     painter.drawLine ( 0, 0, w, 0 );
                     painter.drawLine ( 0, 0, 0, w );
 
@@ -93,6 +113,16 @@ bool QQtBodySelectedStyle::eventFilter ( QObject* watched, QEvent* event )
                     painter.setPen ( Qt::black );
                     painter.setPen ( Qt::DotLine );
                     painter.drawRect ( target->rect() );
+                }
+                break;
+                case SelectedStyle_FourCheck:
+                {
+                    painter.setPen ( Qt::black );
+                    painter.drawRect ( target->rect() );
+                    painter.drawRect ( 0, 0, w, w );
+                    painter.drawRect ( target->size().width() - w, 0, w, w );
+                    painter.drawRect ( 0, target->size().height() - w, w, w );
+                    painter.drawRect ( target->size().width() - w, target->size().height() - w, w, w );
                 }
                 break;
                 default:
