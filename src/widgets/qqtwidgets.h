@@ -1,4 +1,4 @@
-﻿#ifndef __QQT_WIDGETS_DEFINE_H__
+#ifndef __QQT_WIDGETS_DEFINE_H__
 #define __QQT_WIDGETS_DEFINE_H__
 
 #include <QWidget>
@@ -12,7 +12,6 @@
 #include <QElapsedTimer>
 #include <QDesktopWidget>
 #include <QDebug>
-#include <qqt-qt.h>
 #include "qqt-local.h"
 
 #ifdef __cplusplus
@@ -50,16 +49,30 @@ typedef struct QQTSHARED_EXPORT tagBtnIconTable
     QString& operator [] ( int index );
 } TBtnIconTable;
 
-QQTSHARED_EXPORT void moveCenter ( QWidget* w );
-QQTSHARED_EXPORT void moveRight ( QWidget* w );
-QQTSHARED_EXPORT void moveFull ( QWidget* w );
+/**
+ * 主窗口。针对屏幕
+ */
 QQTSHARED_EXPORT void moveHCenter ( QWidget* w );
 QQTSHARED_EXPORT void moveVCenter ( QWidget* w );
+QQTSHARED_EXPORT void moveCenter ( QWidget* w );
+QQTSHARED_EXPORT void moveFull ( QWidget* w );
+QQTSHARED_EXPORT void moveLeft ( QWidget* w );
+QQTSHARED_EXPORT void moveRight ( QWidget* w );
+QQTSHARED_EXPORT void moveTop ( QWidget* w );
+QQTSHARED_EXPORT void moveBottom ( QWidget* w );
 
-QQTSHARED_EXPORT void moveCenter ( QWidget* w, QWidget* parent );
-QQTSHARED_EXPORT void moveFull ( QWidget* w, QWidget* parent );
+/**
+ * 子窗口。针对parent
+ * 此处指定的parent控件，必须是w的parent。
+ */
 QQTSHARED_EXPORT void moveHCenter ( QWidget* w, QWidget* parent );
 QQTSHARED_EXPORT void moveVCenter ( QWidget* w, QWidget* parent );
+QQTSHARED_EXPORT void moveCenter ( QWidget* w, QWidget* parent );
+QQTSHARED_EXPORT void moveFull ( QWidget* w, QWidget* parent );
+QQTSHARED_EXPORT void moveLeft ( QWidget* w, QWidget* parent );
+QQTSHARED_EXPORT void moveRight ( QWidget* w, QWidget* parent );
+QQTSHARED_EXPORT void moveTop ( QWidget* w, QWidget* parent );
+QQTSHARED_EXPORT void moveBottom ( QWidget* w, QWidget* parent );
 
 
 #endif //__QQT_WIDGETS_DEFINE_H__

@@ -6,7 +6,10 @@
 #include "qqt-qt.h"
 #include <qqt-local.h>
 
-
+/**
+ * @brief The QQtMouseEvent class
+ * 在QQtDoubleClickeHelper里面用于保存鼠标事件对象。
+ */
 class QQTSHARED_EXPORT QQtMouseEvent : public QMouseEvent
 {
 public:

@@ -1,5 +1,6 @@
-﻿#include "qqtwidgets.h"
+#include "qqtwidgets.h"
 
+#include <QDesktopWidget>
 
 tagBtnIconTable::tagBtnIconTable()
 {
@@ -76,118 +77,231 @@ const QString& tagBtnIconTable::operator[] ( int index ) const
     return pixmap[index];
 }
 
-
-void moveCenter ( QWidget* w )
-{
-    int x1 = 0, y1 = 0;
-
-    x1 = ( QApplication::desktop()->availableGeometry().width()
-           - w->width() ) / 2;
-    y1 = ( QApplication::desktop()->availableGeometry().height()
-           - w->height() ) / 2;
-
-
-    w->move ( x1, y1 );
-
-    return;
-}
-
-
-void moveRight ( QWidget* w )
-{
-    w->move ( ( QApplication::desktop()->width() - w->width() ), 0 );
-}
-
-
-
-void moveFull ( QWidget* w )
-{
-    w->setGeometry ( QApplication::desktop()->availableGeometry() );
-    w->move ( QApplication::desktop()->availableGeometry().left(),
-              QApplication::desktop()->availableGeometry().top() );
-}
-
+/**
+ * ************************************************************************
+ */
 void moveHCenter ( QWidget* w )
 {
-    int x1 = 0, y1 = 0;
+    QWidget* targetWidget = w;
+    QRect targetGeometry = targetWidget->geometry();
 
-    x1 = ( QApplication::desktop()->availableGeometry().width()
-           - w->width() ) / 2;
-    y1 = w->geometry().top();
+    QDesktopWidget* parentWidget = QApplication::desktop();
+    QRect parentGeometry = parentWidget->availableGeometry();
 
-    w->move ( x1, y1 );
+    int x1 = parentGeometry.left()
+             + ( parentGeometry.width() - targetWidget->width() ) / 2;
+    int y1 = targetGeometry.top();
+
+    targetWidget->move ( x1, y1 );
 }
 
 void moveVCenter ( QWidget* w )
 {
-    int x1 = 0, y1 = 0;
+    QWidget* targetWidget = w;
+    QDesktopWidget* parentWidget = QApplication::desktop();
 
-    x1 = w->geometry().left();
-    y1 = ( QApplication::desktop()->availableGeometry().height()
-           - w->height() ) / 2;
+    int x1 = targetWidget->geometry().left();
+    int y1 = parentWidget->availableGeometry().top()
+             + ( parentWidget->availableGeometry().height()
+                 - targetWidget->height() ) / 2;
 
-    w->move ( x1, y1 );
-
-    return;
+    targetWidget->move ( x1, y1 );
 }
 
-void moveCenter ( QWidget* w, QWidget* parent )
+void moveCenter ( QWidget* w )
 {
-    if ( !parent )
-        parent = QApplication::desktop();
+    QWidget* targetWidget = w;
+    QDesktopWidget* parentWidget = QApplication::desktop();
 
-    int x1 = 0, y1 = 0;
+    int x1 = parentWidget->availableGeometry().left()
+             + ( parentWidget->availableGeometry().width()
+                 - targetWidget->width() ) / 2;
+    int y1 = parentWidget->availableGeometry().top()
+             + ( parentWidget->availableGeometry().height()
+                 - targetWidget->height() ) / 2;
 
-    x1 = ( parent->geometry().width() - w->width() ) / 2;
-    y1 = ( parent->geometry().height() - w->height() ) / 2;
-
-    w->move ( x1, y1 );
-
-    return;
+    targetWidget->move ( x1, y1 );
 }
 
-void moveFull ( QWidget* w, QWidget* parent )
+void moveFull ( QWidget* w )
 {
-    if ( !parent )
-        parent = QApplication::desktop();
+    QWidget* targetWidget = w;
+    QDesktopWidget* parentWidget = QApplication::desktop();
 
-    int x1 = 0, y1 = 0;
-
-    x1 = parent->geometry().left();
-    y1 = parent->geometry().top();
-
-    w->setGeometry ( parent->geometry() );
-    w->move ( x1, y1 );
-
-    return;
+    targetWidget->setGeometry ( parentWidget->availableGeometry() );
+    targetWidget->move ( parentWidget->availableGeometry().left(),
+                         parentWidget->availableGeometry().top() );
 }
 
+void moveLeft ( QWidget* w )
+{
+    QWidget* targetWidget = w;
+    QRect targetGeometry = targetWidget->geometry();
+
+    QDesktopWidget* parentWidget = QApplication::desktop();
+    QRect parentGeometry = parentWidget->availableGeometry();
+
+    int x1 = parentGeometry.left();
+    int y1 = targetGeometry.top();
+
+    targetWidget->move ( x1, y1 );
+}
+
+void moveRight ( QWidget* w )
+{
+    QWidget* targetWidget = w;
+    QDesktopWidget* parentWidget = QApplication::desktop();
+
+    int x1 = parentWidget->availableGeometry().right()
+             - targetWidget->width();
+    int y1 = targetWidget->geometry().top();
+
+    targetWidget->move ( x1, y1 );
+}
+
+void moveTop ( QWidget* w )
+{
+    QWidget* targetWidget = w;
+    QRect targetGeometry = targetWidget->geometry();
+
+    QDesktopWidget* parentWidget = QApplication::desktop();
+    QRect parentGeometry = parentWidget->availableGeometry();
+
+    int x1 = targetGeometry.left();
+    int y1 = parentGeometry.top();
+
+    targetWidget->move ( x1, y1 );
+}
+
+void moveBottom ( QWidget* w )
+{
+    QWidget* targetWidget = w;
+    QRect targetGeometry = targetWidget->geometry();
+
+    QDesktopWidget* parentWidget = QApplication::desktop();
+    QRect parentGeometry = parentWidget->availableGeometry();
+
+    int x1 = targetGeometry.left();
+    int y1 = parentGeometry.bottom();
+
+    targetWidget->move ( x1, y1 );
+}
+
+
+/**
+ * ************************************************************************
+ */
 void moveHCenter ( QWidget* w, QWidget* parent )
 {
+    QRect targetGeometry = w->geometry();
+
+    QRect parentRect = parent->rect();
     if ( !parent )
-        parent = QApplication::desktop();
+        parentRect = QApplication::desktop()->availableGeometry();
 
-    int x1 = 0, y1 = 0;
-
-    x1 = ( parent->geometry().width() - w->width() ) / 2;
-    y1 = w->geometry().top();
+    int x1 = parentRect.left()
+             + ( parentRect.width() - targetGeometry.width() ) / 2;
+    int y1 = targetGeometry.top();
 
     w->move ( x1, y1 );
-
-    return;
 }
 
 void moveVCenter ( QWidget* w, QWidget* parent )
 {
+    QRect targetGeometry = w->geometry();
+
+    QRect parentRect = parent->rect();
     if ( !parent )
-        parent = QApplication::desktop();
+        parentRect = QApplication::desktop()->availableGeometry();
 
-    int x1 = 0, y1 = 0;
-
-    x1 = w->geometry().left();
-    y1 = ( parent->geometry().height() - w->height() ) / 2;
+    int x1 = targetGeometry.left();
+    int y1 = parentRect.top()
+             + ( parentRect.height() - targetGeometry.height() ) / 2;
 
     w->move ( x1, y1 );
-
-    return;
 }
+
+void moveCenter ( QWidget* w, QWidget* parent )
+{
+    QRect targetGeometry = w->geometry();
+
+    QRect parentRect = parent->rect();
+    if ( !parent )
+        parentRect = QApplication::desktop()->availableGeometry();
+
+    int x1 = parentRect.left()
+             + ( parentRect.width() - targetGeometry.width() ) / 2;
+    int y1 = parentRect.top()
+             + ( parentRect.height() - targetGeometry.height() ) / 2;
+
+    w->move ( x1, y1 );
+}
+
+void moveFull ( QWidget* w, QWidget* parent )
+{
+    QRect targetGeometry = w->geometry();
+
+    QRect parentRect = parent->rect();
+    if ( !parent )
+        parentRect = QApplication::desktop()->availableGeometry();
+
+    w->setGeometry ( parentRect );
+    w->move ( parentRect.left(), parentRect.top() );
+}
+
+void moveLeft ( QWidget* w, QWidget* parent )
+{
+    QRect targetGeometry = w->geometry();
+
+    QRect parentRect = parent->rect();
+    if ( !parent )
+        parentRect = QApplication::desktop()->availableGeometry();
+
+    int x1 = parentRect.left();
+    int y1 = targetGeometry.top();
+
+    w->move ( x1, y1 );
+}
+
+void moveRight ( QWidget* w, QWidget* parent )
+{
+    QRect targetGeometry = w->geometry();
+
+    QRect parentRect = parent->rect();
+    if ( !parent )
+        parentRect = QApplication::desktop()->availableGeometry();
+
+    int x1 = parentRect.right() - targetGeometry.width();
+    int y1 = targetGeometry.top();
+
+    w->move ( x1, y1 );
+}
+
+void moveTop ( QWidget* w, QWidget* parent )
+{
+    QRect targetGeometry = w->geometry();
+
+    QRect parentRect = parent->rect();
+    if ( !parent )
+        parentRect = QApplication::desktop()->availableGeometry();
+
+    int x1 = targetGeometry.left();
+    int y1 = parentRect.top();
+
+    w->move ( x1, y1 );
+}
+
+void moveBottom ( QWidget* w, QWidget* parent )
+{
+    QRect targetGeometry = w->geometry();
+
+    QRect parentRect = parent->rect();
+    if ( !parent )
+        parentRect = QApplication::desktop()->availableGeometry();
+
+    int x1 = targetGeometry.left();
+    int y1 = parentRect.bottom();
+
+    w->move ( x1, y1 );
+}
+
