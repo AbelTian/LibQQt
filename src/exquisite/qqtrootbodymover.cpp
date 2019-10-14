@@ -3,6 +3,10 @@
 
 #include <QWidget>
 #include <QMouseEvent>
+#ifdef Q_OS_WIN
+//#pragma comment(lib, "user32.lib")
+#include <qt_windows.h>
+#endif
 
 QQtRootBodyMover::QQtRootBodyMover ( QObject* parent ) : QObject ( parent )
 {
