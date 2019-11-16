@@ -1,4 +1,4 @@
-﻿#include "qqtudpclient.h"
+#include "qqtudpclient.h"
 
 QQtUdpClient::QQtUdpClient ( QObject* parent ) : QUdpSocket ( parent )
 {
@@ -170,8 +170,14 @@ void QQtUdpClient::recvDatagram ( QByteArray& bytes, QHostAddress& address, quin
     //这里的buf用完, 已经释放。
     char* data = new char[size + 1]();
     qint64 len = readDatagram ( data, size, &address, &port );
-    pline() << len;
+    //pline() << len;
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 1)
+    //Qt5.6 MSVC Linux64 全部都出错，设置进去以后拿到的根本就是乱码。
     bytes.setRawData ( data, size );
+#else
+    bytes.resize ( len );
+    memcpy ( bytes.data(), data, len );
+#endif
     delete[] data;
 #endif
 }
