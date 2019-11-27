@@ -1,4 +1,4 @@
-﻿#ifndef QQTGIFWIDGET_H
+#ifndef QQTGIFWIDGET_H
 #define QQTGIFWIDGET_H
 
 #include <qqtwidget.h>
@@ -17,6 +17,8 @@ public:
 
     void setGifFile ( QString gifFile );
 
+    inline QMovie* movieHandler() const { return m_movie; }
+    inline QTimer* timerHandler() const { return m_frameTimer; }
 signals:
 
 public slots:
@@ -25,8 +27,8 @@ private:
     QMovie* m_movie;
     QTimer* m_frameTimer;
 
-private slots:
-    void slotFramePlayback();
+protected slots:
+    virtual void slotFramePlayback();
 };
 
 #endif // QQTGIFWIDGET_H
