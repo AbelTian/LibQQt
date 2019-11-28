@@ -1,4 +1,4 @@
-﻿#include <QLabel>
+#include <QLabel>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QEvent>
@@ -185,7 +185,7 @@ bool QQtTitleBar::eventFilter ( QObject* obj, QEvent* event )
             if ( pWidget )
             {
                 m_pTitleLabel->setText ( pWidget->windowTitle() );
-                return true;
+                return false;
             }
         }
         case QEvent::WindowIconChange:
@@ -196,7 +196,7 @@ bool QQtTitleBar::eventFilter ( QObject* obj, QEvent* event )
                 //必须对外部Widget设置WindowIcon，而不是这个Widget的WindowIcon.
                 QIcon icon = pWidget->windowIcon();
                 m_pIconLabel->setPixmap ( icon.pixmap ( m_pIconLabel->size() ) );
-                return true;
+                return false;
             }
         }
         case QEvent::WindowStateChange:
@@ -208,7 +208,7 @@ bool QQtTitleBar::eventFilter ( QObject* obj, QEvent* event )
             m_pMaximizeButton->setMinimumSize ( extent, extent );
             m_pCloseButton->setMinimumSize ( extent, extent );
             updateMaximize();
-            return true;
+            return false;
         }
         default:
             break;
