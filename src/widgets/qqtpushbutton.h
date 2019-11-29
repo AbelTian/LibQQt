@@ -1,4 +1,4 @@
-﻿#ifndef QQTPUSHBUTTON_H
+#ifndef QQTPUSHBUTTON_H
 #define QQTPUSHBUTTON_H
 
 #include <QPushButton>
@@ -29,6 +29,9 @@ public:
     inline TBtnIconTable& iconTable() { return m_pixmap; }
     inline EBtnStatus btnStatus() const { return state; }
     inline void setRing ( bool op = false ) { ring = op; }
+
+    void setEnabled ( bool );
+    void setDisabled ( bool );
 
 signals:
     void longClick();

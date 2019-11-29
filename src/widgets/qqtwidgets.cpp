@@ -77,6 +77,68 @@ const QString& tagBtnIconTable::operator[] ( int index ) const
     return pixmap[index];
 }
 
+
+tagBtnImageTable::tagBtnImageTable()
+{
+
+}
+
+const QImage& tagBtnImageTable::image ( int index ) const
+{
+    if ( index < 0 || index > BTN_MAX - 1 )
+        return mImage[BTN_NORMAL];
+
+    return mImage[index];
+}
+
+QImage& tagBtnImageTable::image ( int index )
+{
+    if ( index < 0 || index > BTN_MAX - 1 )
+        return mImage[BTN_NORMAL];
+
+    return mImage[index];
+}
+
+void tagBtnImageTable::setStateImage ( int index, const QImage& image )
+{
+    if ( index < 0 || index > BTN_MAX - 1 )
+        return;
+
+    mImage[index] = image;
+}
+
+void tagBtnImageTable::setNormal ( const QImage& normal, const QImage& press )
+{
+    mImage[BTN_NORMAL] = normal;
+    mImage[BTN_PRESS] = press;
+}
+
+void tagBtnImageTable::setHover ( const QImage& hover )
+{
+    mImage[BTN_HOVER] = hover;
+}
+
+void tagBtnImageTable::setDisable ( const QImage& disable )
+{
+    mImage[BTN_DISABLE] = disable;
+}
+
+const QImage& tagBtnImageTable::operator[] ( int index ) const
+{
+    if ( index < 0 || index > BTN_MAX - 1 )
+        return mImage[BTN_NORMAL];
+
+    return mImage[index];
+}
+
+QImage& tagBtnImageTable::operator [] ( int index )
+{
+    if ( index < 0 || index > BTN_MAX - 1 )
+        return mImage[BTN_NORMAL];
+
+    return mImage[index];
+}
+
 /**
  * ************************************************************************
  */

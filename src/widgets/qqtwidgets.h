@@ -2,6 +2,7 @@
 #define __QQT_WIDGETS_DEFINE_H__
 
 #include <QWidget>
+#include <QImage>
 #include <QUuid>
 #include <QApplication>
 #include <QMessageBox>
@@ -23,12 +24,16 @@ extern "C" {
 typedef enum tagEBtnStatus
 {
     BTN_NORMAL = 0,
-    BTN_UNCHECK = BTN_NORMAL,
     BTN_PRESS = 1,
-    BTN_CHECK = BTN_PRESS,
     BTN_HOVER = 2,
-    BTN_DISABLE = 3,
-    BTN_MAX,
+
+    BTN_UNCHECK = BTN_NORMAL,
+    BTN_CHECK = BTN_PRESS,
+
+    BTN_ENABLE = BTN_NORMAL,
+    BTN_DISABLE = 4,
+
+    BTN_MAX = 5
 } EBtnStatus;
 
 #ifdef __cplusplus
@@ -48,6 +53,25 @@ typedef struct QQTSHARED_EXPORT tagBtnIconTable
     const QString& operator[] ( int index ) const;
     QString& operator [] ( int index );
 } TBtnIconTable;
+
+typedef struct QQTSHARED_EXPORT tagBtnImageTable
+{
+    QImage mImage[BTN_MAX];
+
+    tagBtnImageTable();
+
+    const QImage& image ( int index ) const;
+    QImage& image ( int index );
+
+    void setStateImage ( int index, const QImage& image );
+
+    void setNormal ( const QImage& normal, const QImage& press );
+    void setHover ( const QImage& hover );
+    void setDisable ( const QImage& disable );
+
+    const QImage& operator[] ( int index ) const;
+    QImage& operator [] ( int index );
+} TBtnImageTable;
 
 /**
  * 主窗口。针对屏幕

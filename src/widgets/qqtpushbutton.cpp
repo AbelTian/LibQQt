@@ -1,4 +1,4 @@
-﻿#include "qqtpushbutton.h"
+#include "qqtpushbutton.h"
 #include <QStylePainter>
 #include <QMouseEvent>
 
@@ -18,12 +18,33 @@ QQtPushButton::~QQtPushButton()
 {
 }
 
+void QQtPushButton::setEnabled ( bool checked )
+{
+    QPushButton::setEnabled ( checked );
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+#else
+    enabledChange ( checked );
+#endif
+}
+
+void QQtPushButton::setDisabled ( bool checked )
+{
+    QPushButton::setDisabled ( checked );
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+#else
+    enabledChange ( !checked );
+#endif
+}
+
 void QQtPushButton::paintEvent ( QPaintEvent* e )
 {
     Q_UNUSED ( e )
     QStylePainter p ( this );
 
     bool enabled = isEnabled();
+
+    if ( !enabled )
+        state = BTN_DISABLE;
 
     //pline() << this->objectName() << e->type() << state << m_pixmap[state];
 
