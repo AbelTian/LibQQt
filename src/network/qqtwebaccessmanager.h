@@ -1,4 +1,4 @@
-﻿#ifndef QQTWEBWORKCLIENT_H
+#ifndef QQTWEBWORKCLIENT_H
 #define QQTWEBWORKCLIENT_H
 
 #include <QNetworkAccessManager>
@@ -91,6 +91,7 @@ public:
         return mNetworkRequest.url().toString();
     }
     void setWebAccessUrl ( QString strUrl ) {
+        m_strUrl = strUrl;
         mNetworkRequest.setUrl ( QUrl ( m_strUrl ) );
     }
     QNetworkRequest& webAccessRequest() {
@@ -241,7 +242,7 @@ public:
     QQtWebAccessSession* sendPutRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart );
     QQtWebAccessSession* sendDeleteResourceRequest ( const QNetworkRequest& request );
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
-            QIODevice* data = Q_NULLPTR );
+                                             QIODevice* data = Q_NULLPTR );
 
     //win没有这几个函数
     //arm下5.5.1没有
@@ -251,9 +252,9 @@ public:
 #if defined( __DARWIN__ ) || defined( __LINUX__ )
 #if QT_VERSION > QT_VERSION_CHECK(5,7,1)
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
-            const QByteArray& data );
+                                             const QByteArray& data );
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
-            QHttpMultiPart* multiPart );
+                                             QHttpMultiPart* multiPart );
 #endif
 #endif
 
