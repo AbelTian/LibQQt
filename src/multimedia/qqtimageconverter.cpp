@@ -123,6 +123,10 @@ QImage QQtImageConverter::YUYVTORGB888 ( const QVideoFrame& frame )
     if ( !mImage || mImage->isNull()
          || ( mImage->width() != frame.width() || mImage->height() != frame.height() ) )
     {
+        if ( pp )
+            free ( pp );
+        if ( mImage )
+            delete mImage;
         int w = frame.width();
         int h = frame.height();
         pp = ( uchar* ) malloc ( w * h * 3 * sizeof ( char ) );
@@ -138,6 +142,10 @@ QImage QQtImageConverter::UYVYTORGB888 ( const QVideoFrame& frame )
     if ( !mImage || mImage->isNull()
          || ( mImage->width() != frame.width() || mImage->height() != frame.height() ) )
     {
+        if ( pp )
+            free ( pp );
+        if ( mImage )
+            delete mImage;
         int w = frame.width();
         int h = frame.height();
         pp = ( uchar* ) malloc ( w * h * 3 * sizeof ( char ) );
