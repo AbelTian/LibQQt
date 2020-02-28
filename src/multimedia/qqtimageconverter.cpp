@@ -1,5 +1,7 @@
 #include <qqtimageconverter.h>
 
+#include <stdio.h>
+
 int qqt_convert_uyvy_to_rgb888_buffer ( unsigned char* src_buffer, int w, int h,
                                         unsigned char* des_buffer )
 {
