@@ -193,6 +193,6 @@ private:
     /*是个列表和子字典，这是错误的，不可能的*/
 };
 
-QQTSHARED_EXPORT QDebug& operator<< ( QDebug& dbg, const QQtDictionary& d );
+QQTSHARED_EXPORT QDebug operator<< ( QDebug dbg, const QQtDictionary& d );
 
 #endif // QQTDICTIONARY_H

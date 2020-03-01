@@ -604,29 +604,31 @@ QQtDictionary& QQtDictionary::getChild ( const QString& key )
 
 
 
-QDebug& operator<< ( QDebug& dbg, const QQtDictionary& d )
+QDebug operator<< ( QDebug dbg, const QQtDictionary& d )
 {
     if ( d.getType() == QQtDictionary::DictMax )
     {
-        dbg << "\n{"
+        dbg << "{"
             << "\n"
             << "  Type:" << d.getTypeName()
             << "\n"
             << "  Value:" << d.getValue()
-            << "\n}";
+            << "\n"
+            << "}";
     }
     else if ( d.getType() == QQtDictionary::DictValue )
     {
-        dbg << "\n{"
+        dbg << "{"
             << "\n"
             << "  Type:" << d.getTypeName()
             << "\n"
             << "  Value:" << d.getValue()
-            << "\n}";
+            << "\n"
+            << "}";
     }
     else
     {
-        dbg << "\n{"
+        dbg << "{"
             << "\n"
             << "  Type:" << d.getTypeName()
             << "\n"
@@ -657,9 +659,10 @@ QDebug& operator<< ( QDebug& dbg, const QQtDictionary& d )
                 << "  }";
         }
 
-        dbg << "\n}";
+        dbg << "\n"
+            << "}";
     }
 
-    return dbg.space();
+    return dbg;
 }
 
