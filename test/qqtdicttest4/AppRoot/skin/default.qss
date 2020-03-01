@@ -1,0 +1,24 @@
+/*spinbox 抬起样式*/
+QTimeEdit::up-button,QDoubleSpinBox::up-button,QSpinBox::up-button {
+    subcontrol-origin:border;
+    subcontrol-position:right;
+    width: 12px;
+}
+
+QTimeEdit::down-button,QDoubleSpinBox::down-button,QSpinBox::down-button {
+    subcontrol-origin:border;
+    subcontrol-position:left;
+    width: 12px;
+}
+
+/*按钮按下样式*/
+QTimeEdit::up-button:pressed,QDoubleSpinBox::up-button:pressed,QSpinBox::up-button:pressed{
+    subcontrol-origin:border;
+    subcontrol-position:right;
+    width: 12px;
+}
+
+QTimeEdit::down-button:pressed,QDoubleSpinBox::down-button:pressed,QSpinBox::down-button:pressed,QSpinBox::down-button:pressed{
+    subcontrol-position:left;
+    width: 12px;
+}

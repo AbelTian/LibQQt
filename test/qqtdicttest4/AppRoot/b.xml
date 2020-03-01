@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<person a="1">
+   <username name="first-name">王哥</username>
+   <phone-number name="tel-number" type="private">111122211</phone-number>
+   <phone-number name="tel-number" type="public">22222222</phone-number>
+   <address key="working_location">北京-xxxx</address>
+   <sex>M</sex>
+   <weight>75kg</weight>
+</person>
