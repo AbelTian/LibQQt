@@ -52,8 +52,8 @@ QQtApplication::QQtApplication ( int& argc, char** argv ) :
     QDir::setCurrent ( qApp->applicationDirPath() );
 //#endif
 
-    qDebug() << tr ( "QQt Application Framework Software" );
-    qDebug() << tr ( "Copyright (C) 2017 Tianduanrui. All rights reserved." );
+    qDebug() << qPrintable ( tr ( "QQt Application Framework Software" ) );
+    qDebug() << qPrintable ( tr ( "Copyright (C) 2017-2020 Tianduanrui. All rights reserved." ) );
     //qDebug() << tr ( "Assigned by Dezhou." );
 
     pline() << "Qt version:" << QT_VERSION_STR;

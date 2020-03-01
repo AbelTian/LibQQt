@@ -7,6 +7,9 @@
 #include <QJsonValue>       //json值 不准确的
 #include <QJsonParseError>  //错误处理
 
+//support xml
+#include "qdom.h"
+
 QQtDictionary::QQtDictionary ()
 {
     m_type = DictMax;
@@ -408,11 +411,37 @@ QQtDictionary& QQtDictionary::operator = ( const QVariant& value )
     return *this;
 }
 
+QString QQtDictionary::toXML()
+{
+
+}
+
+void QQtDictionary::fromXML ( const QByteArray& xml )
+{
+
+    QString errorStr;
+    int errorLine;
+    int errorCol;
+
+    QDomDocument doc;
+    if ( !doc.setContent ( xml, true, &errorStr,
+                           &errorLine, &errorCol ) )
+    {
+        qDebug() << "errorStr:" << errorStr;
+        qDebug() << "errorLine:" << errorLine <<
+                 "  errorCol:" << errorCol;
+        return;
+    }
+
+    //QDomElement root = doc.documentElement();
+    parseDomNode ( doc, *this );
+}
+
 QByteArray QQtDictionary::toJson ( QJsonDocument::JsonFormat format )
 {
     //node -> QJsonValue -> QJsonDocument
     QJsonValue value;
-    parseDictionaryToJsonValue ( *this, value );
+    packDictionaryToJsonValue ( *this, value );
     QJsonDocument doc = QJsonDocument::fromVariant ( value.toVariant() );
     QByteArray result = doc.toJson ( format );
     return result;
@@ -498,7 +527,7 @@ void QQtDictionary::parseJsonValue ( const QJsonValue& value, QQtDictionary& par
     }
 }
 
-void QQtDictionary::parseDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result )
+void QQtDictionary::packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result )
 {
     switch ( node.getType() )
     {
@@ -532,7 +561,7 @@ void QQtDictionary::parseDictionaryToJsonValue ( const QQtDictionary& node, QJso
             {
                 QList<QQtDictionary>& l = node.getList();
                 QJsonValue value;
-                parseDictionaryToJsonValue ( l[i], value );
+                packDictionaryToJsonValue ( l[i], value );
                 //array.append ( value );
                 array.push_back ( value );
             }
@@ -549,7 +578,7 @@ void QQtDictionary::parseDictionaryToJsonValue ( const QQtDictionary& node, QJso
                 const QString& key = itor.key();
                 const QQtDictionary& srcvalue = itor.value();
                 QJsonValue value;
-                parseDictionaryToJsonValue ( srcvalue, value );
+                packDictionaryToJsonValue ( srcvalue, value );
                 object.insert ( key, value );
             }
             result = object;
@@ -559,6 +588,94 @@ void QQtDictionary::parseDictionaryToJsonValue ( const QQtDictionary& node, QJso
         default:
             break;
     }
+}
+
+void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent )
+{
+    pline() << value.nodeName() << value.nodeType() << value.nodeValue() << "initial";
+
+    switch ( value.nodeType() )
+    {
+        case QDomNode::AttributeNode: //2
+        {
+            QString name0  = value.nodeName();
+            QString value0 = value.nodeValue();
+            pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
+        case QDomNode::TextNode: //3
+        {
+            QString name0 = value.nodeName();
+            QString value0  = value.nodeValue();
+            pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
+        case QDomNode::ElementNode: //1
+        {
+            /**
+             * 警告：XML在解析到QQtDictionary里面的时候，每个节点的类型是Multipel Type，不是单类型！！
+             */
+
+            //attri [__attributes__], key=value
+            QDomNamedNodeMap attrs = value.attributes();
+            for ( int i = 0; i < attrs.size(); i++ )
+            {
+                QDomNode node3 = attrs.item ( i );
+                QString name0 = node3.nodeName();
+                pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                parseDomNode ( node3, parent["__attributes__"][name0] );
+            }
+
+            //child [+text], key=value
+            QDomNodeList childs = value.childNodes();
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node3 = childs.item ( i );
+                QString name0 = node3.nodeName();
+                pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                if ( node3.hasChildNodes() )
+                    parseDomNode ( node3, parent[name0] );
+                else
+                    parent = node3.nodeValue();
+            }
+        }
+        break;
+        case QDomNode::ProcessingInstructionNode: //7
+        {
+            QDomProcessingInstruction pi0 = value.toProcessingInstruction();
+            pline() << pi0.target() << pi0.data();
+            parent = pi0.data();
+        }
+        break;
+        case QDomNode::DocumentNode: //9
+        {
+            QDomNodeList childs = value.childNodes();
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node1 = childs.item ( i );
+                QString name0 = node1.nodeName();
+                pline() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
+                pline() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
+                parseDomNode ( node1, parent[name0] );
+            }
+        }
+        break;
+        case QDomNode::CommentNode:
+            break;
+        case QDomNode::EntityNode:
+            break;
+        default:
+            break;
+    }
+}
+
+void QQtDictionary::packDictionaryToDomElement ( const QQtDictionary& node, QDomNode& result )
+{
+
 }
 
 bool QQtDictionary::operator == ( const QQtDictionary& other ) const
@@ -641,7 +758,9 @@ QDebug operator<< ( QDebug dbg, const QQtDictionary& d )
             for ( int i = 0; i < d.getList().size(); i++ )
             {
                 dbg << "\n"
-                    << "    id:" << i << "Type:" << d[i].getTypeName() << "Value:" << d[i].getValue();
+                    << qPrintable ( QString ( "    id: %1 Type: %2" ).arg ( i, -10 ).arg ( d[i].getTypeName(), -10 ) )
+                    << "Value:" << d[i].getValue();
+                //<< "    id:" << i << "Type:" << d[i].getTypeName() << "Value:" << d[i].getValue();
             }
             dbg << "\n"
                 << "  }";
@@ -653,7 +772,9 @@ QDebug operator<< ( QDebug dbg, const QQtDictionary& d )
             foreach ( QString key, d.getMap().keys() )
             {
                 dbg << "\n"
-                    << "    id:" << key << "Type:" << d[key].getTypeName() << "Value:" << d[key].getValue();
+                    << qPrintable ( QString ( "    id: %1 Type: %2" ).arg ( key, -10 ).arg ( d[key].getTypeName(), -10 ) )
+                    << "Value:" << d[key].getValue();
+                //<< "    id:" << key << "Type:" << d[key].getTypeName() << "Value:" << d[key].getValue();
             }
             dbg << "\n"
                 << "  }";

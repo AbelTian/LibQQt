@@ -3,6 +3,12 @@
 
 #include <QObject>
 #include <QList>
+
+class QJsonDocument;
+class QJsonValue;
+class QDomDocument;
+class QDomNode;
+
 #include <qqtorderedmap.h>
 #include <qqtcore.h>
 #include <qqt-local.h>
@@ -153,7 +159,7 @@ public:
 
     /*与其他数据结构兼容*/
     QString toXML();
-    void fromXML ( QString& xmlContent );
+    void fromXML ( const QByteArray& xml );
     QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact );
     void fromJson ( const QByteArray& json );
 
@@ -170,8 +176,11 @@ public:
     //toValue() toList() toMap(); 不丢失数据方式。
 
 protected:
-    void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
-    void parseDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result );
+    virtual void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
+    virtual void packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result );
+
+    virtual void parseDomNode ( const QDomNode& value, QQtDictionary& parent );
+    virtual void packDictionaryToDomElement ( const QQtDictionary& node, QDomNode& result );
 signals:
 
 public slots:
