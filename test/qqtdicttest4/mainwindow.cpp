@@ -11,6 +11,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui ( new Ui::MainWindow )
 {
     ui->setupUi ( this );
+
 #if 0
 
     QFile file ( "b.xml" );
@@ -21,15 +22,20 @@ MainWindow::MainWindow ( QWidget* parent ) :
     QQtDictionary dict;
     dict.fromXML ( bytes );
     p3line() << "root:" << dict;
-    p3line() << "xml:" << dict["xml"];
+    p3line() << "__processinginstruction__:" << dict["__processinginstruction__"];
     p3line() << "person:" << dict["person"];
 
     p3line() << "address:" << dict["person"]["address"];
     p3line() << "username:" << dict["person"]["username"];
 
+
     p3line() << "phone-number:" << dict["person"]["phone-number"];
-    p3line() << "phone-number.__attributes__:" << dict["person"]["phone-number"]["__attributes__"];
-    p3line() << "phone-number.#text:" << dict["person"]["phone-number"]["#text"];
+    p3line() << "phone-number1:" << dict["person"]["phone-number"][0];
+    p3line() << "phone-number1.__attributes__:" << dict["person"]["phone-number"][0]["__attributes__"];
+    p3line() << "phone-number1.#text:" << dict["person"]["phone-number"][0]["#text"];
+
+    QByteArray bytes0 = dict.toXML ( 4 );
+    p3line() << qPrintable ( QString ( bytes0 ) );
 
 #elif 0
 
@@ -41,7 +47,7 @@ MainWindow::MainWindow ( QWidget* parent ) :
     QQtDictionary dict;
     dict.fromXML ( bytes );
     p3line() << "root:" << dict;
-    p3line() << "xml:" << dict["xml"];
+    p3line() << "__processinginstruction__:" << dict["__processinginstruction__"];
 
     p3line() << "bookstore:" << dict["bookstore"];
 
@@ -61,6 +67,11 @@ MainWindow::MainWindow ( QWidget* parent ) :
         const QQtDictionary& d0 = itor.next();
         p3line() << d0["#text"].getValue().toString();
     }
+
+
+    QByteArray bytes0 = dict.toXML ( 4 );
+    p3line() << qPrintable ( QString ( bytes0 ) );
+
 #else
 
     QFile file ( "a.xml" );
@@ -84,6 +95,10 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
     QByteArray bytes0 = dict.toJson ( QJsonDocument::Indented );
     p3line() << qPrintable ( QString ( bytes0 ) );
+
+    QByteArray bytes1 = dict.toXML ( 4 );
+    p3line() << qPrintable ( QString ( bytes1 ) );
+
 #endif
 }
 

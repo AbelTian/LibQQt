@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <person a="1">
    <username name="first-name">王哥</username>
    <phone-number name="tel-number" type="private">111122211</phone-number>

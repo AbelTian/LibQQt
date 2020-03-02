@@ -37,7 +37,10 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
  * 通过重载函数来实现类型的变化，不建议使用中更改类型。
  *
  * 比json和xml的数据结构要庞大。
- * fromJson toJson， fromXML toXML，fromYAML toYAML
+ * fromJson toJson
+ * fromXML toXML
+ * fromINI toINI
+ * fromYAML toYAML
  *
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
  * QQtDictionary封装了QVariant，实现直接操作真实数据。提供大量操作符。存取数据方便快捷，类型多样。
@@ -160,12 +163,6 @@ public:
     QQtDictionary& operator = ( const QVariant& value );
     bool operator == ( const QQtDictionary& other ) const;
 
-    /*与其他数据结构兼容*/
-    QByteArray toXML();
-    void fromXML ( const QByteArray& xml );
-    QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact );
-    void fromJson ( const QByteArray& json );
-
     //update for new using
     template <typename T>
     bool operator == ( const T& inst ) const {
@@ -178,12 +175,23 @@ public:
     //内部类型转换
     //toValue() toList() toMap(); 不丢失数据方式。
 
+    /*与其他数据结构兼容*/
+    QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact );
+    void fromJson ( const QByteArray& json );
+    QByteArray toXML ( int = -1 );
+    void fromXML ( const QByteArray& xml );
+    QByteArray toINI();
+    void fromINI ( const QByteArray& ini );
+
 protected:
     virtual void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
     virtual void packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result );
 
+protected:
     virtual void parseDomNode ( const QDomNode& value, QQtDictionary& parent );
-    virtual void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result );
+    virtual void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result,
+                                           QDomDocument& doc, QString nodeName = QString() );
+
 signals:
 
 public slots:
