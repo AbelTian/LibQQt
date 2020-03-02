@@ -596,6 +596,14 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
 
     switch ( value.nodeType() )
     {
+        case QDomNode::CommentNode: //8
+        {
+            QString name0  = value.nodeName();
+            QString value0 = value.nodeValue();
+            pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
         case QDomNode::AttributeNode: //2
         {
             QString name0  = value.nodeName();
@@ -615,7 +623,15 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
         case QDomNode::ElementNode: //1
         {
             /**
-             * 警告：XML在解析到QQtDictionary里面的时候，每个节点的类型是Multipel Type，不是单类型！！
+             * <person a="0">liu kai</person>           dict["person"]
+             *                                          dict["person"]["__attributes__"]
+             *                                          dict["person"]["#text"]
+             * ----------------------------------------------------------------------------
+             * <person a="0">
+             *     <sub-person2 b="0">BBB</sub-person2>
+             *     <sub-person b="0">AAA</sub-person>   dict["person"]["sub-person"]["__attributes__"]
+             * </person>                                dict["person"]["sub-person"]["#text"]
+             * -----------------------------------------------------------------------------
              */
 
             //attri [__attributes__], key=value
@@ -629,18 +645,44 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
                 parseDomNode ( node3, parent["__attributes__"][name0] );
             }
 
+
             //child [+text], key=value
             QDomNodeList childs = value.childNodes();
+
+            //check count
+            //dict[item]["count"]
+            //dict[item]["pos"]
+            QQtDictionary node_count;
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node3 = childs.item ( i );
+                QString name0 = node3.nodeName();
+                node_count[name0]["count"] = 0;
+                node_count[name0]["pos"] = 0;
+            }
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node3 = childs.item ( i );
+                QString name0 = node3.nodeName();
+                node_count[name0]["count"] = node_count[name0]["count"].getValue().toInt () + 1;
+            }
+
             for ( int i = 0; i < childs.size(); i++ )
             {
                 QDomNode node3 = childs.item ( i );
                 QString name0 = node3.nodeName();
                 pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
                 pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
-                if ( node3.hasChildNodes() )
-                    parseDomNode ( node3, parent[name0] );
+                int count0 = node_count[name0]["count"].getValue().toInt();
+                int pos0 = node_count[name0]["pos"].getValue().toInt();
+                pline() << count0 << pos0;
+                if ( count0 > 1 )
+                {
+                    parseDomNode ( node3, parent[name0][pos0] );
+                    node_count[name0]["pos"] = pos0 + 1;
+                }
                 else
-                    parent = node3.nodeValue();
+                    parseDomNode ( node3, parent[name0] );
             }
         }
         break;
@@ -664,8 +706,6 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             }
         }
         break;
-        case QDomNode::CommentNode:
-            break;
         case QDomNode::EntityNode:
             break;
         default:
@@ -772,7 +812,7 @@ QDebug operator<< ( QDebug dbg, const QQtDictionary& d )
             foreach ( QString key, d.getMap().keys() )
             {
                 dbg << "\n"
-                    << qPrintable ( QString ( "    id: %1 Type: %2" ).arg ( key, -10 ).arg ( d[key].getTypeName(), -10 ) )
+                    << qPrintable ( QString ( "    id: %1 Type: %2" ).arg ( key, -20 ).arg ( d[key].getTypeName(), -10 ) )
                     << "Value:" << d[key].getValue();
                 //<< "    id:" << key << "Type:" << d[key].getTypeName() << "Value:" << d[key].getValue();
             }
