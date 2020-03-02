@@ -411,7 +411,7 @@ QQtDictionary& QQtDictionary::operator = ( const QVariant& value )
     return *this;
 }
 
-QString QQtDictionary::toXML()
+QByteArray QQtDictionary::toXML()
 {
 
 }
@@ -592,32 +592,21 @@ void QQtDictionary::packDictionaryToJsonValue ( const QQtDictionary& node, QJson
 
 void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent )
 {
-    pline() << value.nodeName() << value.nodeType() << value.nodeValue() << "initial";
+    pline() << value.nodeName() << value.nodeType() << value.nodeValue();
 
     switch ( value.nodeType() )
     {
-        case QDomNode::CommentNode: //8
+        case QDomNode::DocumentNode: //9
         {
-            QString name0  = value.nodeName();
-            QString value0 = value.nodeValue();
-            pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
-            parent = value0;
-        }
-        break;
-        case QDomNode::AttributeNode: //2
-        {
-            QString name0  = value.nodeName();
-            QString value0 = value.nodeValue();
-            pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
-            parent = value0;
-        }
-        break;
-        case QDomNode::TextNode: //3
-        {
-            QString name0 = value.nodeName();
-            QString value0  = value.nodeValue();
-            pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
-            parent = value0;
+            QDomNodeList childs = value.childNodes();
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node1 = childs.item ( i );
+                QString name0 = node1.nodeName();
+                //pline() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
+                //pline() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
+                parseDomNode ( node1, parent[name0] );
+            }
         }
         break;
         case QDomNode::ElementNode: //1
@@ -640,8 +629,8 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             {
                 QDomNode node3 = attrs.item ( i );
                 QString name0 = node3.nodeName();
-                pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
-                pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                //pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                //pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
                 parseDomNode ( node3, parent["__attributes__"][name0] );
             }
 
@@ -671,11 +660,11 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             {
                 QDomNode node3 = childs.item ( i );
                 QString name0 = node3.nodeName();
-                pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
-                pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                //pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                //pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
                 int count0 = node_count[name0]["count"].getValue().toInt();
                 int pos0 = node_count[name0]["pos"].getValue().toInt();
-                pline() << count0 << pos0;
+                //pline() << count0 << pos0;
                 if ( count0 > 1 )
                 {
                     parseDomNode ( node3, parent[name0][pos0] );
@@ -686,30 +675,22 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             }
         }
         break;
+        //#comment
+        case QDomNode::CommentNode: //8
+        //<element key=value>
+        case QDomNode::AttributeNode: //2
+        //#text
+        case QDomNode::TextNode: //3
+        //<?xml ... ?>
         case QDomNode::ProcessingInstructionNode: //7
-        {
-            QDomProcessingInstruction pi0 = value.toProcessingInstruction();
-            pline() << pi0.target() << pi0.data();
-            parent = pi0.data();
-        }
-        break;
-        case QDomNode::DocumentNode: //9
-        {
-            QDomNodeList childs = value.childNodes();
-            for ( int i = 0; i < childs.size(); i++ )
-            {
-                QDomNode node1 = childs.item ( i );
-                QString name0 = node1.nodeName();
-                pline() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
-                pline() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
-                parseDomNode ( node1, parent[name0] );
-            }
-        }
-        break;
-        case QDomNode::EntityNode:
-            break;
         default:
-            break;
+        {
+            QString name0 = value.nodeName();
+            QString value0  = value.nodeValue();
+            //pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
     }
 }
 

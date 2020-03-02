@@ -82,6 +82,8 @@ MainWindow::MainWindow ( QWidget* parent ) :
     p3line() << "subject1.healthCareProvider.__attributes__:" << d0["code"]["__attributes__"];
     p3line() << "subject1.healthCareProvider.#comment:" << d0["#comment"];
 
+    QByteArray bytes0 = dict.toJson ( QJsonDocument::Indented );
+    p3line() << qPrintable ( QString ( bytes0 ) );
 #endif
 }
 

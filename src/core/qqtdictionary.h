@@ -35,7 +35,10 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
  * 包含具名映射 操作方式 dict["cccc"] = {""="", ""=""} dict["eeee"] = ["", "", ""]
  * 接受嵌套访问 操作方式 dict["cccc"][0]["eeeee"]
  * 通过重载函数来实现类型的变化，不建议使用中更改类型。
- * 比json和xml的数据结构要庞大。toJson toXML fromJson fromXML
+ *
+ * 比json和xml的数据结构要庞大。
+ * fromJson toJson， fromXML toXML，fromYAML toYAML
+ *
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
  * QQtDictionary封装了QVariant，实现直接操作真实数据。提供大量操作符。存取数据方便快捷，类型多样。
  */
@@ -158,7 +161,7 @@ public:
     bool operator == ( const QQtDictionary& other ) const;
 
     /*与其他数据结构兼容*/
-    QString toXML();
+    QByteArray toXML();
     void fromXML ( const QByteArray& xml );
     QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact );
     void fromJson ( const QByteArray& json );
