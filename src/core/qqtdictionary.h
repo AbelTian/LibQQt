@@ -189,8 +189,7 @@ protected:
 
 protected:
     virtual void parseDomNode ( const QDomNode& value, QQtDictionary& parent );
-    virtual void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result,
-                                           QDomDocument& doc, QString nodeName = QString() );
+    virtual void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc );
 
 signals:
 

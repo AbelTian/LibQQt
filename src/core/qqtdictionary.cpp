@@ -754,8 +754,7 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
     }
 }
 
-void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result,
-                                              QDomDocument& doc, QString nodeName )
+void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc )
 {
     switch ( node.getType() )
     {
@@ -776,6 +775,7 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
             for ( int i = 0; i < node.getList().size(); i++ )
             {
                 QList<QQtDictionary>& l = node.getList();
+                QString nodeName = object.nodeName();//error，这个位置好像来不了。
                 QDomElement value = doc.createElement ( nodeName );
                 packDictionaryToDomNode ( l[i], value, doc );
                 object.appendChild ( value );
@@ -854,7 +854,7 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
 
                 if ( srcvalue.getType() == DictList )
                 {
-#if 0
+#if 1
                     //list一定在map里面发生。
                     for ( int i = 0; i < srcvalue.getList().size(); i++ )
                     {
@@ -863,8 +863,9 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
                         packDictionaryToDomNode ( l[i], value, doc );
                         object.appendChild ( value );
                     }
-#endif
+#else
                     packDictionaryToDomNode ( srcvalue, object, doc, key );
+#endif
                     continue;
                 }
 
