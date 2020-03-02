@@ -10,6 +10,8 @@
 //support xml
 #include "qdom.h"
 
+#define p3line() QNoDebug()
+
 QQtDictionary::QQtDictionary ()
 {
     m_type = DictMax;
@@ -340,7 +342,7 @@ QQtDictionary& QQtDictionary::operator [] ( int index )
     m_type = DictList;
 
     /*如果index>count，补全*/
-    //pline() << m_list.count() << index;
+    //p3line() << m_list.count() << index;
 
     //list size = 4, 最大index = 3。新 index = 4, 添加，新index才可以使用，否则out of range。
     if ( m_list.size() < index + 1 )
@@ -435,7 +437,7 @@ void QQtDictionary::fromXML ( const QByteArray& xml )
     }
 
     //-1 ---> 4 代表缩进
-    //pline() << qPrintable ( doc.toString ( -2 ) );
+    //p3line() << qPrintable ( doc.toString ( -2 ) );
 #if 0
     if ( !doc.setContent ( doc.toByteArray ( -1 ), true, &errorStr,
                            &errorLine, &errorCol ) )
@@ -465,7 +467,7 @@ void QQtDictionary::fromJson ( const QByteArray& json )
 {
     QJsonParseError error;
     QJsonDocument doc = QJsonDocument::fromJson ( json, &error );
-    //pline() << doc;
+    //p3line() << doc;
     if ( error.error != QJsonParseError::NoError )
     {
         pline() << error.errorString();
@@ -487,7 +489,7 @@ void QQtDictionary::parseJsonValue ( const QJsonValue& value, QQtDictionary& par
     switch ( value.type() )
     {
         case QJsonValue::Null:
-            //pline() << "null json value" << value;
+            //p3line() << "null json value" << value;
             parent = QJsonValue();
             break;
         case QJsonValue::Undefined:
@@ -548,7 +550,7 @@ void QQtDictionary::packDictionaryToJsonValue ( const QQtDictionary& node, QJson
         case DictValue:
         {
             //null, bool, double, string
-            pline() << node.getValue().type();
+            p3line() << node.getValue().type();
             if ( node.getValue() == QVariant ( QJsonValue() ) )
             {
                 result = QJsonValue();
@@ -606,7 +608,7 @@ void QQtDictionary::packDictionaryToJsonValue ( const QQtDictionary& node, QJson
 
 void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent )
 {
-    pline() << value.nodeName() << value.nodeType() << value.nodeValue();
+    p3line() << value.nodeName() << value.nodeType() << value.nodeValue();
 
     switch ( value.nodeType() )
     {
@@ -615,7 +617,7 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             //#comment
             QString name0 = value.nodeName();
             QString value0  = value.nodeValue();
-            //pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            //p3line() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
             parent = value0;
         }
         break;
@@ -624,7 +626,7 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             //<element key=value>
             QString name0 = value.nodeName();
             QString value0  = value.nodeValue();
-            //pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            //p3line() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
             parent = value0;
         }
         break;
@@ -633,7 +635,7 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             //#text
             QString name0 = value.nodeName();
             QString value0  = value.nodeValue();
-            //pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            //p3line() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
             parent = value0;
         }
         break;
@@ -657,8 +659,8 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             {
                 QDomNode node3 = attrs.item ( i );
                 QString name0 = node3.nodeName();
-                //pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
-                //pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                //p3line() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                //p3line() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
                 parseDomNode ( node3, parent["__attributes__"][name0] );
             }
 
@@ -688,11 +690,11 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             {
                 QDomNode node3 = childs.item ( i );
                 QString name0 = node3.nodeName();
-                //pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
-                //pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                //p3line() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                //p3line() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
                 int count0 = node_count[name0]["count"].getValue().toInt();
                 int pos0 = node_count[name0]["pos"].getValue().toInt();
-                //pline() << count0 << pos0;
+                //p3line() << count0 << pos0;
                 if ( count0 > 1 )
                 {
                     parseDomNode ( node3, parent[name0][pos0] );
@@ -707,7 +709,7 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
         {
             //<?xml ... ?>
             QDomProcessingInstruction pi0 = value.toProcessingInstruction();
-            //pline() << pi0.target() << pi0.data();
+            //p3line() << pi0.target() << pi0.data();
             parent = pi0.data();
 
 #if 0
@@ -718,8 +720,8 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             {
                 QDomNode node3 = attrs.item ( i );
                 QString name0 = node3.nodeName();
-                //pline() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
-                //pline() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                //p3line() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                //p3line() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
                 parseDomNode ( node3, parent["__attributes__"][name0] );
             }
 #endif
@@ -733,8 +735,8 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             {
                 QDomNode node1 = childs.item ( i );
                 QString name0 = node1.nodeName();
-                //pline() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
-                //pline() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
+                //p3line() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
+                //p3line() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
                 if ( node1.nodeType() == QDomNode::ProcessingInstructionNode )
                     parseDomNode ( node1, parent["__processinginstruction__"][name0] );
                 else
@@ -747,7 +749,7 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
         {
             QString name0 = value.nodeName();
             QString value0  = value.nodeValue();
-            //pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
             parent = value0;
         }
         break;
@@ -761,7 +763,7 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
         case DictValue:
         {
             //null, bool, double, string
-            pline() << node.getValue().type();
+            p3line() << node.getValue().type();
             QDomNode& object = result;
             QDomText text = doc.createTextNode ( node.getValue().toString() );
             object.appendChild ( text );

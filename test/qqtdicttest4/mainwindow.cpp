@@ -4,7 +4,7 @@
 #include <QFile>
 
 #include <qqtdictionary.h>
-#define p3line() qDebug().space()
+#define p3line() qDebug()
 
 MainWindow::MainWindow ( QWidget* parent ) :
     QMainWindow ( parent ),
@@ -98,6 +98,18 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
     QByteArray bytes1 = dict.toXML ( 4 );
     p3line() << qPrintable ( QString ( bytes1 ) );
+
+    //p3line() << "receiver.device:\n"
+    //         << qPrintable ( QString ( dict["PRPM_IN301010UV01"]["receiver"].toXML ( 4 ) ) );
+    //p3line() << "sender.device:\n"
+    //         << qPrintable ( QString ( dict["PRPM_IN301010UV01"]["sender"].toXML ( 4 ) ) );
+
+    QQtDictionary d1;
+    d1["device"] = dict["PRPM_IN301010UV01"]["sender"]["device"];
+    p3line() << "sender.device:";
+    p3line() << qPrintable ( QString ( d1.toJson ( QJsonDocument::Indented ) ) );
+    p3line() << "sender.device:";
+    p3line() << qPrintable ( QString ( d1.toXML ( 4 ) ) );
 
 #endif
 }
