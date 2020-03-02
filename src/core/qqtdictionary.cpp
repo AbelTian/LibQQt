@@ -596,17 +596,31 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
 
     switch ( value.nodeType() )
     {
-        case QDomNode::DocumentNode: //9
+        case QDomNode::CommentNode: //8
         {
-            QDomNodeList childs = value.childNodes();
-            for ( int i = 0; i < childs.size(); i++ )
-            {
-                QDomNode node1 = childs.item ( i );
-                QString name0 = node1.nodeName();
-                //pline() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
-                //pline() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
-                parseDomNode ( node1, parent[name0] );
-            }
+            //#comment
+            QString name0 = value.nodeName();
+            QString value0  = value.nodeValue();
+            //pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
+        case QDomNode::AttributeNode: //2
+        {
+            //<element key=value>
+            QString name0 = value.nodeName();
+            QString value0  = value.nodeValue();
+            //pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
+        case QDomNode::TextNode: //3
+        {
+            //#text
+            QString name0 = value.nodeName();
+            QString value0  = value.nodeValue();
+            //pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
         }
         break;
         case QDomNode::ElementNode: //1
@@ -675,14 +689,28 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
             }
         }
         break;
-        //#comment
-        case QDomNode::CommentNode: //8
-        //<element key=value>
-        case QDomNode::AttributeNode: //2
-        //#text
-        case QDomNode::TextNode: //3
-        //<?xml ... ?>
         case QDomNode::ProcessingInstructionNode: //7
+        {
+            //<?xml ... ?>
+            QDomProcessingInstruction pi0 = value.toProcessingInstruction();
+            //pline() << pi0.target() << pi0.data();
+            parent = pi0.data();
+        }
+        break;
+        case QDomNode::DocumentNode: //9
+        {
+            QDomNodeList childs = value.childNodes();
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node1 = childs.item ( i );
+                QString name0 = node1.nodeName();
+                //pline() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
+                //pline() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
+                parseDomNode ( node1, parent[name0] );
+            }
+        }
+        break;
+        case QDomNode::EntityNode:
         default:
         {
             QString name0 = value.nodeName();
@@ -694,7 +722,7 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
     }
 }
 
-void QQtDictionary::packDictionaryToDomElement ( const QQtDictionary& node, QDomNode& result )
+void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result )
 {
 
 }

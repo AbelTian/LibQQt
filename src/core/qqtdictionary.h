@@ -183,7 +183,7 @@ protected:
     virtual void packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result );
 
     virtual void parseDomNode ( const QDomNode& value, QQtDictionary& parent );
-    virtual void packDictionaryToDomElement ( const QQtDictionary& node, QDomNode& result );
+    virtual void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result );
 signals:
 
 public slots:
