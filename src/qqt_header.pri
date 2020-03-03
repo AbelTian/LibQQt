@@ -396,21 +396,24 @@ defineTest(add_defines_QQt){
             #message ( __QSERIALPORT__ Defined in $${TARGET})
             greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
             else:CONFIG += serialport
-            unix {
-                DEFINES += _TTY_POSIX_
-            } else {
-                DEFINES += _TTY_WIN_
-            }
+            unix:DEFINES += _TTY_POSIX_
+            win32:DEFINES += _TTY_WIN_
             DEFINES += __QQTSERIALPORT__
-        } else: contains (DEFINES, __QEXTSERIALPORT__) {
+        }
+
+        contains (DEFINES, __QEXTSERIALPORT__) {
+            #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
             CONFIG += thread
             unix:DEFINES += _TTY_POSIX_
             win32:DEFINES += _TTY_WIN_
             #Qt4 is not a very good Cross Qt version, Qt5 suggest.
             win32:LIBS += -lsetupapi -ladvapi32
-            #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
             DEFINES += __QQTSERIALPORT__
-        } else: { }
+        }
+
+        !contains (DEFINES, __QSERIALPORT__):!contains (DEFINES, __QEXTSERIALPORT__){
+            #
+        }
 
         ##################Bluetooth Module###############################
         #if you use qtbluetooth, open this annotation
