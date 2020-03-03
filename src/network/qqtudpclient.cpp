@@ -171,12 +171,16 @@ void QQtUdpClient::recvDatagram ( QByteArray& bytes, QHostAddress& address, quin
     char* data = new char[size + 1]();
     qint64 len = readDatagram ( data, size, &address, &port );
     //pline() << len;
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 1)
-    //Qt5.6 MSVC Linux64 全部都出错，设置进去以后拿到的根本就是乱码。
-    bytes.setRawData ( data, size );
-#else
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     bytes.resize ( len );
     memcpy ( bytes.data(), data, len );
+#elif QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    bytes.resize ( len );
+    memcpy ( bytes.data(), data, len );
+#else
+    //low version
+    //Qt5.6 以上 MSVC Linux64 全部都出错，设置进去以后拿到的根本就是乱码。此处决定仅仅Qt4使用。
+    bytes.setRawData ( data, size );
 #endif
     delete[] data;
 #endif

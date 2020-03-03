@@ -9,19 +9,19 @@
 QQtHeaderView::QQtHeaderView ( Qt::Orientation orientation, QWidget* parent ) :
     QHeaderView ( orientation, parent ), ori ( orientation )
 {
-#if QT_VERSION <= QT_VERSION_CHECK(4,8,7)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#else
     setFocusPolicy ( Qt::NoFocus );
     setStyleSheet ( "QHeaderView, QHeaderView::section{background:transparent;}" );
-#else
 #endif
 }
 
 void QQtHeaderView::paintSection ( QPainter* painter, const QRect& rect, int logicalIndex ) const
 {
-#if QT_VERSION <= QT_VERSION_CHECK(4,8,7)
-    painter->drawText ( rect, Qt::AlignCenter, model()->headerData ( logicalIndex, ori ).toString() );
-#else
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     QHeaderView::paintSection ( painter, rect, logicalIndex );
+#else
+    painter->drawText ( rect, Qt::AlignCenter, model()->headerData ( logicalIndex, ori ).toString() );
 #endif
 }
 
@@ -35,7 +35,9 @@ QSize QQtHeaderView::sectionSizeFromContents ( int logicalIndex ) const
 
 void QQtHeaderView::paintEvent ( QPaintEvent* e )
 {
-#if QT_VERSION <= QT_VERSION_CHECK(4,8,7)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    QHeaderView::paintEvent ( e );
+#else
     Q_UNUSED ( e )
     QStylePainter p ( this->viewport() );
 
@@ -60,7 +62,5 @@ void QQtHeaderView::paintEvent ( QPaintEvent* e )
     }
 
     return;
-#else
-    QHeaderView::paintEvent ( e );
 #endif
 }
