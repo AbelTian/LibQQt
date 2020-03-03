@@ -1,4 +1,4 @@
-﻿
+
 /*!
 \class Posix_QextSerialPort
 \version 1.0.0
@@ -14,6 +14,10 @@ warnings) in the project.  Note that _TTY_NOWARN_ will also turn off portability
 
 #include <stdio.h>
 #include "posix_qextserialport.h"
+
+#ifndef _POSIX_VDISABLE
+#define _POSIX_VDISABLE     ((unsigned char)'\377')
+#endif /* POSIX_VDISABLE */
 
 /*!
 \fn Posix_QextSerialPort::Posix_QextSerialPort()
@@ -48,10 +52,10 @@ Posix_QextSerialPort::Posix_QextSerialPort()
 \fn Posix_QextSerialPort::Posix_QextSerialPort(const Posix_QextSerialPort&)
 Copy constructor.
 */
-Posix_QextSerialPort::Posix_QextSerialPort(const Posix_QextSerialPort& s)
-    : QextSerialBase(s.port)
+Posix_QextSerialPort::Posix_QextSerialPort ( const Posix_QextSerialPort& s )
+    : QextSerialBase ( s.port )
 {
-    setOpenMode(s.openMode());
+    setOpenMode ( s.openMode() );
     port = s.port;
     Settings.BaudRate = s.Settings.BaudRate;
     Settings.DataBits = s.Settings.DataBits;
@@ -62,9 +66,9 @@ Posix_QextSerialPort::Posix_QextSerialPort(const Posix_QextSerialPort& s)
 
     Posix_File = new QFile();
     Posix_File = s.Posix_File;
-    memcpy(&Posix_Timeout, &s.Posix_Timeout, sizeof(struct timeval));
-    memcpy(&Posix_Copy_Timeout, &s.Posix_Copy_Timeout, sizeof(struct timeval));
-    memcpy(&Posix_CommConfig, &s.Posix_CommConfig, sizeof(struct termios));
+    memcpy ( &Posix_Timeout, &s.Posix_Timeout, sizeof ( struct timeval ) );
+    memcpy ( &Posix_Copy_Timeout, &s.Posix_Copy_Timeout, sizeof ( struct timeval ) );
+    memcpy ( &Posix_CommConfig, &s.Posix_CommConfig, sizeof ( struct termios ) );
 }
 
 /*!
@@ -73,11 +77,11 @@ Constructs a serial port attached to the port specified by name.
 name is the name of the device, which is windowsystem-specific,
 e.g."COM1" or "/dev/ttyS0".
 */
-Posix_QextSerialPort::Posix_QextSerialPort(const QString& name, QextSerialBase::QueryMode mode)
-    : QextSerialBase(name)
+Posix_QextSerialPort::Posix_QextSerialPort ( const QString& name, QextSerialBase::QueryMode mode )
+    : QextSerialBase ( name )
 {
     Posix_File = new QFile();
-    setQueryMode(mode);
+    setQueryMode ( mode );
     init();
 }
 
@@ -85,18 +89,18 @@ Posix_QextSerialPort::Posix_QextSerialPort(const QString& name, QextSerialBase::
 \fn Posix_QextSerialPort::Posix_QextSerialPort(const PortSettings& settings)
 Constructs a port with default name and specified settings.
 */
-Posix_QextSerialPort::Posix_QextSerialPort(const PortSettings& settings, QextSerialBase::QueryMode mode)
+Posix_QextSerialPort::Posix_QextSerialPort ( const PortSettings& settings, QextSerialBase::QueryMode mode )
     : QextSerialBase()
 {
-    setBaudRate(settings.BaudRate);
-    setDataBits(settings.DataBits);
-    setParity(settings.Parity);
-    setStopBits(settings.StopBits);
-    setFlowControl(settings.FlowControl);
+    setBaudRate ( settings.BaudRate );
+    setDataBits ( settings.DataBits );
+    setParity ( settings.Parity );
+    setStopBits ( settings.StopBits );
+    setFlowControl ( settings.FlowControl );
 
     Posix_File = new QFile();
-    setTimeout(settings.Timeout_Millisec);
-    setQueryMode(mode);
+    setTimeout ( settings.Timeout_Millisec );
+    setQueryMode ( mode );
     init();
 }
 
@@ -104,19 +108,19 @@ Posix_QextSerialPort::Posix_QextSerialPort(const PortSettings& settings, QextSer
 \fn Posix_QextSerialPort::Posix_QextSerialPort(const QString & name, const PortSettings& settings)
 Constructs a port with specified name and settings.
 */
-Posix_QextSerialPort::Posix_QextSerialPort(const QString& name, const PortSettings& settings,
-                                           QextSerialBase::QueryMode mode)
-    : QextSerialBase(name)
+Posix_QextSerialPort::Posix_QextSerialPort ( const QString& name, const PortSettings& settings,
+                                             QextSerialBase::QueryMode mode )
+    : QextSerialBase ( name )
 {
-    setBaudRate(settings.BaudRate);
-    setDataBits(settings.DataBits);
-    setParity(settings.Parity);
-    setStopBits(settings.StopBits);
-    setFlowControl(settings.FlowControl);
+    setBaudRate ( settings.BaudRate );
+    setDataBits ( settings.DataBits );
+    setParity ( settings.Parity );
+    setStopBits ( settings.StopBits );
+    setFlowControl ( settings.FlowControl );
 
     Posix_File = new QFile();
-    setTimeout(settings.Timeout_Millisec);
-    setQueryMode(mode);
+    setTimeout ( settings.Timeout_Millisec );
+    setQueryMode ( mode );
     init();
 }
 
@@ -124,9 +128,9 @@ Posix_QextSerialPort::Posix_QextSerialPort(const QString& name, const PortSettin
 \fn Posix_QextSerialPort& Posix_QextSerialPort::operator=(const Posix_QextSerialPort& s)
 Override the = operator.
 */
-Posix_QextSerialPort& Posix_QextSerialPort::operator=(const Posix_QextSerialPort& s)
+Posix_QextSerialPort& Posix_QextSerialPort::operator= ( const Posix_QextSerialPort& s )
 {
-    setOpenMode(s.openMode());
+    setOpenMode ( s.openMode() );
     port = s.port;
     Settings.BaudRate = s.Settings.BaudRate;
     Settings.DataBits = s.Settings.DataBits;
@@ -136,16 +140,16 @@ Posix_QextSerialPort& Posix_QextSerialPort::operator=(const Posix_QextSerialPort
     lastErr = s.lastErr;
 
     Posix_File = s.Posix_File;
-    memcpy(&Posix_Timeout, &(s.Posix_Timeout), sizeof(struct timeval));
-    memcpy(&Posix_Copy_Timeout, &(s.Posix_Copy_Timeout), sizeof(struct timeval));
-    memcpy(&Posix_CommConfig, &(s.Posix_CommConfig), sizeof(struct termios));
+    memcpy ( &Posix_Timeout, & ( s.Posix_Timeout ), sizeof ( struct timeval ) );
+    memcpy ( &Posix_Copy_Timeout, & ( s.Posix_Copy_Timeout ), sizeof ( struct timeval ) );
+    memcpy ( &Posix_CommConfig, & ( s.Posix_CommConfig ), sizeof ( struct termios ) );
     return *this;
 }
 
 void Posix_QextSerialPort::init()
 {
-    if (queryMode() == QextSerialBase::EventDriven)
-        qWarning("POSIX doesn't have event driven mechanism implemented yet");
+    if ( queryMode() == QextSerialBase::EventDriven )
+        qWarning ( "POSIX doesn't have event driven mechanism implemented yet" );
 }
 
 /*!
@@ -154,7 +158,7 @@ Standard destructor.
 */
 Posix_QextSerialPort::~Posix_QextSerialPort()
 {
-    if (isOpen())
+    if ( isOpen() )
     {
         close();
     }
@@ -202,314 +206,314 @@ BAUD1800.
    BAUD256000          256000      115200
 \endverbatim
 */
-void Posix_QextSerialPort::setBaudRate(BaudRateType baudRate)
+void Posix_QextSerialPort::setBaudRate ( BaudRateType baudRate )
 {
     LOCK_MUTEX();
 
-    if (Settings.BaudRate != baudRate)
+    if ( Settings.BaudRate != baudRate )
     {
-        switch (baudRate)
+        switch ( baudRate )
         {
-        case BAUD14400:
-            Settings.BaudRate = BAUD9600;
-            break;
+            case BAUD14400:
+                Settings.BaudRate = BAUD9600;
+                break;
 
-        case BAUD56000:
-            Settings.BaudRate = BAUD38400;
-            break;
+            case BAUD56000:
+                Settings.BaudRate = BAUD38400;
+                break;
 
-        case BAUD76800:
+            case BAUD76800:
 
 #ifndef B76800
-            Settings.BaudRate = BAUD57600;
+                Settings.BaudRate = BAUD57600;
 #else
-            Settings.BaudRate = baudRate;
+                Settings.BaudRate = baudRate;
 #endif
-            break;
+                break;
 
-        case BAUD128000:
-        case BAUD256000:
-            Settings.BaudRate = BAUD115200;
-            break;
+            case BAUD128000:
+            case BAUD256000:
+                Settings.BaudRate = BAUD115200;
+                break;
 
-        default:
-            Settings.BaudRate = baudRate;
-            break;
+            default:
+                Settings.BaudRate = baudRate;
+                break;
         }
     }
 
-    if (isOpen())
+    if ( isOpen() )
     {
-        switch (baudRate)
+        switch ( baudRate )
         {
 
-        /*50 baud*/
-        case BAUD50:
-            TTY_PORTABILITY_WARNING("Posix_QextSerialPort Portability Warning: Windows does not support 50 baud operation.");
+            /*50 baud*/
+            case BAUD50:
+                TTY_PORTABILITY_WARNING ( "Posix_QextSerialPort Portability Warning: Windows does not support 50 baud operation." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B50;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B50;
 #else
-            cfsetispeed(&Posix_CommConfig, B50);
-            cfsetospeed(&Posix_CommConfig, B50);
+                cfsetispeed ( &Posix_CommConfig, B50 );
+                cfsetospeed ( &Posix_CommConfig, B50 );
 #endif
-            break;
+                break;
 
-        /*75 baud*/
-        case BAUD75:
-            TTY_PORTABILITY_WARNING("Posix_QextSerialPort Portability Warning: Windows does not support 75 baud operation.");
+            /*75 baud*/
+            case BAUD75:
+                TTY_PORTABILITY_WARNING ( "Posix_QextSerialPort Portability Warning: Windows does not support 75 baud operation." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B75;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B75;
 #else
-            cfsetispeed(&Posix_CommConfig, B75);
-            cfsetospeed(&Posix_CommConfig, B75);
+                cfsetispeed ( &Posix_CommConfig, B75 );
+                cfsetospeed ( &Posix_CommConfig, B75 );
 #endif
-            break;
+                break;
 
-        /*110 baud*/
-        case BAUD110:
+            /*110 baud*/
+            case BAUD110:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B110;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B110;
 #else
-            cfsetispeed(&Posix_CommConfig, B110);
-            cfsetospeed(&Posix_CommConfig, B110);
+                cfsetispeed ( &Posix_CommConfig, B110 );
+                cfsetospeed ( &Posix_CommConfig, B110 );
 #endif
-            break;
+                break;
 
-        /*134.5 baud*/
-        case BAUD134:
-            TTY_PORTABILITY_WARNING("Posix_QextSerialPort Portability Warning: Windows does not support 134.5 baud operation.");
+            /*134.5 baud*/
+            case BAUD134:
+                TTY_PORTABILITY_WARNING ( "Posix_QextSerialPort Portability Warning: Windows does not support 134.5 baud operation." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B134;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B134;
 #else
-            cfsetispeed(&Posix_CommConfig, B134);
-            cfsetospeed(&Posix_CommConfig, B134);
+                cfsetispeed ( &Posix_CommConfig, B134 );
+                cfsetospeed ( &Posix_CommConfig, B134 );
 #endif
-            break;
+                break;
 
-        /*150 baud*/
-        case BAUD150:
-            TTY_PORTABILITY_WARNING("Posix_QextSerialPort Portability Warning: Windows does not support 150 baud operation.");
+            /*150 baud*/
+            case BAUD150:
+                TTY_PORTABILITY_WARNING ( "Posix_QextSerialPort Portability Warning: Windows does not support 150 baud operation." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B150;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B150;
 #else
-            cfsetispeed(&Posix_CommConfig, B150);
-            cfsetospeed(&Posix_CommConfig, B150);
+                cfsetispeed ( &Posix_CommConfig, B150 );
+                cfsetospeed ( &Posix_CommConfig, B150 );
 #endif
-            break;
+                break;
 
-        /*200 baud*/
-        case BAUD200:
-            TTY_PORTABILITY_WARNING("Posix_QextSerialPort Portability Warning: Windows does not support 200 baud operation.");
+            /*200 baud*/
+            case BAUD200:
+                TTY_PORTABILITY_WARNING ( "Posix_QextSerialPort Portability Warning: Windows does not support 200 baud operation." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B200;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B200;
 #else
-            cfsetispeed(&Posix_CommConfig, B200);
-            cfsetospeed(&Posix_CommConfig, B200);
+                cfsetispeed ( &Posix_CommConfig, B200 );
+                cfsetospeed ( &Posix_CommConfig, B200 );
 #endif
-            break;
+                break;
 
-        /*300 baud*/
-        case BAUD300:
+            /*300 baud*/
+            case BAUD300:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B300;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B300;
 #else
-            cfsetispeed(&Posix_CommConfig, B300);
-            cfsetospeed(&Posix_CommConfig, B300);
+                cfsetispeed ( &Posix_CommConfig, B300 );
+                cfsetospeed ( &Posix_CommConfig, B300 );
 #endif
-            break;
+                break;
 
-        /*600 baud*/
-        case BAUD600:
+            /*600 baud*/
+            case BAUD600:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B600;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B600;
 #else
-            cfsetispeed(&Posix_CommConfig, B600);
-            cfsetospeed(&Posix_CommConfig, B600);
+                cfsetispeed ( &Posix_CommConfig, B600 );
+                cfsetospeed ( &Posix_CommConfig, B600 );
 #endif
-            break;
+                break;
 
-        /*1200 baud*/
-        case BAUD1200:
+            /*1200 baud*/
+            case BAUD1200:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B1200;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B1200;
 #else
-            cfsetispeed(&Posix_CommConfig, B1200);
-            cfsetospeed(&Posix_CommConfig, B1200);
+                cfsetispeed ( &Posix_CommConfig, B1200 );
+                cfsetospeed ( &Posix_CommConfig, B1200 );
 #endif
-            break;
+                break;
 
-        /*1800 baud*/
-        case BAUD1800:
-            TTY_PORTABILITY_WARNING("Posix_QextSerialPort Portability Warning: Windows and IRIX do not support 1800 baud operation.");
+            /*1800 baud*/
+            case BAUD1800:
+                TTY_PORTABILITY_WARNING ( "Posix_QextSerialPort Portability Warning: Windows and IRIX do not support 1800 baud operation." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B1800;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B1800;
 #else
-            cfsetispeed(&Posix_CommConfig, B1800);
-            cfsetospeed(&Posix_CommConfig, B1800);
+                cfsetispeed ( &Posix_CommConfig, B1800 );
+                cfsetospeed ( &Posix_CommConfig, B1800 );
 #endif
-            break;
+                break;
 
-        /*2400 baud*/
-        case BAUD2400:
+            /*2400 baud*/
+            case BAUD2400:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B2400;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B2400;
 #else
-            cfsetispeed(&Posix_CommConfig, B2400);
-            cfsetospeed(&Posix_CommConfig, B2400);
+                cfsetispeed ( &Posix_CommConfig, B2400 );
+                cfsetospeed ( &Posix_CommConfig, B2400 );
 #endif
-            break;
+                break;
 
-        /*4800 baud*/
-        case BAUD4800:
+            /*4800 baud*/
+            case BAUD4800:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B4800;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B4800;
 #else
-            cfsetispeed(&Posix_CommConfig, B4800);
-            cfsetospeed(&Posix_CommConfig, B4800);
+                cfsetispeed ( &Posix_CommConfig, B4800 );
+                cfsetospeed ( &Posix_CommConfig, B4800 );
 #endif
-            break;
+                break;
 
-        /*9600 baud*/
-        case BAUD9600:
+            /*9600 baud*/
+            case BAUD9600:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B9600;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B9600;
 #else
-            cfsetispeed(&Posix_CommConfig, B9600);
-            cfsetospeed(&Posix_CommConfig, B9600);
+                cfsetispeed ( &Posix_CommConfig, B9600 );
+                cfsetospeed ( &Posix_CommConfig, B9600 );
 #endif
-            break;
+                break;
 
-        /*14400 baud*/
-        case BAUD14400:
-            TTY_WARNING("Posix_QextSerialPort: POSIX does not support 14400 baud operation.  Switching to 9600 baud.");
+            /*14400 baud*/
+            case BAUD14400:
+                TTY_WARNING ( "Posix_QextSerialPort: POSIX does not support 14400 baud operation.  Switching to 9600 baud." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B9600;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B9600;
 #else
-            cfsetispeed(&Posix_CommConfig, B9600);
-            cfsetospeed(&Posix_CommConfig, B9600);
+                cfsetispeed ( &Posix_CommConfig, B9600 );
+                cfsetospeed ( &Posix_CommConfig, B9600 );
 #endif
-            break;
+                break;
 
-        /*19200 baud*/
-        case BAUD19200:
+            /*19200 baud*/
+            case BAUD19200:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B19200;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B19200;
 #else
-            cfsetispeed(&Posix_CommConfig, B19200);
-            cfsetospeed(&Posix_CommConfig, B19200);
+                cfsetispeed ( &Posix_CommConfig, B19200 );
+                cfsetospeed ( &Posix_CommConfig, B19200 );
 #endif
-            break;
+                break;
 
-        /*38400 baud*/
-        case BAUD38400:
+            /*38400 baud*/
+            case BAUD38400:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B38400;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B38400;
 #else
-            cfsetispeed(&Posix_CommConfig, B38400);
-            cfsetospeed(&Posix_CommConfig, B38400);
+                cfsetispeed ( &Posix_CommConfig, B38400 );
+                cfsetospeed ( &Posix_CommConfig, B38400 );
 #endif
-            break;
+                break;
 
-        /*56000 baud*/
-        case BAUD56000:
-            TTY_WARNING("Posix_QextSerialPort: POSIX does not support 56000 baud operation.  Switching to 38400 baud.");
+            /*56000 baud*/
+            case BAUD56000:
+                TTY_WARNING ( "Posix_QextSerialPort: POSIX does not support 56000 baud operation.  Switching to 38400 baud." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B38400;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B38400;
 #else
-            cfsetispeed(&Posix_CommConfig, B38400);
-            cfsetospeed(&Posix_CommConfig, B38400);
+                cfsetispeed ( &Posix_CommConfig, B38400 );
+                cfsetospeed ( &Posix_CommConfig, B38400 );
 #endif
-            break;
+                break;
 
-        /*57600 baud*/
-        case BAUD57600:
+            /*57600 baud*/
+            case BAUD57600:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B57600;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B57600;
 #else
-            cfsetispeed(&Posix_CommConfig, B57600);
-            cfsetospeed(&Posix_CommConfig, B57600);
+                cfsetispeed ( &Posix_CommConfig, B57600 );
+                cfsetospeed ( &Posix_CommConfig, B57600 );
 #endif
-            break;
+                break;
 
-        /*76800 baud*/
-        case BAUD76800:
-            TTY_PORTABILITY_WARNING("Posix_QextSerialPort Portability Warning: Windows and some POSIX systems do not support 76800 baud operation.");
+            /*76800 baud*/
+            case BAUD76800:
+                TTY_PORTABILITY_WARNING ( "Posix_QextSerialPort Portability Warning: Windows and some POSIX systems do not support 76800 baud operation." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
 
 #ifdef B76800
-            Posix_CommConfig.c_cflag |= B76800;
+                Posix_CommConfig.c_cflag |= B76800;
 #else
-            TTY_WARNING("Posix_QextSerialPort: Posix_QextSerialPort was compiled without 76800 baud support.  Switching to 57600 baud.");
-            Posix_CommConfig.c_cflag |= B57600;
+                TTY_WARNING ( "Posix_QextSerialPort: Posix_QextSerialPort was compiled without 76800 baud support.  Switching to 57600 baud." );
+                Posix_CommConfig.c_cflag |= B57600;
 #endif //B76800
 #else  //CBAUD
 #ifdef B76800
-            cfsetispeed(&Posix_CommConfig, B76800);
-            cfsetospeed(&Posix_CommConfig, B76800);
+                cfsetispeed ( &Posix_CommConfig, B76800 );
+                cfsetospeed ( &Posix_CommConfig, B76800 );
 #else
-            TTY_WARNING("Posix_QextSerialPort: Posix_QextSerialPort was compiled without 76800 baud support.  Switching to 57600 baud.");
-            cfsetispeed(&Posix_CommConfig, B57600);
-            cfsetospeed(&Posix_CommConfig, B57600);
+                TTY_WARNING ( "Posix_QextSerialPort: Posix_QextSerialPort was compiled without 76800 baud support.  Switching to 57600 baud." );
+                cfsetispeed ( &Posix_CommConfig, B57600 );
+                cfsetospeed ( &Posix_CommConfig, B57600 );
 #endif //B76800
 #endif //CBAUD
-            break;
+                break;
 
-        /*115200 baud*/
-        case BAUD115200:
+            /*115200 baud*/
+            case BAUD115200:
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B115200;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B115200;
 #else
-            cfsetispeed(&Posix_CommConfig, B115200);
-            cfsetospeed(&Posix_CommConfig, B115200);
+                cfsetispeed ( &Posix_CommConfig, B115200 );
+                cfsetospeed ( &Posix_CommConfig, B115200 );
 #endif
-            break;
+                break;
 
-        /*128000 baud*/
-        case BAUD128000:
-            TTY_WARNING("Posix_QextSerialPort: POSIX does not support 128000 baud operation.  Switching to 115200 baud.");
+            /*128000 baud*/
+            case BAUD128000:
+                TTY_WARNING ( "Posix_QextSerialPort: POSIX does not support 128000 baud operation.  Switching to 115200 baud." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B115200;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B115200;
 #else
-            cfsetispeed(&Posix_CommConfig, B115200);
-            cfsetospeed(&Posix_CommConfig, B115200);
+                cfsetispeed ( &Posix_CommConfig, B115200 );
+                cfsetospeed ( &Posix_CommConfig, B115200 );
 #endif
-            break;
+                break;
 
-        /*256000 baud*/
-        case BAUD256000:
-            TTY_WARNING("Posix_QextSerialPort: POSIX does not support 256000 baud operation.  Switching to 115200 baud.");
+            /*256000 baud*/
+            case BAUD256000:
+                TTY_WARNING ( "Posix_QextSerialPort: POSIX does not support 256000 baud operation.  Switching to 115200 baud." );
 #ifdef CBAUD
-            Posix_CommConfig.c_cflag &= (~CBAUD);
-            Posix_CommConfig.c_cflag |= B115200;
+                Posix_CommConfig.c_cflag &= ( ~CBAUD );
+                Posix_CommConfig.c_cflag |= B115200;
 #else
-            cfsetispeed(&Posix_CommConfig, B115200);
-            cfsetospeed(&Posix_CommConfig, B115200);
+                cfsetispeed ( &Posix_CommConfig, B115200 );
+                cfsetospeed ( &Posix_CommConfig, B115200 );
 #endif
-            break;
+                break;
         }
 
-        tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
+        tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
     }
 
     UNLOCK_MUTEX();
@@ -533,15 +537,15 @@ This function is subject to the following restrictions:
     8 data bits cannot be used with space parity on POSIX systems.
 
 */
-void Posix_QextSerialPort::setDataBits(DataBitsType dataBits)
+void Posix_QextSerialPort::setDataBits ( DataBitsType dataBits )
 {
     LOCK_MUTEX();
 
-    if (Settings.DataBits != dataBits)
+    if ( Settings.DataBits != dataBits )
     {
-        if ((Settings.StopBits == STOP_2 && dataBits == DATA_5) ||
-            (Settings.StopBits == STOP_1_5 && dataBits != DATA_5) ||
-            (Settings.Parity == PAR_SPACE && dataBits == DATA_8))
+        if ( ( Settings.StopBits == STOP_2 && dataBits == DATA_5 ) ||
+             ( Settings.StopBits == STOP_1_5 && dataBits != DATA_5 ) ||
+             ( Settings.Parity == PAR_SPACE && dataBits == DATA_8 ) )
         {
         }
         else
@@ -550,74 +554,74 @@ void Posix_QextSerialPort::setDataBits(DataBitsType dataBits)
         }
     }
 
-    if (isOpen())
+    if ( isOpen() )
     {
-        switch (dataBits)
+        switch ( dataBits )
         {
 
-        /*5 data bits*/
-        case DATA_5:
-            if (Settings.StopBits == STOP_2)
-            {
-                TTY_WARNING("Posix_QextSerialPort: 5 Data bits cannot be used with 2 stop bits.");
-            }
-            else
-            {
-                Settings.DataBits = dataBits;
-                Posix_CommConfig.c_cflag &= (~CSIZE);
-                Posix_CommConfig.c_cflag |= CS5;
-                tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            }
+            /*5 data bits*/
+            case DATA_5:
+                if ( Settings.StopBits == STOP_2 )
+                {
+                    TTY_WARNING ( "Posix_QextSerialPort: 5 Data bits cannot be used with 2 stop bits." );
+                }
+                else
+                {
+                    Settings.DataBits = dataBits;
+                    Posix_CommConfig.c_cflag &= ( ~CSIZE );
+                    Posix_CommConfig.c_cflag |= CS5;
+                    tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                }
 
-            break;
+                break;
 
-        /*6 data bits*/
-        case DATA_6:
-            if (Settings.StopBits == STOP_1_5)
-            {
-                TTY_WARNING("Posix_QextSerialPort: 6 Data bits cannot be used with 1.5 stop bits.");
-            }
-            else
-            {
-                Settings.DataBits = dataBits;
-                Posix_CommConfig.c_cflag &= (~CSIZE);
-                Posix_CommConfig.c_cflag |= CS6;
-                tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            }
+            /*6 data bits*/
+            case DATA_6:
+                if ( Settings.StopBits == STOP_1_5 )
+                {
+                    TTY_WARNING ( "Posix_QextSerialPort: 6 Data bits cannot be used with 1.5 stop bits." );
+                }
+                else
+                {
+                    Settings.DataBits = dataBits;
+                    Posix_CommConfig.c_cflag &= ( ~CSIZE );
+                    Posix_CommConfig.c_cflag |= CS6;
+                    tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                }
 
-            break;
+                break;
 
-        /*7 data bits*/
-        case DATA_7:
-            if (Settings.StopBits == STOP_1_5)
-            {
-                TTY_WARNING("Posix_QextSerialPort: 7 Data bits cannot be used with 1.5 stop bits.");
-            }
-            else
-            {
-                Settings.DataBits = dataBits;
-                Posix_CommConfig.c_cflag &= (~CSIZE);
-                Posix_CommConfig.c_cflag |= CS7;
-                tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            }
+            /*7 data bits*/
+            case DATA_7:
+                if ( Settings.StopBits == STOP_1_5 )
+                {
+                    TTY_WARNING ( "Posix_QextSerialPort: 7 Data bits cannot be used with 1.5 stop bits." );
+                }
+                else
+                {
+                    Settings.DataBits = dataBits;
+                    Posix_CommConfig.c_cflag &= ( ~CSIZE );
+                    Posix_CommConfig.c_cflag |= CS7;
+                    tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                }
 
-            break;
+                break;
 
-        /*8 data bits*/
-        case DATA_8:
-            if (Settings.StopBits == STOP_1_5)
-            {
-                TTY_WARNING("Posix_QextSerialPort: 8 Data bits cannot be used with 1.5 stop bits.");
-            }
-            else
-            {
-                Settings.DataBits = dataBits;
-                Posix_CommConfig.c_cflag &= (~CSIZE);
-                Posix_CommConfig.c_cflag |= CS8;
-                tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            }
+            /*8 data bits*/
+            case DATA_8:
+                if ( Settings.StopBits == STOP_1_5 )
+                {
+                    TTY_WARNING ( "Posix_QextSerialPort: 8 Data bits cannot be used with 1.5 stop bits." );
+                }
+                else
+                {
+                    Settings.DataBits = dataBits;
+                    Posix_CommConfig.c_cflag &= ( ~CSIZE );
+                    Posix_CommConfig.c_cflag |= CS8;
+                    tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                }
 
-            break;
+                break;
         }
     }
 
@@ -644,13 +648,13 @@ POSIX systems support space parity only if tricked into doing so, and only with
    fewer than 8 data bits.  Use space parity very carefully with POSIX systems.
 
 */
-void Posix_QextSerialPort::setParity(ParityType parity)
+void Posix_QextSerialPort::setParity ( ParityType parity )
 {
     LOCK_MUTEX();
 
-    if (Settings.Parity != parity)
+    if ( Settings.Parity != parity )
     {
-        if (parity == PAR_MARK || (parity == PAR_SPACE && Settings.DataBits == DATA_8))
+        if ( parity == PAR_MARK || ( parity == PAR_SPACE && Settings.DataBits == DATA_8 ) )
         {
         }
         else
@@ -659,72 +663,72 @@ void Posix_QextSerialPort::setParity(ParityType parity)
         }
     }
 
-    if (isOpen())
+    if ( isOpen() )
     {
-        switch (parity)
+        switch ( parity )
         {
 
-        /*space parity*/
-        case PAR_SPACE:
-            if (Settings.DataBits == DATA_8)
-            {
-                TTY_PORTABILITY_WARNING("Posix_QextSerialPort:  Space parity is only supported in POSIX with 7 or fewer data bits");
-            }
-            else
-            {
-
-                /*space parity not directly supported - add an extra data bit to simulate it*/
-                Posix_CommConfig.c_cflag &= ~(PARENB | CSIZE);
-
-                switch (Settings.DataBits)
+            /*space parity*/
+            case PAR_SPACE:
+                if ( Settings.DataBits == DATA_8 )
                 {
-                case DATA_5:
-                    Settings.DataBits = DATA_6;
-                    Posix_CommConfig.c_cflag |= CS6;
-                    break;
+                    TTY_PORTABILITY_WARNING ( "Posix_QextSerialPort:  Space parity is only supported in POSIX with 7 or fewer data bits" );
+                }
+                else
+                {
 
-                case DATA_6:
-                    Settings.DataBits = DATA_7;
-                    Posix_CommConfig.c_cflag |= CS7;
-                    break;
+                    /*space parity not directly supported - add an extra data bit to simulate it*/
+                    Posix_CommConfig.c_cflag &= ~ ( PARENB | CSIZE );
 
-                case DATA_7:
-                    Settings.DataBits = DATA_8;
-                    Posix_CommConfig.c_cflag |= CS8;
-                    break;
+                    switch ( Settings.DataBits )
+                    {
+                        case DATA_5:
+                            Settings.DataBits = DATA_6;
+                            Posix_CommConfig.c_cflag |= CS6;
+                            break;
 
-                case DATA_8:
-                    break;
+                        case DATA_6:
+                            Settings.DataBits = DATA_7;
+                            Posix_CommConfig.c_cflag |= CS7;
+                            break;
+
+                        case DATA_7:
+                            Settings.DataBits = DATA_8;
+                            Posix_CommConfig.c_cflag |= CS8;
+                            break;
+
+                        case DATA_8:
+                            break;
+                    }
+
+                    tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
                 }
 
-                tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            }
+                break;
 
-            break;
+            /*mark parity - WINDOWS ONLY*/
+            case PAR_MARK:
+                TTY_WARNING ( "Posix_QextSerialPort: Mark parity is not supported by POSIX." );
+                break;
 
-        /*mark parity - WINDOWS ONLY*/
-        case PAR_MARK:
-            TTY_WARNING("Posix_QextSerialPort: Mark parity is not supported by POSIX.");
-            break;
+            /*no parity*/
+            case PAR_NONE:
+                Posix_CommConfig.c_cflag &= ( ~PARENB );
+                tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                break;
 
-        /*no parity*/
-        case PAR_NONE:
-            Posix_CommConfig.c_cflag &= (~PARENB);
-            tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            break;
+            /*even parity*/
+            case PAR_EVEN:
+                Posix_CommConfig.c_cflag &= ( ~PARODD );
+                Posix_CommConfig.c_cflag |= PARENB;
+                tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                break;
 
-        /*even parity*/
-        case PAR_EVEN:
-            Posix_CommConfig.c_cflag &= (~PARODD);
-            Posix_CommConfig.c_cflag |= PARENB;
-            tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            break;
-
-        /*odd parity*/
-        case PAR_ODD:
-            Posix_CommConfig.c_cflag |= (PARENB | PARODD);
-            tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            break;
+            /*odd parity*/
+            case PAR_ODD:
+                Posix_CommConfig.c_cflag |= ( PARENB | PARODD );
+                tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                break;
         }
     }
 
@@ -747,50 +751,50 @@ This function is subject to the following restrictions:
     POSIX does not support 1.5 stop bits.
 
 */
-void Posix_QextSerialPort::setStopBits(StopBitsType stopBits)
+void Posix_QextSerialPort::setStopBits ( StopBitsType stopBits )
 {
     LOCK_MUTEX();
 
-    if (Settings.StopBits != stopBits)
+    if ( Settings.StopBits != stopBits )
     {
-        if ((Settings.DataBits == DATA_5 && stopBits == STOP_2) || stopBits == STOP_1_5) {}
+        if ( ( Settings.DataBits == DATA_5 && stopBits == STOP_2 ) || stopBits == STOP_1_5 ) {}
         else
         {
             Settings.StopBits = stopBits;
         }
     }
 
-    if (isOpen())
+    if ( isOpen() )
     {
-        switch (stopBits)
+        switch ( stopBits )
         {
 
-        /*one stop bit*/
-        case STOP_1:
-            Settings.StopBits = stopBits;
-            Posix_CommConfig.c_cflag &= (~CSTOPB);
-            tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            break;
-
-        /*1.5 stop bits*/
-        case STOP_1_5:
-            TTY_WARNING("Posix_QextSerialPort: 1.5 stop bit operation is not supported by POSIX.");
-            break;
-
-        /*two stop bits*/
-        case STOP_2:
-            if (Settings.DataBits == DATA_5)
-            {
-                TTY_WARNING("Posix_QextSerialPort: 2 stop bits cannot be used with 5 data bits");
-            }
-            else
-            {
+            /*one stop bit*/
+            case STOP_1:
                 Settings.StopBits = stopBits;
-                Posix_CommConfig.c_cflag |= CSTOPB;
-                tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            }
+                Posix_CommConfig.c_cflag &= ( ~CSTOPB );
+                tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                break;
 
-            break;
+            /*1.5 stop bits*/
+            case STOP_1_5:
+                TTY_WARNING ( "Posix_QextSerialPort: 1.5 stop bit operation is not supported by POSIX." );
+                break;
+
+            /*two stop bits*/
+            case STOP_2:
+                if ( Settings.DataBits == DATA_5 )
+                {
+                    TTY_WARNING ( "Posix_QextSerialPort: 2 stop bits cannot be used with 5 data bits" );
+                }
+                else
+                {
+                    Settings.StopBits = stopBits;
+                    Posix_CommConfig.c_cflag |= CSTOPB;
+                    tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                }
+
+                break;
         }
     }
 
@@ -810,39 +814,39 @@ FLOW_HARDWARE may not be supported on all versions of UNIX.  In cases where it i
 unsupported, FLOW_HARDWARE is the same as FLOW_OFF.
 
 */
-void Posix_QextSerialPort::setFlowControl(FlowType flow)
+void Posix_QextSerialPort::setFlowControl ( FlowType flow )
 {
     LOCK_MUTEX();
 
-    if (Settings.FlowControl != flow)
+    if ( Settings.FlowControl != flow )
     {
         Settings.FlowControl = flow;
     }
 
-    if (isOpen())
+    if ( isOpen() )
     {
-        switch (flow)
+        switch ( flow )
         {
 
-        /*no flow control*/
-        case FLOW_OFF:
-            Posix_CommConfig.c_cflag &= (~CRTSCTS);
-            Posix_CommConfig.c_iflag &= (~(IXON | IXOFF | IXANY));
-            tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            break;
+            /*no flow control*/
+            case FLOW_OFF:
+                Posix_CommConfig.c_cflag &= ( ~CRTSCTS );
+                Posix_CommConfig.c_iflag &= ( ~ ( IXON | IXOFF | IXANY ) );
+                tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                break;
 
-        /*software (XON/XOFF) flow control*/
-        case FLOW_XONXOFF:
-            Posix_CommConfig.c_cflag &= (~CRTSCTS);
-            Posix_CommConfig.c_iflag |= (IXON | IXOFF | IXANY);
-            tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            break;
+            /*software (XON/XOFF) flow control*/
+            case FLOW_XONXOFF:
+                Posix_CommConfig.c_cflag &= ( ~CRTSCTS );
+                Posix_CommConfig.c_iflag |= ( IXON | IXOFF | IXANY );
+                tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                break;
 
-        case FLOW_HARDWARE:
-            Posix_CommConfig.c_cflag |= CRTSCTS;
-            Posix_CommConfig.c_iflag &= (~(IXON | IXOFF | IXANY));
-            tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
-            break;
+            case FLOW_HARDWARE:
+                Posix_CommConfig.c_cflag |= CRTSCTS;
+                Posix_CommConfig.c_iflag &= ( ~ ( IXON | IXOFF | IXANY ) );
+                tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
+                break;
         }
     }
 
@@ -866,18 +870,18 @@ so for example a 550-millisecond timeout will be seen as 550 milliseconds on POS
 the purpose of detecting available bytes in the read buffer.
 
 */
-void Posix_QextSerialPort::setTimeout(long millisec)
+void Posix_QextSerialPort::setTimeout ( long millisec )
 {
     LOCK_MUTEX();
     Settings.Timeout_Millisec = millisec;
     Posix_Copy_Timeout.tv_sec = millisec / 1000;
     Posix_Copy_Timeout.tv_usec = millisec % 1000;
 
-    if (isOpen())
+    if ( isOpen() )
     {
-        tcgetattr(Posix_File->handle(), &Posix_CommConfig);
+        tcgetattr ( Posix_File->handle(), &Posix_CommConfig );
         Posix_CommConfig.c_cc[VTIME] = millisec / 100;
-        tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
+        tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
     }
 
     UNLOCK_MUTEX();
@@ -889,50 +893,50 @@ Opens the serial port associated to this class.
 This function has no effect if the port associated with the class is already open.
 The port is also configured to the current settings, as stored in the Settings structure.
 */
-bool Posix_QextSerialPort::open(OpenMode mode)
+bool Posix_QextSerialPort::open ( OpenMode mode )
 {
     LOCK_MUTEX();
 
-    if (mode == QIODevice::NotOpen)
+    if ( mode == QIODevice::NotOpen )
         return isOpen();
 
-    if (!isOpen())
+    if ( !isOpen() )
     {
         /*open the port*/
-        Posix_File->setFileName(port);
-        qDebug("Trying to open File");
+        Posix_File->setFileName ( port );
+        qDebug ( "Trying to open File" );
 
-        if (Posix_File->open(QIODevice::ReadWrite | QIODevice::Unbuffered))
+        if ( Posix_File->open ( QIODevice::ReadWrite | QIODevice::Unbuffered ) )
         {
-            qDebug("Opened File succesfully");
+            qDebug ( "Opened File succesfully" );
             /*set open mode*/
-            QIODevice::open(mode);
+            QIODevice::open ( mode );
 
             /*configure port settings*/
-            tcgetattr(Posix_File->handle(), &Posix_CommConfig);
+            tcgetattr ( Posix_File->handle(), &Posix_CommConfig );
 
             /*set up other port settings*/
             Posix_CommConfig.c_cflag |= CREAD | CLOCAL;
-            Posix_CommConfig.c_lflag &= (~(ICANON | ECHO | ECHOE | ECHOK | ECHONL | ISIG));
-            Posix_CommConfig.c_iflag &= (~(INPCK | IGNPAR | PARMRK | ISTRIP | ICRNL | IXANY));
-            Posix_CommConfig.c_oflag &= (~OPOST);
+            Posix_CommConfig.c_lflag &= ( ~ ( ICANON | ECHO | ECHOE | ECHOK | ECHONL | ISIG ) );
+            Posix_CommConfig.c_iflag &= ( ~ ( INPCK | IGNPAR | PARMRK | ISTRIP | ICRNL | IXANY ) );
+            Posix_CommConfig.c_oflag &= ( ~OPOST );
             Posix_CommConfig.c_cc[VMIN] = 0;
-            Posix_CommConfig.c_cc[VINTR] = _POSIX_VDISABLE;
+            Posix_CommConfig.c_cc[VINTR] = _POSIX_VDISABLE; //fpathconf ( Posix_File->handle(), _PC_VDISABLE );
             Posix_CommConfig.c_cc[VQUIT] = _POSIX_VDISABLE;
             Posix_CommConfig.c_cc[VSTART] = _POSIX_VDISABLE;
             Posix_CommConfig.c_cc[VSTOP] = _POSIX_VDISABLE;
             Posix_CommConfig.c_cc[VSUSP] = _POSIX_VDISABLE;
-            setBaudRate(Settings.BaudRate);
-            setDataBits(Settings.DataBits);
-            setParity(Settings.Parity);
-            setStopBits(Settings.StopBits);
-            setFlowControl(Settings.FlowControl);
-            setTimeout(Settings.Timeout_Millisec);
-            tcsetattr(Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig);
+            setBaudRate ( Settings.BaudRate );
+            setDataBits ( Settings.DataBits );
+            setParity ( Settings.Parity );
+            setStopBits ( Settings.StopBits );
+            setFlowControl ( Settings.FlowControl );
+            setTimeout ( Settings.Timeout_Millisec );
+            tcsetattr ( Posix_File->handle(), TCSAFLUSH, &Posix_CommConfig );
         }
         else
         {
-            qDebug("Could not open File! Error code : %d", Posix_File->error());
+            qDebug ( "Could not open File! Error code : %d", Posix_File->error() );
         }
     }
 
@@ -962,7 +966,7 @@ void Posix_QextSerialPort::flush()
 {
     LOCK_MUTEX();
 
-    if (isOpen())
+    if ( isOpen() )
     {
         Posix_File->flush();
     }
@@ -981,12 +985,12 @@ qint64 Posix_QextSerialPort::size() const
 {
     int numBytes;
 
-    if (ioctl(Posix_File->handle(), FIONREAD, &numBytes) < 0)
+    if ( ioctl ( Posix_File->handle(), FIONREAD, &numBytes ) < 0 )
     {
         numBytes = 0;
     }
 
-    return (qint64)numBytes;
+    return ( qint64 ) numBytes;
 }
 
 /*!
@@ -999,29 +1003,29 @@ qint64 Posix_QextSerialPort::bytesAvailable()
 {
     LOCK_MUTEX();
 
-    if (isOpen())
+    if ( isOpen() )
     {
         int bytesQueued;
         fd_set fileSet;
-        FD_ZERO(&fileSet);
-        FD_SET(Posix_File->handle(), &fileSet);
+        FD_ZERO ( &fileSet );
+        FD_SET ( Posix_File->handle(), &fileSet );
 
         /*on Linux systems the Posix_Timeout structure will be altered by the select() call.
           Make sure we use the right timeout values*/
         //memcpy(&Posix_Timeout, &Posix_Copy_Timeout, sizeof(struct timeval));
         Posix_Timeout = Posix_Copy_Timeout;
-        int n = select(Posix_File->handle() + 1, &fileSet, NULL, &fileSet, &Posix_Timeout);
+        int n = select ( Posix_File->handle() + 1, &fileSet, NULL, &fileSet, &Posix_Timeout );
 
-        if (!n)
+        if ( !n )
         {
             lastErr = E_PORT_TIMEOUT;
             UNLOCK_MUTEX();
             return -1;
         }
 
-        if (n == -1 || ioctl(Posix_File->handle(), FIONREAD, &bytesQueued) == -1)
+        if ( n == -1 || ioctl ( Posix_File->handle(), FIONREAD, &bytesQueued ) == -1 )
         {
-            translateError(errno);
+            translateError ( errno );
             UNLOCK_MUTEX();
             return -1;
         }
@@ -1041,32 +1045,32 @@ This function is included to implement the full QIODevice interface, and current
 purpose within this class.  This function is meaningless on an unbuffered device and currently
 only prints a warning message to that effect.
 */
-void Posix_QextSerialPort::ungetChar(char)
+void Posix_QextSerialPort::ungetChar ( char )
 {
     /*meaningless on unbuffered sequential device - return error and print a warning*/
-    TTY_WARNING("Posix_QextSerialPort: ungetChar() called on an unbuffered sequential device - operation is meaningless");
+    TTY_WARNING ( "Posix_QextSerialPort: ungetChar() called on an unbuffered sequential device - operation is meaningless" );
 }
 
 /*!
 \fn void Posix_QextSerialPort::translateError(ulong error)
 Translates a system-specific error code to a QextSerialPort error code.  Used internally.
 */
-void Posix_QextSerialPort::translateError(ulong error)
+void Posix_QextSerialPort::translateError ( ulong error )
 {
-    switch (error)
+    switch ( error )
     {
-    case EBADF:
-    case ENOTTY:
-        lastErr = E_INVALID_FD;
-        break;
+        case EBADF:
+        case ENOTTY:
+            lastErr = E_INVALID_FD;
+            break;
 
-    case EINTR:
-        lastErr = E_CAUGHT_NON_BLOCKED_SIGNAL;
-        break;
+        case EINTR:
+            lastErr = E_CAUGHT_NON_BLOCKED_SIGNAL;
+            break;
 
-    case ENOMEM:
-        lastErr = E_NO_MEMORY;
-        break;
+        case ENOMEM:
+            lastErr = E_NO_MEMORY;
+            break;
     }
 }
 
@@ -1075,16 +1079,16 @@ void Posix_QextSerialPort::translateError(ulong error)
 Sets DTR line to the requested state (high by default).  This function will have no effect if
 the port associated with the class is not currently open.
 */
-void Posix_QextSerialPort::setDtr(bool set)
+void Posix_QextSerialPort::setDtr ( bool set )
 {
     LOCK_MUTEX();
 
-    if (isOpen())
+    if ( isOpen() )
     {
         int status;
-        ioctl(Posix_File->handle(), TIOCMGET, &status);
+        ioctl ( Posix_File->handle(), TIOCMGET, &status );
 
-        if (set)
+        if ( set )
         {
             status |= TIOCM_DTR;
         }
@@ -1093,7 +1097,7 @@ void Posix_QextSerialPort::setDtr(bool set)
             status &= ~TIOCM_DTR;
         }
 
-        ioctl(Posix_File->handle(), TIOCMSET, &status);
+        ioctl ( Posix_File->handle(), TIOCMSET, &status );
     }
 
     UNLOCK_MUTEX();
@@ -1104,16 +1108,16 @@ void Posix_QextSerialPort::setDtr(bool set)
 Sets RTS line to the requested state (high by default).  This function will have no effect if
 the port associated with the class is not currently open.
 */
-void Posix_QextSerialPort::setRts(bool set)
+void Posix_QextSerialPort::setRts ( bool set )
 {
     LOCK_MUTEX();
 
-    if (isOpen())
+    if ( isOpen() )
     {
         int status;
-        ioctl(Posix_File->handle(), TIOCMGET, &status);
+        ioctl ( Posix_File->handle(), TIOCMGET, &status );
 
-        if (set)
+        if ( set )
         {
             status |= TIOCM_RTS;
         }
@@ -1122,7 +1126,7 @@ void Posix_QextSerialPort::setRts(bool set)
             status &= ~TIOCM_RTS;
         }
 
-        ioctl(Posix_File->handle(), TIOCMSET, &status);
+        ioctl ( Posix_File->handle(), TIOCMSET, &status );
     }
 
     UNLOCK_MUTEX();
@@ -1156,46 +1160,46 @@ unsigned long Posix_QextSerialPort::lineStatus()
     unsigned long Status = 0, Temp = 0;
     LOCK_MUTEX();
 
-    if (isOpen())
+    if ( isOpen() )
     {
-        ioctl(Posix_File->handle(), TIOCMGET, &Temp);
+        ioctl ( Posix_File->handle(), TIOCMGET, &Temp );
 
-        if (Temp & TIOCM_CTS)
+        if ( Temp & TIOCM_CTS )
         {
             Status |= LS_CTS;
         }
 
-        if (Temp & TIOCM_DSR)
+        if ( Temp & TIOCM_DSR )
         {
             Status |= LS_DSR;
         }
 
-        if (Temp & TIOCM_RI)
+        if ( Temp & TIOCM_RI )
         {
             Status |= LS_RI;
         }
 
-        if (Temp & TIOCM_CD)
+        if ( Temp & TIOCM_CD )
         {
             Status |= LS_DCD;
         }
 
-        if (Temp & TIOCM_DTR)
+        if ( Temp & TIOCM_DTR )
         {
             Status |= LS_DTR;
         }
 
-        if (Temp & TIOCM_RTS)
+        if ( Temp & TIOCM_RTS )
         {
             Status |= LS_RTS;
         }
 
-        if (Temp & TIOCM_ST)
+        if ( Temp & TIOCM_ST )
         {
             Status |= LS_ST;
         }
 
-        if (Temp & TIOCM_SR)
+        if ( Temp & TIOCM_SR )
         {
             Status |= LS_SR;
         }
@@ -1214,13 +1218,13 @@ bytes actually read, or -1 on error.
 \warning before calling this function ensure that serial port associated with this class
 is currently open (use isOpen() function to check if port is open).
 */
-qint64 Posix_QextSerialPort::readData(char* data, qint64 maxSize)
+qint64 Posix_QextSerialPort::readData ( char* data, qint64 maxSize )
 {
     LOCK_MUTEX();
     int retVal = 0;
-    retVal = Posix_File->read(data, maxSize);
+    retVal = Posix_File->read ( data, maxSize );
 
-    if (retVal == -1)
+    if ( retVal == -1 )
         lastErr = E_READ_FAILED;
 
     UNLOCK_MUTEX();
@@ -1237,13 +1241,13 @@ of bytes actually written, or -1 on error.
 \warning before calling this function ensure that serial port associated with this class
 is currently open (use isOpen() function to check if port is open).
 */
-qint64 Posix_QextSerialPort::writeData(const char* data, qint64 maxSize)
+qint64 Posix_QextSerialPort::writeData ( const char* data, qint64 maxSize )
 {
     LOCK_MUTEX();
     int retVal = 0;
-    retVal = Posix_File->write(data, maxSize);
+    retVal = Posix_File->write ( data, maxSize );
 
-    if (retVal == -1)
+    if ( retVal == -1 )
         lastErr = E_WRITE_FAILED;
 
     UNLOCK_MUTEX();

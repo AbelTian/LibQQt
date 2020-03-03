@@ -1,10 +1,12 @@
-﻿#ifndef QQTSERIALPORT_H
+#ifndef QQTSERIALPORT_H
 #define QQTSERIALPORT_H
 
 #include "qqtprotocol.h"
 #include <qqt-local.h>
 
-#if defined (__QEXTSERIALPORT__ )
+#if defined (__QSERIALPORT__)
+#include <QSerialPort>
+#else
 #include <qextserialport.h>
 class QSerialPort : public QextSerialPort
 {
@@ -68,10 +70,13 @@ public:
     virtual void setStopBits ( StopBits v ) { QextSerialPort::setStopBits ( ( StopBitsType ) v ); }
     virtual void setFlowControl ( FlowControl v ) { QextSerialPort::setFlowControl ( ( FlowType ) v ); }
 };
-#else
-#include <QSerialPort>
 #endif
 
+/**
+ * @brief The QQtSerialPort class
+ * 兼容QextSerialPort和QSerialPort
+ * 添加QQtProtocol支持
+ */
 class QQTSHARED_EXPORT QQtSerialPort : public QSerialPort
 {
     Q_OBJECT

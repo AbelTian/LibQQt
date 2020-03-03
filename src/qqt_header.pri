@@ -96,7 +96,7 @@ defineTest(add_include_QQt){
 #################################################################
 defineTest(add_defines_QQt){
     ##Qt version
-    QT += core sql network gui xml
+    QT += core network gui sql xml
     greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
     # release open debug output
@@ -106,7 +106,9 @@ defineTest(add_defines_QQt){
     }
 
     #compatible old version QQt (deperated)
-    greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
+    equals(QT_MAJOR_VERSION, 6): DEFINES += __QT6__
+    equals(QT_MAJOR_VERSION, 5): DEFINES += __QT5__
+    equals(QT_MAJOR_VERSION, 4): DEFINES += __QT4__
 
     #defined in qqtcore.h
     #lessThan(QT_MAJOR_VERSION, 5):DEFINES += nullptr=0
@@ -315,6 +317,7 @@ defineTest(add_defines_QQt){
         #对于这两种情况，默认删除去。如果用户自己编译了Charts，手动添加charts模块。
         lessThan(QT_VERSION, 5.7):DEFINES-=__QT_CHARTS__
         contains(QSYS_PRIVATE, Arm32|Armhf32|Mips32|Embedded):DEFINES-=__QT_CHARTS__
+
         #based on QtCharts, need charts module
         contains(DEFINES, __QT_CHARTS__ ): QT += charts
 
@@ -359,29 +362,47 @@ defineTest(add_defines_QQt){
     DEFINES += __NETWORKSUPPORT__
     contains (DEFINES, __NETWORKSUPPORT__) {
         ##################SerialPort Module##################################
-        #if you use qextserialport, open the annotation
-        #suggest: Qt5 using factory-packed, Qt4 using from Qt5, extra using this.
-        #DEFINES += __QEXTSERIALPORT__
-
-        #if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
-        lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
-
-        #to ios, use qextserialport
-        contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
+        #|<---- Qt5                |    Qt4   |
+        #|<---- QSerialPort        |
+        #|<---- QextSerialPort                |
 
         #android qt5 has QtSerialport
         #contains (DEFINES, __ANDROID__): DEFINES += __QSERIALPORT__
         #Win32 Win64 MSVC MSVC64, macOS, Linux64, Embedded, use QSerialPort
-        else: DEFINES += __QSERIALPORT__
+        #优先选择QSerialPort
+        DEFINES += __QSERIALPORT__
+        #to Qt4, removed Qt serial port. If user compiler manually, open this note.
+        lessThan(QT_MAJOR_VERSION, 5): DEFINES -= __QSERIALPORT__
+        #to ios, removed Qt serialport. If user compiler manually, open this note.
+        contains (DEFINES, __IOS__): DEFINES -= __QSERIALPORT__
+
+        #if you use qextserialport, open the annotation
+        #suggest: Qt5 using factory-packed, Qt4 using from Qt5, extra using this.
+        #总是打开QextSerialPort
+        DEFINES += __QEXTSERIALPORT__
+        #if compiler QtSerialPort module manual, note this line is a good idea. default: qt4 qextserialport
+        #lessThan(QT_MAJOR_VERSION, 5): DEFINES += __QEXTSERIALPORT__
+        #to ios, use qextserialport
+        #contains (DEFINES, __IOS__): DEFINES += __QEXTSERIALPORT__
 
         #to winRT, can't use any serialport
-        contains (DEFINES, __WINRT__): DEFINES -= __QEXTSERIALPORT__ __QSERIALPORT__
+        contains (DEFINES, __WINRT__): DEFINES -= __QSERIALPORT__ __QEXTSERIALPORT__
 
-        #__QEXTSERIALPORT__ __QSERIALPORT__ qextserialport Qt4 多数平台
-        #__QEXTSERIALPORT__ qextserialport Qt5 偶尔
-        #__QSERIALPORT__ qtserialport Qt5 多数平台
-        #一个都没有 WinRT
-        contains (DEFINES, __QEXTSERIALPORT__) {
+        #__QSERIALPORT__ __QEXTSERIALPORT__ qtserialport Qt5 多数平台
+        #__QEXTSERIALPORT__ qextserialport Qt5 偶尔 [ios]
+        #__QEXTSERIALPORT__ qextserialport Qt4 多数平台
+        #一个都没有 [WinRT]
+        contains (DEFINES, __QSERIALPORT__) {
+            #message ( __QSERIALPORT__ Defined in $${TARGET})
+            greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
+            else:CONFIG += serialport
+            unix {
+                DEFINES += _TTY_POSIX_
+            } else {
+                DEFINES += _TTY_WIN_
+            }
+            DEFINES += __QQTSERIALPORT__
+        } else: contains (DEFINES, __QEXTSERIALPORT__) {
             CONFIG += thread
             unix:DEFINES += _TTY_POSIX_
             win32:DEFINES += _TTY_WIN_
@@ -389,17 +410,7 @@ defineTest(add_defines_QQt){
             win32:LIBS += -lsetupapi -ladvapi32
             #message ( __QEXTSERIALPORT__ Defined in $${TARGET})
             DEFINES += __QQTSERIALPORT__
-        } else: contains (DEFINES, __QSERIALPORT__) {
-            #message ( __QSERIALPORT__ Defined in $${TARGET})
-            lessThan(QT_MAJOR_VERSION, 5): CONFIG += serialport
-            else:QT += serialport
-            unix {
-                DEFINES += _TTY_POSIX_
-            } else {
-                DEFINES += _TTY_WIN_
-            }
-            DEFINES += __QQTSERIALPORT__
-        }
+        } else: { }
 
         ##################Bluetooth Module###############################
         #if you use qtbluetooth, open this annotation
