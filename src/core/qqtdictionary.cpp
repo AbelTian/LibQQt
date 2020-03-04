@@ -791,12 +791,14 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
             //  <sub-person2 b="11"> </sub-person2>
             //</person>
             QDomNode& object = result;
+
             for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
             {
                 //QMap<QString, QQtDictionary>& m = node.getMap();
                 const QString& key = itor.key();
                 const QQtDictionary& srcvalue = itor.value();
 
+                //1! "__processinginstruction__" <?xml version='1.0' encoding='UTF-8'?>
                 if ( key == "__processinginstruction__" )
                 {
                     //"xml"
@@ -810,7 +812,15 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
                     }
                     continue;
                 }
+            }
 
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& key = itor.key();
+                const QQtDictionary& srcvalue = itor.value();
+
+                //2! "__attributes__" <Person attr-key="attr-value"> </Person>
                 if ( key == "__attributes__" )
                 {
                     //"attributes" key = value
@@ -825,6 +835,7 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
                     continue;
                 }
 
+                //3! "#text" <Person>#text</Person>
                 if ( key == "#text" )
                 {
                     //"text"
@@ -834,9 +845,10 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
                     continue;
                 }
 
+                //4! "#comment" <!--#comment-->
                 if ( key == "#comment" )
                 {
-                    //"comment"
+                    //only one
                     if ( srcvalue.getType() == DictValue )
                     {
                         const QString& value2 = srcvalue.getValue().toString();
@@ -845,6 +857,7 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
                         continue;
                     }
 
+                    //multiple
                     for ( int i = 0; i < srcvalue.getList().size(); i++ )
                     {
                         QList<QQtDictionary>& l = srcvalue.getList();
@@ -854,6 +867,7 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
                     continue;
                 }
 
+                //5! dict["person"][0-] <person>a</person> <person>b</person>
                 if ( srcvalue.getType() == DictList )
                 {
 #if 1
@@ -871,6 +885,7 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
                     continue;
                 }
 
+                //6! dict[key][child node] <book>...</book>
                 QDomElement value = doc.createElement ( key );
                 packDictionaryToDomNode ( srcvalue, value, doc );
                 object.appendChild ( value );
