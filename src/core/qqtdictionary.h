@@ -39,7 +39,6 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
  * 比json和xml的数据结构要庞大。
  * fromJson toJson
  * fromXML toXML
- * fromINI toINI
  * fromYAML toYAML
  *
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
@@ -178,10 +177,12 @@ public:
     /*与其他数据结构兼容*/
     QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact );
     void fromJson ( const QByteArray& json );
+
     QByteArray toXML ( int = -1 );
     void fromXML ( const QByteArray& xml );
-    QByteArray toINI();
-    void fromINI ( const QByteArray& ini );
+
+    QByteArray toYAML ( );
+    void fromYAML ( const QByteArray& yaml );
 
 protected:
     virtual void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
