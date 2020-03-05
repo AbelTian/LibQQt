@@ -1,4 +1,4 @@
-﻿#include "qqtsqltreemodel.h"
+#include "qqtsqltreemodel.h"
 #include "qqtcore.h"
 #include "qqtsql.h"
 
@@ -49,6 +49,12 @@ bool QQtSqlTreeModel::parseDatabase()
 {
     QStringList tables = m_db.tables ( QSql::Tables );
     pline() << tables;
+
+    while ( rowCount() > 0 )
+    {
+        removeRow ( 0 );
+    }
+
     QStringListIterator itor ( tables );
 
     while ( itor.hasNext() )
@@ -62,9 +68,18 @@ bool QQtSqlTreeModel::parseDatabase()
 
 bool QQtSqlTreeModel::parseTable ( QString tableName )
 {
+    QListIterator<QQtTableModel*> itor ( tableModelList );
+    while ( itor.hasNext() )
+    {
+        QQtTableModel* m0 = itor.next();
+        m0->deleteLater();
+    }
+    tableModelList.clear();;
+
     QQtTableModel* mdl = new QQtTableModel ( this, m_db );
     mdl->setTable ( tableName );
     mdl->query ( "" );
+
     tableModelList.push_back ( mdl );;
 
     QStandardItem* itemParent = new QStandardItem;

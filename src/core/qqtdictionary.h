@@ -3,13 +3,13 @@
 
 #include <QObject>
 #include <QList>
+#include <QMap>
 
 class QJsonDocument;
 class QJsonValue;
 class QDomDocument;
 class QDomNode;
 
-#include <qqtorderedmap.h>
 #include <qqtcore.h>
 #include <qqt-local.h>
 

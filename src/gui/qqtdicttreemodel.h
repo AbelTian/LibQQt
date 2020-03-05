@@ -15,7 +15,8 @@ public:
     void setDictionary ( QQtDictionary* dict );
     QQtDictionary* dictionary();
 
-    virtual bool query ( QString condition ) override;
+    //这里会更新内部的pdict；
+    virtual void query ( QQtDictionary& dict );
 
 signals:
 
@@ -23,11 +24,11 @@ public slots:
 
     // QQtDictTreeModel interface
 protected:
+    virtual bool query ( QString condition ) override;
     virtual void setFilePath ( QString dictfile ) override;
 
 protected:
-
-    virtual void parseDictNodeToModel ( const QQtDictionary& node, QStandardItem& item );
+    virtual void packDictionaryToTreeModel ( const QQtDictionary& node, QStandardItem* pobject );
 
 private:
     QQtDictionary* pdict;

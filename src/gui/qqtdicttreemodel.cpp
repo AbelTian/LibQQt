@@ -1,18 +1,19 @@
 #include "qqtdicttreemodel.h"
+
 #include <QModelIndex>
-#include <QFile>
+#include <QStandardItem>
 
 #include "qqtcore.h"
 
+#define p3line() qDebug()
+
 QQtDictTreeModel::QQtDictTreeModel ( QObject* parent ) : QQtTreeModel ( parent )
 {
-
 }
 
 void QQtDictTreeModel::setDictionary ( QQtDictionary* dict )
 {
     this->pdict = dict;
-    query ( "" );
 }
 
 QQtDictionary* QQtDictTreeModel::dictionary()
@@ -20,33 +21,73 @@ QQtDictionary* QQtDictTreeModel::dictionary()
     return pdict;
 }
 
-void QQtDictTreeModel::setFilePath ( QString dictfile )
+void QQtDictTreeModel::query ( QQtDictionary& dict )
 {
-    QFile file ( dictfile );
+    pdict = &dict;
 
-    if ( !file.open ( QFile::ReadOnly | QFile::Text ) )
+    while ( rowCount() > 0 )
     {
-        pline() << "Error: Cannot read file " << qPrintable ( dictfile )
-                << ": " << qPrintable ( file.errorString() )
-                << endl;
-        return;
+        removeRow ( 0 );
     }
 
-    QString errorStr;
-    int errorLine;
-    int errorColumn;
-
-
-    file.close();
-
-    clear();
-
-    return;
+    //p3line() << item ( 0, 0 ); //0
+    //p3line() << item ( -1, -1 ); //0
+    packDictionaryToTreeModel ( dict, 0 );
 }
 
-void QQtDictTreeModel::parseDictNodeToModel ( const QQtDictionary& node, QStandardItem& item )
-{
 
+void QQtDictTreeModel::packDictionaryToTreeModel ( const QQtDictionary& node, QStandardItem* pobject )
+{
+    switch ( node.getType() )
+    {
+        case QQtDictionary::DictValue:
+        {
+            //null, bool, double, string
+            //p3line() << node.getValue().type();
+            QStandardItem* item = new QStandardItem;
+            item->setData ( node.getValue(), Qt::EditRole );
+            pobject ? pobject->appendRow ( item ) : appendRow ( item );
+            break;
+        }
+        case QQtDictionary::DictList:
+        {
+            //"name":[a, b, ...]
+            for ( int i = 0; i < node.getList().size(); i++ )
+            {
+                QList<QQtDictionary>& l = node.getList();
+                QStandardItem* item = new QStandardItem;
+                item->setText ( QString::number ( i + 1 ) );
+                packDictionaryToTreeModel ( l[i], item );
+                pobject ? pobject->appendRow ( item ) : appendRow ( item );
+            }
+            break;
+        }
+        case QQtDictionary::DictMap:
+        {
+            //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& key = itor.key();
+                const QQtDictionary& srcvalue = itor.value();
+                QStandardItem* item = new QStandardItem;
+                item->setText ( key );
+                packDictionaryToTreeModel ( srcvalue, item );
+                pobject ? pobject->appendRow ( item ) : appendRow ( item );
+            }
+            break;
+        }
+        case QQtDictionary::DictMax:
+        default:
+            break;
+    }
+}
+
+void QQtDictTreeModel::setFilePath ( QString dictfile )
+{
+    Q_UNUSED ( dictfile )
+    //TODO:
+    return;
 }
 
 bool QQtDictTreeModel::query ( QString condition )

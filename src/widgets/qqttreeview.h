@@ -16,11 +16,6 @@ public:
     virtual ~QQtTreeView();
 
 private:
-
-    // QQtTreeView interface
-protected:
-    void drawRow ( QPainter* painter, const QStyleOptionViewItem& options, const QModelIndex& index ) const;
-    void drawBranches ( QPainter* painter, const QRect& rect, const QModelIndex& index ) const;
 };
 
 #endif // QQTTREEVIEW_H
