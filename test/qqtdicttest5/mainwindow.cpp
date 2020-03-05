@@ -118,4 +118,23 @@ void MainWindow::replyFinished4 ( QQtWebAccessSession* session )
     qDebug() << "===========================================================================";
     QByteArray htmlContent = reply->readAll();
     qDebug() << htmlContent;
+
+    QString result;
+    for ( int i = 0 ; i < htmlContent.size(); i++ )
+    {
+        unsigned char j = htmlContent[i] & 0xFF;
+        QString ch = QString ( j );
+        QString ascii = "\\x" + QString ( "%1" ).arg ( j, 2, 16, QChar ( '0' ) ).toUpper();
+        result += ascii;
+    }
+    ui->textBrowser_4->append ( result );
+
+    for ( int i = 0 ; i < htmlContent.size(); i++ )
+    {
+        unsigned char j = htmlContent[i] & 0xFF;
+        QString ch = QString ( j );
+        QString ascii = "\\x" + QString ( "%1" ).arg ( j, 2, 16, QChar ( '0' ) ).toUpper();
+        ui->textBrowser_4->append ( ascii + "  -----  " + ch );
+        //ui->textBrowser_4->append (  );
+    }
 }
