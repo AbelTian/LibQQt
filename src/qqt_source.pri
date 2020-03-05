@@ -63,8 +63,10 @@ HEADERS += \
 #gui
 #add_object_class(QQtNoFocusDelegate, $$PWD/gui)
 SOURCES += \
+    $$PWD/gui/qqtprogressbardelegate.cpp \
     $$PWD/gui/qqtnofocusdelegate.cpp
 HEADERS += \
+    $$PWD/gui/qqtprogressbardelegate.h \
     $$PWD/gui/qqtnofocusdelegate.h
 
 SOURCES += \

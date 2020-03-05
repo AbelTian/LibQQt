@@ -1,4 +1,4 @@
-﻿#include "qqtprogressbar.h"
+#include "qqtprogressbar.h"
 #include "ui_qqtprogressbar.h"
 #include "QStylePainter"
 #include "qqtcore.h"
@@ -12,10 +12,11 @@ QQtProgressBar::QQtProgressBar ( QWidget* parent ) :
     ui->setupUi ( this );
     m_value = m_min = 0;
     m_max = 100;
-    m_back = "./skin/default/bk_progress_background.png";
-    m_trunk = "./skin/default/bk_progress_trunk.png";
-    ui->widthTrunk->setPixmap ( m_trunk );
-    ui->widgetBack->setPixmap ( m_back );
+    QString back = "./skin/default/bk_progress_background.png";
+    QString trunk = "./skin/default/bk_progress_trunk.png";
+    ui->widthTrunk->setPixmap ( trunk );
+    ui->widgetBack->setPixmap ( back );
+
     ui->widthTrunk->setImageStyle ( QQtWidget::QQTTILEDWIDTH );
     ui->widgetBack->setImageStyle ( QQtWidget::QQTZOOMWIDTH );
 }
@@ -27,10 +28,26 @@ QQtProgressBar::~QQtProgressBar()
 
 void QQtProgressBar::setPixMap ( QString back, QString trunk )
 {
-    m_back = back;
-    m_trunk = trunk;
-    ui->widthTrunk->setPixmap ( m_trunk );
-    ui->widgetBack->setPixmap ( m_back );
+    ui->widthTrunk->setPixmap ( trunk );
+    ui->widgetBack->setPixmap ( back );
+}
+
+void QQtProgressBar::setPixMap ( const QImage& back, const QImage& trunk )
+{
+    ui->widthTrunk->setPixmap ( trunk );
+    ui->widgetBack->setPixmap ( back );
+}
+
+void QQtProgressBar::setPixmap ( const QImage& back, const QImage& trunk )
+{
+    ui->widthTrunk->setPixmap ( trunk );
+    ui->widgetBack->setPixmap ( back );
+}
+
+void QQtProgressBar::setImage ( const QImage& back, const QImage& trunk )
+{
+    ui->widthTrunk->setPixmap ( trunk );
+    ui->widgetBack->setPixmap ( back );
 }
 
 void QQtProgressBar::setValue ( int value )

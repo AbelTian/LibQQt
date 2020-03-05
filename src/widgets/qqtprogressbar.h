@@ -1,10 +1,14 @@
-﻿#ifndef QQTPROGRESSBAR_H
+#ifndef QQTPROGRESSBAR_H
 #define QQTPROGRESSBAR_H
 
+#include <QString>
+#include <QImage>
+
 #include <qqtwidget.h>
-#include "qqt-local.h"
-#include "qqtwidgets.h"
 #include "qqtframe.h"
+
+#include "qqtwidgets.h"
+#include "qqt-local.h"
 
 namespace Ui {
 class QQtProgressBar;
@@ -24,6 +28,11 @@ public:
     virtual ~QQtProgressBar();
 
     void setPixMap ( QString back, QString trunk );
+
+    void setPixMap ( const QImage& back, const QImage& trunk );
+    void setPixmap ( const QImage& back, const QImage& trunk );
+    void setImage ( const QImage& back, const QImage& trunk );
+
 public slots:
     void setValue ( int value );
     void setRange ( int min, int max );
@@ -32,7 +41,6 @@ private:
     Ui::QQtProgressBar* ui;
 
 private:
-    QString m_back, m_trunk;
     int m_min, m_max, m_value;
 };
 
