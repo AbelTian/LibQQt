@@ -6,7 +6,7 @@
 
 /**
  * @brief The QQtTableModel class
- * QQTSqlRelationalTableModel 方便起见，仅仅使用这个model
+ * QSqlRelationalTableModel 方便起见，仅仅使用这个model
  */
 class QQTSHARED_EXPORT QQtTableModel :  public QSqlRelationalTableModel
 {

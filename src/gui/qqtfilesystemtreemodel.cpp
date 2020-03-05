@@ -1,7 +1,8 @@
-﻿#include "qqtfilesystemtreemodel.h"
+#include "qqtfilesystemtreemodel.h"
 #include <QFile>
-#include "qqtcore.h"
 #include <QModelIndex>
+
+#include "qqtcore.h"
 
 QQtFileSystemTreeModel::QQtFileSystemTreeModel ( QObject* parent ) : QFileSystemModel ( parent )
 {

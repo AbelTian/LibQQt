@@ -61,6 +61,12 @@ HEADERS += \
     $$PWD/sql/qqtsqlquery.h
 
 #gui
+#add_object_class(QQtNoFocusDelegate, $$PWD/gui)
+SOURCES += \
+    $$PWD/gui/qqtnofocusdelegate.cpp
+HEADERS += \
+    $$PWD/gui/qqtnofocusdelegate.h
+
 SOURCES += \
     $$PWD/gui/qqttablemodel.cpp \
     $$PWD/gui/qqtdicttreemodel.cpp \

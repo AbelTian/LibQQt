@@ -1,10 +1,16 @@
-﻿#ifndef QQTXMLTREEMODEL_H
+#ifndef QQTXMLTREEMODEL_H
 #define QQTXMLTREEMODEL_H
 
 #include <qqttreemodel.h>
 #include <QDomDocument>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtXmlTreeModel class
+ * 将XML格式的内容解析到Tree里。
+ * 废弃
+ * 使用QQtDictTreeModel代替。
+ */
 class QQTSHARED_EXPORT QQtXmlTreeModel : public QQtTreeModel
 {
     Q_OBJECT

@@ -1,11 +1,23 @@
-﻿#include "qqtdicttreemodel.h"
-#include "qqtcore.h"
+#include "qqtdicttreemodel.h"
 #include <QModelIndex>
 #include <QFile>
+
+#include "qqtcore.h"
 
 QQtDictTreeModel::QQtDictTreeModel ( QObject* parent ) : QQtTreeModel ( parent )
 {
 
+}
+
+void QQtDictTreeModel::setDictionary ( QQtDictionary* dict )
+{
+    this->pdict = dict;
+    query ( "" );
+}
+
+QQtDictionary* QQtDictTreeModel::dictionary()
+{
+    return pdict;
 }
 
 void QQtDictTreeModel::setFilePath ( QString dictfile )
@@ -30,6 +42,11 @@ void QQtDictTreeModel::setFilePath ( QString dictfile )
     clear();
 
     return;
+}
+
+void QQtDictTreeModel::parseDictNodeToModel ( const QQtDictionary& node, QStandardItem& item )
+{
+
 }
 
 bool QQtDictTreeModel::query ( QString condition )

@@ -1,8 +1,7 @@
-﻿#ifndef QQTFILESYSTEMTREEMODEL_H
+#ifndef QQTFILESYSTEMTREEMODEL_H
 #define QQTFILESYSTEMTREEMODEL_H
 
 #include <QFileSystemModel>
-#include <QDomDocument>
 #include <qqt-local.h>
 /**
  * @brief The QQtFileSystemTreeModel class

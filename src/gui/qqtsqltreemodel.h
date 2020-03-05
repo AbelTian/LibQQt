@@ -1,4 +1,4 @@
-﻿#ifndef QQTSQLTREEMODEL_H
+#ifndef QQTSQLTREEMODEL_H
 #define QQTSQLTREEMODEL_H
 
 #include <qqttreemodel.h>
@@ -16,7 +16,6 @@ class QQTSHARED_EXPORT QQtSqlTreeModel : public QQtTreeModel
 public:
     explicit QQtSqlTreeModel ( QObject* parent = 0 );
 
-    //TODO:
     QSqlDatabase& database() { return m_db; }
     void setAbsoluteFilePath ( QString dbname );
 
