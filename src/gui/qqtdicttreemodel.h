@@ -5,6 +5,10 @@
 #include <qqtdictionary.h>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtDictTreeModel class
+ * 把Dict的子节点全都加载到TreeModel
+ */
 class QQTSHARED_EXPORT QQtDictTreeModel : public QQtTreeModel
 {
     Q_OBJECT
