@@ -479,6 +479,16 @@ void QQtDictionary::fromINI ( const QByteArray& ini )
     ::fromIni ( ini, *this );
 }
 
+QByteArray QQtDictionary::toProperties()
+{
+    return ::toProperties ( *this );
+}
+
+void QQtDictionary::fromProperties ( const QByteArray& properties )
+{
+    ::fromProperties ( properties, *this );
+}
+
 QByteArray QQtDictionary::toJson ( QJsonDocument::JsonFormat format )
 {
     //node -> QJsonValue -> QJsonDocument

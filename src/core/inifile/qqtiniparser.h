@@ -8,5 +8,7 @@
 QQTSHARED_EXPORT QByteArray toIni ( const QQtDictionary& dict );
 QQTSHARED_EXPORT void fromIni ( const QByteArray& bytes, QQtDictionary& dict );
 
+QQTSHARED_EXPORT QByteArray toProperties ( const QQtDictionary& dict );
+QQTSHARED_EXPORT void fromProperties ( const QByteArray& bytes, QQtDictionary& dict );
 
 #endif // QQTINIPARSER_H
