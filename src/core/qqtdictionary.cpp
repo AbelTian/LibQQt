@@ -856,6 +856,9 @@ void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNod
                 const QString& key = itor.key();
                 const QQtDictionary& srcvalue = itor.value();
 
+                if ( key == "__processinginstruction__" )
+                    continue;
+
                 //2! "__attributes__" <Person attr-key="attr-value"> </Person>
                 if ( key == "__attributes__" )
                 {
