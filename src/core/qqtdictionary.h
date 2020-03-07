@@ -42,6 +42,7 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
  * fromYAML toYAML              支持Yaml
  * fromINI toINI                支持ini
  * fromProperties toProperties  支持Properties 这是一种Java配置文件的格式，仅仅有键值对、注释
+ * from函数默认行为为合并，如果用户希望新替，请手动调用clear();
  *
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
  * QQtDictionary封装了QVariant，实现直接操作真实数据。提供大量操作符。存取数据方便快捷，类型多样。

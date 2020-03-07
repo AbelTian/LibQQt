@@ -36,11 +36,13 @@ contains (DEFINES, __WIN__) {
 #core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
+    $$PWD/core/qqtdatapersistence.cpp \
     $$PWD/core/qqtorderedmap.cpp \
     $$PWD/core/qqtdictionary.cpp \
     $$PWD/core/qqtobjectmanager.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
+    $$PWD/core/qqtdatapersistence.h \
     $$PWD/core/qqtorderedmap.h \
     $$PWD/core/qqtdictionary.h \
     $$PWD/core/qqtobjectmanager.h
