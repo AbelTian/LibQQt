@@ -36,7 +36,12 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
  * 接受嵌套访问 操作方式 dict["cccc"][0]["eeeee"]
  * 通过重载函数来实现类型的变化，不建议使用中更改类型。
  *
- * 比json和xml的数据结构要庞大。fromJson toJson fromXML toXML
+ * 比json和xml的数据结构要庞大。
+ * fromJson toJson              支持Json
+ * fromXML toXML                支持Xml
+ * fromYAML toYAML              支持Yaml
+ * fromINI toINI                支持ini
+ * fromProperties toProperties  支持Properties 这是一种Java配置文件的格式，仅仅有键值对、注释
  *
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
  * QQtDictionary封装了QVariant，实现直接操作真实数据。提供大量操作符。存取数据方便快捷，类型多样。
@@ -172,11 +177,21 @@ public:
     //toValue() toList() toMap(); 不丢失数据方式。
 
     /*与其他数据结构兼容*/
+
     QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact );
     void fromJson ( const QByteArray& json );
 
     QByteArray toXML ( int = -1 );
     void fromXML ( const QByteArray& xml );
+
+    QByteArray toYAML();
+    void fromYAML ( const QByteArray& yaml );
+
+    QByteArray toINI();
+    void fromINI ( const QByteArray& ini );
+
+    QByteArray toProperties();
+    void fromProperties ( const QByteArray& properties );
 
 protected:
     virtual void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );

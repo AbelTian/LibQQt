@@ -10,6 +10,12 @@
 //support xml
 #include "qdom.h"
 
+//support yaml
+#include "yaml_cpp.h"
+
+//support ini
+#include "qqtiniparser.h"
+
 #define p3line() QNoDebug()
 
 QQtDictionary::QQtDictionary ()
@@ -451,6 +457,26 @@ void QQtDictionary::fromXML ( const QByteArray& xml )
 
     //QDomElement root = doc.documentElement();
     parseDomNode ( doc, *this );
+}
+
+QByteArray QQtDictionary::toYAML()
+{
+    return ::toYAML ( *this );
+}
+
+void QQtDictionary::fromYAML ( const QByteArray& yaml )
+{
+    ::fromYAML ( yaml, *this );
+}
+
+QByteArray QQtDictionary::toINI()
+{
+    return ::toIni ( *this );
+}
+
+void QQtDictionary::fromINI ( const QByteArray& ini )
+{
+    ::fromIni ( ini, *this );
 }
 
 QByteArray QQtDictionary::toJson ( QJsonDocument::JsonFormat format )

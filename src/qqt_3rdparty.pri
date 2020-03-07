@@ -6,8 +6,11 @@
 #注释：在qqt_header.pri打开 DEFINES += __INICONTENTSUPPORT__
 DEFINES += __INICONTENTSUPPORT__
 contains (DEFINES, __INICONTENTSUPPORT__) {
-    SOURCES += $$PWD/core/inifile/inifile.cpp
-    HEADERS += $$PWD/core/inifile/inifile.h
+    INCLUDEPATH += $$PWD/core/inifile
+    SOURCES += $$PWD/core/inifile/inifile.cpp \
+            $$PWD/core/inifile/qqtiniparser.cpp
+    HEADERS += $$PWD/core/inifile/inifile.h \
+            $$PWD/core/inifile/qqtiniparser.h
 }
 
 #yaml
