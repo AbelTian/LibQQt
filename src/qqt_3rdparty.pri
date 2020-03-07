@@ -2,6 +2,21 @@
 #qqt_3rdparty.pri
 #这个文件用于指示版权。
 #-------------------------------------------------------
+#inifile
+#注释：在qqt_header.pri打开 DEFINES += __INICONTENTSUPPORT__
+DEFINES += __INICONTENTSUPPORT__
+contains (DEFINES, __INICONTENTSUPPORT__) {
+    SOURCES += $$PWD/core/inifile/inifile.cpp
+    HEADERS += $$PWD/core/inifile/inifile.h
+}
+
+#yaml
+#注释：在qqt_header.pri打开 DEFINES += __YAMLSUPPORT__
+DEFINES += __YAMLSUPPORT__
+contains (DEFINES, __YAMLSUPPORT__) {
+    include($$PWD/core/yaml_cpp/yaml_cpp.pri)
+}
+
 #pluginsupport
 #注释：在qqt_header.pri打开 DEFINES += __PLUGINSUPPORT__
 #TODO: macOS runtime crash
