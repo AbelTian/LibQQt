@@ -5,6 +5,7 @@
 QQtDataPersistence::QQtDataPersistence ( QObject* parent )
     : QObject ( parent )
 {
+    reset_marker();
     mDataFormat = JsonData;
 
     mTimerInterval = 1000;
@@ -50,6 +51,26 @@ void QQtDataPersistence::start()
 
 QQtDictionary& QQtDataPersistence::dictionary() { return mDict; }
 
+void QQtDataPersistence::marker ()
+{
+    bMarker = true;
+}
+
+void QQtDataPersistence::reset_marker()
+{
+    bMarker = false;
+}
+
+bool QQtDataPersistence::setMarker ( bool mark )
+{
+    bMarker = mark;
+}
+
+bool QQtDataPersistence::getMarker() const
+{
+    return bMarker;
+}
+
 void QQtDataPersistence::stop()
 {
     mLock.unlock();
@@ -66,12 +87,12 @@ void QQtDataPersistence::slotTimeOut()
     if ( staticDict == mDict )
     {
         //字典相同
-        if ( mDict.getMarker() == false )
+        if ( getMarker() == false )
         {
             return;
         }
         //用户设置了marker标记true，强制写
-        mDict.setMarker ( false );
+        setMarker ( false );
     }
     else
     {

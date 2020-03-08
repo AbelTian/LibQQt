@@ -36,7 +36,6 @@ void packDictionaryToYamlNode ( const QQtDictionary& node, YAML::Node& object );
 
 QQtDictionary::QQtDictionary ()
 {
-    bMarker = false;
     m_type = DictMax;
 }
 
@@ -76,26 +75,6 @@ QString QQtDictionary::getTypeName() const
 void QQtDictionary::setType ( QQtDictionary::EDictType type )
 {
     m_type = type;
-}
-
-void QQtDictionary::marker ()
-{
-    bMarker = true;
-}
-
-void QQtDictionary::reset_marker()
-{
-    bMarker = false;
-}
-
-bool QQtDictionary::setMarker ( bool mark )
-{
-    bMarker = mark;
-}
-
-bool QQtDictionary::getMarker() const
-{
-    return bMarker;
 }
 
 void QQtDictionary::setValue ( const QVariant& value )
