@@ -106,6 +106,15 @@ public:
     /*如果设置Value的时候改变了Type，将会以新的Type为准*/
     void setType ( EDictType type );
 
+    /*设置标记*/
+    void marker ();
+    /*重置标记*/
+    void reset_marker ();
+    /*设置标记 default: true*/
+    bool setMarker ( bool mark = true );
+    /*获取标记 default: false*/
+    bool getMarker() const;
+
     //设置value
     template <typename T>
     void setValue ( const T& value ) {
@@ -207,6 +216,9 @@ signals:
 public slots:
 
 private:
+    /*一个标记*/
+    bool bMarker;
+
     /*节点类型，指示性变量*/
     EDictType m_type;
 

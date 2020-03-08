@@ -26,10 +26,9 @@
  *
  * 注意事项：
  * 如果数据文件不存在，将会自动创建文件，
- * 这个类对持久化存储数据文件的访问是“句柄”独占式，
- * 一个数据持久化类句柄对应一个数据文件，
- * 1. 用户私自写同一个数据文件，会被覆盖；
- * 2. 两个数据持久化类句柄共同写同一个数据文件，会竞争，会自动竞争写，最后一次写文件者决定文件内容。
+ * 这个类对持久化存储数据文件的访问是非独占式，
+ * 1. 用户私自写同一个数据文件，本句柄不会自动覆盖；
+ * 2. 两个数据持久化类句柄共同写同一个数据文件，不会竞争，修改时写、Mark时写，最后一次写文件者决定文件内容。
  *
  * 使用方法：
  * QQtDataPersistence keep_inst;
@@ -37,8 +36,10 @@
  *
  * keep_inst.start(); //开始持久化数据操作 每次操作都需要开启和关闭
  * QQtDictionary& handler = keep_inst.dictionary(); //可以操作的数据句柄
- * handler["key1"]["key2"] = "value1";
+ * handler.clear(); //可选：字典数据从新开始。
+ * handler["key1"]["key2"] = "value1"; //字典发生改变，内部自动保存
  * ...
+ * handler.marker(); // 强制保存！
  * keep_inst.stop(); //停止持久化数据操作
  *
  * keep_inst.ExitDataPersistence(); //退出持久化功能。普通buffer，不再保存数据。
@@ -65,11 +66,11 @@ public:
     void setDataFormat ( DataFormat format = JsonData );
     DataFormat dataFormat() const;
 
-    //持久化保存文件 [+初始化字典]
+    //持久化数据文件 [+初始化字典]
     void setDataFile ( const QString& fileName );
     QString dataFile() const;
 
-    //打开数据持久化 [+初始化字典]
+    //打开数据持久化
     void prepareDataPersistence();
     //关闭数据持久化
     void exitDataPersistence();

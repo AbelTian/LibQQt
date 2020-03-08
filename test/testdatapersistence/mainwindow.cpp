@@ -65,7 +65,8 @@ void MainWindow::on_pushButton_clicked ( bool checked )
     //不清空就是和原字典合并，
     handler.clear();
     handler.fromJson ( bytes );
-    //旁边的按钮更改了内部数据，又给改回去了，只好force write。
+    //旁边的按钮更改了内部数据，又给改回去了，只好force write，marker()。
+    handler.marker();
 
     dp0.stop();
 

@@ -24,6 +24,8 @@ QQtDataPersistence::DataFormat QQtDataPersistence::dataFormat() const { return m
 void QQtDataPersistence::setDataFile ( const QString& fileName )
 {
     mFileName = fileName;
+    if ( mFileName.isEmpty() )
+        return;
     parseContentToDictionary();
 }
 
@@ -31,7 +33,8 @@ QString QQtDataPersistence::dataFile() const { return mFileName; }
 
 void QQtDataPersistence::prepareDataPersistence()
 {
-    parseContentToDictionary();
+    if ( mFileName.isEmpty() )
+        return;
     mTimer->start();
 }
 
@@ -58,56 +61,26 @@ void QQtDataPersistence::setTimerInterval ( int millSecond ) { mTimerInterval = 
 
 void QQtDataPersistence::slotTimeOut()
 {
-    QByteArray bytes;
-    packDictionaryToContent ( bytes );
-
-    //如果在字典的值不同的时候才存储，其他人对文件的修改将无法体现在字典里。
-    //非独占式，不读文件，减少了写次数。
+    /*减少写文件；fix：文件相同时，使用marker强制写*/
     static QQtDictionary staticDict;
     if ( staticDict == mDict )
     {
-        //qDebug() << "字典相同，不写。";
-        //return;
-
-        //如果在字典的值不同于文件里的值得时候存储，可以减少写文件次数。
-        //独占式，每次读文件，减少了写次数。
-        QByteArray bytes1;
-        readFile ( bytes1 );
-        if ( bytes1 == bytes )
+        //字典相同
+        if ( mDict.getMarker() == false )
         {
-            //qDebug() << "相同，不写";
             return;
         }
-        else
-        {
-            //qDebug() << "不相同，写";
-        }
+        //用户设置了marker标记true，强制写
+        mDict.setMarker ( false );
     }
     else
     {
-        //qDebug() << "字典不同，写。";
+        //字典不同
         staticDict = mDict;
     }
 
-#if 0
-    //如果在字典的值不同于文件里的值得时候存储，可以减少写文件次数。
-    //独占式，每次读文件，减少了写次数。
-    {
-        QByteArray bytes1;
-        readFile ( bytes1 );
-
-        if ( bytes1 == bytes )
-        {
-            qDebug() << "相同，不写";
-            return;
-        }
-        else
-        {
-            qDebug() << "不相同，写";
-        }
-    }
-#endif
-
+    QByteArray bytes;
+    packDictionaryToContent ( bytes );
     writeFile ( bytes );
 }
 

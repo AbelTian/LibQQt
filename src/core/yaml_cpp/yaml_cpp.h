@@ -1,17 +1,13 @@
 #ifndef YAML_CPP_H
 #define YAML_CPP_H
 
-#include <qqtdictionary.h>
-
 #include "yaml-cpp/emitterstyle.h"
 #include "yaml-cpp/eventhandler.h"
 #include "yaml-cpp/parser.h"
 #include "yaml-cpp/node/node.h"
 #include "yaml-cpp/yaml.h"
 
-#include "yaml_cpp_global.h"
-
-class YAML_CPPSHARED_EXPORT NullEventHandler : public YAML::EventHandler
+class NullEventHandler : public YAML::EventHandler
 {
 public:
     typedef YAML::Mark Mark;
@@ -33,10 +29,5 @@ public:
     virtual void OnMapEnd() {}
 };
 
-YAML_CPPSHARED_EXPORT QByteArray toYAML ( const QQtDictionary& dict );
-YAML_CPPSHARED_EXPORT void fromYAML ( const QByteArray& yaml, QQtDictionary& dict );
-
-YAML_CPPSHARED_EXPORT void parseYamlNodeToDictionary ( const YAML::Node& node, QQtDictionary& object );
-YAML_CPPSHARED_EXPORT void packDictionaryToYamlNode ( const QQtDictionary& node, YAML::Node& object );
 
 #endif // YAML_CPP_H
