@@ -39,7 +39,7 @@
  * handler.clear(); //可选：字典数据从新开始。
  * handler["key1"]["key2"] = "value1"; //字典发生改变，内部自动保存
  * ...
- * handler.marker(); // 强制保存！
+ * keep_inst.marker(); // 强制保存！
  * keep_inst.stop(); //停止持久化数据操作
  *
  * keep_inst.ExitDataPersistence(); //退出持久化功能。普通buffer，不再保存数据。
