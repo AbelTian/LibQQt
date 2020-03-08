@@ -5,8 +5,6 @@
 QQtDataPersistence::QQtDataPersistence ( QObject* parent )
     : QObject ( parent )
 {
-    bForceWrite = false;
-
     mDataFormat = JsonData;
 
     mTimerInterval = 1000;
@@ -49,11 +47,6 @@ void QQtDataPersistence::start()
 
 QQtDictionary& QQtDataPersistence::dictionary() { return mDict; }
 
-void QQtDataPersistence::force_write()
-{
-    bForceWrite = true;
-}
-
 void QQtDataPersistence::stop()
 {
     mLock.unlock();
@@ -65,32 +58,36 @@ void QQtDataPersistence::setTimerInterval ( int millSecond ) { mTimerInterval = 
 
 void QQtDataPersistence::slotTimeOut()
 {
-#if 1
+    QByteArray bytes;
+    packDictionaryToContent ( bytes );
+
     //如果在字典的值不同的时候才存储，其他人对文件的修改将无法体现在字典里。
     //非独占式，不读文件，减少了写次数。
-    if ( bForceWrite )
+    static QQtDictionary staticDict;
+    if ( staticDict == mDict )
     {
-        bForceWrite = false;
-        //qDebug() << "字典force，写。";
-    }
-    else
-    {
-        static QQtDictionary staticDict;
-        if ( staticDict == mDict )
+        //qDebug() << "字典相同，不写。";
+        //return;
+
+        //如果在字典的值不同于文件里的值得时候存储，可以减少写文件次数。
+        //独占式，每次读文件，减少了写次数。
+        QByteArray bytes1;
+        readFile ( bytes1 );
+        if ( bytes1 == bytes )
         {
-            //qDebug() << "字典相同，不写。";
+            //qDebug() << "相同，不写";
             return;
         }
         else
         {
-            //qDebug() << "字典不同，写。";
+            //qDebug() << "不相同，写";
         }
+    }
+    else
+    {
+        //qDebug() << "字典不同，写。";
         staticDict = mDict;
     }
-#endif
-
-    QByteArray bytes;
-    packDictionaryToContent ( bytes );
 
 #if 0
     //如果在字典的值不同于文件里的值得时候存储，可以减少写文件次数。
