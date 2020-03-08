@@ -62,10 +62,27 @@ void MainWindow::on_pushButton_clicked ( bool checked )
     dp0.start();
 
     QQtDictionary& handler = dp0.dictionary();
+    //不清空就是和原字典合并，
     handler.clear();
     handler.fromJson ( bytes );
+    //旁边的按钮更改了内部数据，又给改回去了，只好force write。
+    dp0.force_write();
 
     dp0.stop();
 
 
+}
+
+void MainWindow::on_pushButton_2_clicked ( bool checked )
+{
+    QByteArray bytes = ui->plainTextEdit->toPlainText().toLocal8Bit();
+
+
+    QFile file ( "a.txt" );
+    if ( file.exists() )
+        file.open ( QFile::WriteOnly );
+    else
+        file.open ( QFile::Truncate | QFile::WriteOnly );
+    file.write ( bytes );
+    file.close();
 }
