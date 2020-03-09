@@ -36,13 +36,11 @@ contains (DEFINES, __WIN__) {
 #core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
-    $$PWD/core/qqtdatapersistence.cpp \
     $$PWD/core/qqtorderedmap.cpp \
     $$PWD/core/qqtdictionary.cpp \
     $$PWD/core/qqtobjectmanager.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
-    $$PWD/core/qqtdatapersistence.h \
     $$PWD/core/qqtorderedmap.h \
     $$PWD/core/qqtdictionary.h \
     $$PWD/core/qqtobjectmanager.h
@@ -194,6 +192,11 @@ SOURCES += \
     $$PWD/frame/qqtqssmanager.cpp
 HEADERS += \
     $$PWD/frame/qqtqssmanager.h
+
+SOURCES += \
+    $$PWD/frame/qqtdatapersistence.cpp
+HEADERS += \
+    $$PWD/frame/qqtdatapersistence.h
 
 #multimedia
 #support Qt5, if Qt4 want to use, you need compile QtMultiMedia for Qt4.
