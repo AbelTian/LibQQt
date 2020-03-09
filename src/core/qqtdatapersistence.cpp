@@ -51,28 +51,9 @@ void QQtDataPersistence::start()
 
 QQtDictionary& QQtDataPersistence::dictionary() { return mDict; }
 
-void QQtDataPersistence::marker ()
-{
-    bMarker = true;
-}
-
-void QQtDataPersistence::reset_marker()
-{
-    bMarker = false;
-}
-
-bool QQtDataPersistence::setMarker ( bool mark )
-{
-    bMarker = mark;
-}
-
-bool QQtDataPersistence::getMarker() const
-{
-    return bMarker;
-}
-
 void QQtDataPersistence::stop()
 {
+    marker();
     mLock.unlock();
 }
 
@@ -189,4 +170,24 @@ void QQtDataPersistence::writeFile ( const QByteArray& bytes )
         file.open ( QFile::Truncate | QFile::WriteOnly );
     file.write ( bytes );
     file.close();
+}
+
+void QQtDataPersistence::marker ()
+{
+    bMarker = true;
+}
+
+void QQtDataPersistence::reset_marker()
+{
+    bMarker = false;
+}
+
+bool QQtDataPersistence::setMarker ( bool mark )
+{
+    bMarker = mark;
+}
+
+bool QQtDataPersistence::getMarker() const
+{
+    return bMarker;
 }

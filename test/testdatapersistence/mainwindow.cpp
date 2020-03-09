@@ -67,7 +67,9 @@ void MainWindow::on_pushButton_clicked ( bool checked )
     handler.fromJson ( bytes );
 
     //旁边的按钮更改了内部数据，又给改回去了，只好force write，marker()。
-    dp0.marker();
+    //dp0.marker();
+    //QQtDataPersistence已经内部自动调用，用户正常操作数据即可。
+
     dp0.stop();
 
 

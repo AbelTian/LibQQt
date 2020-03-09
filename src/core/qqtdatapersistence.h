@@ -81,21 +81,13 @@ public:
     //2! 操作
     QQtDictionary& dictionary();
 
-    /*设置标记*/
-    void marker ();
-    /*重置标记*/
-    void reset_marker ();
-    /*设置标记 default: true*/
-    bool setMarker ( bool mark = true );
-    /*获取标记 default: false*/
-    bool getMarker() const;
-
     //3! 关闭
     void stop();
 
     //持久化数据保存周期 [default:1000ms]
     int timerInterval() const;
     void setTimerInterval ( int millSecond = 1000 );
+
 private slots:
     void slotTimeOut();
 
@@ -108,9 +100,20 @@ protected:
     virtual void writeFile ( const QByteArray& bytes );
 
 private:
+
+    /*设置标记*/
+    void marker ();
+    /*重置标记*/
+    void reset_marker ();
+    /*设置标记 default: true*/
+    bool setMarker ( bool mark = true );
+    /*获取标记 default: false*/
+    bool getMarker() const;
+
     /*一个标记*/
     bool bMarker;
 
+private:
     QReadWriteLock mLock;
     QQtDictionary mDict;
 
