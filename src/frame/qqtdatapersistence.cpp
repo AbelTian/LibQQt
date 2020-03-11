@@ -71,23 +71,13 @@ void QQtDataPersistence::setTimerInterval ( int millSecond ) { mTimerInterval = 
 
 void QQtDataPersistence::slotTimeOut()
 {
-    /*减少写文件；fix：文件相同时，使用marker强制写*/
-    static QQtDictionary staticDict;
-    if ( staticDict == mDict )
+    /*减少写文件；marker强制写*/
+    if ( getMarker() == false )
     {
-        //字典相同
-        if ( getMarker() == false )
-        {
-            return;
-        }
-        //用户设置了marker标记true，强制写
-        setMarker ( false );
+        return;
     }
-    else
-    {
-        //字典不同
-        staticDict = mDict;
-    }
+    //用户设置了marker标记true，强制写
+    setMarker ( false );
 
     QByteArray bytes;
     packDictionaryToContent ( bytes );
