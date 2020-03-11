@@ -80,6 +80,7 @@ public:
 
     //2! 操作
     QQtDictionary& dictionary();
+    const QQtDictionary& dictionary() const;
 
     //3! 关闭
     void stop();

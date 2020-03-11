@@ -49,7 +49,15 @@ void QQtDataPersistence::start()
     mLock.lockForWrite();
 }
 
-QQtDictionary& QQtDataPersistence::dictionary() { return mDict; }
+QQtDictionary& QQtDataPersistence::dictionary()
+{
+    return mDict;
+}
+
+const QQtDictionary& QQtDataPersistence::dictionary() const
+{
+    return mDict;
+}
 
 void QQtDataPersistence::stop()
 {
