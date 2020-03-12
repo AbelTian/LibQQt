@@ -1,4 +1,4 @@
-﻿#ifndef QQTSHAREDMEMORY_H
+#ifndef QQTSHAREDMEMORY_H
 #define QQTSHAREDMEMORY_H
 
 #include <QSharedMemory>
@@ -89,34 +89,32 @@ public:
 
     /*以下函数提供操作方便。*/
 
-    QByteArray readShortString ( QByteArray& bytes ) {
+    void readShortString ( QByteArray& bytes, QByteArray& shortString ) {
         quint16 s0;
-        QByteArray str;
         bytes >> s0;
-        str.resize ( s0 );
-        bytes >> str;
-        return str;
+        shortString.resize ( s0 );
+        bytes >> shortString;
+        return;
     }
 
-    void writeShortString ( QByteArray& bytes, QByteArray& shortString ) {
+    void  readString ( QByteArray& bytes, QByteArray& string ) {
+        quint32 s0;
+        bytes >> s0;
+        string.resize ( s0 );
+        bytes >> string;
+        return;
+    }
+
+    void writeShortString ( QByteArray& bytes, const QByteArray& shortString ) {
         quint16 s0 = shortString.size();
         bytes << s0;
         bytes << shortString;
     }
 
-    QByteArray readString ( QByteArray& bytes ) {
-        quint32 s0;
-        QByteArray str;
-        bytes >> s0;
-        str.resize ( s0 );
-        bytes >> str;
-        return str;
-    }
-
-    void writeString ( QByteArray& bytes, QByteArray& shortString ) {
-        quint32 s0 = shortString.size();
+    void writeString ( QByteArray& bytes, const QByteArray& string ) {
+        quint32 s0 = string.size();
         bytes << s0;
-        bytes << shortString;
+        bytes << string;
     }
 
 signals:
