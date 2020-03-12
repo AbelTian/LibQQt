@@ -14,6 +14,8 @@
  * 原理：
  * 内部有QByteArray、字典，
  * 把数据序列化到字典里，通过serialize/unserialize操作，获取字典，获取QByteArray。
+ *
+ * 未实现
  */
 class QQTSHARED_EXPORT QQtDataSerialization : public QObject
 {
