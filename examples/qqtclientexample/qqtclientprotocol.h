@@ -87,7 +87,7 @@ public:
         l >> bend;
     }
     //把报文字段组装成流
-    virtual void packer ( QByteArray& l ) const override {
+    virtual void packer ( QByteArray& l ) override {
         l << asize;
         l << acmd;
         l << adata;

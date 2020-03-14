@@ -1,4 +1,4 @@
-﻿#ifndef QQTMESSAGE_H
+#ifndef QQTMESSAGE_H
 #define QQTMESSAGE_H
 
 #include <QObject>
@@ -19,7 +19,7 @@ public:
      * 这个函数不会更改局部变量
      * @return
      */
-    inline virtual quint16 minlength() const {
+    inline virtual quint16 minlength() {
         return 0x00;
     }
     /**
@@ -27,7 +27,7 @@ public:
      * 这个函数不会更改局部变量
      * @return
      */
-    inline virtual quint16 maxlength() const {
+    inline virtual quint16 maxlength() {
         return 0x07FF;
     }
     /**
@@ -36,7 +36,7 @@ public:
      * @param l
      * @param m
      */
-    inline virtual void packer ( QByteArray& ) const {}
+    inline virtual void packer ( QByteArray& ) {}
     /**
      * @brief 从流中解析报文
      * 这个函数会更改局部变量

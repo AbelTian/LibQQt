@@ -1,4 +1,4 @@
-﻿#ifndef QQTSINGLETONAPPLICATIONPRIVATE_H
+#ifndef QQTSINGLETONAPPLICATIONPRIVATE_H
 #define QQTSINGLETONAPPLICATIONPRIVATE_H
 
 #include <qqt-local.h>
@@ -36,7 +36,7 @@ public:
     //把报文这条流解析出字段
     virtual void parser ( const QByteArray& l ) override;
     //把报文字段组装成流
-    virtual void packer ( QByteArray& l ) const override;
+    virtual void packer ( QByteArray& l ) override;
 };
 
 QDebug& operator << ( QDebug&, const QQtSingleTonNamedPipeClientMessage& msg );
@@ -108,7 +108,7 @@ public:
     //把报文这条流解析出字段
     virtual void parser ( const QByteArray& l ) override;
     //把报文字段组装成流
-    virtual void packer ( QByteArray& l ) const override;
+    virtual void packer ( QByteArray& l ) override;
 };
 
 QDebug& operator << ( QDebug&, const QQtSingleTonNamedPipeServerMessage& msg );

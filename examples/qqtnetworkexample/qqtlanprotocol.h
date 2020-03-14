@@ -35,7 +35,7 @@ public:
         _l >> mCmd;
         _l >> mData;
     }
-    virtual void packer ( QByteArray& l ) const override {
+    virtual void packer ( QByteArray& l ) override {
         l << mSize;
         l << mCmd;
         l << mData;

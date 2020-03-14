@@ -13,7 +13,7 @@ void KongzhiqiUdpMessage::parser(const QByteArray &)
 }
 
 //控制命令组包packer函数
-void KongzhiqiUdpMessage::packer(QByteArray & command) const
+void KongzhiqiUdpMessage::packer(QByteArray & command)
 {
     //写入包头 0-5
     command << 0x31;

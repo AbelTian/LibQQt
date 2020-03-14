@@ -1,4 +1,4 @@
-﻿#include <qqtnamedpipeprivate.h>
+#include <qqtnamedpipeprivate.h>
 
 
 QQtNamedPipeMessage::QQtNamedPipeMessage ( QObject* parent )
@@ -40,7 +40,7 @@ void QQtNamedPipeMessage::parser ( const QByteArray& l )
     _l >> mData;
 }
 
-void QQtNamedPipeMessage::packer ( QByteArray& l ) const
+void QQtNamedPipeMessage::packer ( QByteArray& l )
 {
     l << mSize;
     l << mCmd;

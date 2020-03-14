@@ -103,7 +103,7 @@ void QQTSerialMessage::parser ( const QByteArray& netData )
     setTail ( b5 );
 }
 
-void QQTSerialMessage::packer ( QByteArray& l ) const
+void QQTSerialMessage::packer ( QByteArray& l )
 {
     l << head();
     l << size();

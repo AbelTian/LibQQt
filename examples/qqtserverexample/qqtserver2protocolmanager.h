@@ -1,4 +1,4 @@
-﻿#ifndef QQTSERVER2PROTOCOLMANAGER_H
+#ifndef QQTSERVER2PROTOCOLMANAGER_H
 #define QQTSERVER2PROTOCOLMANAGER_H
 
 #include <qqtmessage.h>
@@ -47,7 +47,7 @@ public:
         _l >> mData;
     }
     //把报文字段组装成流
-    virtual void packer ( QByteArray& l ) const override {
+    virtual void packer ( QByteArray& l ) override {
         l << mSize;
         l << mCmd;
         l << mData;

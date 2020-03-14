@@ -75,7 +75,7 @@ void QQTNetworkMessage::parser ( const QByteArray& block )
     setTail ( b6 );
 }
 
-void QQTNetworkMessage::packer ( QByteArray& stream ) const
+void QQTNetworkMessage::packer ( QByteArray& stream )
 {
     stream << head();
     stream << size();

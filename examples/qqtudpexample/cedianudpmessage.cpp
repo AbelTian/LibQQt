@@ -194,7 +194,7 @@ void CedianUdpMessage::parser(const QByteArray & data)
 }
 
 //监测点数据只有接收，没有发送，所以不需要实现packer函数
-void CedianUdpMessage::packer(QByteArray & l) const
+void CedianUdpMessage::packer(QByteArray & l)
 {
 }
 

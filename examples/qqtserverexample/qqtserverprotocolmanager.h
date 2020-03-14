@@ -1,4 +1,4 @@
-﻿#ifndef QQTSERVERPROTOCOLMANAGER_H
+#ifndef QQTSERVERPROTOCOLMANAGER_H
 #define QQTSERVERPROTOCOLMANAGER_H
 
 #include <QObject>
@@ -74,7 +74,7 @@ public:
         adata.resize ( asize - 2 - 1 );
         l >> adata;
     }
-    virtual void packer ( QByteArray& l ) const override {
+    virtual void packer ( QByteArray& l ) override {
         l << bstart;
         l << bsize;
         l << bcmd;

@@ -112,7 +112,7 @@ public slots:
     // QQtMessage interface
 public:
     virtual void parser(const QByteArray &) override;
-    virtual void packer(QByteArray &) const override;
+    virtual void packer(QByteArray &) override;
 
 private:
     QByteArray mqbaVAA;

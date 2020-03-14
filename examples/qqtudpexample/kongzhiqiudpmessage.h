@@ -24,7 +24,7 @@ public slots:
     // QQtMessage interface
 public:
     virtual void parser(const QByteArray &) override;
-    virtual void packer(QByteArray &command) const override;
+    virtual void packer(QByteArray &command) override;
 private:
     quint8 mDesType;
     quint8 mCommand;

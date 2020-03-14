@@ -1,4 +1,4 @@
-﻿#ifndef QQTPROTOCOL_H
+#ifndef QQTPROTOCOL_H
 #define QQTPROTOCOL_H
 
 #include <QObject>
@@ -86,15 +86,15 @@ signals:
      * 表示是否在使用中。
      */
 public:
-    inline virtual void detach() {
+    inline void detach() {
         mIsDetached = true;
         statusChanged ( 0 );
     }
-    inline virtual void attach() {
+    inline void attach() {
         mIsDetached = false;
         statusChanged ( 1 );
     }
-    inline virtual bool detached() { return mIsDetached; }
+    inline bool detached() { return mIsDetached; }
 
 protected:
     bool mIsDetached;

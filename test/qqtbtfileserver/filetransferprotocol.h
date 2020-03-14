@@ -1,4 +1,4 @@
-﻿#ifndef FILETRANSFERPROTOCOL_H
+#ifndef FILETRANSFERPROTOCOL_H
 #define FILETRANSFERPROTOCOL_H
 
 #include <QObject>
@@ -16,7 +16,7 @@ public:
 public:
     virtual void parser ( const QByteArray& l ) override {
     }
-    virtual void packer ( QByteArray& l ) const override {
+    virtual void packer ( QByteArray& l ) override {
     }
 private:
     quint16 header;

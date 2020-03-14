@@ -198,11 +198,15 @@ SOURCES += \
 HEADERS += \
     $$PWD/frame/qqtdatapersistence.h
 
-#add_object_class(QQtDataSerialization, $$PWD/frame)
-#SOURCES += \
-#    $$PWD/frame/qqtdataserialization.cpp
-#HEADERS += \
-#    $$PWD/frame/qqtdataserialization.h
+add_object_class(QQtStandardProtocol, $$PWD/frame)
+SOURCES += \
+    $$PWD/frame/qqtstandardprotocol.cpp
+HEADERS += \
+    $$PWD/frame/qqtstandardprotocol.h
+SOURCES += \
+    $$PWD/frame/qqtdataserialization.cpp
+HEADERS += \
+    $$PWD/frame/qqtdataserialization.h
 
 #multimedia
 #support Qt5, if Qt4 want to use, you need compile QtMultiMedia for Qt4.

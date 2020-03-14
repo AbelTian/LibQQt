@@ -31,7 +31,7 @@ public:
     // QQTSyntax interface
 public:
     void parser ( const QByteArray& l ) override;
-    void packer ( QByteArray& l ) const override;
+    void packer ( QByteArray& l ) override;
 private:
     quint16 m_Head;
     quint16 m_Size;

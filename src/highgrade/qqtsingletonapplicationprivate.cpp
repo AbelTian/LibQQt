@@ -1,4 +1,4 @@
-﻿#include <qqtsingletonapplicationprivate.h>
+#include <qqtsingletonapplicationprivate.h>
 
 QQtSingleTonNamedPipeClientMessage::QQtSingleTonNamedPipeClientMessage ( QObject* parent )
 {
@@ -30,7 +30,7 @@ void QQtSingleTonNamedPipeClientMessage::parser ( const QByteArray& l )
     _l >> mData;
 }
 
-void QQtSingleTonNamedPipeClientMessage::packer ( QByteArray& l ) const
+void QQtSingleTonNamedPipeClientMessage::packer ( QByteArray& l )
 {
     l << mSize;
     l << mCmd;
@@ -137,7 +137,8 @@ bool QQtSingleTonNamedPipeClientProtocol::dispatcher ( const QByteArray& m ) //m
 }
 
 
-QQtNamedPipeClient* QQtSingleTonNamedPipeClientInstance ( QQtSingleTonNamedPipeClientProtocol*& protocol, QObject* parent )
+QQtNamedPipeClient* QQtSingleTonNamedPipeClientInstance ( QQtSingleTonNamedPipeClientProtocol*& protocol,
+                                                          QObject* parent )
 {
     static QQtSingleTonNamedPipeClientProtocol* p0 = NULL;
     if ( !p0 )
@@ -191,7 +192,7 @@ void QQtSingleTonNamedPipeServerMessage::parser ( const QByteArray& l )
     _l >> mData;
 }
 
-void QQtSingleTonNamedPipeServerMessage::packer ( QByteArray& l ) const
+void QQtSingleTonNamedPipeServerMessage::packer ( QByteArray& l )
 {
     l << mSize;
     l << mCmd;
