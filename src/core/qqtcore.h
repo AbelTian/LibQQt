@@ -94,15 +94,15 @@ typedef unsigned char uint8_t;
 #endif  /* __cplusplus */
 
 //此处加const已经经过测试，不可修改！
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, quint8 r );
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, quint16 r );
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, quint32 r );
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, quint64 r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint8& r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint16& r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint32& r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const quint64& r );
 
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, qint8 r );
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, qint16 r );
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, qint32 r );
-QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, qint64 r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint8& r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint16& r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint32& r );
+QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, const qint64& r );
 
 QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, quint8& r );
 QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, quint16& r );

@@ -1,53 +1,54 @@
 #include "qqtcore.h"
 
-QByteArray& operator<< ( QByteArray& l, quint8 r )
+QByteArray& operator<< ( QByteArray& l, const quint8& r )
 {
     return l.append ( r );
 }
 
-QByteArray& operator<< ( QByteArray& l, quint16 r )
+QByteArray& operator<< ( QByteArray& l, const quint16& r )
 {
     return l << quint8 ( r >> 8 ) << quint8 ( r );
 }
 
-QByteArray& operator<< ( QByteArray& l, quint32 r )
+QByteArray& operator<< ( QByteArray& l, const quint32& r )
 {
     return l << quint16 ( r >> 16 ) << quint16 ( r );
 }
 
-QByteArray& operator<< ( QByteArray& l, quint64 r )
+QByteArray& operator<< ( QByteArray& l, const quint64& r )
 {
     return l << quint32 ( r >> 32 ) << quint32 ( r );
 }
 
 
-QByteArray& operator<< ( QByteArray& l, qint8 r )
+QByteArray& operator<< ( QByteArray& l, const qint8& r )
 {
     quint8 ubyte = quint8 ( r );
     l << ubyte;
     return l;
 }
 
-QByteArray& operator<< ( QByteArray& l, qint16 r )
+QByteArray& operator<< ( QByteArray& l, const qint16& r )
 {
     quint16 ubyte = quint16 ( r );
     l << ubyte;
     return l;
 }
 
-QByteArray& operator<< ( QByteArray& l, qint32 r )
+QByteArray& operator<< ( QByteArray& l, const qint32& r )
 {
     quint32 ubyte = quint32 ( r );
     l << ubyte;
     return l;
 }
 
-QByteArray& operator<< ( QByteArray& l, qint64 r )
+QByteArray& operator<< ( QByteArray& l, const qint64& r )
 {
     quint64 ubyte = quint64 ( r );
     l << ubyte;
     return l;
 }
+
 
 QByteArray& operator>> ( QByteArray& l, quint8& r )
 {
