@@ -435,7 +435,7 @@ QQtDictionary& QQtDictionary::operator = ( const QVariant& value )
     return *this;
 }
 
-QByteArray QQtDictionary::toXML ( int intent )
+QByteArray QQtDictionary::toXML ( int intent ) const
 {
     QDomDocument doc;
     packDictionaryToDomNode ( *this, doc, doc );
@@ -475,7 +475,7 @@ void QQtDictionary::fromXML ( const QByteArray& xml )
     parseDomNode ( doc, *this );
 }
 
-QByteArray QQtDictionary::toYAML()
+QByteArray QQtDictionary::toYAML() const
 {
     return ::toYAML ( *this );
 }
@@ -485,7 +485,7 @@ void QQtDictionary::fromYAML ( const QByteArray& yaml )
     ::fromYAML ( yaml, *this );
 }
 
-QByteArray QQtDictionary::toINI()
+QByteArray QQtDictionary::toINI() const
 {
     return ::toIni ( *this );
 }
@@ -495,7 +495,7 @@ void QQtDictionary::fromINI ( const QByteArray& ini )
     ::fromIni ( ini, *this );
 }
 
-QByteArray QQtDictionary::toProperties()
+QByteArray QQtDictionary::toProperties() const
 {
     return ::toProperties ( *this );
 }
@@ -505,7 +505,7 @@ void QQtDictionary::fromProperties ( const QByteArray& properties )
     ::fromProperties ( properties, *this );
 }
 
-QByteArray QQtDictionary::toJson ( QJsonDocument::JsonFormat format )
+QByteArray QQtDictionary::toJson ( QJsonDocument::JsonFormat format ) const
 {
     //node -> QJsonValue -> QJsonDocument
     QJsonValue value;
@@ -595,7 +595,7 @@ void QQtDictionary::parseJsonValue ( const QJsonValue& value, QQtDictionary& par
     }
 }
 
-void QQtDictionary::packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result )
+void QQtDictionary::packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result ) const
 {
     switch ( node.getType() )
     {
@@ -618,6 +618,10 @@ void QQtDictionary::packDictionaryToJsonValue ( const QQtDictionary& node, QJson
             else if ( node.getValue().type() == QVariant::String )
             {
                 result = QJsonValue ( node.getValue().toString() );
+            }
+            else
+            {
+                result = QJsonValue::fromVariant ( node.getValue() );
             }
             break;
         }
@@ -808,7 +812,7 @@ void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent 
     }
 }
 
-void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc )
+void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc ) const
 {
     switch ( node.getType() )
     {

@@ -179,28 +179,28 @@ public:
 
     /*与其他数据结构兼容*/
 
-    QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact );
+    QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact ) const;
     void fromJson ( const QByteArray& json );
 
-    QByteArray toXML ( int = -1 );
+    QByteArray toXML ( int = -1 ) const;
     void fromXML ( const QByteArray& xml );
 
-    QByteArray toYAML();
+    QByteArray toYAML() const;
     void fromYAML ( const QByteArray& yaml );
 
-    QByteArray toINI();
+    QByteArray toINI() const;
     void fromINI ( const QByteArray& ini );
 
-    QByteArray toProperties();
+    QByteArray toProperties() const;
     void fromProperties ( const QByteArray& properties );
 
 protected:
     virtual void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
-    virtual void packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result );
+    virtual void packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result ) const;
 
 protected:
     virtual void parseDomNode ( const QDomNode& value, QQtDictionary& parent );
-    virtual void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc );
+    virtual void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc ) const;
 
 signals:
 
