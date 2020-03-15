@@ -1,4 +1,4 @@
-﻿#ifndef QQTUDPCLIENT_H
+#ifndef QQTUDPCLIENT_H
 #define QQTUDPCLIENT_H
 
 #include <QUdpSocket>
@@ -29,12 +29,17 @@ public:
     virtual ~QQtUdpClient() {}
 
     void setServer ( QString ip, quint16 port ) {
-        mIP = ip;
+        mHostAddress = QHostAddress ( ip );
         mPort = port;
     }
     void getServer ( QString& ip, quint16& port ) {
-        ip = mIP;
+        ip = mHostAddress.toString();
         port = mPort;
+    }
+
+    void setServerAddress ( const QHostAddress& address, quint16& port ) {
+        mHostAddress = address;
+        mPort = port;
     }
 
     void installProtocol ( QQtProtocol* stack );
@@ -76,7 +81,7 @@ protected:
     virtual void recvDatagram ( QByteArray& bytes, QHostAddress& address, quint16& port );
 private:
     QQtProtocol* m_protocol;
-    QString mIP;
+    QHostAddress mHostAddress;
     quint16 mPort;
 };
 

@@ -21,7 +21,6 @@ QQtUdpClient::QQtUdpClient ( QObject* parent ) : QUdpSocket ( parent )
     connect ( this, SIGNAL ( bytesWritten ( qint64 ) ), this, SIGNAL ( signalUpdateProgress ( qint64 ) ) );
 
     m_protocol = NULL;
-    mIP = "";
     mPort = 0;
 }
 
@@ -204,11 +203,11 @@ void QQtUdpClient::slotWriteData ( const QByteArray& bytes )
 #if QT_VERSION > QT_VERSION_DATAGRAM
     QNetworkDatagram datagram;
     datagram.setData ( bytes );
-    datagram.setDestination ( QHostAddress ( mIP ), mPort );
+    datagram.setDestination ( mHostAddress, mPort );
     datagram.setSender ( localAddress(), localPort() );
     writeDatagram ( datagram );
 #else
-    writeDatagram ( bytes, QHostAddress ( mIP ), mPort );
+    writeDatagram ( bytes, mHostAddress, mPort );
 #endif
 }
 
