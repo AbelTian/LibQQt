@@ -31,62 +31,100 @@ public:
     explicit QQtDataSerialization ( QObject* parent = 0 );
     virtual ~QQtDataSerialization() {}
 
+    QQtDataSerialization ( const QQtDataSerialization& other ) {
+        *this = other;
+    }
+    QQtDataSerialization& operator= ( const QQtDataSerialization& other ) {
+        this->buffer() = other.buffer();
+        this->dictionary() = other.dictionary();
+        return *this;
+    }
+
+    //设置value
+    template <typename T>
+    void addValue ( const T& value ) {
+        mDict["Root"][mIndex++].setValue<T> ( value );
+    }
+    /*自己本身没有孩子，是个叶子，添加值*/
+    void addValue ( const QVariant& value ) {
+        mDict["Root"][mIndex++].setValue ( value );
+    }
+
+    QQtDataSerialization& operator = ( const QVariant& value ) {
+        mDict["Root"][mIndex++].setValue ( value );
+    }
+    bool operator == ( const QQtDataSerialization& other ) {
+        if ( mDict == other.dictionary() && mBytes == other.buffer() )
+            return true;
+        return false;
+    }
+
     /**
      * <<
      **/
     QQtDataSerialization& operator<< ( std::nullptr_t ) { return *this; }
 
-    QQtDataSerialization& operator<< ( const bool& i ) {
+    QQtDataSerialization& operator<< ( bool i ) {
         mDict["Root"][mIndex++] = i;
         return *this;
     }
-    QQtDataSerialization& operator<< ( const float& f ) {
+    QQtDataSerialization& operator<< ( float f ) {
         mDict["Root"][mIndex++] = f;
         return *this;
     }
-    QQtDataSerialization& operator<< ( const double& f ) {
+    QQtDataSerialization& operator<< ( double f ) {
         mDict["Root"][mIndex++] = f;
         return *this;
     }
+
+
+    QQtDataSerialization& operator<< ( quint8 i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( quint16 i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( quint32 i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( quint64 i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+
+    QQtDataSerialization& operator<< ( qint8 i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( qint16 i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( qint32 i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( qint64 i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+
+
     QQtDataSerialization& operator<< ( const QByteArray& b ) {
         mDict["Root"][mIndex++] = b;
         return *this;
     }
-
-    QQtDataSerialization& operator<< ( const quint8& i ) {
-        mDict["Root"][mIndex++] = i;
+    QQtDataSerialization& operator<< ( const QString& b ) {
+        mDict["Root"][mIndex++] = b;
         return *this;
     }
-    QQtDataSerialization& operator<< ( const quint16& i ) {
-        mDict["Root"][mIndex++] = i;
+    QQtDataSerialization& operator<< ( const QVariant& b ) {
+        mDict["Root"][mIndex++] = b;
         return *this;
     }
-    QQtDataSerialization& operator<< ( const quint32& i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-    QQtDataSerialization& operator<< ( const quint64& i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-
-    QQtDataSerialization& operator<< ( const qint8& i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-    QQtDataSerialization& operator<< ( const qint16& i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-    QQtDataSerialization& operator<< ( const qint32& i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-    QQtDataSerialization& operator<< ( const qint64& i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-
     QQtDataSerialization& operator<< ( const QImage& f ) {
         QByteArray bytes;
         bytes.resize ( f.byteCount() );
@@ -110,10 +148,6 @@ public:
     }
     QQtDataSerialization& operator>> ( double& f ) {
         f = mDict["Root"][mIndex++].getValue().toDouble();
-        return *this;
-    }
-    QQtDataSerialization& operator>> ( QByteArray& b ) {
-        b = mDict["Root"][mIndex++].getValue().toByteArray();
         return *this;
     }
 
@@ -151,6 +185,18 @@ public:
         return *this;
     }
 
+    QQtDataSerialization& operator>> ( QByteArray& b ) {
+        b = mDict["Root"][mIndex++].getValue().toByteArray();
+        return *this;
+    }
+    QQtDataSerialization& operator>> ( QString& b ) {
+        b = mDict["Root"][mIndex++].getValue().toString();
+        return *this;
+    }
+    QQtDataSerialization& operator>> ( QVariant& b ) {
+        b = mDict["Root"][mIndex++].getValue();
+        return *this;
+    }
     QQtDataSerialization& operator>> ( QImage& f ) {
         QByteArray bytes;
         bytes = mDict["Root"][mIndex++].getValue().toByteArray();
@@ -182,8 +228,10 @@ public:
 
     void clear();
     void seek ( int index );
-    void dump();
+    int pos();
     int length();
+    void dump();
+    void dump_dictionary();
 
 public:
     virtual quint16 minlength() override {

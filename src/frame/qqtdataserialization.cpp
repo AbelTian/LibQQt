@@ -13,6 +13,13 @@ void QQtDataSerialization::clear() { mDict.clear(); }
 
 void QQtDataSerialization::seek ( int index ) { mIndex = index; }
 
+int QQtDataSerialization::pos()
+{
+    return mIndex;
+}
+
+int QQtDataSerialization::length() { return 2 + 2 + mDict.toJson ( QJsonDocument::Compact ).size() + 2 + 2; }
+
 void QQtDataSerialization::dump()
 {
     quint16 header = 0x77EE;
@@ -38,10 +45,15 @@ void QQtDataSerialization::dump()
              << hex << checksum << ", "
              << hex << tail
              << "}";
-    qDebug() << data;
+    qDebug() << qPrintable ( data );
 }
 
-int QQtDataSerialization::length() { return 2 + 2 + mDict.toJson ( QJsonDocument::Compact ).size() + 2 + 2; }
+void QQtDataSerialization::dump_dictionary()
+{
+    QQtDictionary& dict = mDict;
+    QByteArray data = dict.toJson ( QJsonDocument::Indented );
+    qDebug() << qPrintable ( data );
+}
 
 void QQtDataSerialization::packer ( QByteArray& l )
 {
