@@ -1,4 +1,4 @@
-﻿#include "qqtframe.h"
+#include "qqtframe.h"
 
 QString gUserName;
 QString gPassword;
@@ -84,7 +84,7 @@ void QQt4FrameMsgHandler ( QtMsgType type, const char* msg )
     QQtFrameMsgHandler ( type, msg );
 }
 
-#if QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, const QString& content )
 {
 
@@ -97,4 +97,3 @@ void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, co
     QQtFrameMsgHandler ( type, content.toLocal8Bit().constData() );
 }
 #endif
-

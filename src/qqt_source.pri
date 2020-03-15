@@ -34,13 +34,16 @@ contains (DEFINES, __WIN__) {
 }
 
 #core
+add_class (QQtDebug, $$PWD/core)
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
+    $$PWD/core/qqtdebug.cpp \
     $$PWD/core/qqtorderedmap.cpp \
     $$PWD/core/qqtdictionary.cpp \
     $$PWD/core/qqtobjectmanager.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
+    $$PWD/core/qqtdebug.h \
     $$PWD/core/qqtorderedmap.h \
     $$PWD/core/qqtdictionary.h \
     $$PWD/core/qqtobjectmanager.h

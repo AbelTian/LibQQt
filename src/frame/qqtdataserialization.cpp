@@ -51,8 +51,7 @@ void QQtDataSerialization::dump()
 void QQtDataSerialization::dump_dictionary()
 {
     QQtDictionary& dict = mDict;
-    QByteArray data = dict.toJson ( QJsonDocument::Indented );
-    qDebug() << qPrintable ( data );
+    qDebug() << dict["Root"];;
 }
 
 void QQtDataSerialization::packer ( QByteArray& l )

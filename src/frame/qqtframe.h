@@ -1,4 +1,4 @@
-﻿#ifndef QQTFRAMEDEFINE_H
+#ifndef QQTFRAMEDEFINE_H
 #define QQTFRAMEDEFINE_H
 
 
@@ -18,6 +18,7 @@
 #include <QDir>
 #include <qqt-local.h>
 #include <qqtsql.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -110,16 +111,16 @@ extern QString gUserName;
 extern QString gPassword;
 extern int gAuthority;
 
+/*当前登陆用户 是否具有 函数要求的权限*/
+bool hasAuthority ( int authId = Auth_Admin );
+
 #ifdef __cplusplus
 }
 #endif  /* __cplusplus */
 
-void QQt4FrameMsgHandler ( QtMsgType type, const char* msg );
-#if QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
-void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, const QString& content );
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+QQTSHARED_EXPORT void QQt5FrameMsgHandler ( QtMsgType type, const QMessageLogContext& context, const QString& content );
 #endif
-
-/*当前登陆用户 是否具有 函数要求的权限*/
-bool hasAuthority ( int authId = Auth_Admin );
+QQTSHARED_EXPORT void QQt4FrameMsgHandler ( QtMsgType type, const char* msg );
 
 #endif // QQTFRAMEDEFINE_H

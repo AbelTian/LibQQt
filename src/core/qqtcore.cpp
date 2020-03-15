@@ -141,39 +141,3 @@ bool operator== ( QByteArray& l, QByteArray& r )
         return true;
     return false;
 }
-
-//不堵塞GUI睡眠。
-void QQtSleep ( int millsecond )
-{
-    QElapsedTimer timer;
-    timer.start();
-
-    while ( timer.elapsed() < millsecond )
-    {
-        QApplication::processEvents();
-    }
-}
-
-//0 不堵塞GUI。
-//1 超时退出
-//2 接收到信号，提前退出。
-void QQtSleepSignal ( int millsecond, const QObject* obj, const char* signal )
-{
-    //initilizer
-    QEventLoop eventloop;
-    QObject::connect ( obj, signal, &eventloop, SLOT ( quit() ) );
-
-    QTimer timer;
-    timer.setSingleShot ( true );
-    timer.setInterval ( millsecond );
-    QObject::connect ( &timer, SIGNAL ( timeout() ), &eventloop, SLOT ( quit() ) );
-    timer.start();
-
-    //process
-    eventloop.exec();
-
-    //clear
-    if ( timer.isActive() )
-        timer.stop();
-
-}

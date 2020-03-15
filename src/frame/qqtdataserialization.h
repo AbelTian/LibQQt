@@ -50,8 +50,14 @@ public:
         mDict["Root"][mIndex++].setValue ( value );
     }
 
+    template <typename T>
+    QQtDataSerialization& operator = ( const T& value ) {
+        mDict["Root"][mIndex++].setValue<T> ( value );
+        return *this;
+    }
     QQtDataSerialization& operator = ( const QVariant& value ) {
         mDict["Root"][mIndex++].setValue ( value );
+        return *this;
     }
     bool operator == ( const QQtDataSerialization& other ) {
         if ( mDict == other.dictionary() && mBytes == other.buffer() )
@@ -64,55 +70,61 @@ public:
      **/
     QQtDataSerialization& operator<< ( std::nullptr_t ) { return *this; }
 
-    QQtDataSerialization& operator<< ( bool i ) {
+    QQtDataSerialization& operator<< ( const bool& i ) {
         mDict["Root"][mIndex++] = i;
         return *this;
     }
-    QQtDataSerialization& operator<< ( float f ) {
+    QQtDataSerialization& operator<< ( const float& f ) {
         mDict["Root"][mIndex++] = f;
         return *this;
     }
-    QQtDataSerialization& operator<< ( double f ) {
+    QQtDataSerialization& operator<< ( const double& f ) {
         mDict["Root"][mIndex++] = f;
         return *this;
     }
 
 
-    QQtDataSerialization& operator<< ( quint8 i ) {
+    QQtDataSerialization& operator<< ( const quint8& i ) {
         mDict["Root"][mIndex++] = i;
         return *this;
     }
-    QQtDataSerialization& operator<< ( quint16 i ) {
+    QQtDataSerialization& operator<< ( const quint16& i ) {
         mDict["Root"][mIndex++] = i;
         return *this;
     }
-    QQtDataSerialization& operator<< ( quint32 i ) {
+    QQtDataSerialization& operator<< ( const quint32& i ) {
         mDict["Root"][mIndex++] = i;
         return *this;
     }
-    QQtDataSerialization& operator<< ( quint64 i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-
-    QQtDataSerialization& operator<< ( qint8 i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-    QQtDataSerialization& operator<< ( qint16 i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-    QQtDataSerialization& operator<< ( qint32 i ) {
-        mDict["Root"][mIndex++] = i;
-        return *this;
-    }
-    QQtDataSerialization& operator<< ( qint64 i ) {
+    QQtDataSerialization& operator<< ( const quint64& i ) {
         mDict["Root"][mIndex++] = i;
         return *this;
     }
 
+    QQtDataSerialization& operator<< ( const qint8& i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( const qint16& i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( const qint32& i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( const qint64& i ) {
+        mDict["Root"][mIndex++] = i;
+        return *this;
+    }
 
+    QQtDataSerialization& operator<< ( const char* b ) {
+        QByteArray bytes;
+        bytes.resize ( qstrlen ( b ) );
+        memcpy ( bytes.data(), b, qstrlen ( b ) );
+        mDict["Root"][mIndex++] = bytes;
+        return *this;
+    }
     QQtDataSerialization& operator<< ( const QByteArray& b ) {
         mDict["Root"][mIndex++] = b;
         return *this;
@@ -121,15 +133,21 @@ public:
         mDict["Root"][mIndex++] = b;
         return *this;
     }
-    QQtDataSerialization& operator<< ( const QVariant& b ) {
-        mDict["Root"][mIndex++] = b;
-        return *this;
-    }
     QQtDataSerialization& operator<< ( const QImage& f ) {
         QByteArray bytes;
         bytes.resize ( f.byteCount() );
         memcpy ( bytes.data(), f.bits(), f.byteCount() );
         mDict["Root"][mIndex++] = bytes;
+        return *this;
+    }
+
+    template <typename T>
+    QQtDataSerialization& operator<< ( const T& b ) {
+        mDict["Root"][mIndex++] = b;
+        return *this;
+    }
+    QQtDataSerialization& operator<< ( const QVariant& b ) {
+        mDict["Root"][mIndex++] = b;
         return *this;
     }
 
@@ -164,7 +182,7 @@ public:
         return *this;
     }
     QQtDataSerialization& operator>> ( qint64& i ) {
-        i = qRound64 ( mDict["Root"][mIndex++].getValue().toDouble() );
+        i = mDict["Root"][mIndex++].getValue().toLongLong();
         return *this;
     }
 
@@ -193,14 +211,20 @@ public:
         b = mDict["Root"][mIndex++].getValue().toString();
         return *this;
     }
-    QQtDataSerialization& operator>> ( QVariant& b ) {
-        b = mDict["Root"][mIndex++].getValue();
-        return *this;
-    }
     QQtDataSerialization& operator>> ( QImage& f ) {
         QByteArray bytes;
         bytes = mDict["Root"][mIndex++].getValue().toByteArray();
         f.loadFromData ( bytes );
+        return *this;
+    }
+
+    template <typename T>
+    QQtDataSerialization& operator>> ( T& b ) {
+        b = mDict["Root"][mIndex++].getValue().value<T>();
+        return *this;
+    }
+    QQtDataSerialization& operator>> ( QVariant& b ) {
+        b = mDict["Root"][mIndex++].getValue();
         return *this;
     }
 

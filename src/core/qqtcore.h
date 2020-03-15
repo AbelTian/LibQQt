@@ -89,29 +89,11 @@ typedef unsigned char uint8_t;
 
 #define MAX_LEN 1024
 
-#define WARNING "Warning"
-#define NOTICE "Notice"
-
-
-QQTSHARED_EXPORT void QQtSleep ( int millsecond );
-QQTSHARED_EXPORT void QQtSleepSignal ( int millsecond, const QObject* obj, const char* signal );
-
 #ifdef __cplusplus
 }
 #endif  /* __cplusplus */
 
-
-#define pline() qDebug() << __FILE__ << __LINE__/*QString("%1").arg(__LINE__, 3, 10)*/ << __func__
-#define ptime() pline() << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss zzz")
-#define p2line() qDebug() << QString(__FILE__).split('/').last() << QString("%1").arg(__LINE__, 3, 10) << __func__
-//-----------------------
-#define perr(req, rsl) if(req == rsl) pline() << hex << rsl
-#define pmeta(inst) pline() << inst->metaObject()->className()
-#define pdebug() qDebug()
-#define pdebug_nospace() qDebug().nospace()
-#define packline() pline() << qDebug().nospace()
-
-//不可滥用const，基本类型滥用const会引发后边的const QByteArray& 异常
+//此处加const已经经过测试，不可修改！
 QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, quint8 r );
 QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, quint16 r );
 QQTSHARED_EXPORT QByteArray& operator<< ( QByteArray& l, quint32 r );
@@ -138,104 +120,7 @@ QQTSHARED_EXPORT QByteArray& operator>> ( QByteArray& l, QByteArray& r );
 QQTSHARED_EXPORT bool operator< (  QByteArray& l,  QByteArray& r );
 QQTSHARED_EXPORT bool operator== (  QByteArray& l,  QByteArray& r );
 
-/**
- * @brief The QQtBlock class
- * QMutex，QSemphore，QCondation在gui线程会锁定gui，而我希望在gui线程中堵塞但是不要锁定gui
- * 这个block应用场合为gui线程内部，不适用线程之间
- * 仅仅锁定一次和解锁一次，多次锁定和解锁无用途。
- */
-class QQTSHARED_EXPORT QQtBlock : public QObject
-{
-public:
-    explicit QQtBlock ( QObject* parent = 0 ) : QObject ( parent ), m_lock ( 0 ) {}
-
-    //0x7FFFFFFF
-    bool lock ( int millsecond = 0x7FFFFFFF ) {
-        //m_lock++;
-        m_lock = 1;
-
-        timer.restart();
-
-        while ( timer.elapsed() < millsecond ) {
-            if ( m_lock <= 0 )
-                break;
-
-            QApplication::processEvents();
-        }
-
-        if ( timer.elapsed() >= millsecond )
-            return false;
-
-        return true;
-    }
-
-    void unlock() {
-        //m_lock--;
-        m_lock = 0;
-    }
-
-    bool isLocked() {
-        if ( m_lock <= 0 )
-            return false;
-
-        return true;
-    }
-
-private:
-    int m_lock;
-    QElapsedTimer timer;
-};
-
-//在同一个线程里使用。
-//给QQtBlock加个信号和槽就好了。不必要这个东西吧。
-class QQtBlockSignal : public QQtBlock
-{
-    Q_OBJECT
-public:
-    explicit QQtBlockSignal ( QObject* parent = 0 ) : QQtBlock ( parent ) {
-
-    }
-
-    void addsignal ( const QObject* obj, const char* signal ) {
-
-        QQtSignalObject o0;
-        o0.obj = obj;
-        o0.signal = signal;
-
-        if ( mSignalList.contains ( o0 ) )
-            return;
-        mSignalList.push_back ( o0 );
-
-        connect ( obj, signal, this, SLOT ( slotSignalComing() ) );
-    }
-
-public slots:
-    void slotSignalComing() {
-        unlock();
-    }
-
-private:
-    class QQtSignalObject
-    {
-    public:
-        const QObject* obj;
-        const char* signal;
-
-        QQtSignalObject& operator = ( const QQtSignalObject& other ) {
-            obj = other.obj;
-            signal = other.signal;
-            return *this;
-        }
-
-        bool operator == ( const QQtSignalObject& other ) {
-            if ( obj == other.obj && signal == other.signal )
-                return true;
-            return false;
-        }
-    };
-
-private:
-    QList<QQtSignalObject> mSignalList;
-};
+//调试模块用的太多了，放在core里。
+#include <qqtdebug.h>
 
 #endif // QQTCORE_H
