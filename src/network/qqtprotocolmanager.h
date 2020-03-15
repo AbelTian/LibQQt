@@ -1,4 +1,4 @@
-﻿#ifndef QQTPROTOCOLMANAGER_H
+#ifndef QQTPROTOCOLMANAGER_H
 #define QQTPROTOCOLMANAGER_H
 
 #include <QObject>
@@ -103,7 +103,7 @@ public:
      * @param protocolTypeName
      * @return
      */
-    QQtProtocol* createProtocol ();
+    virtual QQtProtocol* createProtocol ();
     /**
      * 使用完，删除。
      *
@@ -118,7 +118,7 @@ public:
      *
      * 内部没有对QList加锁，所以不要movetothread里用。
      */
-    void deleteProtocol ( QQtProtocol* stack );
+    virtual void deleteProtocol ( QQtProtocol* stack );
 protected:
     QQtProtocol* findDetachedInstance();
 private:
