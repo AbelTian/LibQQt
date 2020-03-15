@@ -204,6 +204,12 @@ SOURCES += \
 HEADERS += \
     $$PWD/frame/qqtdataserialization.h
 
+add_object_class(QQtStandardProtocol, $$PWD/frame)
+SOURCES += \
+    $$PWD/frame/qqtstandardprotocol.cpp
+HEADERS += \
+    $$PWD/frame/qqtstandardprotocol.h
+
 #multimedia
 #support Qt5, if Qt4 want to use, you need compile QtMultiMedia for Qt4.
 #audio success, video arm mips
