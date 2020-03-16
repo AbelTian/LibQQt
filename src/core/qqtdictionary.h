@@ -20,11 +20,11 @@ class QDomNode;
 class QQtDictionary;
 typedef QMap<QString, QQtDictionary> QQtDictionaryMap;
 typedef QMapIterator<QString, QQtDictionary> QQtDictionaryMapIterator;
-typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMapConstIterator;
+typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMutableMapIterator;
 
 typedef QList<QQtDictionary> QQtDictionaryList;
 typedef QListIterator<QQtDictionary> QQtDictionaryListIterator;
-typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
+typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
 
 /**
  * @brief The QQtDictionary class
