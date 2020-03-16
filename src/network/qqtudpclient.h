@@ -37,7 +37,7 @@ public:
         port = mPort;
     }
 
-    void setServerAddress ( const QHostAddress& address, quint16& port ) {
+    void setServerAddress ( QHostAddress address, quint16 port ) {
         mHostAddress = address;
         mPort = port;
     }
