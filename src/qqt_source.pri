@@ -193,23 +193,6 @@ SOURCES += \
 HEADERS += \
     $$PWD/frame/qqtqssmanager.h
 
-SOURCES += \
-    $$PWD/frame/qqtdatapersistence.cpp
-HEADERS += \
-    $$PWD/frame/qqtdatapersistence.h
-
-add_object_class(QQtDataSerialization, $$PWD/frame)
-SOURCES += \
-    $$PWD/frame/qqtdataserialization.cpp
-HEADERS += \
-    $$PWD/frame/qqtdataserialization.h
-
-add_object_class(QQtStandardProtocol, $$PWD/frame)
-SOURCES += \
-    $$PWD/frame/qqtstandardprotocol.cpp
-HEADERS += \
-    $$PWD/frame/qqtstandardprotocol.h
-
 #multimedia
 #support Qt5, if Qt4 want to use, you need compile QtMultiMedia for Qt4.
 #audio success, video arm mips
@@ -690,6 +673,23 @@ contains (DEFINES, __HIGHGRADE__) {
         HEADERS += \
             $$PWD/highgrade/qqtsingletonapplication.h
     }
+
+    SOURCES += \
+        $$PWD/highgrade/qqtdatapersistence.cpp
+    HEADERS += \
+        $$PWD/highgrade/qqtdatapersistence.h
+
+    add_object_class(QQtDataSerialization, $$PWD/highgrade)
+    SOURCES += \
+        $$PWD/highgrade/qqtdataserialization.cpp
+    HEADERS += \
+        $$PWD/highgrade/qqtdataserialization.h
+
+    add_object_class(QQtStandardProtocol, $$PWD/highgrade)
+    SOURCES += \
+        $$PWD/highgrade/qqtstandardprotocol.cpp
+    HEADERS += \
+        $$PWD/highgrade/qqtstandardprotocol.h
 }
 
 include ($$PWD/qqt_3rdparty.pri)
