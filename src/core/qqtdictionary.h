@@ -159,6 +159,8 @@ public:
     QQtDictionary& operator [] ( const QString& key );
     const QQtDictionary operator[] ( const QString& key ) const;
 
+    QQtDictionary& operator = ( const QList<QString>& list );
+
     QQtDictionary& operator = ( const QMap<QString, QQtDictionary>& map );
     QQtDictionary& operator = ( const QList<QQtDictionary>& list );
     QQtDictionary& operator = ( const QQtDictionary& other );

@@ -386,6 +386,20 @@ QQtDictionary& QQtDictionary::operator [] ( const QString& key )
     return m_map.operator [] ( key );
 }
 
+QQtDictionary& QQtDictionary::operator = ( const QList<QString>& list )
+{
+    m_type = DictList;
+
+    m_list.clear();
+    QListIterator<QString> itor ( list );
+    while ( itor.hasNext() )
+    {
+        const QString& key = itor.next();
+        m_list.push_back ( QQtDictionary ( key ) );
+    }
+    return *this;
+}
+
 QQtDictionary& QQtDictionary::operator = ( const QMap<QString, QQtDictionary>& map )
 {
     m_type = DictMap;
@@ -427,6 +441,7 @@ QQtDictionary& QQtDictionary::operator = ( const QQtDictionary& other )
     m_type = type;
     return *this;
 }
+
 
 QQtDictionary& QQtDictionary::operator = ( const QVariant& value )
 {

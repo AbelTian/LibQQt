@@ -18,9 +18,10 @@
  *
  * Buffer:
  * |quint16 header|quint16 size|quint8* json_data|quint16 checksum|quint16 tail|
- * 内部字典，不建议用户使用:
+ * 内部字典:
  * dict["Root"][0-N]=Value;
  * data段保存的是压缩的json结构数据，用户通过此类提供的操作符更改内容。
+ * 不建议用户直接调用，类里提供操作符帮助用户操作data段的字典。
  *
  */
 class QQTSHARED_EXPORT QQtDataSerialization : public QQtMessage
