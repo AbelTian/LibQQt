@@ -25,7 +25,7 @@ contains (DEFINES, __YAMLSUPPORT__) {
 #TODO: macOS runtime crash
 contains (DEFINES, __PLUGINSUPPORT__) {
     #MinGW64 doesn't support contains(||) and contains(|) 任何层pro、pri都不支持。
-    #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+    #contains(QSYS_PRIVATE, Win32|Windows|Win64|MSVC32|MSVC|MSVC64) {
     win32{
         wince*: SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_wince.cpp
         else:  SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_win32.cpp

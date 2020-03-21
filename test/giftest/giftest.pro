@@ -39,7 +39,7 @@ system("touch main.cpp")
 include(../../multi-link/multi-link/add_base_manager.pri)
 include(./app_custom_manager.pri)
 
-contains(QSYS_PRIVATE, ANDROID||ANDROIDX86) {
+contains(QSYS_PRIVATE, ANDROID|ANDROIDX86) {
     CONFIG += mobility
     MOBILITY =
     DISTFILES += \
@@ -48,7 +48,7 @@ contains(QSYS_PRIVATE, ANDROID||ANDROIDX86) {
     ANDROID_PACKAGE_SOURCE_DIR = $${PWD}/android
 }
 
-!contains(QSYS_PRIVATE, Arm32||Mips32) {
+!contains(QSYS_PRIVATE, Arm32|Mips32) {
     RESOURCES += \
         giftest.qrc
 }

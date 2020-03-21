@@ -249,7 +249,7 @@ defineTest(add_defines_QQt){
     #plugin notifer, and plugin device managament.
     #if you use DeviceWatcher , open this annotation
     DEFINES += __PLUGINSUPPORT__
-    contains(QSYS_PRIVATE, iOS||iOSSimulator||macOS) {
+    contains(QSYS_PRIVATE, iOS|iOSSimulator|macOS) {
         DEFINES -= __PLUGINSUPPORT__
     }
 
@@ -259,7 +259,7 @@ defineTest(add_defines_QQt){
     }
 
     contains (DEFINES, __PLUGINSUPPORT__) {
-        #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+        #contains(QSYS_PRIVATE, Win32|Windows|Win64|MSVC32|MSVC|MSVC64) {
         win32 {
             contains (DEFINES, QQT_LIBRARY) {
                 DEFINES += BUILD_QDEVICEWATCHER_LIB
@@ -277,7 +277,7 @@ defineTest(add_defines_QQt){
     DEFINES += __PROCESSSUPPORT__
     #ios has no backend process
     #ios doesn't support contains(||)? 支持，但是只能在一层pri以内。
-    contains(DEFINES, __IOS__||__WINRT__) {
+    contains(DEFINES, __IOS__|__WINRT__) {
         DEFINES -= __PROCESSSUPPORT__
     }
 
@@ -286,13 +286,13 @@ defineTest(add_defines_QQt){
     DEFINES += __PRINTSUPPORT__
     #Qt 5.9.1, ios and android can't support this feature, because Qt 5.9.1, broken
     equals(QT_VERSION, 5.9.1) {
-        contains(QSYS_PRIVATE, iOS||iOSSimulator||Android||AndroidX86) {
+        contains(QSYS_PRIVATE, iOS|iOSSimulator|Android|AndroidX86) {
             DEFINES -= __PRINTSUPPORT__
         }
     }
     #Qt 5.9.2, android support this feature
     #Qt 5.9.2, ios can't use printsupport
-    contains(QSYS_PRIVATE, iOS||iOSSimulator) {
+    contains(QSYS_PRIVATE, iOS|iOSSimulator) {
         DEFINES -= __PRINTSUPPORT__
     }
 
@@ -540,7 +540,7 @@ defineTest(add_defines_QQt){
         contains(DEFINES, __QRDECODE__) {
             #lessThan(QT_MAJOR_VERSION, 5): QT += declarative
             greaterThan(QT_MAJOR_VERSION, 4): QT += quick
-            #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+            #contains(QSYS_PRIVATE, Win32|Windows|Win64|MSVC32|MSVC|MSVC64) {
             win32 {
                 #ignore: QZXing has no need to export
                 contains (DEFINES, QQT_LIBRARY) {
@@ -566,7 +566,7 @@ defineTest(add_defines_QQt){
         ##################Mathes Module###############################
         DEFINES += __MATHWIDGETSUPPORT__
         contains (DEFINES, __MATHWIDGETSUPPORT__) {
-            #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+            #contains(QSYS_PRIVATE, Win32|Windows|Win64|MSVC32|MSVC|MSVC64) {
             win32 {
                 contains (DEFINES, QQT_LIBRARY) {
                     DEFINES += QT_QTMMLWIDGET_LIBRARY
