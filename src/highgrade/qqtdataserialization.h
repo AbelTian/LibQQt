@@ -12,7 +12,7 @@
  * LibQQt提供的标准报文类，数据序列化、反序列化
  *
  * 原理：
- * Buffer ---- Dict ---- Buffer
+ * Dict ---- Buffer
  * 内部有QByteArray，按照以下格式，
  * 可以通过serialize/unserialize序列化到QByteArray里，和从QByteArray里反序列化到内部字典里。
  *
@@ -69,7 +69,7 @@ public:
     /**
      * <<
      **/
-    QQtDataSerialization& operator<< ( std::nullptr_t ) { return *this; }
+    //QQtDataSerialization& operator<< ( std::nullptr_t ) { return *this; }
 
     QQtDataSerialization& operator<< ( const bool& i ) {
         mDict["Root"][mIndex++] = i;
@@ -155,7 +155,7 @@ public:
     /**
      * >>
      **/
-    QQtDataSerialization& operator>> ( std::nullptr_t& ptr ) { ptr = nullptr; return *this; }
+    //QQtDataSerialization& operator>> ( std::nullptr_t& ptr ) { ptr = nullptr; return *this; }
 
     QQtDataSerialization& operator>> ( bool& i ) {
         i = mDict["Root"][mIndex++].getValue().toBool();
