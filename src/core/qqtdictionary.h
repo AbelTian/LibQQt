@@ -60,6 +60,7 @@ public:
         DictList,
         /*是个映射，可能嵌套映射，Map不空，name根据用户设置或许为空*/
         DictMap,
+
         DictMax
     } EDictType;
 

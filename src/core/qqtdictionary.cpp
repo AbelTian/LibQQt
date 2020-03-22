@@ -325,11 +325,13 @@ void QQtDictionary::clear()
 
 void QQtDictionary::remove ( int index )
 {
+    m_type = DictList;
     m_list.removeAt ( index );
 }
 
 void QQtDictionary::remove ( const QString& key )
 {
+    m_type = DictMap;
     m_map.remove ( key );
 }
 
