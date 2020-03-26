@@ -47,6 +47,32 @@ public:
     //sendMessageToProtocolInstance(Protocol, Message);
     //sendMessageToAllProtocolInstance(...);
 
+
+    //通信工具句柄。必然有值。
+    QObject* handler() {
+        return mHandler;
+    }
+    //通信工具句柄。必然有值。
+    QObject* getHandler() {
+        return mHandler;
+    }
+    //在服务器通信工具句柄安装协议句柄的时候会调用。
+    void setHandler ( QObject* o ) {
+        mHandler = o;
+    }
+    //通信工具句柄。必然有值。
+    QObject* getServerHandler() {
+        return mHandler;
+    }
+    //在服务器通信工具句柄安装协议句柄的时候会调用。
+    void setServerHandler ( QObject* o ) {
+        mHandler = o;
+    }
+
+
+private:
+    QObject* mHandler;
+
 signals:
     /**
      * @brief notifyToUser

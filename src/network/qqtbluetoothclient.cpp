@@ -1,4 +1,4 @@
-﻿#include "qqtbluetoothclient.h"
+#include "qqtbluetoothclient.h"
 #include <qqtcore.h>
 
 QQtBluetoothClient::QQtBluetoothClient ( QObject* parent ) : QBluetoothSocket ( parent )
@@ -48,6 +48,7 @@ void QQtBluetoothClient::installProtocol ( QQtProtocol* stack )
 
     connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
               this, SLOT ( slotWriteData ( const QByteArray& ) ) );
+    m_protocol->setClientHandler ( this );
     m_protocol->attach();
     m_protocol->initializer();
 }

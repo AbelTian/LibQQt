@@ -32,6 +32,7 @@ void QQtUdpClient::installProtocol ( QQtProtocol* stack )
 
     connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
               this, SLOT ( slotWriteData ( const QByteArray& ) ) );
+    m_protocol->setClientHandler ( this );
     m_protocol->attach();
     m_protocol->initializer();
 }
