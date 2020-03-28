@@ -83,7 +83,6 @@ defineTest(add_include_QQt){
 
     #highgrade module
     command += $${header_path}/highgrade
-    command += $${header_path}/highgrade/network
 
     INCLUDEPATH += $$add_host_path($$command)
     export(INCLUDEPATH)

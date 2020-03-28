@@ -619,6 +619,8 @@ contains (DEFINES, __EXQUISITE__) {
 }
 
 contains (DEFINES, __HIGHGRADE__) {
+    INCLUDEPATH += $${PWD}/highgrade/private
+
     #shared memory
     #core module
     contains(DEFINES, __SHAREDMEMORY_SUPPORT__){
@@ -630,9 +632,9 @@ contains (DEFINES, __HIGHGRADE__) {
 
     contains(DEFINES, __MESSAGEQUEUE_SUPPORT__){
         SOURCES += \
-            $$PWD/highgrade/qqtmessagequeueprivate.cpp
+            $$PWD/highgrade/private/qqtmessagequeueprivate.cpp
         HEADERS += \
-            $$PWD/highgrade/qqtmessagequeueprivate.h
+            $$PWD/highgrade/private/qqtmessagequeueprivate.h
         #基于tcp socket实现
         SOURCES += \
             $$PWD/highgrade/qqtmessagequeue.cpp
@@ -644,17 +646,16 @@ contains (DEFINES, __HIGHGRADE__) {
     #network module
     contains(DEFINES, __NAMEDPIPE_SUPPORT__){
         #local client iodevice
-        SOURCES += $$PWD/highgrade/network/qqtnamedpipeclient.cpp
-        HEADERS += $$PWD/highgrade/network/qqtnamedpipeclient.h
+        SOURCES += $$PWD/highgrade/private/qqtnamedpipeclient.cpp
+        HEADERS += $$PWD/highgrade/private/qqtnamedpipeclient.h
 
         #local server iodevice
-        SOURCES += $$PWD/highgrade/network/qqtnamedpipeserver.cpp
-        HEADERS += $$PWD/highgrade/network/qqtnamedpipeserver.h
+        SOURCES += $$PWD/highgrade/private/qqtnamedpipeserver.cpp
+        HEADERS += $$PWD/highgrade/private/qqtnamedpipeserver.h
 
-        SOURCES += \
-            $$PWD/highgrade/qqtnamedpipeprivate.cpp
-        HEADERS += \
-            $$PWD/highgrade/qqtnamedpipeprivate.h
+        SOURCES += $$PWD/highgrade/private/qqtnamedpipeprivate.cpp
+        HEADERS += $$PWD/highgrade/private/qqtnamedpipeprivate.h
+
         SOURCES += \
             $$PWD/highgrade/qqtnamedpipe.cpp
         HEADERS += \
@@ -664,9 +665,9 @@ contains (DEFINES, __HIGHGRADE__) {
     #singleton application
     contains(DEFINES, __NAMEDPIPE_SUPPORT__){
         SOURCES += \
-            $$PWD/highgrade/qqtsingletonapplicationprivate.cpp
+            $$PWD/highgrade/private/qqtsingletonapplicationprivate.cpp
         HEADERS += \
-            $$PWD/highgrade/qqtsingletonapplicationprivate.h
+            $$PWD/highgrade/private/qqtsingletonapplicationprivate.h
         #依赖local socket
         SOURCES += \
             $$PWD/highgrade/qqtsingletonapplication.cpp
