@@ -1,24 +1,14 @@
-﻿
 #ifndef QLOGICPREVIEWUI_H
 #define QLOGICPREVIEWUI_H
 
+#include <QWidget>
+#include <QImage>
+
+#include <qqtlogicvideomanager.h>
+
 #include "qqt-qt.h"
-#include "qqtlinux.h"
 #include "qqtcore.h"
 #include "qqt-local.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
-#include "graphics.h"
-#include "dmmu.h"
-#include "hal.h"
-#include "jz_cim.h"
-
-#ifdef __cplusplus
-}
-#endif  /* __cplusplus */
 
 namespace Ui {
 class QQtLogicPreviewWidget;
@@ -36,39 +26,23 @@ class QQTSHARED_EXPORT QQtLogicPreviewWidget : public QWidget
 public:
     explicit QQtLogicPreviewWidget ( QWidget* parent = 0 );
     virtual ~QQtLogicPreviewWidget();
+
     int play();
     int close();
 
+private slots:
+    void slotReadyRead ( const QImage& image );
+
 private:
     Ui::QQtLogicPreviewWidget* ui;
-
-    struct sensor_info sinfo;
-    int pre_bpp;
-    int rate;         /* default to 15fps  */
-    unsigned int addr;
-    unsigned int phys;
-
-    int fd;
-    int format;
-
-    struct camera_memory pre_memory;
-    struct camera_buffer pre_buf;
-    struct frm_size pre_size;
-    unsigned int tlb_base_phys;
-
-    uchar* pp;
-    uchar* p;
-    QImage* frame;
-    QTimer* timer;
 
     bool bFullScreen;
     QWidget* m_parent;
     QRect geome;
     Qt::WindowFlags flags;
 
-    int convert_yuv_to_rgb_pixel ( int y, int u, int v );
-    int convert_yuv_to_rgb_buffer ( unsigned char* yuv, unsigned char* rgb, unsigned int width, unsigned int height );
-
+    QQtLogicVideoManager* manager;
+    QImage mImage;
     // QWidget interface
 protected:
     void paintEvent ( QPaintEvent* );

@@ -195,9 +195,10 @@ HEADERS += \
 
 #multimedia
 #support Qt5, if Qt4 want to use, you need compile QtMultiMedia for Qt4.
-#audio success, video arm mips
-#TODO: audio mediaextention +wav +mp3 +ogg ...
-#TODO: video mediaextention +FFmpeg ... +wince +android +ios +macOS +win +linux
+#audio +wav
+#video arm mips +logic video; desktop +camera
+#TODO: audio mediaextention +mp3 +ogg ...
+#TODO: video mediaextention +FFmpeg +Vlc ... +wince +android +ios +macOS +win +linux
 contains (DEFINES, __MULTIMEDIA__) {
     #mplayer
     contains (DEFINES, __PROCESSSUPPORT__){
@@ -214,10 +215,6 @@ contains (DEFINES, __MULTIMEDIA__) {
         SOURCES += $$PWD/multimedia/qqtaudiomanager.cpp
         HEADERS += $$PWD/multimedia/qqtaudiomanager.h
 
-        #wav audio
-        SOURCES += $$PWD/multimedia/libqwav/libqwav.cpp
-        HEADERS += $$PWD/multimedia/libqwav/libqwav.h
-        HEADERS += $$PWD/multimedia/libqwav/libqwav_global.h
         SOURCES += $$PWD/multimedia/qqtwavaudiomanager.cpp
         HEADERS += $$PWD/multimedia/qqtwavaudiomanager.h
         SOURCES += $$PWD/multimedia/qqtwavsoundeffect.cpp
@@ -226,8 +223,6 @@ contains (DEFINES, __MULTIMEDIA__) {
 
     #video
     contains (DEFINES, __QQTVIDEOSUPPORT__){
-        add_file($$PWD/multimedia/qqtimageconverter.cpp)
-        add_file($$PWD/multimedia/qqtimageconverter.h)
         SOURCES += $$PWD/multimedia/qqtimageconverter.cpp
         HEADERS += $$PWD/multimedia/qqtimageconverter.h
 
@@ -235,6 +230,19 @@ contains (DEFINES, __MULTIMEDIA__) {
         HEADERS += $$PWD/multimedia/qqtcamera.h
         SOURCES += $$PWD/multimedia/qqtvideomanager.cpp
         HEADERS += $$PWD/multimedia/qqtvideomanager.h
+    }
+
+    #logic video
+    contains (DEFINES, __LOGICCAMERAMODULE__) {
+        SOURCES += $$PWD/multimedia/private/qqtlogicvideomanager_p.cpp
+        HEADERS += $$PWD/multimedia/private/qqtlogicvideomanager_p.h
+
+        SOURCES += $$PWD/multimedia/qqtlogicvideomanager.cpp
+        HEADERS += $$PWD/multimedia/qqtlogicvideomanager.h
+
+        SOURCES += $$PWD/multimedia/qqtlogicpreviewwidget.cpp
+        HEADERS += $$PWD/multimedia/qqtlogicpreviewwidget.h
+        FORMS += $$PWD/multimedia/qqtlogicpreviewwidget.ui
     }
 }
 

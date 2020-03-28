@@ -176,25 +176,27 @@ contains (DEFINES, __EXQUISITE__) {
 
 #multimedia
 contains (DEFINES, __MULTIMEDIA__) {
+    INCLUDEPATH += $${PWD}/multimedia/private
+    INCLUDEPATH += $${PWD}/multimedia/private/libqwav
+    INCLUDEPATH += $${PWD}/multimedia/private/dmmu
+
+    contains (DEFINES, __QQTAUDIOSUPPORT__){
+        #wav audio
+        SOURCES += $$PWD/multimedia/private/libqwav/libqwav.cpp
+        HEADERS += $$PWD/multimedia/private/libqwav/libqwav.h
+        HEADERS += $$PWD/multimedia/private/libqwav/libqwav_global.h
+        #include ($$PWD/multimedia/private/libqwav/libqwav.pri)
+    }
+
     contains (DEFINES, __LOGICCAMERAMODULE__) {
         #dmmu support
         #arm mips
         #TODO: +wince +android +ios +macOS +win +linux
-        equals(QSYS_PRIVATE, Embedded) {
-            SOURCES += $$PWD/multimedia/dmmu/dmmu.c
-            HEADERS += $$PWD/multimedia/dmmu/dmmu.h \
-                        $$PWD/multimedia/dmmu/jz_cim.h \
-                        $$PWD/multimedia/dmmu/graphics.h \
-                        $$PWD/multimedia/dmmu/hal.h
-
-            #logic video manager
-            SOURCES += $$PWD/multimedia/qqtlogicvideomanager.cpp
-            HEADERS += $$PWD/multimedia/qqtlogicvideomanager.h
-
-            SOURCES += $$PWD/multimedia/qqtlogicpreviewwidget.cpp
-            HEADERS += $$PWD/multimedia/qqtlogicpreviewwidget.h
-            FORMS += $$PWD/multimedia/qqtlogicpreviewwidget.ui
-        }
+        SOURCES += $$PWD/multimedia/private/dmmu/dmmu.c
+        HEADERS += $$PWD/multimedia/private/dmmu/dmmu.h \
+                    $$PWD/multimedia/private/dmmu/jz_cim.h \
+                    $$PWD/multimedia/private/dmmu/graphics.h \
+                    $$PWD/multimedia/private/dmmu/hal.h
     }
 }
 

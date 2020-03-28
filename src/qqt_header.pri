@@ -32,8 +32,6 @@ defineTest(add_include_QQt){
 
     #multimedia
     command += $${header_path}/multimedia
-    command += $${header_path}/multimedia/dmmu
-    command += $${header_path}/multimedia/libqwav
 
     #charts
     command += $${header_path}/charts
@@ -240,7 +238,8 @@ defineTest(add_defines_QQt){
 
         #LOGIC CAMERA PREVIEW
         #depend on dmmu
-        DEFINES += __LOGICCAMERAMODULE__
+        #need fix, linux embedded armhf32 mips
+        contains(QSYS_PRIVATE, Embedded|Armhf32|Mips32):DEFINES += __LOGICCAMERAMODULE__
     }
 
     ##################PluginSupport Module###############################
