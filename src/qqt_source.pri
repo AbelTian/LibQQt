@@ -200,6 +200,7 @@ HEADERS += \
 #TODO: audio mediaextention +mp3 +ogg ...
 #TODO: video mediaextention +FFmpeg +Vlc ... +wince +android +ios +macOS +win +linux
 contains (DEFINES, __MULTIMEDIA__) {
+    INCLUDEPATH += $${PWD}/multimedia/private
     #mplayer
     contains (DEFINES, __PROCESSSUPPORT__){
         SOURCES += $$PWD/multimedia/qqtmplayer.cpp

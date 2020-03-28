@@ -176,27 +176,25 @@ contains (DEFINES, __EXQUISITE__) {
 
 #multimedia
 contains (DEFINES, __MULTIMEDIA__) {
-    INCLUDEPATH += $${PWD}/multimedia/private
-    INCLUDEPATH += $${PWD}/multimedia/private/libqwav
-    INCLUDEPATH += $${PWD}/multimedia/private/dmmu
+    INCLUDEPATH += $${PWD}/multimedia/libqwav
+    INCLUDEPATH += $${PWD}/multimedia/dmmu
 
     contains (DEFINES, __QQTAUDIOSUPPORT__){
         #wav audio
-        SOURCES += $$PWD/multimedia/private/libqwav/libqwav.cpp
-        HEADERS += $$PWD/multimedia/private/libqwav/libqwav.h
-        HEADERS += $$PWD/multimedia/private/libqwav/libqwav_global.h
-        #include ($$PWD/multimedia/private/libqwav/libqwav.pri)
+        SOURCES += $$PWD/multimedia/libqwav/libqwav.cpp
+        HEADERS += $$PWD/multimedia/libqwav/libqwav.h
+        HEADERS += $$PWD/multimedia/libqwav/libqwav_global.h
     }
 
     contains (DEFINES, __LOGICCAMERAMODULE__) {
         #dmmu support
         #arm mips
         #TODO: +wince +android +ios +macOS +win +linux
-        SOURCES += $$PWD/multimedia/private/dmmu/dmmu.c
-        HEADERS += $$PWD/multimedia/private/dmmu/dmmu.h \
-                    $$PWD/multimedia/private/dmmu/jz_cim.h \
-                    $$PWD/multimedia/private/dmmu/graphics.h \
-                    $$PWD/multimedia/private/dmmu/hal.h
+        SOURCES += $$PWD/multimedia/dmmu/dmmu.c
+        HEADERS += $$PWD/multimedia/dmmu/dmmu.h \
+                    $$PWD/multimedia/dmmu/jz_cim.h \
+                    $$PWD/multimedia/dmmu/graphics.h \
+                    $$PWD/multimedia/dmmu/hal.h
     }
 }
 
