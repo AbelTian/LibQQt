@@ -25,27 +25,6 @@ public:
 
     }
 
-    //通信工具句柄。必然有值。
-    QObject* handler() {
-        return mHandler;
-    }
-    //通信工具句柄。必然有值。
-    QObject* getHandler() {
-        return mHandler;
-    }
-    //在服务器通信工具句柄安装协议句柄的时候会调用。
-    void setHandler ( QObject* o ) {
-        mHandler = o;
-    }
-    //通信工具句柄。必然有值。
-    QObject* getClientHandler() {
-        return mHandler;
-    }
-    //在客户端通信工具句柄安装协议句柄的时候会调用。
-    void setClientHandler ( QObject* o ) {
-        mHandler = o;
-    }
-
     /*
      * 建议：用户在继承类里的函数里直接调用[emit] write(...)
     */
@@ -108,9 +87,6 @@ public:
     /*
      * 以下函数，与用户无关。
      */
-    //
-private:
-    QObject* mHandler;
 
 signals:
     //句柄被使用和废弃不用都会发射状态改变信号。
@@ -136,6 +112,34 @@ public:
 
 protected:
     bool mIsDetached;
+
+#if 1 //没有使用意义，不建议用户使用。
+public:
+
+    //通信工具句柄。必然有值。
+    QObject* handler() {
+        return mHandler;
+    }
+    //通信工具句柄。必然有值。
+    QObject* getHandler() {
+        return mHandler;
+    }
+    //在服务器通信工具句柄安装协议句柄的时候会调用。
+    void setHandler ( QObject* o ) {
+        mHandler = o;
+    }
+    //通信工具句柄。必然有值。
+    QObject* getClientHandler() {
+        return mHandler;
+    }
+    //在客户端通信工具句柄安装协议句柄的时候会调用。
+    void setClientHandler ( QObject* o ) {
+        mHandler = o;
+    }
+private:
+    QObject* mHandler;
+
+#endif
 };
 
 #endif // QQTPROTOCOL_H
