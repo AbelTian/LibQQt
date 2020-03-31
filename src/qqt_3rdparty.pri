@@ -13,6 +13,11 @@ contains (DEFINES, __INICONTENTSUPPORT__) {
             $$PWD/core/inifile/qqtiniparser.h
 }
 
+#DEFINES += __STD_UTF8_CPP_SUPPORT__
+#contains (DEFINES, __STD_UTF8_CPP_SUPPORT__) {
+#    include ($$PWD/core/utf8_cpp/utf8_cpp.pri)
+#}
+
 #yaml
 #注释：在qqt_header.pri打开 DEFINES += __YAMLSUPPORT__
 DEFINES += __YAMLSUPPORT__

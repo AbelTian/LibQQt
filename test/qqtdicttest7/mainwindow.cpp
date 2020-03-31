@@ -97,6 +97,8 @@ void MainWindow::on_pushButton_clicked ( bool checked )
         return;
     }
 
+    qDebug() << qPrintable ( dict.toJson ( QJsonDocument::Indented ) ) ;
+
     if ( ui->checkBox->isChecked() )
     {
         ui->textBrowser->clear();

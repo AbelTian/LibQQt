@@ -86,7 +86,7 @@ int IniFile::UpdateSection ( const string& cleanLine, const string& comment,
     trim ( s );
 
     //检查段是否已存在
-    if ( getSection ( s ) != NULL )
+    if ( ( *section = getSection ( s ) ) != NULL )
     {
         errMsg = string ( "section " ) + s + string ( "already exist" );
         return ERR_SECTION_ALREADY_EXISTS;
@@ -316,16 +316,28 @@ int IniFile::LoadFromContent ( const std::string& buffer )
         if ( cleanLine[0] == '[' )
         {
             err = UpdateSection ( cleanLine, comment, rightComment, &currSection );
+            if ( err == ERR_SECTION_ALREADY_EXISTS )
+            {
+                //如果段存在，用它，继续。合并段了。
+                continue;
+            }
+            if ( err == ERR_UNMATCHED_BRACKETS
+                 || err == ERR_SECTION_EMPTY )
+            {
+                //如果段为空，或者缺少]，不用它，继续。当做上一段的了。
+                continue;
+            }
         }
         else
         {
             // 如果该行是键值，添加到section段的items容器
             err = AddKeyValuePair ( cleanLine, comment, rightComment, currSection );
-        }
 
-        if ( err != 0 )
-        {
-            return err;
+            if ( err == ERR_PARSE_KEY_VALUE_FAILED )
+            {
+                //继续下一行 key - value
+                continue;
+            }
         }
 
         // comment清零
