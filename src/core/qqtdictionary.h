@@ -7,8 +7,6 @@
 
 class QJsonDocument;
 class QJsonValue;
-class QDomDocument;
-class QDomNode;
 
 #include <qqtcore.h>
 #include <qqt-local.h>
@@ -181,11 +179,10 @@ public:
     //toValue() toList() toMap(); 不丢失数据方式。
 
     /*与其他数据结构兼容*/
-
     QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact ) const;
     void fromJson ( const QByteArray& json );
 
-    QByteArray toXML ( int = -1 ) const;
+    QByteArray toXML ( int indent = -1 ) const;
     void fromXML ( const QByteArray& xml );
 
     QByteArray toYAML() const;
@@ -196,14 +193,6 @@ public:
 
     QByteArray toProperties() const;
     void fromProperties ( const QByteArray& properties );
-
-protected:
-    virtual void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
-    virtual void packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result ) const;
-
-protected:
-    virtual void parseDomNode ( const QDomNode& value, QQtDictionary& parent );
-    virtual void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc ) const;
 
 signals:
 

@@ -57,7 +57,11 @@ void QqtdicttestTest::testCase1()
 
 void QqtdicttestTest::testCase2_data()
 {
-
+    QTest::addColumn<QString> ( "data" );
+    QTest::addColumn<QString> ( "result" );
+    QTest::newRow ( "0" ) << "cc" << "dd";
+    QTest::newRow ( "1" ) << "dd" << "ee";
+    QTest::newRow ( "2" ) << "gg" << "ff";
 }
 
 void QqtdicttestTest::testCase2()
@@ -66,6 +70,10 @@ void QqtdicttestTest::testCase2()
     QFETCH ( QString, result );
     dict[0] = result;
     QVERIFY2 ( dict[0].getValue() == result, "Failure" );
+
+    QQtDictionary dict1;
+    dict1["CC"]["DD"]["EE"][data] = result;
+    qDebug() << dict1["CC"]["DD"]["EE"][data].getValue().toString();
 }
 
 QTEST_MAIN ( QqtdicttestTest )
