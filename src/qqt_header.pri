@@ -275,7 +275,7 @@ defineTest(add_defines_QQt){
     #可以添加QQtProcess适配，正常平台使用QProcess继承下来，iOS下使用fork封装。
     DEFINES += __PROCESSSUPPORT__
     #ios has no backend process
-    #ios doesn't support contains(||)? 支持，但是只能在一层pri以内。
+    #ios doesn't support contains(||)? 支持，但是只能在一层pri以内？都不支持||，也不支持两边带空格的||，|。
     contains(DEFINES, __IOS__|__WINRT__) {
         DEFINES -= __PROCESSSUPPORT__
     }
