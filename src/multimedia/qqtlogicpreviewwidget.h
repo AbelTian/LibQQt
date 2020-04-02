@@ -41,7 +41,7 @@ private:
     QRect geome;
     Qt::WindowFlags flags;
 
-    QQtLogicVideoManager* manager;
+    QQtLogicVideoInput* manager;
     QImage mImage;
     // QWidget interface
 protected:

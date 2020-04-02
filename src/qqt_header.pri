@@ -239,6 +239,7 @@ defineTest(add_defines_QQt){
         #LOGIC CAMERA PREVIEW
         #depend on dmmu
         #need fix, linux embedded armhf32 mips
+        #DEFINES += __LOGICCAMERAMODULE__
         contains(QSYS_PRIVATE, Embedded|Armhf32|Mips32):DEFINES += __LOGICCAMERAMODULE__
     }
 

@@ -6,7 +6,7 @@ QQtLogicPreviewWidget::QQtLogicPreviewWidget ( QWidget* parent ) :
     ui ( new Ui::QQtLogicPreviewWidget )
 {
     ui->setupUi ( this );
-    manager = new QQtLogicVideoManager ( this );
+    manager = new QQtLogicVideoInput ( this );
     connect ( manager, SIGNAL ( readyRead ( const QImage& ) ),
               this, SLOT ( slotReadyRead ( const QImage& ) ) );
 }

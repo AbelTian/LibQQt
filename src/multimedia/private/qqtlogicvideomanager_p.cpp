@@ -1,9 +1,9 @@
 #include <qqtlogicvideomanager_p.h>
 #include <qqtlogicvideomanager.h>
 
-int QQtLogicVideoManagerPrivate::sDmmuRefCount = 0;
+int QQtLogicVideoInputPrivate::sDmmuRefCount = 0;
 
-QQtLogicVideoManagerPrivate::QQtLogicVideoManagerPrivate ( QQtLogicVideoManager* q, QObject* parent )
+QQtLogicVideoInputPrivate::QQtLogicVideoInputPrivate ( QQtLogicVideoInput* q, QObject* parent )
     : q_ptr ( q ), QObject ( parent )
 {
     memset ( &sinfo, 0, sizeof ( struct sensor_info ) );
@@ -42,7 +42,7 @@ QQtLogicVideoManagerPrivate::QQtLogicVideoManagerPrivate ( QQtLogicVideoManager*
     sDmmuRefCount++;
 }
 
-QQtLogicVideoManagerPrivate::~QQtLogicVideoManagerPrivate()
+QQtLogicVideoInputPrivate::~QQtLogicVideoInputPrivate()
 {
     sDmmuRefCount--;
     if ( sDmmuRefCount <= 0 )
@@ -51,18 +51,18 @@ QQtLogicVideoManagerPrivate::~QQtLogicVideoManagerPrivate()
     }
 }
 
-void QQtLogicVideoManagerPrivate::init_dmmu()
+void QQtLogicVideoInputPrivate::init_dmmu()
 {
     dmmu_init();
     dmmu_get_page_table_base_phys ( &tlb_base_phys );
 }
 
-void QQtLogicVideoManagerPrivate::deinit_dmmu()
+void QQtLogicVideoInputPrivate::deinit_dmmu()
 {
     dmmu_deinit();
 }
 
-bool QQtLogicVideoManagerPrivate::open ( QString devName )
+bool QQtLogicVideoInputPrivate::open ( QString devName )
 {
     //待测试
     close();
@@ -175,7 +175,7 @@ bool QQtLogicVideoManagerPrivate::open ( QString devName )
     return true;
 }
 
-bool QQtLogicVideoManagerPrivate::close()
+bool QQtLogicVideoInputPrivate::close()
 {
     timer->stop();
 
@@ -210,7 +210,7 @@ bool QQtLogicVideoManagerPrivate::close()
     return true;
 }
 
-void QQtLogicVideoManagerPrivate::slotSendImageToClient()
+void QQtLogicVideoInputPrivate::slotSendImageToClient()
 {
     if ( fd <= 0 )
         return;

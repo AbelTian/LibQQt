@@ -23,14 +23,14 @@ extern "C" {
 
 #include <qqtimageconverter.h>
 
-class QQtLogicVideoManager;
-class QQtLogicVideoManagerPrivate : public QObject
+class QQtLogicVideoInput;
+class QQtLogicVideoInputPrivate : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit QQtLogicVideoManagerPrivate ( QQtLogicVideoManager* q, QObject* parent = 0 );
-    virtual ~QQtLogicVideoManagerPrivate();
+    explicit QQtLogicVideoInputPrivate ( QQtLogicVideoInput* q, QObject* parent = 0 );
+    virtual ~QQtLogicVideoInputPrivate();
 
     bool open ( QString devName );
     bool close();
@@ -70,8 +70,8 @@ private:
 protected:
 
 private:
-    Q_DECLARE_PUBLIC ( QQtLogicVideoManager )
-    QQtLogicVideoManager* q_ptr;
+    Q_DECLARE_PUBLIC ( QQtLogicVideoInput )
+    QQtLogicVideoInput* q_ptr;
 
     static int sDmmuRefCount;
 };
