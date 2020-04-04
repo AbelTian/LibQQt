@@ -933,11 +933,11 @@ void parseDomNode ( const QDomNode& value, QQtDictionary& parent )
                 {
                     if ( count0 > 1 )
                     {
-                        parent[name0][pos0]["__comments__"] = comment0[0];
+                        parent[name0][pos0]["#comment"] = comment0[0];
                     }
                     else
                     {
-                        parent[name0]["__comments__"] = comment0[0];
+                        parent[name0]["#comment"] = comment0[0];
                     }
                     comment0.clear();
                 }
@@ -985,6 +985,9 @@ void parseDomNode ( const QDomNode& value, QQtDictionary& parent )
                 QString name0 = node1.nodeName();
                 //p3line() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
                 //p3line() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
+                if ( node1.nodeType() == QDomNode::CommentNode )
+                    continue;
+
                 if ( node1.nodeType() == QDomNode::ProcessingInstructionNode )
                     parseDomNode ( node1, parent["__processinginstruction__"][name0] );
                 else
@@ -1096,6 +1099,7 @@ void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDom
                     continue;
                 }
 
+#if 0
                 //4! "#comment" <!--#comment-->
                 if ( key == "#comment" )
                 {
@@ -1117,8 +1121,9 @@ void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDom
                     }
                     continue;
                 }
+#endif
 
-                if ( key == "__comments__" )
+                if ( key == "#comment" )
                     continue;
 
                 //5! dict["person"][0-] <person>a</person> <person>b</person>
@@ -1129,10 +1134,10 @@ void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDom
                     for ( int i = 0; i < srcvalue.getList().size(); i++ )
                     {
                         QList<QQtDictionary>& l = srcvalue.getList();
-#if 1 //__comments__
-                        if ( l[i].getMap().contains ( "__comments__" ) )
+#if 1 //#comment
+                        if ( l[i].getMap().contains ( "#comment" ) )
                         {
-                            QDomComment text = doc.createComment ( l[i]["__comments__"].getValue().toString() );
+                            QDomComment text = doc.createComment ( l[i]["#comment"].getValue().toString() );
                             object.appendChild ( text );
                         }
 #endif
@@ -1146,10 +1151,10 @@ void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDom
                     continue;
                 }
 
-#if 1 //__comments__
-                if ( srcvalue.getMap().contains ( "__comments__" ) )
+#if 1 //#comment
+                if ( srcvalue.getMap().contains ( "#comment" ) )
                 {
-                    QDomComment text = doc.createComment ( srcvalue["__comments__"].getValue().toString() );
+                    QDomComment text = doc.createComment ( srcvalue["#comment"].getValue().toString() );
                     object.appendChild ( text );
                 }
 #endif
