@@ -56,13 +56,9 @@ public:
     {
         JsonData,
         XmlData,
-#ifdef __YAMLSUPPORT__
         YamlData,
-#endif
-#ifdef __INICONTENTSUPPORT__
         IniData,
         PropertiesData,
-#endif
 
         MaxFormat
     };
