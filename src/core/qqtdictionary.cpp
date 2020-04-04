@@ -333,6 +333,7 @@ void QQtDictionary::modChild ( const QString& key, const QQtDictionary& value )
 
 void QQtDictionary::clear()
 {
+    m_type = DictMax;
     m_value.clear();
     m_list.clear();
     m_map.clear();
