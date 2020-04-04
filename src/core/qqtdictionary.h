@@ -194,6 +194,9 @@ public:
     QByteArray toProperties() const;
     void fromProperties ( const QByteArray& properties );
 
+    QByteArray toCSV() const;
+    void fromCSV ( const QByteArray& csv );
+
 signals:
 
 public slots:

@@ -11,26 +11,33 @@
 #include "qdom.h"
 
 //support yaml
+#ifdef __YAMLSUPPORT__
 #include "yaml-cpp/parser.h"
 #include "yaml-cpp/node/node.h"
 #include "yaml-cpp/yaml.h"
+#endif
 
 //support ini
+#ifdef __INICONTENTSUPPORT__
 #include "inifile.h"
+#endif
 
 #include <iostream>
 using namespace std;
 
+#ifdef __INICONTENTSUPPORT__
 QByteArray toIni ( const QQtDictionary& dict );
 void fromIni ( const QByteArray& bytes, QQtDictionary& dict );
-
 QByteArray toProperties ( const QQtDictionary& dict );
 void fromProperties ( const QByteArray& bytes, QQtDictionary& dict );
+#endif
 
+#ifdef __YAMLSUPPORT__
 QByteArray toYAML ( const QQtDictionary& dict );
 void fromYAML ( const QByteArray& yaml, QQtDictionary& dict );
 void parseYamlNodeToDictionary ( const YAML::Node& node, QQtDictionary& object );
 void packDictionaryToYamlNode ( const QQtDictionary& node, YAML::Node& object );
+#endif
 
 QByteArray toJson ( const QQtDictionary& dict, int indent = 0 );
 void fromJson ( const QByteArray& json, QQtDictionary& dict );
@@ -492,6 +499,7 @@ void QQtDictionary::fromXML ( const QByteArray& xml )
     ::fromXML ( xml, *this );
 }
 
+#ifdef __YAMLSUPPORT__
 QByteArray QQtDictionary::toYAML() const
 {
     return ::toYAML ( *this );
@@ -501,7 +509,9 @@ void QQtDictionary::fromYAML ( const QByteArray& yaml )
 {
     ::fromYAML ( yaml, *this );
 }
+#endif
 
+#ifdef __INICONTENTSUPPORT__
 QByteArray QQtDictionary::toINI() const
 {
     return ::toIni ( *this );
@@ -521,6 +531,7 @@ void QQtDictionary::fromProperties ( const QByteArray& properties )
 {
     ::fromProperties ( properties, *this );
 }
+#endif
 
 bool QQtDictionary::operator == ( const QQtDictionary& other ) const
 {
@@ -1172,6 +1183,7 @@ void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDom
     }
 }
 
+#ifdef __INICONTENTSUPPORT__
 QByteArray toIni ( const QQtDictionary& dict )
 {
     const QQtDictionary& node = dict;
@@ -1585,8 +1597,9 @@ void fromProperties ( const QByteArray& bytes, QQtDictionary& dict )
 
     //qDebug() << qPrintable ( dict.toJson ( QJsonDocument::Indented ) );
 }
+#endif
 
-
+#ifdef __YAMLSUPPORT__
 QByteArray toYAML ( const QQtDictionary& dict )
 {
 
@@ -1720,3 +1733,4 @@ void packDictionaryToYamlNode ( const QQtDictionary& node, YAML::Node& object )
     }
 
 }
+#endif

@@ -99,15 +99,19 @@ void QQtDataPersistence::parseContentToDictionary()
         case XmlData:
             mDict.fromXML ( bytes );
             break;
+#ifdef __YAMLSUPPORT__
         case YamlData:
             mDict.fromYAML ( bytes );
             break;
+#endif
+#ifdef __INICONTENTSUPPORT__
         case IniData:
             mDict.fromINI ( bytes );
             break;
         case PropertiesData:
             mDict.fromProperties ( bytes );
             break;
+#endif
         case MaxFormat:
         default:
             break;
@@ -126,15 +130,19 @@ void QQtDataPersistence::packDictionaryToContent ( QByteArray& bytes )
         case XmlData:
             bytes = mDict.toXML ( 4 );
             break;
+#ifdef __YAMLSUPPORT__
         case YamlData:
             bytes = mDict.toYAML ( );
             break;
+#endif
+#ifdef __INICONTENTSUPPORT__
         case IniData:
             bytes = mDict.toINI ( );
             break;
         case PropertiesData:
             bytes = mDict.toProperties ( );
             break;
+#endif
         case MaxFormat:
         default:
             break;
