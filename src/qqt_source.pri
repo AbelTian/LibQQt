@@ -690,18 +690,6 @@ contains (DEFINES, __HIGHGRADE__) {
         $$PWD/highgrade/qqtdatapersistence.cpp
     HEADERS += \
         $$PWD/highgrade/qqtdatapersistence.h
-
-    add_object_class(QQtDataSerialization, $$PWD/highgrade)
-    SOURCES += \
-        $$PWD/highgrade/qqtdataserialization.cpp
-    HEADERS += \
-        $$PWD/highgrade/qqtdataserialization.h
-
-    add_object_class(QQtStandardProtocol, $$PWD/highgrade)
-    SOURCES += \
-        $$PWD/highgrade/qqtstandardprotocol.cpp
-    HEADERS += \
-        $$PWD/highgrade/qqtstandardprotocol.h
 }
 
 include ($$PWD/qqt_3rdparty.pri)
