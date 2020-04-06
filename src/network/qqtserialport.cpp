@@ -1,4 +1,4 @@
-﻿#include "qqtserialport.h"
+#include "qqtserialport.h"
 #include "qqtcore.h"
 
 QQtSerialPort::QQtSerialPort ( QObject* parent ) : QSerialPort ( parent )
@@ -24,7 +24,9 @@ void QQtSerialPort::installProtocol ( QQtProtocol* stack )
 
     connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
               this, SLOT ( slotWriteData ( const QByteArray& ) ) );
+    m_protocol->setClientHandler ( this );
     m_protocol->attach();
+    m_protocol->initializer();
 }
 
 void QQtSerialPort::uninstallProtocol ( QQtProtocol* stack )

@@ -1,4 +1,4 @@
-﻿#include "qqttcpserver.h"
+#include "qqttcpserver.h"
 
 QQtTcpServer::QQtTcpServer ( QObject* parent ) :
     QTcpServer ( parent )
@@ -13,6 +13,61 @@ QQtTcpServer::~QQtTcpServer()
 {
     if ( isListening() )
         close();
+}
+
+void QQtTcpServer::installProtocolManager ( QQtProtocolManager* stackGroup )
+{
+    if ( m_protocolManager )
+        return;
+
+    m_protocolManager = stackGroup;
+    m_protocolManager->setServerHandler ( this );
+}
+
+void QQtTcpServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )
+{
+    Q_UNUSED ( stackGroup )
+
+    if ( !m_protocolManager )
+        return;
+
+    m_protocolManager = NULL;
+}
+
+QQtProtocolManager* QQtTcpServer::installedProtocolManager()
+{
+    return m_protocolManager;
+}
+
+QQtTcpClient* QQtTcpServer::findClientByProtocolInstance ( QQtProtocol* protocol )
+{
+    QListIterator<QQtTcpClient*> itor ( m_clientList );
+    while ( itor.hasNext() )
+    {
+        QQtTcpClient* client = itor.next();
+        QQtProtocol* cprotocol = client->installedProtocol();
+        if ( cprotocol == protocol )
+        {
+            return client;
+        }
+    }
+    return NULL;
+}
+
+QQtTcpClient* QQtTcpServer::findClientByIPAddress ( QString ip, quint16 port )
+{
+    QListIterator<QQtTcpClient*> itor ( m_clientList );
+    while ( itor.hasNext() )
+    {
+        QQtTcpClient* client = itor.next();
+        QString aip = client->peerAddress().toString();
+        quint16 aport = client->peerPort();
+        if ( aip == ip && aport == port )
+        {
+            return client;
+        }
+    }
+    return NULL;
 }
 
 void QQtTcpServer::incomingConnection ( qintptr handle )
@@ -67,58 +122,4 @@ void QQtTcpServer::comingNewConnection()
         clientSocket->installProtocol ( protocol );
         m_clientList.push_back ( clientSocket );
     }
-}
-
-void QQtTcpServer::installProtocolManager ( QQtProtocolManager* stackGroup )
-{
-    if ( m_protocolManager )
-        return;
-
-    m_protocolManager = stackGroup;
-}
-
-void QQtTcpServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )
-{
-    Q_UNUSED ( stackGroup )
-
-    if ( !m_protocolManager )
-        return;
-
-    m_protocolManager = NULL;
-}
-
-QQtProtocolManager* QQtTcpServer::installedProtocolManager()
-{
-    return m_protocolManager;
-}
-
-QQtTcpClient* QQtTcpServer::findClientByProtocolInstance ( QQtProtocol* protocol )
-{
-    QListIterator<QQtTcpClient*> itor ( m_clientList );
-    while ( itor.hasNext() )
-    {
-        QQtTcpClient* client = itor.next();
-        QQtProtocol* cprotocol = client->installedProtocol();
-        if ( cprotocol == protocol )
-        {
-            return client;
-        }
-    }
-    return NULL;
-}
-
-QQtTcpClient* QQtTcpServer::findClientByIPAddress ( QString ip, quint16 port )
-{
-    QListIterator<QQtTcpClient*> itor ( m_clientList );
-    while ( itor.hasNext() )
-    {
-        QQtTcpClient* client = itor.next();
-        QString aip = client->peerAddress().toString();
-        quint16 aport = client->peerPort();
-        if ( aip == ip && aport == port )
-        {
-            return client;
-        }
-    }
-    return NULL;
 }

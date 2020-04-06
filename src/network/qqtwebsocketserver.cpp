@@ -1,7 +1,8 @@
-﻿#include "qqtwebsocketserver.h"
+#include "qqtwebsocketserver.h"
 
-QQtWebSocketServer::QQtWebSocketServer ( const QString& serverName, SslMode secureMode,
-                                         QObject* parent ) : QWebSocketServer ( serverName, secureMode, parent )
+QQtWebSocketServer::QQtWebSocketServer ( const QString& serverName,
+                                         SslMode secureMode, QObject* parent )
+    : QWebSocketServer ( serverName, secureMode, parent )
 {
     connect ( this, SIGNAL ( newConnection() ),
               this, SLOT ( comingNewConnection() ) );
@@ -15,6 +16,7 @@ void QQtWebSocketServer::installProtocolManager ( QQtProtocolManager* stackGroup
         return;
 
     m_protocolManager = stackGroup;
+    m_protocolManager->setServerHandler ( this );
 }
 
 void QQtWebSocketServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )

@@ -41,7 +41,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QTextBrowser" name="textBrowser_2"/>
+         <widget class="QTextBrowser" name="textBrowser"/>
         </item>
        </layout>
       </widget>
@@ -51,7 +51,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QTextBrowser" name="textBrowser_3"/>
+         <widget class="QTextBrowser" name="textBrowser_2"/>
         </item>
        </layout>
       </widget>
@@ -61,7 +61,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <widget class="QTextBrowser" name="textBrowser_4"/>
+         <widget class="QTextBrowser" name="textBrowser_3"/>
         </item>
        </layout>
       </widget>
@@ -71,7 +71,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <widget class="QTextBrowser" name="textBrowser_5"/>
+         <widget class="QTextBrowser" name="textBrowser_4"/>
         </item>
        </layout>
       </widget>
@@ -81,7 +81,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_7">
         <item>
-         <widget class="QTextBrowser" name="textBrowser_6"/>
+         <widget class="QTextBrowser" name="textBrowser_5"/>
         </item>
        </layout>
       </widget>
@@ -91,7 +91,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QTextBrowser" name="textBrowser">
+         <widget class="QTextBrowser" name="textBrowser_6">
           <property name="html">
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -208,7 +208,7 @@ p, li { white-space: pre-wrap; }
       </item>
       <item>
        <property name="text">
-        <string>.yaml</string>
+        <string>.yaml .yml</string>
        </property>
       </item>
       <item>

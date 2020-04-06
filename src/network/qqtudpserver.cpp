@@ -1,4 +1,4 @@
-﻿#include "qqtudpserver.h"
+#include "qqtudpserver.h"
 
 QQtUdpServer::QQtUdpServer ( QObject* parent ) : QQtUdpClient ( parent )
 {
@@ -11,6 +11,7 @@ void QQtUdpServer::installProtocolManager ( QQtProtocolManager* stackGroup )
         return;
 
     m_protocolManager = stackGroup;
+    m_protocolManager->setServerHandler ( this );
 }
 
 void QQtUdpServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )

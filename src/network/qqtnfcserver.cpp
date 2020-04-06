@@ -16,6 +16,7 @@ void QQtNfcServer::installProtocolManager ( QQtProtocolManager* stackGroup )
     if ( m_protocolManager )
         return;
     m_protocolManager = stackGroup;
+    m_protocolManager->setServerHandler ( this );
 }
 
 void QQtNfcServer::uninstallProtocolManager ( QQtProtocolManager* stackGroup )

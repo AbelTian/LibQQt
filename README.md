@@ -99,7 +99,7 @@ github link: https://github.com/AbelTian/LibQQt
         - 一个句柄代表一个和外部通信的节点。  
      - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)  
         - 在协议里总是用这个报文的临时句柄，用来解协议包和压协议包。
-     - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) QQtWebSocketProtocol [QQtProtocolManager](src/network/qqtprotocolmanager.h) 
+     - 协议虚类（接口类） [QQtProtocol](src/network/qqtprotocol.h) [QQtProtocolManager](src/network/qqtprotocolmanager.h)
         - 程序业务代码就是依靠这个协议句柄进行通信工作的。  
 7. 添加应用中常用的form
     - *全在frame文件夹*

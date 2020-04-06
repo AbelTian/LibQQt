@@ -13,6 +13,11 @@ contains (DEFINES, __INICONTENTSUPPORT__) {
             $$PWD/core/inifile/qqtiniparser.h
 }
 
+#DEFINES += __STD_UTF8_CPP_SUPPORT__
+#contains (DEFINES, __STD_UTF8_CPP_SUPPORT__) {
+#    include ($$PWD/core/utf8_cpp/utf8_cpp.pri)
+#}
+
 #yaml
 #注释：在qqt_header.pri打开 DEFINES += __YAMLSUPPORT__
 DEFINES += __YAMLSUPPORT__
@@ -25,7 +30,7 @@ contains (DEFINES, __YAMLSUPPORT__) {
 #TODO: macOS runtime crash
 contains (DEFINES, __PLUGINSUPPORT__) {
     #MinGW64 doesn't support contains(||) and contains(|) 任何层pro、pri都不支持。
-    #contains(QSYS_PRIVATE, Win32|Windows|Win64 || MSVC32|MSVC|MSVC64) {
+    #contains(QSYS_PRIVATE, Win32|Windows|Win64|MSVC32|MSVC|MSVC64) {
     win32{
         wince*: SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_wince.cpp
         else:  SOURCES += $$PWD/pluginsupport/devicewatcher/qdevicewatcher_win32.cpp
@@ -176,25 +181,25 @@ contains (DEFINES, __EXQUISITE__) {
 
 #multimedia
 contains (DEFINES, __MULTIMEDIA__) {
+    INCLUDEPATH += $${PWD}/multimedia/libqwav
+    INCLUDEPATH += $${PWD}/multimedia/dmmu
+
+    contains (DEFINES, __QQTAUDIOSUPPORT__){
+        #wav audio
+        SOURCES += $$PWD/multimedia/libqwav/libqwav.cpp
+        HEADERS += $$PWD/multimedia/libqwav/libqwav.h
+        HEADERS += $$PWD/multimedia/libqwav/libqwav_global.h
+    }
+
     contains (DEFINES, __LOGICCAMERAMODULE__) {
         #dmmu support
         #arm mips
         #TODO: +wince +android +ios +macOS +win +linux
-        equals(QSYS_PRIVATE, Embedded) {
-            SOURCES += $$PWD/multimedia/dmmu/dmmu.c
-            HEADERS += $$PWD/multimedia/dmmu/dmmu.h \
-                        $$PWD/multimedia/dmmu/jz_cim.h \
-                        $$PWD/multimedia/dmmu/graphics.h \
-                        $$PWD/multimedia/dmmu/hal.h
-
-            #logic video manager
-            SOURCES += $$PWD/multimedia/qqtlogicvideomanager.cpp
-            HEADERS += $$PWD/multimedia/qqtlogicvideomanager.h
-
-            SOURCES += $$PWD/multimedia/qqtlogicpreviewwidget.cpp
-            HEADERS += $$PWD/multimedia/qqtlogicpreviewwidget.h
-            FORMS += $$PWD/multimedia/qqtlogicpreviewwidget.ui
-        }
+        SOURCES += $$PWD/multimedia/dmmu/dmmu.c
+        HEADERS += $$PWD/multimedia/dmmu/dmmu.h \
+                    $$PWD/multimedia/dmmu/jz_cim.h \
+                    $$PWD/multimedia/dmmu/graphics.h \
+                    $$PWD/multimedia/dmmu/hal.h
     }
 }
 

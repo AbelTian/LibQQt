@@ -1,4 +1,4 @@
-﻿#ifndef QQTMESSAGE_H
+#ifndef QQTMESSAGE_H
 #define QQTMESSAGE_H
 
 #include <QObject>
@@ -11,7 +11,8 @@ class QQTSHARED_EXPORT QQtMessage : public QObject
 {
     Q_OBJECT
 public:
-    inline explicit QQtMessage ( QObject* parent = 0 ) : QObject ( parent ) {}
+    inline explicit QQtMessage ( QObject* parent = 0 )
+        : QObject ( parent ) {}
     inline virtual ~QQtMessage() {}
 public:
     /**

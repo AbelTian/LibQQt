@@ -1,4 +1,4 @@
-﻿#ifndef QQTPROTOCOL_H
+#ifndef QQTPROTOCOL_H
 #define QQTPROTOCOL_H
 
 #include <QObject>
@@ -74,6 +74,20 @@ signals:
      */
     void notifyToProtocolManager ( const QQtProtocol* self, const QQtMessage* message );
 
+    /**
+     * 用户使用
+     * optional
+     * reset函数 = clear = clean = init函数
+     * 用于对Protocol句柄进行初始化成员变量。
+     * 这个函数会在被安装到客户端句柄的时候使用，会有作用。
+     */
+public:
+    inline virtual void initializer() {}
+
+    /*
+     * 以下函数，与用户无关。
+     */
+
 signals:
     //句柄被使用和废弃不用都会发射状态改变信号。
     //status
@@ -99,20 +113,33 @@ public:
 protected:
     bool mIsDetached;
 
-    /**
-     * 用户使用
-     * optional
-     * reset函数 = clear = clean = init函数
-     * 用于对Protocol句柄进行初始化成员变量。
-     * 这个函数会在被安装到客户端句柄的时候使用，会有作用。
-     */
+#if 1 //没有使用意义，不建议用户使用。
 public:
-    inline virtual void initializer() {}
 
-    /*
-     * 以下函数，与用户无关。
-     */
-    //
+    //通信工具句柄。必然有值。
+    QObject* handler() {
+        return mHandler;
+    }
+    //通信工具句柄。必然有值。
+    QObject* getHandler() {
+        return mHandler;
+    }
+    //在服务器通信工具句柄安装协议句柄的时候会调用。
+    void setHandler ( QObject* o ) {
+        mHandler = o;
+    }
+    //通信工具句柄。必然有值。
+    QObject* getClientHandler() {
+        return mHandler;
+    }
+    //在客户端通信工具句柄安装协议句柄的时候会调用。
+    void setClientHandler ( QObject* o ) {
+        mHandler = o;
+    }
+private:
+    QObject* mHandler;
+
+#endif
 };
 
 #endif // QQTPROTOCOL_H

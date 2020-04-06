@@ -1,4 +1,4 @@
-﻿#ifndef QQTFRAMEDEFINE_H
+#ifndef QQTFRAMEDEFINE_H
 #define QQTFRAMEDEFINE_H
 
 
@@ -16,8 +16,11 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QDir>
-#include <qqt-local.h>
+
+#include <qqtcore.h>
 #include <qqtsql.h>
+#include <qqt-local.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -105,6 +108,9 @@ enum
 #define conf_log(file)   QDir(CONFIG_ROOT).absoluteFilePath(QString("%1/%2").arg(LOG_PATH).arg(file))
 #define conf_cache(file) QDir(CONFIG_ROOT).absoluteFilePath(QString("%1/%2").arg(CACHE_PATH).arg(file))
 #endif
+
+#define p3time() pline() << qPrintable(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss zzz"))
+#define p3line() qDebug() << qPrintable(QString(__FILE__).split('/').last()) << qPrintable(QString("%1").arg(__LINE__, 3, 10)) << __func__
 
 extern QString gUserName;
 extern QString gPassword;

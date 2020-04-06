@@ -11,12 +11,50 @@
 #include "qdom.h"
 
 //support yaml
-#include "yaml_cpp.h"
+#ifdef __YAMLSUPPORT__
+#include "yaml-cpp/parser.h"
+#include "yaml-cpp/node/node.h"
+#include "yaml-cpp/yaml.h"
+#endif
 
 //support ini
-#include "qqtiniparser.h"
+#ifdef __INICONTENTSUPPORT__
+#include "inifile.h"
+#endif
 
+#include <iostream>
+using namespace std;
+
+#ifdef __INICONTENTSUPPORT__
+QByteArray toIni ( const QQtDictionary& dict );
+void fromIni ( const QByteArray& bytes, QQtDictionary& dict );
+QByteArray toProperties ( const QQtDictionary& dict );
+void fromProperties ( const QByteArray& bytes, QQtDictionary& dict );
+#endif
+
+#ifdef __YAMLSUPPORT__
+QByteArray toYAML ( const QQtDictionary& dict );
+void fromYAML ( const QByteArray& yaml, QQtDictionary& dict );
+void parseYamlNodeToDictionary ( const YAML::Node& node, QQtDictionary& object );
+void packDictionaryToYamlNode ( const QQtDictionary& node, YAML::Node& object );
+#endif
+
+QByteArray toJson ( const QQtDictionary& dict, int indent = 0 );
+void fromJson ( const QByteArray& json, QQtDictionary& dict );
+void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
+void packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result );
+
+QByteArray toXML ( const QQtDictionary& dict, int indent = -1 );
+void fromXML ( const QByteArray& xml, QQtDictionary& dict );
+void parseDomNode ( const QDomNode& value, QQtDictionary& parent );
+void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc );
+
+//#define LOCAL_DEBUG
+#ifdef LOCAL_DEBUG
+#define p3line() p2line()
+#else
 #define p3line() QNoDebug()
+#endif
 
 QQtDictionary::QQtDictionary ()
 {
@@ -302,6 +340,7 @@ void QQtDictionary::modChild ( const QString& key, const QQtDictionary& value )
 
 void QQtDictionary::clear()
 {
+    m_type = DictMax;
     m_value.clear();
     m_list.clear();
     m_map.clear();
@@ -309,11 +348,13 @@ void QQtDictionary::clear()
 
 void QQtDictionary::remove ( int index )
 {
+    m_type = DictList;
     m_list.removeAt ( index );
 }
 
 void QQtDictionary::remove ( const QString& key )
 {
+    m_type = DictMap;
     m_map.remove ( key );
 }
 
@@ -370,6 +411,20 @@ QQtDictionary& QQtDictionary::operator [] ( const QString& key )
     return m_map.operator [] ( key );
 }
 
+QQtDictionary& QQtDictionary::operator = ( const QList<QString>& list )
+{
+    m_type = DictList;
+
+    m_list.clear();
+    QListIterator<QString> itor ( list );
+    while ( itor.hasNext() )
+    {
+        const QString& key = itor.next();
+        m_list.push_back ( QQtDictionary ( key ) );
+    }
+    return *this;
+}
+
 QQtDictionary& QQtDictionary::operator = ( const QMap<QString, QQtDictionary>& map )
 {
     m_type = DictMap;
@@ -412,6 +467,7 @@ QQtDictionary& QQtDictionary::operator = ( const QQtDictionary& other )
     return *this;
 }
 
+
 QQtDictionary& QQtDictionary::operator = ( const QVariant& value )
 {
     m_type = DictValue;
@@ -419,47 +475,32 @@ QQtDictionary& QQtDictionary::operator = ( const QVariant& value )
     return *this;
 }
 
-QByteArray QQtDictionary::toXML ( int intent )
+QByteArray QQtDictionary::toJson ( QJsonDocument::JsonFormat format ) const
 {
-    QDomDocument doc;
-    packDictionaryToDomNode ( *this, doc, doc );
-    return doc.toByteArray ( intent );
+    int indent = 0;
+    if ( format != QJsonDocument::Compact )
+        indent = 1;
+
+    return ::toJson ( *this, indent );
+}
+
+void QQtDictionary::fromJson ( const QByteArray& json )
+{
+    ::fromJson ( json, *this );
+}
+
+QByteArray QQtDictionary::toXML ( int indent ) const
+{
+    return ::toXML ( *this, indent );
 }
 
 void QQtDictionary::fromXML ( const QByteArray& xml )
 {
-    QString errorStr;
-    int errorLine;
-    int errorCol;
-
-    QDomDocument doc;
-    if ( !doc.setContent ( xml, true, &errorStr,
-                           &errorLine, &errorCol ) )
-    {
-        qDebug() << "errorStr:" << errorStr;
-        qDebug() << "errorLine:" << errorLine <<
-                 "  errorCol:" << errorCol;
-        return;
-    }
-
-    //-1 ---> 4 代表缩进
-    //p3line() << qPrintable ( doc.toString ( -2 ) );
-#if 0
-    if ( !doc.setContent ( doc.toByteArray ( -1 ), true, &errorStr,
-                           &errorLine, &errorCol ) )
-    {
-        qDebug() << "errorStr:" << errorStr;
-        qDebug() << "errorLine:" << errorLine <<
-                 "  errorCol:" << errorCol;
-        return;
-    }
-#endif
-
-    //QDomElement root = doc.documentElement();
-    parseDomNode ( doc, *this );
+    ::fromXML ( xml, *this );
 }
 
-QByteArray QQtDictionary::toYAML()
+#ifdef __YAMLSUPPORT__
+QByteArray QQtDictionary::toYAML() const
 {
     return ::toYAML ( *this );
 }
@@ -468,8 +509,10 @@ void QQtDictionary::fromYAML ( const QByteArray& yaml )
 {
     ::fromYAML ( yaml, *this );
 }
+#endif
 
-QByteArray QQtDictionary::toINI()
+#ifdef __INICONTENTSUPPORT__
+QByteArray QQtDictionary::toINI() const
 {
     return ::toIni ( *this );
 }
@@ -479,7 +522,7 @@ void QQtDictionary::fromINI ( const QByteArray& ini )
     ::fromIni ( ini, *this );
 }
 
-QByteArray QQtDictionary::toProperties()
+QByteArray QQtDictionary::toProperties() const
 {
     return ::toProperties ( *this );
 }
@@ -488,454 +531,7 @@ void QQtDictionary::fromProperties ( const QByteArray& properties )
 {
     ::fromProperties ( properties, *this );
 }
-
-QByteArray QQtDictionary::toJson ( QJsonDocument::JsonFormat format )
-{
-    //node -> QJsonValue -> QJsonDocument
-    QJsonValue value;
-    packDictionaryToJsonValue ( *this, value );
-    QJsonDocument doc = QJsonDocument::fromVariant ( value.toVariant() );
-    QByteArray result = doc.toJson ( format );
-    return result;
-}
-
-void QQtDictionary::fromJson ( const QByteArray& json )
-{
-    QJsonParseError error;
-    QJsonDocument doc = QJsonDocument::fromJson ( json, &error );
-    //p3line() << doc;
-    if ( error.error != QJsonParseError::NoError )
-    {
-        pline() << error.errorString();
-        return;
-    }
-    if ( doc.isNull() || doc.isEmpty() )
-    {
-        pline() << "json is " << doc.isNull() << doc.isEmpty();
-        return;
-    }
-
-    QJsonValue root = QJsonValue::fromVariant ( doc.toVariant() );
-
-    parseJsonValue ( root, *this );
-}
-
-void QQtDictionary::parseJsonValue ( const QJsonValue& value, QQtDictionary& parent )
-{
-    switch ( value.type() )
-    {
-        case QJsonValue::Null:
-            //p3line() << "null json value" << value;
-            parent = QJsonValue();
-            break;
-        case QJsonValue::Undefined:
-            pline() << "undefined json value" << value;
-            break;
-        case QJsonValue::Bool:
-            parent = value.toBool();
-            break;
-        case QJsonValue::Double:
-            parent = value.toDouble();
-            break;
-        case QJsonValue::String:
-            parent = value.toString();
-            break;
-        case QJsonValue::Array:
-        {
-            QJsonArray array = value.toArray();
-            if ( array.size() <= 0 )
-            {
-                parent = QQtDictionary ( DictList );
-                break;
-            }
-            for ( int i = 0; i < array.size(); i++ )
-            {
-                //list，按照顺序为parent节点增加孩子。
-                QJsonValueRef value = array[i];
-                parseJsonValue ( value, parent[i] );
-            }
-            break;
-        }
-        case QJsonValue::Object:
-        {
-            QJsonObject obj = value.toObject();
-            if ( obj.size() <= 0 )
-            {
-                parent = QQtDictionary ( DictMap );
-                break;
-            }
-            QJsonObject::Iterator itor ( &obj, 0 );
-            while ( itor != obj.end() )
-            {
-                //MAP，parent节点，给parent节点增加孩子
-                QJsonValueRef value = itor.value();
-                parseJsonValue ( value, parent[itor.key()] );
-                itor++;
-            }
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-void QQtDictionary::packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result )
-{
-    switch ( node.getType() )
-    {
-        case DictValue:
-        {
-            //null, bool, double, string
-            p3line() << node.getValue().type();
-            if ( node.getValue() == QVariant ( QJsonValue() ) )
-            {
-                result = QJsonValue();
-            }
-            else if ( node.getValue().type() == QVariant::Bool )
-            {
-                result = QJsonValue ( node.getValue().toBool() );
-            }
-            else if ( node.getValue().type() == QVariant::Double )
-            {
-                result = QJsonValue ( node.getValue().toDouble() );
-            }
-            else if ( node.getValue().type() == QVariant::String )
-            {
-                result = QJsonValue ( node.getValue().toString() );
-            }
-            break;
-        }
-        case DictList:
-        {
-            //"name":[a, b, ...]
-            QJsonArray array;
-            for ( int i = 0; i < node.getList().size(); i++ )
-            {
-                QList<QQtDictionary>& l = node.getList();
-                QJsonValue value;
-                packDictionaryToJsonValue ( l[i], value );
-                //array.append ( value );
-                array.push_back ( value );
-            }
-            result = array;
-            break;
-        }
-        case DictMap:
-        {
-            //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
-            QJsonObject object;
-            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
-            {
-                //QMap<QString, QQtDictionary>& m = node.getMap();
-                const QString& key = itor.key();
-                const QQtDictionary& srcvalue = itor.value();
-                QJsonValue value;
-                packDictionaryToJsonValue ( srcvalue, value );
-                object.insert ( key, value );
-            }
-            result = object;
-            break;
-        }
-        case DictMax:
-        default:
-            break;
-    }
-}
-
-void QQtDictionary::parseDomNode ( const QDomNode& value, QQtDictionary& parent )
-{
-    p3line() << value.nodeName() << value.nodeType() << value.nodeValue();
-
-    switch ( value.nodeType() )
-    {
-        case QDomNode::CommentNode: //8
-        {
-            //#comment
-            QString name0 = value.nodeName();
-            QString value0  = value.nodeValue();
-            //p3line() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
-            parent = value0;
-        }
-        break;
-        case QDomNode::AttributeNode: //2
-        {
-            //<element key=value>
-            QString name0 = value.nodeName();
-            QString value0  = value.nodeValue();
-            //p3line() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
-            parent = value0;
-        }
-        break;
-        case QDomNode::TextNode: //3
-        {
-            //#text
-            QString name0 = value.nodeName();
-            QString value0  = value.nodeValue();
-            //p3line() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
-            parent = value0;
-        }
-        break;
-        case QDomNode::ElementNode: //1
-        {
-            /**
-             * <person a="0">liu kai</person>           dict["person"]
-             *                                          dict["person"]["__attributes__"]
-             *                                          dict["person"]["#text"]
-             * ----------------------------------------------------------------------------
-             * <person a="0">
-             *     <sub-person2 b="0">BBB</sub-person2>
-             *     <sub-person b="0">AAA</sub-person>   dict["person"]["sub-person"]["__attributes__"]
-             * </person>                                dict["person"]["sub-person"]["#text"]
-             * -----------------------------------------------------------------------------
-             */
-
-            //attri [__attributes__], key=value
-            QDomNamedNodeMap attrs = value.attributes();
-            for ( int i = 0; i < attrs.size(); i++ )
-            {
-                QDomNode node3 = attrs.item ( i );
-                QString name0 = node3.nodeName();
-                //p3line() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
-                //p3line() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
-                parseDomNode ( node3, parent["__attributes__"][name0] );
-            }
-
-
-            //child [+text], key=value
-            QDomNodeList childs = value.childNodes();
-
-            //check count
-            //dict[item]["count"]
-            //dict[item]["pos"]
-            QQtDictionary node_count;
-            for ( int i = 0; i < childs.size(); i++ )
-            {
-                QDomNode node3 = childs.item ( i );
-                QString name0 = node3.nodeName();
-                node_count[name0]["count"] = 0;
-                node_count[name0]["pos"] = 0;
-            }
-            for ( int i = 0; i < childs.size(); i++ )
-            {
-                QDomNode node3 = childs.item ( i );
-                QString name0 = node3.nodeName();
-                node_count[name0]["count"] = node_count[name0]["count"].getValue().toInt () + 1;
-            }
-
-            for ( int i = 0; i < childs.size(); i++ )
-            {
-                QDomNode node3 = childs.item ( i );
-                QString name0 = node3.nodeName();
-                //p3line() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
-                //p3line() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
-                int count0 = node_count[name0]["count"].getValue().toInt();
-                int pos0 = node_count[name0]["pos"].getValue().toInt();
-                //p3line() << count0 << pos0;
-                if ( count0 > 1 )
-                {
-                    parseDomNode ( node3, parent[name0][pos0] );
-                    node_count[name0]["pos"] = pos0 + 1;
-                }
-                else
-                    parseDomNode ( node3, parent[name0] );
-            }
-        }
-        break;
-        case QDomNode::ProcessingInstructionNode: //7
-        {
-            //<?xml ... ?>
-            QDomProcessingInstruction pi0 = value.toProcessingInstruction();
-            //p3line() << pi0.target() << pi0.data();
-            parent = pi0.data();
-
-#if 0
-            //NO DATA
-            //attri [__attributes__], key=value
-            QDomNamedNodeMap attrs = value.attributes();
-            for ( int i = 0; i < attrs.size(); i++ )
-            {
-                QDomNode node3 = attrs.item ( i );
-                QString name0 = node3.nodeName();
-                //p3line() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
-                //p3line() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
-                parseDomNode ( node3, parent["__attributes__"][name0] );
-            }
 #endif
-
-        }
-        break;
-        case QDomNode::DocumentNode: //9
-        {
-            QDomNodeList childs = value.childNodes();
-            for ( int i = 0; i < childs.size(); i++ )
-            {
-                QDomNode node1 = childs.item ( i );
-                QString name0 = node1.nodeName();
-                //p3line() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
-                //p3line() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
-                if ( node1.nodeType() == QDomNode::ProcessingInstructionNode )
-                    parseDomNode ( node1, parent["__processinginstruction__"][name0] );
-                else
-                    parseDomNode ( node1, parent[name0] );
-            }
-        }
-        break;
-        case QDomNode::EntityNode:
-        default:
-        {
-            QString name0 = value.nodeName();
-            QString value0  = value.nodeValue();
-            pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
-            parent = value0;
-        }
-        break;
-    }
-}
-
-void QQtDictionary::packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc )
-{
-    switch ( node.getType() )
-    {
-        case DictValue:
-        {
-            //null, bool, double, string
-            p3line() << node.getValue().type();
-            QDomNode& object = result;
-            QDomText text = doc.createTextNode ( node.getValue().toString() );
-            object.appendChild ( text );
-            break;
-        }
-        case DictList:
-        {
-            //<book a="1"> ... </book>
-            //<book a="2"> ... </book>
-            QDomNode& object = result;
-            for ( int i = 0; i < node.getList().size(); i++ )
-            {
-                QList<QQtDictionary>& l = node.getList();
-                QString nodeName = object.nodeName();//error，这个位置好像来不了。
-                QDomElement value = doc.createElement ( nodeName );
-                packDictionaryToDomNode ( l[i], value, doc );
-                object.appendChild ( value );
-            }
-            break;
-        }
-        case DictMap:
-        {
-            //<person a="1">
-            //  <sub-person b="10"> </sub-person>
-            //  <sub-person2 b="11"> </sub-person2>
-            //</person>
-            QDomNode& object = result;
-
-            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
-            {
-                //QMap<QString, QQtDictionary>& m = node.getMap();
-                const QString& key = itor.key();
-                const QQtDictionary& srcvalue = itor.value();
-
-                //1! "__processinginstruction__" <?xml version='1.0' encoding='UTF-8'?>
-                if ( key == "__processinginstruction__" )
-                {
-                    //"xml"
-                    for ( QMap<QString, QQtDictionary>::Iterator itor2 = srcvalue.getMap().begin();
-                          itor2 != srcvalue.getMap().end(); itor2++ )
-                    {
-                        const QString& key2 = itor2.key();
-                        const QQtDictionary& srcvalue2 = itor2.value();
-                        QDomProcessingInstruction node0 = doc.createProcessingInstruction ( key2, srcvalue2.getValue().toString() );
-                        object.appendChild ( node0 );
-                    }
-                    continue;
-                }
-            }
-
-            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
-            {
-                //QMap<QString, QQtDictionary>& m = node.getMap();
-                const QString& key = itor.key();
-                const QQtDictionary& srcvalue = itor.value();
-
-                if ( key == "__processinginstruction__" )
-                    continue;
-
-                //2! "__attributes__" <Person attr-key="attr-value"> </Person>
-                if ( key == "__attributes__" )
-                {
-                    //"attributes" key = value
-                    for ( QMap<QString, QQtDictionary>::Iterator itor2 = srcvalue.getMap().begin();
-                          itor2 != srcvalue.getMap().end(); itor2++ )
-                    {
-                        const QString& key2 = itor2.key();
-                        const QQtDictionary& srcvalue2 = itor2.value();
-                        QDomElement e0 = object.toElement();
-                        e0.setAttribute ( key2, srcvalue2.getValue().toString() );
-                    }
-                    continue;
-                }
-
-                //3! "#text" <Person>#text</Person>
-                if ( key == "#text" )
-                {
-                    //"text"
-                    const QString& value2 = srcvalue.getValue().toString();
-                    QDomText text = doc.createTextNode ( value2 );
-                    object.appendChild ( text );
-                    continue;
-                }
-
-                //4! "#comment" <!--#comment-->
-                if ( key == "#comment" )
-                {
-                    //only one
-                    if ( srcvalue.getType() == DictValue )
-                    {
-                        const QString& value2 = srcvalue.getValue().toString();
-                        QDomComment text = doc.createComment ( value2 );
-                        object.appendChild ( text );
-                        continue;
-                    }
-
-                    //multiple
-                    for ( int i = 0; i < srcvalue.getList().size(); i++ )
-                    {
-                        QList<QQtDictionary>& l = srcvalue.getList();
-                        QDomComment text = doc.createComment ( l[i].getValue().toString() );
-                        object.appendChild ( text );
-                    }
-                    continue;
-                }
-
-                //5! dict["person"][0-] <person>a</person> <person>b</person>
-                if ( srcvalue.getType() == DictList )
-                {
-#if 1
-                    //list一定在map里面发生。
-                    for ( int i = 0; i < srcvalue.getList().size(); i++ )
-                    {
-                        QList<QQtDictionary>& l = srcvalue.getList();
-                        QDomElement value = doc.createElement ( key );
-                        packDictionaryToDomNode ( l[i], value, doc );
-                        object.appendChild ( value );
-                    }
-#else
-                    packDictionaryToDomNode ( srcvalue, object, doc, key );
-#endif
-                    continue;
-                }
-
-                //6! dict[key][child node] <book>...</book>
-                QDomElement value = doc.createElement ( key );
-                packDictionaryToDomNode ( srcvalue, value, doc );
-                object.appendChild ( value );
-            }
-            break;
-        }
-        case DictMax:
-        default:
-            break;
-    }
-}
 
 bool QQtDictionary::operator == ( const QQtDictionary& other ) const
 {
@@ -1046,3 +642,1095 @@ QDebug operator<< ( QDebug dbg, const QQtDictionary& d )
     return dbg;
 }
 
+
+QByteArray toJson ( const QQtDictionary& dict, int indent )
+{
+    //node -> QJsonValue -> QJsonDocument
+    QJsonValue value;
+    packDictionaryToJsonValue ( dict, value );
+    QJsonDocument doc = QJsonDocument::fromVariant ( value.toVariant() );
+    QJsonDocument::JsonFormat format = QJsonDocument::Compact;
+    if ( indent > 0 )
+        format = QJsonDocument::Indented;
+    QByteArray result = doc.toJson ( format );
+    return result;
+}
+
+void fromJson ( const QByteArray& json, QQtDictionary& dict )
+{
+    QJsonParseError error;
+    QJsonDocument doc = QJsonDocument::fromJson ( json, &error );
+    //p3line() << doc;
+    if ( error.error != QJsonParseError::NoError )
+    {
+        pline() << error.errorString();
+        return;
+    }
+    if ( doc.isNull() || doc.isEmpty() )
+    {
+        pline() << "json is " << doc.isNull() << doc.isEmpty();
+        return;
+    }
+
+    QJsonValue root = QJsonValue::fromVariant ( doc.toVariant() );
+
+    parseJsonValue ( root, dict );
+}
+
+void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent )
+{
+    switch ( value.type() )
+    {
+        case QJsonValue::Null:
+            //p3line() << "null json value" << value;
+            parent = QJsonValue();
+            break;
+        case QJsonValue::Undefined:
+            pline() << "undefined json value" << value;
+            break;
+        case QJsonValue::Bool:
+            parent = value.toBool();
+            break;
+        case QJsonValue::Double:
+            parent = value.toDouble();
+            break;
+        case QJsonValue::String:
+            parent = value.toString();
+            break;
+        case QJsonValue::Array:
+        {
+            QJsonArray array = value.toArray();
+            if ( array.size() <= 0 )
+            {
+                parent = QQtDictionary ( QQtDictionary::DictList );
+                break;
+            }
+            for ( int i = 0; i < array.size(); i++ )
+            {
+                //list，按照顺序为parent节点增加孩子。
+                QJsonValueRef value = array[i];
+                parseJsonValue ( value, parent[i] );
+            }
+            break;
+        }
+        case QJsonValue::Object:
+        {
+            QJsonObject obj = value.toObject();
+            if ( obj.size() <= 0 )
+            {
+                parent = QQtDictionary ( QQtDictionary::DictMap );
+                break;
+            }
+            QJsonObject::Iterator itor ( &obj, 0 );
+            while ( itor != obj.end() )
+            {
+                //MAP，parent节点，给parent节点增加孩子
+                QJsonValueRef value = itor.value();
+                parseJsonValue ( value, parent[itor.key()] );
+                itor++;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result )
+{
+    switch ( node.getType() )
+    {
+        case QQtDictionary::DictValue:
+        {
+            //null, bool, double, string
+            p3line() << node.getValue().type();
+            if ( node.getValue() == QVariant ( QJsonValue() ) )
+            {
+                result = QJsonValue();
+            }
+            else if ( node.getValue().type() == QVariant::Bool )
+            {
+                result = QJsonValue ( node.getValue().toBool() );
+            }
+            else if ( node.getValue().type() == QVariant::Double )
+            {
+                result = QJsonValue ( node.getValue().toDouble() );
+            }
+            else if ( node.getValue().type() == QVariant::String )
+            {
+                result = QJsonValue ( node.getValue().toString() );
+            }
+            else
+            {
+                result = QJsonValue::fromVariant ( node.getValue() );
+            }
+            break;
+        }
+        case QQtDictionary::DictList:
+        {
+            //"name":[a, b, ...]
+            QJsonArray array;
+            for ( int i = 0; i < node.getList().size(); i++ )
+            {
+                QList<QQtDictionary>& l = node.getList();
+                QJsonValue value;
+                packDictionaryToJsonValue ( l[i], value );
+                //array.append ( value );
+                array.push_back ( value );
+            }
+            result = array;
+            break;
+        }
+        case QQtDictionary::DictMap:
+        {
+            //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
+            QJsonObject object;
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& key = itor.key();
+                const QQtDictionary& srcvalue = itor.value();
+                QJsonValue value;
+                packDictionaryToJsonValue ( srcvalue, value );
+                object.insert ( key, value );
+            }
+            result = object;
+            break;
+        }
+        case QQtDictionary::DictMax:
+        default:
+            break;
+    }
+}
+
+QByteArray toXML ( const QQtDictionary& dict, int intent )
+{
+    QDomDocument doc;
+    packDictionaryToDomNode ( dict, doc, doc );
+    return doc.toByteArray ( intent );
+}
+
+void fromXML ( const QByteArray& xml, QQtDictionary& dict )
+{
+    QString errorStr;
+    int errorLine;
+    int errorCol;
+
+    QDomDocument doc;
+    if ( !doc.setContent ( xml, true, &errorStr,
+                           &errorLine, &errorCol ) )
+    {
+        qDebug() << "errorStr:" << errorStr;
+        qDebug() << "errorLine:" << errorLine <<
+                 "  errorCol:" << errorCol;
+        return;
+    }
+
+    //-1 ---> 4 代表缩进
+    //p3line() << qPrintable ( doc.toString ( -2 ) );
+#if 0
+    if ( !doc.setContent ( doc.toByteArray ( -1 ), true, &errorStr,
+                           &errorLine, &errorCol ) )
+    {
+        qDebug() << "errorStr:" << errorStr;
+        qDebug() << "errorLine:" << errorLine <<
+                 "  errorCol:" << errorCol;
+        return;
+    }
+#endif
+
+    //QDomElement root = doc.documentElement();
+    parseDomNode ( doc, dict );
+}
+
+void parseDomNode ( const QDomNode& value, QQtDictionary& parent )
+{
+    p3line() << value.nodeName() << value.nodeType() << value.nodeValue();
+
+    switch ( value.nodeType() )
+    {
+        case QDomNode::CommentNode: //8
+        {
+            //#comment
+            QString name0 = value.nodeName();
+            QString value0  = value.nodeValue();
+            //p3line() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
+        case QDomNode::AttributeNode: //2
+        {
+            //<element key=value>
+            QString name0 = value.nodeName();
+            QString value0  = value.nodeValue();
+            //p3line() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
+        case QDomNode::TextNode: //3
+        {
+            //#text
+            QString name0 = value.nodeName();
+            QString value0  = value.nodeValue();
+            //p3line() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
+        case QDomNode::ElementNode: //1
+        {
+            /**
+             * <person a="0">liu kai</person>           dict["person"]
+             *                                          dict["person"]["__attributes__"]
+             *                                          dict["person"]["#text"]
+             * ----------------------------------------------------------------------------
+             * <person a="0">
+             *     <sub-person2 b="0">BBB</sub-person2>
+             *     <sub-person b="0">AAA</sub-person>   dict["person"]["sub-person"]["__attributes__"]
+             * </person>                                dict["person"]["sub-person"]["#text"]
+             * -----------------------------------------------------------------------------
+             */
+
+            //attri [__attributes__], key=value
+            QDomNamedNodeMap attrs = value.attributes();
+            for ( int i = 0; i < attrs.size(); i++ )
+            {
+                QDomNode node3 = attrs.item ( i );
+                QString name0 = node3.nodeName();
+                //p3line() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                //p3line() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                parseDomNode ( node3, parent["__attributes__"][name0] );
+            }
+
+
+            //child [+text], key=value
+            QDomNodeList childs = value.childNodes();
+
+            //check count
+            //dict[item]["count"]
+            //dict[item]["pos"]
+            QQtDictionary node_count;
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node3 = childs.item ( i );
+                QString name0 = node3.nodeName();
+                node_count[name0]["count"] = 0;
+                node_count[name0]["pos"] = 0;
+            }
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node3 = childs.item ( i );
+                QString name0 = node3.nodeName();
+                node_count[name0]["count"] = node_count[name0]["count"].getValue().toInt () + 1;
+            }
+
+            QStringList comment0;
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node3 = childs.item ( i );
+                QString name0 = node3.nodeName();
+                //p3line() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                //p3line() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                int count0 = node_count[name0]["count"].getValue().toInt();
+                int pos0 = node_count[name0]["pos"].getValue().toInt();
+                //p3line() << count0 << pos0;
+
+#if 1
+                if ( name0 == "#comment" )
+                {
+                    comment0.push_front ( node3.nodeValue() );
+                    continue;
+                }
+                if ( comment0.size() > 0 )
+                {
+                    if ( count0 > 1 )
+                    {
+                        parent[name0][pos0]["#comment"] = comment0[0];
+                    }
+                    else
+                    {
+                        parent[name0]["#comment"] = comment0[0];
+                    }
+                    comment0.clear();
+                }
+#endif
+
+                if ( count0 > 1 )
+                {
+                    parseDomNode ( node3, parent[name0][pos0] );
+                    node_count[name0]["pos"] = pos0 + 1;
+                }
+                else
+                    parseDomNode ( node3, parent[name0] );
+            }
+        }
+        break;
+        case QDomNode::ProcessingInstructionNode: //7
+        {
+            //<?xml ... ?>
+            QDomProcessingInstruction pi0 = value.toProcessingInstruction();
+            //p3line() << pi0.target() << pi0.data();
+            parent = pi0.data();
+
+#if 0
+            //NO DATA
+            //attri [__attributes__], key=value
+            QDomNamedNodeMap attrs = value.attributes();
+            for ( int i = 0; i < attrs.size(); i++ )
+            {
+                QDomNode node3 = attrs.item ( i );
+                QString name0 = node3.nodeName();
+                //p3line() << node3.nodeName() << node3.nodeType() << node3.nodeValue() ;
+                //p3line() << node3.nodeName() << node3.hasChildNodes() << node3.hasAttributes();
+                parseDomNode ( node3, parent["__attributes__"][name0] );
+            }
+#endif
+
+        }
+        break;
+        case QDomNode::DocumentNode: //9
+        {
+            QDomNodeList childs = value.childNodes();
+            for ( int i = 0; i < childs.size(); i++ )
+            {
+                QDomNode node1 = childs.item ( i );
+                QString name0 = node1.nodeName();
+                //p3line() << node1.nodeName() << node1.nodeType() << node1.nodeValue() ;
+                //p3line() << node1.nodeName() << node1.hasChildNodes() << node1.hasAttributes();
+                if ( node1.nodeType() == QDomNode::CommentNode )
+                    continue;
+
+                if ( node1.nodeType() == QDomNode::ProcessingInstructionNode )
+                    parseDomNode ( node1, parent["__processinginstruction__"][name0] );
+                else
+                    parseDomNode ( node1, parent[name0] );
+            }
+        }
+        break;
+        case QDomNode::EntityNode:
+        default:
+        {
+            QString name0 = value.nodeName();
+            QString value0  = value.nodeValue();
+            pline() << value.nodeName() << value.hasChildNodes() << value.hasAttributes();
+            parent = value0;
+        }
+        break;
+    }
+}
+
+void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc )
+{
+    switch ( node.getType() )
+    {
+        case QQtDictionary::DictValue:
+        {
+            //null, bool, double, string
+            p3line() << node.getValue().type();
+            QDomNode& object = result;
+            QDomText text = doc.createTextNode ( node.getValue().toString() );
+            object.appendChild ( text );
+            break;
+        }
+        case QQtDictionary::DictList:
+        {
+            //<book a="1"> ... </book>
+            //<book a="2"> ... </book>
+            QDomNode& object = result;
+            for ( int i = 0; i < node.getList().size(); i++ )
+            {
+                QList<QQtDictionary>& l = node.getList();
+                QString nodeName = object.nodeName();//error，这个位置好像来不了。
+                QDomElement value = doc.createElement ( nodeName );
+                packDictionaryToDomNode ( l[i], value, doc );
+                object.appendChild ( value );
+            }
+            break;
+        }
+        case QQtDictionary::DictMap:
+        {
+            //<person a="1">
+            //  <sub-person b="10"> </sub-person>
+            //  <sub-person2 b="11"> </sub-person2>
+            //</person>
+            QDomNode& object = result;
+
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& key = itor.key();
+                const QQtDictionary& srcvalue = itor.value();
+
+                //1! "__processinginstruction__" <?xml version='1.0' encoding='UTF-8'?>
+                if ( key == "__processinginstruction__" )
+                {
+                    //"xml"
+                    for ( QMap<QString, QQtDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                          itor2 != srcvalue.getMap().end(); itor2++ )
+                    {
+                        const QString& key2 = itor2.key();
+                        const QQtDictionary& srcvalue2 = itor2.value();
+                        QDomProcessingInstruction node0 = doc.createProcessingInstruction ( key2, srcvalue2.getValue().toString() );
+                        object.appendChild ( node0 );
+                    }
+                    continue;
+                }
+            }
+
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& key = itor.key();
+                const QQtDictionary& srcvalue = itor.value();
+
+                if ( key == "__processinginstruction__" )
+                    continue;
+
+                //2! "__attributes__" <Person attr-key="attr-value"> </Person>
+                if ( key == "__attributes__" )
+                {
+                    //"attributes" key = value
+                    for ( QMap<QString, QQtDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                          itor2 != srcvalue.getMap().end(); itor2++ )
+                    {
+                        const QString& key2 = itor2.key();
+                        const QQtDictionary& srcvalue2 = itor2.value();
+                        QDomElement e0 = object.toElement();
+                        e0.setAttribute ( key2, srcvalue2.getValue().toString() );
+                    }
+                    continue;
+                }
+
+                //3! "#text" <Person>#text</Person>
+                if ( key == "#text" )
+                {
+                    //"text"
+                    const QString& value2 = srcvalue.getValue().toString();
+                    QDomText text = doc.createTextNode ( value2 );
+                    object.appendChild ( text );
+                    continue;
+                }
+
+#if 0
+                //4! "#comment" <!--#comment-->
+                if ( key == "#comment" )
+                {
+                    //only one
+                    if ( srcvalue.getType() == QQtDictionary::DictValue )
+                    {
+                        const QString& value2 = srcvalue.getValue().toString();
+                        QDomComment text = doc.createComment ( value2 );
+                        object.appendChild ( text );
+                        continue;
+                    }
+
+                    //multiple
+                    for ( int i = 0; i < srcvalue.getList().size(); i++ )
+                    {
+                        QList<QQtDictionary>& l = srcvalue.getList();
+                        QDomComment text = doc.createComment ( l[i].getValue().toString() );
+                        object.appendChild ( text );
+                    }
+                    continue;
+                }
+#endif
+
+                if ( key == "#comment" )
+                    continue;
+
+                //5! dict["person"][0-] <person>a</person> <person>b</person>
+                if ( srcvalue.getType() == QQtDictionary::DictList )
+                {
+#if 1
+                    //list一定在map里面发生。
+                    for ( int i = 0; i < srcvalue.getList().size(); i++ )
+                    {
+                        QList<QQtDictionary>& l = srcvalue.getList();
+#if 1 //#comment
+                        if ( l[i].getMap().contains ( "#comment" ) )
+                        {
+                            QDomComment text = doc.createComment ( l[i]["#comment"].getValue().toString() );
+                            object.appendChild ( text );
+                        }
+#endif
+                        QDomElement value = doc.createElement ( key );
+                        packDictionaryToDomNode ( l[i], value, doc );
+                        object.appendChild ( value );
+                    }
+#else
+                    packDictionaryToDomNode ( srcvalue, object, doc, key );
+#endif
+                    continue;
+                }
+
+#if 1 //#comment
+                if ( srcvalue.getMap().contains ( "#comment" ) )
+                {
+                    QDomComment text = doc.createComment ( srcvalue["#comment"].getValue().toString() );
+                    object.appendChild ( text );
+                }
+#endif
+
+                //6! dict[key][child node] <book>...</book>
+                QDomElement value = doc.createElement ( key );
+                packDictionaryToDomNode ( srcvalue, value, doc );
+                object.appendChild ( value );
+            }
+            break;
+        }
+        case QQtDictionary::DictMax:
+        default:
+            break;
+    }
+}
+
+#ifdef __INICONTENTSUPPORT__
+QByteArray toIni ( const QQtDictionary& dict )
+{
+    const QQtDictionary& node = dict;
+
+    inifile::IniFile p0;
+    switch ( dict.getType() )
+    {
+        case QQtDictionary::DictValue:
+        {
+            break;
+        }
+        case QQtDictionary::DictList:
+        {
+            //"name":[a, b, ...]
+            for ( int i = 0; i < node.getList().size(); i++ )
+            {
+#if 0
+                QList<QQtDictionary>& l = node.getList();
+                if ( l[i].getType() == QQtDictionary::DictValue )
+                {
+                    QString qkey = QString::number ( i );
+                    string key = qkey.toStdString();
+                    string value = l[i].getValue().toString().toStdString();
+                    string comment = node["__comments__"][""][qkey]["#comment"].getValue().toString().toStdString();
+                    string right_comment = node["__comments__"][""][qkey]["#right_comment"].getValue().toString().toStdString();
+                    p0.SetStringValue ( "", key, value );
+                    p0.SetComment ( "", key, comment );
+                    p0.SetRightComment ( "", key, right_comment );
+                }
+#else
+                const QString& sec = QString::number ( i );
+                string stdsec = sec.toStdString();
+
+                QList<QQtDictionary>& l = node.getList();
+                const QQtDictionary& srcvalue = l[i];
+
+                p0.AddSection ( stdsec );
+
+                string comment = node["__comments__"][sec]["#comment"].getValue().toString().toStdString();
+                string right_comment = node["__comments__"][sec]["#right_comment"].getValue().toString().toStdString();
+                p0.SetComment ( stdsec, "", comment );
+                p0.SetRightComment ( stdsec, "", right_comment );
+
+                if ( srcvalue.getType() == QQtDictionary::DictList )
+                {
+                    for ( int i = 0; i < srcvalue.getList().size(); i++ )
+                    {
+                        QList<QQtDictionary>& l = srcvalue.getList();
+                        if ( l[i].getType() == QQtDictionary::DictValue )
+                        {
+                            QString qkey = QString::number ( i );
+                            string key = qkey.toStdString();
+                            string value = l[i].getValue().toString().toStdString();
+                            string comment = node["__comments__"][sec][qkey]["#comment"].getValue().toString().toStdString();
+                            string right_comment = node["__comments__"][sec][qkey]["#right_comment"].getValue().toString().toStdString();
+                            p0.SetStringValue ( stdsec, key, value );
+                            p0.SetComment ( stdsec, key, comment );
+                            p0.SetRightComment ( stdsec, key, right_comment );
+                        }
+                    }
+                }
+
+                if ( srcvalue.getType() == QQtDictionary::DictMap )
+                {
+                    for ( QMap<QString, QQtDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                          itor2 != srcvalue.getMap().end(); itor2++ )
+                    {
+                        //QMap<QString, QQtDictionary>& m = node.getMap();
+                        const QString& qkey2 = itor2.key();
+                        string stdkey2 = qkey2.toStdString();
+                        const QQtDictionary& srcvalue2 = itor2.value();
+                        if ( srcvalue2.getType() == QQtDictionary::DictValue )
+                        {
+                            string value = srcvalue2.getValue().toString().toStdString();
+                            string comment = node["__comments__"][sec][qkey2]["#comment"].getValue().toString().toStdString();
+                            string right_comment = node["__comments__"][sec][qkey2]["#right_comment"].getValue().toString().toStdString();
+                            p0.SetStringValue ( stdsec, stdkey2, value );
+                            p0.SetComment ( stdsec, stdkey2, comment );
+                            p0.SetRightComment ( stdsec, stdkey2, right_comment );
+                        }
+                    }
+                }
+
+#endif
+            }
+            break;
+        }
+        case QQtDictionary::DictMap:
+        {
+            //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin();
+                  itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& sec = itor.key();
+                string stdsec = sec.toStdString();
+                const QQtDictionary& srcvalue = itor.value();
+
+                if ( sec == "__comments__" )
+                    continue;
+
+                p0.AddSection ( stdsec );
+
+                string comment = node["__comments__"][sec]["#comment"].getValue().toString().toStdString();
+                string right_comment = node["__comments__"][sec]["#right_comment"].getValue().toString().toStdString();
+                //qDebug() << QString::fromStdString ( comment );
+                //qDebug() << QString::fromStdString ( right_comment );
+                int ret;
+                ret = p0.SetComment ( stdsec, "", comment );
+                //qDebug() << ret;
+                ret = p0.SetRightComment ( stdsec, "", right_comment );
+                //qDebug() << ret;
+
+                if ( srcvalue.getType() == QQtDictionary::DictList )
+                {
+                    for ( int i = 0; i < srcvalue.getList().size(); i++ )
+                    {
+                        QList<QQtDictionary>& l = srcvalue.getList();
+                        if ( l[i].getType() == QQtDictionary::DictValue )
+                        {
+                            QString qkey = QString::number ( i );
+                            string key = qkey.toStdString();
+                            string value = l[i].getValue().toString().toStdString();
+                            string comment = node["__comments__"][sec][qkey]["#comment"].getValue().toString().toStdString();
+                            string right_comment = node["__comments__"][sec][qkey]["#right_comment"].getValue().toString().toStdString();
+                            p0.SetStringValue ( stdsec, key, value );
+                            p0.SetComment ( stdsec, key, comment );
+                            p0.SetRightComment ( stdsec, key, right_comment );
+                        }
+                    }
+                }
+
+                if ( srcvalue.getType() == QQtDictionary::DictMap )
+                {
+                    for ( QMap<QString, QQtDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                          itor2 != srcvalue.getMap().end(); itor2++ )
+                    {
+                        //QMap<QString, QQtDictionary>& m = node.getMap();
+                        const QString& qkey2 = itor2.key();
+                        string stdkey2 = qkey2.toStdString();
+                        const QQtDictionary& srcvalue2 = itor2.value();
+                        if ( srcvalue2.getType() == QQtDictionary::DictValue )
+                        {
+                            string value = srcvalue2.getValue().toString().toStdString();
+                            string comment = node["__comments__"][sec][qkey2]["#comment"].getValue().toString().toStdString();
+                            string right_comment = node["__comments__"][sec][qkey2]["#right_comment"].getValue().toString().toStdString();
+                            p0.SetStringValue ( stdsec, stdkey2, value );
+                            p0.SetComment ( stdsec, stdkey2, comment );
+                            p0.SetRightComment ( stdsec, stdkey2, right_comment );
+                        }
+                    }
+                }
+            }
+            break;
+        }
+        case QQtDictionary::DictMax:
+        default:
+            break;
+    }
+
+    int ret;
+
+    std::string buffer;
+    ret = p0.SaveToContent ( buffer );
+    //qDebug() << ret;
+
+    QByteArray bytes = QByteArray::fromStdString ( buffer );
+    //qDebug() << qPrintable ( bytes );
+
+    //不返回会崩溃
+    return bytes;
+}
+
+void fromIni ( const QByteArray& bytes, QQtDictionary& dict )
+{
+    inifile::IniFile p0;
+    int ret;
+    ret = p0.LoadFromContent ( bytes.toStdString() );
+
+    //qDebug() << ret;
+    vector<string> secs;
+    ret = p0.GetSections ( &secs );
+    for ( vector<string>::iterator itor = secs.begin();
+          itor != secs.end(); itor++ )
+    {
+        string& secName = *itor;
+        inifile::IniSection* sec = p0.getSection ( secName );
+        //sec name
+        string name = sec->name; QString qname = QString::fromStdString ( name );
+        //sec comment
+        string comment = sec->comment; QString qcomment = QString::fromStdString ( comment );
+        //sec right_comment
+        string right_comment = sec->rightComment; QString qright_comment = QString::fromStdString ( right_comment );
+
+        dict["__comments__"][qname]["#comment"] = qcomment;
+        dict["__comments__"][qname]["#right_comment"] = qright_comment;
+
+        //sec child
+        for ( inifile::IniSection::IniItem_it it = sec->begin();
+              it != sec->end(); it++ )
+        {
+            inifile::IniItem& item = *it;
+
+            //#comment
+            string comment = item.comment; QString qcomment = QString::fromStdString ( comment );
+            //#right_comment
+            string right_comment = item.rightComment; QString qright_comment = QString::fromStdString ( right_comment );
+            //key
+            string key = item.key; QString qkey = QString::fromStdString ( key );
+            //value
+            string value = item.value; QString qvalue = QString::fromStdString ( value );
+
+            dict["__comments__"][qname][qkey]["#comment"] = qcomment;
+            dict["__comments__"][qname][qkey]["#right_comment"] = qright_comment;
+            dict[qname][qkey] = qvalue;
+        }
+    }
+
+    //qDebug() << qPrintable ( dict.toJson ( QJsonDocument::Indented ) );
+}
+
+QByteArray toProperties ( const QQtDictionary& dict )
+{
+    const QQtDictionary& node = dict;
+
+    inifile::IniFile p0;
+    switch ( dict.getType() )
+    {
+        case QQtDictionary::DictValue:
+        {
+            break;
+        }
+        case QQtDictionary::DictList:
+        {
+            //"name":[a, b, ...]
+            for ( int i = 0; i < node.getList().size(); i++ )
+            {
+#if 0
+                QList<QQtDictionary>& l = node.getList();
+                if ( l[i].getType() == QQtDictionary::DictValue )
+                {
+                    QString qkey = QString::number ( i );
+                    string key = qkey.toStdString();
+                    string value = l[i].getValue().toString().toStdString();
+                    string comment = node["__comments__"][""][qkey]["#comment"].getValue().toString().toStdString();
+                    string right_comment = node["__comments__"][""][qkey]["#right_comment"].getValue().toString().toStdString();
+                    p0.SetStringValue ( "", key, value );
+                    p0.SetComment ( "", key, comment );
+                    p0.SetRightComment ( "", key, right_comment );
+                }
+#elif 0
+                const QString& sec = QString::number ( i );
+                string stdsec = sec.toStdString();
+
+                QList<QQtDictionary>& l = node.getList();
+                const QQtDictionary& srcvalue = l[i];
+
+                p0.AddSection ( stdsec );
+
+                string comment = node["__comments__"][sec]["#comment"].getValue().toString().toStdString();
+                string right_comment = node["__comments__"][sec]["#right_comment"].getValue().toString().toStdString();
+                p0.SetComment ( stdsec, "", comment );
+                p0.SetRightComment ( stdsec, "", right_comment );
+
+                if ( srcvalue.getType() == QQtDictionary::DictList )
+                {
+                    for ( int i = 0; i < srcvalue.getList().size(); i++ )
+                    {
+                        QList<QQtDictionary>& l = srcvalue.getList();
+                        if ( l[i].getType() == QQtDictionary::DictValue )
+                        {
+                            QString qkey = QString::number ( i );
+                            string key = qkey.toStdString();
+                            string value = l[i].getValue().toString().toStdString();
+                            string comment = node["__comments__"][sec][qkey]["#comment"].getValue().toString().toStdString();
+                            string right_comment = node["__comments__"][sec][qkey]["#right_comment"].getValue().toString().toStdString();
+                            p0.SetStringValue ( stdsec, key, value );
+                            p0.SetComment ( stdsec, key, comment );
+                            p0.SetRightComment ( stdsec, key, right_comment );
+                        }
+                    }
+                }
+
+                if ( srcvalue.getType() == QQtDictionary::DictMap )
+                {
+                    for ( QMap<QString, QQtDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                          itor2 != srcvalue.getMap().end(); itor2++ )
+                    {
+                        //QMap<QString, QQtDictionary>& m = node.getMap();
+                        const QString& qkey2 = itor2.key();
+                        string stdkey2 = qkey2.toStdString();
+                        const QQtDictionary& srcvalue2 = itor2.value();
+                        if ( srcvalue2.getType() == QQtDictionary::DictValue )
+                        {
+                            string value = srcvalue2.getValue().toString().toStdString();
+                            string comment = node["__comments__"][sec][qkey2]["#comment"].getValue().toString().toStdString();
+                            string right_comment = node["__comments__"][sec][qkey2]["#right_comment"].getValue().toString().toStdString();
+                            p0.SetStringValue ( stdsec, stdkey2, value );
+                            p0.SetComment ( stdsec, stdkey2, comment );
+                            p0.SetRightComment ( stdsec, stdkey2, right_comment );
+                        }
+                    }
+                }
+#else
+                const QString& key = QString::number ( i );
+                string stdkey = key.toStdString();
+                QList<QQtDictionary>& l = node.getList();
+                const QQtDictionary& srcvalue = l[i];
+
+                if ( key == "__comments__" )
+                    continue;
+
+                if ( srcvalue.getType() != QQtDictionary::DictValue )
+                    continue;
+
+                p0.AddSection ( "" );
+
+                string value = srcvalue.getValue().toString().toStdString();
+                string comment = node["__comments__"][key]["#comment"].getValue().toString().toStdString();
+                string right_comment = node["__comments__"][key]["#right_comment"].getValue().toString().toStdString();
+                p0.SetStringValue ( "", stdkey, value );
+                p0.SetComment ( "", stdkey, comment );
+                p0.SetRightComment ( "", stdkey, right_comment );
+#endif
+            }
+            break;
+        }
+        case QQtDictionary::DictMap:
+        {
+            //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin();
+                  itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& key = itor.key();
+                string stdkey = key.toStdString();
+                const QQtDictionary& srcvalue = itor.value();
+
+                if ( key == "__comments__" )
+                    continue;
+
+                if ( srcvalue.getType() != QQtDictionary::DictValue )
+                    continue;
+
+                p0.AddSection ( "" );
+
+                string value = srcvalue.getValue().toString().toStdString();
+                string comment = node["__comments__"][key]["#comment"].getValue().toString().toStdString();
+                string right_comment = node["__comments__"][key]["#right_comment"].getValue().toString().toStdString();
+                p0.SetStringValue ( "", stdkey, value );
+                p0.SetComment ( "", stdkey, comment );
+                p0.SetRightComment ( "", stdkey, right_comment );
+            }
+            break;
+        }
+        case QQtDictionary::DictMax:
+        default:
+            break;
+    }
+
+    int ret;
+
+    std::string buffer;
+    ret = p0.SaveToContent ( buffer );
+    //qDebug() << ret;
+
+    QByteArray bytes = QByteArray::fromStdString ( buffer );
+    //qDebug() << qPrintable ( bytes );
+
+    //不返回会崩溃
+    return bytes;
+}
+
+void fromProperties ( const QByteArray& bytes, QQtDictionary& dict )
+{
+    inifile::IniFile p0;
+    int ret;
+    ret = p0.LoadFromContent ( bytes.toStdString() );
+
+    //qDebug() << ret;
+    vector<string> secs;
+    ret = p0.GetSections ( &secs );
+    for ( vector<string>::iterator itor = secs.begin();
+          itor != secs.end(); itor++ )
+    {
+        string& secName = *itor;
+        if ( secName != "" )
+            continue;
+
+        inifile::IniSection* sec = p0.getSection ( secName );
+        //sec child
+        for ( inifile::IniSection::IniItem_it it = sec->begin();
+              it != sec->end(); it++ )
+        {
+            inifile::IniItem& item = *it;
+
+            //#comment
+            string comment = item.comment; QString qcomment = QString::fromStdString ( comment );
+            //#right_comment
+            string right_comment = item.rightComment; QString qright_comment = QString::fromStdString ( right_comment );
+            //key
+            string key = item.key; QString qkey = QString::fromStdString ( key );
+            //value
+            string value = item.value; QString qvalue = QString::fromStdString ( value );
+
+            dict["__comments__"][qkey]["#comment"] = qcomment;
+            dict["__comments__"][qkey]["#right_comment"] = qright_comment;
+            dict[qkey] = qvalue;
+        }
+    }
+
+    //qDebug() << qPrintable ( dict.toJson ( QJsonDocument::Indented ) );
+}
+#endif
+
+#ifdef __YAMLSUPPORT__
+QByteArray toYAML ( const QQtDictionary& dict )
+{
+
+    YAML::Node node;
+    packDictionaryToYamlNode ( dict, node );
+    //std::cout << "================(A)=============" << std::endl;
+    //std::cout << node << std::endl;
+
+
+    std::string buffer;
+    buffer = YAML::Dump ( node );
+
+    QByteArray bytes;
+    bytes = QByteArray::fromStdString ( buffer );
+
+    //std::cout << "================(B)=============" << std::endl;
+    //qDebug() << qPrintable ( bytes );
+
+    return bytes;
+}
+
+void fromYAML ( const QByteArray& yaml, QQtDictionary& dict )
+{
+
+    //这个东西非常容易崩溃。
+    YAML::Node config;
+
+#if 1
+    try
+    {
+        config = YAML::Load ( yaml );
+        //std::cout << config << std::endl;
+    }
+    catch ( const YAML::Exception& e )
+    {
+        //-—
+        //? [ bad conversion but exited crashed
+        std::cerr << e.what() << std::endl;
+        return;
+    }
+#elif 0
+    //YAML::Parser parser();
+#else
+    config = YAML::Load ( yaml );
+#endif
+
+
+    parseYamlNodeToDictionary ( config, dict );
+    //qDebug() << "=================";
+    //qDebug() << dict;
+    //qDebug() << qPrintable ( QString ( dict.toJson ( QJsonDocument::Indented ) ) );
+}
+
+
+
+void parseYamlNodeToDictionary ( const YAML::Node& node, QQtDictionary& object )
+{
+    if ( node.IsNull() )
+    {
+        //qDebug() << "empty value"; //null
+        object = QString();
+    }
+    else if ( node.IsScalar() )
+    {
+        //auto it = node.begin();
+        //qDebug() << QString::fromStdString ( node.Scalar() );
+        object = QString::fromStdString ( node.Scalar() );
+    }
+    else if ( node.IsSequence() )
+    {
+        int id = 0;
+        for ( YAML::Node::const_iterator it = node.begin(); it != node.end(); ++it )
+        {
+            const YAML::Node& obj = *it;
+            parseYamlNodeToDictionary ( obj,  object[id++] );
+        }
+    }
+    else if ( node.IsMap() )
+    {
+        for ( YAML::Node::const_iterator it = node.begin(); it != node.end(); ++it )
+        {
+            //qDebug() << QString::fromStdString ( it->first.as<string>() ) << ":" << it->second.Type();
+            QString key = QString::fromStdString ( it->first.as<string>() ) ;
+            parseYamlNodeToDictionary ( it->second, object[key] );
+
+        }
+    }
+}
+
+void packDictionaryToYamlNode ( const QQtDictionary& node, YAML::Node& object )
+{
+    switch ( node.getType() )
+    {
+        case QQtDictionary:: DictValue:
+        {
+            //null, bool, double, string
+            std::string value = node.getValue().toString().toStdString();
+            object = value;
+            break;
+        }
+        case  QQtDictionary:: DictList:
+        {
+            //"name":[a, b, ...]
+            for ( int i = 0; i < node.getList().size(); i++ )
+            {
+                QList<QQtDictionary>& l = node.getList();
+                YAML::Node value;
+                packDictionaryToYamlNode ( l[i], value );
+                object.push_back ( value );
+            }
+            break;
+        }
+        case QQtDictionary::  DictMap:
+        {
+            //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& qkey = itor.key();
+                std::string key = qkey.toStdString();
+                const QQtDictionary& srcvalue = itor.value();
+                YAML::Node value;
+                packDictionaryToYamlNode ( srcvalue, value );
+                object[key] = value;
+            }
+            break;
+        }
+        case  QQtDictionary:: DictMax:
+        default:
+            break;
+    }
+
+}
+#endif

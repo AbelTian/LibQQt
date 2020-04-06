@@ -1,0 +1,66 @@
+{"Root":[
+
+{
+
+  "type": "Feature",
+
+  "properties": {
+
+    "Name": null,
+
+    "GuoBiao": "GaosuGonglu",
+
+    "DefineNumb": 1
+
+  },
+
+  "geometry": {
+
+    "type": "LineString",
+
+    "coordinates": [
+
+      [ 113.3456537, 23.105271 ],
+
+      [ 113.3455005, 23.1037158 ],
+
+      [ 113.345485, 23.1028259 ]
+
+    ]
+
+  }
+
+},
+
+{
+
+  "type": "Feature",
+
+  "properties": {
+
+    "Name": "兴南大道",
+
+    "GuoBiao": "2JiDaolu",
+
+    "DefineNumb": 4
+
+  },
+
+  "geometry": {
+
+    "type": "LineString",
+
+    "coordinates": [
+
+      [ 113.3074994, 23.0168577 ],
+
+      [ 113.3076886, 23.0168181 ]
+
+    ]
+
+  }
+
+}
+
+]
+}

@@ -7,8 +7,6 @@
 
 class QJsonDocument;
 class QJsonValue;
-class QDomDocument;
-class QDomNode;
 
 #include <qqtcore.h>
 #include <qqt-local.h>
@@ -20,11 +18,11 @@ class QDomNode;
 class QQtDictionary;
 typedef QMap<QString, QQtDictionary> QQtDictionaryMap;
 typedef QMapIterator<QString, QQtDictionary> QQtDictionaryMapIterator;
-typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMapConstIterator;
+typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMutableMapIterator;
 
 typedef QList<QQtDictionary> QQtDictionaryList;
 typedef QListIterator<QQtDictionary> QQtDictionaryListIterator;
-typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
+typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
 
 /**
  * @brief The QQtDictionary class
@@ -42,6 +40,7 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryListConstIterator;
  * fromYAML toYAML              支持Yaml
  * fromINI toINI                支持ini
  * fromProperties toProperties  支持Properties 这是一种Java配置文件的格式，仅仅有键值对、注释
+ * from函数默认行为为合并，如果用户希望新替，请手动调用clear();
  *
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
  * QQtDictionary封装了QVariant，实现直接操作真实数据。提供大量操作符。存取数据方便快捷，类型多样。
@@ -59,6 +58,7 @@ public:
         DictList,
         /*是个映射，可能嵌套映射，Map不空，name根据用户设置或许为空*/
         DictMap,
+
         DictMax
     } EDictType;
 
@@ -158,6 +158,8 @@ public:
     QQtDictionary& operator [] ( const QString& key );
     const QQtDictionary operator[] ( const QString& key ) const;
 
+    QQtDictionary& operator = ( const QList<QString>& list );
+
     QQtDictionary& operator = ( const QMap<QString, QQtDictionary>& map );
     QQtDictionary& operator = ( const QList<QQtDictionary>& list );
     QQtDictionary& operator = ( const QQtDictionary& other );
@@ -177,29 +179,20 @@ public:
     //toValue() toList() toMap(); 不丢失数据方式。
 
     /*与其他数据结构兼容*/
-
-    QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact );
+    QByteArray toJson ( QJsonDocument::JsonFormat format = QJsonDocument::Compact ) const;
     void fromJson ( const QByteArray& json );
 
-    QByteArray toXML ( int = -1 );
+    QByteArray toXML ( int indent = -1 ) const;
     void fromXML ( const QByteArray& xml );
 
-    QByteArray toYAML();
+    QByteArray toYAML() const;
     void fromYAML ( const QByteArray& yaml );
 
-    QByteArray toINI();
+    QByteArray toINI() const;
     void fromINI ( const QByteArray& ini );
 
-    QByteArray toProperties();
+    QByteArray toProperties() const;
     void fromProperties ( const QByteArray& properties );
-
-protected:
-    virtual void parseJsonValue ( const QJsonValue& value, QQtDictionary& parent );
-    virtual void packDictionaryToJsonValue ( const QQtDictionary& node, QJsonValue& result );
-
-protected:
-    virtual void parseDomNode ( const QDomNode& value, QQtDictionary& parent );
-    virtual void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc );
 
 signals:
 

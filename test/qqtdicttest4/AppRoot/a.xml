@@ -30,6 +30,8 @@
                         <code code="231" displayName="主任医师" codeSystem="2.16.156.10011.2.3.3.10" codeSystemName="专业技术职务代码(GB/T 8561)" codeSystemVersion="GB/T 8561-1988"/>
                         <!--工作地址-->
                         <addr>XXXXXXXXX</addr>
+                        <!--工作地址2-->
+                        <addr>AAAAAAAAA</addr>
                         <!--工作联系方式：电话、邮箱地址等-->
                         <telecom value="13800000"/>
                         <!--角色状态RoleStatus-->

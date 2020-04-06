@@ -1,4 +1,4 @@
-﻿#include "qqtwebsocketclient.h"
+#include "qqtwebsocketclient.h"
 
 QQtWebSocketClient::QQtWebSocketClient ( QObject* parent, const QString& origin, QWebSocketProtocol::Version version ) :
     QWebSocket ( origin, version, parent )
@@ -15,6 +15,7 @@ void QQtWebSocketClient::installProtocol ( QQtProtocol* stack )
 
     connect ( m_protocol, SIGNAL ( write ( const QByteArray& ) ),
               this, SLOT ( slotWriteData ( const QByteArray& ) ) );
+    m_protocol->setClientHandler ( this );
     m_protocol->attach();
     m_protocol->initializer();
 }

@@ -1,4 +1,4 @@
-﻿#ifndef QQTPROTOCOLMANAGER_H
+#ifndef QQTPROTOCOLMANAGER_H
 #define QQTPROTOCOLMANAGER_H
 
 #include <QObject>
@@ -39,13 +39,6 @@ class QQTSHARED_EXPORT QQtProtocolManager : public QObject
 public:
     explicit QQtProtocolManager ( QObject* parent = 0 );
     virtual ~QQtProtocolManager();
-
-    //获取Protocol列表
-    //这里列举的函数是给BusinessLevel用的，Protocol里面不要用
-    //findProtocolInstanceByXXX(...);
-    //findClientInfoByProtocolInstance(Protocol);
-    //sendMessageToProtocolInstance(Protocol, Message);
-    //sendMessageToAllProtocolInstance(...);
 
 signals:
     /**
@@ -92,6 +85,7 @@ signals:
     /**
      * 以下和用户无关
      */
+
 public:
     /**
      * @brief createProtocol
@@ -103,7 +97,7 @@ public:
      * @param protocolTypeName
      * @return
      */
-    QQtProtocol* createProtocol ();
+    virtual QQtProtocol* createProtocol ();
     /**
      * 使用完，删除。
      *
@@ -118,11 +112,47 @@ public:
      *
      * 内部没有对QList加锁，所以不要movetothread里用。
      */
-    void deleteProtocol ( QQtProtocol* stack );
+    virtual void deleteProtocol ( QQtProtocol* stack );
 protected:
     QQtProtocol* findDetachedInstance();
 private:
     QList<QQtProtocol*> m_protocol_list;
+
+#if 1 //没有使用意义，不建议用户使用。
+public:
+
+    //获取Protocol列表
+    //这里列举的函数是给BusinessLevel用的，Protocol里面不要用
+    //findProtocolInstanceByXXX(...);
+    //findClientInfoByProtocolInstance(Protocol);
+    //sendMessageToProtocolInstance(Protocol, Message);
+    //sendMessageToAllProtocolInstance(...);
+
+    //通信工具句柄。必然有值。
+    QObject* handler() {
+        return mHandler;
+    }
+    //通信工具句柄。必然有值。
+    QObject* getHandler() {
+        return mHandler;
+    }
+    //在服务器通信工具句柄安装协议句柄的时候会调用。
+    void setHandler ( QObject* o ) {
+        mHandler = o;
+    }
+    //通信工具句柄。必然有值。
+    QObject* getServerHandler() {
+        return mHandler;
+    }
+    //在服务器通信工具句柄安装协议句柄的时候会调用。
+    void setServerHandler ( QObject* o ) {
+        mHandler = o;
+    }
+
+
+private:
+    QObject* mHandler;
+#endif
 };
 
 #endif // QQTPROTOCOLMANAGER_H

@@ -36,13 +36,15 @@ contains (DEFINES, __WIN__) {
 #core
 SOURCES += \
     $$PWD/core/qqtcore.cpp \
-    $$PWD/core/qqtorderedmap.cpp \
     $$PWD/core/qqtdictionary.cpp \
+    $$PWD/core/qqtorderedmap.cpp \
+    $$PWD/core/qqtordereddictionary.cpp \
     $$PWD/core/qqtobjectmanager.cpp
 HEADERS += \
     $$PWD/core/qqtcore.h \
-    $$PWD/core/qqtorderedmap.h \
     $$PWD/core/qqtdictionary.h \
+    $$PWD/core/qqtorderedmap.h \
+    $$PWD/core/qqtordereddictionary.h \
     $$PWD/core/qqtobjectmanager.h
 
 SOURCES += \
@@ -195,10 +197,12 @@ HEADERS += \
 
 #multimedia
 #support Qt5, if Qt4 want to use, you need compile QtMultiMedia for Qt4.
-#audio success, video arm mips
-#TODO: audio mediaextention +wav +mp3 +ogg ...
-#TODO: video mediaextention +FFmpeg ... +wince +android +ios +macOS +win +linux
+#audio +wav
+#video arm mips +logic video; desktop +camera
+#TODO: audio mediaextention +mp3 +ogg ...
+#TODO: video mediaextention +FFmpeg +Vlc ... +wince +android +ios +macOS +win +linux
 contains (DEFINES, __MULTIMEDIA__) {
+    INCLUDEPATH += $${PWD}/multimedia/private
     #mplayer
     contains (DEFINES, __PROCESSSUPPORT__){
         SOURCES += $$PWD/multimedia/qqtmplayer.cpp
@@ -214,10 +218,6 @@ contains (DEFINES, __MULTIMEDIA__) {
         SOURCES += $$PWD/multimedia/qqtaudiomanager.cpp
         HEADERS += $$PWD/multimedia/qqtaudiomanager.h
 
-        #wav audio
-        SOURCES += $$PWD/multimedia/libqwav/libqwav.cpp
-        HEADERS += $$PWD/multimedia/libqwav/libqwav.h
-        HEADERS += $$PWD/multimedia/libqwav/libqwav_global.h
         SOURCES += $$PWD/multimedia/qqtwavaudiomanager.cpp
         HEADERS += $$PWD/multimedia/qqtwavaudiomanager.h
         SOURCES += $$PWD/multimedia/qqtwavsoundeffect.cpp
@@ -226,8 +226,6 @@ contains (DEFINES, __MULTIMEDIA__) {
 
     #video
     contains (DEFINES, __QQTVIDEOSUPPORT__){
-        add_file($$PWD/multimedia/qqtimageconverter.cpp)
-        add_file($$PWD/multimedia/qqtimageconverter.h)
         SOURCES += $$PWD/multimedia/qqtimageconverter.cpp
         HEADERS += $$PWD/multimedia/qqtimageconverter.h
 
@@ -235,6 +233,19 @@ contains (DEFINES, __MULTIMEDIA__) {
         HEADERS += $$PWD/multimedia/qqtcamera.h
         SOURCES += $$PWD/multimedia/qqtvideomanager.cpp
         HEADERS += $$PWD/multimedia/qqtvideomanager.h
+    }
+
+    #logic video
+    contains (DEFINES, __LOGICCAMERAMODULE__) {
+        SOURCES += $$PWD/multimedia/private/qqtlogicvideomanager_p.cpp
+        HEADERS += $$PWD/multimedia/private/qqtlogicvideomanager_p.h
+
+        SOURCES += $$PWD/multimedia/qqtlogicvideomanager.cpp
+        HEADERS += $$PWD/multimedia/qqtlogicvideomanager.h
+
+        SOURCES += $$PWD/multimedia/qqtlogicpreviewwidget.cpp
+        HEADERS += $$PWD/multimedia/qqtlogicpreviewwidget.h
+        FORMS += $$PWD/multimedia/qqtlogicpreviewwidget.ui
     }
 }
 
@@ -619,6 +630,8 @@ contains (DEFINES, __EXQUISITE__) {
 }
 
 contains (DEFINES, __HIGHGRADE__) {
+    INCLUDEPATH += $${PWD}/highgrade/private
+
     #shared memory
     #core module
     contains(DEFINES, __SHAREDMEMORY_SUPPORT__){
@@ -630,9 +643,9 @@ contains (DEFINES, __HIGHGRADE__) {
 
     contains(DEFINES, __MESSAGEQUEUE_SUPPORT__){
         SOURCES += \
-            $$PWD/highgrade/qqtmessagequeueprivate.cpp
+            $$PWD/highgrade/private/qqtmessagequeueprivate.cpp
         HEADERS += \
-            $$PWD/highgrade/qqtmessagequeueprivate.h
+            $$PWD/highgrade/private/qqtmessagequeueprivate.h
         #基于tcp socket实现
         SOURCES += \
             $$PWD/highgrade/qqtmessagequeue.cpp
@@ -644,17 +657,16 @@ contains (DEFINES, __HIGHGRADE__) {
     #network module
     contains(DEFINES, __NAMEDPIPE_SUPPORT__){
         #local client iodevice
-        SOURCES += $$PWD/highgrade/network/qqtnamedpipeclient.cpp
-        HEADERS += $$PWD/highgrade/network/qqtnamedpipeclient.h
+        SOURCES += $$PWD/highgrade/private/qqtnamedpipeclient.cpp
+        HEADERS += $$PWD/highgrade/private/qqtnamedpipeclient.h
 
         #local server iodevice
-        SOURCES += $$PWD/highgrade/network/qqtnamedpipeserver.cpp
-        HEADERS += $$PWD/highgrade/network/qqtnamedpipeserver.h
+        SOURCES += $$PWD/highgrade/private/qqtnamedpipeserver.cpp
+        HEADERS += $$PWD/highgrade/private/qqtnamedpipeserver.h
 
-        SOURCES += \
-            $$PWD/highgrade/qqtnamedpipeprivate.cpp
-        HEADERS += \
-            $$PWD/highgrade/qqtnamedpipeprivate.h
+        SOURCES += $$PWD/highgrade/private/qqtnamedpipeprivate.cpp
+        HEADERS += $$PWD/highgrade/private/qqtnamedpipeprivate.h
+
         SOURCES += \
             $$PWD/highgrade/qqtnamedpipe.cpp
         HEADERS += \
@@ -664,15 +676,20 @@ contains (DEFINES, __HIGHGRADE__) {
     #singleton application
     contains(DEFINES, __NAMEDPIPE_SUPPORT__){
         SOURCES += \
-            $$PWD/highgrade/qqtsingletonapplicationprivate.cpp
+            $$PWD/highgrade/private/qqtsingletonapplicationprivate.cpp
         HEADERS += \
-            $$PWD/highgrade/qqtsingletonapplicationprivate.h
+            $$PWD/highgrade/private/qqtsingletonapplicationprivate.h
         #依赖local socket
         SOURCES += \
             $$PWD/highgrade/qqtsingletonapplication.cpp
         HEADERS += \
             $$PWD/highgrade/qqtsingletonapplication.h
     }
+
+    SOURCES += \
+        $$PWD/highgrade/qqtdatapersistence.cpp
+    HEADERS += \
+        $$PWD/highgrade/qqtdatapersistence.h
 }
 
 include ($$PWD/qqt_3rdparty.pri)

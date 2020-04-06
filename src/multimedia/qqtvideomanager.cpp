@@ -274,15 +274,52 @@ QQtCameraImageProcessing* QQtVideoInput::imageProcessing() const
     return mImageProcessing;
 }
 
+#include <QVideoDeviceSelectorControl>
+
 void QQtVideoInput::start()
 {
     stop();
 
     //初始化截图Flag
     mCaptureFlag = false;
-
+#if 1
     //初始化照相机句柄
     mCamera->setCameraInfo ( mCamInfo );
+#else //Qt Quick Camera的代码
+    QMediaService* service = mCamera->camera()->service();
+    if ( !service )
+        return;
+
+    QVideoDeviceSelectorControl* deviceControl = qobject_cast<QVideoDeviceSelectorControl*>
+                                                 ( service->requestControl ( QVideoDeviceSelectorControl_iid ) );
+    if ( !deviceControl )
+        return;
+
+    int deviceIndex = -1;
+    QString deviceName = mCamera->cameraInfo().deviceName();
+
+    if ( deviceName.isEmpty() )
+    {
+        deviceIndex = deviceControl->defaultDevice();
+    }
+    else
+    {
+        for ( int i = 0; i < deviceControl->deviceCount(); ++i )
+        {
+            if ( deviceControl->deviceName ( i ) == deviceName )
+            {
+                deviceIndex = i;
+                break;
+            }
+        }
+    }
+
+    if ( deviceIndex == -1 )
+        return;
+
+    mCamera->unload();
+    deviceControl->setSelectedDevice ( deviceIndex );
+#endif
 
     //初始化照相机图像控制句柄
     mExposure->setCameraExposure ( mCamera->exposure() );
