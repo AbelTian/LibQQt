@@ -107,7 +107,7 @@ private:
     /*重置标记*/
     void reset_marker ();
     /*设置标记 default: true*/
-    bool setMarker ( bool mark = true );
+    void setMarker ( bool mark = true );
     /*获取标记 default: false*/
     bool getMarker() const;
 

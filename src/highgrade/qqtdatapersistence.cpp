@@ -188,7 +188,7 @@ void QQtDataPersistence::reset_marker()
     bMarker = false;
 }
 
-bool QQtDataPersistence::setMarker ( bool mark )
+void QQtDataPersistence::setMarker ( bool mark )
 {
     bMarker = mark;
 }
