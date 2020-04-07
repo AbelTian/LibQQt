@@ -2,6 +2,11 @@
 #qqt_3rdparty.pri
 #这个文件用于指示版权。
 #-------------------------------------------------------
+#DEFINES += __STD_UTF8_CPP_SUPPORT__
+#contains (DEFINES, __STD_UTF8_CPP_SUPPORT__) {
+#    include ($$PWD/core/utf8_cpp/utf8_cpp.pri)
+#}
+
 #inifile
 #注释：在qqt_header.pri打开 DEFINES += __INICONTENTSUPPORT__
 DEFINES += __INICONTENTSUPPORT__
@@ -13,16 +18,18 @@ contains (DEFINES, __INICONTENTSUPPORT__) {
             $$PWD/core/inifile/qqtiniparser.h
 }
 
-#DEFINES += __STD_UTF8_CPP_SUPPORT__
-#contains (DEFINES, __STD_UTF8_CPP_SUPPORT__) {
-#    include ($$PWD/core/utf8_cpp/utf8_cpp.pri)
-#}
-
 #yaml
 #注释：在qqt_header.pri打开 DEFINES += __YAMLSUPPORT__
 DEFINES += __YAMLSUPPORT__
 contains (DEFINES, __YAMLSUPPORT__) {
     include($$PWD/core/yaml_cpp/yaml_cpp.pri)
+}
+
+#csv support
+#注释：在qqt_header.pri打开 DEFINES += __QTCSVLIB__
+DEFINES += __QTCSVLIB__
+contains (DEFINES, __QTCSVLIB__) {
+    include($$PWD/core/QtCSVLib/QtCSVLib.pri)
 }
 
 #pluginsupport
