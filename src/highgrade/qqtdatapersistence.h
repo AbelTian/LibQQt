@@ -59,6 +59,7 @@ public:
         YamlData,
         IniData,
         PropertiesData,
+        CSVData,
 
         MaxFormat
     };

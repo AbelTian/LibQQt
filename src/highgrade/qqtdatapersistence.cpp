@@ -112,6 +112,11 @@ void QQtDataPersistence::parseContentToDictionary()
             mDict.fromProperties ( bytes );
             break;
 #endif
+#ifdef __QTCSVLIB__
+        case CSVData:
+            mDict.fromCSV ( bytes );
+            break;
+#endif
         case MaxFormat:
         default:
             break;
@@ -141,6 +146,11 @@ void QQtDataPersistence::packDictionaryToContent ( QByteArray& bytes )
             break;
         case PropertiesData:
             bytes = mDict.toProperties ( );
+            break;
+#endif
+#ifdef __QTCSVLIB__
+        case CSVData:
+            bytes = mDict.toCSV ( );
             break;
 #endif
         case MaxFormat:
