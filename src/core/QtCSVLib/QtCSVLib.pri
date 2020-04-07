@@ -36,13 +36,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #-------------------------------------------------
 #用户工程配置
 #-------------------------------------------------
-!msvc {
+#!msvc {
     # flags for gcc-like compiler
-    CONFIG += warn_on
-    QMAKE_CXXFLAGS_WARN_ON += -Werror -Wformat=2 -Wuninitialized -Winit-self \
-            -Wswitch-enum -Wundef -Wpointer-arith \
-            -Wdisabled-optimization -Wcast-align -Wcast-qual
-}
+#    CONFIG += warn_on
+#    QMAKE_CXXFLAGS_WARN_ON += -Werror -Wformat=2 -Wuninitialized -Winit-self \
+#            -Wswitch-enum -Wundef -Wpointer-arith \
+#            -Wdisabled-optimization -Wcast-align -Wcast-qual
+#}
 
 contains (DEFINES, QQT_LIBRARY) {
     DEFINES += QTCSVLIB_LIBRARY

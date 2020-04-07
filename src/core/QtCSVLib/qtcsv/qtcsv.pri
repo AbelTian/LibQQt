@@ -3,8 +3,8 @@ QT *= core
 
 !contains(DEFINES, QTCSV_LIBRARY): DEFINES += QTCSV_MAKE_LIB
 
-INCLUDEPATH += $$PWD/include \
-               $$PWD
+INCLUDEPATH += $$PWD $$PWD/include
+
 SOURCES += \
     $$PWD/sources/writer.cpp \
     $$PWD/sources/variantdata.cpp \
