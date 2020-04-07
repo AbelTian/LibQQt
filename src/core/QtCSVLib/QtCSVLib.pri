@@ -44,11 +44,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #            -Wdisabled-optimization -Wcast-align -Wcast-qual
 #}
 
-contains (DEFINES, QQT_LIBRARY) {
-    DEFINES += QTCSVLIB_LIBRARY
-} else:contains (DEFINES, QQT_STATIC_LIBRARY) {
-    DEFINES += QTCSVLIB_STATIC_LIBRARY
-} else { }
+win32 {
+    contains (DEFINES, QQT_LIBRARY) {
+        DEFINES += QTCSVLIB_LIBRARY
+    } else:contains (DEFINES, QQT_STATIC_LIBRARY) {
+        DEFINES += QTCSVLIB_STATIC_LIBRARY
+    } else { }
+}
 
 include($${PWD}/qtcsvlib_header.pri)
 include($${PWD}/qtcsvlib_source.pri)

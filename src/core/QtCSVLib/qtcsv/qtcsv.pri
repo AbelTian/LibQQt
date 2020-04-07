@@ -1,8 +1,6 @@
 CONFIG *= qt
 QT *= core
 
-!contains(DEFINES, QTCSV_LIBRARY): DEFINES += QTCSV_MAKE_LIB
-
 INCLUDEPATH += $$PWD $$PWD/include
 
 SOURCES += \

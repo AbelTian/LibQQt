@@ -3,6 +3,8 @@
 
 #include <QtGlobal>
 
+#if defined(Q_OS_WIN)
+
 #ifdef QTCSV_STATIC_LIB
 #  define QTCSVSHARED_EXPORT
 #else
@@ -11,6 +13,10 @@
 #  else
 #    define QTCSVSHARED_EXPORT Q_DECL_IMPORT
 #  endif
+#endif
+
+#else
+#  define QTCSVSHARED_EXPORT
 #endif
 
 #endif // QTCSV_GLOBAL_H

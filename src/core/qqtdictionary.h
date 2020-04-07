@@ -188,11 +188,23 @@ public:
     QByteArray toYAML() const;
     void fromYAML ( const QByteArray& yaml );
 
+    //INI, CONF
     QByteArray toINI() const;
     void fromINI ( const QByteArray& ini );
 
     QByteArray toProperties() const;
     void fromProperties ( const QByteArray& properties );
+
+    //QtCSVLib
+    QByteArray toCSV ( const QString& separator = QString ( "," ),
+                       const QString& textDelimiter = QString ( "\"" ),
+                       const QString& textEncoding = QString ( "UTF-8" )
+                     ) const;
+    void fromCSV ( const QByteArray& csv,
+                   const QString& separator = QString ( "," ),
+                   const QString& textDelimiter = QString ( "\"" ),
+                   const QString& textEncoding = QString ( "UTF-8" )
+                 );
 
 signals:
 

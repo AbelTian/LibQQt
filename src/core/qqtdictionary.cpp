@@ -22,6 +22,14 @@
 #include "inifile.h"
 #endif
 
+#ifdef __QTCSVLIB__
+#include "qtcsv/reader.h"
+#include "qtcsv/writer.h"
+#include "qtcsv/stringdata.h"
+#endif
+
+#include <QBuffer>
+
 #include <iostream>
 using namespace std;
 
@@ -37,6 +45,17 @@ QByteArray toYAML ( const QQtDictionary& dict );
 void fromYAML ( const QByteArray& yaml, QQtDictionary& dict );
 void parseYamlNodeToDictionary ( const YAML::Node& node, QQtDictionary& object );
 void packDictionaryToYamlNode ( const QQtDictionary& node, YAML::Node& object );
+#endif
+
+#ifdef __QTCSVLIB__
+QByteArray toCSV ( const QQtDictionary& dict,
+                   const QString& separator,
+                   const QString& textDelimiter,
+                   const QString& textEncoding );
+void fromCSV ( const QByteArray& csv, QQtDictionary& dict,
+               const QString& separator,
+               const QString& textDelimiter,
+               const QString& textEncoding );
 #endif
 
 QByteArray toJson ( const QQtDictionary& dict, int indent = 0 );
@@ -530,6 +549,24 @@ QByteArray QQtDictionary::toProperties() const
 void QQtDictionary::fromProperties ( const QByteArray& properties )
 {
     ::fromProperties ( properties, *this );
+}
+#endif
+
+#ifdef __QTCSVLIB__
+QByteArray QQtDictionary::toCSV ( const QString& separator,
+                                  const QString& textDelimiter,
+                                  const QString& textEncoding
+                                ) const
+{
+    return ::toCSV ( *this, separator, textDelimiter, textEncoding );
+}
+
+void QQtDictionary::fromCSV ( const QByteArray& csv,
+                              const QString& separator,
+                              const QString& textDelimiter,
+                              const QString& textEncoding )
+{
+    ::fromCSV ( csv, *this, separator, textDelimiter, textEncoding );
 }
 #endif
 
@@ -1182,6 +1219,71 @@ void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDom
             break;
     }
 }
+
+#ifdef __QTCSVLIB__
+QByteArray toCSV ( const QQtDictionary& dict,
+                   const QString& separator,
+                   const QString& textDelimiter,
+                   const QString& textEncoding
+                 )
+{
+    QtCSV::StringData strlist0;
+
+    for ( int i = 0; i < dict.getList().size(); i++ )
+    {
+        const QQtDictionary& v0 = dict.getList() [i];
+        QStringList strlist1;
+        for ( int j = 0; j < v0.getList().size(); j++ )
+        {
+            const QQtDictionary& v1 = v0.getList() [j];
+            strlist1.push_back ( v1.getValue().toString() );
+        }
+        strlist0.addRow ( strlist1 );
+    }
+
+    QByteArray bytes;
+    QBuffer buffer ( &bytes );
+    buffer.open ( QBuffer::WriteOnly );
+
+    QTextCodec* codec = QTextCodec::codecForName ( textEncoding.toLocal8Bit() );
+    bool ret = QtCSV::Writer::write ( buffer, strlist0,
+                                      separator, textDelimiter,
+                                      QStringList(), QStringList(),
+                                      codec );
+    if ( !ret )
+    {
+        pline() << "QtCSV write error.";
+    }
+    buffer.close();
+    return bytes;
+}
+
+void fromCSV ( const QByteArray& csv, QQtDictionary& dict,
+               const QString& separator,
+               const QString& textDelimiter,
+               const QString& textEncoding
+             )
+{
+    QByteArray bytes = csv;
+    QBuffer buffer ( &bytes );
+    buffer.open ( QBuffer::ReadOnly );
+    QTextCodec* codec = QTextCodec::codecForName ( textEncoding.toLocal8Bit() );
+    QList<QStringList> strlist0 = QtCSV::Reader::readToList ( buffer,
+                                                              separator, textDelimiter, codec );
+    buffer.close();
+
+    for ( int i = 0; i < strlist0.size(); i++ )
+    {
+        const QStringList& strlist1 = strlist0[i];
+        for ( int j = 0; j < strlist1.size(); j++ )
+        {
+            const QString& strlist2 = strlist1[j];
+            dict[i][j] = strlist2;
+        }
+    }
+}
+
+#endif
 
 #ifdef __INICONTENTSUPPORT__
 QByteArray toIni ( const QQtDictionary& dict )
