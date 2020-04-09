@@ -40,38 +40,37 @@ typedef enum tagEBtnStatus
 }
 #endif  /* __cplusplus */
 
-typedef struct QQTSHARED_EXPORT tagBtnIconTable
+//使用QQtPushButton直接[]运算，在嵌入式板子上表现不正常，所以使用ImageTable。
+struct QQTSHARED_EXPORT TBtnImageTable
 {
-    QString pixmap[BTN_MAX];
+    TBtnImageTable();
 
-    tagBtnIconTable();
-    QString pixMap ( int index );
-    void setPixMap ( int index, QString pix );
-    void initNormal ( QString normal, QString press );
-    void initCheck ( QString uncheck, QString check );
-    void initOther ( QString hover, QString disable );
-    const QString& operator[] ( int index ) const;
-    QString& operator [] ( int index );
-} TBtnIconTable;
-
-typedef struct QQTSHARED_EXPORT tagBtnImageTable
-{
-    QImage mImage[BTN_MAX];
-
-    tagBtnImageTable();
-
-    const QImage& image ( int index ) const;
-    QImage& image ( int index );
+    void setStateImage ( int index, const QString& image );
+    void setNormal ( const QString& normal, const QString& press );
+    void setCheck ( const QString& uncheck, const QString& check );
+    void setOther ( const QString& hover, const QString& disable );
+    void setHover ( const QString& hover );
+    void setDisable ( const QString& disable );
 
     void setStateImage ( int index, const QImage& image );
-
     void setNormal ( const QImage& normal, const QImage& press );
+    void setCheck ( const QImage& uncheck, const QImage& check );
+    void setOther ( const QImage& hover, const QImage& disable );
     void setHover ( const QImage& hover );
     void setDisable ( const QImage& disable );
 
     const QImage& operator[] ( int index ) const;
     QImage& operator [] ( int index );
-} TBtnImageTable;
+
+    const QImage& image ( int index ) const;
+    QImage& image ( int index );
+
+    //深拷贝
+    TBtnImageTable ( const TBtnImageTable& other );
+    TBtnImageTable& operator = ( const TBtnImageTable& other );
+
+    QImage mImage[BTN_MAX];
+};
 
 /**
  * 主窗口。针对屏幕

@@ -1,56 +1,170 @@
-﻿#include "qqtradiobutton.h"
+#include "qqtradiobutton.h"
 #include <QStylePainter>
 
-QQtRadioButton::QQtRadioButton(QWidget* parent) :
-    QRadioButton(parent)
+QQtRadioButton::QQtRadioButton ( QWidget* parent ) :
+    QRadioButton ( parent )
 {
+    mWorkState = BTN_NORMAL;
 }
 
 QQtRadioButton::~QQtRadioButton()
 {
 }
 
-void QQtRadioButton::pixMap(QImage& icon, QImage& iconSel)
+const TBtnImageTable& QQtRadioButton::imageTable() const
 {
-    icon = QImage(this->m_icon[BTN_NORMAL]);
-    iconSel = QImage(this->m_icon[BTN_PRESS]);
+    return mImageTable;
 }
 
-void QQtRadioButton::pixMap(QString& icon, QString& iconSel)
+TBtnImageTable& QQtRadioButton::imageTable()
 {
-    icon = m_icon[BTN_NORMAL];
-    iconSel = m_icon[BTN_PRESS];
+    return mImageTable;
 }
 
-void QQtRadioButton::setPixmap(const QString& icon, const QString& iconSel)
+void QQtRadioButton::translateImage()
 {
-    this->m_icon[BTN_NORMAL] = icon;
-    this->m_icon[BTN_PRESS] = iconSel;
+    int state = mWorkState;
+
+    //qDebug() << isEnabled();
+
+    if ( !isEnabled() )
+        state = BTN_DISABLE;
+
+    setImage ( mImageTable[state] );
 }
 
-void QQtRadioButton::paintEvent(QPaintEvent*)
+void QQtRadioButton::setImage ( const QImage& image )
 {
-    QStylePainter p(this);
-    QString icon = isChecked() ? m_icon[BTN_PRESS] : m_icon[BTN_NORMAL];
+    mImage = image;
+    update();
+}
 
-    if (icon.isEmpty())
+int QQtRadioButton::workState() const
+{
+    return mWorkState;
+}
+
+void QQtRadioButton::setWorkState ( int index )
+{
+    mWorkState = ( EBtnStatus ) index;
+    translateImage();
+}
+
+
+QImage QQtRadioButton::stateImage ( int index )
+{
+    if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
+        return mImageTable[BTN_NORMAL];
+    return mImageTable[index];
+}
+
+void QQtRadioButton::setStateImage ( int index, const QImage& image )
+{
+    if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
         return;
+    mImageTable[index] = image;
+    translateImage();
+}
 
-    p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(icon).pixmap(rect().size(), QIcon::Normal, QIcon::On));
-    /*
-     * 以下方法会导致图片失真
-     */
-    //QImage image(icon);
-    //p.drawItemPixmap(rect(), Qt::AlignCenter, QPixmap::fromImage(image.scaled(rect().size(), Qt::IgnoreAspectRatio)));
+void QQtRadioButton::setNormalImage ( const QImage& normal, const QImage& press )
+{
+    mImageTable[BTN_NORMAL] = normal;
+    mImageTable[BTN_PRESS] = press;
+    translateImage();
+}
+
+void QQtRadioButton::setHoverImage ( const QImage& hover )
+{
+    mImageTable[BTN_HOVER] = hover;
+    translateImage();
+}
+
+void QQtRadioButton::setDisableImage ( const QImage& disable )
+{
+    mImageTable[BTN_DISABLE] = disable;
+    translateImage();
+}
+
+void QQtRadioButton::setEnabled ( bool stat )
+{
+    //qDebug() << stat;
+    QRadioButton::setEnabled ( stat );
+    if ( stat )
+        setWorkState ( BTN_NORMAL );
+    else
+        setWorkState ( BTN_DISABLE );
+}
+
+void QQtRadioButton::setDisabled ( bool stat )
+{
+    QRadioButton::setDisabled ( stat );
+    if ( !stat )
+        setWorkState ( BTN_NORMAL );
+    else
+        setWorkState ( BTN_DISABLE );
+}
+
+void QQtRadioButton::mousePressEvent ( QMouseEvent* event )
+{
+    if ( event->button() == Qt::LeftButton )
+    {
+        mWorkState = BTN_PRESS;
+    }
+    QRadioButton::mousePressEvent ( event );
+    translateImage();
+}
+
+void QQtRadioButton::mouseReleaseEvent ( QMouseEvent* event )
+{
+    if ( event->button() == Qt::LeftButton )
+    {
+#ifdef __EMBEDDED_LINUX__
+        mWorkState = BTN_NORMAL;
+#else
+        if ( rect().contains ( event->pos() ) )
+            mWorkState = BTN_HOVER;
+        else
+            mWorkState = BTN_NORMAL;
+#endif
+    }
+    QRadioButton::mouseReleaseEvent ( event );
+    translateImage();
+}
+
+void QQtRadioButton::enterEvent ( QEvent* event )
+{
+    mWorkState = BTN_HOVER;
+    QRadioButton::enterEvent ( event );
+    translateImage();
+}
+
+void QQtRadioButton::leaveEvent ( QEvent* event )
+{
+    mWorkState = BTN_NORMAL;
+    QRadioButton::leaveEvent ( event );
+    translateImage();
+}
+
+
+void QQtRadioButton::paintEvent ( QPaintEvent* event )
+{
+    if ( mImage.isNull() )
+        return QRadioButton::paintEvent ( event );
+
+    //qDebug() << isEnabled() << mWorkState;
+
+    QStylePainter p ( this );
+    p.drawItemPixmap ( rect(), Qt::AlignCenter, QIcon ( QPixmap::fromImage ( mImage ) ).pixmap ( rect().size(),
+                       QIcon::Normal, QIcon::On ) );
 
     QStyleOptionButton opt;
-    initStyleOption(&opt);
-    p.drawItemText(rect(), Qt::AlignCenter, opt.palette, true, text());
+    initStyleOption ( &opt );
+    p.drawItemText ( rect(), Qt::AlignCenter, opt.palette, isEnabled(), text() );
 }
 
 
-bool QQtRadioButton::hitButton(const QPoint& pos) const
+bool QQtRadioButton::hitButton ( const QPoint& pos ) const
 {
-    Q_UNUSED(pos)
+    Q_UNUSED ( pos )
     return true;
 }

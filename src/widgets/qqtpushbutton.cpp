@@ -5,160 +5,163 @@
 QQtPushButton::QQtPushButton ( QWidget* parent ) :
     QPushButton ( parent )
 {
-    state = BTN_NORMAL;
-    ring = false;
-    m_lcTimer = new QTimer ( this );
-    m_lcTimer->setSingleShot ( true );
-    m_lcTimer->setInterval ( 2200 );
-    connect ( m_lcTimer, SIGNAL ( timeout() ),
-              this, SLOT ( slot_timeout() ) );
+    mWorkState = BTN_NORMAL;
 }
 
 QQtPushButton::~QQtPushButton()
 {
 }
 
-void QQtPushButton::setEnabled ( bool checked )
+const TBtnImageTable& QQtPushButton::imageTable() const
 {
-    QPushButton::setEnabled ( checked );
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-#else
-    enabledChange ( checked );
-#endif
+    return mImageTable;
 }
 
-void QQtPushButton::setDisabled ( bool checked )
+TBtnImageTable& QQtPushButton::imageTable()
 {
-    QPushButton::setDisabled ( checked );
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-#else
-    enabledChange ( !checked );
-#endif
+    return mImageTable;
 }
 
-void QQtPushButton::paintEvent ( QPaintEvent* e )
+void QQtPushButton::translateImage()
 {
-    Q_UNUSED ( e )
-    QStylePainter p ( this );
+    int state = mWorkState;
 
-    bool enabled = isEnabled();
+    //qDebug() << isEnabled();
 
-    if ( !enabled )
+    if ( !isEnabled() )
         state = BTN_DISABLE;
 
-    //pline() << this->objectName() << e->type() << state << m_pixmap[state];
+    setImage ( mImageTable[state] );
+}
 
-#if 0
-    /*
-     * 不会报告ｌｉｂｐｎｇｗａｒｎｉｎｇ
-     */
-    QIcon::Mode iconFlag = QIcon::Normal;
+void QQtPushButton::setImage ( const QImage& image )
+{
+    mImage = image;
+    update();
+}
 
-    if ( BTN_PRESS == state )
-        iconFlag = QIcon::Selected;
+int QQtPushButton::workState() const
+{
+    return mWorkState;
+}
 
-    if ( !enabled )
-        iconFlag = QIcon::Disabled;
+void QQtPushButton::setWorkState ( int index )
+{
+    mWorkState = ( EBtnStatus ) index;
+    translateImage();
+}
 
-    p.drawItemPixmap ( rect(), Qt::AlignCenter, QIcon ( m_pixmap[state] ).pixmap ( rect().size(), iconFlag, QIcon::On ) );
+
+QImage QQtPushButton::stateImage ( int index )
+{
+    if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
+        return mImageTable[BTN_NORMAL];
+    return mImageTable[index];
+}
+
+void QQtPushButton::setStateImage ( int index, const QImage& image )
+{
+    if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
+        return;
+    mImageTable[index] = image;
+    translateImage();
+}
+
+void QQtPushButton::setNormalImage ( const QImage& normal, const QImage& press )
+{
+    mImageTable[BTN_NORMAL] = normal;
+    mImageTable[BTN_PRESS] = press;
+    translateImage();
+}
+
+void QQtPushButton::setHoverImage ( const QImage& hover )
+{
+    mImageTable[BTN_HOVER] = hover;
+    translateImage();
+}
+
+void QQtPushButton::setDisableImage ( const QImage& disable )
+{
+    mImageTable[BTN_DISABLE] = disable;
+    translateImage();
+}
+
+void QQtPushButton::setEnabled ( bool stat )
+{
+    //qDebug() << stat;
+    QPushButton::setEnabled ( stat );
+    if ( stat )
+        setWorkState ( BTN_NORMAL );
+    else
+        setWorkState ( BTN_DISABLE );
+}
+
+void QQtPushButton::setDisabled ( bool stat )
+{
+    QPushButton::setDisabled ( stat );
+    if ( !stat )
+        setWorkState ( BTN_NORMAL );
+    else
+        setWorkState ( BTN_DISABLE );
+}
+
+void QQtPushButton::mousePressEvent ( QMouseEvent* event )
+{
+    if ( event->button() == Qt::LeftButton )
+    {
+        mWorkState = BTN_PRESS;
+    }
+    QPushButton::mousePressEvent ( event );
+    translateImage();
+}
+
+void QQtPushButton::mouseReleaseEvent ( QMouseEvent* event )
+{
+    if ( event->button() == Qt::LeftButton )
+    {
+#ifdef __EMBEDDED_LINUX__
+        mWorkState = BTN_NORMAL;
 #else
-    /*
-     * 以下方法会导致图片失真 可以控制大小 可以控制图片状态 ｓｃａｌｅｄ函数打印ｌｉｂｐｎｇｗａｒｎｉｎｇ
-     */
-    QImage image ( m_pixmap[state] );
-    p.drawItemPixmap ( rect(), Qt::AlignCenter, QPixmap::fromImage ( image.scaled ( rect().size(),
-                                                                                    Qt::IgnoreAspectRatio ) ) );
+        if ( rect().contains ( event->pos() ) )
+            mWorkState = BTN_HOVER;
+        else
+            mWorkState = BTN_NORMAL;
 #endif
+    }
+    QPushButton::mouseReleaseEvent ( event );
+    translateImage();
+}
+
+void QQtPushButton::enterEvent ( QEvent* event )
+{
+    mWorkState = BTN_HOVER;
+    QPushButton::enterEvent ( event );
+    translateImage();
+}
+
+void QQtPushButton::leaveEvent ( QEvent* event )
+{
+    mWorkState = BTN_NORMAL;
+    QPushButton::leaveEvent ( event );
+    translateImage();
+}
+
+
+void QQtPushButton::paintEvent ( QPaintEvent* event )
+{
+    if ( mImage.isNull() )
+        return QPushButton::paintEvent ( event );
+
+    //qDebug() << isEnabled() << mWorkState;
+
+    QStylePainter p ( this );
+    p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                       /*不.copy() 切出图片的中间部分使用*/
+                       QPixmap::fromImage ( mImage
+                                            .scaled ( rect().width(), rect().height(), Qt::IgnoreAspectRatio )
+                                          ) );
 
     QStyleOptionButton opt;
     initStyleOption ( &opt );
-    p.drawItemText ( rect(), Qt::AlignCenter, opt.palette, enabled, text() );
-}
-
-void QQtPushButton::mousePressEvent ( QMouseEvent* e )
-{
-    if ( e->button() == Qt::LeftButton )
-    {
-        state = BTN_PRESS;
-
-        if ( ring )
-            QApplication::beep();
-
-        //pline() << state;
-        m_lcTimer->start();
-    }
-
-    QPushButton::mousePressEvent ( e );
-}
-
-void QQtPushButton::mouseReleaseEvent ( QMouseEvent* e )
-{
-    if ( e->button() == Qt::LeftButton )
-    {
-#ifdef __EMBEDDED_LINUX__
-        state = BTN_NORMAL;
-        //pline() << state;
-        update();
-#else
-
-        if ( rect().contains ( e->pos() ) )
-            state = BTN_HOVER;
-        else
-            state = BTN_NORMAL;
-
-#endif
-
-        if ( m_lcTimer->isActive() )
-        {
-            m_lcTimer->stop();
-            /*在这里说明，用户点了一下抬手了*/
-
-            //emit click();
-        }
-    }
-
-    /*QPushButton的点击信号可能是在这个函数当中发出的*/
-    /*这个函数，用户在收到longClick之后，还会收到click的*/
-    QPushButton::mouseReleaseEvent ( e );
-}
-
-void QQtPushButton::enterEvent ( QEvent* e )
-{
-    state = BTN_HOVER;
-#ifdef __DESKTOP_DARWIN__
-    update();
-#endif
-    QPushButton::enterEvent ( e );
-}
-
-void QQtPushButton::leaveEvent ( QEvent* e )
-{
-    state = BTN_NORMAL;
-#ifdef __DESKTOP_DARWIN__
-    update();
-#endif
-    QPushButton::leaveEvent ( e );
-}
-
-void QQtPushButton::changeEvent ( QEvent* e )
-{
-    QPushButton::changeEvent ( e );
-}
-
-void QQtPushButton::enabledChange ( bool enabled )
-{
-    state = isEnabled() ? BTN_NORMAL : BTN_DISABLE;
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QPushButton::enabledChange ( enabled );
-#else
-    //TODO:
-    Q_UNUSED ( enabled )
-    //TODO:
-#endif
-}
-
-void QQtPushButton::slot_timeout()
-{
-    /*在这里说明，用户点了长达2s*/
-    emit longClick();
+    p.drawItemText ( rect(), Qt::AlignCenter, opt.palette, isEnabled(), text() );
 }

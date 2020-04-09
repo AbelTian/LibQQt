@@ -2,104 +2,52 @@
 
 #include <QDesktopWidget>
 
-tagBtnIconTable::tagBtnIconTable()
-{
-    pixmap[BTN_NORMAL] = "./skin/default/bt_bt_normal.png";
-    pixmap[BTN_UNCHECK] = "./skin/default/bt_bt_normal.png";
-#ifdef __EMBEDDED_LINUX__
-    pixmap[BTN_HOVER] = "./skin/default/bt_bt_hover.png";
-    pixmap[BTN_CHECK] = "./skin/default/bt_bt_hover.png";
-    pixmap[BTN_PRESS] = "./skin/default/bt_bt_hover.png";
-#else
-    pixmap[BTN_HOVER] = "./skin/default/bt_bt_hover.png";
-    pixmap[BTN_CHECK] = "./skin/default/bt_bt_check.png";
-    pixmap[BTN_PRESS] = "./skin/default/bt_bt_press.png";
-#endif
-    pixmap[BTN_DISABLE] = "./skin/default/bt_bt_disable.png";
-}
 
-QString tagBtnIconTable::pixMap ( int index )
-{
-    if ( index < 0 || index + 1 > BTN_MAX )
-        return pixmap[BTN_NORMAL];
-
-    return pixmap[index];
-}
-
-void tagBtnIconTable::setPixMap ( int index, QString pix )
-{
-    if ( index < 0 || index + 1 > BTN_MAX )
-        return;
-
-    pixmap[index] = pix;
-}
-
-void tagBtnIconTable::initNormal ( QString normal, QString press )
-{
-    if ( !normal.isEmpty() )
-        pixmap[BTN_NORMAL] = normal;
-
-    if ( !press.isEmpty() )
-        pixmap[BTN_PRESS] = press;
-}
-
-void tagBtnIconTable::initCheck ( QString uncheck, QString check )
-{
-    if ( !uncheck.isEmpty() )
-        pixmap[BTN_UNCHECK] = uncheck;
-
-    if ( !check.isEmpty() )
-        pixmap[BTN_CHECK] = check;
-}
-
-void tagBtnIconTable::initOther ( QString hover, QString disable )
-{
-    if ( !hover.isEmpty() )
-        pixmap[BTN_HOVER] = hover;
-
-    if ( !disable.isEmpty() )
-        pixmap[BTN_DISABLE] = disable;
-}
-
-QString& tagBtnIconTable::operator [] ( int index )
-{
-    if ( index < 0 || index >= BTN_MAX )
-        return pixmap[0];
-
-    return pixmap[index];
-}
-
-const QString& tagBtnIconTable::operator[] ( int index ) const
-{
-    if ( index < 0 || index >= BTN_MAX )
-        return pixmap[0];
-
-    return pixmap[index];
-}
-
-
-tagBtnImageTable::tagBtnImageTable()
+TBtnImageTable::TBtnImageTable()
 {
 
 }
 
-const QImage& tagBtnImageTable::image ( int index ) const
+void TBtnImageTable::setStateImage ( int index, const QString& image )
 {
-    if ( index < 0 || index > BTN_MAX - 1 )
-        return mImage[BTN_NORMAL];
-
-    return mImage[index];
+    QImage _image ( image );
+    setStateImage ( index, _image );
 }
 
-QImage& tagBtnImageTable::image ( int index )
+void TBtnImageTable::setNormal ( const QString& normal, const QString& press )
 {
-    if ( index < 0 || index > BTN_MAX - 1 )
-        return mImage[BTN_NORMAL];
-
-    return mImage[index];
+    QImage _normal ( normal );
+    QImage _press ( press );
+    setNormal ( _normal, _press );
 }
 
-void tagBtnImageTable::setStateImage ( int index, const QImage& image )
+void TBtnImageTable::setCheck ( const QString& uncheck, const QString& check )
+{
+    QImage _uncheck ( uncheck );
+    QImage _check ( check );
+    setCheck ( _uncheck, _check );
+}
+
+void TBtnImageTable::setOther ( const QString& hover, const QString& disable )
+{
+    QImage _hover ( hover );
+    QImage _disable ( disable );
+    setOther ( _hover, _disable );
+}
+
+void TBtnImageTable::setHover ( const QString& hover )
+{
+    QImage _hover ( hover );
+    setHover ( _hover );
+}
+
+void TBtnImageTable::setDisable ( const QString& disable )
+{
+    QImage _disable ( disable );
+    setDisable ( _disable );
+}
+
+void TBtnImageTable::setStateImage ( int index, const QImage& image )
 {
     if ( index < 0 || index > BTN_MAX - 1 )
         return;
@@ -107,23 +55,35 @@ void tagBtnImageTable::setStateImage ( int index, const QImage& image )
     mImage[index] = image;
 }
 
-void tagBtnImageTable::setNormal ( const QImage& normal, const QImage& press )
+void TBtnImageTable::setNormal ( const QImage& normal, const QImage& press )
 {
     mImage[BTN_NORMAL] = normal;
     mImage[BTN_PRESS] = press;
 }
 
-void tagBtnImageTable::setHover ( const QImage& hover )
+void TBtnImageTable::setCheck ( const QImage& uncheck, const QImage& check )
+{
+    mImage[BTN_UNCHECK] = uncheck;
+    mImage[BTN_CHECK] = check;
+}
+
+void TBtnImageTable::setOther ( const QImage& hover, const QImage& disable )
+{
+    mImage[BTN_HOVER] = hover;
+    mImage[BTN_DISABLE] = disable;
+}
+
+void TBtnImageTable::setHover ( const QImage& hover )
 {
     mImage[BTN_HOVER] = hover;
 }
 
-void tagBtnImageTable::setDisable ( const QImage& disable )
+void TBtnImageTable::setDisable ( const QImage& disable )
 {
     mImage[BTN_DISABLE] = disable;
 }
 
-const QImage& tagBtnImageTable::operator[] ( int index ) const
+const QImage& TBtnImageTable::operator[] ( int index ) const
 {
     if ( index < 0 || index > BTN_MAX - 1 )
         return mImage[BTN_NORMAL];
@@ -131,16 +91,47 @@ const QImage& tagBtnImageTable::operator[] ( int index ) const
     return mImage[index];
 }
 
-QImage& tagBtnImageTable::operator [] ( int index )
+QImage& TBtnImageTable::operator [] ( int index )
 {
     if ( index < 0 || index > BTN_MAX - 1 )
         return mImage[BTN_NORMAL];
 
     return mImage[index];
+}
+
+const QImage& TBtnImageTable::image ( int index ) const
+{
+    if ( index < 0 || index > BTN_MAX - 1 )
+        return mImage[BTN_NORMAL];
+
+    return mImage[index];
+}
+
+QImage& TBtnImageTable::image ( int index )
+{
+    if ( index < 0 || index > BTN_MAX - 1 )
+        return mImage[BTN_NORMAL];
+
+    return mImage[index];
+}
+
+TBtnImageTable::TBtnImageTable ( const TBtnImageTable& other )
+{
+    *this = other;
+}
+
+TBtnImageTable& TBtnImageTable::operator = ( const TBtnImageTable& other )
+{
+    TBtnImageTable& ref = *this;
+    for ( int i = BTN_NORMAL; i < BTN_MAX; i++ )
+    {
+        ref[i] = other[i];
+    }
+    return *this;
 }
 
 /**
- * ************************************************************************
+ * *************************************************************
  */
 void moveHCenter ( QWidget* w )
 {
@@ -251,7 +242,7 @@ void moveBottom ( QWidget* w )
 
 
 /**
- * ************************************************************************
+ * *************************************************************
  */
 void moveHCenter ( QWidget* w, QWidget* parent )
 {

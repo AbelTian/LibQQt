@@ -1,4 +1,4 @@
-﻿#include "qqtmsgbox.h"
+#include "qqtmsgbox.h"
 #include "ui_qqtmsgbox.h"
 #include "qqtcore.h"
 #include <QSpacerItem>
@@ -71,14 +71,14 @@ QQtMsgBox::QQtMsgBox ( QWidget* parent ) :
     ui->btnYes->setText ( "" );
 
     //pic
-    ui->btnNo->iconTable().initNormal ( "./skin/default/bt_back_normal.png",
+    ui->btnNo->imageTable().setNormal ( "./skin/default/bt_back_normal.png",
                                         "./skin/default/bt_back_press.png" );
-    ui->btnNo->iconTable().initOther ( "./skin/default/bt_back_hover.png",
+    ui->btnNo->imageTable().setOther ( "./skin/default/bt_back_hover.png",
                                        "./skin/default/bt_back_disable.png" );
 
-    ui->btnYes->iconTable().initNormal ( "./skin/default/bt_login_normal.png",
+    ui->btnYes->imageTable().setNormal ( "./skin/default/bt_login_normal.png",
                                          "./skin/default/bt_login_press.png" );
-    ui->btnYes->iconTable().initOther ( "./skin/default/bt_login_hover.png",
+    ui->btnYes->imageTable().setOther ( "./skin/default/bt_login_hover.png",
                                         "./skin/default/bt_login_disable.png" );
 
 

@@ -1,30 +1,30 @@
-﻿#include "qqtsvgcheckbox.h"
+#include "qqtsvgcheckbox.h"
 
-QQtSvgCheckBox::QQtSvgCheckBox(QWidget* parent) : QQtCheckBox(parent)
+QQtSvgCheckBox::QQtSvgCheckBox ( QWidget* parent ) : QQtCheckBox ( parent )
 {
 
 }
 
 void QQtSvgCheckBox::renderToVariable()
 {
-    TBtnIconTable& pic = iconTable();
+    TBtnImageTable& pic = imageTable();
 
-    for (int i = 0; i < BTN_MAX; i++)
-        r[i].load(pic[i]);
+    for ( int i = 0; i < BTN_MAX; i++ )
+        r[i].load ( QByteArray ( ( const char* ) pic[i].bits(), pic[i].byteCount() ) );
 }
 
 
-void QQtSvgCheckBox::paintEvent(QPaintEvent* event)
+void QQtSvgCheckBox::paintEvent ( QPaintEvent* event )
 {
-    Q_UNUSED(event)
+    Q_UNUSED ( event )
 
-    QStylePainter p(this);
+    QStylePainter p ( this );
     int  bs = isChecked() ? BTN_PRESS : BTN_NORMAL;
-    if (r[bs].isValid())
-        r[bs].render(&p);
+    if ( r[bs].isValid() )
+        r[bs].render ( &p );
 
     bool enabled = isEnabled();
     QStyleOptionButton opt;
-    initStyleOption(&opt);
-    p.drawItemText(rect(), Qt::AlignCenter, opt.palette, enabled, text());
+    initStyleOption ( &opt );
+    p.drawItemText ( rect(), Qt::AlignCenter, opt.palette, enabled, text() );
 }

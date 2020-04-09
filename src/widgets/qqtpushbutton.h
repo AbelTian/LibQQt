@@ -23,42 +23,45 @@ public:
     explicit QQtPushButton ( QWidget* parent = 0 );
     virtual ~QQtPushButton();
 
-    /*
-     * Qt4，板子上，QQtPushButton [] = 不能正常运算 所以采用这种形式。
-     */
-    inline TBtnIconTable& iconTable() { return m_pixmap; }
-    inline EBtnStatus btnStatus() const { return state; }
-    inline void setRing ( bool op = false ) { ring = op; }
+    QImage stateImage ( int index );
+    void setStateImage ( int index, const QImage& image );
+
+    //normal, press; uncheck, check; [0,1];
+    void setNormalImage ( const QImage& normal, const QImage& press );
+    //hover; [2];
+    void setHoverImage ( const QImage& hover );
+    //disable; [4];
+    void setDisableImage ( const QImage& disable );
 
     void setEnabled ( bool );
     void setDisabled ( bool );
 
-signals:
-    void longClick();
+    const TBtnImageTable& imageTable() const;
+    TBtnImageTable& imageTable();
+
+protected:
+    void setWorkState ( int index );
+    int workState() const;
+    virtual void translateImage();
+    virtual void setImage ( const QImage& image );
+protected:
 
 private:
-    EBtnStatus state;
-    TBtnIconTable m_pixmap;
-    bool ring;
-    QTimer* m_lcTimer;
+    EBtnStatus mWorkState;
+    TBtnImageTable mImageTable;
+    QImage mImage;
 
     // QWidget interface
 protected:
-    virtual void paintEvent ( QPaintEvent* ) override;
+    virtual void mousePressEvent ( QMouseEvent* event ) override;
+    virtual void mouseReleaseEvent ( QMouseEvent* event ) override;
+    virtual void enterEvent ( QEvent* event ) override;
+    virtual void leaveEvent ( QEvent* event ) override;
 
     // QWidget interface
 protected:
-    virtual void mousePressEvent ( QMouseEvent* ) override;
-    virtual void mouseReleaseEvent ( QMouseEvent* ) override;
-    virtual void enterEvent ( QEvent* ) override;
-    virtual void leaveEvent ( QEvent* ) override;
-    virtual void changeEvent ( QEvent* e ) override;
+    virtual void paintEvent ( QPaintEvent* event ) override;
 
-    // QWidget interface
-protected:
-    void enabledChange ( bool );
-protected slots:
-    void slot_timeout();
 };
 
 #endif // QQTPUSHBUTTON_H

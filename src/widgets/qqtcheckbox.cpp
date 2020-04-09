@@ -1,53 +1,172 @@
-﻿#include "qqtcheckbox.h"
+#include "qqtcheckbox.h"
 #include <QStylePainter>
 #include "qqtwidgets.h"
 
-QQtCheckBox::QQtCheckBox(QWidget* parent) :
-    QCheckBox(parent)
+QQtCheckBox::QQtCheckBox ( QWidget* parent ) :
+    QCheckBox ( parent )
 {
+    mWorkState = BTN_NORMAL;
 }
 
 QQtCheckBox::~QQtCheckBox()
 {
 }
 
-void QQtCheckBox::pixMap(QImage& icon, QImage& iconSel) const
+const TBtnImageTable& QQtCheckBox::imageTable() const
 {
-    icon = QImage(this->m_icon[BTN_NORMAL]);
-    iconSel = QImage(this->m_icon[BTN_PRESS]);
+    return mImageTable;
 }
 
-void QQtCheckBox::pixMap(QString& icon, QString& iconSel) const
+TBtnImageTable& QQtCheckBox::imageTable()
 {
-    icon = m_icon[BTN_NORMAL];
-    iconSel = m_icon[BTN_PRESS];
+    return mImageTable;
 }
 
-void QQtCheckBox::setPixmap(const QString& icon, const QString& iconSel)
+void QQtCheckBox::translateImage()
 {
-    this->m_icon[BTN_NORMAL] = icon;
-    this->m_icon[BTN_PRESS] = iconSel;
+    int state = mWorkState;
+
+    //qDebug() << isEnabled();
+
+    if ( !isEnabled() )
+        state = BTN_DISABLE;
+
+    setImage ( mImageTable[state] );
+}
+
+void QQtCheckBox::setImage ( const QImage& image )
+{
+    mImage = image;
+    update();
+}
+
+int QQtCheckBox::workState() const
+{
+    return mWorkState;
+}
+
+void QQtCheckBox::setWorkState ( int index )
+{
+    mWorkState = ( EBtnStatus ) index;
+    translateImage();
 }
 
 
-void QQtCheckBox::paintEvent(QPaintEvent*)
+QImage QQtCheckBox::stateImage ( int index )
 {
-    QStylePainter p(this);
+    if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
+        return mImageTable[BTN_NORMAL];
+    return mImageTable[index];
+}
 
-    QString icon = isChecked() ? m_icon[BTN_PRESS] : m_icon[BTN_NORMAL];
-
-    if (icon.isEmpty())
+void QQtCheckBox::setStateImage ( int index, const QImage& image )
+{
+    if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
         return;
-
-    p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(icon).pixmap(rect().size(), QIcon::Normal, QIcon::On));
-    QStyleOptionButton opt;
-    initStyleOption(&opt);
-    p.drawItemText(rect(), Qt::AlignCenter, opt.palette, true, text());
+    mImageTable[index] = image;
+    translateImage();
 }
 
-bool QQtCheckBox::hitButton(const QPoint& pos) const
+void QQtCheckBox::setNormalImage ( const QImage& normal, const QImage& press )
 {
-    Q_UNUSED(pos)
+    mImageTable[BTN_NORMAL] = normal;
+    mImageTable[BTN_PRESS] = press;
+    translateImage();
+}
+
+void QQtCheckBox::setHoverImage ( const QImage& hover )
+{
+    mImageTable[BTN_HOVER] = hover;
+    translateImage();
+}
+
+void QQtCheckBox::setDisableImage ( const QImage& disable )
+{
+    mImageTable[BTN_DISABLE] = disable;
+    translateImage();
+}
+
+void QQtCheckBox::setEnabled ( bool stat )
+{
+    //qDebug() << stat;
+    QCheckBox::setEnabled ( stat );
+    if ( stat )
+        setWorkState ( BTN_NORMAL );
+    else
+        setWorkState ( BTN_DISABLE );
+}
+
+void QQtCheckBox::setDisabled ( bool stat )
+{
+    QCheckBox::setDisabled ( stat );
+    if ( !stat )
+        setWorkState ( BTN_NORMAL );
+    else
+        setWorkState ( BTN_DISABLE );
+}
+
+void QQtCheckBox::mousePressEvent ( QMouseEvent* event )
+{
+    if ( event->button() == Qt::LeftButton )
+    {
+        mWorkState = BTN_PRESS;
+    }
+    QCheckBox::mousePressEvent ( event );
+    translateImage();
+}
+
+void QQtCheckBox::mouseReleaseEvent ( QMouseEvent* event )
+{
+    if ( event->button() == Qt::LeftButton )
+    {
+#ifdef __EMBEDDED_LINUX__
+        mWorkState = BTN_NORMAL;
+#else
+        if ( rect().contains ( event->pos() ) )
+            mWorkState = BTN_HOVER;
+        else
+            mWorkState = BTN_NORMAL;
+#endif
+    }
+    QCheckBox::mouseReleaseEvent ( event );
+    translateImage();
+}
+
+void QQtCheckBox::enterEvent ( QEvent* event )
+{
+    mWorkState = BTN_HOVER;
+    QCheckBox::enterEvent ( event );
+    translateImage();
+}
+
+void QQtCheckBox::leaveEvent ( QEvent* event )
+{
+    mWorkState = BTN_NORMAL;
+    QCheckBox::leaveEvent ( event );
+    translateImage();
+}
+
+
+void QQtCheckBox::paintEvent ( QPaintEvent* event )
+{
+    if ( mImage.isNull() )
+        return QCheckBox::paintEvent ( event );
+
+    //qDebug() << isEnabled() << mWorkState;
+
+    QStylePainter p ( this );
+    p.drawItemPixmap ( rect(), Qt::AlignCenter, QIcon ( QPixmap::fromImage ( mImage ) ).pixmap ( rect().size(),
+                       QIcon::Normal, QIcon::On ) );
+
+    QStyleOptionButton opt;
+    initStyleOption ( &opt );
+    p.drawItemText ( rect(), Qt::AlignCenter, opt.palette, isEnabled(), text() );
+}
+
+
+bool QQtCheckBox::hitButton ( const QPoint& pos ) const
+{
+    Q_UNUSED ( pos )
     //TODO:
     return true;
 }

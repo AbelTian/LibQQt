@@ -9,7 +9,7 @@ QQtIrregularPushbutton::~QQtIrregularPushbutton() {}
 
 void QQtIrregularPushbutton::resizeEvent ( QResizeEvent* event )
 {
-    QImage normalImage = QImage ( iconTable() [BTN_NORMAL] );
+    QImage normalImage = imageTable() [BTN_NORMAL];
     if ( normalImage.isNull() )
         return QQtPushButton::resizeEvent ( event );
 
