@@ -14,7 +14,9 @@ class QQTSHARED_EXPORT QQtLineEditWithSearch : public QLineEdit
     Q_OBJECT
 public:
     explicit QQtLineEditWithSearch ( QWidget* parent = 0 );
+
     void setButtonText ( QString text );
+    void setButtonIcon ( QString image );
     void setObjectName ( const QString& name );
 
 signals:
