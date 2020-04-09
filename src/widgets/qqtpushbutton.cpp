@@ -37,7 +37,7 @@ void QQtPushButton::translateImage()
 void QQtPushButton::setImage ( const QImage& image )
 {
     mImage = image;
-    update();
+    //update();
 }
 
 int QQtPushButton::workState() const
@@ -48,7 +48,8 @@ int QQtPushButton::workState() const
 void QQtPushButton::setWorkState ( int index )
 {
     mWorkState = ( EBtnStatus ) index;
-    translateImage();
+    //translateImage();
+    //update();
 }
 
 
@@ -64,26 +65,30 @@ void QQtPushButton::setStateImage ( int index, const QImage& image )
     if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
         return;
     mImageTable[index] = image;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtPushButton::setNormalImage ( const QImage& normal, const QImage& press )
 {
     mImageTable[BTN_NORMAL] = normal;
     mImageTable[BTN_PRESS] = press;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtPushButton::setHoverImage ( const QImage& hover )
 {
     mImageTable[BTN_HOVER] = hover;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtPushButton::setDisableImage ( const QImage& disable )
 {
     mImageTable[BTN_DISABLE] = disable;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtPushButton::setEnabled ( bool stat )
@@ -94,6 +99,7 @@ void QQtPushButton::setEnabled ( bool stat )
         setWorkState ( BTN_NORMAL );
     else
         setWorkState ( BTN_DISABLE );
+    update();
 }
 
 void QQtPushButton::setDisabled ( bool stat )
@@ -103,6 +109,7 @@ void QQtPushButton::setDisabled ( bool stat )
         setWorkState ( BTN_NORMAL );
     else
         setWorkState ( BTN_DISABLE );
+    update();
 }
 
 void QQtPushButton::mousePressEvent ( QMouseEvent* event )
@@ -112,7 +119,8 @@ void QQtPushButton::mousePressEvent ( QMouseEvent* event )
         mWorkState = BTN_PRESS;
     }
     QPushButton::mousePressEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtPushButton::mouseReleaseEvent ( QMouseEvent* event )
@@ -129,26 +137,32 @@ void QQtPushButton::mouseReleaseEvent ( QMouseEvent* event )
 #endif
     }
     QPushButton::mouseReleaseEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtPushButton::enterEvent ( QEvent* event )
 {
     mWorkState = BTN_HOVER;
     QPushButton::enterEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtPushButton::leaveEvent ( QEvent* event )
 {
     mWorkState = BTN_NORMAL;
     QPushButton::leaveEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 
 void QQtPushButton::paintEvent ( QPaintEvent* event )
 {
+    //把imageTable()[stat]设置到mImage。
+    translateImage();
+
     if ( mImage.isNull() )
         return QPushButton::paintEvent ( event );
 

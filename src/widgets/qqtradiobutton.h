@@ -33,13 +33,11 @@ public:
 
     const TBtnImageTable& imageTable() const;
     TBtnImageTable& imageTable();
-    //使用ImageTable必须手动translateImage()一次，update不管用。
-    virtual void translateImage();
-
-    int workState() const;
 
 protected:
+    int workState() const;
     void setWorkState ( int index );
+    virtual void translateImage();
     virtual void setImage ( const QImage& image );
 protected:
 

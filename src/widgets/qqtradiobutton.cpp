@@ -36,7 +36,7 @@ void QQtRadioButton::translateImage()
 void QQtRadioButton::setImage ( const QImage& image )
 {
     mImage = image;
-    update();
+    //update();
 }
 
 int QQtRadioButton::workState() const
@@ -47,7 +47,8 @@ int QQtRadioButton::workState() const
 void QQtRadioButton::setWorkState ( int index )
 {
     mWorkState = ( EBtnStatus ) index;
-    translateImage();
+    //translateImage();
+    //update();
 }
 
 
@@ -63,26 +64,30 @@ void QQtRadioButton::setStateImage ( int index, const QImage& image )
     if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
         return;
     mImageTable[index] = image;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtRadioButton::setNormalImage ( const QImage& normal, const QImage& press )
 {
     mImageTable[BTN_NORMAL] = normal;
     mImageTable[BTN_PRESS] = press;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtRadioButton::setHoverImage ( const QImage& hover )
 {
     mImageTable[BTN_HOVER] = hover;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtRadioButton::setDisableImage ( const QImage& disable )
 {
     mImageTable[BTN_DISABLE] = disable;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtRadioButton::setEnabled ( bool stat )
@@ -93,6 +98,7 @@ void QQtRadioButton::setEnabled ( bool stat )
         setWorkState ( BTN_NORMAL );
     else
         setWorkState ( BTN_DISABLE );
+    update();
 }
 
 void QQtRadioButton::setDisabled ( bool stat )
@@ -102,6 +108,7 @@ void QQtRadioButton::setDisabled ( bool stat )
         setWorkState ( BTN_NORMAL );
     else
         setWorkState ( BTN_DISABLE );
+    update();
 }
 
 void QQtRadioButton::mousePressEvent ( QMouseEvent* event )
@@ -111,7 +118,8 @@ void QQtRadioButton::mousePressEvent ( QMouseEvent* event )
         mWorkState = BTN_PRESS;
     }
     QRadioButton::mousePressEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtRadioButton::mouseReleaseEvent ( QMouseEvent* event )
@@ -128,26 +136,32 @@ void QQtRadioButton::mouseReleaseEvent ( QMouseEvent* event )
 #endif
     }
     QRadioButton::mouseReleaseEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtRadioButton::enterEvent ( QEvent* event )
 {
     mWorkState = BTN_HOVER;
     QRadioButton::enterEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtRadioButton::leaveEvent ( QEvent* event )
 {
     mWorkState = BTN_NORMAL;
     QRadioButton::leaveEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 
 void QQtRadioButton::paintEvent ( QPaintEvent* event )
 {
+    //把imageTable()[stat]设置到mImage。
+    translateImage();
+
     if ( mImage.isNull() )
         return QRadioButton::paintEvent ( event );
 

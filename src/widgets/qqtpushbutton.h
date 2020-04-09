@@ -14,6 +14,7 @@
  * 原装Button在嵌入式板子上无法处理掉Hover问题。
  * QSS里设置也可以，把HOVER设置为和NORMAL一样，只是QSS代码量过大。
  * 原装Pushbutton需要设置setFlat以防止出现default button框。
+ * paintEvent()直接从ImageTable里获取状态图片绘制。
  */
 class QQTSHARED_EXPORT QQtPushButton : public QPushButton
 {
@@ -23,7 +24,7 @@ public:
     explicit QQtPushButton ( QWidget* parent = 0 );
     virtual ~QQtPushButton();
 
-public: //!1
+public:
     QImage stateImage ( int index );
     void setStateImage ( int index, const QImage& image );
 
@@ -37,16 +38,13 @@ public: //!1
     void setEnabled ( bool );
     void setDisabled ( bool );
 
-public: //!2
     const TBtnImageTable& imageTable() const;
     TBtnImageTable& imageTable();
-    //使用ImageTable必须手动translateImage()一次，update不管用。
-    virtual void translateImage();
-
-    int workState() const;
 
 protected:
+    int workState() const;
     void setWorkState ( int index );
+    virtual void translateImage();
     virtual void setImage ( const QImage& image );
 protected:
 

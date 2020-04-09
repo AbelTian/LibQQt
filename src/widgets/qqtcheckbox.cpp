@@ -37,7 +37,7 @@ void QQtCheckBox::translateImage()
 void QQtCheckBox::setImage ( const QImage& image )
 {
     mImage = image;
-    update();
+    //update();
 }
 
 int QQtCheckBox::workState() const
@@ -48,7 +48,8 @@ int QQtCheckBox::workState() const
 void QQtCheckBox::setWorkState ( int index )
 {
     mWorkState = ( EBtnStatus ) index;
-    translateImage();
+    //translateImage();
+    //update();
 }
 
 
@@ -64,26 +65,30 @@ void QQtCheckBox::setStateImage ( int index, const QImage& image )
     if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
         return;
     mImageTable[index] = image;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtCheckBox::setNormalImage ( const QImage& normal, const QImage& press )
 {
     mImageTable[BTN_NORMAL] = normal;
     mImageTable[BTN_PRESS] = press;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtCheckBox::setHoverImage ( const QImage& hover )
 {
     mImageTable[BTN_HOVER] = hover;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtCheckBox::setDisableImage ( const QImage& disable )
 {
     mImageTable[BTN_DISABLE] = disable;
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtCheckBox::setEnabled ( bool stat )
@@ -94,6 +99,7 @@ void QQtCheckBox::setEnabled ( bool stat )
         setWorkState ( BTN_NORMAL );
     else
         setWorkState ( BTN_DISABLE );
+    update();
 }
 
 void QQtCheckBox::setDisabled ( bool stat )
@@ -103,6 +109,7 @@ void QQtCheckBox::setDisabled ( bool stat )
         setWorkState ( BTN_NORMAL );
     else
         setWorkState ( BTN_DISABLE );
+    update();
 }
 
 void QQtCheckBox::mousePressEvent ( QMouseEvent* event )
@@ -112,7 +119,8 @@ void QQtCheckBox::mousePressEvent ( QMouseEvent* event )
         mWorkState = BTN_PRESS;
     }
     QCheckBox::mousePressEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtCheckBox::mouseReleaseEvent ( QMouseEvent* event )
@@ -129,26 +137,32 @@ void QQtCheckBox::mouseReleaseEvent ( QMouseEvent* event )
 #endif
     }
     QCheckBox::mouseReleaseEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtCheckBox::enterEvent ( QEvent* event )
 {
     mWorkState = BTN_HOVER;
     QCheckBox::enterEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 void QQtCheckBox::leaveEvent ( QEvent* event )
 {
     mWorkState = BTN_NORMAL;
     QCheckBox::leaveEvent ( event );
-    translateImage();
+    //translateImage();
+    update();
 }
 
 
 void QQtCheckBox::paintEvent ( QPaintEvent* event )
 {
+    //把imageTable()[stat]设置到mImage。
+    translateImage();
+
     if ( mImage.isNull() )
         return QCheckBox::paintEvent ( event );
 
