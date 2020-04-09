@@ -1,4 +1,4 @@
-﻿#ifndef QQTAPPLICATION_H
+#ifndef QQTAPPLICATION_H
 #define QQTAPPLICATION_H
 
 #include <QApplication>
@@ -39,15 +39,15 @@ public:
     static void setHighDpiScaling ( bool open = true );
 
     //设置工作目录
-    void setWorkRoot ( const QString workroot );
+    void setWorkRoot ( const QString& workroot );
 
-    //获取工作目录 总是跟随用户设置改变
-    const QString getWorkRoot();
+    //获取工作目录 总是跟随用户设置改变 $(pwd)或者%CD%
+    QString getWorkRoot();
 
     //QQtApplication把启动目录强制切换到了应用程序所在目录，如果用户需要更改回去，那么自己切换到这个目录即可。
-    //获取启动时目录 $(pwd)或者%CD%
+    //获取启动时目录
     //这个值是固定不变的。
-    const QString getStartingWorkRoot();
+    const QString& getStartingWorkRoot() const;
 
     //这两个函数和MFC架构里的那两个函数一样的功能，但是Qt提供了main函数里的更好的窗口启动方法，所以，这里不实现。
     virtual int initInstance() { return 0; }

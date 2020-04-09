@@ -171,17 +171,17 @@ void QQtApplication::setHighDpiScaling ( bool open )
 #endif
 }
 
-void QQtApplication::setWorkRoot ( const QString workroot )
+void QQtApplication::setWorkRoot ( const QString& workroot )
 {
     QDir::setCurrent ( workroot );
 }
 
-const QString QQtApplication::getWorkRoot()
+QString QQtApplication::getWorkRoot()
 {
     return QDir::currentPath();
 }
 
-const QString QQtApplication::getStartingWorkRoot()
+const QString& QQtApplication::getStartingWorkRoot() const
 {
     return startWorkRoot;
 }
