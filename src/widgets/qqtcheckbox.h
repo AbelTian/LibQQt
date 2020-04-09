@@ -32,12 +32,15 @@ public:
     void setEnabled ( bool );
     void setDisabled ( bool );
 
-protected:
     const TBtnImageTable& imageTable() const;
     TBtnImageTable& imageTable();
-    void setWorkState ( int index );
-    int workState() const;
+    //使用ImageTable必须手动translateImage()一次，update不管用。
     virtual void translateImage();
+
+    int workState() const;
+
+protected:
+    void setWorkState ( int index );
     virtual void setImage ( const QImage& image );
 protected:
 

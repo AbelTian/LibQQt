@@ -23,6 +23,7 @@ public:
     explicit QQtPushButton ( QWidget* parent = 0 );
     virtual ~QQtPushButton();
 
+public: //!1
     QImage stateImage ( int index );
     void setStateImage ( int index, const QImage& image );
 
@@ -36,13 +37,16 @@ public:
     void setEnabled ( bool );
     void setDisabled ( bool );
 
+public: //!2
     const TBtnImageTable& imageTable() const;
     TBtnImageTable& imageTable();
+    //使用ImageTable必须手动translateImage()一次，update不管用。
+    virtual void translateImage();
+
+    int workState() const;
 
 protected:
     void setWorkState ( int index );
-    int workState() const;
-    virtual void translateImage();
     virtual void setImage ( const QImage& image );
 protected:
 
