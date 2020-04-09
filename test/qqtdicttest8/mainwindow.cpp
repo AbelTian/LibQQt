@@ -16,6 +16,16 @@ MainWindow::MainWindow ( QWidget* parent ) :
     QByteArray bytes = file.readAll();
     ui->plainTextEdit->appendPlainText ( bytes );
     file.close();
+
+    QQtDictionary dict;
+    QList<QColor> bb;
+    bb << QColor ( Qt::red );
+    bb << QColor ( Qt::black );
+    bb << QColor ( Qt::green );
+    bb << QColor ( Qt::yellow );
+    bb << QColor ( Qt::magenta );
+    dict = bb;
+    pline() << dict;
 }
 
 MainWindow::~MainWindow()

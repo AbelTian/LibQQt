@@ -40,6 +40,7 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
  * fromYAML toYAML              支持Yaml
  * fromINI toINI                支持ini
  * fromProperties toProperties  支持Properties 这是一种Java配置文件的格式，仅仅有键值对、注释
+ * fromCSV toCSV                支持csv 逗号分隔值格式文本。
  * from函数默认行为为合并，如果用户希望新替，请手动调用clear();
  *
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
@@ -158,6 +159,16 @@ public:
     QQtDictionary& operator [] ( const QString& key );
     const QQtDictionary operator[] ( const QString& key ) const;
 
+    template <typename T>
+    QQtDictionary& operator = ( const QList<T>& list1 ) {
+        m_type = DictList;
+        m_list.clear();
+        for ( int i = 0; i < list1.size(); i++ ) {
+            const T& v1 = list1[i];
+            m_list.push_back ( QQtDictionary ( v1 ) );
+        }
+        return *this;
+    }
     QQtDictionary& operator = ( const QList<QString>& list );
 
     QQtDictionary& operator = ( const QMap<QString, QQtDictionary>& map );
