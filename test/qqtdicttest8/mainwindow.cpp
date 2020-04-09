@@ -26,6 +26,14 @@ MainWindow::MainWindow ( QWidget* parent ) :
     bb << QColor ( Qt::magenta );
     dict = bb;
     pline() << dict;
+
+    QStringList cc;
+    cc << "你好";
+    cc << "您好";
+    cc << "nin hao";
+    cc << "Hello";
+    dict = cc;
+    pline() << dict;
 }
 
 MainWindow::~MainWindow()
