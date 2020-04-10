@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QList>
 #include <QMap>
+#include <QDebug>
 
 class QJsonDocument;
 class QJsonValue;
@@ -48,9 +49,11 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
  */
 class QQTSHARED_EXPORT QQtDictionary
 {
-    Q_ENUMS ( EDictType )
-
 public:
+    /*explicit 函数只能作为构造函数，不能作为拷贝构造函数，拷贝构造函数不可加*/
+    explicit QQtDictionary ();
+    ~QQtDictionary ();
+
     typedef enum tagDictType
     {
         /*只有一个值*/
@@ -62,10 +65,6 @@ public:
 
         DictMax
     } EDictType;
-
-    /*explicit 函数只能作为构造函数，不能作为拷贝构造函数，拷贝构造函数不可加*/
-    explicit QQtDictionary ();
-    virtual ~QQtDictionary ();
 
     bool isNull() const;
     bool isValid() const;
@@ -216,10 +215,6 @@ public:
                    const QString& textDelimiter = QString ( "\"" ),
                    const QString& textEncoding = QString ( "UTF-8" )
                  );
-
-signals:
-
-public slots:
 
 private:
     /*节点类型，指示性变量*/
