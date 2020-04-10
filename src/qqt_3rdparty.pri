@@ -34,10 +34,10 @@ contains (DEFINES, __QTCSVLIB__) {
 
 #jsoncpp support
 #注释：在qqt_header.pri打开 DEFINES += __JSONCPP_SUPPORT__
-DEFINES += __JSONCPP_SUPPORT__
-contains (DEFINES, __JSONCPP_SUPPORT__) {
-    include($$PWD/core/json_cpp/json_cpp.pri)
-}
+#DEFINES += __JSONCPP_SUPPORT__
+#contains (DEFINES, __JSONCPP_SUPPORT__) {
+#    include($$PWD/core/json_cpp/json_cpp.pri)
+#}
 
 #rapidjson support
 #注释：在qqt_header.pri打开 DEFINES += __RAPIDJSON_SUPPORT__
