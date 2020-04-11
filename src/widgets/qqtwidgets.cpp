@@ -2,6 +2,81 @@
 
 #include <QDesktopWidget>
 
+TBtnIconTable::TBtnIconTable()
+{
+    pixmap[BTN_NORMAL] = "./skin/default/bt_bt_normal.png";
+    pixmap[BTN_UNCHECK] = "./skin/default/bt_bt_normal.png";
+#ifdef __EMBEDDED_LINUX__
+    pixmap[BTN_HOVER] = "./skin/default/bt_bt_hover.png";
+    pixmap[BTN_CHECK] = "./skin/default/bt_bt_hover.png";
+    pixmap[BTN_PRESS] = "./skin/default/bt_bt_hover.png";
+#else
+    pixmap[BTN_HOVER] = "./skin/default/bt_bt_hover.png";
+    pixmap[BTN_CHECK] = "./skin/default/bt_bt_check.png";
+    pixmap[BTN_PRESS] = "./skin/default/bt_bt_press.png";
+#endif
+    pixmap[BTN_DISABLE] = "./skin/default/bt_bt_disable.png";
+}
+
+QString TBtnIconTable::pixMap ( int index )
+{
+    if ( index < 0 || index + 1 > BTN_MAX )
+        return pixmap[BTN_NORMAL];
+
+    return pixmap[index];
+}
+
+void TBtnIconTable::setPixMap ( int index, QString pix )
+{
+    if ( index < 0 || index + 1 > BTN_MAX )
+        return;
+
+    pixmap[index] = pix;
+}
+
+void TBtnIconTable::initNormal ( QString normal, QString press )
+{
+    if ( !normal.isEmpty() )
+        pixmap[BTN_NORMAL] = normal;
+
+    if ( !press.isEmpty() )
+        pixmap[BTN_PRESS] = press;
+}
+
+void TBtnIconTable::initCheck ( QString uncheck, QString check )
+{
+    if ( !uncheck.isEmpty() )
+        pixmap[BTN_UNCHECK] = uncheck;
+
+    if ( !check.isEmpty() )
+        pixmap[BTN_CHECK] = check;
+}
+
+void TBtnIconTable::initOther ( QString hover, QString disable )
+{
+    if ( !hover.isEmpty() )
+        pixmap[BTN_HOVER] = hover;
+
+    if ( !disable.isEmpty() )
+        pixmap[BTN_DISABLE] = disable;
+}
+
+QString& TBtnIconTable::operator [] ( int index )
+{
+    if ( index < 0 || index >= BTN_MAX )
+        return pixmap[0];
+
+    return pixmap[index];
+}
+
+const QString& TBtnIconTable::operator[] ( int index ) const
+{
+    if ( index < 0 || index >= BTN_MAX )
+        return pixmap[0];
+
+    return pixmap[index];
+}
+
 
 TBtnImageTable::TBtnImageTable()
 {

@@ -1,4 +1,4 @@
-﻿#ifndef QQTSVGRADIOBUTTON_H
+#ifndef QQTSVGRADIOBUTTON_H
 #define QQTSVGRADIOBUTTON_H
 
 #include <qqtradiobutton.h>
@@ -12,6 +12,20 @@ class QQTSHARED_EXPORT QQtSvgRadioButton : public QQtRadioButton
     Q_OBJECT
 public:
     explicit QQtSvgRadioButton ( QWidget* parent = nullptr );
+
+    QString stateImage ( int index );
+    void setStateImage ( int index, const QString& image );
+
+    //normal, press; uncheck, check; [0,1];
+    void setNormalImage ( const QString& normal, const QString& press );
+    //hover; [2];
+    void setHoverImage ( const QString& hover );
+    //disable; [4];
+    void setDisableImage ( const QString& disable );
+
+    const TBtnIconTable& iconTable() const;
+    TBtnIconTable& iconTable();
+
     /**
      * @brief renderToVariable
      * call this function after iconTable() set.
@@ -26,6 +40,8 @@ protected:
     virtual void paintEvent ( QPaintEvent* event ) override;
 private:
     QSvgRenderer r[BTN_MAX];
+
+    TBtnIconTable mIconTable;
 };
 
 #endif // QQTSVGRADIOBUTTON_H

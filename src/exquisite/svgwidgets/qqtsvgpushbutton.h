@@ -1,4 +1,4 @@
-﻿#ifndef QQTSVGPUSHBUTTON_H
+#ifndef QQTSVGPUSHBUTTON_H
 #define QQTSVGPUSHBUTTON_H
 
 #include <qqtpushbutton.h>
@@ -13,6 +13,19 @@ class QQTSHARED_EXPORT QQtSvgPushButton : public QQtPushButton
 public:
     explicit QQtSvgPushButton ( QWidget* parent = nullptr );
     virtual ~QQtSvgPushButton() {}
+
+    QString stateImage ( int index );
+    void setStateImage ( int index, const QString& image );
+
+    //normal, press; uncheck, check; [0,1];
+    void setNormalImage ( const QString& normal, const QString& press );
+    //hover; [2];
+    void setHoverImage ( const QString& hover );
+    //disable; [4];
+    void setDisableImage ( const QString& disable );
+
+    const TBtnIconTable& iconTable() const;
+    TBtnIconTable& iconTable();
 
     /**
      * @brief renderToVariable
@@ -31,6 +44,7 @@ protected:
 private:
     QSvgRenderer r[BTN_MAX];
 
+    TBtnIconTable mIconTable;
 };
 
 #endif // QQTSVGPUSHBUTTON_H

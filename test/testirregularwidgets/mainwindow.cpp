@@ -1,4 +1,4 @@
-﻿#include "mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <qqtirregularwidget.h>
@@ -79,9 +79,9 @@ MainWindow::MainWindow ( QWidget* parent ) :
     //ui->widget_26->setParent ( 0 );
     //ui->widget_26->show();
 
-    ui->pushButton->iconTable().initNormal ( conf_root ( "close_0.png" ), conf_root ( "close_01.png" ) );
-    ui->pushButton->iconTable().initCheck ( conf_root ( "close_0.png" ), conf_root ( "close_01.png" ) );
-    ui->pushButton->iconTable().initOther ( conf_root ( "close_01.png" ), conf_root ( "close_01.png" ) );
+    ui->pushButton->imageTable().setNormal ( conf_root ( "close_0.png" ), conf_root ( "close_01.png" ) );
+    ui->pushButton->imageTable().setCheck ( conf_root ( "close_0.png" ), conf_root ( "close_01.png" ) );
+    ui->pushButton->imageTable().setOther ( conf_root ( "close_01.png" ), conf_root ( "close_01.png" ) );
     connect ( ui->pushButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( clicked2() ) );
     ui->pushButton->installEventFilter ( this );
 
