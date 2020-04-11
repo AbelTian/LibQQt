@@ -169,8 +169,16 @@ void QQtCheckBox::paintEvent ( QPaintEvent* event )
     //qDebug() << isEnabled() << mWorkState;
 
     QStylePainter p ( this );
+#if 0
     p.drawItemPixmap ( rect(), Qt::AlignCenter, QIcon ( QPixmap::fromImage ( mImage ) ).pixmap ( rect().size(),
                        QIcon::Normal, QIcon::On ) );
+#else
+    p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
+                       /*不.copy() 切出图片的中间部分使用*/
+                       QPixmap::fromImage ( mImage
+                                            .scaled ( rect().width(), rect().height(), Qt::IgnoreAspectRatio )
+                                          ) );
+#endif
 
     QStyleOptionButton opt;
     initStyleOption ( &opt );
