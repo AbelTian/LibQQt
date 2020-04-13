@@ -158,6 +158,8 @@ QQtWebAccessSession::QQtWebAccessSession ( QObject* parent ) :
     m_pTimer = new QTimer ( this );
     m_pTimer->setSingleShot ( true );
     m_pTimer->setInterval ( 10000 );
+
+    mErrorCode = QNetworkReply::NoError;
 }
 
 QQtWebAccessSession::~QQtWebAccessSession() {}
@@ -202,6 +204,16 @@ QString QQtWebAccessSession::getWebAccessSessionName()
 void QQtWebAccessSession::setWebAccessSessionName ( QString strSessionName )
 {
     m_strSessionName = strSessionName;
+}
+
+QNetworkReply::NetworkError QQtWebAccessSession::getErrorCode()
+{
+    return mErrorCode;
+}
+
+void QQtWebAccessSession::setErrorCode ( QNetworkReply::NetworkError error )
+{
+    mErrorCode = error;
 }
 
 /**
@@ -1150,7 +1162,10 @@ void QQtWebAccessManager::localReplyTimeOut()
     if ( !s0 )
         return;
 
+    s0->setErrorCode ( QNetworkReply::TimeoutError );
+
     emit replyTimeOut ( s0 ); //请求失败
+
     s0->getWebAccessReply()->abort();
     s0->getWebAccessReply()->deleteLater();
     manager->removeWebAccessSession ( s0 );

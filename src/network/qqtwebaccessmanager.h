@@ -89,11 +89,16 @@ public:
     QString getWebAccessSessionName();
     void setWebAccessSessionName ( QString strSessionName );
 
+    QNetworkReply::NetworkError getErrorCode();
+    void setErrorCode ( QNetworkReply::NetworkError error );
+
 private:
     //request
     QNetworkRequest mNetworkRequest;
     //call back
     QNetworkReply* m_pNetworkReply;
+    //call back error code
+    QNetworkReply::NetworkError mErrorCode;
     //call time out
     QTimer* m_pTimer;
     //calling url [user set] to make request
