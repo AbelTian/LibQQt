@@ -31,10 +31,10 @@ typedef QNetworkCookie QQtWebAccessCookie;
 
 /**
  * @brief The QQtWebAccessCookieJar class
- * 一个QQtWebAccessManager对应一个cookieJar
+ * 一个QQtWebAccessManager对应一个cookieJar。
  * 这个CookieJar是具名的CookieJar。
- * QNetworkCookieJar可以保存多个网址的Cookie组
- * 添加一些函数丰富QQtWebAccessCookieJar的功能
+ * QNetworkCookieJar可以保存多个网址的Cookie组，QQtWebAccessCookieJar明确可以保存多个网址的Cookie组。
+ * 添加一些函数丰富QNetworkCookieJar的功能。
  */
 class QQTSHARED_EXPORT QQtWebAccessCookieJar: public QNetworkCookieJar
 {
@@ -70,49 +70,24 @@ class QQTSHARED_EXPORT QQtWebAccessSession : public QObject
 {
     Q_OBJECT
 public:
-    explicit QQtWebAccessSession ( QObject* parent = 0 ) :
-        QObject ( parent ) {
-        m_pTimer = new QTimer ( this );
-        m_pTimer->setSingleShot ( true );
-        m_pTimer->setInterval ( 10000 );
-    }
-    virtual ~QQtWebAccessSession() {}
+    explicit QQtWebAccessSession ( QObject* parent = 0 );
+    virtual ~QQtWebAccessSession();
 
     //timer
-    void setTimeOut ( int timeout ) {
-        m_pTimer->setInterval ( timeout );
-    }
-    QTimer* getTimer() {
-        return m_pTimer;
-    }
+    QTimer* getTimer();
 
     //request
-    QString getWebAccessUrl() {
-        return mNetworkRequest.url().toString();
-    }
-    void setWebAccessUrl ( QString strUrl ) {
-        m_strUrl = strUrl;
-        mNetworkRequest.setUrl ( QUrl ( m_strUrl ) );
-    }
-    QNetworkRequest& webAccessRequest() {
-        return mNetworkRequest;
-    }
+    QString getWebAccessUrl();
+    void setWebAccessUrl ( QString strUrl );
+    QNetworkRequest& webAccessRequest();
 
     //reply
-    QNetworkReply* getWebAccessReply() {
-        return m_pNetworkReply;
-    }
-    void setWebAccessReply ( QNetworkReply* reply ) {
-        m_pNetworkReply = reply;
-    }
+    QNetworkReply* getWebAccessReply();
+    void setWebAccessReply ( QNetworkReply* reply );
 
     //session name
-    QString getWebAccessSessionName() {
-        return m_strSessionName;
-    }
-    void setWebAccessSessionName ( QString strSessionName ) {
-        m_strSessionName = strSessionName;
-    }
+    QString getWebAccessSessionName();
+    void setWebAccessSessionName ( QString strSessionName );
 
 private:
     //request
@@ -190,7 +165,6 @@ public:
     QString getRequestUrlByTimer ( QTimer* timer );
     QQtWebAccessSession* getSessionByTimer ( QTimer* timer );
 
-
     QNetworkReply* getReplyHandler ( QQtWebAccessSession* session );
     QString getRequestUrl ( QQtWebAccessSession* session );
     QString getSessionName ( QQtWebAccessSession* session );
@@ -228,18 +202,22 @@ public:
      * @param session
      */
     void sendGetRequest ( QQtWebAccessSession* session );
-    QQtWebAccessSession* sendGetRequest ( QString strUrl );
-    QList<QQtWebAccessSession*> sendGetRequests ( QStringList& strUrls );
     QQtWebAccessSession* sendGetRequest ( const QNetworkRequest& netRequest );
+    QQtWebAccessSession* sendGetRequest ( QString strUrl );
+
     QList<QQtWebAccessSession*> sendGetRequests ( const QList<QNetworkRequest>& netRequests );
+    QList<QQtWebAccessSession*> sendGetRequests ( QStringList& strUrls );
 
     QQtWebAccessSession* sendHeadRequest ( const QNetworkRequest& request );
+
     QQtWebAccessSession* sendPostRequest ( const QNetworkRequest& request, QIODevice* data );
     QQtWebAccessSession* sendPostRequest ( const QNetworkRequest& request, const QByteArray& data );
     QQtWebAccessSession* sendPostRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart );
+
     QQtWebAccessSession* sendPutRequest ( const QNetworkRequest& request, QIODevice* data );
     QQtWebAccessSession* sendPutRequest ( const QNetworkRequest& request, const QByteArray& data );
     QQtWebAccessSession* sendPutRequest ( const QNetworkRequest& request, QHttpMultiPart* multiPart );
+
     QQtWebAccessSession* sendDeleteResourceRequest ( const QNetworkRequest& request );
     QQtWebAccessSession* sendCustomRequest ( const QNetworkRequest& request, const QByteArray& verb,
                                              QIODevice* data = Q_NULLPTR );
@@ -257,6 +235,41 @@ public:
                                              QHttpMultiPart* multiPart );
 #endif
 #endif
+
+    /**
+     * User-Agent:
+     */
+    //index=0 Qt默认的，用户不设置 [default]; index=1...N User-Agent: ...
+    int getUserAgentCount();
+    QList<QByteArray> getUserAgentList();
+    QByteArray getUserAgent ( int index = 0 );
+    void setUserAgent ( int index = 0 );
+    void setUserAgent ( const QByteArray& agent );
+    QByteArray userAgent();
+
+    /**
+     * ContentType
+     */
+    //index = 0, application/x-www-form-urlencoded [default]; index=1...N ContentType:
+    int getContentTypeCount();
+    QList<QByteArray> getContentTypeList();
+    QByteArray getContentType ( int index = 0 );
+    void setContentType ( int index = 0 );
+    void setContentType ( const QByteArray& type );
+    QByteArray contentType();
+
+    /**
+     * CookieJar
+     */
+    //默认为空，不设置CookieJar。
+    //QQtWebAccessManager提供QQtWebAccessCookieJar给用户使用，
+    //用户每次请求，手动设置Cookie组，内部会自动给URL设置Cookie组发到服务器，接收时也是自动给URL设置Cookie组发到用户。
+    //QQtWebAccessManager无法获知用户给每个URL设置哪些Cookie组。
+    //QQtWebAccessManager不知道CookieJar里是否存在公共Cookie组。
+
+    //设置每次请求超时时间
+    void setTimerInterval ( int millsecond = 10000 );
+    int timerInterval();
 
 signals:
     void updateUploadProgress ( QQtWebAccessSession* session, qint64 bytesSent, qint64 bytesTotal );
@@ -286,6 +299,24 @@ private slots:
 
 private:
     QQtWebAccessSessionManager* manager;
+
+protected:
+    virtual void initUserAgent();
+private:
+    QList<QByteArray> mUserAgentList;
+    QByteArray mUserAgent;
+
+protected:
+    virtual void initContentType();
+private:
+    QList<QByteArray> mContentTypeList;
+    QByteArray mContentType;
+
+protected:
+    virtual void setRequestHeader ( QNetworkRequest& netRequest );
+
+private:
+    int mTimerInterval;
 };
 
 #endif // QQTWEBWORKCLIENT_H
