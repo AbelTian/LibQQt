@@ -166,10 +166,11 @@ void QQtDataPersistence::readFile ( QByteArray& bytes )
         return;
 
     QFile file ( mFileName );
+    //pline() << "file:" << mFileName << file.exists();
     if ( file.exists() )
         file.open ( QFile::ReadOnly );
     else
-        file.open ( QFile::Truncate | QFile::ReadOnly );
+        file.open ( QFile::Truncate | QFile::ReadWrite );
     bytes = file.readAll();
     file.close();
 }
