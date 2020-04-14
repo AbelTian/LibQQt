@@ -104,7 +104,7 @@ github link: https://github.com/AbelTian/LibQQt
         - QQtSerialPort 兼容QSerialPort and QextSerialPort
         - [QQtTcpClient](src/network/qqttcpclient.h)、QQtTcpServer、QQtUdpClient、QQtUdpServer
         - QQtBluetoothSocket、QQtBluetoothServer +QQtBluetoothManager
-        - QQtWebAccessManager，支持http、ftp等主流协议，高并发传输，管理cookie和session。
+        - [QQtWebAccessManager](src/network/qqtwebaccessmanager.h)、[QQtWebLoader](src/network/qqtwebloader.h)，支持http、ftp等主流协议，高并发传输，管理cookie和session。
         - [QQtWebSocket](src/network/qqtwebsocketclient.h) 接口
         - 一个句柄代表一个和外部通信的节点。  
      - 报文虚类（接口类） [QQtMessage](src/network/qqtmessage.h)  

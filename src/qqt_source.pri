@@ -367,6 +367,9 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     contains (DEFINES, __WEBACCESSSUPPORT__) {
         SOURCES += $$PWD/network/qqtwebaccessmanager.cpp
         HEADERS += $$PWD/network/qqtwebaccessmanager.h
+
+        SOURCES += $$PWD/network/qqtwebloader.cpp
+        HEADERS += $$PWD/network/qqtwebloader.h
     }
 }
 
@@ -690,11 +693,6 @@ contains (DEFINES, __HIGHGRADE__) {
         HEADERS += \
             $$PWD/highgrade/qqtsingletonapplication.h
     }
-
-    SOURCES += \
-        $$PWD/highgrade/qqtdatapersistence.cpp
-    HEADERS += \
-        $$PWD/highgrade/qqtdatapersistence.h
 }
 
 include ($$PWD/qqt_3rdparty.pri)
