@@ -143,6 +143,31 @@ MainWindow::MainWindow ( QWidget* parent ) :
     dict1 = dict;
     pline() << "ordered dict:" << qPrintable ( dict1.toJson ( 4 ) ) ;
 
+    QQtOrderedDictionary dict2;
+    dict2["G"]["B"] = "C";
+    dict2["T"] = "C";
+
+    QQtOrderedDictionary dict3;
+    dict3 = dict1;
+
+    QQtDictionary dict4;
+    dict4 = dict;
+
+    QQtDictionary dict5;
+    dict5["B"]["E"] = "C";
+
+
+    pline() << bool ( dict1 == dict ); // =
+    pline() << bool ( dict == dict1 ); // =
+
+    pline() << bool ( dict2 == dict ); // !=
+    pline() << bool ( dict == dict2 ); // !=
+
+    pline() << bool ( dict1 == dict3 ); // =
+    pline() << bool ( dict == dict4 ); // =
+
+    pline() << bool ( dict == dict5 ); // !=
+    pline() << bool ( dict2 == dict1 ); // !=
 }
 
 MainWindow::~MainWindow()
