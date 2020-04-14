@@ -27,7 +27,8 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
 
 /**
  * @brief The QQtDictionary class
- * QQt 字典
+ * QQt Dictionary
+ *
  * 字典当中包含
  * 有序tuple 操作方式 dict[0] = ["","","",5] dict[max-1] = {""="",""="",""="",""=""}
  * 不支持无序tuple 操作方式 无
