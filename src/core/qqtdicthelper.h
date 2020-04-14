@@ -10,4 +10,20 @@
 typedef QQtDictionary QDictionary;
 typedef QQtOrderedDictionary QOrderedDictionary;
 
+typedef QQtDictionaryMap QDictionaryMap;
+typedef QQtDictionaryMapIterator QDictionaryMapIterator;
+typedef QQtDictionaryMutableMapIterator QDictionaryMutableMapIterator;
+
+typedef QQtDictionaryList QDictionaryList;
+typedef QQtDictionaryListIterator QDictionaryListIterator;
+typedef QQtDictionaryMutableListIterator QDictionaryMutableListIterator;
+
+typedef QQtOrderedDictionaryMap QOrderedDictionaryMap;
+typedef QQtOrderedDictionaryMapIterator QOrderedDictionaryMapIterator;
+typedef QQtOrderedDictionaryMutableMapIterator QOrderedDictionaryMutableMapIterator;
+
+typedef QQtOrderedDictionaryList QOrderedDictionaryList;
+typedef QQtOrderedDictionaryListIterator QOrderedDictionaryListIterator;
+typedef QQtOrderedDictionaryMutableListIterator QOrderedDictionaryMutableListIterator;
+
 #endif // QQTDICTHELPER_H

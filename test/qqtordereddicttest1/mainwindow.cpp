@@ -3,7 +3,7 @@
 
 #include <qqtorderedmap.h>
 #include <qqtordereddictionary.h>
-
+#include <qqtdicthelper.h>
 
 #include <QDebug>
 #include <QFile>
