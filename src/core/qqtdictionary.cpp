@@ -1882,7 +1882,7 @@ void parseOrderedDictionary ( QQtDictionary& node, const QQtOrderedDictionary& o
             for ( int i = 0; i < obj.getList().size(); i++ )
             {
                 const QQtOrderedDictionary& value = obj.getList() [i];
-                parseOrderedDictionary ( node, value );
+                parseOrderedDictionary ( node[i], value );
             }
         }
         break;

@@ -2329,7 +2329,7 @@ void parseDictionary ( QQtOrderedDictionary& node, const QQtDictionary& obj )
             for ( int i = 0; i < obj.getList().size(); i++ )
             {
                 const QQtDictionary& value = obj.getList() [i];
-                parseDictionary ( node, value );
+                parseDictionary ( node[i], value );
             }
         }
         break;

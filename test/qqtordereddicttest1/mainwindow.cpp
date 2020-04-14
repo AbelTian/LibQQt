@@ -134,6 +134,15 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->textBrowser_4->append ( qPrintable ( m4.toXML ( 4 ) ) );
 
 
+    QQtDictionary dict;
+    dict["Hello"][1] = "A1";
+    dict["But"][2]["你好"] = "B";
+    pline() << "sorted dict" << qPrintable ( dict.toJson ( QJsonDocument::Indented ) ) ;
+
+    QQtOrderedDictionary dict1;
+    dict1 = dict;
+    pline() << "ordered dict:" << qPrintable ( dict1.toJson ( 4 ) ) ;
+
 }
 
 MainWindow::~MainWindow()
