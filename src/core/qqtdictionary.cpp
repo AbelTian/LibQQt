@@ -1,4 +1,5 @@
 #include "qqtdictionary.h"
+#include <qqtordereddictionary.h>
 
 //support json
 #include <QJsonDocument>    //json文档
@@ -67,6 +68,8 @@ QByteArray toXML ( const QQtDictionary& dict, int indent = -1 );
 void fromXML ( const QByteArray& xml, QQtDictionary& dict );
 void parseDomNode ( const QDomNode& value, QQtDictionary& parent );
 void packDictionaryToDomNode ( const QQtDictionary& node, QDomNode& result, QDomDocument& doc );
+
+void parseOrderedDictionary ( QQtDictionary& node, const QQtOrderedDictionary& obj );
 
 //#define LOCAL_DEBUG
 #ifdef LOCAL_DEBUG
@@ -377,6 +380,16 @@ void QQtDictionary::remove ( const QString& key )
     m_map.remove ( key );
 }
 
+QQtDictionary::QQtDictionary ( const QMap<QString, QQtDictionary>& map )
+{
+    *this = map;
+}
+
+QQtDictionary::QQtDictionary ( const QList<QQtDictionary>& list )
+{
+    *this = list;
+}
+
 QQtDictionary::QQtDictionary ( const QQtDictionary& other )
 {
     *this = other;
@@ -390,6 +403,24 @@ QQtDictionary::QQtDictionary ( const QQtDictionary::EDictType type )
 const QQtDictionary QQtDictionary::operator[] ( const QString& key ) const
 {
     return m_map[key];
+}
+
+QQtDictionary::QQtDictionary ( const QQtOrderedDictionary& other )
+{
+    *this = other;
+}
+
+QQtDictionary& QQtDictionary::operator = ( const QQtOrderedDictionary& other )
+{
+    parseOrderedDictionary ( *this, other );
+    return *this;
+}
+
+bool QQtDictionary::operator == ( const QQtOrderedDictionary& other ) const
+{
+    const QQtDictionary& ref = *this;
+    QQtDictionary other1 = other;
+    return ( bool ) ( ref == other1 );
 }
 
 const QQtDictionary& QQtDictionary::operator[] ( int index ) const
@@ -1836,3 +1867,40 @@ void packDictionaryToYamlNode ( const QQtDictionary& node, YAML::Node& object )
 
 }
 #endif
+
+void parseOrderedDictionary ( QQtDictionary& node, const QQtOrderedDictionary& obj )
+{
+    switch ( obj.getType() )
+    {
+        case QQtOrderedDictionary::DictValue:
+        {
+            node = obj.getValue();
+        }
+        break;
+        case QQtOrderedDictionary::DictList:
+        {
+            for ( int i = 0; i < obj.getList().size(); i++ )
+            {
+                const QQtOrderedDictionary& value = obj.getList() [i];
+                parseOrderedDictionary ( node, value );
+            }
+        }
+        break;
+        case QQtOrderedDictionary::DictMap:
+        {
+            QQtOrderedDictionaryMapIterator itor ( obj.getMap() );
+            while ( itor.hasNext() )
+            {
+                itor.next();
+                const QString& key = itor.key();
+                const QQtOrderedDictionary& value = itor.value();
+                parseOrderedDictionary ( node[key], value );
+            }
+        }
+        break;
+        case QQtOrderedDictionary::DictMax:
+        default:
+            break;
+    }
+}
+

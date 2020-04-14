@@ -11,14 +11,15 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
+class QQtDictionary;
 class QQtOrderedDictionary;
-typedef QOrderedMap<QString, QQtOrderedDictionary> QOrderedDictionaryMap;
-typedef QOrderedMapIterator<QString, QQtOrderedDictionary> QOrderedDictionaryMapIterator;
-typedef QMutableMapIterator<QString, QQtOrderedDictionary> QOrderedDictionaryMutableMapIterator;
+typedef QOrderedMap<QString, QQtOrderedDictionary> QQtOrderedDictionaryMap;
+typedef QOrderedMapIterator<QString, QQtOrderedDictionary> QQtOrderedDictionaryMapIterator;
+typedef QMutableMapIterator<QString, QQtOrderedDictionary> QQtOrderedDictionaryMutableMapIterator;
 
-typedef QList<QQtOrderedDictionary> QOrderedDictionaryList;
-typedef QListIterator<QQtOrderedDictionary> QOrderedDictionaryListIterator;
-typedef QMutableListIterator<QQtOrderedDictionary> QOrderedDictionaryMutableListIterator;
+typedef QList<QQtOrderedDictionary> QQtOrderedDictionaryList;
+typedef QListIterator<QQtOrderedDictionary> QQtOrderedDictionaryListIterator;
+typedef QMutableListIterator<QQtOrderedDictionary> QQtOrderedDictionaryMutableListIterator;
 
 /**
  * @brief The QQtOrderedDictionary class
@@ -167,6 +168,10 @@ public:
     bool operator == ( const QVariant& var ) const {
         return *this == QQtOrderedDictionary ( var );
     }
+
+    QQtOrderedDictionary ( const QQtDictionary& other );
+    QQtOrderedDictionary& operator = ( const QQtDictionary& other );
+    bool operator == ( const QQtDictionary& other ) const;
 
     //内部类型转换
     //toValue() toList() toMap(); 不丢失数据方式。

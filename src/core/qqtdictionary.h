@@ -11,12 +11,12 @@ class QJsonValue;
 
 #include <qqtcore.h>
 #include <qqt-local.h>
-
 /*
  * 简化使用
  * 遍历时
  */
 class QQtDictionary;
+class QQtOrderedDictionary;
 typedef QMap<QString, QQtDictionary> QQtDictionaryMap;
 typedef QMapIterator<QString, QQtDictionary> QQtDictionaryMapIterator;
 typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMutableMapIterator;
@@ -147,6 +147,8 @@ public:
     void remove ( const QString& key );
 
     /*深拷贝*/
+    QQtDictionary ( const QMap<QString, QQtDictionary>& map );
+    QQtDictionary ( const QList<QQtDictionary>& list );
     QQtDictionary ( const QQtDictionary& other );
     QQtDictionary ( const QVariant& value );
     QQtDictionary ( const EDictType type );
@@ -185,6 +187,10 @@ public:
     bool operator == ( const QVariant& var ) const {
         return *this == QQtDictionary ( var );
     }
+
+    QQtDictionary ( const QQtOrderedDictionary& other );
+    QQtDictionary& operator = ( const QQtOrderedDictionary& other );
+    bool operator == ( const QQtOrderedDictionary& other ) const;
 
     //内部类型转换
     //toValue() toList() toMap(); 不丢失数据方式。

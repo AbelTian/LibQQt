@@ -34,23 +34,28 @@ contains (DEFINES, __WIN__) {
 }
 
 #core
-SOURCES += \
-    $$PWD/core/qqtcore.cpp \
-    $$PWD/core/qqtdictionary.cpp \
-    $$PWD/core/qqtorderedmap.cpp \
-    $$PWD/core/qqtordereddictionary.cpp \
-    $$PWD/core/qqtobjectmanager.cpp
-HEADERS += \
-    $$PWD/core/qqtcore.h \
-    $$PWD/core/qqtdictionary.h \
-    $$PWD/core/qqtorderedmap.h \
-    $$PWD/core/qqtordereddictionary.h \
-    $$PWD/core/qqtobjectmanager.h
+SOURCES += $$PWD/core/qqtcore.cpp
+HEADERS += $$PWD/core/qqtcore.h
 
+#object manager
+SOURCES += $$PWD/core/qqtobjectmanager.cpp
+HEADERS += $$PWD/core/qqtobjectmanager.h
+
+#event
+SOURCES += $$PWD/core/qqtevent.cpp
+HEADERS += $$PWD/core/qqtevent.h
+
+#dictionary
 SOURCES += \
-    $$PWD/core/qqtevent.cpp
+    $$PWD/core/qqtdicthelper.cpp \
+    $$PWD/core/qqtordereddictionary.cpp \
+    $$PWD/core/qqtorderedmap.cpp \
+    $$PWD/core/qqtdictionary.cpp
 HEADERS += \
-    $$PWD/core/qqtevent.h
+    $$PWD/core/qqtdicthelper.h \
+    $$PWD/core/qqtordereddictionary.h \
+    $$PWD/core/qqtorderedmap.h \
+    $$PWD/core/qqtdictionary.h
 
 #sql
 SOURCES += \
