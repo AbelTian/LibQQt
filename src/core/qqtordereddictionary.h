@@ -11,32 +11,31 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
-class QOrderedDictionary;
-typedef QOrderedMap<QString, QOrderedDictionary> QOrderedDictionaryMap;
-typedef QOrderedMapIterator<QString, QOrderedDictionary> QOrderedDictionaryMapIterator;
-typedef QMutableMapIterator<QString, QOrderedDictionary> QOrderedDictionaryMutableMapIterator;
+class QQtOrderedDictionary;
+typedef QOrderedMap<QString, QQtOrderedDictionary> QOrderedDictionaryMap;
+typedef QOrderedMapIterator<QString, QQtOrderedDictionary> QOrderedDictionaryMapIterator;
+typedef QMutableMapIterator<QString, QQtOrderedDictionary> QOrderedDictionaryMutableMapIterator;
 
-typedef QList<QOrderedDictionary> QOrderedDictionaryList;
-typedef QListIterator<QOrderedDictionary> QOrderedDictionaryListIterator;
-typedef QMutableListIterator<QOrderedDictionary> QOrderedDictionaryMutableListIterator;
+typedef QList<QQtOrderedDictionary> QOrderedDictionaryList;
+typedef QListIterator<QQtOrderedDictionary> QOrderedDictionaryListIterator;
+typedef QMutableListIterator<QQtOrderedDictionary> QOrderedDictionaryMutableListIterator;
 
 /**
- * @brief The QOrderedDictionary class
- * QQt Ordered 字典
+ * @brief The QQtOrderedDictionary class
+ * QQt Ordered Dictionary
  *
- * 使用不排序的map的字典类
- * LinkedHashMap
- * 和QOrderedDictionary一样的功能，仅仅map是不排序的。
+ * 使用不排序的map的字典类，QOrderedMap
+ * 和QQtDictionary功能一样，不同之处在于QQtOrderedDictionary的map是不排序的。
  *
  * toJson()   fromJson() 也是不排序的。
  * toXML()    fromXML()  也是不排序的。
  */
-class QQTSHARED_EXPORT QOrderedDictionary
+class QQTSHARED_EXPORT QQtOrderedDictionary
 {
 public:
     /*explicit 函数只能作为构造函数，不能作为拷贝构造函数，拷贝构造函数不可加*/
-    explicit QOrderedDictionary ();
-    ~QOrderedDictionary ();
+    explicit QQtOrderedDictionary ();
+    ~QQtOrderedDictionary ();
 
     typedef enum tagDictType
     {
@@ -63,23 +62,23 @@ public:
     int size() const;
 
     bool hasChild ( const QString& key ) const;
-    bool hasChild ( const QOrderedDictionary& value ) const;
+    bool hasChild ( const QQtOrderedDictionary& value ) const;
 
     /*获取数据*/
     /*获取全部数据*/
     /*获取当前字典的全部数据*/
     /*保存为[key]=[value]的*/
-    QOrderedMap<QString, QOrderedDictionary>& getMap() const;
+    QOrderedMap<QString, QQtOrderedDictionary>& getMap() const;
     /*保存为index=[value]*/
-    QList<QOrderedDictionary>& getList() const ;
+    QList<QQtOrderedDictionary>& getList() const ;
 
     /*获取单个数据*/
     /*保存为value的*/
     QVariant& getValue();
     const QVariant& getValue() const;
 
-    QOrderedDictionary& getChild ( int index );
-    QOrderedDictionary& getChild ( const QString& key );
+    QQtOrderedDictionary& getChild ( int index );
+    QQtOrderedDictionary& getChild ( const QString& key );
     /*获取一个个孩子*/
 
     /*类型*/
@@ -101,28 +100,28 @@ public:
     /*插入数据，自动设置type*/
     /*自己本身有孩子，添加全部孩子*/
     /*whole value list*/
-    void setChild ( const QList<QOrderedDictionary>& list );
+    void setChild ( const QList<QQtOrderedDictionary>& list );
     /*whole value map*/
-    void setChild ( const QOrderedMap<QString, QOrderedDictionary>& map );
+    void setChild ( const QOrderedMap<QString, QQtOrderedDictionary>& map );
 
     /*自己本身没有孩子，添加一个个的孩子*/
     /*index = int*/
     void addChild ( const QString& value );
-    void addChild ( const QOrderedDictionary& dict );
+    void addChild ( const QQtOrderedDictionary& dict );
 
     /*自己本身有孩子，添加一个个的孩子*/
     /*index = int, 会在之前之后插入，现更改为会替换存在的index*/
     /*index = string, 会替换存在的index*/
     void insertChild ( int index, const QString& value );
-    void insertChild ( int index, const QOrderedDictionary& dict );
+    void insertChild ( int index, const QQtOrderedDictionary& dict );
     void insertChild ( const QString& key, const QString& value );
-    void insertChild ( const QString& key, const QOrderedDictionary& dict );
+    void insertChild ( const QString& key, const QQtOrderedDictionary& dict );
 
     /*操作数据，改变数据*/
     void modValue ( const QVariant& value );
     /*没有这个数据会无效*/
-    void modChild ( int index, const QOrderedDictionary& value );
-    void modChild ( const QString& key, const QOrderedDictionary& value );
+    void modChild ( int index, const QQtOrderedDictionary& value );
+    void modChild ( const QString& key, const QQtOrderedDictionary& value );
 
     /*删除数据*/
     void clear ( );
@@ -130,35 +129,35 @@ public:
     void remove ( const QString& key );
 
     /*深拷贝*/
-    QOrderedDictionary ( const QOrderedDictionary& other );
-    QOrderedDictionary ( const QVariant& value );
-    QOrderedDictionary ( const EDictType type );
+    QQtOrderedDictionary ( const QQtOrderedDictionary& other );
+    QQtOrderedDictionary ( const QVariant& value );
+    QQtOrderedDictionary ( const EDictType type );
 
     /*操作符*/
     /*警告：可读、可写*/
     /*don't out of range? no, it is ok now.*/
-    QOrderedDictionary& operator [] ( int index );
-    const QOrderedDictionary& operator[] ( int index ) const;
-    QOrderedDictionary& operator [] ( const QString& key );
-    const QOrderedDictionary operator[] ( const QString& key ) const;
+    QQtOrderedDictionary& operator [] ( int index );
+    const QQtOrderedDictionary& operator[] ( int index ) const;
+    QQtOrderedDictionary& operator [] ( const QString& key );
+    const QQtOrderedDictionary operator[] ( const QString& key ) const;
 
     template <typename T>
-    QOrderedDictionary& operator = ( const QList<T>& list1 ) {
+    QQtOrderedDictionary& operator = ( const QList<T>& list1 ) {
         m_type = DictList;
         m_list.clear();
         for ( int i = 0; i < list1.size(); i++ ) {
             const T& v1 = list1[i];
-            m_list.push_back ( QOrderedDictionary ( v1 ) );
+            m_list.push_back ( QQtOrderedDictionary ( v1 ) );
         }
         return *this;
     }
-    QOrderedDictionary& operator = ( const QList<QString>& list );
+    QQtOrderedDictionary& operator = ( const QList<QString>& list );
 
-    QOrderedDictionary& operator = ( const QOrderedMap<QString, QOrderedDictionary>& map );
-    QOrderedDictionary& operator = ( const QList<QOrderedDictionary>& list );
-    QOrderedDictionary& operator = ( const QOrderedDictionary& other );
-    QOrderedDictionary& operator = ( const QVariant& value );
-    bool operator == ( const QOrderedDictionary& other ) const;
+    QQtOrderedDictionary& operator = ( const QOrderedMap<QString, QQtOrderedDictionary>& map );
+    QQtOrderedDictionary& operator = ( const QList<QQtOrderedDictionary>& list );
+    QQtOrderedDictionary& operator = ( const QQtOrderedDictionary& other );
+    QQtOrderedDictionary& operator = ( const QVariant& value );
+    bool operator == ( const QQtOrderedDictionary& other ) const;
 
     //update for new using
     template <typename T>
@@ -166,7 +165,7 @@ public:
         return *this == QVariant ( inst );
     }
     bool operator == ( const QVariant& var ) const {
-        return *this == QOrderedDictionary ( var );
+        return *this == QQtOrderedDictionary ( var );
     }
 
     //内部类型转换
@@ -210,14 +209,14 @@ private:
     QVariant m_value;
     /*不是叶子列表，是个叶子列表，是个叶子列表的值*/
     /*列表保存在这里*//*不如仅仅使用map方便*/
-    QList<QOrderedDictionary> m_list; //[index]
+    QList<QQtOrderedDictionary> m_list; //[index]
     /*不是叶子映射，是个子字典，是个叶子，是个叶子的值组合*/
     /*映射保存在这里，QStirng可以升级为QVariant*/
-    QOrderedMap<QString, QOrderedDictionary> m_map;
+    QOrderedMap<QString, QQtOrderedDictionary> m_map;
     /*是个列表和子字典，这是错误的，不可能的*/
 };
 
-QQTSHARED_EXPORT QDebug operator<< ( QDebug dbg, const QOrderedDictionary& d );
+QQTSHARED_EXPORT QDebug operator<< ( QDebug dbg, const QQtOrderedDictionary& d );
 
 #endif // QQTORDEREDDICTIONARY_H
 
