@@ -527,9 +527,18 @@ QQtDictionary& QQtDictionary::operator = ( const QVariant& value )
 
 QByteArray QQtDictionary::toJson ( QJsonDocument::JsonFormat format ) const
 {
-    int indent = 0;
-    if ( format != QJsonDocument::Compact )
+    //<0; 0; >0
+    int indent = ( int ) format; //default: 0
+
+    //-4,-1; 0; 1-4
+    if ( indent < 0 ) //Compact
+        indent = -4;
+    else if ( indent == 0 ) //Indent
         indent = 1;
+    else if ( indent == 1 ) //Compact
+        indent = 0;
+    else //Indent
+        indent = 4;
 
     return ::toJson ( *this, indent );
 }
@@ -718,7 +727,12 @@ QByteArray toJson ( const QQtDictionary& dict, int indent )
     packDictionaryToJsonValue ( dict, value );
     QJsonDocument doc = QJsonDocument::fromVariant ( value.toVariant() );
     QJsonDocument::JsonFormat format = QJsonDocument::Compact;
-    if ( indent > 0 )
+    //-4,-1; 0; 1-4
+    if ( indent < 0 )
+        format = QJsonDocument::Compact;
+    else if ( indent == 0 )
+        format = QJsonDocument::Compact;
+    else
         format = QJsonDocument::Indented;
     QByteArray result = doc.toJson ( format );
     return result;
