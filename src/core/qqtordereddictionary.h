@@ -204,6 +204,9 @@ public:
                    const QString& textEncoding = QString ( "UTF-8" )
                  );
 
+    QByteArray toCbor() const;
+    void fromCbor ( const QByteArray& cbor );
+
 private:
     /*节点类型，指示性变量*/
     EDictType m_type;

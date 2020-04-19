@@ -43,6 +43,7 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
  * fromINI toINI                支持ini
  * fromProperties toProperties  支持Properties 这是一种Java配置文件的格式，仅仅有键值对、注释
  * fromCSV toCSV                支持csv 逗号分隔值格式文本。
+ * fromCbor toCbor              支持Cbor 二进制、树型、流式数据结构。
  * from函数默认行为为合并，如果用户希望新替，请手动调用clear();
  *
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
@@ -222,6 +223,9 @@ public:
                    const QString& textDelimiter = QString ( "\"" ),
                    const QString& textEncoding = QString ( "UTF-8" )
                  );
+
+    QByteArray toCbor() const;
+    void fromCbor ( const QByteArray& cbor );
 
 private:
     /*节点类型，指示性变量*/

@@ -31,6 +31,10 @@
 
 #include <QBuffer>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#include <QCborValue>
+#endif
+
 #include <iostream>
 using namespace std;
 
@@ -57,6 +61,13 @@ void fromCSV ( const QByteArray& csv, QQtDictionary& dict,
                const QString& separator,
                const QString& textDelimiter,
                const QString& textEncoding );
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+QByteArray toCbor ( const QQtDictionary& dict );
+void fromCbor ( const QByteArray& cbor, QQtDictionary& dict );
+void parseCborNodeToDictionary ( const QCborValue& node, QQtDictionary& object );
+void packDictionaryToCborNode ( const QQtDictionary& node, QCborValue& object );
 #endif
 
 QByteArray toJson ( const QQtDictionary& dict, int indent = 0 );
@@ -607,6 +618,18 @@ void QQtDictionary::fromCSV ( const QByteArray& csv,
                               const QString& textEncoding )
 {
     ::fromCSV ( csv, *this, separator, textDelimiter, textEncoding );
+}
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+QByteArray QQtDictionary::toCbor() const
+{
+    return ::toCbor ( *this );
+}
+
+void QQtDictionary::fromCbor ( const QByteArray& cbor )
+{
+    ::fromCbor ( cbor, *this );
 }
 #endif
 
@@ -1918,3 +1941,188 @@ void parseOrderedDictionary ( QQtDictionary& node, const QQtOrderedDictionary& o
     }
 }
 
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+QByteArray toCbor ( const QQtDictionary& dict )
+{
+    QCborValue root;
+    packDictionaryToCborNode ( dict, root );
+
+    return root.toCbor();
+}
+
+void fromCbor ( const QByteArray& cbor, QQtDictionary& dict )
+{
+    QCborValue root;
+    QCborParserError error;
+    root.fromCbor ( cbor, &error );
+    if ( error.error != QCborError::NoError )
+    {
+        pline() << ( int ) ( error.error ) << error.errorString() << error.offset;
+        return;
+    }
+
+    parseCborNodeToDictionary ( root, dict );
+}
+
+void parseCborNodeToDictionary ( const QCborValue& node, QQtDictionary& object )
+{
+    switch ( node.type() )
+    {
+        case QCborValue::Integer:
+        {
+            object = node.toInteger();
+        }
+        break;
+        case QCborValue::SimpleType:
+        case QCborValue::False:
+        case QCborValue::True:
+        case QCborValue::Undefined:
+        {
+            if ( node.type() == QCborValue::False || node.type() == QCborValue::True )
+            {
+                object = node.toBool();
+                break;
+            }
+            object = node.toInteger();
+        }
+        break;
+        case QCborValue::Double:
+            object = node.toDouble();
+            break;
+        case QCborValue::ByteArray:
+            object = node.toByteArray();
+            break;
+        case QCborValue::String:
+            object = node.toString();
+            break;
+        case QCborValue::DateTime:
+            object = node.toDateTime();
+            break;
+        case QCborValue::Url:
+            object = node.toUrl();
+            break;
+        case QCborValue::RegularExpression:
+            object = node.toRegularExpression();
+            break;
+        case QCborValue::Uuid:
+            object = node.toUuid();
+            break;
+        case QCborValue::Array:
+        {
+            QCborArray array = node.toArray();
+            if ( array.size() <= 0 )
+            {
+                object = QQtDictionary ( QQtDictionary::DictList );
+                break;
+            }
+            for ( int i = 0; i < array.size(); i++ )
+            {
+                parseCborNodeToDictionary ( array[i], object[i] );
+            }
+        }
+        break;
+        case QCborValue::Map:
+        {
+            QCborMap map = node.toMap();
+            if ( map.size() <= 0 )
+            {
+                object = QQtDictionary ( QQtDictionary::DictMap );
+                break;
+            }
+            for ( QCborMap::Iterator itor = map.begin();
+                  itor != map.end(); itor++ )
+            {
+                const QCborValue& qkey = itor.key();
+                QCborValueRef qvalue = itor.value();
+                //强制转换为String，如果不是String，如此强制转换可能出现特别的数据。
+                QString key = qkey.toString();
+                parseCborNodeToDictionary ( qvalue, object[key] );
+            }
+        }
+        break;
+        case QCborValue::Tag:
+        {
+            //此处没有判定tag，而是全部转换为String。
+            node.tag();
+            pline() << ( quint64 ) node.tag();
+            //其实可以按照tag类型划分成已知的Value类型，但是我看基本上全都是String，所以此处全都转换成String。
+            QString value = node.taggedValue().toString();
+            object = value;
+        }
+        break;
+        case QCborValue::Invalid:
+            pline() << "invalid Cbor.";
+        default:
+            break;
+    }
+}
+
+void packDictionaryToCborNode ( const QQtDictionary& node, QCborValue& result )
+{
+    switch ( node.getType() )
+    {
+        case QQtDictionary::DictValue:
+        {
+            //null, bool, double, string
+            p3line() << node.getValue().type();
+            if ( node.getValue() == QVariant ( QJsonValue() ) )
+            {
+                result = QCborValue();
+            }
+            else if ( node.getValue().type() == QVariant::Bool )
+            {
+                result = QCborValue ( node.getValue().toBool() );
+            }
+            else if ( node.getValue().type() == QVariant::Double )
+            {
+                result = QCborValue ( node.getValue().toDouble() );
+            }
+            else if ( node.getValue().type() == QVariant::String )
+            {
+                result = QCborValue ( node.getValue().toString() );
+            }
+            else
+            {
+                result = QCborValue::fromVariant ( node.getValue() );
+            }
+            break;
+        }
+        case QQtDictionary::DictList:
+        {
+            //"name":[a, b, ...]
+            QCborArray array;
+            for ( int i = 0; i < node.getList().size(); i++ )
+            {
+                QList<QQtDictionary>& l = node.getList();
+                QCborValue value;
+                packDictionaryToCborNode ( l[i], value );
+                //array.append ( value );
+                array.push_back ( value );
+            }
+            result = array;
+            break;
+        }
+        case QQtDictionary::DictMap:
+        {
+            //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
+            QCborMap object;
+            for ( QMap<QString, QQtDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            {
+                //QMap<QString, QQtDictionary>& m = node.getMap();
+                const QString& key = itor.key();
+                const QQtDictionary& srcvalue = itor.value();
+                QCborValue value;
+                packDictionaryToCborNode ( srcvalue, value );
+                object.insert ( key, value );
+            }
+            result = object;
+            break;
+        }
+        case QQtDictionary::DictMax:
+        default:
+            break;
+    }
+}
+
+#endif
