@@ -32,6 +32,10 @@
 #include <QBuffer>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#define __CBOR_SUPPORT__
+#endif
+
+#ifdef __CBOR_SUPPORT__
 #include <QCborValue>
 #endif
 
@@ -63,7 +67,7 @@ void fromCSV ( const QByteArray& csv, QQtDictionary& dict,
                const QString& textEncoding );
 #endif
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#ifdef __CBOR_SUPPORT__
 QByteArray toCbor ( const QQtDictionary& dict );
 void fromCbor ( const QByteArray& cbor, QQtDictionary& dict );
 void parseCborNodeToDictionary ( const QCborValue& node, QQtDictionary& object );
@@ -621,7 +625,7 @@ void QQtDictionary::fromCSV ( const QByteArray& csv,
 }
 #endif
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#ifdef __CBOR_SUPPORT__
 QByteArray QQtDictionary::toCbor() const
 {
     return ::toCbor ( *this );
@@ -1942,7 +1946,7 @@ void parseOrderedDictionary ( QQtDictionary& node, const QQtOrderedDictionary& o
 }
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#ifdef __CBOR_SUPPORT__
 QByteArray toCbor ( const QQtDictionary& dict )
 {
     QCborValue root;

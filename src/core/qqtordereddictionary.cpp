@@ -47,6 +47,10 @@
 #include <QBuffer>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#define __CBOR_SUPPORT__
+#endif
+
+#ifdef __CBOR_SUPPORT__
 #include <QCborValue>
 #endif
 
@@ -79,7 +83,7 @@ void fromCSV ( const QByteArray& csv, QQtOrderedDictionary& dict,
 #endif
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#ifdef __CBOR_SUPPORT__
 QByteArray toCbor ( const QQtOrderedDictionary& dict );
 void fromCbor ( const QByteArray& cbor, QQtOrderedDictionary& dict );
 void parseCborNodeToDictionary ( const QCborValue& node, QQtOrderedDictionary& object );
@@ -627,7 +631,7 @@ void QQtOrderedDictionary::fromCSV ( const QByteArray& csv,
 }
 #endif
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#ifdef __CBOR_SUPPORT__
 QByteArray QQtOrderedDictionary::toCbor() const
 {
     return ::toCbor ( *this );
@@ -2375,7 +2379,7 @@ void parseDictionary ( QQtOrderedDictionary& node, const QQtDictionary& obj )
     }
 }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#ifdef __CBOR_SUPPORT__
 QByteArray toCbor ( const QQtOrderedDictionary& dict )
 {
     QCborValue root;
@@ -2540,7 +2544,8 @@ void packDictionaryToCborNode ( const QQtOrderedDictionary& node, QCborValue& re
         {
             //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
             QCborMap object;
-            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end(); itor++ )
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end();
+                  itor++ )
             {
                 //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                 const QString& key = itor.key();
