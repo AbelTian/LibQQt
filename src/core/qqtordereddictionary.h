@@ -177,12 +177,14 @@ public:
     //toValue() toList() toMap(); 不丢失数据方式。
 
     /*与其他数据结构兼容*/
-    QByteArray toJson ( int indent = 0 ) const;
+    //RapidJson
+    QByteArray toJson ( int indent = -1 ) const;
     void fromJson ( const QByteArray& json );
 
     QByteArray toXML ( int indent = -1 ) const;
     void fromXML ( const QByteArray& xml );
 
+    //yaml-cpp
     QByteArray toYAML() const;
     void fromYAML ( const QByteArray& yaml );
 
