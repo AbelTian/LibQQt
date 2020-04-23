@@ -57,8 +57,8 @@ void QQtDictTreeModel::packDictionaryToTreeModel ( const QQtDictionary& node, QS
                 QList<QQtDictionary>& l = node.getList();
                 QStandardItem* item = new QStandardItem;
                 item->setText ( QString::number ( i + 1 ) );
-                packDictionaryToTreeModel ( l[i], item );
                 pobject ? pobject->appendRow ( item ) : appendRow ( item );
+                packDictionaryToTreeModel ( l[i], item );
             }
             break;
         }
@@ -72,8 +72,8 @@ void QQtDictTreeModel::packDictionaryToTreeModel ( const QQtDictionary& node, QS
                 const QQtDictionary& srcvalue = itor.value();
                 QStandardItem* item = new QStandardItem;
                 item->setText ( key );
-                packDictionaryToTreeModel ( srcvalue, item );
                 pobject ? pobject->appendRow ( item ) : appendRow ( item );
+                packDictionaryToTreeModel ( srcvalue, item );
             }
             break;
         }
