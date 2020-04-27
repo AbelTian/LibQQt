@@ -68,12 +68,16 @@ HEADERS += \
     $$PWD/sql/qqtsqlquery.h
 
 #gui
-#add_object_class(QQtButtonItemDelegate, $$PWD/gui)
+#add_object_class(QQtSliderItemDelegate, $$PWD/gui)
 SOURCES += \
+    $$PWD/gui/qqtslideritemdelegate.cpp \
+    $$PWD/gui/qqtcheckboxdelegate.cpp \
     $$PWD/gui/qqtbuttonitemdelegate.cpp \
     $$PWD/gui/qqtprogressbardelegate.cpp \
     $$PWD/gui/qqtnofocusdelegate.cpp
 HEADERS += \
+    $$PWD/gui/qqtslideritemdelegate.h \
+    $$PWD/gui/qqtcheckboxdelegate.h \
     $$PWD/gui/qqtbuttonitemdelegate.h \
     $$PWD/gui/qqtprogressbardelegate.h \
     $$PWD/gui/qqtnofocusdelegate.h

@@ -10,6 +10,7 @@
 #include <qqt-local.h>
 /**
  * @brief The QQtNoFocusDelegate class
+ * Qt Table Item没有选中框
  */
 class QQTSHARED_EXPORT QQtNoFocusDelegate : public QItemDelegate
 {
@@ -27,8 +28,7 @@ private:
 
     // QItemDelegate interface
 protected:
-    virtual void drawFocus ( QPainter* painter,
-                             const QStyleOptionViewItem& option,
+    virtual void drawFocus ( QPainter* painter, const QStyleOptionViewItem& option,
                              const QRect& rect ) const override {
     }
 };

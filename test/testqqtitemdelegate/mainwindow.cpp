@@ -21,11 +21,13 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
     ui->treeView->header()->setSectionResizeMode ( RfcName, QHeaderView::ResizeToContents );
     ui->treeView->header()->setStretchLastSection ( false );
-    ui->treeView->setEditTriggers ( QTreeView::NoEditTriggers );
+    //ui->treeView->setEditTriggers ( QTreeView::NoEditTriggers );
     ui->treeView->setSelectionMode ( QTreeView::SingleSelection );
 
-    ui->treeView->setItemDelegateForColumn ( RfcDownProgress, new QQtProgressBarDelegate ( this ) );
-    ui->treeView->setItemDelegateForColumn ( RfcDownStatus, new QQtButtonItemDelegate ( this ) );
+    //ui->treeView->setItemDelegateForColumn ( RfcDownProgress, new QQtProgressBarDelegate ( this ) );
+    //ui->treeView->setItemDelegateForColumn ( RfcDownStatus, new QQtButtonItemDelegate ( this ) );
+    ui->treeView->setItemDelegateForColumn ( RfcDownStatus, new QQtCheckBoxDelegate ( this ) );
+    ui->treeView->setItemDelegateForColumn ( RfcDownProgress, new QQtSliderItemDelegate ( this ) );
 
     mModel->query ( mDict );
     ui->treeView->resizeColumnToContents ( RfcName );

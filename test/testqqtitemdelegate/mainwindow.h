@@ -7,6 +7,8 @@
 #include <usercustomtreemodel.h>
 #include <qqtprogressbardelegate.h>
 #include <qqtbuttonitemdelegate.h>
+#include <qqtcheckboxdelegate.h>
+#include <qqtslideritemdelegate.h>
 #include <qqtframe.h>
 
 namespace Ui {
