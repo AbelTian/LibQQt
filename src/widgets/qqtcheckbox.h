@@ -45,6 +45,8 @@ protected:
     void setWorkState ( int index );
     virtual void translateImage();
     virtual void setImage ( const QImage& image );
+    QImage& image() { return mImage; }
+    const QImage& image() const { return mImage; }
 protected:
 
 private:

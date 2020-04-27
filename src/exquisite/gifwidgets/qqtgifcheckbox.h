@@ -6,6 +6,12 @@
 #include <qqtcore.h>
 #include <qqt-local.h>
 
+/**
+ * @brief The QQtGifCheckBox class
+ * 准备ByteArray，QIODevice，ImageTable，状态QMovie，
+ * 初始化Normal态，开启timer，
+ * 事件驱动更改状态QMovie为当前QMovie。
+ */
 class QQTSHARED_EXPORT QQtGifCheckBox : public QQtCheckBox
 {
     Q_OBJECT
@@ -47,12 +53,17 @@ signals:
 public slots:
 private:
     TBtnIconTable mIconTable;
+    QMovie mMovie[BTN_MAX];
 
     QMovie* m_movie;
     QTimer* m_frameTimer;
 
 protected slots:
     virtual void slotFramePlayback();
+
+    // QWidget interface
+protected:
+    virtual void paintEvent ( QPaintEvent* event ) override;
 };
 
 #endif // QQTGIFCHECKBOX_H
