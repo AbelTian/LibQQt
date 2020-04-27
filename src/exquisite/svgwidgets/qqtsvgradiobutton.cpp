@@ -5,16 +5,6 @@ QQtSvgRadioButton::QQtSvgRadioButton ( QWidget* parent ) : QQtRadioButton ( pare
 
 }
 
-const TBtnIconTable& QQtSvgRadioButton::iconTable() const
-{
-    return mIconTable;
-}
-
-TBtnIconTable& QQtSvgRadioButton::iconTable()
-{
-    return mIconTable;
-}
-
 QString QQtSvgRadioButton::stateImage ( int index )
 {
     if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
@@ -27,7 +17,7 @@ void QQtSvgRadioButton::setStateImage ( int index, const QString& image )
     if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
         return;
     mIconTable[index] = image;
-    //translateImage();
+    translateImage();
     update();
 }
 
@@ -35,24 +25,33 @@ void QQtSvgRadioButton::setNormalImage ( const QString& normal, const QString& p
 {
     mIconTable[BTN_NORMAL] = normal;
     mIconTable[BTN_PRESS] = press;
-    //translateImage();
+    translateImage();
     update();
 }
 
 void QQtSvgRadioButton::setHoverImage ( const QString& hover )
 {
     mIconTable[BTN_HOVER] = hover;
-    //translateImage();
+    translateImage();
     update();
 }
 
 void QQtSvgRadioButton::setDisableImage ( const QString& disable )
 {
     mIconTable[BTN_DISABLE] = disable;
-    //translateImage();
+    translateImage();
     update();
 }
 
+const TBtnIconTable& QQtSvgRadioButton::iconTable() const
+{
+    return mIconTable;
+}
+
+TBtnIconTable& QQtSvgRadioButton::iconTable()
+{
+    return mIconTable;
+}
 
 void QQtSvgRadioButton::renderToVariable()
 {
@@ -60,6 +59,11 @@ void QQtSvgRadioButton::renderToVariable()
 
     for ( int i = 0; i < BTN_MAX; i++ )
         r[i].load ( pic[i] );
+}
+
+void QQtSvgRadioButton::translateImage()
+{
+    renderToVariable();
 }
 
 

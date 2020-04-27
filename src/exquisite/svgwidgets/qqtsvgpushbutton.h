@@ -24,14 +24,17 @@ public:
     //disable; [4];
     void setDisableImage ( const QString& disable );
 
+    //svg控件使用iconTable，必须render。
     const TBtnIconTable& iconTable() const;
     TBtnIconTable& iconTable();
-
     /**
      * @brief renderToVariable
      * call this function after iconTable() set.
      */
     void renderToVariable();
+protected:
+    virtual void translateImage();
+
 
 signals:
 

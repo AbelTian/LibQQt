@@ -5,16 +5,6 @@ QQtSvgCheckBox::QQtSvgCheckBox ( QWidget* parent ) : QQtCheckBox ( parent )
 
 }
 
-const TBtnIconTable& QQtSvgCheckBox::iconTable() const
-{
-    return mIconTable;
-}
-
-TBtnIconTable& QQtSvgCheckBox::iconTable()
-{
-    return mIconTable;
-}
-
 QString QQtSvgCheckBox::stateImage ( int index )
 {
     if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
@@ -27,7 +17,7 @@ void QQtSvgCheckBox::setStateImage ( int index, const QString& image )
     if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
         return;
     mIconTable[index] = image;
-    //translateImage();
+    translateImage();
     update();
 }
 
@@ -35,24 +25,33 @@ void QQtSvgCheckBox::setNormalImage ( const QString& normal, const QString& pres
 {
     mIconTable[BTN_NORMAL] = normal;
     mIconTable[BTN_PRESS] = press;
-    //translateImage();
+    translateImage();
     update();
 }
 
 void QQtSvgCheckBox::setHoverImage ( const QString& hover )
 {
     mIconTable[BTN_HOVER] = hover;
-    //translateImage();
+    translateImage();
     update();
 }
 
 void QQtSvgCheckBox::setDisableImage ( const QString& disable )
 {
     mIconTable[BTN_DISABLE] = disable;
-    //translateImage();
+    translateImage();
     update();
 }
 
+const TBtnIconTable& QQtSvgCheckBox::iconTable() const
+{
+    return mIconTable;
+}
+
+TBtnIconTable& QQtSvgCheckBox::iconTable()
+{
+    return mIconTable;
+}
 
 void QQtSvgCheckBox::renderToVariable()
 {
@@ -60,6 +59,11 @@ void QQtSvgCheckBox::renderToVariable()
 
     for ( int i = 0; i < BTN_MAX; i++ )
         r[i].load ( pic[i] );
+}
+
+void QQtSvgCheckBox::translateImage()
+{
+    renderToVariable();
 }
 
 

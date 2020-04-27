@@ -1,4 +1,4 @@
-﻿#ifndef QQTSVGWIDGET_H
+#ifndef QQTSVGWIDGET_H
 #define QQTSVGWIDGET_H
 
 #include <QSvgWidget>
@@ -14,6 +14,7 @@ public:
 
     void setSvgFile ( QString& filename );
     void setSvgContent ( QByteArray& bytes );
+
 signals:
 
 public slots:
