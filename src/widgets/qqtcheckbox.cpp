@@ -163,12 +163,6 @@ void QQtCheckBox::paintEvent ( QPaintEvent* event )
     //把imageTable()[stat]设置到mImage。
     translateImage();
 
-#if 0
-    //如果把translateImage放在外边，就需要这个代码，作为对初始化的判断。
-    if ( mImage.isNull() )
-        translateImage();
-#endif
-
     if ( mImage.isNull() )
         return QCheckBox::paintEvent ( event );
 

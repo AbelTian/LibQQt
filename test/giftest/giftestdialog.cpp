@@ -1,4 +1,4 @@
-﻿#include "giftestdialog.h"
+#include "giftestdialog.h"
 #include "ui_giftestdialog.h"
 #include "qqtframe.h"
 
@@ -28,10 +28,10 @@ GifTestDialog::GifTestDialog ( QWidget* parent ) :
 #endif
 
     //使用了res函数以后 代码得到了极大简化
-    pline() << res ( "waiting.gif" );
-    pline() << res ( "../waiting.gif" );
+    pline() << conf_res ( "waiting.gif" );
+    pline() << conf_res ( "../waiting.gif" );
     pline() << QDir ( "." ).relativeFilePath ( "skin/yun.png" );
-    pline() << QDir ( res ( "../waiting.gif" ) ).absolutePath();
+    pline() << QDir ( conf_res ( "../waiting.gif" ) ).absolutePath();
     ui->labelGif->setGifFile (  conf_skin ( "waiting.gif" ) );
     ui->widgetGif->setGifFile ( conf_skin ( "waiting.gif" ) );
     ui->widgetQQt->setPixmap ( conf_skin ( "yun.png" ) );
