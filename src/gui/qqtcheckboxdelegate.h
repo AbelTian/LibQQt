@@ -83,7 +83,7 @@ public:
             QTextOption o;
             o.setAlignment ( Qt::AlignLeft | Qt::AlignVCenter );
             QRect localRect2 ( option.rect );
-            localRect2.setLeft ( localRect2.left() + localRect.height() );
+            localRect2.setLeft ( localRect2.left() + localRect2.height() );
             painter->drawText ( localRect2, QString ( "%1" ).arg ( value ), o );
 
             painter->restore();

@@ -45,6 +45,26 @@ protected:
 
 private:
     QQtDictionary* pdict;
+
+#if 0
+    // QAbstractItemModel interface
+    // 一般EditRole和DisplayRole保存一样的数据。
+public:
+    virtual QVariant data ( const QModelIndex& index, int role ) const override {
+        //根据index的column从字典中获取数据返回。
+        if ( !pdict )
+            return QVariant();
+
+        //返回默认的也可以，二选一。
+    }
+    virtual bool setData ( const QModelIndex& index, const QVariant& value, int role ) override {
+        //根据index的column向字典中设置数据。
+        if ( !pdict )
+            return false;
+
+        //返回默认的也可以，二选一。
+    }
+#endif
 };
 
 #endif // QQTDICTTREEMODEL_H
