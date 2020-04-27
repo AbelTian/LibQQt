@@ -6,6 +6,7 @@
 #include <qqtdicthelper.h>
 #include <usercustomtreemodel.h>
 #include <qqtprogressbardelegate.h>
+#include <qqtbuttonitemdelegate.h>
 #include <qqtframe.h>
 
 namespace Ui {

@@ -30,7 +30,7 @@ void QQtProgressBarDelegate::drawDisplay ( QPainter* painter, const QStyleOption
         QStyleOptionProgressBar bar;
 
         //no need?
-        //bar.init ( this );
+        bar.init ( option.widget );
 
         bar.rect.setRect ( left, top, width, height ); //设置其在表格中的位置
         bar.state = option.state;

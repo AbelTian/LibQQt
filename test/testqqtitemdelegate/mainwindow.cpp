@@ -23,7 +23,9 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->treeView->header()->setStretchLastSection ( false );
     ui->treeView->setEditTriggers ( QTreeView::NoEditTriggers );
     ui->treeView->setSelectionMode ( QTreeView::SingleSelection );
+
     ui->treeView->setItemDelegateForColumn ( RfcDownProgress, new QQtProgressBarDelegate ( this ) );
+    ui->treeView->setItemDelegateForColumn ( RfcDownStatus, new QQtButtonItemDelegate ( this ) );
 
     mModel->query ( mDict );
     ui->treeView->resizeColumnToContents ( RfcName );

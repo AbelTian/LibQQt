@@ -68,11 +68,13 @@ HEADERS += \
     $$PWD/sql/qqtsqlquery.h
 
 #gui
-#add_object_class(QQtNoFocusDelegate, $$PWD/gui)
+#add_object_class(QQtButtonItemDelegate, $$PWD/gui)
 SOURCES += \
+    $$PWD/gui/qqtbuttonitemdelegate.cpp \
     $$PWD/gui/qqtprogressbardelegate.cpp \
     $$PWD/gui/qqtnofocusdelegate.cpp
 HEADERS += \
+    $$PWD/gui/qqtbuttonitemdelegate.h \
     $$PWD/gui/qqtprogressbardelegate.h \
     $$PWD/gui/qqtnofocusdelegate.h
 
