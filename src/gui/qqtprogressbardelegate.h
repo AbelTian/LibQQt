@@ -10,7 +10,7 @@
 #include <qqt-local.h>
 /**
  * @brief The QQtProgressBarDelegate class
- * QTableView进度条代理
+ * Qt表格进度条代理
  *
  * 不用代理也可以。
  * QTableWidget::setCellWidget(int row, int column, QWidget *widget)

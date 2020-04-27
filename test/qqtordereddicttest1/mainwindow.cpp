@@ -168,6 +168,17 @@ MainWindow::MainWindow ( QWidget* parent ) :
 
     pline() << bool ( dict == dict5 ); // !=
     pline() << bool ( dict2 == dict1 ); // !=
+
+    QQtOrderedDictionary dict6;
+    dict6["StrKey"][0]["BBB"]["JJJ"][1]["GGG"] = "A Value.";
+    QStringList keyList;
+    keyList << "StrKey" << "0" << "BBB" << "JJJ";
+    QQtOrderedDictionary& rd1 = QQtGetDictNode ( dict6, keyList );
+    pline() << rd1;
+    pline() << "-----";
+    keyList << "1";
+    rd1 = QQtGetDictNode ( dict6, keyList );
+    pline() << rd1;
 }
 
 MainWindow::~MainWindow()

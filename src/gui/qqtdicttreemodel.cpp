@@ -35,6 +35,41 @@ void QQtDictTreeModel::query ( QQtDictionary& dict )
     packDictionaryToTreeModel ( dict, 0 );
 }
 
+QStringList QQtDictTreeModel::getFullName ( const QModelIndex& index )
+{
+    if ( !index.isValid() )
+        return QStringList();
+
+    QStringList fullname;
+    QModelIndex tempIndex = index;//row 0 parent? NO，在里边。
+    while ( tempIndex.isValid() )
+    {
+        QModelIndex parentIndex = tempIndex.parent();
+        int row = tempIndex.row();
+        QString data = this->index ( row, 0, parentIndex ).data().toString();
+        fullname.push_front ( data );
+
+        tempIndex = tempIndex.parent();
+    }
+    return fullname;
+}
+
+bool QQtDictTreeModel::isLeafNode ( const QModelIndex& index )
+{
+    if ( !index.isValid() )
+        return false;
+
+    return index.child ( 0, 0 ).isValid() ? false : true;
+}
+
+bool QQtDictTreeModel::isRootNode ( const QModelIndex& index )
+{
+    if ( !index.isValid() )
+        return false;
+
+    return index.parent().isValid() ? false : true;
+}
+
 
 void QQtDictTreeModel::packDictionaryToTreeModel ( const QQtDictionary& node, QStandardItem* pobject )
 {

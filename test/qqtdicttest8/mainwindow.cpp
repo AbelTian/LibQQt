@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <qqtdictionary.h>
-
+#include <qqtdicthelper.h>
 #include <QBuffer>
 
 MainWindow::MainWindow ( QWidget* parent ) :
@@ -34,6 +34,17 @@ MainWindow::MainWindow ( QWidget* parent ) :
     cc << "Hello";
     dict = cc;
     pline() << dict;
+
+    QQtDictionary dict1;
+    dict1["StrKey"][0]["BBB"]["JJJ"][1]["GGG"] = "A Value.";
+    QStringList keyList;
+    keyList << "StrKey" << "0" << "BBB" << "JJJ";
+    QQtDictionary& rd1 = QQtGetDictNode ( dict1, keyList );
+    pline() << rd1;
+    pline() << "-----";
+    keyList << "1";
+    rd1 = QQtGetDictNode ( dict1, keyList );
+    pline() << rd1;
 }
 
 MainWindow::~MainWindow()

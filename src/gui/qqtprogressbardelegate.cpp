@@ -17,7 +17,11 @@ void QQtProgressBarDelegate::drawDisplay ( QPainter* painter, const QStyleOption
 
     if ( ok )
     {
+#if 0
         int radio = 5;
+#else
+        int radio = 0;
+#endif
         int top = option.rect.top() + radio;
         int left = option.rect.left() + radio;
         int width = option.rect.width() - 2 * radio;
@@ -29,7 +33,7 @@ void QQtProgressBarDelegate::drawDisplay ( QPainter* painter, const QStyleOption
         //bar.init ( this );
 
         bar.rect.setRect ( left, top, width, height ); //设置其在表格中的位置
-        bar.state = QStyle::State_Enabled;
+        bar.state = option.state;
 
         //设置对应model列的值，需要自定义model
         bar.progress = pos;

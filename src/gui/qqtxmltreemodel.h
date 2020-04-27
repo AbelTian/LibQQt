@@ -8,8 +8,7 @@
 /**
  * @brief The QQtXmlTreeModel class
  * 将XML格式的内容解析到Tree里。
- * 废弃
- * 使用QQtDictTreeModel代替。
+ * 废弃，使用QQtDictTreeModel代替。
  */
 class QQTSHARED_EXPORT QQtXmlTreeModel : public QQtTreeModel
 {

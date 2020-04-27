@@ -22,6 +22,15 @@ public:
     //这里会更新内部的pdict；
     virtual void query ( QQtDictionary& dict );
 
+    //无论用户选中哪个Item，这个函数都会计算第一列从根到叶子的值列表。
+    virtual QStringList getFullName ( const QModelIndex& index );
+
+    //查看是否是叶子节点，是否有孩子
+    bool isLeafNode ( const QModelIndex& index );
+
+    //查看是否是Root节点，是否有父亲。这种节点可能有多个。
+    bool isRootNode ( const QModelIndex& index );
+
 signals:
 
 public slots:
