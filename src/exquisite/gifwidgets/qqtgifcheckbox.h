@@ -30,7 +30,7 @@ public:
      * call this function after iconTable() set.
      */
     void renderToVariable();
-    //以上函数把图片设置到iconTable()。
+    //以上函数把图片设置到ImageTable()。
 
     inline QMovie* movieHandler() const { return m_movie; }
     inline QTimer* timerHandler() const { return m_frameTimer; }

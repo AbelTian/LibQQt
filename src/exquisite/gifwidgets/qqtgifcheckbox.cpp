@@ -5,6 +5,10 @@ QQtGifCheckBox::QQtGifCheckBox ( QWidget* parent ) : QQtCheckBox ( parent )
 
 }
 
+/**
+ * 设置到局部变量
+ */
+
 QString QQtGifCheckBox::stateImage ( int index )
 {
     if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
@@ -55,12 +59,23 @@ TBtnIconTable& QQtGifCheckBox::iconTable()
 
 void QQtGifCheckBox::renderToVariable()
 {
-    TBtnIconTable& pic = iconTable();
+    TBtnIconTable& icons = iconTable();
+    TBtnImageTable& images = imageTable();
+    for ( int i = BTN_NORMAL; i < BTN_MAX; i++ )
+        images[i] = QImage ( icons[i] );
+    setImage ( images[BTN_NORMAL] );
 }
+
+/**
+ * 事件驱动
+ * 内存中准备好ImageTable、ImageDevice；准备好QMovie；
+ * 事件开始，QMovie设置为当前的Movie启动，其他的停止；
+ * 只有一个Timer。
+ */
 
 void QQtGifCheckBox::translateImage()
 {
-    renderToVariable();
+    //设置当前Movie。
 }
 
 void QQtGifCheckBox::slotFramePlayback()
