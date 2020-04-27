@@ -1,4 +1,4 @@
-﻿#include "qqtsvgprogressbar.h"
+#include "qqtsvgprogressbar.h"
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -11,17 +11,17 @@ QQtSvgProgressBar::QQtSvgProgressBar ( QWidget* parent ) : QQtSvgWidget ( parent
 {
     this->resize ( 487, 34 );
     setContentsMargins ( 0, 0, 0, 0 );
-    setWindowTitle ( QApplication::translate ( "QQtProgressBar", "Form", nullptr ) );
+    setWindowTitle ( QApplication::translate ( "QQtSvgProgressBar", "Form", nullptr ) );
 
     widgetBack = new QQtSvgWidget ( this );
-    widgetBack->setObjectName ( "widgetBack" );
+    widgetBack->setObjectName ( "svgWidgetBack" );
 
     QGridLayout* gridLayout = new QGridLayout ( widgetBack );
-    gridLayout->setObjectName ( "gridLayout" );
+    gridLayout->setObjectName ( "svgGridLayout" );
     gridLayout->setContentsMargins ( 0, 0, 0, 0 );
 
     widgetTrunk = new QQtSvgWidget ( widgetBack );
-    widgetTrunk->setObjectName ( "widgetTrunk" );
+    widgetTrunk->setObjectName ( "svgWidgetTrunk" );
     gridLayout->addWidget ( widgetTrunk, 0, 0, 1, 1 );
 
     QSpacerItem* horizontalSpacer = new QSpacerItem ( 149, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
@@ -33,7 +33,7 @@ QQtSvgProgressBar::QQtSvgProgressBar ( QWidget* parent ) : QQtSvgWidget ( parent
     QHBoxLayout* horizontalLayout = new QHBoxLayout ( this );
     horizontalLayout->setSpacing ( 0 );
     horizontalLayout->setContentsMargins ( 0, 0, 0, 0 );
-    horizontalLayout->setObjectName ( "horizontalLayout" );
+    horizontalLayout->setObjectName ( "svgHorizontalLayout" );
     horizontalLayout->addWidget ( widgetBack );
     setLayout ( horizontalLayout );
 }

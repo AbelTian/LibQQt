@@ -32,6 +32,8 @@ public:
      */
     void renderToVariable();
 protected:
+    //QQt基础Widget把这个函数作为把状态图设置进入当前图，
+    //svgwidgets重新实现这个函数，把状态图render进入svgRender，和父类的函数工作位置不一样。
     virtual void translateImage();
 signals:
 

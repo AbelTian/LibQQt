@@ -1,4 +1,4 @@
-﻿#ifndef QQTSVGPROGRESSBAR_H
+#ifndef QQTSVGPROGRESSBAR_H
 #define QQTSVGPROGRESSBAR_H
 
 #include <qqtsvgwidget.h>
@@ -13,6 +13,7 @@ public:
     explicit QQtSvgProgressBar ( QWidget* parent = nullptr );
 
     void setSvgFile ( QString back, QString trunk );
+
 public slots:
     void setValue ( int value );
     void setRange ( int min, int max );

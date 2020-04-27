@@ -35,6 +35,11 @@ public:
     const TBtnImageTable& imageTable() const;
     TBtnImageTable& imageTable();
 
+    //maybe render? NO,对于子类必须render。
+    //上边提供的函数都不需要render，
+    //ImageTable不需要render，
+    //IconTable一直都需要render。
+
 protected:
     int workState() const;
     void setWorkState ( int index );

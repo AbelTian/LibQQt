@@ -33,6 +33,7 @@ public:
 
     const TBtnImageTable& imageTable() const;
     TBtnImageTable& imageTable();
+    //maybe render?NO,对于子类必须render。
 
 protected:
     int workState() const;
