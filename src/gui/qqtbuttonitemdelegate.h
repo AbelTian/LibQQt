@@ -21,7 +21,7 @@
  * V view       对窗口的抽象模型，有table、treetable等
  * C controler  联系model、view的交互工作，包括delegate、写在window，dialog里面的业务代码。
  *
- * 无法正常显示
+ * 未实现
  */
 class QQTSHARED_EXPORT QQtButtonItemDelegate : public QItemDelegate
 {

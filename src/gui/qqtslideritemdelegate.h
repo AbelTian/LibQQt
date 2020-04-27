@@ -61,28 +61,36 @@ public:
 
     void paint ( QPainter* painter, const QStyleOptionViewItem& option,
                  const QModelIndex& index ) const override {
-        painter->save();
-        const int value = index.model()->data ( index ).toInt();
-        QRect rect ( option.rect );
-        const int width = ( value * rect.width() ) / 100;
-        rect.setWidth ( width );
-        QColor c;
-        if ( value <= 20 ) {
-            c = Qt::red;
-        }
-        else if ( value <= 50 ) {
-            c = QColor ( 240, 96, 0 );
+        bool ok = false;
+        int value = index.data().toInt ( &ok );
+        if ( ok ) {
+            painter->save();
+
+            QRect rect ( option.rect );
+            int width = ( value * rect.width() ) / 100;
+            rect.setWidth ( width );
+            QColor c;
+            if ( value <= 20 ) {
+                c = Qt::red;
+            }
+            else if ( value <= 50 ) {
+                c = QColor ( 240, 96, 0 );
+            }
+            else {
+                c = Qt::green;
+            }
+
+            painter->fillRect ( rect, c );
+
+            QTextOption o;
+            o.setAlignment ( Qt::AlignLeft | Qt::AlignVCenter );
+            painter->drawText ( option.rect, QString ( "%1%" ).arg ( value ), o );
+
+            painter->restore();
         }
         else {
-            c = Qt::green;
+            QItemDelegate::paint ( painter, option, index );
         }
-
-        painter->fillRect ( rect, c );
-        QTextOption o;
-        o.setAlignment ( Qt::AlignCenter );
-        painter->drawText ( option.rect, QString ( "%1%" ).arg ( value ), o );
-
-        painter->restore();
     }
 
 protected:

@@ -52,52 +52,46 @@ public:
     void updateEditorGeometry ( QWidget* editor, const QStyleOptionViewItem& option,
                                 const QModelIndex& index ) const override {
         Q_UNUSED ( index );
-
-        QStyleOptionButton item;
-        item.init ( option.widget );
-
-        //QRect checkbox_rect = QApplication::style()->subElementRect ( QStyle::SE_CheckBoxIndicator, &item );
-
-        //center
-        item.rect = option.rect;
-        //item.rect.setLeft ( option.rect.x() +
-        //                    option.rect.width() / 2 - checkbox_rect.width() / 2 );
-
-        editor->setGeometry ( item.rect );
+        editor->setGeometry ( option.rect );
     }
 
-    void paint ( QPainter* painter, const QStyleOptionViewItem& option,
-                 const QModelIndex& index ) const override {
-
-        //retrieve data
-        bool data = index.model()->data ( index, Qt::DisplayRole ).toBool();
-
-        //create CheckBox style
-        QStyleOptionViewItemV3 item;
-        item.init ( option.widget );
-
-        //QRect checkbox_rect = QApplication::style()->subElementRect ( QStyle::SE_CheckBoxIndicator, &item );
-        //QRect checkbox_rect ( option.rect );
-        //center
-        item.rect = option.rect;
-        //item.rect.setLeft ( option.rect.left() +
-        //                    option.rect.width() / 2 - checkbox_rect.width() / 2 );
-
-        //checked or not checked
-        //if ( data )
-        //    item.state = QStyle::State_On | QStyle::State_Enabled;
-        //else
-        //    item.state = QStyle::State_Off | QStyle::State_Enabled;
-        item.state = option.state;
-
-        //done! we can draw!
-        QApplication::style()->drawControl ( QStyle::CE_CheckBox, &item, painter );
-
-    }
 protected:
 
 private:
 
+
+    // QAbstractItemDelegate interface
+public:
+    virtual void paint ( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const override {
+        bool ok = false;
+        int value = index.data().toInt ( &ok );
+        if ( ok ) {
+            painter->save();
+
+            QColor c;
+            if ( value <= 0 ) {
+                c = Qt::red;
+            }
+            else {
+                c = Qt::green;
+            }
+
+            QRect localRect ( option.rect );
+            localRect.setWidth ( localRect.height() );
+            painter->fillRect ( localRect, c );
+
+            QTextOption o;
+            o.setAlignment ( Qt::AlignLeft | Qt::AlignVCenter );
+            QRect localRect2 ( option.rect );
+            localRect2.setLeft ( localRect2.left() + localRect.height() );
+            painter->drawText ( localRect2, QString ( "%1" ).arg ( value ), o );
+
+            painter->restore();
+        }
+        else {
+            QItemDelegate::paint ( painter, option, index );
+        }
+    }
 };
 
 #endif // QQTCHECKBOXDELEGATE_H
