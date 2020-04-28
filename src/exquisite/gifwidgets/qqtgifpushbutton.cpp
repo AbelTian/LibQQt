@@ -130,10 +130,6 @@ void QQtGifPushButton::translateImage()
     int state = workState();
 
     if ( isCheckable() )
-#ifdef __EMBEDDED_LINUX__
-#else
-        if ( !isHover() )
-#endif
         if ( isChecked() )
             state = BTN_CHECK;
         else

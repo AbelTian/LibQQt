@@ -38,6 +38,7 @@ protected:
 signals:
 
 public slots:
+    void setChecked ( bool ischecked );
 
     // QWidget interface
 protected:

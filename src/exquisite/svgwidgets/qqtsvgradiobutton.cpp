@@ -2,7 +2,7 @@
 
 QQtSvgRadioButton::QQtSvgRadioButton ( QWidget* parent ) : QQtRadioButton ( parent )
 {
-
+    //connect ( this, SIGNAL ( toggled ( bool ) ), this, SLOT ( setChecked ( bool ) ) );
 }
 
 QString QQtSvgRadioButton::stateImage ( int index )
@@ -68,6 +68,12 @@ void QQtSvgRadioButton::translateImage()
     update();
 }
 
+void QQtSvgRadioButton::setChecked ( bool ischecked )
+{
+    QQtRadioButton::setChecked ( ischecked );
+    translateImage();
+}
+
 
 void QQtSvgRadioButton::paintEvent ( QPaintEvent* event )
 {
@@ -77,10 +83,6 @@ void QQtSvgRadioButton::paintEvent ( QPaintEvent* event )
     int  bs = workState();
 
     if ( isCheckable() )
-#ifdef __EMBEDDED_LINUX__
-#else
-        if ( !isHover() )
-#endif
         if ( isChecked() )
             bs = BTN_CHECK;
         else

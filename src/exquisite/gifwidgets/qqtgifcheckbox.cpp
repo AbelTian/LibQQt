@@ -130,24 +130,10 @@ void QQtGifCheckBox::translateImage()
     int state = workState();
 
     if ( isCheckable() )
-#ifdef __EMBEDDED_LINUX__
         if ( isChecked() )
             state = BTN_CHECK;
         else
             state = BTN_UNCHECK;
-#else
-        if ( !isHover() )
-            if ( isChecked() )
-                state = BTN_CHECK;
-            else
-                state = BTN_UNCHECK;
-        else if ( isHover() )
-            if ( state == BTN_CHECK )
-                if ( isChecked() )
-                    state = BTN_UNCHECK;
-                else
-                    state = BTN_CHECK;
-#endif
 
     //qDebug() << isEnabled();
     if ( !isEnabled() )

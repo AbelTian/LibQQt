@@ -5,6 +5,7 @@ QQtRadioButton::QQtRadioButton ( QWidget* parent ) :
     QRadioButton ( parent )
 {
     mWorkState = BTN_NORMAL;
+    //connect ( this, SIGNAL ( toggled ( bool ) ), this, SLOT ( setChecked ( bool ) ) );
 }
 
 QQtRadioButton::~QQtRadioButton()
@@ -93,6 +94,12 @@ TBtnImageTable& QQtRadioButton::imageTable()
     return mImageTable;
 }
 
+void QQtRadioButton::setChecked ( bool ischecked )
+{
+    QRadioButton::setChecked ( ischecked );
+    translateImage();
+}
+
 int QQtRadioButton::workState() const
 {
     return mWorkState;
@@ -160,10 +167,6 @@ void QQtRadioButton::translateImage()
     int state = mWorkState;
 
     if ( isCheckable() )
-#ifdef __EMBEDDED_LINUX__
-#else
-        if ( !isHover() )
-#endif
         if ( isChecked() )
             state = BTN_CHECK;
         else

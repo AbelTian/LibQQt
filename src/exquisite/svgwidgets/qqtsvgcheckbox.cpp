@@ -77,10 +77,6 @@ void QQtSvgCheckBox::paintEvent ( QPaintEvent* event )
     int  bs = workState();
 
     if ( isCheckable() )
-#ifdef __EMBEDDED_LINUX__
-#else
-        if ( !isHover() )
-#endif
         if ( isChecked() )
             bs = BTN_CHECK;
         else

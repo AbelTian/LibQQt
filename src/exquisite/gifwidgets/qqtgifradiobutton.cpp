@@ -7,6 +7,8 @@ QQtGifRadioButton::QQtGifRadioButton ( QWidget* parent ) : QQtRadioButton ( pare
     m_frameTimer->setSingleShot ( false );
     connect ( m_frameTimer, SIGNAL ( timeout() ),
               this, SLOT ( slotFramePlayback() ) );
+
+    connect ( this, SIGNAL ( toggled ( bool ) ), this, SLOT ( setChecked ( bool ) ) );
 }
 
 /**
@@ -66,6 +68,12 @@ void QQtGifRadioButton::renderToVariable()
     TBtnIconTable& icons = iconTable();
     for ( int i = BTN_NORMAL; i < BTN_MAX; i++ )
         mMovie[i].setFileName ( icons[i] );
+    translateImage();
+}
+
+void QQtGifRadioButton::setChecked ( bool ischecked )
+{
+    QQtRadioButton::setChecked ( ischecked );
     translateImage();
 }
 
@@ -130,10 +138,6 @@ void QQtGifRadioButton::translateImage()
     int state = workState();
 
     if ( isCheckable() )
-#ifdef __EMBEDDED_LINUX__
-#else
-        if ( !isHover() )
-#endif
         if ( isChecked() )
             state = BTN_CHECK;
         else

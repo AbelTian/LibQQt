@@ -29,6 +29,22 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->pushButton_3->imageTable() [BTN_DISABLE] = QImage ( conf_skin ( "bt_bt_disable.png" ) );
 #endif
 
+    ui->r1->imageTable() [BTN_NORMAL] = QImage ( conf_skin ( "bt_bt_normal.png" ) );
+    ui->r1->imageTable() [BTN_PRESS] = QImage ( conf_skin ( "bt_bt_press.png" ) );
+    ui->r1->imageTable() [BTN_HOVER] = QImage ( conf_skin ( "bt_bt_hover.png" ) );
+    ui->r1->imageTable() [BTN_DISABLE] = QImage ( conf_skin ( "bt_bt_disable.png" ) );
+
+    ui->r2->imageTable() [BTN_NORMAL] = QImage ( conf_skin ( "bt_bt_normal.png" ) );
+    ui->r2->imageTable() [BTN_PRESS] = QImage ( conf_skin ( "bt_bt_press.png" ) );
+    ui->r2->imageTable() [BTN_HOVER] = QImage ( conf_skin ( "bt_bt_hover.png" ) );
+    ui->r2->imageTable() [BTN_DISABLE] = QImage ( conf_skin ( "bt_bt_disable.png" ) );
+
+    ui->c1->imageTable() [BTN_NORMAL] = QImage ( conf_skin ( "bt_bt_normal.png" ) );
+    ui->c1->imageTable() [BTN_PRESS] = QImage ( conf_skin ( "bt_bt_press.png" ) );
+    ui->c1->imageTable() [BTN_HOVER] = QImage ( conf_skin ( "bt_bt_hover.png" ) );
+    ui->c1->imageTable() [BTN_DISABLE] = QImage ( conf_skin ( "bt_bt_disable.png" ) );
+
+
     ui->pushButton->setCheckable ( true );
     ui->pushButton->setChecked ( false );
 }
@@ -46,6 +62,9 @@ void MainWindow::on_pushButton_clicked ( bool checked )
         ui->pushButton_2->setEnabled ( false );
         ui->pushButton_3->setEnabled ( false );
         ui->pushButton_4->setEnabled ( false );
+        ui->c1->setEnabled ( false );
+        ui->r1->setEnabled ( false );
+        ui->r2->setEnabled ( false );
     }
     else
     {
@@ -53,6 +72,9 @@ void MainWindow::on_pushButton_clicked ( bool checked )
         ui->pushButton_2->setEnabled ( true );
         ui->pushButton_3->setEnabled ( true );
         ui->pushButton_4->setEnabled ( true );
+        ui->c1->setEnabled ( true );
+        ui->r1->setEnabled ( true );
+        ui->r2->setEnabled ( true );
     }
 
 }

@@ -43,6 +43,9 @@ public:
     inline QMovie* movieHandler() const { return m_movie; }
     inline QTimer* timerHandler() const { return m_frameTimer; }
 
+public slots:
+    void setChecked ( bool );
+
 protected:
     //QQt基础Widget把这个函数作为把状态图设置进入当前图，
     //gifwidgets重新实现这个函数，把状态图文件设置进QMovie，和父类的函数工作位置不一样。
