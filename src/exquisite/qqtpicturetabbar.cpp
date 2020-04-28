@@ -1,4 +1,4 @@
-﻿#include "qqtpicturetabbar.h"
+#include "qqtpicturetabbar.h"
 #include "QStylePainter"
 #include "QStyleOptionTabV3"
 #include "QDebug"
@@ -18,6 +18,10 @@ QQtPictureTabBar::QQtPictureTabBar ( QWidget* parent ) :
     selectedTextColor = QColor ( 255, 255, 255 );
     textFont = QApplication::font();
     setDrawBase ( true );
+
+    //不设置就获取，你图什么？
+    dict1["image"].setType ( QQtDictionary::DictList );
+    dict1["icon"].setType ( QQtDictionary::DictList );
 }
 
 void QQtPictureTabBar::setIconStyle ( QQtPictureTabBar::IconStyle iconStyle )
@@ -162,7 +166,8 @@ void QQtPictureTabBar::drawPicture ( QPainter* p )
             int sel = currentIndex() == index ? BTN_PRESS : BTN_NORMAL;
 #if 1
             //tabRect = rect()?
-            p->drawPixmap ( tRect0, QIcon ( dict1["image"][index][sel].getValue().toString() ).pixmap ( tRect0.size(), QIcon::Normal, QIcon::On ) );
+            p->drawPixmap ( tRect0, QIcon ( dict1["image"][index][sel].getValue().toString() ).pixmap ( tRect0.size(),
+                            QIcon::Normal, QIcon::On ) );
 #endif
 
             /*
@@ -178,8 +183,9 @@ void QQtPictureTabBar::drawPicture ( QPainter* p )
             //为什么不用这个呢?因为上边那个QIcon直接缩放到了完整的符合Icon大小的图.直接居中.
             //这个不需要,多次一举.
 #if 0
-            p->drawItemPixmap ( tRect0, Qt::AlignCenter, QIcon ( dict1["image"][index][sel].getValue().toString() ).pixmap ( tRect0.size(), QIcon::Normal,
-                                QIcon::On )  );
+            p->drawItemPixmap ( tRect0, Qt::AlignCenter,
+                                QIcon ( dict1["image"][index][sel].getValue().toString() ).pixmap ( tRect0.size(), QIcon::Normal,
+                                        QIcon::On )  );
 #endif
             p->restore();
         }
@@ -260,7 +266,8 @@ void QQtPictureTabBar::drawIcon ( QPainter* p )
         {
             p->save();
             //tabRect = rect()?
-            p->drawPixmap ( tRect0, QIcon ( dict1["icon"][index][sel].getValue().toString() ).pixmap ( tRect0.size(), mode, QIcon::On ) );
+            p->drawPixmap ( tRect0, QIcon ( dict1["icon"][index][sel].getValue().toString() ).pixmap ( tRect0.size(), mode,
+                            QIcon::On ) );
             /*
              * 失真不明显，使用以下方法
              */

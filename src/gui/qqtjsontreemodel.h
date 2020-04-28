@@ -8,8 +8,7 @@
 /**
  * @brief The QQtJsonTreeModel class
  * 将Json格式的内容解析到Tree里。
- * 废弃
- * 使用QQtDictTreeModel代替。
+ * 废弃，使用QQtDictTreeModel代替。
  */
 class QQTSHARED_EXPORT QQtJsonTreeModel : public QQtTreeModel
 {

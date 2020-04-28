@@ -12,46 +12,9 @@ QQtPushButton::~QQtPushButton()
 {
 }
 
-const TBtnImageTable& QQtPushButton::imageTable() const
-{
-    return mImageTable;
-}
-
-TBtnImageTable& QQtPushButton::imageTable()
-{
-    return mImageTable;
-}
-
-void QQtPushButton::translateImage()
-{
-    int state = mWorkState;
-
-    //qDebug() << isEnabled();
-
-    if ( !isEnabled() )
-        state = BTN_DISABLE;
-
-    setImage ( mImageTable[state] );
-}
-
-void QQtPushButton::setImage ( const QImage& image )
-{
-    mImage = image;
-    //update();
-}
-
-int QQtPushButton::workState() const
-{
-    return mWorkState;
-}
-
-void QQtPushButton::setWorkState ( int index )
-{
-    mWorkState = ( EBtnStatus ) index;
-    //translateImage();
-    //update();
-}
-
+/**
+ * 把图片设置到内部变量
+ */
 
 QImage QQtPushButton::stateImage ( int index )
 {
@@ -112,6 +75,42 @@ void QQtPushButton::setDisabled ( bool stat )
     update();
 }
 
+bool QQtPushButton::isHover()
+{
+    QRect r0 = rect();
+    QRect gr0 = QRect ( mapToGlobal ( r0.topLeft() ), mapToGlobal ( r0.bottomRight() ) );
+    if ( gr0.contains ( QCursor::pos() ) )
+        return true;
+    return false;
+}
+
+const TBtnImageTable& QQtPushButton::imageTable() const
+{
+    return mImageTable;
+}
+
+TBtnImageTable& QQtPushButton::imageTable()
+{
+    return mImageTable;
+}
+
+int QQtPushButton::workState() const
+{
+    return mWorkState;
+}
+
+void QQtPushButton::setWorkState ( int index )
+{
+    mWorkState = ( EBtnStatus ) index;
+    //translateImage();
+    //update();
+}
+
+/**
+ * 事件驱动图片显示
+ */
+
+
 void QQtPushButton::mousePressEvent ( QMouseEvent* event )
 {
     if ( event->button() == Qt::LeftButton )
@@ -157,6 +156,30 @@ void QQtPushButton::leaveEvent ( QEvent* event )
     update();
 }
 
+void QQtPushButton::translateImage()
+{
+    int state = mWorkState;
+
+    if ( isCheckable() )
+        if ( isChecked() )
+            state = BTN_CHECK;
+        else
+            state = BTN_UNCHECK;
+
+    //qDebug() << isEnabled();
+
+    if ( !isEnabled() )
+        state = BTN_DISABLE;
+
+    setImage ( mImageTable[state] );
+}
+
+void QQtPushButton::setImage ( const QImage& image )
+{
+    mImage = image;
+    //update();
+}
+
 
 void QQtPushButton::paintEvent ( QPaintEvent* event )
 {
@@ -169,11 +192,16 @@ void QQtPushButton::paintEvent ( QPaintEvent* event )
     //qDebug() << isEnabled() << mWorkState;
 
     QStylePainter p ( this );
+#if 0
+    p.drawItemPixmap ( rect(), Qt::AlignCenter, QIcon ( QPixmap::fromImage ( mImage ) ).pixmap ( rect().size(),
+                       QIcon::Normal, QIcon::On ) );
+#else
     p.drawItemPixmap ( rect(), Qt::AlignLeft | Qt::AlignTop,
                        /*不.copy() 切出图片的中间部分使用*/
                        QPixmap::fromImage ( mImage
                                             .scaled ( rect().width(), rect().height(), Qt::IgnoreAspectRatio )
                                           ) );
+#endif
 
     QStyleOptionButton opt;
     initStyleOption ( &opt );

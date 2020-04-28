@@ -34,23 +34,28 @@ contains (DEFINES, __WIN__) {
 }
 
 #core
-SOURCES += \
-    $$PWD/core/qqtcore.cpp \
-    $$PWD/core/qqtdictionary.cpp \
-    $$PWD/core/qqtorderedmap.cpp \
-    $$PWD/core/qqtordereddictionary.cpp \
-    $$PWD/core/qqtobjectmanager.cpp
-HEADERS += \
-    $$PWD/core/qqtcore.h \
-    $$PWD/core/qqtdictionary.h \
-    $$PWD/core/qqtorderedmap.h \
-    $$PWD/core/qqtordereddictionary.h \
-    $$PWD/core/qqtobjectmanager.h
+SOURCES += $$PWD/core/qqtcore.cpp
+HEADERS += $$PWD/core/qqtcore.h
 
+#object manager
+SOURCES += $$PWD/core/qqtobjectmanager.cpp
+HEADERS += $$PWD/core/qqtobjectmanager.h
+
+#event
+SOURCES += $$PWD/core/qqtevent.cpp
+HEADERS += $$PWD/core/qqtevent.h
+
+#dictionary
 SOURCES += \
-    $$PWD/core/qqtevent.cpp
+    $$PWD/core/qqtdicthelper.cpp \
+    $$PWD/core/qqtordereddictionary.cpp \
+    $$PWD/core/qqtorderedmap.cpp \
+    $$PWD/core/qqtdictionary.cpp
 HEADERS += \
-    $$PWD/core/qqtevent.h
+    $$PWD/core/qqtdicthelper.h \
+    $$PWD/core/qqtordereddictionary.h \
+    $$PWD/core/qqtorderedmap.h \
+    $$PWD/core/qqtdictionary.h
 
 #sql
 SOURCES += \
@@ -63,11 +68,17 @@ HEADERS += \
     $$PWD/sql/qqtsqlquery.h
 
 #gui
-#add_object_class(QQtNoFocusDelegate, $$PWD/gui)
+#add_object_class(QQtSliderItemDelegate, $$PWD/gui)
 SOURCES += \
+    $$PWD/gui/qqtslideritemdelegate.cpp \
+    $$PWD/gui/qqtcheckboxdelegate.cpp \
+    $$PWD/gui/qqtbuttonitemdelegate.cpp \
     $$PWD/gui/qqtprogressbardelegate.cpp \
     $$PWD/gui/qqtnofocusdelegate.cpp
 HEADERS += \
+    $$PWD/gui/qqtslideritemdelegate.h \
+    $$PWD/gui/qqtcheckboxdelegate.h \
+    $$PWD/gui/qqtbuttonitemdelegate.h \
     $$PWD/gui/qqtprogressbardelegate.h \
     $$PWD/gui/qqtnofocusdelegate.h
 
@@ -362,6 +373,9 @@ contains (DEFINES, __NETWORKSUPPORT__) {
     contains (DEFINES, __WEBACCESSSUPPORT__) {
         SOURCES += $$PWD/network/qqtwebaccessmanager.cpp
         HEADERS += $$PWD/network/qqtwebaccessmanager.h
+
+        SOURCES += $$PWD/network/qqtwebloader.cpp
+        HEADERS += $$PWD/network/qqtwebloader.h
     }
 }
 
@@ -685,11 +699,6 @@ contains (DEFINES, __HIGHGRADE__) {
         HEADERS += \
             $$PWD/highgrade/qqtsingletonapplication.h
     }
-
-    SOURCES += \
-        $$PWD/highgrade/qqtdatapersistence.cpp
-    HEADERS += \
-        $$PWD/highgrade/qqtdatapersistence.h
 }
 
 include ($$PWD/qqt_3rdparty.pri)

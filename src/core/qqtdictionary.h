@@ -11,12 +11,12 @@ class QJsonValue;
 
 #include <qqtcore.h>
 #include <qqt-local.h>
-
 /*
  * 简化使用
  * 遍历时
  */
 class QQtDictionary;
+class QQtOrderedDictionary;
 typedef QMap<QString, QQtDictionary> QQtDictionaryMap;
 typedef QMapIterator<QString, QQtDictionary> QQtDictionaryMapIterator;
 typedef QMutableMapIterator<QString, QQtDictionary> QQtDictionaryMutableMapIterator;
@@ -27,7 +27,8 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
 
 /**
  * @brief The QQtDictionary class
- * QQt 字典
+ * QQt Dictionary
+ *
  * 字典当中包含
  * 有序tuple 操作方式 dict[0] = ["","","",5] dict[max-1] = {""="",""="",""="",""=""}
  * 不支持无序tuple 操作方式 无
@@ -42,6 +43,7 @@ typedef QMutableListIterator<QQtDictionary> QQtDictionaryMutableListIterator;
  * fromINI toINI                支持ini
  * fromProperties toProperties  支持Properties 这是一种Java配置文件的格式，仅仅有键值对、注释
  * fromCSV toCSV                支持csv 逗号分隔值格式文本。
+ * fromCbor toCbor              支持Cbor 二进制、树型、流式数据结构。
  * from函数默认行为为合并，如果用户希望新替，请手动调用clear();
  *
  * QVariant 不能直接获取到真实数据，改变必须使用临时变量，而且，接口设计也不够灵活，存入和取出都不太方便。
@@ -146,6 +148,8 @@ public:
     void remove ( const QString& key );
 
     /*深拷贝*/
+    QQtDictionary ( const QMap<QString, QQtDictionary>& map );
+    QQtDictionary ( const QList<QQtDictionary>& list );
     QQtDictionary ( const QQtDictionary& other );
     QQtDictionary ( const QVariant& value );
     QQtDictionary ( const EDictType type );
@@ -185,6 +189,10 @@ public:
         return *this == QQtDictionary ( var );
     }
 
+    QQtDictionary ( const QQtOrderedDictionary& other );
+    QQtDictionary& operator = ( const QQtOrderedDictionary& other );
+    bool operator == ( const QQtOrderedDictionary& other ) const;
+
     //内部类型转换
     //toValue() toList() toMap(); 不丢失数据方式。
 
@@ -198,14 +206,12 @@ public:
     QByteArray toYAML() const;
     void fromYAML ( const QByteArray& yaml );
 
-    //INI, CONF
     QByteArray toINI() const;
     void fromINI ( const QByteArray& ini );
 
     QByteArray toProperties() const;
     void fromProperties ( const QByteArray& properties );
 
-    //QtCSVLib
     QByteArray toCSV ( const QString& separator = QString ( "," ),
                        const QString& textDelimiter = QString ( "\"" ),
                        const QString& textEncoding = QString ( "UTF-8" )
@@ -215,6 +221,9 @@ public:
                    const QString& textDelimiter = QString ( "\"" ),
                    const QString& textEncoding = QString ( "UTF-8" )
                  );
+
+    QByteArray toCbor() const;
+    void fromCbor ( const QByteArray& cbor );
 
 private:
     /*节点类型，指示性变量*/

@@ -7,6 +7,7 @@
 /**
  * @brief The QQtFTPTreeModel class
  * 将FTP解析到QQtDictionary里，然后写入Model。
+ * 废弃，使用QQtDictTreeModel代替。
  * 未实现
  */
 class QQTSHARED_EXPORT QQtFTPTreeModel : public QObject

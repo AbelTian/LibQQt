@@ -31,14 +31,19 @@ public:
     void setEnabled ( bool );
     void setDisabled ( bool );
 
+    bool isHover();
+
     const TBtnImageTable& imageTable() const;
     TBtnImageTable& imageTable();
+    //maybe render?NO,对于子类必须render。
 
 protected:
     int workState() const;
     void setWorkState ( int index );
     virtual void translateImage();
     virtual void setImage ( const QImage& image );
+    QImage& image() { return mImage; }
+    const QImage& image() const { return mImage; }
 protected:
 
 private:

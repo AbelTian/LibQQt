@@ -41,6 +41,21 @@ typedef enum tagEBtnStatus
 #endif  /* __cplusplus */
 
 //使用QQtPushButton直接[]运算，在嵌入式板子上表现不正常，所以使用ImageTable。
+struct QQTSHARED_EXPORT TBtnIconTable
+{
+    QString pixmap[BTN_MAX];
+
+    TBtnIconTable();
+    QString pixMap ( int index );
+    void setPixMap ( int index, QString pix );
+    void initNormal ( QString normal, QString press );
+    void initCheck ( QString uncheck, QString check );
+    void initOther ( QString hover, QString disable );
+    const QString& operator[] ( int index ) const;
+    QString& operator [] ( int index );
+};
+
+//使用QQtPushButton直接[]运算，在嵌入式板子上表现不正常，所以使用ImageTable。
 struct QQTSHARED_EXPORT TBtnImageTable
 {
     TBtnImageTable();

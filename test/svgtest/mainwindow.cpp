@@ -25,13 +25,13 @@ MainWindow::MainWindow ( QWidget* parent ) :
     ui->c0->iconTable() [BTN_HOVER] = conf_root ( "bt_stir.svg" );
     ui->c0->iconTable() [BTN_PRESS] = conf_root ( "bt_stir_press.svg" );
     ui->c0->renderToVariable();
-    ui->r0->iconTable() [BTN_NORMAL] = conf_root ( "bt_stir.svg" );
-    ui->r0->iconTable() [BTN_HOVER] = conf_root ( "bt_stir.svg" );
-    ui->r0->iconTable() [BTN_PRESS] = conf_root ( "bt_stir_press.svg" );
+    ui->r0->iconTable() [BTN_NORMAL] = conf_root ( "bt_circle.svg" );
+    ui->r0->iconTable() [BTN_HOVER] = conf_root ( "bt_circle.svg" );
+    ui->r0->iconTable() [BTN_PRESS] = conf_root ( "bt_circle_press.svg" );
     ui->r0->renderToVariable();
-    ui->r1->iconTable() [BTN_NORMAL] = conf_root ( "bt_stir.svg" );
-    ui->r1->iconTable() [BTN_HOVER] = conf_root ( "bt_stir.svg" );
-    ui->r1->iconTable() [BTN_PRESS] = conf_root ( "bt_stir_press.svg" );
+    ui->r1->iconTable() [BTN_NORMAL] = conf_root ( "bt_circle.svg" );
+    ui->r1->iconTable() [BTN_HOVER] = conf_root ( "bt_circle.svg" );
+    ui->r1->iconTable() [BTN_PRESS] = conf_root ( "bt_circle_press.svg" );
     ui->r1->renderToVariable();
 
     ui->p0->setSvgFile ( conf_root ( "bk_progress_background.svg" ),

@@ -1,4 +1,5 @@
 #include <qqtordereddictionary.h>
+#include <qqtdictionary.h>
 
 //support json
 #ifdef __JSONCPP_SUPPORT__
@@ -45,56 +46,74 @@
 
 #include <QBuffer>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,12,0)
+#define __CBOR_SUPPORT__
+#endif
+
+#ifdef __CBOR_SUPPORT__
+#include <QCborValue>
+#endif
+
 #include <iostream>
 using namespace std;
 
 #ifdef __INICONTENTSUPPORT__
-QByteArray toIni ( const QOrderedDictionary& dict );
-void fromIni ( const QByteArray& bytes, QOrderedDictionary& dict );
-QByteArray toProperties ( const QOrderedDictionary& dict );
-void fromProperties ( const QByteArray& bytes, QOrderedDictionary& dict );
+QByteArray toIni ( const QQtOrderedDictionary& dict );
+void fromIni ( const QByteArray& bytes, QQtOrderedDictionary& dict );
+QByteArray toProperties ( const QQtOrderedDictionary& dict );
+void fromProperties ( const QByteArray& bytes, QQtOrderedDictionary& dict );
 #endif
 
 #ifdef __YAMLSUPPORT__
-QByteArray toYAML ( const QOrderedDictionary& dict );
-void fromYAML ( const QByteArray& yaml, QOrderedDictionary& dict );
-void parseYamlNodeToDictionary ( const YAML::Node& node, QOrderedDictionary& object );
-void packDictionaryToYamlNode ( const QOrderedDictionary& node, YAML::Node& object );
+QByteArray toYAML ( const QQtOrderedDictionary& dict );
+void fromYAML ( const QByteArray& yaml, QQtOrderedDictionary& dict );
+void parseYamlNodeToDictionary ( const YAML::Node& node, QQtOrderedDictionary& object );
+void packDictionaryToYamlNode ( const QQtOrderedDictionary& node, YAML::Node& object );
 #endif
 
 #ifdef __QTCSVLIB__
-QByteArray toCSV ( const QOrderedDictionary& dict,
+QByteArray toCSV ( const QQtOrderedDictionary& dict,
                    const QString& separator,
                    const QString& textDelimiter,
                    const QString& textEncoding );
-void fromCSV ( const QByteArray& csv, QOrderedDictionary& dict,
+void fromCSV ( const QByteArray& csv, QQtOrderedDictionary& dict,
                const QString& separator,
                const QString& textDelimiter,
                const QString& textEncoding );
 #endif
 
 
-#ifdef USE_JSONCPP
-QByteArray toJson ( const QOrderedDictionary& dict, int indent = 0 );
-void fromJson ( const QByteArray& json, QOrderedDictionary& dict );
-void parseJsonValue ( const Json::Value& value, QOrderedDictionary& parent );
-void packDictionaryToJsonValue ( const QOrderedDictionary& node, Json::Value& result );
-#elif defined(USE_RAPIDJSON)
-QByteArray toJson ( const QOrderedDictionary& dict, int indent = 0 );
-void fromJson ( const QByteArray& json, QOrderedDictionary& dict );
-void parseJsonValue ( const rapidjson::Value& value, QOrderedDictionary& parent, rapidjson::Document& doc  );
-void packDictionaryToJsonValue ( const QOrderedDictionary& node, rapidjson::Value& result, rapidjson::Document& doc );
-#else
-QByteArray toJson ( const QOrderedDictionary& dict, int indent = 0 );
-void fromJson ( const QByteArray& json, QOrderedDictionary& dict );
-void parseJsonValue ( const QJsonValue& value, QOrderedDictionary& parent );
-void packDictionaryToJsonValue ( const QOrderedDictionary& node, QJsonValue& result );
+#ifdef __CBOR_SUPPORT__
+QByteArray toCbor ( const QQtOrderedDictionary& dict );
+void fromCbor ( const QByteArray& cbor, QQtOrderedDictionary& dict );
+void parseCborNodeToDictionary ( const QCborValue& node, QQtOrderedDictionary& object );
+void packDictionaryToCborNode ( const QQtOrderedDictionary& node, QCborValue& object );
 #endif
 
-QByteArray toXML ( const QOrderedDictionary& dict, int indent = -1 );
-void fromXML ( const QByteArray& xml, QOrderedDictionary& dict );
-void parseDomNode ( const QDomNode& value, QOrderedDictionary& parent );
-void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result, QDomDocument& doc );
+#ifdef USE_JSONCPP
+QByteArray toJson ( const QQtOrderedDictionary& dict, int indent = 0 );
+void fromJson ( const QByteArray& json, QQtOrderedDictionary& dict );
+void parseJsonValue ( const Json::Value& value, QQtOrderedDictionary& parent );
+void packDictionaryToJsonValue ( const QQtOrderedDictionary& node, Json::Value& result );
+#elif defined(USE_RAPIDJSON)
+QByteArray toJson ( const QQtOrderedDictionary& dict, int indent = 0 );
+void fromJson ( const QByteArray& json, QQtOrderedDictionary& dict );
+void parseJsonValue ( const rapidjson::Value& value, QQtOrderedDictionary& parent, rapidjson::Document& doc  );
+void packDictionaryToJsonValue ( const QQtOrderedDictionary& node, rapidjson::Value& result, rapidjson::Document& doc );
+#else
+QByteArray toJson ( const QQtOrderedDictionary& dict, int indent = 0 );
+void fromJson ( const QByteArray& json, QQtOrderedDictionary& dict );
+void parseJsonValue ( const QJsonValue& value, QQtOrderedDictionary& parent );
+void packDictionaryToJsonValue ( const QQtOrderedDictionary& node, QJsonValue& result );
+#endif
+
+QByteArray toXML ( const QQtOrderedDictionary& dict, int indent = -1 );
+void fromXML ( const QByteArray& xml, QQtOrderedDictionary& dict );
+void parseDomNode ( const QDomNode& value, QQtOrderedDictionary& parent );
+void packDictionaryToDomNode ( const QQtOrderedDictionary& node, QDomNode& result, QDomDocument& doc );
+
+void parseDictionary ( QQtOrderedDictionary& node, const QQtDictionary& obj );
+
 
 //#define LOCAL_DEBUG
 #ifdef LOCAL_DEBUG
@@ -103,17 +122,17 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
 #define p3line() QNoDebug()
 #endif
 
-QOrderedDictionary::QOrderedDictionary ()
+QQtOrderedDictionary::QQtOrderedDictionary ()
 {
     m_type = DictMax;
 }
 
-QOrderedDictionary::~QOrderedDictionary()
+QQtOrderedDictionary::~QQtOrderedDictionary()
 {
 
 }
 
-bool QOrderedDictionary::isValue() const
+bool QQtOrderedDictionary::isValue() const
 {
     bool is = false;
 
@@ -123,12 +142,12 @@ bool QOrderedDictionary::isValue() const
     return is;
 }
 
-QOrderedDictionary::EDictType QOrderedDictionary::getType() const
+QQtOrderedDictionary::EDictType QQtOrderedDictionary::getType() const
 {
     return m_type;
 }
 
-QString QOrderedDictionary::getTypeName() const
+QString QQtOrderedDictionary::getTypeName() const
 {
     QString type = "Invalid";
     if ( DictValue == m_type )
@@ -141,35 +160,35 @@ QString QOrderedDictionary::getTypeName() const
     return type;
 }
 
-void QOrderedDictionary::setType ( QOrderedDictionary::EDictType type )
+void QQtOrderedDictionary::setType ( QQtOrderedDictionary::EDictType type )
 {
     m_type = type;
 }
 
-void QOrderedDictionary::setValue ( const QVariant& value )
+void QQtOrderedDictionary::setValue ( const QVariant& value )
 {
     m_type = DictValue;
     m_value = value;
 }
 
-void QOrderedDictionary::setChild ( const QList<QOrderedDictionary>& list )
+void QQtOrderedDictionary::setChild ( const QList<QQtOrderedDictionary>& list )
 {
     m_type = DictList;
     m_list = list;
 }
 
-void QOrderedDictionary::setChild ( const QOrderedMap<QString, QOrderedDictionary>& map )
+void QQtOrderedDictionary::setChild ( const QOrderedMap<QString, QQtOrderedDictionary>& map )
 {
     m_type = DictMap;
     m_map = map;
 }
 
-void QOrderedDictionary::addChild ( const QString& value )
+void QQtOrderedDictionary::addChild ( const QString& value )
 {
-    addChild ( QOrderedDictionary ( QVariant ( value ) ) );
+    addChild ( QQtOrderedDictionary ( QVariant ( value ) ) );
 }
 
-void QOrderedDictionary::addChild ( const QOrderedDictionary& dict )
+void QQtOrderedDictionary::addChild ( const QQtOrderedDictionary& dict )
 {
     m_type = DictList;
     //list类
@@ -180,18 +199,18 @@ void QOrderedDictionary::addChild ( const QOrderedDictionary& dict )
     m_list.push_back ( dict );
 }
 
-void QOrderedDictionary::insertChild ( const QString& key, const QOrderedDictionary& dict )
+void QQtOrderedDictionary::insertChild ( const QString& key, const QQtOrderedDictionary& dict )
 {
     m_type = DictMap;
     m_map.insert ( key, dict );
 }
 
-void QOrderedDictionary::insertChild ( int index, const QString& value )
+void QQtOrderedDictionary::insertChild ( int index, const QString& value )
 {
-    insertChild ( index, QOrderedDictionary ( QVariant ( value ) ) );
+    insertChild ( index, QQtOrderedDictionary ( QVariant ( value ) ) );
 }
 
-void QOrderedDictionary::insertChild ( int index, const QOrderedDictionary& dict )
+void QQtOrderedDictionary::insertChild ( int index, const QQtOrderedDictionary& dict )
 {
     m_type = DictList;
     //list类
@@ -215,12 +234,12 @@ void QOrderedDictionary::insertChild ( int index, const QOrderedDictionary& dict
     this->operator [] ( index ) = dict;
 }
 
-void QOrderedDictionary::insertChild ( const QString& key, const QString& value )
+void QQtOrderedDictionary::insertChild ( const QString& key, const QString& value )
 {
-    insertChild ( key, QOrderedDictionary ( QVariant ( value ) ) );
+    insertChild ( key, QQtOrderedDictionary ( QVariant ( value ) ) );
 }
 
-int QOrderedDictionary::count() const
+int QQtOrderedDictionary::count() const
 {
     int cnt = -1;
 
@@ -234,7 +253,7 @@ int QOrderedDictionary::count() const
     return cnt;
 }
 
-int QOrderedDictionary::size() const
+int QQtOrderedDictionary::size() const
 {
     int cnt = -1;
 
@@ -248,7 +267,7 @@ int QOrderedDictionary::size() const
     return cnt;
 }
 
-bool QOrderedDictionary::isNull() const
+bool QQtOrderedDictionary::isNull() const
 {
     if ( m_type == DictMax )
         return true;
@@ -256,7 +275,7 @@ bool QOrderedDictionary::isNull() const
     return false;
 }
 
-bool QOrderedDictionary::isValid() const
+bool QQtOrderedDictionary::isValid() const
 {
     bool isValid = false;
 
@@ -287,7 +306,7 @@ bool QOrderedDictionary::isValid() const
     return isValid;
 }
 
-bool QOrderedDictionary::isEmpty() const
+bool QQtOrderedDictionary::isEmpty() const
 {
     bool isEmpty = true;
 
@@ -319,7 +338,7 @@ bool QOrderedDictionary::isEmpty() const
 }
 
 
-bool QOrderedDictionary::isList() const
+bool QQtOrderedDictionary::isList() const
 {
     bool is = false;
 
@@ -329,7 +348,7 @@ bool QOrderedDictionary::isList() const
     return is;
 }
 
-bool QOrderedDictionary::isMap() const
+bool QQtOrderedDictionary::isMap() const
 {
     bool is = false;
 
@@ -340,7 +359,7 @@ bool QOrderedDictionary::isMap() const
 
 }
 
-bool QOrderedDictionary::hasChild ( const QString& key ) const
+bool QQtOrderedDictionary::hasChild ( const QString& key ) const
 {
     bool has = false;
 
@@ -350,7 +369,7 @@ bool QOrderedDictionary::hasChild ( const QString& key ) const
     return has;
 }
 
-bool QOrderedDictionary::hasChild ( const QOrderedDictionary& value ) const
+bool QQtOrderedDictionary::hasChild ( const QQtOrderedDictionary& value ) const
 {
     bool has = false;
 
@@ -361,13 +380,13 @@ bool QOrderedDictionary::hasChild ( const QOrderedDictionary& value ) const
     return has;
 }
 
-void QOrderedDictionary::modValue ( const QVariant& value )
+void QQtOrderedDictionary::modValue ( const QVariant& value )
 {
     m_type = DictValue;
     m_value = value;
 }
 
-void QOrderedDictionary::modChild ( int index, const QOrderedDictionary& value )
+void QQtOrderedDictionary::modChild ( int index, const QQtOrderedDictionary& value )
 {
     if ( !m_list.contains ( value ) )
         return;
@@ -376,7 +395,7 @@ void QOrderedDictionary::modChild ( int index, const QOrderedDictionary& value )
     m_list[index] = value;
 }
 
-void QOrderedDictionary::modChild ( const QString& key, const QOrderedDictionary& value )
+void QQtOrderedDictionary::modChild ( const QString& key, const QQtOrderedDictionary& value )
 {
     if ( !m_map.contains ( key ) )
         return;
@@ -385,7 +404,7 @@ void QOrderedDictionary::modChild ( const QString& key, const QOrderedDictionary
     m_map[key] = value;
 }
 
-void QOrderedDictionary::clear()
+void QQtOrderedDictionary::clear()
 {
     m_type = DictMax;
     m_value.clear();
@@ -393,45 +412,63 @@ void QOrderedDictionary::clear()
     m_map.clear();
 }
 
-void QOrderedDictionary::remove ( int index )
+void QQtOrderedDictionary::remove ( int index )
 {
     m_type = DictList;
     m_list.removeAt ( index );
 }
 
-void QOrderedDictionary::remove ( const QString& key )
+void QQtOrderedDictionary::remove ( const QString& key )
 {
     m_type = DictMap;
     m_map.remove ( key );
 }
 
-QOrderedDictionary::QOrderedDictionary ( const QOrderedDictionary& other )
+QQtOrderedDictionary::QQtOrderedDictionary ( const QQtOrderedDictionary& other )
 {
     *this = other;
 }
 
-QOrderedDictionary::QOrderedDictionary ( const QOrderedDictionary::EDictType type )
+QQtOrderedDictionary::QQtOrderedDictionary ( const QQtOrderedDictionary::EDictType type )
 {
     m_type = type;
 }
 
-const QOrderedDictionary QOrderedDictionary::operator[] ( const QString& key ) const
+const QQtOrderedDictionary QQtOrderedDictionary::operator[] ( const QString& key ) const
 {
     return m_map[key];
 }
 
-const QOrderedDictionary& QOrderedDictionary::operator[] ( int index ) const
+QQtOrderedDictionary::QQtOrderedDictionary ( const QQtDictionary& other )
+{
+    *this = other;
+}
+
+QQtOrderedDictionary& QQtOrderedDictionary::operator = ( const QQtDictionary& other )
+{
+    parseDictionary ( *this, other );
+    return *this;
+}
+
+bool QQtOrderedDictionary::operator == ( const QQtDictionary& other ) const
+{
+    const QQtOrderedDictionary& ref = *this;
+    QQtOrderedDictionary other1 = other;
+    return ( bool ) ( ref == other1 );
+}
+
+const QQtOrderedDictionary& QQtOrderedDictionary::operator[] ( int index ) const
 {
     return m_list[index];
 }
 
-QOrderedDictionary::QOrderedDictionary ( const QVariant& value )
+QQtOrderedDictionary::QQtOrderedDictionary ( const QVariant& value )
 {
     m_type = DictValue;
     *this = value;
 }
 
-QOrderedDictionary& QOrderedDictionary::operator [] ( int index )
+QQtOrderedDictionary& QQtOrderedDictionary::operator [] ( int index )
 {
     m_type = DictList;
 
@@ -446,19 +483,19 @@ QOrderedDictionary& QOrderedDictionary::operator [] ( int index )
         /*相差的数量*///count -> index+1 = index+1 - count
 
         for ( int i = 0; i < index + 1 - cnt; i++ )
-            m_list.push_back ( QOrderedDictionary() );
+            m_list.push_back ( QQtOrderedDictionary() );
     }
 
-    return ( QOrderedDictionary& ) m_list.operator [] ( index );
+    return ( QQtOrderedDictionary& ) m_list.operator [] ( index );
 }
 
-QOrderedDictionary& QOrderedDictionary::operator [] ( const QString& key )
+QQtOrderedDictionary& QQtOrderedDictionary::operator [] ( const QString& key )
 {
     m_type = DictMap;
     return m_map.operator [] ( key );
 }
 
-QOrderedDictionary& QOrderedDictionary::operator = ( const QList<QString>& list )
+QQtOrderedDictionary& QQtOrderedDictionary::operator = ( const QList<QString>& list )
 {
     m_type = DictList;
 
@@ -467,26 +504,26 @@ QOrderedDictionary& QOrderedDictionary::operator = ( const QList<QString>& list 
     while ( itor.hasNext() )
     {
         const QString& key = itor.next();
-        m_list.push_back ( QOrderedDictionary ( key ) );
+        m_list.push_back ( QQtOrderedDictionary ( key ) );
     }
     return *this;
 }
 
-QOrderedDictionary& QOrderedDictionary::operator = ( const QOrderedMap<QString, QOrderedDictionary>& map )
+QQtOrderedDictionary& QQtOrderedDictionary::operator = ( const QOrderedMap<QString, QQtOrderedDictionary>& map )
 {
     m_type = DictMap;
     m_map = map;
     return *this;
 }
 
-QOrderedDictionary& QOrderedDictionary::operator = ( const QList<QOrderedDictionary>& list )
+QQtOrderedDictionary& QQtOrderedDictionary::operator = ( const QList<QQtOrderedDictionary>& list )
 {
     m_type = DictList;
     m_list = list;
     return *this;
 }
 
-QOrderedDictionary& QOrderedDictionary::operator = ( const QOrderedDictionary& other )
+QQtOrderedDictionary& QQtOrderedDictionary::operator = ( const QQtOrderedDictionary& other )
 {
     EDictType type = other.getType();
 
@@ -515,86 +552,98 @@ QOrderedDictionary& QOrderedDictionary::operator = ( const QOrderedDictionary& o
 }
 
 
-QOrderedDictionary& QOrderedDictionary::operator = ( const QVariant& value )
+QQtOrderedDictionary& QQtOrderedDictionary::operator = ( const QVariant& value )
 {
     m_type = DictValue;
     m_value = value;
     return *this;
 }
 
-QByteArray QOrderedDictionary::toJson ( int indent ) const
+QByteArray QQtOrderedDictionary::toJson ( int indent ) const
 {
     return ::toJson ( *this, indent );
 }
 
-void QOrderedDictionary::fromJson ( const QByteArray& json )
+void QQtOrderedDictionary::fromJson ( const QByteArray& json )
 {
     ::fromJson ( json, *this );
 }
 
-QByteArray QOrderedDictionary::toXML ( int indent ) const
+QByteArray QQtOrderedDictionary::toXML ( int indent ) const
 {
     return ::toXML ( *this, indent );
 }
 
-void QOrderedDictionary::fromXML ( const QByteArray& xml )
+void QQtOrderedDictionary::fromXML ( const QByteArray& xml )
 {
     ::fromXML ( xml, *this );
 }
 
 #ifdef __YAMLSUPPORT__
-QByteArray QOrderedDictionary::toYAML() const
+QByteArray QQtOrderedDictionary::toYAML() const
 {
     return ::toYAML ( *this );
 }
 
-void QOrderedDictionary::fromYAML ( const QByteArray& yaml )
+void QQtOrderedDictionary::fromYAML ( const QByteArray& yaml )
 {
     ::fromYAML ( yaml, *this );
 }
 #endif
 
 #ifdef __INICONTENTSUPPORT__
-QByteArray QOrderedDictionary::toINI() const
+QByteArray QQtOrderedDictionary::toINI() const
 {
     return ::toIni ( *this );
 }
 
-void QOrderedDictionary::fromINI ( const QByteArray& ini )
+void QQtOrderedDictionary::fromINI ( const QByteArray& ini )
 {
     ::fromIni ( ini, *this );
 }
 
-QByteArray QOrderedDictionary::toProperties() const
+QByteArray QQtOrderedDictionary::toProperties() const
 {
     return ::toProperties ( *this );
 }
 
-void QOrderedDictionary::fromProperties ( const QByteArray& properties )
+void QQtOrderedDictionary::fromProperties ( const QByteArray& properties )
 {
     ::fromProperties ( properties, *this );
 }
 #endif
 
 #ifdef __QTCSVLIB__
-QByteArray QOrderedDictionary::toCSV ( const QString& separator,
-                                       const QString& textDelimiter,
-                                       const QString& textEncoding
-                                     ) const
+QByteArray QQtOrderedDictionary::toCSV ( const QString& separator,
+                                         const QString& textDelimiter,
+                                         const QString& textEncoding
+                                       ) const
 {
     return ::toCSV ( *this, separator, textDelimiter, textEncoding );
 }
 
-void QOrderedDictionary::fromCSV ( const QByteArray& csv,
-                                   const QString& separator,
-                                   const QString& textDelimiter,
-                                   const QString& textEncoding )
+void QQtOrderedDictionary::fromCSV ( const QByteArray& csv,
+                                     const QString& separator,
+                                     const QString& textDelimiter,
+                                     const QString& textEncoding )
 {
     ::fromCSV ( csv, *this, separator, textDelimiter, textEncoding );
 }
 #endif
 
-bool QOrderedDictionary::operator == ( const QOrderedDictionary& other ) const
+#ifdef __CBOR_SUPPORT__
+QByteArray QQtOrderedDictionary::toCbor() const
+{
+    return ::toCbor ( *this );
+}
+
+void QQtOrderedDictionary::fromCbor ( const QByteArray& cbor )
+{
+    ::fromCbor ( cbor, *this );
+}
+#endif
+
+bool QQtOrderedDictionary::operator == ( const QQtOrderedDictionary& other ) const
 {
     if ( m_type == other.getType() &&
          other.getList() == m_list &&
@@ -605,41 +654,41 @@ bool QOrderedDictionary::operator == ( const QOrderedDictionary& other ) const
     return false;
 }
 
-QOrderedMap<QString, QOrderedDictionary>& QOrderedDictionary::getMap() const
+QOrderedMap<QString, QQtOrderedDictionary>& QQtOrderedDictionary::getMap() const
 {
-    return ( QOrderedMap<QString, QOrderedDictionary>& ) m_map;
+    return ( QOrderedMap<QString, QQtOrderedDictionary>& ) m_map;
 }
 
-QList<QOrderedDictionary>& QOrderedDictionary::getList() const
+QList<QQtOrderedDictionary>& QQtOrderedDictionary::getList() const
 {
-    return ( QList<QOrderedDictionary>& ) m_list;
+    return ( QList<QQtOrderedDictionary>& ) m_list;
 }
 
-QVariant& QOrderedDictionary::getValue()
+QVariant& QQtOrderedDictionary::getValue()
 {
     return ( QVariant& ) m_value;
 }
 
-const QVariant& QOrderedDictionary::getValue() const
+const QVariant& QQtOrderedDictionary::getValue() const
 {
     return ( const QVariant& ) m_value;
 }
 
-QOrderedDictionary& QOrderedDictionary::getChild ( int index )
+QQtOrderedDictionary& QQtOrderedDictionary::getChild ( int index )
 {
     return m_list[index];
 }
 
-QOrderedDictionary& QOrderedDictionary::getChild ( const QString& key )
+QQtOrderedDictionary& QQtOrderedDictionary::getChild ( const QString& key )
 {
     return m_map[key];
 }
 
 
 
-QDebug operator<< ( QDebug dbg, const QOrderedDictionary& d )
+QDebug operator<< ( QDebug dbg, const QQtOrderedDictionary& d )
 {
-    if ( d.getType() == QOrderedDictionary::DictMax )
+    if ( d.getType() == QQtOrderedDictionary::DictMax )
     {
         dbg << "{"
             << "\n"
@@ -649,7 +698,7 @@ QDebug operator<< ( QDebug dbg, const QOrderedDictionary& d )
             << "\n"
             << "}";
     }
-    else if ( d.getType() == QOrderedDictionary::DictValue )
+    else if ( d.getType() == QQtOrderedDictionary::DictValue )
     {
         dbg << "{"
             << "\n"
@@ -667,7 +716,7 @@ QDebug operator<< ( QDebug dbg, const QOrderedDictionary& d )
             << "\n"
             << "  Count:" << d.count();
 
-        if ( d.getType() == QOrderedDictionary::DictList )
+        if ( d.getType() == QQtOrderedDictionary::DictList )
         {
             dbg << "\n"
                 << "  List:" << "{";
@@ -681,7 +730,7 @@ QDebug operator<< ( QDebug dbg, const QOrderedDictionary& d )
             dbg << "\n"
                 << "  }";
         }
-        else if ( d.getType() == QOrderedDictionary::DictMap )
+        else if ( d.getType() == QQtOrderedDictionary::DictMap )
         {
             dbg << "\n"
                 << "  Map:" << "{";
@@ -705,7 +754,7 @@ QDebug operator<< ( QDebug dbg, const QOrderedDictionary& d )
 
 
 #ifdef USE_JSONCPP
-QByteArray toJson ( const QOrderedDictionary& dict, int indent )
+QByteArray toJson ( const QQtOrderedDictionary& dict, int indent )
 {
     //node -> QJsonValue -> QJsonDocument
     Json::Value root;
@@ -730,7 +779,7 @@ QByteArray toJson ( const QOrderedDictionary& dict, int indent )
     return result;
 }
 
-void fromJson ( const QByteArray& json, QOrderedDictionary& dict )
+void fromJson ( const QByteArray& json, QQtOrderedDictionary& dict )
 {
     Json::Value root;
 
@@ -757,7 +806,7 @@ void fromJson ( const QByteArray& json, QOrderedDictionary& dict )
     parseJsonValue ( root, dict );
 }
 
-void parseJsonValue ( const Json::Value& value, QOrderedDictionary& parent )
+void parseJsonValue ( const Json::Value& value, QQtOrderedDictionary& parent )
 {
     switch ( value.type() )
     {
@@ -791,7 +840,7 @@ void parseJsonValue ( const Json::Value& value, QOrderedDictionary& parent )
             const Json::Value& array = value;
             if ( array.size() <= 0 )
             {
-                parent = QOrderedDictionary ( QOrderedDictionary:: DictList );
+                parent = QQtOrderedDictionary ( QQtOrderedDictionary:: DictList );
                 break;
             }
             for ( int i = 0; i < array.size(); i++ )
@@ -807,7 +856,7 @@ void parseJsonValue ( const Json::Value& value, QOrderedDictionary& parent )
             const Json::Value& obj = value;
             if ( obj.size() <= 0 )
             {
-                parent = QOrderedDictionary ( QOrderedDictionary::DictMap );
+                parent = QQtOrderedDictionary ( QQtOrderedDictionary::DictMap );
                 break;
             }
             for ( Json::ValueConstIterator itor = obj.begin(); itor != obj.end(); itor++ )
@@ -824,11 +873,11 @@ void parseJsonValue ( const Json::Value& value, QOrderedDictionary& parent )
             break;
     }
 }
-void packDictionaryToJsonValue ( const QOrderedDictionary& node, Json::Value& result )
+void packDictionaryToJsonValue ( const QQtOrderedDictionary& node, Json::Value& result )
 {
     switch ( node.getType() )
     {
-        case QOrderedDictionary::DictValue:
+        case QQtOrderedDictionary::DictValue:
         {
             //null, bool, double, string
             p3line() << node.getValue().type();
@@ -868,13 +917,13 @@ void packDictionaryToJsonValue ( const QOrderedDictionary& node, Json::Value& re
             }
             break;
         }
-        case QOrderedDictionary::DictList:
+        case QQtOrderedDictionary::DictList:
         {
             //"name":[a, b, ...]
             Json::Value array ( Json::arrayValue );
             for ( int i = 0; i < node.getList().size(); i++ )
             {
-                QList<QOrderedDictionary>& l = node.getList();
+                QList<QQtOrderedDictionary>& l = node.getList();
                 Json::Value value;
                 packDictionaryToJsonValue ( l[i], value );
                 //array.append ( value );
@@ -884,16 +933,16 @@ void packDictionaryToJsonValue ( const QOrderedDictionary& node, Json::Value& re
             result = array;
             break;
         }
-        case QOrderedDictionary::DictMap:
+        case QQtOrderedDictionary::DictMap:
         {
             //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
             Json::Value object ( Json::objectValue );
-            for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor = node.getMap().begin();
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin();
                   itor != node.getMap().end(); itor++ )
             {
-                //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                 Json::String key = itor.key().toStdString();
-                const QOrderedDictionary& srcvalue = itor.value();
+                const QQtOrderedDictionary& srcvalue = itor.value();
                 Json::Value value;
                 packDictionaryToJsonValue ( srcvalue, value );
                 object[key] = value;
@@ -901,13 +950,13 @@ void packDictionaryToJsonValue ( const QOrderedDictionary& node, Json::Value& re
             result = object;
             break;
         }
-        case QOrderedDictionary::DictMax:
+        case QQtOrderedDictionary::DictMax:
         default:
             break;
     }
 }
 #elif defined(USE_RAPIDJSON)
-QByteArray toJson ( const QOrderedDictionary& dict, int indent )
+QByteArray toJson ( const QQtOrderedDictionary& dict, int indent )
 {
     //node -> QJsonValue -> QJsonDocument
     rapidjson::Document root;
@@ -932,7 +981,7 @@ QByteArray toJson ( const QOrderedDictionary& dict, int indent )
     return result;
 }
 
-void fromJson ( const QByteArray& json, QOrderedDictionary& dict )
+void fromJson ( const QByteArray& json, QQtOrderedDictionary& dict )
 {
     rapidjson::Document doc;
     doc.Parse ( json.constData(), json.size() );
@@ -952,7 +1001,7 @@ void fromJson ( const QByteArray& json, QOrderedDictionary& dict )
     parseJsonValue ( doc, dict, doc );
 }
 
-void parseJsonValue ( const rapidjson::Value& value, QOrderedDictionary& parent, rapidjson::Document& doc  )
+void parseJsonValue ( const rapidjson::Value& value, QQtOrderedDictionary& parent, rapidjson::Document& doc  )
 {
     switch ( value.GetType() )
     {
@@ -1007,7 +1056,7 @@ void parseJsonValue ( const rapidjson::Value& value, QOrderedDictionary& parent,
             const rapidjson::Value& array = value;
             if ( array.Size() <= 0 )
             {
-                parent = QOrderedDictionary ( QOrderedDictionary:: DictList );
+                parent = QQtOrderedDictionary ( QQtOrderedDictionary:: DictList );
                 break;
             }
             for ( int i = 0; i < array.Size(); i++ )
@@ -1023,7 +1072,7 @@ void parseJsonValue ( const rapidjson::Value& value, QOrderedDictionary& parent,
             const rapidjson::Value& obj = value;
             if ( obj.MemberCount() <= 0 )
             {
-                parent = QOrderedDictionary ( QOrderedDictionary::DictMap );
+                parent = QQtOrderedDictionary ( QQtOrderedDictionary::DictMap );
                 break;
             }
             for ( rapidjson::Value::ConstMemberIterator itor = obj.MemberBegin(); itor != obj.MemberEnd(); itor++ )
@@ -1043,11 +1092,11 @@ void parseJsonValue ( const rapidjson::Value& value, QOrderedDictionary& parent,
             break;
     }
 }
-void packDictionaryToJsonValue ( const QOrderedDictionary& node, rapidjson::Value& result, rapidjson::Document& doc )
+void packDictionaryToJsonValue ( const QQtOrderedDictionary& node, rapidjson::Value& result, rapidjson::Document& doc )
 {
     switch ( node.getType() )
     {
-        case QOrderedDictionary::DictValue:
+        case QQtOrderedDictionary::DictValue:
         {
             //null, bool, double, string
             p3line() << node.getValue().type();
@@ -1090,13 +1139,13 @@ void packDictionaryToJsonValue ( const QOrderedDictionary& node, rapidjson::Valu
             }
             break;
         }
-        case QOrderedDictionary::DictList:
+        case QQtOrderedDictionary::DictList:
         {
             //"name":[a, b, ...]
             rapidjson::Value array ( rapidjson::kArrayType );
             for ( int i = 0; i < node.getList().size(); i++ )
             {
-                QList<QOrderedDictionary>& l = node.getList();
+                QList<QQtOrderedDictionary>& l = node.getList();
                 rapidjson::Value value;
                 packDictionaryToJsonValue ( l[i], value, doc );
                 //array.append ( value );
@@ -1106,19 +1155,19 @@ void packDictionaryToJsonValue ( const QOrderedDictionary& node, rapidjson::Valu
             result = array;
             break;
         }
-        case QOrderedDictionary::DictMap:
+        case QQtOrderedDictionary::DictMap:
         {
             //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
             rapidjson::Value object ( rapidjson::kObjectType );
-            for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor = node.getMap().begin();
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin();
                   itor != node.getMap().end(); itor++ )
             {
-                //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                 std::string str = itor.key().toStdString();
                 rapidjson::Value key ( rapidjson::kStringType );
                 key.SetString ( str.c_str(), str.size(), doc.GetAllocator() );
 
-                const QOrderedDictionary& srcvalue = itor.value();
+                const QQtOrderedDictionary& srcvalue = itor.value();
                 rapidjson::Value value;
                 packDictionaryToJsonValue ( srcvalue, value, doc );
                 //object[key] = value;
@@ -1127,13 +1176,13 @@ void packDictionaryToJsonValue ( const QOrderedDictionary& node, rapidjson::Valu
             result = object;
             break;
         }
-        case QOrderedDictionary::DictMax:
+        case QQtOrderedDictionary::DictMax:
         default:
             break;
     }
 }
 #else
-QByteArray toJson ( const QOrderedDictionary& dict, int indent )
+QByteArray toJson ( const QQtOrderedDictionary& dict, int indent )
 {
     //node -> QJsonValue -> QJsonDocument
     QJsonValue value;
@@ -1146,7 +1195,7 @@ QByteArray toJson ( const QOrderedDictionary& dict, int indent )
     return result;
 }
 
-void fromJson ( const QByteArray& json, QOrderedDictionary& dict )
+void fromJson ( const QByteArray& json, QQtOrderedDictionary& dict )
 {
     QJsonParseError error;
     QJsonDocument doc = QJsonDocument::fromJson ( json, &error );
@@ -1167,7 +1216,7 @@ void fromJson ( const QByteArray& json, QOrderedDictionary& dict )
     parseJsonValue ( root, dict );
 }
 
-void parseJsonValue ( const QJsonValue& value, QOrderedDictionary& parent )
+void parseJsonValue ( const QJsonValue& value, QQtOrderedDictionary& parent )
 {
     switch ( value.type() )
     {
@@ -1192,7 +1241,7 @@ void parseJsonValue ( const QJsonValue& value, QOrderedDictionary& parent )
             QJsonArray array = value.toArray();
             if ( array.size() <= 0 )
             {
-                parent = QOrderedDictionary ( QOrderedDictionary::DictList );
+                parent = QQtOrderedDictionary ( QQtOrderedDictionary::DictList );
                 break;
             }
             for ( int i = 0; i < array.size(); i++ )
@@ -1208,7 +1257,7 @@ void parseJsonValue ( const QJsonValue& value, QOrderedDictionary& parent )
             QJsonObject obj = value.toObject();
             if ( obj.size() <= 0 )
             {
-                parent = QOrderedDictionary ( QOrderedDictionary::DictMap );
+                parent = QQtOrderedDictionary ( QQtOrderedDictionary::DictMap );
                 break;
             }
             QJsonObject::Iterator itor ( &obj, 0 );
@@ -1225,11 +1274,11 @@ void parseJsonValue ( const QJsonValue& value, QOrderedDictionary& parent )
             break;
     }
 }
-void packDictionaryToJsonValue ( const QOrderedDictionary& node, QJsonValue& result )
+void packDictionaryToJsonValue ( const QQtOrderedDictionary& node, QJsonValue& result )
 {
     switch ( node.getType() )
     {
-        case QOrderedDictionary::DictValue:
+        case QQtOrderedDictionary::DictValue:
         {
             //null, bool, double, string
             p3line() << node.getValue().type();
@@ -1255,13 +1304,13 @@ void packDictionaryToJsonValue ( const QOrderedDictionary& node, QJsonValue& res
             }
             break;
         }
-        case QOrderedDictionary::DictList:
+        case QQtOrderedDictionary::DictList:
         {
             //"name":[a, b, ...]
             QJsonArray array;
             for ( int i = 0; i < node.getList().size(); i++ )
             {
-                QList<QOrderedDictionary>& l = node.getList();
+                QList<QQtOrderedDictionary>& l = node.getList();
                 QJsonValue value;
                 packDictionaryToJsonValue ( l[i], value );
                 //array.append ( value );
@@ -1270,16 +1319,16 @@ void packDictionaryToJsonValue ( const QOrderedDictionary& node, QJsonValue& res
             result = array;
             break;
         }
-        case QOrderedDictionary::DictMap:
+        case QQtOrderedDictionary::DictMap:
         {
             //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
             QJsonObject object;
-            for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor = node.getMap().begin();
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin();
                   itor != node.getMap().end(); itor++ )
             {
-                //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                 const QString& key = itor.key();
-                const QOrderedDictionary& srcvalue = itor.value();
+                const QQtOrderedDictionary& srcvalue = itor.value();
                 QJsonValue value;
                 packDictionaryToJsonValue ( srcvalue, value );
                 object.insert ( key, value );
@@ -1287,21 +1336,21 @@ void packDictionaryToJsonValue ( const QOrderedDictionary& node, QJsonValue& res
             result = object;
             break;
         }
-        case QOrderedDictionary::DictMax:
+        case QQtOrderedDictionary::DictMax:
         default:
             break;
     }
 }
 #endif
 
-QByteArray toXML ( const QOrderedDictionary& dict, int intent )
+QByteArray toXML ( const QQtOrderedDictionary& dict, int intent )
 {
     QDomDocument doc;
     packDictionaryToDomNode ( dict, doc, doc );
     return doc.toByteArray ( intent );
 }
 
-void fromXML ( const QByteArray& xml, QOrderedDictionary& dict )
+void fromXML ( const QByteArray& xml, QQtOrderedDictionary& dict )
 {
     QString errorStr;
     int errorLine;
@@ -1334,7 +1383,7 @@ void fromXML ( const QByteArray& xml, QOrderedDictionary& dict )
     parseDomNode ( doc, dict );
 }
 
-void parseDomNode ( const QDomNode& value, QOrderedDictionary& parent )
+void parseDomNode ( const QDomNode& value, QQtOrderedDictionary& parent )
 {
     p3line() << value.nodeName() << value.nodeType() << value.nodeValue();
 
@@ -1399,7 +1448,7 @@ void parseDomNode ( const QDomNode& value, QOrderedDictionary& parent )
             //check count
             //dict[item]["count"]
             //dict[item]["pos"]
-            QOrderedDictionary node_count;
+            QQtOrderedDictionary node_count;
             for ( int i = 0; i < childs.size(); i++ )
             {
                 QDomNode node3 = childs.item ( i );
@@ -1509,11 +1558,11 @@ void parseDomNode ( const QDomNode& value, QOrderedDictionary& parent )
     }
 }
 
-void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result, QDomDocument& doc )
+void packDictionaryToDomNode ( const QQtOrderedDictionary& node, QDomNode& result, QDomDocument& doc )
 {
     switch ( node.getType() )
     {
-        case QOrderedDictionary::DictValue:
+        case QQtOrderedDictionary::DictValue:
         {
             //null, bool, double, string
             p3line() << node.getValue().type();
@@ -1522,14 +1571,14 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
             object.appendChild ( text );
             break;
         }
-        case QOrderedDictionary::DictList:
+        case QQtOrderedDictionary::DictList:
         {
             //<book a="1"> ... </book>
             //<book a="2"> ... </book>
             QDomNode& object = result;
             for ( int i = 0; i < node.getList().size(); i++ )
             {
-                QList<QOrderedDictionary>& l = node.getList();
+                QList<QQtOrderedDictionary>& l = node.getList();
                 QString nodeName = object.nodeName();//error，这个位置好像来不了。
                 QDomElement value = doc.createElement ( nodeName );
                 packDictionaryToDomNode ( l[i], value, doc );
@@ -1537,7 +1586,7 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
             }
             break;
         }
-        case QOrderedDictionary::DictMap:
+        case QQtOrderedDictionary::DictMap:
         {
             //<person a="1">
             //  <sub-person b="10"> </sub-person>
@@ -1545,22 +1594,22 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
             //</person>
             QDomNode& object = result;
 
-            for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end();
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end();
                   itor++ )
             {
-                //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                 const QString& key = itor.key();
-                const QOrderedDictionary& srcvalue = itor.value();
+                const QQtOrderedDictionary& srcvalue = itor.value();
 
                 //1! "__processinginstruction__" <?xml version='1.0' encoding='UTF-8'?>
                 if ( key == "__processinginstruction__" )
                 {
                     //"xml"
-                    for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                    for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
                           itor2 != srcvalue.getMap().end(); itor2++ )
                     {
                         const QString& key2 = itor2.key();
-                        const QOrderedDictionary& srcvalue2 = itor2.value();
+                        const QQtOrderedDictionary& srcvalue2 = itor2.value();
                         QDomProcessingInstruction node0 = doc.createProcessingInstruction ( key2, srcvalue2.getValue().toString() );
                         object.appendChild ( node0 );
                     }
@@ -1568,12 +1617,12 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
                 }
             }
 
-            for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor = node.getMap().begin();
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin();
                   itor != node.getMap().end(); itor++ )
             {
-                //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                 const QString& key = itor.key();
-                const QOrderedDictionary& srcvalue = itor.value();
+                const QQtOrderedDictionary& srcvalue = itor.value();
 
                 if ( key == "__processinginstruction__" )
                     continue;
@@ -1582,11 +1631,11 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
                 if ( key == "__attributes__" )
                 {
                     //"attributes" key = value
-                    for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                    for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
                           itor2 != srcvalue.getMap().end(); itor2++ )
                     {
                         const QString& key2 = itor2.key();
-                        const QOrderedDictionary& srcvalue2 = itor2.value();
+                        const QQtOrderedDictionary& srcvalue2 = itor2.value();
                         QDomElement e0 = object.toElement();
                         e0.setAttribute ( key2, srcvalue2.getValue().toString() );
                     }
@@ -1608,7 +1657,7 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
                 if ( key == "#comment" )
                 {
                     //only one
-                    if ( srcvalue.getType() == QOrderedDictionary::DictValue )
+                    if ( srcvalue.getType() == QQtOrderedDictionary::DictValue )
                     {
                         const QString& value2 = srcvalue.getValue().toString();
                         QDomComment text = doc.createComment ( value2 );
@@ -1619,7 +1668,7 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
                     //multiple
                     for ( int i = 0; i < srcvalue.getList().size(); i++ )
                     {
-                        QList<QOrderedDictionary>& l = srcvalue.getList();
+                        QList<QQtOrderedDictionary>& l = srcvalue.getList();
                         QDomComment text = doc.createComment ( l[i].getValue().toString() );
                         object.appendChild ( text );
                     }
@@ -1631,13 +1680,13 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
                     continue;
 
                 //5! dict["person"][0-] <person>a</person> <person>b</person>
-                if ( srcvalue.getType() == QOrderedDictionary::DictList )
+                if ( srcvalue.getType() == QQtOrderedDictionary::DictList )
                 {
 #if 1
                     //list一定在map里面发生。
                     for ( int i = 0; i < srcvalue.getList().size(); i++ )
                     {
-                        QList<QOrderedDictionary>& l = srcvalue.getList();
+                        QList<QQtOrderedDictionary>& l = srcvalue.getList();
 #if 1 //#comment
                         if ( l[i].getMap().contains ( "#comment" ) )
                         {
@@ -1670,14 +1719,14 @@ void packDictionaryToDomNode ( const QOrderedDictionary& node, QDomNode& result,
             }
             break;
         }
-        case QOrderedDictionary::DictMax:
+        case QQtOrderedDictionary::DictMax:
         default:
             break;
     }
 }
 
 #ifdef __QTCSVLIB__
-QByteArray toCSV ( const QOrderedDictionary& dict,
+QByteArray toCSV ( const QQtOrderedDictionary& dict,
                    const QString& separator,
                    const QString& textDelimiter,
                    const QString& textEncoding
@@ -1687,11 +1736,11 @@ QByteArray toCSV ( const QOrderedDictionary& dict,
 
     for ( int i = 0; i < dict.getList().size(); i++ )
     {
-        const QOrderedDictionary& v0 = dict.getList() [i];
+        const QQtOrderedDictionary& v0 = dict.getList() [i];
         QStringList strlist1;
         for ( int j = 0; j < v0.getList().size(); j++ )
         {
-            const QOrderedDictionary& v1 = v0.getList() [j];
+            const QQtOrderedDictionary& v1 = v0.getList() [j];
             strlist1.push_back ( v1.getValue().toString() );
         }
         strlist0.addRow ( strlist1 );
@@ -1714,7 +1763,7 @@ QByteArray toCSV ( const QOrderedDictionary& dict,
     return bytes;
 }
 
-void fromCSV ( const QByteArray& csv, QOrderedDictionary& dict,
+void fromCSV ( const QByteArray& csv, QQtOrderedDictionary& dict,
                const QString& separator,
                const QString& textDelimiter,
                const QString& textEncoding
@@ -1742,25 +1791,25 @@ void fromCSV ( const QByteArray& csv, QOrderedDictionary& dict,
 #endif
 
 #ifdef __INICONTENTSUPPORT__
-QByteArray toIni ( const QOrderedDictionary& dict )
+QByteArray toIni ( const QQtOrderedDictionary& dict )
 {
-    const QOrderedDictionary& node = dict;
+    const QQtOrderedDictionary& node = dict;
 
     inifile::IniFile p0;
     switch ( dict.getType() )
     {
-        case QOrderedDictionary::DictValue:
+        case QQtOrderedDictionary::DictValue:
         {
             break;
         }
-        case QOrderedDictionary::DictList:
+        case QQtOrderedDictionary::DictList:
         {
             //"name":[a, b, ...]
             for ( int i = 0; i < node.getList().size(); i++ )
             {
 #if 0
-                QList<QOrderedDictionary>& l = node.getList();
-                if ( l[i].getType() == QOrderedDictionary::DictValue )
+                QList<QQtOrderedDictionary>& l = node.getList();
+                if ( l[i].getType() == QQtOrderedDictionary::DictValue )
                 {
                     QString qkey = QString::number ( i );
                     string key = qkey.toStdString();
@@ -1775,8 +1824,8 @@ QByteArray toIni ( const QOrderedDictionary& dict )
                 const QString& sec = QString::number ( i );
                 string stdsec = sec.toStdString();
 
-                QList<QOrderedDictionary>& l = node.getList();
-                const QOrderedDictionary& srcvalue = l[i];
+                QList<QQtOrderedDictionary>& l = node.getList();
+                const QQtOrderedDictionary& srcvalue = l[i];
 
                 p0.AddSection ( stdsec );
 
@@ -1785,12 +1834,12 @@ QByteArray toIni ( const QOrderedDictionary& dict )
                 p0.SetComment ( stdsec, "", comment );
                 p0.SetRightComment ( stdsec, "", right_comment );
 
-                if ( srcvalue.getType() == QOrderedDictionary::DictList )
+                if ( srcvalue.getType() == QQtOrderedDictionary::DictList )
                 {
                     for ( int i = 0; i < srcvalue.getList().size(); i++ )
                     {
-                        QList<QOrderedDictionary>& l = srcvalue.getList();
-                        if ( l[i].getType() == QOrderedDictionary::DictValue )
+                        QList<QQtOrderedDictionary>& l = srcvalue.getList();
+                        if ( l[i].getType() == QQtOrderedDictionary::DictValue )
                         {
                             QString qkey = QString::number ( i );
                             string key = qkey.toStdString();
@@ -1804,16 +1853,16 @@ QByteArray toIni ( const QOrderedDictionary& dict )
                     }
                 }
 
-                if ( srcvalue.getType() == QOrderedDictionary::DictMap )
+                if ( srcvalue.getType() == QQtOrderedDictionary::DictMap )
                 {
-                    for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                    for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
                           itor2 != srcvalue.getMap().end(); itor2++ )
                     {
-                        //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                        //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                         const QString& qkey2 = itor2.key();
                         string stdkey2 = qkey2.toStdString();
-                        const QOrderedDictionary& srcvalue2 = itor2.value();
-                        if ( srcvalue2.getType() == QOrderedDictionary::DictValue )
+                        const QQtOrderedDictionary& srcvalue2 = itor2.value();
+                        if ( srcvalue2.getType() == QQtOrderedDictionary::DictValue )
                         {
                             string value = srcvalue2.getValue().toString().toStdString();
                             string comment = node["__comments__"][sec][qkey2]["#comment"].getValue().toString().toStdString();
@@ -1829,16 +1878,16 @@ QByteArray toIni ( const QOrderedDictionary& dict )
             }
             break;
         }
-        case QOrderedDictionary::DictMap:
+        case QQtOrderedDictionary::DictMap:
         {
             //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
-            for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor = node.getMap().begin();
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin();
                   itor != node.getMap().end(); itor++ )
             {
-                //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                 const QString& sec = itor.key();
                 string stdsec = sec.toStdString();
-                const QOrderedDictionary& srcvalue = itor.value();
+                const QQtOrderedDictionary& srcvalue = itor.value();
 
                 if ( sec == "__comments__" )
                     continue;
@@ -1855,12 +1904,12 @@ QByteArray toIni ( const QOrderedDictionary& dict )
                 ret = p0.SetRightComment ( stdsec, "", right_comment );
                 //qDebug() << ret;
 
-                if ( srcvalue.getType() == QOrderedDictionary::DictList )
+                if ( srcvalue.getType() == QQtOrderedDictionary::DictList )
                 {
                     for ( int i = 0; i < srcvalue.getList().size(); i++ )
                     {
-                        QList<QOrderedDictionary>& l = srcvalue.getList();
-                        if ( l[i].getType() == QOrderedDictionary::DictValue )
+                        QList<QQtOrderedDictionary>& l = srcvalue.getList();
+                        if ( l[i].getType() == QQtOrderedDictionary::DictValue )
                         {
                             QString qkey = QString::number ( i );
                             string key = qkey.toStdString();
@@ -1874,16 +1923,16 @@ QByteArray toIni ( const QOrderedDictionary& dict )
                     }
                 }
 
-                if ( srcvalue.getType() == QOrderedDictionary::DictMap )
+                if ( srcvalue.getType() == QQtOrderedDictionary::DictMap )
                 {
-                    for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                    for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
                           itor2 != srcvalue.getMap().end(); itor2++ )
                     {
-                        //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                        //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                         const QString& qkey2 = itor2.key();
                         string stdkey2 = qkey2.toStdString();
-                        const QOrderedDictionary& srcvalue2 = itor2.value();
-                        if ( srcvalue2.getType() == QOrderedDictionary::DictValue )
+                        const QQtOrderedDictionary& srcvalue2 = itor2.value();
+                        if ( srcvalue2.getType() == QQtOrderedDictionary::DictValue )
                         {
                             string value = srcvalue2.getValue().toString().toStdString();
                             string comment = node["__comments__"][sec][qkey2]["#comment"].getValue().toString().toStdString();
@@ -1897,7 +1946,7 @@ QByteArray toIni ( const QOrderedDictionary& dict )
             }
             break;
         }
-        case QOrderedDictionary::DictMax:
+        case QQtOrderedDictionary::DictMax:
         default:
             break;
     }
@@ -1915,7 +1964,7 @@ QByteArray toIni ( const QOrderedDictionary& dict )
     return bytes;
 }
 
-void fromIni ( const QByteArray& bytes, QOrderedDictionary& dict )
+void fromIni ( const QByteArray& bytes, QQtOrderedDictionary& dict )
 {
     inifile::IniFile p0;
     int ret;
@@ -1963,25 +2012,25 @@ void fromIni ( const QByteArray& bytes, QOrderedDictionary& dict )
     //qDebug() << qPrintable ( dict.toJson ( QJsonDocument::Indented ) );
 }
 
-QByteArray toProperties ( const QOrderedDictionary& dict )
+QByteArray toProperties ( const QQtOrderedDictionary& dict )
 {
-    const QOrderedDictionary& node = dict;
+    const QQtOrderedDictionary& node = dict;
 
     inifile::IniFile p0;
     switch ( dict.getType() )
     {
-        case QOrderedDictionary::DictValue:
+        case QQtOrderedDictionary::DictValue:
         {
             break;
         }
-        case QOrderedDictionary::DictList:
+        case QQtOrderedDictionary::DictList:
         {
             //"name":[a, b, ...]
             for ( int i = 0; i < node.getList().size(); i++ )
             {
 #if 0
-                QList<QOrderedDictionary>& l = node.getList();
-                if ( l[i].getType() == QOrderedDictionary::DictValue )
+                QList<QQtOrderedDictionary>& l = node.getList();
+                if ( l[i].getType() == QQtOrderedDictionary::DictValue )
                 {
                     QString qkey = QString::number ( i );
                     string key = qkey.toStdString();
@@ -1996,8 +2045,8 @@ QByteArray toProperties ( const QOrderedDictionary& dict )
                 const QString& sec = QString::number ( i );
                 string stdsec = sec.toStdString();
 
-                QList<QOrderedDictionary>& l = node.getList();
-                const QOrderedDictionary& srcvalue = l[i];
+                QList<QQtOrderedDictionary>& l = node.getList();
+                const QQtOrderedDictionary& srcvalue = l[i];
 
                 p0.AddSection ( stdsec );
 
@@ -2006,12 +2055,12 @@ QByteArray toProperties ( const QOrderedDictionary& dict )
                 p0.SetComment ( stdsec, "", comment );
                 p0.SetRightComment ( stdsec, "", right_comment );
 
-                if ( srcvalue.getType() == QOrderedDictionary::DictList )
+                if ( srcvalue.getType() == QQtOrderedDictionary::DictList )
                 {
                     for ( int i = 0; i < srcvalue.getList().size(); i++ )
                     {
-                        QList<QOrderedDictionary>& l = srcvalue.getList();
-                        if ( l[i].getType() == QOrderedDictionary::DictValue )
+                        QList<QQtOrderedDictionary>& l = srcvalue.getList();
+                        if ( l[i].getType() == QQtOrderedDictionary::DictValue )
                         {
                             QString qkey = QString::number ( i );
                             string key = qkey.toStdString();
@@ -2025,16 +2074,16 @@ QByteArray toProperties ( const QOrderedDictionary& dict )
                     }
                 }
 
-                if ( srcvalue.getType() == QOrderedDictionary::DictMap )
+                if ( srcvalue.getType() == QQtOrderedDictionary::DictMap )
                 {
-                    for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
+                    for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor2 = srcvalue.getMap().begin();
                           itor2 != srcvalue.getMap().end(); itor2++ )
                     {
-                        //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                        //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                         const QString& qkey2 = itor2.key();
                         string stdkey2 = qkey2.toStdString();
-                        const QOrderedDictionary& srcvalue2 = itor2.value();
-                        if ( srcvalue2.getType() == QOrderedDictionary::DictValue )
+                        const QQtOrderedDictionary& srcvalue2 = itor2.value();
+                        if ( srcvalue2.getType() == QQtOrderedDictionary::DictValue )
                         {
                             string value = srcvalue2.getValue().toString().toStdString();
                             string comment = node["__comments__"][sec][qkey2]["#comment"].getValue().toString().toStdString();
@@ -2048,13 +2097,13 @@ QByteArray toProperties ( const QOrderedDictionary& dict )
 #else
                 const QString& key = QString::number ( i );
                 string stdkey = key.toStdString();
-                QList<QOrderedDictionary>& l = node.getList();
-                const QOrderedDictionary& srcvalue = l[i];
+                QList<QQtOrderedDictionary>& l = node.getList();
+                const QQtOrderedDictionary& srcvalue = l[i];
 
                 if ( key == "__comments__" )
                     continue;
 
-                if ( srcvalue.getType() != QOrderedDictionary::DictValue )
+                if ( srcvalue.getType() != QQtOrderedDictionary::DictValue )
                     continue;
 
                 p0.AddSection ( "" );
@@ -2069,21 +2118,21 @@ QByteArray toProperties ( const QOrderedDictionary& dict )
             }
             break;
         }
-        case QOrderedDictionary::DictMap:
+        case QQtOrderedDictionary::DictMap:
         {
             //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
-            for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor = node.getMap().begin();
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin();
                   itor != node.getMap().end(); itor++ )
             {
-                //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                 const QString& key = itor.key();
                 string stdkey = key.toStdString();
-                const QOrderedDictionary& srcvalue = itor.value();
+                const QQtOrderedDictionary& srcvalue = itor.value();
 
                 if ( key == "__comments__" )
                     continue;
 
-                if ( srcvalue.getType() != QOrderedDictionary::DictValue )
+                if ( srcvalue.getType() != QQtOrderedDictionary::DictValue )
                     continue;
 
                 p0.AddSection ( "" );
@@ -2097,7 +2146,7 @@ QByteArray toProperties ( const QOrderedDictionary& dict )
             }
             break;
         }
-        case QOrderedDictionary::DictMax:
+        case QQtOrderedDictionary::DictMax:
         default:
             break;
     }
@@ -2115,7 +2164,7 @@ QByteArray toProperties ( const QOrderedDictionary& dict )
     return bytes;
 }
 
-void fromProperties ( const QByteArray& bytes, QOrderedDictionary& dict )
+void fromProperties ( const QByteArray& bytes, QQtOrderedDictionary& dict )
 {
     inifile::IniFile p0;
     int ret;
@@ -2158,7 +2207,7 @@ void fromProperties ( const QByteArray& bytes, QOrderedDictionary& dict )
 #endif
 
 #ifdef __YAMLSUPPORT__
-QByteArray toYAML ( const QOrderedDictionary& dict )
+QByteArray toYAML ( const QQtOrderedDictionary& dict )
 {
 
     YAML::Node node;
@@ -2179,7 +2228,7 @@ QByteArray toYAML ( const QOrderedDictionary& dict )
     return bytes;
 }
 
-void fromYAML ( const QByteArray& yaml, QOrderedDictionary& dict )
+void fromYAML ( const QByteArray& yaml, QQtOrderedDictionary& dict )
 {
 
     //这个东西非常容易崩溃。
@@ -2213,7 +2262,7 @@ void fromYAML ( const QByteArray& yaml, QOrderedDictionary& dict )
 
 
 
-void parseYamlNodeToDictionary ( const YAML::Node& node, QOrderedDictionary& object )
+void parseYamlNodeToDictionary ( const YAML::Node& node, QQtOrderedDictionary& object )
 {
     if ( node.IsNull() )
     {
@@ -2247,49 +2296,271 @@ void parseYamlNodeToDictionary ( const YAML::Node& node, QOrderedDictionary& obj
     }
 }
 
-void packDictionaryToYamlNode ( const QOrderedDictionary& node, YAML::Node& object )
+void packDictionaryToYamlNode ( const QQtOrderedDictionary& node, YAML::Node& object )
 {
     switch ( node.getType() )
     {
-        case QOrderedDictionary:: DictValue:
+        case QQtOrderedDictionary:: DictValue:
         {
             //null, bool, double, string
             std::string value = node.getValue().toString().toStdString();
             object = value;
             break;
         }
-        case  QOrderedDictionary:: DictList:
+        case  QQtOrderedDictionary:: DictList:
         {
             //"name":[a, b, ...]
             for ( int i = 0; i < node.getList().size(); i++ )
             {
-                QList<QOrderedDictionary>& l = node.getList();
+                QList<QQtOrderedDictionary>& l = node.getList();
                 YAML::Node value;
                 packDictionaryToYamlNode ( l[i], value );
                 object.push_back ( value );
             }
             break;
         }
-        case QOrderedDictionary::  DictMap:
+        case QQtOrderedDictionary::  DictMap:
         {
             //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
-            for ( QOrderedMap<QString, QOrderedDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end();
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end();
                   itor++ )
             {
-                //QOrderedMap<QString, QOrderedDictionary>& m = node.getMap();
+                //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
                 const QString& qkey = itor.key();
                 std::string key = qkey.toStdString();
-                const QOrderedDictionary& srcvalue = itor.value();
+                const QQtOrderedDictionary& srcvalue = itor.value();
                 YAML::Node value;
                 packDictionaryToYamlNode ( srcvalue, value );
                 object[key] = value;
             }
             break;
         }
-        case  QOrderedDictionary:: DictMax:
+        case  QQtOrderedDictionary:: DictMax:
         default:
             break;
     }
 
 }
+#endif
+
+void parseDictionary ( QQtOrderedDictionary& node, const QQtDictionary& obj )
+{
+    switch ( obj.getType() )
+    {
+        case QQtDictionary::DictValue:
+        {
+            node = obj.getValue();
+        }
+        break;
+        case QQtDictionary::DictList:
+        {
+            for ( int i = 0; i < obj.getList().size(); i++ )
+            {
+                const QQtDictionary& value = obj.getList() [i];
+                parseDictionary ( node[i], value );
+            }
+        }
+        break;
+        case QQtDictionary::DictMap:
+        {
+            QQtDictionaryMapIterator itor ( obj.getMap() );
+            while ( itor.hasNext() )
+            {
+                itor.next();
+                const QString& key = itor.key();
+                const QQtDictionary& value = itor.value();
+                parseDictionary ( node[key], value );
+            }
+        }
+        break;
+        case QQtDictionary::DictMax:
+        default:
+            break;
+    }
+}
+
+#ifdef __CBOR_SUPPORT__
+QByteArray toCbor ( const QQtOrderedDictionary& dict )
+{
+    QCborValue root;
+    packDictionaryToCborNode ( dict, root );
+
+    return root.toCbor();
+}
+
+void fromCbor ( const QByteArray& cbor, QQtOrderedDictionary& dict )
+{
+    QCborValue root;
+    QCborParserError error;
+    root.fromCbor ( cbor, &error );
+    if ( error.error != QCborError::NoError )
+    {
+        pline() << ( int ) ( error.error ) << error.errorString() << error.offset;
+        return;
+    }
+
+    parseCborNodeToDictionary ( root, dict );
+}
+
+void parseCborNodeToDictionary ( const QCborValue& node, QQtOrderedDictionary& object )
+{
+    switch ( node.type() )
+    {
+        case QCborValue::Integer:
+        {
+            object = node.toInteger();
+        }
+        break;
+        case QCborValue::SimpleType:
+        case QCborValue::False:
+        case QCborValue::True:
+        case QCborValue::Undefined:
+        {
+            if ( node.type() == QCborValue::False || node.type() == QCborValue::True )
+            {
+                object = node.toBool();
+                break;
+            }
+            object = node.toInteger();
+        }
+        break;
+        case QCborValue::Double:
+            object = node.toDouble();
+            break;
+        case QCborValue::ByteArray:
+            object = node.toByteArray();
+            break;
+        case QCborValue::String:
+            object = node.toString();
+            break;
+        case QCborValue::DateTime:
+            object = node.toDateTime();
+            break;
+        case QCborValue::Url:
+            object = node.toUrl();
+            break;
+        case QCborValue::RegularExpression:
+            object = node.toRegularExpression();
+            break;
+        case QCborValue::Uuid:
+            object = node.toUuid();
+            break;
+        case QCborValue::Array:
+        {
+            QCborArray array = node.toArray();
+            if ( array.size() <= 0 )
+            {
+                object = QQtOrderedDictionary ( QQtOrderedDictionary::DictList );
+                break;
+            }
+            for ( int i = 0; i < array.size(); i++ )
+            {
+                parseCborNodeToDictionary ( array[i], object[i] );
+            }
+        }
+        break;
+        case QCborValue::Map:
+        {
+            QCborMap map = node.toMap();
+            if ( map.size() <= 0 )
+            {
+                object = QQtOrderedDictionary ( QQtOrderedDictionary::DictMap );
+                break;
+            }
+            for ( QCborMap::Iterator itor = map.begin();
+                  itor != map.end(); itor++ )
+            {
+                const QCborValue& qkey = itor.key();
+                QCborValueRef qvalue = itor.value();
+                //强制转换为String，如果不是String，如此强制转换可能出现特别的数据。
+                QString key = qkey.toString();
+                parseCborNodeToDictionary ( qvalue, object[key] );
+            }
+        }
+        break;
+        case QCborValue::Tag:
+        {
+            //此处没有判定tag，而是全部转换为String。
+            node.tag();
+            pline() << ( quint64 ) node.tag();
+            //其实可以按照tag类型划分成已知的Value类型，但是我看基本上全都是String，所以此处全都转换成String。
+            QString value = node.taggedValue().toString();
+            object = value;
+        }
+        break;
+        case QCborValue::Invalid:
+            pline() << "invalid Cbor.";
+        default:
+            break;
+    }
+}
+
+void packDictionaryToCborNode ( const QQtOrderedDictionary& node, QCborValue& result )
+{
+    switch ( node.getType() )
+    {
+        case QQtOrderedDictionary::DictValue:
+        {
+            //null, bool, double, string
+            p3line() << node.getValue().type();
+            if ( node.getValue() == QVariant ( QJsonValue() ) )
+            {
+                result = QCborValue();
+            }
+            else if ( node.getValue().type() == QVariant::Bool )
+            {
+                result = QCborValue ( node.getValue().toBool() );
+            }
+            else if ( node.getValue().type() == QVariant::Double )
+            {
+                result = QCborValue ( node.getValue().toDouble() );
+            }
+            else if ( node.getValue().type() == QVariant::String )
+            {
+                result = QCborValue ( node.getValue().toString() );
+            }
+            else
+            {
+                result = QCborValue::fromVariant ( node.getValue() );
+            }
+            break;
+        }
+        case QQtOrderedDictionary::DictList:
+        {
+            //"name":[a, b, ...]
+            QCborArray array;
+            for ( int i = 0; i < node.getList().size(); i++ )
+            {
+                QList<QQtOrderedDictionary>& l = node.getList();
+                QCborValue value;
+                packDictionaryToCborNode ( l[i], value );
+                //array.append ( value );
+                array.push_back ( value );
+            }
+            result = array;
+            break;
+        }
+        case QQtOrderedDictionary::DictMap:
+        {
+            //"name": {"a":"b", "a2":"b2", "a3":["b31", "b32"], "a4":{"a41":"b41", "a42":"b42"}, ...}
+            QCborMap object;
+            for ( QOrderedMap<QString, QQtOrderedDictionary>::Iterator itor = node.getMap().begin(); itor != node.getMap().end();
+                  itor++ )
+            {
+                //QOrderedMap<QString, QQtOrderedDictionary>& m = node.getMap();
+                const QString& key = itor.key();
+                const QQtOrderedDictionary& srcvalue = itor.value();
+                QCborValue value;
+                packDictionaryToCborNode ( srcvalue, value );
+                object.insert ( key, value );
+            }
+            result = object;
+            break;
+        }
+        case QQtOrderedDictionary::DictMax:
+        default:
+            break;
+    }
+}
+
 #endif

@@ -62,8 +62,11 @@ public:
     void setPixmap ( const QString& pic );
     void setPixmap ( const QPixmap& pixmap );
 
-    QImage image();
+    QImage& image() { return mImage; }
+    const QImage& image() const { return mImage; }
     void setImage ( const QImage& image );
+    void setImage ( const QString& image );
+    void setImage ( const QPixmap& image );
 
     // QWidget interface
 protected:

@@ -16,6 +16,21 @@ QQtWidget::ImageStyle QQtWidget::imageStyle() { return m_style; }
 
 void QQtWidget::setImageStyle ( QQtWidget::ImageStyle style ) { m_style = style; }
 
+void QQtWidget::setImage ( const QImage& image )
+{
+    setPixmap ( image );
+}
+
+void QQtWidget::setImage ( const QString& image )
+{
+    setPixmap ( image );
+}
+
+void QQtWidget::setImage ( const QPixmap& image )
+{
+    setPixmap ( image );
+}
+
 void QQtWidget::setPixmap ( const QString& pic )
 {
     bool ret = mImage.load ( pic );
@@ -28,13 +43,6 @@ void QQtWidget::setPixmap ( const QPixmap& pixmap )
 {
     mImage = pixmap.toImage();
     update();
-}
-
-QImage QQtWidget::image() { return mImage; }
-
-void QQtWidget::setImage ( const QImage& image )
-{
-    setPixmap ( image );
 }
 
 void QQtWidget::setPixmap ( const QImage& image )

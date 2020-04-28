@@ -9,6 +9,7 @@
  * QDirModel 没有设置RootPath函数
  * 两者都可以通过QTreeView的setRootIndex来设置RootPath,其实是在QTreeView里面进行过滤。
  * view->setRootIndex ( model->index ( "the/root/path" ) );
+ * 废弃，使用QQtDictTreeModel代替。
  */
 class QQTSHARED_EXPORT QQtFileSystemTreeModel : public QFileSystemModel
 {
