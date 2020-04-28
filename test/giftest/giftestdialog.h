@@ -12,11 +12,14 @@ class GifTestDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit GifTestDialog(QWidget *parent = 0);
+    explicit GifTestDialog ( QWidget* parent = 0 );
     ~GifTestDialog();
 
+protected slots:
+    virtual void updateProgress();
+
 private:
-    Ui::GifTestDialog *ui;
+    Ui::GifTestDialog* ui;
 };
 
 #endif // GIFTESTDIALOG_H

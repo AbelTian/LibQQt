@@ -17,30 +17,30 @@ void QQtSvgCheckBox::setStateImage ( int index, const QString& image )
     if ( index < BTN_NORMAL || index > BTN_MAX - 1 )
         return;
     mIconTable[index] = image;
-    translateImage();
-    update();
+    renderToVariable();
+    //update();
 }
 
 void QQtSvgCheckBox::setNormalImage ( const QString& normal, const QString& press )
 {
     mIconTable[BTN_NORMAL] = normal;
     mIconTable[BTN_PRESS] = press;
-    translateImage();
-    update();
+    renderToVariable();
+    //update();
 }
 
 void QQtSvgCheckBox::setHoverImage ( const QString& hover )
 {
     mIconTable[BTN_HOVER] = hover;
-    translateImage();
-    update();
+    renderToVariable();
+    //update();
 }
 
 void QQtSvgCheckBox::setDisableImage ( const QString& disable )
 {
     mIconTable[BTN_DISABLE] = disable;
-    translateImage();
-    update();
+    renderToVariable();
+    //update();
 }
 
 const TBtnIconTable& QQtSvgCheckBox::iconTable() const
@@ -59,11 +59,13 @@ void QQtSvgCheckBox::renderToVariable()
 
     for ( int i = 0; i < BTN_MAX; i++ )
         r[i].load ( pic[i] );
+
+    translateImage();
 }
 
 void QQtSvgCheckBox::translateImage()
 {
-    renderToVariable();
+    update();
 }
 
 
@@ -72,7 +74,21 @@ void QQtSvgCheckBox::paintEvent ( QPaintEvent* event )
     Q_UNUSED ( event )
 
     QStylePainter p ( this );
-    int  bs = isChecked() ? BTN_PRESS : BTN_NORMAL;
+    int  bs = workState();
+
+    if ( isCheckable() )
+#ifdef __EMBEDDED_LINUX__
+#else
+        if ( !isHover() )
+#endif
+        if ( isChecked() )
+            bs = BTN_CHECK;
+        else
+            bs = BTN_UNCHECK;
+
+    if ( !isEnabled() )
+        bs = BTN_DISABLE;
+
     if ( r[bs].isValid() )
         r[bs].render ( &p );
 

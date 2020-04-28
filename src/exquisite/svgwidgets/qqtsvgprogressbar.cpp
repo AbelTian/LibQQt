@@ -36,6 +36,9 @@ QQtSvgProgressBar::QQtSvgProgressBar ( QWidget* parent ) : QQtSvgWidget ( parent
     horizontalLayout->setObjectName ( "svgHorizontalLayout" );
     horizontalLayout->addWidget ( widgetBack );
     setLayout ( horizontalLayout );
+
+    setRange ( 0, 100 );
+    setValue ( 0 );
 }
 
 void QQtSvgProgressBar::setSvgFile ( QString back, QString trunk )
@@ -49,7 +52,7 @@ void QQtSvgProgressBar::setValue ( int value )
     m_value = value;
     int w = widgetBack->width() * ( m_value - m_min ) / ( m_max - m_min );
     int h = widgetBack->height();
-    widgetTrunk->setFixedSize ( w, h );
+    widgetTrunk->setGeometry ( 0, 0, w, h );
 }
 
 void QQtSvgProgressBar::setRange ( int min, int max )

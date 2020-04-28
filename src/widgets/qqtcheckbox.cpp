@@ -12,46 +12,9 @@ QQtCheckBox::~QQtCheckBox()
 {
 }
 
-const TBtnImageTable& QQtCheckBox::imageTable() const
-{
-    return mImageTable;
-}
-
-TBtnImageTable& QQtCheckBox::imageTable()
-{
-    return mImageTable;
-}
-
-void QQtCheckBox::translateImage()
-{
-    int state = mWorkState;
-
-    //qDebug() << isEnabled();
-
-    if ( !isEnabled() )
-        state = BTN_DISABLE;
-
-    setImage ( mImageTable[state] );
-}
-
-void QQtCheckBox::setImage ( const QImage& image )
-{
-    mImage = image;
-    //update();
-}
-
-int QQtCheckBox::workState() const
-{
-    return mWorkState;
-}
-
-void QQtCheckBox::setWorkState ( int index )
-{
-    mWorkState = ( EBtnStatus ) index;
-    //translateImage();
-    //update();
-}
-
+/**
+ * 把图片设置到内部变量
+ */
 
 QImage QQtCheckBox::stateImage ( int index )
 {
@@ -112,6 +75,42 @@ void QQtCheckBox::setDisabled ( bool stat )
     update();
 }
 
+bool QQtCheckBox::isHover()
+{
+    QRect r0 = rect();
+    QRect gr0 = QRect ( mapToGlobal ( r0.topLeft() ), mapToGlobal ( r0.bottomRight() ) );
+    if ( gr0.contains ( QCursor::pos() ) )
+        return true;
+    return false;
+}
+
+const TBtnImageTable& QQtCheckBox::imageTable() const
+{
+    return mImageTable;
+}
+
+TBtnImageTable& QQtCheckBox::imageTable()
+{
+    return mImageTable;
+}
+
+int QQtCheckBox::workState() const
+{
+    return mWorkState;
+}
+
+void QQtCheckBox::setWorkState ( int index )
+{
+    mWorkState = ( EBtnStatus ) index;
+    //translateImage();
+    //update();
+}
+
+/**
+ * 事件驱动图片显示
+ */
+
+
 void QQtCheckBox::mousePressEvent ( QMouseEvent* event )
 {
     if ( event->button() == Qt::LeftButton )
@@ -155,6 +154,34 @@ void QQtCheckBox::leaveEvent ( QEvent* event )
     QCheckBox::leaveEvent ( event );
     //translateImage();
     update();
+}
+
+void QQtCheckBox::translateImage()
+{
+    int state = mWorkState;
+
+    if ( isCheckable() )
+#ifdef __EMBEDDED_LINUX__
+#else
+        if ( !isHover() )
+#endif
+        if ( isChecked() )
+            state = BTN_CHECK;
+        else
+            state = BTN_UNCHECK;
+
+    //qDebug() << isEnabled();
+
+    if ( !isEnabled() )
+        state = BTN_DISABLE;
+
+    setImage ( mImageTable[state] );
+}
+
+void QQtCheckBox::setImage ( const QImage& image )
+{
+    mImage = image;
+    //update();
 }
 
 

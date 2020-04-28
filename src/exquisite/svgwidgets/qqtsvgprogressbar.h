@@ -3,8 +3,8 @@
 
 #include <qqtsvgwidget.h>
 #include <QSvgRenderer>
-#include <qqt-local.h>
 #include <qqtcore.h>
+#include <qqt-local.h>
 
 class QQTSHARED_EXPORT QQtSvgProgressBar : public QQtSvgWidget
 {

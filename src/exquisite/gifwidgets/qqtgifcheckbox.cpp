@@ -26,7 +26,7 @@ void QQtGifCheckBox::setStateImage ( int index, const QString& image )
         return;
     mIconTable[index] = image;
     renderToVariable();
-    update();
+    //update();
 }
 
 void QQtGifCheckBox::setNormalImage ( const QString& normal, const QString& press )
@@ -34,21 +34,21 @@ void QQtGifCheckBox::setNormalImage ( const QString& normal, const QString& pres
     mIconTable[BTN_NORMAL] = normal;
     mIconTable[BTN_PRESS] = press;
     renderToVariable();
-    update();
+    //update();
 }
 
 void QQtGifCheckBox::setHoverImage ( const QString& hover )
 {
     mIconTable[BTN_HOVER] = hover;
     renderToVariable();
-    update();
+    //update();
 }
 
 void QQtGifCheckBox::setDisableImage ( const QString& disable )
 {
     mIconTable[BTN_DISABLE] = disable;
     renderToVariable();
-    update();
+    //update();
 }
 
 const TBtnIconTable& QQtGifCheckBox::iconTable() const
@@ -66,6 +66,7 @@ void QQtGifCheckBox::renderToVariable()
     TBtnIconTable& icons = iconTable();
     for ( int i = BTN_NORMAL; i < BTN_MAX; i++ )
         mMovie[i].setFileName ( icons[i] );
+    translateImage();
 }
 
 /**
@@ -75,6 +76,51 @@ void QQtGifCheckBox::renderToVariable()
  * 只有一个Timer。
  */
 
+void QQtGifCheckBox::mousePressEvent ( QMouseEvent* event )
+{
+    if ( event->button() == Qt::LeftButton )
+    {
+        setWorkState ( BTN_PRESS );
+    }
+    QCheckBox::mousePressEvent ( event );
+    translateImage();
+    //update();
+}
+
+void QQtGifCheckBox::mouseReleaseEvent ( QMouseEvent* event )
+{
+    if ( event->button() == Qt::LeftButton )
+    {
+#ifdef __EMBEDDED_LINUX__
+        setWorkState ( BTN_NORMAL );
+#else
+        if ( rect().contains ( event->pos() ) )
+            setWorkState ( BTN_HOVER );
+        else
+            setWorkState ( BTN_NORMAL );
+#endif
+    }
+    QCheckBox::mouseReleaseEvent ( event );
+    translateImage();
+    //update();
+}
+
+void QQtGifCheckBox::enterEvent ( QEvent* event )
+{
+    setWorkState ( BTN_HOVER );
+    QCheckBox::enterEvent ( event );
+    translateImage();
+    //update();
+}
+
+void QQtGifCheckBox::leaveEvent ( QEvent* event )
+{
+    setWorkState ( BTN_NORMAL );
+    QCheckBox::leaveEvent ( event );
+    translateImage();
+    //update();
+}
+
 void QQtGifCheckBox::translateImage()
 {
     //设置当前Movie。
@@ -82,6 +128,27 @@ void QQtGifCheckBox::translateImage()
 
     //
     int state = workState();
+
+    if ( isCheckable() )
+#ifdef __EMBEDDED_LINUX__
+        if ( isChecked() )
+            state = BTN_CHECK;
+        else
+            state = BTN_UNCHECK;
+#else
+        if ( !isHover() )
+            if ( isChecked() )
+                state = BTN_CHECK;
+            else
+                state = BTN_UNCHECK;
+        else if ( isHover() )
+            if ( state == BTN_CHECK )
+                if ( isChecked() )
+                    state = BTN_UNCHECK;
+                else
+                    state = BTN_CHECK;
+#endif
+
     //qDebug() << isEnabled();
     if ( !isEnabled() )
         state = BTN_DISABLE;

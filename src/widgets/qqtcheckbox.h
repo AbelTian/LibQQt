@@ -32,6 +32,8 @@ public:
     void setEnabled ( bool );
     void setDisabled ( bool );
 
+    bool isHover();
+
     const TBtnImageTable& imageTable() const;
     TBtnImageTable& imageTable();
 
