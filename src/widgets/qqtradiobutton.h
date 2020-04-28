@@ -37,11 +37,6 @@ public:
     TBtnImageTable& imageTable();
     //maybe render?NO,对于子类必须render。
 
-public slots:
-
-    void setChecked ( bool ischecked );
-
-
 protected:
     int workState() const;
     void setWorkState ( int index );

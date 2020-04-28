@@ -37,9 +37,6 @@ protected:
     virtual void translateImage();
 signals:
 
-public slots:
-    void setChecked ( bool ischecked );
-
     // QWidget interface
 protected:
     virtual void paintEvent ( QPaintEvent* event ) override;
