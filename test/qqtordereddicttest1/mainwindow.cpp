@@ -40,6 +40,12 @@ MainWindow::MainWindow ( QWidget* parent ) :
         qDebug() << i1.key() << i1.value();
     }
 
+    for ( QMap<QString, QString>::ConstIterator i1 = m0.begin();
+          i1 != m0.end(); i1++ )
+    {
+        qDebug() << i1.key() << i1.value();
+    }
+
 
     QOrderedMap<QString, QString> map;
 
@@ -122,6 +128,28 @@ MainWindow::MainWindow ( QWidget* parent ) :
         itor2.previous();
         qDebug() << itor2.hasPrevious();;
         qDebug() << itor2.key() << itor2.value() << itor2.hasPrevious();;
+    }
+
+
+    pline() << "Test 可修改 iterator";
+    for ( QQtOrderedDictionaryMap::Iterator itor = m3.getMap().begin();
+          itor != m3.getMap().end(); itor++ )
+    {
+        qDebug() << itor.key() << itor.value();
+    }
+
+    pline() << "Test const iterator";
+    for ( QQtOrderedDictionaryMap::ConstIterator itor = m3.getMap().constBegin();
+          itor != m3.getMap().constEnd(); itor++ )
+    {
+        qDebug() << itor.key() << itor.value();
+    }
+
+    pline() << "Test const iterator 2";
+    for ( QQtOrderedDictionaryMap::ConstIterator itor = m3.getMap().begin();
+          itor != m3.getMap().end(); itor++ )
+    {
+        qDebug() << itor.key() << itor.value();
     }
 
     QOrderedDictionary m4;

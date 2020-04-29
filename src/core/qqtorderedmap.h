@@ -142,7 +142,7 @@ inline QOrderedMap() Q_DECL_NOTHROW : d ( &_d ) { }
         typedef T* pointer;
         typedef T& reference;
 
-        inline iterator() : i ( Q_NULLPTR ) { }
+        inline iterator() : i ( Q_NULLPTR ), d ( Q_NULLPTR ) { }
         inline iterator ( Node* an, QList<Node>* ad ) : i ( an ), d ( ad ) {}
 
         inline const Key& key() const { return i->first; }
@@ -236,14 +236,14 @@ inline QOrderedMap() Q_DECL_NOTHROW : d ( &_d ) { }
         typedef const T* pointer;
         typedef const T& reference;
 
-        Q_DECL_CONSTEXPR inline const_iterator() : i ( Q_NULLPTR ) { }
+        Q_DECL_CONSTEXPR inline const_iterator() : i ( Q_NULLPTR ), d ( Q_NULLPTR ) { }
         inline const_iterator ( const Node* node, const QList<Node>* ad ) : i ( node ), d ( ad ) { }
 #ifdef QT_STRICT_ITERATORS
         explicit inline const_iterator ( const iterator& o )
 #else
         inline const_iterator ( const iterator& o )
 #endif
-        { i = o.i; }
+        { i = o.i; d = o.d; }
 
         inline const Key& key() const { return i->first; }
         inline const T& value() const { return i->second; }
