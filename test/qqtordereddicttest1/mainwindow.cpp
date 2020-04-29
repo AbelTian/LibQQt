@@ -152,6 +152,26 @@ MainWindow::MainWindow ( QWidget* parent ) :
         qDebug() << itor.key() << itor.value();
     }
 
+    QPair<QQtOrderedDictionaryMap::Iterator, QQtOrderedDictionaryMap::Iterator> pair = m3.getMap().equal_range ( "BBBG" );
+    QQtOrderedDictionaryMap::Iterator firstKey = pair.first;
+    QQtOrderedDictionaryMap::Iterator lastKey = pair.second;
+    const QString& key1 = firstKey.key();
+    const QQtOrderedDictionary& value1 = firstKey.value();
+    const QString& key2 = lastKey.key();
+    const QQtOrderedDictionary& value2 = lastKey.value();
+    pline() << key1 << key2;
+
+    QPair<QQtOrderedDictionaryMap::ConstIterator,
+          QQtOrderedDictionaryMap::ConstIterator> pair2 = m3.getMap().equal_range ( "BBBG" );
+    QQtOrderedDictionaryMap::ConstIterator constFirstKey = pair2.first;
+    QQtOrderedDictionaryMap::ConstIterator constLastKey = pair2.second;
+    const QString& key3 = constFirstKey.key();
+    const QQtOrderedDictionary& value3 = constFirstKey.value();
+    const QString& key4 = constLastKey.key();
+    const QQtOrderedDictionary& value4 = constLastKey.value();
+    pline() << key3 << key4;
+
+
     QOrderedDictionary m4;
     file.setFileName ( "mainwindow.ui" );
     file.open ( QFile::ReadOnly );

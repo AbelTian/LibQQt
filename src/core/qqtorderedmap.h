@@ -694,9 +694,36 @@ QPair<typename QOrderedMap<Key, T>::iterator, typename QOrderedMap<Key, T>::iter
 QOrderedMap<Key, T>::equal_range ( const Key& akey )
 {
     detach();
+
     Node* firstNode, *lastNode;
+
+    for ( typename QList<Node>::Iterator itor = d->begin();
+          itor != d->end(); itor++ )
+    {
+        Node* n = &*itor;
+        if ( n->first == akey )
+        {
+            firstNode = n;
+            break;
+        }
+    }
+
+    if ( iterator ( firstNode, d ) == end() )
+        return QPair<iterator, iterator> ( end(), end() );
+
+    for ( typename QList<Node>::Iterator itor = d->end() - 1;
+          itor >= d->begin(); itor-- )
+    {
+        Node* n = &*itor;
+        if ( n->first == akey )
+        {
+            lastNode = n;
+            break;
+        }
+    }
+
     //d->nodeRange ( akey, &firstNode, &lastNode );
-    //return QPair<iterator, iterator> ( iterator ( firstNode ), iterator ( lastNode ) );
+    return QPair<iterator, iterator> ( iterator ( firstNode, d ), iterator ( lastNode, d ) );
 }
 
 template <class Key, class T>
@@ -704,8 +731,34 @@ QPair<typename QOrderedMap<Key, T>::const_iterator, typename QOrderedMap<Key, T>
 QOrderedMap<Key, T>::equal_range ( const Key& akey ) const
 {
     Node* firstNode, *lastNode;
+
+    for ( typename QList<Node>::ConstIterator itor = d->constBegin();
+          itor != d->constEnd(); itor++ )
+    {
+        Node* n = &*itor;
+        if ( n->first == akey )
+        {
+            firstNode = n;
+            break;
+        }
+    }
+
+    if ( iterator ( firstNode, d ) == constEnd() )
+        return qMakePair ( constEnd(), constEnd() );
+
+    for ( typename QList<Node>::Iterator itor = d->constEnd() - 1;
+          itor >= d->constBegin(); itor-- )
+    {
+        Node* n = &*itor;
+        if ( n->first == akey )
+        {
+            lastNode = n;
+            break;
+        }
+    }
+
     //d->nodeRange ( akey, &firstNode, &lastNode );
-    //return qMakePair ( const_iterator ( firstNode ), const_iterator ( lastNode ) );
+    return qMakePair ( const_iterator ( firstNode, d ), const_iterator ( lastNode, d ) );
 }
 
 #ifdef Q_MAP_DEBUG
